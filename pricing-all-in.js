@@ -141,8 +141,8 @@
   if (typeof V !== 'undefined') {
     V.pricing = () => {
       const r = quote({});
-      return phero('Pricing', 'Published package prices before tax', 'Start now with Unit 1 and a live session for your staff, or look ahead to the annual bundle. Each price says where it comes from, and every one is proposed until the owner confirms it. Ordering opens soon: nothing is for sale online yet.') + `
-<section class="tight pz-status"><div class="wrap"><div class="pz-banner" role="note"><span class="chip warn">Ordering opens soon</span><p>These are the brand’s recommended launch prices, before tax. The owner has not yet confirmed them, so each one is marked <b>${LABEL}</b> until then. No payment is taken on this site.</p></div></div></section>
+      return phero('Pricing', 'Published package prices before tax', 'Start now with Unit 1 and a live session for your staff, or look ahead to the annual bundle. Each price says where it comes from, and every one is a proposed launch price until it is final. Ordering opens soon: nothing is for sale online yet.') + `
+<section class="tight pz-status"><div class="wrap"><div class="pz-banner" role="note"><span class="chip warn">Ordering opens soon</span><p>These are the brand’s recommended launch prices, before tax. They are not final yet, so each one is marked <b>${LABEL}</b> until then. No payment is taken on this site.</p></div></div></section>
 ${window.FFRelease ? window.FFRelease.launch() : ''}
 <section class="band-paper" id="annual"><div class="wrap">${head('Annual bundle (future)', 'One startup package, one monthly fee', 'The full program, once it is made. The startup package is paid once; the monthly fee pays for the app, training, new lessons and support. Each package says what it delivers today, when it starts and when billing begins: most items are still being made.')}
  <div class="pz-tiers">${TIERS.map(t => `<article class="pz-tier-card" style="--c:var(--${t.c})">

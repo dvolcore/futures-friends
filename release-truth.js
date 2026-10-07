@@ -94,7 +94,7 @@
    <div><dt>Not included</dt><dd>${L.excludes.map(id => `${E(short(id))} ${chip(id)}`).join('; ')}</dd></div>
    <div><dt>Start date</dt><dd>${E(L.start)}</dd></div>
    <div><dt>Recurring billing</dt><dd>${E(L.billing)}</dd></div></dl></article></div>
- ${opts.note === false ? '' : `<p class="small muted rt-legend">The launch package is a proposal built from catalog prices that already exist; the owner has not confirmed it. The annual bundle below is a separate, future offer.</p>`}</div></section>`;
+ ${opts.note === false ? '' : `<p class="small muted rt-legend">The launch package is a proposal built from catalog prices that already exist; it is not final yet. The annual bundle below is a separate, future offer.</p>`}</div></section>`;
   }
 
   // E2: the status strip at the top of every commercial route, with one practical evidence item next to the claim it supports.
