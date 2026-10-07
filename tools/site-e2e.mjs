@@ -127,7 +127,7 @@ async function sweepRoutes() {
       reset(log);
       const owner = PORTAL_ROUTES.includes(r.split('/')[0]) ? 'demo-portal agent' : undefined;
       await step('route', `#${r} @${vp.width}`, async () => {
-        await open(page, r);
+        try { await open(page, r); } catch (e) { if (!/Timeout/.test(e.message)) throw e; await page.waitForTimeout(3000); await open(page, r); }   // one retry: GitHub Pages hiccups
         // scroll the page so lazy images / videos load and get checked
         await page.evaluate(async () => { const h = document.body.scrollHeight; for (let y = 0; y < h; y += 700) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } scrollTo(0, 0); });
         await page.waitForTimeout(600);
@@ -146,7 +146,7 @@ async function sweepRoutes() {
         const dead = await page.evaluate(() => {
           const out = []; const v = document.getElementById('view'); const routes = window.FFRouteMeta ? Object.keys(window.FFRouteMeta.ROUTES) : [];
           v.querySelectorAll('[data-anchor]').forEach((b) => { if (!document.getElementById(b.dataset.anchor)) out.push(`data-anchor="${b.dataset.anchor}" has no target`); });
-          v.querySelectorAll('[data-go]').forEach((b) => { if (b.dataset.go && routes.length && !routes.includes(b.dataset.go) && !(typeof V !== 'undefined' && V[b.dataset.go])) out.push(`data-go="${b.dataset.go}" is not a page`); });
+          v.querySelectorAll('[data-go]').forEach((b) => { const g = (b.dataset.go || '').split('/')[0]; if (g && routes.length && !routes.includes(g) && !(typeof V !== 'undefined' && V[g])) out.push(`data-go="${b.dataset.go}" is not a page`); });
           v.querySelectorAll('a[href^="#"]').forEach((a) => { const h = a.getAttribute('href').slice(1).split('/')[0]; if (h && routes.length && !routes.includes(h) && !(typeof V !== 'undefined' && V[h]) && !document.getElementById(h)) out.push(`link #${h} goes nowhere`); });
           return [...new Set(out)];
         });
