@@ -78,7 +78,7 @@
   ]
  },
  "count": 19,
- "total_bytes": 34205586,
+ "total_bytes": 34157862,
  "files": [
   {
    "file": "video/ff-friend-booker-4x5-poster.webp",
@@ -142,33 +142,33 @@
   },
   {
    "file": "video/ff-intro-titled-16x9-poster.webp",
-   "bytes": 244034,
-   "sha256": "33875201cf9c8aeea708e0e04a337881ce079a6d9a9d51719dea92f2e8d07f5c"
+   "bytes": 244132,
+   "sha256": "93d16be0a1d3013238f1f4679fa07c6d5cb1cdc0d88df69723c132cfac705056"
   },
   {
    "file": "video/ff-intro-titled-16x9.av1.webm",
-   "bytes": 6366778,
-   "sha256": "f636ad9d3f93016e23ec77dcccf722f0bcec026ca0fe1a03bd0cbde81e692701"
+   "bytes": 6366030,
+   "sha256": "fde6fe0fbec9a71b1f78d3b27fa586f311e4c10740aa6779ce5512a9a1177609"
   },
   {
    "file": "video/ff-intro-titled-16x9.mp4",
-   "bytes": 9425707,
-   "sha256": "7dbfd8db68e3b4906c2711e765089759080083a574157e3e48c6cad5a09f2bf5"
+   "bytes": 9390950,
+   "sha256": "4bbe5b8bf941e2c37ed271ead0673e8bb2b86a63ca127ec65ec21fcfc2466648"
   },
   {
    "file": "video/ff-intro-titled-4x5-poster.webp",
-   "bytes": 176396,
-   "sha256": "2974687e8ae99a97815698e72f9f29a959c17b25dfaf58617adb231b781ed62b"
+   "bytes": 176326,
+   "sha256": "3628bd8fc3c55163100051b2ec629ce85d9a763e361183c73e760200c1698236"
   },
   {
    "file": "video/ff-intro-titled-4x5.av1.webm",
-   "bytes": 5292151,
-   "sha256": "035bc65c0a2e2c2f2c0be229a9cf4e3ddcbf07313e990fffa964f4339763cb9b"
+   "bytes": 5292732,
+   "sha256": "3d8689a3b9876f70f418feddb793a9c7acd1f265da555cd5689e6ef6045e8249"
   },
   {
    "file": "video/ff-intro-titled-4x5.mp4",
-   "bytes": 7985037,
-   "sha256": "78e1855ea2e37233675247cfcc1a1a99d4861c0fc5bce4c29d32ee28db11a298"
+   "bytes": 7972209,
+   "sha256": "d0b5cfb1f95c890dd63220933bce099a57f19d985f14f01c0cff8fd34f85d356"
   },
   {
    "file": "video/ff-intro-titled.en.vtt",

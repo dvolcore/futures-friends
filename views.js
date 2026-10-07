@@ -55,7 +55,7 @@ const V = {};
 // ---------------------------------------------------------------- HOME (mirrors the platform landing page)
 // Signature moments owned here: H friend rooms, I daily learning loop, J explorable classroom, K family app stack.
 // G (living hero) is wired but dormant: set window.FF_HERO_VIDEO = true once video/hero-loop.mp4 exists.
-const FFH_LOOP = [['Watch','A friend story, told with puppets for now','purple'],['Talk','The teacher asks what happened and why','booker'],['Do','A connected hands-on activity','zuri'],['Move','Movement, role play, art or a song','bop'],['Explore','The four learning zones, all day','lumi'],['Take home','A question and activity for families','gold-deep']];
+const FFH_LOOP = [['Watch','A friend story, told with puppets for now','watch'],['Talk','The teacher asks what happened and why','booker'],['Do','A connected hands-on activity','zuri'],['Move','Movement, role play, art or a song','bop'],['Explore','The four learning zones, all day','lumi'],['Take home','A question and activity for families','gold-deep']];
 const FFH_ZONES = {
   booker:{short:'Reading Area', r:[0,0,.553,.487], at:[.30,.20], say:'This is my Reading Area. We read together, trace our letters and try again when a word gets tricky.'},
   lumi:{short:'Calm Corner', r:[.558,0,.442,.487], at:[.80,.20], say:'In my Calm Corner we name our feelings, take flower-and-candle breaths and make room for everyone.'},
@@ -133,7 +133,7 @@ const FFH_NOTES = [
   ['bop','What we ate','Lunch: chicken and rice bowl','Mandarin oranges and milk. Tried a new food today!'],
   ['lumi','Growing','A new milestone','Retold three events from a story and named four feelings.'],
   ['zuri','Take-home','Name hunt','Find your child\'s first letter on signs and boxes at home.'],
-  ['purple','Message from the teacher','Episode night','This week\'s episode is ready to watch together, with one question to talk about.']];
+  ['watch','Message from the teacher','Episode night','This week\'s episode is ready to watch together, with one question to talk about.']];
 const ffhPhone = () => `<div class="ffhk-phone" role="img" aria-label="Sample Family App notifications on a phone lock screen"><div class="ffhk-screen"><i class="ffhk-wall" aria-hidden="true"></i>
   <div class="ffhk-clock"><b>5:42</b><span>Friday, pickup time</span></div>
   <div class="ffhk-stack">${FFH_NOTES.map(n=>`<div class="ffhk-n" style="--c:var(--${n[0]})"><img src="img/brand/ff-plush-mark-96.webp" width="96" height="96" alt=""><div><div class="ffhk-h"><span>${n[1]}</span><span>now</span></div><b>${esc(n[2])}</b><p>${esc(n[3])}</p></div></div>`).join('')}</div>
@@ -506,7 +506,7 @@ function learningStepsBand(){ const S=window.FFSteps; if(!S||!S.summary) return 
 V.readiness = () => phero('School readiness','How Futures Friends supports every child','Our answer to adaptive software: teachers who observe, a program that adapts, and families who keep the learning going at home.',{anchors:[['loop','The learning loop'],['adapt','Observe and adapt'],['steps','Learning Steps'],['support','Supports'],['stars','Friendship Stars']]}) + `
 <section id="loop" class="band-paper"><div class="wrap">${head('The learning loop','Six steps, every day','')}
  <div class="loop">
-  <div style="background:var(--purple)"><i>1</i><b>Watch</b><span>A puppet story (episodes later)</span></div><div style="background:var(--booker)"><i>2</i><b>Talk</b><span>Guided discussion</span></div>
+  <div style="background:var(--watch)"><i>1</i><b>Watch</b><span>A puppet story (episodes later)</span></div><div style="background:var(--booker)"><i>2</i><b>Talk</b><span>Guided discussion</span></div>
   <div style="background:var(--zuri)"><i>3</i><b>Do</b><span>Hands-on activity</span></div><div style="background:var(--bop)"><i>4</i><b>Move</b><span>Physical play</span></div>
   <div style="background:var(--lumi)"><i>5</i><b>Explore</b><span>Learning zones</span></div><div style="background:var(--gold-deep)"><i>6</i><b>Take home</b><span>Family connection</span></div></div></div></section>
 <section id="adapt"><div class="wrap">${head('Observe and adapt','The teacher is the adaptive engine','Young children learn through relationships, not drills. The Futures Hub helps teachers see what each child needs next.')}
@@ -628,7 +628,7 @@ function portalDirector(){ const rooms=[['Twos room',8,1,8],['Threes room',10,1,
   <div class="card"><b>Staff training</b><div class="meter"><i style="width:72%"></i></div><span class="small">5 of 7 staff finished Level 1 Foundations · 2 due by Nov 30</span></div>
   <div class="card"><b>Enrollment this month</b><span class="small">14 inquiries · 9 tours · 4 enrolled · 3 waitlisted</span><div class="meter"><i style="width:44%;background:var(--booker)"></i></div></div>
   <div class="card"><b>Food budget</b><span class="small">Week 2, Easy &amp; Quick · $2.52 per child per day</span><div class="meter"><i style="width:63%;background:var(--bop)"></i></div></div>
-  <div class="card"><b>Screen time this week</b><span class="small">2 of 4 episodes used · 11 of 30 minutes</span><div class="meter"><i style="width:37%;background:var(--purple)"></i></div></div>
+  <div class="card"><b>Screen time this week</b><span class="small">2 of 4 episodes used · 11 of 30 minutes</span><div class="meter"><i style="width:37%;background:var(--watch)"></i></div></div>
  </div>`; }
 function portalClass(){ const k=st.kid!=null?KIDS[st.kid]:null; return `
  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip">Threes and Pre-K · 20 children</span><span class="chip ok">2 teachers · in ratio</span><span class="chip">Unit 2, Week 1 · Booker's Story About Me</span></div>

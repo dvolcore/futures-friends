@@ -88,12 +88,12 @@
   // The Bop at Home activity videos, one list for every page that shows them (#bop-at-home cards in whole-child.js, the Futures at
   // Home activity cards and the "Ready? Bop & Go!" picture guide in family-library.js). Literal paths, so the site-hygiene scan sees them.
   const BOP_ACTS = {
-    'elephant-stomp': { t: 'Elephant Stomp & Sway', src: 'video/act-elephant-stomp.mp4?v=3', poster: 'video/act-elephant-stomp-poster.jpg?v=3' },
-    'trunk-reach': { t: 'Trunk Reach', src: 'video/act-trunk-reach.mp4?v=3', poster: 'video/act-trunk-reach-poster.jpg?v=3' },
-    'freeze-try-again': { t: 'Freeze & Try Again', src: 'video/act-freeze-try-again.mp4?v=3', poster: 'video/act-freeze-try-again-poster.jpg?v=3' },
-    'animal-walks': { t: 'Animal Walks', src: 'video/act-animal-walks.mp4?v=3', poster: 'video/act-animal-walks-poster.jpg?v=3' },
-    'flamingo-balance': { t: 'Flamingo Balance', src: 'video/act-flamingo-balance.mp4?v=3', poster: 'video/act-flamingo-balance-poster.jpg?v=3' },
-    'clap-back': { t: 'Clap-Back Rhythm', src: 'video/act-clap-back.mp4?v=3', poster: 'video/act-clap-back-poster.jpg?v=3' }
+    'elephant-stomp': { t: 'Elephant Stomp & Sway', src: 'video/act-elephant-stomp.mp4?v=4', poster: 'video/act-elephant-stomp-poster.jpg?v=4' },
+    'trunk-reach': { t: 'Trunk Reach', src: 'video/act-trunk-reach.mp4?v=4', poster: 'video/act-trunk-reach-poster.jpg?v=4' },
+    'freeze-try-again': { t: 'Freeze & Try Again', src: 'video/act-freeze-try-again.mp4?v=4', poster: 'video/act-freeze-try-again-poster.jpg?v=4' },
+    'animal-walks': { t: 'Animal Walks', src: 'video/act-animal-walks.mp4?v=4', poster: 'video/act-animal-walks-poster.jpg?v=4' },
+    'flamingo-balance': { t: 'Flamingo Balance', src: 'video/act-flamingo-balance.mp4?v=4', poster: 'video/act-flamingo-balance-poster.jpg?v=4' },
+    'clap-back': { t: 'Clap-Back Rhythm', src: 'video/act-clap-back.mp4?v=4', poster: 'video/act-clap-back-poster.jpg?v=4' }
   };
   // The other friends' play-along videos (W11, 2026-10-07, ~/futures-friends-video/web-activities; receipts in
   // 11_Website_Movement_Videos/_friends_2026-10-07): same title cards and the same player. who = the friend who leads it. Literal paths.
@@ -105,7 +105,7 @@
     'booker-first-sound': { who: 'booker', t: "First-Sound Hunt", src: 'video/act-booker-first-sound.mp4?v=2', poster: 'video/act-booker-first-sound-poster.jpg?v=1' },
     'lumi-kind-words': { who: 'lumi', t: "Look, Listen, Lend a Hand", src: 'video/act-lumi-kind-words.mp4?v=2', poster: 'video/act-lumi-kind-words-poster.jpg?v=1' },
     'zuri-color-walk': { who: 'zuri', t: "Color Walk", src: 'video/act-zuri-color-walk.mp4?v=2', poster: 'video/act-zuri-color-walk-poster.jpg?v=1' },
-    'bop-bubble-chase': { who: 'bop', t: "Bubble Chase", src: 'video/act-bop-bubble-chase.mp4?v=1', poster: 'video/act-bop-bubble-chase-poster.jpg?v=1' },
+    'bop-bubble-chase': { who: 'bop', t: "Bubble Chase", src: 'video/act-bop-bubble-chase.mp4?v=2', poster: 'video/act-bop-bubble-chase-poster.jpg?v=2' },
     'peekaboo-turns': { who: 'lumi', t: "Peekaboo Turns", src: 'video/act-peekaboo-turns.mp4?v=2', poster: 'video/act-peekaboo-turns-poster.jpg?v=1', cap: "Watch Lumi play it, then play face to face." },
   };
   const NAMES = { bop: 'Bop', booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri' };

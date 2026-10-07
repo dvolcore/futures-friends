@@ -15,7 +15,7 @@
 :root{
   --cream:#FBF6EC; --paper:#FFFFFF; --paper2:#F6EFE2; --ink:#14313D; --muted:#4F616A; --line:#E6DCCB;
   --navy:#0A2B38; --navy2:#123E50; --gold:#E7A928; --gold-deep:#8A6108;
-  --booker:#2F6FC0; --lumi:#D9488B; --zuri:#2E9E57; --bop:#8236AE; --purple:#7B57C8;
+  --booker:#2F6FC0; --lumi:#D9488B; --zuri:#2E9E57; --bop:#8236AE; --purple:#7B57C8; --watch:#0A7A8A;
   --booker-s:#E7EFFA; --lumi-s:#FBE8F1; --zuri-s:#E6F4EB; --bop-s:#F3EAFB;
   --ok:#1F6E43; --warn:#8A5A00; --bad:#B03A30; --on-dark:#F4F8F9;
   --display:"Fredoka","Poppins",system-ui,sans-serif; --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -23,11 +23,11 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --cream:#0B1A21; --paper:#11242D; --paper2:#0E1E26; --ink:#EAF1F3; --muted:#9DB1BA; --line:#22404D;
-  --booker:#7EB0EE; --lumi:#F18CBA; --zuri:#6ECC92; --bop:#C9A2EC; --purple:#AC93EC;
+  --booker:#7EB0EE; --lumi:#F18CBA; --zuri:#6ECC92; --bop:#C9A2EC; --purple:#AC93EC; --watch:#5CC6CE;
   --booker-s:#14304A; --lumi-s:#3A1A2A; --zuri-s:#123220; --bop-s:#2C1A3B; --ok:#6ECC92; --warn:#E7B04A; --bad:#F29088; --gold-deep:#E7A928; color-scheme:dark}}
 :root[data-theme="dark"]{
   --cream:#0B1A21; --paper:#11242D; --paper2:#0E1E26; --ink:#EAF1F3; --muted:#9DB1BA; --line:#22404D;
-  --booker:#7EB0EE; --lumi:#F18CBA; --zuri:#6ECC92; --bop:#C9A2EC; --purple:#AC93EC;
+  --booker:#7EB0EE; --lumi:#F18CBA; --zuri:#6ECC92; --bop:#C9A2EC; --purple:#AC93EC; --watch:#5CC6CE;
   --booker-s:#14304A; --lumi-s:#3A1A2A; --zuri-s:#123220; --bop-s:#2C1A3B; --ok:#6ECC92; --warn:#E7B04A; --bad:#F29088; --gold-deep:#E7A928; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
@@ -319,22 +319,22 @@ nav.main .mob{display:none}
 <link rel="stylesheet" href="friend-voices.css?v=1">
 <link rel="stylesheet" href="hero-world.css?v=2">
 <link rel="stylesheet" href="unit-1.css?v=5">
-<link rel="stylesheet" href="loop-widget.css?v=2">
+<link rel="stylesheet" href="loop-widget.css?v=3">
 <link rel="stylesheet" href="w10-glass.css?v=1">
 <link rel="stylesheet" href="this-week.css?v=1">
 <link rel="stylesheet" href="hub-offline.css?v=2">
 <link rel="stylesheet" href="approve.css?v=1">
 <link rel="stylesheet" href="arrival.css?v=1">
 <link rel="stylesheet" href="care-history.css?v=1">
-<link rel="stylesheet" href="home-calm.css?v=6">
-<link rel="stylesheet" href="home-alive.css?v=3">
+<link rel="stylesheet" href="home-calm.css?v=7">
+<link rel="stylesheet" href="home-alive.css?v=4">
 <link rel="stylesheet" href="footer-scene.css?v=2">
 <link rel="stylesheet" href="home-day.css?v=1">
 <link rel="stylesheet" href="glass.css?v=3">
 <link rel="stylesheet" href="booker-walk.css?v=2">
 <link rel="stylesheet" href="plush-textures.css?v=1">
 <link rel="stylesheet" href="plush-world.css?v=1">
-<link rel="stylesheet" href="a11y-wave3.css?v=4">
+<link rel="stylesheet" href="a11y-wave3.css?v=5">
 <link rel="stylesheet" href="wayfinding.css?v=4">
 <link rel="stylesheet" href="sound.css?v=4">
 <link rel="stylesheet" href="entry.css?v=1">
@@ -399,7 +399,7 @@ nav.main .mob{display:none}
 <script src="vendor/Draggable.min.js"></script>
 <script src="vendor/InertiaPlugin.min.js"></script>
 <script src="data.js?v=12"></script>
-<script src="captions.js?v=13"></script>
+<script src="captions.js?v=14"></script>
 <script src="ff-motion.js?v=2"></script>
 <script src="entry.js?v=1"></script>
 <script src="plush-cast.js?v=2"></script>
@@ -434,7 +434,7 @@ nav.main .mob{display:none}
 <script src="intake-config.js?v=2"></script>
 <script src="analytics-config.js?v=1"></script>
 <script src="talk-cards.js?v=3"></script>
-<script src="features.js?v=31"></script>
+<script src="features.js?v=32"></script>
 <script src="intake.js?v=5"></script>
 <script src="enroll-desk.js?v=1"></script>
 <script src="tour-booking.js?v=1"></script>
@@ -468,7 +468,7 @@ nav.main .mob{display:none}
 <script src="academy-lms-author.js?v=5"></script>
 <script src="approve.js?v=2"></script>
 <script src="academy-scorm.js?v=1"></script>
-<script src="demo-portal.js?v=2"></script>
+<script src="demo-portal.js?v=3"></script>
 <script src="home-calm.js?v=9"></script>
 <script src="home-alive.js?v=2"></script>
 <script src="footer-scene.js?v=2"></script>

@@ -10,6 +10,7 @@ A pop-up storybook. Every page opens like a felt pop-up book: a real room behind
 - Lumi pink: #D9488B (BELONG + RESET, Lumi)
 - Zuri green: #2E9E57 (EXPLORE + NOURISH, Zuri)
 - Bop purple: #8236AE (MOVE + OUTSIDE, Bop; owner decision 2026-10-07, was orange #E8761E). Text-safe ink #6B2A8E (8.9:1 on white, 8.3:1 on cream); lavender #C9A2EC (dark mode, light felt); tint #F3EAFB. Bop the plush keeps his grey fleece and green overalls: the brand accent changed, the character did not.
+- Watch teal (learning-loop step 1, not a friend): #0A7A8A (white text 5.0:1; token `--watch`), dark mode #5CC6CE with navy text (7.4:1); print ink #0B6672, tint #E5F4F5 (`watch` in tools/ff_brand.py). Changed 2026-10-07 from purple #7B57C8, which read as Bop purple. The loop: Watch teal, Talk Booker blue, Do Zuri green, Move Bop purple, Explore Lumi pink, Take home gold.
 - Tagline: "Learn. Move. Explore. Belong." (official, owner 2026-10-07; never "Learn. Play. Explore. Belong.")
 
 ## Type

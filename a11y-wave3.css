@@ -11,6 +11,7 @@
 .sample{color:var(--gold-deep);border-color:var(--gold-deep)}
 
 /* "The learning loop" and "Eat the Rainbow" bands: same hues, deep enough to carry white text */
+.loop>div:nth-child(1){background:#0A7A8A!important}   /* Watch teal (2026-10-07; was purple #7B57C8, too close to Bop purple), white text 5.0:1 */
 .loop>div:nth-child(2){background:var(--booker-ink)!important}
 .loop>div:nth-child(3){background:var(--zuri-ink)!important}
 .loop>div:nth-child(4){background:#6B2A8E!important;color:#fff}   /* Bop purple (owner 2026-10-07), white text */

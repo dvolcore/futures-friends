@@ -24,7 +24,7 @@ const FS = () => window.FFSteps || {domains:[], levels:[], bands:[]};
 const areaLabel = k => ((FS().domains || []).find(d => d.key === k) || {}).label || '';
 const LOOP = [['watch','Watch','A friend story, told with puppets for now'],['talk','Talk','The teacher asks what happened and why'],['do','Do','A connected hands-on activity'],
   ['move','Move','Movement, role play, art or a song'],['explore','Explore','The four learning zones, all day'],['home','Take home','A question and activity for families']];
-const STEP_FRIEND = {watch:'lumi', talk:'booker', do:'zuri', move:'bop', explore:'lumi', home:'gold'};
+const STEP_FRIEND = {watch:'watch', talk:'booker', do:'zuri', move:'bop', explore:'lumi', home:'gold'};
 const DS = {open:{}, armed:{}, plan:{}, review:{}, tour:{}, enroll:{}, out:{}, quiz:{}, quizRes:null, lesson:null, msg:'', pw:null, reset:null, mfa:null, pin:null};
 const fmtTime = ms => ms ? new Date(ms).toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'}) : '';
 const nowOn = date => { const n = new Date(), d = api() ? api().fromIso(date) : new Date(); d.setHours(n.getHours(), n.getMinutes(), 0, 0); return d.getTime(); };

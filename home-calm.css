@@ -61,7 +61,7 @@
 /* ---- how a day works: one line of six steps */
 .hc-day{padding-block:var(--hc-pad)}
 .hc-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 clamp(12px,1.6vw,22px);position:relative}
-.hc-steps::before{content:"";position:absolute;left:23px;right:23px;top:23px;height:2px;background:linear-gradient(90deg,var(--purple),var(--booker),var(--zuri),var(--bop),var(--lumi),var(--gold));opacity:.55}
+.hc-steps::before{content:"";position:absolute;left:23px;right:23px;top:23px;height:2px;background:linear-gradient(90deg,var(--watch),var(--booker),var(--zuri),var(--bop),var(--lumi),var(--gold));opacity:.55}
 .hc-steps li{position:relative;display:grid;align-content:start;gap:6px;min-width:0}
 .hc-num{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--cream);border:2.5px solid var(--c);color:var(--ink);font:600 19px/1 var(--display);font-variant-numeric:tabular-nums;margin-bottom:10px;position:relative}
 .hc-steps b{font:600 19px/1.2 var(--display);color:var(--ink)}

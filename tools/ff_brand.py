@@ -39,6 +39,8 @@ FRIEND = {
     'lumi':   {'deep': '#A82A65', 'felt': '#C4467F', 'tint': '#FBEAF2', 'thread': '#F8D3E3', 'name': 'Lumi', 'pillars': 'BELONG + RESET'},
     'zuri':   {'deep': '#1B6E3E', 'felt': '#2E8452', 'tint': '#E7F4EC', 'thread': '#CDEBD8', 'name': 'Zuri', 'pillars': 'EXPLORE + NOURISH'},
     'bop':    {'deep': '#6B2A8E', 'felt': '#8236AE', 'tint': '#F3EAFB', 'thread': '#E3CFF5', 'name': 'Bop', 'pillars': 'MOVE + OUTSIDE'},
+    # the learning loop's Watch step (not a friend): sky teal since 2026-10-07 (was purple #7B57C8, too close to Bop purple)
+    'watch':  {'deep': '#0B6672', 'felt': '#0A7A8A', 'tint': '#E5F4F5', 'thread': '#C8E8EB', 'name': 'Watch', 'pillars': ''},
     'gold':   {'deep': '#6E4C00', 'felt': '#D99A22', 'tint': '#FBF1D8', 'thread': '#FFF0C9', 'name': 'Futures Friends', 'pillars': ''},
     'navy':   {'deep': NAVY, 'felt': '#173F52', 'tint': '#EAF0F2', 'thread': '#C9DCE3', 'name': 'Futures Friends', 'pillars': ''},
 }
@@ -50,6 +52,7 @@ CMYK = {
     '#2F67B3': (86, 52, 0, 4), '#23589F': (90, 60, 2, 10), '#C4467F': (12, 85, 18, 2), '#A82A65': (18, 95, 30, 10),
     '#2E8452': (82, 18, 85, 8), '#1B6E3E': (88, 25, 92, 22), '#8236AE': (62, 90, 0, 0), '#6B2A8E': (72, 100, 4, 10),
     '#D99A22': (8, 38, 96, 2), '#173F52': (92, 60, 40, 40),
+    '#0A7A8A': (92, 30, 40, 10), '#0B6672': (94, 40, 45, 25),
 }
 
 TYPE = {  # the type scale (pt): display Fredoka, text Poppins; leading in brackets

@@ -169,5 +169,5 @@
 
 @media print{.hc-path,.hc-stitch{display:none}}
 /* Bop purple (owner 2026-10-07): white number on the deep purple in light mode; navy on the lavender in dark mode */
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hc-steps li[style*="--bop"].is-here .hc-num{color:#0A2B38}}
-:root[data-theme="dark"] .hc-steps li[style*="--bop"].is-here .hc-num{color:#0A2B38}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hc-steps li[style*="--bop"].is-here .hc-num,:root:not([data-theme="light"]) .hc-steps li[style*="--watch"].is-here .hc-num{color:#0A2B38}}
+:root[data-theme="dark"] .hc-steps li[style*="--bop"].is-here .hc-num,:root[data-theme="dark"] .hc-steps li[style*="--watch"].is-here .hc-num{color:#0A2B38}

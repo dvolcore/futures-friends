@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 400" width="460" height="400" role="img" aria-label="Sample picture: Outdoor play (demo placeholder, not a photo of a child)">
-<rect width="460" height="400" rx="28" fill="#FDEDE0"/><rect x="12" y="12" width="436" height="376" rx="22" fill="none" stroke="#E8761E" stroke-width="4" stroke-dasharray="14 10"/>
-<circle cx="320" cy="130" r="34" fill="#E7A928"/><path d="M60 300 Q170 210 240 280 T420 270 V330 H60Z" fill="#2E9E57"/><circle cx="200" cy="240" r="22" fill="#E8761E"/><path d="M185 262 l-12 34 M215 262 l12 34" stroke="#0A2B38" stroke-width="6" stroke-linecap="round"/>
+<rect width="460" height="400" rx="28" fill="#F3EAFB"/><rect x="12" y="12" width="436" height="376" rx="22" fill="none" stroke="#8236AE" stroke-width="4" stroke-dasharray="14 10"/>
+<circle cx="320" cy="130" r="34" fill="#E7A928"/><path d="M60 300 Q170 210 240 280 T420 270 V330 H60Z" fill="#2E9E57"/><circle cx="200" cy="240" r="22" fill="#8236AE"/><path d="M185 262 l-12 34 M215 262 l12 34" stroke="#0A2B38" stroke-width="6" stroke-linecap="round"/>
 <rect x="24" y="24" width="170" height="40" rx="20" fill="#0A2B38"/><text x="109" y="50" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="18" font-weight="800" fill="#fff">SAMPLE PICTURE</text>
 <text x="230" y="368" text-anchor="middle" font-family="Fredoka, Nunito, Arial, sans-serif" font-size="28" font-weight="700" fill="#0A2B38">Outdoor play</text>
 </svg>

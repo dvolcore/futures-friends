@@ -129,7 +129,7 @@ if (!document.getElementById('ff-features-css')) {
 .ffx-big{font-family:var(--display);font-size:44px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
 .ffx-big small{font-size:16px;color:var(--muted);font-family:var(--body);font-weight:500}
 .ffx-meter{height:14px}
-.ffx-meter i{background:var(--purple);transition:width .3s ease}
+.ffx-meter i{background:var(--watch);transition:width .3s ease}
 .ffx-meter.full i{background:var(--bad)}
 .ffx-log{list-style:none;margin:0;padding:0 2px 0 0;display:grid;gap:6px}
 .ffx-log li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;font-size:13.5px;padding:8px 10px;border-radius:10px;background:var(--paper2)}
@@ -572,7 +572,7 @@ V.academy = () => {
  <div class="ffx-rails" data-ffx-rails>${trackOrder(filt).map(t => trackRail(a, t, filt)).join('')}</div>
 </div></section>
 <section><div class="wrap"><div class="grid g2" style="align-items:start">
- <div class="card" style="border-top:5px solid var(--purple)" data-motion="reveal"><span class="tag c" style="--c:var(--purple);justify-self:start">Watch together</span><h3>Training is for adults. The 30-minute rule is for children.</h3>
+ <div class="card" style="border-top:5px solid var(--watch)" data-motion="reveal"><span class="tag c" style="--c:var(--watch);justify-self:start">Watch together</span><h3>Training is for adults. The 30-minute rule is for children.</h3>
   <p class="small">The Futures Friends 30-minute weekly screen limit is for children in the classroom. It does not apply to adult training, so staff can complete modules at their own pace: on a break, at a staff meeting or at home.</p>
   <p class="small">Never watch training videos while you are counted in ratio. Watch as a team at a staff meeting, pause at each chapter and talk about how the lesson looks in your rooms.</p></div>
  <div class="card" style="border-top:5px solid var(--zuri)" data-motion="reveal"><span class="tag c" style="--c:var(--zuri);justify-self:start">Captions and access</span><h3>Every lesson, every learner</h3>
@@ -652,7 +652,7 @@ const reportHtml = () => { const log = WLOG(), room = st.ffxRoom || 'Threes Room
   return `<div class="top"><span>Family App \u00b7 ${esc(room)}</span><span>${last ? shortDate(fromIso(last.date)) : 'Sample'}</span></div>
    <div class="bd"><span class="small muted">What we watched together</span><b style="font-family:var(--display);font-size:19px">${esc(ep.title)} \u00b7 ${ep.min} min</b>
    <span class="small"><b>Ask at dinner:</b> "${esc(ep.q)}"</span><span class="small"><b>We also did:</b> ${esc(ep.act)}</span>
-   <div class="meter" aria-hidden="true"><i style="width:${Math.min(100, used / 30 * 100)}%;background:var(--purple)"></i></div><span class="small muted">${used} of 30 screen minutes used this week</span></div>`; };
+   <div class="meter" aria-hidden="true"><i style="width:${Math.min(100, used / 30 * 100)}%;background:var(--watch)"></i></div><span class="small muted">${used} of 30 screen minutes used this week</span></div>`; };
 
 const tvHtml = inner => `<div class="ffx-tv" data-ffx-tv><div class="ffx-tv-set"><div class="ffx-tv-screen">${inner}</div>
   <div class="ffx-tv-chin"><span>Futures Friends TV</span><span class="knobs" aria-hidden="true"><i class="led"></i><i class="knob"></i><i class="knob"></i></span></div></div>

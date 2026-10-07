@@ -25,7 +25,7 @@ test('every titled video, poster and caption file is in video/, registered with 
   assert.deepEqual(Object.keys(C.BOP_ACTS), SLUGS);
   for (const s of SLUGS) {
     const v = C.BOP_ACTS[s];
-    assert.equal(v.src, `video/act-${s}.mp4?v=3`); assert.equal(v.poster, `video/act-${s}-poster.jpg?v=3`);
+    assert.equal(v.src, `video/act-${s}.mp4?v=4`); assert.equal(v.poster, `video/act-${s}-poster.jpg?v=4`);
     for (const f of [`video/act-${s}.mp4`, `video/act-${s}-poster.jpg`, `video/act-${s}.en.vtt`]) assert.ok(fs.statSync(path.join(ROOT, f)).size > 500, f);
     assert.match(read(`video/act-${s}.en.vtt`), /^WEBVTT/);
     assert.ok(C.has(v.src), s + ' has captions');
@@ -35,7 +35,7 @@ test('every titled video, poster and caption file is in video/, registered with 
 
 test('the one player: native controls, no autoplay, preload none, captions on by default, transcript, honest label', () => {
   const html = C.actPlayer('freeze-try-again', 'Freeze & Try Again');
-  assert.match(html, /<video controls playsinline preload="none" width="1280" height="720" poster="video\/act-freeze-try-again-poster\.jpg\?v=3"/);
+  assert.match(html, /<video controls playsinline preload="none" width="1280" height="720" poster="video\/act-freeze-try-again-poster\.jpg\?v=4"/);
   assert.doesNotMatch(html, /autoplay|muted|loop/);
   assert.match(html, /<track kind="captions" srclang="en" label="English" src="video\/act-freeze-try-again\.en\.vtt" default>/);
   assert.match(html, /Watch Bop do it with you &middot; story-world animation/);
@@ -84,7 +84,7 @@ for (const width of [390, 1280]) {
     for (const [id, vid] of [['freeze-and-try-again', 'freeze-try-again'], ['animal-walks', 'animal-walks'], ['flamingo-balance', 'flamingo-balance']]) {
       await h.goto(page, site.base, 'activities/' + id, 400);
       const d = await page.evaluate(id => { const el = document.querySelector('#fl-one #act-' + id), f = el && el.querySelector('.fl-act-bd > .wc-actvid'), a = el && el.querySelector('.fl-act-bd a.fl-chiplink'); return { open: el && el.open, vid: f && f.dataset.bopAct, first: f && f === el.querySelector('.fl-act-bd').firstElementChild, src: f && f.querySelector('source').getAttribute('src'), href: a && a.getAttribute('href'), name: a && a.textContent.replace(/\s+/g, ' ').trim(), visible: a && a.getBoundingClientRect().height > 0 }; }, id);
-      assert.deepEqual(d, { open: true, vid, first: true, src: `video/act-${vid}.mp4?v=3`, href: `#bop-at-home/bop-act-${vid}`, name: 'Bop · MOVE: watch Bop do it at Bop at Home →', visible: true }, id);
+      assert.deepEqual(d, { open: true, vid, first: true, src: `video/act-${vid}.mp4?v=4`, href: `#bop-at-home/bop-act-${vid}`, name: 'Bop · MOVE: watch Bop do it at Bop at Home →', visible: true }, id);
     }
     // the chip is a working link: it opens Bop at Home at that activity's video card
     await page.click('#fl-one a.fl-chiplink'); await page.waitForTimeout(500);
@@ -98,7 +98,7 @@ for (const width of [390, 1280]) {
     assert.match(await page.textContent('#flActList .fl-meta[role=status]'), /with Zuri$/);
     // the Bop & Go! picture guide
     await h.goto(page, site.base, 'see-how', 400);
-    assert.equal(await page.evaluate(() => { const f = document.querySelector('#guide-bop-and-go .wc-actvid'); return f && f.querySelector('source').getAttribute('src'); }), 'video/act-elephant-stomp.mp4?v=3');
+    assert.equal(await page.evaluate(() => { const f = document.querySelector('#guide-bop-and-go .wc-actvid'); return f && f.querySelector('source').getAttribute('src'); }), 'video/act-elephant-stomp.mp4?v=4');
     assert.deepEqual(errors, []);
     await ctx.close();
   });

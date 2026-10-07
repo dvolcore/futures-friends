@@ -495,7 +495,9 @@ def main():
     fonts()
     data = site_data()
     fam = data['fam']
-    full = [b for b in fam['BOOKS'] if b['status'] == 'full']
+    # the talk cards cover Books 1 to 3 (family-library-data.js PRINTABLES 'story-cards': 3 pages); Books 4 and 5 went full later and
+    # Book 5 is an ensemble book (c 'all') with no single friend colour or pose, so it needs its own card design before it joins
+    full = [b for b in fam['BOOKS'] if b['status'] == 'full' and b['n'] <= 3]
     made = {
         'daily-rhythm': daily_rhythm(),
         'rainbow-tracker': rainbow(),
