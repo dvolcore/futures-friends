@@ -3,6 +3,7 @@
   "source_dir": "~/Downloads/FUTURES_FRIENDS_PROJECT/06_Website/FuturesWebsite/public/assets",
   "credit": "Futures Learning Center, Independence, Missouri",
   "added": "2026-10-07",
+  "concepts": "Branded-room CONCEPT composites of these photos (kit added, real_photo false) live in img/branded-rooms/ with their own manifest, never here.",
   "photos": [
     { "key": "exterior", "source": "exterior.jpg", "sha256": "a5ab0a9e6119b29b77ff23001346de0d451fca98c442bc801e9be42404ce9059", "real_photo": true, "people": false,
       "what": "The building from the street corner: stone walls, the blue front door under the Futures sign at the left, two child-care flag banners on the lawn", "where": "Outside, corner of the building and the front entrance", "crop": null },

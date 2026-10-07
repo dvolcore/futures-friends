@@ -137,6 +137,10 @@ test('G42: every file under img/ and video/ is referenced by the site (directly 
   // (tests/w10-photos.test.js checks the folder holds exactly the listed files).
   const centerKeys = JSON.parse(read('img/center/manifest.json')).photos.map(p => p.key);
   const center = f => { const m = f.split(path.sep).join('/').match(/^img\/center\/(.+)-(?:400|800|1200)\.(?:webp|jpg)$/); return f.split(path.sep).join('/') === 'img/center/manifest.json' || (!!m && centerKeys.includes(m[1]) && code.includes(`'${m[1]}'`)); };
-  const orphans = files.filter(f => !code.includes(path.basename(f)) && !(copyOf(f) && code.includes(copyOf(f))) && !dynamic.some(re => re.test(f.split(path.sep).join('/'))) && !plush.has(f.split(path.sep).join('/')) && !center(f));
+  // img/branded-rooms/ (2026-10-07) holds the concept composites: brand-art.js builds <key>-kit-<400|800|1200>.<webp|jpg> from FFArt.KIT
+  // keys, so a file counts as referenced when img/branded-rooms/manifest.json lists its key (tests/branded-rooms.test.js checks the folder).
+  const kitKeys = JSON.parse(read('img/branded-rooms/manifest.json')).rooms.map(r => r.key);
+  const kit = f => { const g = f.split(path.sep).join('/'), m = g.match(/^img\/branded-rooms\/(.+)-kit-(?:400|800|1200)\.(?:webp|jpg)$/); return g === 'img/branded-rooms/manifest.json' || (!!m && kitKeys.includes(m[1]) && code.includes(`'${m[1]}'`)); };
+  const orphans = files.filter(f => !code.includes(path.basename(f)) && !(copyOf(f) && code.includes(copyOf(f))) && !dynamic.some(re => re.test(f.split(path.sep).join('/'))) && !plush.has(f.split(path.sep).join('/')) && !center(f) && !kit(f));
   assert.deepEqual(orphans, []);
 });

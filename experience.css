@@ -48,3 +48,9 @@ html[data-motion=off] .ex-curriculum *,html[data-motion=off] .ex-ribbon{animatio
 @media(max-width:680px){.ex-photocredit{top:auto;right:auto;left:16px;bottom:6px;font-size:10.5px;max-width:calc(100% - 32px)}}
 /* the hero note never runs under the cast (768 px: it sat under Booker's head) */
 @media(min-width:681px) and (max-width:1000px){.ex-hero .ex-heronote{max-width:calc(48vw - 56px)}}   /* beats a11y-wave3.css (loads later) */
+/* branded-room concept in the hero (brand-art.js KIT): the kit version shows first, the real photo is one tap away */
+.ex-hero.ffa-kit .ex-heroimage{transition:opacity .25s ease}
+.ex-hero[data-kit-view="kit"] img[data-real-photo].ex-heroimage,.ex-hero[data-kit-view="real"] img[data-kit-photo].ex-heroimage{opacity:0}
+.ex-photocredit .ex-kitlabel{font-weight:600}
+.ex-photocredit .ffa-kit-toggle{position:static;display:inline-flex;margin:4px 0 0;box-shadow:none;background:#eef2f6;vertical-align:middle}
+.ex-photocredit .ffa-kit-toggle button{padding:6px 10px;min-height:28px;font-size:11.5px}

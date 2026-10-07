@@ -201,7 +201,7 @@
     if (!window.FFArt) return '';
     const real = hasReal();
     return `<div class="ffa-slots hc-slots" aria-label="${real ? 'Our center in Independence, in real photos' : 'Photos still to come'}">${SLOTS.map(([kind, title, line, k, ratio], i) => (i === 0 ? ''
-      : real ? window.FFArt.photo(REAL[i][0], { title: REAL[i][1], line: REAL[i][2], ratio: 'land', sizes: '(max-width:680px) 92vw, 380px' }) : window.FFArt.slot({ kind, title, line, k, ratio }))).join('')}</div>`;
+      : real ? window.FFArt.photo(REAL[i][0], { title: REAL[i][1], line: REAL[i][2], ratio: 'land', sizes: '(max-width:680px) 92vw, 380px', kitNote: false }) : window.FFArt.slot({ kind, title, line, k, ratio }))).join('')}</div>`;
   }
   function trust() {
     const ts = window.FFTeacherStandard ? window.FFTeacherStandard.callout('home') : '';
@@ -212,7 +212,7 @@
     <p>Futures Friends is piloting at Futures Learning Center, 3625 S Blue Ridge Blvd. Call ${E(phone())} for the ages served right now and current hours.</p>
     <a class="hc-btn hc-btn-quiet" href="#enroll">Visit our pilot center ${icon('ArrowRight')}</a>
    </div>
-   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms and front door in Independence. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
+   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms and front door in Independence. The two rooms open on a concept: the Futures Friends Learning Zones kit in our classroom, added to the real photo and not installed yet. Tap Real room to see each room today. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
   </div></section>`;
   }
 

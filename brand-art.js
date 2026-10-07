@@ -9,6 +9,12 @@
      its source file and sha256; wave 10, owner 2026-10-07: "We already have that, so there's no reason that should have a
      placeholder"). It fills a slot only where the photo shows what the slot promised (a room, a learning zone, the front door).
      Every one carries the credit line, so it reads as our pilot center and nothing else. Never put a render or AI image here.
+   - KIT / kitImg(key, o): "branded room" CONCEPT composites (img/branded-rooms/, listed in img/branded-rooms/manifest.json; owner
+     2026-10-07: "They need our hypothetical carpets and our posters added so they're branded with our stuff"). The same real photo
+     with the proposed Learning Zones kit (zone mat, poster or sign, plush) composited in locally. Never presented as the real
+     center: photo() shows them behind a "Real room / With the kit" toggle (default: with the kit) and labels them
+     "Concept: the Futures Friends Learning Zones kit in our classroom"; the plain real photo is one tap away.
+     window.FFBrandedRooms lists them ({key, real, kit, alt, w, h}) for other pages (the room-kit page).
    - homeStage(): the Home hero cast, the four friends on the plush meadow (Booker center stage; meadow-hero.js draws the world).
    Loaded before views.js. Callers guard with window.FFArt, so a missing file never breaks a page. */
 (function () {
@@ -107,12 +113,44 @@
     const sizes = esc(o.sizes || '(max-width:820px) 92vw, 560px');
     return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(o.alt || p.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-real-photo="${esc(key)}"></picture>`;
   }
+  // ---- branded-room CONCEPTS: the real photo + the proposed kit, composited locally (img/branded-rooms/<key>-kit-<w>.<ext>) ----
+  const KIT_LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
+  const KIT = {
+    'turtle-rug': { zone: "Lumi's Calm Corner", alt: "Concept image, not installed yet: our main classroom with a pink Lumi's Calm Corner zone mat beside the turtle stepping stones and a Lumi poster on the pillar" },
+    'alphabet-rug': { zone: 'Friends Circle', alt: "Concept image, not installed yet: our carpet area with a Futures Friends Friends Circle rug showing all four friends in place of the alphabet rug, a Booker poster and a Booker plush on the bench" },
+    'reading-corner': { zone: "Booker's Reading Area", alt: "Concept image, not installed yet: our reading corner with a blue Booker's Reading Area mat in front of the bookshelf, a Booker zone sign on the wall and a Booker plush on the bench" },
+    'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone mat, a Bop zone sign above the shelf and a Bop plush on top of it" },
+    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone mat beside the table, a Zuri poster on the wall and a Zuri plush on the cubby" }
+  };
+  function kitImg(key, o = {}) {
+    const k = KIT[key], p = CENTER[key]; if (!k || !p) return '';
+    const b = 'img/branded-rooms/' + key + '-kit', set = ext => [400, 800, 1200].map(w => `${b}-${w}.${ext} ${w}w`).join(', ');
+    const sizes = esc(o.sizes || '(max-width:820px) 92vw, 560px');
+    return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(k.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-kit-photo="${esc(key)}"></picture>`;
+  }
+  // The toggle: any [data-kit-show] button sets data-kit-view on its nearest [data-kit-view] holder (CSS shows that picture).
+  function kitToggle(key) {
+    return `<span class="ffa-kit-toggle" role="group" aria-label="Show the room"><button type="button" data-kit-show="real" aria-pressed="false">Real room</button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</button></span>`;
+  }
+  if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', e => {
+    const b = e.target && e.target.closest && e.target.closest('[data-kit-show]'); if (!b) return;
+    const h = b.closest('[data-kit-view]'); if (!h) return;
+    const v = b.dataset.kitShow; h.dataset.kitView = v;
+    h.querySelectorAll('[data-kit-show]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.kitShow === v)));
+  });
   // A figure with the photo, an optional caption and the credit line. o.ratio 'wide' | 'land' crops to the slot's frame shape.
+  // Rooms with a branded concept show it first, labelled, with the real photo one tap away (o.kit === false: real photo only;
+  // o.kitNote === false drops the caption note where the section text already says it, e.g. Home's real-photos block).
   function photo(key, o = {}) {
     if (!CENTER[key]) return '';
-    return `<figure class="ffa-photo${o.ratio ? ' ffa-photo-' + esc(o.ratio) : ''}${o.cls ? ' ' + esc(o.cls) : ''}">${photoImg(key, o)}
-   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}<span class="ffa-credit">Photo: ${CENTER_CREDIT}</span></figcaption></figure>`;
+    const kit = KIT[key] && o.kit !== false;
+    const cls = `ffa-photo${o.ratio ? ' ffa-photo-' + esc(o.ratio) : ''}${kit ? ' ffa-kit' : ''}${o.cls ? ' ' + esc(o.cls) : ''}`;
+    const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span><span class="ffa-kit-concept">${kitImg(key, o)}</span><span class="ffa-kit-label" aria-hidden="true">Concept</span>${kitToggle(key)}</div>` : photoImg(key, o);
+    return `<figure class="${cls}"${kit ? ' data-kit-view="kit"' : ''}>${media}
+   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).</span>` : ''}<span class="ffa-credit">Photo: ${CENTER_CREDIT}</span></figcaption></figure>`;
   }
+  const FFBrandedRooms = Object.keys(KIT).map(key => ({ key, real: `img/center/${key}-800.jpg`, kit: `img/branded-rooms/${key}-kit-800.jpg`, alt: KIT[key].alt, w: CENTER[key].w, h: CENTER[key].h, zone: KIT[key].zone, label: KIT_LABEL }));
+  window.FFBrandedRooms = FFBrandedRooms;
 
-  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT };
+  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL };
 })();

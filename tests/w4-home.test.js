@@ -19,6 +19,8 @@ const BUTTONS = 9;
 // button (WCAG 2.2.2), so Home may add exactly those two. (Wave 9: the hello frame's clip is now the talking intro; same one button,
 // which also replays it at the end.)
 const VIDEO_BUTTONS = 2;
+// Branded rooms (owner 2026-10-07): each concept room photo carries a 'Real room / With the kit' pair, so the real photo is one tap away.
+const KIT_BUTTONS = 4;
 // document height ceilings (204bd4a: 7,724 and 13,878; wave 4: 4,400 and 7,000; wave 6 adds the friend picker, the felt path and
 // "What we have built": measured 5,947 and 8,688)
 // 2026-10-07 (owner): the welcome video got its own big section under the hero (+1,100 px at 1280, +800 at 390, measured 7,558
@@ -35,7 +37,7 @@ const homeFacts = page => page.evaluate(() => {
     downloads: links.filter(a => a.hasAttribute('download') || /\.(pdf|zip|docx?|csv)(\?|#|$)/i.test(a.getAttribute('href')) || /^printables\//.test(a.getAttribute('href'))).length,
     controls: v.querySelectorAll('a[href],button').length,
     links: v.querySelectorAll('a[href]').length,
-    buttons: [...v.querySelectorAll('button')].map(b => b.matches('.ffa-friend') ? 'friend' : b.matches('[role=tab].hc-picktab') ? 'tab' : b.matches('[data-brand-reveal]') ? 'reveal' : b.matches('.hc-vbtn[data-video-toggle]') ? 'video' : b.matches('.hc-vsound') ? 'sound' : b.outerHTML.slice(0, 80)),
+    buttons: [...v.querySelectorAll('button')].map(b => b.matches('.ffa-friend') ? 'friend' : b.matches('[role=tab].hc-picktab') ? 'tab' : b.matches('[data-brand-reveal]') ? 'reveal' : b.matches('.hc-vbtn[data-video-toggle]') ? 'video' : b.matches('.hc-vsound') ? 'sound' : b.matches('.ffa-kit-toggle [data-kit-show]') ? 'kit' : b.outerHTML.slice(0, 80)),
     hello: [...v.querySelectorAll('.hc-intro .hc-hello')].map(f => ({ vis: vis(f), cap: (f.querySelector('figcaption b') || {}).textContent, video: !!f.querySelector('video[aria-label]') })),
     strip: v.querySelectorAll('#rt-strip,.rt-strip,.rt-ev').length,
     samples: v.querySelectorAll('[data-sample],.fj-sample,.rt-sample,.fj-shot,.fj-thumb').length,
@@ -81,6 +83,7 @@ for (const width of [1280, 390]) {
     const f = await homeFacts(page);
     assert.ok(f.links <= BUDGET, `links in #view: ${f.links} <= ${BUDGET}`);
     // wave 9 (owner 2026-10-07): plus the welcome video's 'Tap for sound' button, shown only while it plays silently
+    assert.ok(f.buttons.filter(b => b === 'kit').length <= KIT_BUTTONS, 'at most two Real room / With the kit toggles'); f.buttons = f.buttons.filter(b => b !== 'kit'); f.controls -= KIT_BUTTONS;
     assert.ok(f.buttons.length <= BUTTONS + VIDEO_BUTTONS + 1 && f.buttons.filter(b => b !== 'video' && b !== 'sound').length <= BUTTONS && f.buttons.filter(b => b === 'video').length <= VIDEO_BUTTONS && f.buttons.filter(b => b === 'sound').length <= 1 && f.buttons.every(b => ['friend', 'tab', 'reveal', 'video', 'sound'].includes(b)), `buttons are only the friend toys, the logo reveal and the two animation pause buttons: ${f.buttons.join(', ')}`);
     assert.ok(f.controls <= BUDGET + BUTTONS + VIDEO_BUTTONS, `links and buttons in #view: ${f.controls} <= ${BUDGET + BUTTONS + VIDEO_BUTTONS}`);
     assert.ok(f.height <= HEIGHT[width], `page height ${f.height} <= ${HEIGHT[width]}`);
