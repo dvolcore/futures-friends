@@ -5,7 +5,7 @@
      - Teacher Portal (portal.js, with the demo database): Today, Check-in (times, pickup, care log, naps), Daily plan (the teacher's
        OWN six-step plans, submitted for approval; the public Day 9 sample to look at), Children, Progress (area-tagged notes),
        Messages (sample pictures, no uploads), Family reports (built from the day, sent to families).
-     - Director: Dashboard (attendance, ratios, what is due), Staff, Approvals, Enrollment desk, Reports (+ every teacher tab).
+     - Director: Dashboard (attendance, ratios, what is due), AI inbox (demo-inbox.js: fake emails, canned drafts), Staff, Approvals, Enrollment desk, Reports (+ every teacher tab).
      - Family Portal: the child's day (check-in time, plan, report, notes, messages), friend videos and Futures at Home links.
      - Academy (#learn, #learn-course/F-101): course list, the "Meet the Friends" sample lesson video, progress, a demo completion record.
    Everything is labelled "Demo, sample data, resets anytime". No curriculum is shown beyond what the public site already carries
@@ -141,7 +141,7 @@ function addTabs(tabs, role){
   const waiting = role === 'director' ? approvalsWaiting() : 0;
   const out = [];
   const s = ses() || {}, may = k => role === 'director' || (!!s.id && DM.can(s.id, k));
-  if (role === 'director') out.push(['dash','Dashboard'], ['staff','Staff'], ['approvals', 'Approvals' + (waiting ? ` <span class="ffd-count" aria-label="${waiting} waiting">${waiting}</span>` : '')], ['invite','Invite']);
+  if (role === 'director') out.push(['dash','Dashboard'], window.FFDemoInbox ? ['inbox', 'Inbox' + (window.FFDemoInbox.open() ? ` <span class="ffd-count" aria-label="${window.FFDemoInbox.open()} waiting">${window.FFDemoInbox.open()}</span>` : '')] : null, ['staff','Staff'], ['approvals', 'Approvals' + (waiting ? ` <span class="ffd-count" aria-label="${waiting} waiting">${waiting}</span>` : '')], ['invite','Invite']);
   if (may('enroll')) out.push(['enroll','Enrollment']);
   if (may('billing')) out.push(['billing','Billing']);
   if (may('reports')) out.push(['dreports','Reports']);
@@ -150,10 +150,10 @@ function addTabs(tabs, role){
   tabs.splice(0, tabs.length, ...out.filter(Boolean));
 }
 function view(tab, c){
-  const f = {checkin:checkinView, plans:plansView, reports:reportsView, dash:dashView, staff:staffView, approvals:approvalsView, enroll:enrollView, dreports:dReportsView, invite:inviteView,
+  const f = {inbox:c2 => window.FFDemoInbox ? window.FFDemoInbox.view(c2) : null, checkin:checkinView, plans:plansView, reports:reportsView, dash:dashView, staff:staffView, approvals:approvalsView, enroll:enrollView, dreports:dReportsView, invite:inviteView,
     billing:billingView, access:accessView, hours:hoursTab}[tab];
   if (!f) return null;
-  if (['dash','staff','approvals','invite'].includes(tab) && c.role !== 'director') return null;
+  if (['dash','inbox','staff','approvals','invite'].includes(tab) && c.role !== 'director') return null;
   const need = {enroll:'enroll', billing:'billing', dreports:'reports', access:'staff'}[tab];
   if (need && c.role !== 'director' && !DM.can(c.me, need)) return null;
   if (tab === 'billing' && c.role !== 'director' && !DM.isDirector(DM.get('staff', c.me))) return null;   // money: directors and the owner only

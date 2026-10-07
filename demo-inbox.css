@@ -1,0 +1,50 @@
+/* Futures Hub DEMO: the director's AI inbox (demo-inbox.js). Site tokens only (light and dark), Bop purple for the AI labels; phone first. */
+.ffi{display:grid;gap:14px;min-width:0}
+.ffi-intro{display:grid;gap:6px;border-top:5px solid var(--bop,#8236AE)}
+.ffi-intro .h4{margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ffi-ai{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:800;letter-spacing:.01em;background:#8236AE;color:#fff}
+.ffi-filters{display:flex;flex-wrap:wrap;gap:6px}
+.ffi-filter{font:inherit;font-size:13.5px;font-weight:700;padding:6px 12px;min-height:36px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.ffi-filter[aria-pressed="true"]{background:#6B2A8E;border-color:#6B2A8E;color:#fff}
+.ffi-filter:focus-visible,.ffi-item:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.ffi-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:16px;align-items:start}
+@media (max-width:900px){.ffi-grid{grid-template-columns:minmax(0,1fr)}}
+.ffi-q,.ffi-d{min-width:0}
+.ffi-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ffi-item{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;gap:6px;padding:10px 12px;border-radius:14px;border:2px solid var(--line);border-left:6px solid var(--line);background:var(--paper);min-width:0}
+.ffi-item:hover{box-shadow:0 4px 14px rgba(10,43,56,.12)}
+.ffi-item.is-sel{border-color:#8236AE;border-left-color:#8236AE;background:var(--paper2)}
+.ffi-item.is-done{border-style:dashed;border-left-style:solid}
+.ffi-item.is-done .ffi-subj{text-decoration:line-through}
+.ffi-top{display:flex;justify-content:space-between;gap:8px;min-width:0}
+.ffi-from{font-size:14px;overflow-wrap:anywhere}
+.ffi-subj{font-size:14.5px;overflow-wrap:anywhere}
+.ffi-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ffi-tags .chip{font-size:11.5px;white-space:normal}
+.ffi-cat{display:inline-flex;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:800;border:1.5px solid currentColor;background:transparent;color:var(--ink)}
+.ffi-c-enroll,.ffi-c-tour{color:var(--zuri-ink,#1B6E3E)}
+.ffi-c-billing{color:var(--booker-ink,#23589F)}
+.ffi-c-absence,.ffi-c-care{color:var(--lumi-ink,#A82A65)}
+.ffi-c-complaint{color:var(--bad,#B42318)}
+.ffi-c-staff{color:var(--bop-ink,#6B2A8E)}
+.ffi-c-spam{color:var(--muted)}
+.ffi-detail{display:grid;gap:12px;min-width:0}
+.ffi-dhead{display:grid;gap:4px}
+.ffi-dhead .h4{margin:0;overflow-wrap:anywhere}
+.ffi-dhead .mini{overflow-wrap:anywhere}
+.ffi-h{margin:0 0 6px;font-size:15px}
+.ffi-body{margin:0;padding:10px 12px;border-radius:10px;background:var(--paper2);border:1px solid var(--line);font:inherit;font-size:14px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
+.ffi-warn{padding:10px 12px;border-radius:10px;border:2px solid var(--bad,#B42318);border-left-width:6px;font-size:14px;line-height:1.45}
+.ffi-route-box{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:8px 12px;border-radius:10px;border:2px dashed var(--line)}
+.ffi-draft{padding:10px 12px;border-radius:12px;border:2px solid #8236AE}
+.ffi-draft .f{display:grid;gap:6px;font-size:13.5px}
+.ffi-ta{width:100%;box-sizing:border-box;min-height:200px;resize:vertical;font:inherit;font-size:14px;line-height:1.5}
+.ffi-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:640px){.ffi-cols{grid-template-columns:minmax(0,1fr)}}
+.ffi-facts dl{margin:0;display:grid;gap:6px}
+.ffi-facts dl div{display:grid;gap:1px}
+.ffi-facts dt{font-size:12.5px;font-weight:800;color:var(--muted)}
+.ffi-facts dd{margin:0;font-size:14px;overflow-wrap:anywhere}
+.ffi-why ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px;line-height:1.45}
+.ffi-facts,.ffi-why{padding:10px 12px;border-radius:12px;background:var(--paper2)}
+.ffi-send .btn{min-height:44px}
