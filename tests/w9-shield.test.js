@@ -69,11 +69,11 @@ async function open(width, opts = {}) {
   const ctx = await browser.newContext({ viewport: h.SIZES[width], reducedMotion: opts.motion ? 'no-preference' : 'reduce', javaScriptEnabled: opts.js !== false, deviceScaleFactor: opts.dpr || 1 });
   const p = await ctx.newPage(); const errors = []; p.on('pageerror', e => errors.push(e.message));
   await p.addInitScript(() => {
-    localStorage.setItem('ff-sound', 'off');
+    localStorage.setItem('ff-sound-v2', 'off');
     window.__sfx = []; document.addEventListener('ff:sfx', e => { if (e.detail.src === 'flc-mark') window.__sfx.push(e.detail.name); });
     window.__cls = []; try { new PerformanceObserver(l => l.getEntries().forEach(e => { if (!e.hadRecentInput) window.__cls.push({ v: e.value, src: (e.sources || []).map(s => s.node && s.node.closest && s.node.closest('footer') ? 'footer' : (s.node && s.node.nodeName) || '') }); })).observe({ type: 'layout-shift', buffered: true }); } catch (e) { /* no API */ }
   });
-  if (opts.motionOff) await p.addInitScript(() => { localStorage.setItem('ff-display-preferences', JSON.stringify({ motion: false })); });   // the site's Decorative motion switch, off
+  if (opts.motionOff) await p.addInitScript(() => { localStorage.setItem('ff-display-preferences', JSON.stringify({ motion2: false })); });   // the site's Decorative motion switch, off
   await p.goto(`${srv.base}?fresh=w9s-${Date.now()}#${opts.route || 'home'}`);
   if (opts.js !== false) await p.waitForFunction(() => document.querySelector('footer .fprog .flcm'));
   return { ctx, p, errors };
@@ -259,7 +259,7 @@ test('hover, keyboard focus in the block and tap replay the arrow and star with 
   // tap on a phone
   const t = await browser.newContext({ viewport: h.SIZES[390], reducedMotion: 'no-preference', hasTouch: true, isMobile: true });
   const q = await t.newPage();
-  await q.addInitScript(() => { localStorage.setItem('ff-sound', 'off'); window.__sfx = []; document.addEventListener('ff:sfx', e => { if (e.detail.src === 'flc-mark') window.__sfx.push(e.detail.name); }); });
+  await q.addInitScript(() => { localStorage.setItem('ff-sound-v2', 'off'); window.__sfx = []; document.addEventListener('ff:sfx', e => { if (e.detail.src === 'flc-mark') window.__sfx.push(e.detail.name); }); });
   await q.goto(`${srv.base}?fresh=w9t-${Date.now()}#home`);
   await q.waitForFunction(() => document.querySelector('footer .fprog .flcm'));
   await toFooter(q);

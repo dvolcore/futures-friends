@@ -4,21 +4,28 @@
      before the visitor's first tap or key, so the first touch anywhere on the page unlocks it; until then a felt "Tap for sound" tag
      points at the pill on Home. Nothing autoplays before that touch. A felt pill bottom-right, just above the back-to-top button's slot (bottom-left collides with
      the hero cast's name tags at 1280 and with the wayfinding context card from 1440 px), holds two real toggle buttons: "Sound" (effects) and, once sound is on, "Nature" (the
-     quiet day-part beds, off by default even when sound is on). Both choices are remembered (localStorage, in try/catch).
+     quiet day-part beds). Both choices are remembered (localStorage, in try/catch).
+   - Owner 2026-10-07 ("the natural noises need to be automatically on as well ... for demonstration purposes I need ALL the effects
+     on"): Nature is ON by default together with Sound, and both keys were bumped (-v2) so an old stored "off" no longer blocks the
+     demo; a visitor who turns either off now is remembered under the new key. The entry gate (entry.js) is the first tap that wakes
+     both; "Enter without sound" turns sound off for that session only (set(false, {session: true}), not stored).
+   - Ducking: the nature beds fade to almost nothing while anything else speaks: a video or audio element on the page playing with its sound,
+     a friend's voice line (FFVoices) or the storybook's read-aloud (speechSynthesis); they fade back afterwards. Anyone can ask for a
+     re-check with a plain 'ff:duck' document event. ducked() tells whether the beds are ducked right now.
    - No AudioContext exists until the visitor turns sound on with a tap or key (or, on a return visit with sound on, until their first
      tap or key on the page). The tab going hidden suspends it; it resumes when the tab is visible again and sound is on.
    - Listens (fire-and-forget, see docs/reviews/WAVE8_CONTRACT.md): ff:sfx {name, x?, gain?, i?} and ff:daypart {part}; plus the
      site's own events: clicks on .btn / [data-go] / links -> tap, ff:audience -> chime, hashchange -> page-turn. Unknown names are ignored.
    - Master limiter so overlapping sounds never clip; per-sound minimum gaps (footsteps at most ~4 a second); letter-pops queue on a
      beat and climb a pentatonic tune (FUTURES then FRIENDS), so the title landing plays a little rising melody.
-   Public: window.FFSound = {play(name, opts) -> true if it sounded, enabled(), unlocked() -> true once the visitor's tap or key has
+   Public: window.FFSound = {play(name, opts) -> true if it sounded, enabled(), nature(), ducked(), set(on, {session}), unlocked() -> true once the visitor's tap or key has
    woken the AudioContext (wave 9: the talking intro on Home plays with its voice only then), set(on), names, render(name,
    offlineCtx, opts)} (frozen; render is the audition helper that draws any sound or bed into an OfflineAudioContext). */
 (function () {
   'use strict';
   if (typeof document === 'undefined') return;
   const W = window, D = document;
-  const KEY = 'ff-sound', NKEY = 'ff-sound-nature', HKEY = 'ff-sound-hint';
+  const KEY = 'ff-sound-v2', NKEY = 'ff-sound-nature-v2', HKEY = 'ff-sound-hint';
   const MASTER = 1.0, AMB = 0.5;   // owner 2026-10-06: too quiet on a phone speaker; the limiter keeps peaks under -3 dBFS
   const get = k => { try { return W.localStorage.getItem(k); } catch (_) { return null; } };
   const put = (k, v) => { try { W.localStorage.setItem(k, v); } catch (_) { /* blocked storage: the choice lasts this visit */ } };
@@ -43,10 +50,11 @@
     const m = c.createGain(); m.gain.value = MASTER; m.connect(lim); lim.connect(c.destination);
     const verb = c.createConvolver(); verb.buffer = impulse(c, 1.8); const vg = c.createGain(); vg.gain.value = 0.55; verb.connect(vg); vg.connect(m);
     const fx = c.createGain(); fx.connect(m);
-    const amb = c.createGain(); amb.gain.value = 0; amb.connect(m);
+    const duck = c.createGain(); duck.connect(m);   // the nature beds' ducking stage (ducking below)
+    const amb = c.createGain(); amb.gain.value = 0; amb.connect(duck);
     const nb = c.createBuffer(1, c.sampleRate * 2, c.sampleRate), nd = nb.getChannelData(0), r = seeded(11);
     for (let i = 0; i < nd.length; i++) nd[i] = r() * 2 - 1;
-    return { c, m, fx, verb, amb, noise: nb };
+    return { c, m, fx, verb, amb, duck, noise: nb };
   }
 
   // ---------------------------------------------------------------- voice helpers
@@ -238,7 +246,7 @@
   };
 
   // ---------------------------------------------------------------- live engine
-  let on = get(KEY) !== 'off', nature = get(NKEY) === 'on', part = 'morning';
+  let on = get(KEY) !== 'off', nature = get(NKEY) !== 'off', part = 'morning';
   let ac = null, G = null;
   const visible = () => D.visibilityState !== 'hidden';
   const live = () => !!(on && ac && ac.state === 'running' && visible());
@@ -265,6 +273,7 @@
     if (!AC) return false;
     try { ac = new AC({ latencyHint: 'interactive' }); } catch (_) { return false; }
     G = graph(ac);
+    ducked = false; duck();
     ac.onstatechange = () => ambient();
     return true;
   }
@@ -276,11 +285,14 @@
   }
   function unlock(e) {
     if (!on || !visible()) return;
+    if (e && e.target && e.target.closest && e.target.closest('[data-ffs-ignore]')) return;   // "Enter without sound" wakes nothing
     playbackSession();
     if (!makeContext()) return;
     const greet = () => {   // a little hello the first time sound wakes up, so the visitor knows it works (not when the tap was on the pill)
       if (greeted || ac.state !== 'running') return; greeted = true;
       if (e && e.target && e.target.closest && e.target.closest('.ffs')) return;
+      // through the entry gate onto Home with motion: the title's own letters play the tune as they land (hero-world.js), so no second one
+      if (e && e.target && e.target.closest && e.target.closest('.ffe') && D.documentElement.dataset.ffeTune === 'opening') return;
       const t0 = ac.currentTime + 0.03;
       try {   // on Home the hello is the title tune (FUTURES, FRIENDS rising, then the logo landing); elsewhere just the landing
         if (/^(#home(\/|$)|#?$)/.test(location.hash)) {
@@ -335,7 +347,24 @@
     clearTimeout(tick);
     if (want || Object.keys(buses).length) tick = setTimeout(schedule, 300);
   }
+  // ducking: is anything else speaking right now?
+  let ducked = false;
+  function loud() {
+    try {
+      for (const m of D.querySelectorAll('video, audio')) if (!m.paused && !m.ended && !m.muted && m.volume > 0 && m.readyState > 1) return true;
+      if (W.FFVoices && typeof W.FFVoices.speaking === 'function' && W.FFVoices.speaking()) return true;
+      if (W.speechSynthesis && W.speechSynthesis.speaking) return true;
+    } catch (_) { /* nothing to check */ }
+    return false;
+  }
+  function duck() {
+    const d = loud();
+    if (d === ducked) return;
+    ducked = d;
+    if (G) G.duck.gain.setTargetAtTime(d ? 0.0001 : 1, ac.currentTime, d ? 0.08 : 0.7);
+  }
   function schedule() {
+    duck();
     if (!G || !visible()) return;                                      // hidden: no timer at all; visibilitychange starts it again
     const now = ac.currentTime, running = live();
     for (const k in buses) {
@@ -364,8 +393,8 @@
     natBtn.setAttribute('aria-pressed', nature ? 'true' : 'false');
     natBtn.querySelector('.ffs-st').textContent = nature ? 'on' : 'off';
   }
-  function set(v) {
-    on = !!v; put(KEY, on ? 'on' : 'off');
+  function set(v, o) {
+    on = !!v; if (!(o && o.session)) put(KEY, on ? 'on' : 'off');
     if (on && W.navigator && W.navigator.userActivation && W.navigator.userActivation.isActive) unlock();
     if (!on && ac) { ambient(); setTimeout(() => { if (!on && ac) ac.suspend().catch(() => {}); }, 700); }   // off: fade, then the graph sleeps
     paint(); dropHint();
@@ -426,6 +455,8 @@
     else if (on) ac.resume().catch(() => {});
     ambient();
   });
+  ['play', 'playing', 'pause', 'ended', 'volumechange', 'emptied'].forEach(t => D.addEventListener(t, () => setTimeout(duck, 0), true));   // media events do not bubble: caught on the way down
+  D.addEventListener('ff:duck', () => setTimeout(duck, 0));
   D.addEventListener('ff:sfx', e => { const d = e && e.detail; if (d && typeof d === 'object') play(d.name, d); });
   D.addEventListener('ff:daypart', e => {
     const p = e && e.detail && e.detail.part;
@@ -457,7 +488,7 @@
     return false;
   }
 
-  W.FFSound = Object.freeze({ play, enabled: () => on, unlocked: () => !!(ac && ac.state === 'running'), set, names: NAMES, render });
+  W.FFSound = Object.freeze({ play, enabled: () => on, nature: () => nature, ducked: () => ducked, unlocked: () => !!(ac && ac.state === 'running'), set, names: NAMES, render });
   if (D.body) build(); else D.addEventListener('DOMContentLoaded', build);
   tryAutoplay();
 })();

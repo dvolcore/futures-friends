@@ -99,7 +99,7 @@ test('the felt pause button still pauses (no restart, no voice); the sound pill 
 
 test('sound turned off on an earlier visit: the intro plays muted with captions, no chip, and a tap does not unmute it', async () => {
   const ctx = await ctxFor(390, true);
-  await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound', 'off'); } catch (e) { /* blocked */ } });
+  await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound-v2', 'off'); } catch (e) { /* blocked */ } });
   const page = await ctx.newPage(); const errors = errorsOf(page);
   await h.goto(page, site.base, 'home', 900);
   await toIntro(page); await playing(page);

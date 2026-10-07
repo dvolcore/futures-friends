@@ -45,7 +45,10 @@
     cur = null; curK = null; done = null;
     if (a) { try { a.pause(); a.currentTime = 0; } catch (_) { /* not loaded yet */ } }
     if (f) { try { f(); } catch (_) { /* the card is gone */ } }
+    ping();
   }
+  // sound.js ducks the nature beds while a friend speaks: a plain re-check event (a detached Audio's own events reach no listener)
+  const ping = () => { try { D.dispatchEvent(new CustomEvent('ff:duck')); } catch (_) { /* fire-and-forget */ } };
 
   function make(k) {
     const a = new Audio();
@@ -67,6 +70,7 @@
     let p = null;
     try { p = a.play(); } catch (_) { stop(); return 'none'; }
     if (p && typeof p.catch === 'function') p.catch(() => { if (cur === a) stop(); });
+    a.addEventListener('playing', ping, { once: true });
     return 'playing';
   }
 

@@ -15,7 +15,7 @@ const SIZES = { 1280: { width: 1280, height: 720 }, 390: { width: 390, height: 8
 async function toFooter(page) {
   await page.goto(`${srv.base}?fresh=w9e-${Date.now()}#home`);
   await page.waitForFunction(() => document.querySelector('footer .fprog .flcm'));
-  await page.evaluate(() => localStorage.setItem('ff-sound', 'off'));
+  await page.evaluate(() => localStorage.setItem('ff-sound-v2', 'off'));
 }
 
 try {

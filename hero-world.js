@@ -618,7 +618,10 @@
       if (window.FFHeroMotion && typeof window.FFHeroMotion.skip === 'function') window.FFHeroMotion.skip();
       sc.timer(() => finish('skipped'), SPEED_MS + 60);
     };
-    sc.frame(() => {
+    // the entry gate (entry.js): the opening waits until the visitor has passed it, so it plays in full view as the gate lifts
+    const G8 = window.FFEntry;
+    const when = f => (G8 && typeof G8.wait === 'function' ? G8.wait(() => sc.frame(f)) : sc.frame(f));
+    when(() => {
       if (sc.aborted) return;
       const r = hero.getBoundingClientRect();
       const onTop = r.top < (innerHeight || 800) * .5 && r.bottom > 0 && (window.scrollY || 0) < 40;

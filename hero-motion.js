@@ -421,7 +421,8 @@
         if (wait) defer(() => start(1), wait); else start(1);
       }));
     };
-    sc.frame(decide);
+    // the entry gate (entry.js): the cast arrives after the visitor has passed it (hero-world.js, which waits too, decides first)
+    if (window.FFEntry && typeof window.FFEntry.wait === 'function') window.FFEntry.wait(() => sc.frame(decide)); else sc.frame(decide);
     return vis;
   }
 

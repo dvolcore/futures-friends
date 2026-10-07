@@ -101,7 +101,7 @@ test.before(async () => {
 });
 test.after(async () => { await browser.close(); await srv.close(); });
 const fresh = () => `${srv.base}?fresh=w8-${Date.now()}#home`;
-const SFXLOG = () => { try { localStorage.setItem('ff-sound', 'off'); } catch (_) {} /* sound on by default (owner): keep the audio engine out of frame-timing tests; ff:sfx events fire regardless */ window.__sfx = []; const t0 = performance.now(); document.addEventListener('ff:sfx', e => window.__sfx.push(Object.assign({ t: performance.now() - t0 }, e.detail))); };
+const SFXLOG = () => { try { localStorage.setItem('ff-sound-v2', 'off'); } catch (_) {} /* sound on by default (owner): keep the audio engine out of frame-timing tests; ff:sfx events fire regardless */ window.__sfx = []; const t0 = performance.now(); document.addEventListener('ff:sfx', e => window.__sfx.push(Object.assign({ t: performance.now() - t0 }, e.detail))); };
 
 test('the letters re-assemble to the original logo (decoded in Chromium, pixel by pixel) and sit exactly in their slots', async () => {
   const ctx = await browser.newContext({ viewport: h.SIZES[1280], reducedMotion: 'reduce' });

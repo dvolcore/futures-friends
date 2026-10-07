@@ -6,7 +6,7 @@
 //  - sound is ON by default (owner 2026-10-06): one AudioContext at arrival plays as soon as the browser allows (phones: the first tap
 //    anywhere, which also plays a hello); turning it off is remembered and then nothing is created;
 //  - unknown names and junk events are ignored; per-sound rate limits (footsteps ~4 a second), letter-pops queue on a beat;
-//  - a hidden tab suspends audio and it resumes only when visible and on; nature beds are a second switch, off by default;
+//  - a hidden tab suspends audio and it resumes only when visible and on; nature beds are a second switch, ON by default with sound since 2026-10-07 (owner: "ALL the effects on"; keys -v2), and duck under any other voice;
 //  - the site's own events sound: .btn / [data-go] / link clicks -> tap, ff:audience -> chime, hashchange -> page-turn;
 //  - the felt pill: real toggle buttons with names and states, 44 px targets, a visible focus ring, axe clean, and clear of every
 //    other fixed or sticky piece of UI at 1280, 390 and 1600 px; the one-time hint never covers content.
@@ -69,14 +69,14 @@ async function page(width = 1280, opts = {}) {
   await p.addInitScript(SPY);
   // Most tests below were written for an off-by-default pill and start from 'off' (as a visitor who turned it off would);
   // opts.fresh gives the true first-visit default (on). The guard keeps choices made during the test across reloads.
-  if (!opts.stored && !opts.fresh) await p.addInitScript(() => { if (localStorage.getItem('ff-sound') === null) localStorage.setItem('ff-sound', 'off'); });
+  if (!opts.stored && !opts.fresh) await p.addInitScript(() => { if (localStorage.getItem('ff-sound-v2') === null) localStorage.setItem('ff-sound-v2', 'off'); });
   if (opts.stored) await p.addInitScript(s => { for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, opts.stored);
   await p.goto(url(opts.route)); await p.waitForFunction(() => document.querySelector('.ffs'));
   return { ctx, p, errors };
 }
 const state = p => p.evaluate(() => ({ ac: window.__ac.length, st: window.__ac[0] ? window.__ac[0].state : null, src: window.__src, on: window.FFSound.enabled(),
   pressed: document.querySelector('.ffs-main').getAttribute('aria-pressed'), nat: document.querySelector('.ffs-nat').hidden ? null : document.querySelector('.ffs-nat').getAttribute('aria-pressed'),
-  stored: localStorage.getItem('ff-sound'), storedNature: localStorage.getItem('ff-sound-nature'), label: document.querySelector('.ffs-main').innerText.replace(/\s+/g, ' ').trim() }));
+  stored: localStorage.getItem('ff-sound-v2'), storedNature: localStorage.getItem('ff-sound-nature-v2'), label: document.querySelector('.ffs-main').innerText.replace(/\s+/g, ' ').trim() }));
 const tapEmpty = async p => { const at = await p.evaluate(() => { const hb = document.querySelector('header.bar').getBoundingClientRect(); return [Math.round(innerWidth * 0.62), Math.round(hb.bottom - 8)]; }); await p.mouse.click(at[0], at[1]); };
 const fire = (p, detail) => p.evaluate(d => document.dispatchEvent(new CustomEvent('ff:sfx', { detail: d })), detail);
 
@@ -115,7 +115,7 @@ test('turned off: never autoplays: no AudioContext while off; events make no sou
   assert.equal(s.src, 0);
   // FFSound is frozen and small (wave 9 adds unlocked(), read by the talking intro on Home; false here: sound is off, no context)
   assert.deepEqual(await p.evaluate(() => [Object.isFrozen(window.FFSound), Object.keys(window.FFSound).sort().join(), window.FFSound.names.join(), window.FFSound.unlocked()]),
-    [true, 'enabled,names,play,render,set,unlocked', CONTRACT.join(), false]);
+    [true, 'ducked,enabled,names,nature,play,render,set,unlocked', CONTRACT.join(), false]);
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -124,7 +124,7 @@ test('the toggle turns sound on (one AudioContext, made inside the tap), remembe
   const { ctx, p, errors } = await page(1280);
   await p.click('.ffs-main'); await p.waitForTimeout(250);
   let s = await state(p);
-  assert.deepEqual([s.ac, s.st, s.on, s.pressed, s.nat, s.stored, s.label], [1, 'running', true, 'true', 'false', 'on', 'Sound on']);
+  assert.deepEqual([s.ac, s.st, s.on, s.pressed, s.nat, s.stored, s.label], [1, 'running', true, 'true', 'true', 'on', 'Sound on'], 'Nature comes on with sound (owner 2026-10-07)');
   assert.ok(s.src > 0, 'turning on gives a small confirmation sound');
   assert.equal(await p.evaluate(() => window.FFSound.play('chime')), true);
   // return visit: remembered as on, but the browser has no gesture yet, so nothing is created and nothing plays
@@ -173,7 +173,7 @@ test('blocked storage: the pill still works for the visit and nothing throws', a
 });
 
 test('unknown names and junk events are ignored; known contract events sound; x and gain are clamped', async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'on' } });
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(150);
   const before = (await state(p)).src;
   for (const d of [{ name: 'nope' }, { name: 'constructor' }, { name: '__proto__' }, { name: 'toString' }, { name: 42 }, {}, null, 'tap', { name: 'TAP' }]) await fire(p, d);
@@ -188,7 +188,7 @@ test('unknown names and junk events are ignored; known contract events sound; x 
 });
 
 test('rate limits: footsteps at most ~4 a second, repeats of one sound are spaced, letter-pops queue on a beat and the queue is capped', async () => {
-  const { ctx, p } = await page(1280, { stored: { 'ff-sound': 'on' } });
+  const { ctx, p } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(150);
   // 40 footsteps over one second
   const steps = await p.evaluate(async () => { let n = 0; for (let i = 0; i < 40; i++) { if (window.FFSound.play('footstep')) n++; await new Promise(r => setTimeout(r, 25)); } return n; });
@@ -211,7 +211,7 @@ test('rate limits: footsteps at most ~4 a second, repeats of one sound are space
 });
 
 test('a hidden tab suspends sound (and nature); it resumes only when visible and still on', async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'on', 'ff-sound-nature': 'on' } });
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on', 'ff-sound-nature-v2': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(400);
   const vis = v => p.evaluate(v => { Object.defineProperty(document, 'visibilityState', { value: v, configurable: true }); document.dispatchEvent(new Event('visibilitychange')); }, v);
   await vis('hidden'); await p.waitForTimeout(150);
@@ -230,8 +230,9 @@ test('a hidden tab suspends sound (and nature); it resumes only when visible and
   await ctx.close();
 });
 
-test('nature beds: a second switch, off even when sound is on; follow ff:daypart; remembered', async () => {
-  const { ctx, p, errors } = await page(1280);
+test('nature beds: a second switch, off once the visitor turns it off (remembered); follow ff:daypart', async () => {
+  // owner 2026-10-07: nature is ON by default with sound; a visitor who turned it off (under the new key) keeps it off
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'off', 'ff-sound-nature-v2': 'off' } });
   await p.click('.ffs-main'); await p.waitForTimeout(1500);
   const quiet = (await state(p)).src;
   await p.waitForTimeout(1500);
@@ -253,8 +254,46 @@ test('nature beds: a second switch, off even when sound is on; follow ff:daypart
   await ctx.close();
 });
 
+test('defaults (owner 2026-10-07, "ALL the effects on"): a fresh visitor has Sound and Nature on; an old stored "off" (pre -v2 keys) is ignored', async () => {
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'off', 'ff-sound-nature': 'off' } });
+  const s = await state(p);
+  assert.deepEqual([s.on, s.pressed, s.nat, s.stored, s.storedNature], [true, 'true', 'true', null, null]);
+  assert.equal(await p.evaluate(() => window.FFSound.nature()), true);
+  // "Enter without sound" (the entry gate) turns sound off for the session only: nothing is stored
+  await p.evaluate(() => window.FFSound.set(false, { session: true }));
+  assert.deepEqual([(await state(p)).on, (await state(p)).stored], [false, null]);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('ducking: the nature beds fade out while a video plays with its sound (or a friend speaks) and come back after', async () => {
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
+  await tapEmpty(p); await p.waitForTimeout(400);
+  const duck = () => p.evaluate(() => { const c = window.__ac[0]; return { ducked: window.FFSound.ducked(), nature: window.FFSound.nature(), st: c && c.state }; });
+  assert.deepEqual(await duck(), { ducked: false, nature: true, st: 'running' });
+  // a video with a sound track, playing unmuted (the tap above is the gesture that allows it)
+  await p.evaluate(() => { const v = document.createElement('video'); v.id = 'duck-test'; v.src = 'video/ff-intro-titled-16x9.mp4'; v.playsInline = true; v.style.cssText = 'position:fixed;width:2px;height:2px;left:0;top:0'; document.body.appendChild(v); return v.play(); });
+  await p.waitForFunction(() => window.FFSound.ducked(), null, { timeout: 4000 });
+  // muted, it no longer speaks over the beds
+  await p.evaluate(() => { document.getElementById('duck-test').muted = true; });
+  await p.waitForFunction(() => !window.FFSound.ducked(), null, { timeout: 2000 });
+  await p.evaluate(() => { document.getElementById('duck-test').muted = false; });
+  await p.waitForFunction(() => window.FFSound.ducked(), null, { timeout: 2000 });
+  await p.evaluate(() => document.getElementById('duck-test').pause());
+  await p.waitForFunction(() => !window.FFSound.ducked(), null, { timeout: 2000 });
+  // a friend's voice line (FFVoices, a detached Audio) ducks too, through its ff:duck ping and the scheduler's re-check
+  const voiced = await p.evaluate(() => (window.FFVoices ? window.FFVoices.play('booker') : 'none'));
+  if (voiced === 'playing') {
+    await p.waitForFunction(() => window.FFSound.ducked(), null, { timeout: 4000 });
+    await p.evaluate(() => window.FFVoices.stop());
+    await p.waitForFunction(() => !window.FFSound.ducked(), null, { timeout: 2000 });
+  }
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
 test("the site's own events sound: a button or link click taps, choosing an audience chimes, a route change turns a page", async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'on' } });
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(200);
   const grow = async (act) => { const a = (await state(p)).src; await act(); await p.waitForTimeout(120); return (await state(p)).src - a; };
   assert.ok(await grow(() => p.evaluate(() => window.FFAudience.set('families'))) >= 4, 'ff:audience -> chime (two bells)');
@@ -317,8 +356,8 @@ for (const width of [1280, 390]) {
     const mine = async () => (await h.axe(p, { openDetails: false })).filter(v => v.nodes.some(n => /\.ffs|ffs-/.test(n.target)));   // the whole page, every impact
     assert.deepEqual(await mine(), []);
     await p.keyboard.press('Tab'); await p.focus('.ffs-main'); await p.keyboard.press('Enter'); await p.waitForTimeout(150);
-    assert.equal(await tree(), '- region "Sound settings":\n  - button "Nature sounds"\n  - button "Sound" [pressed]', 'Enter toggles; Nature comes before Sound in reading order, as on screen');
-    assert.equal(await p.getByRole('button', { name: 'Nature sounds', exact: true, pressed: false }).count(), 1);
+    assert.equal(await tree(), '- region "Sound settings":\n  - button "Nature sounds" [pressed]\n  - button "Sound" [pressed]', 'Enter toggles; Nature (on by default) comes before Sound in reading order, as on screen');
+    assert.equal(await p.getByRole('button', { name: 'Nature sounds', exact: true, pressed: true }).count(), 1);
     const ring = await p.evaluate(() => {
       const el = document.activeElement, cs = getComputedStyle(el);
       const rgb = c => (c.match(/\d+(\.\d+)?/g) || []).slice(0, 3).map(Number);

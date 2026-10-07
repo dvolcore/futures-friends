@@ -12,7 +12,9 @@
   function saved(){const a=read('ff-saved-lessons',[]);return Array.isArray(a)?a.filter(c=>modules.some(m=>m.code===c)):[];}
   const preferences = read('ff-display-preferences',{});
   document.documentElement.dataset.theme = 'light';
-  document.documentElement.dataset.motion = preferences.motion === false ? 'off' : 'on';
+  // owner 2026-10-07 (demo: "I need ALL the effects on"): an old stored motion=false no longer switches motion off; only a choice made
+  // since then (motion2) does, so everyone starts with the animations on and can still turn them off (remembered).
+  document.documentElement.dataset.motion = preferences.motion2 === false ? 'off' : 'on';
   const ui = {tab:'overview',query:'',track:'',status:'',sort:'catalog',limit:12};
   const rawPlan = read('ff-learning-plan',{});
   const learningPlan = {track:X.tracks.some(t=>t.p===rawPlan.track)?rawPlan.track:'F', hours:Math.min(8,Math.max(.5,+rawPlan.hours||2))};
@@ -35,7 +37,7 @@
 
   const settingsDialog = document.createElement('dialog');
   settingsDialog.className='px-dialog px-settings';settingsDialog.id='px-settings';settingsDialog.setAttribute('aria-labelledby','px-settings-title');
-  settingsDialog.innerHTML=`<div class="px-dialoghead"><h2 id="px-settings-title">Display preferences</h2><button type="button" class="px-iconbtn" data-px="close" aria-label="Close preferences">${icon('X')}</button></div><label class="px-toggle"><span>${icon('Waves')} Decorative motion</span><input type="checkbox" id="px-motion" ${preferences.motion===false?'':'checked'}></label><p class="px-muted">Your device's reduced-motion preference always takes priority.</p>`;
+  settingsDialog.innerHTML=`<div class="px-dialoghead"><h2 id="px-settings-title">Display preferences</h2><button type="button" class="px-iconbtn" data-px="close" aria-label="Close preferences">${icon('X')}</button></div><label class="px-toggle"><span>${icon('Waves')} Decorative motion</span><input type="checkbox" id="px-motion" ${preferences.motion2===false?'':'checked'}></label><p class="px-muted">Your device's reduced-motion preference always takes priority.</p>`;
   document.body.appendChild(settingsDialog);
   const pages=[['home','Futures Friends'],['curriculum','Curriculum by age'],['whole-child','The Whole-Child Day: learning, meals, movement, Quiet Time'],['bop-at-home','Bop at Home: free family movement, Move Your Body Grow Your Mind'],['at-home','Futures at Home: free family library'],['story-time','Story Time: read-along storybooks'],['activities','Things to do at home by age'],['printables','Printables for families'],['see-how','See how: picture guides'],['my-week','My Week: weekly plan, sticker chart, certificates'],['for-centers','For Child Care Centers: what a licensed center gets'],['teacher-standard','Our Teacher Standard: training, background checks and mastery'],['train-your-staff','Train your staff with us'],['readiness','School Readiness'],['friends','Booker Lumi Zuri Bop and storybooks'],['watch','Watch episodes'],['rainbow','Eat the Rainbow recipes'],['academy','Training Academy'],['options','Program Options'],['pricing','Pricing'],['hub','Futures Hub'],['enroll','Visit our pilot center: Futures Learning Center, Independence, Missouri'],['jobs','Careers and open positions'],['job','Job opening'],['contact','Contact and support']];
   window.FFSearchPages=pages;
@@ -85,7 +87,7 @@
     const t=e.target,map={'px-track':'track','px-status':'status','px-sort':'sort'};
     if(map[t.id]){ui[map[t.id]]=t.value;ui.limit=12;rerender(t.id);}
     if(t.id==='px-plantrack'||t.id==='px-goal'){learningPlan[t.id==='px-plantrack'?'track':'hours']=t.id==='px-goal'?+t.value:t.value;persist('ff-learning-plan',learningPlan);rerender(t.id);}
-    if(t.id==='px-motion'){preferences.motion=t.checked;persist('ff-display-preferences',preferences);document.documentElement.dataset.motion=t.checked?'on':'off';render();}
+    if(t.id==='px-motion'){preferences.motion2=t.checked;persist('ff-display-preferences',preferences);document.documentElement.dataset.motion=t.checked?'on':'off';render();}
   });
   document.addEventListener('click',e=>{
     const t=e.target.closest('button,a');if(!t)return;

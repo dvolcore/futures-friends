@@ -30,6 +30,7 @@ before(async () => {
   });
   await new Promise(r => server.listen(PORT, '127.0.0.1', r));
   browser = await chromium.launch();
+  { const make = browser.newContext.bind(browser); browser.newContext = async (...o) => { const c = await make(...o); await c.addInitScript(() => { try { sessionStorage.setItem('ff-entered', '1'); } catch (_) {} }); return c; }; }   // past the entry gate (entry.js)
 });
 after(async () => { await browser?.close(); server?.close(); });
 
@@ -86,7 +87,7 @@ for (const [w, h] of [[1440, 900], [1280, 800], [1024, 768], [768, 1024], [390, 
   });
 }
 
-for (const [name, opts, init] of [['device reduced motion', { reducedMotion: 'reduce' }, null], ['site motion switch off', {}, () => { try { localStorage.setItem('ff-display-preferences', '{"motion":false}'); } catch (e) {} }]]) {
+for (const [name, opts, init] of [['device reduced motion', { reducedMotion: 'reduce' }, null], ['site motion switch off', {}, () => { try { localStorage.setItem('ff-display-preferences', '{"motion2":false}'); } catch (e) {} }]]) {
   test(`${name}: the hero is static and complete from the first frame`, async () => {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, ...opts });
     const page = await ctx.newPage(); if (init) await page.addInitScript(init);

@@ -111,7 +111,7 @@ for (const width of [1280, 390]) {
     await ctx.close();
     // 4. the site's own motion switch turns page turns off too
     ({ ctx, page, errors } = await h.open(browser, width, { motion: true }));
-    await page.addInitScript(() => { try { localStorage.setItem('ff-display-preferences', JSON.stringify({ motion: false })); } catch (_) {} });
+    await page.addInitScript(() => { try { localStorage.setItem('ff-display-preferences', JSON.stringify({ motion2: false })); } catch (_) {} });
     await h.goto(page, site.base, 'curriculum');
     await page.evaluate(() => { window.__vt = 0; const o = document.startViewTransition; document.startViewTransition = function () { window.__vt++; return o.apply(document, arguments); }; });
     await page.click('#ffw-close a[href="#contact"]'); await page.waitForTimeout(150);
@@ -152,7 +152,8 @@ for (const width of [1280, 390]) {
 test('audience switcher with storage blocked: still works for the visit, no errors', async () => {
   const { ctx, page, errors } = await h.open(browser, 1280);
   await page.addInitScript(() => { const boom = () => { throw new Error('blocked'); }; Object.defineProperty(window, 'localStorage', { get: boom }); Object.defineProperty(window, 'sessionStorage', { get: boom }); });
-  await h.goto(page, site.base, 'pricing');   // Home shows no context strip; dismiss it on a page that has one
+  // with storage blocked the entry gate cannot remember the session (it would open on every load); ?nogate skips it (entry.js)
+  await page.goto(`${site.base}?nogate&fresh=${Date.now()}#pricing`); await page.waitForFunction(() => document.querySelector('#view') && document.querySelector('#view').children.length > 0); await page.waitForTimeout(450);   // Home shows no context strip; dismiss it on a page that has one
   await page.click('.px-utility .ffw-audbtn[data-audience="staff"]'); await page.waitForTimeout(100);
   assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'staff');
   await page.click('.ffw-next-x'); await page.waitForTimeout(100);

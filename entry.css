@@ -1,0 +1,43 @@
+/* Futures Friends: the entry gate (entry.js). A felt morning sky over the whole screen: drifting felt clouds, the meadow hills at the
+   bottom, the plush logo on a cream felt card with a gold running stitch, one big gold "Tap to enter" button and a quiet text button.
+   It lifts up and away (transform and opacity only); with reduced motion or the motion switch off it simply fades. */
+html.ffe-open,html.ffe-open body{overflow:hidden}
+.ffe{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px 16px;overflow:hidden;
+  background:linear-gradient(180deg,#7EC3EC 0%,#A6D6F2 46%,#CDEBF8 100%);font-family:var(--body,"Poppins",system-ui,sans-serif)}
+.ffe-sky{position:absolute;inset:0;pointer-events:none}
+.ffe-cloud{position:absolute;display:block;background:url("img/plush/hero/felt-cloud-1-480.webp") center/contain no-repeat;opacity:.95}
+.ffe-c1{width:clamp(150px,22vw,300px);aspect-ratio:480/333;left:-2%;top:8%}
+.ffe-c2{width:clamp(120px,17vw,240px);aspect-ratio:480/378;right:4%;top:16%;background-image:url("img/plush/hero/felt-cloud-3-480.webp")}
+.ffe-c3{width:clamp(100px,13vw,190px);aspect-ratio:480/333;left:62%;top:2%;opacity:.8}
+.ffe-hills{position:absolute;left:0;right:0;bottom:0;height:min(42vh,48vw);background:url("img/plush/hero/world-hills-1600.webp") 50% 100%/cover no-repeat}
+@media (max-width:600px){.ffe-hills{background-image:url("img/plush/hero/world-hills-800.webp");height:34vh}}
+.ffe-card{position:relative;z-index:1;display:grid;justify-items:center;gap:14px;width:min(560px,100%);padding:clamp(24px,4vw,40px) clamp(20px,4vw,44px) clamp(20px,3vw,30px);
+  text-align:center;border-radius:28px;background-color:#FBF6EC;background-image:var(--tx-cream,none);background-size:var(--tx-tile,384px);color:#14313D;
+  box-shadow:0 30px 60px -24px rgba(10,43,56,.45),0 2px 6px rgba(10,43,56,.12)}
+.ffe-card::after{content:"";position:absolute;inset:9px;border:2px dashed rgba(176,122,0,.5);border-radius:21px;pointer-events:none}
+.ffe-logo{width:min(420px,78vw);height:auto;margin-top:-4px}
+.ffe-h{margin:0;font-family:var(--display,"Fredoka",system-ui,sans-serif);font-size:clamp(25px,3.4vw,34px);line-height:1.15;color:#0A2B38;letter-spacing:-.005em}
+.ffe-p{margin:0;max-width:40ch;font-size:16px;line-height:1.6;color:#33474F}
+.ffe-go{appearance:none;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;min-width:min(300px,100%);margin-top:6px;padding:0 34px;
+  border:0;border-radius:999px;background:#F5C553;color:#0A2B38;font:700 21px/1 var(--display,"Fredoka",system-ui,sans-serif);cursor:pointer;
+  box-shadow:0 6px 0 #C9951E,0 16px 28px -10px rgba(10,43,56,.45);-webkit-tap-highlight-color:transparent}
+.ffe-go::after{content:"";position:absolute;inset:5px;border:2px dashed rgba(10,43,56,.35);border-radius:999px;pointer-events:none}
+.ffe-go svg{width:24px;height:24px}
+.ffe-go:hover{background:#F8CF66}
+.ffe-go:active{transform:translateY(3px);box-shadow:0 3px 0 #C9951E,0 10px 20px -10px rgba(10,43,56,.45)}
+.ffe-go:focus-visible{outline:3px solid #0A2B38;outline-offset:4px}
+.ffe-quiet{appearance:none;min-height:44px;padding:0 14px;border:0;background:none;color:#14313D;font:600 15px/1 var(--body,"Poppins",system-ui,sans-serif);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.ffe-quiet:focus-visible{outline:3px solid #0A2B38;outline-offset:2px;border-radius:8px}
+/* leaving: the gate fades (always); with motion the card rises and the sky lifts away to reveal the hero */
+.ffe.ffe-out{opacity:0;pointer-events:none;transition:opacity .25s linear}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .ffe.ffe-out{transform:translateY(-100%);opacity:.0;transition:transform .85s cubic-bezier(.6,0,.3,1),opacity .85s cubic-bezier(.7,0,.9,.4)}
+  :root:not([data-motion=off]) .ffe-c1{animation:ffe-drift 9s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .ffe-c2{animation:ffe-drift 11s ease-in-out infinite alternate-reverse}
+  :root:not([data-motion=off]) .ffe-c3{animation:ffe-drift 13s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .ffe-card{animation:ffe-in .6s cubic-bezier(.2,.8,.2,1) both}
+  :root:not([data-motion=off]) .ffe-go{transition:transform .15s,box-shadow .15s,background-color .15s}
+}
+@keyframes ffe-drift{to{translate:28px 0}}
+@keyframes ffe-in{from{opacity:0;translate:0 18px}}
+@media print{.ffe{display:none!important}}

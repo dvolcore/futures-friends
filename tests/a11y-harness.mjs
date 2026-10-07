@@ -15,9 +15,26 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '
 export const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 export const BLOCKING = ['serious', 'critical'];
 
-export function loadChromium() {
+function rawChromium() {
   try { return createRequire(join(HUB_DIR, 'hub/package.json'))('playwright-core').chromium; }
   catch (e) { throw new Error(`playwright-core not found under ${HUB_DIR}/hub/node_modules (set HUB_DIR): ${e.message}`); }
+}
+// The entry gate (entry.js, owner 2026-10-07) opens the first page load of every session. Tests that are not about the gate start
+// past it: every context made from this browser marks the session as entered (sessionStorage 'ff-entered'), exactly as a visitor
+// who already tapped "Tap to enter". loadChromium({ gate: true }) gives the untouched browser (tests/entry-gate.test.js).
+export const PASS_GATE = () => { try { sessionStorage.setItem('ff-entered', '1'); } catch (_) { /* blocked storage */ } };
+export function loadChromium(opts = {}) {
+  const chromium = rawChromium();
+  if (opts.gate) return chromium;
+  return new Proxy(chromium, { get(t, k) {
+    if (k !== 'launch') { const v = t[k]; return typeof v === 'function' ? v.bind(t) : v; }
+    return async (...a) => {
+      const browser = await t.launch(...a), make = browser.newContext.bind(browser), page = browser.newPage.bind(browser);
+      browser.newContext = async (...o) => { const c = await make(...o); await c.addInitScript(PASS_GATE); return c; };
+      browser.newPage = async (...o) => { const pg = await page(...o); await pg.addInitScript(PASS_GATE); return pg; };
+      return browser;
+    };
+  } });
 }
 
 export async function startSite(root = SITE) {

@@ -20,7 +20,7 @@ test.after(async () => { await browser.close(); await srv.close(); });
 
 async function scan(route, w) {
   const ctx = await browser.newContext({ viewport: { width: w, height: HEIGHT[w] }, reducedMotion: 'reduce', hasTouch: w < 768, isMobile: w < 768 });
-  await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound', 'off'); } catch (_) {} });
+  await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound-v2', 'off'); } catch (_) {} });
   const page = await ctx.newPage();
   await h.goto(page, srv.base, route, 900);
   const found = [];
@@ -136,7 +136,7 @@ test('#for-centers (1280): the Sound/Nature dock tucks over card bodies, even a 
 test('Home: the walking Booker and his trail never paint over words (390, 768, motion on)', async () => {
   for (const w of [390, 768]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: HEIGHT[w] }, hasTouch: w < 768, isMobile: w < 768 });
-    await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound', 'off'); } catch (_) {} });
+    await ctx.addInitScript(() => { try { localStorage.setItem('ff-sound-v2', 'off'); } catch (_) {} });
     const page = await ctx.newPage();
     await h.goto(page, srv.base, 'home', 4500);
     const total = Math.min(4000, await page.evaluate(() => document.documentElement.scrollHeight)), bad = [];

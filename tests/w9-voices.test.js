@@ -76,7 +76,7 @@ async function open(w, { sound = 'on', motion = false } = {}) {
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.addInitScript(s => {
-    try { localStorage.setItem('ff-sound', s); localStorage.setItem('ff-sound-hint', '1'); } catch (_) { /* blocked */ }
+    try { localStorage.setItem('ff-sound-v2', s); localStorage.setItem('ff-sound-hint', '1'); } catch (_) { /* blocked */ }
     window.__plays = []; window.__pauses = []; window.__on = new Set();
     const file = a => (a.currentSrc || a.src || '').replace(/^.*\/(audio\/)/, '$1');
     // only the friends' voices are counted (the page's own videos keep their real play/pause)
