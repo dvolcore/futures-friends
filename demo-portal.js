@@ -473,12 +473,13 @@ function photoPick(id, label){
 
 // ---------------------------------------------------------------- Account and password reset (demo flows)
 const baseAccount = V.account, baseReset = V['reset-password'];
+const signinLinks = () => `<div class="ffd-row"><button class="btn soft" type="button" data-go="signin-teacher">Teacher Sign-In</button><button class="btn soft" type="button" data-go="signin-family">Family Sign-In</button></div>`;
 const PW_MIN = 10;
 V.account = () => {
   if (!on()) return baseAccount ? baseAccount() : '';
   const s = ses();
   const head = phero('Account and security', 'Your Futures Hub account', '', {chars:['zuri']});
-  if (!s) return head + `<section class="band-paper"><div class="wrap"><div class="card signin ffd-card">${BADGE}<h2 class="h3">Sign in to see your account</h2><p class="small">Account settings belong to a signed-in person. Sign in with a demo account to try them.</p>${roleButtons('teacher')}${accountsTable()}</div></div></section>`;
+  if (!s) return head + `<section class="band-paper"><div class="wrap"><div class="card signin ffd-card">${BADGE}<h2 class="h3">Sign in to see your account</h2><p class="small">Account settings belong to a signed-in person. Sign in with a demo account to try them.</p>${roleButtons('teacher')}${signinLinks()}${accountsTable()}</div></div></section>`;
   const staff = s.role !== 'family';
   return head + `<section class="band-paper"><div class="wrap ffd-acct">
    <div class="card ffd-card">${BADGE}<h2 class="h3">${E(s.name)}</h2><p class="small">${E(s.label)} · <code>${E(s.email)}</code> · ${E(DM.CENTER)}</p>
@@ -509,7 +510,7 @@ V['reset-password'] = () => {
   else body = `<form class="card signin ffd-card" id="dmResetEmail" novalidate>${BADGE}<h2 class="h3">Email me a reset link</h2><p class="small">Enter the email of a demo account. Nothing is sent anywhere, and nothing you type is kept.</p>
     <label class="f" for="dmRsEmail">Email<input class="i" id="dmRsEmail" type="email" autocomplete="off" spellcheck="false" placeholder="${fam ? 'family' : 'teacher'}@demo.futuresfriends"></label>
     <button class="btn navy" type="submit">Send reset link</button><p class="note" id="dmRsMsg" role="alert" aria-live="polite"></p>
-    <p class="mini"><button type="button" class="rl" data-go="${fam ? 'signin-family' : 'signin-teacher'}">Back to sign-in</button></p>${accountsTable()}</form>`;
+    ${signinLinks()}${accountsTable()}</form>`;
   return head + `<section class="band-paper"><div class="wrap">${body}</div></section>`;
 };
 function pwProblem(p){ if (String(p).length < PW_MIN) return `Use at least ${PW_MIN} characters.`; if (/^(.)\1+$/.test(p) || /^(password|1234567890|qwerty)/i.test(p)) return 'That password is too easy to guess. Try three or four unrelated words.'; return ''; }

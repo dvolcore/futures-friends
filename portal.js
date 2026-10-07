@@ -812,7 +812,7 @@ function connectDemo(){
 }
 // state the Whole-Child Daily Rhythm screens (daily-rhythm.js) need; read-only copies, so that file cannot change portal state
 function rhythmCtx(){ return {hub:P.hub, demo:!!P.demo, me:P.me, email:P.email, role:P.role, center:P.center, room:P.room, date:P.date, rooms:P.rooms, kids:P.kids, fam:P.fam, canWrite:P.canWrite, tab:P.tab}; }
-window.FFPortal = {subscribeKd, connectHub, connectDemo, ctx:rhythmCtx, rerender:()=>render(),
+window.FFPortal = {subscribeKd, connectHub, ctx:rhythmCtx, rerender:()=>render(), connectDemo,
   // demo-portal.js reads and writes the same records the portal screens use (demo mode only)
   demoApi:{kd:kdDoc, day:dayDoc, put:(c,id,d)=>put(c,id,d), put2:(c,id,d)=>put2(c,id,d), roomKids, kdKey, dayKey, lunchText, lessonFor, todayIso, fmtDate, shortDate, iso, fromIso,
     obs:()=>P2.obs, msgs:()=>P2.msgs, photos:()=>P2.photos, kidName, who, setTab:t=>{P.tab=t;}, setRoom:r=>{ if(P.rooms[r]){ P.room=r; subscribeDays(); } }, setDate:d=>{ P.date=d; subscribeKd(); },

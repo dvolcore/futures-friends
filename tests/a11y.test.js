@@ -56,12 +56,14 @@ for (const width of [1280, 390]) {
     await h.goto(page, site.base, 'unit-1');
     await page.click('[data-anchor="u1s-sample"]'); await scan('unit 1 summary, sample day');
     await h.goto(page, site.base, 'portal');
+    await page.click('[data-demo-signin="teacher"]'); await settle(page); await page.evaluate(() => { const t = document.getElementById('toast'); if (t) t.hidden = true; });   // demo mode (2026-10-07): the portal opens after a demo sign-in
     await page.evaluate(() => { window.FFHub = { configured: true, connected: true, role: 'teacher', portalFor: () => 'portal' }; });
     await page.click('[data-ptab="curriculum"]'); await page.waitForSelector('.u1-locked'); await scan('portal curriculum access card');
     // Hub demo and the teacher portal tabs
     await h.goto(page, site.base, 'hub');
     for (const p of ['director', 'class', 'family']) { await page.click(`[data-portal="${p}"]`); await scan(`hub demo ${p}`); }
     await h.goto(page, site.base, 'portal');
+    await page.evaluate(() => { delete window.FFHub; });
     for (const t of [...new Set(await page.$$eval('[data-ptab]', (els) => els.map((e) => e.dataset.ptab)))]) { await page.click(`[data-ptab="${t}"]`); await scan(`portal tab ${t}`); }
     // menus and dialogs
     await h.goto(page, site.base, 'home');

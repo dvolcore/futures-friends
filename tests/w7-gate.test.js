@@ -252,6 +252,7 @@ for (const width of [1280, 390]) {
     const asked = [];
     page.on('request', r => { if (GATED.test(new URL(r.url()).pathname.replace(/^\//, ''))) asked.push(r.url()); });
     await h.goto(page, srv.base, 'portal');
+    await page.click('[data-demo-signin="teacher"]'); await page.waitForTimeout(400);   // demo mode (2026-10-07): the portal opens after a demo sign-in
     await page.click('[data-ptab="curriculum"]');
     await page.waitForSelector('.u1-locked');
     const f = await page.evaluate(() => ({ body: document.body.innerText, viewer: !!document.querySelector('[data-u1-day],#u1-days,#u1-downloads'), data: !!(window.FFUnit1Data || window.FFUnitData || window.FFUnit1Family),
