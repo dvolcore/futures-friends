@@ -39,6 +39,7 @@
     'founding-partners': ['Become a Founding Partner: 90-day pilot', 'A 90-day pilot for 5 to 10 Kansas City area programs: home providers, centers and church preschools. Proposed terms, set in a written agreement.'],
     membership: ['Monthly Membership: what arrives every month', 'What a Futures Friends membership delivers each month and who helps you use it, with what is ready now, launching with the pilot or planned.'],
     'brand-kit': ['Partner brand kit', 'Make your "featuring Futures Friends" lockup, follow the usage rules and see which partner kit pieces are ready.'],
+    'room-planner': ['Room Planner: lay out your Learning Zones room to scale', 'Enter your room’s measurements, place doors and each friend’s zone, and check space per child, exits and sightlines. Save, print or send for a quote.'],
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
     'store-request': ['Store request', 'Send your Futures Store list as a quote request or join the family shop list. Nothing is charged and no order is placed online.'],
     funding: ['Funding Help', 'Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.'],
