@@ -1,0 +1,8300 @@
+{
+ "generated": "2026-10-07",
+ "tool": "tools/site-map.mjs",
+ "pages": [
+  {
+   "route": "home",
+   "title": "Futures Friends · Early learning for ages 2 to 5",
+   "section": "",
+   "sections": [
+    {
+     "id": "hc-doors-h",
+     "title": "Start where you are"
+    },
+    {
+     "id": "hc-friends-h",
+     "title": "Four friends. Four things children practice every day."
+    },
+    {
+     "id": "hc-day-h",
+     "title": "From a six-minute story to a whole day of learning"
+    },
+    {
+     "id": "hc-proof-h",
+     "title": "What we have built so far"
+    },
+    {
+     "id": "ts-home-h",
+     "title": "Who is with your child, and how we know they are ready"
+    },
+    {
+     "id": "hc-close-h",
+     "title": "Talk to a real person"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/ff-friend-booker-4x5.mp4",
+     "label": "Booker the bear sits in the meadow with his open picture book and waves hello."
+    },
+    {
+     "type": "video",
+     "src": "video/ff-intro-titled-16x9.mp4",
+     "label": "Story-world animation: Booker the bear, Lumi the bunny, Zuri the turtle and Bop the elephant each say hello and introduce themselves in a felt meadow."
+    }
+   ]
+  },
+  {
+   "route": "impact",
+   "title": "Impact and research",
+   "section": "Why the early years matter, and how we measure them",
+   "sections": [
+    {
+     "id": "why-early",
+     "title": "Strong foundations before kindergarten"
+    },
+    {
+     "id": "measure",
+     "title": "Progress you can see, not screen minutes"
+    },
+    {
+     "id": "flagship",
+     "title": "Futures Learning Center, Independence, Missouri"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "readiness",
+   "title": "School Readiness",
+   "section": "How Futures Friends supports every child",
+   "sections": [
+    {
+     "id": "loop",
+     "title": "Six steps, every day"
+    },
+    {
+     "id": "adapt",
+     "title": "The teacher is the adaptive engine"
+    },
+    {
+     "id": "steps",
+     "title": "What teachers look for, from infants to pre-K"
+    },
+    {
+     "id": "support",
+     "title": "Every child supported"
+    },
+    {
+     "id": "stars",
+     "title": "Motivation that young children understand"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "curriculum",
+   "title": "Curriculum by age",
+   "section": "Futures FriendsA year of discovery.",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "ages",
+     "title": "Growing at their own pace."
+    },
+    {
+     "id": "units",
+     "title": "Twelve adventures. Endless curiosity."
+    },
+    {
+     "id": "u1-band-curriculum",
+     "title": "The first month, in summary"
+    },
+    {
+     "id": "family-plan",
+     "title": "Your next little adventure."
+    },
+    {
+     "id": "wc-cu-h",
+     "title": "Learning is one part of the day."
+    },
+    {
+     "id": "ff-loop",
+     "title": "From a six-minute story to a whole day of learning"
+    },
+    {
+     "id": "addons",
+     "title": "New seasons. New possibilities."
+    },
+    {
+     "id": "books",
+     "title": "Meet their next favorite friend."
+    }
+   ],
+   "media": [
+    {
+     "type": "book",
+     "src": "#story-time/booker-tries-again",
+     "label": "Booker Tries Again"
+    }
+   ]
+  },
+  {
+   "route": "options",
+   "title": "Program Options",
+   "section": "Deploy Futures Friends your way",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "rt-options",
+     "title": "What each option includes today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-centers",
+   "title": "For Child Care Centers: what a licensed center gets",
+   "section": "Bring Futures Friends to your child care center, starting with Unit 1",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "fj-pv-h",
+     "title": "See it, scope it, start it"
+    },
+    {
+     "id": "u1-band-centers",
+     "title": "Unit 1 at a glance: the first month"
+    },
+    {
+     "id": "license",
+     "title": "What a licensed center gets"
+    },
+    {
+     "id": "wc-engines",
+     "title": "Four engines that reinforce each other"
+    },
+    {
+     "id": "wc-pilot",
+     "title": "Prove it in a real center first"
+    },
+    {
+     "id": "rt-package",
+     "title": "What the package includes today"
+    },
+    {
+     "id": "ts-staff-h",
+     "title": "Train your staff with us"
+    },
+    {
+     "id": "ff-map",
+     "title": "More than a login"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-home",
+   "title": "Home Daycares",
+   "section": "A big program sized for your home daycare",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "fj-pv-h",
+     "title": "See it, scope it, start it"
+    },
+    {
+     "id": "rt-package",
+     "title": "What the package includes today"
+    },
+    {
+     "id": "ts-staff-h",
+     "title": "Train your staff with us"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-prek",
+   "title": "Pre-K and Head Start Partners",
+   "section": "Readiness units for pre-K partners",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "rt-package",
+     "title": "What the package includes today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-faith",
+   "title": "Faith-Based Centers",
+   "section": "Values children live out every day",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "rt-package",
+     "title": "What the package includes today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-employers",
+   "title": "Employer Child Care",
+   "section": "A branded program for your on-site child care",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "rt-package",
+     "title": "What the package includes today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "for-families",
+   "title": "Families at Home",
+   "section": "The Futures Friends come home",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "fj-fam-h",
+     "title": "Try one tonight"
+    },
+    {
+     "id": "rt-package",
+     "title": "What families can have today"
+    },
+    {
+     "id": "ts-fam-h",
+     "title": "Who will be with your child"
+    },
+    {
+     "id": "wc-co-h",
+     "title": "More than daycare. A system families can see."
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "include",
+   "title": "Futures Include",
+   "section": "Every child belongs in the Futures Friends classroom",
+   "sections": [
+    {
+     "id": "features",
+     "title": "Inclusion that is part of every day"
+    },
+    {
+     "id": "how",
+     "title": "Four steps"
+    },
+    {
+     "id": "funding",
+     "title": "Bring in every available dollar"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "hub",
+   "title": "Futures Hub",
+   "section": "The app that runs the whole program",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "app",
+   "title": "Get the App",
+   "section": "The Futures Hub, on every device",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "family-guide",
+   "title": "Family App guide",
+   "section": "Everything families can see and do",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "signin-family",
+   "title": "Family Sign-In",
+   "section": "Welcome back",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "signin-teacher",
+   "title": "Teacher Sign-In",
+   "section": "Welcome back",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "training",
+   "title": "Planned training and certification",
+   "section": "Futures Friends educator pathways",
+   "sections": [
+    {
+     "id": "ladder",
+     "title": ""
+    },
+    {
+     "id": "catalog",
+     "title": "Core course outlines"
+    },
+    {
+     "id": "summit-cta",
+     "title": "Two days in Kansas City"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "summit",
+   "title": "Proposed educator summit",
+   "section": "A gathering for Kansas City educators",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "support",
+   "title": "Support and FAQ",
+   "section": "Need help? Find answers here.",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "contact",
+   "title": "Contact and support",
+   "section": "Request information",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "quote",
+   "title": "Request a quote",
+   "section": "Request a quote",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "rt-quote",
+     "title": "Your written quote uses this scope"
+    },
+    {
+     "id": "launch",
+     "title": "Launch package: teach Unit 1 now"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "friends",
+   "title": "Booker Lumi Zuri Bop and storybooks",
+   "section": "Booker, Lumi, Zuri and Bop",
+   "sections": [
+    {
+     "id": "ff-rooms",
+     "title": "Meet the Futures Friends"
+    },
+    {
+     "id": "ff-town-h",
+     "title": "Meet the whole town"
+    }
+   ],
+   "media": [
+    {
+     "type": "book",
+     "src": "#story-time/booker-tries-again",
+     "label": "Booker Tries Again"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/big-feelings-brighter-days",
+     "label": "Big Feelings, Brighter Days"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/what-happens-if-we-try",
+     "label": "What Happens If We Try?"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/clean-up-team",
+     "label": "Clean Up, Team! (preview)"
+    }
+   ]
+  },
+  {
+   "route": "rainbow",
+   "title": "Eat the Rainbow recipes",
+   "section": "Rainbow meals for little ones",
+   "sections": [
+    {
+     "id": "ffr-game",
+     "title": "Build a rainbow plate"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "funding",
+   "title": "Funding Help",
+   "section": "Find the funding your program may qualify for",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "pricing",
+   "title": "Pricing",
+   "section": "Published package prices before tax",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "launch",
+     "title": "Launch package: teach Unit 1 now"
+    },
+    {
+     "id": "annual",
+     "title": "One startup package, one monthly fee"
+    },
+    {
+     "id": "pz-calc",
+     "title": "Your future annual bundle, before tax"
+    },
+    {
+     "id": "pz-compare",
+     "title": "What you can get today, next to what others sell"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "why",
+   "title": "Why Futures Friends",
+   "section": "Made for the youngest learners, not adapted from K-12",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "news",
+   "title": "Newsroom",
+   "section": "Futures Friends news and updates",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "blog",
+   "title": "Blog for Educators",
+   "section": "Ideas for child care classrooms",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "post",
+   "title": "Blog article",
+   "section": "Small screens, big conversations: screen time for ages 2 to 5",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "events",
+   "title": "Events",
+   "section": "Family events and Discovery Day",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "privacy",
+   "title": "Privacy policy",
+   "section": "Privacy policy",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "child-privacy",
+   "title": "Child privacy",
+   "section": "Child privacy",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "terms",
+   "title": "Terms",
+   "section": "Terms",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "accessibility",
+   "title": "Accessibility",
+   "section": "Accessibility",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "portal",
+   "title": "Teacher Portal",
+   "section": "Teacher Portal",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "family-portal",
+   "title": "Family Portal",
+   "section": "Family Portal",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "talk",
+   "title": "Talk about it cards",
+   "section": "Talk about it cards",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "academy",
+   "title": "Training Academy",
+   "section": "Room to grow.",
+   "sections": [
+    {
+     "id": "px-plan-title",
+     "title": "Your weekly plan"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/academy-welcome.mp4",
+     "label": "Academy introduction: Ms. June, a story-world teacher, introduces Booker, Lumi, Zuri and Bop"
+    }
+   ]
+  },
+  {
+   "route": "watch",
+   "title": "Watch episodes",
+   "section": "Futures Friends episodes",
+   "sections": [
+    {
+     "id": "ffx-player",
+     "title": "Classroom player"
+    },
+    {
+     "id": "ffx-bop",
+     "title": "Move along with Bop"
+    },
+    {
+     "id": "ffx-artwork",
+     "title": "Meet the story worlds"
+    },
+    {
+     "id": "ffx-eps",
+     "title": "Season One plan: 13 episodes"
+    },
+    {
+     "id": "tk-watch",
+     "title": "A card for every episode"
+    },
+    {
+     "id": "ffx-family",
+     "title": "Families see exactly what was watched"
+    },
+    {
+     "id": "rt-screen",
+     "title": "Scheduled minutes are not a limit"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/episode-sample.mp4",
+     "label": "Futures Friends sample episode clip"
+    },
+    {
+     "type": "video",
+     "src": "video/bop-move-along.mp4?v=2",
+     "label": "Move along with Bop: Bop the elephant leads Elephant Stomp and Sway"
+    }
+   ]
+  },
+  {
+   "route": "enroll",
+   "title": "Visit Futures Learning Center",
+   "section": "A Place to Learn, Play & Grow",
+   "sections": [
+    {
+     "id": "ffx-why",
+     "title": "Three promises, every day"
+    },
+    {
+     "id": "ffx-meet",
+     "title": "The building, the director and the team"
+    },
+    {
+     "id": "ts-fam-h",
+     "title": "Who will be with your child"
+    },
+    {
+     "id": "ffx-day",
+     "title": "A day at Futures"
+    },
+    {
+     "id": "ffx-tuition",
+     "title": "One simple weekly rate"
+    },
+    {
+     "id": "ffx-tour",
+     "title": "See the classrooms for yourself"
+    },
+    {
+     "id": "ffx-apply",
+     "title": "Apply in three short steps"
+    },
+    {
+     "id": "ffx-jobs",
+     "title": "We're hiring teachers"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "jobs",
+   "title": "Careers and open positions",
+   "section": "Teach with Futures Friends",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "job",
+   "title": "Job opening",
+   "section": "Job opening",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "whole-child",
+   "title": "The Whole-Child Day: learning, meals, movement, Quiet Time",
+   "section": "More than daycare. A system families can see.",
+   "sections": [
+    {
+     "id": "wc-day",
+     "title": "One day. One connected system."
+    },
+    {
+     "id": "wc-friends",
+     "title": "Each friend owns a part of the day"
+    },
+    {
+     "id": "wc-move",
+     "title": "Bop & Go! Movement without workouts"
+    },
+    {
+     "id": "wc-targets",
+     "title": "What a day aims to deliver"
+    },
+    {
+     "id": "wc-quiet",
+     "title": "Lumi's Quiet Time"
+    },
+    {
+     "id": "wc-nourish",
+     "title": "Eat the Rainbow, inside real meals"
+    },
+    {
+     "id": "wc-family",
+     "title": "What you'll see each day"
+    },
+    {
+     "id": "wc-photos",
+     "title": "Photos from our center go here"
+    },
+    {
+     "id": "wc-promises",
+     "title": "Promises, built into the software, the policy and the training"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "bop-at-home",
+   "title": "Bop at Home: free family movement, Move Your Body Grow Your Mind",
+   "section": "Move Your Body, Grow Your Mind",
+   "sections": [
+    {
+     "id": "wc-how-h",
+     "title": "How Bop at Home works"
+    },
+    {
+     "id": "wc-acts",
+     "title": "Eight things to try tonight"
+    },
+    {
+     "id": "wc-signup",
+     "title": "Join the weekly Bop at Home challenge"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=2",
+     "label": "Bop leads Elephant Stomp & Sway"
+    },
+    {
+     "type": "video",
+     "src": "video/act-trunk-reach.mp4?v=2",
+     "label": "Bop leads Trunk Reach"
+    },
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=2",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
+     "type": "video",
+     "src": "video/act-animal-walks.mp4?v=2",
+     "label": "Bop leads Animal Walks"
+    },
+    {
+     "type": "video",
+     "src": "video/act-flamingo-balance.mp4?v=2",
+     "label": "Bop leads Flamingo Balance"
+    },
+    {
+     "type": "video",
+     "src": "video/act-clap-back.mp4?v=2",
+     "label": "Bop leads Clap-Back Rhythm"
+    },
+    {
+     "type": "video",
+     "src": "video/bop-move-along.mp4?v=2",
+     "label": "Move along with Bop: Bop the elephant leads Elephant Stomp and Sway"
+    }
+   ]
+  },
+  {
+   "route": "teacher-standard",
+   "title": "Our Teacher Standard: training, background checks and mastery",
+   "section": "Who is with your child, and how we know they are ready.",
+   "sections": [
+    {
+     "id": "ts-welcome-h",
+     "title": "Welcome, teachers, providers and families"
+    },
+    {
+     "id": "ts-law",
+     "title": "Before any teacher is alone with your child"
+    },
+    {
+     "id": "ts-further",
+     "title": "Where our training goes further than the law"
+    },
+    {
+     "id": "ts-method",
+     "title": "Why scenario practice beats a video you can click through"
+    },
+    {
+     "id": "ts-pilot",
+     "title": "Safe Sleep and Lumi's Quiet Time"
+    },
+    {
+     "id": "ts-verify",
+     "title": "A completion means proof, not attendance"
+    },
+    {
+     "id": "ts-year",
+     "title": "Training does not stop after the first month"
+    },
+    {
+     "id": "ts-ask",
+     "title": "What you can ask to see"
+    },
+    {
+     "id": "ts-status",
+     "title": "Where we are today"
+    },
+    {
+     "id": "ts-faq",
+     "title": "Questions families ask about our teachers"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "train-your-staff",
+   "title": "Train your staff with us",
+   "section": "Train your staff with us.",
+   "sections": [
+    {
+     "id": "ts-staff-welcome-h",
+     "title": "Training your team should leave proof, not just hours"
+    },
+    {
+     "id": "ts-offer",
+     "title": "One method, from the first week to every renewal"
+    },
+    {
+     "id": "ts-wont",
+     "title": "What it will not do"
+    },
+    {
+     "id": "ts-staff-status",
+     "title": "Where we are today"
+    },
+    {
+     "id": "ts-staff-ask",
+     "title": "Tell us about your program"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "store",
+   "title": "Futures Store",
+   "section": "Shop for families. Kits for classrooms.",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "shop-families",
+   "title": "Family shop",
+   "section": "The family shop",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "shop-programs",
+   "title": "Classroom Branding Kits and program supplies",
+   "section": "Classroom Branding Kits and program supplies",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "kits",
+     "title": "Name your corners in three sizes"
+    },
+    {
+     "id": "supplies",
+     "title": "Everything in the catalog"
+    },
+    {
+     "id": "who",
+     "title": ""
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "corners",
+   "title": "Name your corners: the learning zone guide",
+   "section": "One friend in every learning corner",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "store-request",
+   "title": "Store request",
+   "section": "Request a quote",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "at-home",
+   "title": "Futures at Home: free family library",
+   "section": "Futures at Home",
+   "sections": [
+    {
+     "id": "fl-age",
+     "title": "How old is your child?"
+    },
+    {
+     "id": "fl-doors",
+     "title": "Everything here is free"
+    },
+    {
+     "id": "fl-diff",
+     "title": "More than a video in your feed"
+    },
+    {
+     "id": "fl-how",
+     "title": "One story, one thing to do, one move, one calm moment"
+    },
+    {
+     "id": "fl-messages",
+     "title": "Futures at Home, in your inbox"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "story-time",
+   "title": "Story Time: read-along storybooks",
+   "section": "Story Time",
+   "sections": [
+    {
+     "id": "fl-shelf",
+     "title": "Five stories, three free to read now"
+    },
+    {
+     "id": "fl-crowd",
+     "title": "Ask, wait, add a little"
+    },
+    {
+     "id": "fl-imagination",
+     "title": "Free books and library cards"
+    }
+   ],
+   "media": [
+    {
+     "type": "book",
+     "src": "#story-time/booker-tries-again",
+     "label": "Booker Tries Again"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/big-feelings-brighter-days",
+     "label": "Big Feelings, Brighter Days"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/what-happens-if-we-try",
+     "label": "What Happens If We Try?"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/clean-up-team",
+     "label": "Clean Up, Team! (preview)"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/the-rainbow-picnic",
+     "label": "The Rainbow Picnic (preview)"
+    }
+   ]
+  },
+  {
+   "route": "activities",
+   "title": "Things to do at home, by age",
+   "section": "Things to do tonight",
+   "sections": [
+    {
+     "id": "fl-lib",
+     "title": "Find one that fits"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=1",
+     "label": "Lumi leads Feeling Faces"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-calm-breath.mp4?v=1",
+     "label": "Lumi leads Smell the Flower, Blow the Candle"
+    },
+    {
+     "type": "video",
+     "src": "video/act-animal-walks.mp4?v=2",
+     "label": "Bop leads Animal Walks"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-brave-reader.mp4?v=1",
+     "label": "Booker leads Brave Reader Steps"
+    },
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=2",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=1",
+     "label": "Lumi leads Feeling Faces"
+    },
+    {
+     "type": "video",
+     "src": "video/act-flamingo-balance.mp4?v=2",
+     "label": "Bop leads Flamingo Balance"
+    }
+   ]
+  },
+  {
+   "route": "printables",
+   "title": "Printables for families",
+   "section": "Printables",
+   "sections": [
+    {
+     "id": "fl-pdfs",
+     "title": "Pick what you need"
+    },
+    {
+     "id": "fl-kit",
+     "title": "Library cards and free books"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "see-how",
+   "title": "See how: picture guides for routines",
+   "section": "See how: picture guides",
+   "sections": [
+    {
+     "id": "fl-guides",
+     "title": "Routines in pictures"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/act-lumi-calm-breath.mp4?v=1",
+     "label": "Lumi leads Smell the Flower, Blow the Candle"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-brave-reader.mp4?v=1",
+     "label": "Booker leads Brave Reader Steps"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-wonder-loop.mp4?v=1",
+     "label": "Zuri leads Zuri’s Wonder Loop"
+    },
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=2",
+     "label": "Bop leads Elephant Stomp & Sway"
+    }
+   ]
+  },
+  {
+   "route": "family-videos",
+   "title": "Watch together: family videos",
+   "section": "Watch together",
+   "sections": [
+    {
+     "id": "fl-now",
+     "title": "On the shelf today"
+    },
+    {
+     "id": "fl-next",
+     "title": "What we are filming"
+    },
+    {
+     "id": "fl-screens",
+     "title": "How much screen time?"
+    }
+   ],
+   "media": [
+    {
+     "type": "video",
+     "src": "video/ff-intro-titled-16x9.mp4",
+     "label": "Meet the four friends: hello from Booker, Lumi, Zuri and Bop"
+    },
+    {
+     "type": "video",
+     "src": "video/bop-move-along.mp4",
+     "label": "Move along with Bop: Elephant Stomp and Sway"
+    },
+    {
+     "type": "video",
+     "src": "video/episode-sample.mp4",
+     "label": "Meet the four friends (sample clip)"
+    }
+   ]
+  },
+  {
+   "route": "my-week",
+   "title": "My Week: plan, stickers and certificates",
+   "section": "My Week",
+   "sections": [
+    {
+     "id": "fl-plan",
+     "title": "A plan for this week"
+    },
+    {
+     "id": "fl-stickers",
+     "title": "Our week"
+    },
+    {
+     "id": "fl-club",
+     "title": "Count the books you share"
+    },
+    {
+     "id": "fl-certs",
+     "title": "Print a certificate"
+    },
+    {
+     "id": "fl-mine",
+     "title": "Saved on this device only"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "learn",
+   "title": "Futures Friends Academy",
+   "section": "My training",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "learn-course",
+   "title": "Course | Futures Friends Academy",
+   "section": "Course",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "learn-cert",
+   "title": "Certificate | Futures Friends Academy",
+   "section": "Certificate",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "verify",
+   "title": "Verify a certificate | Futures Friends Academy",
+   "section": "Verify a certificate",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "unit-1",
+   "title": "Unit 1 at a glance: the first month, in summary",
+   "section": "Welcome to Futures: Meet the Friends",
+   "sections": [
+    {
+     "id": "rt-strip",
+     "title": "Where Futures Friends stands today"
+    },
+    {
+     "id": "u1s-year-h",
+     "title": "12 monthly units, 48 theme weeks"
+    },
+    {
+     "id": "u1-weeks-h",
+     "title": "One friend leads each week"
+    },
+    {
+     "id": "u1s-day-h",
+     "title": "What a day looks like: six steps"
+    },
+    {
+     "id": "u1s-roles-h",
+     "title": "The same characters, the same jobs"
+    },
+    {
+     "id": "u1s-ages-h",
+     "title": "One plan, three age versions"
+    },
+    {
+     "id": "u1s-taste-h",
+     "title": "Three of the 20 days"
+    },
+    {
+     "id": "u1s-fam-h",
+     "title": "How families stay connected"
+    },
+    {
+     "id": "u1s-get-h",
+     "title": "What a program receives"
+    },
+    {
+     "id": "u1-ask-h",
+     "title": "Open the full curriculum in the Teacher Portal"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "this-week",
+   "title": "This week with Booker, Lumi, Zuri and Bop: for enrolled families",
+   "section": "This week with Booker",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "learn-team",
+   "title": "Team training | Futures Friends Academy",
+   "section": "Center compliance",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "learn-author",
+   "title": "Course authoring | Futures Friends Academy",
+   "section": "Course authoring",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "learn-approve",
+   "title": "Content approval | Futures Friends Academy",
+   "section": "Content approval",
+   "sections": [],
+   "media": []
+  }
+ ],
+ "links": [
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Visit our center",
+   "kind": "nav",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Teacher Portal preview",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Family Portal preview",
+   "kind": "nav",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Futures Friends home",
+   "kind": "nav",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Curriculum",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Whole Child",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Teacher Standard",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Futures at Home",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Friends & Books",
+   "kind": "nav",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Find your program",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "",
+   "label": "Find your program",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "",
+   "label": "Meet the friends",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "video:intro",
+   "status": "fixed",
+   "note": "was #friends. Hero button with a play icon: now lands on the talking intro (each friend introduces themself) and starts it."
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-doors-h",
+   "label": "For child care centers",
+   "kind": "card",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-doors-h",
+   "label": "For home daycares",
+   "kind": "card",
+   "to_route": "for-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-doors-h",
+   "label": "For families",
+   "kind": "card",
+   "to_route": "for-families",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-doors-h",
+   "label": "Compare every program option",
+   "kind": "card",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "",
+   "label": "See what is available today",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-friends-h",
+   "label": "See Brave Reader Steps in the family library",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "brave-reader-steps",
+   "status": "ok",
+   "note": "#activities/brave-reader-steps shows the same page as #activities"
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-friends-h",
+   "label": "Meet the friends and their books",
+   "kind": "nav",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "fixed",
+   "note": "was #friends. Hero button with a play icon: now lands on the talking intro (each friend introduces themself) and starts it."
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-day-h",
+   "label": "See the whole-child day",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "20 teaching days in Unit 1 Written day by day for twos, threes and pre-K Draft, summary free to read",
+   "kind": "card",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "37 activities for families From things you already have at home Free now",
+   "kind": "card",
+   "to_route": "activities",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "12 family printables 9 in English and 3 in Spanish Free now, Spanish in draft",
+   "kind": "card",
+   "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "5 storybooks 3 free to read along today In development",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "21 story-world characters Names beyond the four friends are proposals In development",
+   "kind": "card",
+   "to_route": "friends",
+   "to_section": "#ff-town-h",
+   "status": "fixed",
+   "note": "was #friends (page top). Lands on Meet the whole town (#ff-town-h)."
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-proof-h",
+   "label": "37 training modules for teachers The Futures Friends Academy catalog Draft, not yet state approved",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "",
+   "label": "Read our Teacher Standard",
+   "kind": "button",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "",
+   "label": "Visit our pilot center",
+   "kind": "button",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-close-h",
+   "label": "Contact us",
+   "kind": "button",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "footer-friends",
+   "label": "Move with Bop",
+   "kind": "footer",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "footer-friends",
+   "label": "Belong with Lumi",
+   "kind": "footer",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "footer-friends",
+   "label": "Learn with Booker",
+   "kind": "footer",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "footer-friends",
+   "label": "Explore with Zuri",
+   "kind": "footer",
+   "to_route": "activities",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Enroll at Futures Learning Center",
+   "kind": "footer",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Futures at Home (free)",
+   "kind": "footer",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "The Whole-Child Day",
+   "kind": "footer",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Friends & Books",
+   "kind": "footer",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Bop at Home",
+   "kind": "footer",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Story Time",
+   "kind": "footer",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Printables",
+   "kind": "footer",
+   "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Families",
+   "kind": "footer",
+   "to_route": "for-families",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Family App Guide",
+   "kind": "footer",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Family Portal (preview)",
+   "kind": "footer",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Child Care Centers",
+   "kind": "footer",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Home Daycares",
+   "kind": "footer",
+   "to_route": "for-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Curriculum",
+   "kind": "footer",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Pricing",
+   "kind": "footer",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Program Options",
+   "kind": "footer",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Pre-K & Head Start",
+   "kind": "footer",
+   "to_route": "for-prek",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Faith-Based Centers",
+   "kind": "footer",
+   "to_route": "for-faith",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Employer Child Care",
+   "kind": "footer",
+   "to_route": "for-employers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Train Your Staff",
+   "kind": "footer",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Funding Help",
+   "kind": "footer",
+   "to_route": "funding",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Futures Hub",
+   "kind": "footer",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Get the App",
+   "kind": "footer",
+   "to_route": "app",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Impact",
+   "kind": "footer",
+   "to_route": "impact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Our Teacher Standard",
+   "kind": "footer",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Unit 1 at a glance",
+   "kind": "footer",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Training Academy",
+   "kind": "footer",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Careers",
+   "kind": "footer",
+   "to_route": "jobs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Training path (in development)",
+   "kind": "footer",
+   "to_route": "training",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Educator Summit",
+   "kind": "footer",
+   "to_route": "summit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Talk About It cards",
+   "kind": "footer",
+   "to_route": "talk",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Blog for Educators",
+   "kind": "footer",
+   "to_route": "blog",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Teacher Portal (preview)",
+   "kind": "footer",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "School Readiness",
+   "kind": "footer",
+   "to_route": "readiness",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Futures Include",
+   "kind": "footer",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Watch Episodes",
+   "kind": "footer",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Eat the Rainbow",
+   "kind": "footer",
+   "to_route": "rainbow",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Futures Store",
+   "kind": "footer",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Why Futures",
+   "kind": "footer",
+   "to_route": "why",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Newsroom",
+   "kind": "footer",
+   "to_route": "news",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Events",
+   "kind": "footer",
+   "to_route": "events",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Support & FAQ",
+   "kind": "footer",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Contact Us",
+   "kind": "footer",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Privacy Policy",
+   "kind": "footer",
+   "to_route": "privacy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Child Privacy",
+   "kind": "footer",
+   "to_route": "child-privacy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Terms",
+   "kind": "footer",
+   "to_route": "terms",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Accessibility",
+   "kind": "footer",
+   "to_route": "accessibility",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Futures Friends home",
+   "kind": "nav",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Talk to a real person",
+   "kind": "nav",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "",
+   "kind": "nav",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Curriculum",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Whole Child",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Teacher Standard",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Futures at Home",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Friends & Books",
+   "kind": "nav",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Visit our pilot center",
+   "kind": "nav",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "The whole-child day",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Bop at Home",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "What a center gets",
+   "kind": "nav",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Home daycares",
+   "kind": "nav",
+   "to_route": "for-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Curriculum by age",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Pricing",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Train your staff",
+   "kind": "nav",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Our Teacher Standard",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Unit 1 at a glance",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Talk About It cards",
+   "kind": "nav",
+   "to_route": "talk",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Training Academy",
+   "kind": "nav",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Careers",
+   "kind": "nav",
+   "to_route": "jobs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Teacher Portalpreview",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Family Portalpreview",
+   "kind": "nav",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Program options",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Futures Hub",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Watch",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Eat the Rainbow",
+   "kind": "nav",
+   "to_route": "rainbow",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "School readiness",
+   "kind": "nav",
+   "to_route": "readiness",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Story Time",
+   "kind": "nav",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Printables",
+   "kind": "nav",
+   "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Support and FAQ",
+   "kind": "nav",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Contact",
+   "kind": "nav",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "The research",
+   "kind": "hero",
+   "to_route": "impact",
+   "to_section": "why-early",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "What we measure",
+   "kind": "hero",
+   "to_route": "impact",
+   "to_section": "measure",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "Flagship center",
+   "kind": "hero",
+   "to_route": "impact",
+   "to_section": "flagship",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Curriculum",
+   "kind": "hero",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "The learning loop",
+   "kind": "hero",
+   "to_route": "readiness",
+   "to_section": "loop",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Observe and adapt",
+   "kind": "hero",
+   "to_route": "readiness",
+   "to_section": "adapt",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Learning Steps",
+   "kind": "hero",
+   "to_route": "readiness",
+   "to_section": "steps",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Supports",
+   "kind": "hero",
+   "to_route": "readiness",
+   "to_section": "support",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Friendship Stars",
+   "kind": "hero",
+   "to_route": "readiness",
+   "to_section": "stars",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "support",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "",
+   "label": "Explore the learning year",
+   "kind": "hero",
+   "to_route": "curriculum",
+   "to_section": "units",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "",
+   "label": "Find your age band",
+   "kind": "hero",
+   "to_route": "curriculum",
+   "to_section": "ages",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "",
+   "label": "Grow your teaching practice",
+   "kind": "nav",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "units",
+   "label": "Build a family plan",
+   "kind": "chip",
+   "to_route": "curriculum",
+   "to_section": "family-plan",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "u1-band-curriculum",
+   "label": "See the Unit 1 summary",
+   "kind": "button",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "wc-cu-h",
+   "label": "See the whole-child day",
+   "kind": "button",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "addons",
+   "label": "Eat the Rainbow",
+   "kind": "nav",
+   "to_route": "rainbow",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "addons",
+   "label": "Individual growth",
+   "kind": "nav",
+   "to_route": "readiness",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "addons",
+   "label": "Educator learning",
+   "kind": "nav",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "books",
+   "label": "Read Booker Tries Again in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "booker-tries-again",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "books",
+   "label": "Explore the stories",
+   "kind": "button",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Open the sample Teacher Portal",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "options",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "for-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "for-prek",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Details",
+   "kind": "card",
+   "to_route": "for-families",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
+   "from_section": "",
+   "label": "Request a Quote",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "Request More Information",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "Unit 1 at a glance",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "What the package includes today",
+   "kind": "chip",
+   "to_route": "for-centers",
+   "to_section": "rt-package",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "How starting works",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "Support and answers",
+   "kind": "nav",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "Open the sample Teacher Portal",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fj-pv-h",
+   "label": "How the Futures Hub works",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "u1-band-centers",
+   "label": "See the Unit 1 summary",
+   "kind": "button",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "license",
+   "label": "program pricing",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "license",
+   "label": "the whole-child page",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "More details",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "rt-package",
+   "label": "launch package",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ts-staff-h",
+   "label": "See the staff training plan",
+   "kind": "button",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ff-map",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ff-map",
+   "label": "Program options",
+   "kind": "button",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "Request More Information",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "Unit 1 at a glance",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "What the package includes today",
+   "kind": "chip",
+   "to_route": "for-home",
+   "to_section": "rt-package",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "How starting works",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "Support and answers",
+   "kind": "nav",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "Open the sample Teacher Portal",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "fj-pv-h",
+   "label": "How the Futures Hub works",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "More details",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "rt-package",
+   "label": "launch package",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "ts-staff-h",
+   "label": "See the staff training plan",
+   "kind": "button",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "Request More Information",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "More details",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "rt-package",
+   "label": "launch package",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "Request More Information",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "More details",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "rt-package",
+   "label": "launch package",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "Request More Information",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Open the sample Teacher Portal",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "View the curriculum",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "Explore Futures Include",
+   "kind": "button",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "More details",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "rt-package",
+   "label": "launch package",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
+   "label": "Request Information",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Print it or find more for your child's age",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "",
+   "label": "Find a discovery to share",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "",
+   "label": "Open the family library",
+   "kind": "button",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "fj-fam-h",
+   "label": "Print it or find more for your child's age",
+   "kind": "card",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "fj-fam-h",
+   "label": "Visit the pilot center",
+   "kind": "nav",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "ts-fam-h",
+   "label": "Read our Teacher Standard",
+   "kind": "button",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "wc-co-h",
+   "label": "See the whole-child day",
+   "kind": "button",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "wc-co-h",
+   "label": "Free Bop at Home activities",
+   "kind": "button",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-families",
+   "from_section": "",
+   "label": "Contact Us",
+   "kind": "button",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "Curriculum",
+   "kind": "hero",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "Key features",
+   "kind": "hero",
+   "to_route": "include",
+   "to_section": "features",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "How it works",
+   "kind": "hero",
+   "to_route": "include",
+   "to_section": "how",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "Funding help",
+   "kind": "hero",
+   "to_route": "include",
+   "to_section": "funding",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "funding",
+   "label": "Funding help",
+   "kind": "button",
+   "to_route": "funding",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
+   "label": "Request Details",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Get the app",
+   "kind": "hero",
+   "to_route": "app",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Teacher Sign-In",
+   "kind": "hero",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Open the Teacher Portal",
+   "kind": "button",
+   "to_route": "portal",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Open the Family Portal",
+   "kind": "button",
+   "to_route": "family-portal",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
+   "label": "Family App guide",
+   "kind": "button",
+   "to_route": "family-guide",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "app",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "app",
+   "from_section": "",
+   "label": "Futures Hub",
+   "kind": "hero",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-guide",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-guide",
+   "from_section": "",
+   "label": "Futures Hub",
+   "kind": "hero",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-family",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-family",
+   "from_section": "",
+   "label": "Contact the center",
+   "kind": "card",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-teacher",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-teacher",
+   "from_section": "",
+   "label": "Contact the center",
+   "kind": "card",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Training Academy",
+   "kind": "hero",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Credentials",
+   "kind": "hero",
+   "to_route": "training",
+   "to_section": "ladder",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Module catalog",
+   "kind": "hero",
+   "to_route": "training",
+   "to_section": "catalog",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "",
+   "label": "Summit",
+   "kind": "hero",
+   "to_route": "training",
+   "to_section": "summit-cta",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "training",
+   "from_section": "summit-cta",
+   "label": "Summit details",
+   "kind": "button",
+   "to_route": "summit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "summit",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "summit",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "summit",
+   "from_section": "",
+   "label": "Training Academy",
+   "kind": "hero",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "summit",
+   "from_section": "",
+   "label": "Training path",
+   "kind": "hero",
+   "to_route": "training",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "summit",
+   "from_section": "",
+   "label": "Ask about the summit",
+   "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "support",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "support",
+   "from_section": "",
+   "label": "Let us know",
+   "kind": "button",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "contact",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "",
+   "label": "Pricing",
+   "kind": "hero",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Open the sample Teacher Portal",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Read Booker's book",
+   "kind": "button",
+   "to_route": "story-time",
+   "to_section": "booker-tries-again",
+   "status": "fixed",
+   "note": "was #friends (same page). Opens Booker Tries Again in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Read Lumi's book",
+   "kind": "button",
+   "to_route": "story-time",
+   "to_section": "big-feelings-brighter-days",
+   "status": "fixed",
+   "note": "was #friends (same page). Opens Big Feelings, Brighter Days in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Read Zuri's book",
+   "kind": "button",
+   "to_route": "story-time",
+   "to_section": "what-happens-if-we-try",
+   "status": "fixed",
+   "note": "was #friends (same page). Opens What Happens If We Try? in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Read Bop's book",
+   "kind": "button",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "fixed",
+   "note": "was #friends (same page). Opens the Clean Up, Team! preview (full read-along waits on the revised text)."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Discover the curriculum",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Read Booker Tries Again in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "booker-tries-again",
+   "status": "fixed",
+   "note": "was img/booker-tries-again-preview.png (raw image, new tab). The cover opens the reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Read three of the stories free in Story Time",
+   "kind": "button",
+   "to_route": "story-time",
+   "to_section": "#fl-shelf",
+   "status": "fixed",
+   "note": "was #story-time (page top). Lands on the bookshelf (#fl-shelf), the three free books highlighted."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF101 · Week 1 The Wobbly Welcome Tower Booker Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "101",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF102 · Week 2 A Spot for Everyone Lumi Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "102",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF103 · Week 3 What Melts? Zuri Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "103",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF104 · Week 4 The Cleanup Beat Bop Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "104",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF105 · Week 5 The Missing Rhyme Booker Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "105",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF106 · Week 6 The Feelings Forecast Lumi Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "106",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF107 · Week 7 Seed Surprise Zuri Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "107",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF108 · Week 8 Move Like Me Bop Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "108",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF109 · Week 9 The Rainbow Snack Adventure All four friends Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "109",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF110 · Week 10 The Brave Question Booker Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "110",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF111 · Week 11 Two Friends, One Toy Lumi Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "111",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF112 · Week 12 Where Did My Shadow Go? Zuri Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "112",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "FF113 · Week 13 The Brighter Together Parade All four friends Talk about it card",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "113",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "rainbow",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "rainbow",
+   "from_section": "",
+   "label": "The whole-child day",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "funding",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "funding",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "funding",
+   "from_section": "",
+   "label": "Pricing",
+   "kind": "hero",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "",
+   "label": "Ask for a written quote",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "why",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "news",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "Small screens, big conversations: screen time for ages 2 to 5 The national child care health standards, Caring for Our C",
+   "kind": "card",
+   "to_route": "post",
+   "to_section": "screen-time",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "Staffing by age mix: Missouri ratios made simple Missouri licensing rules (5 CSR 25-500.112) set a ratio of 1 adult for ",
+   "kind": "card",
+   "to_route": "post",
+   "to_section": "ratios",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "Choking-safe snacks for under-fives Young children are still learning to chew and swallow. The CDC recommends cutting an",
+   "kind": "card",
+   "to_route": "post",
+   "to_section": "choking",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "CACFP: what your meals may be worth The Child and Adult Care Food Program reimburses licensed programs for qualifying me",
+   "kind": "card",
+   "to_route": "post",
+   "to_section": "cacfp",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "post",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "post",
+   "from_section": "",
+   "label": "Blog for educators",
+   "kind": "hero",
+   "to_route": "blog",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "post",
+   "from_section": "",
+   "label": "More articles",
+   "kind": "card",
+   "to_route": "blog",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "events",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "privacy",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "child-privacy",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "terms",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "accessibility",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "portal",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "portal",
+   "from_section": "",
+   "label": "Teacher Portal",
+   "kind": "hero",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-portal",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-portal",
+   "from_section": "",
+   "label": "Family Portal",
+   "kind": "hero",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-portal",
+   "from_section": "",
+   "label": "Family Portal sign-in",
+   "kind": "nav",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "talk",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "talk",
+   "from_section": "",
+   "label": "Friends & Books",
+   "kind": "hero",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "talk",
+   "from_section": "",
+   "label": "Watch",
+   "kind": "hero",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "nav",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Talk to our team",
+   "kind": "nav",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Home",
+   "kind": "nav",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Explore lesson",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "F-101",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Welcome to Futures Friends: Our Mission, Our Friends, Our Learning Loop",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "F-101",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Setting Up the Learning Zones",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "F-102",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Health and Safety Essentials in a Futures Friends Classroom",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "F-103",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "",
+   "label": "Explore a classroom discovery",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "academy",
+   "from_section": "px-plan-title",
+   "label": "F-101 Welcome to Futures Friends: Our Mission, Our Friends, Our Learning Loop",
+   "kind": "nav",
+   "to_route": "academy",
+   "to_section": "F-101",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Friends & Books",
+   "kind": "hero",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Classroom player",
+   "kind": "hero",
+   "to_route": "watch",
+   "to_section": "ffx-player",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Episode library",
+   "kind": "hero",
+   "to_route": "watch",
+   "to_section": "ffx-eps",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Family report",
+   "kind": "hero",
+   "to_route": "watch",
+   "to_section": "ffx-family",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-player",
+   "label": "Talk about it card for this clip",
+   "kind": "nav",
+   "to_route": "talk",
+   "to_section": "w0",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "101",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "102",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "103",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "104",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "105",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "106",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "107",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "108",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "109",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "110",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "111",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "112",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "Full talk card: before, during, after and a feeling word",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "113",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-eps",
+   "label": "See the talk cards",
+   "kind": "card",
+   "to_route": "talk",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "tk-watch",
+   "label": "Open the card set",
+   "kind": "button",
+   "to_route": "talk",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Schedule a Tour",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-tour",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Apply online",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-apply",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Why families choose us",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-why",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Daily life",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-day",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Tuition",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-tuition",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Check a request",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-status",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "",
+   "label": "Employment",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "ffx-jobs",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "ts-fam-h",
+   "label": "Read our Teacher Standard",
+   "kind": "button",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "ffx-tuition",
+   "label": "Apply online",
+   "kind": "chip",
+   "to_route": "enroll",
+   "to_section": "ffx-apply",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "ffx-tuition",
+   "label": "Schedule a Tour",
+   "kind": "chip",
+   "to_route": "enroll",
+   "to_section": "ffx-tour",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "ffx-jobs",
+   "label": "See open positions",
+   "kind": "card",
+   "to_route": "jobs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "jobs",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "job",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "job",
+   "from_section": "",
+   "label": "Careers",
+   "kind": "hero",
+   "to_route": "jobs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Try Bop at Home, free",
+   "kind": "hero",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "See the day",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-day",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "The day",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-day",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Four friends",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-friends",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Bop & Go!",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-move",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Daily targets",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-targets",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Quiet Time",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-quiet",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Eat the Rainbow",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-nourish",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "What families see",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-family",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Our promises",
+   "kind": "hero",
+   "to_route": "whole-child",
+   "to_section": "wc-promises",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "wc-friends",
+   "label": "See what families get",
+   "kind": "chip",
+   "to_route": "whole-child",
+   "to_section": "wc-family",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "wc-move",
+   "label": "Bop at Home activities",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "wc-nourish",
+   "label": "Eat the Rainbow",
+   "kind": "nav",
+   "to_route": "rainbow",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "wc-family",
+   "label": "Ask a question",
+   "kind": "nav",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "Bop at Home",
+   "kind": "card",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "whole-child",
+   "from_section": "",
+   "label": "For centers",
+   "kind": "card",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "",
+   "label": "Join the weekly challenge",
+   "kind": "hero",
+   "to_route": "bop-at-home",
+   "to_section": "wc-signup",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "",
+   "label": "See the activities",
+   "kind": "hero",
+   "to_route": "bop-at-home",
+   "to_section": "wc-acts",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-signup",
+   "label": "the whole-child page",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "See the rules",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-law",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Where we are today",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-status",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Read the status",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-status",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Before day one",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-law",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Where we go further",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-further",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "How training works",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-method",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "The pilot course",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-pilot",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "How we verify",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-verify",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Every year",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-year",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "What to ask",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-ask",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Questions",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "ts-faq",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Visit Futures Learning Center",
+   "kind": "card",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Train your staff with us",
+   "kind": "card",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "teacher-standard",
+   "from_section": "",
+   "label": "Explore the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "",
+   "label": "Ask to hear when it opens",
+   "kind": "hero",
+   "to_route": "train-your-staff",
+   "to_section": "ts-staff-ask",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "",
+   "label": "See our teacher standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "ts-staff-ask",
+   "label": "our teacher standard",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "train-your-staff",
+   "from_section": "ts-staff-ask",
+   "label": "what a licensed center gets",
+   "kind": "nav",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Print it or find more for your child's age",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "",
+   "label": "Shop for families",
+   "kind": "card",
+   "to_route": "shop-families",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "",
+   "label": "Shop for programs",
+   "kind": "card",
+   "to_route": "shop-programs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
+   "from_section": "",
+   "label": "See the corner guide",
+   "kind": "button",
+   "to_route": "corners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "",
+   "label": "Futures Store",
+   "kind": "hero",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Print it or find more for your child's age",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-families",
+   "from_section": "",
+   "label": "Tell me when it opens",
+   "kind": "card",
+   "to_route": "store-request",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "Futures Store",
+   "kind": "hero",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "Branding kits",
+   "kind": "hero",
+   "to_route": "shop-programs",
+   "to_section": "kits",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "Program supplies",
+   "kind": "hero",
+   "to_route": "shop-programs",
+   "to_section": "supplies",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "Centers, homes and churches",
+   "kind": "hero",
+   "to_route": "shop-programs",
+   "to_section": "who",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Read the Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "kits",
+   "label": "See the corner guide",
+   "kind": "button",
+   "to_route": "corners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "kits",
+   "label": "Request a quote for this list",
+   "kind": "card",
+   "to_route": "store-request",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "corners",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "corners",
+   "from_section": "",
+   "label": "Futures Store",
+   "kind": "hero",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "corners",
+   "from_section": "",
+   "label": "See the Classroom Branding Kits",
+   "kind": "button",
+   "to_route": "shop-programs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "corners",
+   "from_section": "",
+   "label": "How the curriculum uses the zones",
+   "kind": "button",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store-request",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store-request",
+   "from_section": "",
+   "label": "Futures Store",
+   "kind": "hero",
+   "to_route": "store",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store-request",
+   "from_section": "",
+   "label": "Back to the list",
+   "kind": "card",
+   "to_route": "shop-programs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Read a story",
+   "kind": "hero",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Build my week",
+   "kind": "hero",
+   "to_route": "my-week",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-age",
+   "label": "Babies Birth to 12 months 9 activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "infant",
+   "status": "ok",
+   "note": "#activities/infant shows the same page as #activities"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-age",
+   "label": "Toddlers 12 to 24 months 12 activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "toddler",
+   "status": "ok",
+   "note": "#activities/toddler shows the same page as #activities"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-age",
+   "label": "Twos 2 years 16 activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "twos",
+   "status": "ok",
+   "note": "#activities/twos shows the same page as #activities"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-age",
+   "label": "Threes 3 years 20 activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "threes",
+   "status": "ok",
+   "note": "#activities/threes shows the same page as #activities"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-age",
+   "label": "Pre-K 4 and 5 years 19 activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "prek",
+   "status": "ok",
+   "note": "#activities/prek shows the same page as #activities"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "Story Time Three Futures Friends storybooks to read free, page by page, with a question to ask on every page.",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "Things to do tonight 37 activities for babies to pre-K, 3 to 15 minutes, made from things you already have.",
+   "kind": "card",
+   "to_route": "activities",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "Printables Picture schedule, rainbow tracker, calm-down and move cards, a reading log, a sticker chart and certificates.",
+   "kind": "card",
+   "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "See how: picture guides Eight routines shown in pictures, step by step, for when you would rather see it than read it.",
+   "kind": "card",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "My Week A plan for your child's age that changes every Monday, a sticker chart and certificates you can print.",
+   "kind": "card",
+   "to_route": "my-week",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "Watch What there is to watch today, what we are filming next and how to keep screen time small.",
+   "kind": "card",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-doors",
+   "label": "Bop at Home Free movement activities, every one with an adapted version, and a weekly challenge.",
+   "kind": "card",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "fl-diff",
+   "label": "My Week",
+   "kind": "nav",
+   "to_route": "my-week",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Family Portal sign-in",
+   "kind": "nav",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "",
+   "label": "Start with Booker",
+   "kind": "hero",
+   "to_route": "story-time",
+   "to_section": "booker-tries-again",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "fl-shelf",
+   "label": "Read it together",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "booker-tries-again",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "fl-shelf",
+   "label": "Read it together",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "big-feelings-brighter-days",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "fl-shelf",
+   "label": "Read it together",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "what-happens-if-we-try",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "fl-shelf",
+   "label": "See the preview",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "story-time",
+   "from_section": "fl-shelf",
+   "label": "See the preview",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "the-rainbow-picnic",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "activities",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "activities",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Bop · MOVE : more at Bop at Home",
+   "kind": "chip",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Lumi · BELONG : all Lumi's activities",
+   "kind": "chip",
+   "to_route": "activities",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": "#activities/lumi shows the same page as #activities"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Booker · LEARN : all Booker's activities",
+   "kind": "chip",
+   "to_route": "activities",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#activities/booker shows the same page as #activities"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Zuri · EXPLORE : all Zuri's activities",
+   "kind": "chip",
+   "to_route": "activities",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": "#activities/zuri shows the same page as #activities"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Bop · MOVE : watch Bop do it at Bop at Home",
+   "kind": "chip",
+   "to_route": "bop-at-home",
+   "to_section": "bop-act-animal-walks",
+   "status": "ok",
+   "note": "#bop-at-home/bop-act-animal-walks shows the same page as #bop-at-home"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Bop · MOVE : watch Bop do it at Bop at Home",
+   "kind": "chip",
+   "to_route": "bop-at-home",
+   "to_section": "bop-act-freeze-try-again",
+   "status": "ok",
+   "note": "#bop-at-home/bop-act-freeze-try-again shows the same page as #bop-at-home"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Bop · MOVE : watch Bop do it at Bop at Home",
+   "kind": "chip",
+   "to_route": "bop-at-home",
+   "to_section": "bop-act-flamingo-balance",
+   "status": "ok",
+   "note": "#bop-at-home/bop-act-flamingo-balance shows the same page as #bop-at-home"
+  },
+  {
+   "from_route": "activities",
+   "from_section": "fl-lib",
+   "label": "Futures Include",
+   "kind": "nav",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "printables",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "printables",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "printables",
+   "from_section": "",
+   "label": "Download the starter pack (all 8)",
+   "kind": "hero",
+   "to_route": "printables/futures-at-home-starter-pack.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Our Day: picture schedule (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-daily-rhythm.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-daily-rhythm.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-nuestro-dia.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Rainbow at Home week tracker (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-rainbow-tracker.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-rainbow-tracker.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-arcoiris.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Lumi's calm-down cards (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-lumi-calm-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-lumi-calm-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-tarjetas-de-calma.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Bop's move cards (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-bop-move-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-bop-move-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Booker's Book Club reading log (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-booker-reading-log.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-booker-reading-log.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Our week sticker chart (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-sticker-chart.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-sticker-chart.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Story Time talk cards (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-story-time-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-story-time-cards.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download Certificates from the four friends (PDF)",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-certificates.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "Download PDF",
+   "kind": "card",
+   "to_route": "printables/futures-at-home-certificates.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-kit",
+   "label": "Download PDF : Library cards and books (family sheet)",
+   "kind": "button",
+   "to_route": "printables/marketing/futures-kit-library-card-sheet.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "see-how",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "see-how",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-now",
+   "label": "Bop at Home",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-now",
+   "label": "Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-now",
+   "label": "Picture guides",
+   "kind": "card",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "",
+   "label": "Make my plan",
+   "kind": "hero",
+   "to_route": "my-week",
+   "to_section": "fl-plan",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "",
+   "label": "Sticker chart",
+   "kind": "hero",
+   "to_route": "my-week",
+   "to_section": "fl-stickers",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "fl-stickers",
+   "label": "Blank chart (PDF)",
+   "kind": "button",
+   "to_route": "printables/futures-at-home-sticker-chart.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "fl-certs",
+   "label": "All four as a PDF",
+   "kind": "button",
+   "to_route": "printables/futures-at-home-certificates.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "my-week",
+   "from_section": "fl-mine",
+   "label": "My Week",
+   "kind": "nav",
+   "to_route": "my-week",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "learn",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "learn",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-course",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-cert",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "verify",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "verify",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "verify",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "verify",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "verify",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "",
+   "label": "Curriculum",
+   "kind": "hero",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "",
+   "label": "Educators: open the full curriculum",
+   "kind": "hero",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "",
+   "label": "Talk to a real person",
+   "kind": "hero",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Launch package and prices",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": "links to the page it is on"
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "kind": "nav",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Print it or find more for your child's age",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Optional on-site launch day in the Kansas City metro",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Futures Hub for your program: built and tested, not hosted yet",
+   "kind": "nav",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Level 1 Foundations training: courses being written, not state-approved",
+   "kind": "nav",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
+   "kind": "nav",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "rt-strip",
+   "label": "Episodes: scripted or outlined, none made yet",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1s-year-h",
+   "label": "See the year at a glance",
+   "kind": "nav",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1s-day-h",
+   "label": "More about episodes",
+   "kind": "nav",
+   "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1s-fam-h",
+   "label": "This week with the friends",
+   "kind": "card",
+   "to_route": "this-week",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1s-fam-h",
+   "label": "Futures at Home",
+   "kind": "card",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1-ask-h",
+   "label": "Educator sign-in",
+   "kind": "card",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1-ask-h",
+   "label": "Talk to a real person",
+   "kind": "card",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1-ask-h",
+   "label": "Ask about a tour",
+   "kind": "card",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Futures at Home",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Family Portal sign-in",
+   "kind": "hero",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Free activities for every family",
+   "kind": "hero",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Week 1: Booker",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#this-week/booker shows the same page as #this-week"
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Week 2: Lumi",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Week 3: Zuri",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Week 4: Bop",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "bop",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "this-week",
+   "from_section": "",
+   "label": "Unit 1 summary",
+   "kind": "nav",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-team",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-author",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "Teacher Standard",
+   "kind": "hero",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "Academy",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "My training",
+   "kind": "hero",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "Verify a certificate",
+   "kind": "hero",
+   "to_route": "verify",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "learn-approve",
+   "from_section": "",
+   "label": "See the Academy",
+   "kind": "button",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  }
+ ],
+ "page_errors": {}
+}

@@ -1,0 +1,21 @@
+/* care-history.js: the director's Edit history tab and the "Children leaving the center" card (wave 4). Existing tokens only. */
+.chh{display:grid;gap:12px}
+.chh-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.chh-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.chh-filters .f{flex:1 1 180px;min-width:0}
+.chh-filters .i{padding:7px 9px;width:100%;box-sizing:border-box}
+.chh-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.chh-row{padding:10px 0;border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.chh-row:last-child{border-bottom:0}
+.chh-h{margin:0;font-size:14px;overflow-wrap:anywhere}
+.chh-h time{font-weight:600;color:var(--navy)}
+.chh-rec{color:var(--muted)}
+.chh-f{margin:0;padding-left:18px;display:grid;gap:2px;font-size:13.5px;overflow-wrap:anywhere}
+.chh-err{margin:0;padding:10px 12px;border-radius:10px;background:#FDECEC;color:#6B1111}
+.chh-left{display:grid;gap:10px}
+.chh-left h4{margin:6px 0 0;font-size:15px}
+.chh-confirm{display:grid;gap:8px;padding:12px;border:2px solid var(--gold,#E7A928);border-radius:12px;background:var(--paper2)}
+.chh-confirm p{margin:0}
+.chh-acts{display:flex;flex-wrap:wrap;gap:8px}
+.chh-done,.chh-crm{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.chh-done li{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;font-size:14px}

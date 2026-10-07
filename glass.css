@@ -1,0 +1,92 @@
+/* Liquid glass (wave 8, owner 2026-10-06: "Apple glass in a few places"). Three places on Home only, never everywhere:
+   the audience doors' shelf, the plate that holds the "What we have built" badges, and the "Talk to a real person" band.
+   The material: a frosted pane (backdrop blur + saturation) of the page's own paper colour, a bright rim and a specular highlight
+   that follows the pointer (home-day.js writes --gx/--gy, fine pointers only), and on Chromium a refracting edge (an SVG
+   feDisplacementMap applied through backdrop-filter to the rim only; home-day.js turns it on with html.ffg-refract).
+   Fallbacks: no backdrop-filter support or prefers-reduced-transparency -> a solid panel of the same colour. Every colour on the
+   glass keeps WCAG AA in all three states (measured: tests/w8-page.test.js and the evidence contrast report).
+   Box changes (padding on the badge plate and the band) are in CSS from the first paint, so nothing shifts. */
+
+.hc-prooflist,.hc-close .hc-closegrid{
+  --g-rgb:255 253 248; --g-a:.6; --g-rim:rgba(255,255,255,.78); --g-spec:rgba(255,255,255,.55);
+  position:relative;isolation:isolate;
+  background:rgb(var(--g-rgb) / var(--g-a));
+  -webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);
+  border:1px solid var(--g-rim);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.12),
+    0 32px 64px -34px rgba(10,43,56,.5),0 3px 8px rgba(10,43,56,.07)}
+/* the specular highlight and the soft top sheen */
+.hc-prooflist::after,.hc-close .hc-closegrid::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+  background:radial-gradient(clamp(180px,26vw,340px) circle at var(--gx,22%) var(--gy,-10%),var(--g-spec),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,rgba(255,255,255,.34) 0,rgba(255,255,255,0) 38%);
+  mix-blend-mode:soft-light;opacity:.9;transition:opacity .4s}
+/* the refracting rim (Chromium only, see home-day.js): the backdrop is displaced inside a 10px ring, not behind the text */
+.ffg-refract .hc-prooflist::before,.ffg-refract .hc-close .hc-closegrid::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;padding:11px;
+  -webkit-backdrop-filter:url(#ffg-refract) blur(1.5px) saturate(1.5);backdrop-filter:url(#ffg-refract) blur(1.5px) saturate(1.5);
+  -webkit-mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.hc-prooflist>*,.hc-close .hc-closegrid>*{position:relative;z-index:1}
+
+/* 1. the doors (wave 10, owner 2026-10-07: "we really can't see that effect because we have this big block here that's blocking
+   it ... enough holes in this big block so we can see all the things going on in the background"): the one slab is now three
+   floating glass cards with open sky between them, and each card is clear where there is no writing. The frosted backing is the
+   card's ::before, masked: solid behind the words, fading to clear in the band the friend peeks out of (the top band on wide
+   screens, the right-hand column on phones), so clouds, sun and birds show through while scrolling. A door still turns to paper
+   when pointed at (home-alive.css). Same boxes as before (the gap replaces the 1px dividers), so nothing shifts. */
+.hc-doorlist{background:none;border:0;box-shadow:none;gap:clamp(16px,2vw,28px)}
+.hc-door{--g-rgb:255 253 248;--g-a:.78;position:relative;z-index:1;isolation:isolate;border:1px solid rgba(255,255,255,.85);border-radius:24px;
+  background:rgb(255 255 255 / .06);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3),0 28px 56px -34px rgba(10,43,56,.5),0 2px 6px rgba(10,43,56,.05)}
+.hc-door+.hc-door{border-left:1px solid rgba(255,255,255,.85);border-top:1px solid rgba(255,255,255,.85)}
+.hc-door::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:rgb(var(--g-rgb) / var(--g-a));-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6);
+  --win:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.05) clamp(40px,4vw,54px),#000 clamp(76px,7vw,92px));
+  --corner:radial-gradient(150px 76px at 100% 100%,rgba(0,0,0,.05) 0,rgba(0,0,0,.05) 45%,#000 100%);
+  -webkit-mask:var(--win),var(--corner);-webkit-mask-composite:source-in;mask:var(--win),var(--corner);mask-composite:intersect}
+.hc-door::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:radial-gradient(clamp(160px,22vw,300px) circle at var(--gx,22%) var(--gy,-10%),rgba(255,255,255,.6),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,rgba(255,255,255,.3) 0,rgba(255,255,255,0) 30%);mix-blend-mode:soft-light}
+@media (max-width:820px){
+  .hc-doorlist{gap:18px}
+  .hc-door::before{--win:linear-gradient(90deg,#000 0,#000 calc(100% - 106px),rgba(0,0,0,.05) calc(100% - 80px));--corner:linear-gradient(#000 0 0)}
+}
+
+/* 2. the badge plate */
+.hc-prooflist{--g-a:.42;border-radius:clamp(24px,2.6vw,34px);padding:clamp(10px,1.4vw,18px)}
+
+/* 3. the dusk band: dark glass over the evening sky; the band's padding moves inside the pane, so its height is unchanged */
+.hc-close{padding-block:clamp(36px,4.4vw,60px)}
+.hc-close .hc-closegrid{--g-rgb:16 30 70;--g-a:.62;--g-rim:rgba(255,255,255,.26);--g-spec:rgba(255,236,190,.42);
+  border-radius:clamp(24px,2.6vw,34px);padding:clamp(22px,3vw,34px) clamp(22px,3.2vw,40px);max-width:1140px;margin-inline:auto;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.08),0 34px 70px -30px rgba(4,10,40,.75)}
+.hc-close .hc-closegrid::after{mix-blend-mode:screen;opacity:.45}
+@media (max-width:820px){.hc-close .hc-closegrid{margin-inline:12px}}
+
+/* dark theme: the panes take the dark paper */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hc-door{--g-rgb:17 36 45;--g-a:.84;border-color:rgba(255,255,255,.16)}}
+:root[data-theme=dark] .hc-door{--g-rgb:17 36 45;--g-a:.84;border-color:rgba(255,255,255,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hc-prooflist{--g-rgb:17 36 45;--g-a:.7;--g-rim:rgba(255,255,255,.16);--g-spec:rgba(255,255,255,.2)}}
+:root[data-theme=dark] .hc-prooflist{--g-rgb:17 36 45;--g-a:.7;--g-rim:rgba(255,255,255,.16);--g-spec:rgba(255,255,255,.2)}
+
+/* fallbacks: a solid pane of the same colour */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .hc-prooflist,.hc-close .hc-closegrid{--g-a:.95}
+  .hc-door{--g-a:.95}
+}
+@media (prefers-reduced-transparency:reduce){
+  .hc-prooflist,.hc-close .hc-closegrid{--g-a:.96;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .hc-prooflist::before,.hc-close .hc-closegrid::before{content:none}
+  .hc-door::before{--g-a:.97;-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask:none;mask:none}
+}
+:root.ffg-solid .hc-prooflist,:root.ffg-solid .hc-close .hc-closegrid{--g-a:.96;-webkit-backdrop-filter:none;backdrop-filter:none}
+:root.ffg-solid .hc-door::before{--g-a:.97;-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask:none;mask:none}
+@media print{.hc-door::after,.hc-prooflist::after,.hc-close .hc-closegrid::after,.hc-door::before,.hc-prooflist::before,.hc-close .hc-closegrid::before{content:none}}
+
+/* Sticky header turns to frosted glass on scroll (header-glass.js toggles .is-glass). Text stays the header's dark ink on a 74% white
+   pane, so contrast holds over any section; the green utility row stays solid (its small light labels need it for contrast). */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  header.bar{transition:background-color .35s ease,box-shadow .35s ease}
+  header.bar.is-glass{background:rgba(255,255,255,.74);-webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(10,43,56,.12)}
+}
+@media (prefers-reduced-transparency: reduce){header.bar.is-glass{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-reduced-motion: reduce){header.bar{transition:none}}

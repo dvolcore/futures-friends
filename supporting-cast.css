@@ -1,0 +1,180 @@
+.ff-community{border-block:1px solid #e4dccf;padding:64px 0}
+.ff-community .px-sectionheading p{max-width:360px}
+.ff-community-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:28px 0}
+.ff-community-choices button{display:flex;align-items:center;text-align:left;gap:10px;min-width:0;min-height:100px;padding:10px 14px;background:#fff;border:1px solid #cedee6;border-radius:8px;color:#173a48;cursor:pointer;transition:border-color .2s,background .2s}
+.ff-community-choices button[aria-pressed=true]{border:2px solid var(--cast-accent);padding:9px 13px;background:#fff}
+.ff-community-choices button img{width:52px;height:76px;object-fit:contain;flex-shrink:0;transition:transform .2s}
+.ff-community-choices button:hover img{transform:translateY(-4px)}
+.ff-community-choices b{display:block;font-size:17px;line-height:1.25}
+.ff-community-choices small{display:block;font-size:12px;line-height:1.4;margin-top:5px}
+.ff-community-choices button:focus-visible{outline:3px solid #117c99;outline-offset:4px}
+.ff-community-detail{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr);gap:40px;min-height:400px;align-items:center}
+.ff-community-copy{max-width:650px}
+.ff-community-copy h3{font-size:32px;line-height:1.2;margin:10px 0 14px}
+.ff-community-copy>p{line-height:1.7;max-width:590px}
+.ff-community-activity{border-left:3px solid #3a8998;padding-left:22px;margin:24px 0}
+.ff-community-activity h4{font-size:20px;margin:8px 0}
+.ff-community-activity ol{padding-left:20px;line-height:1.7;margin:8px 0}
+.ff-community-portrait{display:grid;justify-items:center;align-content:center;min-height:400px}
+.ff-community-portrait img{height:340px;width:260px;object-fit:contain;animation:ff-cast-enter .35s ease-out both}
+.ff-community-portrait>span{font-family:var(--display);font-size:24px;color:var(--cast-accent);border-bottom:3px solid currentColor;padding:0 12px 6px}
+.ff-cast-note{font-size:12px;color:#506c77;margin:20px 0 0}
+.ff-cast-status{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ff-context{padding:46px 0;border-block:1px solid #e4dccf;color:#173a48}
+.ff-context-inner{display:grid;grid-template-columns:330px minmax(0,1fr);gap:48px;align-items:center}
+.ff-context-art{display:grid;justify-items:center;align-content:end;min-height:300px;--box:300px}
+.ff-context-art .tx-ground{width:min(300px,100%);margin-top:-6px}
+.ff-context h2{font-size:30px;line-height:1.25;margin:10px 0 14px}
+.ff-context p{line-height:1.7;max-width:670px}
+.ff-context blockquote{font-family:var(--display);font-size:22px;margin:20px 0;color:#694286;border-left:3px solid #b7a1d0;padding-left:18px}
+.ff-context ol{padding-left:20px;line-height:1.7;margin:18px 0}
+.ff-context small{display:block;font-size:12px;color:#506c77;margin-top:16px;max-width:600px}
+.ff-context-compact{margin-top:32px;padding:24px;border-radius:0}
+.ff-context-compact .wrap{padding:0;width:100%;max-width:none}
+.ff-context-compact .ff-context-inner{grid-template-columns:230px minmax(0,1fr);gap:24px}
+.ff-context-compact .ff-context-art{min-height:220px;--box:220px}
+.ff-context-compact h2{font-size:24px}
+@keyframes ff-cast-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.ff-community-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.ff-context-inner{grid-template-columns:260px minmax(0,1fr);gap:24px}}
+@media(max-width:650px){.ff-community{padding:40px 0}.ff-community-choices{gap:8px;margin:20px 0}.ff-community-choices button{flex-direction:column;justify-content:flex-start;text-align:center;padding:12px 8px;min-height:170px}.ff-community-choices button[aria-pressed=true]{padding:11px 7px}.ff-community-choices button img{width:60px;height:85px}.ff-community-choices b{font-size:16px}.ff-community-detail{grid-template-columns:1fr;gap:16px;min-height:0}.ff-community-portrait{grid-row:1;min-height:250px}.ff-community-portrait img{width:200px;height:230px}.ff-community-portrait>span{font-size:21px}.ff-community-copy h3{font-size:26px}.ff-context{padding:32px 0}.ff-context-inner,.ff-context-compact .ff-context-inner{grid-template-columns:1fr;gap:14px}.ff-context-art,.ff-context-compact .ff-context-art{min-height:230px;--box:230px}.ff-context h2{font-size:26px}.ff-context-compact{padding:24px 16px}}
+html[data-motion=off] .ff-community-portrait img{animation:none}
+html[data-motion=off] .ff-community-choices button img{transition:none;transform:none}
+@media(prefers-reduced-motion:reduce){.ff-community-portrait img{animation:none}.ff-community-choices button,.ff-community-choices button img{transition:none}.ff-community-choices button:hover img{transform:none}}
+/* guide call-out (FFSupporting.guide): a story-world character introducing a section */
+.ff-guide{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center;background:color-mix(in srgb,var(--cast-accent) 7%,#fff);border:1px solid color-mix(in srgb,var(--cast-accent) 34%,#fff);border-radius:14px;padding:10px 16px 10px 12px;max-width:760px;box-shadow:0 1px 0 color-mix(in srgb,var(--cast-accent) 22%,transparent),0 6px 14px -10px rgba(10,43,56,.25)}
+.ff-guide-art{width:72px;height:96px;object-fit:contain;object-position:50% 0}
+.ff-guide-copy{display:grid;gap:4px;min-width:0}
+.ff-guide-who{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.ff-guide-who b{font-family:var(--display);font-size:17px;color:var(--cast-accent)}
+.ff-guide-who small,.ff-guide-tag{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#3f5963}
+.ff-guide-kick{font-size:12px;font-weight:600;color:#3d4f57}
+.ff-guide p{margin:0;font-size:14.5px;line-height:1.55;color:#173a48}
+.ff-guide blockquote{margin:4px 0 0;font-family:var(--display);font-size:19px;line-height:1.3;color:var(--cast-accent)}
+@media(max-width:480px){.ff-guide{grid-template-columns:56px minmax(0,1fr)}.ff-guide-art{width:56px;height:76px}}
+
+/* wave 5: plush library art at true relative size (FFSupporting duo/cameo/town). Heights come from the manifest lineup_scale,
+   so a child never stands taller than the grown-up beside them; width follows from the image's own aspect (width/height attrs). */
+.ff-duo{display:flex;align-items:flex-end;justify-content:center;gap:0}
+.ff-duo img{height:calc(var(--box,300px) * var(--s) / var(--smax));width:auto;max-width:none;object-fit:contain}
+.ff-duo img+img{margin-left:-6%}
+.ff-story-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#3f5963}
+.ff-community-portrait .ff-story-tag{margin-top:8px}
+.ff-guide-pair{--box:96px;align-self:end}
+.ff-guide-duo{grid-template-columns:auto minmax(0,1fr)}
+.ff-guide-duo .ff-guide-pair img+img{margin-left:-10px}
+/* cameo: a small named group on felt grass (empty states, 404, page corners) */
+.ff-cameo{--u:150px;margin:0;display:inline-grid;justify-items:center;gap:0;max-width:100%}
+.ff-cameo-row{display:flex;align-items:flex-end;justify-content:center;padding-inline:10px}
+.ff-cameo-fig{display:block;height:calc(var(--u) * var(--s));aspect-ratio:var(--ar);margin-inline:-4px}
+.ff-cameo-fig img{width:100%;height:100%;object-fit:contain}
+.ff-cameo .tx-ground{width:100%;min-width:140px;margin-top:-5px}
+.ff-cameo figcaption{margin-top:8px;font-size:13px;line-height:1.45;color:#3d4f57;text-align:center;max-width:34ch}
+.ff-cameo figcaption .ff-story-tag{display:block;margin-top:2px;letter-spacing:.04em}
+/* the town on #friends: three shelves, one height unit (--u) for everyone */
+.ff-town{padding:64px 0 56px;border-block:1px solid #e4dccf;color:#173a48;--u:170px}
+.ff-shelves{display:flex;flex-wrap:wrap;column-gap:48px;align-items:flex-start;justify-content:space-between}
+.ff-shelf-class{flex:1 1 100%}
+.ff-town-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:12px 48px;align-items:end;margin-bottom:28px}
+.ff-town-head h2{font-size:clamp(28px,3.4vw,38px)}
+.ff-town-head p{color:#3d4f57;line-height:1.65;max-width:58ch}
+.ff-shelf{margin-top:30px}
+.ff-shelf h3{font-size:18px;color:#173a48;margin:0 0 8px}
+.ff-shelf-row{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:flex-start;row-gap:22px}
+.ff-townie-slot{display:flex;align-items:flex-end;justify-content:center;height:calc(var(--u) * var(--rowmax,1))}
+.ff-townie{display:grid;justify-items:center;align-content:start;text-align:center;flex:0 0 auto;min-width:86px;padding-inline:3px}
+.ff-townie-art{display:block;height:calc(var(--u) * var(--s));aspect-ratio:var(--ar);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.ff-townie-art img{width:100%;height:100%;object-fit:contain}
+.ff-townie .tx-ground{width:calc(100% + 6px);margin:-5px -3px 0;border-radius:0}
+.ff-townie:first-child .tx-ground{border-radius:999px 0 0 999px}
+.ff-townie:last-child .tx-ground{border-radius:0 999px 999px 0}
+.ff-townie b{margin-top:10px;font-family:var(--display);font-size:16px;line-height:1.2;color:var(--cast-accent)}
+.ff-townie-lead b{color:color-mix(in srgb,var(--cast-accent) 72%,#000)}
+.ff-townie small{font-size:12px;line-height:1.35;color:#3d4f57;max-width:13ch}
+.ff-townie:hover .ff-townie-art{transform:translateY(-4px)}
+.ff-town .ff-cast-note{margin-top:26px}
+@media(max-width:1000px){.ff-town{--u:150px}.ff-town-head{grid-template-columns:1fr}}
+@media(max-width:650px){.ff-town{--u:150px;padding:44px 0 40px}.ff-townie{min-width:84px}.ff-townie b{font-size:15px}.ff-shelf-row{justify-content:center}.ff-townie .tx-ground{border-radius:999px}}
+html[data-motion=off] .ff-townie-art{transition:none;transform:none}
+@media(prefers-reduced-motion:reduce){.ff-townie-art{transition:none}.ff-townie:hover .ff-townie-art{transform:none}}
+.ff-guide.tx-cream{background-color:color-mix(in srgb,var(--cast-accent) 7%,#fff);background-blend-mode:multiply}
+
+/* wave 9: the story-world cards come alive (runtime in supporting-cast.js). Same box, same words, same label: the character now sits
+   in a real <button> (its signature action), and everything added on top is aria-hidden and absolutely placed, so nothing shifts. */
+.ff-guide{position:relative;isolation:isolate}
+.ff-guide.wc-pre{opacity:1;transform:none}   /* the card is never faded out to wait for the scroll reveal: its own entrance runs instead */
+.ff-guide-actor{position:relative;display:block;padding:0;margin:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:12px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ff-guide-actor:focus-visible{outline:3px solid #117c99;outline-offset:3px}
+.ff-guide-actor .ff-rig{position:relative;display:block;height:100%;aspect-ratio:var(--ar,.6);width:auto;margin-inline:auto;transform-origin:50% 100%}
+.ff-guide-actor .ff-rig>img,.ff-part-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 0}
+.ff-part{position:absolute;inset:0;display:block;pointer-events:none}
+.ff-head{rotate:var(--look,0deg);transition:rotate .6s cubic-bezier(.2,.8,.2,1)}
+.ff-guide-actor-duo{align-self:end}
+.ff-guide-actor-duo .ff-duo{align-self:auto}
+.ff-guide-actor-duo .ff-duo img{transform-origin:50% 100%}
+.ff-guide-actor-duo .ff-duo{rotate:var(--look,0deg);transform-origin:50% 100%;transition:rotate .6s cubic-bezier(.2,.8,.2,1)}
+@media (hover:hover) and (pointer:fine){.ff-guide-actor:hover .ff-rig,.ff-guide-actor-duo:hover .ff-duo{translate:0 -3px;transition:translate .25s cubic-bezier(.2,.8,.2,1)}}
+.ff-guide-actor .ff-rig,.ff-guide-actor-duo .ff-duo{transition:translate .3s cubic-bezier(.2,.8,.2,1)}
+/* idle breathing: a uniform scale from the feet, only while on screen (.ff-on) */
+@keyframes ff-breathe{0%,100%{scale:1}50%{scale:1.016}}
+.ff-guide.ff-on .ff-rig{animation:ff-breathe 4.4s ease-in-out infinite}
+.ff-guide.ff-on .ff-guide-actor-duo .ff-duo img{animation:ff-breathe 4.1s ease-in-out infinite}
+.ff-guide.ff-on .ff-guide-actor-duo .ff-duo img+img{animation-duration:3.5s;animation-delay:-1.2s}
+/* the stitched inner border: drawn once on entrance (mask dash), then simply there */
+.ff-stitch{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);overflow:visible;pointer-events:none;z-index:0}
+.ff-stitch-line{fill:none;stroke:color-mix(in srgb,var(--cast-accent) 52%,#fff);stroke-width:1.4;stroke-dasharray:4 3.2;stroke-linecap:round}
+.ff-stitch-draw{fill:none;stroke:#fff;stroke-width:6;stroke-dasharray:1 0}
+.ff-guide.ff-draw .ff-stitch-draw{stroke-dasharray:1 1;animation:ff-stitch 1.15s cubic-bezier(.45,.05,.3,1) both}
+@keyframes ff-stitch{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.ff-guide>:not(.ff-stitch):not(.ff-fx):not(.ff-bubbles){position:relative;z-index:1}
+/* the line writes on: every word starts at 60% (always readable), then inks in, line by line */
+@keyframes ff-ink{from{opacity:.6}to{opacity:1}}
+.ff-writing .ff-w{animation:ff-ink .42s ease-out both;animation-delay:var(--d,0ms)}
+/* felt accents */
+.ff-fx{position:absolute;inset:0;pointer-events:none;z-index:3;overflow:visible}
+.ff-fx-bit{position:absolute;left:0;top:0;width:22px;height:22px;transform:translate(-50%,-50%);opacity:0;will-change:transform,opacity}
+.ff-fx-bit img,.ff-fx-bit svg{display:block;width:100%;height:100%;filter:drop-shadow(0 2px 2px rgba(10,43,56,.22))}
+.ff-fx-sparkle{width:34px;height:34px}.ff-fx-star{width:13px;height:13px}
+.ff-fx-heart{width:18px;height:17px}.ff-fx-leaf{width:20px;height:20px}.ff-fx-check{width:26px;height:26px}
+.ff-fx-tick{stroke-dasharray:1;stroke-dashoffset:0}
+/* Ms. June's two questions pop up as felt speech bubbles (decorative copies: the words are already on the card) */
+.ff-bubbles{position:absolute;left:52px;bottom:calc(100% - 8px);display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 10px;max-width:calc(100% - 60px);pointer-events:none;z-index:4}
+.ff-bubble{position:relative;display:block;opacity:0;padding:7px 13px 8px;font:600 14px/1.2 var(--display);color:var(--cast-accent);white-space:nowrap;background:#fffdf8;border-radius:16px;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--cast-accent) 30%,#fff),0 7px 16px -8px rgba(10,43,56,.4);transform-origin:12px 100%}
+.ff-bubble::before{content:"";position:absolute;inset:3px;border:1.2px dashed color-mix(in srgb,var(--cast-accent) 45%,#fff);border-radius:13px}
+.ff-bubble::after{content:"";position:absolute;left:14px;bottom:-6px;width:12px;height:12px;background:#fffdf8;transform:rotate(45deg);box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--cast-accent) 30%,#fff);border-radius:0 0 3px 0}
+@media(max-width:480px){.ff-bubbles{left:30px;gap:6px;max-width:calc(100% - 34px)}.ff-bubble{font-size:12px;padding:6px 10px 7px}.ff-bubble::after{left:11px;width:10px;height:10px;bottom:-5px}}
+/* the town and cameo groups breathe while on screen */
+.ff-shelf.ff-on .ff-townie-art img,.ff-cameo.ff-on .ff-cameo-fig img{animation:ff-breathe var(--bd,4.4s) ease-in-out infinite;animation-delay:var(--bdl,0s);transform-origin:50% 100%}
+.ff-townie,.ff-cameo-fig{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ff-cameo,.ff-shelf{position:relative}
+/* a story-world animation in the portrait slot (only when a clip is registered; see CLIPS in supporting-cast.js): a felt-stitched
+   picture frame, a felt play/pause/replay button, and the honest "Story-world animation" tag under it */
+.ff-guide-has-video{grid-template-columns:112px minmax(0,1fr)}
+.ff-guide-video{position:relative;display:grid;justify-items:center;align-content:center;gap:6px;width:112px;height:auto;transform-origin:50% 100%}
+.ff-vframe{position:relative;display:block;width:100%;aspect-ratio:var(--vr,4/5);border-radius:14px;overflow:hidden;cursor:pointer;background:color-mix(in srgb,var(--cast-accent) 12%,#fff);box-shadow:0 0 0 2px color-mix(in srgb,var(--cast-accent) 38%,#fff),0 8px 16px -10px rgba(10,43,56,.55)}
+.ff-vframe::after{content:"";position:absolute;inset:4px;border:1.3px dashed rgba(255,255,255,.78);border-radius:10px;pointer-events:none;z-index:1}
+.ff-guide-video .ff-guide-poster,.ff-guide-clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.ff-guide-clip{opacity:0;transition:opacity .35s}
+.ff-guide-video.ff-playing .ff-guide-clip{opacity:1}
+.ff-guide-vtag{display:block;font-size:10px;font-weight:600;line-height:1.25;letter-spacing:.05em;text-transform:uppercase;color:#3f5963;text-align:center;max-width:100%}
+.ff-vid-btn{position:absolute;right:7px;bottom:7px;z-index:2;display:grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:50%;cursor:pointer;color:#fff;background:var(--cast-accent);box-shadow:inset 0 0 0 3px var(--cast-accent),inset 0 0 0 4.5px rgba(255,255,255,.75),0 3px 8px -2px rgba(10,43,56,.45);transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+.ff-vid-btn::before{content:"";position:absolute;inset:-5px}
+.ff-vid-btn:active{transform:scale(.92)}
+.ff-vid-btn svg{width:16px;height:16px;fill:currentColor}
+.ff-vid-btn path{display:none}
+.ff-vid-btn[data-ff-vid=play] .ff-vid-play,.ff-vid-btn[data-ff-vid=pause] .ff-vid-pause,.ff-vid-btn[data-ff-vid=again] .ff-vid-again{display:block}
+.ff-vid-btn:focus-visible{outline:3px solid #117c99;outline-offset:2px}
+/* a parent's loop: their framed animation, with the lead friend's cut-out standing in front of the frame's corner */
+.ff-guide-vduo{grid-template-columns:140px minmax(0,1fr)}
+.ff-guide-video-duo{width:140px;justify-items:start}
+.ff-guide-video-duo .ff-vframe{width:100px}
+.ff-guide-video-duo .ff-vid-btn{right:auto;left:7px}
+.ff-guide-vkid{position:absolute;left:74px;bottom:22px;z-index:3;height:76px;width:auto;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 4px rgba(10,43,56,.22))}
+.ff-guide-video-duo .ff-guide-vtag{width:100px}
+/* the words on the card light up as they are spoken (CSS Custom Highlight API; the line itself never changes) */
+::highlight(ff-say){background-color:rgba(255,214,102,.55);color:inherit}
+@media(max-width:480px){.ff-guide-has-video{grid-template-columns:92px minmax(0,1fr)}.ff-guide-video{width:92px}.ff-vid-btn{right:5px;bottom:5px}.ff-guide-vduo{grid-template-columns:106px minmax(0,1fr)}.ff-guide-video-duo{width:106px}.ff-guide-video-duo .ff-vframe,.ff-guide-video-duo .ff-guide-vtag{width:78px}.ff-guide-vkid{left:56px;height:56px}.ff-guide-video-duo .ff-vid-btn{left:5px}}
+/* reduced motion and the motion switch: the composed final state */
+@media(prefers-reduced-motion:reduce){.ff-guide.ff-on .ff-rig,.ff-guide.ff-on .ff-guide-actor-duo .ff-duo img,.ff-shelf.ff-on .ff-townie-art img,.ff-cameo.ff-on .ff-cameo-fig img{animation:none}.ff-writing .ff-w{animation:none}.ff-guide.ff-draw .ff-stitch-draw{animation:none;stroke-dasharray:1 0}.ff-head,.ff-guide-actor-duo .ff-duo{rotate:none;transition:none}.ff-guide-actor:hover .ff-rig,.ff-guide-actor-duo:hover .ff-duo{translate:none}}
+html[data-motion=off] .ff-guide .ff-rig,html[data-motion=off] .ff-guide-actor-duo .ff-duo img,html[data-motion=off] .ff-town .ff-townie-art img,html[data-motion=off] .ff-cameo .ff-cameo-fig img,html[data-motion=off] .ff-writing .ff-w{animation:none}
+html[data-motion=off] .ff-head,html[data-motion=off] .ff-guide-actor-duo .ff-duo{rotate:none}
+@media print{.ff-stitch,.ff-fx,.ff-bubbles,.ff-vid-btn,.ff-guide-clip{display:none}.ff-w{opacity:1!important}}

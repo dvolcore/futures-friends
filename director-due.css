@@ -1,0 +1,64 @@
+/* Futures Hub director compliance desk: What's due, safety logs (incidents, drills, ratios), the family's incident
+   acknowledgement and the printable inspection binder. Drawn by director-due.js. */
+.dd{display:grid;gap:16px}
+.dd section,.dd-binder section{padding-block:0}   /* the site gives every <section> large vertical padding */
+.dd-head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;justify-content:space-between}
+.dd-head h2{margin:0;font-size:24px}
+.dd-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.dd-tile{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--paper);display:grid;gap:2px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.dd-tile b{font-size:26px;line-height:1}
+.dd-tile.bad b{color:var(--bad)} .dd-tile.warn b{color:var(--warn)} .dd-tile.ok b{color:var(--ok)}
+.dd-tile[aria-pressed="true"]{outline:3px solid var(--gold);outline-offset:1px}
+.dd-sec{display:grid;gap:8px}
+.dd-sec>h3{margin:6px 0 0;font-size:18px;display:flex;gap:8px;align-items:center}
+.dd-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.dd-item{border:1px solid var(--line);border-left:6px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--paper);display:grid;gap:6px}
+.dd-item.overdue{border-left-color:var(--bad)} .dd-item.due_7{border-left-color:var(--warn)} .dd-item.due_30{border-left-color:var(--gold)}
+.dd-item.due_90{border-left-color:var(--ok)} .dd-item.needs_info{border-left-color:var(--line)} .dd-item.own_records{border-left-color:var(--navy,#1f3b4d)}
+.dd-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:start}
+.dd-when{font-weight:700;white-space:nowrap}
+.dd-cite{font-size:12.5px;color:var(--muted)}
+.dd-cite b{font-weight:600;color:inherit}
+.dd-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dd-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;align-items:end;padding:10px;border:1px dashed var(--line);border-radius:12px;background:var(--paper2)}
+.dd-form .i{width:100%;padding:7px 9px}
+.dd-form .wide{grid-column:1/-1}
+.dd-check{display:flex;gap:8px;align-items:center;font-size:14px}
+.dd-check input{width:18px;height:18px;flex:none}
+.dd-rooms{display:flex;flex-wrap:wrap;gap:6px 14px}
+.dd-msg{font-size:14px}
+.dd-msg.bad{color:var(--bad)} .dd-msg.ok{color:var(--ok)}
+.dd-tw{overflow-x:auto}
+.dd-table{width:100%;border-collapse:collapse;font-size:14px}
+.dd-table th,.dd-table td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.dd-warn{border:2px solid var(--warn);border-radius:12px;padding:8px 10px;background:var(--paper)}
+.dd-warn.over{border-color:var(--bad)}
+.dd-elig{display:grid;gap:6px}
+.dd-sub{display:flex;flex-wrap:wrap;gap:6px}
+.dd-sub button[aria-pressed="true"]{background:var(--navy,#1f3b4d);color:#fff;border-color:var(--navy,#1f3b4d)}
+.dd-fam{border:2px solid var(--gold);border-radius:16px;padding:14px 16px;background:var(--paper);display:grid;gap:10px;margin-bottom:16px}
+/* binder (screen and print) */
+.dd-binder{background:#fff;color:#111;border:1px solid var(--line);border-radius:12px;padding:24px;display:grid;gap:18px;font-size:14px}
+.dd-binder h1,.dd-binder h2,.dd-binder h3{color:#111;text-align:left;font-family:inherit}
+.dd-binder h1{font-size:26px;margin:0}
+.dd-binder h2{font-size:19px;margin:0;border-bottom:2px solid #111;padding-bottom:4px}
+.dd-binder .dd-cover{display:grid;gap:6px;border-bottom:3px double #111;padding-bottom:14px}
+.dd-binder .dd-toc ol{margin:6px 0 0;padding-left:22px;display:grid;gap:4px}
+.dd-binder table{width:100%;border-collapse:collapse;font-size:12.5px}
+.dd-binder th,.dd-binder td{border:1px solid #bbb;padding:4px 6px;text-align:left;vertical-align:top}
+.dd-binder .cites{font-size:12px;color:#444}
+.dd-binder .miss{color:#a11}
+.dd-binder section{break-inside:auto}
+.dd-binder section+section{break-before:page}
+@media (max-width:640px){
+  .dd-row{grid-template-columns:1fr}
+  .dd-binder{padding:14px}
+}
+@media print{
+  .dd-binder{padding:0}
+  @page{size:letter portrait;margin:14mm}
+}
+/* R6: exception queue and classroom access on What's due */
+#ddExc .dd-item b,#ddAccess .dd-item b{overflow-wrap:anywhere}
+#ddExc .chip{white-space:normal;text-align:right}
+@media (max-width:640px){#ddExc .dd-when,#ddAccess .chip{white-space:normal}}

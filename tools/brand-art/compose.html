@@ -1,0 +1,147 @@
+<!doctype html>
+<!-- Brand-art compositor (G13-G17, I05, D07, D08). Lays out site art from APPROVED assets only: the four official cut-outs
+     (img/cut_*.webp), the sticker and white wordmarks (img/brand/), the rainbow food icons (img/rainbow/), the self-hosted fonts
+     and the site colour tokens. No generated art. tools/build-brand-art.mjs opens compose.html#<asset> at the asset's exact size
+     and screenshots it. Characters are drawn with height set and width auto (object-fit: contain), so they are never stretched. -->
+<html lang="en"><head><meta charset="utf-8"><title>Brand art compositor</title>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<style>
+:root{--navy:#0A2B38;--navy2:#123E50;--gold:#E7A928;--cream:#FBF6EC;--paper:#FFFFFF;--ink:#14313D;--muted:#4F616A;
+ --booker:#2F6FC0;--lumi:#D9488B;--zuri:#2E9E57;--bop:#E8761E;--purple:#7B57C8;
+ --booker-s:#E7EFFA;--lumi-s:#FBE8F1;--zuri-s:#E6F4EB;--bop-s:#FDEDE0;--display:"Fredoka","Poppins",sans-serif;--body:"Poppins",sans-serif}
+*{box-sizing:border-box;margin:0}
+html,body{width:var(--w);height:var(--h);overflow:hidden;background:var(--navy);font-family:var(--body);color:var(--ink)}
+#a{position:relative;width:var(--w);height:var(--h);overflow:hidden}
+img.cut{display:block;height:var(--ch);width:auto;object-fit:contain;filter:drop-shadow(0 calc(var(--ch)*.03) calc(var(--ch)*.035) rgba(0,0,0,.32))}
+.navybg{background:radial-gradient(55% 80% at 78% 60%,rgba(231,169,40,.26),transparent 70%),radial-gradient(45% 70% at 6% 0%,rgba(47,111,192,.36),transparent 70%),radial-gradient(40% 60% at 52% 108%,rgba(217,72,139,.22),transparent 70%),linear-gradient(160deg,#0E3446,#0A2B38 60%,#0B2530)}
+.stitch{position:absolute;inset:calc(var(--u)*1.2);border:calc(var(--u)*.25) dashed rgba(255,255,255,.22);border-radius:calc(var(--u)*3);pointer-events:none}
+.stitch.dark{border-color:rgba(10,43,56,.25)}
+.pill{display:inline-flex;align-items:center;gap:.4em;border-radius:999px;font:600 1em/1 var(--display);letter-spacing:.04em;padding:.42em .9em;color:#fff;background:var(--c)}
+.plate{display:grid;justify-items:center;gap:calc(var(--u)*.4);background:#fff;border:calc(var(--u)*.25) dashed var(--c);border-radius:calc(var(--u)*2);padding:calc(var(--u)*.8) calc(var(--u)*1.6);box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.4) rgba(0,0,0,.22);text-align:center}
+.plate b{font:700 calc(var(--u)*2.3)/1 var(--display);color:var(--c);letter-spacing:.03em}
+.plate span{font:500 calc(var(--u)*1.25)/1.15 var(--body);color:var(--ink)}
+.plate i{font:600 calc(var(--u)*1.1)/1 var(--display);font-style:normal;letter-spacing:.08em;color:var(--c)}
+.tag{display:inline-block;font:600 calc(var(--u)*1.2)/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:.55em .9em;border-radius:999px}
+.stripes{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 9%,#fff) 0 calc(var(--u)*1.6),color-mix(in srgb,var(--c) 15%,#fff) calc(var(--u)*1.6) calc(var(--u)*3.2))}
+.ph{display:grid;gap:calc(var(--u)*.7);justify-items:start;background:rgba(255,255,255,.96);border:calc(var(--u)*.25) dashed var(--c,#0A2B38);border-radius:calc(var(--u)*2);padding:calc(var(--u)*1.6) calc(var(--u)*2);box-shadow:0 calc(var(--u)*.8) calc(var(--u)*2) rgba(10,43,56,.18)}
+.ph h2{font:700 calc(var(--u)*2.9)/1.08 var(--display);color:var(--navy)}
+.ph p{font:400 calc(var(--u)*1.4)/1.4 var(--body);color:var(--muted);max-width:32em}
+.cam{width:calc(var(--u)*5);height:calc(var(--u)*5);border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff}
+.cam svg{width:56%;height:56%}
+.row{display:flex;align-items:flex-end}
+</style></head>
+<body><div id="a"></div>
+<script>
+const K = ['booker','lumi','zuri','bop'];
+const NAME = {booker:'Booker',lumi:'Lumi',zuri:'Zuri',bop:'Bop'};
+const ROLE = {booker:'The Brave Little Learner',lumi:'The Kindness Keeper',zuri:'The Curious Explorer',bop:'The Mighty Mover'};
+const PILL = {booker:'LEARN + SMILE',lumi:'BELONG + RESET',zuri:'EXPLORE + NOURISH',bop:'MOVE + OUTSIDE'};
+const ZONE = {booker:"Booker's Reading Area",lumi:"Lumi's Calm Corner",zuri:"Zuri's Discovery Zone",bop:"Bop's Movement Zone"};
+const RAINBOW = [['Red Rockets','#C93B2E',['tomato','strawberry']],['Orange Sunshine','#B5530C',['carrot','orange']],['Yellow Sunbeams','#8A6700',['banana','corn']],
+  ['Green Sprouts','#1F7A44',['broccoli','peas']],['Purple Pals','#5B43A8',['blueberries','grapes']],['Cozy Clouds','#6F5C44',['cauliflower','bread']]];
+const CAM = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const cut = (k, h, extra='') => `<img class="cut" src="../../img/cut_${k}.webp" alt="" style="--ch:${h}px;${extra}">`;
+const plate = (k, sub) => `<div class="plate" style="--c:var(--${k})"><b>${NAME[k].toUpperCase()}</b>${sub === 'role' ? `<span>${ROLE[k]}</span>` : ''}<i>${PILL[k]}</i></div>`;
+const star = (x, y, s, o=1) => `<svg style="position:absolute;left:${x}px;top:${y}px;width:${s}px;height:${s}px;opacity:${o};color:var(--gold);filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7L2 9.2l7.1-.6z"/></svg>`;
+const food = n => `<img src="../../img/rainbow/${n}.svg" alt="" style="width:100%;height:100%;object-fit:contain">`;
+const placeholder = (title, line, c='#0A2B38') => `<div class="ph" style="--c:${c}"><div style="display:flex;gap:calc(var(--u)*1);align-items:center"><span class="cam">${CAM}</span><span class="tag">Photo placeholder</span></div><h2>${title}</h2><p>${line}</p></div>`;
+
+const A = {
+  // G13: the four friends on a felt stage with their current pillars. Also the poster frame for the Academy video and a blurred page backdrop.
+  hero: [1600, 900, 10, () => `<div class="navybg" style="position:absolute;inset:0"></div><div class="stitch"></div>
+    <div style="position:absolute;left:96px;top:150px;width:540px;display:grid;gap:26px">
+      <img src="../../img/brand/ff-sticker.png" alt="" style="width:520px;height:auto">
+      <div style="font:600 30px/1.2 var(--display);color:#fff">Early learning for ages 2 to 5</div>
+      <div style="width:120px;height:6px;border-radius:3px;background:var(--gold)"></div>
+      <div style="font:500 22px/1.4 var(--body);color:#C6D7DD">With Booker, Lumi, Zuri and Bop</div></div>
+    <div style="position:absolute;left:700px;top:590px;width:820px;height:170px;border-radius:50%;background:radial-gradient(closest-side,rgba(231,169,40,.28),rgba(231,169,40,.08) 70%,transparent);border:3px dashed rgba(231,169,40,.5)"></div>
+    ${star(1440,96,52)}${star(860,150,30,.8)}
+    <div class="row" style="position:absolute;left:660px;right:50px;bottom:110px;justify-content:center;gap:0">
+      ${K.map(k => `<div style="display:grid;justify-items:center;gap:16px;margin:0 -6px">${cut(k, 360)}${plate(k)}</div>`).join('')}</div>`],
+  // G14: name plates with the current roles (Bop is The Mighty Mover).
+  group: [1000, 417, 6, () => `${K.map((k, i) => `<div class="stripes" style="--c:var(--${k});position:absolute;top:0;bottom:0;left:${i*250}px;width:250px;border-right:${i<3?'4px solid #fff':'0'}"></div>`).join('')}
+    <div class="row" style="position:absolute;left:0;right:0;top:14px;justify-content:space-around">${K.map(k => `<div style="width:250px;display:grid;justify-items:center">${cut(k, 300)}</div>`).join('')}</div>
+    <div class="row" style="position:absolute;left:0;right:0;bottom:12px;justify-content:space-around">${K.map(k => `<div style="width:250px;display:grid;justify-items:center">${plate(k, 'role')}</div>`).join('')}</div>`],
+  // G15: the classroom slot. A real photo is needed, so this is a labelled placeholder (never removed, only labelled). No characters:
+  // the Curriculum hero lays its own cast over this picture, and the label sits where that hero's crop keeps it visible at 1280.
+  carpet: [1200, 728, 8, () => `<div class="stripes" style="--c:var(--booker);position:absolute;inset:0"></div><div class="stitch dark"></div>
+    <div style="position:absolute;left:470px;top:470px;width:680px;height:190px;border-radius:50%;background:radial-gradient(closest-side,#fff 0 30%,#F5C553 31% 44%,#E8761E 45% 56%,#D9488B 57% 68%,#2F6FC0 69% 82%,#2E9E57 83% 99%,transparent 100%);opacity:.85"></div>
+    <div style="position:absolute;left:600px;top:150px;width:520px">${placeholder('A real classroom photo goes here', 'Futures Friends is piloting in Independence, Missouri. This frame holds the place of a real photo of a Futures Friends classroom. It is not a picture of a room.')}</div>`],
+  // I05: the dining-room slot. The old picture carried health labels on its wall (guardrail 10); this one shows the claim-free rainbow names only.
+  kitchen: [1200, 675, 8, () => `<div class="stripes" style="--c:var(--zuri);position:absolute;inset:0"></div><div class="stitch dark"></div>
+    <div style="position:absolute;left:64px;top:56px;right:64px;display:grid;gap:18px">
+      <div style="font:700 46px/1 var(--display);color:var(--navy)">Eat the Rainbow</div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px">${RAINBOW.map(r => `<div style="background:#fff;border-radius:16px;border:3px solid ${r[1]};padding:10px 8px 12px;display:grid;justify-items:center;gap:6px"><div style="display:flex;gap:4px;height:58px">${r[2].map(n => `<div style="width:54px;height:58px">${food(n)}</div>`).join('')}</div><b style="font:600 17px/1.1 var(--display);color:${r[1]};text-align:center">${r[0]}</b></div>`).join('')}</div></div>
+    <div style="position:absolute;left:64px;top:262px;width:560px">${placeholder('The dining-room photo goes here', 'A real photo of family-style meals at our pilot classroom will replace this frame. It is not a picture of a room.', '#2E9E57')}</div>
+    <div class="row" style="position:absolute;right:56px;bottom:40px;gap:0">${K.map(k => cut(k, 228)).join('')}</div>`],
+  // I05 + G35 holding art: the home map's five zones, same layout as the old concept picture so the map's zoom spots still land.
+  zones: [1200, 800, 7, () => {
+    const R = {booker:[0,0,.553,.487],lumi:[.558,0,.442,.487],zuri:[0,.493,.41,.382],bop:[.413,.493,.219,.382],eat:[.636,.493,.364,.382]};
+    const box = r => `left:${r[0]*1200}px;top:${r[1]*800}px;width:${r[2]*1200}px;height:${r[3]*800}px`;
+    const zone = k => { const r = R[k], w = r[2]*1200, h = r[3]*800, small = w < 300;
+      return `<div class="stripes" style="--c:var(--${k});position:absolute;${box(r)};overflow:hidden">
+        <div style="position:absolute;left:${small?14:24}px;top:${small?14:22}px;right:${small?14:24}px;display:grid;gap:8px;justify-items:start">
+          <b style="font:700 ${small?22:30}px/1.05 var(--display);color:var(--${k})">${ZONE[k]}</b>
+          <span class="pill" style="--c:var(--${k});font-size:${small?12:14}px">${PILL[k]}</span>
+          <span class="tag" style="font-size:${small?10:12}px">Photo coming</span></div>
+        <div style="position:absolute;right:${small?8:30}px;bottom:0">${cut(k, small ? 170 : 250)}</div></div>`; };
+    const e = R.eat;
+    return `<div style="position:absolute;inset:0;background:#fff"></div>${K.map(zone).join('')}
+      <div class="stripes" style="--c:var(--gold);position:absolute;${box(e)}"><div style="position:absolute;left:22px;top:20px;right:20px;display:grid;gap:10px">
+        <b style="font:700 28px/1.05 var(--display);color:var(--navy)">Eat the Rainbow dining room</b>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${RAINBOW.map(r => `<span style="display:grid;justify-items:center;gap:2px;background:#fff;border-radius:12px;border:2px solid ${r[1]};padding:6px 4px"><span style="width:44px;height:40px">${food(r[2][0])}</span><b style="font:600 13px/1.1 var(--display);color:${r[1]};text-align:center">${r[0]}</b></span>`).join('')}</div>
+        <span class="tag" style="font-size:12px;justify-self:start">Photo coming</span></div></div>
+      <div class="navybg" style="position:absolute;left:0;right:0;top:${.875*800+4}px;bottom:0;display:flex;align-items:center;gap:26px;padding:0 34px">
+        <img src="../../img/brand/ff-white.png" alt="" style="height:82px;width:auto">
+        <span style="font:600 19px/1.3 var(--display);color:#fff;flex:1">Placeholder zone map: real photos of each learning zone come from our pilot classroom.</span>
+        <span class="row" style="gap:0;align-self:flex-end">${K.map(k => cut(k, 92)).join('')}</span></div>`; }],
+  // G17: a cover layout for a title that IS in the series (Book 2, led by Lumi). It replaces a cover whose title was not in the series.
+  'cover-lumi': [1254, 1254, 12, () => cover('lumi', 'Book 2', 'Big Feelings,', 'Brighter Days')],
+  // G16: Book 4, led by Bop. It replaces a cover whose title was not in the series.
+  'cover-bop': [1254, 1254, 12, () => cover('bop', 'Book 4', 'Clean Up,', 'Team!')],
+  // Plush redesign 2026-10-06: Book 1 cover and the three classroom posters, rebuilt from the new plush cut-outs (no generated art).
+  'cover-booker': [1254, 1254, 12, () => cover('booker', 'Book 1', 'Booker', 'Tries Again')],
+  'poster-booker': [1672, 941, 12, () => poster('booker', 'Booker', 'A New Friend at Futures')],
+  'poster-bop': [1672, 941, 12, () => poster('bop', 'Bop', 'Teamwork Makes It Brighter')],
+  'poster-lumi': [1672, 941, 12, () => poster('lumi', 'Lumi', 'Kindness Goes a Long Way')],
+  // D07: the Academy welcome clip, four title cards (0:00 welcome, 0:08 the friends, 0:16 the loop, 0:24 the proposed pathway).
+  'ac1': [1280, 720, 8, () => slide('Welcome', 'Welcome to the Academy', 'Training in development for every Futures Friends classroom', `<img src="../../img/group.jpg" alt="" style="width:560px;height:auto;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.35)">`)],
+  'ac2': [1280, 720, 8, () => slide('Meet the friends', 'Booker, Lumi, Zuri and Bop', 'Four friends, four pillars, one program', `<div class="row" style="gap:14px">${K.map(k => `<div style="display:grid;justify-items:center;gap:10px;background:rgba(255,255,255,.08);border-radius:18px;padding:16px 6px 14px;width:178px">${cut(k, 200)}<span class="pill" style="--c:var(--${k});font-size:12px;white-space:nowrap">${PILL[k]}</span></div>`).join('')}</div>`, true)],
+  'ac3': [1280, 720, 8, () => slide('Every day', 'The daily learning loop', 'Six steps, every lesson', `<div style="display:grid;grid-template-columns:repeat(3,150px);gap:16px">${[['Watch','#7B57C8'],['Talk','#2F6FC0'],['Do','#2E9E57'],['Move','#E8761E'],['Explore','#D9488B'],['Take home','#B5830C']].map((s, i) => `<div style="height:150px;border-radius:20px;background:${s[1]};border:4px solid rgba(255,255,255,.75);padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff"><b style="font:700 38px/1 var(--display)">${i+1}</b><b style="font:600 22px/1 var(--display)">${s[0]}</b></div>`).join('')}</div>`)],
+  'ac4': [1280, 720, 8, () => slide('Your proposed path', 'Planned training levels', 'Short lessons and quick checks. Planned levels only: no course is state-approved yet, and no credential is issued.', `<div style="display:grid;gap:16px;width:440px">${[['Level 1','Foundations','#B5830C'],['Level 2','Classroom Practice','#8A9BA5'],['Level 3','Certified Educator (planned)','#E7A928']].map(l => `<div style="display:flex;align-items:center;gap:16px;background:#fff;border-radius:999px;padding:12px 26px 12px 12px"><span style="width:56px;height:56px;border-radius:50%;background:${l[2]};display:grid;place-items:center;color:#fff;font:700 24px var(--display)">★</span><b style="font:600 22px/1.2 var(--display);color:var(--navy)">${l[0]} · ${l[1]}</b></div>`).join('')}</div>`)]
+};
+
+function cover(k, book, l1, l2) {
+  return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
+   <div style="position:absolute;left:0;right:0;top:92px;display:grid;justify-items:center;gap:18px;text-align:center">
+     <img src="../../img/brand/ff-sticker-sm.png" alt="" style="width:300px;height:auto">
+     <span class="pill" style="--c:var(--${k});font-size:26px">${book} · A Futures Friends Story</span>
+     <div style="font:700 112px/1 var(--display);color:var(--navy)">${l1}<br><span style="color:var(--${k})">${l2}</span></div></div>
+   <div style="position:absolute;left:0;right:0;bottom:120px;display:grid;justify-items:center">${cut(k, 560)}</div>
+   <div style="position:absolute;left:0;right:0;bottom:46px;display:flex;justify-content:center"><span class="tag" style="font-size:22px">Cover layout preview · final illustration to come</span></div>`;
+}
+function poster(k, who, line) {
+  return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
+   <div style="position:absolute;left:90px;top:0;bottom:0;width:820px;display:grid;align-content:center;gap:22px">
+     <img src="../../img/brand/ff-sticker-sm.png" alt="" style="width:260px;height:auto">
+     <div style="font:700 104px/1 var(--display);color:var(--${k})">${who}</div>
+     <div style="font:700 64px/1.08 var(--display);color:var(--navy)">${line}</div>
+     <span class="tag" style="font-size:20px;justify-self:start">Poster layout preview · final art to come</span></div>
+   <div style="position:absolute;right:110px;bottom:60px">${cut(k, 760)}</div>`;
+}
+function slide(kicker, title, sub, art, wide) {
+  return `<div class="navybg" style="position:absolute;inset:0"></div>
+   <span class="tag" style="position:absolute;left:56px;top:40px;font-size:14px">Futures Friends Academy</span>
+   <div style="position:absolute;left:56px;top:${wide?120:230}px;width:${wide?1100:520}px;display:grid;gap:14px">
+     <span style="font:600 16px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">${kicker}</span>
+     <h1 style="font:700 ${wide?48:56}px/1.05 var(--display);color:#fff">${title}</h1>
+     <p style="font:500 21px/1.4 var(--body);color:#C6D7DD">${sub}</p></div>
+   <div style="position:absolute;${wide?'left:56px;right:56px;bottom:70px;display:flex;justify-content:center':'right:56px;top:50%;transform:translateY(-50%)'}">${art}</div>`;
+}
+
+const name = location.hash.slice(1), [w, h, u, fn] = A[name];
+document.documentElement.style.cssText = `--w:${w}px;--h:${h}px;--u:${u}px`;
+document.getElementById('a').innerHTML = fn();
+window.ASSETS = Object.fromEntries(Object.entries(A).map(([k, v]) => [k, [v[0], v[1]]]));
+window.READY = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))]);
+</script></body></html>

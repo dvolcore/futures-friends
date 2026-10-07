@@ -1,0 +1,119 @@
+/* The Home hero, plush meadow edition (wave 6; meadow-hero.js draws the world, brand-art.js homeStage() the cast).
+   Composition: the plush logo (h1) and a cream felt card with the pillar line and the two buttons, centered over the sky; the four
+   friends on ONE ground line across the meadow, Booker center stage and in front. Static rules only; every movement lives in
+   hero-motion.css behind both motion switches. The story-world surfaces keep fixed colours in light and dark themes.
+   Character art keeps its proportions: each figure is sized from one height and its file's own aspect ratio (--ar). */
+
+.px-homehero.mh-hero{
+  --fh:clamp(150px,18.5vw,240px);      /* Booker's art box: the shared ground line sits at its bottom edge */
+  --cap:56px;                          /* the caption row under every friend (name + pills), one fixed height for all */
+  --focus-ring:#0A2B38;
+  min-height:0;padding:0;display:flex;flex-direction:column;background:#33A0FC;color:#14313D;isolation:isolate;overflow:hidden}
+.px-homehero.mh-hero:before{content:none}
+.px-homehero.mh-hero :focus-visible{outline:3px solid #0A2B38;outline-offset:3px;box-shadow:0 0 0 6px #fff}
+
+/* ---- the world (sky, sun, clouds, hills, treehouse, cottage, meadow, grass): hero-world.css, wave 7 */
+
+/* ---- the copy: plush logo + cream felt card */
+.mh-grid{position:relative;z-index:4;display:grid;justify-items:center;padding-top:clamp(12px,1.8vw,24px)}
+.mh-hero .px-herocopy.mh-copy{padding:0;display:grid;justify-items:center;text-align:center;gap:clamp(6px,.9vw,12px);max-width:100%}
+.mh-hero h1.mh-logo{position:relative;z-index:0;isolation:isolate;margin:0;line-height:0;font-size:0}
+/* the logo's cloud nest (wave 7, owner: "the fuzz needs to be able to come in the clouds"): two puffs behind it, one in front */
+.mh-nest{position:absolute;inset:0;pointer-events:none}
+.mh-puff{position:absolute;display:block;height:auto;max-width:none;border:0;border-radius:0;filter:drop-shadow(0 8px 10px rgba(10,43,56,.16))}
+.mh-puff-l{width:36%;left:-15%;bottom:-14%;z-index:-1}
+.mh-puff-r{width:30%;right:-11%;top:-6%;z-index:-1}
+.mh-puff-f{width:17%;left:-3%;bottom:-17%;z-index:1}
+.mh-logo-img{display:block;width:clamp(250px,24vw,330px);height:auto;max-width:78vw;border:0;border-radius:0;filter:drop-shadow(0 12px 16px rgba(10,43,56,.3))}
+.mh-card{position:relative;display:grid;justify-items:center;gap:6px;width:min(720px,100%);padding:14px clamp(18px,2.6vw,34px) 16px;border-radius:26px;
+  background-color:#FFF8EC;background-image:var(--tx-cream,none);background-size:var(--tx-tile,384px);
+  outline:2px dashed rgba(166,116,18,.5);outline-offset:-8px;box-shadow:0 18px 34px -16px rgba(10,43,56,.5),0 2px 0 rgba(255,255,255,.7) inset}
+.mh-hero .mh-card>p{margin:0;font:600 clamp(22px,2.3vw,30px)/1.2 var(--display,Fredoka),sans-serif;color:#14313D;letter-spacing:-.005em}
+.mh-hero .px-herosupport{margin:0;font-size:15px;line-height:1.5;color:#3E5058;max-width:62ch}
+.mh-hero .px-heroactions{margin-top:8px;justify-content:center;flex-wrap:wrap}
+.mh-hero .px-heroactions .px-primary{background:#F5C553;color:#14313D;box-shadow:0 6px 0 -2px #C9971F}
+.mh-hero .px-heroactions .px-secondary{background:#fff;color:#0A2B38;border-color:#0A2B38}
+.mh-hero .px-heroactions .px-secondary:hover{background:#EEF6FF}
+/* ---- wave 8: the card is Apple-style liquid glass where the browser can blur what is behind it (the world shows through, blurred and
+   brighter; a white rim; a soft specular light that follows the pointer or the phone's tilt, .mh-spec from hero-world.js; in Chromium
+   an SVG lens bends the backdrop at the edges, .mh-refract). The tint keeps every line of the card at 7:1 or more over any part of the
+   sky. Without backdrop-filter, or with "reduce transparency", it stays the cream felt card above. */
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  @media not (prefers-reduced-transparency:reduce){
+    .mh-hero .mh-card{isolation:isolate;overflow:hidden;background-color:rgba(255,251,244,.8);background-image:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.06) 42%,rgba(255,255,255,.14));
+      outline:0;border:1px solid rgba(255,255,255,.72);
+      -webkit-backdrop-filter:blur(14px) saturate(160%) brightness(1.08);backdrop-filter:blur(14px) saturate(160%) brightness(1.08);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -18px 32px -24px rgba(10,43,56,.28),0 24px 50px -22px rgba(10,43,56,.5),0 2px 6px -2px rgba(10,43,56,.18)}
+    .mh-hero.mh-refract .mh-card{-webkit-backdrop-filter:url(#mh-lens) blur(10px) saturate(160%) brightness(1.08);backdrop-filter:url(#mh-lens) blur(10px) saturate(160%) brightness(1.08)}
+    /* low-power devices (hero-world.js .mh-lite): no live blur behind the card */
+    .mh-hero.mh-lite .mh-card{-webkit-backdrop-filter:none;backdrop-filter:none;background-color:rgba(255,251,244,.94)}
+    .mh-spec{position:absolute;z-index:-1;left:-40%;top:-120%;width:180%;height:340%;pointer-events:none;display:block;
+      background:radial-gradient(closest-side,rgba(255,255,255,.62),rgba(255,255,255,.18) 42%,rgba(255,255,255,0) 70%);
+      translate:var(--gx,-18%) var(--gy,0%)}
+  }
+}
+/* tagline words in their friend's colour, dark shades for the cream card (all 5.4:1 or more on #FFF8EC) */
+.mh-card .ffm-w[data-k=booker]{--fw:#1F5BB5}
+.mh-card .ffm-w[data-k=bop]{--fw:#A8490C}
+.mh-card .ffm-w[data-k=zuri]{--fw:#1C7340}
+.mh-card .ffm-w[data-k=lumi]{--fw:#AD2D69}
+
+/* ---- the cast: one ground line, Booker center stage */
+.mh-castrow{position:relative;z-index:3;margin-top:clamp(6px,1vw,14px)}
+.mh-stage.ffa-stage{display:block;min-height:0;height:auto;isolation:auto}
+.mh-stage .mh-cast{position:relative;height:calc(var(--fh) + var(--cap) + 18px);display:block;padding:0}
+.mh-stage .ffa-fig{--ffa-h:calc(var(--fh) * var(--kh,1));position:absolute;top:0;left:var(--x);width:calc(var(--ffa-h) * var(--ar,.7));translate:-50% 0;z-index:var(--z,1);
+  display:grid;grid-template-rows:var(--fh) var(--cap);justify-items:center;gap:0;margin:0;flex:none;min-width:0}
+.mh-stage .ffa-friend{height:var(--fh);align-items:end;position:relative;transform-origin:50% 100%}
+.mh-stage .ffa-hop{position:relative;height:100%;align-items:end}
+.mh-stage .ffa-fig img{filter:drop-shadow(0 10px 10px rgba(30,48,10,.32))}
+.mh-stage .ffa-fig figcaption{align-self:start;width:max-content;padding-top:8px;gap:5px}
+.mh-stage .ffa-fig figcaption b{color:#fff;background:rgba(10,43,56,.78);padding:4px 11px;border-radius:999px;font-size:clamp(14px,1.3vw,17px)}
+.mh-stage .ffa-pills{flex-wrap:nowrap}
+.mh-stage .ffa-pill{box-shadow:0 0 0 1.5px rgba(255,255,255,.85)}
+.mh-stage .ffa-fig.is-on figcaption b{color:#F5C553}
+.mh-stage .ffa-friend:focus-visible{border-radius:20px}
+/* the action still used in motion (hero-motion.js adds it): same height unit, its own ratio, standing on the same bottom edge */
+.mh-stage .ffm-pose{--pw:calc(var(--ffa-h) * var(--pk,1) * var(--par,1));position:absolute;left:50%;bottom:0;margin:0 0 0 calc(var(--pw) / -2);height:calc(var(--ffa-h) * var(--pk,1));width:var(--pw);
+  aspect-ratio:auto;max-width:none;object-fit:contain;object-position:50% 100%;border:0;border-radius:0;opacity:0;pointer-events:none}
+.mh-stage .ffm-pose.is-shown{opacity:1}
+.mh-stage .ffa-fig.ffm-posing .ffa-hop>.ffa-cut{opacity:0}
+/* ---- the dialogue card: felt, a name tab, one line at a time (hero-motion.js). Desktop: in the open meadow at the right, beside the
+   cast, so it never covers a button; phones and tablets: under the cast, in the page flow (it opens only when a friend is tapped). */
+.mh-stage .mh-say{position:absolute;z-index:6;left:auto;right:clamp(10px,2.4vw,40px);top:clamp(0px,calc(var(--ty,40px) - 34px),90px);translate:none;
+  width:min(300px,22vw);max-width:none;margin:0;padding:18px 16px 12px;border-radius:20px;display:grid;gap:10px;color:#14313D;pointer-events:auto;
+  background-color:#FFF8EC;background-image:var(--tx-cream,none);background-size:var(--tx-tile,384px);
+  border:2.5px solid var(--sc,#E7A928);outline:2px dashed rgba(166,116,18,.45);outline-offset:-8px;box-shadow:0 18px 34px -14px rgba(10,43,56,.5)}
+.mh-stage .mh-say[hidden]{display:none}
+.mh-stage .mh-say:after{content:"";position:absolute;left:-10px;right:auto;top:30px;bottom:auto;width:16px;height:16px;translate:0 0;rotate:45deg;background:#FFF8EC;border:solid var(--sc,#E7A928);border-width:0 0 2.5px 2.5px}
+.mh-saytab{position:absolute;top:-14px;left:14px;padding:4px 12px 5px;border-radius:999px;font:600 14px/1 var(--display);color:#fff;background:var(--tab,#0A2B38);box-shadow:0 4px 10px -4px rgba(10,43,56,.5)}
+.mh-say[data-k=booker]{--tab:#1F5BB5}.mh-say[data-k=lumi]{--tab:#AD2D69}.mh-say[data-k=zuri]{--tab:#1C7340}.mh-say[data-k=bop]{--tab:#A8490C}
+.mh-sayline{margin:0;font:500 16px/1.45 var(--body);color:#14313D}
+.mh-sayask{display:flex;flex-wrap:wrap;gap:6px}
+.mh-sayaskbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 13.5px/1.1 var(--body);text-decoration:none}
+.mh-sayaskbtn:hover{background:#174B45}
+.mh-sayaskbtn .px-icon{width:14px;height:14px}
+.mh-saynav{display:flex;justify-content:flex-end;gap:6px}
+.mh-saynext,.mh-sayclose{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid #0A2B38;background:#fff;color:#0A2B38;cursor:pointer;padding:0}
+.mh-saynext{background:#F5C553;border-color:#C9971F}
+.mh-saynext .px-icon,.mh-sayclose .px-icon{width:16px;height:16px}
+@media (max-width:899px){
+  .mh-stage .mh-say{position:relative;right:auto;top:auto;width:min(440px,calc(100% - 32px));margin:4px auto 14px}
+  .mh-stage .mh-say:after{left:50%;top:-10px;translate:-50% 0;rotate:135deg}
+}
+
+@media (max-width:900px){
+  .px-homehero.mh-hero{--fh:clamp(140px,26vw,220px)}
+}
+@media (max-width:640px){
+  .px-homehero.mh-hero{--fh:138px;--cap:66px}
+  .mh-stage .ffa-fig{left:var(--xs)}
+  .mh-stage .ffa-pills{flex-direction:column;align-items:center;gap:3px}
+  .mh-stage .ffa-pill{font-size:8.5px;padding:4px 5px}
+  .mh-stage .ffa-fig figcaption b{font-size:13px;padding:3px 8px}
+  .mh-card{padding:12px 16px 14px;border-radius:22px}
+  .mh-hero .px-herosupport{font-size:14px}
+  .mh-hero .px-heroactions{width:100%;flex-direction:column;align-items:stretch;gap:8px}
+  .mh-hero .px-heroactions .px-btn{justify-content:center;font-size:13px;padding:12px 14px}
+}
+@media print{.mh-nest{display:none}.px-homehero.mh-hero{background:none}}

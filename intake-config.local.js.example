@@ -1,0 +1,3 @@
+/* Local test connection to the gateway in the Futures Friends CRM repo (compose.intake.yaml, 127.0.0.1:8097).
+   Copy to intake-config.local.js (git-ignored). Loaded only on localhost / 127.0.0.1. */
+window.FF_INTAKE = { url: 'http://127.0.0.1:8097', turnstileSiteKey: '' };

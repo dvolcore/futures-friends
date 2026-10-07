@@ -1,0 +1,59 @@
+/* Futures Friends print kit: shared print styles (built to PDF by tools/build-print-kit.mjs).
+   US Letter pages, self-hosted brand fonts (embedded in the PDF), site colour tokens from index.html / a11y-wave3.css.
+   Every page is a fixed .page box; the builder fails if any content overflows it. */
+@import url('../../../fonts/fonts.css');
+/* Fredoka is a variable font, which Chromium writes into PDFs as Type 3 glyphs; a static SemiBold instance (made from
+   fonts/fredoka-latin.woff2 by the builder, SIL OFL 1.1, see fonts/OFL-Fredoka.txt) embeds as a normal TrueType font. */
+@font-face { font-family: 'Fredoka Print'; font-style: normal; font-weight: 500 700; src: url(fredoka-600-static.woff2) format('woff2'); }
+@page { size: 8.5in 11in; margin: 0; }
+:root {
+  --navy: #0A2B38; --ink: #14313D; --muted: #4F626B; --gold: #E7A928; --gold-deep: #8A6108; --cream: #FBF6EC; --line: #CBD6DA;
+  --booker: #23589F; --lumi: #B02F6C; --zuri: #1B7541; --bop: #A84908;
+  --booker-s: #E7EFFA; --lumi-s: #FBE8F1; --zuri-s: #E6F4EB; --bop-s: #FDEDE0;
+  --display: 'Fredoka Print', 'Fredoka', 'Poppins', system-ui, sans-serif; --body: 'Poppins', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); font: 400 10.5pt/1.42 var(--body);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; color: var(--navy); margin: 0; line-height: 1.12; }
+p { margin: 0; }
+img { display: block; }
+/* Character art keeps its true proportions: height is set, width follows (never stretched). */
+img.cut { height: var(--h, 1.4in); width: auto; object-fit: contain; }
+
+.page { position: relative; width: 8.5in; height: 11in; overflow: hidden; break-after: page; page-break-after: always;
+  padding: 0.62in 0.55in 0.5in; display: flex; flex-direction: column; gap: 0.16in; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+
+/* Draft label: on every page of a draft, in the top margin, in real text. */
+.draft { position: absolute; top: 0.16in; left: 0.55in; right: 0.55in; display: flex; justify-content: space-between; gap: 0.2in;
+  padding: 0.05in 0.12in; border: 1.5px dashed #B3261E; border-radius: 6px; color: #8C1D18; background: #FDECEA;
+  font: 600 8.6pt/1.25 var(--body); letter-spacing: .02em; }
+.draft span:last-child { font-weight: 400; color: #6E1A16; text-align: right; }
+
+/* Placeholders: visibly labelled, never invented. */
+.ph { display: inline-block; padding: 0 0.06in; border: 1.4px dashed var(--gold-deep); border-radius: 4px; background: #FFF4D6;
+  color: #5C4005; font-weight: 600; font-style: normal; }
+.ph::before { content: 'PLACEHOLDER: '; font-size: .78em; letter-spacing: .06em; }
+
+.foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 0.2in;
+  border-top: 1px solid var(--line); padding-top: 0.08in; font-size: 7.6pt; color: var(--muted); }
+.foot b { color: var(--ink); font-weight: 600; }
+.foot > span:last-child { flex: none; max-width: 3.4in; text-align: right; }
+.eyebrow { font: 600 8.5pt/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
+
+/* Checkbox lists and form lines */
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.07in; }
+.checks li { display: grid; grid-template-columns: 0.22in 1fr; align-items: start; }
+.checks li::before { content: ''; width: 0.15in; height: 0.15in; margin-top: 0.025in; border: 1.6px solid var(--navy); border-radius: 3px; }
+.checks small { display: block; color: var(--muted); font-size: 8.4pt; line-height: 1.35; }
+.field { display: grid; grid-template-columns: auto 1fr; gap: 0.1in; align-items: end; font-weight: 500; }
+.field i { border-bottom: 1.2px solid var(--ink); height: 0.24in; font-style: normal; }
+.fields { display: grid; gap: 0.12in; }
+.fields.two { grid-template-columns: 1fr 1fr; column-gap: 0.3in; }
+
+.box { border: 1.5px solid var(--line); border-radius: 10px; padding: 0.14in 0.18in; }
+.box h2 { font-size: 13.5pt; margin-bottom: 0.08in; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; vertical-align: top; padding: 0.045in 0.08in; border-bottom: 1px solid var(--line); }
+th { font: 600 8.4pt/1.2 var(--body); color: var(--navy); background: #EEF3F4; }

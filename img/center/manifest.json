@@ -1,0 +1,20 @@
+{
+  "about": "Real photos of Futures Learning Center, 3625 S Blue Ridge Blvd, Independence, Missouri (the Futures Friends pilot center), from the original FLC website. No people in any photo. Resized to 400/800/1200 px wide as WebP + JPEG with all metadata (EXIF, GPS, ICC comments) stripped. Never add a concept render or AI image here.",
+  "source_dir": "~/Downloads/FUTURES_FRIENDS_PROJECT/06_Website/FuturesWebsite/public/assets",
+  "credit": "Futures Learning Center, Independence, Missouri",
+  "added": "2026-10-07",
+  "photos": [
+    { "key": "exterior", "source": "exterior.jpg", "sha256": "a5ab0a9e6119b29b77ff23001346de0d451fca98c442bc801e9be42404ce9059", "real_photo": true, "people": false,
+      "what": "The building from the street corner: stone walls, the blue front door under the Futures sign at the left, two child-care flag banners on the lawn", "where": "Outside, corner of the building and the front entrance", "crop": null },
+    { "key": "turtle-rug", "source": "turtle-rug.jpg", "sha256": "a726ffeef386502b56b5a8b8470572abb959df248e6df768900b61aaecb95abb", "real_photo": true, "people": false,
+      "what": "A wide view of the main classroom: a grass mat with turtle stepping stones, a child-size table and chairs, an alphabet rug and cubby shelves", "where": "Main classroom", "crop": null },
+    { "key": "alphabet-rug", "source": "alphabet-rug.jpg", "sha256": "76b20bbbe8cd385bfdbf6c995dfa5dd782a580931058ee88073a67d14ddea793", "real_photo": true, "people": false,
+      "what": "The carpet area: a large alphabet rug, small armchairs, the reading shelf and toy shelves", "where": "Carpet and reading area", "crop": null },
+    { "key": "reading-corner", "source": "classroom-play.jpg", "sha256": "d0fac0f6e71e94aead72c28904e4c32502b2eb0a8b3af8f07996375a1ecc5600", "real_photo": true, "people": false,
+      "what": "The reading corner: a bookshelf of picture books, a reading wall and a cushioned bench", "where": "Reading corner", "crop": null },
+    { "key": "dress-up-corner", "source": "blue-rug-corner.jpg", "sha256": "af9af8140437562a576c9cab489d333374bad64f5aeba126e06c67517bd4959e", "real_photo": true, "people": false,
+      "what": "The dress-up and toy corner: a shelf of toys, a rail of dress-up costumes, a small rug and a balance bike", "where": "Dress-up and toy corner", "crop": null },
+    { "key": "blue-table-room", "source": "classroom-blue-desk.jpg", "sha256": "50f1e153321ce12aaae1f2864df7f71772e62573432ab5786473eee68a4586e9", "real_photo": true, "people": false,
+      "what": "A classroom with a blue table set with learning trays, a chalkboard easel, cubby shelves and days-of-the-week posters", "where": "Classroom", "crop": "4:5, top kept (bottom strip of carpet trimmed)" }
+  ]
+}

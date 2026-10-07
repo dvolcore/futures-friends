@@ -1,0 +1,20 @@
+/* Booker walks the path (booker-walk.js): a stitched felt trail down the page margins and across the gaps between sections, and
+   a small Booker who walks it with the scroll. Decoration only (aria-hidden); never over text or a control. */
+#bw-layer{position:absolute;top:0;left:0;width:100%;z-index:4;pointer-events:none;overflow:hidden}
+.bw-seg{position:absolute;overflow:visible;pointer-events:none}
+.bw-edge,.bw-band,.bw-stitch{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bw-edge{stroke:#B7895A;opacity:.55}
+.bw-band{stroke:#E6C99C}
+.bw-stitch{stroke:#FFF7E4;stroke-dasharray:6 6;opacity:.95}
+.bw-walker{position:absolute;left:0;top:0;width:var(--bw-w);height:var(--bw-h);opacity:0;pointer-events:none;cursor:pointer;will-change:transform,opacity;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.bw-walker.is-on{opacity:1;pointer-events:auto;transition:opacity .24s cubic-bezier(.16,1,.3,1)}   /* fades in; steps out of sight at once when words come under him */
+.bw-shadow{position:absolute;left:12%;right:12%;bottom:-3px;height:7px;border-radius:50%;background:radial-gradient(closest-side,rgba(40,30,10,.32),rgba(40,30,10,0))}
+.bw-body{position:absolute;inset:0;transform:translateY(var(--bob,0)) rotate(var(--rock,0deg));transform-origin:50% 100%}
+.bw-pose{position:absolute;bottom:0;left:50%;height:100%!important;width:auto!important;max-width:none;object-fit:contain;translate:-50% 0;filter:drop-shadow(0 4px 4px rgba(30,40,10,.25));transition:opacity .14s}
+.bw-wave{opacity:0}
+.bw-walker.is-waving .bw-wave{opacity:1}
+.bw-walker.is-waving .bw-walk{opacity:0}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .bw-band{stroke:#C9A877}}
+:root[data-theme=dark] .bw-band{stroke:#C9A877}
+@media print{#bw-layer{display:none}}

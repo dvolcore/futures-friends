@@ -1,0 +1,6 @@
+# local backend connection (local URL + anon key): never commit
+hub-config.local.js
+# local gateway connection: never commit
+intake-config.local.js
+# local analytics server connection: never commit
+analytics-config.local.js

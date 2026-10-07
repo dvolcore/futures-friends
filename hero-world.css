@@ -1,0 +1,193 @@
+/* The Home hero's 3D world (wave 7, hero-world.js; markup in meadow-hero.js). Fake depth with real CSS 3D, no WebGL:
+   .mh-world / .mh-nearworld  perspective (1000 px desktop, 800 px phones), the eye a little below the middle (--mh-oy)
+     .mh-cam                   holds the 3D context
+       .mh-dolly               the opening's crane down from the clouds (Web Animation, runs on the compositor)
+         .mh-plane             one flat card per depth: translateZ(--z) and scaled back so it looks as authored at rest
+   The camera moves sideways and up and down around the cast's plane (z 0): a plane at depth z moves by its share
+   --k = -z / (P - z) of the camera's move (the sun 0.6, the hills 0.39, the grass 0.03, the flowers in front -0.35), so the friends
+   never slide while everything behind and in front of them does, and no plane is ever tilted out of shape. Two sources add up:
+   a slow automatic drift (CSS loop on each plane's `translate`, by --kt = -z / P: that is k on screen once the perspective has
+   shrunk or grown it; phones get motion without touching anything) and the pointer
+   (desktop), the phone's tilt and scroll (hero-world.js, springy, written into each plane's `transform`).
+   Transforms and opacity only in every loop; every loop sits behind both motion switches and stops off screen / on a hidden tab
+   (.ffm-paused, hero-motion.css). Character art is never in a plane: the friends keep their own uniform-only rules. */
+
+.mh-hero{--mh-p:1000;--mh-oy:58%;--ar:1.7768}
+@media (max-width:640px){.mh-hero{--mh-p:800;--mh-oy:62%;--ar:.8884}}
+
+/* ---- the 3D rig (static rules: at rest every plane renders exactly where its 2D layout puts it) */
+.mh-world{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;perspective:calc(var(--mh-p) * 1px);perspective-origin:50% var(--mh-oy)}
+.mh-nearworld{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden;perspective:calc(var(--mh-p) * 1px);perspective-origin:50% var(--mh-oy)}
+.mh-cam,.mh-dolly{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% var(--mh-oy)}
+.mh-plane{position:absolute;inset:0;display:block;container-type:size;transform-origin:50% var(--mh-oy);--k:calc(-1 * var(--z) / (var(--mh-p) - var(--z)));--kt:calc(-1 * var(--z) / var(--mh-p));
+  transform:translateZ(calc(var(--z) * 1px)) scale(calc(1 - var(--z) / var(--mh-p)));backface-visibility:hidden}
+.mh-world .mh-layer{position:absolute;display:block}
+.mh-sky{inset:0;background:linear-gradient(180deg,#33A0FC 0%,#3DA4FC 10%,#44AAFD 20%,#59B5FD 30%,#7AC8FD 40%,#9AD6FC 52%,#B4E0FB 64%,#C8E8F8 100%)}
+.mh-world img,.mh-nearworld img{display:block;max-width:none;border:0;border-radius:0}
+
+/* the plate's frame: the plate's own aspect, covering the plane (8% spare round the edges for the camera), standing on the bottom */
+.mh-frame{position:absolute;left:50%;bottom:0;display:block;width:max(108cqw,calc(108cqh * var(--ar)));aspect-ratio:var(--ar);translate:-50% 0}
+.mh-frame picture{display:contents}
+.mh-hills{position:absolute;inset:0;width:100%;height:100%}
+.mh-near{position:absolute;left:0;bottom:0;width:100%;height:auto}
+/* the treehouse and cottage where the plate had them (desktop, tablet) ... */
+.mh-treehouse{position:absolute;left:0;top:2.125%;width:19.139%;height:auto}
+.mh-cottage{position:absolute;left:85.347%;top:26.78%;width:14.653%;height:auto}
+/* ... and on phones, where the centre crop leaves them out, as the stage's wings at the screen edges */
+@media (max-width:640px){
+  .mh-treehouse{left:calc(50% - 50cqw - 15cqw);top:auto;bottom:34%;width:44cqw}
+  .mh-cottage{left:calc(50% + 50cqw - 20cqw);top:auto;bottom:33%;width:34cqw}
+}
+
+/* sun and its slow light rays */
+.mh-sunwrap{position:absolute;top:clamp(8px,2.6vw,36px);right:clamp(-12px,13vw,230px);width:clamp(62px,8.4vw,124px)}
+.mh-sun{position:relative;width:100%;height:auto;filter:drop-shadow(0 8px 12px rgba(10,43,56,.18))}
+.mh-rays{position:absolute;inset:-75%;border-radius:50%;background:repeating-conic-gradient(rgba(255,246,206,0) 0deg 8deg,rgba(255,243,190,.42) 8deg 15deg);
+  -webkit-mask:radial-gradient(closest-side,#000 22%,rgba(0,0,0,.5) 55%,transparent 100%);mask:radial-gradient(closest-side,#000 22%,rgba(0,0,0,.5) 55%,transparent 100%)}
+
+/* ---- wave 8: more depth. Sun bloom + soft light shafts from the sun (one pre-blurred image in its own plane in front of the far
+   sky, pinned to the sun), the far felt mountains behind the hills' ridge, and haze at the foot of the far planes (depth fog). */
+.mh-bloom{position:absolute;inset:-130%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,244,204,.78),rgba(255,238,178,.32) 38%,rgba(255,236,170,0) 72%)}
+.mh-hero{--mh-sw:clamp(62px,8.4vw,124px);--mh-sx:calc(100% - clamp(-12px,13vw,230px) - var(--mh-sw) / 2);--mh-sy:calc(clamp(8px,2.6vw,36px) + var(--mh-sw) * .48)}
+.mh-shafts{position:absolute;display:block;width:115%;height:115%;max-width:none;left:calc(var(--mh-sx) - 96.6%);top:calc(var(--mh-sy) - 8%);transform-origin:84% 7%}
+.mh-mountains{position:absolute;left:0;top:14%;width:100%;height:auto}
+.mh-fog{position:absolute;left:-4%;right:-4%;display:block}
+.mh-fog-far{top:20%;height:28%;background:linear-gradient(180deg,rgba(220,238,252,0),rgba(220,238,252,.5) 62%,rgba(226,241,252,.62) 82%,rgba(226,241,252,0))}
+.mh-fog-near{top:46%;height:20%;background:linear-gradient(180deg,rgba(236,246,252,0),rgba(236,246,252,.26) 50%,rgba(236,246,252,0))}
+/* phones: the band's centre half (world-mountains-c600), like the plate's own centre crop, so it spans the frame as is */
+
+/* ---- wave 8: the felt birds (z -420), the butterfly and the bokeh in front of the cast (hero-world.js makes them, motion only) */
+.mh-bird{position:absolute;left:0;top:var(--by);width:var(--bs);display:block}
+.mh-bird>i,.mh-fly>i{position:relative;display:block}
+.mh-bird img,.mh-fly img{position:absolute;left:0;top:0;width:100%;height:auto}
+.mh-bird img:first-child,.mh-fly img:first-child{position:relative}
+.mh-fly{position:absolute;left:0;top:var(--fy);width:var(--fs);display:block}
+.mh-bokeh{position:absolute;left:var(--kx);top:var(--ky);width:var(--ks);aspect-ratio:1;translate:-50% -50%;display:block;border-radius:50%;
+  background:radial-gradient(circle closest-side,rgba(255,251,236,.2) 0 50%,rgba(255,251,236,.32) 78%,rgba(255,251,236,.1) 92%,rgba(255,251,236,0))}
+.mh-bokeh[data-k=warm]{background:radial-gradient(circle closest-side,rgba(255,238,190,.26) 0 50%,rgba(255,232,170,.36) 76%,rgba(255,232,170,0))}
+
+/* ---- wave 8: the living letters. The h1's <img> shows the letterless badge (the kit's top rows); every letter is a sprite of the
+   same file in its slot. Three boxes each: .mh-l places it (and leaves with the scroll), .mh-lf flies it in and leans it toward the
+   pointer (hero-world.js), .mh-la is the felt itself (breathes, joins the wave, boings when tapped). */
+.mh-hero .mh-logo-img{aspect-ratio:800/379;object-fit:cover;object-position:50% 0}
+.mh-letters{position:absolute;inset:0;display:block;z-index:0;pointer-events:none}
+.mh-l{position:absolute;display:block;pointer-events:auto;-webkit-tap-highlight-color:transparent}
+.mh-lf,.mh-la{position:absolute;inset:0;display:block;transform-origin:50% 86%}
+.mh-la{background:url(img/plush/hero/plush-logo-kit-800.webp) no-repeat}
+.mh-dust{position:absolute;display:block;width:var(--d);height:var(--d);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,250,240,.95) 0 38%,rgba(255,246,232,.5) 60%,rgba(255,246,232,0) 72%)}
+.mh-burst{position:absolute;display:block;pointer-events:none;width:180%;left:-40%;top:-60%;height:auto;opacity:0}
+
+/* clouds: placed by --cx/--cy; in motion they drift across the whole sky and wrap round */
+.mh-cloudwrap{position:absolute;left:0;top:var(--cy);width:clamp(70px,var(--cw),230px)}
+.mh-p-mid .mh-cloudwrap{width:clamp(96px,var(--cw),250px)}
+.mh-bz,.mh-drift{display:block}
+.mh-drift{transform:translateX(var(--cx))}
+.mh-cloud{width:100%;height:auto;filter:drop-shadow(0 8px 10px rgba(10,43,56,.12))}
+
+
+/* the grass strip the friends stand on (a hair wider than the hero so the camera never shows its ends) */
+.mh-frontwrap{position:absolute;left:-2%;right:-2%;bottom:0;height:calc(var(--cap) + 46px)}
+.mh-front{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+
+/* the closest flowers, out of focus at the desktop corners (they never reach a friend's name) */
+.mh-fore{position:absolute;bottom:-34%;width:clamp(120px,11vw,190px);height:auto;filter:saturate(1.05)}
+.mh-fore-l{left:-3%}
+.mh-fore-r{right:-3%;transform:scaleX(-1)}
+@media (max-width:1099px){.mh-fore{display:none}}
+
+/* ---- particles (hero-world.js makes them only when motion is on): felt petals, pollen and sparkles at several depths */
+.mh-pt{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);display:block}
+.mh-pt>i,.mh-pt>i>b{display:block;width:100%;height:100%}
+.mh-pt>i>b{background:center/contain no-repeat}
+.mh-pt[data-kind=daisy]>i>b{background-image:url(img/plush/hero/petal-daisy.webp)}
+.mh-pt[data-kind=daisy-s]>i>b{background-image:url(img/plush/hero/petal-daisy-s.webp)}
+.mh-pt[data-kind=pink]>i>b{background-image:url(img/plush/hero/petal-pink.webp)}
+.mh-pt[data-kind=pollen]>i>b{border-radius:50%;background:radial-gradient(circle,rgba(255,250,228,.95) 0 28%,rgba(255,236,170,.45) 46%,rgba(255,236,170,0) 70%)}
+.mh-pt[data-kind=spark]>i>b{background:#F5C553;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+
+/* ---- the opening's cloud bank (hero-world.js adds it only when the opening plays, and removes it after) */
+.mh-veil{position:absolute;display:block;left:var(--vx);top:var(--vy);width:var(--vw);height:auto;translate:-50% -50%}
+.mh-veilsky{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 45%,rgba(255,255,255,.96),rgba(242,248,255,.9) 60%,rgba(214,236,255,.82))}
+
+@media (prefers-reduced-motion:no-preference){
+  /* the camera drifts by itself, slowly (a 24 s loop), on every device: each plane by its depth's share */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-plane{animation:mh-orbit 24s ease-in-out infinite}
+  /* clouds cross the sky at their depth's speed and wrap round; each bobs gently */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-drift{animation:mh-wrap var(--cs,120s) linear var(--cdl,0s) infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-cloud{animation:mh-bob 9s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-cloudwrap1 .mh-cloud,:root:not([data-motion=off]) .mh-hero.mh-alive .mh-cloudwrap3 .mh-cloud{animation-duration:11.5s;animation-delay:-4s}
+  /* the sun rocks; its rays turn once a minute */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-sun{animation:mh-rock 9s ease-in-out infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-rays{animation:mh-spin 60s linear infinite}
+  /* the plush logo hangs in the sky and floats; its cloud nest breathes with it */
+  :root:not([data-motion=off]) .mh-hero.mh-alive h1.mh-logo{animation:mh-float 6.5s ease-in-out infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-puff{animation:mh-puff 5.2s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-puff-r{animation-duration:6.1s;animation-delay:-2s}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-puff-f{animation-duration:4.6s;animation-delay:-1s}
+  /* particles: a long drift (with fade in and out) and a sway inside it */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt>i{animation:mh-ptdrift var(--d,18s) linear var(--dl,0s) infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt>i>b{animation:mh-ptsway var(--sw,3.4s) ease-in-out var(--dl,0s) infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt[data-kind=spark]>i>b{animation:mh-twinkle var(--sw,2.4s) ease-in-out var(--dl,0s) infinite alternate}
+  /* the breeze: a push from a finger or the pointer settles back like a spring */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bz,:root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt{transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+  /* wave 8: the light shafts breathe and slowly turn against each other; the bloom pulses */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-shafts{animation:mh-shaft 11s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bloom{animation:mh-bloom 7s ease-in-out infinite alternate}
+  /* birds cross the sky on a slow arc, flapping (up, mid, down, mid) and gliding; the butterfly flutters along the meadow */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bird{animation:mh-cross var(--bd,30s) linear var(--bdl,0s) infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bird>i{animation:mh-arc var(--ba,3.4s) ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bird img:nth-child(1){animation:mh-flap1 var(--bf,.52s) step-end infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bird img:nth-child(2){animation:mh-flap2 var(--bf,.52s) step-end infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bird img:nth-child(3){animation:mh-flap3 var(--bf,.52s) step-end infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-fly{animation:mh-cross var(--fd,38s) linear var(--fdl,0s) infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-fly>i{animation:mh-flutter-path 3.1s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-fly img:nth-child(1){animation:mh-wing1 .26s step-end infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-fly img:nth-child(2){animation:mh-wing2 .26s step-end infinite}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bokeh{animation:mh-bokeh var(--kd,16s) ease-in-out var(--kdl,0s) infinite alternate}
+  /* wave 8: the living letters. Each breathes on its own phase (1 to 3 px, about 1.5 degrees), and every 8 s a wave runs through
+     FUTURES, then FRIENDS, then the heart. (Behind both switches; reduced motion: the assembled logo, still.) */
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-la{animation:mh-lbob 3.2s ease-in-out calc(var(--i) * -.83s) infinite alternate,mh-lwave 8s cubic-bezier(.3,.7,.4,1) calc(var(--i) * 75ms + 3s) infinite;
+    animation-duration:calc(3.2s + sin(var(--i) * 2.1) * .7s),8s}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-l{cursor:pointer}
+  /* off screen or hidden tab: everything in the world stops (hero-motion.css stops the cast) */
+  .mh-hero.ffm-paused .mh-world *,.mh-hero.ffm-paused .mh-nearworld *,.mh-hero.ffm-paused h1.mh-logo,.mh-hero.ffm-paused h1.mh-logo *{animation-play-state:paused!important}
+}
+@keyframes mh-orbit{
+  0%,100%{translate:0 0}
+  25%{translate:calc(var(--kt) * 54px) calc(var(--kt) * -16px)}
+  50%{translate:0 calc(var(--kt) * 12px)}
+  75%{translate:calc(var(--kt) * -54px) calc(var(--kt) * -16px)}
+}
+@keyframes mh-wrap{from{transform:translateX(-32vw)}to{transform:translateX(112vw)}}
+@keyframes mh-bob{from{transform:translateY(-4px)}to{transform:translateY(5px)}}
+@keyframes mh-rock{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(-6px)}}
+@keyframes mh-spin{to{transform:rotate(360deg)}}
+@keyframes mh-float{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-9px) rotate(.8deg)}}
+@keyframes mh-puff{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@keyframes mh-ptdrift{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:var(--o,.9)}88%{opacity:var(--o,.9)}100%{transform:translate3d(var(--dx,20vw),var(--dy,-30vh),0);opacity:0}}
+@keyframes mh-ptsway{from{transform:translateX(-10px) rotate(-28deg)}to{transform:translateX(10px) rotate(32deg)}}
+@keyframes mh-twinkle{from{transform:scale(.55) rotate(0deg);opacity:.35}to{transform:scale(1) rotate(45deg);opacity:1}}
+@keyframes mh-shaft{from{opacity:.62;transform:rotate(-1.2deg)}to{opacity:1;transform:rotate(1.4deg)}}
+@keyframes mh-bloom{from{opacity:.7;transform:scale(.94)}to{opacity:1;transform:scale(1.06)}}
+@keyframes mh-cross{0%{transform:translateX(-14vw)}62%{transform:translateX(114vw)}100%{transform:translateX(114vw)}}
+@keyframes mh-arc{from{transform:translateY(-10px) rotate(-3deg)}to{transform:translateY(12px) rotate(4deg)}}
+/* the flap cycle: up, mid, down, mid (one frame shown at a time, opacity only) */
+@keyframes mh-flap1{0%{opacity:1}25%{opacity:0}100%{opacity:0}}
+@keyframes mh-flap2{0%{opacity:0}25%{opacity:1}50%{opacity:0}75%{opacity:1}100%{opacity:1}}
+@keyframes mh-flap3{0%{opacity:0}50%{opacity:1}75%{opacity:0}100%{opacity:0}}
+@keyframes mh-flutter-path{0%{transform:translate(0,0) rotate(-6deg)}33%{transform:translate(18px,-22px) rotate(5deg)}66%{transform:translate(-8px,-6px) rotate(-2deg)}100%{transform:translate(10px,14px) rotate(7deg)}}
+@keyframes mh-wing1{0%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@keyframes mh-wing2{0%{opacity:0}50%{opacity:1}100%{opacity:1}}
+@keyframes mh-bokeh{from{transform:translate(-14px,8px) scale(.92);opacity:.4}to{transform:translate(16px,-12px) scale(1.06);opacity:.85}}
+@keyframes mh-lbob{from{translate:0 1px;rotate:calc(sin(var(--i) * 1.3 + .4) * -1.5deg)}to{translate:0 calc(-1px - (1 + sin(var(--i) * 2.7)) * 1px);rotate:calc(sin(var(--i) * 1.3 + .4) * 1.5deg)}}
+@keyframes mh-lwave{0%,100%{transform:none}2.6%{transform:translateY(-7px) rotate(-2.5deg) scale(1.05,1.03)}5.6%{transform:translateY(1px) scale(1.06,.93)}8%{transform:translateY(-1px) scale(.98,1.02)}10%{transform:none}}
+/* wave 8: as the hero scrolls away, the letters drift up and apart a little and fade back (CSS scroll-driven animation, run by the
+   browser off the main thread; browsers without animation-timeline simply keep them in place). Motion only. */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    :root:not([data-motion=off]) .mh-hero.mh-alive .mh-l{animation:mh-lexit linear both;animation-timeline:view();animation-range:exit 5% exit 95%}
+  }
+}
+@keyframes mh-lexit{to{translate:calc((var(--i) - 7) * 4px) calc(-26px - var(--i) * 1.4px);rotate:calc(sin(var(--i) * 2.3) * 7deg);opacity:.35}}
+@media print{.mh-world,.mh-nearworld{display:none}}

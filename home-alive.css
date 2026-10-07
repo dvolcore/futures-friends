@@ -1,0 +1,170 @@
+/* The living Home sections (wave 6; markup home-calm.js, behaviour home-alive.js, motion kit ff-motion.js).
+   Story-world pieces (the friend picker, the felt path, the waving friends) sit on felt; real-world content (the counts in "What
+   we have built", the trust band) stays on plain paper. Every movement sits behind both motion switches; with motion off every
+   section is complete and still. Character art keeps its proportions (height set, width auto, object-fit: contain). */
+
+/* ---- doors: each host friend peeks over the top edge of their door and pops up to say hi; the whole door is its one link
+   (the button's hit area stretches over the door), it rises 8px and a stitched border draws itself in. With motion off the stitch
+   is simply there. */
+.hc-door{border-radius:24px}
+.hc-doorlink::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1}
+.hc-stitch{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.hc-stitch-line,.hc-stitch-mask{x:8px;y:8px;width:calc(100% - 16px);height:calc(100% - 16px);rx:18px;ry:18px;fill:none}
+.hc-stitch-line{stroke:var(--c);stroke-width:2;stroke-dasharray:7 6;stroke-linecap:round;opacity:.8}
+.hc-stitch-mask{stroke:#fff;stroke-width:8}
+.hc-door{--peek-h:clamp(104px,9.4vw,124px)}
+.hc-door .hc-doorart{height:var(--peek-h);width:calc(var(--peek-h) * .82 + 16px);translate:0 -100%;overflow:hidden;top:1px;padding:0}
+.hc-peek{display:flex;justify-content:center}
+.hc-peek{height:100%;transform:translateY(46%) rotate(0deg);transform-origin:50% 100%}
+.hc-peek .hc-doorcut{display:block;height:var(--peek-h);width:auto;max-width:none;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(10,43,56,.18))}
+.hc-door:hover .hc-peek,.hc-door:focus-within .hc-peek{transform:translateY(6%) rotate(-4deg)}
+.hc-door .hc-doorcut{transition:none}
+@media (hover:hover){.hc-door:hover .hc-doorcut,.hc-door:focus-within .hc-doorcut{translate:none;rotate:none}}
+
+/* ---- pick a friend */
+.hc-pick .hc-head{margin-bottom:clamp(20px,2.6vw,30px)}
+.hc-pickstage{border-radius:32px;padding:clamp(14px,2vw,22px);display:grid;gap:clamp(14px,2vw,22px);box-shadow:inset 0 0 0 2px rgba(255,255,255,.6),0 20px 44px -30px rgba(10,43,56,.5);outline:2px dashed rgba(120,100,80,.28);outline-offset:-10px}
+.hc-picktabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.2vw,14px)}
+.hc-picktab{display:flex;align-items:flex-end;justify-content:center;gap:10px;min-height:84px;padding:8px 14px 10px;border-radius:20px;border:2px solid transparent;background:rgba(255,255,255,.55);color:#14313D;font:600 clamp(16px,1.6vw,20px)/1.1 var(--display);cursor:pointer;overflow:hidden}
+.hc-picktab img{height:72px;width:auto;object-fit:contain;flex:none;margin-bottom:-12px;transform-origin:50% 100%}
+.hc-picktab span{padding-bottom:6px}
+.hc-picktab:hover{background:rgba(255,255,255,.85)}
+.hc-picktab[aria-selected=true]{background:#fff;border-color:var(--c);box-shadow:0 10px 22px -14px rgba(10,43,56,.55)}
+.hc-picktab[aria-selected=true] span{text-decoration:underline;text-decoration-color:var(--c);text-decoration-thickness:3px;text-underline-offset:6px}
+.hc-pickpanel{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(16px,3vw,40px);align-items:center;background:#FFFCF6;border-radius:24px;padding:clamp(16px,2.4vw,30px);min-height:clamp(320px,30vw,380px)}
+.hc-pickpanel:focus-visible{outline:3px solid #0A2B38;outline-offset:3px}
+.hc-pickart{--pa:clamp(240px,24vw,310px);position:relative;display:grid;justify-items:center;align-items:end;height:var(--pa)}
+.hc-pickcut{position:relative;z-index:1;height:calc(var(--pa) - 26px);width:auto;max-width:100%;object-fit:contain;object-position:50% 100%;margin-bottom:10px;filter:drop-shadow(0 12px 12px rgba(30,48,10,.28))}
+.hc-pickground{position:absolute;left:8%;right:8%;bottom:6px;height:16px}
+.hc-pickcopy{display:grid;gap:8px;align-content:center;min-width:0}
+.hc-pickcopy h3{font-size:clamp(28px,3vw,38px);color:#14313D}
+.hc-pickcopy .hc-role{font-weight:600;color:#14313D;font-size:16px}
+.hc-pickd{color:#3E5058;font-size:16px;line-height:1.6;max-width:56ch}
+.hc-pick .hc-pills span{background:color-mix(in srgb,var(--c) 16%,#fff);color:#14313D}
+.hc-try{margin-top:8px;display:grid;gap:8px;padding:16px 18px;border-radius:18px;background:#fff;border:2px dashed color-mix(in srgb,var(--c) 55%,#E6DCCB)}
+.hc-trytitle{display:grid;gap:2px}
+.hc-trytitle b{font:600 18px/1.25 var(--display);color:#14313D}
+.hc-trytitle span{font-size:14px;color:#3E5058}
+.hc-try ol{margin:0;padding-left:20px;display:grid;gap:4px;color:#253F49;font-size:15px;line-height:1.5}
+.hc-trylink{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#14313D;text-underline-offset:4px;justify-self:start}
+.hc-trylink .px-icon{width:15px;height:15px}
+
+/* ---- section headings: a gold stitch under the key word (drawn; with motion on it draws in when the heading arrives) */
+.hc-key{position:relative;display:inline-block;white-space:nowrap}
+.hc-key::after{content:"";position:absolute;left:0;right:0;bottom:-.06em;height:.12em;min-height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--gold,#E7A928) 0 .42em,transparent .42em .66em)}
+.hc-close .hc-key::after{background:repeating-linear-gradient(90deg,#F5C553 0 .42em,transparent .42em .66em)}
+
+/* ---- the kinetic line in "What we have built" */
+.hc-kinetic{margin:-6px 0 clamp(20px,2.6vw,30px);font:600 clamp(22px,2.6vw,32px)/1.25 var(--display);color:#14313D;max-width:42ch}
+.hc-kinetic [data-k=booker]{color:#1B52A6}.hc-kinetic [data-k=bop]{color:#933F09}.hc-kinetic [data-k=zuri]{color:#17653A}.hc-kinetic [data-k=lumi]{color:#9A275D}
+
+/* ---- how a day works: a felt path the friends walk along */
+.hc-trail{position:relative}
+.hc-path{position:relative;height:96px;margin:0 0 10px;overflow:hidden}
+.hc-pathsvg{position:absolute;left:0;right:0;bottom:0;width:100%;height:60px;overflow:visible}
+.hc-pathbase,.hc-pathdraw{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.hc-pathbase{stroke:#B9C98A;stroke-width:12;opacity:.55}
+.hc-pathdraw{stroke:#5F7A26;stroke-width:3;stroke-dasharray:8 7}
+.hc-trail-live .hc-pathdraw{stroke-dasharray:100;stroke-dashoffset:100}
+.hc-parade{position:absolute;left:0;right:0;bottom:22px;height:64px}
+.hc-walker{position:absolute;left:calc((3 - var(--i,0)) * 5.5%);bottom:0;height:64px;display:block;transform-origin:50% 100%}
+.hc-trail-live .hc-walker{left:0;will-change:transform}
+.hc-walkcut{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(30,48,10,.25))}
+.hc-trail .hc-steps::before{display:none}
+.hc-steps li.is-here .hc-num{background:var(--c);color:#fff;border-color:var(--c)}
+.hc-steps li[style*="--gold-deep"].is-here .hc-num,.hc-steps li[style*="--bop"].is-here .hc-num,.hc-steps li[style*="--zuri"].is-here .hc-num{color:#0A2B38}
+
+/* ---- what we have built: real counts, plain paper, each a felt-stitched patch that links to the thing itself */
+.hc-proof{padding-block:var(--hc-pad,clamp(48px,5.5vw,72px))}
+.hc-prooflist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+.hc-prooftile a{position:relative;display:grid;gap:4px;align-content:start;height:100%;padding:22px 22px 20px;border-radius:22px;background:var(--paper,#fff);border:1px solid var(--line,#E6DCCB);color:#14313D;text-decoration:none;
+  box-shadow:0 14px 30px -24px rgba(10,43,56,.5);outline:2px dashed color-mix(in srgb,var(--c) 45%,transparent);outline-offset:-9px;transition:translate .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.hc-prooftile a:hover{box-shadow:0 18px 34px -22px rgba(10,43,56,.55)}
+.hc-prooftile a:focus-visible{outline:3px solid #0A2B38;outline-offset:3px}
+.hc-proofn{font:700 clamp(46px,5vw,64px)/1 var(--display);color:color-mix(in srgb,var(--c) 62%,#0A2B38);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.hc-prooftile b{font:600 19px/1.25 var(--display);color:#14313D}
+.hc-proofline{font-size:14.5px;line-height:1.45;color:#3E5058}
+.hc-proofstage{justify-self:start;margin-top:8px;font:600 12px/1 var(--body);letter-spacing:.02em;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--gold) 18%,#fff);color:#5C4206}
+.hc-prooftile[data-proof-id=activities] .hc-proofstage,.hc-prooftile[data-proof-id=printables] .hc-proofstage{background:#E3F4E8;color:#14532D}
+
+/* magnetic buttons: only the label moves */
+.ffm-label{display:inline-flex;align-items:center;gap:inherit}
+
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .hc-peek{transition:transform .42s cubic-bezier(.34,1.56,.64,1)}
+  :root:not([data-motion=off]) .hc-door{transition:translate .35s cubic-bezier(.16,1,.3,1),background-color .25s,box-shadow .35s}
+  :root:not([data-motion=off]) .hc-door:hover,:root:not([data-motion=off]) .hc-door:focus-within{translate:0 -8px;background:var(--paper,#fff);box-shadow:0 22px 40px -26px rgba(10,43,56,.55)}
+  :root:not([data-motion=off]) .hc-door:hover .hc-peek,:root:not([data-motion=off]) .hc-door:focus-within .hc-peek{transform:translateY(6%) rotate(-4deg) scale(1.04)}
+  :root:not([data-motion=off]) .hc-stitch-mask{stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .35s cubic-bezier(.4,0,.2,1)}
+  :root:not([data-motion=off]) .hc-door:hover .hc-stitch-mask,:root:not([data-motion=off]) .hc-door:focus-within .hc-stitch-mask{stroke-dashoffset:0;transition-duration:.8s}
+  :root:not([data-motion=off]) .hc-stitch-wait .hc-key::after{clip-path:inset(0 100% 0 0)}
+  :root:not([data-motion=off]) .hc-stitch-wait.is-stitched .hc-key::after{clip-path:inset(0 0 0 0);transition:clip-path .7s .25s cubic-bezier(.65,0,.35,1)}
+  :root:not([data-motion=off]) .ffm-label{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  :root:not([data-motion=off]) .mh-hero .px-primary:active,:root:not([data-motion=off]) .hc-btn-gold:active{transform:scale(.97)}
+  :root:not([data-motion=off]) .hc-kinetic.is-kinetic [data-k]{transition:opacity .2s linear}
+  :root:not([data-motion=off]) .hc-picktab{transition:background-color .2s,border-color .2s,box-shadow .2s}
+  :root:not([data-motion=off]) .hc-picktab:active{scale:.965}
+  :root:not([data-motion=off]) .hc-picktab{transition:background-color .2s,border-color .2s,box-shadow .2s,scale .16s cubic-bezier(.2,.8,.3,1)}
+  :root:not([data-motion=off]) .hc-steps .hc-num{transition:background-color .25s,color .25s,border-color .25s,scale .35s cubic-bezier(.34,1.56,.64,1)}
+  :root:not([data-motion=off]) .hc-trail-live .hc-steps li.is-here .hc-num{scale:1.08}
+  :root:not([data-motion=off]) .hc-prooftile a:hover{translate:0 -3px}
+}
+@media (max-width:820px){
+  .hc-door{--peek-h:96px}
+  .hc-door .hc-doorart{translate:none;overflow:visible;top:10px;padding:0}
+  .hc-door .hc-peek{transform:none}
+  .hc-prooflist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hc-pickpanel{grid-template-columns:1fr;min-height:0}
+  .hc-pickart{--pa:220px}
+}
+@media (max-width:620px){
+  .hc-picktab{flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;min-height:96px;padding:6px 4px 8px;font-size:14px;border-radius:16px}
+  .hc-picktab img{height:58px;margin-bottom:0}
+  .hc-picktab span{padding-bottom:0}
+  .hc-pickstage{border-radius:24px;padding:10px;outline-offset:-6px}
+  .hc-pickpanel{padding:14px;border-radius:18px}
+  /* phones: the path is the steps' own rail; with motion on it is faint until the walk reaches each step, then drawn in colour */
+  .hc-path{display:none}
+  .hc-trail-live .hc-steps li::before{opacity:.18;background:repeating-linear-gradient(180deg,var(--c) 0 6px,transparent 6px 11px)}
+  .hc-trail-live .hc-steps li.is-here::before{opacity:.75;background:var(--c);width:3px}
+  .hc-prooflist{grid-template-columns:1fr;gap:10px}
+  .hc-prooftile a{grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:2px;align-items:center;padding:14px 16px;border-radius:18px;outline-offset:-7px}
+  .hc-proofn{grid-row:span 3;font-size:42px;min-width:2.1ch;text-align:center}
+  .hc-proofstage{margin-top:4px}
+  .hc-prooftile b{font-size:16px}
+  .hc-proofline{font-size:13.5px}
+  .hc-proofstage{font-size:11px;padding:5px 8px}
+}
+/* ---- wave 8: living friends. The tabs are felt cards: a felt face with a stitched edge and depth, and the friend turns to wave
+   (the waving pose sits exactly over the standing one). With JavaScript the face is its own layer (.hc-picktabface, home-day.js)
+   that tilts toward the pointer with a sheen, behind the friend; the friend and the name never tilt. */
+.hc-picktab,.hc-picktabface{background-color:color-mix(in srgb,var(--c) 9%,#FFFDF8);background-image:var(--tx-cream);background-size:256px;background-blend-mode:multiply;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 10px 18px -14px rgba(10,43,56,.55),0 2px 0 color-mix(in srgb,var(--c) 22%,#E6DCCB);outline:1.5px dashed color-mix(in srgb,var(--c) 40%,rgba(120,100,80,.35));outline-offset:-6px}
+.hc-picktab{position:relative;isolation:isolate}
+.hc-picktab[aria-selected=true],.hc-picktab[aria-selected=true] .hc-picktabface{background-color:#fff;outline-color:color-mix(in srgb,var(--c) 70%,transparent)}
+.hc-picktab.has-face{background:transparent;box-shadow:none;outline:0}
+.hc-picktab.has-face[aria-selected=true]{border-color:transparent}
+.hc-picktabface{position:absolute;inset:2px;border-radius:18px;z-index:-1;pointer-events:none;transform-origin:50% 55%;will-change:transform}
+.hc-picktab[aria-selected=true] .hc-picktabface{box-shadow:inset 0 0 0 2px var(--c),0 1px 0 rgba(255,255,255,.9) inset,0 10px 22px -14px rgba(10,43,56,.55)}
+.hc-picktabface::after{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .25s;
+  background:radial-gradient(140px circle at var(--sx,50%) var(--sy,0%),rgba(255,255,255,.8),rgba(255,255,255,0) 65%);mix-blend-mode:soft-light}
+.hc-picktab:hover .hc-picktabface::after{opacity:1}
+.hc-picktab:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+.hc-picktab img{transition:opacity .16s}
+.hc-picktabwave{position:absolute;width:auto!important;max-width:none;object-fit:contain;transform:translateX(-50%);transform-origin:50% 100%;opacity:0;pointer-events:none;z-index:1;transition:opacity .16s}
+.hc-picktab.is-waving .hc-picktabwave{opacity:1}
+.hc-picktab.is-waving>img:not(.hc-picktabwave){opacity:0}
+@media (max-width:620px){.hc-picktabface{border-radius:14px}}
+
+/* ---- wave 8: the counts are stitched felt badges. A felt rim in the friend's colour carries the stitch; the face stays plain paper
+   (real-world counts). The rim replaces 5px of padding, so the tiles keep their size. */
+.hc-prooftile a{border:5px solid transparent;padding:18px 18px 16px;
+  background:linear-gradient(var(--paper,#fff),var(--paper,#fff)) padding-box,var(--tx-cream) border-box,linear-gradient(color-mix(in srgb,var(--c) 58%,#fff),color-mix(in srgb,var(--c) 70%,#fff)) border-box;
+  background-size:auto,180px,auto;background-blend-mode:normal,multiply,normal;
+  outline:2px dashed rgba(255,255,255,.92);outline-offset:-3.5px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 16px 28px -22px rgba(10,43,56,.55),0 2px 0 color-mix(in srgb,var(--c) 35%,#E6DCCB)}
+.hc-prooftile a:focus-visible{outline:3px solid #0A2B38;outline-offset:3px}
+.hc-proofspark{position:absolute;width:110px;height:auto;pointer-events:none;z-index:3;transform:translate(-50%,-50%)}
+@media (max-width:620px){.hc-prooftile a{padding:10px 12px;outline-offset:-3px}}
+
+@media print{.hc-path,.hc-stitch{display:none}}

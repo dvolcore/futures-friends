@@ -1,0 +1,44 @@
+/* Home hero motion (hero-motion.js, ff-motion.js). Transforms and opacity only. Character art only ever moves, rotates or scales uniformly.
+   Static rules first (they hold with motion off too); every moving rule sits behind BOTH switches: the device reduced-motion
+   setting and the site's own Decorative motion switch ([data-motion=off]), and runs only on a hero hero-motion.js has wired
+   (.ffm-live), so it can be paused off screen and on hidden tabs (.ffm-paused). */
+
+/* The tagline: each word in its friend's color (light shades for the wave-5 navy hero: 8.8:1 or more; meadow-hero.css sets the
+   dark shades for the cream card). */
+.ffm-w{display:inline-block;color:var(--fw,#fff)}
+.ffm-w[data-k=booker]{--fw:#A9CDFF}
+.ffm-w[data-k=bop]{--fw:#FFBC85}
+.ffm-w[data-k=zuri]{--fw:#93E2B1}
+.ffm-w[data-k=lumi]{--fw:#FFB1D5}
+.ffm-w.is-on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+
+/* Sparkles in the friend's color */
+.ffa-fig{position:relative}
+.ffm-spark{position:absolute;left:50%;top:6%;width:12px;height:12px;margin:-6px 0 0 -6px;background:var(--c,#E7A928);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);pointer-events:none;z-index:5}
+
+@media (prefers-reduced-motion:no-preference){
+  /* The world's loops (clouds, sun, camera drift, petals, the logo's float) live in hero-world.css (wave 7). */
+  /* The friends breathe and sway once they have arrived (never during the entrance). */
+  :root:not([data-motion=off]) .ffm-live .ffa-fig:not(.ffm-arriving) .ffa-hop{animation:ffm-sway 7s ease-in-out infinite;transform-origin:50% 100%}
+  :root:not([data-motion=off]) .ffm-live .ffa-fig:nth-child(2):not(.ffm-arriving) .ffa-hop{animation-duration:8.2s;animation-delay:-2.4s}
+  :root:not([data-motion=off]) .ffm-live .ffa-fig:nth-child(3):not(.ffm-arriving) .ffa-hop{animation-duration:6.6s;animation-delay:-1.1s}
+  :root:not([data-motion=off]) .ffm-live .ffa-fig:nth-child(4):not(.ffm-arriving) .ffa-hop{animation-duration:7.6s;animation-delay:-3.7s}
+  /* Off screen or hidden tab: every loop on the stage and in the world stops. */
+  .ffa-stage.ffm-paused,.ffa-stage.ffm-paused *{animation-play-state:paused!important}
+  .mh-hero.ffm-paused,.mh-hero.ffm-paused *{animation-play-state:paused!important}
+
+  /* The hand-over between an action still and the standing art (the entrance, and the expression swap) */
+  :root:not([data-motion=off]) .ffm-live .ffa-hop>.ffm-pose{transition:opacity .12s ease-out}
+  :root:not([data-motion=off]) .ffm-live .ffa-fig.ffm-posing .ffa-hop>.ffa-cut{transition:opacity 0s .12s}
+  /* Friends who notice you: up to 4 degrees toward the pointer or the friend being pointed at (desktop) */
+  :root:not([data-motion=off]) .ffm-live .ffa-friend{transition:rotate .6s cubic-bezier(.2,.7,.2,1)}
+
+  /* Labels answer the pointer */
+  :root:not([data-motion=off]) .ffm-live .ffa-pill{transition:box-shadow .25s ease}
+  /* Audience doors: the friend on the card leans in when the card is pointed at or focused */
+  :root:not([data-motion=off]) .fj-doorart img{transition:translate .35s cubic-bezier(.34,1.56,.64,1),rotate .35s cubic-bezier(.34,1.56,.64,1)}
+  :root:not([data-motion=off]) .fj-door:hover .fj-doorart img,:root:not([data-motion=off]) .fj-door:focus-within .fj-doorart img{translate:0 -6px;rotate:-6deg}
+}
+@keyframes ffm-sway{0%,100%{rotate:0deg;translate:0 0}30%{rotate:-1.2deg;translate:0 -1.5%}60%{rotate:1deg;translate:0 0}80%{rotate:.4deg;translate:0 -.8%}}
+
+/* Depth on scroll and with the pointer: the world's camera (hero-world.js), wave 7. */

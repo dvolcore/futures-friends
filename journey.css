@@ -1,0 +1,131 @@
+/* Purchase and use journey (R7): audience doors under the Home hero, real sample-data screenshots, provider and family blocks,
+   grouped More menu, skip link and focus on dark bands. Uses the site tokens; text colors are the darker friend shades
+   (#2F6FC0, #23814B, #B52D71) so small text passes 4.5:1 on white. Motion only answers hover and respects both the device
+   reduced-motion setting and the site's own "Decorative motion" switch. */
+
+/* Skip link: first thing a keyboard user reaches */
+.ff-skip{position:absolute;left:12px;top:-60px;z-index:200;background:#F5C553;color:#0A2B38;font-weight:700;font-size:14px;padding:10px 16px;border-radius:10px;text-decoration:none;box-shadow:0 6px 18px #0a2b3833}
+.ff-skip:focus{top:10px;outline:3px solid #0A2B38;outline-offset:2px}
+
+/* Focus rings that stay visible on navy and green bands (gold, as DESIGN.md asks) */
+.px-utility :focus-visible,.px-homehero :focus-visible,.fj-doorshead :focus-visible,footer :focus-visible,.px-academyband :focus-visible{outline-color:#F5C553}
+.px-utility small{font-size:.82em;font-weight:500;opacity:.8}
+
+/* Grouped More menu */
+.px-more>.px-moregroups{width:min(700px,calc(100vw - 48px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 22px;padding:16px 18px}
+.px-moregroup{display:flex;flex-direction:column;min-width:0}
+.px-more a[hidden],[data-ff-pending][hidden]{display:none!important}
+.px-moregroup>b{font-size:11px;font-weight:700;color:#536761;padding:8px 10px 4px;letter-spacing:.01em}
+.px-moregroup a{white-space:normal;line-height:1.35}
+.px-moregroup a[aria-current=page]{color:#18675f;font-weight:700}
+@media(max-width:900px){.px-more>.px-moregroups{width:100%;grid-template-columns:1fr;padding:0 0 8px;gap:0}.px-moregroup>b{padding:14px 0 2px}.px-moregroup a{padding:10px 0 10px 12px;font-size:13px}}
+
+/* Home hero: make room for the doors to rise into the first screen */
+.px-homehero.fj-hero.ffa-homehero:after{inset:10px 10px 10px}
+.fj-hero .ffa-homegrid{padding-top:clamp(24px,3vw,40px);padding-bottom:150px}
+.fj-hero .ffa-stage{min-height:clamp(240px,22vw,290px)}
+.fj-hero .ffa-fig{--ffa-h:clamp(140px,15vw,196px)}
+.fj-hero .px-herocopy h1{font-size:clamp(44px,5.2vw,64px);margin:12px 0 14px}
+.fj-hero .px-herocopy>p{font-size:clamp(22px,2.4vw,30px);margin-bottom:12px}
+.fj-hero .px-heroactions{margin-top:22px}
+
+/* The three doors */
+.fj-doors{position:relative;z-index:2;margin-top:-150px;padding-bottom:44px}
+.fj-doorshead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;color:#fff;min-height:36px;margin-bottom:38px}
+.fj-doorshead h2{font-size:clamp(22px,2.2vw,28px);color:#fff}
+.fj-compare{font-size:13px;font-weight:600;color:#fff}
+.fj-compare .px-icon{vertical-align:-3px;margin-left:4px}
+.fj-compare .px-icon,.fj-go .px-icon{width:16px;height:16px;flex-shrink:0}
+.fj-doorlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.fj-door{position:relative;display:flex;flex-direction:column;gap:10px;background:#fff;color:var(--ink);border-radius:20px;padding:22px 22px 20px;border-top:6px solid var(--c);box-shadow:0 18px 40px #0a2b3826,0 2px 0 #0a2b380d}
+.fj-doorart{position:absolute;right:16px;top:-40px;width:62px;height:88px;pointer-events:none}
+.fj-doorart img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px #0a2b3833)}
+.fj-who{margin:0;font-size:13px;font-weight:700;color:var(--c,#2F6FC0);padding-right:72px}
+.fj-door h3{font-size:clamp(20px,1.8vw,23px)}
+.fj-now{background:#f5f8f7;border-radius:12px;padding:10px 12px}
+.fj-tag{display:inline-block;font-size:11.5px;font-weight:700;color:#0A2B38;background:#F5C553;border-radius:999px;padding:2px 10px;margin-bottom:6px}
+.fj-now ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.55}
+.fj-later{font-size:12.5px;color:#536761;margin:0}
+.fj-tonight{border:2px dashed color-mix(in srgb,var(--c) 45%,#fff);border-radius:12px;padding:10px 12px;font-size:13.5px;display:grid;gap:2px}
+.fj-tonight b{font-family:var(--display);font-size:16px;font-weight:600}
+.fj-tonight span{color:#536761;font-size:12.5px}
+.fj-tonight ol{margin:4px 0 0;padding-left:18px}
+.fj-go{margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 16px;border-radius:12px;background:var(--c,#2F6FC0);color:#fff;font-weight:700;font-size:14px;text-decoration:none;text-align:center}
+.fj-go:hover{filter:brightness(.92)}
+.fj-local{font-size:12.5px;color:#536761;margin:0}
+.fj-local a,.fj-back a{color:#0A2B38;font-weight:700}
+.fj-back{margin:18px 0 0;font-size:13.5px;color:var(--ink)}
+.fj-muted{color:#536761;font-weight:400}
+
+/* Small real-screen thumbnails inside the doors */
+.fj-thumb{position:relative;margin:0;padding-top:12px;display:grid;gap:6px}
+.fj-thumb img{width:100%;height:auto;border-radius:10px;border:1px solid #e6dccb;box-shadow:0 6px 16px #0a2b3812}
+.fj-thumb .fj-sample{left:10px;top:3px}
+.fj-thumb figcaption{font-size:12px;color:#536761;line-height:1.45}
+
+/* Real screens, labelled as sample data */
+.fj-examples{background:#fff;padding:56px 0;border-top:1px solid #e6dccb;border-bottom:1px solid #e6dccb}
+.fj-exhead{display:grid;gap:6px;margin-bottom:22px;max-width:760px}
+.fj-exhead p{color:#536761}
+.fj-exgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.fj-exgrid.fj-two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.fj-exstack{display:grid;gap:22px}
+.fj-shot{margin:0;display:grid;gap:8px}
+.fj-shotframe{position:relative;border-radius:14px;border:1px solid #e6dccb;background:#fbf6ec;padding:10px;box-shadow:0 10px 26px #0a2b3814}
+.fj-shotframe img{width:100%;height:auto;border-radius:8px}
+.fj-sample{position:absolute;left:18px;top:-11px;z-index:1;background:#0A2B38;color:#fff;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 10px}
+.fj-shot figcaption{font-size:13px;line-height:1.5}
+.fj-shot figcaption a{font-weight:700;color:#18675f}
+
+/* Provider and family blocks on the audience pages */
+.fj-provider{padding:52px 0;background:#fff}
+.fj-steps{list-style:none;margin:0 0 28px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.fj-steps li{position:relative;display:grid;gap:8px;align-content:start;background:#fbf6ec;border:1px solid #e6dccb;border-radius:16px;padding:20px 18px 18px}
+.fj-steps li>.px-icon{width:24px;height:24px;color:#18675f}
+.fj-steps h3{font-size:19px}
+.fj-steps p{font-size:13.5px;line-height:1.6;color:var(--ink)}
+.fj-textbtn{font:inherit;font-size:13.5px;font-weight:700;color:#18675f;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:underline}
+.fj-textbtn .px-icon{width:16px;height:16px}
+.fj-steps a{font-size:13.5px;font-weight:700;color:#18675f;display:inline-flex;align-items:center;gap:6px;margin-right:12px}
+.fj-num{position:absolute;right:14px;top:12px;font-family:var(--display);font-weight:700;font-size:28px;color:#e6dccb}
+.fj-famgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
+.fj-act,.fj-center{display:grid;gap:10px;background:#fbf6ec;border:1px solid #e6dccb;border-radius:18px;padding:22px}
+.fj-act{border-top:6px solid var(--c,#B52D71)}
+.fj-act ol{margin:0;padding-left:20px;display:grid;gap:4px}
+.fj-center .fj-go{background:#18675f}
+.fj-act .fj-go{justify-self:start}
+.fj-center .fj-go{justify-self:start}
+.ffa-homehero .fj-reveal,.px-academyband .fj-reveal{margin-top:14px}
+
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .fj-door{transition:transform .2s ease,box-shadow .2s ease}
+  :root:not([data-motion=off]) .fj-door:hover{transform:translateY(-3px);box-shadow:0 22px 46px #0a2b3830}
+  :root:not([data-motion=off]) .fj-go .px-icon{transition:transform .2s ease}
+  :root:not([data-motion=off]) .fj-go:hover .px-icon{transform:translateX(4px)}
+}
+
+@media (max-width:1100px){.fj-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+  .fj-hero .ffa-homegrid{padding-bottom:28px}
+  .fj-doors{margin-top:0;padding-top:30px}
+  .fj-doorshead{color:var(--ink);min-height:0}
+  .fj-doorshead h2,.fj-compare{color:var(--ink)}
+  .fj-doorshead :focus-visible{outline-color:#2f6fc0}
+  .fj-doorlist{grid-template-columns:1fr;gap:42px;margin-top:40px}
+  .fj-exgrid,.fj-exgrid.fj-two,.fj-famgrid{grid-template-columns:1fr}
+  .fj-examples,.fj-provider{padding:40px 0}
+}
+@media (max-width:640px){header.bar .px-utility .wrap>div{gap:14px}header.bar .px-utility .wrap>div a{white-space:nowrap;font-size:11px}}
+@media (max-width:480px){.px-utility small{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+@media (max-width:560px){.fj-steps{grid-template-columns:1fr}.fj-door{padding:20px 18px 18px}}
+
+/* Contrast fixes found by the R7 axe pass on the journey routes (Home, For Centers, Home Daycares, Families, Enroll):
+   white text on the light friend colors was 2.9 to 4.0:1. Same darker shades the hero pills already use (brand-art.css). */
+.ffhm-spot[data-z=lumi],.tag.c[style*="--lumi"]{background:#B02F6C}
+.ffhm-spot[data-z=zuri],.tag.c[style*="--zuri"]{background:#1B7541}
+.ffhm-spot[data-z=bop],.tag.c[style*="--bop"]{background:#A84908}
+.tag.c[style*="--gold-deep"]{background:#8A6108}
+.card .eyebrow{color:#8A6108}
+.card>b[style*="var(--lumi)"]{color:#B02F6C!important}
+.card>b[style*="var(--zuri)"]{color:#1B7541!important}
+.card>b[style*="var(--bop)"]{color:#A84908!important}

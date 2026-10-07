@@ -1,0 +1,26 @@
+/* The friends above the footer (footer-scene.js): a felt meadow strip on the footer's navy; each friend is a named link. */
+.ff-footscene{--focus-ring:#F5C553;position:relative;background:var(--navy,#0A2B38);padding:clamp(18px,3vw,30px) 0 0;overflow:hidden}
+.ff-footscene-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,3vw,40px)}
+.ff-footfriend{display:grid;justify-items:center;gap:6px;color:#fff;text-decoration:none;border-radius:16px;padding:4px 4px 10px}
+.ff-footscene .ff-footfriend:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
+.ff-footart{display:block;height:clamp(84px,9vw,118px)}
+.ff-footcut{height:100%;width:auto;object-fit:contain;transform-origin:50% 100%;filter:drop-shadow(0 8px 8px rgba(0,0,0,.35))}
+.ff-footlabel{font:600 13px/1.2 var(--display);color:#fff;background:rgba(255,255,255,.1);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.ff-footfriend:hover .ff-footlabel{background:color-mix(in srgb,var(--c) 70%,#0A2B38)}
+.ff-footground{position:absolute;left:0;right:0;bottom:42px;height:12px;border-radius:0}
+.ff-footart.is-waiting{opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .ff-footcut{transition:translate .35s cubic-bezier(.34,1.56,.64,1)}
+  :root:not([data-motion=off]) .ff-footfriend:hover .ff-footcut,:root:not([data-motion=off]) .ff-footfriend:focus-visible .ff-footcut{translate:0 -8px}
+}
+@media (max-width:480px){.ff-footlabel{font-size:11px;padding:3px 7px}.ff-footscene-row{gap:4px}}
+/* visual audit 2026-10-07: on a phone the four nowrap name pills were wider than the screen, so "…ove with Bop" and "Explore with Zu…" were cut off at
+   both edges. Each friend now takes a quarter of the row and its name may wrap onto two centred lines. */
+@media (max-width:560px){
+  .ff-footscene-row{gap:2px;padding-inline:6px}
+  .ff-footfriend{flex:1 1 0;min-width:0;padding-inline:0}
+  .ff-footart{max-width:100%}
+  .ff-footcut{max-width:100%}
+  .ff-footlabel{white-space:normal;text-align:center;border-radius:12px;line-height:1.15;max-width:100%}
+}
+@media print{.ff-footscene{display:none}}

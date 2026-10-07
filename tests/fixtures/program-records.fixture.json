@@ -1,0 +1,48 @@
+[
+  {
+    "id": "u1-w1-d1-circle", "release": "unit-1", "version": 1, "status": "approved",
+    "date_offset": { "week": 1, "day": 1 }, "theme": "TEST Hello, Friends", "block": "circle", "character": "lumi", "pillars": ["BELONG"],
+    "objective": "Children greet a friend by name in the circle.",
+    "learning_steps": ["thr-se-1"],
+    "age_adaptations": { "twos": "Sing the hello song and wave to one friend.", "threes": "Pass the Lumi puppet and say a friend's name." },
+    "duration_min_estimate": 10, "materials": ["Lumi puppet", "Name cards"],
+    "prompts": ["Who is sitting next to you today?"],
+    "participation_alternatives": ["A child may wave or hold up a name card instead of speaking."],
+    "media": [{ "type": "puppet", "ref": "printables/lumi-puppet.pdf", "status": "ready" }, { "type": "video", "ref": "video/hello-friends.mp4", "status": "unavailable" }],
+    "kitchen_prompt": "At snack, ask: what color is your cup?",
+    "home_continuation": { "title": "TEST Hello Song at Home", "steps": ["Sing the hello song at dinner.", "Say the name of each person at the table."], "materials_from_home": [] },
+    "sources": ["SYNTHETIC TEST FIXTURE (R3): not program content"]
+  },
+  {
+    "id": "u1-w1-d1-story", "release": "unit-1", "version": 1, "status": "approved",
+    "date_offset": { "week": 1, "day": 1 }, "theme": "TEST Hello, Friends", "block": "story", "character": "booker", "pillars": ["LEARN"],
+    "objective": "Children point to pictures while the story is read.",
+    "learning_steps": [],
+    "age_adaptations": { "threes": "Ask one what-happens-next question." },
+    "duration_min_estimate": 15, "materials": ["Read-aloud book"], "prompts": ["What do you see on this page?"],
+    "participation_alternatives": ["Look at the pictures on a lap or in a quiet corner."],
+    "media": [{ "type": "print", "ref": "printables/hello-story.pdf", "status": "draft" }],
+    "kitchen_prompt": null, "home_continuation": null,
+    "sources": ["SYNTHETIC TEST FIXTURE (R3): not program content"]
+  },
+  {
+    "id": "u1-w1-d2-circle", "release": "unit-1", "version": 1, "status": "approved",
+    "date_offset": { "week": 1, "day": 2 }, "theme": "TEST Feelings Faces", "block": "circle", "character": "lumi", "pillars": ["BELONG", "RESET"],
+    "objective": "Children name one feeling with a face card.",
+    "learning_steps": [],
+    "age_adaptations": { "threes": "Match a face card to a feeling word." },
+    "duration_min_estimate": 10, "materials": ["Feeling face cards"], "prompts": ["How does Lumi feel?"],
+    "participation_alternatives": ["Point to a card instead of speaking."],
+    "media": [], "kitchen_prompt": null,
+    "home_continuation": { "title": "TEST Feeling Faces at Dinner", "steps": ["Make a happy face and a calm face together."], "materials_from_home": [] },
+    "sources": ["SYNTHETIC TEST FIXTURE (R3): not program content"]
+  },
+  {
+    "id": "u1-w1-d3-circle", "release": "unit-1", "version": 1, "status": "draft",
+    "date_offset": { "week": 1, "day": 3 }, "theme": "TEST Draft Day", "block": "circle", "character": "bop", "pillars": ["MOVE"],
+    "objective": "A draft that no view may show.",
+    "learning_steps": [], "age_adaptations": { "threes": "Draft." }, "duration_min_estimate": 10, "materials": [], "prompts": [],
+    "participation_alternatives": [], "media": [], "kitchen_prompt": null, "home_continuation": null,
+    "sources": ["SYNTHETIC TEST FIXTURE (R3): not program content"]
+  }
+]

@@ -1,0 +1,207 @@
+/* A day in the world (wave 8, owner 2026-10-06: "do some motion, graphic stuff in the background ... a lot more polished, high-end").
+   Scrolling Home moves through one day: the hero is morning, the doors late morning, the friends midday, the day path afternoon,
+   the counts golden afternoon, trust and the pilot center sunset, "Talk to a real person" dusk, the footer night.
+   Layers (home-day.js builds them; every one is aria-hidden decoration and holds no information):
+   - .hd-stage   one fixed felt sky behind the page. Its layers cross-fade with scroll (native scroll-driven CSS, GSAP ScrollTrigger
+                 where the browser lacks it); a felt sun arcs across it; felt clouds, birds and pollen drift in it.
+   - .hd-world   per section, behind the content: a soft mist so text keeps AA contrast, and the composed still sky when motion is
+                 off (the section's own plate or gradient).
+   - .hd-edge    the felt divider that joins two sections (cloud bank, rolling hills, flower border, grass), inside the section's
+                 own padding so nothing moves.
+   - .hd-fx      the hidden surprises: pointer toys placed only where no link, button or text is (home-day.js checks).
+   Without JavaScript, with reduced motion or with the motion switch off, every section shows its own still sky, by time of day.
+   No layer adds height: the page measures exactly as before plus the glass padding noted in glass.css. Story-world art only. */
+
+/* ---------------------------------------------------------------- the composed still day (always; the base layer) */
+.hc-doors,.hc-status,.hc-friends,.hc-day,.hc-proof,.hc-trust,.hc-close{position:relative;isolation:isolate}
+.hc-status,.hc-friends,.hc-day,.hc-proof,.hc-trust,.hc-close{z-index:0}
+.hc-doors>.wrap,.hc-status>.wrap,.hc-friends>.wrap,.hc-day>.wrap,.hc-proof>.wrap,.hc-trust>.wrap,.hc-close>.wrap{position:relative;z-index:2}
+.hc-doors{background:linear-gradient(180deg,#A6D6F2 0%,#C6E6F7 100%)}
+.hc-status{background:#C6E6F7}
+.hc-friends{background:linear-gradient(180deg,#C6E6F7 0%,#B4DDF5 100%)}
+.hc-day{background:linear-gradient(180deg,#B4DDF5 0%,#E9E5C4 100%)}
+.hc-proof{background:linear-gradient(180deg,#E9E5C4 0%,#F6D592 100%)}
+.hc-trust{background:linear-gradient(180deg,#F6D592 0%,#F7A27A 55%,#E8838C 100%)}
+.hc-close{background:linear-gradient(180deg,#E8838C 0%,#9A6A9E 18%,#3B3A7C 46%,#152558 78%,#0E1F55 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  .hc-doors{background:linear-gradient(180deg,#0E2A3E 0%,#11304A 100%)}
+  .hc-status{background:#11304A}
+  .hc-friends{background:linear-gradient(180deg,#11304A 0%,#133652 100%)}
+  .hc-day{background:linear-gradient(180deg,#133652 0%,#2A3350 100%)}
+  .hc-proof{background:linear-gradient(180deg,#2A3350 0%,#3A3046 100%)}
+  .hc-trust{background:linear-gradient(180deg,#3A3046 0%,#40283F 100%)}
+  .hc-close{background:linear-gradient(180deg,#40283F 0%,#24224C 40%,#0E1F55 100%)}}}
+:root[data-theme=dark] .hc-doors{background:linear-gradient(180deg,#0E2A3E 0%,#11304A 100%)}
+:root[data-theme=dark] .hc-status{background:#11304A}
+:root[data-theme=dark] .hc-friends{background:linear-gradient(180deg,#11304A 0%,#133652 100%)}
+:root[data-theme=dark] .hc-day{background:linear-gradient(180deg,#133652 0%,#2A3350 100%)}
+:root[data-theme=dark] .hc-proof{background:linear-gradient(180deg,#2A3350 0%,#3A3046 100%)}
+:root[data-theme=dark] .hc-trust{background:linear-gradient(180deg,#3A3046 0%,#40283F 100%)}
+:root[data-theme=dark] .hc-close{background:linear-gradient(180deg,#40283F 0%,#24224C 40%,#0E1F55 100%)}
+/* the trust band had its own pale fill; the sky and its mist replace it */
+.hc-status-row{border-color:color-mix(in srgb,var(--ink) 16%,transparent)}
+
+/* ---------------------------------------------------------------- per-section world: plate, mist */
+.hd-world{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict}
+.hd-plate{position:absolute;inset:0;background-size:cover;background-position:50% 0;background-repeat:no-repeat;opacity:0;transition:opacity .6s}
+.hd-plate.is-in{opacity:1}
+.hc-proof .hd-plate{background-position:50% 100%}
+.hc-trust .hd-plate{background-position:66% 30%}
+/* The mist keeps every word AA over the felt sky (contrast measured, see tests/w8-page.test.js): clear at the seams, where the
+   dividers and the sky are the picture, and soft behind the copy. */
+.hd-mist{--m:.5;position:absolute;inset:0;
+  background:linear-gradient(180deg,rgb(var(--mist-rgb) / calc(var(--m) * .25)) 0,rgb(var(--mist-rgb) / var(--m)) clamp(90px,12vw,150px),rgb(var(--mist-rgb) / var(--m)) calc(100% - clamp(110px,12vw,160px)),rgb(var(--mist-rgb) / calc(var(--m) * .2)) 100%)}
+:root{--mist-rgb:255 253 247}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--mist-rgb:9 22 30}}
+:root[data-theme=dark]{--mist-rgb:9 22 30}
+.hc-doors .hd-mist{--m:.42}
+.hc-status .hd-mist{--m:.55}
+.hc-friends .hd-mist{--m:.5}
+.hc-day .hd-mist{--m:.66}
+.hc-proof .hd-mist{--m:.64}
+.hc-trust .hd-mist{--m:.76}
+/* the trust band's captions sit low in it, so its mist holds until the dusk hills */
+.hc-trust .hd-mist{background:linear-gradient(180deg,rgb(var(--mist-rgb) / calc(var(--m) * .3)) 0,rgb(var(--mist-rgb) / var(--m)) clamp(80px,10vw,130px),rgb(var(--mist-rgb) / var(--m)) calc(100% - 64px),rgb(var(--mist-rgb) / calc(var(--m) * .3)) 100%)}
+/* secondary text a shade deeper on the felt sky (light theme), so it keeps AA wherever the sky is brightest */
+:root:not([data-theme=dark]) .hc-doors,:root:not([data-theme=dark]) .hc-status,:root:not([data-theme=dark]) .hc-friends,:root:not([data-theme=dark]) .hc-day,:root:not([data-theme=dark]) .hc-proof,:root:not([data-theme=dark]) .hc-trust{--muted:#384B54}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hc-doors,:root:not([data-theme=light]) .hc-status,:root:not([data-theme=light]) .hc-friends,:root:not([data-theme=light]) .hc-day,:root:not([data-theme=light]) .hc-proof,:root:not([data-theme=light]) .hc-trust{--muted:#B4C6CE}}
+.hc-close .hd-mist{display:none}
+
+/* ---------------------------------------------------------------- dividers: felt edges that join the sections */
+.hd-edge{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background-repeat:repeat-x;background-position:0 100%}
+/* the morning cloud bank just under the hero's meadow (inside the doors' own top padding, never over the hero's cast row) */
+.hd-edge-clouds{top:0;height:var(--eh);--eh:clamp(52px,5.6vw,78px);background-image:image-set(url("img/plush/world8/div-clouds-700.webp") 1x,url("img/plush/world8/div-clouds-1400.webp") 2x);background-size:auto 100%;
+  -webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 92%);mask-image:linear-gradient(180deg,#000 52%,transparent 92%)}
+/* bottom edges sit inside the section's own bottom padding; the crest is transparent felt, the base melts into the next sky */
+.hd-edge-hills,.hd-edge-flowers,.hd-edge-grass,.hd-edge-dusk{bottom:0;height:var(--eh);background-size:auto 100%;
+  -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hd-edge-hills{--eh:clamp(44px,5.2vw,70px);background-image:image-set(url("img/plush/world8/div-hills-652.webp") 1x,url("img/plush/world8/div-hills-1305.webp") 2x);opacity:.92}
+.hd-edge-flowers{--eh:clamp(46px,5.6vw,74px);background-image:image-set(url("img/plush/world8/div-flowers-700.webp") 1x,url("img/plush/world8/div-flowers-1400.webp") 2x)}
+.hd-edge-grass{--eh:clamp(42px,5vw,66px);background-image:image-set(url("img/plush/world8/div-grass-700.webp") 1x,url("img/plush/world8/div-grass-1400.webp") 2x);filter:sepia(.28) saturate(1.05) brightness(1.04)}
+/* sunset: the same felt hills, far away and in silhouette against the evening */
+.hd-edge-dusk{--eh:clamp(40px,4.6vw,62px);background-image:image-set(url("img/plush/world8/div-hills-652.webp") 1x,url("img/plush/world8/div-hills-1305.webp") 2x);filter:hue-rotate(178deg) saturate(.5) brightness(.6);opacity:.9;background-position:180px 100%}
+/* the friends' hills and the grass are a little out of phase so the seams never line up */
+.hd-edge-grass{background-position:240px 100%}
+/* grass sways (a slow lean of the whole felt strip, never a stretch) */
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .hd-live .hd-edge-flowers,:root:not([data-motion=off]) .hd-live .hd-edge-grass{transform-origin:50% 100%;animation:hd-sway 7s ease-in-out infinite alternate}
+}
+@keyframes hd-sway{from{transform:translate3d(-6px,0,0)}to{transform:translate3d(6px,0,0)}}
+
+/* ---------------------------------------------------------------- the fixed sky (motion on): .hd-live on <html> */
+.hd-stage{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;contain:strict;background:#A6D6F2}
+.hd-stage>*{position:absolute}
+.hd-sky{inset:0;opacity:0;background-size:cover;background-position:50% 50%;will-change:opacity}
+.hd-sky[data-k="0"]{opacity:1;background:linear-gradient(180deg,#8FCDF1 0%,#C6E6F7 100%)}
+.hd-sky[data-k="1"]{background:linear-gradient(180deg,#78C2F0 0%,#B4DDF5 100%)}
+.hd-sky[data-k="2"]{background-color:#78C5F8;background-position:50% 0}
+.hd-sky[data-k="3"]{background:linear-gradient(180deg,rgba(255,206,120,0) 0%,rgba(255,196,110,.42) 55%,rgba(255,170,90,.62) 100%)}
+.hd-sky[data-k="4"]{background-color:#FB8B5D;background-position:66% 50%}
+.hd-sky[data-k="5"]{background:linear-gradient(180deg,#24245E 0%,#5E4C8C 55%,#D9818A 100%)}
+.hd-sun{width:clamp(64px,8.5vw,118px);height:auto;left:0;top:0;opacity:0;will-change:transform,opacity;filter:drop-shadow(0 0 18px rgba(255,214,110,.55))}
+.hd-clouds{inset:0;will-change:opacity}
+.hd-cloud{position:absolute;left:0;height:auto;opacity:.95;will-change:transform}
+.hd-birds{inset:0;will-change:opacity}
+.hd-pollen{inset:0;opacity:0;will-change:opacity}
+.hd-stars{inset:0;opacity:0;will-change:opacity}
+.hd-mote{position:absolute;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,#FFF6C8 0 35%,rgba(255,230,140,0) 70%)}
+.hd-star{position:absolute;height:auto}
+/* felt birds: three wing frames on one body registration (up, mid, down, mid) */
+.hd-bird{position:absolute;display:block;width:var(--bw,40px);aspect-ratio:128/126}
+.hd-bird img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0}
+.hd-bird img:first-child{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .hd-cloud{animation:hd-drift var(--d,160s) linear var(--dl,0s) infinite}
+  :root:not([data-motion=off]) .hd-stage .hd-bird{animation:hd-glide var(--d,38s) linear var(--dl,0s) infinite}
+  :root:not([data-motion=off]) .hd-bird img{animation:hd-flap .64s steps(1) infinite}
+  :root:not([data-motion=off]) .hd-bird img:nth-child(2){animation-name:hd-flap2}
+  :root:not([data-motion=off]) .hd-bird img:nth-child(3){animation-name:hd-flap3}
+  :root:not([data-motion=off]) .hd-mote{animation:hd-rise var(--d,14s) linear var(--dl,0s) infinite}
+  :root:not([data-motion=off]) .hd-star{animation:hd-twinkle var(--d,3.4s) ease-in-out var(--dl,0s) infinite alternate}
+}
+@keyframes hd-drift{from{transform:translate3d(-40vw,0,0)}to{transform:translate3d(110vw,0,0)}}
+@keyframes hd-glide{0%{transform:translate3d(-12vw,0,0)}50%{transform:translate3d(50vw,-3vh,0)}100%{transform:translate3d(112vw,1vh,0)}}
+@keyframes hd-flap{0%{opacity:1}25%{opacity:0}75%{opacity:0}}
+@keyframes hd-flap2{0%{opacity:0}25%{opacity:1}50%{opacity:0}75%{opacity:1}}
+@keyframes hd-flap3{0%{opacity:0}50%{opacity:1}75%{opacity:0}}
+@keyframes hd-rise{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:.9}85%{opacity:.8}100%{transform:translate3d(28px,-46vh,0);opacity:0}}
+@keyframes hd-twinkle{from{opacity:.35;transform:scale(.86)}to{opacity:1;transform:scale(1)}}
+.hd-stage.ffm-paused *,.hd-world.ffm-paused *,.hd-fx.ffm-paused *,.hd-night.ffm-paused *,.hd-edge.ffm-paused{animation-play-state:paused!important}
+/* motion on: the sections let the fixed sky show through (the dusk band keeps its own sky so its white text is always on dark) */
+.hd-live .hc-doors,.hd-live .hc-status,.hd-live .hc-friends,.hd-live .hc-day,.hd-live .hc-proof,.hd-live .hc-trust{background:transparent}
+.hd-live .hd-plate{display:none}
+:root:not(.hd-live) .hd-stage{display:none}
+
+/* ---------------------------------------------------------------- hidden surprises (pointer toys; aria-hidden; never over content) */
+.hd-fx{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:clip}
+.hd-toy{position:absolute;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.hd-toy[data-blocked]{display:none}
+.hd-toy img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.hd-toy-cloud{width:clamp(84px,8vw,104px);aspect-ratio:480/282}
+.hd-toy-bird{width:clamp(40px,3.6vw,52px);aspect-ratio:128/126}
+.hd-toy-bird img{position:absolute;inset:0}
+.hd-toy-flower{width:46px;height:46px;display:grid;place-items:center}
+.hd-toy-moon{aspect-ratio:160/156}
+.hd-toy-flower img{width:30px}
+.hd-toy-star{width:44px;height:44px;display:grid;place-items:center}
+.hd-toy-star img{width:28px}
+.hd-toy-moon{width:clamp(56px,6vw,82px)}
+.hd-toy-firefly{width:44px;height:44px;display:grid;place-items:center}
+.hd-toy-firefly img{width:28px}
+.hd-glow{position:absolute;inset:-12px;width:auto!important;mix-blend-mode:screen;opacity:.9}
+.hd-drop{position:absolute;top:0;left:0;width:14px;height:auto;pointer-events:none;z-index:4}
+.hd-burst{position:absolute;width:90px;height:auto;pointer-events:none;z-index:4}
+.hd-rainbow{position:absolute;width:clamp(160px,20vw,260px);height:auto;pointer-events:none;z-index:0;opacity:0}
+.hd-found{position:absolute;z-index:6;pointer-events:none;white-space:nowrap;font:600 12.5px/1 var(--display);color:#0A2B38;background:#FFF6DA;padding:7px 11px 7px 9px;border-radius:999px;
+  box-shadow:0 8px 18px -8px rgba(10,43,56,.5),inset 0 0 0 1.5px rgba(231,169,40,.65);outline:1.5px dashed rgba(138,97,8,.55);outline-offset:-5px;display:inline-flex;align-items:center;gap:6px}
+.hd-found img{width:16px;height:auto}
+@media (hover:hover) and (pointer:fine){.hd-toy:hover{filter:brightness(1.06) drop-shadow(0 4px 8px rgba(10,43,56,.18))}}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .hd-toy-cloud{animation:hd-bob 6s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .hd-toy-firefly{animation:hd-fly var(--d,9s) ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .hd-toy-firefly .hd-glow{animation:hd-glowp 2.2s ease-in-out infinite alternate}
+}
+@keyframes hd-bob{from{transform:translate3d(0,0,0)}to{transform:translate3d(10px,-6px,0)}}
+@keyframes hd-fly{0%{transform:translate3d(0,0,0)}33%{transform:translate3d(26px,-10px,0)}66%{transform:translate3d(-10px,-18px,0)}100%{transform:translate3d(18px,6px,0)}}
+@keyframes hd-glowp{from{opacity:.45}to{opacity:1}}
+
+/* ---------------------------------------------------------------- night: the friends' strip above the footer, on Home */
+body:has(#view .hc-close) .ff-footscene{padding-top:clamp(64px,7vw,92px);background:#0E2462}
+.hd-night{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hd-nightsky{position:absolute;inset:0;background-color:#0E2462;background-repeat:no-repeat;background-size:max(100%,760px) auto;background-position:0 62%}
+.hd-nightmeadow{position:absolute;left:0;right:0;bottom:0;height:clamp(56px,6vw,96px);background-repeat:repeat-x;background-position:50% 100%;background-size:auto 100%;
+  background-image:image-set(url("img/plush/world8/meadow-front-night-960.webp") 1x,url("img/plush/world8/meadow-front-night-1916.webp") 2x)}
+body:has(#view .hc-close) .ff-footground{opacity:0}
+body:has(#view .hc-close) .ff-footlabel{background:rgba(8,18,52,.78);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.hd-night .hd-star{position:absolute}
+.hd-ffly{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#FFF4B0 0 30%,rgba(255,226,120,.55) 45%,rgba(255,226,120,0) 70%);mix-blend-mode:screen}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .hd-ffly{animation:hd-ffly var(--d,11s) ease-in-out var(--dl,0s) infinite alternate}
+}
+@keyframes hd-ffly{0%{transform:translate3d(0,0,0);opacity:.2}30%{opacity:1}50%{transform:translate3d(40px,-26px,0);opacity:.6}80%{opacity:1}100%{transform:translate3d(-20px,-50px,0);opacity:.25}}
+/* the footer friends say goodnight: Booker yawns, a few stitched z's drift up */
+.hd-zz{position:absolute;pointer-events:none;width:22px;height:auto;color:#F5E7B0;opacity:0}
+
+@media print{.hd-stage,.hd-world,.hd-edge,.hd-fx,.hd-night{display:none!important}}
+@media (prefers-reduced-data:reduce){.hd-plate,.hd-sky{background-image:none!important}}
+
+/* dark theme: the felt sky is dimmed behind a night glaze and the mist turns dark, so the light text keeps its contrast */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  .hd-stage::after{content:"";position:absolute;inset:0;background:rgba(5,14,22,.55)}
+  .hd-plate{filter:brightness(.55)}
+  .hc-doors .hd-mist,.hc-status .hd-mist{--m:.62}
+  .hc-friends .hd-mist{--m:.7}
+  .hc-day .hd-mist,.hc-proof .hd-mist,.hc-trust .hd-mist{--m:.78}}}
+:root[data-theme=dark] .hd-stage::after{content:"";position:absolute;inset:0;background:rgba(5,14,22,.55)}
+:root[data-theme=dark] .hd-plate{filter:brightness(.55)}
+:root[data-theme=dark] .hc-doors .hd-mist,:root[data-theme=dark] .hc-status .hd-mist{--m:.62}
+:root[data-theme=dark] .hc-friends .hd-mist{--m:.7}
+:root[data-theme=dark] .hc-day .hd-mist,:root[data-theme=dark] .hc-proof .hd-mist,:root[data-theme=dark] .hc-trust .hd-mist{--m:.78}
+/* phones: the 1x felt strips at every pixel density (the felt reads the same; it keeps the rest of Home inside +600 KB at DPR 3) */
+@media (max-width:700px){
+  .hd-edge-clouds{background-image:url("img/plush/world8/div-clouds-700.webp")}
+  .hd-edge-hills,.hd-edge-dusk{background-image:url("img/plush/world8/div-hills-652.webp")}
+  .hd-edge-flowers{background-image:url("img/plush/world8/div-flowers-700.webp")}
+  .hd-edge-grass{background-image:url("img/plush/world8/div-grass-700.webp")}
+  .hd-nightmeadow{background-image:url("img/plush/world8/meadow-front-night-960.webp")}
+}

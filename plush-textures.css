@@ -1,0 +1,38 @@
+/* Signature textures (wave 5): seamless felt and meadow tiles derived from the plush art (img/plush/textures, no generative
+   model). One rule gives them meaning: STORY-WORLD SURFACES ARE FELT. Bands and cards where story-world characters live sit on
+   felt; real-world content (prices, rules, real people, placeholders for real photos) stays on plain paper. Characters stand on
+   a strip of meadow grass.
+
+   Tokens            tile                         used for
+   --tx-felt         fleece-gray-light            story-world bands (.tx-felt): Ms. June, Rowan, the friend picker
+   --tx-cloud        cloud-cotton-light           the town and the 404 (.tx-cloud)
+   --tx-cream        felt-cream-light             story-world cards (.tx-cream): guide call-outs, cameos
+   --tx-meadow       meadow-grass (full colour)   the ground strip under character rows (.tx-ground); never behind text
+   --tx-meadow-light meadow-grass-light           outside and movement bands (.tx-meadow)
+   The light tiles were contrast-checked behind #536761 text (W5ASSETS); every text colour used on them here is darker.
+   Story-world bands are light "felt islands" in both themes (their text colours are fixed dark, like the supporting-cast
+   components they dress), so the tiles stay on in dark mode. Off in print and with prefers-reduced-data. */
+:root{
+  --tx-felt:url("img/plush/textures/fleece-gray-light-512.webp");
+  --tx-cloud:url("img/plush/textures/cloud-cotton-light-512.webp");
+  --tx-cream:url("img/plush/textures/felt-cream-light-512.webp");
+  --tx-meadow:url("img/plush/textures/meadow-grass-512.webp");
+  --tx-meadow-light:url("img/plush/textures/meadow-grass-light-512.webp");
+  --tx-tile:384px;
+  --tx-felt-c:#F6F0EA; --tx-cloud-c:#F9F5F0; --tx-cream-c:#F8F3E9; --tx-meadow-c:#F1EEE1; --tx-ground-c:#8C9945;
+}
+.tx-felt{background-color:var(--tx-felt-c);background-image:var(--tx-felt);background-size:var(--tx-tile)}
+.tx-cloud{background-color:var(--tx-cloud-c);background-image:var(--tx-cloud);background-size:var(--tx-tile)}
+.tx-cream{background-color:var(--tx-cream-c);background-image:var(--tx-cream);background-size:var(--tx-tile)}
+.tx-meadow{background-color:var(--tx-meadow-c);background-image:var(--tx-meadow-light);background-size:var(--tx-tile)}
+/* The ground: a soft felt-grass strip with a stitched top edge. Decorative only (aria-hidden spans). */
+.tx-ground{display:block;height:12px;border-radius:999px;background-color:var(--tx-ground-c);background-image:var(--tx-meadow);background-size:160px;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 2px 3px rgba(40,52,10,.18)}
+
+@media (prefers-reduced-data: reduce){
+  .tx-felt,.tx-cloud,.tx-cream,.tx-meadow,.tx-ground{background-image:none}
+}
+@media print{
+  .tx-felt,.tx-cloud,.tx-cream,.tx-meadow{background:none !important}
+  .tx-ground{display:none !important}
+}

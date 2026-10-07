@@ -1,0 +1,179 @@
+{
+ "version": 1,
+ "generated": "2026-10-07",
+ "lane": "W8 PAGE (integration of the W8 video lane); W9 talking intro (owner-approved 2026-10-07)",
+ "story_art_label": "Story-world animation (plush illustration brought to life with Seedance 2.5 from approved Futures Friends art). Never footage of the real Futures Learning Center.",
+ "receipts": "~/Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/plush-generated/video-w8/RECEIPTS.json",
+ "receipts_w9_intro": "~/Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/plush-generated/video-w9-intro/RECEIPTS.json",
+ "source": "~/futures-friends-video/web/ (INTEGRATION.md); only the AV1 WebM, H.264 MP4 and WebP poster of each clip are published (VP9 WebM and JPEG posters skipped for repo weight); W9 intro: ~/futures-friends-video/web-intro/ (INTEGRATION.md): AV1 WebM (+Opus), H.264 MP4 (+AAC), WebP posters and the captions file (JPEG posters skipped)",
+ "used_by": "home-calm.js VIDEOS + home-video.js (VIDEOS.intro) + captions.js (ff-intro-titled.en.vtt) + loop-widget.js (WATCH)",
+ "retired": {
+  "note": "The silent 8 s hello loop (wave 8) was replaced on Home by the W9 talking intro on 2026-10-07 and removed from video/ (tests/site-hygiene.test.js G42: no unreferenced files). Last in the repo at 8f93ab2..31d9aa5; byte-identical masters remain in ~/futures-friends-video/web/. 2026-10-07: the untitled talking intro (ff-intro-16x9/4x5 and ff-intro.en.vtt) was replaced by the owner-approved titled version (ff-intro-titled-*, ~/futures-friends-video/web-intro-titled/README.md) and moved out of video/ to the Trash; the untitled masters remain in ~/futures-friends-video/web-intro/.",
+  "files": [
+   {
+    "file": "video/ff-hello-16x9-poster.webp",
+    "bytes": 170602,
+    "sha256": "9d5c5ed7940b02c865633f59271087ee4835c77c0df1fc15e0e13e638b5fc1c4"
+   },
+   {
+    "file": "video/ff-hello-16x9.av1.webm",
+    "bytes": 1443044,
+    "sha256": "a4702208501cef1d323025d0094770998bf6388ff3b2aef0230ce5a0e784b110"
+   },
+   {
+    "file": "video/ff-hello-16x9.mp4",
+    "bytes": 1374312,
+    "sha256": "9382802da00bace587cdc341bace4309e498c08b3a3fb4058ecb80b7b8e4169b"
+   },
+   {
+    "file": "video/ff-hello-4x5-poster.webp",
+    "bytes": 109932,
+    "sha256": "a576fd728c4d934b14ee1aff70bc42c0e3300f9f73f36c6a838b601452086164"
+   },
+   {
+    "file": "video/ff-hello-4x5.av1.webm",
+    "bytes": 1301342,
+    "sha256": "e5e5415243383ae08960bdb5f9e668d2930ce27536178b539f1dc0e60f4ef87d"
+   },
+   {
+    "file": "video/ff-hello-4x5.mp4",
+    "bytes": 1314130,
+    "sha256": "b0b1770f1b91044a3177b4f49ece5eff2b203d762cfc04f1d4fb7916141300c9"
+   },
+   {
+    "file": "video/ff-intro-16x9-poster.webp",
+    "bytes": 112860,
+    "sha256": "f479b9404ff8e784f7f53aa0a3e0a0f18a610d0c7aaf19790756f2652af6300f"
+   },
+   {
+    "file": "video/ff-intro-16x9.av1.webm",
+    "bytes": 4440427,
+    "sha256": "93dc0705419e7640f6742aec097e74b4d79650c1c6c5c767c7fbb8da8b5461d5"
+   },
+   {
+    "file": "video/ff-intro-16x9.mp4",
+    "bytes": 6775962,
+    "sha256": "9f64d677f1e57ffe5c6ec085cc01fa36899f871aa2e819d81fe4eabc6f16a721"
+   },
+   {
+    "file": "video/ff-intro-4x5-poster.webp",
+    "bytes": 62836,
+    "sha256": "cec903cb7eedebd6d09d5e923980ce4daee3dbcb88d3363e9079df323aa1c9f9"
+   },
+   {
+    "file": "video/ff-intro-4x5.av1.webm",
+    "bytes": 3596731,
+    "sha256": "2b72849916a5af4af953042be7a2ed9e4040debf61afa02a186b58a4d84bf173"
+   },
+   {
+    "file": "video/ff-intro-4x5.mp4",
+    "bytes": 5271247,
+    "sha256": "fff2393b53c641fd8a042e17ec7e7b8e635e85684ee8cb903abb8245a1328175"
+   },
+   {
+    "file": "video/ff-intro.en.vtt",
+    "bytes": 492,
+    "sha256": "dad94597c78df2951a71bdbbdb91a2ee31a43fef9209644e4a0c4f894dd1af16"
+   }
+  ]
+ },
+ "count": 19,
+ "total_bytes": 34205586,
+ "files": [
+  {
+   "file": "video/ff-friend-booker-4x5-poster.webp",
+   "bytes": 89276,
+   "sha256": "8b6a9de5a8b4496f6fd5b42e788e9a00409b0d495f5c36e3d5f7d88ab888565e"
+  },
+  {
+   "file": "video/ff-friend-booker-4x5.av1.webm",
+   "bytes": 480919,
+   "sha256": "1ed7b47f35a97036cf4b66d1d8727df8247887a7f73199dca59f4abfe467fec2"
+  },
+  {
+   "file": "video/ff-friend-booker-4x5.mp4",
+   "bytes": 534055,
+   "sha256": "67ae97b5d0e99f83e7b72e8f997c971542b4fa1d5c9141ef95443fce635b590e"
+  },
+  {
+   "file": "video/ff-friend-bop-4x5-poster.webp",
+   "bytes": 82386,
+   "sha256": "2dc3142e0863475268ff95744dc6dd33bf72cd97cd6df03fe05e99fc1aa3b8cf"
+  },
+  {
+   "file": "video/ff-friend-bop-4x5.av1.webm",
+   "bytes": 574177,
+   "sha256": "aa1dc2b127b0842b96f5d440fc5df2319edb26e14b6bfbfaa0dc58d037d18b59"
+  },
+  {
+   "file": "video/ff-friend-bop-4x5.mp4",
+   "bytes": 535207,
+   "sha256": "7aa23d2adfbf810db917ce7e952c574177bf383da6521eb1a390c5ccd692a431"
+  },
+  {
+   "file": "video/ff-friend-lumi-4x5-poster.webp",
+   "bytes": 89786,
+   "sha256": "7719bba3330b9ccf29005e47ea36fe26f4b02a8102b04160a4cc490e725bd2a2"
+  },
+  {
+   "file": "video/ff-friend-lumi-4x5.av1.webm",
+   "bytes": 595539,
+   "sha256": "419da1d800f55789d49d0c168cff4d4e0ebc01d0ea404fa00b237eed8a06233f"
+  },
+  {
+   "file": "video/ff-friend-lumi-4x5.mp4",
+   "bytes": 530137,
+   "sha256": "cca7eaf96b5fc039cb0a5e474d13c1e14a23e7292a9e96b2fac0f4ff6ebb4c9d"
+  },
+  {
+   "file": "video/ff-friend-zuri-4x5-poster.webp",
+   "bytes": 89672,
+   "sha256": "06423d7c0e83579a4a26f141f109ca89e0fac17deca7986e5d4c5801327ec75b"
+  },
+  {
+   "file": "video/ff-friend-zuri-4x5.av1.webm",
+   "bytes": 575200,
+   "sha256": "f979a43f4f39712b9872997186291265d34acfed5b1865a1a2f92a35d8579a37"
+  },
+  {
+   "file": "video/ff-friend-zuri-4x5.mp4",
+   "bytes": 538234,
+   "sha256": "2e30a5b5a0f8c96b81a22a5a16a982eaaac3eeaf9d230c2400aa24f75ba5820d"
+  },
+  {
+   "file": "video/ff-intro-titled-16x9-poster.webp",
+   "bytes": 244034,
+   "sha256": "33875201cf9c8aeea708e0e04a337881ce079a6d9a9d51719dea92f2e8d07f5c"
+  },
+  {
+   "file": "video/ff-intro-titled-16x9.av1.webm",
+   "bytes": 6366778,
+   "sha256": "f636ad9d3f93016e23ec77dcccf722f0bcec026ca0fe1a03bd0cbde81e692701"
+  },
+  {
+   "file": "video/ff-intro-titled-16x9.mp4",
+   "bytes": 9425707,
+   "sha256": "7dbfd8db68e3b4906c2711e765089759080083a574157e3e48c6cad5a09f2bf5"
+  },
+  {
+   "file": "video/ff-intro-titled-4x5-poster.webp",
+   "bytes": 176396,
+   "sha256": "2974687e8ae99a97815698e72f9f29a959c17b25dfaf58617adb231b781ed62b"
+  },
+  {
+   "file": "video/ff-intro-titled-4x5.av1.webm",
+   "bytes": 5292151,
+   "sha256": "035bc65c0a2e2c2f2c0be229a9cf4e3ddcbf07313e990fffa964f4339763cb9b"
+  },
+  {
+   "file": "video/ff-intro-titled-4x5.mp4",
+   "bytes": 7985037,
+   "sha256": "78e1855ea2e37233675247cfcc1a1a99d4861c0fc5bce4c29d32ee28db11a298"
+  },
+  {
+   "file": "video/ff-intro-titled.en.vtt",
+   "bytes": 895,
+   "sha256": "01b5017b80c3591f04c565415635c7cf9cb4140691bff673381408eb616c0753"
+  }
+ ]
+}

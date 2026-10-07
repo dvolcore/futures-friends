@@ -1,0 +1,23 @@
+/* Wave 9 VOICES (friend-voices.js + hero-motion.js): the dialogue card's link to the friend's videos, the "sound is off" hint,
+   the speaking indicator in the name tab, and the friend's gentle talking bob. The indicator sits inside the absolutely placed
+   name tab, so speaking never changes the card's size. Moving rules sit behind BOTH motion switches. */
+/* in the card's button row, before the next and close buttons (the card keeps its wave-6 height) */
+.mh-saygo{display:inline-flex;align-items:center;gap:6px;margin-right:auto;min-height:40px;padding:7px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 14px/1.15 var(--body);text-decoration:none}
+.mh-saygo:hover{background:#174B45}
+.mh-saygo:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
+.mh-saygo .px-icon{width:14px;height:14px;flex:none}
+.mh-sayhint{margin:0;font:500 13.5px/1.35 var(--body);color:#4A5A61}
+.mh-saywave{display:none;align-items:flex-end;gap:2px;height:10px;margin-left:7px;vertical-align:-1px}
+.mh-saywave i{display:block;width:3px;height:10px;border-radius:2px;background:currentColor;transform-origin:50% 100%}
+.mh-saywave i:nth-child(2){height:7px}.mh-saywave i:nth-child(3){height:9px}
+.mh-say.is-speaking .mh-saywave{display:inline-flex}
+
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .mh-say.is-speaking .mh-saywave i{animation:ffv-eq .5s ease-in-out infinite alternate}
+  :root:not([data-motion=off]) .mh-say.is-speaking .mh-saywave i:nth-child(2){animation-delay:-.18s}
+  :root:not([data-motion=off]) .mh-say.is-speaking .mh-saywave i:nth-child(3){animation-delay:-.33s}
+  /* the friend's talking bob: the individual translate property, so it adds to the sway and the hop (transforms) underneath */
+  :root:not([data-motion=off]) .ffa-fig.ffm-talking .ffa-hop>img{animation:ffv-talk .34s ease-in-out infinite alternate;transform-origin:50% 100%}
+}
+@keyframes ffv-eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@keyframes ffv-talk{from{translate:0 0}to{translate:0 -2.2%}}

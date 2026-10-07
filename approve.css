@@ -1,0 +1,43 @@
+/* Content approval console (#learn-approve, approve.js). Builds on academy-lms.css. */
+.ap-tabs{margin-top:0}
+.lms-tabs.ap-tabs button{color:var(--ink,#13303B);border-color:var(--line,#D8D2C4);background:#fff}
+.lms-tabs.ap-tabs button:hover{background:var(--paper2,#FBF7EE);color:var(--ink,#13303B)}
+.lms-tabs.ap-tabs [aria-pressed="true"]{background:var(--gold);color:#0A2B38;border-color:var(--gold)}
+.lms-tabs.ap-tabs :focus-visible{outline:3px solid var(--navy,#0A2B38);outline-offset:2px}
+.ap-rel{max-width:240px}
+.ap-rule .lms-row{align-items:flex-start}
+.ap-weeks{display:grid;gap:10px}
+.ap-week h4{margin:0 0 6px;font-size:14px}
+.ap-days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ap-day{display:grid;gap:2px;text-align:left;padding:8px 10px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.ap-day b{font-size:15px}
+.ap-day span{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.ap-day.done{border-color:var(--ok,#2E9E57);background:#F1FAF4}
+.ap-day[aria-current="true"]{border-color:var(--navy,#0A2B38);box-shadow:0 0 0 2px var(--navy,#0A2B38)}
+.ap-day:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ap-daywrap{display:grid;gap:12px;scroll-margin-top:80px}
+.ap-dayhead{align-items:flex-start;gap:10px}
+.ap-rec{display:grid;gap:8px;min-width:0}
+.ap-rec h3{overflow-wrap:anywhere}
+.ap-det{border-top:1px solid var(--line);padding-top:6px}
+.ap-det summary{cursor:pointer;font-weight:600;font-size:14px}
+.ap-prev{display:grid;gap:8px;margin-top:6px;font-size:14px}
+.ap-prev p{margin:0}
+.ap-prev h5{margin:0 0 3px;font-size:13.5px}
+.ap-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+.ap-ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.ap-ul li{overflow-wrap:anywhere}
+.ap-note{border-left:4px solid var(--gold);background:var(--paper2,#FBF7EE);padding:6px 10px;border-radius:8px}
+.ap-prev code{font-size:12px;overflow-wrap:anywhere}
+.ap-d{display:grid;gap:2px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.ap-d p{margin:0}
+.ap-sub{display:grid;gap:2px;padding-left:10px}
+.ap-d del{background:#FDECEA;color:#8E2A1F}
+.ap-d ins{background:#E7F6EC;color:#1F5E36;text-decoration:none}
+.ap-actions{gap:8px;flex-wrap:wrap}
+.ap-ask textarea{width:100%}
+.ap-courses .ap-course{display:grid;gap:8px}
+@media (max-width:760px){
+  .ap-days{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ap-dayhead .btn{width:100%}
+}

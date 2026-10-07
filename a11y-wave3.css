@@ -1,0 +1,89 @@
+/* Wave 3 G: accessibility and polish layer. Loaded last. Contrast, focus and target-size fixes that must not change brand or content.
+   Friend colours stay as fills; where a friend colour is used as TEXT, it is mixed toward black until it clears 4.5:1 (--ci), and
+   where it is a FILL behind white text, the darker "-ink" shade (the one the Family Library already uses) is used instead. */
+:root{--ci-mix:68%;--booker-ink:#23589F;--lumi-ink:#B02F6C;--zuri-ink:#1B7541;--bop-ink:#A84908}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ci-mix:100%;--booker-ink:var(--booker);--lumi-ink:var(--lumi);--zuri-ink:var(--zuri);--bop-ink:var(--bop)}}
+:root[data-theme="dark"]{--ci-mix:100%;--booker-ink:var(--booker);--lumi-ink:var(--lumi);--zuri-ink:var(--zuri);--bop-ink:var(--bop)}
+
+/* friend name, Bop's line, the talk-card Before/During/After labels, Academy course art */
+.friend .nm,.tk-bopline,.tk-qs b,.px-courseart span,.px-courseart b{color:color-mix(in srgb,var(--c,var(--accent)) var(--ci-mix),#000)}
+.px-courseart span,.px-courseart b{color:color-mix(in srgb,var(--accent) var(--ci-mix),#000)}
+.sample{color:var(--gold-deep);border-color:var(--gold-deep)}
+
+/* "The learning loop" and "Eat the Rainbow" bands: same hues, deep enough to carry white text */
+.loop>div:nth-child(2){background:var(--booker-ink)!important}
+.loop>div:nth-child(3){background:var(--zuri-ink)!important}
+.loop>div:nth-child(4){background:var(--bop)!important;color:#0A2B38}   /* Bop's orange stays, with navy text */
+.loop>div:nth-child(4) i,.loop>div:nth-child(4) span{opacity:1}
+.loop>div:nth-child(4)::after{border-color:rgba(10,43,56,.45)}
+.loop>div:nth-child(5){background:var(--lumi-ink)!important}
+.loop>div:nth-child(2) b{color:#fff!important}
+.bands>div:nth-child(1){background:#C23B2F!important}
+.bands>div:nth-child(2){background:#E8761E!important;color:#0A2B38}
+.bands>div:nth-child(3){background:#F2C94C!important;color:#0A2B38}
+.bands>div:nth-child(4){background:#1B7541!important}
+.bands>div:nth-child(6){background:#7A6648!important}
+
+/* Season One slate and talk cards sitting on navy */
+.tk-sc{color:#F4F8F9;color:color-mix(in srgb,var(--c) 45%,#fff)}
+.tk-foot{background:transparent;padding:10px 0 0;margin:0;border-top:1px dashed var(--line);color:var(--muted)}   /* was a navy block: the global footer rule leaked into the card */
+.band-navy .ffx-report .muted,.band-navy .ffx-report .small{color:var(--muted)}
+:root .ffx-report .top{background:var(--lumi-ink);color:#fff}
+.demo .top .sample{color:var(--gold);border-color:var(--gold)}
+.ex-weeks small,.ex-weekcopy dt{color:#46596B}
+
+/* screen-reader-only text (the class was used in three places and defined in none) */
+.sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* an h2 that keeps the size of the h3 cards around it (heading outline fixed without moving the design) */
+h2.h3{font-size:20px}
+/* a scrolling table that is a keyboard stop needs a visible focus ring */
+.tw[data-ff-scroll]:focus-visible{outline:3px solid #2F6FC0;outline-offset:2px}
+
+/* Hub: domain headings carry the friend colour as text; stat captions on a light card must not use the on-dark grey */
+.card.p2-dom h3{color:color-mix(in srgb,var(--c) var(--ci-mix),#000)}
+.card .stat span,.card .stat .muted{color:var(--muted)}
+
+/* a programmatic focus target (a page, a day card) shows where focus went when the keyboard put it there */
+.fl-stage:focus-visible,#u1-day:focus-visible{outline:3px solid #2F6FC0;outline-offset:4px;border-radius:6px}
+[tabindex="-1"]:focus:not(:focus-visible){outline:none}
+
+/* Keyboard focus ring: one colour per surface, so it stays >= 3:1 against what it sits on (WCAG 2.4.11 / 1.4.11). Gold on white was 2.1:1.
+   Blue on light surfaces, the existing light gold on the navy ones. !important because many components set their own ring. */
+:root{--focus-ring:#2F6FC0}
+body>footer,.band-navy,.phero,.hero,.cta,.lms-hero,.fl-hero,.ffx-tv,.px-utility,.px-homehero,.ffhl,.ff-home-rooms,.u1-hero,.wc-hero{--focus-ring:#F5C553}
+:where(a,button,input,select,textarea,summary,video,audio,[tabindex],[role="button"]):focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px}
+
+/* Found by tools/a11y-pixel-contrast.mjs (text on photos, gradients and pseudo-elements, which axe reports as "incomplete") */
+.px-academyband .ff-brand-trigger{color:var(--px-green,#174B45);font-size:14px;font-weight:600}   /* white text on a white band: the button was invisible */
+.px-academyband .ff-brand-trigger:hover{color:var(--px-ink,#193B38)}
+.cover{background:var(--ci,var(--c))}                                                               /* white title on the friend's deep shade */
+.fl-cover-n{background:rgba(10,43,56,.82);padding:2px 8px;border-radius:999px;right:8px}           /* "Book 2" sat on the pale artwork */
+:root .ffx-pillar .ic{color:color-mix(in srgb,var(--c) var(--ci-mix),#000)}
+.ff-home-rooms[data-interactive] .ffhr-motto{color:#FFF9CC}
+@media (max-width:760px){
+  .ffa-fig figcaption b,.wc-fig figcaption b{background:rgba(10,43,56,.72);padding:3px 10px;border-radius:999px}
+  .ex-herolink{background:rgba(255,255,255,.9);padding:5px 12px;border-radius:999px}
+}
+
+/* WCAG 2.4.11 Focus Not Obscured: the header is sticky (120px, 102px on a phone) and the to-top button is fixed, so a focused control must be scrolled clear of both */
+html{scroll-padding-top:132px;scroll-padding-bottom:64px}
+@media (max-width:760px){html{scroll-padding-top:114px}}
+
+/* WCAG 1.4.10 Reflow at 320px: long words, addresses and wide buttons wrap instead of forcing a sideways page scroll */
+#view p,#view h3,#view li,#view .tag,#view .btn{overflow-wrap:anywhere}
+#view .tag,#view .btn{max-width:100%}
+.legal{grid-template-columns:minmax(0,1fr)}
+#view .grid>*,#view .legal>*,#view .card>*{min-width:0}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+
+/* The release status strip (release-strip.js) now sits between the Home hero and the three doors, so the doors no longer overlap the dark hero: their heading is dark text on the page, with no pull-up */
+#rt-strip+.fj-doors,.rt-strip+.fj-doors{margin-top:0;padding-top:28px}
+#rt-strip+.fj-doors .fj-doorshead,#rt-strip+.fj-doors .fj-doorshead h2,#rt-strip+.fj-doors .fj-compare,.rt-strip+.fj-doors .fj-doorshead,.rt-strip+.fj-doors .fj-doorshead h2,.rt-strip+.fj-doors .fj-compare{color:var(--ink)}
+#rt-strip+.fj-doors .fj-doorshead :focus-visible,.rt-strip+.fj-doors .fj-doorshead :focus-visible{outline-color:#2f6fc0}
+:root .td-seg{background:var(--zuri-ink)}
+:root .td-seg:nth-child(2n){background:var(--booker-ink)}
+
+/* #curriculum hero note got longer (release strip wave): keep it inside the copy column, on a light plate, clear of the friends */
+.ex-heronote{display:block;max-width:min(100%,400px);background:rgba(255,255,255,.92);color:#233C50;padding:6px 10px;border-radius:8px;white-space:normal}

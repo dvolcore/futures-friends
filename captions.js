@@ -1,0 +1,110 @@
+/* Captions and transcripts for every site video (launch checklist D156).
+   One registry, used by every player: features.js player(), the Academy overview (premium.js), the family watch shelf
+   (family-library.js), the logo reveal (brand-reveal.js); the LMS players read captions_url / transcript from each lesson instead.
+   Rules:
+   - A <track kind="captions" srclang="en" default> is written only when a real, human-checked .vtt file is registered here.
+   - A transcript toggle is written only when a real transcript is registered here.
+   - Nothing is invented. A silent clip has nothing spoken to caption. A placeholder clip (none is on the site since the
+     gap fill of 2026-10-07 retired episode-sample.mp4) would say "Captions coming with the final video"; each final video brings its own files.
+     The Academy welcome (academy-welcome.mp4) was a silent placeholder until W10 (2026-10-07); it is now the finished sample lesson.
+   To publish captions for a video: add the .vtt next to it and register it, for example
+     'video/name.mp4': { vtt: 'video/name.en.vtt', transcript: 'Every spoken word and on-screen text, as plain paragraphs.' } */
+(function () {
+  'use strict';
+  const INTRO = "[Title] The felt Futures Friends logo flies in: Meet the Futures Friends\n\nBooker: Hi! I'm Booker. I love to learn, even when it's tricky!\n\nLumi: I'm Lumi! I help everyone feel like they belong.\n\nZuri: I'm Zuri! Let's explore and find out together!\n\nBop: And I'm Bop! Move your body, grow your mind!\n\nAll four friends: We're the Futures Friends!\n\n[End card] Futures Friends. Learn. Move. Explore. Belong. Futures Friends \u00b7 a program of Futures Learning Center";
+  const CAPS = {
+    // Academy sample lesson "Meet the Friends" (W10, 2026-10-07; receipts plush-generated/video-w10-academy): Ms. June (story-world
+    // teacher) presents, the four friends say their approved intro lines. Captions checked word for word against the audio (whisper small.en).
+    'video/academy-welcome.mp4': { vtt: 'video/academy-welcome.en.vtt', transcript: "[Title card] Futures Friends Training Academy. Meet the Friends: Booker, Lumi, Zuri and Bop. Four friends, four pillars, one program.\n\nMs. June: Welcome to the Futures Friends Training Academy. I'm Ms. June, a teacher in our story world. Here, grown-ups learn how the friends work in the classroom.\n\nMs. June: Let's meet the four friends. Each one owns two pillars of the whole-child day.\n\n[Card: Booker, The Brave Little Learner. Pillars: Learn, Smile.] Booker: Hi! I'm Booker. I love to learn, even when it's tricky! Ms. June: Booker owns Learn and Smile.\n\n[Card: Lumi, The Kindness Keeper. Pillars: Belong, Reset.] Lumi: I'm Lumi! I help everyone feel like they belong. Ms. June: Lumi owns Belong and Reset.\n\n[Card: Zuri, The Curious Explorer. Pillars: Explore, Nourish.] Zuri: I'm Zuri! Let's explore and find out together! Ms. June: Zuri owns Explore and Nourish.\n\n[Card: Bop, The Mighty Mover. Pillars: Move, Outside.] Bop: And I'm Bop! Move your body, grow your mind! Ms. June: Bop owns Move and Outside.\n\nMs. June: Our learning loop has six steps: watch, talk, do, move, explore, take home. Take home gives families a question and an activity to share.\n\nMs. June: Use the friends as steady cues. Bop: Ready? Bop and go! Ms. June: ...means time to move. Lumi's Quiet Time invites everyone to slow down.\n\nMs. June: Next is the planned Level 1, Foundations: learning zones, health and safety, and daily routines. Level 2 goes deeper into each friend's zone. [Card: Planned Futures Friends levels, not state credentials. Courses are in development; until a course is approved, it does not count toward required training hours.]\n\nMs. June: Episodes and courses are still in development, and no course counts towards required training hours until it's approved. Small steps, big stories.\n\n[End card] Futures Friends Training Academy. Small steps. Big stories. Story-world characters. Episodes and courses are in development." },
+    'video/ff-logo-reveal-navy.mp4': { silent: true },
+    // Bop at Home activity videos (titled versions, 2026-10-07, ~/futures-friends-video/web-activities): a 4 s title card, Bop's
+    // activity, an end card. Captions shifted +4.000 s by the video lane; the transcripts are its .txt files, word for word.
+    'video/act-elephant-stomp.mp4': { vtt: 'video/act-elephant-stomp.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Elephant Stomp & Sway. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Stomp with me! Right, left!\n\nBop: Now sway, sway, like a gentle tree.\n\nBop: One, two! Your turn!\n\nBop: Stomp and sway! Great job!\n\nBop: Freeze... you did it!\n\nBop: Ready? Bop and go!\n\nBop: Let's do it again!\n\nBop: Stomp your heavy elephant feet...\n\nBop: One, two, three!\n\nBop: Now swing your trunk from side to side...\n\nBop: Swish... swish!\n\nBop: Slow... down...\n\nBop: Now you're a sleepy elephant.\n\nBop: Shhh... sleepy elephant.\n\nBop: Good morning, elephant! Time to wake up!\n\nBop: Let's be elephants sitting down.\n\nBop: Everybody can do it!\n\nBop: Pat your knees like elephant feet...\n\nBop: One, two, three!\n\nBop: Now make a big trunk with both arms.\n\nBop: Swing... and swing... and swing!\n\nBop: Ta-da!\n\nBop: Sitting or standing, you did it!\n\nBop: Now let's do it very, very quietly.\n\nBop: Shhh.\n\nBop: Quiet knee pats...\n\nBop: One, two, three.\n\nBop: Now a slow, quiet trunk.\n\nBop: Hum with me. [Bop hums softly]\n\nBop: Now let's stand up tall!\n\n[End card] Great moving, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    'video/act-trunk-reach.mp4': { vtt: 'video/act-trunk-reach.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Trunk Reach. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Let's play Trunk Reach!\n\nBop: There's an apple way up high!\n\nBop: Reach your trunk up high... and pick it!\n\nBop: How high can your trunk go today?\n\nBop: Yum! One apple!\n\n[End card] Great reaching, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    'video/act-freeze-try-again.mp4': { vtt: 'video/act-freeze-try-again.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Freeze & Try Again. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Let's play Freeze and Try Again!\n\nBop: When the music stops... freeze!\n\n[Bop hums along to the music]\n\n[Music stops] Freeze!\n\n[Bop giggles]\n\nBop: Now try again!\n\n[Bop hums along to the music]\n\n[Music stops] Freeze!\n\n[Bop giggles]\n\nBop: Now try again!\n\nBop: March with me, knees up high!\n\n[Bop hums along to the music]\n\n[Music stops] Freeze!\n\nBop: Now try again!\n\n[Bop giggles and hums along to the music]\n\n[End card] Great freezing, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    'video/act-animal-walks.mp4': { vtt: 'video/act-animal-walks.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Animal Walks. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Let's do Animal Walks!\n\nBop: Which animal will you be?\n\nBop: I'll be an elephant first.\n\nBop: Big, heavy steps!\n\nBop: Switch! Now walk like a big bear!\n\nBop: Can you walk like a bear?\n\nBop: Stand up tall with me.\n\nBop: Switch! Now hop like a little bunny!\n\nBop: Small hops. Ready?\n\nBop: Can you hop like a bunny?\n\nBop: Hop with me!\n\n[Upbeat music]\n\n[End card] Great walking, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    'video/act-flamingo-balance.mp4': { vtt: 'video/act-flamingo-balance.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Flamingo Balance. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Let's be flamingos!\n\nBop: It's Flamingo Balance!\n\nBop: Stand tall, and hold the wall or a grown-up's hand.\n\nBop: Lift one foot a little... and count with me!\n\nBop: One... two... three... four... five!\n\nBop: Wobbles are welcome!\n\nBop: Ready for the other foot?\n\nBop: Now the other foot!\n\nBop: Lift it a little... and count with me!\n\nBop: One... two... three... four... five!\n\nBop: Wobbles are welcome!\n\nBop: Now be a flamingo with a wing!\n\nBop: Stretch your other arm out wide.\n\nBop: One... two... three... four... five!\n\n[End card] Great balancing, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    'video/act-clap-back.mp4': { vtt: 'video/act-clap-back.en.vtt', transcript: "[Title card] Futures Friends. Movement break: Clap-Back Rhythm. Move along with Bop.\n\nBop: Hi, friends! I'm Bop.\n\nBop: Let's play Clap-Back!\n\nBop: I clap... then you clap it back.\n\nBop: Listen!\n\n[Clap! Clap! Clap!]\n\nBop: Your turn!\n\nBop: Listen!\n\n[Clap! Clap! Clap!]\n\nBop: Your turn!\n\nBop: Great clapping!\n\nBop: Soon it's your turn to lead!\n\nBop: Listen! One clap... then two.\n\n[Clap!] ... [Clap! Clap!]\n\nBop: Your turn!\n\nBop: Listen! Two claps... then one.\n\n[Clap! Clap!] ... [Clap!]\n\nBop: Your turn!\n\nBop: You heard the wait!\n\nBop: Great listening!\n\n[End card] Great clapping, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    // Move Along with Bop (owner-approved 2026-10-07): titled version (4 s intro, 5 s outro); captions timed by whisper.cpp small.en and shifted +4.000 s; every word matches Bop's approved script.
+    'video/bop-move-along.mp4': { vtt: 'video/bop-move-along.en.vtt', transcript: "[Title card] Move Along with Bop: Elephant Stomp & Sway.\n\nHi, friends! I'm Bop. Stomp with me! Right, left!\n\nNow sway, sway, like a gentle tree. One, two! Your turn!\n\nStomp and sway! Great job! Freeze... you did it!\n\n[End card] Great moving, friends! Learn. Move. Explore. Belong. A Futures Friends movement break." },
+    // W11 friend play-along videos (2026-10-07, ~/futures-friends-video/web-activities): titled like the Bop videos (+4.000 s captions);
+    // every caption line is the scripted line, checked against a whisper small.en transcript of the selected take.
+    'video/act-lumi-calm-breath.mp4': { vtt: 'video/act-lumi-calm-breath.en.vtt', transcript: "[Title card] Futures Friends. Calm corner: Smell the Flower, Blow the Candle. Breathe with Lumi.\n\nLumi: Hi, friends. I'm Lumi.\n\nLumi: When feelings get big, we can breathe together.\n\nLumi: Here's my flower... and my candle.\n\nLumi: Smell the flower...\n\nLumi: Blow the candle...\n\nLumi: How does your body feel now?\n\n[End card] Calm breathing, friends! Learn. Move. Explore. Belong. A Futures Friends play-along video." },
+    'video/act-zuri-wonder-loop.mp4': { vtt: 'video/act-zuri-wonder-loop.en.vtt', transcript: "[Title card] Futures Friends. Wonder time: Zuri’s Wonder Loop. Explore with Zuri.\n\nZuri: Hi, friends! I'm Zuri.\n\nZuri: Notice. What do you see?\n\nZuri: Tiny petals!\n\nZuri: Guess. What will happen if I blow on it?\n\nZuri: Let's try!\n\nZuri: Was it what you thought? It wiggled!\n\nZuri: I wonder, I wonder... what happens if we try?\n\n[End card] Great wondering, friends! Learn. Move. Explore. Belong. A Futures Friends play-along video." },
+    'video/act-lumi-feelings-faces.mp4': { vtt: 'video/act-lumi-feelings-faces.en.vtt', transcript: "[Title card] Futures Friends. Feelings: Feeling Faces. with Lumi.\n\nLumi: Hi, friends. I'm Lumi.\n\nLumi: Let's make feeling faces. Copy me!\n\nLumi: Happy!\n\nLumi: Sad.\n\nLumi: Surprised!\n\nLumi: Sleepy...\n\nLumi: Every feeling is okay.\n\n[End card] Great faces, friends! Learn. Move. Explore. Belong. A Futures Friends play-along video." },
+    'video/act-booker-brave-reader.mp4': { vtt: 'video/act-booker-brave-reader.en.vtt', transcript: "[Title card] Futures Friends. Read along: Brave Reader Steps. Read along with Booker.\n\nBooker: Hi, friends! I'm Booker.\n\nBooker: A new word? Let's be brave readers!\n\n[On screen: a word card with a red kite picture from Booker's book, the word KITE in big letters and kite in small letters under it.]\n\nBooker: First, look at the picture for a clue.\n\n[Step 1, Look at the picture: the kite picture lights up. Clue!]\n\nBooker: Say the first sound... kuh, kuh, kuh.\n\n[Step 2, Say the first sound: the letter K lights up, with /k/ under it.]\n\nBooker: Slide your finger, slow as honey.\n\n[Step 3, Slide your finger: a paw slides under K, I, T, E and each letter lights up: k... i... t...]\n\nBooker: Kite!\n\n[Step 4, Read the word: the whole word KITE lights up.]\n\nBooker: Not quite? That's okay.\n\nBooker: Big breath. Brave heart. I can try again!\n\n[On screen: Big breath. Brave heart. I can try again!]\n\n[End card] Brave reading, friends! Learn. Move. Explore. Belong. A Futures Friends play-along video." },
+    // The four friends' talking intro on Home (owner-approved 2026-10-07, ~/futures-friends-video/web-intro/INTEGRATION.md): one caption
+    // file with speaker names, the same timing for the 16:9 and the 4:5 cut; every word matches the approved script.
+    // Titled version (owner-approved 2026-10-07, ~/futures-friends-video/web-intro-titled/README.md): a felt 3D title, the same
+    // friends' footage from 6.000 s (captions shifted +6.000 s), then the poster end card.
+    'video/ff-intro-titled-16x9.mp4': { vtt: 'video/ff-intro-titled.en.vtt', transcript: INTRO },
+    'video/ff-intro-titled-4x5.mp4': { vtt: 'video/ff-intro-titled.en.vtt', transcript: INTRO },
+    // Moments from the Clubhouse (Episode One sneak peek, gap fill 2026-10-07): captions timed with whisper.cpp small.en, words = the script lines
+    // (checked against the audio); the newcomer is credited as "New friend" because the character's name is not final.
+    'video/moments/ff-moment-lumi-hello-choices.mp4': { vtt: 'video/moments/ff-moment-lumi-hello-choices.en.vtt', transcript: 'Lumi: Hug, high-five, wave or space?\n\nNew friend: Wave.\n\nZuri: One eye works. Huh.' },
+    'video/moments/ff-moment-zuri-small-wave.mp4': { vtt: 'video/moments/ff-moment-zuri-small-wave.en.vtt', transcript: 'Zuri: Two eyes is harder.\n\nNew friend: You can try.\n\nZuri: Small wave. Same happy?' },
+    'video/moments/ff-moment-bop-two-waves.mp4': { vtt: 'video/moments/ff-moment-bop-two-waves.en.vtt', transcript: 'Bop: Two waves.\n\nNew friend: Pick one.' },
+    'video/moments/ff-moment-lumi-hands-close.mp4': { vtt: 'video/moments/ff-moment-lumi-hands-close.en.vtt', transcript: 'Lumi: I almost hugged.\n\nNew friend: Hands can stay here.\n\nLumi: Here.' },
+    'video/moments/ff-moment-booker-watch-first.mp4': { vtt: 'video/moments/ff-moment-booker-watch-first.en.vtt', transcript: 'Booker: You can watch first.' },
+    // Silent story-world loops on the Watch shelf (#family-videos): no sound track, nothing to caption.
+    'video/ff-hello-4x5.mp4': { silent: true },
+    'video/ff-meadow-ambient-16x9.mp4': { silent: true },
+    'video/ff-friend-booker-4x5.mp4': { silent: true },
+    'video/ff-friend-lumi-4x5.mp4': { silent: true },
+    'video/ff-friend-zuri-4x5.mp4': { silent: true },
+    'video/ff-friend-bop-4x5.mp4': { silent: true },
+    // W9 CARDS (2026-10-07): story-world cast animations on the guide cards (supporting-cast.js CLIPS; receipts video/cast/manifest.json).
+    // Talking clips: the .vtt text is the exact line printed on the card (checked against each file); the parents' loops have no sound track.
+    'video/cast/ff-cast-june-welcome.mp4': { vtt: 'video/cast/ff-cast-june-welcome.en.vtt', transcript: "Every grown-up in the room starts as a learner. Let's look closely at what that learning asks of them." },
+    'video/cast/ff-cast-june-two-questions.mp4': { vtt: 'video/cast/ff-cast-june-two-questions.en.vtt', transcript: "In our story world, I ask the children two questions. Good training asks the grown-ups the same two." },
+    'video/cast/ff-cast-june-small-steps.mp4': { vtt: 'video/cast/ff-cast-june-small-steps.en.vtt', transcript: "Small steps. Big stories. A team learns the same way children do: one clear step, practiced until it sticks." },
+    'video/cast/ff-cast-june-notice-wonder.mp4': { vtt: 'video/cast/ff-cast-june-notice-wonder.en.vtt', transcript: "What do you notice about your team? What do you wonder? Bring both questions to the conversation." },
+    'video/cast/ff-cast-hazel-law.mp4': { vtt: 'video/cast/ff-cast-hazel-law.en.vtt', transcript: "First things first: before a grown-up teaches, the law asks who they are and whether they are ready." },
+    'video/cast/ff-cast-moss-standard.mp4': { vtt: 'video/cast/ff-cast-moss-standard.en.vtt', transcript: "Knowing the rule is the start. Showing it, every day, is the standard." },
+    'video/cast/ff-cast-fern-safety.mp4': { vtt: 'video/cast/ff-cast-fern-safety.en.vtt', transcript: "If a grown-up misses a safety question, they go back and learn it again. That is not a failure. That is the point." },
+    'video/cast/ff-cast-bruno-loop.mp4': { silent: true },
+    'video/cast/ff-cast-rose-loop.mp4': { silent: true },
+    'video/cast/ff-cast-sage-loop.mp4': { silent: true },
+    'video/cast/ff-cast-ella-loop.mp4': { silent: true },
+  };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const entry = src => CAPS[String(src || '').split(/[?#]/)[0]] || null;
+  const has = src => { const e = entry(src); return !!(e && e.vtt); };
+  // The <track> for a player. Empty string when no caption file exists, so no player ever points at a missing file.
+  const tracks = src => has(src) ? `<track kind="captions" srclang="en" label="English" src="${esc(entry(src).vtt)}" default>` : '';
+  const transcript = (src, title) => { const e = entry(src); if (!e || !e.transcript) return '';
+    return `<details class="ffcap-tr"><summary>Read the transcript${title ? `<span class="ffcap-vh">: ${esc(title)}</span>` : ''}</summary><div>${String(e.transcript).split(/\n{2,}/).map(p => `<p>${esc(p)}</p>`).join('')}</div></details>`; };
+  // The honest note for a placeholder clip with no captions yet. Final videos with no captions say so plainly too.
+  const note = src => { const e = entry(src); if (e && (e.vtt || e.transcript)) return '';
+    if (e && !e.placeholder) return '';   // a finished silent film (the logo reveal) needs no note: it has no words
+    return `<p class="ffcap-note" role="note"><b>Captions coming with the final video.</b>${e && e.silent ? ' This placeholder clip has no sound and no spoken words.' : ''}</p>`; };
+  const extras = (src, title) => transcript(src, title) + note(src);
+  // The Bop at Home activity videos, one list for every page that shows them (#bop-at-home cards in whole-child.js, the Futures at
+  // Home activity cards and the "Ready? Bop & Go!" picture guide in family-library.js). Literal paths, so the site-hygiene scan sees them.
+  const BOP_ACTS = {
+    'elephant-stomp': { t: 'Elephant Stomp & Sway', src: 'video/act-elephant-stomp.mp4?v=2', poster: 'video/act-elephant-stomp-poster.jpg?v=2' },
+    'trunk-reach': { t: 'Trunk Reach', src: 'video/act-trunk-reach.mp4?v=2', poster: 'video/act-trunk-reach-poster.jpg?v=2' },
+    'freeze-try-again': { t: 'Freeze & Try Again', src: 'video/act-freeze-try-again.mp4?v=2', poster: 'video/act-freeze-try-again-poster.jpg?v=2' },
+    'animal-walks': { t: 'Animal Walks', src: 'video/act-animal-walks.mp4?v=2', poster: 'video/act-animal-walks-poster.jpg?v=2' },
+    'flamingo-balance': { t: 'Flamingo Balance', src: 'video/act-flamingo-balance.mp4?v=2', poster: 'video/act-flamingo-balance-poster.jpg?v=2' },
+    'clap-back': { t: 'Clap-Back Rhythm', src: 'video/act-clap-back.mp4?v=2', poster: 'video/act-clap-back-poster.jpg?v=2' }
+  };
+  // The other friends' play-along videos (W11, 2026-10-07, ~/futures-friends-video/web-activities; receipts in
+  // 11_Website_Movement_Videos/_friends_2026-10-07): same title cards and the same player. who = the friend who leads it. Literal paths.
+  const FRIEND_ACTS = {
+    'booker-brave-reader': { who: 'booker', t: "Brave Reader Steps", src: 'video/act-booker-brave-reader.mp4?v=2', poster: 'video/act-booker-brave-reader-poster.jpg?v=1' },
+    'zuri-wonder-loop': { who: 'zuri', t: "Zuri’s Wonder Loop", src: 'video/act-zuri-wonder-loop.mp4?v=2', poster: 'video/act-zuri-wonder-loop-poster.jpg?v=2' },
+    'lumi-calm-breath': { who: 'lumi', t: "Smell the Flower, Blow the Candle", src: 'video/act-lumi-calm-breath.mp4?v=2', poster: 'video/act-lumi-calm-breath-poster.jpg?v=2' },
+    'lumi-feelings-faces': { who: 'lumi', t: "Feeling Faces", src: 'video/act-lumi-feelings-faces.mp4?v=2', poster: 'video/act-lumi-feelings-faces-poster.jpg?v=2' },
+  };
+  const NAMES = { bop: 'Bop', booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri' };
+  // One player for all of them: it talks, so it never autoplays; native controls, captions on by default, nothing loads before play.
+  const actPlayer = (slug, title) => { const f = FRIEND_ACTS[slug], v = BOP_ACTS[slug] || f; if (!v) return '';
+    const n = NAMES[(f && f.who) || 'bop'], data = f ? `data-friend-act="${esc(slug)}" data-who="${esc(f.who)}"` : `data-bop-act="${esc(slug)}"`;
+    return `<figure class="wc-actvid" ${data}><video controls playsinline preload="none" width="1280" height="720" poster="${esc(v.poster)}" aria-label="${esc(n + ' leads ' + v.t)}"><source src="${esc(v.src)}" type="video/mp4">${tracks(v.src)}</video><figcaption>Watch ${n} do it with you &middot; story-world animation</figcaption>${transcript(v.src, title || v.t)}</figure>`; };
+  // A friend's own videos, in slate order (the friend's video section on #activities/<friend>).
+  const friendActs = who => Object.keys(FRIEND_ACTS).filter(k => FRIEND_ACTS[k].who === who);
+  const API = { CAPS, has, tracks, transcript, note, extras, BOP_ACTS, FRIEND_ACTS, friendActs, actPlayer };
+  if (typeof window !== 'undefined') window.FFCaptions = API;
+  if (typeof module !== 'undefined' && module.exports) module.exports = API;
+})();

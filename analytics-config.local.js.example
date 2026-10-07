@@ -1,0 +1,4 @@
+/* Local test connection to the analytics server in the Futures Friends CRM repo (compose.analytics.yaml, 127.0.0.1:8099).
+   Copy to analytics-config.local.js (git-ignored). Loaded only on localhost / 127.0.0.1.
+   siteId: the PUBLIC website id that `bash analytics/setup-local.sh` prints in the CRM repo. */
+window.FF_ANALYTICS = { url: 'http://127.0.0.1:8099', siteId: '' };

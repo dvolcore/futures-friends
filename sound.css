@@ -1,0 +1,61 @@
+/* Futures Friends wave 8 SOUND: the felt speaker pill (sound.js). Cream felt with a gold running stitch, like the wayfinding card.
+   Bottom-right at every width, directly above the back-to-top button's slot (motion.js .totop, 48 px at right 18 / bottom 18), so it
+   never moves when that button appears. Bottom-left was not clean: the hero cast's name tags at 1280, the wayfinding context card from
+   1440 px. Desktop: "Nature" stacks above "Sound" (narrow, inside the empty right margin on wide screens); phones: side by side.
+   44 px targets. Transform and opacity only for motion; complete and still with motion off. */
+.ffs{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;flex-direction:column;
+  align-items:flex-end;gap:6px;font-family:var(--body,"Poppins",system-ui,sans-serif)}
+/* Phones: two round 44 px icon buttons stacked in the corner, so nothing covers the hero cast (owner check 2026-10-06: the labelled
+   pills sat over Booker, Lumi and Zuri). The words stay as each button's accessible name; on/off shows as the speaker waves / leaf colour
+   plus a gold ring when on. */
+@media (max-width:640px){
+  .ffs{flex-direction:column;align-items:flex-end;gap:8px}
+  .ffs-btn{width:44px;padding:0;justify-content:center;gap:0}
+  .ffs-btn .ffs-l{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .ffs-btn .ffs-st{display:none}
+  .ffs-btn[aria-pressed="true"]{border-color:#E7A928;box-shadow:0 0 0 2px #E7A928,0 6px 16px rgba(10,43,56,.16)}
+  .ffs-nat[aria-pressed="false"] svg{opacity:.55}
+}
+.ffs-btn{appearance:none;position:relative;display:inline-flex;align-items:center;gap:7px;min-height:44px;min-width:44px;margin:0;padding:0 12px 0 10px;border-radius:999px;
+  border:1.5px solid #E6DCCB;background-color:#FBF6EC;background-image:var(--tx-cream,none);background-size:var(--tx-tile,384px);color:#14313D;
+  font:inherit;font-weight:600;font-size:14px;line-height:1;cursor:pointer;box-shadow:0 6px 16px rgba(10,43,56,.16),0 1px 3px rgba(10,43,56,.1);
+  -webkit-tap-highlight-color:transparent}
+.ffs-btn[hidden]{display:none}
+.ffs-btn::after{content:"";position:absolute;inset:4px;border:1.5px dashed rgba(176,122,0,.45);border-radius:999px;pointer-events:none}
+.ffs-btn:hover{box-shadow:0 8px 20px rgba(10,43,56,.2),0 1px 3px rgba(10,43,56,.1)}
+.ffs-btn:focus-visible{box-shadow:0 0 0 2px #fff,0 6px 16px rgba(10,43,56,.16)}
+.ffs-btn svg{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ffs-btn .ffs-spk{fill:#E7A928;stroke:#14313D}
+.ffs-nat svg{color:#3F7F3A}
+.ffs-nat svg path:first-child{fill:#9CC98A}
+.ffs-st{display:inline-grid;place-items:center;min-width:28px;height:20px;padding:0 6px;border-radius:999px;background:#E9E1D2;color:#41545C;font-size:12px;font-weight:700}
+.ffs-btn[aria-pressed="true"] .ffs-st{background:#E7A928;color:#0A2B38}
+.ffs-main[aria-pressed="false"] .ffs-w1,.ffs-main[aria-pressed="false"] .ffs-w2{display:none}
+.ffs-main[aria-pressed="true"] .ffs-x{display:none}
+.ffs-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* the one-time hint: a little felt tag beside (or above) the pill pointing at it; sound.js shows it only where it covers nothing that
+   means something, and it never takes pointer events */
+.ffs-hint{position:absolute;right:calc(100% + 12px);bottom:6px;line-height:18px;padding:7px 12px;border-radius:12px;background:#0A2B38;color:#fff;font-weight:600;font-size:13px;
+  white-space:nowrap;pointer-events:none;box-shadow:0 6px 14px rgba(10,43,56,.22)}
+.ffs-hint::after{content:"";position:absolute;left:100%;top:50%;margin-top:-7px;border:7px solid transparent;border-left-color:#0A2B38}
+.ffs-hint[data-at=above]{right:4px;bottom:calc(100% + 10px)}
+.ffs-hint[data-at=above]::after{left:auto;right:22px;top:100%;margin-top:0;border-left-color:transparent;border-top-color:#0A2B38}
+.ffs-hint[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .ffs-btn{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s}
+  :root:not([data-motion=off]) .ffs-btn:active{transform:scale(.95)}
+  :root:not([data-motion=off]) .ffs-hint{animation:ffs-in .4s cubic-bezier(.2,.8,.2,1) both}
+  :root:not([data-motion=off]) .ffs-main[aria-pressed="true"] .ffs-w2{animation:ffs-wave 1.2s ease-out 1 both}
+}
+@keyframes ffs-in{from{opacity:0;transform:translateX(8px)}}
+@keyframes ffs-wave{from{opacity:0}}
+@media print{.ffs{display:none!important}}
+/* Tucked dock (motion.js FFdock, visual audit 2026-10-07): when words or a control lie under the floating buttons they slide right to a
+   14px tab at the screen edge, so nothing floats on top of text; a tap on the tab brings them back for a few seconds. */
+.ffs-btn{transition:translate .22s cubic-bezier(.2,.8,.2,1),opacity .22s}
+.totop{transition:opacity .3s,transform .3s,translate .22s cubic-bezier(.2,.8,.2,1)}
+.ff-dock-tuck .ffs-btn,.ff-dock-tuck .totop.on{translate:calc(100% + max(18px,env(safe-area-inset-right)) - 14px) 0;opacity:.9}
+.ff-dock-tuck .ffs-btn::after{display:none}
+.ff-dock-tuck .ffs-hint{display:none}
+@media (prefers-reduced-motion:reduce){.ffs-btn,.totop{transition:none}}
+:root[data-motion=off] .ffs-btn,:root[data-motion=off] .totop{transition:none}

@@ -1,0 +1,200 @@
+/* The calm Home page (home-calm.js). A pop-up storybook, quiet edition: the hero is the one loud page; below it a single shelf
+   rises out of the hero with the three audience doors, then cream and white bands with live text, one line of six steps, and a
+   navy close. Tokens only, so light and dark both work. Character art keeps its proportions (brand-art.css guards cut_ images). */
+
+.hc-doors,.hc-friends,.hc-day,.hc-trust,.hc-close{--hc-pad:clamp(48px,5.5vw,72px)}
+.hc-head{display:grid;gap:12px;margin:0 0 clamp(28px,3.5vw,40px)}
+.hc-head p,.hc-doorshead p{max-width:64ch}
+.hc-head h2,.hc-doorshead h2,.hc-trust h2,.hc-close h2{font-size:clamp(28px,3.3vw,42px);letter-spacing:-.01em;color:var(--ink)}
+.hc-head p,.hc-doorshead p{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--muted)}
+
+/* buttons: one shape across the page */
+.hc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 20px;border-radius:999px;border:1.5px solid transparent;background:var(--ink);color:var(--paper);font:600 15px/1.2 var(--body);text-decoration:none;transition:background-color .2s,color .2s,border-color .2s,translate .2s;cursor:pointer}
+.hc-btn .px-icon{width:16px;height:16px;flex:none;transition:translate .2s}
+.hc-btn:hover .px-icon{translate:3px 0}
+.hc-btn-quiet{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.hc-btn-quiet:hover{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.hc-more{display:inline-flex;align-items:center;gap:8px;margin-top:clamp(24px,3vw,36px);font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:color-mix(in srgb,var(--ink) 35%,transparent)}
+.hc-more:hover{text-decoration-color:currentColor}
+.hc-more .px-icon{width:16px;height:16px}
+
+/* ---- the shelf: three doors rising out of the hero */
+.hc-doors{position:relative;z-index:2;padding-block:clamp(48px,5.5vw,72px) clamp(32px,4vw,48px)}
+.hc-doorshead{display:grid;gap:10px;margin:0 0 clamp(72px,7vw,92px)}
+.hc-doorlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--paper);border:1px solid var(--line);border-radius:28px;box-shadow:0 30px 60px -32px rgba(10,43,56,.42),0 2px 6px rgba(10,43,56,.06)}
+.hc-door{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:clamp(84px,7.5vw,100px) clamp(22px,2.6vw,34px) clamp(26px,3vw,34px);min-width:0}
+.hc-door+.hc-door{border-left:1px solid var(--line)}
+.hc-doorart{position:absolute;top:0;left:clamp(16px,2.2vw,28px);height:clamp(128px,11.5vw,156px);translate:0 -46%;pointer-events:none}
+.hc-doorcut{height:100%;width:auto;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 10px 12px rgba(10,43,56,.22))}
+.hc-door h3{font-size:clamp(22px,2vw,26px);color:var(--ink)}
+.hc-door h3::after{content:"";display:block;width:36px;height:4px;border-radius:2px;background:var(--c);margin-top:10px}
+.hc-door p{color:var(--muted);font-size:15.5px;line-height:1.6;max-width:38ch;margin-bottom:8px}
+.hc-door .hc-btn{margin-top:auto}
+@media (hover:hover){.hc-door .hc-doorcut{transition:translate .4s cubic-bezier(.22,1,.36,1),rotate .4s cubic-bezier(.22,1,.36,1)}
+ .hc-door:hover .hc-doorcut,.hc-door:focus-within .hc-doorcut{translate:0 -6px;rotate:-3deg}}
+.hc-aside{margin-top:22px;font-size:15px;color:var(--muted)}
+.hc-aside a{color:var(--ink);font-weight:600;text-underline-offset:4px}
+
+/* The hero kept 150px of bottom room for doors that used to overlap it; the shelf now starts below the hero, so give the room back. */
+.px-homehero.fj-hero .ffa-homegrid{padding-bottom:clamp(44px,6.5vw,88px)}
+
+/* ---- the one quiet status line, from the release manifest */
+.hc-status{padding-bottom:clamp(8px,2vw,16px)}
+.hc-status-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.hc-status-row p{display:flex;flex-wrap:wrap;gap:6px 0}
+.hc-status-item{display:inline-flex;align-items:center;gap:8px}
+.hc-status-item+.hc-status-item{margin-left:18px;padding-left:18px;border-left:1px solid var(--line)}
+.hc-status-item .px-icon{width:17px;height:17px;color:var(--gold-deep);flex:none}
+.hc-status-link{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink);text-underline-offset:4px}
+.hc-status-link .px-icon{width:15px;height:15px}
+
+/* ---- the four friends: text first; their color is the only ornament */
+.hc-friends{padding-block:var(--hc-pad);background:var(--paper)}
+.hc-friendlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.hc-friendlist li{display:grid;align-content:start;gap:8px;padding-top:18px;border-top:3px solid var(--c);min-width:0}
+.hc-friendlist h3{font-size:clamp(24px,2.2vw,30px);color:var(--ink)}
+.hc-pills{display:flex;flex-wrap:wrap;gap:6px}
+.hc-pills span{font:600 11.5px/1 var(--display);letter-spacing:.08em;padding:6px 9px;border-radius:999px;background:color-mix(in srgb,var(--c) 14%,var(--paper));color:var(--ink)}
+.hc-role{font-weight:600;color:var(--ink);font-size:15px}
+.hc-friendlist li>p:last-child{color:var(--muted);font-size:15px;line-height:1.6}
+
+/* ---- how a day works: one line of six steps */
+.hc-day{padding-block:var(--hc-pad)}
+.hc-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 clamp(12px,1.6vw,22px);position:relative}
+.hc-steps::before{content:"";position:absolute;left:23px;right:23px;top:23px;height:2px;background:linear-gradient(90deg,var(--purple),var(--booker),var(--zuri),var(--bop),var(--lumi),var(--gold));opacity:.55}
+.hc-steps li{position:relative;display:grid;align-content:start;gap:6px;min-width:0}
+.hc-num{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--cream);border:2.5px solid var(--c);color:var(--ink);font:600 19px/1 var(--display);font-variant-numeric:tabular-nums;margin-bottom:10px;position:relative}
+.hc-steps b{font:600 19px/1.2 var(--display);color:var(--ink)}
+.hc-steps li>span:last-child{font-size:14.5px;line-height:1.5;color:var(--muted)}
+
+/* ---- trust: our Teacher Standard in brief, and the pilot center with its placeholder frames */
+.hc-trust{padding-block:var(--hc-pad);background:var(--paper)}
+.hc-trustgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,40px) clamp(36px,6vw,88px);align-items:start}
+.hc-trust h2{font-size:clamp(26px,2.8vw,36px)}
+.ts-home-compact,.hc-trust-place{display:grid;gap:16px;justify-items:start}
+.ts-home-compact>p:not(.ts-home-flag),.hc-trust-place>p{color:var(--muted);font-size:16px;line-height:1.65;max-width:58ch}
+.ts-home-compact .ts-home-points{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:0;width:100%;grid-template-columns:1fr}
+.ts-home-compact .ts-home-points li{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(0,1.6fr);gap:4px 18px;padding:14px 0;border-top:1px solid var(--line);background:none;border-radius:0}
+.ts-home-compact .ts-home-points li:last-child{border-bottom:1px solid var(--line)}
+.ts-home-compact .ts-home-points b{font:600 17px/1.3 var(--display);color:var(--ink)}
+.ts-home-compact .ts-home-points span{font-size:15px;color:var(--muted)}
+.ts-home-compact .ts-home-flag{font-size:14px;color:var(--ink);background:color-mix(in srgb,var(--gold) 16%,var(--paper));padding:10px 14px;border-radius:10px;border:0}
+.hc-real{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,2fr);gap:18px clamp(24px,4vw,56px);align-items:start;padding-top:clamp(28px,3.5vw,40px);border-top:1px solid var(--line)}
+.hc-real h3{font-size:clamp(20px,1.8vw,23px);color:var(--ink);margin-bottom:8px}
+.hc-realnote{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:60ch}
+.hc-realnote b{color:var(--ink)}
+.hc-slots.ffa-slots{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0}
+.hc-slots .ffa-slot-frame{aspect-ratio:4/3}
+.hc-slots .ffa-slot figcaption{font-size:13px}
+.hc-slots .ffa-slot figcaption b{font-size:13.5px}
+
+/* ---- one closing call to action */
+.hc-close{--focus-ring:#F5C553;padding-block:clamp(52px,6.5vw,88px);background:var(--navy);color:var(--on-dark)}
+.hc-closegrid{display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:24px 48px;align-items:center}
+.hc-close h2{color:#fff}
+.hc-close p{color:#CFDEE3;font-size:17px;max-width:52ch;margin-top:10px}
+.hc-closeacts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hc-btn-gold{background:#F5C553;color:#0A2B38}
+.hc-btn-gold:hover{background:#FFD772}
+.hc-btn-line{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.hc-btn-line:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hc-reveal{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 4px;border:0;background:none;color:#fff;font:600 15px/1.2 var(--body);text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.45);cursor:pointer}
+.hc-reveal:hover{text-decoration-color:#fff}
+.hc-reveal .px-icon{width:16px;height:16px}
+
+/* ---- the Academy band now closes #teacher-standard */
+.hc-academy{margin-top:0}
+
+@media (max-width:1000px){
+ .hc-friendlist{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hc-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 18px}
+ .hc-steps::before{display:none}
+}
+@media (max-width:820px){
+ .hc-doorlist{grid-template-columns:1fr;border-radius:22px}
+ .hc-door{padding:26px 22px 24px}
+ .hc-door h3,.hc-door p{padding-right:80px}
+ .hc-doorshead{margin-bottom:32px}
+ .hc-door+.hc-door{border-left:0;border-top:1px solid var(--line)}
+ .hc-doorart{top:10px;left:auto;right:16px;height:96px;translate:none}
+ .hc-trustgrid{grid-template-columns:1fr}
+ .hc-real{grid-template-columns:1fr}
+ .hc-slots.ffa-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hc-closegrid{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+ .hc-steps{grid-template-columns:1fr;gap:0}
+ .hc-steps li{grid-template-columns:48px minmax(0,1fr);column-gap:16px;row-gap:2px;padding-bottom:18px}
+ .hc-steps li .hc-num{grid-row:span 2;margin:0}
+ .hc-steps li::before{content:"";position:absolute;left:23px;top:48px;bottom:0;width:2px;background:var(--c);opacity:.4}
+ .hc-steps li:last-child::before{display:none}
+ .hc-steps b{align-self:end;padding-top:4px}
+ .hc-status-item+.hc-status-item{margin-left:0;padding-left:0;border-left:0}
+ .hc-status-row p{flex-direction:column;gap:4px}
+ .ts-home-compact .ts-home-points li{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+ .hc-friendlist{gap:28px 18px}
+ .hc-friendlist li>p:last-child,.hc-role{font-size:14px}
+ .hc-door{padding:22px 18px}
+ .hc-door h3,.hc-door p{padding-right:76px}
+ .hc-doorart{height:88px;right:10px}
+ .hc-slots.ffa-slots{grid-template-columns:1fr 1fr;gap:10px}
+}
+@media (max-width:359px){.hc-friendlist{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.hc-btn,.hc-btn .px-icon,.hc-door .hc-doorcut{transition:none}}
+:root[data-motion="off"] .hc-door .hc-doorcut{transition:none}
+
+/* ---- wave 8: story-world animation (home-calm.js VIDEOS, behaviour home-video.js). A felt-stitched frame of a fixed ratio, so
+   nothing moves when the poster or the clip arrives; the clip fades in over its own first frame. */
+.hc-video{margin:0;display:grid;gap:8px;min-width:0}
+.hc-video figcaption{font-size:13px;color:var(--muted)}
+.hc-video figcaption b{font:600 13.5px/1.3 var(--display);color:var(--ink)}
+.hc-vframe{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/3;background:#9FD0EE;
+  box-shadow:0 14px 28px -20px rgba(10,43,56,.55),inset 0 0 0 1px rgba(255,255,255,.4);isolation:isolate}
+.hc-vposter,.hc-vposter img,.hc-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0% 50%;display:block;border:0;border-radius:0;max-width:none}
+.hc-vposter{z-index:0}
+.hc-v{z-index:1;opacity:0;transition:opacity .45s cubic-bezier(.16,1,.3,1);background:transparent}
+.hc-vframe.is-playing .hc-v{opacity:1}
+.hc-vframe::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;outline:2px dashed rgba(255,255,255,.75);outline-offset:-7px}
+.hc-vbtn{position:absolute;right:10px;bottom:10px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;cursor:pointer;color:#fff;
+  background:rgba(10,43,56,.78);box-shadow:0 6px 14px -6px rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(255,255,255,.35);outline:1.5px dashed rgba(255,255,255,.6);outline-offset:-5px;transition:background-color .2s,scale .16s}
+.hc-vbtn:hover{background:#0A2B38}
+.hc-vbtn:active{scale:.95}
+.hc-vbtn:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
+.hc-vbtn svg{width:20px;height:20px}
+.hc-vbtn .hc-vpause,.hc-vbtn[data-state=playing] .hc-vplay{display:none}
+.hc-vbtn[data-state=playing] .hc-vpause{display:block}
+/* the hello: 16:9 clip in the 4:3 frame shows the friends' side of the meadow; on phones the 4:5 clip gets the whole row */
+@media (max-width:600px){
+  .hc-slots .hc-hello{grid-column:1/-1}
+  .hc-hello .hc-vframe{aspect-ratio:4/5}
+  .hc-hello .hc-vposter img,.hc-hello .hc-v{object-position:50% 50%}
+}
+/* the picked friend's own loop stands where the cut-out stood (same height), as a 4:5 story window; the cut-out comes back if
+   the clip cannot play */
+.hc-pickart.has-video .hc-pickcut,.hc-pickart.has-video .hc-pickground{display:none}
+.hc-pickvideo{height:calc(var(--pa) - 6px);width:auto;aspect-ratio:4/5;border-radius:22px;align-self:end}
+.hc-pickvideo .hc-vposter img,.hc-pickvideo .hc-v{object-position:50% 60%}
+.hc-pickart:not(.has-video) .hc-pickvideo{display:none}
+/* wave 9: the talking intro (VIDEOS.intro). Its captions stay readable in the small story frame and keep the bottom of it, so its felt
+   button sits top-right; when the intro has ended the button shows a replay arrow. */
+.hc-hello .hc-v::cue{font-size:12px;line-height:1.3;color:#fff;background:rgba(10,43,56,.85)}
+@media (max-width:600px){.hc-hello .hc-v::cue{font-size:15px}}
+.hc-hello .hc-vbtn{top:10px;bottom:auto}
+.hc-vbtn .hc-vreplay,.hc-vbtn[data-state=ended] .hc-vplay{display:none}
+.hc-vbtn[data-state=ended] .hc-vreplay{display:block}
+.hc-hello .ffcap-tr{font-size:13px;margin-top:4px}
+@media (prefers-reduced-motion:reduce){.hc-v{transition:none}}
+@media print{.hc-v,.hc-vbtn{display:none}}
+
+/* welcome video: 'Tap for sound' while it plays silently (owner 2026-10-07) */
+.hc-vsound{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;white-space:nowrap;border:0;border-radius:999px;background:#14313D;color:#fff;font:700 14px/1 var(--body,'Poppins',system-ui,sans-serif);box-shadow:0 8px 20px rgba(10,43,56,.3);cursor:pointer}
+.hc-vsound[hidden]{display:none}
+.hc-vsound:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.hc-vsound:not([hidden]){animation:hc-vsound-pulse 1.8s ease-in-out infinite}}
+@keyframes hc-vsound-pulse{50%{box-shadow:0 8px 20px rgba(10,43,56,.3),0 0 0 8px rgba(245,197,83,.35)}}
+
+/* Gap fill 2026-10-07: a closed transcript takes no room (its paragraphs had a layout box inside the closed <details>, which the
+   walking Booker treated as text to avoid). */
+.ffcap-tr:not([open])>div{display:none}

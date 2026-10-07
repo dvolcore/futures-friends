@@ -1,0 +1,50 @@
+.ff-advisor{padding:64px 0;background:linear-gradient(120deg,#f8f4fc 0%,#fff 58%,#f0f8f5 100%);border-block:1px solid #e4dfea;color:#173a48}
+.ff-advisor-laurie{background:linear-gradient(120deg,#f0f8f5 0%,#fff 58%,#fff9e8 100%)}
+.ff-advisor-layout{display:grid;grid-template-columns:minmax(240px,390px) minmax(0,1fr);gap:64px;align-items:center}
+.ff-advisor-art{margin:0;min-width:0}
+.ff-advisor-art button{display:block;position:relative;padding:0;width:100%;aspect-ratio:1122/1402;border:1px solid #e5dfeb;border-radius:8px;background:#fff;cursor:zoom-in;box-shadow:0 16px 35px #20343d14;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.ff-advisor-art button:hover{transform:translateY(-4px);box-shadow:0 20px 40px #20343d22}
+.ff-advisor-art img{display:block;width:100%;height:100%;object-fit:contain}
+.ff-advisor-art button:focus-visible,.ff-advisor-background summary:focus-visible,.ff-advisor-dialog button:focus-visible,.ff-advisor-dialog a:focus-visible{outline:3px solid #087b90;outline-offset:5px}
+.ff-advisor-expand{position:absolute;bottom:12px;right:12px;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#663993;box-shadow:0 2px 10px #20343d30}
+.ff-advisor-art figcaption{font-size:11px;line-height:1.5;color:#526a73;margin-top:12px}
+.ff-advisor-kicker{font-size:12px;font-weight:700;text-transform:uppercase;color:#6a3894}
+.ff-advisor-copy h2{font-family:var(--display);font-size:34px;line-height:1.2;margin:12px 0 24px;max-width:560px}
+.ff-advisor-person{border-top:3px solid transparent;border-image:linear-gradient(90deg,#8243ad,#167fc9,#48a354,#edb616) 1;padding-top:18px}
+.ff-advisor-person h3{font-size:23px;line-height:1.3;margin:0 0 8px}
+.ff-advisor-person>p{font-size:13px;line-height:1.7;color:#526a73;max-width:570px;margin:0}
+.ff-advisor-copy blockquote{margin:24px 0;padding:0 0 0 20px;border-left:3px solid #a66bc4}
+.ff-advisor-copy blockquote p{font-size:20px;line-height:1.65;margin:0;color:#49345d}
+.ff-advisor-copy cite{display:block;font-style:normal;font-size:11px;color:#526a73;margin-top:10px}
+.ff-advisor-focus{list-style:none;padding:0;margin:24px 0;display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;font-weight:600}
+.ff-advisor-focus li{padding-left:12px;border-left:3px solid #348d77}
+.ff-advisor-background{border-block:1px solid #d7dfe1}
+.ff-advisor-background summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 0;cursor:pointer;list-style:none;font-size:13px;font-weight:700}
+.ff-advisor-background summary::-webkit-details-marker{display:none}
+.ff-advisor-background summary svg{flex-shrink:0;transition:transform .2s}
+.ff-advisor-background[open] summary svg{transform:rotate(180deg)}
+.ff-advisor-expanded{padding-bottom:18px}
+.ff-advisor-expanded h4{font-size:14px;margin:16px 0 10px}
+.ff-advisor-expanded blockquote{margin:14px 0 24px}
+.ff-advisor-expanded blockquote p{font-size:15px;line-height:1.8}
+.ff-advisor-background-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ff-advisor-background-grid ul{padding-left:18px;margin:0;font-size:13px;line-height:1.8}
+.ff-advisor-background-grid li{margin-bottom:8px}
+.ff-advisor-source{font-size:11px;line-height:1.7;color:#526a73;margin:20px 0 0}
+.ff-advisor-compact{margin-top:36px;padding:28px 0}
+.ff-advisor-compact .wrap{width:100%;max-width:none;padding:0 24px}
+.ff-advisor-compact .ff-advisor-layout{grid-template-columns:230px minmax(0,1fr);gap:32px}
+.ff-advisor-compact .ff-advisor-copy h2{font-size:26px;margin-bottom:18px}
+.ff-advisor-compact .ff-advisor-person h3{font-size:20px}
+.ff-advisor-compact .ff-advisor-copy>blockquote p{font-size:17px}
+.ff-advisor-dialog{padding:16px;border:1px solid #d7dfe1;border-radius:8px;max-width:740px;width:calc(100% - 32px);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;color:#173a48;box-sizing:border-box}
+.ff-advisor-dialog::backdrop{background:#14282de0;backdrop-filter:blur(5px)}
+.ff-advisor-dialogbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:12px;font-size:14px}
+.ff-advisor-dialogbar button{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border:1px solid #d7dfe1;border-radius:6px;background:#fff;color:#173a48;cursor:pointer}
+.ff-advisor-dialog>img{display:block;width:100%;height:auto}
+.ff-advisor-dialog>a{display:flex;align-items:center;gap:8px;width:fit-content;min-height:44px;margin-top:8px;font-size:13px;color:#65338b}
+@media(max-width:950px){.ff-advisor-layout{grid-template-columns:minmax(230px,320px) minmax(0,1fr);gap:32px}.ff-advisor-copy h2{font-size:28px}.ff-advisor-copy>blockquote p{font-size:18px}.ff-advisor-background-grid{grid-template-columns:1fr;gap:4px}}
+@media(max-width:650px){.ff-advisor{padding:36px 0}.ff-advisor-layout,.ff-advisor-compact .ff-advisor-layout{grid-template-columns:minmax(0,1fr);gap:28px}.ff-advisor-art{width:100%;max-width:320px;justify-self:center}.ff-advisor-copy h2{font-size:28px}.ff-advisor-compact .wrap{padding:0 16px}.ff-advisor-dialog{padding:10px}.ff-advisor-person h3{font-size:22px}}
+html[data-motion=off] .ff-advisor-art button{transition:none;transform:none}
+html[data-motion=off] .ff-advisor-background summary svg{transition:none}
+@media(prefers-reduced-motion:reduce){.ff-advisor-art button,.ff-advisor-background summary svg{transition:none}.ff-advisor-art button:hover{transform:none}}

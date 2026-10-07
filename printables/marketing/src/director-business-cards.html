@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Director business cards, 3.5 x 2 in, 8-up on US Letter with crop marks - DRAFT, placeholders</title>
+<meta name="description" content="E08. Director business cards: fronts on page 1, backs on page 2, 8 cards per US Letter sheet with 0.125 in bleed and crop marks. Director name, direct phone and email are labelled placeholders until the owner supplies them.">
+<link rel="stylesheet" href="kit.css">
+<style>
+.sheet { padding: 0; display: block; }
+.card { position: absolute; width: 3.75in; height: 2.25in; overflow: hidden; }
+/* trim box = bleed box inset 0.125in; safe area = a further 0.125in */
+.front { background: #fff; }
+.front::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0.29in; background: var(--gold); }
+.front .in { position: absolute; left: 0.44in; right: 0.25in; top: 0.25in; bottom: 0.25in; display: flex; flex-direction: column; }
+.front img { height: 0.38in; width: auto; align-self: flex-start; }
+.front .name { margin-top: 0.07in; font: 600 9.5pt/1.2 var(--display); color: var(--navy); }
+.front .role { font: 500 7.4pt/1.25 var(--body); color: var(--gold-deep); letter-spacing: .04em; text-transform: uppercase; }
+.front .lines { margin-top: auto; display: grid; gap: 0.01in; font-size: 6.9pt; line-height: 1.3; }
+.front .ph { padding: 0 0.04in; border-width: 1px; }
+.back { background: var(--navy); color: #fff; display: grid; place-items: center; text-align: center; }
+.back .in { width: 2.9in; display: grid; justify-items: center; gap: 0.06in; }
+.back img { height: 0.82in; width: auto; }
+.back p { font-size: 7pt; line-height: 1.35; color: #D7E4E8; }
+.back p b { color: var(--gold); font-weight: 600; }
+.mark { position: absolute; background: #000; }
+.mark.v { width: 0.25pt; }
+.mark.h { height: 0.25pt; }
+.spec { position: absolute; left: 0.55in; right: 0.55in; bottom: 0.2in; font-size: 7.4pt; color: var(--muted); display: flex; justify-content: space-between; gap: 0.2in; }
+</style>
+</head>
+<body>
+
+<section class="page sheet" id="fronts" aria-label="Business card fronts, 8 per sheet">
+  <div class="draft"><span>DRAFT: director name, direct phone and email are placeholders (owner to supply)</span><span>Fronts &middot; checklist E08</span></div>
+  <div class="spec"><span>Trim 3.5 x 2 in &middot; bleed 0.125 in &middot; 8-up on US Letter &middot; cut on the crop marks</span><span>Page 1 of 2: fronts</span></div>
+</section>
+
+<section class="page sheet" id="backs" aria-label="Business card backs, 8 per sheet">
+  <div class="draft"><span>DRAFT: director name, direct phone and email are placeholders (on the fronts)</span><span>Backs &middot; flip on long edge &middot; E08</span></div>
+  <div class="spec"><span>Backs line up with the fronts when printed two-sided (flip on long edge). Use 100 lb cover or heavier card stock.</span><span>Page 2 of 2: backs</span></div>
+</section>
+
+<template id="front">
+  <div class="card front"><div class="in">
+    <img src="../../../img/brand/flc-lockup.png" alt="Futures Learning Center">
+    <span class="name"><span class="ph">director name</span></span>
+    <span class="role">Director &middot; Futures Learning Center</span>
+    <div class="lines">
+      <span>Direct: <span class="ph">director phone</span></span>
+      <span>Center: (816) 988-5661</span>
+      <span><span class="ph">director email</span></span>
+      <span>3625 S Blue Ridge Blvd, Independence, MO 64052</span>
+    </div>
+  </div></div>
+</template>
+<template id="back">
+  <div class="card back"><div class="in">
+    <img src="../../../img/brand/ff-plush-wordmark-640.png" alt="Futures Friends: Learn. Play. Explore. Belong.">
+    <p>Futures Friends is piloting at Futures Learning Center in Independence, Missouri.<br><b>dvolcore.github.io/futures-friends</b></p>
+  </div></div>
+</template>
+
+<script>
+// 2 columns x 4 rows of 3.75 x 2.25 in bleed boxes, touching; trim lines sit 0.125 in inside each box.
+const COLS = [0.5, 4.25], ROWS = [1.0, 3.25, 5.5, 7.75], W = 3.75, H = 2.25, B = 0.125;
+function lay(sheet, tpl) {
+  for (const y of ROWS) for (const x of COLS) {
+    const c = document.getElementById(tpl).content.firstElementChild.cloneNode(true);
+    c.style.left = x + 'in'; c.style.top = y + 'in';
+    sheet.appendChild(c);
+  }
+  const mark = (cls, css) => { const m = document.createElement('i'); m.className = 'mark ' + cls; m.setAttribute('aria-hidden', 'true'); Object.assign(m.style, css); sheet.appendChild(m); };
+  const xs = COLS.flatMap(x => [x + B, x + W - B]), ys = ROWS.flatMap(y => [y + B, y + H - B]);
+  const top = ROWS[0], bottom = ROWS[ROWS.length - 1] + H, left = COLS[0], right = COLS[COLS.length - 1] + W;
+  for (const x of xs) { mark('v', { left: x + 'in', top: (top - 0.42) + 'in', height: '0.32in' }); mark('v', { left: x + 'in', top: (bottom + 0.1) + 'in', height: '0.32in' }); }
+  for (const y of ys) { mark('h', { top: y + 'in', left: (left - 0.42) + 'in', width: '0.32in' }); mark('h', { top: y + 'in', left: (right + 0.1) + 'in', width: '0.32in' }); }
+}
+lay(document.getElementById('fronts'), 'front');
+lay(document.getElementById('backs'), 'back');
+</script>
+</body>
+</html>

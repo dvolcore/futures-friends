@@ -1,0 +1,200 @@
+/* Futures Friends: Unit 1 sample (#unit-1) and its entry bands. Builds on the whole-child tokens and classes (--wc-*, .wc-sec,
+   .wc-hero, .wc-head); u1- prefix only. Status chips keep 4.5:1 text contrast. */
+.u1 .wc-hero h1 span{color:var(--wc-gold);display:block}
+.u1-hero .lede{color:#E6EEF1}
+.u1-facts{display:flex;flex-wrap:wrap;gap:8px 14px;list-style:none;padding:0;margin:14px 0 4px;color:#fff;font:500 14px/1.4 var(--body)}
+.u1-facts li{display:inline-flex;align-items:center;gap:6px}
+.u1-cast{display:flex;align-items:flex-end;justify-content:center;gap:4px}
+.u1-cast img{width:auto;height:clamp(110px,15vw,170px)}
+
+.u1-chip{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.02em;padding:5px 9px;border-radius:999px;border:1px solid transparent;white-space:nowrap;vertical-align:middle}
+.u1-ready{background:#E3F2E8;color:#14532D;border-color:#9CCDAE}
+.u1-draft{background:#FBF0D3;color:#6B4700;border-color:#E9CE8B}
+.u1-unavailable{background:#F3E5E5;color:#7A1F1F;border-color:#DDB3B3}
+.u1-sample{background:#E7EFFA;color:#1B4378;border-color:#AFC6E8}
+.u1-outline{background:#EEF1F2;color:#36474F;border-color:#C9D3D7}
+
+.u1-weekgrid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.u1-weekgrid li{display:flex;gap:12px;align-items:center;background:color-mix(in srgb,var(--c) 8%,#fff);border:1px solid color-mix(in srgb,var(--c) 28%,#fff);border-left:6px solid var(--c);border-radius:var(--r,16px);padding:12px 14px}
+.u1-weekgrid img{height:86px;width:auto;flex:none}
+.u1-weekgrid div{display:grid;gap:3px;min-width:0}
+.u1-weekgrid span{font:600 12px/1.3 var(--body);color:var(--c);letter-spacing:.04em}
+.u1-weekgrid b{font:600 17px/1.25 var(--display)}
+.u1-weekgrid small{color:var(--muted);font-size:13px}
+
+.u1-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.u1-col{background:var(--paper,#fff);border:1px solid var(--line,#dde5e8);border-radius:var(--r,16px);padding:18px}
+.u1-col h3{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 6px}
+.u1-col h3 span{font:500 14px/1 var(--body);color:var(--muted)}
+.u1-col p{font-size:14px;color:var(--muted);margin:0 0 10px}
+.u1-col ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px}
+
+.u1-sf{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:center}
+.u1-sf p{max-width:66ch}
+.u1-sf-art{display:flex;justify-content:center;gap:8px}
+.u1-sf-art img{height:150px;width:auto}
+
+.u1-pick{display:grid;gap:10px;margin-bottom:18px}
+.u1-wk{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.u1-wk>span{font:600 13px/1.3 var(--body);color:var(--c);min-width:16em}
+.u1-wk>div{display:flex;flex-wrap:wrap;gap:8px}
+.u1-pick button{min-width:44px;min-height:44px;border-radius:12px;border:2px solid var(--c);background:#fff;color:var(--c);font:600 16px/1 var(--display);cursor:pointer;position:relative}
+.u1-pick button[aria-pressed="true"]{background:var(--c);color:#fff}
+.u1-pick button.u1-is-sample::after{content:"";position:absolute;top:-4px;right:-4px;width:10px;height:10px;border-radius:50%;background:var(--wc-gold);border:2px solid #fff}
+.u1-pick button:focus-visible{outline:3px solid var(--wc-gold);outline-offset:2px}
+
+.u1-day{background:#fff;border:1px solid var(--line,#dde5e8);border-top:6px solid var(--c);border-radius:var(--r,16px);padding:clamp(16px,2.5vw,26px)}
+.u1-dayhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.u1-dayhead h3{font-size:clamp(22px,2.6vw,30px);margin:4px 0}
+.u1-dayhead p{margin:0;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.u1-blocks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.u1-block{border:1px solid var(--line,#dde5e8);border-left:5px solid var(--c);border-radius:12px;padding:12px 14px}
+.u1-bhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px}
+.u1-bhead b{font:600 16px/1.3 var(--display);color:var(--c)}
+.u1-bhead span{font-size:13px;color:var(--muted)}
+.u1-block p{margin:6px 0 0;font-size:15px}
+.u1-castlabelap{display:grid;gap:4px;font-size:13.5px!important;color:var(--muted)}
+.u1-more{margin-top:8px;font-size:14.5px}
+.u1-more summary{cursor:pointer;font-weight:600;color:var(--wc-booker)}
+.u1-more dl{display:grid;gap:8px;margin:10px 0}
+.u1-more dt{font-weight:600}
+.u1-more dd{margin:0}
+.u1-more h5{margin:8px 0 4px;font-size:14px}
+.u1-more ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.u1-pt,.u1-home{margin-top:14px;padding:14px 16px;border-radius:12px;background:#F7F9FA;border:1px dashed #C9D3D7}
+.u1-home{background:#FBF6EC;border-color:#E9CE8B}
+.u1-pt h4,.u1-home h4{margin:0 0 6px;font-size:16px}
+.u1-pt p{margin:0 0 6px;font-size:14px;color:var(--muted)}
+.u1-pt ol,.u1-home ul{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14.5px}
+
+.u1-h3{font-size:19px;margin:22px 0 10px}
+.u1-files{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.u1-file{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line,#dde5e8);border-radius:12px;padding:12px}
+.u1-file img{width:84px;height:auto;border:1px solid var(--line,#dde5e8);border-radius:6px;flex:none}
+.u1-file div{display:grid;gap:6px;min-width:0}
+.u1-file a,.u1-list a{color:var(--wc-booker);font-weight:600;text-underline-offset:3px;overflow-wrap:anywhere}
+.u1-file span,.u1-list span{font-size:13px;color:var(--muted)}
+.u1-all{margin-top:18px}
+.u1-all summary{cursor:pointer;font-weight:600}
+.u1-list{margin:10px 0 0;padding-left:18px;display:grid;gap:6px}
+
+.u1-next-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start}
+.u1-later{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:14.5px}
+.u1-later li{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+
+@media (max-width:860px){
+  .u1-cols,.u1-next-grid,.u1-sf{grid-template-columns:1fr}
+  .u1 .wc-hero-grid{grid-template-columns:1fr}
+  .u1-cast img{height:96px}
+  .u1-wk>span{min-width:0;flex-basis:100%}
+}
+/* ETEACH: Start Monday download, the day's timing blocks and supply list, the four whole-child fields on every block */
+.u1-get{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.u1-get .btn{white-space:normal;text-align:center}
+.u1-note{font-size:14px;color:var(--muted);margin:0 0 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.u1-teach{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;margin:0 0 14px;align-items:start}
+.u1-teach .td-sup-list{border:1px solid var(--line,#dde5e8);border-radius:12px;padding:10px 12px}
+.u1-block .td-sup{margin-top:8px}
+/* Wave 7 GATE: the public summary (#unit-1, .u1s) and the Teacher Portal's Curriculum tab (.u1-full, .u1-locked). */
+.u1s-steps,.u1s-ages-list,.u1s-titles,.u1s-cards,.u1s-counts,.u1s-status{list-style:none;padding:0;margin:0}
+.u1s-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px;counter-reset:none}
+.u1s-steps li{display:grid;gap:4px;align-content:start;background:#fff;border:1px solid var(--line,#dde5e8);border-top:5px solid var(--c);border-radius:14px;padding:14px}
+.u1s-steps li>span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font:600 15px/1 var(--display)}
+.u1s-steps b{font:600 18px/1.2 var(--display)}
+.u1s-steps small,.u1s-ages-list small,.u1s-cards small{color:var(--muted);font-size:14.5px;line-height:1.45}
+.u1s-ages-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.u1s-ages-list li,.u1s-cards li{display:grid;gap:6px;align-content:start;background:#fff;border:1px solid var(--line,#dde5e8);border-left:6px solid var(--c,var(--wc-booker));border-radius:14px;padding:16px}
+.u1s-ages-list span{font:600 12px/1.3 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.u1s-ages-list b,.u1s-cards b{font:600 19px/1.25 var(--display)}
+.u1s-taste-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.u1s-titles{display:grid;gap:10px}
+.u1s-titles li{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;background:var(--tx-cream-c,#F8F3E9);background-image:var(--tx-cream);background-size:var(--tx-tile,384px);border:1px solid #E6D9BF;border-radius:999px;padding:12px 20px}
+.u1s-titles span{font:600 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#6B4700}
+.u1s-titles b{font:600 19px/1.25 var(--display);color:#22312F}
+.u1s-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.u1s-cards li:nth-child(1){--c:var(--wc-booker)}.u1s-cards li:nth-child(2){--c:var(--wc-lumi)}.u1s-cards li:nth-child(3){--c:var(--wc-zuri)}
+.u1s-counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px;margin-bottom:18px}
+.u1s-counts li{display:grid;gap:2px;background:#fff;border:1px solid var(--line,#dde5e8);border-radius:14px;padding:14px 16px}
+.u1s-counts b{font:600 clamp(28px,3.4vw,38px)/1 var(--display);color:var(--wc-booker)}
+.u1s-counts span{font-size:14px;color:var(--muted)}
+.u1s-status{display:grid;gap:8px;margin-bottom:8px}
+.u1s-status li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:15px}
+.u1s-status li span:last-child{color:var(--muted);font-size:14px}
+.u1s-cta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.u1s-door{display:grid;gap:10px;align-content:start;justify-items:start;background:#fff;border:1px solid var(--line,#dde5e8);border-radius:18px;padding:clamp(18px,2.6vw,28px)}
+.u1s-door h2{font-size:clamp(22px,2.6vw,30px)}
+.u1s-door p{margin:0;color:var(--muted);max-width:52ch}
+.u1s-weeks .wc-head p{color:#36474F}
+.u1-fullhead{padding:clamp(18px,2.6vw,28px) 0 4px}
+.u1-fullhead .wrap{display:grid;gap:12px;justify-items:start}
+.u1-fullhead h2{font-size:clamp(26px,3.4vw,40px)}
+.u1-fullhead .lede{max-width:70ch;margin:0}
+.u1-facts-dark{color:var(--ink,#22312F)}
+.u1-locked{display:grid;gap:10px;max-width:720px;border-top:5px solid var(--wc-booker,#2F6FC0)}
+.u1-locked h3{margin:0}
+.u1-lockchip{justify-self:start;font:600 12px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:#E7EFFA;color:#1B4378;border:1px solid #AFC6E8}
+.u1-lockcount{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.u1-lockacts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:860px){
+  .u1s-taste-grid,.u1s-cta{grid-template-columns:1fr}
+}
+/* Wave 10 BRAND: the curriculum identity (same system as the PDFs, tools/ff_brand.py). Felt is for story-world surfaces only: the unit
+   cover, week tabs and cast avatars; teaching content stays on plain paper. The stitched thread is the signature. White text sits on
+   felt tones that keep 4.5:1 (checked: booker 5.7, lumi 4.6, zuri 4.6, bop 4.9, navy 11.2). */
+:root{--u1-felt-booker:#2F67B3;--u1-felt-lumi:#C4467F;--u1-felt-zuri:#2E8452;--u1-felt-bop:#B5541A;--u1-felt-navy:#173F52;--u1-felt-gold:#B7883A;
+  --u1-felt-tex:var(--tx-cream);--u1-thread:rgba(255,255,255,.62)}   /* the texture tokens of plush-textures.css (one system) */
+.wc-hero.u1-castfelt,.u1-castfelt{background-color:var(--u1-felt-navy);background-image:var(--u1-felt-tex);background-size:420px;background-blend-mode:multiply;position:relative}
+.u1-castfelt::after{content:"";position:absolute;inset:12px;border:1.5px dashed var(--u1-thread);border-radius:22px;pointer-events:none}
+.u1-fullhead.u1-castfelt{color:#fff;padding:clamp(24px,3.4vw,40px) 0 0;margin-bottom:8px;border-radius:0 0 26px 26px;overflow:hidden}
+.u1-fullhead.u1-castfelt .lede,.u1-fullhead.u1-castfelt h2{color:#fff}.u1-fullhead.u1-castfelt .wc-kick{color:var(--wc-gold)}
+.u1-fullhead.u1-castfelt .u1-facts-dark{color:#fff}
+.u1-castgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:end}
+.u1-castcopy{display:grid;gap:12px;justify-items:start;padding-bottom:clamp(22px,3vw,36px)}
+.u1-castrow{position:relative;display:grid;justify-items:center;align-self:end}
+.u1-caststage{--u:clamp(96px,calc(94vw / var(--n,6)),260px);display:flex;align-items:flex-end;justify-content:center;gap:0;position:relative;padding:0 14px;max-width:100%}
+
+.u1-caststage img{width:auto;max-width:none;flex:none;object-fit:contain;margin-inline:-5px;position:relative}
+.u1-caststage::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:14px;border-radius:999px;background-color:var(--tx-ground-c,#8C9945);background-image:var(--tx-meadow);background-size:160px;z-index:0}
+.u1-caststage img{z-index:1}
+.u1-castlabel{display:inline-block;font:600 11px/1 var(--body);padding:5px 9px;border-radius:999px;background:#F3EBDA;color:#0A2B38;white-space:nowrap}
+.u1-castlabel-dark{margin:14px 0 16px}
+.u1-castfelt .u1-caststage img[data-plush="booker-hero"]{z-index:2}
+
+/* week tabs: the binder's tab dividers, as cards */
+.u1-tabs{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px;padding-top:16px}
+.u1-tabs li{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:end;color:#fff;
+  background-color:var(--t);background-image:var(--u1-felt-tex);background-size:420px;background-blend-mode:multiply;border-radius:18px;padding:16px 16px 0}
+.u1-tabs li::after{content:"";position:absolute;inset:7px;border:1.4px dashed var(--u1-thread);border-radius:13px;pointer-events:none}
+.u1-tabs .u1-tab{position:absolute;top:-15px;left:18px;font:600 13px/1 var(--display);padding:8px 14px 10px;border-radius:12px 12px 0 0;
+  background-color:var(--t);background-image:var(--u1-felt-tex);background-size:420px;background-blend-mode:multiply}
+.u1-tabs img{height:104px;width:auto;align-self:end;margin-bottom:-2px}
+.u1-tabs div{display:grid;gap:4px;padding-bottom:16px;min-width:0}
+.u1-tabs div span{font:600 12px/1.3 var(--body);letter-spacing:.04em;opacity:.92}
+.u1-tabs b{font:600 18px/1.22 var(--display)}
+.u1-tabs small{font-size:13.5px;line-height:1.4;color:#fff;opacity:.94}
+
+/* the cast in their roles: pop-out avatars (the cut-out stands out of the felt disc's top edge) */
+.u1-rolelist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:18px}
+.u1-rolelist li{display:grid;justify-items:center;text-align:center;gap:4px;padding:6px 8px 14px;background:#fff;border:1px solid var(--line,#dde5e8);border-radius:16px}
+.u1-rolelist b{font:600 16px/1.2 var(--display);color:var(--navy,#0A2B38);margin-top:4px}
+.u1-rolelist small{font-size:13.5px;line-height:1.35;color:var(--muted)}
+.u1-av{position:relative;display:block;width:84px;height:118px;border-radius:0 0 42px 42px;overflow:hidden}
+.u1-av::before{content:"";position:absolute;left:0;right:0;bottom:0;height:84px;border-radius:50%;background-color:var(--t);background-image:var(--u1-felt-tex);background-size:300px;background-blend-mode:multiply}
+.u1-av::after{content:"";position:absolute;left:4px;right:4px;bottom:4px;height:76px;border-radius:50%;border:1.2px dashed var(--u1-thread)}
+.u1-av img{position:absolute;left:50%;top:6px;transform:translateX(-50%);height:150px;width:auto;max-width:none;z-index:1}
+
+/* drawn icons (img/curriculum/icons.svg), one stroke weight everywhere */
+.u1-ic{width:22px;height:22px;flex:none;color:currentColor}
+.u1-bic{width:20px;height:20px;vertical-align:-4px;margin-right:8px}
+.u1-bhead b{display:inline-flex;align-items:center}
+.u1s-steps li>span .u1-ic{width:18px;height:18px;color:#fff}
+.u1-binder{margin:0 0 18px;display:grid;gap:8px;justify-items:center;max-width:620px}
+.u1-binder img{width:100%;height:auto;border-radius:18px}
+.u1-binder figcaption{font:600 12.5px/1.3 var(--body);color:var(--muted)}
+.u1-castfelt ::selection,.u1-tabs ::selection{background:var(--wc-gold);color:#0A2B38}
+@media (max-width:860px){
+  .u1-castgrid{grid-template-columns:1fr}
+  .u1-castcopy{padding-bottom:4px}
+  .u1-caststage{--u:clamp(84px,calc(124vw / var(--n,6)),230px)}
+}
+@media print{.u1-castfelt,.u1-tabs li{background:none;color:#0A2B38}.u1-castfelt::after,.u1-tabs li::after{border-color:#0A2B38}}

@@ -1,0 +1,53 @@
+/* Futures Hub lost-connection banner, "Not saved yet" marks and the paper downtime sheet (hub-offline.js) */
+.ffo-bar{position:sticky;top:0;z-index:60;background:#FFF4D6;color:#3D2A00;border-bottom:2px solid var(--warn,#C08410);font-size:14px}
+.ffo-bar.ffo-live{background:var(--paper2,#F6EFE2);color:var(--ink,#14313D)}
+.ffo-in{display:grid;gap:8px;padding-block:10px}
+.ffo-head{margin:0;line-height:1.45}
+.ffo-n{display:inline-block;font-weight:600;white-space:nowrap}
+.ffo-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ffo-acts .btn{padding:6px 12px;font-size:13px}
+.ffo-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ffo-list li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:6px 0;border-top:1px solid rgba(61,42,0,.18)}
+.ffo-st{font-size:13px;opacity:.85}
+.ffo-mark{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.5;color:#5A3B00;background:#FFE7A6;border:1px solid var(--warn,#C08410);white-space:nowrap}
+.ffo-inline{padding-block:10px;font-size:14px}
+.ffo-card{max-width:680px;display:grid;gap:10px;border-top:5px solid var(--warn,#C08410)}
+.ffo-card p{margin:0}
+@media (max-width:600px){
+  .ffo-bar{font-size:13px}
+  .ffo-in{gap:6px;padding-block:8px}
+  .ffo-acts{gap:6px}
+  .ffo-acts .btn{padding:4px 10px;font-size:12px}
+}
+@media (prefers-color-scheme:dark){
+  .ffo-bar{background:#3A2C08;color:#FBE7B0}
+  .ffo-list li{border-top-color:rgba(251,231,176,.2)}
+}
+
+/* the paper sheet: a full-screen preview with Print and Close */
+.ffo-sheet{position:fixed;inset:0;z-index:200;overflow:auto;background:#fff;color:#111;padding:16px}
+.ffo-sheet-bar{position:sticky;top:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:end;padding-bottom:10px;background:#fff}
+.ffo-room{display:grid;gap:2px;font-size:13px;color:#111;margin-right:auto}.ffo-room select{min-height:36px;padding:4px 8px;font:inherit}
+.ffo-paper+.ffo-paper{margin-top:28px;padding-top:18px;border-top:2px dashed #999}
+.ffo-paper{max-width:1100px;margin:0 auto;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.ffo-paper h2{font-size:20px;margin:0 0 6px;color:#111}
+.ffo-meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0 0 6px;font-size:14px}
+.ffo-note{font-size:12px;margin:0 0 10px;color:#333}
+.ffo-tab{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;min-width:760px}
+.ffo-tab th,.ffo-tab td{border:1px solid #555;padding:4px 5px;height:26px;text-align:left;vertical-align:top;color:#111;background:#fff}
+.ffo-tab{border:1px solid #555}
+.ffo-tab th{background:#eee;font-weight:600;height:auto;white-space:normal;overflow-wrap:anywhere}
+.ffo-tab th:first-child{width:17%}
+.ffo-tab th:nth-child(9){width:20%}
+.ffo-box{border:1px solid #555;min-height:70px;padding:5px;margin-top:10px;font-size:12px}
+.ffo-sign{font-size:12px;margin-top:10px}
+@page ffosheet{size:letter landscape;margin:10mm}
+@media print{
+  body.ffo-printing *{visibility:hidden!important}
+  body.ffo-printing #ffoSheet,body.ffo-printing #ffoSheet *{visibility:visible!important}
+  body.ffo-printing #ffoSheet{position:absolute;inset:0 auto auto 0;width:100%;overflow:visible;padding:0;page:ffosheet}
+  body.ffo-printing .ffo-sheet-bar{display:none!important}
+  body.ffo-printing .ffo-paper+.ffo-paper{break-before:page;page-break-before:always;border-top:0;margin-top:0;padding-top:0}
+  body.ffo-printing .ffo-tab{min-width:0}
+  .ffo-bar{display:none!important}
+}

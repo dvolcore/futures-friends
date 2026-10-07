@@ -1,0 +1,213 @@
+{
+ "version": 1,
+ "generated": "2026-10-07",
+ "lane": "W9 CARDS (integration of the W9 cast video lane)",
+ "story_art_label": "Story-world animation (approved Futures Friends plush art brought to life with Seedance 2.5). The characters are story-world characters, not staff; never footage of the real Futures Learning Center.",
+ "receipts": "~/Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/plush-generated/video-w9-cast/RECEIPTS.json",
+ "source": "~/futures-friends-video/web-cast/ (INTEGRATION.md); published: H.264 MP4, AV1 WebM, WebP poster and, for the talking clips, the WebVTT captions (renamed <base>.en.vtt)",
+ "used_by": "supporting-cast.js CLIPS (guide cards on #teacher-standard, #train-your-staff, #for-families); captions.js registers each .vtt",
+ "count": 40,
+ "total_bytes": 12080759,
+ "files": [
+  {
+   "file": "video/cast/ff-cast-bruno-loop-poster.webp",
+   "bytes": 52576,
+   "sha256": "9faef4838ed1b2cc6a880c85d3f6defe5466e9f87c24930989ff5868ea5dd19e"
+  },
+  {
+   "file": "video/cast/ff-cast-bruno-loop.av1.webm",
+   "bytes": 355962,
+   "sha256": "ba83daa83cc023baf698781c1083ac7953fdaf69c6394992ce20f7ae0117d863"
+  },
+  {
+   "file": "video/cast/ff-cast-bruno-loop.mp4",
+   "bytes": 495442,
+   "sha256": "44658ff25211e004a290041023d085e32a1a969a1869209d16e2ab28d0124719"
+  },
+  {
+   "file": "video/cast/ff-cast-ella-loop-poster.webp",
+   "bytes": 56512,
+   "sha256": "5761febde362d240830b4a0cd5a8370eddc240ab0ec5d403dfd1dc18279c7098"
+  },
+  {
+   "file": "video/cast/ff-cast-ella-loop.av1.webm",
+   "bytes": 518411,
+   "sha256": "716cd1f5d28142994a3dc2ac1566c5c82f70a40ab59780f5f4ba157d9be8be99"
+  },
+  {
+   "file": "video/cast/ff-cast-ella-loop.mp4",
+   "bytes": 840747,
+   "sha256": "9504dfb7064c67c7d16c6df03cc6575b810519efc9af3da219fa931d25bba159"
+  },
+  {
+   "file": "video/cast/ff-cast-fern-safety-poster.webp",
+   "bytes": 46240,
+   "sha256": "6e29380f491b2285c10edce79cb7e42a9f28c563523e67fa295243760aed54da"
+  },
+  {
+   "file": "video/cast/ff-cast-fern-safety.av1.webm",
+   "bytes": 617413,
+   "sha256": "f50d17419d27e14c1c432dff0e83285439ce6af857d4f06699543b6450d62405"
+  },
+  {
+   "file": "video/cast/ff-cast-fern-safety.en.vtt",
+   "bytes": 221,
+   "sha256": "d9f63092b913cc7dafb8b34a3d716473d14aca874dccfacadd39bd711ff536cd"
+  },
+  {
+   "file": "video/cast/ff-cast-fern-safety.mp4",
+   "bytes": 950080,
+   "sha256": "e83173ff4cd69b1e9296aee3fec62dae49a5d2c0cc7ea6c5646d2619ea567c0f"
+  },
+  {
+   "file": "video/cast/ff-cast-hazel-law-poster.webp",
+   "bytes": 28296,
+   "sha256": "220fc7bbb2464183f87ba040f27574f316119cbf4763927c373e105f7e2ec1fb"
+  },
+  {
+   "file": "video/cast/ff-cast-hazel-law.av1.webm",
+   "bytes": 385714,
+   "sha256": "7a3c3b617268dccc56201019e709d380800ccd4077dcaf61d3a24aa6a0e4c33f"
+  },
+  {
+   "file": "video/cast/ff-cast-hazel-law.en.vtt",
+   "bytes": 174,
+   "sha256": "be97d0f3d351d880a48f3103760a67ae164ce68e3e95c0f3f0a7d4767952f81d"
+  },
+  {
+   "file": "video/cast/ff-cast-hazel-law.mp4",
+   "bytes": 578572,
+   "sha256": "dd31ed6bec1fdcc22ec8541281bceae92a89b0e3a503f7c5bf6ff10335488263"
+  },
+  {
+   "file": "video/cast/ff-cast-june-notice-wonder-poster.webp",
+   "bytes": 23456,
+   "sha256": "af25a9d33c79ec51bd29f053c2cb9ee513ed823790851a2e54003330dfb9e5d2"
+  },
+  {
+   "file": "video/cast/ff-cast-june-notice-wonder.av1.webm",
+   "bytes": 371315,
+   "sha256": "7a28e3924cf08fdc926fb53513215cd3e5a4151f086ff95bc38182309bc83c4f"
+  },
+  {
+   "file": "video/cast/ff-cast-june-notice-wonder.en.vtt",
+   "bytes": 204,
+   "sha256": "9dd660fff111cce81a8898e9151a39db57c67953ada3aeb33a6a2c0b57986aa1"
+  },
+  {
+   "file": "video/cast/ff-cast-june-notice-wonder.mp4",
+   "bytes": 610173,
+   "sha256": "ddf2224d58b0d983dd59971bcfcc926c3b0de62ac1f33ab1528b77bd3a15fd29"
+  },
+  {
+   "file": "video/cast/ff-cast-june-small-steps-poster.webp",
+   "bytes": 26784,
+   "sha256": "873358ae683a8df4285ab0e80b49faa0a41b8883b9137b29502f6213468a5cd0"
+  },
+  {
+   "file": "video/cast/ff-cast-june-small-steps.av1.webm",
+   "bytes": 410799,
+   "sha256": "265391e02fa1577543176d9a1ca26e108e00998c84010e5c3670a6f0584cbc73"
+  },
+  {
+   "file": "video/cast/ff-cast-june-small-steps.en.vtt",
+   "bytes": 248,
+   "sha256": "209aaf7b8fc0999d18b7bb9ce8db5d6b4178dd9375baed70b13be810680b5760"
+  },
+  {
+   "file": "video/cast/ff-cast-june-small-steps.mp4",
+   "bytes": 645872,
+   "sha256": "e3e317ff11d56fbd9361ec204caf32642c14f069fe44565a5f9891de1c73580a"
+  },
+  {
+   "file": "video/cast/ff-cast-june-two-questions-poster.webp",
+   "bytes": 25902,
+   "sha256": "1b549ed70c8d42e7151ab6064a5b27b63f8c09380ef2cc50918197b759da998c"
+  },
+  {
+   "file": "video/cast/ff-cast-june-two-questions.av1.webm",
+   "bytes": 380436,
+   "sha256": "d016022e5a8034d47bf71206014a809a27debef1a2c53804a2ab16b790148ade"
+  },
+  {
+   "file": "video/cast/ff-cast-june-two-questions.en.vtt",
+   "bytes": 174,
+   "sha256": "97e43b77336ef84443285763a0741d40fe6ab8eb79b2c31b07dd372f5362aa2e"
+  },
+  {
+   "file": "video/cast/ff-cast-june-two-questions.mp4",
+   "bytes": 596386,
+   "sha256": "aa80a48d44a521ec3db6144674d93298589b07c3aa54c6bf8bebea45ce7e067a"
+  },
+  {
+   "file": "video/cast/ff-cast-june-welcome-poster.webp",
+   "bytes": 26824,
+   "sha256": "740ab08149aa0bb1b705a6a5dd2da258543c0f5abdc2d0de0598c7b86ac2f640"
+  },
+  {
+   "file": "video/cast/ff-cast-june-welcome.av1.webm",
+   "bytes": 425553,
+   "sha256": "cdc59d380d4c1f043a9fee012797a42144a0ddfdc8f57d2eb3c0135061679b7b"
+  },
+  {
+   "file": "video/cast/ff-cast-june-welcome.en.vtt",
+   "bytes": 176,
+   "sha256": "d730d079a1596aae6b20ccb4ddef95e57e484604f13b8f8ebbc244da66cbcc46"
+  },
+  {
+   "file": "video/cast/ff-cast-june-welcome.mp4",
+   "bytes": 669875,
+   "sha256": "3a5e4209ce2373bffe0250530e70982271b506134e7d47ac3b2759e7aa20b39f"
+  },
+  {
+   "file": "video/cast/ff-cast-moss-standard-poster.webp",
+   "bytes": 51896,
+   "sha256": "c9dfc031f3e15129e84787e91bedd6a1c779fa5a863bd2321fe2f9064432a6d7"
+  },
+  {
+   "file": "video/cast/ff-cast-moss-standard.av1.webm",
+   "bytes": 533617,
+   "sha256": "0db8b83cd926a51b8431720856597d835483999ee13f678a2e938c9dcccd0400"
+  },
+  {
+   "file": "video/cast/ff-cast-moss-standard.en.vtt",
+   "bytes": 144,
+   "sha256": "acab6ac48b9b2a0f879bca61420d95806c9ce7697835b88de94033942cf4fb58"
+  },
+  {
+   "file": "video/cast/ff-cast-moss-standard.mp4",
+   "bytes": 783184,
+   "sha256": "92c678bd8b635c4c60dcd16c49fe0daa1404be00fcbdf7088fece41b9d5ebea7"
+  },
+  {
+   "file": "video/cast/ff-cast-rose-loop-poster.webp",
+   "bytes": 28036,
+   "sha256": "96aa239fe06c9282e4b31eb14ebeac3e5d20e954a50b1a178484ab8b6830df8f"
+  },
+  {
+   "file": "video/cast/ff-cast-rose-loop.av1.webm",
+   "bytes": 324241,
+   "sha256": "a1c8e506b4bc83924ec98fbb63965667c510f83f3d48ba2a70b043870e61dbf8"
+  },
+  {
+   "file": "video/cast/ff-cast-rose-loop.mp4",
+   "bytes": 531806,
+   "sha256": "005c6e8e599ceaadd135cbba2b1945ad540ef30fc3956d92838a6afe3eb60c91"
+  },
+  {
+   "file": "video/cast/ff-cast-sage-loop-poster.webp",
+   "bytes": 39736,
+   "sha256": "eee8b2f073c441b21cf735be57b7695b8c0f8fdf00962c33d386113af698d870"
+  },
+  {
+   "file": "video/cast/ff-cast-sage-loop.av1.webm",
+   "bytes": 258698,
+   "sha256": "3ed6b82274823949a5143545021a4ce1bc0ae75cac244b739241cec0b0165525"
+  },
+  {
+   "file": "video/cast/ff-cast-sage-loop.mp4",
+   "bytes": 388864,
+   "sha256": "75b94a9130ae9e606a24927531a2783fc7e611e2925cbc44a6ea824b016c4ddc"
+  }
+ ]
+}

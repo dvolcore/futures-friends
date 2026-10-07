@@ -1,0 +1,52 @@
+/* Wave 10 SWEEP (w10-glass.js tags the grids): the liquid-glass material of loop-widget.css / glass.css on five flat card grids.
+   Box sizes are untouched (same padding, same border widths): only the pane colour, a backdrop, the rim, shadows, the specular
+   highlight and a `translate` lift on hover change, so the layout grid and every word stay exactly where they were. Text keeps the
+   page ink on a >=86%-opaque pale pane, so contrast holds (measured in tests/w10-widgets.test.js). */
+
+/* the backdrop the glass frosts: soft felt-colour light behind the grid (absolute, no layout) */
+.w10g{position:relative;isolation:isolate}
+.w10g::after{content:"";position:absolute;inset:-28px -20px;z-index:-1;pointer-events:none;border-radius:40px;opacity:.55;filter:blur(30px);
+  background:radial-gradient(38% 60% at 12% 30%,color-mix(in srgb,var(--lumi) 45%,transparent),transparent 70%),
+    radial-gradient(34% 60% at 50% 80%,color-mix(in srgb,var(--zuri) 40%,transparent),transparent 70%),
+    radial-gradient(36% 60% at 88% 30%,color-mix(in srgb,var(--booker) 40%,transparent),transparent 70%),
+    radial-gradient(30% 50% at 70% 10%,color-mix(in srgb,var(--gold) 45%,transparent),transparent 70%)}
+
+/* the pane */
+.w10g .w10g-tile{--g-rgb:255 253 248;--g-a:.86;--g-spec:rgba(255,255,255,.75);
+  position:relative;isolation:isolate;background:rgb(var(--g-rgb) / var(--g-a)) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+  border-color:rgba(255,255,255,.9);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3),0 22px 44px -30px rgba(10,43,56,.5),0 2px 6px rgba(10,43,56,.05);
+  transition:translate .3s cubic-bezier(.23,1,.32,1),box-shadow .3s cubic-bezier(.23,1,.32,1)}
+.w10g .w10g-tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(clamp(140px,20vw,260px) circle at var(--gx,24%) var(--gy,-12%),var(--g-spec),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,rgba(255,255,255,.4) 0,rgba(255,255,255,0) 42%);
+  mix-blend-mode:soft-light}
+/* keep each grid's coloured edge (top bar / header) */
+.w10g-whole-child .w10g-tile{border-top-color:var(--c)}
+.w10g-teacher-standard .w10g-tile{border-top-color:var(--c,var(--wc-navy2))}
+
+@media (hover:hover) and (pointer:fine){
+  :root:not([data-motion=off]) .w10g .w10g-tile:hover{translate:0 -4px}
+  .w10g .w10g-tile:hover{box-shadow:inset 0 1.5px 0 #fff,0 30px 54px -30px rgba(10,43,56,.6),0 0 0 1px color-mix(in srgb,var(--c,#14313D) 35%,transparent)}
+}
+
+/* #whole-child: pointing at a step lights the day up to it */
+.w10g-whole-child .w10g-tile.w10-lit{box-shadow:inset 0 1.5px 0 #fff,0 0 0 2px color-mix(in srgb,var(--c) 70%,#fff),0 24px 44px -28px color-mix(in srgb,var(--c) 60%,#0A2B38)}
+.w10g-whole-child .w10g-tile .wc-node{transition:scale .3s cubic-bezier(.34,1.56,.64,1)}
+:root:not([data-motion=off]) .w10g-whole-child .w10g-tile.w10-lit .wc-node{scale:1.08}
+/* #pricing: the tick becomes a small stamp on the glass */
+.w10g-pricing .w10g-tile b::before{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#E3F2E8;font-size:12px;margin-right:8px;vertical-align:1px}
+
+/* dark theme */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .w10g .w10g-tile{--g-rgb:17 36 45;--g-a:.86;--g-spec:rgba(255,255,255,.16);border-color:rgba(255,255,255,.14)}
+  :root:not([data-theme=light]) .w10g-pricing .w10g-tile b::before{background:#123220}}
+:root[data-theme=dark] .w10g .w10g-tile{--g-rgb:17 36 45;--g-a:.86;--g-spec:rgba(255,255,255,.16);border-color:rgba(255,255,255,.14)}
+:root[data-theme=dark] .w10g-pricing .w10g-tile b::before{background:#123220}
+
+/* fallbacks: a solid pane */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.w10g .w10g-tile{--g-a:.97}}
+@media (prefers-reduced-transparency:reduce){.w10g .w10g-tile{--g-a:.98;-webkit-backdrop-filter:none;backdrop-filter:none}.w10g::after{content:none}}
+:root.ffg-solid .w10g .w10g-tile{--g-a:.98;-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (prefers-reduced-motion:reduce){.w10g .w10g-tile,.w10g .w10g-tile .wc-node{transition:none}.w10g .w10g-tile:hover{translate:none}.w10g-whole-child .w10g-tile.w10-lit .wc-node{scale:1}}
+@media print{.w10g::after,.w10g .w10g-tile::after{content:none}.w10g .w10g-tile{-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}}

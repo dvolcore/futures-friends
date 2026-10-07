@@ -1,0 +1,4 @@
+# Futures Friends public site. The full curriculum (day plans, packets, printables, unit data) is not published here
+# (IP lockdown, owner decision 2026-10-07): licensed centers receive it privately. Nothing on this site needs hiding from crawlers.
+User-agent: *
+Allow: /

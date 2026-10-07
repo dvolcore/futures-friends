@@ -1,0 +1,19 @@
+/* hub-auth.js: two-step verification, password reset, account page and the classroom idle lock */
+.ffa-card{max-width:560px}
+.ffa-card h4{margin:0 0 6px;font-family:var(--display);font-size:1.05rem}
+.ffa-steps{margin:0 0 6px;padding-left:20px;display:grid;gap:8px}
+.ffa-qr{display:block;margin:10px 0 6px;width:180px;height:180px;background:#fff;padding:8px;border:1px solid var(--line);border-radius:8px}
+.ffa-key{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.95rem;letter-spacing:.06em;background:var(--cream);color:var(--ink);padding:4px 8px;border-radius:6px;word-break:break-all;user-select:all}
+.ffa-code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.3em;font-size:1.15rem;max-width:12ch;padding:9px 11px}
+.ffa-sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px;display:grid;gap:8px}
+.ffa-sec form{display:grid;gap:8px}
+.ffa-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ffa-chip{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.ffa-chip.ok{color:var(--ok);border-color:currentColor}
+.ffa-lock{position:fixed;inset:0;z-index:2147483000;background:var(--navy);display:grid;place-items:center;padding:16px;overflow:auto}
+.ffa-lockbox{background:var(--paper);color:var(--ink);border-radius:var(--r,14px);border-top:6px solid var(--gold);padding:24px;width:min(420px,100%);display:grid;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.ffa-lockbox h2{margin:0;font-family:var(--display);font-size:1.5rem}
+.ffa-lockbox p{margin:0}
+.ffa-lockbox .btn{width:100%;justify-content:center}
+@media (prefers-reduced-motion:no-preference){.ffa-lockbox{animation:ffa-in .18s ease-out}}
+@keyframes ffa-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}

@@ -1,0 +1,64 @@
+/* Release truth (release-truth.js): Available now / In development / Coming later, Hub feature states, screen-time definitions. Site tokens only. */
+.rt-chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;line-height:1.2;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:var(--paper);white-space:nowrap;vertical-align:middle}
+.rt-chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.rt-now{background:color-mix(in srgb,var(--ok) 14%,var(--paper));border-color:color-mix(in srgb,var(--ok) 45%,var(--line))}
+.rt-now::before{background:var(--ok)}
+.rt-dev{background:color-mix(in srgb,var(--warn) 14%,var(--paper));border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
+.rt-dev::before{background:var(--warn)}
+.rt-later::before{background:transparent;border:2px solid var(--muted);width:6px;height:6px}
+.rt-scope{display:grid;gap:10px}
+.rt-group{display:grid;gap:6px}
+.rt-h{margin:0}
+.rt-list{list-style:none;padding-left:0;gap:6px}
+.rt-list li{border-left:3px solid var(--line);padding-left:10px;overflow-wrap:anywhere}
+.rt-group[data-availability="available_now"] .rt-list li{border-left-color:var(--ok)}
+.rt-group[data-availability="in_development"] .rt-list li{border-left-color:var(--warn)}
+.rt-note{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+.rt-legend{margin-top:14px;max-width:72ch}
+.rt-head{display:grid;gap:6px;margin-bottom:18px;max-width:72ch}
+.rt-head h2{margin:0}
+.rt-pkgs{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start}
+.rt-pkg{display:grid;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.rt-pkg h3{margin:0;font-size:18px}
+details.rt-pkg summary{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;cursor:pointer;font-size:15px}
+details.rt-pkg summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.rt-counts{display:inline-flex;flex-wrap:wrap;gap:6px}
+.rt-screen{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:0 0 12px}
+.rt-screen div{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:14px 16px;display:grid;gap:4px;align-content:start}
+.rt-screen dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rt-screen dd{margin:0;display:grid;gap:4px;font-size:13.5px}
+.rt-screen dd b{font-family:var(--display);font-size:22px;font-weight:600}
+.card .rt-chip{display:flex;width:fit-content;margin-top:6px}
+/* E2: the release status strip at the top of every commercial route */
+.rt-strip{padding:clamp(18px,3vw,28px) 0;background:var(--cream,var(--paper));border-bottom:1px solid var(--line)}
+.rt-strip-head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.rt-strip-head h2{margin:0;font-size:clamp(19px,2.2vw,24px)}
+.rt-strip-head p{margin:0}
+.rt-strip-cols{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.rt-col{background:var(--paper);border:1px solid var(--line);border-radius:var(--r,16px);padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0}
+.rt-col[data-stage="available_now"]{border-top:4px solid var(--ok)}
+.rt-col[data-stage="at_launch"]{border-top:4px solid var(--warn)}
+.rt-col[data-stage="planned"]{border-top:4px solid var(--muted)}
+.rt-col-h{margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rt-col-note{font-size:11.5px;font-weight:600;color:var(--muted)}
+.rt-def{margin:0;font-size:12.5px;color:var(--muted)}
+.rt-col ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rt-col li{font-size:13.5px;line-height:1.4;overflow-wrap:anywhere;display:grid;gap:8px}
+.rt-col li>a{color:inherit}
+.rt-strip-src{margin:10px 0 0}
+.rt-ev{margin:0;display:grid;gap:6px;position:relative;border:1px dashed var(--line);border-radius:12px;padding:8px;background:var(--cream,var(--paper))}
+.rt-ev img{width:100%;height:auto;max-height:220px;object-fit:contain;object-position:left top;border-radius:8px;background:#fff}
+.rt-ev figcaption{font-size:12.5px;line-height:1.45}
+.rt-sample{position:absolute;top:14px;left:14px;font-size:11px;font-weight:700;background:var(--navy,#123);color:#fff;border-radius:999px;padding:2px 8px}
+@media (max-width:860px){.rt-strip-cols{grid-template-columns:minmax(0,1fr)}}
+/* E1: start date, recurring billing, delivered files and exclusions for each priced package */
+.rt-terms{display:grid;gap:8px;margin:4px 0 0;padding-top:10px;border-top:1px dashed var(--line)}
+.rt-terms>div{display:grid;gap:2px}
+.rt-terms dt{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rt-terms dd{margin:0;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.rt-terms-line{border-top:1px dashed var(--line);padding-top:8px;margin:6px 0 0;line-height:1.45}
+.rt-files{margin:0;padding-left:18px;display:grid;gap:3px}
+.rt-coverage{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13px}
+.rt-launch .rt-pkgs{grid-template-columns:minmax(0,1fr);max-width:860px}
+.rt-proposed{vertical-align:middle}
+@media (max-width:860px){.rt-ev img{max-height:150px}}

@@ -1,0 +1,115 @@
+/* Per-route document titles and meta descriptions for the hash-routed site (G43).
+   One map, applied on every navigation by the go() wrapper in premium.js. Titles that premium.js already used are kept word for word.
+   Descriptions say only what is true today: planned things are called planned, and the preview pages say they are previews.
+   Routes that already carry their own description (window.FFWholeChild.meta) keep it. */
+(function () {
+  const SITE = 'Futures Friends';
+  // route: [title, description]. Title is shown as "<title> | Futures Friends" (home keeps the static page title).
+  const R = {
+    home: ['Futures Friends', 'Futures Friends: a character-led early learning program for child care centers, home daycares and families, ages 2 to 5. Home of Booker, Lumi, Zuri and Bop.'],
+    impact: ['Impact and research', 'Why the early years matter, the published research behind early learning, and what Futures Friends plans to measure.'],
+    readiness: ['School Readiness', 'How the Futures Friends learning loop, teacher observation and family activities support school readiness for children ages 2 to 5.'],
+    curriculum: ['Curriculum by age', 'A planned year of twelve monthly units and 48 theme weeks for twos, threes and pre-K. Unit 1 is written day by day; later units are outlined.'],
+    options: ['Program Options', 'Compare Futures Friends program options for child care centers, home daycares, pre-K partners, faith-based centers, employers and families.'],
+    'for-centers': ['For Child Care Centers: what a licensed center gets', 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'],
+    'for-home': ['Home Daycares', 'A one-room, mixed-age Futures Friends program sized for licensed home daycare providers.'],
+    'for-prek': ['Pre-K and Head Start Partners', 'Futures Friends readiness units being mapped to the Missouri Early Learning Standards and the Head Start framework, with family engagement tools.'],
+    'for-faith': ['Faith-Based Centers', 'A values-forward early learning program centered on kindness, courage, curiosity and helping others, with room for each program’s own traditions.'],
+    'for-employers': ['Employer Child Care', 'A branded Futures Friends program for on-site and partner child care for working families.'],
+    'for-families': ['Families at Home', 'Take-home activities, books and a weekly question for families, with or without a Futures Friends program nearby.'],
+    include: ['Futures Include', 'Lesson adaptations and inclusion supports for children with disabilities and developmental delays, plus early intervention guidance for families.'],
+    hub: ['Futures Hub', 'The Futures Hub for directors, classrooms and families: Today checklist, lunch planner, ratio checks and family updates. Built, not yet live; shown with sample data.'],
+    app: ['Get the App', 'The Futures Hub is a web app: use it in any browser on a classroom tablet, a director’s computer or a family’s phone, and add it to your home screen.'],
+    'family-guide': ['Family App guide', 'A step-by-step tour of what families can see and do in the Futures Friends Family App.'],
+    'signin-family': ['Family Sign-In', 'Family sign-in for the Futures Friends Family App.'],
+    'signin-teacher': ['Teacher Sign-In', 'Teacher sign-in for the Futures Hub classroom tools.'],
+    'account': ['Account and Security', 'Change your Futures Hub password, two-step verification and classroom tablet PIN.'],
+    'reset-password': ['Reset Your Password', 'Get a one-time email link to choose a new Futures Hub password.'],
+    training: ['Planned training and certification', 'A proposed seven-credential educator pathway and module catalog. Approval and eligible training hours have not been verified.'],
+    summit: ['Proposed educator summit', 'A proposed two-day educator summit in Kansas City. Dates, venues and eligible training hours are not confirmed.'],
+    support: ['Support and FAQ', 'Technical support, tutorials and answers to common questions for directors, teachers and families.'],
+    contact: ['Contact and support', 'Contact Futures Friends by phone, email or form. Futures Learning Center, 3625 S Blue Ridge Blvd, Independence, Missouri.'],
+    quote: ['Request a quote', 'Tell us your rooms, ages and enrollment and we will build a Futures Friends startup package quote.'],
+    friends: ['Booker Lumi Zuri Bop and storybooks', 'Meet Booker, Lumi, Zuri and Bop, and the storybooks and episodes now in development.'],
+    rainbow: ['Eat the Rainbow recipes', 'The Eat the Rainbow cookbook and menu planner: 36 recipes in three levels, designed around the CACFP meal pattern.'],
+    store: ['Futures Store', 'The Futures Store: a family shop and Classroom Branding Kits for centers, home daycares and churches. Ordering opens soon.'],
+    'shop-families': ['Family shop', 'Tees, a library book tote, posters and, later, storybooks and plush with Booker, Lumi, Zuri and Bop. Ordering opens soon.'],
+    'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
+    corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
+    'store-request': ['Store request', 'Send your Futures Store list as a quote request or join the family shop list. Nothing is charged and no order is placed online.'],
+    funding: ['Funding Help', 'Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.'],
+    pricing: ['Pricing', 'Published startup packages and monthly fees for home daycares and child care centers, plus training and seasonal add-ons.'],
+    why: ['Why Futures Friends', 'How Futures Friends differs from video-first online curricula: built for ages 2 to 5, teacher-led and hands-on.'],
+    news: ['Newsroom', 'Futures Friends news and updates.'],
+    blog: ['Blog for Educators', 'Practical guides for child care classrooms: screen time, ratios, choking-safe snacks and CACFP.'],
+    post: ['Blog article', 'A practical guide for child care classrooms from the Futures Friends team.'],
+    events: ['Events', 'Family events and Discovery Day at Futures Friends programs.'],
+    privacy: ['Privacy policy', 'Futures Friends privacy policy. Sample policy for this preview site; final policies will be reviewed by counsel before launch.'],
+    'child-privacy': ['Child privacy', 'How Futures Friends handles children’s information. Sample policy for this preview site; final policies will be reviewed by counsel before launch.'],
+    terms: ['Terms', 'Futures Friends terms. Sample policy for this preview site; final terms will be reviewed by counsel before launch.'],
+    accessibility: ['Accessibility', 'Futures Friends accessibility goals: WCAG 2.2 Level AA across this site and the Futures Hub.'],
+    portal: ['Teacher Portal', 'The Futures Hub teacher portal: classroom day, attendance, meals, milestones and messages. Sample local preview.'],
+    'family-portal': ['Family Portal', 'The Futures Hub family portal: today at Futures, meals, milestones and messages. Sample local preview.'],
+    academy: ['Training Academy', 'A preview of the Futures Friends Training Academy with sample lessons and knowledge checks. No professional credential or approved training hours are issued.'],
+    watch: ['Watch episodes', 'The planned Futures Friends micro-series: 3 to 6 minute episodes watched together with a teacher. No episode is finished yet; the welcome video plays here.'],
+    talk: ['Talk about it cards', 'Printable talk-about-it cards for every planned Futures Friends episode: three questions, a feeling word and one thing to try at home.'],
+    enroll: ['Visit Futures Learning Center', 'Futures Learning Center in Independence, Missouri: tours, online applications, tuition and a day in the life for children ages 2 to 5.'],
+    jobs: ['Careers and open positions', 'Teaching, kitchen and leadership roles at Futures Friends centers. Apply online.'],
+    job: ['Job opening', 'Position details and application for a Futures Friends opening.'],
+    'whole-child': ['The Whole-Child Day: learning, meals, movement, Quiet Time', 'One day, one connected system: learning, meals, movement, Quiet Time and family connection, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.'],
+    'teacher-standard': ['Our Teacher Standard: training, background checks and mastery', 'What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.'],
+    'unit-1': ['Unit 1 at a glance: the first month, in summary', 'The first Futures Friends unit in summary: four weeks, 20 teaching days and 161 activities for ages 2 to 5, plus one sample day. Full plans for licensed centers.'],
+    'train-your-staff': ['Train your staff with us', 'The Futures Friends course method for child care centers and home daycares: scenario mastery, time tracking and director checklists. In development, not open yet.'],
+    'this-week': ['This week with Booker, Lumi, Zuri and Bop: for enrolled families', 'The week\'s friend, theme and value. Families enrolled at Futures Learning Center get the week\'s activities and family cards from their child\'s classroom.'],
+    'at-home': ['Futures at Home: free family library', 'Free storybooks to read together, activities by age, printables and a weekly plan from Booker, Lumi, Zuri and Bop. No account, nothing to buy.'],
+    'story-time': ['Story Time: read-along storybooks', 'Read five Futures Friends storybooks free, page by page, with a question, a word and a move or breath to share on every page.'],
+    activities: ['Things to do at home, by age', 'Short activities for babies to pre-K from things you have at home, with steps, what to notice and easier or harder versions.'],
+    printables: ['Printables for families', 'Free PDFs: picture schedule, rainbow tracker, calm-down and move cards, reading log, sticker chart and certificates. Some in Spanish.'],
+    'see-how': ['See how: picture guides for routines', 'Everyday routines in pictures, one step at a time: calm breathing, brave reading, brushing teeth, movement breaks and bedtime.'],
+    'family-videos': ['Watch together: family videos', 'Short videos with Booker, Lumi, Zuri and Bop to watch together: the welcome video, Bop\'s movement breaks and a calm minute, and how to keep screen time small.'],
+    'my-week': ['My Week: plan, stickers and certificates', 'A free weekly plan for your child\'s age that changes every Monday, a sticker chart and printable certificates. Saved only on your device.'],
+    'bop-at-home': ['Bop at Home: free family movement, Move Your Body Grow Your Mind', 'Free family movement activities from Bop: no equipment, every one with an adapted version. Join the weekly Bop at Home challenge. Move Your Body, Grow Your Mind.'],
+    learn: ['Futures Friends Academy', 'Futures Friends Academy: courses and training records for teachers and directors.'],
+    'learn-course': ['Course | Futures Friends Academy', 'A Futures Friends Academy course.'],
+    'learn-cert': ['Certificate | Futures Friends Academy', 'A Futures Friends Academy certificate.'],
+    verify: ['Verify a certificate | Futures Friends Academy', 'Check a Futures Friends Academy certificate code.'],
+    'learn-team': ['Team training | Futures Friends Academy', 'Futures Friends Academy team training records for directors.'],
+    'learn-author': ['Course authoring | Futures Friends Academy', 'Futures Friends Academy course authoring tools.'],
+    'learn-approve': ['Content approval | Futures Friends Academy', 'Futures Friends Academy content approval for reviewers.'],
+    'not-found': ['Page not found', 'This page is not on the Futures Friends site. Try the home page, the whole-child day, Bop at Home or contact us.']
+  };
+  const trim = (s, n) => { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…'; };
+  let first = null;                                                                       // the static title and description in index.html
+
+  function lookup(route, arg) {
+    const r = R[route] || [String(route || 'home').replace(/-/g, ' ').replace(/^./, c => c.toUpperCase()), ''];
+    let title = r[0], desc = r[1];
+    if (route === 'post') {
+      const posts = typeof POSTS !== 'undefined' ? POSTS : null, p = Array.isArray(posts) && posts.find(x => x.id === arg);   // POSTS is views.js's top-level const
+      if (p) { title = p.t; desc = trim(p.b[0], 155); }
+    } else if (route === 'academy' && arg) {
+      const mods = (window.FF && window.FF.modules) || [], m = mods.find(x => x.code === arg);
+      if (m) { title = m.code + ' ' + m.title + ' | Training Academy'; desc = 'Sample lesson preview: ' + m.title + '. No professional credential or approved training hours are issued.'; }
+    }
+    return { title: route === 'home' && first ? first.title : (title.indexOf('|') > -1 || title === SITE ? title : title + ' | ' + SITE), description: desc };
+  }
+
+  function describe(route, arg) {
+    const meta = document.querySelector('meta[name="description"]');
+    if (!first) first = { title: document.title, description: meta ? meta.getAttribute('content') || '' : '' };
+    const m = lookup(route, arg), wc = window.FFWholeChild && window.FFWholeChild.meta;
+    if (meta) meta.setAttribute('content', (wc && wc[route]) || (route === 'home' ? first.description : m.description) || first.description);
+    return m;
+  }
+  // Called by the go() wrapper in premium.js on every navigation; describe() is also what the render hook in whole-child.js calls
+  // after an asynchronous re-render, so a late hook can never put the home description back on another route.
+  function apply(route, arg) {
+    const m = describe(route, arg);
+    document.title = m.title;
+    return m;
+  }
+
+  const api = { ROUTES: R, lookup, describe, apply };
+  if (typeof window !== 'undefined') window.FFRouteMeta = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})();

@@ -1,0 +1,21 @@
+/* Futures Learning Center shield, alive (wave 9): the idle loops for flc-mark.js. The SVG takes the exact box of the <img> it
+   replaces (44 px wide, height from the 256 x 318 drawing = 54.66 px, as the PNG): no layout shift. Every loop runs only with
+   motion allowed (device setting AND the site's Decorative motion switch) and pauses off screen / on hidden tabs (.ffm-paused).
+   At rest (and always with motion off) the sparkles are invisible and the shine is parked outside the shield: the PNG's look. */
+footer .fprog .flcm{width:44px;height:auto;flex:0 0 44px;margin-top:2px}
+.flcm{display:block;aspect-ratio:256/318;overflow:visible;-webkit-tap-highlight-color:transparent}
+.flcm g,.flcm path,.flcm rect{transform-box:view-box}
+.flcm-spark{transform:scale(var(--s,1));transform-origin:0 0}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .flcm.is-live .flcm-star{animation:flcm-twinkle 6s cubic-bezier(.22,1,.36,1) 1.2s infinite}
+  :root:not([data-motion=off]) .flcm.is-live .flcm-spark{animation:flcm-glint 6s ease-out 1.2s infinite}
+  :root:not([data-motion=off]) .flcm.is-live .flcm-sparks>g:nth-child(2) .flcm-spark{animation-delay:1.32s}
+  :root:not([data-motion=off]) .flcm.is-live .flcm-sparks>g:nth-child(3) .flcm-spark,
+  :root:not([data-motion=off]) .flcm.is-live .flcm-sparks>g:nth-child(4) .flcm-spark{animation-name:none}
+  :root:not([data-motion=off]) .flcm.is-live .flcm-band{animation:flcm-shine 13s cubic-bezier(.45,0,.25,1) 3.5s infinite}
+}
+.flcm.ffm-paused,.flcm.ffm-paused *{animation-play-state:paused!important}
+@keyframes flcm-twinkle{0%,84%,100%{transform:none}88%{transform:scale(1.18) rotate(12deg)}93%{transform:scale(.96) rotate(-3deg)}97%{transform:none}}
+@keyframes flcm-glint{0%,84%,97%,100%{opacity:0;transform:scale(0) rotate(0deg)}89%{opacity:1;transform:scale(calc(var(--s,1)*1.1)) rotate(45deg)}}
+@keyframes flcm-shine{0%{transform:translateX(0)}10%,100%{transform:translateX(470px)}}
+@media print{.flcm *{animation:none!important}}
