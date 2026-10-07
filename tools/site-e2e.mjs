@@ -78,7 +78,11 @@ async function newPage(ctx) {
 }
 const reset = (log) => { for (const k of Object.keys(log)) log[k].length = 0; };
 
-async function open(page, route, settle = 700) {
+async function open(page, route, settle = 700, retry = true) {
+  try { await openOnce(page, route, settle); }
+  catch (e) { if (!retry || !/Timeout/.test(e.message)) throw e; await page.waitForTimeout(3000); await openOnce(page, route, settle); }   // one retry: GitHub Pages hiccups
+}
+async function openOnce(page, route, settle) {
   await page.goto(`${BASE}?e2e=${Date.now()}#${route}`, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await page.waitForFunction(() => document.querySelector('#view') && document.querySelector('#view').children.length > 0, null, { timeout: 20000 });
   await page.waitForTimeout(settle);
@@ -127,7 +131,7 @@ async function sweepRoutes() {
       reset(log);
       const owner = PORTAL_ROUTES.includes(r.split('/')[0]) ? 'demo-portal agent' : undefined;
       await step('route', `#${r} @${vp.width}`, async () => {
-        try { await open(page, r); } catch (e) { if (!/Timeout/.test(e.message)) throw e; await page.waitForTimeout(3000); await open(page, r); }   // one retry: GitHub Pages hiccups
+        await open(page, r);
         // scroll the page so lazy images / videos load and get checked
         await page.evaluate(async () => { const h = document.body.scrollHeight; for (let y = 0; y < h; y += 700) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } scrollTo(0, 0); });
         await page.waitForTimeout(600);
