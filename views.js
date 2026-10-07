@@ -121,7 +121,7 @@ const ffhMap = () => `<section class="ffhm" data-signature id="ff-map" data-z=""
    <div class="ffhm-pop"><img class="ffhm-cut" src="${FFcut('booker')}" alt=""><p class="ffhm-say" aria-live="polite"></p></div>
    <button class="ffhm-back btn soft" type="button" hidden>Whole room</button>
   </div>
-  <p class="small muted ffhm-cap">Illustrated map, not a photo of our center. Tap a zone to step inside.</p>
+  <p class="small muted ffhm-cap">Illustrated map, not a photo of our center. Tap a zone to step inside. <a class="rl" href="#room-kit">See the Learning Zones Kit</a></p>
  </div>
  <div class="ffhm-copy">${head('Everything in one program','More than a login','')}
   ${ck(['<b>Curriculum for twos, threes and pre-K:</b> Units 1 to 4 written day by day (draft), Units 5 to 12 planned','<b>Five storybooks</b>, all free to read online (print editions in development), and a planned Season 1 micro-series','<b>Eat the Rainbow Kitchen:</b> 36 recipes and menus designed around the CACFP meal pattern','<b>Futures Friends educator training</b> ladder (planned, not state-approved)','<b>Classroom world (in development):</b> carpet, posters, zone signs and plush friends','<b>Futures Hub (built, not yet live):</b> Today checklist, family daily report, lunch planner, attendance and ratio checks','<b>Futures Include:</b> adaptations and inclusion supports for every child','<b>Funding help, marketing kit, summer camp and holiday units</b>'])}

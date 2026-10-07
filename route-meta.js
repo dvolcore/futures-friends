@@ -35,6 +35,7 @@
     store: ['Futures Store', 'The Futures Store: a family shop and Classroom Branding Kits for centers, home daycares and churches. Ordering opens soon.'],
     'shop-families': ['Family shop', 'Tees, a library book tote, posters and, later, storybooks and plush with Booker, Lumi, Zuri and Bop. Ordering opens soon.'],
     'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
+    'room-kit': ['Learning Zones Kit: carpets, fences and friend zones for your room', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
     'store-request': ['Store request', 'Send your Futures Store list as a quote request or join the family shop list. Nothing is charged and no order is placed online.'],
     funding: ['Funding Help', 'Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.'],

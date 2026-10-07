@@ -61,7 +61,7 @@
     <div class="fj-doorart hc-doorart" aria-hidden="true"><span class="hc-peek">${window.FFPlush.img(d.peek || d.k, { cls: 'hc-doorcut', alt: '', h: 156 })}</span></div>
     <h3>${E(d.h)}</h3><p>${E(d.p)}</p>
     <a class="hc-btn hc-doorlink" href="#${d.go[0]}">${E(d.go[1])} ${icon('ArrowRight')}</a>${STITCH(d.id)}</li>`).join('')}</ul>
-   <p class="hc-aside">Running a pre-K, faith-based or employer program? <a href="#options">Compare every program option</a></p>
+   <p class="hc-aside">Running a pre-K, faith-based or employer program? <a href="#options">Compare every program option</a>. Setting up a room? <a href="#room-kit">See the Learning Zones Kit</a></p>
   </div></section>`;
   }
 

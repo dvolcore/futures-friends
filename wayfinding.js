@@ -78,6 +78,7 @@
     'train-your-staff': ['Train your staff', 'centers', 'teacher-standard', 'zuri'],
     'shop-programs': ['Classroom kits', 'centers', 'store', 'bop'],
     corners: ['Learning zone guide', 'centers', 'store', 'zuri'],
+    'room-kit': ['Learning Zones Kit', 'centers', 'options', 'bop'],
     'learn-team': ['Team training', 'centers', 'learn', 'zuri'],
     'teacher-standard': ['Teacher Standard', 'staff', 'home', 'booker'],
     'unit-1': ['Unit 1 at a glance', 'staff', 'curriculum', 'booker'],
@@ -127,7 +128,7 @@
   // Menu: each audience's 3 to 5 links in big type.
   const GROUPS = {
     families: [['enroll', 'Visit our pilot center'], ['at-home', 'Futures at Home'], ['whole-child', 'The whole-child day'], ['bop-at-home', 'Bop at Home'], ['friends', 'Friends & Books']],
-    centers: [['for-centers', 'What a center gets'], ['for-home', 'Home daycares'], ['curriculum', 'Curriculum by age'], ['pricing', 'Pricing'], ['train-your-staff', 'Train your staff']],
+    centers: [['for-centers', 'What a center gets'], ['for-home', 'Home daycares'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing'], ['train-your-staff', 'Train your staff']],
     staff: [['teacher-standard', 'Our Teacher Standard'], ['unit-1', 'Unit 1 at a glance'], ['talk', 'Talk About It cards'], ['academy', 'Training Academy'], ['jobs', 'Careers']]
   };
   // Everything else one tap away in the menu (small links).
@@ -347,6 +348,7 @@
     'story-time': 'read aloud read along storybook books story',
     printables: 'print pdf printable worksheet chart certificate',
     'teacher-standard': 'background check training teacher standard qualifications cpr first aid safety',
+    'room-kit': 'room kit learning zones carpet rug fence mat classroom setup layout floor plan church pack away',
     'whole-child': 'meals food nap quiet time rest movement schedule day',
     curriculum: 'lessons lesson plan units themes weeks curriculum ages',
     'unit-1': 'unit one summary first month at a glance overview days weeks sample day full curriculum lesson plans packets licensed request access',
