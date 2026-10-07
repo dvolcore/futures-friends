@@ -4,3 +4,4 @@ hub-config.local.js
 intake-config.local.js
 # local analytics server connection: never commit
 analytics-config.local.js
+node_modules
