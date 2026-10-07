@@ -15,7 +15,7 @@ The system (also written up in DESIGN.md, "Curriculum print system"):
   - The stitch: a dashed thread line, inset on every felt surface and used as the rule under every heading. It is the curriculum's
     signature, taken from the stitched felt plush logo.
   - Colour codes the lead friend and pillar: Booker (LEARN + SMILE) blue, Lumi (BELONG + RESET) pink, Zuri (EXPLORE + NOURISH)
-    green, Bop (MOVE + OUTSIDE) orange. "deep" is the text/ink colour (>= 4.5:1 on paper and tint), "felt" the surface colour.
+    green, Bop (MOVE + OUTSIDE) purple (owner decision 2026-10-07; was orange). "deep" is the text/ink colour (>= 4.5:1 on paper and tint), "felt" the surface colour.
     All colours sit inside the US web-coated (SWOP) CMYK gamut; the packaging prints them as CMYK builds (see CMYK below).
   - Black-and-white fallback: colour is never the only code. Every block carries its drawn icon and its name; every week carries
     "Week N" and the friend's name; the thumb tab position also encodes the week.
@@ -38,7 +38,7 @@ FRIEND = {
     'booker': {'deep': '#23589F', 'felt': '#2F67B3', 'tint': '#E9F0FA', 'thread': '#CFE0F6', 'name': 'Booker', 'pillars': 'LEARN + SMILE'},
     'lumi':   {'deep': '#A82A65', 'felt': '#C4467F', 'tint': '#FBEAF2', 'thread': '#F8D3E3', 'name': 'Lumi', 'pillars': 'BELONG + RESET'},
     'zuri':   {'deep': '#1B6E3E', 'felt': '#2E8452', 'tint': '#E7F4EC', 'thread': '#CDEBD8', 'name': 'Zuri', 'pillars': 'EXPLORE + NOURISH'},
-    'bop':    {'deep': '#9C4507', 'felt': '#B5541A', 'tint': '#FCEEE2', 'thread': '#F9D9BF', 'name': 'Bop', 'pillars': 'MOVE + OUTSIDE'},
+    'bop':    {'deep': '#6B2A8E', 'felt': '#8236AE', 'tint': '#F3EAFB', 'thread': '#E3CFF5', 'name': 'Bop', 'pillars': 'MOVE + OUTSIDE'},
     'gold':   {'deep': '#6E4C00', 'felt': '#D99A22', 'tint': '#FBF1D8', 'thread': '#FFF0C9', 'name': 'Futures Friends', 'pillars': ''},
     'navy':   {'deep': NAVY, 'felt': '#173F52', 'tint': '#EAF0F2', 'thread': '#C9DCE3', 'name': 'Futures Friends', 'pillars': ''},
 }
@@ -48,7 +48,7 @@ KEYS = ['booker', 'lumi', 'zuri', 'bop']
 CMYK = {
     NAVY: (95, 62, 42, 55), GOLD: (0, 30, 92, 4), PAPER: (0, 1, 3, 0), CREAM: (0, 2, 6, 1),
     '#2F67B3': (86, 52, 0, 4), '#23589F': (90, 60, 2, 10), '#C4467F': (12, 85, 18, 2), '#A82A65': (18, 95, 30, 10),
-    '#2E8452': (82, 18, 85, 8), '#1B6E3E': (88, 25, 92, 22), '#B5541A': (14, 74, 100, 8), '#9C4507': (20, 78, 100, 18),
+    '#2E8452': (82, 18, 85, 8), '#1B6E3E': (88, 25, 92, 22), '#8236AE': (62, 90, 0, 0), '#6B2A8E': (72, 100, 4, 10),
     '#D99A22': (8, 38, 96, 2), '#173F52': (92, 60, 40, 40),
 }
 

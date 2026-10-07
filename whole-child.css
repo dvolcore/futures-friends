@@ -2,7 +2,7 @@
    Curriculum entry bands). Uses the site tokens (Fredoka + Poppins, navy and gold, felt-stitch dashes, character colors). The
    --wc-* colors are the character colors deepened until white text on them passes 4.5:1. */
 :root{
-  --wc-booker:#23589F; --wc-lumi:#B02F6C; --wc-zuri:#1B7541; --wc-bop:#A84908; --wc-purple:#6644B0;
+  --wc-booker:#23589F; --wc-lumi:#B02F6C; --wc-zuri:#1B7541; --wc-bop:#6B2A8E; --wc-purple:#6644B0;
   --wc-gold:#E7A928; --wc-gold-ink:#7A5200; --wc-navy:#0A2B38; --wc-navy2:#123E50;
 }
 .wc-vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

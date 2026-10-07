@@ -1,7 +1,7 @@
 /* Futures at Home (#at-home, #story-time, #activities, #printables, #see-how, #family-videos, #my-week).
    Site tokens (Fredoka + Poppins, navy and gold, felt-stitch dashes). --fl-* are the character colors deepened until white text
    on them passes 4.5:1 (same values as whole-child.css). */
-:root{--fl-booker:#23589F;--fl-lumi:#B02F6C;--fl-zuri:#1B7541;--fl-bop:#A84908;--fl-gold-ink:#7A5200}
+:root{--fl-booker:#23589F;--fl-lumi:#B02F6C;--fl-zuri:#1B7541;--fl-bop:#6B2A8E;--fl-gold-ink:#7A5200}
 .ffl{overflow-x:clip}
 .ffl [hidden]{display:none!important}
 .fl-vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -121,7 +121,7 @@
 .fl-prompt .fl-meta{color:#B8CCD3}
 .fl-qtype{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--gold);color:#0A2B38;padding:5px 8px;border-radius:6px;margin-right:6px;vertical-align:2px}
 .fl-qword{background:#D7E5EA}
-.fl-qmove{background:#F5B98A}
+.fl-qmove{background:#DCC3F3}
 .fl-page-end .fl-text,.fl-page-cover .fl-text{align-content:start}
 .fl-page-end ol{margin:0;padding-left:20px;display:grid;gap:8px}
 .fl-endside ol{padding-left:20px;margin:0;display:grid;gap:6px;font-size:14.5px}

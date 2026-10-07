@@ -79,7 +79,7 @@
     const ctx=canvas.getContext('2d');
     if(!ctx)return;
     const width=canvas.width=innerWidth,height=canvas.height=innerHeight;
-    const colors=['#2F6FC0','#D9488B','#2E9E57','#E8761E','#E7A928'];
+    const colors=['#2F6FC0','#D9488B','#2E9E57','#8236AE','#E7A928'];
     const particles=Array.from({length:Math.min(140,Math.max(1,count||60))},(_,i)=>({x:width/2+(Math.random()-.5)*width*.4,y:height*.35,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,size:Math.random()*6+4,color:colors[i%colors.length]}));
     const start=performance.now();
     function frame(now){

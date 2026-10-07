@@ -157,7 +157,7 @@ test('room slots are labelled placeholders on the page and in the picture, never
 
 test('the art is laid out from approved assets only, characters are never stretched, and nothing is fetched or generated', () => {
   const compose = read('tools/brand-art/compose.html'), build = read('tools/build-brand-art.mjs');
-  for (const s of compose.match(/\.\.\/\.\.\/img\/[A-Za-z0-9_./${}-]+/g)) assert.match(s, /^\.\.\/\.\.\/img\/(cut_\$\{k\}\.webp|brand\/ff-(sticker|sticker-sm|white)\.png|rainbow\/\$\{n\}\.svg|group\.jpg)$/, s);
+  for (const s of compose.match(/\.\.\/\.\.\/img\/[A-Za-z0-9_./${}-]+/g)) assert.match(s, /^\.\.\/\.\.\/img\/(cut_\$\{k\}\.webp|brand\/ff-(sticker|sticker-sm|white|plush-wordmark-640)\.png|rainbow\/\$\{n\}\.svg|group\.jpg)$/, s);
   assert.match(compose, /img\.cut\{display:block;height:var\(--ch\);width:auto;object-fit:contain/);
   assert.doesNotMatch(compose + build, /https?:\/\/(?!127\.0\.0\.1)|fetch\(|higgsfield|openai|replicate/i);
   for (const f of ['booker', 'lumi', 'zuri', 'bop']) assert.ok(fs.existsSync(path.join(ROOT, `img/cut_${f}.webp`)));

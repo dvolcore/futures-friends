@@ -8,8 +8,8 @@
   };
   const domains = ['Literacy','Math & science','Social-emotional','Physical development','Creative arts'];
   const symbols = ['BookOpen','Leaf','Heart','Waves','Sparkles'];
-  const colors = ['#2158b4','#25815b','#b43177','#c15416','#7050ad'];
-  const friendColors = {booker:'#2158b4',lumi:'#b43177',zuri:'#25815b',bop:'#c15416'};
+  const colors = ['#2158b4','#25815b','#b43177','#8236AE','#7050ad'];
+  const friendColors = {booker:'#2158b4',lumi:'#b43177',zuri:'#25815b',bop:'#6B2A8E'};
   const activities = {
     booker:{title:'A story in three pictures', time:'10 minutes', material:'A favorite picture book', steps:['Look through the pictures together.','Choose a beginning, middle and ending.','Tell the story in your own words.'], adapt:{twos:'Point to a favorite picture and name what you see.', threes:'Put three story moments in order with a grown-up.', prek:'Retell the story and imagine a different ending.'}},
     lumi:{title:'A little kindness goes a long way',time:'5 minutes',material:'Paper and crayons',steps:['Draw a face for how you feel today.','Talk about something that helps when feelings get big.','Choose one kind thing to do together.'],adapt:{twos:'Point to a happy or sad face; a grown-up names the feeling.',threes:'Name a feeling and practice asking for a turn.',prek:'Describe a feeling and suggest a way to help a friend.'}},

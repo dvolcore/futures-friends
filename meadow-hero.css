@@ -54,7 +54,7 @@
 }
 /* tagline words in their friend's colour, dark shades for the cream card (all 5.4:1 or more on #FFF8EC) */
 .mh-card .ffm-w[data-k=booker]{--fw:#1F5BB5}
-.mh-card .ffm-w[data-k=bop]{--fw:#A8490C}
+.mh-card .ffm-w[data-k=bop]{--fw:#6B2A8E}
 .mh-card .ffm-w[data-k=zuri]{--fw:#1C7340}
 .mh-card .ffm-w[data-k=lumi]{--fw:#AD2D69}
 
@@ -87,7 +87,7 @@
 .mh-stage .mh-say[hidden]{display:none}
 .mh-stage .mh-say:after{content:"";position:absolute;left:-10px;right:auto;top:30px;bottom:auto;width:16px;height:16px;translate:0 0;rotate:45deg;background:#FFF8EC;border:solid var(--sc,#E7A928);border-width:0 0 2.5px 2.5px}
 .mh-saytab{position:absolute;top:-14px;left:14px;padding:4px 12px 5px;border-radius:999px;font:600 14px/1 var(--display);color:#fff;background:var(--tab,#0A2B38);box-shadow:0 4px 10px -4px rgba(10,43,56,.5)}
-.mh-say[data-k=booker]{--tab:#1F5BB5}.mh-say[data-k=lumi]{--tab:#AD2D69}.mh-say[data-k=zuri]{--tab:#1C7340}.mh-say[data-k=bop]{--tab:#A8490C}
+.mh-say[data-k=booker]{--tab:#1F5BB5}.mh-say[data-k=lumi]{--tab:#AD2D69}.mh-say[data-k=zuri]{--tab:#1C7340}.mh-say[data-k=bop]{--tab:#6B2A8E}
 .mh-sayline{margin:0;font:500 16px/1.45 var(--body);color:#14313D}
 .mh-sayask{display:flex;flex-wrap:wrap;gap:6px}
 .mh-sayaskbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 13.5px/1.1 var(--body);text-decoration:none}

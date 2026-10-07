@@ -123,9 +123,9 @@
    white text on the light friend colors was 2.9 to 4.0:1. Same darker shades the hero pills already use (brand-art.css). */
 .ffhm-spot[data-z=lumi],.tag.c[style*="--lumi"]{background:#B02F6C}
 .ffhm-spot[data-z=zuri],.tag.c[style*="--zuri"]{background:#1B7541}
-.ffhm-spot[data-z=bop],.tag.c[style*="--bop"]{background:#A84908}
+.ffhm-spot[data-z=bop],.tag.c[style*="--bop"]{background:#6B2A8E}
 .tag.c[style*="--gold-deep"]{background:#8A6108}
 .card .eyebrow{color:#8A6108}
 .card>b[style*="var(--lumi)"]{color:#B02F6C!important}
 .card>b[style*="var(--zuri)"]{color:#1B7541!important}
-.card>b[style*="var(--bop)"]{color:#A84908!important}
+.card>b[style*="var(--bop)"]{color:#6B2A8E!important}

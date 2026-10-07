@@ -56,7 +56,7 @@
 
 /* ---- the kinetic line in "What we have built" */
 .hc-kinetic{margin:-6px 0 clamp(20px,2.6vw,30px);font:600 clamp(22px,2.6vw,32px)/1.25 var(--display);color:#14313D;max-width:42ch}
-.hc-kinetic [data-k=booker]{color:#1B52A6}.hc-kinetic [data-k=bop]{color:#933F09}.hc-kinetic [data-k=zuri]{color:#17653A}.hc-kinetic [data-k=lumi]{color:#9A275D}
+.hc-kinetic [data-k=booker]{color:#1B52A6}.hc-kinetic [data-k=bop]{color:#6B2A8E}.hc-kinetic [data-k=zuri]{color:#17653A}.hc-kinetic [data-k=lumi]{color:#9A275D}
 
 /* ---- how a day works: a felt path the friends walk along */
 .hc-trail{position:relative}
@@ -72,7 +72,7 @@
 .hc-walkcut{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(30,48,10,.25))}
 .hc-trail .hc-steps::before{display:none}
 .hc-steps li.is-here .hc-num{background:var(--c);color:#fff;border-color:var(--c)}
-.hc-steps li[style*="--gold-deep"].is-here .hc-num,.hc-steps li[style*="--bop"].is-here .hc-num,.hc-steps li[style*="--zuri"].is-here .hc-num{color:#0A2B38}
+.hc-steps li[style*="--gold-deep"].is-here .hc-num,.hc-steps li[style*="--zuri"].is-here .hc-num{color:#0A2B38}
 
 /* ---- what we have built: real counts, plain paper, each a felt-stitched patch that links to the thing itself */
 .hc-proof{padding-block:var(--hc-pad,clamp(48px,5.5vw,72px))}
@@ -168,3 +168,6 @@
 @media (max-width:620px){.hc-prooftile a{padding:10px 12px;outline-offset:-3px}}
 
 @media print{.hc-path,.hc-stitch{display:none}}
+/* Bop purple (owner 2026-10-07): white number on the deep purple in light mode; navy on the lavender in dark mode */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hc-steps li[style*="--bop"].is-here .hc-num{color:#0A2B38}}
+:root[data-theme="dark"] .hc-steps li[style*="--bop"].is-here .hc-num{color:#0A2B38}

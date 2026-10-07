@@ -141,7 +141,7 @@
 /* Wave 10 BRAND: the curriculum identity (same system as the PDFs, tools/ff_brand.py). Felt is for story-world surfaces only: the unit
    cover, week tabs and cast avatars; teaching content stays on plain paper. The stitched thread is the signature. White text sits on
    felt tones that keep 4.5:1 (checked: booker 5.7, lumi 4.6, zuri 4.6, bop 4.9, navy 11.2). */
-:root{--u1-felt-booker:#2F67B3;--u1-felt-lumi:#C4467F;--u1-felt-zuri:#2E8452;--u1-felt-bop:#B5541A;--u1-felt-navy:#173F52;--u1-felt-gold:#B7883A;
+:root{--u1-felt-booker:#2F67B3;--u1-felt-lumi:#C4467F;--u1-felt-zuri:#2E8452;--u1-felt-bop:#8236AE;--u1-felt-navy:#173F52;--u1-felt-gold:#B7883A;
   --u1-felt-tex:var(--tx-cream);--u1-thread:rgba(255,255,255,.62)}   /* the texture tokens of plush-textures.css (one system) */
 .wc-hero.u1-castfelt,.u1-castfelt{background-color:var(--u1-felt-navy);background-image:var(--u1-felt-tex);background-size:420px;background-blend-mode:multiply;position:relative}
 .u1-castfelt::after{content:"";position:absolute;inset:12px;border:1.5px dashed var(--u1-thread);border-radius:22px;pointer-events:none}

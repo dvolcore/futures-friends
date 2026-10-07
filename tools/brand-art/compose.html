@@ -1,14 +1,14 @@
 <!doctype html>
 <!-- Brand-art compositor (G13-G17, I05, D07, D08). Lays out site art from APPROVED assets only: the four official cut-outs
-     (img/cut_*.webp), the sticker and white wordmarks (img/brand/), the rainbow food icons (img/rainbow/), the self-hosted fonts
+     (img/cut_*.webp), the plush wordmark (img/brand/ff-plush-wordmark-640.png) with the official tagline as live text, the rainbow food icons (img/rainbow/), the self-hosted fonts
      and the site colour tokens. No generated art. tools/build-brand-art.mjs opens compose.html#<asset> at the asset's exact size
      and screenshots it. Characters are drawn with height set and width auto (object-fit: contain), so they are never stretched. -->
 <html lang="en"><head><meta charset="utf-8"><title>Brand art compositor</title>
 <link rel="stylesheet" href="../../fonts/fonts.css">
 <style>
 :root{--navy:#0A2B38;--navy2:#123E50;--gold:#E7A928;--cream:#FBF6EC;--paper:#FFFFFF;--ink:#14313D;--muted:#4F616A;
- --booker:#2F6FC0;--lumi:#D9488B;--zuri:#2E9E57;--bop:#E8761E;--purple:#7B57C8;
- --booker-s:#E7EFFA;--lumi-s:#FBE8F1;--zuri-s:#E6F4EB;--bop-s:#FDEDE0;--display:"Fredoka","Poppins",sans-serif;--body:"Poppins",sans-serif}
+ --booker:#2F6FC0;--lumi:#D9488B;--zuri:#2E9E57;--bop:#8236AE;--purple:#7B57C8;
+ --booker-s:#E7EFFA;--lumi-s:#FBE8F1;--zuri-s:#E6F4EB;--bop-s:#F3EAFB;--display:"Fredoka","Poppins",sans-serif;--body:"Poppins",sans-serif}
 *{box-sizing:border-box;margin:0}
 html,body{width:var(--w);height:var(--h);overflow:hidden;background:var(--navy);font-family:var(--body);color:var(--ink)}
 #a{position:relative;width:var(--w);height:var(--h);overflow:hidden}
@@ -50,7 +50,7 @@ const A = {
   // G13: the four friends on a felt stage with their current pillars. Also the poster frame for the Academy video and a blurred page backdrop.
   hero: [1600, 900, 10, () => `<div class="navybg" style="position:absolute;inset:0"></div><div class="stitch"></div>
     <div style="position:absolute;left:96px;top:150px;width:540px;display:grid;gap:26px">
-      <img src="../../img/brand/ff-sticker.png" alt="" style="width:520px;height:auto">
+      <img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="width:520px;height:auto"><div style="font:600 30px/1.1 var(--display);color:#fff;margin-top:-10px">Learn. Move. Explore. Belong.</div>
       <div style="font:600 30px/1.2 var(--display);color:#fff">Early learning for ages 2 to 5</div>
       <div style="width:120px;height:6px;border-radius:3px;background:var(--gold)"></div>
       <div style="font:500 22px/1.4 var(--body);color:#C6D7DD">With Booker, Lumi, Zuri and Bop</div></div>
@@ -92,7 +92,7 @@ const A = {
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${RAINBOW.map(r => `<span style="display:grid;justify-items:center;gap:2px;background:#fff;border-radius:12px;border:2px solid ${r[1]};padding:6px 4px"><span style="width:44px;height:40px">${food(r[2][0])}</span><b style="font:600 13px/1.1 var(--display);color:${r[1]};text-align:center">${r[0]}</b></span>`).join('')}</div>
         <span class="tag" style="font-size:12px;justify-self:start">Photo coming</span></div></div>
       <div class="navybg" style="position:absolute;left:0;right:0;top:${.875*800+4}px;bottom:0;display:flex;align-items:center;gap:26px;padding:0 34px">
-        <img src="../../img/brand/ff-white.png" alt="" style="height:82px;width:auto">
+        <span style="display:grid;justify-items:center;gap:2px"><img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="height:66px;width:auto"><span style="font:600 12px/1 var(--display);color:#fff;white-space:nowrap">Learn. Move. Explore. Belong.</span></span>
         <span style="font:600 19px/1.3 var(--display);color:#fff;flex:1">Placeholder zone map: real photos of each learning zone come from our pilot classroom.</span>
         <span class="row" style="gap:0;align-self:flex-end">${K.map(k => cut(k, 92)).join('')}</span></div>`; }],
   // G17: a cover layout for a title that IS in the series (Book 2, led by Lumi). It replaces a cover whose title was not in the series.
@@ -107,14 +107,14 @@ const A = {
   // D07: the Academy welcome clip, four title cards (0:00 welcome, 0:08 the friends, 0:16 the loop, 0:24 the proposed pathway).
   'ac1': [1280, 720, 8, () => slide('Welcome', 'Welcome to the Academy', 'Training in development for every Futures Friends classroom', `<img src="../../img/group.jpg" alt="" style="width:560px;height:auto;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.35)">`)],
   'ac2': [1280, 720, 8, () => slide('Meet the friends', 'Booker, Lumi, Zuri and Bop', 'Four friends, four pillars, one program', `<div class="row" style="gap:14px">${K.map(k => `<div style="display:grid;justify-items:center;gap:10px;background:rgba(255,255,255,.08);border-radius:18px;padding:16px 6px 14px;width:178px">${cut(k, 200)}<span class="pill" style="--c:var(--${k});font-size:12px;white-space:nowrap">${PILL[k]}</span></div>`).join('')}</div>`, true)],
-  'ac3': [1280, 720, 8, () => slide('Every day', 'The daily learning loop', 'Six steps, every lesson', `<div style="display:grid;grid-template-columns:repeat(3,150px);gap:16px">${[['Watch','#7B57C8'],['Talk','#2F6FC0'],['Do','#2E9E57'],['Move','#E8761E'],['Explore','#D9488B'],['Take home','#B5830C']].map((s, i) => `<div style="height:150px;border-radius:20px;background:${s[1]};border:4px solid rgba(255,255,255,.75);padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff"><b style="font:700 38px/1 var(--display)">${i+1}</b><b style="font:600 22px/1 var(--display)">${s[0]}</b></div>`).join('')}</div>`)],
+  'ac3': [1280, 720, 8, () => slide('Every day', 'The daily learning loop', 'Six steps, every lesson', `<div style="display:grid;grid-template-columns:repeat(3,150px);gap:16px">${[['Watch','#7B57C8'],['Talk','#2F6FC0'],['Do','#2E9E57'],['Move','#8236AE'],['Explore','#D9488B'],['Take home','#B5830C']].map((s, i) => `<div style="height:150px;border-radius:20px;background:${s[1]};border:4px solid rgba(255,255,255,.75);padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff"><b style="font:700 38px/1 var(--display)">${i+1}</b><b style="font:600 22px/1 var(--display)">${s[0]}</b></div>`).join('')}</div>`)],
   'ac4': [1280, 720, 8, () => slide('Your proposed path', 'Planned training levels', 'Short lessons and quick checks. Planned levels only: no course is state-approved yet, and no credential is issued.', `<div style="display:grid;gap:16px;width:440px">${[['Level 1','Foundations','#B5830C'],['Level 2','Classroom Practice','#8A9BA5'],['Level 3','Certified Educator (planned)','#E7A928']].map(l => `<div style="display:flex;align-items:center;gap:16px;background:#fff;border-radius:999px;padding:12px 26px 12px 12px"><span style="width:56px;height:56px;border-radius:50%;background:${l[2]};display:grid;place-items:center;color:#fff;font:700 24px var(--display)">★</span><b style="font:600 22px/1.2 var(--display);color:var(--navy)">${l[0]} · ${l[1]}</b></div>`).join('')}</div>`)]
 };
 
 function cover(k, book, l1, l2) {
   return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
    <div style="position:absolute;left:0;right:0;top:92px;display:grid;justify-items:center;gap:18px;text-align:center">
-     <img src="../../img/brand/ff-sticker-sm.png" alt="" style="width:300px;height:auto">
+     <img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="width:340px;height:auto"><span style="font:600 26px/1 var(--display);color:var(--navy);margin-top:-8px">Learn. Move. Explore. Belong.</span>
      <span class="pill" style="--c:var(--${k});font-size:26px">${book} · A Futures Friends Story</span>
      <div style="font:700 112px/1 var(--display);color:var(--navy)">${l1}<br><span style="color:var(--${k})">${l2}</span></div></div>
    <div style="position:absolute;left:0;right:0;bottom:120px;display:grid;justify-items:center">${cut(k, 560)}</div>
@@ -123,7 +123,7 @@ function cover(k, book, l1, l2) {
 function poster(k, who, line) {
   return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
    <div style="position:absolute;left:90px;top:0;bottom:0;width:820px;display:grid;align-content:center;gap:22px">
-     <img src="../../img/brand/ff-sticker-sm.png" alt="" style="width:260px;height:auto">
+     <span style="display:grid;justify-items:start;gap:6px"><img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="width:300px;height:auto"><span style="font:600 22px/1 var(--display);color:var(--navy)">Learn. Move. Explore. Belong.</span></span>
      <div style="font:700 104px/1 var(--display);color:var(--${k})">${who}</div>
      <div style="font:700 64px/1.08 var(--display);color:var(--navy)">${line}</div>
      <span class="tag" style="font-size:20px;justify-self:start">Poster layout preview · final art to come</span></div>

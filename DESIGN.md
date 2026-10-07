@@ -9,7 +9,8 @@ A pop-up storybook. Every page opens like a felt pop-up book: a real room behind
 - Booker blue: #0B5ED7 (LEARN + SMILE, Booker)
 - Lumi pink: #D9488B (BELONG + RESET, Lumi)
 - Zuri green: #2E9E57 (EXPLORE + NOURISH, Zuri)
-- Bop orange: #E8761E (MOVE + OUTSIDE, Bop)
+- Bop purple: #8236AE (MOVE + OUTSIDE, Bop; owner decision 2026-10-07, was orange #E8761E). Text-safe ink #6B2A8E (8.9:1 on white, 8.3:1 on cream); lavender #C9A2EC (dark mode, light felt); tint #F3EAFB. Bop the plush keeps his grey fleece and green overalls: the brand accent changed, the character did not.
+- Tagline: "Learn. Move. Explore. Belong." (official, owner 2026-10-07; never "Learn. Play. Explore. Belong.")
 
 ## Type
 - Display: Fredoka 600/700. matches the rounded felt lettering of the wordmark; headlines only.
@@ -35,7 +36,7 @@ One identity for every curriculum piece: day packets, Start Monday bundles, clas
 - Logo: every Futures Friends logo in the curriculum is the plush wordmark (img/brand/ff-plush-wordmark-640.png; the square plush FF mark where a square fits). The FLC shield never appears in curriculum pieces.
 - Paper and felt: teaching content stays on plain warm paper (#FFFDF8). Felt (the plush felt-cream grain recoloured per friend, tiled at true texture scale) is only for story-world surfaces: covers, day/section openers, the week thumb tab, guide notes, posters, zone signs, family-card bands.
 - The stitch: a dashed thread line inset on every felt surface and used as the rule under every heading and table head. It replaces heavy side bars (none anywhere).
-- Colour per lead friend and pillar: ink (`deep`, 4.5:1+ on paper and tint) / surface (`felt`, white text 4.6:1+) / tint. Booker #23589F/#2F67B3, Lumi #A82A65/#C4467F, Zuri #1B6E3E/#2E8452, Bop #9C4507/#B5541A, navy #0A2B38/#173F52. CMYK builds for the press live in `CMYK` (inside SWOP coverage).
+- Colour per lead friend and pillar: ink (`deep`, 4.5:1+ on paper and tint) / surface (`felt`, white text 4.6:1+) / tint. Booker #23589F/#2F67B3, Lumi #A82A65/#C4467F, Zuri #1B6E3E/#2E8452, Bop #6B2A8E/#8236AE (purple since 2026-10-07), navy #0A2B38/#173F52. CMYK builds for the press live in `CMYK` (inside SWOP coverage).
 - Type: Fredoka 700 display (day numbers, covers), Fredoka 600 headings, Poppins 400/600 text. Scale (pt): cover 54-76, opener 40-44, title 24, h1 20, h2 14.5, h3 12, body 10.2, small 8.6, label 7.4. PDF stamps and contents use the same Poppins files (never Helvetica).
 - Icons: one drawn set (24-unit grid, one stroke weight) for every block type and section (circle, picture-talk, friends-live, activity, outside, move, zones, story, meal, home, goodbye, supplies, print, routine, safety, observe, song, kitchen, art, timing, join, watch, talk, ...). The PDFs draw it; the web uses the generated sprite `img/curriculum/icons.svg`.
 - Cast in recurring roles, always labelled "Story-world character" beside real-world content: Ms. June = teacher notes (day packet, Start Monday cover, story cue cards); Principal Hazel = routines and safety (daily routines, timing sheet, nature rules); Mr. Moss = room setup and supplies (supply lists, prep list, classroom printables cover); Ms. Fern = art and messy play (art table sign); classmates = activity examples; each friend's grown-up = family cards (Bruno/Booker, Rose/Lumi, Sage/Zuri, Ella/Bop). Avatars are pop-outs (the cut-out stands out of the felt disc's top edge), never a circle mask.

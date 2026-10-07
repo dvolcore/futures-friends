@@ -1,7 +1,7 @@
 /* Wave 3 G: accessibility and polish layer. Loaded last. Contrast, focus and target-size fixes that must not change brand or content.
    Friend colours stay as fills; where a friend colour is used as TEXT, it is mixed toward black until it clears 4.5:1 (--ci), and
    where it is a FILL behind white text, the darker "-ink" shade (the one the Family Library already uses) is used instead. */
-:root{--ci-mix:68%;--booker-ink:#23589F;--lumi-ink:#B02F6C;--zuri-ink:#1B7541;--bop-ink:#A84908}
+:root{--ci-mix:68%;--booker-ink:#23589F;--lumi-ink:#B02F6C;--zuri-ink:#1B7541;--bop-ink:#6B2A8E}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ci-mix:100%;--booker-ink:var(--booker);--lumi-ink:var(--lumi);--zuri-ink:var(--zuri);--bop-ink:var(--bop)}}
 :root[data-theme="dark"]{--ci-mix:100%;--booker-ink:var(--booker);--lumi-ink:var(--lumi);--zuri-ink:var(--zuri);--bop-ink:var(--bop)}
 
@@ -13,9 +13,9 @@
 /* "The learning loop" and "Eat the Rainbow" bands: same hues, deep enough to carry white text */
 .loop>div:nth-child(2){background:var(--booker-ink)!important}
 .loop>div:nth-child(3){background:var(--zuri-ink)!important}
-.loop>div:nth-child(4){background:var(--bop)!important;color:#0A2B38}   /* Bop's orange stays, with navy text */
+.loop>div:nth-child(4){background:#6B2A8E!important;color:#fff}   /* Bop purple (owner 2026-10-07), white text */
 .loop>div:nth-child(4) i,.loop>div:nth-child(4) span{opacity:1}
-.loop>div:nth-child(4)::after{border-color:rgba(10,43,56,.45)}
+.loop>div:nth-child(4)::after{border-color:rgba(255,255,255,.55)}
 .loop>div:nth-child(5){background:var(--lumi-ink)!important}
 .loop>div:nth-child(2) b{color:#fff!important}
 .bands>div:nth-child(1){background:#C23B2F!important}

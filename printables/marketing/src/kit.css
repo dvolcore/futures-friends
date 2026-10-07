@@ -8,8 +8,8 @@
 @page { size: 8.5in 11in; margin: 0; }
 :root {
   --navy: #0A2B38; --ink: #14313D; --muted: #4F626B; --gold: #E7A928; --gold-deep: #8A6108; --cream: #FBF6EC; --line: #CBD6DA;
-  --booker: #23589F; --lumi: #B02F6C; --zuri: #1B7541; --bop: #A84908;
-  --booker-s: #E7EFFA; --lumi-s: #FBE8F1; --zuri-s: #E6F4EB; --bop-s: #FDEDE0;
+  --booker: #23589F; --lumi: #B02F6C; --zuri: #1B7541; --bop: #6B2A8E;
+  --booker-s: #E7EFFA; --lumi-s: #FBE8F1; --zuri-s: #E6F4EB; --bop-s: #F3EAFB;
   --display: 'Fredoka Print', 'Fredoka', 'Poppins', system-ui, sans-serif; --body: 'Poppins', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }

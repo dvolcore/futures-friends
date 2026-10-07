@@ -7,7 +7,7 @@
    dark shades for the cream card). */
 .ffm-w{display:inline-block;color:var(--fw,#fff)}
 .ffm-w[data-k=booker]{--fw:#A9CDFF}
-.ffm-w[data-k=bop]{--fw:#FFBC85}
+.ffm-w[data-k=bop]{--fw:#D2B0F2}
 .ffm-w[data-k=zuri]{--fw:#93E2B1}
 .ffm-w[data-k=lumi]{--fw:#FFB1D5}
 .ffm-w.is-on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}

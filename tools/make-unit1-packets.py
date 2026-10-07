@@ -338,7 +338,7 @@ def face(c, cx, cy, r, kind, col):
 
 
 def blocks(c, x, y, mode, s=0.42 * inch):
-    cols = [HexColor('#23589F'), HexColor('#E7A928'), HexColor('#1B7541'), HexColor('#B02F6C'), HexColor('#A84908')]
+    cols = [HexColor('#23589F'), HexColor('#E7A928'), HexColor('#1B7541'), HexColor('#B02F6C'), HexColor('#6B2A8E')]
     c.setLineWidth(1.2); c.setStrokeColor(INK)
     if mode == 'tall':
         for i in range(5):
@@ -654,7 +654,7 @@ def classroom(man):
         if t == 'Blocks':
             blocks(c, gx + 0.3 * inch, gy - 0.2 * inch, 'wide', s=0.55 * inch)
         elif t == 'Books':
-            for n, col in enumerate(['#23589F', '#B02F6C', '#1B7541', '#A84908']):
+            for n, col in enumerate(['#23589F', '#B02F6C', '#1B7541', '#6B2A8E']):
                 c.setFillColor(HexColor(col)); c.rect(gx + n * 0.42 * inch, gy, 0.36 * inch, 2.2 * inch - n * 0.15 * inch, stroke=1, fill=1)
         elif t == 'Scarves':
             for n, col in enumerate(['#B02F6C', '#E7A928', '#23589F']):

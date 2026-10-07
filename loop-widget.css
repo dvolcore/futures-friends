@@ -36,7 +36,7 @@
   transition:transform .28s cubic-bezier(.23,1,.32,1),box-shadow .28s cubic-bezier(.23,1,.32,1),background-color .2s ease}
 .lw-tile .lw-num{grid-column:1;grid-row:1;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;
   font:600 15px/1 var(--display);box-shadow:0 0 0 3px rgb(255 255 255 / .75),0 4px 10px -4px var(--c);transition:background-color .2s ease}
-.lw .lw-tiles>li[style*="--bop"] .lw-num,.lw .lw-tiles>li[style*="--zuri"] .lw-num{color:#0A2B38}
+.lw .lw-tiles>li[style*="--zuri"] .lw-num{color:#0A2B38}
 .lw-tile .lw-plush{grid-column:2;grid-row:1 / span 2;justify-self:end;width:auto;height:64px;margin:-6px -4px -4px 0;
   filter:drop-shadow(0 6px 6px rgba(10,43,56,.18));transition:transform .35s cubic-bezier(.34,1.56,.64,1);transform-origin:50% 100%}
 .lw-tile b{grid-column:1 / -1;grid-row:2;align-self:end;font:600 18px/1.2 var(--display);color:var(--ink);margin-top:6px}
@@ -217,3 +217,6 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .u1s-day:has(.lw){--focus-ring:#EAF1F3}}
 :root[data-theme=dark] .u1s-day:has(.lw){--focus-ring:#EAF1F3}
 .lw-media .lw-poster{--focus-ring:#FFFDF7}.lw .lw-media .lw-poster:focus-visible{outline-offset:-6px}
+/* Bop purple (owner 2026-10-07): white number on purple in light mode; navy on the lavender in dark mode */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lw .lw-tiles>li[style*="--bop"] .lw-num{color:#0A2B38}}
+:root[data-theme="dark"] .lw .lw-tiles>li[style*="--bop"] .lw-num{color:#0A2B38}
