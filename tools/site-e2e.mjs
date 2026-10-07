@@ -87,7 +87,7 @@ async function open(page, route, settle = 700) {
 // Skip past the tap-to-enter sound gate / welcome overlay if one is up, so it never masks a page.
 async function dismissGate(page) {
   await page.evaluate(() => {
-    const sel = ['[data-ff-gate-enter]', '.ffs-gate button', '.sound-gate button', '.ff-enter button', '[data-enter]'];
+    const sel = ['.ffe-go'];
     for (const s of sel) { const b = document.querySelector(s); if (b && b.offsetParent) { b.click(); return s; } }
     return null;
   }).catch(() => null);
@@ -171,6 +171,32 @@ async function features() {
   await open(page, 'home', 1800);
   await dismissGate(page);
 
+  // ---- entry gate (entry.js): a fresh session opens on "Tap to enter"; the tap wakes sound; the gate shows once per session
+  await step('entry', 'entry gate: shows on a fresh session, Tap to enter lifts it and wakes sound, once per session; Enter without sound', async () => {
+    const raw = await loadChromium({ gate: true }).launch();
+    try {
+      const c = await raw.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', hasTouch: true });
+      const p = await c.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+      await p.goto(`${BASE}?e2e=${Date.now()}#home`); await p.waitForTimeout(1500);
+      const g = await p.evaluate(() => { const b = document.querySelector('.ffe-go'); return { has: !!b, vis: !!(b && b.offsetParent), focus: document.activeElement === b, open: window.FFEntry ? window.FFEntry.open() : null }; });
+      if (!g.has) return { status: 'warn', detail: 'no entry gate on this build (not published yet?)' };
+      assert(g.vis, 'gate button not visible');
+      await p.locator('.ffe-go').click(); await p.waitForTimeout(1500);
+      const after = await p.evaluate(() => ({ gone: !document.querySelector('.ffe-go') || !document.querySelector('.ffe-go').offsetParent, unlocked: window.FFSound ? window.FFSound.unlocked() : null, on: window.FFSound ? window.FFSound.enabled() : null, inert: document.querySelector('#view')?.closest('[inert]') ? 'inert' : 'ok' }));
+      assert(after.gone, 'gate did not lift'); assert(after.inert === 'ok', 'page still inert after entering'); assert(after.unlocked, 'sound not unlocked by the tap');
+      await p.goto(`${BASE}?e2e=${Date.now()}#watch`); await p.waitForTimeout(1200);
+      const again = await p.evaluate(() => !!(document.querySelector('.ffe-go') && document.querySelector('.ffe-go').offsetParent));
+      assert(!again, 'gate showed again in the same session');
+      const c2 = await raw.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' }); const p2 = await c2.newPage();
+      await p2.goto(`${BASE}?e2e=${Date.now()}#at-home`); await p2.waitForTimeout(1500);
+      await p2.locator('.ffe-quiet').click(); await p2.waitForTimeout(1200);
+      const quiet = await p2.evaluate(() => ({ gone: !document.querySelector('.ffe-go') || !document.querySelector('.ffe-go').offsetParent, on: window.FFSound ? window.FFSound.enabled() : null }));
+      assert(quiet.gone, '"Enter without sound" did not lift the gate'); assert(quiet.on === false, `"Enter without sound" left sound on (${quiet.on})`);
+      assert(!errs.length, errs.join(' | '));
+      return `gate shown with focus=${g.focus}; tap: sound unlocked, enabled=${after.on}; not shown again; quiet entry sound off`;
+    } finally { await raw.close(); }
+  });
+
   // ---- global chrome
   await step('nav', 'menu opens, lists pages, closes (Escape and close button) @390', async () => {
     await clickSel(page, '#menuT');
@@ -250,7 +276,7 @@ async function features() {
       main.click(); await new Promise((r) => setTimeout(r, 250)); const s1 = main.getAttribute('aria-pressed');
       main.click(); await new Promise((r) => setTimeout(r, 250)); const s2 = main.getAttribute('aria-pressed');
       const n0 = nat.getAttribute('aria-pressed'); nat.click(); await new Promise((r) => setTimeout(r, 250)); const n1 = nat.getAttribute('aria-pressed');
-      const stored = localStorage.getItem('ff-sound-nature');
+      const stored = Object.keys(localStorage).filter((k) => /^ff-sound-nature/.test(k)).map((k) => localStorage.getItem(k))[0] ?? null;
       nat.click(); await new Promise((r) => setTimeout(r, 200));
       return { s0, s1, s2, n0, n1, stored, unlocked: window.FFSound && window.FFSound.unlocked(), enabled: window.FFSound && window.FFSound.enabled() };
     });
