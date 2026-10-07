@@ -101,7 +101,8 @@
   // One player for all of them: it talks, so it never autoplays; native controls, captions on by default, nothing loads before play.
   const actPlayer = (slug, title) => { const f = FRIEND_ACTS[slug], v = BOP_ACTS[slug] || f; if (!v) return '';
     const n = NAMES[(f && f.who) || 'bop'], data = f ? `data-friend-act="${esc(slug)}" data-who="${esc(f.who)}"` : `data-bop-act="${esc(slug)}"`;
-    return `<figure class="wc-actvid" ${data}><video controls playsinline preload="none" width="1280" height="720" poster="${esc(v.poster)}" aria-label="${esc(n + ' leads ' + v.t)}"><source src="${esc(v.src)}" type="video/mp4">${tracks(v.src)}</video><figcaption>Watch ${n} do it with you &middot; story-world animation</figcaption>${transcript(v.src, title || v.t)}</figure>`; };
+    return `<figure class="wc-actvid" ${data}><video controls playsinline preload="none" width="1280" height="720" poster="${esc(v.poster)}" aria-label="${esc(n + ' leads ' + v.t)}"><source src="${esc(v.src)}" type="video/mp4">${tracks(v.src)}</video><figcaption>${f && f.cap ? esc(f.cap) : `Watch ${n} do it with you`} &middot; story-world animation</figcaption>${transcript(v.src, title || v.t)}</figure>`; };
+  // f.cap (optional): a different caption line, e.g. Peekaboo Turns for babies: "Watch Lumi play it, then play face to face."
   // A friend's own videos, in slate order (the friend's video section on #activities/<friend>).
   const friendActs = who => Object.keys(FRIEND_ACTS).filter(k => FRIEND_ACTS[k].who === who);
   const API = { CAPS, has, tracks, transcript, note, extras, BOP_ACTS, FRIEND_ACTS, friendActs, actPlayer };

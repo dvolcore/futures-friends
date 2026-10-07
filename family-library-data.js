@@ -373,6 +373,13 @@ const VIDEOS = {
     { t: 'Look, Listen, Lend a Hand', who: 'Lumi', k: 'lumi', what: 'Lumi teaches the three kind gestures and the words "Do you want to play with me?"' },
     { t: 'Color Walk', who: 'Zuri', k: 'zuri', what: 'Zuri finds green, white, yellow and blue outside, and asks for your favorite find.' },
     { t: 'Bubble Chase', who: 'Bop', k: 'bop', what: 'An outdoor move-along: pop the bubbles with a clap, a toe and an elbow.' },
+    { t: 'Peekaboo Turns', who: 'Lumi', k: 'lumi', what: 'For babies and toddlers: Lumi plays peekaboo and waits for your baby\'s turn. Watch it, then play face to face.' },
+    { t: 'Front, Back, Top, Sparkle!', who: 'Booker', k: 'booker', what: 'Brush along with Booker: front, back, top, and a big sparkle smile.' },
+    { t: 'Count Colors, Not Bites', who: 'Zuri', k: 'zuri', what: 'Zuri counts the colors on a picnic plate. Look, sniff, touch, taste or pass: every way counts.' },
+    { t: 'Thankful Stretch', who: 'Lumi', k: 'lumi', what: 'A bedtime stretch with Lumi: reach up, bend down, think of one good thing.' },
+    { t: 'Loud and Soft Shakers', who: 'Zuri', k: 'zuri', what: 'Loud, soft, stop! Zuri listens to two homemade shakers.' },
+    { t: 'Name-It Walk', who: 'Booker', k: 'booker', what: 'Booker points and names what he sees outside: a flower, a tree, a cloud.' },
+    { t: 'Parade March', who: 'Bop', k: 'bop', what: 'March slow, march fast, and freeze, with Bop leading the parade.' },
     { t: 'Read-alongs with the friends', who: 'All four friends', k: 'all', what: 'The Story Time books read aloud, with the words on screen.' }
   ]
 };
