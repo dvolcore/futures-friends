@@ -101,7 +101,8 @@ test('pick a friend: a real tab list, one tab stop, each friend with a real fami
     assert.equal(a.c, k, `${id} is ${k}'s activity`);
     assert.ok(S.FFPlush.has(pose), `${pose} is a plush library pose`);
     const p = S.FFHomeCalm.pickPanel(k);
-    assert.match(p, new RegExp(`${a.min} minutes`), `${k}: the minutes come from the activity`);
+    const t = Math.round(a.min * 60), len = t % 60 ? (t < 60 ? t + ' seconds' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec') : t / 60 + ' minutes';
+    assert.ok(p.includes(len), `${k}: the length comes from the activity (${len})`);
     assert.match(p, new RegExp(`href="#activities/${id}"`));
     assert.doesNotMatch(p, /3-minute|three-minute/i, 'no made-up length');
   }

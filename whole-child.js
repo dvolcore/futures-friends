@@ -245,7 +245,7 @@ function photosHtml() {
   const C = window.FFCaptions;
   return sect('wc-photos-sec band-paper', 'wc-photos', '', `${lead('See it in motion', 'The day, with the friends', 'Three routines from this page, shown by the friends. Story-world animation: our own classrooms are shown with real photos on the Enroll page, and children are never filmed without their families&rsquo; permission.', '{H}')}
   <div class="wc-motion">${MOTION.map(m => m.act ? `<div class="wc-motion-item" style="--c:var(--wc-bop)">${C && C.actPlayer ? C.actPlayer(m.act, m.t.replace('&amp;', '&')) : ''}<p><b>${m.t}</b> ${m.line}</p></div>`
-    : `<figure class="wc-motion-item wc-motion-loop" style="--c:var(--wc-${m.k})"><video controls muted loop playsinline preload="none" poster="${m.poster}" width="640" height="800" aria-label="${m.label}"><source src="${m.src}" type="video/mp4"></video><figcaption><b>${m.t}</b> ${m.line}</figcaption></figure>`).join('')}</div>`);
+    : `<figure class="wc-motion-item wc-motion-loop" style="--c:var(--wc-${m.k})"><video controls muted loop playsinline preload="none" poster="${m.poster}" width="640" height="800" aria-label="${m.label}"><source src="${m.src}" type="video/mp4">${window.FFCaptions ? window.FFCaptions.tracks(m.src) : ''}</video><figcaption><b>${m.t}</b> ${m.line}</figcaption></figure>`).join('')}</div>`);
 }
 
 V['whole-child'] = () => `<div class="wc">${heroHtml()}${dayHtml()}${friendsHtml()}${moveHtml()}${targetsHtml()}${quietHtml()}${nourishHtml()}${familyHtml()}${photosHtml()}${promisesHtml()}${nextHtml()}</div>`;
@@ -256,8 +256,8 @@ V['whole-child'] = () => `<div class="wc">${heroHtml()}${dayHtml()}${friendsHtml
 const bopVideo = () => `<div class="wc-bopvid wc-rv" style="--c:var(--wc-bop)">${window.FFCaptions && window.FFCaptions.actPlayer ? window.FFCaptions.actPlayer('elephant-stomp', 'Move along with Bop: Elephant Stomp & Sway') : ''}
    <p class="wc-bopvid-cap"><b>Move along with Bop</b><span>Elephant Stomp &amp; Sway, the full movement break &middot; ${vlen(VSEC['elephant-stomp'])} &middot; turn the sound on and move together. Story-world animation.</span></p></div>`;
 // (The Watch page's movement break moved into the full video shelf on #watch: family-library.js, gap fill 2026-10-07.)
-// The real length of each titled video on the cards (seconds, ffprobe of video/act-*.mp4, 2026-10-07 long versions); min = that length.
-const VSEC = { 'elephant-stomp': 158, 'trunk-reach': 39, 'freeze-try-again': 69, 'animal-walks': 69, 'flamingo-balance': 69, 'clap-back': 69 };
+// The real length of each titled video on the cards (seconds, ffprobe of the act- videos, 2026-10-07 long versions); min = that length.
+const VSEC = { 'bop-bubble-chase': 39, 'elephant-stomp': 158, 'trunk-reach': 39, 'freeze-try-again': 69, 'animal-walks': 69, 'flamingo-balance': 69, 'clap-back': 69 };
 const vlen = sec => sec < 60 ? sec + ' sec' : Math.floor(sec / 60) + ' min' + (sec % 60 ? ' ' + (sec % 60) + ' sec' : '');
 const ACTS = [
   { t: 'Elephant Stomp & Sway', vid: 'elephant-stomp', skill: ['Move', 'Rhythm'], min: VSEC['elephant-stomp'] / 60, space: 'Small indoor space', steps: ['Stomp your heavy elephant feet: one, two, three.', 'Swing your trunk from side to side.', 'Slow down until you are a sleepy elephant.'], say: 'Ready? Bop & Go!', adapt: 'Seated or wheelchair: stomp with your hands on your knees or pat the arms of the chair, and swing your trunk with both arms. Sound-sensitive: do it in silence, or hum softly.' },
@@ -338,6 +338,17 @@ function actCard(a, i) {
    <div class="wc-adapt">${pic('adjust', 'wc-adapt-pic')}<b>Adapted version</b><p>${esc(a.adapt)}</p></div></article>`;
 }
 
+// Bop's other videos (captions.js FRIEND_ACTS with who 'bop', e.g. Bubble Chase), so every Bop video is on his page (owner 2026-10-07).
+// Same shared player; each links to its Futures at Home activity card.
+function bopMoreHtml() {
+  const C = window.FFCaptions, ks = C && C.friendActs ? C.friendActs('bop') : [];
+  if (!ks.length) return '';
+  const fam = window.FFFamily && window.FFFamily.ACTS ? window.FFFamily.ACTS : [];
+  return `<section class="wc-sec" id="wc-bop-more" aria-labelledby="wc-bop-more-h"><div class="wrap">${lead('Outside with Bop', 'More videos with Bop', 'Movement to take outside, with the same easy steps on its activity card.', 'wc-bop-more-h')}
+  <div class="wc-bopmore">${ks.map(k => { const a = fam.find(x => x.vid === k), v = C.FRIEND_ACTS[k];
+    return `<article class="wc-bopmore-item wc-rv" id="bop-act-${esc(k)}" style="--c:var(--wc-bop)"><h3>${esc(v.t)}</h3><p class="wc-meta"><span>${VSEC[k] ? vlen(VSEC[k]) : ''}</span></p>${C.actPlayer(k, v.t)}${a ? `<p class="small"><a class="rl" href="#activities/${esc(a.id)}">Try ${esc(a.t)} together: the activity card</a></p>` : ''}</article>`; }).join('')}</div></div></section>`;
+}
+
 V['bop-at-home'] = () => `<div class="wc wc-bh">
  <header class="wc-hero wc-hero-bop"><div class="wrap wc-hero-grid">
   <div class="wc-hero-copy"><span class="wc-kick">Bop at Home</span>
@@ -354,6 +365,7 @@ V['bop-at-home'] = () => `<div class="wc wc-bh">
  <section class="wc-sec band-paper" id="wc-acts" aria-labelledby="wc-acts-h"><div class="wrap">${lead('Free, short and screen-free', 'Eight things to try tonight', 'Each one takes 30 seconds to 10 minutes and needs nothing but you. Clear a little space, stay close and offer water.', 'wc-acts-h')}
   <div class="wc-acts-grid">${ACTS.map(actCard).join('')}</div>
   <p class="wc-strap wc-rv">A grown-up joins in and supervises every activity. Stop whenever a child is tired, and never use movement or outdoor time as a reward or a punishment.</p></div></section>
+ ${bopMoreHtml()}
  <section class="wc-sec wc-bh-quote" aria-label="A word from Bop"><div class="wrap wc-bh-quote-grid">
   <figure class="wc-pull wc-rv" style="--c:var(--wc-bop)">${art('bop', { alt: '', cls: 'wc-pull-cut' })}<blockquote><p>&ldquo;Wobbles are welcome. Trying is the win.&rdquo;</p></blockquote><figcaption>Bop, the Mighty Mover</figcaption></figure>
   ${bopVideo()}</div></section>

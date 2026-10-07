@@ -387,6 +387,7 @@
 .wc-bopvid{margin:0;display:grid;gap:10px;min-width:0}
 .wc-bopvid video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--r,18px);background:#1d2b30;box-shadow:0 14px 34px rgba(10,43,56,.18);border:3px solid color-mix(in srgb,var(--c) 45%,#fff)}
 .wc-bopvid figcaption{display:grid;gap:2px}.wc-bopvid figcaption b{font-size:1.05rem}.wc-bopvid figcaption span{color:var(--muted,#41545C);font-size:.92rem}
+.wc-bopmore{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}.wc-bopmore-item{display:grid;gap:8px;min-width:0;background:var(--card,#fff);border-radius:18px;padding:14px;border:2px solid color-mix(in srgb,var(--c) 30%,#fff)}.wc-bopmore-item h3{margin:0}
 .wc-bopvid-cap{display:grid;gap:2px;margin:0}.wc-bopvid-cap b{font-size:1.05rem}.wc-bopvid-cap span{color:var(--muted,#41545C);font-size:.92rem}
 #ffx-bop .wc-bopvid{max-width:960px}
 
