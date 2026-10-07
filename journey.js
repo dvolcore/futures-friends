@@ -72,7 +72,7 @@
     return `<li class="fj-door" style="--c:${d.c}">
       <div class="fj-doorart" aria-hidden="true">${cut(d.k)}</div>
       <p class="fj-who">${E(d.who)}</p><h3>${E(d.h)}</h3>
-      ${a ? `<div class="fj-tonight"><b>${E(a.t)}</b><span>${+a.min} minutes, nothing to buy. ${E(a.say)}</span></div>` : ''}
+      ${a ? `<div class="fj-tonight"><b>${E(a.t)}</b><span>${(t => t % 60 ? (t < 60 ? t + ' seconds' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec') : t / 60 + ' minutes')(Math.round(a.min * 60))}, nothing to buy. ${E(a.say)}</span></div>` : ''}
       <div class="fj-now"><span class="fj-tag">Available now</span><ul>${d.now().map(x => `<li>${E(x)}</li>`).join('')}</ul></div>
       <p class="fj-later">${E(d.later)}</p>
       <a class="fj-go" href="#${go[0]}">${E(go[1])} ${icon('ArrowRight')}</a>
@@ -141,7 +141,7 @@
     return `<section class="fj-provider fj-family" aria-labelledby="fj-fam-h"><div class="wrap">
       <div class="fj-exhead"><h2 id="fj-fam-h">Try one tonight</h2><p>Free, no account, nothing to buy.</p></div>
       <div class="fj-famgrid">
-        ${a ? `<article class="fj-act" style="--c:#B52D71"><p class="fj-who">${+a.min} minutes, with ${E((window.CH && CH[a.c] && CH[a.c].n) || 'Lumi')}</p><h3>${E(a.t)}</h3><p><b>You need:</b> ${E(a.mat.join(', '))}</p><ol>${a.steps.map(s => `<li>${E(s)}</li>`).join('')}</ol><p class="fj-muted">${E(a.safety)}</p>${homeGuide(a.c)}<a class="fj-go" href="#activities/${E(a.id)}">Print it or find more for your child's age ${icon('ArrowRight')}</a></article>` : `<article class="fj-act"><h3>Futures at Home</h3><p>Storybooks, activities by age and printables.</p><a class="fj-go" href="#at-home">Open the free family library ${icon('ArrowRight')}</a></article>`}
+        ${a ? `<article class="fj-act" style="--c:#B52D71"><p class="fj-who">${(t => t % 60 ? (t < 60 ? t + ' seconds' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec') : t / 60 + ' minutes')(Math.round(a.min * 60))}, with ${E((window.CH && CH[a.c] && CH[a.c].n) || 'Lumi')}</p><h3>${E(a.t)}</h3><p><b>You need:</b> ${E(a.mat.join(', '))}</p><ol>${a.steps.map(s => `<li>${E(s)}</li>`).join('')}</ol><p class="fj-muted">${E(a.safety)}</p>${homeGuide(a.c)}<a class="fj-go" href="#activities/${E(a.id)}">Print it or find more for your child's age ${icon('ArrowRight')}</a></article>` : `<article class="fj-act"><h3>Futures at Home</h3><p>Storybooks, activities by age and printables.</p><a class="fj-go" href="#at-home">Open the free family library ${icon('ArrowRight')}</a></article>`}
         <div class="fj-center"><h3>With a Futures Friends center, the day comes home</h3>${shot('family', { sizes: '520px', link: false })}<p>Futures Friends is piloting at Futures Learning Center in Independence, Missouri. Call for the ages served right now and current hours.</p><a class="fj-go" href="#enroll">Visit the pilot center ${icon('ArrowRight')}</a></div>
       </div>
     </div></section>`;

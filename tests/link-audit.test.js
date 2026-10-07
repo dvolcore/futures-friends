@@ -85,9 +85,9 @@ test('the "Watch" door lands on a shelf with the finished videos; the characters
   const ctx = await browser.newContext({ viewport: h.SIZES[1280], reducedMotion: 'reduce' });
   const page = await ctx.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
   await h.goto(page, site.base, 'family-videos', 600);
-  // gap fill 2026-10-07: the shelf is grouped by friend; the welcome video opens it and Bop's move-along leads his group
+  // gap fill 2026-10-07: the shelf is grouped by friend; the welcome video opens it and Bop's move-along (the FULL Elephant Stomp & Sway, owner 2026-10-07) leads his group
   const srcs = await page.evaluate(() => [...document.querySelectorAll('#fl-v-meet video source, #fl-v-move video source')].map(s => s.getAttribute('src')));
-  assert.ok(srcs.includes('video/ff-intro-titled-16x9.mp4') && srcs.some(s => /bop-move-along/.test(s)), JSON.stringify(srcs));
+  assert.ok(srcs.includes('video/ff-intro-titled-16x9.mp4') && srcs.some(s => /act-elephant-stomp\.mp4/.test(s)) && !srcs.some(s => /bop-move-along/.test(s)), JSON.stringify(srcs));
   await h.goto(page, site.base, 'home', 600);
   const tile = page.locator('[data-proof-id="characters"] a');
   await tile.scrollIntoViewIfNeeded(); await tile.click();

@@ -127,7 +127,7 @@ test('placeholder slots say what goes there and use only official art', () => {
   for (const [f, re] of [['home-calm.js', /Photos and video of our center are coming/], ['features.js', /The building and the rooms/], ['features.js', /To meet the director and the teaching team, book a tour/], ['views.js', /Open 3625 S Blue Ridge Blvd in Google Maps/], ['whole-child.js', /See it in motion/]])
     assert.match(read(f), re, f);
   // the Bop video slot is filled (owner 2026-10-07): the real player with captions replaces its placeholder
-  assert.match(read('whole-child.js'), /video\/bop-move-along\.mp4/);
+  assert.match(read('whole-child.js'), /actPlayer\('elephant-stomp', 'Move along with Bop/);   // owner 2026-10-07: the full version, never the short
 });
 
 test('page weight: heavy posters and covers are served as resized WebP copies with sizes, lazy loading and dimensions', () => {

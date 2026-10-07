@@ -103,7 +103,7 @@
     const c = ch(k), a = act(k), P = window.FFPlush;
     return `<div class="hc-pickart${VIDEOS[k] ? ' has-video' : ''}" style="--c:var(--${k})"><span class="tx-ground hc-pickground" aria-hidden="true"></span>${VIDEOS[k] ? videoFrame(k, 'hc-pickvideo') : ''}${P ? P.img(PICKS[k][0], { cls: 'hc-pickcut', alt: P.alt(PICKS[k][0]), h: 300 }) : ''}</div>
     <div class="hc-pickcopy" style="--c:var(--${k})"><p class="hc-pills">${PILLARS[k].map(p => `<span>${p}</span>`).join('')}</p><h3>${E(c.n)}</h3><p class="hc-role">${E(c.role)}</p><p class="hc-pickd">${E(c.d)}</p>
-     ${a ? `<div class="hc-try"><p class="hc-trytitle"><b>Try one tonight: ${E(a.t)}</b><span>${+a.min} minutes, ${E(String(a.where || '').toLowerCase())}, nothing to buy</span></p><ol>${(a.steps || []).slice(0, 4).map(x => `<li>${E(x)}</li>`).join('')}</ol><a class="hc-trylink" href="#activities/${E(a.id)}">See ${E(a.t)} in the family library ${icon('ArrowRight')}</a></div>` : ''}</div>`;
+     ${a ? `<div class="hc-try"><p class="hc-trytitle"><b>Try one tonight: ${E(a.t)}</b><span>${(t => t % 60 ? (t < 60 ? t + ' seconds' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec') : t / 60 + ' minutes')(Math.round(a.min * 60))}, ${E(String(a.where || '').toLowerCase())}, nothing to buy</span></p><ol>${(a.steps || []).slice(0, 4).map(x => `<li>${E(x)}</li>`).join('')}</ol><a class="hc-trylink" href="#activities/${E(a.id)}">See ${E(a.t)} in the family library ${icon('ArrowRight')}</a></div>` : ''}</div>`;
   }
   function friends() {
     return `<section class="hc-friends hc-pick" aria-labelledby="hc-friends-h"><div class="wrap">

@@ -25,7 +25,7 @@ test('every titled video, poster and caption file is in video/, registered with 
   assert.deepEqual(Object.keys(C.BOP_ACTS), SLUGS);
   for (const s of SLUGS) {
     const v = C.BOP_ACTS[s];
-    assert.equal(v.src, `video/act-${s}.mp4?v=2`); assert.equal(v.poster, `video/act-${s}-poster.jpg?v=2`);
+    assert.equal(v.src, `video/act-${s}.mp4?v=3`); assert.equal(v.poster, `video/act-${s}-poster.jpg?v=3`);
     for (const f of [`video/act-${s}.mp4`, `video/act-${s}-poster.jpg`, `video/act-${s}.en.vtt`]) assert.ok(fs.statSync(path.join(ROOT, f)).size > 500, f);
     assert.match(read(`video/act-${s}.en.vtt`), /^WEBVTT/);
     assert.ok(C.has(v.src), s + ' has captions');
@@ -35,7 +35,7 @@ test('every titled video, poster and caption file is in video/, registered with 
 
 test('the one player: native controls, no autoplay, preload none, captions on by default, transcript, honest label', () => {
   const html = C.actPlayer('freeze-try-again', 'Freeze & Try Again');
-  assert.match(html, /<video controls playsinline preload="none" width="1280" height="720" poster="video\/act-freeze-try-again-poster\.jpg\?v=2"/);
+  assert.match(html, /<video controls playsinline preload="none" width="1280" height="720" poster="video\/act-freeze-try-again-poster\.jpg\?v=3"/);
   assert.doesNotMatch(html, /autoplay|muted|loop/);
   assert.match(html, /<track kind="captions" srclang="en" label="English" src="video\/act-freeze-try-again\.en\.vtt" default>/);
   assert.match(html, /Watch Bop do it with you &middot; story-world animation/);
@@ -45,11 +45,14 @@ test('the one player: native controls, no autoplay, preload none, captions on by
   for (const f of ['whole-child.js', 'family-library.js']) { assert.match(read(f), /FFCaptions\.actPlayer\(/, f); assert.doesNotMatch(read(f), /video\/act-/, f + ' has no clip paths of its own'); }
 });
 
-test('#bop-at-home: each of the six activity cards carries its own video; durations stay as the owner set them', () => {
+test('#bop-at-home: each of the six activity cards carries its own video; each card shows its video\'s real length', () => {
   const W = wholeChild();
-  const want = { 'Elephant Stomp & Sway': ['elephant-stomp', 3], 'Trunk Reach': ['trunk-reach', 0.5], 'Freeze & Try Again': ['freeze-try-again', 2], 'Animal Walks': ['animal-walks', 3], 'Flamingo Balance': ['flamingo-balance', 2.5], 'Clap-Back Rhythm': ['clap-back', 3] };
+  // owner 2026-10-07: each card shows the real length of its (long) titled video
+  const want = { 'Elephant Stomp & Sway': ['elephant-stomp', 158 / 60], 'Trunk Reach': ['trunk-reach', 39 / 60], 'Freeze & Try Again': ['freeze-try-again', 69 / 60], 'Animal Walks': ['animal-walks', 69 / 60], 'Flamingo Balance': ['flamingo-balance', 69 / 60], 'Clap-Back Rhythm': ['clap-back', 69 / 60] };
   for (const [t, [vid, min]] of Object.entries(want)) { const a = W.ACTS.find(x => x.t === t); assert.ok(a, t); assert.equal(a.vid, vid, t); assert.equal(a.min, min, t); }
-  assert.ok(read('whole-child.js').includes("const BOP_VIDEO = 'video/bop-move-along.mp4?v=2'"), 'the standalone Move along with Bop player stays as it is');
+  assert.match(read('whole-child.js'), /actPlayer\('elephant-stomp', 'Move along with Bop/, 'the Move along with Bop player plays the FULL Elephant Stomp & Sway');
+  assert.doesNotMatch(read('whole-child.js'), /bop-move-along/, 'the 39-second short is retired');
+  for (const [s, sec] of Object.entries({ 'elephant-stomp': 128, 'trunk-reach': 39, 'freeze-try-again': 69 })) assert.ok(fs.statSync(path.join(ROOT, `video/act-${s}.mp4`)).size > 1e6, s);
 });
 
 test('Futures at Home: the same activities carry the same video and the same minutes as Bop at Home; Bop & Go! gets Elephant Stomp', () => {
@@ -81,7 +84,7 @@ for (const width of [390, 1280]) {
     for (const [id, vid] of [['freeze-and-try-again', 'freeze-try-again'], ['animal-walks', 'animal-walks'], ['flamingo-balance', 'flamingo-balance']]) {
       await h.goto(page, site.base, 'activities/' + id, 400);
       const d = await page.evaluate(id => { const el = document.querySelector('#fl-one #act-' + id), f = el && el.querySelector('.fl-act-bd > .wc-actvid'), a = el && el.querySelector('.fl-act-bd a.fl-chiplink'); return { open: el && el.open, vid: f && f.dataset.bopAct, first: f && f === el.querySelector('.fl-act-bd').firstElementChild, src: f && f.querySelector('source').getAttribute('src'), href: a && a.getAttribute('href'), name: a && a.textContent.replace(/\s+/g, ' ').trim(), visible: a && a.getBoundingClientRect().height > 0 }; }, id);
-      assert.deepEqual(d, { open: true, vid, first: true, src: `video/act-${vid}.mp4?v=2`, href: `#bop-at-home/bop-act-${vid}`, name: 'Bop · MOVE: watch Bop do it at Bop at Home →', visible: true }, id);
+      assert.deepEqual(d, { open: true, vid, first: true, src: `video/act-${vid}.mp4?v=3`, href: `#bop-at-home/bop-act-${vid}`, name: 'Bop · MOVE: watch Bop do it at Bop at Home →', visible: true }, id);
     }
     // the chip is a working link: it opens Bop at Home at that activity's video card
     await page.click('#fl-one a.fl-chiplink'); await page.waitForTimeout(500);
@@ -95,7 +98,7 @@ for (const width of [390, 1280]) {
     assert.match(await page.textContent('#flActList .fl-meta[role=status]'), /with Zuri$/);
     // the Bop & Go! picture guide
     await h.goto(page, site.base, 'see-how', 400);
-    assert.equal(await page.evaluate(() => { const f = document.querySelector('#guide-bop-and-go .wc-actvid'); return f && f.querySelector('source').getAttribute('src'); }), 'video/act-elephant-stomp.mp4?v=2');
+    assert.equal(await page.evaluate(() => { const f = document.querySelector('#guide-bop-and-go .wc-actvid'); return f && f.querySelector('source').getAttribute('src'); }), 'video/act-elephant-stomp.mp4?v=3');
     assert.deepEqual(errors, []);
     await ctx.close();
   });

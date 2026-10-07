@@ -100,7 +100,8 @@ const friendLink = a => { const k = a.c, f = FRIENDS[k]; if (!f) return '';
   const bop = k === 'bop', href = bop ? `#bop-at-home${onBah ? '/bop-act-' + a.vid : ''}` : `#activities/${k}`;
   return `<a class="fl-chip fl-chiplink" style="--c:${col(k)}" href="${href}">${f.n} &middot; ${f.p}<span class="fl-vh">:</span> <span>${bop ? (onBah ? 'watch Bop do it at Bop at Home' : 'more at Bop at Home') : `all ${f.n}'s activities`}</span> <span aria-hidden="true">&rarr;</span></a>`; };
 const actVideo = a => a.vid && window.FFCaptions && window.FFCaptions.actPlayer ? window.FFCaptions.actPlayer(a.vid, a.t) : '';
-const mins = m => m < 1 ? Math.round(m * 60) + ' sec' : String(m).replace(/\.5$/, '\u00bd') + ' min';
+// whole minutes as before; a video-length card (min = seconds / 60, e.g. 69 / 60) prints its exact length: "1 min 9 sec"
+const mins = m => { const t = Math.round(m * 60); return t < 60 ? t + ' sec' : t % 60 === 0 ? t / 60 + ' min' : t % 60 === 30 ? Math.floor(t / 60) + '\u00bd min' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec'; };
 const bandsText = ids => ids.map(id => band(id).n).join(', ');
 const privacyNote = `<p class="fl-privacy"><b>No account. Nothing about your child leaves this device.</b> These pages have no ads and no trackers. Anything you save here (your plan settings, stickers and book count) stays in this browser, and you can erase it on <a href="#my-week">My Week</a>.</p>`;
 

@@ -223,8 +223,12 @@ test('the watch shelf (gap fill 2026-10-07) shows every finished video, grouped 
   }
   // every Bop at Home video, the welcome video, the four friend loops, the hello loop, the meadow and the logo film are on the shelf
   for (const slug of [...Object.keys(C.BOP_ACTS), ...Object.keys(C.FRIEND_ACTS)]) assert.ok(items.some(v => v.act === slug), slug + ' is on the shelf');
-  for (const f of ['ff-intro-titled-16x9', 'ff-hello-4x5', 'ff-meadow-ambient-16x9', 'ff-logo-reveal-navy', 'bop-move-along', 'ff-friend-booker-4x5', 'ff-friend-lumi-4x5', 'ff-friend-zuri-4x5', 'ff-friend-bop-4x5'])
+  for (const f of ['ff-intro-titled-16x9', 'ff-hello-4x5', 'ff-meadow-ambient-16x9', 'ff-logo-reveal-navy', 'ff-friend-booker-4x5', 'ff-friend-lumi-4x5', 'ff-friend-zuri-4x5', 'ff-friend-bop-4x5'])
     assert.ok(items.some(v => v.src && v.src.includes('video/' + f + '.mp4')), f);
+  // owner 2026-10-07: Move Along with Bop is the FULL Elephant Stomp & Sway (headline of Bop's group); the 39-second short is retired
+  const mv = F.VIDEOS.shelf.find(g => g.id === 'move').items;
+  assert.equal(mv[0].act, 'elephant-stomp'); assert.ok(mv[0].big);
+  assert.ok(!items.some(v => v.src && /bop-move-along/.test(v.src)), 'no shelf item plays the short');
   // Episode One sneak peek (gap fill 2026-10-07): labelled as story-world moments, never as an episode; each has its captions
   const moments = F.VIDEOS.shelf.find(g => g.id === 'moments');
   assert.equal(moments.items.length, 5); assert.match(moments.lede, /not a finished episode/);

@@ -73,7 +73,7 @@ test('each step renders its real content from the site data (talk cards, family 
   // Move: Bop's activity clip (act-*.mp4) present on disk with captions, else the Move Along video; link to #bop-at-home
   const acts = fs.readdirSync(path.join(ROOT, 'video')).filter(f => /^act-.*\.mp4$/.test(f));
   if (acts.length) assert.ok(acts.map(f => `video/${f}`).includes(W.MOVES[0].mp4), `Move plays a Bop activity clip (${W.MOVES[0].mp4})`); else assert.equal(W.MOVES[0].mp4, 'video/bop-move-along.mp4');
-  assert.equal(W.MOVES[W.MOVES.length - 1].mp4, 'video/bop-move-along.mp4', 'the Move Along video is the fallback');
+  assert.equal(W.MOVES[W.MOVES.length - 1].mp4, 'video/act-elephant-stomp.mp4', 'the full Move Along video (Elephant Stomp & Sway) is the fallback');
   for (const m of W.MOVES) { assert.ok(fs.existsSync(path.join(ROOT, m.mp4)) && fs.existsSync(path.join(ROOT, m.poster)), m.mp4); assert.ok(C.window.FFCaptions.has(m.mp4), `${m.mp4} has captions`); }
   assert.ok(C.window.FFCaptions.has(W.WATCH.mp4));
   assert.match(b(3), /href="#bop-at-home"/); assert.match(b(3), /Story-world animation/);
@@ -206,7 +206,7 @@ test('videos are lazy and never autoplay: nothing requested until play; then nat
     await page.click('#lw-tab-3');
     assert.equal(await page.locator('.lw video').count(), 0);
     await page.click('[data-lw-play="move"]');
-    assert.match(await page.evaluate(() => document.querySelector('.lw video source[type="video/mp4"]').getAttribute('src')), /^video\/(act-.*|bop-move-along)\.mp4$/);
+    assert.match(await page.evaluate(() => document.querySelector('.lw video source[type="video/mp4"]').getAttribute('src')), /^video\/act-.*\.mp4$/);
     assert.equal(await page.evaluate(() => document.querySelector('.lw video').hasAttribute('autoplay')), false);
     assert.deepEqual(errors, []);
     await ctx.close();

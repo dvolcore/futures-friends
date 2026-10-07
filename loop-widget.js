@@ -7,7 +7,7 @@
        1 Watch      the four friends' talking intro (story-world animation, captions), click to play, never autoplays
        2 Talk       flip cards with the "what happened / why" questions of the public talk-about-it cards (talk-cards.js)
        3 Do         one family activity from the free library (family-library-data.js), steps you can tick, "see more" link
-       4 Move       Bop's activity video (video/act-*.mp4 when present, else video/bop-move-along.mp4), link to #bop-at-home
+       4 Move       Bop's activity video (Trunk Reach, else the full Elephant Stomp & Sway, video/act-elephant-stomp.mp4), link to #bop-at-home
        5 Explore    the four learning zones as a tiny story-world map (tap a zone: what children do there; FFH_ZONES, views.js)
        6 Take home  a family take-home card built from the same public talk card as step 2 (no Unit 1 family weeks: those stay
                     behind the Family Portal, curriculum-gate.js), link to #at-home
@@ -35,11 +35,11 @@
   // the clips (all story-world animation from approved art; receipts in video/manifest.json)
   const WATCH = { mp4: 'video/ff-intro-titled-16x9.mp4', av1: 'video/ff-intro-titled-16x9.av1.webm', codecs: 'av01.0.05M.08, opus', poster: 'video/ff-intro-titled-16x9-poster.webp',
     title: 'Meet the four friends', label: 'Story-world animation: Booker, Lumi, Zuri and Bop each say hello and introduce themselves in a felt meadow.' };
-  // Move: the newest Bop activity clip (video/act-*.mp4) first, the Move Along video as the fallback if it cannot play
+  // Move: the short Trunk Reach clip first, the full Move Along video (Elephant Stomp & Sway) as the fallback if it cannot play
   const MOVES = [
-    { mp4: 'video/act-trunk-reach.mp4', poster: 'video/act-trunk-reach-poster.jpg', title: 'Trunk Reach with Bop', len: '30 seconds',
+    { mp4: 'video/act-trunk-reach.mp4', poster: 'video/act-trunk-reach-poster.jpg', title: 'Trunk Reach with Bop', len: '39 seconds',
       label: 'Story-world animation: Bop the elephant reaches his trunk up high to pick an apple.' },
-    { mp4: 'video/bop-move-along.mp4', poster: 'video/bop-move-along-poster.jpg', title: 'Move along with Bop', len: 'under a minute',
+    { mp4: 'video/act-elephant-stomp.mp4', poster: 'video/act-elephant-stomp-poster.jpg', title: 'Move along with Bop: Elephant Stomp & Sway', len: '2 min 38 sec',
       label: 'Story-world animation: Bop the elephant leads Elephant Stomp and Sway.' }
   ];
   const DO_ID = 'ice-detectives';
@@ -114,7 +114,7 @@
       const n = a.steps.length, done = S.done.filter(Boolean).length;
       return `<div class="lw-media lw-felt" style="--c:var(--${E(a.c)})">${plush('zuri-magnifier', 150, 'lw-bigcut')}<p class="lw-bubble">${E(a.say || '')}</p></div>
        <div class="lw-copy"><span class="lw-kick">Hands-on</span><h3>${E(a.t)}</h3>
-        <p class="lw-meta">${+a.min} minutes · ${E(String(a.where || '').toLowerCase())} · for ${(a.bands || []).map(b => E(BANDS[b] || b)).join(' and ')}</p>
+        <p class="lw-meta">${(t => t % 60 ? (t < 60 ? t + ' seconds' : Math.floor(t / 60) + ' min ' + (t % 60) + ' sec') : t / 60 + ' minutes')(Math.round(a.min * 60))} · ${E(String(a.where || '').toLowerCase())} · for ${(a.bands || []).map(b => E(BANDS[b] || b)).join(' and ')}</p>
         <p class="lw-need"><b>You need:</b> ${(a.mat || []).map(E).join(', ')}</p>
         <ol class="lw-todo" aria-label="Steps: tick each one as you go">${a.steps.map((s, j) => `<li><button type="button" class="lw-tick" data-lw-do="${j}" aria-pressed="${!!S.done[j]}"><span class="lw-box" aria-hidden="true"></span><span>${E(s)}</span></button></li>`).join('')}</ol>
         <p class="lw-note" data-lw-donenote>${done === n ? 'All done. That is the whole activity!' : (a.safety ? E(a.safety) : '')}</p>
@@ -203,7 +203,7 @@
     const zone = t.closest('[data-lw-zone]');
     if (zone && zone.dataset.lwZone !== S.zone) { S.zone = zone.dataset.lwZone; rerender(root); const b = root.querySelector(`[data-lw-zone="${S.zone}"]`); if (b) b.focus(); sfx('sparkle'); }
   }
-  // the Move clip falls back to the Move Along video if the newest activity clip cannot play
+  // the Move clip falls back to the full Move Along video (Elephant Stomp & Sway) if Trunk Reach cannot play
   function fallback(e) {
     const v = e.currentTarget; if (!v || v.dataset.lwVideo !== 'move' || S.move >= MOVES.length - 1) return;
     S.move += 1; const media = v.parentNode; media.innerHTML = player('move'); const n = media.querySelector('video'); n.addEventListener('error', fallback, true);
