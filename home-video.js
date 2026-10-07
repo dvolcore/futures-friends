@@ -1,5 +1,5 @@
 /* Story-world animation on Home (wave 8, owner-approved clips; markup and file list in home-calm.js VIDEOS, receipts in
-   video/manifest.json). Two places: the four friends' talking intro (wave 9; the first frame of the trust band's photo/video row)
+   video/manifest.json). Two places: the four friends' talking intro (wave 9; since 2026-10-07 the big "Meet the Futures Friends" section right under the hero)
    and the picked friend's own loop in "Pick a friend".
    - Lazy: a frame shows its poster (a lazy image); its video element gets sources (AV1 with its codecs string, then H.264) and turns
      its captions on only when it comes near the screen and may play. Nothing is requested for a frame the visitor never scrolls near.

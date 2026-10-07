@@ -46,7 +46,7 @@ for (const width of [390, 1280]) {
     assert.equal(s.chip, true, 'the "Tap for sound" button shows');
     assert.equal(await page.textContent(F + ' .hc-vsound'), 'Tap for sound');
     if (width === 390) await page.tap(F + ' .hc-vsound');           // a finger on the button
-    else await page.click(F + ' figcaption b');                       // a click anywhere on the page (plain caption text)
+    else await page.click('.hc-intro figcaption b');                   // a click anywhere on the page (plain caption text)
     await page.waitForTimeout(250);
     s = await state(page);
     assert.equal(s.muted, false, 'with its voice');
@@ -89,7 +89,10 @@ test('the felt pause button still pauses (no restart, no voice); the sound pill 
   assert.equal(await page.getAttribute(F + ' .hc-vbtn', 'aria-label'), 'Play the animation');
   // the sound pill turns sound off: no restart, and no chip
   await page.click(F + ' .hc-vbtn'); await playing(page);
-  await page.click('.ffs .ffs-main'); await page.waitForTimeout(600);
+  // the big intro (2026-10-07) sits under the floating pill, so the dock has tucked it to the edge (motion.js FFdock): the first tap
+  // only brings it back, the second presses Sound
+  if (await page.evaluate(() => document.documentElement.classList.contains('ff-dock-tuck'))) { await page.$eval('.ffs .ffs-main', b => b.click()); await page.waitForTimeout(100); }
+  await page.$eval('.ffs .ffs-main', b => b.click()); await page.waitForTimeout(600);
   s = await state(page);
   assert.equal(await page.evaluate(() => window.FFSound.enabled()), false);
   assert.ok(!s.paused && s.muted && s.t > 1 && !s.chip, `sound off: plays on silently, no chip: ${JSON.stringify(s)}`);

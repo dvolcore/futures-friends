@@ -121,7 +121,8 @@ for (const width of [1280, 390]) {
     const urls = []; page.on('request', r => urls.push(r.url()));
     await h.goto(page, site.base, 'home', 700);
     const before = await page.evaluate(() => ({ worlds: document.querySelectorAll('.hd-world').length, trust: !!document.querySelector('.hc-trust > .hd-world') }));
-    assert.ok(before.worlds >= 1 && before.worlds < 7 && !before.trust, `only the near sections at first: ${JSON.stringify(before)}`);
+    // 2026-10-07: the big welcome video now sits between the hero and the doors, so at load no section may be near enough yet
+    assert.ok(before.worlds < 7 && !before.trust, `only the near sections at first: ${JSON.stringify(before)}`);
     assert.deepEqual(urls.filter(u => /world8\/(sky-sunset|sky-night|meadow-front-night|moon|firefly|div-grass)/.test(u)), [], 'far-away art (sunset, night, the golden grass) is not fetched on load');
     await sweep(page);
     const f = await page.evaluate(() => {
@@ -422,6 +423,7 @@ test('loops pause: the fixed sky while the hero fills the screen and on a hidden
   const page = await ctx.newPage();
   await h.goto(page, site.base, 'home', 700);
   assert.equal(await page.evaluate(() => document.querySelector('.hd-stage').classList.contains('ffm-paused')), true, 'paused behind the hero');
+  await page.evaluate(() => document.querySelector('.hc-doors').scrollIntoView()); await page.waitForTimeout(300);   // the doors' layers get built (they are below the welcome video now)
   await page.evaluate(() => document.querySelector('.hc-day').scrollIntoView()); await page.waitForTimeout(300);
   assert.equal(await page.evaluate(() => document.querySelector('.hd-stage').classList.contains('ffm-paused')), false);
   await page.evaluate(() => { Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true }); document.dispatchEvent(new Event('visibilitychange')); });
@@ -479,8 +481,8 @@ test('animation: the hello frame and every friend\'s pick panel carry their clip
   const page = await ctx.newPage(); const errors = errorsOf(page);
   await h.goto(page, site.base, 'home', 700);
   const f = await page.evaluate(() => ({
-    hello: [...document.querySelectorAll('.hc-slots .hc-hello')].map(x => [x.querySelector('video').getAttribute('aria-label'), x.querySelector('figcaption b').textContent.trim()]),
-    transcript: [...document.querySelectorAll('.hc-slots .hc-hello figcaption details.ffcap-tr')].map(d => d.querySelector('summary').textContent + ' | ' + d.querySelector('div').textContent),
+    hello: [...document.querySelectorAll('.hc-intro .hc-hello')].map(x => [x.querySelector('video').getAttribute('aria-label'), x.querySelector('figcaption b').textContent.trim()]),
+    transcript: [...document.querySelectorAll('.hc-intro .hc-hello figcaption details.ffcap-tr')].map(d => d.querySelector('summary').textContent + ' | ' + d.querySelector('div').textContent),
     placeholders: [...document.querySelectorAll('.hc-slots [data-placeholder]')].map(x => [x.querySelector('.ffa-slot-tag').textContent, x.querySelector('figcaption b').textContent]),
     note: document.querySelector('.hc-real h3').textContent
   }));

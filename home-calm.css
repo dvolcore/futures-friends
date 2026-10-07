@@ -198,3 +198,50 @@
 /* Gap fill 2026-10-07: a closed transcript takes no room (its paragraphs had a layout box inside the closed <details>, which the
    walking Booker treated as text to avoid). */
 .ffcap-tr:not([open])>div{display:none}
+
+/* ---- "Meet the Futures Friends" (owner 2026-10-07: the welcome video "needs to be in a prime location ... blown up way bigger, almost
+   edge to edge on the screen"). Its own section right under the hero: the 16:9 intro as wide as the page (never taller than the screen
+   under the header), in a cream felt rim with a gold running stitch; phones get the 4:5 cut edge to edge less 16 px. The felt play
+   button is big and centred until it plays, then tucks into the corner. Fixed ratios, so nothing shifts when the poster or clip lands. */
+.hc-intro{position:relative;isolation:isolate;padding-block:clamp(40px,5vw,68px) clamp(44px,5.5vw,76px);background:linear-gradient(180deg,#8FCBEF 0%,#A6D6F2 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hc-intro{background:linear-gradient(180deg,#0B2232 0%,#0E2A3E 100%)}}
+:root[data-theme=dark] .hc-intro{background:linear-gradient(180deg,#0B2232 0%,#0E2A3E 100%)}
+.hc-introwrap{position:relative;z-index:2;display:grid;justify-items:center;gap:clamp(18px,2.4vw,28px)}
+.hc-introhead{text-align:center;display:grid;justify-items:center;gap:10px;max-width:60ch}
+.hc-introhead h2{font-size:clamp(30px,4vw,50px);letter-spacing:-.01em;color:var(--ink);line-height:1.1}
+.hc-introhead p{font-size:clamp(15px,1.4vw,17px);line-height:1.6;color:var(--ink)}
+.hc-introtag{display:inline-block;padding:5px 12px;border-radius:999px;background:#0A2B38;color:#fff!important;font-size:12.5px!important;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.3!important}
+.hc-introfig{width:min(100%,calc((100svh - 130px) * 16 / 9));margin:0 auto;gap:12px}
+.hc-introvideo.hc-vframe{aspect-ratio:16/9;border-radius:clamp(18px,2.4vw,30px);box-shadow:0 0 0 clamp(6px,.9vw,11px) #FBF6EC,0 0 0 calc(clamp(6px,.9vw,11px) + 2px) rgba(176,122,0,.35),0 34px 70px -28px rgba(10,43,56,.6)}
+.hc-introvideo .hc-vposter img,.hc-introvideo .hc-v{object-position:50% 50%}
+.hc-introvideo.hc-vframe::after{outline:2.5px dashed rgba(255,255,255,.8);outline-offset:-11px}
+.hc-introvideo .hc-v::cue{font-size:clamp(15px,1.6vw,22px);line-height:1.35}
+.hc-introvideo .hc-vbtn{top:16px;right:16px;bottom:auto;width:52px;height:52px}
+.hc-introvideo .hc-vbtn svg{width:24px;height:24px}
+.hc-introvideo .hc-vbtn:not([data-state=playing]){top:50%;right:50%;width:clamp(76px,9vw,104px);height:clamp(76px,9vw,104px);translate:50% -50%;background:rgba(245,197,83,.96);color:#0A2B38;outline-color:rgba(10,43,56,.4);box-shadow:0 14px 34px -10px rgba(10,43,56,.6)}
+.hc-introvideo .hc-vbtn:not([data-state=playing]):hover{background:#F8CF66}
+.hc-introvideo .hc-vbtn:not([data-state=playing]) svg{width:42%;height:42%}
+.hc-introvideo .hc-vbtn:not([data-state=playing]):focus-visible{outline:3px solid #0A2B38;outline-offset:3px}
+.hc-introfig figcaption{text-align:center;display:grid;justify-items:center;gap:4px;padding-top:clamp(8px,1vw,14px)}
+.hc-introfig figcaption>b{font-size:14.5px;color:var(--ink)}
+.hc-introfig .ffcap-tr{font-size:14px;max-width:70ch;text-align:left}
+.hc-stars{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin:0}
+.hc-starslabel{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:4px}
+.hc-star{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:4px 16px 4px 6px;border-radius:999px;background:#FBF6EC;color:#14313D;font-weight:700;font-size:15px;text-decoration:none;border:2px solid var(--c);box-shadow:0 6px 14px -8px rgba(10,43,56,.45)}
+.hc-star:hover{background:#fff;text-decoration:underline;text-underline-offset:3px}
+.hc-star:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+.hc-star .hc-starcut{height:40px;width:auto;object-fit:contain}
+@media (max-width:600px){
+  .hc-introfig{width:calc(100vw - 32px);max-width:none;margin-inline:calc(50% - 50vw + 16px)}
+  .hc-introvideo.hc-vframe{aspect-ratio:4/5;box-shadow:0 0 0 6px #FBF6EC,0 0 0 8px rgba(176,122,0,.35),0 24px 48px -22px rgba(10,43,56,.6)}
+  .hc-introvideo .hc-vbtn{top:12px;right:12px;width:48px;height:48px}
+  .hc-star{padding-right:12px;font-size:14px}
+}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .hc-introvideo .hc-vbtn{transition:background-color .2s,scale .16s}}
+/* the photo row, on its own now: a heading over three equal photos (one column on phones) */
+.hc-real{grid-template-columns:1fr}
+.hc-slots.ffa-slots{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:600px){.hc-slots.ffa-slots{grid-template-columns:1fr;gap:14px}}
+/* the big intro's "Tap for sound" sits at the top of the picture, clear of the captions along its bottom */
+.hc-introvideo .hc-vsound{top:16px;bottom:auto}
+@media (max-width:600px){.hc-introvideo .hc-vsound{top:14px;left:14px;transform:none}}

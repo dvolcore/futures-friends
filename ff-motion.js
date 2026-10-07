@@ -52,12 +52,13 @@
 
       pauseOffscreen(el, also) {
         let seen = true;
-        const targets = [el].concat(also || []).filter(Boolean);
-        const set = () => { const off = !seen || document.visibilityState === 'hidden'; targets.forEach(t => t.classList.toggle('ffm-paused', off)); };
+        // also: elements, or a function returning them (layers built lazily after this call are still paused with el)
+        const targets = () => [el].concat((typeof also === 'function' ? also() : also) || []).filter(Boolean);
+        const set = () => { const off = !seen || document.visibilityState === 'hidden'; targets().forEach(t => t.classList.toggle('ffm-paused', off)); };
         const io = s.observe(es => { es.forEach(e => { seen = e.isIntersecting; }); set(); }, { threshold: 0 });
         if (io) io.observe(el);
         s.listen(document, 'visibilitychange', set);
-        s.add(() => targets.forEach(t => t.classList.remove('ffm-paused')));
+        s.add(() => targets().forEach(t => t.classList.remove('ffm-paused')));
         return { get seen() { return seen; } };
       },
 

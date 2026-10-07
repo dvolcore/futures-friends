@@ -160,15 +160,32 @@
   </div></section>`;
   }
 
+  // ---- 1b. "Meet the Futures Friends": the welcome video, big, right under the hero (owner 2026-10-07: "This intro video is too small
+  // for people to even see ... It needs to be in a prime location ... almost edge to edge on the screen, because this needs to be a big
+  // introduction"). Its own cinema section: the four friends' titled ~45 s intro (VIDEOS.intro) in a felt-framed 16:9 window as wide as
+  // the page allows (phones: the 4:5 cut, edge to edge less 16 px), captions on, the felt pause/replay button, "Tap for sound"
+  // (home-video.js: poster first, sources only when it is on screen, stops downloading when scrolled past, never autoplays with reduced
+  // motion), the transcript under it and a "Starring" row linking each friend to their own videos and activities. The ONLY copy of the
+  // intro on Home: the old small slot in the trust band's photo row is gone (the three real photos have that row to themselves).
+  const STARS = [['booker', '#activities/booker'], ['lumi', '#activities/lumi'], ['zuri', '#activities/zuri'], ['bop', '#bop-at-home']];
+  function intro() {
+    const C = window.FFCaptions, tr = C && typeof C.transcript === 'function' ? C.transcript(VIDEOS.intro.wide.mp4, 'the four friends introduce themselves') : '';
+    const P = window.FFPlush;
+    return `<section class="hc-intro" aria-labelledby="hc-intro-h"><div class="wrap hc-introwrap">
+   <div class="hc-introhead"><p class="hc-introtag">Story-world animation</p><h2 id="hc-intro-h" data-stitch>Meet the <span class="hc-key">Futures Friends</span></h2><p>Booker, Lumi, Zuri and Bop say hello and tell you who they are. Captions are on; tap for their voices.</p></div>
+   <figure class="hc-video hc-hello hc-introfig">${videoFrame('intro', 'hc-hellovideo hc-introvideo')}<figcaption><b>${E(VIDEOS.intro.caption)}</b>${tr}</figcaption></figure>
+   <p class="hc-stars"><span class="hc-starslabel">Starring</span>${STARS.map(([k, href]) => `<a class="hc-star" href="${href}" style="--c:var(--${k})">${P ? P.img(k, { cls: 'hc-starcut', alt: '', h: 40 }) : ''}<span>${E(ch(k).n)}</span></a>`).join('')}</p>
+  </div></section>`;
+  }
+
   // ---- 5. trust: our Teacher Standard in brief (teacher-standard.js owns the copy) and the pilot center, with the placeholder frames
   const SLOTS = [['video', 'A short hello from the four friends', 'An 8-second loop for the top of this page', 'bop', 'wide'],
     ['photo', 'A teacher reading on the carpet', 'With a Futures Friends book, families\' permission first', 'booker', 'land'],
     ['photo', 'Hands-on learning', 'Sorting, pouring and painting, hands only', 'zuri', 'land'],
     ['photo', 'Our team at the front door', 'The people who will greet your child', 'lumi', 'land']];
-  // Wave 8 (owner-approved story-world animation, ~/futures-friends-video/INTEGRATION.md): the first frame, "A short hello from the
-  // four friends", is filled with the four friends' story-world clip (wave 9: their talking intro, VIDEOS.intro, with its transcript
-  // under the caption). It is story-world animation, captioned as such; the three frames that promise real photos of our center
-  // stay labelled placeholders (house rule) until real photos replace them.
+  // SLOTS[0] (the hello video) moved out of this row on 2026-10-07: the welcome video now has its own big section under the hero
+  // (intro(), above); this row holds only the three frames of our center. hello() is kept for anything that still wants the small
+  // figure, but Home no longer renders it here.
   function hello() {
     const C = window.FFCaptions, tr = C && typeof C.transcript === 'function' ? C.transcript(VIDEOS.intro.wide.mp4, 'the four friends introduce themselves') : '';
     return `<figure class="hc-video hc-hello" data-video="intro">${videoFrame('intro', 'hc-hellovideo')}<figcaption><b>${E(VIDEOS.intro.caption)}</b>${tr}</figcaption></figure>`;
@@ -183,8 +200,8 @@
   function slots() {
     if (!window.FFArt) return '';
     const real = hasReal();
-    return `<div class="ffa-slots hc-slots" aria-label="${real ? 'Our center and the four friends' : 'Photos and video still to come'}">${SLOTS.map(([kind, title, line, k, ratio], i) => (i === 0 ? hello()
-      : real ? window.FFArt.photo(REAL[i][0], { title: REAL[i][1], line: REAL[i][2], ratio: 'land', sizes: '(max-width:680px) 92vw, 300px' }) : window.FFArt.slot({ kind, title, line, k, ratio }))).join('')}</div>`;
+    return `<div class="ffa-slots hc-slots" aria-label="${real ? 'Our center in Independence, in real photos' : 'Photos still to come'}">${SLOTS.map(([kind, title, line, k, ratio], i) => (i === 0 ? ''
+      : real ? window.FFArt.photo(REAL[i][0], { title: REAL[i][1], line: REAL[i][2], ratio: 'land', sizes: '(max-width:680px) 92vw, 380px' }) : window.FFArt.slot({ kind, title, line, k, ratio }))).join('')}</div>`;
   }
   function trust() {
     const ts = window.FFTeacherStandard ? window.FFTeacherStandard.callout('home') : '';
@@ -195,7 +212,7 @@
     <p>Futures Friends is piloting at Futures Learning Center, 3625 S Blue Ridge Blvd. Call ${E(phone())} for the ages served right now and current hours.</p>
     <a class="hc-btn hc-btn-quiet" href="#enroll">Visit our pilot center ${icon('ArrowRight')}</a>
    </div>
-   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">The welcome video is story-world animation. The three photos are our real center in Independence; photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos and video of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos and video from our center will go after our photo day.</p>'}</div>${slots()}</div>
+   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms and front door in Independence. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
   </div></section>`;
   }
 
@@ -209,7 +226,7 @@
   </div></section>`;
   }
 
-  const body = () => doors() + status() + friends() + day() + proof() + trust() + close();
+  const body = () => intro() + doors() + status() + friends() + day() + proof() + trust() + close();
 
   // ---------------------------------------------------------------- moved off Home, onto the page for its audience
   // "Meet the Futures Friends Academy": the training catalog is for teachers, so it now closes #teacher-standard.
@@ -231,5 +248,5 @@
   };
   Object.keys(MOVED).forEach(r => insert(r, MOVED[r][0], MOVED[r][1]));
 
-  window.FFHomeCalm = { body, status, doors, friends, day, proof, proofData, pickPanel, trust, close, slots, academyBand, DOORS, SLOTS, MOVED, PICKS, PARADE, pathY, PATH_D, VIDEOS, videoFrame, hello };
+  window.FFHomeCalm = { body, intro, STARS, status, doors, friends, day, proof, proofData, pickPanel, trust, close, slots, academyBand, DOORS, SLOTS, MOVED, PICKS, PARADE, pathY, PATH_D, VIDEOS, videoFrame, hello };
 })();

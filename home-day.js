@@ -514,7 +514,7 @@
     }
 
     // per-section loops pause off screen
-    if (motion) SCENES.forEach(s => { const e = root.querySelector(s.sel); if (e) { const fx = () => Array.from(e.querySelectorAll(':scope > .hd-world, :scope > .hd-edge, :scope > .hd-fx')); sc.timer(() => sc.pauseOffscreen(e, fx()), 50); } });
+    if (motion) SCENES.forEach(s => { const e = root.querySelector(s.sel); if (e) { const fx = () => Array.from(e.querySelectorAll(':scope > .hd-world, :scope > .hd-edge, :scope > .hd-fx')); sc.timer(() => sc.pauseOffscreen(e, fx), 50); } });   // fx, not fx(): a section's layers are built lazily, when it comes near
 
     // surprises and the night strip (both lazy; placed clear of every tap target)
     let ny = null;

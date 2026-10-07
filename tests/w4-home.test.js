@@ -21,7 +21,9 @@ const BUTTONS = 9;
 const VIDEO_BUTTONS = 2;
 // document height ceilings (204bd4a: 7,724 and 13,878; wave 4: 4,400 and 7,000; wave 6 adds the friend picker, the felt path and
 // "What we have built": measured 5,947 and 8,688)
-const HEIGHT = { 1280: 6400, 390: 9300 };
+// 2026-10-07 (owner): the welcome video got its own big section under the hero (+1,100 px at 1280, +800 at 390, measured 7,558
+// and 9,536); the small slot it left in the photo row is gone
+const HEIGHT = { 1280: 7800, 390: 9900 };
 
 const homeFacts = page => page.evaluate(() => {
   const v = document.querySelector('#view');
@@ -34,7 +36,7 @@ const homeFacts = page => page.evaluate(() => {
     controls: v.querySelectorAll('a[href],button').length,
     links: v.querySelectorAll('a[href]').length,
     buttons: [...v.querySelectorAll('button')].map(b => b.matches('.ffa-friend') ? 'friend' : b.matches('[role=tab].hc-picktab') ? 'tab' : b.matches('[data-brand-reveal]') ? 'reveal' : b.matches('.hc-vbtn[data-video-toggle]') ? 'video' : b.matches('.hc-vsound') ? 'sound' : b.outerHTML.slice(0, 80)),
-    hello: [...v.querySelectorAll('.hc-slots .hc-hello')].map(f => ({ vis: vis(f), cap: (f.querySelector('figcaption b') || {}).textContent, video: !!f.querySelector('video[aria-label]') })),
+    hello: [...v.querySelectorAll('.hc-intro .hc-hello')].map(f => ({ vis: vis(f), cap: (f.querySelector('figcaption b') || {}).textContent, video: !!f.querySelector('video[aria-label]') })),
     strip: v.querySelectorAll('#rt-strip,.rt-strip,.rt-ev').length,
     samples: v.querySelectorAll('[data-sample],.fj-sample,.rt-sample,.fj-shot,.fj-thumb').length,
     screenshots: [...v.querySelectorAll('img')].filter(i => /img\/journey\/|previews\//.test(i.getAttribute('src'))).length,
@@ -103,7 +105,7 @@ for (const width of [1280, 390]) {
     assert.equal(f.slots.length, 0, 'no empty placeholder frames on Home');
     assert.deepEqual(f.real, ['reading-corner', 'blue-table-room', 'exterior'], 'three real photos of our center');
     // Wave 9 (owner-approved 2026-10-07): the frame now holds the four friends' talking intro; its caption changed with it, still "Story-world".
-    assert.deepEqual(f.hello, [{ vis: true, cap: 'Story-world animation: meet the four friends.', video: true }], 'the filled frame says it is story-world animation');
+    assert.deepEqual(f.hello, [{ vis: true, cap: 'Story-world animation: meet the four friends.', video: true }], 'the welcome video (its own big section since 2026-10-07) says it is story-world animation');
     assert.match(f.text, /Our center, in real photos/);
     assert.match(f.text, /not yet approved by either state/, 'Teacher Standard honesty line kept');
     assert.equal(f.reveal, 1, 'the logo reveal is still reachable on Home');
