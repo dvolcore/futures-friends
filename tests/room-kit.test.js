@@ -143,7 +143,7 @@ test('links in: nav group, footer, route meta, home doors, zone map and the cent
   const c = site();
   for (const r of ['for-centers', 'for-home', 'options', 'pricing', 'shop-programs', 'corners']) assert.match(c.render(r), /href="#room-kit"/, r);
   assert.match(read('views.js'), /ffhm-cap">[^<]*<a class="rl" href="#room-kit">/, 'the zone map caption');
-  assert.match(read('home-calm.js'), /hc-aside">.*href="#room-kit"/, "Home's Start where you are doors");
+  // Home: no new link (the calm-Home link budget, tests/w4-home.test.js, is full); Home reaches the kit via For centers / For home
   assert.match(read('wayfinding.js'), /\['room-kit', 'Learning Zones Kit'\]/);
   assert.match(read('wayfinding.js'), /'room-kit': \['Learning Zones Kit', 'centers'/);
   assert.ok(require(path.join(ROOT, 'route-meta.js')).ROUTES['room-kit']);
