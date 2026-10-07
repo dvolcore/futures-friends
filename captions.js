@@ -93,9 +93,9 @@
   // 11_Website_Movement_Videos/_friends_2026-10-07): same title cards and the same player. who = the friend who leads it. Literal paths.
   const FRIEND_ACTS = {
     'booker-brave-reader': { who: 'booker', t: "Brave Reader Steps", src: 'video/act-booker-brave-reader.mp4?v=2', poster: 'video/act-booker-brave-reader-poster.jpg?v=1' },
-    'zuri-wonder-loop': { who: 'zuri', t: "Zuri’s Wonder Loop", src: 'video/act-zuri-wonder-loop.mp4?v=2', poster: 'video/act-zuri-wonder-loop-poster.jpg?v=2' },
-    'lumi-calm-breath': { who: 'lumi', t: "Smell the Flower, Blow the Candle", src: 'video/act-lumi-calm-breath.mp4?v=2', poster: 'video/act-lumi-calm-breath-poster.jpg?v=2' },
-    'lumi-feelings-faces': { who: 'lumi', t: "Feeling Faces", src: 'video/act-lumi-feelings-faces.mp4?v=2', poster: 'video/act-lumi-feelings-faces-poster.jpg?v=2' },
+    'zuri-wonder-loop': { who: 'zuri', t: "Zuri’s Wonder Loop", src: 'video/act-zuri-wonder-loop.mp4?v=3', poster: 'video/act-zuri-wonder-loop-poster.jpg?v=3' },
+    'lumi-calm-breath': { who: 'lumi', t: "Smell the Flower, Blow the Candle", src: 'video/act-lumi-calm-breath.mp4?v=3', poster: 'video/act-lumi-calm-breath-poster.jpg?v=3' },
+    'lumi-feelings-faces': { who: 'lumi', t: "Feeling Faces", src: 'video/act-lumi-feelings-faces.mp4?v=3', poster: 'video/act-lumi-feelings-faces-poster.jpg?v=3' },
   };
   const NAMES = { bop: 'Bop', booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri' };
   // One player for all of them: it talks, so it never autoplays; native controls, captions on by default, nothing loads before play.
