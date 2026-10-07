@@ -98,15 +98,15 @@
   // The other friends' play-along videos (W11, 2026-10-07, ~/futures-friends-video/web-activities; receipts in
   // 11_Website_Movement_Videos/_friends_2026-10-07): same title cards and the same player. who = the friend who leads it. Literal paths.
   const FRIEND_ACTS = {
-    'booker-brave-reader': { who: 'booker', t: "Brave Reader Steps", src: 'video/act-booker-brave-reader.mp4?v=2', poster: 'video/act-booker-brave-reader-poster.jpg?v=1' },
-    'zuri-wonder-loop': { who: 'zuri', t: "Zuri’s Wonder Loop", src: 'video/act-zuri-wonder-loop.mp4?v=3', poster: 'video/act-zuri-wonder-loop-poster.jpg?v=3' },
-    'lumi-calm-breath': { who: 'lumi', t: "Smell the Flower, Blow the Candle", src: 'video/act-lumi-calm-breath.mp4?v=3', poster: 'video/act-lumi-calm-breath-poster.jpg?v=3' },
-    'lumi-feelings-faces': { who: 'lumi', t: "Feeling Faces", src: 'video/act-lumi-feelings-faces.mp4?v=3', poster: 'video/act-lumi-feelings-faces-poster.jpg?v=3' },
-    'booker-first-sound': { who: 'booker', t: "First-Sound Hunt", src: 'video/act-booker-first-sound.mp4?v=1', poster: 'video/act-booker-first-sound-poster.jpg?v=1' },
-    'lumi-kind-words': { who: 'lumi', t: "Look, Listen, Lend a Hand", src: 'video/act-lumi-kind-words.mp4?v=1', poster: 'video/act-lumi-kind-words-poster.jpg?v=1' },
-    'zuri-color-walk': { who: 'zuri', t: "Color Walk", src: 'video/act-zuri-color-walk.mp4?v=1', poster: 'video/act-zuri-color-walk-poster.jpg?v=1' },
+    'booker-brave-reader': { who: 'booker', t: "Brave Reader Steps", src: 'video/act-booker-brave-reader.mp4?v=3', poster: 'video/act-booker-brave-reader-poster.jpg?v=1' },
+    'zuri-wonder-loop': { who: 'zuri', t: "Zuri’s Wonder Loop", src: 'video/act-zuri-wonder-loop.mp4?v=4', poster: 'video/act-zuri-wonder-loop-poster.jpg?v=3' },
+    'lumi-calm-breath': { who: 'lumi', t: "Smell the Flower, Blow the Candle", src: 'video/act-lumi-calm-breath.mp4?v=4', poster: 'video/act-lumi-calm-breath-poster.jpg?v=3' },
+    'lumi-feelings-faces': { who: 'lumi', t: "Feeling Faces", src: 'video/act-lumi-feelings-faces.mp4?v=4', poster: 'video/act-lumi-feelings-faces-poster.jpg?v=3' },
+    'booker-first-sound': { who: 'booker', t: "First-Sound Hunt", src: 'video/act-booker-first-sound.mp4?v=2', poster: 'video/act-booker-first-sound-poster.jpg?v=1' },
+    'lumi-kind-words': { who: 'lumi', t: "Look, Listen, Lend a Hand", src: 'video/act-lumi-kind-words.mp4?v=2', poster: 'video/act-lumi-kind-words-poster.jpg?v=1' },
+    'zuri-color-walk': { who: 'zuri', t: "Color Walk", src: 'video/act-zuri-color-walk.mp4?v=2', poster: 'video/act-zuri-color-walk-poster.jpg?v=1' },
     'bop-bubble-chase': { who: 'bop', t: "Bubble Chase", src: 'video/act-bop-bubble-chase.mp4?v=1', poster: 'video/act-bop-bubble-chase-poster.jpg?v=1' },
-    'peekaboo-turns': { who: 'lumi', t: "Peekaboo Turns", src: 'video/act-peekaboo-turns.mp4?v=1', poster: 'video/act-peekaboo-turns-poster.jpg?v=1', cap: "Watch Lumi play it, then play face to face." },
+    'peekaboo-turns': { who: 'lumi', t: "Peekaboo Turns", src: 'video/act-peekaboo-turns.mp4?v=2', poster: 'video/act-peekaboo-turns-poster.jpg?v=1', cap: "Watch Lumi play it, then play face to face." },
   };
   const NAMES = { bop: 'Bop', booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri' };
   // One player for all of them: it talks, so it never autoplays; native controls, captions on by default, nothing loads before play.
