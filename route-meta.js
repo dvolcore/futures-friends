@@ -76,6 +76,8 @@
     'learn-team': ['Team training | Futures Friends Academy', 'Futures Friends Academy team training records for directors.'],
     'learn-author': ['Course authoring | Futures Friends Academy', 'Futures Friends Academy course authoring tools.'],
     'learn-approve': ['Content approval | Futures Friends Academy', 'Futures Friends Academy content approval for reviewers.'],
+    'start-center': ['Start your center', 'Create a demo Futures Hub center for a child care program or church preschool: its own name, colour, sign-in page, staff and families.'],
+    c: ['Center sign-in', 'The sign-in page of one center in the Futures Hub demo: staff and families of that center sign in here.'],
     'not-found': ['Page not found', 'This page is not on the Futures Friends site. Try the home page, the whole-child day, Bop at Home or contact us.']
   };
   const trim = (s, n) => { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…'; };

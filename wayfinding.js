@@ -91,6 +91,8 @@
     post: ['Article', 'staff', 'blog', 'zuri'],
     'signin-teacher': ['Teacher Portal', 'staff', 'home', 'zuri'],
     portal: ['Teacher Portal preview', 'staff', 'signin-teacher', 'zuri'],
+    'start-center': ['Start your center', 'centers', 'hub', 'zuri'],
+    c: ['Center sign-in', 'staff', 'signin-teacher', 'booker'],
     learn: ['Academy', 'staff', 'teacher-standard', 'zuri'],
     'learn-course': ['Course', 'staff', 'learn', 'zuri'],
     'learn-cert': ['Certificate', 'staff', 'learn', 'zuri'],

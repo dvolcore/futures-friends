@@ -91,7 +91,7 @@ function cacfpOk(c){ return !!(c && c.protein && c.grain && c.veg && c.fruit && 
 const youngRoom = room => ['infant','toddler'].includes(ONE_BAND_AGES[String((P.rooms[room]||{}).ages||'')]);
 function weekDates(date){ const d=fromIso(date); const mon=new Date(d); mon.setDate(d.getDate()-((d.getDay()+6)%7)); return [0,1,2,3,4].map(i=>{const x=new Date(mon); x.setDate(mon.getDate()+i); return iso(x);}); }
 function header(title, sub){ return `<div class="phero" style="padding-block:28px"><div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 28px"><div style="display:grid;gap:8px"><div class="eyebrow">Futures Hub</div><h1 style="font-size:clamp(26px,3.6vw,38px)">${title}</h1><p class="lede">${sub}</p></div>
-  <div style="display:grid;gap:6px;justify-items:end"><span class="chip ${P.live?'ok':'warn'}" style="background:transparent;color:${P.live?'#7FE0A8':'#F3C969'};border-color:currentColor">${P.live?(P.canWrite?'Live \u00b7 saving to your program':'Live \u00b7 view only'):'Sample local preview \u00b7 changes stay in this browser'}</span>${P.hub?`<span class="small" id="hubWho" style="color:#C6D7DD">Signed in as ${esc(P.email)}${P.center&&P.center.name?' \u00b7 '+esc(P.center.name):''} <button type="button" class="btn soft" style="padding:4px 10px;margin-left:6px" data-hub="signout">Sign out</button></span>`:''}</div></div></div>`; }
+  <div style="display:grid;gap:6px;justify-items:end">${P.demo&&window.FFDemoPortal?window.FFDemoPortal.headerBits(rhythmCtx()):`<span class="chip ${P.live?'ok':'warn'}" style="background:transparent;color:${P.live?'#7FE0A8':'#F3C969'};border-color:currentColor">${P.live?(P.canWrite?'Live \u00b7 saving to your program':'Live \u00b7 view only'):'Sample local preview \u00b7 changes stay in this browser'}</span>`}${P.hub?`<span class="small" id="hubWho" style="color:#C6D7DD">Signed in as ${esc(P.email)}${P.center&&P.center.name?' \u00b7 '+esc(P.center.name):''} <button type="button" class="btn soft" style="padding:4px 10px;margin-left:6px" data-hub="signout">Sign out</button></span>`:''}</div></div></div>`; }
 
 // ---------------- TEACHER PORTAL
 V.portal = () => {
@@ -103,13 +103,16 @@ V.portal = () => {
   if (window.FFArrival && P.hub) window.FFArrival.addTabs(tabs, P.role); // Arrivals: sign-in / sign-out, pickup lists, kiosk (arrival.js), hub mode only
   if (window.FFReport && P.hub) tabs.splice(tabs.findIndex(t=>t[0]==='messages')+1,0,['reports','Family reports']); // evening daily report preview (family-report.js), hub mode only
   if (window.FFHistory && P.hub) window.FFHistory.addTabs(tabs, P.role); // Edit history (care-history.js): director only, hub mode only
-  return header('Teacher Portal', `${P.rooms[P.room].name} \u00b7 ${fmtDate(P.date)}`) + `
-  <section class="band-paper" style="padding-block:22px 60px"><div class="wrap" style="display:grid;gap:16px">
+  if (P.demo && window.FFDemoPortal) window.FFDemoPortal.addTabs(tabs, P.role); // demo mode (demo-portal.js): plans, check-in, reports, director views
+  if (!tabs.some(t=>t[0]===P.tab)) P.tab = tabs[0][0];
+  const demoV = P.demo && window.FFDemoPortal ? window.FFDemoPortal.view(P.tab, rhythmCtx()) : null;
+  return header(P.demo && P.role==='director' ? 'Director Portal' : 'Teacher Portal', `${P.rooms[P.room].name} \u00b7 ${fmtDate(P.date)}`) + `
+  <section class="band-paper" style="padding-block:22px 60px"><div class="wrap ff-pwrap" style="display:grid;gap:16px">
    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">
     <label class="f" for="pRoom">Classroom${roomPicker()}</label>
     <label class="f" for="pDate">Date<input class="i" type="date" id="pDate" value="${P.date}" style="padding:7px 9px"></label>
-    <div class="seg" role="group" aria-label="Portal sections" style="margin-left:auto">${tabs.map(t=>`<button data-ptab="${t[0]}" aria-pressed="${P.tab===t[0]}">${t[1]}</button>`).join('')}</div></div>
-   ${({today:todayView, calendar:calendarView, lunch:lunchView, children:childrenView, progress:progressView, messages:messagesView, account:accountView, setup:setupView, rhythm:()=>window.FFRhythm.teacherView(rhythmCtx()), rweek:()=>window.FFRhythm.rweekView(rhythmCtx()), due:()=>window.FFDue.dueView(rhythmCtx()), safety:()=>window.FFDue.safetyView(rhythmCtx()), reports:()=>window.FFReport.teacherView(rhythmCtx()), arrivals:()=>window.FFArrival.view(rhythmCtx()), history:()=>window.FFHistory.view(rhythmCtx()), curriculum:()=>window.FFUnit1?window.FFUnit1.portalView():''}[P.tab] || todayView)()}
+    <div class="seg${P.demo?' demo-tabs':''}" role="group" aria-label="Portal sections" style="margin-left:auto">${tabs.map(t=>`<button data-ptab="${t[0]}" aria-pressed="${P.tab===t[0]}">${t[1]}</button>`).join('')}</div></div>
+   ${demoV!=null ? demoV : ({today:todayView, calendar:calendarView, lunch:lunchView, children:childrenView, progress:progressView, messages:messagesView, account:accountView, setup:setupView, rhythm:()=>window.FFRhythm.teacherView(rhythmCtx()), rweek:()=>window.FFRhythm.rweekView(rhythmCtx()), due:()=>window.FFDue.dueView(rhythmCtx()), safety:()=>window.FFDue.safetyView(rhythmCtx()), reports:()=>window.FFReport.teacherView(rhythmCtx()), arrivals:()=>window.FFArrival.view(rhythmCtx()), history:()=>window.FFHistory.view(rhythmCtx()), curriculum:()=>window.FFUnit1?window.FFUnit1.portalView():''}[P.tab] || todayView)()}
   </div></section>`;
 };
 
@@ -122,6 +125,7 @@ function todayView(){
   const kids = roomKids(P.room); const present = kids.filter(([id])=>kdDoc(id,P.date).present===true).length;
   return `<div class="grid" style="grid-template-columns:1.25fr 1fr;gap:16px;align-items:start">
    <div style="display:grid;gap:16px">
+    ${P.demo && window.FFDemoPortal ? window.FFDemoPortal.todayCard(rhythmCtx()) : ''}
     ${ps ? programTop(pi, ps) : `<div class="card" style="border-top:5px solid var(--${L.lead})"><div style="display:flex;gap:12px;align-items:center"><img src="${FFcut(L.lead)}" alt="" style="width:54px;border-radius:8px"><div><span class="small muted">Unit ${L.unit.n} \u00b7 ${esc(L.unit.title)} \u00b7 Week ${L.wk} \u00b7 curriculum outline</span><h3>${esc(L.theme)}</h3><span class="small" style="color:var(--${L.lead});font-weight:600">${esc(L.leadTxt)}</span></div></div>
      <div class="grid g2" style="gap:8px"><span class="small"><b>Today's focus (${L.focusDomain}):</b> ${esc(L.focus)}</span><span class="small"><b>${L.friday?'Screen-free Friday':'Episode'}:</b> ${L.friday?'No episode today':esc(L.episode)}</span><span class="small"><b>Books:</b> ${esc(L.book)}</span><span class="small"><b>Take-home:</b> ${esc(L.take)}</span></div>${programNote(pi)}</div>`}
     <div class="card"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h3>Today's checklist</h3><span class="chip ${c.p===100?'ok':(c.p?'warn':'')}">${c.done} of ${c.total} done \u00b7 ${c.p}%</span></div>
@@ -273,12 +277,12 @@ function setupView(){
 
 // ---------------- FAMILY PORTAL
 V['family-portal'] = () => {
-  const kids = Object.entries(P.kids).sort((a,b)=>a[1].first.localeCompare(b[1].first));
+  const kids = Object.entries(P.kids).filter(([id])=>!(P.demo && P.role==='family' && window.FFDemo) || window.FFDemo.familyKids().includes(id)).sort((a,b)=>a[1].first.localeCompare(b[1].first));
   if (!kids.length) return header('Family Portal','Your child\'s day at Futures.') + `<section class="band-paper"><div class="wrap"><div class="card" style="max-width:620px"><h3>No children linked yet</h3><p class="small">Your center links your child to your account. To try the family view now, load the sample classes in the Teacher Portal.</p><button class="btn navy" data-go="portal">Open the Teacher Portal</button>${window.FFSupporting&&window.FFSupporting.cameo?`<div class="ff-empty-cameo">${window.FFSupporting.cameo(['mara','pip'],{unit:120,caption:'Every first day starts with a brave hello.'})}</div>`:''}</div></div></section>`;
   if (!P.fam.kid || !P.kids[P.fam.kid]) P.fam.kid = kids[0][0];
   if (!P.fam.date) P.fam.date = P.date;
-  return header('Family Portal', 'What your child learned, ate and did today.') + `<section class="band-paper" style="padding-block:22px 60px"><div class="wrap" style="display:grid;gap:16px">
-   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end"><label class="f" for="fKid">Child${sel('fKid', kids.map(([id,k])=>[id,`${k.first} ${k.last||''}.`]), P.fam.kid)}</label><label class="f" for="fDate">Day<input class="i" type="date" id="fDate" value="${P.fam.date}" style="padding:7px 9px"></label>${P.live?'':'<span class="sample">Sample family view</span>'}</div>
+  return header('Family Portal', 'What your child learned, ate and did today.') + `<section class="band-paper" style="padding-block:22px 60px"><div class="wrap ff-pwrap" style="display:grid;gap:16px">
+   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end"><label class="f" for="fKid">Child${sel('fKid', kids.map(([id,k])=>[id,`${k.first} ${k.last||''}.`]), P.fam.kid)}</label><label class="f" for="fDate">Day<input class="i" type="date" id="fDate" value="${P.fam.date}" style="padding:7px 9px"></label>${P.live?'':'<span class="sample">Sample family view</span>'}${P.demo?'<span class="sample">Demo family view</span>':''}</div>
    ${familyReport(P.fam.kid, P.fam.date)}</div></section>`;
 };
 // The ONE family-report publisher in hub mode is the hub (daily_report_publish_day -> daily_reports -> family-report.js "Today's report"
@@ -344,7 +348,7 @@ function ls2Save(){ if(P.live) return; try{ localStorage.setItem(LS2, JSON.strin
 function ls2Load(){ try{ const raw=localStorage.getItem(LS2); if(!raw) return; const o=JSON.parse(raw); C2.forEach(c=>{ if(o && o[c] && typeof o[c]==='object') Object.assign(P2[c], o[c]); }); }catch(_){} }
 async function put2(coll, id, data){
   const clean = JSON.parse(JSON.stringify(data)); P2[coll][id] = clean;
-  if (P.db && P.live) { if(!P.canWrite && !(P.hub && P.role==='family' && coll==='msgs')) return; try { await P.db.collection(coll).doc(id).set(clean); } catch(err){ if(P.hub && coll==='photos') delete P2[coll][id]; fail(err); return false; } }
+  if (P.db && P.live) { if(!P.canWrite && !((P.hub||P.demo) && P.role==='family' && coll==='msgs')) return; try { await P.db.collection(coll).doc(id).set(clean); } catch(err){ if(P.hub && coll==='photos') delete P2[coll][id]; fail(err); return false; } }
   else if (ls2Save()===false && coll==='photos') toast('Photo kept on this screen only (browser storage is full).');
   return true;
 }
@@ -381,6 +385,7 @@ function coverage(kid, band){ const all=kidObs(kid), list=band?bandSteps(band):[
   const now=fromIso(P.date).getTime(); const recent=all.filter(o=>o.date && (now-fromIso(o.date).getTime())/864e5<=30 && (now-fromIso(o.date).getTime())>=0).length;
   const doms=FS.domains.filter(d=>list.some(s=>s.domain===d.key)).map(d=>({d, n:list.filter(s=>s.domain===d.key && noted.has(s.id)).length, m:list.filter(s=>s.domain===d.key).length}));
   return {notes:all.length, shared:all.filter(o=>o.shared===true).length, recent, noted:noted.size, steps:list.length, doms}; }
+const demoArea = () => !!(P.demo && !FS.steps.length && FS.domains.length);   // demo: observations carry an area tag from the public summary
 const lcFirst = s => s ? s.charAt(0).toLowerCase()+s.slice(1) : s;
 const fmtAt = ms => new Date(ms).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 const kidName = id => { const k=P.kids[id]; return k?`${k.first} ${k.last?k.last+'.':''}`.trim():'Child'; };
@@ -502,14 +507,14 @@ function progressView(){
     ${covCard}
     <div class="card" data-motion="reveal" id="p2ObsCard"><h3>Add observation</h3>
      ${P.canWrite?`<div class="p2-row"><label class="f" for="p2ObsDate">Date<input class="i" type="date" id="p2ObsDate" value="${P.date}" style="padding:7px 9px"></label><label class="f" for="p2ObsCtx">Where or when${sel('p2ObsCtx', CTX, '')}</label></div>
-     <div class="p2-row"><label class="f" for="p2ObsStep">Learning Step<select class="i" id="p2ObsStep" style="padding:7px 9px"><option value="">General note (no Learning Step)</option>${doms.map(d=>`<optgroup label="${esc(d.label)}">${list.filter(s=>s.domain===d.key).map(s=>`<option value="${s.id}" ${s.id===pick?'selected':''}>${esc(s.text)}</option>`).join('')}</optgroup>`).join('')}</select></label><label class="f" for="p2ObsLvl">Level (optional)${sel('p2ObsLvl', [['','No level, just a note']].concat(FS.levels.map(l=>[l.key,l.label])), '', band?'':'disabled')}</label></div>
+     ${demoArea()?`<div class="p2-row"><label class="f" for="p2ObsArea">Learning Steps area (tag)${sel('p2ObsArea', [['','General note (no area)']].concat(FS.domains.map(d=>[d.key,d.label])), '')}</label><label class="f" for="p2ObsLvl">Level word (optional)${sel('p2ObsLvl', [['','No level, just a note']].concat(FS.levels.map(l=>[l.key,l.label])), '')}</label></div>`:`<div class="p2-row"><label class="f" for="p2ObsStep">Learning Step<select class="i" id="p2ObsStep" style="padding:7px 9px"><option value="">General note (no Learning Step)</option>${doms.map(d=>`<optgroup label="${esc(d.label)}">${list.filter(s=>s.domain===d.key).map(s=>`<option value="${s.id}" ${s.id===pick?'selected':''}>${esc(s.text)}</option>`).join('')}</optgroup>`).join('')}</select></label><label class="f" for="p2ObsLvl">Level (optional)${sel('p2ObsLvl', [['','No level, just a note']].concat(FS.levels.map(l=>[l.key,l.label])), '', band?'':'disabled')}</label></div>`}
      <label class="f" for="p2ObsText">What did you see?<textarea class="i" id="p2ObsText" style="min-height:80px" placeholder="What the child did or said, e.g. Counted 8 bears one by one and said 'eight!'"></textarea></label>
      <p class="mini">Write what you saw in plain words. Choose a level only when this note shows it: Emerging, Developing or Secure.</p>
-     <label class="f" for="p2ObsPhoto">Add photo (optional)<input class="p2-file" type="file" accept="image/*" id="p2ObsPhoto"></label>
+     ${P.demo&&window.FFDemoPortal?window.FFDemoPortal.photoPick('p2ObsPhotoDemo','Add a sample photo (optional)'):`<label class="f" for="p2ObsPhoto">Add photo (optional)<input class="p2-file" type="file" accept="image/*" id="p2ObsPhoto"></label>`}
      ${P2.pending&&P2.pending.kid===kid?`<div class="p2-prev"><img src="${esc(P2.pending.src)}" alt="Photo ready to save"><span class="small">Photo ready · <button class="rl" data-p2="clearphoto">Remove</button></span></div>`:''}
      <label style="display:flex;gap:8px;align-items:center;font-size:13.5px" for="p2ObsShare"><input type="checkbox" id="p2ObsShare" style="width:18px;height:18px;accent-color:var(--gold)"> Share with ${esc(k.first)}'s family now (they see the note, date, context and level word)</label>
      <div class="p2-row" style="justify-content:space-between;align-items:center"><span class="p2-priv">${photoNotice()}</span><button class="btn navy" data-p2="saveobs">Save observation</button></div>`:'<p class="small muted">View only.</p>'}</div>
-    <div class="card" data-motion="reveal"><h3>Recent observations</h3>${obs.length?`<div>${obs.map(o=>{ const s=STEP[o.step]; return `<div class="p2-obs" data-obs="${esc(o.id)}" style="--c:var(--${s?domFriend(s.domain):(o.domain||'zuri')})"><span class="mini">${s?esc(s.text):'General note'} · ${shortDate(o.date)}${o.context?' · '+esc(ctxLabel(o.context)):''}${o.level&&LVLW[o.level]?' · '+esc(LVLW[o.level].label):''}</span><span class="small">${esc(o.text||'Photo added')}</span><span class="mini" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${o.shared===true?'<span class="chip ok">Shared with family</span>':'<span class="chip">Teachers only</span>'}${P.canWrite?`<button class="rl" data-p2share="${esc(o.id)}">${o.shared===true?'Stop sharing':'Approve and share with family'}</button>`:''}</span></div>`; }).join('')}</div>`:'<p class="small muted">No observations yet.</p>'}${earlier('obs','notes')}</div>
+    <div class="card" data-motion="reveal"><h3>Recent observations</h3>${obs.length?`<div>${obs.map(o=>{ const s=STEP[o.step]; return `<div class="p2-obs" data-obs="${esc(o.id)}" style="--c:var(--${s?domFriend(s.domain):(o.domain||'zuri')})"><span class="mini">${s?esc(s.text):(o.area&&SDOM[o.area]?esc(SDOM[o.area].label):'General note')} · ${shortDate(o.date)}${o.context?' · '+esc(ctxLabel(o.context)):''}${o.level&&LVLW[o.level]?' · '+esc(LVLW[o.level].label):''}</span><span class="small">${esc(o.text||'Photo added')}</span><span class="mini" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${o.shared===true?'<span class="chip ok">Shared with family</span>':'<span class="chip">Teachers only</span>'}${P.canWrite?`<button class="rl" data-p2share="${esc(o.id)}">${o.shared===true?'Stop sharing':'Approve and share with family'}</button>`:''}</span></div>`; }).join('')}</div>`:'<p class="small muted">No observations yet.</p>'}${earlier('obs','notes')}</div>
     <div class="card" data-motion="reveal"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap"><h3>Photos</h3><span class="p2-priv">${photoNotice()}</span></div>${photos.length?`<div class="p2-thumbs">${photos.map(thumb).join('')}</div>`:'<p class="small muted">No photos yet. Add one with an observation or a daily photo moment.</p>'}${earlier('photos','photos')}</div>
    </div></div>`;
 }
@@ -536,7 +541,7 @@ function messagesView(){
     <div class="card" data-motion="reveal"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap"><h3>Daily photo moments</h3><span class="p2-priv">${photoNotice()}</span></div>
      ${today.length?`<div class="p2-strip" tabindex="0" role="region" aria-label="Photo moments in this classroom">${today.map(p=>thumb(Object.assign({},p,{caption:`${P.kids[p.kid]?.first||''}: ${p.caption||''}`}))).join('')}</div>`:'<p class="small muted">No photo moments posted yet.</p>'}
      ${P.canWrite?`<div class="p2-row"><label class="f" for="p2MomKid">Child${sel('p2MomKid', kids.map(([id,x])=>[id,`${x.first} ${x.last||''}.`]), (P2.momentPending&&P2.momentPending.kid)||kid)}</label><label class="f" for="p2MomCap">Caption<input class="i" id="p2MomCap" style="padding:7px 9px" placeholder="e.g. Painting with Zuri's leaf stamps"></label></div>
-     <div class="p2-row" style="align-items:center"><label class="f" for="p2MomFile" style="flex:1 1 200px">Photo<input class="p2-file" type="file" accept="image/*" id="p2MomFile"></label>${P2.momentPending?`<div class="p2-prev"><img src="${esc(P2.momentPending.src)}" alt="Photo ready to post"></div>`:''}<button class="btn gold" data-p2="postmoment">Post photo moment</button></div>`:''}</div>
+     <div class="p2-row" style="align-items:center">${P.demo&&window.FFDemoPortal?window.FFDemoPortal.photoPick('p2MomFileDemo','Sample photo'):`<label class="f" for="p2MomFile" style="flex:1 1 200px">Photo<input class="p2-file" type="file" accept="image/*" id="p2MomFile"></label>`}${P2.momentPending?`<div class="p2-prev"><img src="${esc(P2.momentPending.src)}" alt="Photo ready to post"></div>`:''}<button class="btn gold" data-p2="postmoment">Post photo moment</button></div>`:''}</div>
    </div></div>`;
 }
 
@@ -556,7 +561,7 @@ function familyLearning(kid){
   const obs=shared.slice(0,5);
   return `<div class="card p2-fam" data-motion="reveal" id="p2fLearning"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap"><h3>${esc(k.first)}'s learning</h3><span class="mini">${band?esc(BANDS[band]||'')+' Learning Steps':'Learning Steps'}</span></div>
     <p class="small">What teachers saw during play and routines and chose to share with you. These are words, not grades: there are no scores, percentages or comparisons with other children.</p>
-    <h4>What we saw</h4>${obs.length?`<div>${obs.map(o=>{ const s=STEP[o.step]; return `<div class="p2-obs" style="--c:var(--${s?domFriend(s.domain):(o.domain||'zuri')})"><span class="mini">${shortDate(o.date)}${o.context?' · '+esc(ctxLabel(o.context)):''}${s?' · '+esc(s.family):''}${o.level&&LVLW[o.level]?' · '+esc(LVLW[o.level].label):''}</span><span class="small">${esc(o.text||'Photo added')}</span></div>`; }).join('')}</div>`:`<p class="small"><span class="p2-lvl none">Not yet observed</span> No observations have been shared yet. That says nothing about what ${esc(k.first)} can do: notes appear here when a teacher shares them.</p>`}
+    <h4>What we saw</h4>${obs.length?`<div>${obs.map(o=>{ const s=STEP[o.step]; return `<div class="p2-obs" style="--c:var(--${s?domFriend(s.domain):(o.domain||'zuri')})"><span class="mini">${shortDate(o.date)}${o.context?' · '+esc(ctxLabel(o.context)):''}${s?' · '+esc(s.family):(o.area&&SDOM[o.area]?' · '+esc(SDOM[o.area].family):'')}${o.level&&LVLW[o.level]?' · '+esc(LVLW[o.level].label):''}</span><span class="small">${esc(o.text||'Photo added')}</span></div>`; }).join('')}</div>`:`<p class="small"><span class="p2-lvl none">Not yet observed</span> No observations have been shared yet. That says nothing about what ${esc(k.first)} can do: notes appear here when a teacher shares them.</p>`}
     <h4>Things ${esc(k.first)} is doing now</h4>${doing.length?`<ul>${doing.map(s=>`<li class="small">${esc(s.family)} <span class="p2-lvl" data-l="${esc(lvl[s.id].level)}">${esc(LVLW[lvl[s.id].level].label)}</span> <span class="mini">${shortDate(lvl[s.id].date)}</span></li>`).join('')}</ul>`:'<p class="small muted">Not yet observed. Your child\'s teacher will add these as they see them.</p>'}
     <h4>What's next</h4>${next.length?`<ul>${next.map(s=>`<li class="small">${esc(latest[s.id]?s.next:s.family)}</li>`).join('')}</ul>`:'<p class="small muted">Ideas appear here once a teacher shares an observation.</p>'}
     <h4>Try at home</h4>${next.length?`<ul>${next.map(s=>`<li class="small">${esc(s.home)}</li>`).join('')}</ul>`:'<p class="small muted">Futures at Home has activities for every age while you wait.</p>'}</div>`;
@@ -621,19 +626,20 @@ document.addEventListener('click', async e=>{
   const mk=t.closest('[data-p2mk]'); if(mk){ P2.mk=mk.dataset.p2mk; await markRead(P2.mk,'teacher'); render(); const b=document.querySelector(`[data-p2mk="${P2.mk}"]`); if(b) b.focus(); scrollChat(); return; }
   const ea=t.closest('[data-p2earlier]'); if(ea && P.hub && WINDOWED.includes(ea.dataset.p2earlier)){ const c=ea.dataset.p2earlier; P2.since[c]=weeksBefore(P2.since[c]||iso(new Date()), WIN_WEEKS); sub2(c); render(); toast(`Loading from ${shortDate(P2.since[c])}`); const b=document.querySelector(`[data-p2earlier="${c}"]`); if(b) b.focus(); return; }
   const qr=t.closest('[data-p2qr]'); if(qr){ const ta=$('#p2Msg'); if(ta){ ta.value=qr.dataset.p2qr; ta.focus(); } return; }
-  if(!P.canWrite && !(P.hub && P.role==='family' && t.closest('[data-p2="fsend"]'))) return;
+  if(!P.canWrite && !((P.hub||P.demo) && P.role==='family' && t.closest('[data-p2="fsend"]'))) return;
   const sh=t.closest('[data-p2share]'); if(sh){ const id=sh.dataset.p2share, o=P2.obs[id]; if(!o) return; const x=Object.assign({}, o, {shared:o.shared!==true}); delete x.shared_by; delete x.shared_at;
     await put2('obs', id, x); if(o.photo && P2.photos[o.photo] && !P.hub){ await put2('photos', o.photo, Object.assign({}, P2.photos[o.photo], {shared:x.shared})); } // in the Hub the database moves the photo with it
     toast(x.shared?'Shared with the family':'No longer shared with the family'); return render(); }
   const a=t.closest('[data-p2]'); if(!a) return; const act=a.dataset.p2;
   if(act==='clearphoto'){ P2.pending=null; return render(); }
-  if(act==='saveobs'){ const kid=P2.pk, text=($('#p2ObsText').value||'').trim(), date=$('#p2ObsDate').value||P.date, step=$('#p2ObsStep').value, level=$('#p2ObsLvl').value; const photo=P2.pending&&P2.pending.kid===kid?P2.pending:null;
+  if(act==='saveobs'){ const kid=P2.pk, text=($('#p2ObsText').value||'').trim(), date=$('#p2ObsDate').value||P.date, step=($('#p2ObsStep')||{}).value||'', level=$('#p2ObsLvl').value; const photo=P2.pending&&P2.pending.kid===kid?P2.pending:null;
     if(!text && !photo){ $('#p2ObsText').focus(); toast('Write a note or add a photo first'); return; }
-    if(level && !STEP[step]){ $('#p2ObsStep').focus(); toast('Choose the Learning Step this level is for'); return; }
+    if(level && !STEP[step] && !demoArea()){ $('#p2ObsStep').focus(); toast('Choose the Learning Step this level is for'); return; }
     if(level && !text){ $('#p2ObsText').focus(); toast('A level needs a note about what you saw'); return; }
-    if(level && !bandOf(kid)){ toast('Confirm the Learning Steps set first'); return; }
+    if(level && !bandOf(kid) && !demoArea()){ toast('Confirm the Learning Steps set first'); return; }
     const share=!!($('#p2ObsShare')||{}).checked, ctx=($('#p2ObsCtx')||{}).value||'';
-    const s=STEP[step], oid=uid('o'); const o={kid, room:P.kids[kid].room, date, domain:s?domFriend(s.domain):'zuri', text, shared:share, at:Date.now(), by:P.me||'demo'}; if(s) o.step=s.id; if(s && level) o.level=level; if(ctx) o.context=ctx;
+    const area=demoArea()?(($('#p2ObsArea')||{}).value||''):''; if(area && level && !text){ $('#p2ObsText').focus(); toast('A level needs a note about what you saw'); return; }
+    const s=STEP[step], oid=uid('o'); const o={kid, room:P.kids[kid].room, date, domain:s?domFriend(s.domain):(area?domFriend(area):'zuri'), text, shared:share, at:Date.now(), by:P.me||'demo'}; if(s) o.step=s.id; if(s && level) o.level=level; if(area){ o.area=area; if(level) o.level=level; } if(ctx) o.context=ctx;
     if(photo){ const pid=uid('ph'); o.photo=pid; const ok=await put2('photos', pid, {kid, room:o.room, date, src:photo.src, caption:text?text.slice(0,60):(s?s.family.slice(0,60):'Learning moment'), kind:'portfolio', shared:share, domain:o.domain, at:Date.now(), by:P.me||'demo'}); if(ok===false) return; }
     await put2('obs', oid, o);
     if(s && level){ const pr=Object.assign({kid}, P2.progress[kid]); delete pr.ms; delete pr.sample; pr.steps=Object.assign({}, pr.steps); pr.steps[s.id]={level, date, note:text, obs:oid, by:P.me||'demo', at:Date.now()}; pr.by=P.me||'demo'; pr.at=Date.now(); await put2('progress', kid, pr); }
@@ -652,6 +658,8 @@ document.addEventListener('click', async e=>{
 });
 document.addEventListener('change', async e=>{
   const t=e.target; if(view!=='portal' && view!=='family-portal') return;
+  if(P.demo && (t.id==='p2ObsPhotoDemo' || t.id==='p2MomFileDemo')){ const src=t.value; if(t.id==='p2ObsPhotoDemo') P2.pending=src?{kid:P2.pk, src}:null; else { const kidSel=$('#p2MomKid'); P2.momentPending=src?{src, kid:kidSel?kidSel.value:P2.mk}:null; }
+    if(src) toast('Sample photo ready'); return; }
   if(t.id==='p2ObsPhoto' || t.id==='p2MomFile'){ const f=t.files&&t.files[0]; if(!f) return; try{ const src=await downscale(f);
       if(t.id==='p2ObsPhoto'){ P2.pending={kid:P2.pk, src}; } else { const kidSel=$('#p2MomKid'); P2.momentPending={src, kid:kidSel?kidSel.value:P2.mk}; const cap=$('#p2MomCap'); P2.momentCap=cap?cap.value:''; }
       const keep = t.id==='p2ObsPhoto' ? {text:($('#p2ObsText')||{}).value, date:($('#p2ObsDate')||{}).value, step:($('#p2ObsStep')||{}).value, lvl:($('#p2ObsLvl')||{}).value} : null;
@@ -669,6 +677,7 @@ V['family-portal'] = () => { const html=famBase(); const kid=P.fam.kid; if(!kid 
   let out = html.replace(/<\/div><\/section>$/, familyExtras(kid)+'</div></section>');
   if (P.hub && window.FFReport) { const rep = window.FFReport.familyToday(rhythmCtx()); if (rep) out = out.replace(FR_ANCHOR, ()=>rep+FR_ANCHOR); } // evening report (family-report.js): the one published report
   if (P.hub && window.FFRhythm) { const card = window.FFRhythm.familyCard(rhythmCtx()); if (card) out = out.replace(FR_ANCHOR, ()=>card+FR_ANCHOR); } // "Today" card (daily-rhythm.js)
+  if (P.demo && window.FFDemoPortal) { out = out.replace(FR_ANCHOR, ()=>window.FFDemoPortal.familyTop(rhythmCtx())+FR_ANCHOR); out = out.replace(/<\/div><\/section>$/, ()=>window.FFDemoPortal.familyEnd(rhythmCtx())+'</div></section>'); } // demo-portal.js: check-in times, today's plan, the sent report, friend videos
   if (P.hub && window.FFArrival && P.role==='family') { const pk = window.FFArrival.familyCard(rhythmCtx()); if (pk) out = out.replace(/<\/div><\/section>$/, ()=>pk+'</div></section>'); } // who can pick up (arrival.js)
   return out; };
 const portalBase = V.portal;
@@ -701,7 +710,7 @@ document.addEventListener('click', async e=>{
   const pgc=t.closest('[data-prog-sched]'); if(pgc && P.canWrite && P.hub && window.FFProgram){ const v=($('#pgStart')||{}).value; if(!v){ const f=$('#pgStart'); if(f) f.focus(); return; }
     try{ await window.FFProgram.schedule(rhythmCtx(), P.room, pgc.dataset.progSched, v); toast(`${relName(pgc.dataset.progSched)} scheduled`); }catch(err){ toast(err && err.message ? err.message : 'That did not save.'); } return render(); }
   const lm=t.closest('[data-lmode]'); if(lm && P.canWrite){ const d=dayDoc(P.room,P.date); d.lunch=Object.assign({},d.lunch,{mode:lm.dataset.lmode}); await put('days',dayKey(P.room,P.date),d); return render(); }
-  const at=t.closest('[data-att]'); if(at && P.canWrite){ const id=at.dataset.att, x=kdDoc(id,P.date); x.present = at.dataset.v==='1'; await put('kidday',kdKey(id,P.date),x); return render(); }
+  const at=t.closest('[data-att]'); if(at && P.canWrite){ const id=at.dataset.att, x=kdDoc(id,P.date); x.present = at.dataset.v==='1'; if(P.demo && window.FFDemoPortal) window.FFDemoPortal.stampAttendance(x); await put('kidday',kdKey(id,P.date),x); return render(); }
   const rr=t.closest('[data-rmroom]'); if(rr){ if(!rr.dataset.armed){ rr.dataset.armed=1; rr.textContent='Click again to remove'; return; } await del('rooms', rr.dataset.rmroom); P.room=null; return render(); }
   const p=t.closest('[data-p]'); if(!p) return; const a=p.dataset.p;
   if(a==='sample') return loadSample();
@@ -781,13 +790,31 @@ async function connectHub(){
   P.room='threes';
   seed2(); ls2Load();
   if (window.FFHub && window.FFHub.configured) { window.FFHub.boot(); return; }
+  if (window.FFDemo && window.FFDemo.enabled() && window.FFDemo.session()) { connectDemo(); return; }
   if (!window.claude || !window.claude.use) return;
   P.user = await window.claude.use('user');
   if (P.user){ try{ P.me = await P.user.id(); }catch(_){} try{ const w=await P.user.can('data.write'); if(w===false) P.canWrite=false; }catch(_){} }
   P.db = await window.claude.use('db'); if(!P.db) return;
   goLive();
 })();
+// Demo mode (demo-core.js): the public site has no hosted Hub, so a demo account opens the portals on FAKE sample data kept in this
+// browser (FFDemo.db has the same small document interface as the Hub). Nothing is sent anywhere. Never used when a Hub is configured.
+function connectDemo(){
+  const D0 = window.FFDemo, s = D0 && D0.enabled() ? D0.session() : null; if(!s || P.hub) return null;
+  D0.ensureSeed();
+  P.demo=true; P.role=s.role==='family'?'family':(s.role==='director'?'director':'teacher'); P.email=s.email; P.center={name:D0.CENTER}; P.me=s.id; P.names[s.id]=s.name;
+  Object.assign(P.names, D0.staffNames());
+  P.user={id:async()=>s.id, can:async()=>P.role!=='family', profiles:async ids=>Object.fromEntries(ids.map(i=>[i,{name:D0.staffNames()[i]||'A teacher'}]))};
+  P.canWrite=P.role!=='family'; P.db=D0.db; P.days={}; P.kd={}; P.kdDate=null; P.daysSince=null; P2.since={}; P2.pk=null; P2.mk=null; P2.pending=null; P2.momentPending=null;
+  P.tab=P.role==='director'?'dash':'today'; P.fam={kid:P.role==='family'?D0.familyKids()[0]:null, date:null};
+  goLive(); P.room=P.role!=='family'?D0.TEACHER_ROOM:P.room;
+  return {role:P.role};
+}
 // state the Whole-Child Daily Rhythm screens (daily-rhythm.js) need; read-only copies, so that file cannot change portal state
-function rhythmCtx(){ return {hub:P.hub, role:P.role, center:P.center, room:P.room, date:P.date, rooms:P.rooms, kids:P.kids, fam:P.fam, canWrite:P.canWrite, tab:P.tab}; }
-window.FFPortal = {subscribeKd, connectHub, ctx:rhythmCtx, rerender:()=>render()};
+function rhythmCtx(){ return {hub:P.hub, demo:!!P.demo, me:P.me, email:P.email, role:P.role, center:P.center, room:P.room, date:P.date, rooms:P.rooms, kids:P.kids, fam:P.fam, canWrite:P.canWrite, tab:P.tab}; }
+window.FFPortal = {subscribeKd, connectHub, connectDemo, ctx:rhythmCtx, rerender:()=>render(),
+  // demo-portal.js reads and writes the same records the portal screens use (demo mode only)
+  demoApi:{kd:kdDoc, day:dayDoc, put:(c,id,d)=>put(c,id,d), put2:(c,id,d)=>put2(c,id,d), roomKids, kdKey, dayKey, lunchText, lessonFor, todayIso, fmtDate, shortDate, iso, fromIso,
+    obs:()=>P2.obs, msgs:()=>P2.msgs, photos:()=>P2.photos, kidName, who, setTab:t=>{P.tab=t;}, setRoom:r=>{ if(P.rooms[r]){ P.room=r; subscribeDays(); } }, setDate:d=>{ P.date=d; subscribeKd(); },
+    setFam:(kid,date)=>{ P.fam={kid, date:date||P.date}; }, steps:()=>FS}};
 })();
