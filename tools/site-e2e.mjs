@@ -857,8 +857,8 @@ async function media() {
         const near = (outer && outer.innerText) || '';
         const file = src.split('?')[0];
         const reg = caps[file] || null;
-        const head = reg && reg.transcript ? String(reg.transcript).replace(/\s+/g, ' ').slice(0, 40) : '';
-        const trDetails = head && [...document.querySelectorAll('#view details.ffcap-tr')].some((d) => d.textContent.replace(/\s+/g, ' ').includes(head));
+        const head = reg && reg.transcript ? String(reg.transcript).replace(/\s+/g, '').slice(0, 40) : '';   // paragraphs join without spaces in textContent
+        const trDetails = head && [...document.querySelectorAll('#view details.ffcap-tr')].some((d) => d.textContent.replace(/\s+/g, '').includes(head));
         return { src, file, poster: v.getAttribute('poster') || box?.querySelector('picture img, img')?.getAttribute('src') || '', tracks: tr, near: near.slice(0, 600),
           silent: !!(reg && reg.silent), hasTranscript: !!(reg && reg.transcript), transcriptShown: !!trDetails };
       }).filter((v) => v.src);
