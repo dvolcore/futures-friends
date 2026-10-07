@@ -198,3 +198,26 @@
 .ffd-sw input:checked+span{box-shadow:0 0 0 3px var(--navy)}
 .ffd-sw input:focus-visible+span{outline:3px solid var(--navy);outline-offset:3px}
 .ffd-cpage .phero{border-bottom:8px solid var(--cc)}
+/* the Procare workflow (2026-10-07): capacity, enrollment link, billing, statements, time clock, permissions */
+.ffd-caps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ffd-caps li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+.ffd-caps .meter,.ffd-caps li>.mini{grid-column:1 / -1}
+.ffd-capn{font-weight:800;font-size:1.15rem}
+.ffd-linkd{display:grid;gap:6px;padding:8px 0}
+.ffd-linkd>span:not(.mini){display:flex;flex-wrap:wrap;gap:6px}
+.ffd-paynote{border:2px dashed var(--gold,#E7A928);border-radius:14px;padding:10px 14px;background:rgba(231,169,40,.08);font-size:.95rem}
+.ffd-stmt table{width:100%}
+.ffd-stmt .ffd-sign{margin-top:18px}
+.ffd-ef .ffd-fs{margin:0;border:1px solid var(--line,#ddd);border-radius:12px;padding:10px 12px}
+.ffd-ef{display:grid;gap:14px}
+.ffd-clock{display:grid;gap:12px}
+.ffd-big{font-size:1.25rem;padding:16px 28px;justify-self:start}
+.ffd-perm td,.ffd-perm th{white-space:nowrap}
+.ffd-pc{text-align:center}
+.ffd-pc input{width:20px;height:20px}
+.ffd-bill .ffd-toggle{white-space:nowrap}
+@media print{body.ffd-printing *{visibility:hidden}body.ffd-printing .ffd-print,body.ffd-printing .ffd-print *{visibility:visible}body.ffd-printing .ffd-print{position:absolute;left:0;top:0;width:100%;box-shadow:none;border:0}body.ffd-printing .ffd-noprint{display:none}}
+.ffd-msgprev{border:1px solid var(--line,#ddd);border-radius:12px;padding:10px 12px;background:#fff;color:#1d2b30;font-size:.92rem;overflow-wrap:anywhere}
+.ffd-msgprev pre{white-space:pre-wrap;font:inherit;margin:6px 0 0}
+.ffd-sms{border-radius:18px 18px 18px 4px;background:#E9F3F1;max-width:34em}
+.ffd-ch{max-width:12em}

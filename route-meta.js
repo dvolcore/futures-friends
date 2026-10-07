@@ -78,6 +78,8 @@
     'learn-author': ['Course authoring | Futures Friends Academy', 'Futures Friends Academy course authoring tools.'],
     'learn-approve': ['Content approval | Futures Friends Academy', 'Futures Friends Academy content approval for reviewers.'],
     'start-center': ['Start your center', 'Create a demo Futures Hub center for a child care program or church preschool: its own name, colour, sign-in page, staff and families.'],
+    'enroll-link': ['Enrollment form', 'The enrollment form a center sends to a family in the Futures Hub demo: child, contacts, a short staff alert and the health-forms promise. Demo only, nothing is sent.'],
+    timeclock: ['Time clock', 'Staff clock in and out and see their own hours in the Futures Hub demo.'],
     c: ['Center sign-in', 'The sign-in page of one center in the Futures Hub demo: staff and families of that center sign in here.'],
     'not-found': ['Page not found', 'This page is not on the Futures Friends site. Try the home page, the whole-child day, Bop at Home or contact us.']
   };

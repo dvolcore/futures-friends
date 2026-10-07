@@ -94,6 +94,8 @@
     portal: ['Teacher Portal preview', 'staff', 'signin-teacher', 'zuri'],
     'start-center': ['Start your center', 'centers', 'hub', 'zuri'],
     c: ['Center sign-in', 'staff', 'signin-teacher', 'booker'],
+    'enroll-link': ['Enrollment form', 'families', 'enroll', 'lumi'],
+    timeclock: ['Time clock', 'staff', 'signin-teacher', 'bop'],
     learn: ['Academy', 'staff', 'teacher-standard', 'zuri'],
     'learn-course': ['Course', 'staff', 'learn', 'zuri'],
     'learn-cert': ['Certificate', 'staff', 'learn', 'zuri'],

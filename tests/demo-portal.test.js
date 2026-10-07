@@ -35,7 +35,7 @@ const tick = () => new Promise(r => setTimeout(r, 0));
 // ---------------------------------------------------------------- 1. the data layer
 test('demo accounts: role buttons and the documented email + password open the demo; anything else does not', () => {
   const { D, mem } = core();
-  assert.deepEqual([...D.ACCOUNTS.map(a => a.key)], ['teacher', 'director', 'family', 'academy']);
+  assert.deepEqual([...D.ACCOUNTS.map(a => a.key)], ['teacher', 'director', 'family', 'academy', 'staff']);
   for (const a of D.ACCOUNTS) { assert.match(a.email, /^[a-z]+@demo\.futuresfriends$/, 'a fake address that cannot be anybody\'s'); assert.equal(a.password, 'demo'); }
   assert.equal(D.session(), null);
   assert.equal(D.signInWith('teacher@demo.futuresfriends', 'wrong'), null);
@@ -545,3 +545,135 @@ test('start your center (390): create a church center, Get started, invite staff
   assert.deepEqual(errors, []); assert.deepEqual(offsite, []);
   await ctx.close();
 });
+
+// ---------------------------------------------------------------- 4. the owner's Procare workflow (2026-10-07)
+test('data: capacity per room, tuition accounts and a paid history, two weeks of punches, permission presets (owner = everything, cook = hours only)', () => {
+  const { D } = core(); D.signIn('director');
+  assert.deepEqual(['twos', 'demo', 'prek'].map(r => D.get('rooms', r).capacity), [6, 10, 6]);
+  assert.equal(Object.keys(D.all('accounts')).length, 17, 'every child has a tuition account');
+  const mia = Object.values(D.all('invoices')).filter(x => x.kid === 'd5');
+  assert.ok(mia.length >= 8 && mia.every(x => x.status === 'paid' && x.receipt), 'the family has a paid history for statements');
+  assert.ok(Object.values(D.all('invoices')).some(x => x.subsidy > 0), 'subsidy shares are kept apart');
+  assert.ok(Object.keys(D.all('punches')).length > 20);
+  assert.deepEqual([...D.permsOf('s-carmen')], ['hours']); assert.deepEqual([...D.permsOf('s-alana')], ['hours', 'classroom']);
+  assert.equal(D.presetOf(D.permsOf('s-dana')), 'director'); assert.equal(D.can('s-carmen', 'billing'), false);
+  assert.doesNotMatch(JSON.stringify(D.all('accounts')) + JSON.stringify(Object.values(D.all('invoices')).map(x => [x.via, x.receipt])), /\d{9,}|routing|cvv|card number/i, 'no card or bank numbers anywhere');
+  assert.equal(D.signIn('staff').home, 'timeclock');
+});
+
+for (const width of [390, 1280]) {
+  test(`procare workflow at ${width}: enrollment link -> parent form -> room with live capacity -> billing + autopay + receipt -> permissions -> hours-only staff -> family statements`, async () => {
+    const { ctx, page, errors, offsite } = await openPage(width, { context: { acceptDownloads: true } });
+    await h.goto(page, srv.base, 'signin-teacher', 400);
+    await signIn(page, 'director');
+    await page.click('[data-ptab="enroll"]'); await settle(page);
+    let t = await text(page);
+    assert.match(t, /Rooms and capacity/); assert.match(t, /Demo Classroom · Age 3 8 \/ 10/);
+    await page.fill('#pgLkParent', 'Jordan P.'); await page.selectOption('#pgLkRoom', 'demo'); await page.click('#pgLinkForm button[type="submit"]'); await settle(page);
+    assert.match(await text(page), /Jordan P\. Link sent/);
+    await shot(page, width, 'enroll-link'); await axeClean(page, 'Enrollment link'); await noSideScroll(page, 'Enrollment link');
+    // the parent opens the link
+    await page.click('[data-pg="openlink"]'); await settle(page);
+    assert.match(page.url(), /#enroll-link\/flc\.[A-Z0-9]+$/);
+    assert.match(await text(page), /Enroll your child at Futures Learning Center/);
+    assert.doesNotMatch(await text(page), /immuni[sz]ation (date|record) *:|medication|diagnos/i, 'no medical fields beyond the alert flag');
+    await axeClean(page, 'Parent form'); await noSideScroll(page, 'Parent form');
+    await page.click('#pgEnrollForm button[type="submit"]'); await settle(page);
+    assert.match(await page.textContent('#pgEfMsg'), /Please add your child’s first name/);
+    await page.fill('#pgEfFirst', 'Remy'); await page.fill('#pgEfLast', 'P'); await page.fill('#pgEfBirth', '2023-03');
+    await page.selectOption('#pgEfPay', 'subsidy');
+    await page.fill('#pgEc1Name', 'Lee P.'); await page.fill('#pgEc1Rel', 'Grandmother'); await page.fill('#pgEc1Ph', '555-0100');
+    await page.check('input[name="pgEfAlert"][value="yes"]'); await page.fill('#pgEfAlertText', 'Peanut allergy: plan at the front desk');
+    await page.check('#pgEfDocs'); await page.check('#pgEfOk');
+    await shot(page, width, 'parent-form');
+    await page.click('#pgEnrollForm button[type="submit"]'); await settle(page);
+    assert.match(await text(page), /Thank you\. Your form is with Futures Learning Center/);
+    // back at the desk: the application, the alert, the documents promise, placement with live capacity
+    await page.click('[data-pg="backdesk"]'); await page.waitForTimeout(500);
+    t = await text(page);
+    assert.match(t, /Remy P\./); assert.match(t, /Came in through the enrollment link/);
+    assert.match(t, /Alert \(parent-reported\): Peanut allergy: plan at the front desk/); assert.match(t, /Health documents: family will bring them/);
+    const app = await page.getAttribute('[data-pg="docsin"]', 'data-id');
+    await page.click(`[data-pg="docsin"][data-id="${app}"]`); await settle(page);
+    assert.match(await text(page), /Health documents received at the front desk/);
+    await page.click(`[data-dm="enrollask"][data-id="${app}"]`); await settle(page);
+    assert.match(await page.textContent(`#pgCap_${app}`), /After enrolling: 9 \/ 10 in Demo Classroom/);
+    await page.selectOption(`#dmEnRoom_${app}`, 'twos'); await settle(page);
+    assert.match(await page.textContent(`#pgCap_${app}`), /After enrolling: 5 \/ 6 in Twos Room/);
+    await page.selectOption(`#dmEnRoom_${app}`, 'demo');
+    await page.click(`[data-dm="enrollok"][data-id="${app}"]`); await settle(page);
+    t = await text(page);
+    assert.match(t, /Enrolled 1 Remy P\./); assert.match(t, /Demo Classroom · Age 3 9 \/ 10/);
+    await shot(page, width, 'placed'); await axeClean(page, 'Placed'); await noSideScroll(page, 'Placed');
+    // billing
+    await page.click('[data-ptab="billing"]'); await settle(page);
+    t = await text(page);
+    assert.match(t, /Demo: payments are not processed\. No card or bank details are collected or stored/);
+    assert.match(t, /Remy P\. · Demo Classroom \$225\.00 \$150\.00 \$75\.00 Autopay off/);
+    await page.click('[data-pg="invweek"]'); await settle(page);
+    await page.locator('tr', { hasText: 'Remy P.' }).locator('[data-pg="autopay"]').click(); await settle(page);
+    assert.match(await text(page), /Remy P\. · Demo Classroom \$225\.00 \$150\.00 \$75\.00 Autopay on \$75\.00/);
+    await page.click('[data-pg="autorun"]'); await settle(page);
+    assert.match(await text(page), /Remy P\. · Demo Classroom \$225\.00 \$150\.00 \$75\.00 Autopay on \$0\.00 Paid up/);
+    await page.click('[data-pg="receipt"]'); await settle(page);
+    assert.match(await page.textContent('#pgReceipt'), /Receipt R-\d{6}-[A-Z0-9]+[^]*EIN XX-XXXXXXX/);
+    await shot(page, width, 'billing'); await axeClean(page, 'Billing'); await noSideScroll(page, 'Billing');
+    // recurring tuition per child: the schedule preview, then turn it off
+    t = await text(page);
+    assert.match(t, /Child billing plan Recurring on/);
+    assert.match(t, /Next alert: Wed, [A-Z][a-z]{2} \d+ · Due: Fri, [A-Z][a-z]{2} \d+ · Covers Mon, [A-Z][a-z]{2} \d+ to Fri, [A-Z][a-z]{2} \d+ · \$[\d,]+\.\d\d/);
+    assert.match(t, /Already paid\? Please ignore/);
+    await page.uncheck('#pgBpRec'); await page.click('#pgPlanForm button[type="submit"]'); await settle(page);
+    assert.match(await text(page), /Child billing plan Recurring off/);
+    await page.check('#pgBpRec'); await page.click('#pgPlanForm button[type="submit"]'); await settle(page);
+    // payment reminders: due Friday for the following week; paid and autopay families are skipped; nothing is really sent
+    assert.match(await text(page), /Tuition due: every Friday for the following week/);
+    await page.click('[data-pg="remrun"][data-stage="wed"]'); await settle(page);
+    assert.match(await page.innerText('#pgRemPrev'), /Wednesday reminder by (email|email and text)/);
+    assert.match(await page.innerText('#pgRemPrev'), /Reply STOP to opt out/);
+    await axeClean(page, 'Reminders'); await noSideScroll(page, 'Reminders');
+    // hours and access: timesheets, payroll CSV, the permission matrix
+    await page.click('[data-ptab="access"]'); await settle(page);
+    t = await text(page);
+    assert.match(t, /Timesheets · week of/); assert.match(t, /Who can see what/);
+    const [dl] = await Promise.all([page.waitForEvent('download'), page.click('[data-pg="payroll"]')]);
+    assert.match(fs.readFileSync(await dl.path(), 'utf8'), /^# DEMO sample data, made up\n"week_of","staff","role"/);
+    assert.equal(await page.isDisabled('#pgPre_s-dana'), true, 'the owner always has everything');
+    await page.selectOption('#pgPre_s-alana', 'hours'); await settle(page);
+    assert.equal(await page.isChecked('#pgPm_s-alana_classroom'), false);
+    await page.check('#pgPm_s-carmen_reports'); await settle(page);
+    assert.equal(await page.inputValue('#pgPre_s-carmen'), 'custom');
+    assert.equal(await page.isDisabled('#pgPm_s-carmen_billing'), true, 'non-director employees never get financials');
+    assert.equal(await page.isDisabled('#pgPm_s-alana_billing'), true);
+    // HQ support access: requested, off until the owner approves; time-limited and logged
+    assert.match(await page.innerText('#pgSupport'), /Requested: off until you approve/);
+    await page.click('[data-pg="supok"]'); await settle(page);
+    assert.match(await page.innerText('#pgSupport'), /On until/);
+    await page.click('[data-pg="supoff"]'); await settle(page);
+    assert.match(await page.innerText('#pgSupport'), /Off/);
+    await shot(page, width, 'access'); await axeClean(page, 'Hours and access'); await noSideScroll(page, 'Hours and access');
+    // the teacher is now "Hours only": the time clock and nothing else
+    await page.click('[data-demo="signout"]'); await page.waitForTimeout(800);
+    await signIn(page, 'teacher');
+    t = await text(page);
+    assert.match(t, /time clock/i); assert.match(t, /Your access: Hours only/); assert.doesNotMatch(t, /Check-in|Amara|Mia C|Tuition|\$\d/);
+    assert.match(t, /Care alerts · whole center/); assert.match(t, /Tree nut allergy/); assert.match(t, /Peanut allergy/);
+    await page.click('[data-pg="punch"]'); await settle(page);
+    assert.match(await text(page), /Clocked out/);
+    await shot(page, width, 'timeclock'); await axeClean(page, 'Time clock'); await noSideScroll(page, 'Time clock');
+    // the family pulls their own statements
+    await page.click('[data-demo="signout"]'); await page.waitForTimeout(800);
+    await h.goto(page, srv.base, 'signin-family', 400); await signIn(page, 'family');
+    t = await text(page);
+    assert.match(t, /Tuition and payments/); assert.match(t, /Statements/); assert.match(t, /Upcoming charges/);
+    await page.click('[data-pg="taxstmt"]'); await settle(page);
+    const st = (await page.innerText('#pgStmt')).replace(/\s+/g, ' ');
+    assert.match(st, new RegExp(`Child care payments statement · ${new Date().getFullYear()}`)); assert.match(st, /EIN: XX-XXXXXXX/); assert.match(st, /Total \$[\d,]+\.\d\d/);
+    await shot(page, width, 'tax-statement'); await axeClean(page, 'Tax statement'); await noSideScroll(page, 'Tax statement');
+    await page.click('[data-pg="attstmt"]'); await settle(page);
+    assert.match((await page.innerText('#pgStmt')).replace(/\s+/g, ' '), /Attendance record · [A-Z][a-z]+ \d{4}[^]*days attended/);
+    await shot(page, width, 'attendance-statement');
+    assert.deepEqual(errors, []); assert.deepEqual(offsite, []);
+    await ctx.close();
+  });
+}

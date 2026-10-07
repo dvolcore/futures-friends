@@ -64,8 +64,31 @@ const ACCOUNTS = [
   {key:'teacher', email:'teacher@demo.futuresfriends', password:'demo', role:'teacher', id:'s-alana', label:'Demo Teacher', home:'portal'},
   {key:'director', email:'director@demo.futuresfriends', password:'demo', role:'director', id:'s-dana', label:'Demo Director', home:'portal'},
   {key:'family', email:'family@demo.futuresfriends', password:'demo', role:'family', id:'f-family', label:'Demo Family', home:'family-portal'},
-  {key:'academy', email:'academy@demo.futuresfriends', password:'demo', role:'academy', id:'s-devin', label:'Demo Academy staff', home:'learn'}
+  {key:'academy', email:'academy@demo.futuresfriends', password:'demo', role:'academy', id:'s-devin', label:'Demo Academy staff', home:'learn'},
+  {key:'staff', email:'staff@demo.futuresfriends', password:'demo', role:'staff', id:'s-carmen', label:'Demo Staff (hours only)', home:'timeclock'}
 ];
+// Staff access (owner 2026-10-07, the Procare workflow: "our employees only have access to their hours"; the director and the owner see
+// everything; "I decide which employee has access to what"). One list of permissions, three presets, a custom mix per employee.
+const PERMS = [
+  ['hours', 'Own hours', 'Clock in and out, see their own hours'],
+  ['classroom', 'Own classroom', 'Check-in, daily plan, family reports and messages for their room'],
+  ['allkids', 'Every room', 'Every child and every room in the center'],
+  ['enroll', 'Enrollment', 'Enrollment links, applications, room placement'],
+  ['billing', 'Financials', 'Tuition, invoices, payments, statements, payroll: directors and the owner only'],
+  ['reports', 'Reports', 'Attendance and enrollment reports (no money)'],
+  ['staff', 'Staff and access', 'Timesheets and who can see what']
+];
+const PRESETS = {hours:['hours'], teacher:['hours', 'classroom'], director:PERMS.map(p => p[0])};
+const PRESET_LABEL = {hours:'Hours only', teacher:'Teacher: own classroom', director:'Director: everything', custom:'Custom'};
+// Owner decisions 2026-10-07: directors see everything in their center (the owner sees all of their own centers); non-director employees
+// NEVER see money (tuition, invoices, statements, payroll), whatever is ticked; Futures Friends HQ never sees a center's money either.
+const FINANCIAL = ['billing'];
+const isDirector = s => !!(s && (s.owner || /director/i.test(s.role || '')));
+const defaultPerms = s => isDirector(s) ? PRESETS.director : /lead teacher/i.test(s.role || '') ? PRESETS.teacher : PRESETS.hours;
+function permsOf(id){ const s = (load().staff || {})[id]; if (!s) return []; if (s.owner) return PRESETS.director.slice();
+  const ps = Array.isArray(s.perms) ? s.perms.slice() : defaultPerms(s).slice(); return isDirector(s) ? ps : ps.filter(p => !FINANCIAL.includes(p)); }
+const can = (id, perm) => permsOf(id).includes(perm);
+function presetOf(list){ const k = Object.keys(PRESETS).find(p => PRESETS[p].length === list.length && PRESETS[p].every(x => list.includes(x))); return k || 'custom'; }
 
 // ---------------------------------------------------------------- dates
 const pad = n => String(n).padStart(2, '0');
@@ -117,12 +140,12 @@ function seedDay(db, date, today){
     db.kidday[key] = x;
   });
 }
-const ROOM_BASE = {twos:{ages:'Age 2', level:1, order:1, ratio:8}, demo:{ages:'Age 3', level:1, order:2, ratio:10}, prek:{ages:'Ages 4 to 5', level:1, order:3, ratio:10}};
+const ROOM_BASE = {twos:{ages:'Age 2', level:1, order:1, ratio:8, capacity:6}, demo:{ages:'Age 3', level:1, order:2, ratio:10, capacity:10}, prek:{ages:'Ages 4 to 5', level:1, order:3, ratio:10, capacity:6}};
 function seed(c){
   c = c || center();
   const today = todayIso(), y1 = weekdayOffset(today, -1), t1 = weekdayOffset(today, 1);
   const db = {v:VERSION, center:c.id, seededFor:today, rooms:{}, kids:{}, days:{}, kidday:{}, progress:{}, obs:{}, photos:{}, msgs:{},
-    plans:{}, staff:{}, apps:{}, requests:{}, dues:{}, reports:{}, training:{}, invites:{}, log:[]};
+    plans:{}, staff:{}, apps:{}, requests:{}, dues:{}, reports:{}, training:{}, invites:{}, links:{}, accounts:{}, invoices:{}, punches:{}, log:[]};
   const P = PROFILES[c.kind];
   if (!P) return seedNew(c, db, today);   // a center made with "Start your center": an empty space and a Get started list
   db.familyName = P.family; db.familyKid = 'd5';
@@ -188,7 +211,53 @@ function seed(c){
   db.training['s-omar'] = {courses:{}};
   db.training['s-dana'] = {courses:{'F-101':{lessons:{meet:true, loop:true, check:true}, done:at(weekdayOffset(today, -40), 9, 0), hours:1.5}}};
   if (c.type === 'church') { db.dues.q7 = {title:'Church board: share the monthly preschool update', area:'Ministry', due:weekdayOffset(today, 6), done:false}; }
+  seedOps(db, today);
   return db;
+}
+// ---------------------------------------------------------------- billing, time clock (the Procare workflow; seeded with the center,
+// and added once to a demo saved before they existed). Demo only: no payment is processed, no card or bank details exist anywhere.
+const RATES = {twos:245, demo:225, prek:210};
+const mondayOf = date => { const d = fromIso(date); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return iso(d); };
+const addDays = (date, n) => { const d = fromIso(date); d.setDate(d.getDate() + n); return iso(d); };
+const receiptNo = (week, kid) => 'R-' + week.replace(/-/g, '').slice(2) + '-' + kid.toUpperCase();
+function seedOps(db, today){
+  db.links = db.links || {}; db.accounts = db.accounts || {}; db.invoices = db.invoices || {}; db.punches = db.punches || {};
+  db.rates = db.rates || {};
+  Object.keys(db.rooms || {}).forEach(r => { if (db.rooms[r].capacity == null) db.rooms[r].capacity = (ROOM_BASE[r] || {}).capacity || 10; if (db.rates[r] == null) db.rates[r] = RATES[r] || 225; });
+  const thisWeek = mondayOf(today), family = db.familyKid;
+  Object.entries(db.kids || {}).forEach(([id, k], i) => {
+    if (db.accounts[id]) return;
+    const sub = id === 'p2' || id === 't3';   // two families pay with the state child care subsidy (demo)
+    db.accounts[id] = {kid:id, plan:k.room, autopay:i % 3 !== 2, method:i % 2 ? 'Demo bank account (no real account)' : 'Demo card (no real card)',
+      subsidy:sub ? {agency:'State child care subsidy (demo)', weekly:150} : null, since:addDays(thisWeek, -7 * (id === family ? 60 : 8)),
+      remind:i % 4 === 1 ? 'both' : 'email', smsOptIn:i % 4 === 1};
+    const weeks = id === family ? Math.min(52, Math.round((fromIso(thisWeek) - new Date(fromIso(today).getFullYear() - 1, 0, 1)) / 6048e5)) : 4;
+    for (let w = weeks; w >= 1; w--) {
+      const wk = addDays(thisWeek, -7 * w), amt = db.rates[k.room] || 225, a = db.accounts[id], subAmt = a.subsidy ? Math.min(a.subsidy.weekly, amt) : 0;
+      const late = id === 't2' && w === 1;
+      db.invoices[`inv_${id}_${wk}`] = {kid:id, week:wk, amount:amt, subsidy:subAmt, family:amt - subAmt, status:late ? 'pastdue' : 'paid',
+        paidAt:late ? null : at(addDays(wk, 4), 18, 0), via:late ? '' : a.autopay ? 'Autopay (demo)' : 'Recorded by the director (demo)', receipt:late ? '' : receiptNo(wk, id)};
+    }
+  });
+  // the family's child: attendance for the last month, so the subsidy / reimbursement report has real rows
+  if (family && db.kids[family]) for (let n = 22; n >= 5; n--) { const d = weekdayOffset(today, -n), key = `${family}_${d}`;
+    if (!db.kidday[key]) db.kidday[key] = {kid:family, room:db.kids[family].room, date:d, present:n % 9 !== 0, meals:{}, nap:'', note:'', star:false,
+      ...(n % 9 ? {inAt:at(d, 7, 25 + n % 20), inBy:`${db.familyName} (family)`, outAt:at(d, 16, 30 + n % 25), outBy:`${db.familyName} (family)`} : {})}; }
+  // two weeks of punches for staff (a pay period), and today's open punch for whoever is on duty
+  Object.entries(db.staff || {}).forEach(([sid, s], i) => {
+    for (let n = 9; n >= 1; n--) { const d = weekdayOffset(today, -n), key = `p_${sid}_${d}`; if (db.punches[key] || (i + n) % 11 === 0) continue;
+      db.punches[key] = {staff:sid, date:d, in:at(d, 6 + (i % 2), 45 + (i * 5) % 15), out:at(d, 15 + (i % 2), (i * 13 + n * 7) % 60)}; }
+    if (s.onDuty && s.clockIn) { const key = `p_${sid}_${today}`; if (!db.punches[key]) db.punches[key] = {staff:sid, date:today, in:s.clockIn, out:null}; }
+  });
+  // care alerts the families reported (every staff member of the center sees them; no medical records behind them)
+  if (db.kids.p3 && db.kids.p3.alert == null) db.kids.p3.alert = 'Tree nut allergy: plan at the front desk';
+  if (db.kids.t2 && db.kids.t2.alert == null) db.kids.t2.alert = 'Asthma: inhaler plan at the front desk';
+  // Futures Friends HQ support access: off unless the owner approves it, time-limited, every step logged; never the money
+  db.support = db.support || {hq:{status:'requested', reason:'Repair: the evening report did not send for one room (demo ticket 1042)', requestedAt:at(today, 8, 5), until:null,
+    log:[{what:'HQ asked for support access', by:'Futures Friends HQ support', at:at(today, 8, 5)}]}};
+  // weekly tuition: next week's invoice is due Friday; reminders by email or text (text only with the family's opt-in), quiet hours
+  db.billset = db.billset || {cfg:{due:'friday', wed:true, fri:true, sat:true, lateFee:15, quietFrom:20, quietTo:8, log:[]}};
+  db.opsV = 1;
 }
 function seedNew(c, db, today){
   const church = c.type === 'church';
@@ -200,6 +269,7 @@ function seedNew(c, db, today){
   due('n1', 'Upload your state license or exemption letter', 'Licensing', 5);
   due('n2', church ? 'Share the preschool plan with your church board' : 'Set your tuition and hours', church ? 'Ministry' : 'Business', 7);
   due('n3', 'Fire drill plan for the first month', 'Safety', 10);
+  seedOps(db, today);
   return db;
 }
 
@@ -211,6 +281,7 @@ function load(){
   if (DB && DB.center === c.id) return DB;
   const d = readJson(dbKey(c.id));
   DB = d && d.v === VERSION && d.rooms && d.center === c.id ? d : seed(c);
+  if (!DB.opsV) { seedOps(DB, todayIso()); if (d === DB) save(); }
   if (d !== DB) save();
   return DB;
 }
@@ -267,7 +338,7 @@ function snapshot(coll, filters){
   return {docs:rows, size:rows.length, empty:!rows.length, forEach:f => rows.forEach(f)};
 }
 function deliver(L){ try { L.cb(snapshot(L.coll, L.filters)); } catch (e) { if (L.err) try { L.err(e); } catch (_) {} } }
-const COLLS = ['rooms','kids','days','kidday','progress','obs','photos','msgs','plans','staff','apps','requests','dues','reports','training','invites'];
+const COLLS = ['rooms','kids','days','kidday','progress','obs','photos','msgs','plans','staff','apps','requests','dues','reports','training','invites','links','accounts','invoices','punches','rates','support','billset'];
 function query(coll, filters){
   return {
     where:(col, op, val) => { if (op !== '==' && op !== '>=') throw new Error('Unsupported filter'); return query(coll, filters.concat([{col, op, val}])); },
@@ -296,7 +367,7 @@ function session(){
   const s = readJson(KEY_SES); const a = s && ACCOUNTS.find(x => x.key === s.key);
   if (!a) return (SES = null);
   const c = center(), db = load();
-  const name = a.role === 'family' ? (db.familyName || 'Demo parent') : ((db.staff[a.id] || {}).name || ({teacher:'Demo teacher', academy:'Demo staff member'}[a.role] || 'Demo director'));
+  const name = a.role === 'family' ? (db.familyName || 'Demo parent') : ((db.staff[a.id] || {}).name || ({teacher:'Demo teacher', academy:'Demo staff member', staff:'Demo staff member'}[a.role] || 'Demo director'));
   const owner = a.role === 'director' && !!(db.staff[a.id] || {}).owner;
   SES = {key:a.key, role:a.role, id:a.id, name, label:a.label + (owner ? ', owner' : ''), owner, email:a.email, home:a.home, at:s.at, center:c.id};
   return SES;
@@ -329,5 +400,6 @@ const staffNames = () => { const o = {}; Object.entries(load().staff || {}).forE
 W.FFDemo = {VERSION, TEACHER_ROOM, TYPE_LABEL, COLORS, get CENTER(){ return center().name; }, ACCOUNTS:ACCOUNTS.map(a => ({key:a.key, email:a.email, password:a.password, role:a.role, label:a.label, home:a.home})),
   enabled, session, signIn, signInWith, signOut, reset, ensureSeed, db, all, get, put, del, familyKids, staffNames, setFamily, familyName,
   centers, center, bySlug, createCenter, switchCenter, setViewCenter,
+  PERMS, PRESETS, PRESET_LABEL, FINANCIAL, isDirector, permsOf, can, presetOf, mondayOf, addDays, receiptNo,
   persistent:() => { load(); return persistent; }, todayIso, weekdayOffset, _seed:seed};
 })();
