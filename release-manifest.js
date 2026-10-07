@@ -1115,7 +1115,7 @@
      "unit-1"
     ],
     [
-     "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+     "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
      "family-library",
      "at-home"
     ]
@@ -1134,7 +1134,7 @@
    ],
    "planned": [
     [
-     "Units 2 to 12: outlined week by week, daily plans not written yet",
+     "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
      "curriculum-units-2-12",
      "curriculum"
     ],
@@ -1171,7 +1171,7 @@
      "curriculum-unit1-days"
     ],
     [
-     "Futures at Home for your families: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+     "Futures at Home for your families: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
      "family-library"
     ],
     [

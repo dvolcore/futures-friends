@@ -9,7 +9,7 @@
     home: ['Futures Friends', 'Futures Friends: a character-led early learning program for child care centers, home daycares and families, ages 2 to 5. Home of Booker, Lumi, Zuri and Bop.'],
     impact: ['Impact and research', 'Why the early years matter, the published research behind early learning, and what Futures Friends plans to measure.'],
     readiness: ['School Readiness', 'How the Futures Friends learning loop, teacher observation and family activities support school readiness for children ages 2 to 5.'],
-    curriculum: ['Curriculum by age', 'A planned year of twelve monthly units and 48 theme weeks for twos, threes and pre-K. Unit 1 is written day by day; later units are outlined.'],
+    curriculum: ['Curriculum by age', 'A planned year of twelve monthly units and 48 theme weeks for twos, threes and pre-K. Units 1 to 4 are written day by day (draft); Units 5 to 12 are outlined.'],
     options: ['Program Options', 'Compare Futures Friends program options for child care centers, home daycares, pre-K partners, faith-based centers, employers and families.'],
     'for-centers': ['For Child Care Centers: what a licensed center gets', 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'],
     'for-home': ['Home Daycares', 'A one-room, mixed-age Futures Friends program sized for licensed home daycare providers.'],
