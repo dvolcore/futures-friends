@@ -154,7 +154,7 @@ test('activities: every band has all four friends, every card has steps, notice 
   }
   assert.equal(new Set(F.ACTS.map(a => a.id)).size, F.ACTS.length, 'ids are unique (they are deep links)');
   for (const a of F.ACTS) {
-    assert.ok(a.min >= (a.vid ? 2 : 3) && a.min <= 15, a.id + ' takes 3 to 15 minutes (owner 2026-10-07: a Bop video activity matches its Bop at Home card, 2 minutes and up)');
+    assert.ok(a.min >= (a.vid ? 1.5 : 3) && a.min <= 15, a.id + ' takes 3 to 15 minutes (owner 2026-10-07: a video activity matches its video, 1½ minutes and up)');
     assert.ok(a.steps.length >= 3 && a.mat.length && a.notice.length && a.say, a.id);
     assert.equal(a.adapt.length, 3, a.id + ' has easier, stretch and access versions');
     for (const k of a.src) assert.ok(F.SRC[k], a.id + ' cites ' + k);

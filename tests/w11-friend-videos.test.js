@@ -31,7 +31,7 @@ test('the same player: no autoplay, captions on, the leading friend named honest
     const v = C.FRIEND_ACTS[s], html = C.actPlayer(s, v.t);
     assert.match(html, /<video controls playsinline preload="none" width="1280" height="720"/);
     assert.doesNotMatch(html, /<video[^>]*\s(autoplay|muted|loop)[\s>=]/);
-    assert.match(html, new RegExp(`Watch ${NAMES[v.who]} do it with you &middot; story-world animation`));
+    assert.ok(html.includes(`${v.cap || `Watch ${NAMES[v.who]} do it with you`} &middot; story-world animation`), s + ' caption line');
     assert.match(html, new RegExp(`aria-label="${NAMES[v.who]} leads `));
     assert.match(html, /<track kind="captions" srclang="en" label="English" src="video\/act-[a-z-]+\.en\.vtt" default>/);
   }

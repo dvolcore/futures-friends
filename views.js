@@ -80,7 +80,7 @@ const ffhRoom = (k, i, active = null) => { const c = CH[k], b = (D.books||[]).fi
    <p class="ffhr-d">${c.d}</p>
    <dl class="ffhr-meta"><div><dt>Zone</dt><dd>${c.z}</dd></div>${b?`<div><dt>Book</dt><dd><cite>${esc(b.title)}</cite></dd></div>`:''}</dl>
    <p class="ffhr-motto">“${c.m}”</p>
-   <div class="ffhr-acts"><button class="btn gold ffhr-3d" type="button" data-ff3d="${k}" hidden>Meet ${c.n} in 3D</button>${b&&bid?`<a class="btn ffhr-more" href="#story-time/${bid}">Read ${c.n}'s book</a>`:`<a class="btn ffhr-more" href="#friends" data-reveal="#ff-room-${k}">Meet ${c.n}</a>`}</div>
+   <div class="ffhr-acts"><button class="btn gold ffhr-3d" type="button" data-ff3d="${k}" hidden>Meet ${c.n} in 3D</button><a class="btn ffhr-watch" href="${k==='bop'?'#bop-at-home':`#activities/${k}`}">Watch ${c.n}'s videos</a>${b&&bid?`<a class="btn ffhr-more" href="#story-time/${bid}">Read ${c.n}'s book</a>`:`<a class="btn ffhr-more" href="#friends" data-reveal="#ff-room-${k}">Meet ${c.n}</a>`}</div>
   </div>
   <div class="ffhr-stage">
    <div class="ffhr-shape" aria-hidden="true"><svg viewBox="0 0 200 200"><path transform="translate(100 100) rotate(${i*67}) scale(1.25)" d="${FFH_BLOB}"/></svg></div>
