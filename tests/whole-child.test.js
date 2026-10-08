@@ -439,7 +439,7 @@ test('scroll reveals run only when motion is allowed and never hide content that
   c.window.IntersectionObserver = c.IntersectionObserver;
   hook('whole-child', root, false);
   assert.equal(els.some(e => e.classList.has('wc-pre')), false, 'reduced motion: nothing is hidden');
-  assert.match(meta.v, /One day, one connected system/);
+  assert.match(meta.v, /One day, planned on purpose/);
   hook('home', root, true);
   assert.equal(meta.v, 'ORIGINAL', 'other routes get the original description back');
   assert.deepEqual(els.map(e => e.classList.has('wc-pre')), [false, true, true], 'only below-the-fold items start hidden');

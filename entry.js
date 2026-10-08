@@ -176,7 +176,7 @@
   <div class="ffe-card">
    <img class="ffe-logo" src="img/plush/hero/plush-logo-480.webp" srcset="img/plush/hero/plush-logo-480.webp 480w, img/plush/hero/plush-logo-960.webp 960w" sizes="(max-width:600px) 78vw, 420px" width="480" height="227" alt="Futures Friends" decoding="async" fetchpriority="high">
    <h2 id="ffe-h" class="ffe-h">Welcome to the Futures Friends world</h2>
-   <p id="ffe-p" class="ffe-p">Booker, Lumi, Zuri and Bop are waiting in the meadow. Turn your sound up: the friends have music, birdsong and voices to share.</p>
+   <p id="ffe-p" class="ffe-p">Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello. Sound on, if you can: there is music, birdsong and four voices.</p>
    <button type="button" class="ffe-go"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg><span>Tap to enter</span></button>
    <button type="button" class="ffe-quiet" data-ffs-ignore>Enter without sound</button>
    <p class="ffe-who"><span>Run a center, home daycare, church or program?</span> <button type="button" class="ffe-centers">Enter for centers &amp; programs</button></p>

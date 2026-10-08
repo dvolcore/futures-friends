@@ -117,7 +117,7 @@
   }
   function friends() {
     return `<section class="hc-friends hc-pick" aria-labelledby="hc-friends-h"><div class="wrap">
-   <div class="hc-head"><h2 id="hc-friends-h" data-stitch>Four friends. Four things children <span class="hc-key">practice</span> every day.</h2><p>Children meet them in stories, find them around the classroom and bring them home. Pick a friend to meet them.</p></div>
+   <div class="hc-head"><h2 id="hc-friends-h" data-stitch>Each friend has a <span class="hc-key">job</span> in the room.</h2><p>Booker reads, Lumi listens, Zuri wonders and Bop moves. Children meet them in stories, spot them around the classroom and take them home. Tap a friend to say hello.</p></div>
    <div class="hc-pickstage tx-felt" data-pick>
     <div class="hc-picktabs" role="tablist" aria-label="Pick a friend">${FRIENDS.map((k, i) => `<button type="button" role="tab" class="hc-picktab" id="hc-pick-${k}" data-k="${k}" aria-selected="${i ? 'false' : 'true'}" aria-controls="hc-pickpanel" tabindex="${i ? -1 : 0}" style="--c:var(--${k})">${window.FFPlush ? window.FFPlush.img(k, { cls: 'hc-picktabcut', alt: '', h: 72 }) : ''}<span>${E(ch(k).n)}</span></button>`).join('')}</div>
     <div class="hc-pickpanel" id="hc-pickpanel" role="tabpanel" aria-labelledby="hc-pick-${FRIENDS[0]}" tabindex="0" data-k="${FRIENDS[0]}">${pickPanel(FRIENDS[0])}</div>
@@ -232,7 +232,7 @@
   // footer-scene.js)
   function close() {
     return `<section class="hc-close" aria-labelledby="hc-close-h"><div class="wrap hc-closegrid">
-   <div><h2 id="hc-close-h" data-stitch>Talk to a <span class="hc-key">real person</span></h2><p>Questions about Futures Friends for your child, or about our pilot center in Independence? We are happy to help.</p></div>
+   <div><h2 id="hc-close-h" data-stitch>Talk to a <span class="hc-key">real person</span></h2><p>Questions about Futures Friends for your child, or about our pilot center in Independence? Call or write and we will get back to you.</p></div>
    <div class="hc-closeacts"><a class="hc-btn hc-btn-gold" href="#contact">Contact us ${icon('ArrowRight')}</a><a class="hc-btn hc-btn-line" href="${tel()}">Call ${E(phone())}</a>
     <button type="button" class="ff-brand-trigger hc-reveal" data-brand-reveal>${icon('Play')} Watch the logo reveal</button></div>
   </div></section>`;

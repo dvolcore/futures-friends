@@ -103,8 +103,8 @@ for (const [name, opts, init] of [['device reduced motion', { reducedMotion: 're
     assert.deepEqual(s.words, ['1', '1', '1', '1']);
     assert.equal(s.tagline, 'Learn. Move. Explore. Belong.');
     await page.locator('.ffa-friend').nth(2).click({ force: true });
-    assert.equal(await page.locator('.ffa-say').textContent(), 'Zuri Curious minds go further.');
-    assert.equal(await page.locator('.ffa-stage [role=status]').textContent(), 'Zuri: Curious minds go further.');
+    assert.equal(await page.locator('.ffa-say').textContent(), 'Zuri I wonder what happens if we try!');
+    assert.equal(await page.locator('.ffa-stage [role=status]').textContent(), 'Zuri: I wonder what happens if we try!');
     await ctx.close();
   });
 }

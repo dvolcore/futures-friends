@@ -138,7 +138,7 @@
   // asks who you are; the last line offers the three ways in. Every other friend says one line. Never auto-advances; the ▶ button
   // (an icon) moves on; Escape or the close button ends it. Lines are read out by the stage's polite status line.
   const TALK = {
-    booker: { lines: ["Hi! I'm Booker.", 'Brave learners build brighter tomorrows. I can show you around.', 'Are you a family, a center, or a teacher?'],
+    booker: { lines: ["Hi! I'm Booker.", 'Big breath, brave heart. I can show you around.', 'Are you a family, a center, or a teacher?'],
       ask: [['families', 'A family', 'for-families'], ['centers', 'A center', 'for-centers'], ['staff', 'A teacher', 'teacher-standard']] }
   };
   const ICON = n => `<svg class="px-icon" aria-hidden="true" focusable="false"><use href="img/ui-icons.svg#${n}"></use></svg>`;

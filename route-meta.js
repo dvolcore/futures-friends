@@ -65,7 +65,7 @@
     enroll: ['Visit Futures Learning Center', 'Futures Learning Center in Independence, Missouri: tours, online applications, tuition and a day in the life for children ages 2 to 5.'],
     jobs: ['Careers and open positions', 'Teaching, kitchen and leadership roles at Futures Friends centers. Apply online.'],
     job: ['Job opening', 'Position details and application for a Futures Friends opening.'],
-    'whole-child': ['The Whole-Child Day: learning, meals, movement, Quiet Time', 'One day, one connected system: learning, meals, movement, Quiet Time and family connection, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.'],
+    'whole-child': ['The Whole-Child Day: learning, meals, movement, Quiet Time', 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.'],
     'teacher-standard': ['Our Teacher Standard: training, background checks and mastery', 'What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.'],
     'unit-1': ['Unit 1 at a glance: the first month, in summary', 'The first Futures Friends unit in summary: four weeks, 20 teaching days and 161 activities for ages 2 to 5, plus one sample day. Full plans for licensed centers.'],
     'train-your-staff': ['Train your staff with us', 'The Futures Friends course method for child care centers and home daycares: scenario mastery, time tracking and director checklists. In development, not open yet.'],

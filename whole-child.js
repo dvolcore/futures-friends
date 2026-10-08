@@ -124,8 +124,8 @@ function heroHtml() {
   return `<header class="wc-hero"><div class="wrap wc-hero-grid">
   <div class="wc-hero-copy">
    <span class="wc-kick">The whole-child day</span>
-   <h1>More than daycare. <span>A system families can see.</span></h1>
-   <p class="lede">Learning, meals, movement, rest and family connection, designed as one day. The same four friends, the same words and the same habits reinforce one another from arrival to pickup.</p>
+   <h1>The whole day, planned on purpose. <span>Families get to see it.</span></h1>
+   <p class="lede">A story, a snack, a stomp around the room, a rest, one question at pickup: planned together as one day. The same four friends and the same few words turn up from arrival to pickup, so each part backs up the others.</p>
    <div class="wc-acts">${lnk('bop-at-home', 'Try Bop at Home, free')}<button type="button" class="btn ghost" data-anchor="wc-day">See the day</button></div>
    <nav class="wc-anchors" aria-label="On this page">${[['wc-day', 'The day'], ['wc-friends', 'Four friends'], ['wc-move', 'Bop &amp; Go!'], ['wc-targets', 'Daily targets'], ['wc-quiet', 'Quiet Time'], ['wc-nourish', 'Eat the Rainbow'], ['wc-family', 'What families see'], ['wc-promises', 'Our promises']].map(a => `<button type="button" data-anchor="${a[0]}">${a[1]}</button>`).join('')}</nav>
   </div>
@@ -136,7 +136,7 @@ function heroHtml() {
 }
 
 function dayHtml() {
-  return sect('wc-day', 'wc-day', '', `${lead('From arrival to pickup', 'One day. One connected system.', 'The whole-child promise is visible at every step of the day, and every step has a friend who owns it.', '{H}')}
+  return sect('wc-day', 'wc-day', '', `${lead('From arrival to pickup', 'One day, six steps.', 'Every step has a friend who looks after it, and a family can see all six.', '{H}')}
   <ol class="wc-steps">${DAY.map((s, i) => `<li class="wc-step wc-rv" style="--c:${col(s.c)};--i:${i}">
    <span class="wc-node" aria-hidden="true">${i + 1}</span>${pic(DAY_PIC[i], 'wc-step-pic')}
    <h3>${s.n}</h3><p class="wc-what">${s.what}</p><p class="wc-text">${s.text}</p>${ownerChip(s.owner)}</li>`).join('')}</ol>
@@ -144,7 +144,7 @@ function dayHtml() {
 }
 
 function friendsHtml() {
-  return sect('wc-friends-sec band-paper', 'wc-friends', '', `${lead('Four friends carry the promise', 'Each friend owns a part of the day', 'The friends are not decoration. Each one owns a developmental territory and a repeatable classroom ritual.', '{H}')}
+  return sect('wc-friends-sec band-paper', 'wc-friends', '', `${lead('Four friends carry the promise', 'Each friend owns a part of the day', 'Each friend looks after an area of development and a classroom routine that repeats every day.', '{H}')}
   <div class="wc-chars">${KEYS.map(k => { const o = OWN[k]; return `<article class="wc-char wc-rv" style="--c:var(--wc-${k});--s:var(--${k}-s)">
    <div class="wc-char-top">${art(k, { pose: PILLAR_POSE[k] })}<div class="wc-char-id"><h3>${CH[k].n}</h3><span class="wc-pills">${pills(k)}</span></div></div>
    <div class="wc-char-body"><p class="wc-ritual"><b>${o.ritual}</b><span>${o.note}</span></p>
@@ -156,7 +156,7 @@ function friendsHtml() {
 function moveHtml() {
   return sect('wc-move-sec', 'wc-move', '', `<div class="wc-split">
    <div class="wc-split-art wc-rv">${scene('playground', [['bop-running', 36], ['tad', 66]], 'The storybook playground, not a photo of our center') || art('bop', { cls: 'wc-big' })}<p class="wc-say" style="--c:var(--wc-bop)"><b>Ready? Bop &amp; Go!</b><span>${TAGLINE}</span></p></div>
-   <div class="wc-split-copy">${lead('Bop owns MOVE and OUTSIDE', 'Bop &amp; Go! Movement without workouts', 'Missions, stories, rhythm, outdoor quests and physical literacy. Children hear &ldquo;Ready? Bop &amp; Go!&rdquo; and parents see movement built into the day.', '{H}')}
+   <div class="wc-split-copy">${lead('Bop owns MOVE and OUTSIDE', 'Bop &amp; Go! Movement without workouts', 'Missions, stories, rhythm and outdoor quests. Children hear &ldquo;Ready? Bop &amp; Go!&rdquo; and parents see movement worked into the whole day.', '{H}')}
     <ul class="wc-skills" aria-label="Bop mission skills">${SKILLS.map(s => `<li>${s}</li>`).join('')}</ul>
     <h3 class="wc-h3">The Daily 5</h3>
     <ol class="wc-d5">${DAILY5.map((d, i) => `<li><span class="wc-n" aria-hidden="true">${i + 1}</span>${pic(D5_PIC[i], 'wc-d5-pic')}<div><b>${d[0]}</b><span>${d[1]}</span></div></li>`).join('')}</ol>
@@ -184,9 +184,9 @@ function targetsHtml() {
 function quietHtml() {
   const q = [['Notice', 'Speedy body or quiet body?'], ['Breathe', 'A simple breathing ritual with Lumi.'], ['Soften', 'Slower movement and a quieter voice.'], ['Rest', 'A predictable transition into quiet or rest.']];
   return sect('wc-quiet-sec', 'wc-quiet', '', `<div class="wc-split wc-split-rev">
-   <div class="wc-split-copy">${lead('Lumi owns BELONG and RESET', 'Lumi\'s Quiet Time', 'A branded reset ritual for transitions, rest and body awareness.', '{H}')}
+   <div class="wc-split-copy">${lead('Lumi owns BELONG and RESET', 'Lumi\'s Quiet Time', 'Our reset routine for transitions, rest and noticing your body.', '{H}')}
     <ol class="wc-q">${q.map((s, i) => `<li class="wc-rv"><span class="wc-n" aria-hidden="true">${i + 1}</span>${pic(Q_PIC[i], 'wc-q-pic')}<div><b>${s[0]}</b><span>${s[1]}</span></div></li>`).join('')}</ol>
-    <blockquote class="wc-quote">This is not &ldquo;calm down.&rdquo; It teaches children to notice their own state and move through a predictable routine.</blockquote>
+    <blockquote class="wc-quote">Children learn to notice how their body feels, then follow the same four steps every time.</blockquote>
     <p class="wc-note">Quiet Time is offered, never forced. For infants, safe-sleep rules come first. Some state rules add a requirement: Missouri preschoolers who do not sleep must have a rest period of 30 to 60 minutes. In those rooms rest is required and sleep never is.</p></div>
    <div class="wc-split-art wc-rv">${art('lumi', { cls: 'wc-big', pose: 'calm-breath', alt: 'Lumi the bunny, taking a calm breath' })}</div></div>`);
 }
@@ -362,7 +362,7 @@ V['bop-at-home'] = () => `<div class="wc wc-bh">
   <li class="wc-rv">${pic('star', 'wc-three-pic')}<b>Trying is the win</b><span>We celebrate taking part, not how well or how long. There are no scores and no comparing.</span></li></ul>
   <div class="wc-pillar wc-rv" style="--c:var(--wc-bop)"><div class="wc-pillar-id"><span class="wc-pill" style="--c:var(--wc-bop)">MOVE</span><span class="wc-pill" style="--c:var(--wc-bop)">OUTSIDE</span><b>Bop&rsquo;s pillar</b><span>${TAGLINE}</span></div>
    <ul class="wc-skillpics" aria-label="What the activities practice">${SKILL_PIC.map(([n, k]) => `<li>${pic(k)}<span>${n}</span></li>`).join('')}</ul></div></div></section>
- <section class="wc-sec band-paper" id="wc-acts" aria-labelledby="wc-acts-h"><div class="wrap">${lead('Free, short and screen-free', 'Eight things to try tonight', 'Each one takes 30 seconds to 10 minutes and needs nothing but you. Clear a little space, stay close and offer water.', 'wc-acts-h')}
+ <section class="wc-sec band-paper" id="wc-acts" aria-labelledby="wc-acts-h"><div class="wrap">${lead('Free and short', 'Eight things to try tonight', 'Each one takes 30 seconds to 10 minutes and needs nothing but you. Clear a little space, stay close and offer water.', 'wc-acts-h')}
   <div class="wc-acts-grid">${ACTS.map(actCard).join('')}</div>
   <p class="wc-strap wc-rv">A grown-up joins in and supervises every activity. Stop whenever a child is tired, and never use movement or outdoor time as a reward or a punishment.</p></div></section>
  ${bopMoreHtml()}
@@ -418,15 +418,15 @@ function callout(where) {
   if (where === 'curriculum') return `<section class="wc-callout wc-callout-slim" aria-labelledby="wc-cu-h"><div class="wrap wc-cu"><span class="wc-heads wc-heads-lg" aria-hidden="true">${KEYS.map(k => art(k, { alt: '' })).join('')}</span>
    <div><h2 id="wc-cu-h">Learning is one part of the day.</h2><p>See how stories, meals, movement, Quiet Time and families connect.</p></div>${lnk('whole-child', 'See the whole-child day')}</div></section>`;
   return `<section class="wc-callout wc-callout-home" aria-labelledby="wc-co-h"><div class="wrap wc-co">
-   <div class="wc-co-copy"><span class="wc-kick">The whole-child day</span><h2 id="wc-co-h">More than daycare. A system families can see.</h2>
-    <p>Learning, meals, movement, rest and family connection, designed as one day and led by the four friends.</p>
+   <div class="wc-co-copy"><span class="wc-kick">The whole-child day</span><h2 id="wc-co-h">The whole day, planned on purpose.</h2>
+    <p>Story, snack, movement, rest and one question at pickup, planned as one day and led by the four friends.</p>
     <div class="wc-acts">${lnk('whole-child', 'See the whole-child day')}${lnk('bop-at-home', 'Free Bop at Home activities', 'btn soft')}</div></div>
    <ol class="wc-strip" aria-label="The day in six steps">${DAY.map((s, i) => `<li style="--c:${col(s.c)}"><span class="wc-node" aria-hidden="true">${i + 1}</span><b>${s.n}</b><span class="wc-what">${s.what}</span></li>`).join('')}</ol></div></section>`;
 }
 
 // ---------------------------------------------------------------- per-route page description, reveal-on-scroll, footer links
 const META = {
-  'whole-child': 'One day, one connected system: learning, meals, movement, Quiet Time and family connection, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.',
+  'whole-child': 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.',
   'bop-at-home': 'Free family movement activities from Bop: no equipment, every one with an adapted version. Join the weekly Bop at Home challenge. Move Your Body, Grow Your Mind.',
   'for-centers': 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'
 };

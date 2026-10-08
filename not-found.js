@@ -22,9 +22,9 @@
   let asked = '';
 
   V['not-found'] = () => `<section class="ffa-404" aria-labelledby="ffa-404-h"><div class="wrap ffa-404-grid">
-   <div class="ffa-404-art"><span class="ffa-404-num" aria-hidden="true">404</span>${art()}<p class="ffa-404-say" aria-hidden="true"><b>Hmm.</b> This page is not on my map.</p></div>
+   <div class="ffa-404-art"><span class="ffa-404-num" aria-hidden="true">404</span>${art()}<p class="ffa-404-say" aria-hidden="true"><b>Hmm.</b> I checked the map twice. This page isn&rsquo;t on it.</p></div>
    <div class="ffa-404-copy"><span class="ffa-kick">Page not found</span><h1 id="ffa-404-h">We can&rsquo;t find that page</h1>
-    <p class="lede">${asked ? `There is no page at <code>#${e(asked)}</code>. It may have moved, or the link has a typo.` : 'The link may have moved, or it has a typo.'} Here are some good places to go instead.</p>
+    <p class="lede">${asked ? `Nothing lives at <code>#${e(asked)}</code>. The page may have moved, or the link has a typo.` : 'The page may have moved, or the link has a typo.'} Try one of these instead.</p>
     <ul class="ffa-404-try">${TRY.map(t => `<li style="--c:var(--${t[3]})"><a href="#${t[0]}">${mini(t[3])}<span><b>${t[1]}</b><small>${t[2]}</small></span></a></li>`).join('')}</ul>
     <p class="small muted">Still stuck? Call <a href="tel:+18169885661">(816) 988-5661</a> and a real person will help.</p></div></div></section>`;
 

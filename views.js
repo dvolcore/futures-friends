@@ -5,9 +5,9 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 const money = n => '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 const R = Object.fromEntries(D.recipes.map(r => [r.code, r]));
 const CH = {
-  booker:{n:'Booker',a:'brown bear',role:'The Brave Little Learner',p:'LEARN',v:'Confidence',z:"Booker's Reading Area",m:'Brave learners build brighter tomorrows.',d:'Early literacy, storytelling, listening, and the courage to try again.'},
+  booker:{n:'Booker',a:'brown bear',role:'The Brave Little Learner',p:'LEARN',v:'Confidence',z:"Booker's Reading Area",m:'Big breath. Brave heart. Try again!',d:'Early literacy, storytelling, listening, and the courage to try again.'},
   lumi:{n:'Lumi',a:'bunny',role:'The Kindness Keeper',p:'BELONG',v:'Kindness',z:"Lumi's Calm Corner",m:'Kindness brightens every day.',d:'Naming feelings, calming down, friendship and making room for everyone.'},
-  zuri:{n:'Zuri',a:'turtle',role:'The Curious Explorer',p:'EXPLORE',v:'Curiosity',z:"Zuri's Discovery Zone",m:'Curious minds go further.',d:'Questions, nature, numbers, shapes and simple experiments.'},
+  zuri:{n:'Zuri',a:'turtle',role:'The Curious Explorer',p:'EXPLORE',v:'Curiosity',z:"Zuri's Discovery Zone",m:'I wonder what happens if we try!',d:'Questions, nature, numbers, shapes and simple experiments.'},
   bop:{n:'Bop',a:'elephant',role:'The Mighty Mover',p:'MOVE',v:'Independence',z:"Bop's Movement Zone",m:'Move your body, grow your mind.',d:'Movement, music, routines, clean-up and doing it myself.'}};
 const KEYS = ['booker','lumi','zuri','bop'];
 // Character art: ONE source, the plush library (img/plush/characters; plush-cast.js / window.FFPlush, wave 5). window.FFcut and img()
@@ -471,12 +471,12 @@ window.FFhooks.push(function(v, root, ok){
 // Learning Steps claim, computed from learning-steps-summary.js (public counts only; the steps are private, IP lockdown 2026-10-07) so the site never says more than the crosswalk shows.
 function stepsClaim(){ const S=window.FFSteps; if(!S||!S.summary) return 'Teacher-observed Learning Steps for each age band, from infants to pre-K. Not a test or a screening.';
   const t=S.summary, b=t.by_standard; return `${t.total} teacher-observed Learning Steps from birth to kindergarten. Each one cites its source (CDC milestones or the Missouri, Kansas or Head Start standards). ${b.kels.mapped} are matched to Kansas standards, ${b.mels.mapped} to Missouri and ${b.elof.mapped} to Head Start; the rest are marked not matched. A draft awaiting expert review, and never a test or a score.`; }
-V.impact = () => phero('Impact','Why the early years matter, and how we measure them','Quality early learning is one of the most studied areas in education. Futures Friends draws on that research and plans to report progress in ways families and funders can follow.',{anchors:[['why-early','The research'],['measure','What we measure'],['flagship','Flagship center']]}) + `
-<section id="why-early" class="band-paper"><div class="wrap">${head('The research','Strong foundations before kindergarten','')}
+V.impact = () => phero('Impact','Why the early years matter, and how we measure them','Early learning is among the most studied topics in education. We build on that research, and we plan to report our own results in plain numbers that a parent or a funder can check.',{anchors:[['why-early','The research'],['measure','What we measure'],['flagship','Flagship center']]}) + `
+<section id="why-early" class="band-paper"><div class="wrap">${head('The research','What the research says about the first five years','')}
  <div class="grid g3">
   ${card('A brain built early','The Harvard Center on the Developing Child describes the early years as the period when the foundations of brain architecture are built, through back-and-forth interaction with caring adults.','Brain architecture','booker')}
-  ${card('A strong return','Economist James Heckman\'s research on two high-quality birth-to-five programs for disadvantaged children estimated a 13% annual return on investment through better education, health and earnings outcomes.','13% annual return','zuri')}
-  ${card('Play is learning','The American Academy of Pediatrics describes play as essential to building problem-solving, self-control and social skills in young children.','The power of play','bop')}
+  ${card('It pays back','Economist James Heckman\'s research on two high-quality birth-to-five programs for disadvantaged children estimated a 13% annual return on investment through better education, health and earnings outcomes.','13% annual return','zuri')}
+  ${card('Play is how they learn','The American Academy of Pediatrics describes play as essential to building problem-solving, self-control and social skills in young children.','The power of play','bop')}
  </div><p class="note" style="margin-top:12px">Sources: Harvard Center on the Developing Child, Brain Architecture; University of Chicago, Heckman (2016); American Academy of Pediatrics, The Power of Play (2018).</p></div></section>
 <section id="measure"><div class="wrap">${head('What we measure','Progress you can see, not screen minutes','Futures Friends is designed to track child milestones, family engagement and program quality.')}
  <div class="grid g4">
@@ -593,7 +593,7 @@ ${window.FFRelease ? window.FFRelease.packageSection(key) : ''}
 ${cta('Learn more about how Futures Friends can help your program','Request information and we will build your startup package.','Request Information')}`; }
 Object.keys(AUD).forEach(k => V[k] = () => audience(k));
 
-V['for-families'] = () => phero('Families','The Futures Friends come home','Families see what their child learned, ate and tried, and get one simple thing to do together each week.',{crumb:['options','Program options'],chars:['lumi','bop']}) + `
+V['for-families'] = () => phero('Families','The Futures Friends come home','You see what your child learned, ate and tried today. Then you get one small thing to do together before the week is out.',{crumb:['options','Program options'],chars:['lumi','bop']}) + `
 ${window.FFSupporting.arrival()}
 <section class="tight"><div class="wrap"><div class="cta"><div style="display:grid;gap:8px"><h2>Futures at Home: free for every family</h2><p class="lede">Read five storybooks together, find activities for your child's age, print fridge pages and make a plan for your week. No account needed.</p></div><a class="btn gold" href="#at-home">Open the family library</a></div></div></section>
 <section class="band-paper"><div class="wrap"><div class="grid g3">
@@ -657,7 +657,7 @@ V.app = () => phero('Get the app','The Futures Hub, on every device','The Hub is
  ${card('Family phones','Open the Hub in the browser on any iPhone or Android phone and add it to your home screen to see notes and stars.','Families','lumi')}</div>
  <div class="card" style="margin-top:18px"><h3>Requirements</h3>${ck(['A current version of Chrome, Safari or Edge on a computer or tablet','Any iPhone or Android phone with a current browser for families','Wi-Fi in each classroom for the Teacher Portal; lessons are written to run from print'])}<p class="note">The Hub is invite-only: directors are invited by Futures Friends, and staff and families get an email invitation from their center.</p></div></div></section>`;
 
-V['family-guide'] = () => phero('Family App guide','Everything families can see and do','A step-by-step tour of the Family App.',{crumb:['hub','Futures Hub'],chars:['lumi']}) + `
+V['family-guide'] = () => phero('Family App guide','What you will see in the Family App','A quick tour: signing in, what shows up each day, and where to find your reports.',{crumb:['hub','Futures Hub'],chars:['lumi']}) + `
 <section class="band-paper"><div class="wrap">${head('Signing in','Four steps','')}<div class="steps">${card('Get your invite','Your center sends an email invitation to the address on your enrollment form.')}${card('Verify','Enter the code sent to your phone or email.')}${card('Add your details','Confirm your name and how you want to be notified.')}${card('Turn on quick sign-in','Use Face ID, fingerprint or a PIN next time.')}</div></div></section>
 <section><div class="wrap">${head('Your dashboard','What you will see each day','')}<div class="grid g3">${card('Today at Futures','The lesson, the lead friend and a question to ask at dinner.')}${card('What we ate','Breakfast, lunch and snack, plus new foods your child tried.')}${card('Friendship Stars','Stars your child earned and why.')}${card('Take-home activity','A five-minute activity for the week.')}${card('Learning Steps','What teachers saw, in words, with what comes next and an idea to try at home.')}${card('Messages','Notes from your child\'s teacher, and replies.')}</div></div></section>
 <section class="band-paper"><div class="wrap">${head('Reports','Download and share','')}<div class="tw"><table><tr><th>Report</th><th>What it shows</th><th>How often</th></tr><tr><td>Learning notes</td><td>What teachers saw, what\'s next and ideas for home, in words (no scores)</td><td>As teachers add them</td></tr><tr><td>Attendance and meals</td><td>Days attended and meals served</td><td>Monthly</td></tr><tr><td>Friendship Stars</td><td>Stars earned by value</td><td>Any time</td></tr></table></div></div></section>`;
@@ -737,7 +737,7 @@ V.contact = () => contactForm('Request information','Questions? Need a quote for
 V.quote = () => contactForm('Request a quote','Tell us your rooms, ages and enrollment and we will build your startup package.','quote');
 
 // ---------------------------------------------------------------- FRIENDS, RAINBOW, STORE, FUNDING, PRICING, WHY
-V.friends = () => phero('Friends and books','Booker, Lumi, Zuri and Bop','Four plush-and-felt friends who live in the Clubhouse. Each one stands for a learning pillar and a value.') + `
+V.friends = () => phero('Friends and books','Booker, Lumi, Zuri and Bop','Four plush-and-felt friends share the Clubhouse. Each looks after one learning pillar and practices one value.') + `
 <section class="band-paper"><div class="wrap"><div class="grid g4">${KEYS.map(friendCard).join('')}</div></div></section>
 ${window.FFSupporting.town ? window.FFSupporting.town() : ''}${window.FFSupporting.community()}
 <section class="band-paper" data-signature><div class="wrap">${head('Cover layout previews','Storybook covers in development','Layouts made from the official character art while the final cover illustrations are drawn.')}
@@ -754,7 +754,7 @@ ${window.FFTalk ? window.FFTalk.friendsBand() : `<section class="band-navy"><div
  <p class="small" style="margin-top:14px;color:#B8CCD3">Earlier working titles are shown. Season One is planned at 13 episodes.</p></div></section>`}`;
 
 V.rainbow = () => { const rows=((D.menus[String(st.lvl)]||{})[String(st.wk)]||[]); const avg=rows.reduce((a,r)=>a+dayCost(r),0)/(rows.length||1);
- return phero('Eat the Rainbow','Rainbow meals for little ones','A full cookbook and menu planner in three levels. Menus are designed around the USDA CACFP meal pattern for ages 3 to 5.',{chars:['bop','zuri']}) + `
+ return phero('Eat the Rainbow','A rainbow on every plate','Thirty-six recipes in three levels, plus a menu planner with the food cost worked out. Menus are designed around the USDA CACFP meal pattern for ages 3 to 5.',{chars:['bop','zuri']}) + `
 <section class="band-paper"><div class="wrap"><div class="bands"><div style="background:#D9483B"><b>Red</b><span>Red Rockets</span></div><div style="background:#E8761E"><b>Orange</b><span>Orange Sunshine</span></div><div style="background:#C99A06"><b>Yellow</b><span>Yellow Sunbeams</span></div><div style="background:#2E9E57"><b>Green</b><span>Green Sprouts</span></div><div style="background:#6A4FB8"><b>Blue &amp; Purple</b><span>Purple Pals</span></div><div style="background:#8A7558"><b>White &amp; Tan</b><span>Cozy Clouds</span></div></div>
  <div class="grid g3" style="margin-top:18px">${card('Easy & Quick','15 to 20 minutes hands-on with smart shortcuts. About $2.55 per child per day.','Level 1','zuri')}${card('Medium','Scratch cooking with basic equipment. About $2.81 per child per day.','Level 2','bop')}${card('Next Level','Grinder-method chicken nuggets, batch marinara and a freezer prep day. About $2.95 per child per day.','Level 3','lumi')}</div></div></section>
 <section><div class="wrap">${head('Menu planner','Try a week','Pick a level and a week. Tap a recipe code to open the recipe card.')}

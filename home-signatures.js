@@ -8,7 +8,7 @@
   const arrow = name => `<svg aria-hidden="true" width="22" height="22"><use href="img/ui-icons.svg#${name}"/></svg>`;
   window.FFHome = {
     wrapIndex,
-    rooms: () => `<section class="ff-home-intro"><div class="wrap px-sectionheading"><div><span class="px-kicker">FOUR FRIENDS. ENDLESS POSSIBILITIES.</span><h2>A friend for every discovery.</h2></div><p>Different personalities.<br>One big-hearted learning world.</p></div></section>
+    rooms: () => `<section class="ff-home-intro"><div class="wrap px-sectionheading"><div><span class="px-kicker">MEET THE FOUR</span><h2>Pick a friend. Say hi.</h2></div><p>A bear who reads. A bunny who listens.<br>A turtle who wonders. An elephant who stomps.</p></div></section>
       <section class="ff-home-rooms ffhr" id="ff-rooms" data-interactive data-character="${KEYS[selected]}" aria-label="Meet the Futures Friends" aria-roledescription="carousel">
         <div class="ff-home-slides">${KEYS.map((key, index) => ffhRoom(key, index, selected)).join('')}</div>
         <div class="ff-home-controls"><button type="button" class="ff-home-arrow" data-room-direction="-1" aria-label="Previous friend" title="Previous friend">${arrow('ArrowLeft')}</button>

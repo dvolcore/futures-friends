@@ -166,16 +166,16 @@ V['at-home'] = () => `<div class="ffl">
  <header class="fl-hero fl-hero-home"><div class="wrap fl-hero-grid">
   <div class="fl-hero-copy"><span class="fl-kick">Free for every family &middot; no account</span>
    <h1>Futures at Home</h1>
-   <p class="lede">Stories to read together, things to do tonight, printables for the fridge and a plan for your week, from Booker, Lumi, Zuri and Bop. For babies to pre-K, whether or not your child attends a Futures Friends program.</p>
+   <p class="lede">Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Babies through pre-K are welcome, whether or not your child goes to a Futures Friends program.</p>
    <div class="fl-acts"><a class="btn gold" href="#story-time">Read a story</a><a class="btn ghost" href="#my-week">Build my week</a></div></div>
   <div class="fl-hero-art">${art('all')}</div></div></header>
  ${sec('fl-age', 'Start here', 'How old is your child?', 'Pick an age to see activities that fit. Each one takes 3 to 15 minutes.',
   `<div class="fl-bandpick">${BANDS.map(b => `<a class="fl-band" href="#activities/${b.id}"><b>${b.n}</b><span>${b.age}</span><span class="fl-count">${ACTS.filter(a => a.bands.includes(b.id)).length} activities</span></a>`).join('')}</div>`)}
- ${sec('fl-doors', 'Inside the library', 'Everything here is free', '',
+ ${sec('fl-doors', 'Inside the library', 'Seven things to open, all free', '',
   `<div class="fl-doors">${DOORS.map(d => `<a class="fl-door" href="#${d[0]}" style="--c:${col(d[3])}">${art(d[3], 'fl-door-art')}<h3>${d[1]}</h3><p>${d[2]}</p><span class="fl-go" aria-hidden="true">Open &rarr;</span></a>`).join('')}</div>`, 'band-paper')}
- ${sec('fl-diff', 'Why come here', 'More than a video in your feed', 'Short videos are a great way to meet the friends. These pages are where you can do something with them.',
+ ${sec('fl-diff', 'Why come here', 'After the video', 'A short video is a fine way to meet the friends. These pages are for what comes next: reading, printing, moving, doing.',
   `<ul class="fl-diff">${DIFF.map(d => `<li><b>${d[0]}</b><span>${d[1]}</span></li>`).join('')}</ul>${privacyNote}`)}
- ${sec('fl-how', 'How it works', 'One story, one thing to do, one move, one calm moment', 'That is the whole idea. A few minutes together, most days, with the same words your child hears in a Futures classroom.',
+ ${sec('fl-how', 'How it works', 'One story, one thing to do, one move, one calm moment', 'A few minutes together, most days, using the same words your child hears in a Futures classroom.',
   `<ol class="fl-four">${FK.map(k => `<li style="--c:${col(k)}">${art(k)}<b>${FRIENDS[k].n}: ${FRIENDS[k].p}</b><span>${FRIENDS[k].t}</span><q>${E(FRIENDS[k].line)}</q></li>`).join('')}</ol>
    ${window.FFSupporting && window.FFSupporting.cameo ? `<div class="fl-family-cameo">${window.FFSupporting.cameo(['bruno', 'booker', 'rose', 'lumi', 'sage', 'zuri', 'ella', 'bop'], { caption: 'Every friend has a grown-up at home, too.', cls: 'fl-cameo' })}</div>` : ''}
    <p class="fl-note">The activities follow published guidance, cited on each card: reading aloud from birth and asking questions while you read (${ext('aapRead', 'AAP')}, ${ext('dialogic', 'Reading Rockets')}), back-and-forth play (${ext('serve', 'Harvard Center on the Developing Child')}) and daily active play (${ext('who', 'WHO 2019')}). They were written by the Futures Friends team; an outside early-childhood specialist review is planned. "What to notice" notes are for noticing, never for diagnosing.</p>`, 'band-paper')}
@@ -186,7 +186,7 @@ const R = { book: null, page: 0, size: 1, point: false, wi: -1, speaking: false 
 const SIZES = [['Smaller', .86], ['Regular', 1], ['Big', 1.2], ['Biggest', 1.42]];
 
 function shelf() {
-  return `<div class="ffl">${hero('Story Time', 'Story Time', 'Read a Futures Friends storybook together, one page at a time. Every page has a question to ask, a word to talk about and sometimes a move or a breath to share.', 'booker', `<a class="btn gold" href="#story-time/${BOOKS[0].id}">Start with Booker</a>`, scene('reading-corner', [['booker-reading', 33], ['tilly', 63], ['mimi', 80]], { u: 78, line: 'The storybook reading corner, not a photo of our center' }))}
+  return `<div class="ffl">${hero('Story Time', 'Story Time', 'Read a storybook together, one page at a time. Every page has a question to ask and a word to talk about, and some have a move or a breath to share.', 'booker', `<a class="btn gold" href="#story-time/${BOOKS[0].id}">Start with Booker</a>`, scene('reading-corner', [['booker-reading', 33], ['tilly', 63], ['mimi', 80]], { u: 78, line: 'The storybook reading corner, not a photo of our center' }))}
   ${sec('fl-shelf', 'The bookshelf', 'Five stories, all free to read', 'Read every page of all five books here. Booker Tries Again has its finished pictures. For the other four, each page tells you what the picture shows, so your child can imagine it, or draw it.',
    `<div class="fl-shelfgrid">${BOOKS.map(b => `<article class="fl-book" style="--c:${col(b.c)}">${b.cover ? `<div class="fl-cover fl-cover-real">${bookImg(b.cover, b.title + ' cover: ' + b.coverAlt, 'fl-cover-img', '(max-width:460px) 180px, 200px')}<span class="fl-cover-n">Book ${b.n}</span></div>` : `<div class="fl-cover">${art(b.c === 'booker' ? 'booker-reading' : b.c)}<span class="fl-cover-t">${E(b.title)}</span><span class="fl-cover-n">Book ${b.n}</span></div>`}
      <div class="fl-book-bd">${friendChip(b.c)} ${b.status === 'full' ? chip('zuri', 'Free to read') : `<span class="fl-chip fl-chip-soft">Preview &middot; full book soon</span>`}
@@ -368,7 +368,7 @@ function actDetail(a, open = false) {
 function actList() {
   const list = ACTS.filter(a => (!A.band || a.bands.includes(A.band)) && (!A.friend || a.c === A.friend));
   return `<p class="fl-meta" role="status">${list.length} ${list.length === 1 ? 'activity' : 'activities'}${A.band ? ' for ' + band(A.band).n.toLowerCase() : ''}${A.friend ? ' with ' + FRIENDS[A.friend].n : ''}</p>
-   <div class="fl-actgrid">${list.map(a => actDetail(a)).join('') || '<p>No activities match. Try another friend.</p>'}</div>`;
+   <div class="fl-actgrid">${list.map(a => actDetail(a)).join('') || '<p>Nothing matches that mix yet. Try another friend or age.</p>'}</div>`;
 }
 // #activities/<friend>: the friend's own play-along videos first (their video section), each tied to its activity card,
 // then the friend's own storybook right under them (owner 2026-10-07: "there's an actual book, we need to see that book in his section").

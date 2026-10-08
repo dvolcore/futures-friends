@@ -180,7 +180,7 @@ test('keyboard: Enter on a friend speaks and moves focus into the card; Escape c
   c = await card(page);
   assert.equal(c.line, LINES.booker);
   await page.click('.mh-saynext');
-  assert.equal((await card(page)).line, 'Brave learners build brighter tomorrows. I can show you around.');
+  assert.equal((await card(page)).line, 'Big breath, brave heart. I can show you around.');
   assert.deepEqual(errors, []);
   await ctx.close();
 });

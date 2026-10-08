@@ -84,7 +84,7 @@ for (const [name, opts, ok] of [['the device asks for reduced motion', { reduce:
     assert.equal(say.querySelector('.mh-sayline').textContent, "Hi! I'm Booker.");
     assert.equal(e.stage().querySelector('[role=status]').textContent, "Booker: Hi! I'm Booker.", 'a permanent status line reads it out');
     say.dispatch('click', { target: say.querySelector('.mh-saynext') });
-    assert.equal(e.stage().querySelector('[role=status]').textContent, 'Booker: Brave learners build brighter tomorrows. I can show you around.', 'the motto is the second line');
+    assert.equal(e.stage().querySelector('[role=status]').textContent, 'Booker: Big breath, brave heart. I can show you around.', 'the motto is the second line');
     say.dispatch('click', { target: say.querySelector('.mh-saynext') });
     assert.equal(say.querySelector('.mh-sayline').textContent, 'Are you a family, a center, or a teacher?');
     assert.deepEqual(say.querySelectorAll('.mh-sayaskbtn').map(a => [a.getAttribute('href'), a.dataset.aud]), [['#for-families', 'families'], ['#for-centers', 'centers'], ['#teacher-standard', 'staff']], 'three ways in');
@@ -261,8 +261,8 @@ test('keyboard parity: arrows, Home and End move between friends; focus reacts l
   assert.deepEqual(tagline(e).querySelectorAll('.ffm-w.is-on').map(w => w.dataset.k), ['zuri'], 'only the focused friend\'s word');
   b[3].click();
   // Wave 6: the card reads "Hi! I'm Zuri. <motto>" (was "<name> <motto>")
-  assert.equal(e.stage().querySelector('.ffa-say .mh-sayline').textContent, "Hi! I'm Zuri. Curious minds go further.");
-  assert.equal(e.stage().querySelector('[role=status]').textContent, "Zuri: Hi! I'm Zuri. Curious minds go further.");
+  assert.equal(e.stage().querySelector('.ffa-say .mh-sayline').textContent, "Hi! I'm Zuri. I wonder what happens if we try!");
+  assert.equal(e.stage().querySelector('[role=status]').textContent, "Zuri: Hi! I'm Zuri. I wonder what happens if we try!");
   b[3].dispatch('keydown', { key: 'Escape' });
   assert.equal(e.stage().querySelector('.ffa-say').textContent, '');
   assert.deepEqual(b.map(x => x.getAttribute('aria-pressed')), ['false', 'false', 'false', 'false']);

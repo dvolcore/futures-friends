@@ -18,7 +18,7 @@ function setup() {
 test('community preserves the core cast and offers four supporting friends', () => {
   const {api} = setup();
   const html = api.community();
-  assert.match(html, /Booker, Lumi, Zuri and Bop are at the heart/);
+  assert.match(html, /The four are the stars/);
   assert.equal((html.match(/data-community-friend=/g) || []).length, 4);
   assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1);
   assert.match(html, /role="status" aria-live="polite"/);
