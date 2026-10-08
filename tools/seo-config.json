@@ -1,0 +1,20 @@
+{
+  "origin": "https://dvolcore.github.io/futures-friends",
+  "siteName": "Futures Friends",
+  "tagline": "Learn. Move. Explore. Belong.",
+  "logo": "img/apple-touch-icon.png",
+  "ogImage": "img/og/ff-share-default.png",
+  "ogImageAlt": "The plush Futures Friends wordmark with Booker, Lumi, Zuri and Bop. Early learning for ages 2 to 5.",
+  "phone": "+1-816-988-5661",
+  "email": "info@futureslearningcenter.com",
+  "center": {
+    "name": "Futures Learning Center",
+    "street": "3625 S Blue Ridge Blvd",
+    "city": "Independence",
+    "region": "MO",
+    "postalCode": "64052",
+    "country": "US",
+    "image": "img/center/alphabet-rug-1200.jpg"
+  },
+  "note": "Owner action: when a custom domain is connected, change origin here (for example https://www.example.com), add the CNAME file, and run node tools/prerender.mjs. Every canonical, sitemap, llms.txt and JSON-LD URL follows this one value."
+}

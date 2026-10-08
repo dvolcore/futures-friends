@@ -482,7 +482,7 @@ H.signIn = async (email, password) => {
 };
 H.magicLink = async (email, who) => {
   try { await H.ready; } catch (e) { return {ok:false, error:'Sign-in is unavailable right now. Try again in a moment.'}; }
-  const redirect = location.origin + location.pathname + '#' + (who === 'Family' ? 'signin-family' : 'signin-teacher');
+  const redirect = location.origin + (window.FF_ROOT_PATH||location.pathname) + '#' + (who === 'Family' ? 'signin-family' : 'signin-teacher');
   const {error} = await sb.auth.signInWithOtp({email:String(email).trim(), options:{shouldCreateUser:false, emailRedirectTo:redirect}});
   if (error && (error.status === 429 || /rate limit|too many|seconds/i.test(error.message || ''))) return {ok:false, error:'A link was just sent. Wait a minute before asking for another.'};
   return {ok:true}; // same answer whether or not the address has an account

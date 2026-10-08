@@ -205,6 +205,23 @@ node --test tests/ip-lockdown.test.js                            # must pass bef
 
   If a commit of yours adds packets or unit data, drop it from the rebase and regenerate into the private repo instead.
 
+## Search and AI-answer pages: `node tools/prerender.mjs` (SEO, 2026-10-08)
+The site is a hash-routed app, so crawlers and AI fetchers see one thin page. `tools/prerender.mjs` drives the real app in headless
+Chromium and writes, next to `index.html`, a real HTML page for every public route and every store product, collection and blog post
+(`kids-shop.html`, `enroll.html`, `product-<id>.html`, `shop-<collection>.html`, `blog-<id>.html`; GitHub Pages serves them as `/kids-shop`,
+`/product-plush-bop`, ...). Each has the rendered view in `<main>`, its own title, description, canonical, Open Graph / Twitter tags and JSON-LD,
+and boots the app on its own route (the first-visit gate and cloud fly-through are unchanged). It also writes `sitemap.xml`, `robots.txt`,
+`llms.txt`, `llms-full.txt`, `404.html` and `docs/seo-manifest.json`, and updates the marked head block and `<main>` of `index.html`.
+Everything is generated from the live data (`store-catalog.js` names, prices, order and images; `route-meta.js` titles and descriptions;
+the rendered views), nothing is typed in the tool: after ANY store, copy or route edit run
+
+    node tools/prerender.mjs          # about 2.5 minutes; rewrites the generated files
+    node tools/prerender.mjs --check  # writes nothing, exits 1 when committed output is stale
+
+then commit the generated files with the change (tests/seo.test.js checks them). Titles must be 60 characters or fewer and descriptions 155 or
+fewer (set them in `route-meta.js`). Prices appear as JSON-LD `Offer`s only for approved fixed prices on orderable items, never availability.
+The public address comes from `tools/seo-config.json` (`origin`): when a custom domain is connected, change it and rerun.
+
 ## Publishing: bump the build stamp
 
 Phones keep stale copies of the site (GitHub Pages caches pages for 10 minutes; iOS keeps tabs alive). `build-stamp.js` compares the

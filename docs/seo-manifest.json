@@ -1,0 +1,1576 @@
+{
+ "generated_by": "tools/prerender.mjs",
+ "origin": "https://dvolcore.github.io/futures-friends",
+ "pages": [
+  {
+   "file": "index.html",
+   "url": "https://dvolcore.github.io/futures-friends/",
+   "route": "home",
+   "arg": null,
+   "kind": "home",
+   "title": "Futures Friends · Early learning for ages 2 to 5",
+   "description": "Futures Friends is a character-led early learning program for child care centers, home daycares and families, ages 2 to 5, with Booker, Lumi, Zuri and Bop.",
+   "h1": "Futures Friends"
+  },
+  {
+   "file": "centers.html",
+   "url": "https://dvolcore.github.io/futures-friends/centers",
+   "route": "centers",
+   "arg": null,
+   "kind": "page",
+   "title": "For centers and programs | Futures Friends",
+   "description": "Futures Friends for child care centers, home daycares, churches, pre-K partners and employers: programs, rooms, curriculum, training, pricing and a demo.",
+   "h1": "Bring Futures Friends to your program"
+  },
+  {
+   "file": "book-demo.html",
+   "url": "https://dvolcore.github.io/futures-friends/book-demo",
+   "route": "book-demo",
+   "arg": null,
+   "kind": "page",
+   "title": "Book a demo | Futures Friends",
+   "description": "Book a demo of Futures Friends and talk through a membership for your center, home daycare, church or program.",
+   "h1": "Book a demo"
+  },
+  {
+   "file": "options.html",
+   "url": "https://dvolcore.github.io/futures-friends/options",
+   "route": "options",
+   "arg": null,
+   "kind": "page",
+   "title": "Program Options | Futures Friends",
+   "description": "Compare Futures Friends program options for child care centers, home daycares, pre-K partners, faith-based centers, employers and families.",
+   "h1": "Pick the version that fits your building"
+  },
+  {
+   "file": "for-centers.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-centers",
+   "route": "for-centers",
+   "arg": null,
+   "kind": "page",
+   "title": "For Child Care Centers: what you get | Futures Friends",
+   "description": "What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.",
+   "h1": "Bring Futures Friends to your child care center, starting with Unit 1"
+  },
+  {
+   "file": "for-home.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-home",
+   "route": "for-home",
+   "arg": null,
+   "kind": "page",
+   "title": "Home Daycares | Futures Friends",
+   "description": "A one-room, mixed-age Futures Friends program sized for licensed home daycare providers.",
+   "h1": "A big program sized for your home daycare"
+  },
+  {
+   "file": "for-prek.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-prek",
+   "route": "for-prek",
+   "arg": null,
+   "kind": "page",
+   "title": "Pre-K and Head Start Partners | Futures Friends",
+   "description": "Futures Friends readiness units being mapped to the Missouri Early Learning Standards and the Head Start framework, with family engagement tools.",
+   "h1": "Readiness units for pre-K partners"
+  },
+  {
+   "file": "for-faith.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-faith",
+   "route": "for-faith",
+   "arg": null,
+   "kind": "page",
+   "title": "Faith-Based Centers | Futures Friends",
+   "description": "An early learning program built around kindness, courage and helping others, with room for each church’s own prayers, songs and traditions.",
+   "h1": "Kindness and courage, one week at a time"
+  },
+  {
+   "file": "for-employers.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-employers",
+   "route": "for-employers",
+   "arg": null,
+   "kind": "page",
+   "title": "Employer Child Care | Futures Friends",
+   "description": "A branded Futures Friends program for on-site and partner child care for working families.",
+   "h1": "A branded program for your on-site child care"
+  },
+  {
+   "file": "pricing.html",
+   "url": "https://dvolcore.github.io/futures-friends/pricing",
+   "route": "pricing",
+   "arg": null,
+   "kind": "page",
+   "title": "Pricing | Futures Friends",
+   "description": "Published startup packages and monthly fees for home daycares and child care centers, plus training and seasonal add-ons.",
+   "h1": "Published package prices before tax"
+  },
+  {
+   "file": "membership.html",
+   "url": "https://dvolcore.github.io/futures-friends/membership",
+   "route": "membership",
+   "arg": null,
+   "kind": "page",
+   "title": "Monthly Membership: what you get | Futures Friends",
+   "description": "What a Futures Friends membership delivers each month and who helps you use it, with what is ready now, launching with the pilot or planned.",
+   "h1": "What arrives every month, and who helps you use it"
+  },
+  {
+   "file": "founding-partners.html",
+   "url": "https://dvolcore.github.io/futures-friends/founding-partners",
+   "route": "founding-partners",
+   "arg": null,
+   "kind": "page",
+   "title": "Become a Founding Partner: 90-day pilot | Futures Friends",
+   "description": "A 90-day pilot for 5 to 10 Kansas City area programs: home providers, centers and church preschools. Proposed terms, set in a written agreement.",
+   "h1": "Become a Founding Partner"
+  },
+  {
+   "file": "curriculum.html",
+   "url": "https://dvolcore.github.io/futures-friends/curriculum",
+   "route": "curriculum",
+   "arg": null,
+   "kind": "page",
+   "title": "Curriculum by age | Futures Friends",
+   "description": "Twelve monthly units and 48 theme weeks for twos, threes and pre-K. Units 1 to 11 are written as drafts, none approved yet; Unit 12 is being written.",
+   "h1": "Futures Friends Twelve months, four friends."
+  },
+  {
+   "file": "readiness.html",
+   "url": "https://dvolcore.github.io/futures-friends/readiness",
+   "route": "readiness",
+   "arg": null,
+   "kind": "page",
+   "title": "School Readiness | Futures Friends",
+   "description": "How the Futures Friends learning loop, teacher observation and family activities support school readiness for children ages 2 to 5.",
+   "h1": "How Futures Friends supports every child"
+  },
+  {
+   "file": "unit-1.html",
+   "url": "https://dvolcore.github.io/futures-friends/unit-1",
+   "route": "unit-1",
+   "arg": null,
+   "kind": "page",
+   "title": "Unit 1 at a glance: the first month | Futures Friends",
+   "description": "The first Futures Friends unit in summary: four weeks, 20 teaching days and 161 activities for ages 2 to 5, plus one sample day.",
+   "h1": "Welcome to Futures: Meet the Friends"
+  },
+  {
+   "file": "teacher-standard.html",
+   "url": "https://dvolcore.github.io/futures-friends/teacher-standard",
+   "route": "teacher-standard",
+   "arg": null,
+   "kind": "page",
+   "title": "Our Teacher Standard: training and checks | Futures Friends",
+   "description": "What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.",
+   "h1": "Who is with your child, and how we know they are ready."
+  },
+  {
+   "file": "include.html",
+   "url": "https://dvolcore.github.io/futures-friends/include",
+   "route": "include",
+   "arg": null,
+   "kind": "page",
+   "title": "Futures Include | Futures Friends",
+   "description": "Lesson adaptations and inclusion supports for children with disabilities and developmental delays, plus early intervention guidance for families.",
+   "h1": "Every child belongs in the Futures Friends classroom"
+  },
+  {
+   "file": "hub.html",
+   "url": "https://dvolcore.github.io/futures-friends/hub",
+   "route": "hub",
+   "arg": null,
+   "kind": "page",
+   "title": "Futures Hub | Futures Friends",
+   "description": "The Futures Hub for directors, classrooms and families: Today checklist, lunch planner, ratio checks and family updates. Built, not yet live; sample data.",
+   "h1": "Office, classroom and family in one app"
+  },
+  {
+   "file": "app.html",
+   "url": "https://dvolcore.github.io/futures-friends/app",
+   "route": "app",
+   "arg": null,
+   "kind": "page",
+   "title": "Get the App | Futures Friends",
+   "description": "The Futures Hub is a web app: use it in any browser on a classroom tablet, a director’s computer or a family’s phone, and add it to your home screen.",
+   "h1": "The Futures Hub, on every device"
+  },
+  {
+   "file": "train-your-staff.html",
+   "url": "https://dvolcore.github.io/futures-friends/train-your-staff",
+   "route": "train-your-staff",
+   "arg": null,
+   "kind": "page",
+   "title": "Train your staff with us | Futures Friends",
+   "description": "The Futures Friends course method for child care centers and home daycares: scenario mastery, time tracking and director checklists. In development.",
+   "h1": "Train your staff with us."
+  },
+  {
+   "file": "training.html",
+   "url": "https://dvolcore.github.io/futures-friends/training",
+   "route": "training",
+   "arg": null,
+   "kind": "page",
+   "title": "Planned training and certification | Futures Friends",
+   "description": "A proposed seven-credential educator pathway and module catalog. Approval and eligible training hours have not been verified.",
+   "h1": "Futures Friends educator pathways"
+  },
+  {
+   "file": "summit.html",
+   "url": "https://dvolcore.github.io/futures-friends/summit",
+   "route": "summit",
+   "arg": null,
+   "kind": "page",
+   "title": "Proposed educator summit | Futures Friends",
+   "description": "A proposed two-day educator summit in Kansas City. Dates, venues and eligible training hours are not confirmed.",
+   "h1": "A gathering for Kansas City educators"
+  },
+  {
+   "file": "funding.html",
+   "url": "https://dvolcore.github.io/futures-friends/funding",
+   "route": "funding",
+   "arg": null,
+   "kind": "page",
+   "title": "Funding Help | Futures Friends",
+   "description": "Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.",
+   "h1": "Funding your program may qualify for"
+  },
+  {
+   "file": "impact.html",
+   "url": "https://dvolcore.github.io/futures-friends/impact",
+   "route": "impact",
+   "arg": null,
+   "kind": "page",
+   "title": "Impact and research | Futures Friends",
+   "description": "Why ages 2 to 5 matter, the published research on early learning, and what Futures Friends plans to measure.",
+   "h1": "Why the early years matter, and how we measure them"
+  },
+  {
+   "file": "why.html",
+   "url": "https://dvolcore.github.io/futures-friends/why",
+   "route": "why",
+   "arg": null,
+   "kind": "page",
+   "title": "Why Futures Friends | Futures Friends",
+   "description": "How Futures Friends differs from video-first online curricula: made for ages 2 to 5, led by the teacher, hands-on.",
+   "h1": "Made for the youngest learners, not adapted from K-12"
+  },
+  {
+   "file": "brand-kit.html",
+   "url": "https://dvolcore.github.io/futures-friends/brand-kit",
+   "route": "brand-kit",
+   "arg": null,
+   "kind": "page",
+   "title": "Partner brand kit | Futures Friends",
+   "description": "Make your \"featuring Futures Friends\" lockup, read the usage rules and see which kit pieces are ready.",
+   "h1": "Show families you run Futures Friends"
+  },
+  {
+   "file": "room-planner.html",
+   "url": "https://dvolcore.github.io/futures-friends/room-planner",
+   "route": "room-planner",
+   "arg": null,
+   "kind": "page",
+   "title": "Room Planner: lay out your zones | Futures Friends",
+   "description": "Enter your room’s measurements, place doors and each friend’s zone, and check space per child, exits and sightlines. Save, print or send for a quote.",
+   "h1": "Plan your room"
+  },
+  {
+   "file": "corners.html",
+   "url": "https://dvolcore.github.io/futures-friends/corners",
+   "route": "corners",
+   "arg": null,
+   "kind": "page",
+   "title": "Name your corners: the learning zone guide | Futures Friends",
+   "description": "Booker's Reading Area, Lumi's Calm Corner, Zuri's Discovery Zone, Bop's Movement Zone and the Eat the Rainbow wall: what goes in each.",
+   "h1": "One friend in every learning corner"
+  },
+  {
+   "file": "academy.html",
+   "url": "https://dvolcore.github.io/futures-friends/academy",
+   "route": "academy",
+   "arg": null,
+   "kind": "page",
+   "title": "Training Academy | Futures Friends",
+   "description": "A preview of the Training Academy with sample lessons and knowledge checks. No professional credential or approved training hours are issued.",
+   "h1": "Your training, in one place."
+  },
+  {
+   "file": "quote.html",
+   "url": "https://dvolcore.github.io/futures-friends/quote",
+   "route": "quote",
+   "arg": null,
+   "kind": "page",
+   "title": "Request a quote | Futures Friends",
+   "description": "Send your rooms, ages and enrollment and we will price a Futures Friends startup package for you.",
+   "h1": "Request a quote"
+  },
+  {
+   "file": "kids-shop.html",
+   "url": "https://dvolcore.github.io/futures-friends/kids-shop",
+   "route": "kids-shop",
+   "arg": null,
+   "kind": "page",
+   "title": "Kids' Shop | Futures Friends",
+   "description": "A small Kids' Shop for families: a friend poster, a plush friend and a small carpet. Ordering opens soon; nothing is charged here.",
+   "h1": "Gear up like Booker."
+  },
+  {
+   "file": "enroll.html",
+   "url": "https://dvolcore.github.io/futures-friends/enroll",
+   "route": "enroll",
+   "arg": null,
+   "kind": "page",
+   "title": "Visit Futures Learning Center | Futures Friends",
+   "description": "Futures Learning Center in Independence, Missouri: tours, tuition and a day in the life for children ages 2 to 5.",
+   "h1": "A Place to Learn, Play & Grow"
+  },
+  {
+   "file": "friends.html",
+   "url": "https://dvolcore.github.io/futures-friends/friends",
+   "route": "friends",
+   "arg": null,
+   "kind": "page",
+   "title": "Booker Lumi Zuri Bop and storybooks | Futures Friends",
+   "description": "Meet Booker, Lumi, Zuri and Bop, and the storybooks and episodes now in development.",
+   "h1": "Booker, Lumi, Zuri and Bop"
+  },
+  {
+   "file": "story-time.html",
+   "url": "https://dvolcore.github.io/futures-friends/story-time",
+   "route": "story-time",
+   "arg": null,
+   "kind": "page",
+   "title": "Story Time: read-along storybooks | Futures Friends",
+   "description": "Read five Futures Friends storybooks free, page by page, with a question, a word and a move or breath to share on every page.",
+   "h1": "Story Time"
+  },
+  {
+   "file": "at-home.html",
+   "url": "https://dvolcore.github.io/futures-friends/at-home",
+   "route": "at-home",
+   "arg": null,
+   "kind": "page",
+   "title": "Futures at Home: free family library | Futures Friends",
+   "description": "Free storybooks to read together, activities by age, printables and a weekly plan from Booker, Lumi, Zuri and Bop. No account, nothing to buy.",
+   "h1": "Futures at Home"
+  },
+  {
+   "file": "bop-at-home.html",
+   "url": "https://dvolcore.github.io/futures-friends/bop-at-home",
+   "route": "bop-at-home",
+   "arg": null,
+   "kind": "page",
+   "title": "Bop at Home: free family movement | Futures Friends",
+   "description": "Free family movement activities from Bop: no equipment, every one with an adapted version, plus a weekly challenge. Move Your Body, Grow Your Mind.",
+   "h1": "Move Your Body, Grow Your Mind"
+  },
+  {
+   "file": "whole-child.html",
+   "url": "https://dvolcore.github.io/futures-friends/whole-child",
+   "route": "whole-child",
+   "arg": null,
+   "kind": "page",
+   "title": "The Whole-Child Day, planned on purpose | Futures Friends",
+   "description": "One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop.",
+   "h1": "The whole day, planned on purpose. Families get to see it."
+  },
+  {
+   "file": "printables.html",
+   "url": "https://dvolcore.github.io/futures-friends/printables",
+   "route": "printables",
+   "arg": null,
+   "kind": "page",
+   "title": "Printables for families | Futures Friends",
+   "description": "Free PDFs: picture schedule, rainbow tracker, calm-down and move cards, reading log, sticker chart and certificates. Each one in Spanish too (draft).",
+   "h1": "Printables"
+  },
+  {
+   "file": "activities.html",
+   "url": "https://dvolcore.github.io/futures-friends/activities",
+   "route": "activities",
+   "arg": null,
+   "kind": "page",
+   "title": "Things to do at home, by age | Futures Friends",
+   "description": "Short activities for ages 2 to 5 from things you have at home, with steps, what to notice and easier or harder versions.",
+   "h1": "Things to do tonight"
+  },
+  {
+   "file": "see-how.html",
+   "url": "https://dvolcore.github.io/futures-friends/see-how",
+   "route": "see-how",
+   "arg": null,
+   "kind": "page",
+   "title": "See how: picture guides for routines | Futures Friends",
+   "description": "Everyday routines in pictures, one step at a time: calm breathing, brave reading, brushing teeth, movement breaks and bedtime.",
+   "h1": "See how: picture guides"
+  },
+  {
+   "file": "family-videos.html",
+   "url": "https://dvolcore.github.io/futures-friends/family-videos",
+   "route": "family-videos",
+   "arg": null,
+   "kind": "page",
+   "title": "Watch together: family videos | Futures Friends",
+   "description": "Short videos with Booker, Lumi, Zuri and Bop to watch together: the welcome video, Bop's movement breaks, a calm minute and screen-time tips.",
+   "h1": "Watch together"
+  },
+  {
+   "file": "watch.html",
+   "url": "https://dvolcore.github.io/futures-friends/watch",
+   "route": "watch",
+   "arg": null,
+   "kind": "page",
+   "title": "Watch episodes | Futures Friends",
+   "description": "The planned Futures Friends micro-series: 3 to 6 minute episodes watched together with a teacher. No episode is finished yet; the welcome video plays here.",
+   "h1": "Futures Friends episodes"
+  },
+  {
+   "file": "talk.html",
+   "url": "https://dvolcore.github.io/futures-friends/talk",
+   "route": "talk",
+   "arg": null,
+   "kind": "page",
+   "title": "Talk about it cards | Futures Friends",
+   "description": "Printable talk-about-it cards for every planned Futures Friends episode: three questions, a feeling word and one thing to try at home.",
+   "h1": "Talk about it cards"
+  },
+  {
+   "file": "my-week.html",
+   "url": "https://dvolcore.github.io/futures-friends/my-week",
+   "route": "my-week",
+   "arg": null,
+   "kind": "page",
+   "title": "My Week: plan, stickers and certificates | Futures Friends",
+   "description": "A free weekly plan for your child's age that changes every Monday, a sticker chart and printable certificates. Saved only on your device.",
+   "h1": "My Week"
+  },
+  {
+   "file": "for-families.html",
+   "url": "https://dvolcore.github.io/futures-friends/for-families",
+   "route": "for-families",
+   "arg": null,
+   "kind": "page",
+   "title": "Families at Home | Futures Friends",
+   "description": "Take-home activities, books and a weekly question for families, with or without a Futures Friends program nearby.",
+   "h1": "The Futures Friends come home"
+  },
+  {
+   "file": "family-guide.html",
+   "url": "https://dvolcore.github.io/futures-friends/family-guide",
+   "route": "family-guide",
+   "arg": null,
+   "kind": "page",
+   "title": "Family App guide | Futures Friends",
+   "description": "A step-by-step tour of what families can see and do in the Futures Friends Family App.",
+   "h1": "What you will see in the Family App"
+  },
+  {
+   "file": "rainbow.html",
+   "url": "https://dvolcore.github.io/futures-friends/rainbow",
+   "route": "rainbow",
+   "arg": null,
+   "kind": "page",
+   "title": "Eat the Rainbow recipes | Futures Friends",
+   "description": "The Eat the Rainbow cookbook and menu planner: 36 recipes in three levels, designed around the CACFP meal pattern.",
+   "h1": "A rainbow on every plate"
+  },
+  {
+   "file": "store.html",
+   "url": "https://dvolcore.github.io/futures-friends/store",
+   "route": "store",
+   "arg": null,
+   "kind": "page",
+   "title": "Futures Store | Futures Friends",
+   "description": "Learning Zones Kits, carpets, posters, plush, apparel and room materials for centers, home daycares and churches, plus a Kids’ Shop. Orders are requests.",
+   "h1": "Shop the room."
+  },
+  {
+   "file": "shop.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop",
+   "route": "shop",
+   "arg": null,
+   "kind": "page",
+   "title": "Shop the Futures Store | Futures Friends",
+   "description": "Kits, room add-ons, classroom materials and books for centers, home daycares and churches. Prices are shown where they are set; everything else is a quote.",
+   "h1": "All products"
+  },
+  {
+   "file": "shop-programs.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-programs",
+   "route": "shop-programs",
+   "arg": null,
+   "kind": "page",
+   "title": "Classroom Branding Kits and supplies | Futures Friends",
+   "description": "Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.",
+   "h1": "Learning Zones Kits"
+  },
+  {
+   "file": "room-kit.html",
+   "url": "https://dvolcore.github.io/futures-friends/room-kit",
+   "route": "room-kit",
+   "arg": null,
+   "kind": "page",
+   "title": "Learning Zones Kit: carpets and zones | Futures Friends",
+   "description": "Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.",
+   "h1": "The Learning Zones Kit"
+  },
+  {
+   "file": "support.html",
+   "url": "https://dvolcore.github.io/futures-friends/support",
+   "route": "support",
+   "arg": null,
+   "kind": "page",
+   "title": "Support and FAQ | Futures Friends",
+   "description": "Help with the Futures Hub, short tutorials and answers for directors, teachers and families.",
+   "h1": "Answers, and a person to call"
+  },
+  {
+   "file": "contact.html",
+   "url": "https://dvolcore.github.io/futures-friends/contact",
+   "route": "contact",
+   "arg": null,
+   "kind": "page",
+   "title": "Contact and support | Futures Friends",
+   "description": "Contact Futures Friends by phone, email or form. Futures Learning Center, 3625 S Blue Ridge Blvd, Independence, Missouri.",
+   "h1": "Request information"
+  },
+  {
+   "file": "news.html",
+   "url": "https://dvolcore.github.io/futures-friends/news",
+   "route": "news",
+   "arg": null,
+   "kind": "page",
+   "title": "Newsroom | Futures Friends",
+   "description": "News from Futures Friends and Futures Learning Center.",
+   "h1": "Futures Friends news and updates"
+  },
+  {
+   "file": "blog.html",
+   "url": "https://dvolcore.github.io/futures-friends/blog",
+   "route": "blog",
+   "arg": null,
+   "kind": "page",
+   "title": "Blog for Educators | Futures Friends",
+   "description": "Plain guides for child care classrooms on screen time, ratios, choking-safe snacks and CACFP.",
+   "h1": "Notes for the classroom"
+  },
+  {
+   "file": "events.html",
+   "url": "https://dvolcore.github.io/futures-friends/events",
+   "route": "events",
+   "arg": null,
+   "kind": "page",
+   "title": "Events | Futures Friends",
+   "description": "Family events and Discovery Day at Futures Friends programs.",
+   "h1": "Family events and Discovery Day"
+  },
+  {
+   "file": "jobs.html",
+   "url": "https://dvolcore.github.io/futures-friends/jobs",
+   "route": "jobs",
+   "arg": null,
+   "kind": "page",
+   "title": "Careers and open positions | Futures Friends",
+   "description": "Teaching, kitchen and leadership roles at Futures Friends centers. Online applications open soon; call or email in the meantime.",
+   "h1": "Teach with Futures Friends"
+  },
+  {
+   "file": "privacy.html",
+   "url": "https://dvolcore.github.io/futures-friends/privacy",
+   "route": "privacy",
+   "arg": null,
+   "kind": "page",
+   "title": "Privacy policy | Futures Friends",
+   "description": "Futures Friends privacy policy. Sample policy for this preview site; final policies will be reviewed by counsel before launch.",
+   "h1": "Privacy policy"
+  },
+  {
+   "file": "child-privacy.html",
+   "url": "https://dvolcore.github.io/futures-friends/child-privacy",
+   "route": "child-privacy",
+   "arg": null,
+   "kind": "page",
+   "title": "Child privacy | Futures Friends",
+   "description": "How Futures Friends handles children’s information. Sample policy for this preview site; final policies will be reviewed by counsel before launch.",
+   "h1": "Child privacy"
+  },
+  {
+   "file": "terms.html",
+   "url": "https://dvolcore.github.io/futures-friends/terms",
+   "route": "terms",
+   "arg": null,
+   "kind": "page",
+   "title": "Terms | Futures Friends",
+   "description": "Futures Friends terms. Sample policy for this preview site; final terms will be reviewed by counsel before launch.",
+   "h1": "Terms"
+  },
+  {
+   "file": "accessibility.html",
+   "url": "https://dvolcore.github.io/futures-friends/accessibility",
+   "route": "accessibility",
+   "arg": null,
+   "kind": "page",
+   "title": "Accessibility | Futures Friends",
+   "description": "Futures Friends accessibility goals: WCAG 2.2 Level AA across this site and the Futures Hub.",
+   "h1": "Accessibility"
+  },
+  {
+   "file": "blog-screen-time.html",
+   "url": "https://dvolcore.github.io/futures-friends/blog-screen-time",
+   "route": "post",
+   "arg": "screen-time",
+   "kind": "post",
+   "title": "Screen time for ages 2 to 5 in child care | Futures Friends",
+   "description": "What national child care health standards say about screens for ages 2 to 5, and how short, shared episodes fit inside them.",
+   "h1": "Small screens, big conversations: screen time for ages 2 to 5"
+  },
+  {
+   "file": "blog-ratios.html",
+   "url": "https://dvolcore.github.io/futures-friends/blog-ratios",
+   "route": "post",
+   "arg": "ratios",
+   "kind": "post",
+   "title": "Missouri child care ratios by age mix | Futures Friends",
+   "description": "Missouri licensing sets 1 adult for 8 two-year-olds and 1 for 10 three- and four-year-olds. How to staff a room with mixed ages.",
+   "h1": "Staffing by age mix: Missouri ratios made simple"
+  },
+  {
+   "file": "blog-choking.html",
+   "url": "https://dvolcore.github.io/futures-friends/blog-choking",
+   "route": "post",
+   "arg": "choking",
+   "kind": "post",
+   "title": "Choking-safe snacks for under-fives | Futures Friends",
+   "description": "How to cut, cook and serve foods so children under five can eat safely, following CDC guidance, and what our kitchens do about grapes.",
+   "h1": "Choking-safe snacks for under-fives"
+  },
+  {
+   "file": "blog-cacfp.html",
+   "url": "https://dvolcore.github.io/futures-friends/blog-cacfp",
+   "route": "post",
+   "arg": "cacfp",
+   "kind": "post",
+   "title": "CACFP: what your meals may be worth | Futures Friends",
+   "description": "What the Child and Adult Care Food Program reimburses, the USDA rates for July 2026 to June 2027, and how menus meet the meal pattern.",
+   "h1": "CACFP: what your meals may be worth"
+  },
+  {
+   "file": "shop-kits.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-kits",
+   "route": "shop",
+   "arg": "kits",
+   "kind": "collection",
+   "title": "Learning Zones Kits | Futures Store",
+   "description": "The room, set up. Three sizes, from one home room to a four-room center.",
+   "h1": "Learning Zones Kits"
+  },
+  {
+   "file": "shop-carpets.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-carpets",
+   "route": "shop",
+   "arg": "carpets",
+   "kind": "collection",
+   "title": "Carpets and corner rugs | Futures Store",
+   "description": "A rug for each friend’s zone, and large square corner rugs that hold a furnished reading, calm, discovery or movement corner.",
+   "h1": "Carpets and corner rugs"
+  },
+  {
+   "file": "shop-posters.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-posters",
+   "route": "shop",
+   "arg": "posters",
+   "kind": "collection",
+   "title": "Posters | Futures Store",
+   "description": "Booker, Lumi, Zuri, Bop and the Friends Circle, each in two designs, $16 a poster.",
+   "h1": "Posters"
+  },
+  {
+   "file": "shop-plush.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-plush",
+   "route": "shop",
+   "arg": "plush",
+   "kind": "collection",
+   "title": "Plush friends | Futures Store",
+   "description": "Soft Booker, Lumi, Zuri and Bop. Opening soon: leave your email on a plush page and we will tell you the day it opens.",
+   "h1": "Plush friends"
+  },
+  {
+   "file": "shop-apparel.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-apparel",
+   "route": "shop",
+   "arg": "apparel",
+   "kind": "collection",
+   "title": "Apparel | Futures Store",
+   "description": "T-shirts, hoodies and backpacks for each friend and for all four together. Sizes and prices are still being set.",
+   "h1": "Apparel"
+  },
+  {
+   "file": "shop-stickers.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-stickers",
+   "route": "shop",
+   "arg": "stickers",
+   "kind": "collection",
+   "title": "Stickers & Coloring | Futures Store",
+   "description": "Sticker sheets and coloring books for each friend, and universe packs with all 22 friends: classmates, school friends and families.",
+   "h1": "Stickers & Coloring"
+  },
+  {
+   "file": "shop-drinkware.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-drinkware",
+   "route": "shop",
+   "arg": "drinkware",
+   "kind": "collection",
+   "title": "Drinkware & Mealtime | Futures Store",
+   "description": "Insulated character bottles and the Eat the Rainbow divided plate. Made to order.",
+   "h1": "Drinkware & Mealtime"
+  },
+  {
+   "file": "shop-addons.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-addons",
+   "route": "shop",
+   "arg": "addons",
+   "kind": "collection",
+   "title": "Room add-ons | Futures Store",
+   "description": "Zone Boundaries, Friend Fences, shelf bands and pack-away gear that mark each friend’s corner.",
+   "h1": "Room add-ons"
+  },
+  {
+   "file": "shop-materials.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-materials",
+   "route": "shop",
+   "arg": "materials",
+   "kind": "collection",
+   "title": "Classroom materials | Futures Store",
+   "description": "Zone signs, puppets, cue cards and labels. Replace one, or stock a new room.",
+   "h1": "Classroom materials"
+  },
+  {
+   "file": "shop-books.html",
+   "url": "https://dvolcore.github.io/futures-friends/shop-books",
+   "route": "shop",
+   "arg": "books",
+   "kind": "collection",
+   "title": "Books | Futures Store",
+   "description": "The five Futures Friends storybooks. Read them online now; print editions are coming.",
+   "h1": "Books"
+  },
+  {
+   "file": "product-kit-home.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-kit-home",
+   "route": "product",
+   "arg": "kit-home",
+   "kind": "product",
+   "title": "Home Daycare Learning Zones Kit | Futures Store",
+   "description": "One room, five zones. Sized for a licensed home provider.",
+   "h1": "Home Daycare Learning Zones Kit"
+  },
+  {
+   "file": "product-kit-center-starter.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-kit-center-starter",
+   "route": "product",
+   "arg": "kit-center-starter",
+   "kind": "product",
+   "title": "Center Starter Learning Zones Kit | Futures Store",
+   "description": "A model room plus starter sets for up to three classrooms.",
+   "h1": "Center Starter Learning Zones Kit"
+  },
+  {
+   "file": "product-kit-center-complete.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-kit-center-complete",
+   "route": "product",
+   "arg": "kit-center-complete",
+   "kind": "product",
+   "title": "Center Complete Learning Zones Kit | Futures Store",
+   "description": "A full set for each of four classrooms.",
+   "h1": "Center Complete Learning Zones Kit"
+  },
+  {
+   "file": "product-zone-boundaries.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zone-boundaries",
+   "route": "product",
+   "arg": "zone-boundaries",
+   "kind": "product",
+   "title": "Zone Boundaries pack | Futures Store",
+   "description": "Four zone mats, Friend Fence panels, shelf bands and floor paths.",
+   "h1": "Zone Boundaries pack"
+  },
+  {
+   "file": "product-zone-mats-only.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zone-mats-only",
+   "route": "product",
+   "arg": "zone-mats-only",
+   "kind": "product",
+   "title": "Zone mats only | Futures Store",
+   "description": "Four classroom mats, shelf bands and floor paths. Your own low shelves are the zone edges.",
+   "h1": "Zone mats only"
+  },
+  {
+   "file": "product-friend-fence.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-friend-fence",
+   "route": "product",
+   "arg": "friend-fence",
+   "kind": "product",
+   "title": "Friend Fence panel | Futures Store",
+   "description": "A low, see-through divider for one zone edge.",
+   "h1": "Friend Fence panel"
+  },
+  {
+   "file": "product-shelf-bands.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-shelf-bands",
+   "route": "product",
+   "arg": "shelf-bands",
+   "kind": "product",
+   "title": "Friend Shelf Band | Futures Store",
+   "description": "A felt band in a friend’s colour that wraps a low shelf you already own.",
+   "h1": "Friend Shelf Band"
+  },
+  {
+   "file": "product-church-pack-away.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-church-pack-away",
+   "route": "product",
+   "arg": "church-pack-away",
+   "kind": "product",
+   "title": "Church Pack-Away pack | Futures Store",
+   "description": "Banner stands, a rolling cart, rug bags and a Sunday reset card.",
+   "h1": "Church Pack-Away pack"
+  },
+  {
+   "file": "product-extra-room-starter.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-extra-room-starter",
+   "route": "product",
+   "arg": "extra-room-starter",
+   "kind": "product",
+   "title": "Extra room Zones Starter | Futures Store",
+   "description": "Signs, posters, puppets, labels, sit spots and cue cards for one more room (no rug).",
+   "h1": "Extra room Zones Starter"
+  },
+  {
+   "file": "product-zone-signs.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zone-signs",
+   "route": "product",
+   "arg": "zone-signs",
+   "kind": "product",
+   "title": "Zone sign set | Futures Store",
+   "description": "Five signs with each friend, the zone name and two words, in English and Spanish.",
+   "h1": "Zone sign set"
+  },
+  {
+   "file": "product-rainbow-poster.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rainbow-poster",
+   "route": "product",
+   "arg": "rainbow-poster",
+   "kind": "product",
+   "title": "Eat the Rainbow poster | Futures Store",
+   "description": "The six colour bands for the dining wall, 24 x 36 in.",
+   "h1": "Eat the Rainbow poster"
+  },
+  {
+   "file": "product-stick-puppets.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stick-puppets",
+   "route": "product",
+   "arg": "stick-puppets",
+   "kind": "product",
+   "title": "Stick puppet set | Futures Store",
+   "description": "Printed stick puppets of the four friends. Every kit ships with these now.",
+   "h1": "Stick puppet set"
+  },
+  {
+   "file": "product-cue-cards.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-cue-cards",
+   "route": "product",
+   "arg": "cue-cards",
+   "kind": "product",
+   "title": "Friend cue cards | Futures Store",
+   "description": "Six laminated cards a teacher holds up at transitions.",
+   "h1": "Friend cue cards"
+  },
+  {
+   "file": "product-bin-labels.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bin-labels",
+   "route": "product",
+   "arg": "bin-labels",
+   "kind": "product",
+   "title": "Picture and word bin labels | Futures Store",
+   "description": "Twelve labels per zone, each with a word, a picture and the friend’s icon.",
+   "h1": "Picture and word bin labels"
+  },
+  {
+   "file": "product-rug-booker-reading-area.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-booker-reading-area",
+   "route": "product",
+   "arg": "rug-booker-reading-area",
+   "kind": "product",
+   "title": "Booker's Reading Area Carpet | Futures Store",
+   "description": "A blue Reading Area carpet centered on Booker and reading moments.",
+   "h1": "Booker's Reading Area Carpet"
+  },
+  {
+   "file": "product-rug-lumi-calm-corner.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-lumi-calm-corner",
+   "route": "product",
+   "arg": "rug-lumi-calm-corner",
+   "kind": "product",
+   "title": "Lumi's Calm Corner Carpet | Futures Store",
+   "description": "A pink Calm Corner carpet for breathing, quiet connection and belonging with Lumi.",
+   "h1": "Lumi's Calm Corner Carpet"
+  },
+  {
+   "file": "product-rug-zuri-discovery-zone.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-zuri-discovery-zone",
+   "route": "product",
+   "arg": "rug-zuri-discovery-zone",
+   "kind": "product",
+   "title": "Zuri's Discovery Zone Carpet | Futures Store",
+   "description": "A green Discovery Zone carpet that invites looking, wondering and exploring with Zuri.",
+   "h1": "Zuri's Discovery Zone Carpet"
+  },
+  {
+   "file": "product-rug-bop-movement-zone.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-bop-movement-zone",
+   "route": "product",
+   "arg": "rug-bop-movement-zone",
+   "kind": "product",
+   "title": "Bop's Movement Zone Carpet | Futures Store",
+   "description": "A purple Movement Zone carpet designed around active play and growing with Bop.",
+   "h1": "Bop's Movement Zone Carpet"
+  },
+  {
+   "file": "product-rug-friends-circle.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-friends-circle",
+   "route": "product",
+   "arg": "rug-friends-circle",
+   "kind": "product",
+   "title": "Friends Circle Carpet | Futures Store",
+   "description": "A shared multicolor carpet bringing Booker, Lumi, Zuri and Bop together.",
+   "h1": "Friends Circle Carpet"
+  },
+  {
+   "file": "product-rug-square-booker-reading-area.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-square-booker-reading-area",
+   "route": "product",
+   "arg": "rug-square-booker-reading-area",
+   "kind": "product",
+   "title": "Booker's Furnished Reading Corner Carpet | Futures Store",
+   "description": "A large square carpet for placing reading furniture into Booker's blue Reading Area.",
+   "h1": "Booker's Furnished Reading Corner Carpet"
+  },
+  {
+   "file": "product-rug-square-lumi-calm-corner.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-square-lumi-calm-corner",
+   "route": "product",
+   "arg": "rug-square-lumi-calm-corner",
+   "kind": "product",
+   "title": "Lumi's Furnished Calm Corner Carpet | Futures Store",
+   "description": "A large square carpet for placing calm-corner furniture into Lumi's pink zone.",
+   "h1": "Lumi's Furnished Calm Corner Carpet"
+  },
+  {
+   "file": "product-rug-square-zuri-discovery-zone.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-square-zuri-discovery-zone",
+   "route": "product",
+   "arg": "rug-square-zuri-discovery-zone",
+   "kind": "product",
+   "title": "Zuri's Furnished Discovery Corner Carpet | Futures Store",
+   "description": "A large square carpet for discovery furniture and materials in Zuri's green zone.",
+   "h1": "Zuri's Furnished Discovery Corner Carpet"
+  },
+  {
+   "file": "product-rug-square-bop-movement-zone.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-square-bop-movement-zone",
+   "route": "product",
+   "arg": "rug-square-bop-movement-zone",
+   "kind": "product",
+   "title": "Bop's Furnished Movement Corner Carpet | Futures Store",
+   "description": "A large square carpet for movement furniture and activity in Bop's purple zone.",
+   "h1": "Bop's Furnished Movement Corner Carpet"
+  },
+  {
+   "file": "product-rug-square-friends-circle.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-rug-square-friends-circle",
+   "route": "product",
+   "arg": "rug-square-friends-circle",
+   "kind": "product",
+   "title": "Friends Circle Furnished Gathering Carpet | Futures Store",
+   "description": "A large square carpet for shared seating and gathering with all four friends.",
+   "h1": "Friends Circle Furnished Gathering Carpet"
+  },
+  {
+   "file": "product-bundle-four-zone-starter.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bundle-four-zone-starter",
+   "route": "product",
+   "arg": "bundle-four-zone-starter",
+   "kind": "product",
+   "title": "Four-Zone Starter Set | Futures Store",
+   "description": "Four individual activity-zone carpets.",
+   "h1": "Four-Zone Starter Set"
+  },
+  {
+   "file": "product-bundle-complete-learning-zones.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bundle-complete-learning-zones",
+   "route": "product",
+   "arg": "bundle-complete-learning-zones",
+   "kind": "product",
+   "title": "Complete Learning Zones Set | Futures Store",
+   "description": "All five carpets including Friends Circle.",
+   "h1": "Complete Learning Zones Set"
+  },
+  {
+   "file": "product-bundle-character-merchandising-kit.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bundle-character-merchandising-kit",
+   "route": "product",
+   "arg": "bundle-character-merchandising-kit",
+   "kind": "product",
+   "title": "Character Merchandising Kit | Futures Store",
+   "description": "Four plush friends and a poster for every zone, Friends Circle included.",
+   "h1": "Character Merchandising Kit"
+  },
+  {
+   "file": "product-poster-booker-reading-area-v1.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-booker-reading-area-v1",
+   "route": "product",
+   "arg": "poster-booker-reading-area-v1",
+   "kind": "product",
+   "title": "Booker's Reading Area Poster, V1 | Futures Store",
+   "description": "Character-led blue Reading Area poster featuring Booker.",
+   "h1": "Booker's Reading Area Poster, V1"
+  },
+  {
+   "file": "product-poster-booker-reading-area-v2.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-booker-reading-area-v2",
+   "route": "product",
+   "arg": "poster-booker-reading-area-v2",
+   "kind": "product",
+   "title": "Booker's Reading Area Poster, V2 | Futures Store",
+   "description": "Typography-led blue Reading Area poster variation.",
+   "h1": "Booker's Reading Area Poster, V2"
+  },
+  {
+   "file": "product-poster-lumi-calm-corner-v1.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-lumi-calm-corner-v1",
+   "route": "product",
+   "arg": "poster-lumi-calm-corner-v1",
+   "kind": "product",
+   "title": "Lumi's Calm Corner Poster, V1 | Futures Store",
+   "description": "Character-led pink Calm Corner poster featuring Lumi.",
+   "h1": "Lumi's Calm Corner Poster, V1"
+  },
+  {
+   "file": "product-poster-lumi-calm-corner-v2.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-lumi-calm-corner-v2",
+   "route": "product",
+   "arg": "poster-lumi-calm-corner-v2",
+   "kind": "product",
+   "title": "Lumi's Calm Corner Poster, V2 | Futures Store",
+   "description": "Typography-led pink Calm Corner poster variation.",
+   "h1": "Lumi's Calm Corner Poster, V2"
+  },
+  {
+   "file": "product-poster-zuri-discovery-zone-v1.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-zuri-discovery-zone-v1",
+   "route": "product",
+   "arg": "poster-zuri-discovery-zone-v1",
+   "kind": "product",
+   "title": "Zuri's Discovery Zone Poster, V1 | Futures Store",
+   "description": "Character-led green Discovery Zone poster featuring Zuri.",
+   "h1": "Zuri's Discovery Zone Poster, V1"
+  },
+  {
+   "file": "product-poster-zuri-discovery-zone-v2.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-zuri-discovery-zone-v2",
+   "route": "product",
+   "arg": "poster-zuri-discovery-zone-v2",
+   "kind": "product",
+   "title": "Zuri's Discovery Zone Poster, V2 | Futures Store",
+   "description": "Typography-led green Discovery Zone poster variation.",
+   "h1": "Zuri's Discovery Zone Poster, V2"
+  },
+  {
+   "file": "product-poster-bop-movement-zone-v1.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-bop-movement-zone-v1",
+   "route": "product",
+   "arg": "poster-bop-movement-zone-v1",
+   "kind": "product",
+   "title": "Bop's Movement Zone Poster, V1 | Futures Store",
+   "description": "Character-led purple Movement Zone poster featuring Bop.",
+   "h1": "Bop's Movement Zone Poster, V1"
+  },
+  {
+   "file": "product-poster-bop-movement-zone-v2.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-bop-movement-zone-v2",
+   "route": "product",
+   "arg": "poster-bop-movement-zone-v2",
+   "kind": "product",
+   "title": "Bop's Movement Zone Poster, V2 | Futures Store",
+   "description": "Typography-led purple Movement Zone poster variation.",
+   "h1": "Bop's Movement Zone Poster, V2"
+  },
+  {
+   "file": "product-poster-friends-circle-v1.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-friends-circle-v1",
+   "route": "product",
+   "arg": "poster-friends-circle-v1",
+   "kind": "product",
+   "title": "Friends Circle Poster, V1 | Futures Store",
+   "description": "Character-led shared poster featuring all four friends.",
+   "h1": "Friends Circle Poster, V1"
+  },
+  {
+   "file": "product-poster-friends-circle-v2.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-poster-friends-circle-v2",
+   "route": "product",
+   "arg": "poster-friends-circle-v2",
+   "kind": "product",
+   "title": "Friends Circle Poster, V2 | Futures Store",
+   "description": "Typography-led shared poster variation.",
+   "h1": "Friends Circle Poster, V2"
+  },
+  {
+   "file": "product-plush-booker.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-plush-booker",
+   "route": "product",
+   "arg": "plush-booker",
+   "kind": "product",
+   "title": "Booker Plush | Futures Store",
+   "description": "Soft Booker to hug. Opening soon.",
+   "h1": "Booker Plush"
+  },
+  {
+   "file": "product-plush-lumi.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-plush-lumi",
+   "route": "product",
+   "arg": "plush-lumi",
+   "kind": "product",
+   "title": "Lumi Plush | Futures Store",
+   "description": "Soft Lumi to hug. Opening soon.",
+   "h1": "Lumi Plush"
+  },
+  {
+   "file": "product-plush-zuri.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-plush-zuri",
+   "route": "product",
+   "arg": "plush-zuri",
+   "kind": "product",
+   "title": "Zuri Plush | Futures Store",
+   "description": "Soft Zuri to hug. Opening soon.",
+   "h1": "Zuri Plush"
+  },
+  {
+   "file": "product-plush-bop.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-plush-bop",
+   "route": "product",
+   "arg": "plush-bop",
+   "kind": "product",
+   "title": "Bop Plush | Futures Store",
+   "description": "Soft Bop to hug. Opening soon.",
+   "h1": "Bop Plush"
+  },
+  {
+   "file": "product-booker-tshirt.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-booker-tshirt",
+   "route": "product",
+   "arg": "booker-tshirt",
+   "kind": "product",
+   "title": "Booker T-shirt | Futures Store",
+   "description": "Booker T-shirt. Back print: “Every story starts with you.” Sizes coming soon.",
+   "h1": "Booker T-shirt"
+  },
+  {
+   "file": "product-booker-hoodie.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-booker-hoodie",
+   "route": "product",
+   "arg": "booker-hoodie",
+   "kind": "product",
+   "title": "Booker hoodie | Futures Store",
+   "description": "Booker hoodie. Back print: “Every story starts with you.” Sizes coming soon.",
+   "h1": "Booker hoodie"
+  },
+  {
+   "file": "product-booker-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-booker-backpack",
+   "route": "product",
+   "arg": "booker-backpack",
+   "kind": "product",
+   "title": "Booker backpack | Futures Store",
+   "description": "Front print: “Start your story.” Sizes coming soon.",
+   "h1": "Booker backpack"
+  },
+  {
+   "file": "product-lumi-tshirt.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-lumi-tshirt",
+   "route": "product",
+   "arg": "lumi-tshirt",
+   "kind": "product",
+   "title": "Lumi T-shirt | Futures Store",
+   "description": "Lumi T-shirt. Back print: “Take a breath. You belong.” Sizes coming soon.",
+   "h1": "Lumi T-shirt"
+  },
+  {
+   "file": "product-lumi-hoodie.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-lumi-hoodie",
+   "route": "product",
+   "arg": "lumi-hoodie",
+   "kind": "product",
+   "title": "Lumi hoodie | Futures Store",
+   "description": "Lumi hoodie. Back print: “Take a breath. You belong.” Sizes coming soon.",
+   "h1": "Lumi hoodie"
+  },
+  {
+   "file": "product-lumi-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-lumi-backpack",
+   "route": "product",
+   "arg": "lumi-backpack",
+   "kind": "product",
+   "title": "Lumi backpack | Futures Store",
+   "description": "Front print: “You belong here.” Sizes coming soon.",
+   "h1": "Lumi backpack"
+  },
+  {
+   "file": "product-zuri-tshirt.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zuri-tshirt",
+   "route": "product",
+   "arg": "zuri-tshirt",
+   "kind": "product",
+   "title": "Zuri T-shirt | Futures Store",
+   "description": "Zuri T-shirt. Back print: “Stay curious. Discover more.” Sizes coming soon.",
+   "h1": "Zuri T-shirt"
+  },
+  {
+   "file": "product-zuri-hoodie.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zuri-hoodie",
+   "route": "product",
+   "arg": "zuri-hoodie",
+   "kind": "product",
+   "title": "Zuri hoodie | Futures Store",
+   "description": "Zuri hoodie. Back print: “Stay curious. Discover more.” Sizes coming soon.",
+   "h1": "Zuri hoodie"
+  },
+  {
+   "file": "product-zuri-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zuri-backpack",
+   "route": "product",
+   "arg": "zuri-backpack",
+   "kind": "product",
+   "title": "Zuri backpack | Futures Store",
+   "description": "Front print: “Wonder starts here.” Sizes coming soon.",
+   "h1": "Zuri backpack"
+  },
+  {
+   "file": "product-bop-tshirt.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bop-tshirt",
+   "route": "product",
+   "arg": "bop-tshirt",
+   "kind": "product",
+   "title": "Bop T-shirt | Futures Store",
+   "description": "Bop T-shirt. Back print: “Move your body. Shine your way.” Sizes coming soon.",
+   "h1": "Bop T-shirt"
+  },
+  {
+   "file": "product-bop-hoodie.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bop-hoodie",
+   "route": "product",
+   "arg": "bop-hoodie",
+   "kind": "product",
+   "title": "Bop hoodie | Futures Store",
+   "description": "Bop hoodie. Back print: “Move your body. Shine your way.” Sizes coming soon.",
+   "h1": "Bop hoodie"
+  },
+  {
+   "file": "product-bop-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bop-backpack",
+   "route": "product",
+   "arg": "bop-backpack",
+   "kind": "product",
+   "title": "Bop backpack | Futures Store",
+   "description": "Front print: “Make room to move.” Sizes coming soon.",
+   "h1": "Bop backpack"
+  },
+  {
+   "file": "product-all-friends-tshirt.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-all-friends-tshirt",
+   "route": "product",
+   "arg": "all-friends-tshirt",
+   "kind": "product",
+   "title": "All Friends T-shirt | Futures Store",
+   "description": "All Friends T-shirt. Back print: “Learn. Move. Explore. Belong.” Sizes coming soon.",
+   "h1": "All Friends T-shirt"
+  },
+  {
+   "file": "product-all-friends-hoodie.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-all-friends-hoodie",
+   "route": "product",
+   "arg": "all-friends-hoodie",
+   "kind": "product",
+   "title": "All Friends hoodie | Futures Store",
+   "description": "All Friends hoodie. Back print: “Learn. Move. Explore. Belong.” Sizes coming soon.",
+   "h1": "All Friends hoodie"
+  },
+  {
+   "file": "product-all-friends-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-all-friends-backpack",
+   "route": "product",
+   "arg": "all-friends-backpack",
+   "kind": "product",
+   "title": "All Friends backpack | Futures Store",
+   "description": "Front print: “Together we grow.” Sizes coming soon.",
+   "h1": "All Friends backpack"
+  },
+  {
+   "file": "product-booker-replica-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-booker-replica-backpack",
+   "route": "product",
+   "arg": "booker-replica-backpack",
+   "kind": "product",
+   "title": "Booker's Official Backpack | Futures Store",
+   "description": "The backpack Booker wears in every story.",
+   "h1": "Booker's Official Backpack"
+  },
+  {
+   "file": "product-zuri-replica-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-zuri-replica-backpack",
+   "route": "product",
+   "arg": "zuri-replica-backpack",
+   "kind": "product",
+   "title": "Zuri's Official Shell Backpack | Futures Store",
+   "description": "The backpack Zuri wears in every story.",
+   "h1": "Zuri's Official Shell Backpack"
+  },
+  {
+   "file": "product-bop-replica-backpack.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bop-replica-backpack",
+   "route": "product",
+   "arg": "bop-replica-backpack",
+   "kind": "product",
+   "title": "Bop's Official Backpack | Futures Store",
+   "description": "The backpack Bop wears in every story.",
+   "h1": "Bop's Official Backpack"
+  },
+  {
+   "file": "product-stickers-booker.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-booker",
+   "route": "product",
+   "arg": "stickers-booker",
+   "kind": "product",
+   "title": "Booker Story Sticker Sheet | Futures Store",
+   "description": "Sticker sheet with Booker poses and reading-themed icons.",
+   "h1": "Booker Story Sticker Sheet"
+  },
+  {
+   "file": "product-stickers-lumi.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-lumi",
+   "route": "product",
+   "arg": "stickers-lumi",
+   "kind": "product",
+   "title": "Lumi Calm Sticker Sheet | Futures Store",
+   "description": "Sticker sheet with Lumi poses and calm-corner themed icons.",
+   "h1": "Lumi Calm Sticker Sheet"
+  },
+  {
+   "file": "product-stickers-zuri.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-zuri",
+   "route": "product",
+   "arg": "stickers-zuri",
+   "kind": "product",
+   "title": "Zuri Discovery Sticker Sheet | Futures Store",
+   "description": "Sticker sheet with Zuri poses and discovery-themed icons.",
+   "h1": "Zuri Discovery Sticker Sheet"
+  },
+  {
+   "file": "product-stickers-bop.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-bop",
+   "route": "product",
+   "arg": "stickers-bop",
+   "kind": "product",
+   "title": "Bop Movement Sticker Sheet | Futures Store",
+   "description": "Sticker sheet with Bop poses and movement-themed icons.",
+   "h1": "Bop Movement Sticker Sheet"
+  },
+  {
+   "file": "product-stickers-all-friends.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-all-friends",
+   "route": "product",
+   "arg": "stickers-all-friends",
+   "kind": "product",
+   "title": "Core Four Sticker Sheet | Futures Store",
+   "description": "Sticker sheet with all four friends and shared learning-zone icons.",
+   "h1": "Core Four Sticker Sheet"
+  },
+  {
+   "file": "product-stickers-universe.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-stickers-universe",
+   "route": "product",
+   "arg": "stickers-universe",
+   "kind": "product",
+   "title": "Futures Friends Universe Sticker Pack | Futures Store",
+   "description": "Four sticker sheets with all 22 friends: leads, classmates, school team and families.",
+   "h1": "Futures Friends Universe Sticker Pack"
+  },
+  {
+   "file": "product-coloring-book-booker.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-coloring-book-booker",
+   "route": "product",
+   "arg": "coloring-book-booker",
+   "kind": "product",
+   "title": "Color Your Story Coloring Book | Futures Store",
+   "description": "A coloring book with Booker on the cover and a black-and-white page to color.",
+   "h1": "Color Your Story Coloring Book"
+  },
+  {
+   "file": "product-coloring-book-lumi.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-coloring-book-lumi",
+   "route": "product",
+   "arg": "coloring-book-lumi",
+   "kind": "product",
+   "title": "Color Your Calm Coloring Book | Futures Store",
+   "description": "A coloring book with Lumi on the cover and a black-and-white page to color.",
+   "h1": "Color Your Calm Coloring Book"
+  },
+  {
+   "file": "product-coloring-book-zuri.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-coloring-book-zuri",
+   "route": "product",
+   "arg": "coloring-book-zuri",
+   "kind": "product",
+   "title": "Color Your Curiosity Coloring Book | Futures Store",
+   "description": "A coloring book with Zuri on the cover and a black-and-white page to color.",
+   "h1": "Color Your Curiosity Coloring Book"
+  },
+  {
+   "file": "product-coloring-book-bop.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-coloring-book-bop",
+   "route": "product",
+   "arg": "coloring-book-bop",
+   "kind": "product",
+   "title": "Color Your Moves Coloring Book | Futures Store",
+   "description": "A coloring book with Bop on the cover and a black-and-white page to color.",
+   "h1": "Color Your Moves Coloring Book"
+  },
+  {
+   "file": "product-coloring-book-universe.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-coloring-book-universe",
+   "route": "product",
+   "arg": "coloring-book-universe",
+   "kind": "product",
+   "title": "Futures Friends Universe Coloring Pack | Futures Store",
+   "description": "A four-page coloring pack with all 22 friends: leads, classmates, school team and families.",
+   "h1": "Futures Friends Universe Coloring Pack"
+  },
+  {
+   "file": "product-bottle-booker.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bottle-booker",
+   "route": "product",
+   "arg": "bottle-booker",
+   "kind": "product",
+   "title": "Booker Insulated Bottle | Futures Store",
+   "description": "Booker on a insulated bottle.",
+   "h1": "Booker Insulated Bottle"
+  },
+  {
+   "file": "product-bottle-lumi.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bottle-lumi",
+   "route": "product",
+   "arg": "bottle-lumi",
+   "kind": "product",
+   "title": "Lumi Insulated Bottle | Futures Store",
+   "description": "Lumi on a insulated bottle.",
+   "h1": "Lumi Insulated Bottle"
+  },
+  {
+   "file": "product-bottle-zuri.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bottle-zuri",
+   "route": "product",
+   "arg": "bottle-zuri",
+   "kind": "product",
+   "title": "Zuri Insulated Bottle | Futures Store",
+   "description": "Zuri on a insulated bottle.",
+   "h1": "Zuri Insulated Bottle"
+  },
+  {
+   "file": "product-bottle-bop.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-bottle-bop",
+   "route": "product",
+   "arg": "bottle-bop",
+   "kind": "product",
+   "title": "Bop Insulated Bottle | Futures Store",
+   "description": "Bop on a insulated bottle.",
+   "h1": "Bop Insulated Bottle"
+  },
+  {
+   "file": "product-eat-the-rainbow-plate.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-eat-the-rainbow-plate",
+   "route": "product",
+   "arg": "eat-the-rainbow-plate",
+   "kind": "product",
+   "title": "Eat the Rainbow Divided Plate | Futures Store",
+   "description": "A silicone divided plate: a color space for each part of the rainbow and a section for protein.",
+   "h1": "Eat the Rainbow Divided Plate"
+  },
+  {
+   "file": "product-book-booker-tries-again.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-book-booker-tries-again",
+   "route": "product",
+   "arg": "book-booker-tries-again",
+   "kind": "product",
+   "title": "Booker Tries Again | Futures Store",
+   "description": "Book 1 of 5. Read it online in Story Time. Print edition coming.",
+   "h1": "Booker Tries Again"
+  },
+  {
+   "file": "product-book-big-feelings.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-book-big-feelings",
+   "route": "product",
+   "arg": "book-big-feelings",
+   "kind": "product",
+   "title": "Big Feelings, Brighter Days | Futures Store",
+   "description": "Book 2 of 5. Read it online in Story Time. Print edition coming.",
+   "h1": "Big Feelings, Brighter Days"
+  },
+  {
+   "file": "product-book-what-happens.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-book-what-happens",
+   "route": "product",
+   "arg": "book-what-happens",
+   "kind": "product",
+   "title": "What Happens If We Try? | Futures Store",
+   "description": "Book 3 of 5. Read it online in Story Time. Print edition coming.",
+   "h1": "What Happens If We Try?"
+  },
+  {
+   "file": "product-book-clean-up-team.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-book-clean-up-team",
+   "route": "product",
+   "arg": "book-clean-up-team",
+   "kind": "product",
+   "title": "Clean Up, Team! | Futures Store",
+   "description": "Book 4 of 5. Print and online editions are coming.",
+   "h1": "Clean Up, Team!"
+  },
+  {
+   "file": "product-book-rainbow-picnic.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-book-rainbow-picnic",
+   "route": "product",
+   "arg": "book-rainbow-picnic",
+   "kind": "product",
+   "title": "The Rainbow Picnic | Futures Store",
+   "description": "Book 5 of 5. Print and online editions are coming.",
+   "h1": "The Rainbow Picnic"
+  },
+  {
+   "file": "product-kids-carpet.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-kids-carpet",
+   "route": "product",
+   "arg": "kids-carpet",
+   "kind": "product",
+   "title": "Small friend carpet | Futures Store",
+   "description": "A small play carpet for a bedroom or reading nook.",
+   "h1": "Small friend carpet"
+  },
+  {
+   "file": "product-kids-printables.html",
+   "url": "https://dvolcore.github.io/futures-friends/product-kids-printables",
+   "route": "product",
+   "arg": "kids-printables",
+   "kind": "product",
+   "title": "Futures at Home activity pages | Futures Store",
+   "description": "Free activity pages: picture schedule, calm-down cards, move cards, reading log and more.",
+   "h1": "Futures at Home activity pages"
+  }
+ ]
+}

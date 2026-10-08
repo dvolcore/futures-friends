@@ -353,7 +353,7 @@ test('For Centers keeps the existing page and adds the licensed-center block, th
   for (const e of ['Childcare', 'Media and IP', 'Products', 'Licensing']) assert.ok(html.includes(`<h3>${e}</h3>`), e);
   assert.match(t, /Enrollment .* Character attachment .* Product demand .* Licensing/);
   assert.match(t, /We do not promise enrollment or revenue results/);
-  assert.match(t, /partner concept package/);
+  assert.match(t, /proposed partner package/);
   for (const s of ['Lock', 'Pilot', 'Measure', 'Refine', 'Scale', 'Child engagement', 'Teacher usability', 'Parent recall', 'Phrase transfer', 'Activity completion', 'Tour and enrollment signal']) assert.ok(t.includes(s), s);
   assert.match(html, /data-ffi-preset="centers"/);
   assert.match(html, /<h3>Talk to us about licensing<\/h3>/);

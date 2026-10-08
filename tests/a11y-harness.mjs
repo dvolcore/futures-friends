@@ -40,7 +40,8 @@ export function loadChromium(opts = {}) {
 export async function startSite(root = SITE) {
   const server = createServer((req, res) => {
     const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^(\.\.[/\\])+/, '');
-    const file = join(root, p === '/' ? 'index.html' : p);
+    let file = join(root, p === '/' ? 'index.html' : p);
+    if (!existsSync(file) && existsSync(file + '.html')) file += '.html';      // like GitHub Pages: /kids-shop serves kids-shop.html
     if (!file.startsWith(root) || !existsSync(file) || statSync(file).isDirectory()) { res.writeHead(404); res.end(); return; }
     res.writeHead(200, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' });
     createReadStream(file).pipe(res);

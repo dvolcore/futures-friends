@@ -395,7 +395,7 @@ function centersHtml() {
   <section class="wc-sec wc-lic" id="license" aria-labelledby="license-h"><div class="wrap">${lead('Partner-center package', 'What a licensed center gets', 'A licensable operating system, not a folder of PDFs. Six parts that work together so families see one consistent program.', 'license-h')}
    <ul class="wc-six">${LICENSE.map((l, i) => `<li class="wc-rv" style="--c:var(--wc-${l[2]});--i:${i % 3}"><b>${l[0]}</b><span>${l[1]}</span></li>`).join('')}</ul>
    <p class="wc-banner wc-rv">One license. One consistent family experience across locations.</p>
-   <p class="wc-note">This is a partner concept package. Scope and terms are confirmed in a conversation. See the published ${lnk('pricing', 'program pricing', 'rl')}, or learn how the day works on ${lnk('whole-child', 'the whole-child page', 'rl')}.</p></div></section>
+   <p class="wc-note">This is a proposed partner package. Scope and terms are confirmed in a conversation. See the published ${lnk('pricing', 'program pricing', 'rl')}, or learn how the day works on ${lnk('whole-child', 'the whole-child page', 'rl')}.</p></div></section>
   <section class="wc-sec band-paper" id="wc-engines" aria-labelledby="wc-engines-h"><div class="wrap">${lead('How it works for partners', 'Four engines that reinforce each other', 'The childcare operation creates the audience. The characters and the shared program expand what a center can offer.', 'wc-engines-h')}
    <ol class="wc-engines">${ENGINES.map((e, i) => `<li class="wc-rv" style="--c:var(--wc-${e[3]})"><span class="wc-node" aria-hidden="true">${i + 1}</span><h3>${e[0]}</h3><p class="wc-what">${e[1]}</p><p class="wc-text">${e[2]}</p></li>`).join('')}</ol>
    <p class="wc-flow wc-rv" aria-label="How the engines feed each other"><span>Enrollment</span><i aria-hidden="true">&rarr;</i><span>Character attachment</span><i aria-hidden="true">&rarr;</i><span>Product demand</span><i aria-hidden="true">&rarr;</i><span>Licensing</span></p>
@@ -425,8 +425,8 @@ function callout(where) {
 
 // ---------------------------------------------------------------- per-route page description, reveal-on-scroll, footer links
 const META = {
-  'whole-child': 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.',
-  'bop-at-home': 'Free family movement activities from Bop: no equipment, every one with an adapted version. Join the weekly Bop at Home challenge. Move Your Body, Grow Your Mind.',
+  'whole-child': 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop.',
+  'bop-at-home': 'Free family movement activities from Bop: no equipment, every one with an adapted version, plus a weekly challenge. Move Your Body, Grow Your Mind.',
   'for-centers': 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'
 };
 let metaOrig = null;

@@ -1,4 +1,7 @@
 # Futures Friends public site. The full curriculum (day plans, packets, printables, unit data) is not published here
 # (IP lockdown, owner decision 2026-10-07): licensed centers receive it privately. Nothing on this site needs hiding from crawlers.
+# Search engines and AI answer engines (Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Applebot) are welcome.
 User-agent: *
 Allow: /
+
+Sitemap: https://dvolcore.github.io/futures-friends/sitemap.xml

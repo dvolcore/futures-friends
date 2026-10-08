@@ -57,7 +57,7 @@ function card(p, o) {
   const cta = C.canOrder(p) ? (p.priceState === 'fixed' ? 'Add to bag' : 'Request') : p.cta === 'notify' ? 'Notify me' : p.cta === 'link' ? 'Free to print' : 'View';
   return `<li class="sp-cardwrap" data-rv><article class="sp-card" style="--tone:var(--${t});--tone-s:var(--${tint(t)})" data-pid="${E(p.id)}">
     <div class="sp-mwrap"><a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
-      ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 300px', alt: '' }) : ''}
+      ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 300px', alt: a.alt || p.name }) : ''}
       ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 300px', alt: '', cls: 'sp-img2' }) : ''}
       ${(!concept && !sample && a && a.tile) ? badgeHtml('Product photo coming', 'ph') : ''}
     </a>
