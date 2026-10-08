@@ -224,6 +224,7 @@ const T = {
   'Concept 1': 'Concepto 1',
   'Concept 2': 'Concepto 2',
   'Choose an entrance concept': 'Elige un concepto de entrada',
+  'Choose an entrance design': 'Elige un diseño de entrada',
   'Not built yet. The building today is one tap away.': 'Todavía no está construida. El edificio de hoy está a un toque.',
   'See the building today': 'Ver el edificio hoy',
   'Proposed': 'Propuesta',
