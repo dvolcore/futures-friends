@@ -117,7 +117,7 @@
   const KIT_LABEL = 'Planned design: the Futures Friends Learning Zones kit in our classroom';
   const KIT_CAPTION = 'Planned design.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
   const ENTRANCE_CAPTION = 'Planned design.';   // owner 2026-10-07, verbatim, visible beside the entrance concept
-  const ENTRANCE2_CAPTION = 'Planned design.';   // owner 2026-10-07: Concept 2 (four friend banners on the wall); ships when its file lands
+  const ENTRANCE2_CAPTION = 'Planned design.';   // owner 2026-10-08: Design 2 (four friend banners on the wall), the third option
   const ENTRANCE_LABEL = 'Planned design: the Futures Learning Center character entrance';
   const KIT = {
     'turtle-rug': { zone: 'All five zones', alt: "Planned design, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
@@ -126,9 +126,9 @@
     'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Planned design, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
     'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Planned design, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" },
     // Owner 2026-10-07: the proposed front entrance REPLACES the plain exterior photo as the main image (06-front-entrance); the real building is one tap away.
-    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Planned design', real: 'See the building today', kit: 'Proposed', alt: 'Planned design, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors', variants: [   // Concept 1 ships now; Concept 2 is `pending` until its file exists (img/branded-rooms/exterior-2-kit-*), and the Concept 1 / Concept 2 switch stays hidden until then. Mirrors the manifest's variants.
+    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Planned design', real: 'See the building today', kit: 'Proposed', alt: 'Planned design, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors', variants: [   // Design 1 (lawn characters) and Design 2 (friend banners on the wall) both ship; a variant can still be flagged `pending` to hide the switch. Mirrors the manifest's variants. With 'See the building today' the entrance has three views.
       { id: 1, label: 'Design 1', file: 'exterior-kit', caption: ENTRANCE_CAPTION, badge: 'Planned design' },
-      { id: 2, label: 'Design 2', file: 'exterior-2-kit', caption: ENTRANCE2_CAPTION, badge: 'Planned design', pending: true, alt: 'Planned design, not built yet: the proposed Futures Learning Center entrance with four tall friend banners (Booker, Lumi, Zuri and Bop) on the building wall, a lawn sign carrying the FLC shield and a Welcome banner on the lamp pole' }
+      { id: 2, label: 'Design 2', file: 'exterior-2-kit', caption: ENTRANCE2_CAPTION, badge: 'Planned design', alt: 'Planned design, not built yet: the Futures Learning Center entrance with four friend banners on the building wall (Booker, Lumi, Zuri and Bop), the lawn sign and the Welcome banner' }
     ] }
   };
   function kitImg(key, o = {}) {
@@ -150,7 +150,7 @@
       concept: vs.map(v => `<span class="ffa-kit-concept" data-concept="${v.id}">${kitImg(key, Object.assign({}, o, { variant: v.id }))}</span>`).join(''),
       label: vs.map(v => `<span class="ffa-kit-label ffa-kit-label-char" data-concept="${v.id}" aria-hidden="true">${v.badge}</span>`).join(''),
       caption: vs.map(v => `<span class="ffa-kit-caption" data-concept="${v.id}">${v.caption}</span>`).join(''),
-      sw: `<span class="ffa-concept-switch" role="group" aria-label="Choose an entrance concept">${vs.map((v, i) => `<button type="button" data-concept-show="${v.id}" aria-pressed="${i === 0}">${v.label}</button>`).join('')}</span>` };
+      sw: `<span class="ffa-concept-switch" role="group" aria-label="Choose an entrance design">${vs.map((v, i) => `<button type="button" data-concept-show="${v.id}" aria-pressed="${i === 0}">${v.label}</button>`).join('')}</span>` };
   }
   function kitToggle(key) {
     const k = KIT[key] || {};

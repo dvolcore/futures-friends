@@ -46,11 +46,21 @@ test('prices come from the data sources: add-on from FFRoomKit.ADDONS, packages 
   assert.doesNotMatch(src.replace(/\/\*[\s\S]*?\*\//, ''), /\b(1195|1995|1495|2995|5995)\b/, 'no price typed into the component');
 });
 
+test('the entrance slide shows both designs: the Design 1 / Design 2 switch plus See the building today', () => {
+  const c = site(), A = c.window.FFArt;
+  assert.equal(c.window.FFBrandedRooms.at(-1).key, 'exterior');
+  assert.equal(A.liveVariants('exterior').length, 2, 'Design 2 is no longer pending');
+  const h = c.render('centers');
+  assert.match(h, /data-concept-show="1"[^>]*>Design 1</); assert.match(h, /data-concept-show="2"[^>]*>Design 2</);
+  assert.match(h, /exterior-2-kit-800\.jpg/); assert.match(h, /data-kit-show="real"[^>]*>See the building today</);
+  assert.ok(h.includes('<span class="ffa-kit-caption" data-concept="2">Planned design.</span>'));
+});
+
 test('every concept image has its Concept badge, alt text, lazy loading and the Real room / With the kit toggle', () => {
   const c = site(), n = c.window.FFBrandedRooms.length, h = c.render('centers');
   assert.ok(n >= 5);
   assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room');
-  assert.equal((h.match(/class="ffa-kit-label( ffa-kit-label-char)?"[^>]*>Planned design</g) || []).length, n, 'Concept badge on every slide');
+  assert.equal((h.match(/class="ffa-kit-label( ffa-kit-label-char)?"[^>]*>Planned design</g) || []).length, n + 1, 'a badge on every slide, and a second one on the entrance for Design 2');
   assert.equal((h.match(/<span class="ffa-kit-caption">Planned design\.<\/span>/g) || []).length >= n - 1 ? n - 1 : -1, n - 1, 'the required caption under every kit slide');
   assert.equal((h.match(/<span class="ffa-kit-caption"( data-concept="1")?>Planned design\.<\/span>/g) || []).length >= 1, true, 'the front entrance slide carries its own required caption');
   assert.equal(c.window.FFBrandedRooms.at(-1).key, 'exterior'); assert.ok(!c.render('for-centers').includes('Front entrance') && !c.render('pricing').includes('Front entrance'), 'compact bands stay about the kit rooms');
