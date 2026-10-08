@@ -7,7 +7,7 @@
 <link rel="preload" href="fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css?v=1">
-<script>/* Home only: start the meadow hills (phones: their centre crop) and the plush logo kit (badge + letters in one file; the hero's largest images), then the opening's two cloud-bank images, with the HTML, before any script runs. */(function(h){if(h&&!/^#home(\/|$)/.test(h))return;var d=document,a=[["img/plush/hero/world-hills-1280.webp","img/plush/hero/world-hills-800.webp 800w, img/plush/hero/world-hills-1280.webp 1280w, img/plush/hero/world-hills-1600.webp 1600w","108vw","(min-width:641px)"],["img/plush/hero/world-hills-c836.webp","","","(max-width:640px)"],["img/plush/hero/plush-logo-kit-800.webp","","",""],["img/plush/hero/cloud-veil-1.webp","","","",1],["img/plush/hero/cloud-veil-2.webp","","","",1]];a.forEach(function(x){var l=d.createElement("link");l.rel="preload";l.as="image";l.href=x[0];if(x[1]){l.setAttribute("imagesrcset",x[1]);l.setAttribute("imagesizes",x[2]);}if(x[3])l.media=x[3];if(!x[4])l.setAttribute("fetchpriority","high");d.head.appendChild(l);});})(location.hash);</script>
+<script>/* Home only: start the meadow hills (phones: their centre crop) and the plush logo kit (badge + letters in one file; the hero's largest images), then the opening's two cloud-bank images, with the HTML, before any script runs. */(function(h){if(h&&!/^#home(\/|$)/.test(h)){/* a first visit (the gate will show) lands on Home first */var f=0;try{f=sessionStorage.getItem("ff-entered")!=="1"&&!/[?&]nogate\b/.test(location.search);}catch(e){}if(!f)return;}var d=document,a=[["img/plush/hero/world-hills-1280.webp","img/plush/hero/world-hills-800.webp 800w, img/plush/hero/world-hills-1280.webp 1280w, img/plush/hero/world-hills-1600.webp 1600w","108vw","(min-width:641px)"],["img/plush/hero/world-hills-c836.webp","","","(max-width:640px)"],["img/plush/hero/plush-logo-kit-800.webp","","",""],["img/plush/hero/cloud-veil-1.webp","","","",1],["img/plush/hero/cloud-veil-2.webp","","","",1]];a.forEach(function(x){var l=d.createElement("link");l.rel="preload";l.as="image";l.href=x[0];if(x[1]){l.setAttribute("imagesrcset",x[1]);l.setAttribute("imagesizes",x[2]);}if(x[3])l.media=x[3];if(!x[4])l.setAttribute("fetchpriority","high");d.head.appendChild(l);});})(location.hash);</script>
 
 <style>#view:empty{min-height:100vh;min-height:100svh}#view:empty~#ffw-close,#view:empty~#ff-prefooter,#view:empty~footer{visibility:hidden}/* reserve the page area until the first view renders, and keep the "Talk to a real person" band, pre-footer and footer unpainted until then: on a page shorter than the screen they would otherwise jump up into view (CLS, #job 0.107) */
 
@@ -339,7 +339,7 @@ nav.main .mob{display:none}
 <link rel="stylesheet" href="a11y-wave3.css?v=5">
 <link rel="stylesheet" href="wayfinding.css?v=4">
 <link rel="stylesheet" href="sound.css?v=4">
-<link rel="stylesheet" href="entry.css?v=1">
+<link rel="stylesheet" href="entry.css?v=2">
 <link rel="stylesheet" href="flc-mark.css?v=1">
 <link rel="stylesheet" href="demo-portal.css?v=3">
 <link rel="stylesheet" href="room-kit.css?v=1">
@@ -405,7 +405,7 @@ nav.main .mob{display:none}
 <script src="data.js?v=12"></script>
 <script src="captions.js?v=14"></script>
 <script src="ff-motion.js?v=2"></script>
-<script src="entry.js?v=1"></script>
+<script src="entry.js?v=2"></script>
 <script src="plush-cast.js?v=2"></script>
 <script src="supporting-cast.js?v=8"></script>
 <script src="advisor-profiles.js?v=1"></script>

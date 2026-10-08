@@ -41,3 +41,20 @@ html.ffe-open,html.ffe-open body{overflow:hidden}
 @keyframes ffe-drift{to{translate:28px 0}}
 @keyframes ffe-in{from{opacity:0;translate:0 18px}}
 @media print{.ffe{display:none!important}}
+/* first visit from a deep link (owner 2026-10-07): the visitor stays on Home after the fly-through; a small felt note offers the page
+   they were sent to. Bottom-centre, small, dismissible, hides itself after ~8 s (entry.js). */
+.ffe-next{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));z-index:990;transform:translateX(-50%);display:flex;align-items:center;gap:6px;
+  width:max-content;max-width:calc(100vw - 32px);padding:4px 4px 4px 16px;border-radius:999px;background-color:#FBF6EC;background-image:var(--tx-cream,none);background-size:var(--tx-tile,384px);
+  box-shadow:0 12px 26px -12px rgba(10,43,56,.5),0 1px 4px rgba(10,43,56,.14);font:500 14px/1.25 var(--body,"Poppins",system-ui,sans-serif);color:#14313D}
+.ffe-next::after{content:"";position:absolute;inset:3px;border:1.5px dashed rgba(176,122,0,.5);border-radius:999px;pointer-events:none}
+.ffe-next-t{position:relative;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ffe-next-t b{font-weight:700;color:#0A2B38}
+.ffe-next-go{appearance:none;position:relative;flex:none;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:#F5C553;color:#0A2B38;font:700 15px/1 var(--display,"Fredoka",system-ui,sans-serif);cursor:pointer;box-shadow:0 3px 0 #C9951E}
+.ffe-next-go:hover{background:#F8CF66}
+.ffe-next-x{appearance:none;position:relative;flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#14313D;font:600 22px/1 system-ui,sans-serif;cursor:pointer}
+.ffe-next-x:hover{background:rgba(10,43,56,.08)}
+.ffe-next-go:focus-visible,.ffe-next-x:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+.ffe-next.ffe-next-out{opacity:0;pointer-events:none;transition:opacity .25s linear}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .ffe-next{animation:ffe-next-in .45s cubic-bezier(.2,.9,.3,1.2) both}}
+@keyframes ffe-next-in{from{opacity:0;translate:0 20px}}
+@media print{.ffe-next{display:none!important}}
