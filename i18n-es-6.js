@@ -49,7 +49,24 @@ window.FFi18n.add('es', {
   'A real person replies; nothing is charged.': 'Una persona real responde; no se cobra nada.',
   'Online applications are not switched on yet, so call or email with your resume.': 'Las solicitudes de empleo en línea todavía no están activadas; llama o escribe con tu currículum.',
   'Until online applications are switched on, call or email and the hiring team will take your details. They contact people they would like to meet. Applying is not a job offer.': 'Mientras las solicitudes en línea no estén activadas, llama o escribe y el equipo de contratación tomará tus datos. Se comunican con las personas que quieren conocer. Solicitar no es una oferta de trabajo.',
+  // ---- Trusted by professionals band (endorse-band.js). DRAFT, pending teacher review. Quotes are translations of the supplied statements.
+  'Trusted by professionals': 'Con la confianza de profesionales',
+  'A curriculum educator and a registered nurse each reviewed part of what we offer: the curriculum and the Eat the Rainbow menu. These are their own words.': 'Una educadora de currículo y una enfermera registrada revisaron cada una una parte de lo que ofrecemos: el currículo y el menú de Come el arcoíris. Estas son sus propias palabras.',
+  'Reviewed our curriculum': 'Revisó nuestro currículo',
+  'Reviewed our Eat the Rainbow menu': 'Revisó nuestro menú de Come el arcoíris',
+  'Education Adjunct Faculty / Curriculum & Instruction / Educator Development': 'Profesora adjunta de educación / Currículo e instrucción / Desarrollo de educadores',
+  'I\u2019m impressed by the way it combines empathy, structure, and real-world readiness in a way that educators can confidently implement.': 'Me impresiona cómo combina empatía, estructura y preparación para el mundo real, de una manera que los educadores pueden aplicar con confianza.',
+  'RN with 40 years of experience, including pediatrics and community health': 'Enfermera registrada con 40 años de experiencia, incluida la pediatría y la salud comunitaria',
+  'Each statement and profile was supplied by the professional for Futures Learning Center. They are reviews of the curriculum and the menu, not an accreditation or a certification of every recipe.': 'Cada declaración y perfil fue proporcionado por la profesional para Futures Learning Center. Son revisiones del currículo y del menú, no una acreditación ni una certificación de cada receta.',
+  'Read the full statement': 'Leer la declaración completa',
+  'Read statement': 'Leer la declaración',
+  'Eat the Rainbow menu reviewed by': 'Menú de Come el arcoíris revisado por',
+  'Curriculum reviewed by': 'Currículo revisado por',
+  'Professional reviews': 'Revisiones profesionales',
+  'Melissa Hill, M.Ed., Education Adjunct Faculty': 'Melissa Hill, M.Ed., profesora adjunta de educación',
+  'Laurie Ouding, RN, LNC, Lifestyle Medicine Certified': 'Laurie Ouding, RN, LNC, certificada en medicina del estilo de vida',
 }, [
+  [/^Read the full statement from (.+)$/, 'Leer la declaración completa de $1'],
   [/^Online (.+) are not switched on yet, so this page sends nothing: no request goes out, there is no reference number and no automatic reply\. Please call or email us and a real person will help you\.$/, (m, w) => `Las solicitudes en línea (${window.FFi18n.lookup(w, 'es') || w}) todavía no están activadas, así que esta página no envía nada: no sale ninguna solicitud, no hay número de referencia ni respuesta automática. Por favor, llámanos o escríbenos y una persona real te ayudará.`],
   [/^(\d+) ready · (\d+) in review · (\d+) drafts? · (\d+) coming$/, '$1 listos · $2 en revisión · $3 borradores · $4 próximos']
 ]);

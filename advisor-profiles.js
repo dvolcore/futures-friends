@@ -68,5 +68,7 @@
   });
   // A route change must not leave a detached profile's modal over the next page.
   window.addEventListener('hashchange', () => { if (dialog?.open) dialog.close(); });
-  window.FFAdvisors = {render};
+  // Read-only copy of one profile's supplied wording, for the endorsement band (endorse-band.js). Never edited, never invented.
+  const profile = key => { const p = get(key); return p ? Object.freeze({...p}) : null; };
+  window.FFAdvisors = {render, profile};
 })();
