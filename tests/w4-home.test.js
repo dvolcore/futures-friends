@@ -140,7 +140,7 @@ const MOVED = [
   ['Teacher Standard in full (Ms. June, train your staff)', 'teacher-standard', '#view', /Story-world character[\s\S]*Train your staff/i],
   ['Try something with a friend (supporting characters; wave 5 heading)', 'friends', '.ff-community', /Try something with a friend\./],
   ['Meet the whole town (wave 5: every story-world character, to scale)', 'friends', '.ff-town', /Meet the whole town/],
-  ['Meet the Futures Friends Academy', 'teacher-standard', '.px-academyband', /Meet the Futures Friends Academy\.[\s\S]*Explore the Academy/]
+  ['The Futures Friends Academy band', 'teacher-standard', '.px-academyband', /The Futures Friends Academy\.[\s\S]*Explore the Academy/]
 ];
 for (const width of [1280, 390]) {
   test(`every section moved off Home renders on its new page (${width}px)`, async () => {
