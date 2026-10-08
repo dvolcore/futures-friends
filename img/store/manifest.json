@@ -33,7 +33,11 @@
      "w1200": "img/store/booker-replica-backpack-1-1024.webp",
      "jpg": "img/store/booker-replica-backpack-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf5e7"
+     "bg": "#fdf5e7",
+     "bgt": "#fcf2e6",
+     "bgb": "#fef5e9",
+     "bgl": "#faf0e1",
+     "bgr": "#fdf4e6"
     }
    ]
   },
@@ -68,7 +72,11 @@
      "w1200": "img/store/bop-replica-backpack-1-1024.webp",
      "jpg": "img/store/bop-replica-backpack-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#faf1e6"
+     "bg": "#faf1e6",
+     "bgt": "#fbf4e8",
+     "bgb": "#fbf3e8",
+     "bgl": "#faf2e8",
+     "bgr": "#f9f3e8"
     }
    ]
   },
@@ -103,7 +111,11 @@
      "w1200": "img/store/bottle-booker-1-1024.webp",
      "jpg": "img/store/bottle-booker-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdfdf9"
+     "bg": "#fdfdf9",
+     "bgt": "#e4e6e9",
+     "bgb": "#faf8f4",
+     "bgl": "#fefdf9",
+     "bgr": "#fdfdf9"
     }
    ]
   },
@@ -138,7 +150,11 @@
      "w1200": "img/store/bottle-bop-1-1024.webp",
      "jpg": "img/store/bottle-bop-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdfaf5"
+     "bg": "#fdfaf5",
+     "bgt": "#e7e1e5",
+     "bgb": "#e6e1dd",
+     "bgl": "#fcf9f3",
+     "bgr": "#fdfaf3"
     }
    ]
   },
@@ -173,7 +189,11 @@
      "w1200": "img/store/bottle-lumi-1-1024.webp",
      "jpg": "img/store/bottle-lumi-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fcf7ef"
+     "bg": "#fcf7ef",
+     "bgt": "#f4d3d4",
+     "bgb": "#f4eae3",
+     "bgl": "#fbf5ec",
+     "bgr": "#fdf8ee"
     }
    ]
   },
@@ -208,7 +228,11 @@
      "w1200": "img/store/bottle-zuri-1-1024.webp",
      "jpg": "img/store/bottle-zuri-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fbf6ee"
+     "bg": "#fbf6ee",
+     "bgt": "#f0ece4",
+     "bgb": "#f6f1e9",
+     "bgl": "#fcf6ef",
+     "bgr": "#fcf6ef"
     }
    ]
   },
@@ -248,7 +272,11 @@
      "w1200": "img/store/bundle-character-merchandising-kit-1-1672.webp",
      "jpg": "img/store/bundle-character-merchandising-kit-1-800.jpg",
      "ratio": 1.7768,
-     "bg": "#f6e9db"
+     "bg": "#f6e9db",
+     "bgt": "#f4e7d9",
+     "bgb": "#f6e9dd",
+     "bgl": "#f4e5d6",
+     "bgr": "#efe2d6"
     }
    ]
   },
@@ -288,7 +316,11 @@
      "w1200": "img/store/bundle-complete-learning-zones-1-1774.webp",
      "jpg": "img/store/bundle-complete-learning-zones-1-800.jpg",
      "ratio": 2,
-     "bg": "#cca57e"
+     "bg": "#cca57e",
+     "bgt": "#dbb895",
+     "bgb": "#d4ac84",
+     "bgl": "#8d888d",
+     "bgr": "#c1945c"
     }
    ]
   },
@@ -328,7 +360,11 @@
      "w1200": "img/store/bundle-four-zone-starter-1-1384.webp",
      "jpg": "img/store/bundle-four-zone-starter-1-800.jpg",
      "ratio": 1.5603,
-     "bg": "#d0aa83"
+     "bg": "#d0aa83",
+     "bgt": "#dfbe9e",
+     "bgb": "#d4ad85",
+     "bgl": "#a89688",
+     "bgr": "#874f87"
     }
    ]
   },
@@ -368,7 +404,11 @@
      "w1200": "img/store/collection-apparel-1-2000.webp",
      "jpg": "img/store/collection-apparel-1-800.jpg",
      "ratio": 2,
-     "bg": "#fbf6ef"
+     "bg": "#fbf6ef",
+     "bgt": "#fcf6ef",
+     "bgb": "#fcf6ef",
+     "bgl": "#f6f5f0",
+     "bgr": "#f6f1ee"
     }
    ]
   },
@@ -408,7 +448,11 @@
      "w1200": "img/store/collection-carpets-1-1774.webp",
      "jpg": "img/store/collection-carpets-1-800.jpg",
      "ratio": 2,
-     "bg": "#cca57e"
+     "bg": "#cca57e",
+     "bgt": "#dbb895",
+     "bgb": "#d4ac84",
+     "bgl": "#8d888d",
+     "bgr": "#c1945c"
     },
     {
      "n": 2,
@@ -444,7 +488,11 @@
      "w1200": "img/store/collection-carpets-2-1536.webp",
      "jpg": "img/store/collection-carpets-2-800.jpg",
      "ratio": 1.5,
-     "bg": "#cba376"
+     "bg": "#cba376",
+     "bgt": "#d2aa7e",
+     "bgb": "#d1a87b",
+     "bgl": "#d4ad82",
+     "bgr": "#d1a97d"
     }
    ]
   },
@@ -484,7 +532,11 @@
      "w1200": "img/store/collection-drinkware-1-2000.webp",
      "jpg": "img/store/collection-drinkware-1-800.jpg",
      "ratio": 2,
-     "bg": "#f7f3e9"
+     "bg": "#f7f3e9",
+     "bgt": "#f8f3e9",
+     "bgb": "#f8f3e9",
+     "bgl": "#fcfaf6",
+     "bgr": "#eee5d8"
     }
    ]
   },
@@ -524,7 +576,11 @@
      "w1200": "img/store/collection-plush-1-1672.webp",
      "jpg": "img/store/collection-plush-1-800.jpg",
      "ratio": 1.7768,
-     "bg": "#f6e9db"
+     "bg": "#f6e9db",
+     "bgt": "#f4e7d9",
+     "bgb": "#f6e9dd",
+     "bgl": "#f4e5d6",
+     "bgr": "#efe2d6"
     }
    ]
   },
@@ -564,7 +620,11 @@
      "w1200": "img/store/collection-posters-1-2000.webp",
      "jpg": "img/store/collection-posters-1-800.jpg",
      "ratio": 2,
-     "bg": "#f8f3e9"
+     "bg": "#f8f3e9",
+     "bgt": "#f8f3e9",
+     "bgb": "#f8f3e9",
+     "bgl": "#acc8e0",
+     "bgr": "#ddcad5"
     }
    ]
   },
@@ -604,7 +664,11 @@
      "w1200": "img/store/collection-stickers-1-2000.webp",
      "jpg": "img/store/collection-stickers-1-800.jpg",
      "ratio": 2,
-     "bg": "#f8f3e9"
+     "bg": "#f8f3e9",
+     "bgt": "#f8f3e9",
+     "bgb": "#f8f3e9",
+     "bgl": "#cdcad1",
+     "bgr": "#efe8ee"
     }
    ]
   },
@@ -644,7 +708,11 @@
      "w1200": "img/store/coloring-book-booker-1-1536.webp",
      "jpg": "img/store/coloring-book-booker-1-800.jpg",
      "ratio": 1.5,
-     "bg": "#fbf0e1"
+     "bg": "#fbf0e1",
+     "bgt": "#fbf2e5",
+     "bgb": "#f7eade",
+     "bgl": "#f7e9d8",
+     "bgr": "#fbeedf"
     }
    ]
   },
@@ -684,7 +752,11 @@
      "w1200": "img/store/coloring-book-bop-1-1536.webp",
      "jpg": "img/store/coloring-book-bop-1-800.jpg",
      "ratio": 1.5,
-     "bg": "#f8eddf"
+     "bg": "#f8eddf",
+     "bgt": "#f7ece0",
+     "bgb": "#f6ebde",
+     "bgl": "#f1e5d7",
+     "bgr": "#eadfce"
     }
    ]
   },
@@ -724,7 +796,11 @@
      "w1200": "img/store/coloring-book-lumi-1-1536.webp",
      "jpg": "img/store/coloring-book-lumi-1-800.jpg",
      "ratio": 1.5,
-     "bg": "#f2e6d9"
+     "bg": "#f2e6d9",
+     "bgt": "#f4e7db",
+     "bgb": "#f4e3d7",
+     "bgl": "#eadccc",
+     "bgr": "#f0e4d5"
     }
    ]
   },
@@ -759,7 +835,11 @@
      "w1200": "img/store/coloring-book-universe-1-1024.webp",
      "jpg": "img/store/coloring-book-universe-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#c6c6c6",
+     "bgb": "#d2d2d2",
+     "bgl": "#fdfdfd",
+     "bgr": "#fdfdfd"
     },
     {
      "n": 2,
@@ -790,7 +870,11 @@
      "w1200": "img/store/coloring-book-universe-2-1024.webp",
      "jpg": "img/store/coloring-book-universe-2-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#dcdcdc",
+     "bgb": "#d6d6d6",
+     "bgl": "#fefefe",
+     "bgr": "#fdfdfd"
     },
     {
      "n": 3,
@@ -821,7 +905,11 @@
      "w1200": "img/store/coloring-book-universe-3-1024.webp",
      "jpg": "img/store/coloring-book-universe-3-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#c8c7c8",
+     "bgb": "#d8d8d8",
+     "bgl": "#fdfdfd",
+     "bgr": "#fbfbfb"
     },
     {
      "n": 4,
@@ -852,7 +940,11 @@
      "w1200": "img/store/coloring-book-universe-4-1024.webp",
      "jpg": "img/store/coloring-book-universe-4-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#e5e5e5",
+     "bgb": "#e9e9e9",
+     "bgl": "#fcfcfc",
+     "bgr": "#fafafa"
     }
    ]
   },
@@ -892,7 +984,11 @@
      "w1200": "img/store/coloring-book-zuri-1-1536.webp",
      "jpg": "img/store/coloring-book-zuri-1-800.jpg",
      "ratio": 1.5,
-     "bg": "#faeddd"
+     "bg": "#faeddd",
+     "bgt": "#fbefdf",
+     "bgb": "#f7e9d6",
+     "bgl": "#d4bea4",
+     "bgr": "#fcf0e0"
     }
    ]
   },
@@ -932,7 +1028,11 @@
      "w1200": "img/store/eat-the-rainbow-plate-1-1402.webp",
      "jpg": "img/store/eat-the-rainbow-plate-1-800.jpg",
      "ratio": 1.2496,
-     "bg": "#fdf9f2"
+     "bg": "#fdf9f2",
+     "bgt": "#fbf5eb",
+     "bgb": "#d4c3af",
+     "bgl": "#fef8ef",
+     "bgr": "#e9ded1"
     }
    ]
   },
@@ -967,7 +1067,11 @@
      "w1200": "img/store/plush-booker-1-1013.webp",
      "jpg": "img/store/plush-booker-1-800.jpg",
      "ratio": 0.6523,
-     "bg": "#f8e9da"
+     "bg": "#f8e9da",
+     "bgt": "#f1dece",
+     "bgb": "#f3e1d1",
+     "bgl": "#f6e7d8",
+     "bgr": "#f6e7d7"
     },
     {
      "n": 2,
@@ -1003,7 +1107,11 @@
      "w1200": "img/store/plush-booker-2-1536.webp",
      "jpg": "img/store/plush-booker-2-800.jpg",
      "ratio": 1.5,
-     "bg": "#f9eadc"
+     "bg": "#f9eadc",
+     "bgt": "#f7e8da",
+     "bgb": "#f9eadc",
+     "bgl": "#eddbcd",
+     "bgr": "#efdfd1"
     }
    ]
   },
@@ -1038,7 +1146,11 @@
      "w1200": "img/store/plush-bop-1-1154.webp",
      "jpg": "img/store/plush-bop-1-800.jpg",
      "ratio": 0.8467,
-     "bg": "#f8efe5"
+     "bg": "#f8efe5",
+     "bgt": "#f8efe5",
+     "bgb": "#f4eadf",
+     "bgl": "#f8eee4",
+     "bgr": "#f9f0e5"
     },
     {
      "n": 2,
@@ -1074,7 +1186,11 @@
      "w1200": "img/store/plush-bop-2-1620.webp",
      "jpg": "img/store/plush-bop-2-800.jpg",
      "ratio": 1.6684,
-     "bg": "#f9f0e5"
+     "bg": "#f9f0e5",
+     "bgt": "#fbf2e7",
+     "bgb": "#f8eee4",
+     "bgl": "#ece2da",
+     "bgr": "#f1e7de"
     }
    ]
   },
@@ -1109,7 +1225,11 @@
      "w1200": "img/store/plush-lumi-1-1000.webp",
      "jpg": "img/store/plush-lumi-1-800.jpg",
      "ratio": 0.6357,
-     "bg": "#f6eee4"
+     "bg": "#f6eee4",
+     "bgt": "#f7ede2",
+     "bgb": "#f3e8dc",
+     "bgl": "#f5ede3",
+     "bgr": "#f6efe4"
     },
     {
      "n": 2,
@@ -1145,7 +1265,11 @@
      "w1200": "img/store/plush-lumi-2-1536.webp",
      "jpg": "img/store/plush-lumi-2-800.jpg",
      "ratio": 1.5,
-     "bg": "#f8f0e7"
+     "bg": "#f8f0e7",
+     "bgt": "#f9f0e7",
+     "bgb": "#f7eee6",
+     "bgl": "#f7efe6",
+     "bgr": "#f7f0e7"
     }
    ]
   },
@@ -1180,7 +1304,11 @@
      "w1200": "img/store/plush-zuri-1-1071.webp",
      "jpg": "img/store/plush-zuri-1-800.jpg",
      "ratio": 0.7291,
-     "bg": "#f5e9d6"
+     "bg": "#f5e9d6",
+     "bgt": "#f4e5cf",
+     "bgb": "#f7e9d9",
+     "bgl": "#f5e7d5",
+     "bgr": "#f6e9d6"
     },
     {
      "n": 2,
@@ -1216,7 +1344,11 @@
      "w1200": "img/store/plush-zuri-2-1774.webp",
      "jpg": "img/store/plush-zuri-2-800.jpg",
      "ratio": 2,
-     "bg": "#f5e9db"
+     "bg": "#f5e9db",
+     "bgt": "#f4e8d9",
+     "bgb": "#f5e9da",
+     "bgl": "#f0e5d1",
+     "bgr": "#f1e6d2"
     }
    ]
   },
@@ -1256,7 +1388,11 @@
      "w1200": "img/store/poster-booker-reading-area-v1-1-1600.webp",
      "jpg": "img/store/poster-booker-reading-area-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#d0e8fc"
+     "bg": "#d0e8fc",
+     "bgt": "#9ec7eb",
+     "bgb": "#b9daf4",
+     "bgl": "#b0d4f1",
+     "bgr": "#b2d6f1"
     }
    ]
   },
@@ -1296,7 +1432,11 @@
      "w1200": "img/store/poster-booker-reading-area-v2-1-1600.webp",
      "jpg": "img/store/poster-booker-reading-area-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#c3d2e4"
+     "bg": "#c3d2e4",
+     "bgt": "#fbf8f0",
+     "bgb": "#faf7f0",
+     "bgl": "#6c93c5",
+     "bgr": "#f9f7f1"
     }
    ]
   },
@@ -1336,7 +1476,11 @@
      "w1200": "img/store/poster-bop-movement-zone-v1-1-1600.webp",
      "jpg": "img/store/poster-bop-movement-zone-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f1e6fc"
+     "bg": "#f1e6fc",
+     "bgt": "#c6a9dc",
+     "bgb": "#efe4fa",
+     "bgl": "#f1e6fc",
+     "bgr": "#f0e6fc"
     }
    ]
   },
@@ -1376,7 +1520,11 @@
      "w1200": "img/store/poster-bop-movement-zone-v2-1-1600.webp",
      "jpg": "img/store/poster-bop-movement-zone-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#d8cbe1"
+     "bg": "#d8cbe1",
+     "bgt": "#fbf8f0",
+     "bgb": "#faf7f0",
+     "bgl": "#a185c0",
+     "bgr": "#f9f6f1"
     }
    ]
   },
@@ -1416,7 +1564,11 @@
      "w1200": "img/store/poster-friends-circle-v1-1-1600.webp",
      "jpg": "img/store/poster-friends-circle-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf0d7"
+     "bg": "#fdf0d7",
+     "bgt": "#ddac4a",
+     "bgb": "#daab56",
+     "bgl": "#dbab57",
+     "bgr": "#d7a858"
     }
    ]
   },
@@ -1456,7 +1608,11 @@
      "w1200": "img/store/poster-friends-circle-v2-1-1600.webp",
      "jpg": "img/store/poster-friends-circle-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#c2c7d0"
+     "bg": "#c2c7d0",
+     "bgt": "#fbf8f0",
+     "bgb": "#faf7f0",
+     "bgl": "#667591",
+     "bgr": "#f9f7f1"
     }
    ]
   },
@@ -1496,7 +1652,11 @@
      "w1200": "img/store/poster-lumi-calm-corner-v1-1-1600.webp",
      "jpg": "img/store/poster-lumi-calm-corner-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fbd5de"
+     "bg": "#fbd5de",
+     "bgt": "#ef9eb5",
+     "bgb": "#f6c4cf",
+     "bgl": "#f4c1ce",
+     "bgr": "#f4c1ce"
     }
    ]
   },
@@ -1536,7 +1696,11 @@
      "w1200": "img/store/poster-lumi-calm-corner-v2-1-1600.webp",
      "jpg": "img/store/poster-lumi-calm-corner-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f6d7df"
+     "bg": "#f6d7df",
+     "bgt": "#fbf8f0",
+     "bgb": "#fbf7f0",
+     "bgl": "#eca2bf",
+     "bgr": "#fbf7f0"
     }
    ]
   },
@@ -1576,7 +1740,11 @@
      "w1200": "img/store/poster-zuri-discovery-zone-v1-1-1600.webp",
      "jpg": "img/store/poster-zuri-discovery-zone-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#ddf5dd"
+     "bg": "#ddf5dd",
+     "bgt": "#81c194",
+     "bgb": "#d6f4d6",
+     "bgl": "#d9f4d9",
+     "bgr": "#d9f5d9"
     }
    ]
   },
@@ -1616,7 +1784,11 @@
      "w1200": "img/store/poster-zuri-discovery-zone-v2-1-1600.webp",
      "jpg": "img/store/poster-zuri-discovery-zone-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#cee4ce"
+     "bg": "#cee4ce",
+     "bgt": "#fbf8f0",
+     "bgb": "#faf8ef",
+     "bgl": "#8bbf94",
+     "bgr": "#f9f8ef"
     }
    ]
   },
@@ -1651,7 +1823,11 @@
      "w1200": "img/store/rug-booker-reading-area-1-1024.webp",
      "jpg": "img/store/rug-booker-reading-area-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fcf5eb"
+     "bg": "#fcf5eb",
+     "bgt": "#4975b0",
+     "bgb": "#5d7fad",
+     "bgl": "#597aa9",
+     "bgr": "#6387b5"
     }
    ]
   },
@@ -1686,7 +1862,11 @@
      "w1200": "img/store/rug-bop-movement-zone-1-1024.webp",
      "jpg": "img/store/rug-bop-movement-zone-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fef7ec"
+     "bg": "#fef7ec",
+     "bgt": "#8d55a8",
+     "bgb": "#9368a3",
+     "bgl": "#966ca8",
+     "bgr": "#986fab"
     }
    ]
   },
@@ -1721,7 +1901,11 @@
      "w1200": "img/store/rug-friends-circle-1-1024.webp",
      "jpg": "img/store/rug-friends-circle-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fbf1de"
+     "bg": "#fbf1de",
+     "bgt": "#dbae5d",
+     "bgb": "#d7a958",
+     "bgl": "#d7a858",
+     "bgr": "#d5a85b"
     }
    ]
   },
@@ -1756,7 +1940,11 @@
      "w1200": "img/store/rug-lumi-calm-corner-1-1024.webp",
      "jpg": "img/store/rug-lumi-calm-corner-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f7eae0"
+     "bg": "#f7eae0",
+     "bgt": "#c44269",
+     "bgb": "#cc6883",
+     "bgl": "#bc4f6f",
+     "bgr": "#bf4d6f"
     }
    ]
   },
@@ -1791,7 +1979,11 @@
      "w1200": "img/store/rug-square-booker-reading-area-1-1200.webp",
      "jpg": "img/store/rug-square-booker-reading-area-1-800.jpg",
      "ratio": 1,
-     "bg": "#d2a67b"
+     "bg": "#d2a67b",
+     "bgt": "#e0b996",
+     "bgb": "#d7ae85",
+     "bgl": "#deb891",
+     "bgr": "#ddb489"
     }
    ]
   },
@@ -1826,7 +2018,11 @@
      "w1200": "img/store/rug-square-bop-movement-zone-1-1200.webp",
      "jpg": "img/store/rug-square-bop-movement-zone-1-800.jpg",
      "ratio": 1,
-     "bg": "#dbb891"
+     "bg": "#dbb891",
+     "bgt": "#ddbb94",
+     "bgb": "#d9b58b",
+     "bgl": "#dcb992",
+     "bgr": "#debd98"
     }
    ]
   },
@@ -1861,7 +2057,11 @@
      "w1200": "img/store/rug-square-friends-circle-1-1200.webp",
      "jpg": "img/store/rug-square-friends-circle-1-800.jpg",
      "ratio": 1,
-     "bg": "#ceb192"
+     "bg": "#ceb192",
+     "bgt": "#d4b597",
+     "bgb": "#cbaa87",
+     "bgl": "#c6a582",
+     "bgr": "#dfc8b0"
     }
    ]
   },
@@ -1896,7 +2096,11 @@
      "w1200": "img/store/rug-square-lumi-calm-corner-1-1200.webp",
      "jpg": "img/store/rug-square-lumi-calm-corner-1-800.jpg",
      "ratio": 1,
-     "bg": "#cbae93"
+     "bg": "#cbae93",
+     "bgt": "#d5b89f",
+     "bgb": "#cdaf94",
+     "bgl": "#d1ad9b",
+     "bgr": "#c8a28a"
     }
    ]
   },
@@ -1931,7 +2135,11 @@
      "w1200": "img/store/rug-square-zuri-discovery-zone-1-1200.webp",
      "jpg": "img/store/rug-square-zuri-discovery-zone-1-800.jpg",
      "ratio": 1,
-     "bg": "#d2af8d"
+     "bg": "#d2af8d",
+     "bgt": "#cfaa88",
+     "bgb": "#cfa985",
+     "bgl": "#cea987",
+     "bgr": "#d6b291"
     }
    ]
   },
@@ -1966,7 +2174,11 @@
      "w1200": "img/store/rug-zuri-discovery-zone-1-1024.webp",
      "jpg": "img/store/rug-zuri-discovery-zone-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fef3e7"
+     "bg": "#fef3e7",
+     "bgt": "#439160",
+     "bgb": "#5a946c",
+     "bgl": "#5a926b",
+     "bgr": "#60976f"
     }
    ]
   },
@@ -2001,7 +2213,11 @@
      "w1200": "img/store/stickers-all-friends-1-1024.webp",
      "jpg": "img/store/stickers-all-friends-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#ccd0e1",
+     "bgb": "#fbfbfb",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     }
    ]
   },
@@ -2036,7 +2252,11 @@
      "w1200": "img/store/stickers-booker-1-1024.webp",
      "jpg": "img/store/stickers-booker-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdfcfd"
+     "bg": "#fdfcfd",
+     "bgt": "#dcebf4",
+     "bgb": "#e6f1f8",
+     "bgl": "#daeaf6",
+     "bgr": "#d9eaf6"
     }
    ]
   },
@@ -2071,7 +2291,11 @@
      "w1200": "img/store/stickers-bop-1-1024.webp",
      "jpg": "img/store/stickers-bop-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#efe8f5",
+     "bgb": "#fbfafb",
+     "bgl": "#f9f9fa",
+     "bgr": "#faf9fa"
     }
    ]
   },
@@ -2106,7 +2330,11 @@
      "w1200": "img/store/stickers-lumi-1-1024.webp",
      "jpg": "img/store/stickers-lumi-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe"
+     "bg": "#fefefe",
+     "bgt": "#f7eaf0",
+     "bgb": "#fcf8fb",
+     "bgl": "#fbf4f8",
+     "bgr": "#fbf5f8"
     }
    ]
   },
@@ -2141,7 +2369,11 @@
      "w1200": "img/store/stickers-universe-1-1024.webp",
      "jpg": "img/store/stickers-universe-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefaf0"
+     "bg": "#fefaf0",
+     "bgt": "#f3ede1",
+     "bgb": "#f7f6e8",
+     "bgl": "#fefbef",
+     "bgr": "#fdfaef"
     },
     {
      "n": 2,
@@ -2172,7 +2404,11 @@
      "w1200": "img/store/stickers-universe-2-1024.webp",
      "jpg": "img/store/stickers-universe-2-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefaf0"
+     "bg": "#fefaf0",
+     "bgt": "#fcf8ed",
+     "bgb": "#f9f8ef",
+     "bgl": "#fdfaef",
+     "bgr": "#fdfaf0"
     },
     {
      "n": 3,
@@ -2203,7 +2439,11 @@
      "w1200": "img/store/stickers-universe-3-1024.webp",
      "jpg": "img/store/stickers-universe-3-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf9ed"
+     "bg": "#fdf9ed",
+     "bgt": "#f6f3e4",
+     "bgb": "#f7f1e0",
+     "bgl": "#fdf9ed",
+     "bgr": "#fdf9ed"
     },
     {
      "n": 4,
@@ -2234,7 +2474,11 @@
      "w1200": "img/store/stickers-universe-4-1024.webp",
      "jpg": "img/store/stickers-universe-4-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefbf3"
+     "bg": "#fefbf3",
+     "bgt": "#f4f1ec",
+     "bgb": "#fdf9f2",
+     "bgl": "#fefbf3",
+     "bgr": "#fefbf2"
     }
    ]
   },
@@ -2269,7 +2513,11 @@
      "w1200": "img/store/stickers-zuri-1-1024.webp",
      "jpg": "img/store/stickers-zuri-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f9f9f9"
+     "bg": "#f9f9f9",
+     "bgt": "#dae2cd",
+     "bgb": "#fbfbfa",
+     "bgl": "#f9f9f8",
+     "bgr": "#f9faf9"
     }
    ]
   },
@@ -2304,7 +2552,11 @@
      "w1200": "img/store/zuri-replica-backpack-1-1024.webp",
      "jpg": "img/store/zuri-replica-backpack-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf4e6"
+     "bg": "#fdf4e6",
+     "bgt": "#faf0e1",
+     "bgb": "#fef7ea",
+     "bgl": "#fcf3e5",
+     "bgr": "#fdf7ea"
     },
     {
      "n": 2,
@@ -2335,7 +2587,11 @@
      "w1200": "img/store/zuri-replica-backpack-2-1024.webp",
      "jpg": "img/store/zuri-replica-backpack-2-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf4e6"
+     "bg": "#fdf4e6",
+     "bgt": "#faf0e1",
+     "bgb": "#fef7ea",
+     "bgl": "#fcf3e5",
+     "bgr": "#fdf7ea"
     }
    ]
   },
@@ -2365,7 +2621,11 @@
      "w1200": "img/store/all-friends-backpack-1-768.webp",
      "jpg": "img/store/all-friends-backpack-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#f6eee8"
+     "bg": "#f6eee8",
+     "bgt": "#f6eee8",
+     "bgb": "#f6eee8",
+     "bgl": "#f6eee8",
+     "bgr": "#f6eee8"
     },
     {
      "n": 2,
@@ -2391,7 +2651,11 @@
      "w1200": "img/store/all-friends-backpack-2-768.webp",
      "jpg": "img/store/all-friends-backpack-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#f6eee8"
+     "bg": "#f6eee8",
+     "bgt": "#f6eee8",
+     "bgb": "#f6eee8",
+     "bgl": "#f6eee8",
+     "bgr": "#f6eee8"
     }
    ]
   },
@@ -2426,7 +2690,11 @@
      "w1200": "img/store/all-friends-hoodie-1-1200.webp",
      "jpg": "img/store/all-friends-hoodie-1-768.jpg",
      "ratio": 1.5,
-     "bg": "#f7f1ea"
+     "bg": "#f7f1ea",
+     "bgt": "#f8f2eb",
+     "bgb": "#f5eee6",
+     "bgl": "#fae7b3",
+     "bgr": "#edd8ab"
     }
    ]
   },
@@ -2456,7 +2724,11 @@
      "w1200": "img/store/all-friends-tshirt-1-768.webp",
      "jpg": "img/store/all-friends-tshirt-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#f8f4ed"
+     "bg": "#f8f4ed",
+     "bgt": "#f8f4ee",
+     "bgb": "#f8f4ee",
+     "bgl": "#f8f4ee",
+     "bgr": "#f8f4ee"
     },
     {
      "n": 2,
@@ -2482,7 +2754,11 @@
      "w1200": "img/store/all-friends-tshirt-2-768.webp",
      "jpg": "img/store/all-friends-tshirt-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#f8f4ee"
+     "bg": "#f8f4ee",
+     "bgt": "#f8f4ee",
+     "bgb": "#f8f4ee",
+     "bgl": "#f8f4ee",
+     "bgr": "#f8f4ee"
     }
    ]
   },
@@ -2512,7 +2788,11 @@
      "w1200": "img/store/booker-backpack-1-768.webp",
      "jpg": "img/store/booker-backpack-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf5ea"
+     "bg": "#fcf5ea",
+     "bgt": "#fcf5ea",
+     "bgb": "#fcf5ea",
+     "bgl": "#fcf5ea",
+     "bgr": "#fcf5ea"
     },
     {
      "n": 2,
@@ -2538,7 +2818,11 @@
      "w1200": "img/store/booker-backpack-2-768.webp",
      "jpg": "img/store/booker-backpack-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf5ea"
+     "bg": "#fcf5ea",
+     "bgt": "#fcf5ea",
+     "bgb": "#fcf5ea",
+     "bgl": "#fcf5ea",
+     "bgr": "#fcf5ea"
     }
    ]
   },
@@ -2573,7 +2857,11 @@
      "w1200": "img/store/booker-hoodie-1-1200.webp",
      "jpg": "img/store/booker-hoodie-1-768.jpg",
      "ratio": 1.5,
-     "bg": "#f7f0e7"
+     "bg": "#f7f0e7",
+     "bgt": "#f8f1e8",
+     "bgb": "#f6efe6",
+     "bgl": "#a3b8d7",
+     "bgr": "#b2c8e6"
     }
    ]
   },
@@ -2603,7 +2891,11 @@
      "w1200": "img/store/booker-tshirt-1-768.webp",
      "jpg": "img/store/booker-tshirt-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fefaf2"
+     "bg": "#fefaf2",
+     "bgt": "#fefaf2",
+     "bgb": "#fefaf2",
+     "bgl": "#fefaf2",
+     "bgr": "#fefaf2"
     },
     {
      "n": 2,
@@ -2629,7 +2921,11 @@
      "w1200": "img/store/booker-tshirt-2-768.webp",
      "jpg": "img/store/booker-tshirt-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fefaf2"
+     "bg": "#fefaf2",
+     "bgt": "#fefaf2",
+     "bgb": "#fefaf2",
+     "bgl": "#fefaf2",
+     "bgr": "#fefaf2"
     }
    ]
   },
@@ -2659,7 +2955,11 @@
      "w1200": "img/store/bop-backpack-1-768.webp",
      "jpg": "img/store/bop-backpack-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf5ef"
+     "bg": "#fcf5ef",
+     "bgt": "#fcf6ef",
+     "bgb": "#fcf6ef",
+     "bgl": "#fcf6ef",
+     "bgr": "#fcf6ef"
     },
     {
      "n": 2,
@@ -2685,7 +2985,11 @@
      "w1200": "img/store/bop-backpack-2-768.webp",
      "jpg": "img/store/bop-backpack-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf5ef"
+     "bg": "#fcf5ef",
+     "bgt": "#fcf6ef",
+     "bgb": "#fcf6ef",
+     "bgl": "#fcf6ef",
+     "bgr": "#fcf6ef"
     }
    ]
   },
@@ -2720,7 +3024,11 @@
      "w1200": "img/store/bop-hoodie-1-1200.webp",
      "jpg": "img/store/bop-hoodie-1-768.jpg",
      "ratio": 1.5,
-     "bg": "#f9f3ed"
+     "bg": "#f9f3ed",
+     "bgt": "#f8f2eb",
+     "bgb": "#f7f1ea",
+     "bgl": "#bfadc2",
+     "bgr": "#ccb9d1"
     }
    ]
   },
@@ -2750,7 +3058,11 @@
      "w1200": "img/store/bop-tshirt-1-768.webp",
      "jpg": "img/store/bop-tshirt-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf9f2"
+     "bg": "#fcf9f2",
+     "bgt": "#fcf9f3",
+     "bgb": "#fcf9f3",
+     "bgl": "#fcf9f3",
+     "bgr": "#fcf9f3"
     },
     {
      "n": 2,
@@ -2776,7 +3088,11 @@
      "w1200": "img/store/bop-tshirt-2-768.webp",
      "jpg": "img/store/bop-tshirt-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcf8f3"
+     "bg": "#fcf8f3",
+     "bgt": "#fcf9f3",
+     "bgb": "#fcf9f3",
+     "bgl": "#fcf9f3",
+     "bgr": "#fcf9f3"
     }
    ]
   },
@@ -2806,7 +3122,11 @@
      "w1200": "img/store/lumi-backpack-1-768.webp",
      "jpg": "img/store/lumi-backpack-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#f9f4ea"
+     "bg": "#f9f4ea",
+     "bgt": "#f9f4ea",
+     "bgb": "#f9f4ea",
+     "bgl": "#f9f4ea",
+     "bgr": "#f9f4ea"
     },
     {
      "n": 2,
@@ -2832,7 +3152,11 @@
      "w1200": "img/store/lumi-backpack-2-768.webp",
      "jpg": "img/store/lumi-backpack-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#f9f4ea"
+     "bg": "#f9f4ea",
+     "bgt": "#f9f4ea",
+     "bgb": "#f9f4ea",
+     "bgl": "#f9f4ea",
+     "bgr": "#f9f4ea"
     }
    ]
   },
@@ -2867,7 +3191,11 @@
      "w1200": "img/store/lumi-hoodie-1-1200.webp",
      "jpg": "img/store/lumi-hoodie-1-768.jpg",
      "ratio": 1.5,
-     "bg": "#f7f1ea"
+     "bg": "#f7f1ea",
+     "bgt": "#f7f1ea",
+     "bgb": "#f7f1ea",
+     "bgl": "#edc6c9",
+     "bgr": "#f6cacf"
     }
    ]
   },
@@ -2897,7 +3225,11 @@
      "w1200": "img/store/lumi-tshirt-1-768.webp",
      "jpg": "img/store/lumi-tshirt-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fbf3e9"
+     "bg": "#fbf3e9",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     },
     {
      "n": 2,
@@ -2923,7 +3255,11 @@
      "w1200": "img/store/lumi-tshirt-2-768.webp",
      "jpg": "img/store/lumi-tshirt-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#faf3ea"
+     "bg": "#faf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -2953,7 +3289,11 @@
      "w1200": "img/store/zuri-backpack-1-768.webp",
      "jpg": "img/store/zuri-backpack-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fbf3e9"
+     "bg": "#fbf3e9",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     },
     {
      "n": 2,
@@ -2979,7 +3319,11 @@
      "w1200": "img/store/zuri-backpack-2-768.webp",
      "jpg": "img/store/zuri-backpack-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fbf3e9"
+     "bg": "#fbf3e9",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -3014,7 +3358,11 @@
      "w1200": "img/store/zuri-hoodie-1-1200.webp",
      "jpg": "img/store/zuri-hoodie-1-768.jpg",
      "ratio": 1.5,
-     "bg": "#fcf7f0"
+     "bg": "#fcf7f0",
+     "bgt": "#fdf7f0",
+     "bgb": "#fcf8f0",
+     "bgl": "#cadbc3",
+     "bgr": "#cad5bd"
     }
    ]
   },
@@ -3044,7 +3392,11 @@
      "w1200": "img/store/zuri-tshirt-1-768.webp",
      "jpg": "img/store/zuri-tshirt-1-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcfbf4"
+     "bg": "#fcfbf4",
+     "bgt": "#fcfbf4",
+     "bgb": "#fcfbf4",
+     "bgl": "#fcfbf4",
+     "bgr": "#fcfbf4"
     },
     {
      "n": 2,
@@ -3070,7 +3422,11 @@
      "w1200": "img/store/zuri-tshirt-2-768.webp",
      "jpg": "img/store/zuri-tshirt-2-768.jpg",
      "ratio": 0.75,
-     "bg": "#fcfbf4"
+     "bg": "#fcfbf4",
+     "bgt": "#fcfbf4",
+     "bgb": "#fcfbf4",
+     "bgl": "#fcfbf4",
+     "bgr": "#fcfbf4"
     }
    ]
   }

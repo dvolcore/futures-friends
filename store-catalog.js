@@ -396,7 +396,7 @@
   function gallery(p, rooms) {
     const real = photos(p.id).filter(im => !im.angle).map((im, i) => ({ kind: 'photo', fit: 'contain',
       srcset: (im.files || [[im.w400, 400], [im.w800, 800], [im.w1200, 1200]]).filter(x => x[0]), src: im.jpg || im.w800, w: im.w || 4, h: im.h || 3,
-      alt: im.alt || p.name + (photos(p.id).filter(x => !x.angle).length > 1 ? ', picture ' + (i + 1) : ''), caption: '', bg: im.bg || '', ratio: im.ratio }));
+      alt: im.alt || p.name + (photos(p.id).filter(x => !x.angle).length > 1 ? ', picture ' + (i + 1) : ''), caption: '', bg: im.bg || '', bgt: im.bgt || '', bgb: im.bgb || '', bgl: im.bgl || '', bgr: im.bgr || '', ratio: im.ratio }));
     const room = roomShot(p, rooms);
     if (real.length) return room ? real.concat([room]) : real;
     return fallbacks(p, rooms);

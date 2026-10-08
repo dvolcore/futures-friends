@@ -53,8 +53,10 @@ function magick(a) { return execFileSync('magick', a, { stdio: ['ignore', 'pipe'
 /* The picture's own background, sampled from its four corners (a 6 px patch each) as #rrggbb. The shop paints each picture frame in this colour so the
    picture blends into its card with no visible inner rectangle. */
 function cornerBg(f) {
-  const out = magick([f + '[0]', '-alpha', 'remove', '-background', 'white', '-format', '%[fx:int(255*(p{2,2}.r+p{w-3,2}.r+p{2,h-3}.r+p{w-3,h-3}.r)/4)],%[fx:int(255*(p{2,2}.g+p{w-3,2}.g+p{2,h-3}.g+p{w-3,h-3}.g)/4)],%[fx:int(255*(p{2,2}.b+p{w-3,2}.b+p{2,h-3}.b+p{w-3,h-3}.b)/4)]', 'info:']).trim().split(',').map(Number);
-  return '#' + out.map(v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, '0')).join('');
+  const hex = a => '#' + a.map(v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, '0')).join('');
+  const strip = (grav, geo) => hex(magick([f + '[0]', '-alpha', 'remove', '-background', 'white', '-gravity', grav, '-crop', geo, '+repage', '-scale', '1x1!', '-format', '%[fx:int(255*r)],%[fx:int(255*g)],%[fx:int(255*b)]', 'info:']).trim().split(',').map(Number));
+  return { bg: hex(magick([f + '[0]', '-alpha', 'remove', '-background', 'white', '-format', '%[fx:int(255*(p{2,2}.r+p{w-3,2}.r+p{2,h-3}.r+p{w-3,h-3}.r)/4)],%[fx:int(255*(p{2,2}.g+p{w-3,2}.g+p{2,h-3}.g+p{w-3,h-3}.g)/4)],%[fx:int(255*(p{2,2}.b+p{w-3,2}.b+p{2,h-3}.b+p{w-3,h-3}.b)/4)]', 'info:']).trim().split(',').map(Number)),
+    bgt: strip('North', '60%x3+0+0'), bgb: strip('South', '60%x3+0+0'), bgl: strip('West', '3x60%+0+0'), bgr: strip('East', '3x60%+0+0') };
 }
 const sha = f => createHash('sha256').update(readFileSync(f)).digest('hex').slice(0, 16);
 
@@ -96,7 +98,7 @@ for (const { f, id, n } of found) {
   const entry = { n, src: hash, w: ow >= top ? top : ow, h: Math.round((oh / ow) * (ow >= top ? top : ow)), sizes,
     files: sizes.map(w => [`img/store/${base}-${w}.webp`, w]), w400: `img/store/${base}-${sizes[0]}.webp`, w800: `img/store/${base}-${mid}.webp`, w1200: `img/store/${base}-${top}.webp`,
     jpg: `img/store/${base}-${mid}.jpg`, ratio: +(ow / oh).toFixed(4) };
-  entry.bg = (prev && prev.src === hash && prev.bg) || (DRY ? '' : cornerBg(join(OUT, `${base}-${sizes[0]}.webp`)));
+  if (prev && prev.src === hash && prev.bgt) Object.assign(entry, { bg: prev.bg, bgt: prev.bgt, bgb: prev.bgb, bgl: prev.bgl, bgr: prev.bgr }); else if (!DRY) Object.assign(entry, cornerBg(join(OUT, `${base}-${sizes[0]}.webp`)));
   if (alts[id] && alts[id][n - 1]) entry.alt = alts[id][n - 1];
   (products[id] = products[id] || { images: [] }).images.push(entry);
 }
@@ -104,7 +106,7 @@ for (const p of Object.values(products)) p.images.sort((a, b) => a.n - b.n);
 if (MERGE) for (const [id, p] of Object.entries(old.products || {})) {
   if (products[id]) continue;
   products[id] = p; for (const i of p.images) { for (const [f] of i.files) keep.add(f.replace('img/store/', '')); keep.add(i.jpg.replace('img/store/', '')); }
-  for (const i of p.images) if (!i.bg && !DRY) i.bg = cornerBg(join(SITE, i.files[0][0]));
+  for (const i of p.images) if (!i.bgt && !DRY) Object.assign(i, cornerBg(join(SITE, i.files[0][0])));
 }
 
 // remove pictures that are no longer in the folder

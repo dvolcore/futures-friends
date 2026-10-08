@@ -12,7 +12,7 @@ const PLUSH = [['plush-booker', 'Booker', 'blue'], ['plush-lumi', 'Lumi', 'pink'
 
 function plushPic(id, name) {
   const b = `img/store/${id}-1-`;
-  return `<img src="${b}800.jpg" srcset="${b}400.webp 400w, ${b}800.webp 800w" sizes="(max-width:700px) 40vw, 220px" alt="${E(name + ' plush, concept sample')}" loading="lazy" decoding="async">`;
+  return `<img src="${b}800.jpg" srcset="${b}400.webp 400w, ${b}800.webp 800w" sizes="(max-width:700px) 40vw, 220px" alt="${E(name + ' plush')}" loading="lazy" decoding="async">`;
 }
 
 function kitBand() {
@@ -28,10 +28,10 @@ function kitBand() {
 function kidsStrip() {
   const items = PLUSH.map(([id, name, tone]) => `<li class="st-item st-${tone}"><span class="st-img">${plushPic(id, name)}</span><span class="st-name">${E(name)}</span></li>`).join('');
   return `<section class="st-band st-kids" aria-labelledby="stKidsH"><div class="wrap">
-    <div class="st-head"><div><p class="st-eyebrow">Kids’ Shop <span class="st-chip st-chip-inl">Concept sample</span></p><h2 id="stKidsH">Meet the friends, for home</h2></div>
+    <div class="st-head"><div><p class="st-eyebrow">Kids’ Shop</p><h2 id="stKidsH">Meet the friends, for home</h2></div>
     <a class="btn soft" href="#kids-shop" data-go="kids-shop">Visit the Kids’ Shop</a></div>
     <a class="st-strip-link" href="#kids-shop" data-go="kids-shop" aria-label="Visit the Kids\u2019 Shop: Booker, Lumi, Zuri and Bop plush friends"><ul class="st-strip" role="list">${items}</ul></a>
-    <p class="st-note">Concept samples. Plush friends are not for sale yet.</p></div></section>`;
+    <p class="st-note">Plush friends are opening soon.</p></div></section>`;
 }
 
 function classroom() {

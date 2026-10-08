@@ -218,7 +218,7 @@
 /* ---------------------------------------------------------------- picture backgrounds: each product picture carries its own corner colour (--ibg, sampled at import),
    so once it has painted the picture and its card are one surface: no visible inner rectangle */
 .sp-pro .sp-img[style*="--ibg"]{mix-blend-mode:normal!important}
-.sp-pro .sp-img.is-ready[style*="--ibg"]{background:var(--ibg)}
+.sp-pro .sp-img.is-ready[style*="--ibg"]{background:var(--ibg);background:linear-gradient(var(--ibgd,to bottom),var(--ibg1,var(--ibg)),var(--ibg2,var(--ibg)))}
 
 /* the sticky add-to-bag bar reserves its own safe area: the floating sound and nature controls and the View bag pill sit above it, never over the button */
 @media (max-width:900px){
