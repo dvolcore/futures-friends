@@ -81,7 +81,7 @@ const RAIL_ORDER = { families: ['apparel', 'backpacks', 'plush', 'stickers', 'dr
 function railChip(id, active) {
   const [label, pid] = RAIL[id];
   let g = pid ? C.gallery(C.product(pid), rooms())[0] : C.roomShot({ id: 'rail', name: 'Kits', kind: 'kit', room: 'turtle-rug' }, rooms());
-  return `<li><a class="sp-chip${active === id ? ' is-on' : ''}" href="./#shop/${id}" data-go="shop/${id}"${active === id ? ' aria-current="page"' : ''}><span class="sp-chip-i${g && g.kind === 'sample' ? ' is-sample' : ''}">${g ? imgTag(g, { sizes: '44px', alt: '' }) : ''}</span><span>${label}</span></a></li>`;
+  return `<li><button type="button" class="sp-chip${active === id ? ' is-on' : ''}" data-go="shop/${id}"${active === id ? ' aria-current="page"' : ''}><span class="sp-chip-i${g && g.kind === 'sample' ? ' is-sample' : ''}">${g ? imgTag(g, { sizes: '44px', alt: '' }) : ''}</span><span>${label}</span></button></li>`;
 }
 function rail(active) {
   const side = aud() === 'families' ? 'families' : 'centers', ids = RAIL_ORDER[side];
