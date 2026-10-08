@@ -76,9 +76,10 @@ const PERMS = [
   ['enroll', 'Enrollment', 'Enrollment links, applications, room placement'],
   ['billing', 'Financials', 'Tuition, invoices, payments, statements, payroll: directors and the owner only'],
   ['reports', 'Reports', 'Attendance and enrollment reports (no money)'],
-  ['staff', 'Staff and access', 'Timesheets and who can see what']
+  ['staff', 'Staff and access', 'Timesheets and who can see what'],
+  ['library', 'Resource Library', 'Find, preview and send curriculum, menus, letters and forms (teachers send family items only; money items stay with directors)']
 ];
-const PRESETS = {hours:['hours'], teacher:['hours', 'classroom'], director:PERMS.map(p => p[0])};
+const PRESETS = {hours:['hours'], teacher:['hours', 'classroom', 'library'], director:PERMS.map(p => p[0])};
 const PRESET_LABEL = {hours:'Hours only', teacher:'Teacher: own classroom', director:'Director: everything', custom:'Custom'};
 // Owner decisions 2026-10-07: directors see everything in their center (the owner sees all of their own centers); non-director employees
 // NEVER see money (tuition, invoices, statements, payroll), whatever is ticked; Futures Friends HQ never sees a center's money either.
@@ -150,7 +151,7 @@ function seed(c){
   if (!P) return seedNew(c, db, today);   // a center made with "Start your center": an empty space and a Get started list
   db.familyName = P.family; db.familyKid = 'd5';
   ['twos','demo','prek'].forEach((id, i) => db.rooms[id] = Object.assign({demo:true, name:P.rooms[i]}, ROOM_BASE[id]));
-  KID_IDS.forEach((id, i) => { const [first, last] = P.kids[i].split(' '); db.kids[id] = {first, last, room:KID_ROOM(id), demo:true}; });
+  KID_IDS.forEach((id, i) => { const [first, last] = P.kids[i].split(' '); db.kids[id] = {first, last, room:KID_ROOM(id), demo:true, lang:['d3', 'd6', 't2'].includes(id) ? 'es' : 'en'}; });
   STAFF_BASE.forEach((s, i) => db.staff[s.id] = Object.assign({}, s, {name:P.staff[i], clockIn:s.onDuty ? at(today, s.id === 's-dana' ? 7 : 6, 50) : null}));
   const KIDS = KID_IDS.map(id => [id, db.kids[id].first, db.kids[id].last, db.kids[id].room]);
   const mia = db.kids.d5.first, omar = db.staff['s-omar'].name;
@@ -338,7 +339,7 @@ function snapshot(coll, filters){
   return {docs:rows, size:rows.length, empty:!rows.length, forEach:f => rows.forEach(f)};
 }
 function deliver(L){ try { L.cb(snapshot(L.coll, L.filters)); } catch (e) { if (L.err) try { L.err(e); } catch (_) {} } }
-const COLLS = ['rooms','kids','days','kidday','progress','obs','photos','msgs','plans','staff','apps','requests','dues','reports','training','invites','links','accounts','invoices','punches','rates','support','billset'];
+const COLLS = ['rooms','kids','days','kidday','progress','obs','photos','msgs','plans','staff','apps','requests','dues','reports','training','invites','links','accounts','invoices','punches','rates','support','billset','libsends','liblog'];
 function query(coll, filters){
   return {
     where:(col, op, val) => { if (op !== '==' && op !== '>=') throw new Error('Unsupported filter'); return query(coll, filters.concat([{col, op, val}])); },

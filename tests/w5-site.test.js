@@ -21,7 +21,7 @@ const ROOT = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const man = JSON.parse(read('img/plush/manifest.json'));
 const LIB = new Set(man.files.map(f => f.path));
-const SITE_FILES = fs.readdirSync(ROOT).filter(f => /\.(js|css|html)$/.test(f) && f !== 'release-manifest.js');
+const SITE_FILES = fs.readdirSync(ROOT).filter(f => /\.(js|css|html)$/.test(f) && f !== 'release-manifest.js' && f !== 'library-catalog.js');   // the Library catalog lists the print-kit friend art by file name (brand kit group)
 const SUPPORT = ['ms-june', 'principal-hazel', 'mr-moss', 'ms-fern', 'pip', 'nico', 'tilly', 'poppy', 'finn', 'mimi', 'tad', 'bruno', 'rose', 'sage', 'ella', 'mara', 'rowan'];
 const LEADS = ['booker', 'lumi', 'zuri', 'bop'];
 

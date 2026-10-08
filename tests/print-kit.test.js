@@ -139,7 +139,8 @@ test('#printables lists only the finished family sheet; staff drafts are built b
     assert.ok(fs.existsSync(path.join(ROOT, k.f)), k.f + ' link resolves');
     assert.equal(k.draft, null, 'only finished sheets are public');
   }
-  const site = fs.readdirSync(ROOT).filter(f => /\.(js|html)$/.test(f) && f !== 'family-library-data.js').map(f => read(f)).join('\n') + html;
+  // library-catalog.js is the staff Resource Library (demo Director and Teacher portals): it lists the marketing kit on purpose, behind the demo sign-in
+  const site = fs.readdirSync(ROOT).filter(f => /\.(js|html)$/.test(f) && f !== 'family-library-data.js' && f !== 'library-catalog.js').map(f => read(f)).join('\n') + html;
   for (const k of PRINT_KIT.filter(k => !k.family)) {
     assert.ok(fs.existsSync(path.join(ROOT, k.f)), k.f + ' is still built');
     assert.ok(!site.includes(k.f), k.f + ' is not linked from the public site');
