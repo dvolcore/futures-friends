@@ -60,15 +60,13 @@ const GATES = [
       ['A new hire may start early on a qualifying fingerprint result only while supervised at all times by staff whose own check is complete.', '5 CSR 25-600.020(2)(B)']] },
   { when: 'Within 7 days', sub: 'And before being left alone with children', c: 'booker',
     ks: [['A facility orientation: the licensing rules, emergency procedures, behavior and discipline policies, the daily schedule, each child\'s allergies and special needs, health and safety, and confidentiality.', 'K.A.R. 28-4-428a(a)']],
-    mo: [['A documented facility orientation: a tour, the licensing rules, medication, illness and discipline practices, the needs of the children assigned, the safe sleep policy, the emergency plan and how to report suspected abuse or neglect.', '5 CSR 25-500.102(1)(K)'],
+    mo: [['A documented facility orientation: a tour, the licensing rules, medication, illness and discipline practices, the needs of the children assigned, the emergency plan and how to report suspected abuse or neglect.', '5 CSR 25-500.102(1)(K)'],
       ['Every caregiver reviews the licensing rules when they start.', '5 CSR 25-500.102(1)(H)']] },
   { when: 'Within 30 days', sub: 'In Kansas, also before sole responsibility for children', c: 'zuri',
-    ks: [['Health and safety training approved by the state, in 10 subject areas: abuse and neglect, child development and supervision, safe sleep, illness and infection, food and allergy emergencies, building safety, emergency preparedness, hazardous materials, transportation and medication.', 'K.A.R. 28-4-428a(b)'],
+    ks: [['Health and safety training approved by the state, in 10 subject areas set by the state, including abuse and neglect, child development and supervision, illness and infection, food and allergy emergencies, building safety, emergency preparedness, hazardous materials, transportation and medication.', 'K.A.R. 28-4-428a(b)'],
       ['Pediatric first aid and pediatric CPR, with the skills shown in person to an instructor, and kept current.', 'K.A.R. 28-4-428a(c)'],
-      ['A negative TB test or chest x-ray.', 'K.A.R. 28-4-126(c)'],
-      ['Lead teachers in infant rooms: 4 hours of infant-specific training.', 'K.A.R. 28-4-428a(d)']],
-    mo: [['A medical exam report signed by a physician or a supervised nurse, with a TB risk assessment or a negative TB skin test.', '5 CSR 25-500.122(1)'],
-      ['In programs licensed for infants: safe sleep training approved by the state and based on the AAP recommendations, repeated every 3 years.', '5 CSR 25-500.102(4)']] },
+      ['A negative TB test or chest x-ray.', 'K.A.R. 28-4-126(c)']],
+    mo: [['A medical exam report signed by a physician or a supervised nurse, with a TB risk assessment or a negative TB skin test.', '5 CSR 25-500.122(1)']] },
   { when: 'Every day', sub: 'Whenever children are in care', c: 'bop',
     ks: [['At least one person with current pediatric first aid and CPR in every unit, at all times.', 'K.A.R. 28-4-428a(c)(4)'],
       ['Each staff member reports suspected abuse or neglect to the Kansas Department for Children and Families within 24 hours.', 'K.A.R. 28-4-430(c)(2)'],
@@ -76,7 +74,7 @@ const GATES = [
     mo: [['Current first aid and CPR for at least one caregiver per 20 children of licensed capacity, and at least one on site whenever children are present.', '5 CSR 25-500.102(1)(T)'],
       ['Suspected abuse or neglect is reported immediately to the Children\'s Division hotline, 1-800-392-3738. No one may investigate first or stand in the way of the report.', 'RSMo 210.115; 5 CSR 25-500.102(1)(J)']] },
   { when: 'Every year', sub: 'For as long as they work with children', c: 'lumi',
-    ks: [['16 clock hours of training approved by the state each licensure year, at least 4 of them in health and safety. Infant caregivers: 4 of the 16 infant-specific. Directors: 6 in program administration. Family home providers: 10 hours.', 'K.A.R. 28-4-428a(e); 28-4-114a(d)(2)'],
+    ks: [['16 clock hours of training approved by the state each licensure year, at least 4 of them in health and safety. Directors: 6 in program administration. Family home providers: 10 hours.', 'K.A.R. 28-4-428a(e); 28-4-114a(d)(2)'],
       ['An updated staff health status form, and practice of shelter-in-place and off-site relocation.', 'K.A.R. 28-4-126(b); 28-4-128(a)']],
     mo: [['12 clock hours of training approved by the state each calendar year, recorded in the state\'s MOPD system. Repeating a course in the same year earns no extra credit.', '5 CSR 25-500.102(3)'],
       ['A Family Care Safety Registry check on every staff member before the license anniversary.', '5 CSR 25-500.052(2)(C)']] },
@@ -127,16 +125,15 @@ function lawHtml() {
 
 // ---------------------------------------------------------------- where our standard goes further (curriculum.json design_standard)
 const FURTHER = [
-  ['Safety questions need 100%', 'Life-safety questions must be answered 100% correctly, whatever the overall score. A miss sends the teacher back to that lesson, then retests with a different question on the same point.', 'Life-safety topics include safe sleep, reporting abuse and neglect, and missing-child counts.', 'lumi'],
+  ['Safety questions need 100%', 'Life-safety questions must be answered 100% correctly, whatever the overall score. A miss sends the teacher back to that lesson, then retests with a different question on the same point.', 'Life-safety topics include rest-time supervision, reporting abuse and neglect, and missing-child counts.', 'lumi'],
   ['Seen doing it, in the room', 'Within 30 days of each course, the director (or a senior mentor teacher) watches the teacher at work and signs a short checklist for that course. A missed life-safety item starts a coaching plan.', 'The checklist is not counted as clock hours. It is proof the training reached the classroom.', 'booker'],
   ['Writing it down', 'Every course ends with one or two short written reflections, read by a coach. They are marked complete or not complete, never graded.', 'Example: "Walk through your room in your head. What one thing will you check differently at the next nap?"', 'zuri'],
   ['Real time on task', 'No fast-forward and no skipping slides. An activity at least every 5 minutes means the course moves only when the teacher takes part, and the clock pauses when they step away.', 'Active time is logged for each part of the course.', 'bop'],
-  ['No swaddling, in either state', 'Kansas rules ban swaddling in child care. Missouri\'s rules do not mention it, so in Missouri it is our policy.', `National guidance agrees: ${ext(SRC.cfoc, 'Caring for Our Children')} 3.1.4.2 calls swaddling not necessary or recommended in child care.`, 'lumi'],
-  ['Safe sleep for everyone who covers a nap', 'Missouri requires safe sleep training in programs licensed for infants. Our safe sleep course is built for directors, teachers, floaters, substitutes and volunteers, and we recommend it for every Kansas teacher who may cover an infant room or nap time.', 'Infant safe sleep always comes before Quiet Time.', 'booker'],
+  ['Rest time for everyone who covers a nap', 'Our rest-time course is built for directors, teachers, floaters, substitutes and volunteers: anyone who may be in the room at nap time. It sets out our own practice for ages 2 to 5. Rest rules differ by state, so we confirm them with our licensing consultant.', 'Quiet Time is offered, never forced and never a punishment.', 'booker'],
   ['One named person signs every course', 'Each version of each course must be checked against the current rule text and signed by our Training Content Lead and Trainer of Record before teachers use it.', 'That role is not filled yet. Kansas and Missouri editions differ wherever the rules differ.', 'zuri']
 ];
 function furtherHtml() {
-  return sect('ts-further-sec', 'ts-further', `${lead('Our standard', 'Where our training goes further than the law', 'The states set the minimum. We designed our courses to add the seven things below. They are in the course design now and will apply to our teachers as each course launches.', 'ts-further-h')}
+  return sect('ts-further-sec', 'ts-further', `${lead('Our standard', 'Where our training goes further than the law', 'The states set the minimum. We designed our courses to add the six things below. They are in the course design now and will apply to our teachers as each course launches.', 'ts-further-h')}
   ${guideBy('moss', 'Knowing the rule is the start. Showing it, every day, is the standard.')}
   <ul class="ts-further">${FURTHER.map((f, i) => `<li class="wc-rv" style="--c:var(--wc-${f[3]});--i:${i % 3}"><span class="wc-check" aria-hidden="true"></span><h3>${f[0]}</h3><p>${f[1]}</p><p class="ts-why">${f[2]}</p></li>`).join('')}</ul>`);
 }
@@ -144,7 +141,7 @@ function furtherHtml() {
 // ---------------------------------------------------------------- the method (design standard, every clock-hour course)
 const METHOD = [
   ['Watch', 'A short video', 'Two to four minutes: a friend opener, a real-classroom demonstration filmed with family consent, or a scene acted by adults. No child is filmed in a staged unsafe scene.', 'booker'],
-  ['Do', 'An activity every few minutes', 'Spot the hazards in a crib photo, put the reporting steps in order, choose what to do next. Progress waits for an answer.', 'zuri'],
+  ['Do', 'An activity every few minutes', 'Spot the hazards in a rest-area photo, put the reporting steps in order, choose what to do next. Progress waits for an answer.', 'zuri'],
   ['Decide', 'Scenario questions', 'Drawn at random from a bank at least three times larger than the quiz, with feedback on every answer. 80% to pass, 3 attempts.', 'bop'],
   ['Master', 'Life-safety at 100%', 'Safety questions must be right every time. A miss means the lesson again and a new question.', 'lumi'],
   ['Reflect', 'A coach reads it', 'One or two short written reflections, read and marked complete by a coach.', 'navy2'],
@@ -157,7 +154,7 @@ const VS = [
   ['Done when the video ends', 'Done when the director has seen it in the room']
 ];
 function methodHtml() {
-  return sect('band-paper ts-method-sec', 'ts-method', `${lead('How training works', 'Why scenario practice beats a video you can click through', 'A teacher can sit through a video and still not know what to do when a baby rolls over at nap time. So every course is short lessons, constant practice and real decisions, then proof in the classroom.', 'ts-method-h')}
+  return sect('band-paper ts-method-sec', 'ts-method', `${lead('How training works', 'Why scenario practice beats a video you can click through', 'A teacher can sit through a video and still not know what to do when a child will not settle at rest time. So every course is short lessons, constant practice and real decisions, then proof in the classroom.', 'ts-method-h')}
   ${june('In our story world, I ask the children two questions. Good training asks the grown-ups the same two.', { quote: JUNE_Q, kicker: 'The question behind the method' })}
   <ol class="wc-steps ts-steps">${METHOD.map((s, i) => `<li class="wc-step wc-rv" style="--c:${col(s[3])};--i:${i}"><span class="wc-node" aria-hidden="true">${i + 1}</span><h3>${s[0]}</h3><p class="wc-what">${s[1]}</p><p class="wc-text">${s[2]}</p></li>`).join('')}</ol>
   <div class="ts-method-grid">
@@ -168,19 +165,19 @@ function methodHtml() {
 }
 
 // ---------------------------------------------------------------- the pilot (curriculum.json SR-120 + PILOT_COURSE_BRIEF.md)
-const PILOT = { code: 'SR-120', title: 'Safe Sleep and Lumi\'s Quiet Time', hours: '1.5', videos: 13, activities: 16, checkpoint: 4, checkpointAt: 55, finalItems: 8, bank: 28, bankSafety: 16, reflections: 2 };
+const PILOT = { code: 'SR-120', title: 'Rest Time and Lumi\'s Quiet Time', hours: '1.5', videos: 13, activities: 16, checkpoint: 4, checkpointAt: 55, finalItems: 8, bank: 28, bankSafety: 16, reflections: 2 };
 const PRACTICE = [
-  'Every infant under 12 months goes on their back for every nap, in their own crib or play yard that meets the rules. A baby who falls asleep anywhere else is moved.',
-  'Spot every unsafe item in a sleep space: soft bedding, bumpers, positioners, swaddles, weighted products, bibs, pacifier clips, covered heads and overdressing.',
-  'The rolling rule: place every baby on the back. A baby who rolls both ways may stay in the position they choose; a baby who cannot yet roll both ways is returned to the back.',
-  'Watch sleeping babies by sight and sound, with enough light to see each face and skin color.',
-  'Lead Lumi\'s Quiet Time (Notice, Breathe, Soften, Rest) for toddlers and preschoolers: offered, never forced, never a punishment, and within each state\'s rest rule.'
+  'Set up the rest area: each child on their own labeled cot or mat, cots spaced apart, with clear walkways to every exit.',
+  'Check every cot: the child\'s own labeled bedding, cords kept away, and no food, drink or hazard objects on the cot. Shoes off and stored.',
+  'Keep every resting child in sight and in hearing, with lighting that lets you see each child.',
+  'After the rest period, give children who do not sleep a quiet activity so the others can keep resting.',
+  'Lead Lumi\'s Quiet Time (Notice, Breathe, Soften, Rest) for twos through pre-K: offered, never forced, never a punishment, and within each state\'s rest rule.'
 ];
-const CHECKLIST = ['Every infant placed on the back in their own crib or play yard', 'Fitted sheet only in the sleep space', 'No swaddles, bibs, necklaces, pacifier clips or positioners', 'A baby asleep anywhere else is moved promptly', 'Light enough to see each face and skin color', 'Staff placed to see and hear every sleeping baby', 'No equipment that blocks seeing or hearing', 'Babies dressed for the room: one layer more than an adult', 'An awake baby is out of the crib within 30 minutes', 'Quiet Time led with the four steps', 'Children who do not sleep get a quiet activity, per the state rule', 'Rest is never used as punishment'];
+const CHECKLIST = ['Each child on their own labeled cot or mat', 'Cots or mats spaced apart, with clear walkways', 'Each child\'s own labeled bedding', 'Lighting that lets staff see each child', 'Staff placed to see and hear every resting child', 'No equipment that blocks seeing or hearing', 'No food, drink or hazard objects on cots', 'Shoes off and stored, cords kept away', 'Quiet activities ready for children who do not sleep after the rest period', 'Quiet Time led with the four steps', 'Children who do not sleep get a quiet activity, per the state rule', 'Rest is never used as punishment'];
 function pilotHtml() {
   const p = PILOT;
   return sect('wc-quiet-sec ts-pilot-sec', 'ts-pilot', `<div class="wc-split wc-split-rev">
-   <div class="wc-split-copy">${lead('The pilot course, in development', p.title, 'The first course we are building. Safe sleep is the rule that matters most for babies, and Missouri reviews every word of a safe sleep course against the AAP recommendations. If this course meets the bar, the format does.', 'ts-pilot-h')}
+   <div class="wc-split-copy">${lead('The pilot course, in development', p.title, 'The first course we are building. Rest time is when one adult must see and hear every child, so we start there. If this course meets the bar, the format does.', 'ts-pilot-h')}
     <dl class="ts-facts">
      <div><dt>Length</dt><dd><b>${p.hours}</b> hours</dd></div>
      <div><dt>Short videos</dt><dd><b>${p.videos}</b> of 2 to 4 minutes</dd></div>
@@ -195,7 +192,7 @@ function pilotHtml() {
    <div class="wc-split-art wc-rv">${art('lumi', { cls: 'wc-big', pose: 'calm-breath', alt: 'Lumi the bunny, taking a calm breath' })}</div></div>
   <div class="ts-checklist wc-rv"><h3>What the director checks in the room, within 30 days</h3>
    <ol>${CHECKLIST.map(c => `<li>${c}</li>`).join('')}</ol>
-   <p class="wc-note">This course is a design (draft 0.1). It has not yet been reviewed by our trainer of record or by either state. For babies, safe sleep always comes first; Quiet Time is for toddlers and preschoolers.</p></div>`);
+   <p class="wc-note">This course is a design (draft 0.1). It has not yet been reviewed by our trainer of record or by either state. This is the program\'s own rest-time practice for ages 2 to 5. Confirm the exact rest rules with your licensing consultant. Quiet Time is for twos through pre-K.</p></div>`);
 }
 
 // ---------------------------------------------------------------- how mastery is verified (the completion record)
@@ -208,7 +205,7 @@ function verifyHtml() {
     ${guideBy('fern', 'If a grown-up misses a safety question, they go back and learn it again. That is not a failure. That is the point.')}</div>
    <div class="wc-split-art wc-rv"><figure class="wc-today ts-record" aria-labelledby="ts-record-cap">
     <span class="wc-ribbon">Example</span>
-    <div class="wc-today-head"><b>Course record: SR-120</b><span>Safe Sleep and Lumi's Quiet Time, version 0.1 (draft)</span></div>
+    <div class="wc-today-head"><b>Course record: SR-120</b><span>Rest Time and Lumi's Quiet Time, version 0.1 (draft)</span></div>
     <div class="wc-today-sec"><h3>Course work</h3><ul class="wc-ticks">${['Videos', 'Activities', 'Life-safety 100%', 'Final check 80%+', 'Reflections'].map(x => `<li>${x}</li>`).join('')}</ul></div>
     <div class="wc-today-sec"><h3>In the room</h3><p class="ts-rec-line"><b>Director checklist</b><span>Due within 30 days of the course</span></p></div>
     <div class="wc-today-sec ts-rec-state"><h3>State credit</h3><p class="ts-rec-line"><b>Pending approval</b><span>Shown only after Kansas or Missouri records it</span></p></div>
@@ -216,7 +213,7 @@ function verifyHtml() {
 }
 
 // ---------------------------------------------------------------- every year (curriculum.json annual_plans, Missouri center teacher)
-const PLAN = [['SR-120', 'Safe Sleep and Lumi\'s Quiet Time', 1.5], ['SR-200', 'Lumi\'s Calm Corner: Developmentally Appropriate Guidance and Discipline', 1.5], ['FF-110', 'The Whole-Child Daily Rhythm', 1.0], ['FF-120', 'Bop &amp; Go!: Move Your Body, Grow Your Mind', 1.5], ['FF-140', 'Booker\'s Watch, Do, Repeat, Take Home', 2.0], ['SR-160', 'Ready for Anything: Emergency Preparedness, Drills and Reunification', 1.5], ['SR-130', 'Healthy Rooms: Recognizing Illness and Preventing Infection', 1.5], ['FF-170', 'Observing and Documenting Children\'s Learning', 2.0]];
+const PLAN = [['SR-120', 'Rest Time and Lumi\'s Quiet Time', 1.5], ['SR-200', 'Lumi\'s Calm Corner: Developmentally Appropriate Guidance and Discipline', 1.5], ['FF-110', 'The Whole-Child Daily Rhythm', 1.0], ['FF-120', 'Bop &amp; Go!: Move Your Body, Grow Your Mind', 1.5], ['FF-140', 'Booker\'s Watch, Do, Repeat, Take Home', 2.0], ['SR-160', 'Ready for Anything: Emergency Preparedness, Drills and Reunification', 1.5], ['SR-130', 'Healthy Rooms: Recognizing Illness and Preventing Infection', 1.5], ['FF-170', 'Observing and Documenting Children\'s Learning', 2.0]];
 const planTotal = () => PLAN.reduce((a, r) => a + r[2], 0);
 function yearHtml() {
   return sect('ts-year-sec', 'ts-year', `${lead('Every year after', 'Training comes round every year', 'The states require training every year. Our draft catalog plans it by role, so the minimum is met without repeating a course.', 'ts-year-h')}
@@ -224,9 +221,9 @@ function yearHtml() {
    <div class="wc-rules ts-year-rules">
     <div><h3>The hours, planned by role</h3><ul><li>Kansas centers: 16 hours a licensure year, at least 4 in health and safety. Kansas homes: 10.</li><li>Missouri: 12 hours a calendar year.</li><li>Each plan in our draft catalog meets the state minimum without repeating a course in the same year.</li></ul></div>
     <div><h3>A needs check every year</h3><ul><li>In Kansas, the director must assess each teacher's training needs every licensure year (K.A.R. 28-4-428a(e)(2)).</li><li>Every new course brings its own director checklist.</li></ul></div>
-    <div><h3>Renewals that matter</h3><ul><li>Missouri infant programs: safe sleep training again every 3 years.</li><li>Pediatric first aid and CPR kept current, in person.</li></ul></div>
+    <div><h3>Renewals that matter</h3><ul><li>Pediatric first aid and CPR kept current, in person.</li></ul></div>
    </div>
-   <div class="ts-plan wc-rv"><span class="wc-ribbon wc-ribbon-inline">Sample plan</span><h3>A Missouri teacher in an infant-licensed center</h3>
+   <div class="ts-plan wc-rv"><span class="wc-ribbon wc-ribbon-inline">Sample plan</span><h3>A Missouri center teacher</h3>
     <table><caption class="wc-vh">Sample annual training plan, ${planTotal().toFixed(1)} hours</caption><thead><tr><th scope="col">Course</th><th scope="col">Hours</th></tr></thead>
      <tbody>${PLAN.map(r => `<tr><td><b>${r[0]}</b> ${r[1]}</td><td>${r[2].toFixed(1)}</td></tr>`).join('')}</tbody>
      <tfoot><tr><th scope="row">Total (Missouri requires 12)</th><td>${planTotal().toFixed(1)}</td></tr></tfoot></table>
@@ -236,7 +233,7 @@ function yearHtml() {
 
 // ---------------------------------------------------------------- what families can ask to see
 const ASK = [
-  ['The written safe sleep policy', 'Kansas programs must share their safe sleep plan before a baby\'s first day. Missouri programs give you a copy of their policy at enrollment.', 'K.A.R. 28-4-436(b); 5 CSR 25-500.132', 'lumi'],
+  ['The written rest-time policy', 'Ask to see the center\'s rest-time plan: where children rest, how adults see and hear them, and what children do if they do not sleep. Rules differ by state, so confirm with your licensing consultant.', 'The program\'s own practice', 'lumi'],
   ['The emergency plan', 'Kansas programs review it with parents and with staff every year: fire, weather, a missing child, lockdown, where children go and how families are reunited.', 'K.A.R. 28-4-128(a)', 'bop'],
   ['Who has current first aid and CPR today', 'Ask how the program makes sure someone with current pediatric first aid and CPR is with your child\'s group all day.', 'K.A.R. 28-4-428a(c); 5 CSR 25-500.102(1)(T)', 'zuri'],
   ['Whether each teacher in the room has finished orientation and health and safety training', 'Programs keep these records in each person\'s file. Expect a yes or no, not the personal file: background check results stay confidential.', 'K.A.R. 28-4-428a(f); 5 CSR 25-500.102(1)(N)', 'booker'],
@@ -250,8 +247,8 @@ function askHtml() {
 
 // ---------------------------------------------------------------- where we are today (honest status box)
 const STATUS = {
-  done: ['A draft course map for Kansas and Missouri, with every state rule tied to its citation (draft 0.1).', 'The pilot course designed: Safe Sleep and Lumi\'s Quiet Time.', 'The course design standard: short videos, activities every few minutes, scenario checks, 100% life-safety mastery, coach-read reflections and director sign-off.'],
-  now: ['Building the first courses: what a new teacher needs first, starting with safe sleep, reporting abuse and neglect, emergency preparedness, guidance and discipline, and the Futures Friends daily rhythm.', 'Preparing our courses for state review in Kansas (Cape) and Missouri (MOPD).'],
+  done: ['A draft course map for Kansas and Missouri, with every state rule tied to its citation (draft 0.1).', 'The pilot course designed: Rest Time and Lumi\'s Quiet Time.', 'The course design standard: short videos, activities every few minutes, scenario checks, 100% life-safety mastery, coach-read reflections and director sign-off.'],
+  now: ['Building the first courses: what a new teacher needs first, starting with rest time, reporting abuse and neglect, emergency preparedness, guidance and discipline, and the Futures Friends daily rhythm.', 'Preparing our courses for state review in Kansas (Cape) and Missouri (MOPD).'],
   not: ['No course has been reviewed or approved by Kansas or Missouri. Until one is, its hours do not count toward required training.', 'Our learning platform is not yet approved by Missouri for self-paced courses.', 'Our Training Content Lead and Trainer of Record is not yet named.', 'No course is live yet.']
 };
 function statusHtml(compact) {
@@ -272,7 +269,7 @@ const FAQ = [
   ['What happens if a teacher misses a safety question?', 'They go back to the lesson that covers it and answer a different question on the same point. Life-safety questions need 100%, whatever the overall score. If the director sees a life-safety item missed in the classroom, a coaching plan starts.'],
   ['Do teachers learn CPR online?', 'No. Kansas requires pediatric first aid and CPR with the skills shown in person to an instructor. CPR and first aid come from an in-person partner, not from our online courses.'],
   ['Is a background check done before a teacher starts?', 'Both states require it before the person works or is present. In Missouri, a new hire may start on a qualifying fingerprint result only under constant supervision until the full check is complete.'],
-  ['Does Lumi\'s Quiet Time replace the safe sleep rules?', 'No. For babies, safe sleep always comes first: on the back, in their own crib or play yard, with nothing soft. Quiet Time is for toddlers and preschoolers, offered and never forced. In Missouri, preschoolers who do not sleep still rest for 30 to 60 minutes, because the state requires it.'],
+  ['Is Lumi\'s Quiet Time the same as nap time?', 'No. Quiet Time is a calm routine for twos through pre-K, offered and never forced. Rest or nap time follows our own practice for ages 2 to 5 and your state\'s rest rule. In Missouri, preschoolers who do not sleep still rest for 30 to 60 minutes, because the state requires it.'],
   ['Who checks that the courses are correct?', 'Every course cites the rule it teaches, with separate Kansas and Missouri editions where the rules differ. Before teachers use a course, our Training Content Lead and Trainer of Record must check it against the current rule text and sign it. That person has not been named yet.'],
   ['Is Ms. June a real teacher?', 'No. Ms. June is a character from the Futures Friends story world. She introduces parts of this page; she does not speak for, or describe, any real member of our staff.'],
   ['Are Principal Hazel, Mr. Moss and Ms. Fern real staff?', 'No. They are story-world characters too, like Ms. June. They introduce a section each; none of them describes a real person at our center.'],
@@ -293,12 +290,12 @@ V['teacher-standard'] = () => `<div class="wc ts">${heroHtml()}${welcomeHtml()}$
 
 // ---------------------------------------------------------------- #train-your-staff (for center and home daycare owners)
 const OFFER = [
-  ['The same courses', 'Kansas and Missouri editions of the state-required topics (safe sleep, reporting abuse and neglect, emergencies, medication and more), plus the Futures Friends methods.', 'booker'],
+  ['The same courses', 'Kansas and Missouri editions of the state-required topics (reporting abuse and neglect, emergencies, medication and more), plus the Futures Friends methods.', 'booker'],
   ['Pass the safety questions', 'Two to four minute videos, activities every few minutes, scenario checks and 100% on life-safety questions.', 'lumi'],
   ['Director dashboards', 'Who has finished what, what is due, and each person\'s hours against your state\'s clock: the Kansas licensure year or the Missouri calendar year.', 'zuri'],
   ['Time tracking', 'Active time for each lesson, idle time paused, and completion records ready for the state registry once a course is approved.', 'bop'],
   ['Observation checklists', 'A short on-the-job checklist for each course, for the director to sign within 30 days. A missed life-safety item starts a coaching plan.', 'purple'],
-  ['Annual plans by role', 'Sample plans for teachers, infant-room staff, directors and home providers, checked against your state\'s hour minimums.', 'gold']
+  ['Annual plans by role', 'Sample plans for teachers, directors and home providers, checked against your state\'s hour minimums.', 'gold']
 ];
 const WONT = [
   ['Count toward state hours before approval', 'Each course counts only after Kansas (Cape) or Missouri (MOPD) approves it.'],
@@ -352,7 +349,7 @@ function callout(where) {
   return `<div class="ts-home-compact">
    <h2 id="ts-home-h">Who is with your child, and how we know they are ready</h2>
     <p>The law sets the minimum before any teacher is alone with children. Our training is designed to add mastery and proof on the job, and we tell you exactly where it stands.</p>
-    <ul class="ts-home-points"><li><b>Before day one</b><span>Background checks, orientation and safety training, by state law</span></li><li><b>100% on life-safety</b><span>Safe sleep, reporting and missing-child questions, every time</span></li><li><b>Seen in the room</b><span>A director checklist within 30 days of each course</span></li></ul>
+    <ul class="ts-home-points"><li><b>Before day one</b><span>Background checks, orientation and safety training, by state law</span></li><li><b>100% on life-safety</b><span>Rest-time supervision, reporting and missing-child questions, every time</span></li><li><b>Seen in the room</b><span>A director checklist within 30 days of each course</span></li></ul>
     <p class="ts-home-flag">Our courses are in development and not yet approved by either state.</p>
     <a class="hc-btn hc-btn-quiet" href="#teacher-standard">Read our Teacher Standard <svg class="px-icon" aria-hidden="true"><use href="img/ui-icons.svg#ArrowRight"></use></svg></a></div>`;
 }

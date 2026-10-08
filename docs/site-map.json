@@ -84,7 +84,7 @@
     },
     {
      "id": "steps",
-     "title": "What teachers look for, from infants to pre-K"
+     "title": "What teachers look for, from twos to pre-K"
     },
     {
      "id": "support",
@@ -1175,7 +1175,7 @@
     },
     {
      "id": "ts-pilot",
-     "title": "Safe Sleep and Lumi's Quiet Time"
+     "title": "Rest Time and Lumi's Quiet Time"
     },
     {
      "id": "ts-verify",
@@ -9088,26 +9088,6 @@
   {
    "from_route": "at-home",
    "from_section": "fl-age",
-   "label": "Babies Birth to 12 months 9 activities",
-   "kind": "nav",
-   "to_route": "activities",
-   "to_section": "infant",
-   "status": "ok",
-   "note": "#activities/infant shows the same page as #activities"
-  },
-  {
-   "from_route": "at-home",
-   "from_section": "fl-age",
-   "label": "Toddlers 12 to 24 months 12 activities",
-   "kind": "nav",
-   "to_route": "activities",
-   "to_section": "toddler",
-   "status": "ok",
-   "note": "#activities/toddler shows the same page as #activities"
-  },
-  {
-   "from_route": "at-home",
-   "from_section": "fl-age",
    "label": "Twos 2 years 16 activities",
    "kind": "nav",
    "to_route": "activities",
@@ -9148,7 +9128,7 @@
   {
    "from_route": "at-home",
    "from_section": "fl-doors",
-   "label": "Things to do tonight 37 activities for babies to pre-K, 3 to 15 minutes, made from things you already have.",
+   "label": "Things to do tonight 27 activities for ages 2 to 5, 3 to 15 minutes, made from things you already have.",
    "kind": "card",
    "to_route": "activities",
    "to_section": "",

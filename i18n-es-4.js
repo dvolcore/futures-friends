@@ -127,7 +127,7 @@ window.FFi18n.add('es', {
   "Before day one": "Antes del primer día",
   "Background checks, orientation and safety training, by state law": "Verificación de antecedentes, orientación y capacitación en seguridad, según la ley estatal",
   "100% on life-safety": "100% en seguridad vital",
-  "Safe sleep, reporting and missing-child questions, every time": "Preguntas sobre sueño seguro, reportes y niños desaparecidos, todas las veces",
+  "Rest-time supervision, reporting and missing-child questions, every time": "Supervisión en el tiempo de descanso, reportes y preguntas sobre niños desaparecidos, todas las veces",
   "Seen in the room": "Observado en el salón",
   "A director checklist within 30 days of each course": "Una lista de verificación del director en un plazo de 30 días después de cada curso",
   "Our courses are in development and not yet approved by either state.": "Nuestros cursos están en desarrollo y todavía no están aprobados por ninguno de los dos estados.",

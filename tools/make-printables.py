@@ -366,8 +366,8 @@ def reading_log(crowd, lang='en'):
                          title='Registro de lectura del Club de Lectura de Booker' if es else "Booker's Book Club reading log")
     W, H = letter
     header(c, W, H, 'Club de Lectura de Booker' if es else "Booker's Book Club",
-           'Anota cada libro que compartan. Releer un favorito también cuenta. Los bebés también cuentan.' if es else
-           'Write down every book you share. Rereading a favorite counts. Babies count too.', NAVY, es, friend='booker',
+           'Anota cada libro que compartan. Releer un favorito también cuenta. Todos los lectores cuentan.' if es else
+           'Write down every book you share. Rereading a favorite counts. Every reader counts.', NAVY, es, friend='booker',
            pill_at=(0.5 * inch, H - 1.52 * inch, 'left'))
     draw_img(c, art('booker-reading'), None, H - 2.42 * inch, h=1.2 * inch, cx=W - 0.95 * inch)
     qh = para(c, ('<b>Prueben una pregunta cada vez.</b> ' if es else '<b>Try one question each time.</b> ') + ' '.join(f'<b>{v[0]}:</b> {v[1]}' for v in crowd.values()),

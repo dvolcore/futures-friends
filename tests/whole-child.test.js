@@ -109,7 +109,7 @@ test('state rules are shown on top of the defaults, with Kansas, Missouri and bo
   const html = site().render('whole-child'), t = text(html);
   assert.match(html, /State rules sit on top of these defaults/);
   assert.match(t, /At least 60 minutes outdoors once a child has been in care more than 4 hours/);
-  assert.match(t, /Awake toddlers confined no more than 30 minutes \(K\.A\.R\. 28-4-440\(f\)\)/);
+  assert.doesNotMatch(t, /confined|crib|infant/i, 'ages 2 to 5 only: no confinement or infant rule is shown');
   assert.match(t, /Kansas homes: physical activity offered at least 1 hour a day/);
   assert.match(t, /1 hour outdoors for full-day preschool and school-age children, weather permitting/);
   assert.match(t, /Preschoolers who do not sleep rest 30 to 60 minutes\. Rest is required, and sleep never is/);
@@ -144,7 +144,7 @@ test('copy follows the guardrails: no medical claims, no body measurement, no di
   assert.match(t, /Quiet Time is offered, never forced/);
   assert.match(t, /Water is available all day, with a prompt at every Bop & Go! transition/);
   assert.match(t, /The teacher decides/);
-  assert.match(t, /sleep and rest rules/i);
+  assert.match(t, /rest-time rules/i);
   assert.match(t, /opt-in and never tracked per person/);
   assert.match(t, /does not replace balanced food service/);
 });

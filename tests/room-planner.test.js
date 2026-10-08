@@ -22,7 +22,7 @@ function site() {
 }
 
 // ---------------------------------------------------------------- square feet per child
-test('space per child: Missouri 35, Kansas centers 28, Kansas homes 25, Missouri infants and toddlers 45 (the stricter number)', () => {
+test('space per child: Missouri 35, Kansas centers 28, Kansas homes 25, Missouri youngest children 45 (the stricter number)', () => {
   const m = s => C.minPerChild(Object.assign({}, C.DEFAULT_SETUP, s)).sqft;
   assert.equal(m({ state: 'MO', type: 'center', ages: ['threes'] }), 35);
   assert.equal(m({ state: 'MO', type: 'home', ages: ['twos'] }), 35);
@@ -117,7 +117,7 @@ test('sightlines: a tall shelf hides Lumi from the teacher (a stop); a 24 in fen
   assert.ok(C.check(room(20, 20, [exitDoor(), lumi])).some(i => i.kind === 'sight' && /Add a teacher position/.test(i.msg)));
 });
 
-test('safety and comfort: heaters keep 36 in clear; calm corner away from doors and from Bop; Missouri infant and toddler rooms get washable mats', () => {
+test('safety and comfort: heaters keep 36 in clear; calm corner away from doors and from Bop; Missouri rooms for the youngest children get washable mats', () => {
   const heater = C.make('heater', { x: 0, y: 100 }), mat = C.make('mat', { z: 'booker', sz: '35', w: 36, l: 60, x: 20, y: 120 });
   assert.ok(C.check(room(20, 20, [exitDoor({ at: 150 }), heater, mat])).some(i => i.kind === 'safety' && i.level === 'stop' && /36 in away/.test(i.msg)));
   const lumi = C.make('mat', { z: 'lumi', sz: '35', w: 36, l: 60, x: 20, y: 160 }), bop = C.make('mat', { z: 'bop', sz: '35', w: 36, l: 60, x: 80, y: 160 });

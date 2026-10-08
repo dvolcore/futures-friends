@@ -452,7 +452,7 @@ V.activities = () => {
    ${sec('fl-lib', 'The activity library', 'Find one that fits', 'Pick an age and a friend. Open any card to see the steps.',
     `<div class="fl-filters">${seg('Age', A.band, [['', 'All ages']].concat(BANDS.map(b => [b.id, b.n])))}${seg('Friend', A.friend, [['', 'All friends']].concat(FK.map(k => [k, FRIENDS[k].n])))}</div>
      <div id="flActList">${actList()}</div>
-     <p class="fl-note">"What you might notice" is for noticing, never for diagnosing. If something worries you, trust that feeling and talk with your child's doctor. The CDC's free milestone checklists and Milestone Tracker app can help you prepare (${ext('cdc', 'CDC Learn the Signs. Act Early.')}). In Missouri, families can ask for a free evaluation through First Steps (birth to 3) or their school district (ages 3 to 5); see <a href="#include">Futures Include</a>.</p>`)}</div>`;
+     <p class="fl-note">"What you might notice" is for noticing, never for diagnosing. If something worries you, trust that feeling and talk with your child's doctor. The CDC's free milestone checklists and Milestone Tracker app can help you prepare (${ext('cdc', 'CDC Learn the Signs. Act Early.')}). In Missouri, families can ask for a free evaluation through First Steps (until a child turns 3) or their school district (ages 3 to 5); see <a href="#include">Futures Include</a>.</p>`)}</div>`;
 };
 
 // ---------------------------------------------------------------- #printables

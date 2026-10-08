@@ -186,7 +186,6 @@ function buckets(step, mission, minutes, o, band){
     if (o && o.swap) { x.weather_swap = true; x.outdoor_min = 0; } else x.outdoor_min = m;
   }
   if (step.type==='reset') { x.active_min = 0; x.mvpa_min = 0; x.rest_min = !mission ? m : 0; } // a rest period (not a movement reset) counts as rest
-  if (mission && /tummy/i.test(mission.title)) x.tummy_min = m;
   return x;
 }
 function scale(mo, minutes){
@@ -443,11 +442,11 @@ function familyCard(c){
   else if (!day.present) body = `<p class="small">${E(first)}'s Daily Rhythm shows here once ${E(first)} is marked here for the day.</p>`;
   else {
     const tg = Object.fromEntries((day.targets||[]).map(t=>[t.metric,t]));
-    const act = tg.mvpa_min || tg.tummy_min, out = tg.outdoor_min || tg.outdoor_occasions, scr = tg.screen_max_min;
+    const act = tg.mvpa_min, out = tg.outdoor_min || tg.outdoor_occasions, scr = tg.screen_max_min;
     const line = (t, what) => !t ? '' : `<li><b>${what}:</b> ${t.value} ${t.unit==='minutes'?'minutes':(t.unit==='occasions'?'times':'activities')} today in ${E(first)}'s room. ${t.min!=null?`Our goal for this age is ${t.min}${t.max!=null?' to '+t.max:''} ${t.unit==='minutes'?'minutes':''}. ${t.status==='met'?'Reached today.':'Still building today.'}`:`The limit is ${t.max} ${t.unit==='minutes'?'minutes':''}.`} <span class="rh-src">Source: ${t.source_url?`<a href="${E(t.source_url)}" target="_blank" rel="noopener">${E(t.source_label)}</a>`:E(t.source_label)}</span></li>`;
     const moments = (day.moments||[]).filter(m=>m.moment_type!=='water');
     const mission = (day.moments||[]).map(m=>m.mission).find(Boolean);
-    body = `<ul class="rh-fam" style="list-style:none;padding:0;margin:0;display:grid;gap:4px">${line(tg.mvpa_min,'Active play')}${tg.tummy_min?line(tg.tummy_min,'Tummy time'):''}${line(tg.outdoor_min,'Outdoors')}${scr?`<li><b>Screen time:</b> ${scr.value===0?'None today.':`${scr.value} minutes today, with a teacher.`} ${scr.max===0?'Children through age 2 do not use screens here.':''}</li>`:''}</ul>
+    body = `<ul class="rh-fam" style="list-style:none;padding:0;margin:0;display:grid;gap:4px">${line(tg.mvpa_min,'Active play')}${line(tg.outdoor_min,'Outdoors')}${scr?`<li><b>Screen time:</b> ${scr.value===0?'None today.':`${scr.value} minutes today, with a teacher.`} ${scr.max===0?'Children through age 2 do not use screens here.':''}</li>`:''}</ul>
      ${moments.length?`<h3 style="font-size:16px;margin-top:8px">${E(first)}'s room today</h3><ul class="rh-fam" style="margin:0;padding-left:18px">${moments.map(m=>`<li>${E(m.title)}${m.minutes?` <span class="mini">${m.minutes} min</span>`:''}${m.weather_swap?' <span class="mini">(moved indoors for the weather)</span>':''}</li>`).join('')}</ul>`:'<p class="small muted">No moments logged yet today.</p>'}
      ${mission?`<div class="rh-note" style="margin-top:8px"><b>Today's Bop mission: ${E(mission.title)}.</b> ${E(mission.teacher_words)}</div>`:''}
      <div class="rh-note" style="margin-top:8px"><b>At pickup, ask:</b> "What's your one thing?" Let ${E(first)} choose the one thing from today that they want to tell you about.</div>`;
