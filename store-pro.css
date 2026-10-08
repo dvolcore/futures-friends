@@ -229,3 +229,4 @@
 .sp-qv-info{min-width:0}
 .sp-qv-info .sp-buyrow{flex-wrap:wrap}
 .sp-qv-info .sp-addbtn{flex:1 1 190px;white-space:normal;line-height:1.2;min-height:50px}
+.sp-notify-form[hidden]{display:none!important}
