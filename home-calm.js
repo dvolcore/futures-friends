@@ -96,7 +96,7 @@
   // The friends' loops have no sound track (nothing to caption); the talking intro's captions (speaker names included) are registered
   // in captions.js, so the shared caption hook writes its <track>; written without "default" so its file is not fetched before the
   // clip comes near (lazy, like the clip): home-video.js turns the captions on (showing) when it gives the clip its sources.
-  const captions = src => (window.FFCaptions && typeof window.FFCaptions.tracks === 'function' ? window.FFCaptions.tracks(src).replace(/ default>$/, '>') : '');
+  const captions = src => (window.FFCaptions && typeof window.FFCaptions.tracks === 'function' ? window.FFCaptions.tracks(src).replace(/ default>/g, '>') : '');   // every track (English, and the Spanish one from captions-es.js)
   function videoFrame(key, cls) {
     const v = VIDEOS[key], wide = v.wide, tall = v.tall, first = wide || tall;
     const poster = wide ? `<picture class="hc-vposter"><source media="(max-width:600px)" srcset="${tall.poster}" width="${tall.w}" height="${tall.h}"><img src="${wide.poster}" alt="" width="${wide.w}" height="${wide.h}" loading="lazy" decoding="async"></picture>`

@@ -37,7 +37,8 @@
       video.querySelectorAll('source').forEach(x => x.remove());
       video.insertAdjacentHTML('afterbegin', `<source src="${v.av1}" type='video/webm; codecs="${v.codecs}"'><source src="${v.mp4}" type="video/mp4">`);
       video.load();
-      const t = video.querySelector('track');   // its captions (the talking intro) come on with the sources, not before
+      const lang = (window.FFi18n && window.FFi18n.lang) || 'en';   // the site language's track (i18n.js), else the first one
+      const t = video.querySelector(`track[srclang="${lang}"]`) || video.querySelector('track');   // its captions (the talking intro) come on with the sources, not before
       if (t && t.track) t.track.mode = 'showing';
     };
     const label = () => {
