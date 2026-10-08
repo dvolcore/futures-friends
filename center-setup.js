@@ -26,7 +26,7 @@ const STEPS = {
 };
 const FACILITY = [['child_care_center','Child care center'],['preschool','Preschool'],['family_home','Family child care home'],['group_home','Group child care home'],
   ['school_age','School-age program'],['license_exempt_religious','License-exempt religious program (Missouri)']];
-const MONTHS = [[0,'Infants (under 12 months)'],[12,'12 to 23 months'],[24,'2 years'],[36,'3 years'],[48,'4 to 5 years'],[60,'School age']];
+const MONTHS = [[24,'2 years'],[36,'3 years'],[48,'4 to 5 years'],[60,'School age']];
 const INVITE_STATUS = {pending:'Sending soon', invited:'Invited', active:'Joined', blocked:'Needs attention', cancelled:'Cancelled'};
 
 const S = { centerId:null, row:null, status:null, cfg:null, invites:null, loading:false, err:null, open:null, collapsed:false, busy:false, note:'', exporting:false };
@@ -118,7 +118,7 @@ function stepBody(step, st){
  <label class="f">ZIP code<input class="i" name="zip" inputmode="numeric" maxlength="5" value="${E(p.zip || '')}"></label>
  <label class="f">Latitude<input class="i" name="lat" inputmode="decimal" value="${E(p.lat ?? '')}" required></label>
  <label class="f">Longitude<input class="i" name="lon" inputmode="decimal" value="${E(p.lon ?? '')}" required></label>
- <label class="cs-check"><input type="checkbox" name="serves_infants" ${p.serves_infants?'checked':''}> We care for infants (under 12 months)</label>
+ <label class="cs-check"><input type="checkbox" name="serves_infants" ${p.serves_infants?'checked':''}> We also care for infants (our curriculum is for ages 2 to 5; this turns on infant-specific staff requirements)</label>
  <label class="cs-check"><input type="checkbox" name="subsidy_contract" ${p.subsidy_contract?'checked':''}> We have a child care subsidy contract</label>
  <div class="cs-acts" style="grid-column:1/-1"><button class="btn soft" type="button" data-cs="locate">Use this device’s location</button>
  <span class="small muted">Do this at the center. The location is used only for the weather card (api.weather.gov); it is not shared.</span></div>

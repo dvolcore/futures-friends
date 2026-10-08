@@ -106,7 +106,6 @@ function buildPlan(o, when = new Date()) {
   const calms = shuffle(forBand.filter(a => a.c === 'lumi'), r);
   const outside = shuffle(forBand.filter(a => (F.ACTS.find(x => x.id === a.id) || a).where === 'Outdoors' /* the English value: in Spanish it is 'Al aire libre' */), r);
   const full = BOOKS.filter(x => x.status === 'full');
-  const young = b === 'infant' || b === 'toddler';
   const types = Object.keys(CROWD);
   const start = monday(when);
   const used = new Set();
@@ -118,9 +117,7 @@ function buildPlan(o, when = new Date()) {
     const doIt = next(weekend && outside.length ? outside : (doPool.length ? doPool : forBand), i); used.add(doIt.id);
     const move = next(moves, i, doIt); if (move) used.add(move.id);
     const calm = calms.length ? (calms[i % calms.length] !== doIt ? calms[i % calms.length] : calms[(i + 1) % calms.length]) : null;
-    const story = young
-      ? { t: 'A board book you love', how: 'Point to a picture, name it, and pause for your baby\'s turn.', href: '#activities/point-and-name-book' }
-      : (i % 2 === 0 ? { t: full[(i / 2) % full.length].title, how: 'Read it free in Story Time, then try one talk-about-it question.', href: '#story-time/' + full[(i / 2) % full.length].id }
+    const story = (i % 2 === 0 ? { t: full[(i / 2) % full.length].title, how: 'Read it free in Story Time, then try one talk-about-it question.', href: '#story-time/' + full[(i / 2) % full.length].id }
         : { t: 'Any book from your shelf or the library', how: CROWD[types[i % types.length]][0] + ': ' + CROWD[types[i % types.length]][1], href: '#story-time' });
     return { day: d, date: isoDay(date), weekend, story, doIt, move, calm };
   }) };
@@ -151,7 +148,7 @@ const privacyNote = `<p class="fl-privacy"><b>No account. Nothing about your chi
 // ---------------------------------------------------------------- #at-home
 const DOORS = [
   ['story-time', 'Story Time', 'Five Futures Friends storybooks to read free, page by page, with a question to ask on every page.', 'booker'],
-  ['activities', 'Things to do tonight', `${ACTS.length} activities for babies to pre-K, 3 to 15 minutes, made from things you already have.`, 'zuri'],
+  ['activities', 'Things to do tonight', `${ACTS.length} activities for ages 2 to 5, 3 to 15 minutes, made from things you already have.`, 'zuri'],
   ['printables', 'Printables', 'Picture schedule, rainbow tracker, calm-down and move cards, a reading log, a sticker chart and certificates. Each one in Spanish too (draft).', 'lumi'],
   ['see-how', 'See how: picture guides', 'Eight routines shown in pictures, step by step, for when you would rather see it than read it.', 'bop'],
   ['my-week', 'My Week', 'A plan for your child\'s age that changes every Monday, a sticker chart and certificates you can print.', 'booker'],
@@ -160,7 +157,7 @@ const DOORS = [
 ];
 const DIFF = [
   ['The whole story, not a clip', 'Read every word of five storybooks, page by page, with a question for each page.'],
-  ['Made for your child\'s age', 'Pick babies, toddlers, twos, threes or pre-K and see only what fits.'],
+  ['Made for your child\'s age', 'Pick twos, threes or pre-K and see only what fits.'],
   ['Things you can print', 'Fridge schedules, cut-out cards, a reading log and certificates, ready as PDFs.'],
   ['A plan for this week', 'Seven days of small things to do, made for your child\'s age. New every Monday.'],
   ['Your progress stays yours', 'Stickers and book counts are saved on your own device. No account, no sharing.'],
@@ -170,7 +167,7 @@ V['at-home'] = () => `<div class="ffl">
  <header class="fl-hero fl-hero-home"><div class="wrap fl-hero-grid">
   <div class="fl-hero-copy"><span class="fl-kick">Free for every family &middot; no account</span>
    <h1>Futures at Home</h1>
-   <p class="lede">Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Babies through pre-K are welcome, whether or not your child goes to a Futures Friends program.</p>
+   <p class="lede">Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Made for children ages 2 to 5, whether or not your child goes to a Futures Friends program.</p>
    <div class="fl-acts"><a class="btn gold" href="#story-time">Read a story</a><a class="btn ghost" href="#my-week">Build my week</a></div></div>
   <div class="fl-hero-art">${art('all')}</div></div></header>
  ${sec('fl-age', 'Start here', 'How old is your child?', 'Pick an age to see activities that fit. Each one takes 3 to 15 minutes.',
@@ -182,7 +179,7 @@ V['at-home'] = () => `<div class="ffl">
  ${sec('fl-how', 'How it works', 'One story, one thing to do, one move, one calm moment', 'A few minutes together, most days, using the same words your child hears in a Futures classroom.',
   `<ol class="fl-four">${FK.map(k => `<li style="--c:${col(k)}">${art(k)}<b>${FRIENDS[k].n}: ${FRIENDS[k].p}</b><span>${FRIENDS[k].t}</span><q>${E(FRIENDS[k].line)}</q></li>`).join('')}</ol>
    ${window.FFSupporting && window.FFSupporting.cameo ? `<div class="fl-family-cameo">${window.FFSupporting.cameo(['bruno', 'booker', 'rose', 'lumi', 'sage', 'zuri', 'ella', 'bop'], { caption: 'Every friend has a grown-up at home, too.', cls: 'fl-cameo' })}</div>` : ''}
-   <p class="fl-note">The activities follow published guidance, cited on each card: reading aloud from birth and asking questions while you read (${ext('aapRead', 'AAP')}, ${ext('dialogic', 'Reading Rockets')}), back-and-forth play (${ext('serve', 'Harvard Center on the Developing Child')}) and daily active play (${ext('who', 'WHO 2019')}). They were written by the Futures Friends team; an outside early-childhood specialist review is planned. "What to notice" notes are for noticing, never for diagnosing.</p>`, 'band-paper')}
+   <p class="fl-note">The activities follow published guidance, cited on each card: reading aloud and asking questions while you read (${ext('aapRead', 'AAP')}, ${ext('dialogic', 'Reading Rockets')}), back-and-forth play (${ext('serve', 'Harvard Center on the Developing Child')}) and daily active play (${ext('who', 'WHO 2019')}). They were written by the Futures Friends team; an outside early-childhood specialist review is planned. "What to notice" notes are for noticing, never for diagnosing.</p>`, 'band-paper')}
 </div>`;
 
 // ---------------------------------------------------------------- #story-time
@@ -449,7 +446,7 @@ V.activities = () => {
   const one = actById(a);
   if (BANDS.some(b => b.id === a)) A.band = a;
   if (FK.includes(a)) A.friend = a;   // #activities/<friend>: the friend chip's link
-  return `<div class="ffl">${hero('Things to do', 'Things to do tonight', `${ACTS.length} short activities for babies to pre-K, made from things you already have at home. Each one has steps, what you might notice and ways to make it easier or harder.`, 'zuri')}
+  return `<div class="ffl">${hero('Things to do', 'Things to do tonight', `${ACTS.length} short activities for ages 2 to 5, made from things you already have at home. Each one has steps, what you might notice and ways to make it easier or harder.`, 'zuri')}
    ${one ? sec('fl-one', 'Activity', E(one.t), '', `<div class="fl-actgrid fl-actone">${actDetail(one, true)}</div>`, 'band-paper') : ''}
    ${!one && A.friend ? friendVideos(A.friend) : ''}
    ${sec('fl-lib', 'The activity library', 'Find one that fits', 'Pick an age and a friend. Open any card to see the steps.',
@@ -518,7 +515,7 @@ function guideHtml(g) {
 V['see-how'] = () => `<div class="ffl">${hero('See how', 'See how: picture guides', 'For parents who would rather see it than read about it. Eight everyday routines, one picture per step. Press play to walk through the steps, or print a guide for the fridge.', 'bop')}
  ${sec('fl-guides', 'Picture guides', 'Routines in pictures', 'Each guide uses the same words your child hears in a Futures classroom, so home and school sound alike.',
   `<div class="fl-guidegrid">${GUIDES.map(guideHtml).join('')}</div>
-   <p class="fl-note">Tooth-brushing amounts follow the ${ext('teeth', 'AAP')}; tummy time and sleep follow the ${ext('sleep', 'AAP safe sleep guidance')}; mealtime choice follows our Eat the Rainbow rule: food is never a reward or a punishment.</p>`)}</div>`;
+   <p class="fl-note">Tooth-brushing amounts follow the ${ext('teeth', 'AAP')}; bedtime routines follow the ${ext('sleep', 'AAP sleep guidance')}; mealtime choice follows our Eat the Rainbow rule: food is never a reward or a punishment.</p>`)}</div>`;
 
 // ---------------------------------------------------------------- #family-videos
 // The shelf (gap fill 2026-10-07): every finished video, grouped by friend (VIDEOS.shelf). Talking videos get their captions and
@@ -569,9 +566,8 @@ V['family-videos'] = () => `<div class="ffl">${hero('Watch', 'Watch together', `
    <div class="fl-card fl-noscreen"><h3>Prefer stories without a screen?</h3><p>Story Time has ${BOOKS.filter(b => b.status === 'full').length} full storybooks to read aloud, and the picture guides show routines step by step.</p><div class="fl-acts"><a class="btn navy" href="#story-time">Story Time</a><a class="btn soft" href="#see-how">Picture guides</a></div></div>`, 'band-paper')}
  ${sec('fl-screens', 'Small screens, big talk', 'How much screen time?', '',
   `<div class="fl-screengrid">
-    <div class="fl-card"><h3>Under 2</h3><p>No screens except video chats with family. The AAP explains that babies under 18 months have a hard time learning from screens, and the WHO does not recommend screen time before age 2. Read, sing and play instead.</p></div>
     <div class="fl-card"><h3>Ages 2 to 5</h3><p>The WHO says no more than 1 hour a day, and less is better. Futures Friends suggests 30 minutes a day or less of all screens together, watched with a grown-up.</p></div>
-    <div class="fl-card"><h3>In child care</h3><p>Futures Friends classrooms schedule at most 24 minutes of episodes a week for children 3 to 5, and none for children 2 and younger.</p></div></div>
+    <div class="fl-card"><h3>In child care</h3><p>Futures Friends classrooms schedule at most 24 minutes of episodes a week for children 3 to 5, and none for twos.</p></div></div>
    <p class="fl-note">Watch together, pause to ask "What happened?", and then turn it off and try the activity. The AAP's newest guidance (2026) puts watching together and choosing quality first, rather than a set number of minutes. Sources, checked 5 October 2026: ${ext('who')}; ${ext('aapScreen')} (2016); ${ext('aap2026')}; ${ext('aapCoview')}; ${ext('cfoc')}.</p>`)}</div>`;
 
 // ---------------------------------------------------------------- #my-week
@@ -638,7 +634,7 @@ V['my-week'] = () => {
     <fieldset><legend>Time for the main activity</legend><div class="fl-radios fl-row">${[5, 10, 15].map(m => `<label><input type="radio" name="mins" value="${m}" ${+p.mins === m ? 'checked' : ''}><span><b>${m} min</b></span></label>`).join('')}</div></fieldset></form>
     ${planHtml()}`)}
   ${sec('fl-stickers', 'Sticker chart', 'Our week', 'One row for each friend. Add a sticker when you try something together. There are no scores and no comparing: trying is the win.', `${chartHtml()}<div class="fl-acts"><button type="button" class="btn soft" data-fl="print" data-target="flChart">Print this chart</button><a class="btn soft" href="printables/futures-at-home-sticker-chart.pdf" download>Blank chart (PDF)</a></div>`, 'band-paper')}
-  ${sec('fl-club', 'Book club', 'Count the books you share', 'Babies count too: pointing at pictures together is reading.', clubHtml())}
+  ${sec('fl-club', 'Book club', 'Count the books you share', 'Pointing at pictures together counts as reading.', clubHtml())}
   ${sec('fl-certs', 'Certificates', 'Print a certificate', 'Pick one, type your child\'s first name and print. The name stays on this screen only. It is never saved or sent.',
    `<div class="fl-certpick"><div class="seg fl-seg" role="group" aria-label="Certificate">${CERTS.map((c, i) => `<button type="button" data-fl="cert" data-i="${i}" aria-pressed="${C.cert === i}">${E(c[1])}</button>`).join('')}</div>
     <label class="fl-namefield" for="flName">Child's first name (optional)<input id="flName" class="i" maxlength="24" autocomplete="off" value="${E(C.name)}"></label></div>

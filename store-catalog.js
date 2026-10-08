@@ -29,7 +29,7 @@
 
   // ------------------------------------------------------------------ vocab for the filters
   const AUDIENCES = [['center', 'Child care center'], ['home', 'Home daycare'], ['church', 'Church or faith program'], ['family', 'Family']];
-  const AGES = [['infant', 'Infants'], ['toddler', 'Toddlers'], ['twos', 'Twos'], ['threes', 'Threes'], ['prek', 'Pre-K']];
+  const AGES = [['twos', 'Twos'], ['threes', 'Threes'], ['prek', 'Pre-K']];
   const ZONES = [['circle', 'Friends Circle'], ['booker', 'Booker’s Reading Area'], ['lumi', 'Lumi’s Calm Corner'], ['zuri', 'Zuri’s Discovery Zone'], ['bop', 'Bop’s Movement Zone']];
   const COLLECTIONS = [
     { id: 'kits', name: 'Learning Zones Kits', blurb: 'The room, set up. Three sizes, from one home room to a four-room center.', side: 'centers', tone: 'booker', room: 'turtle-rug' },
@@ -55,7 +55,7 @@
     quote: ['What does “Request a quote” mean?', 'It means we have not set a public price yet. Add it to your list, send the request, and a real person sends back a price, shipping and timing before anything is charged.']
   };
   const SAFETY = {
-    rug: 'Rugs and mats need a federal flammability report (16 CFR 1630 or 1631) and a Children’s Product Certificate before they ship. Missouri does not allow carpet in new infant and toddler space, so those rooms use washable mats laundered daily.',
+    rug: 'Rugs and mats need a federal flammability report (16 CFR 1630 or 1631) and a Children’s Product Certificate before they ship. Where a state bars carpet in rooms for its youngest children (Missouri does, 5 CSR 25-500.082), use washable mats laundered daily.',
     fence: 'Friend Fence panels stand 22 to 24 in high with see-through tops, rounded corners, self-stable feet and no head-entrapment gaps. Adults must keep every child in sight and hearing. A tip test and lab review come before the first panel ships.',
     print: 'Posters and signs are not toys. Hang nothing from ceilings or across doors, keep exits clear, and plan wall art within your fire code cap (20 percent of a wall unless your fire marshal allows more).',
     puppets: 'Printed stick puppets are for use with an adult. They are not for children under 3 who still put things in their mouths. Plush friends follow later, only after toy-safety testing (ASTM F963).',
@@ -67,7 +67,7 @@
 
   // ------------------------------------------------------------------ the products
   const P = [];
-  const add = p => { P.push(Object.assign({ audiences: ['center', 'home', 'church'], ages: ['infant', 'toddler', 'twos', 'threes', 'prek'], zones: ['circle', 'booker', 'lumi', 'zuri', 'bop'],
+  const add = p => { P.push(Object.assign({ audiences: ['center', 'home', 'church'], ages: ['twos', 'threes', 'prek'], zones: ['circle', 'booker', 'lumi', 'zuri', 'bop'],
     priceState: 'quote', price: null, orderable: true, cta: 'cart', badges: [], ships: 'parcel', options: [], box: [], dims: [], materials: [], care: [], safety: [], faq: [FAQ.quote, FAQ.lead, FAQ.returns], pairs: [], images: [], tone: 'booker' }, p)); };
 
   // Kits: the startup packages. Shipping for the box and carpets is part of the package price (Pricing page).
@@ -82,7 +82,7 @@
   };
   add(Object.assign({}, kitCommon, {
     id: 'kit-home', name: 'Home Daycare Learning Zones Kit', short: 'One room, five zones. Sized for a licensed home provider.', price: APPROVED.packages.home, tier: 'home',
-    audiences: ['home', 'church'], ages: ['toddler', 'twos', 'threes', 'prek'], tone: 'lumi',
+    audiences: ['home', 'church'], ages: ['twos', 'threes', 'prek'], tone: 'lumi',
     membership: { monthly: APPROVED.monthly.home },
     box: ['6 ft Friends Circle rug', 'Zone signs, 9 x 12 in (five)', 'Four character posters, 18 x 24 in', 'Printed stick puppets for all four friends', 'Picture and word bin labels, 12 per zone', '30 sit spots', 'Six friend cue cards', 'Hand chime', 'Home welcome box and onboarding'],
     dims: ['Friends Circle rug: 6 ft round', 'Zone signs: 9 x 12 in', 'Posters: 18 x 24 in', 'Cue cards: 8.5 x 11 in'],
@@ -161,7 +161,7 @@
   const ZKEY = { 'Reading Area': 'booker', 'Calm Corner': 'lumi', 'Discovery Zone': 'zuri', 'Movement Zone': 'bop', 'Friends Circle': 'circle' };
   const ROOM_FOR = { booker: 'reading-corner', lumi: 'turtle-rug', zuri: 'blue-table-room', bop: 'dress-up-corner', circle: 'alphabet-rug' };
   const TONE = { booker: 'booker', lumi: 'lumi', zuri: 'zuri', bop: 'bop', circle: 'gold', 'all-friends': 'gold' };
-  const sampleBase = { sample: true, audiences: ['center', 'home', 'church', 'family'], ages: ['infant', 'toddler', 'twos', 'threes', 'prek'] };
+  const sampleBase = { sample: true, audiences: ['center', 'home', 'church', 'family'], ages: ['twos', 'threes', 'prek'] };
   const FOUR = ['booker', 'lumi', 'zuri', 'bop'];
   MERCH.rugs.forEach(r => {
     const z = ZKEY[r.zone], square = r.format === 'large-square', t = TONE[z];
@@ -178,7 +178,7 @@
   const NAMES = Object.fromEntries([].concat(MERCH.rugs, MERCH.plush, MERCH.posters).map(x => [x.id, x.name.replace(' Sample', '').replace(' \u2014 ', ', ')]));
   MERCH.bundles.forEach(b => {
     const rugSet = b.includes.every(i => i.startsWith('rug-')), t = rugSet ? 'bop' : 'lumi';
-    add(Object.assign({}, sampleBase, { id: b.id, name: b.name, short: b.description, description: b.description, collection: rugSet ? 'carpets' : 'plush', kind: 'bundle', ships: rugSet ? 'freight' : 'parcel', tone: t, ages: rugSet ? ['infant', 'toddler', 'twos', 'threes', 'prek'] : ['toddler', 'twos', 'threes', 'prek'],
+    add(Object.assign({}, sampleBase, { id: b.id, name: b.name, short: b.description, description: b.description, collection: rugSet ? 'carpets' : 'plush', kind: 'bundle', ships: rugSet ? 'freight' : 'parcel', tone: t, ages: rugSet ? ['twos', 'threes', 'prek'] : ['twos', 'threes', 'prek'],
       zones: rugSet ? ['circle', 'booker', 'lumi', 'zuri', 'bop'].slice(b.includes.length === 4 ? 1 : 0) : ['circle', 'booker', 'lumi', 'zuri', 'bop'], room: rugSet ? 'turtle-rug' : null,
       badges: ['Made to order', rugSet ? 'Ships after safety testing' : 'Plush ships after safety testing', 'Concept sample'], includes: b.includes,
       box: b.includes.map(i => (NAMES[i] || i)), dims: ['Sizes are confirmed with the maker.'], materials: ['Confirmed at sample approval.'], care: ['Care follows each item.'],
@@ -196,7 +196,7 @@
     const z = pl.character.toLowerCase();
     add(Object.assign({}, sampleBase, { id: pl.id, name: pl.name.replace(' Sample', ''), short: 'Soft ' + pl.character + ' to hug. Opens for orders only after safety testing.', description: 'A soft plush ' + pl.character + ', one of the four story-world friends. The first sample is still being made, so the picture is a concept and the finished plush may differ.',
       collection: 'plush', kind: 'plush', priceState: 'fixed', price: APPROVED.kids.plush, orderable: false, cta: 'notify', tone: z, zones: [z], kidsShop: true, ships: 'parcel',
-      badges: ['Ships after safety testing', 'Concept sample'], ages: ['toddler', 'twos', 'threes', 'prek'], box: ['One plush ' + pl.character + ' (about 12 in)'], dims: ['About 12 in tall (proposed)'],
+      badges: ['Ships after safety testing', 'Concept sample'], ages: ['twos', 'threes', 'prek'], box: ['One plush ' + pl.character + ' (about 12 in)'], dims: ['About 12 in tall (proposed)'],
       materials: ['Embroidered face, no hard parts, washable. Illustrated cords, buckles and buttons become sewn details. Confirmed at the production sample.'], care: ['Surface-wash by hand until the production care label is final.'],
       safety: [SAFETY.plush, SAFETY.small], lead: 'Not available yet. We ship only after testing is done.',
       faq: [['Why can’t I order it?', 'Children’s toys must pass third-party testing and carry a Children’s Product Certificate before they are sold. We will not take an order until that is done. Leave your email and we will tell you the day it opens.'], ['Is the picture the real plush?', 'No. It is a concept sample picture of the plush we plan to make. The finished plush may differ.'], FAQ.returns],
@@ -233,7 +233,7 @@
 
   // Kids' Shop
   add({ id: 'kids-carpet', name: 'Small friend carpet', short: 'A small play carpet for a bedroom or reading nook.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'soon', orderable: false, cta: 'notify', ships: 'freight',
-    badges: ['Made to order', 'Ships after safety testing', 'Concept image'], tone: 'bop', ages: ['toddler', 'twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing. Confirmed at sample approval.'], care: ['Spot-clean; air dry.'],
+    badges: ['Made to order', 'Ships after safety testing', 'Concept image'], tone: 'bop', ages: ['twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing. Confirmed at sample approval.'], care: ['Spot-clean; air dry.'],
     safety: [SAFETY.rug], lead: 'Price and size are still being set.', faq: [['When can I buy it?', 'Size and price are still being set, and the rug needs its flammability report first. Leave your email and we will write when it is ready.'], FAQ.freight],
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Made to order. We will post the size and price when they are final.' });
   add({ id: 'kids-printables', name: 'Futures at Home printable packs', short: 'Picture schedule, calm-down cards, move cards, reading log and more. Free to print.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',

@@ -14,7 +14,7 @@ const E = s => esc(s == null ? '' : String(s));
 const PHONE = '(816) 988-5661';
 
 // The five age bands of the family library (family-library-data.js BANDS) and of hub/content/futures-at-home.
-const AGE_OPTS = [['infant', 'Baby (birth to 12 months)'], ['toddler', 'Toddler (12 to 24 months)'], ['twos', 'Two-year-old'], ['threes', 'Three-year-old'], ['prek', 'Pre-K (4 and 5 years)']];
+const AGE_OPTS = [['twos', 'Two-year-old'], ['threes', 'Three-year-old'], ['prek', 'Pre-K (4 and 5 years)']];
 
 function payload(f) {
   return { kind: 'subscribe', data: { topic: 'futures_at_home', email: f.email, firstName: f.name || '', ageBand: f.age, consent: !!f.consent, website: f.website || '' } };

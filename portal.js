@@ -73,8 +73,8 @@ const who = id => id==='demo' ? 'you (demo)' : (id===P.me ? 'you' : (P.names[id]
 const photoNotice = () => P.live ? 'Family photo view' : 'Sample photos on this browser';
 
 // ---------------- sample program (demo mode or one click to load)
-const SAMPLE_ROOMS = {infants:{name:'Infant Room',ages:'Infants (under 12 months)',level:1,order:-1}, toddlers:{name:'Toddler Room',ages:'Toddlers (12 to 23 months)',level:1,order:0}, twos:{name:'Twos Room',ages:'Age 2',level:1,order:1}, threes:{name:'Threes Room',ages:'Age 3',level:1,order:2}, prek:{name:'Pre-K Room',ages:'Ages 4 to 5',level:1,order:3}};
-const SAMPLE_KIDS = [['Amara','B','infants'],['Theo','W','infants'],['Rosa','M','toddlers'],['Jalen','D','toddlers'],['Mila','T','toddlers'],['Ava','R','twos'],['Mateo','H','twos'],['Zoe','O','twos'],['Elijah','V','twos'],['Mia','C','threes'],['Noah','J','threes'],['Aria','Q','threes'],['Liam','X','threes'],['Nova','E','threes'],['Jayden','L','prek'],['Ivy','S','prek'],['Kai','Z','prek'],['Luna','G','prek'],['Malik','N','prek']];
+const SAMPLE_ROOMS = {twos:{name:'Twos Room',ages:'Age 2',level:1,order:1}, threes:{name:'Threes Room',ages:'Age 3',level:1,order:2}, prek:{name:'Pre-K Room',ages:'Ages 4 to 5',level:1,order:3}};
+const SAMPLE_KIDS = [['Ava','R','twos'],['Mateo','H','twos'],['Zoe','O','twos'],['Elijah','V','twos'],['Mia','C','threes'],['Noah','J','threes'],['Aria','Q','threes'],['Liam','X','threes'],['Nova','E','threes'],['Jayden','L','prek'],['Ivy','S','prek'],['Kai','Z','prek'],['Luna','G','prek'],['Malik','N','prek']];
 async function loadSample(){ for (const [id,r] of Object.entries(SAMPLE_ROOMS)) await put('rooms', id, Object.assign({sample:true}, r));
   for (let i=0;i<SAMPLE_KIDS.length;i++){ const k=SAMPLE_KIDS[i]; await put('kids', 'k'+(i+1), {first:k[0], last:k[1], room:k[2], sample:true}); }
   P.room = 'threes'; render(); toast('Sample classes loaded'); }
@@ -88,7 +88,7 @@ function lunchText(room,date){ const r=P.rooms[room]; const d=dayDoc(room,date);
 // All five CACFP lunch components are LISTED (milk, meat or alternate, vegetable, fruit or a second vegetable, grain). This checks the
 // list only: portions by age, crediting, whole grain-rich for the day and milk type by age are the kitchen's job and are not checked here.
 function cacfpOk(c){ return !!(c && c.protein && c.grain && c.veg && c.fruit && c.milk); }
-const youngRoom = room => ['infant','toddler'].includes(ONE_BAND_AGES[String((P.rooms[room]||{}).ages||'')]);
+const youngRoom = room => ONE_BAND_AGES[String((P.rooms[room]||{}).ages||'')] === 'twos';
 function weekDates(date){ const d=fromIso(date); const mon=new Date(d); mon.setDate(d.getDate()-((d.getDay()+6)%7)); return [0,1,2,3,4].map(i=>{const x=new Date(mon); x.setDate(mon.getDate()+i); return iso(x);}); }
 function header(title, sub){ return `<div class="phero" style="padding-block:28px"><div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 28px"><div style="display:grid;gap:8px"><div class="eyebrow">Futures Hub</div><h1 style="font-size:clamp(26px,3.6vw,38px)">${title}</h1><p class="lede">${sub}</p></div>
   <div style="display:grid;gap:6px;justify-items:end">${P.demo&&window.FFDemoPortal?window.FFDemoPortal.headerBits(rhythmCtx()):`<span class="chip ${P.live?'ok':'warn'}" style="background:transparent;color:${P.live?'#7FE0A8':'#F3C969'};border-color:currentColor">${P.live?(P.canWrite?'Live \u00b7 saving to your program':'Live \u00b7 view only'):'Sample local preview \u00b7 changes stay in this browser'}</span>`}${P.hub?`<span class="small" id="hubWho" style="color:#C6D7DD">Signed in as ${esc(P.email)}${P.center&&P.center.name?' \u00b7 '+esc(P.center.name):''} <button type="button" class="btn soft" style="padding:4px 10px;margin-left:6px" data-hub="signout">Sign out</button></span>`:''}</div></div></div>`; }
@@ -118,7 +118,7 @@ V.portal = () => {
 
 function todayView(){
   const L = lessonFor(P.date), d = dayDoc(P.room,P.date), c = completion(P.room,P.date), wd = fromIso(P.date).getDay();
-  const noScreen = !!(P.hub && window.FFRhythm && window.FFRhythm.screensBlocked(P.room)) || (!P.hub && ['infant','toddler'].includes(bandOfRoom(P.room))); // infants, under-2 rooms, or ages not set: no episodes
+  const noScreen = !!(P.hub && window.FFRhythm && window.FFRhythm.screensBlocked(P.room)) || (!P.hub && bandOfRoom(P.room)==='twos'); // twos rooms, or ages not set: no episodes
   if (wd===0||wd===6) return `<div class="card"><h3>No program on weekends</h3><p class="small">Pick a weekday to see the checklist.</p></div>`;
   const pi = progFor(P.room, P.date), ps = progSum(P.room, P.date, true);
   const items = checklist(P.date).map(it => (noScreen && it[0]==='episode') ? ['episode','Song, puppet or card version (no screen in this room)',it[2]] : it);
@@ -224,7 +224,7 @@ function lunchView(){
    <label class="f" for="pLevel">Menu level for ${esc(r.name)}${sel('pLevel',[[1,'Level 1 \u00b7 Easy & Quick'],[2,'Level 2 \u00b7 Medium'],[3,'Level 3 \u00b7 Next Level']], r.level||1, P.canWrite?'':'disabled')}</label></div>
   <div class="card"><h3>${fmtDate(P.date)}</h3>
    <div class="seg" role="group" aria-label="Lunch type"><button data-lmode="planned" aria-pressed="${d.lunch.mode!=='custom'}">Planned menu</button><button data-lmode="custom" aria-pressed="${d.lunch.mode==='custom'}">Custom lunch</button></div>
-   ${d.lunch.mode!=='custom' ? (m?`<div class="tw"><table><tr><th>Breakfast</th><td>${linkR(m[1])}</td></tr><tr><th>Lunch</th><td>${linkR(m[2])}</td></tr><tr><th>PM snack</th><td>${linkR(m[3])}</td></tr></table></div><p class="small muted">From the Eat the Rainbow ${LEVELS[r.level||1]} cycle menu, week ${lessonFor(P.date).wk}. Written for the CACFP lunch pattern for ages 3 to 5; portions and crediting are checked by your kitchen.${youngRoom(P.room)?' This room is younger: age 1 needs unflavored whole milk and smaller portions, and babies under 12 months follow the separate CACFP infant meal pattern.':''}</p>`:'<p class="small muted">No planned menu for this day.</p>') : `
+   ${d.lunch.mode!=='custom' ? (m?`<div class="tw"><table><tr><th>Breakfast</th><td>${linkR(m[1])}</td></tr><tr><th>Lunch</th><td>${linkR(m[2])}</td></tr><tr><th>PM snack</th><td>${linkR(m[3])}</td></tr></table></div><p class="small muted">From the Eat the Rainbow ${LEVELS[r.level||1]} cycle menu, week ${lessonFor(P.date).wk}. Written for the CACFP lunch pattern for ages 3 to 5; portions and crediting are checked by your kitchen.${youngRoom(P.room)?' This room is younger: two-year-olds fall in the CACFP ages 1 to 2 group, which has smaller portions.':''}</p>`:'<p class="small muted">No planned menu for this day.</p>') : `
     <label class="f" for="lDish">What are you serving?<input class="i" id="lDish" value="${esc(c.dish||'')}" placeholder="e.g. Turkey tacos with rice and corn" ${P.canWrite?'':'disabled'}></label>
     <div class="grid g2" style="gap:10px">${[['protein','Protein (meat or alternate)'],['grain','Grain (whole grain-rich)'],['veg','Vegetable'],['fruit','Fruit (or a second vegetable)'],['milk','Milk']].map(f=>`<label class="f" for="l_${f[0]}">${f[1]}${sel('l_'+f[0], OPT[f[0]], c[f[0]]||'', `data-lfield="${f[0]}" ${P.canWrite?'':'disabled'}`)}</label>`).join('')}</div>
     <label class="f" for="lAllergy">Menu change for the whole room (optional; no child names or health details)<input class="i" id="lAllergy" value="${esc(c.allergy||'')}" placeholder="e.g. Turkey instead of ham today" ${P.canWrite?'':'disabled'}></label>
@@ -271,7 +271,7 @@ function accountView(){
 function setupView(){
   const rs = Object.entries(P.rooms).sort((a,b)=>(a[1].order||9)-(b[1].order||9));
   return `<div class="card"><h3>Classrooms</h3>${rs.length?`<div class="tw"><table><tr><th>Classroom</th><th>Ages</th><th>Menu level</th><th class="n">Children</th><th><span class="sr-only">Remove</span></th></tr>${rs.map(([id,r])=>`<tr><td><b>${esc(r.name)}</b>${r.sample?' <span class="sample">Sample</span>':''}</td><td>${esc(r.ages||'')}</td><td>${LEVELS[r.level||1]}</td><td class="n">${roomKids(id).length}</td><td>${P.canWrite?`<button class="rl" data-rmroom="${id}">Remove</button>`:''}</td></tr>`).join('')}</table></div>`:'<p class="small muted">No classrooms yet.</p>'}
-   ${P.canWrite?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:end"><label class="f" for="rName">Classroom name<input class="i" id="rName" placeholder="e.g. Sunshine Room" style="padding:7px 9px"></label><label class="f" for="rAges">Ages${sel('rAges',['Infants (under 12 months)','Toddlers (12 to 23 months)','Age 2','Age 3','Ages 3 to 4','Ages 4 to 5','Mixed ages 2 to 5'],'Age 3')}</label><button class="btn navy" data-p="addroom">Add classroom</button>${rs.length?'':'<button class="btn gold" data-p="sample">Load sample classes</button>'}</div>`:''}
+   ${P.canWrite?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:end"><label class="f" for="rName">Classroom name<input class="i" id="rName" placeholder="e.g. Sunshine Room" style="padding:7px 9px"></label><label class="f" for="rAges">Ages${sel('rAges',['Age 2','Age 3','Ages 3 to 4','Ages 4 to 5','Mixed ages 2 to 5'],'Age 3')}</label><button class="btn navy" data-p="addroom">Add classroom</button>${rs.length?'':'<button class="btn gold" data-p="sample">Load sample classes</button>'}</div>`:''}
    <p class="note">${P.live?'Everything here saves to your program and is shared with your team.':'Sample local preview: changes stay in this browser. A live account or host connection is required to save to your program.'}</p></div>`;
 }
 
@@ -366,13 +366,13 @@ const domFriend = d => (SDOM[d]||{}).friend || 'zuri';
 const stepsOf = kid => ((P2.progress[kid]||{}).steps) || {};
 function monthsOld(dob, on){ const a=fromIso(dob), b=fromIso(on); return (b.getFullYear()-a.getFullYear())*12 + (b.getMonth()-a.getMonth()) - (b.getDate()<a.getDate()?1:0); }
 function bandOfRoom(room){ const r=P.rooms[room]||{}; const s=`${r.ages||''} ${r.name||''}`.toLowerCase();
-  if(/infant|bab(y|ies)|under 12/.test(s)) return 'infant'; if(/toddler|12 to 23/.test(s)) return 'toddler'; if(/mixed/.test(s)) return 'threes';
+  if(/mixed/.test(s)) return 'threes';
   if(/pre-?k|4|5/.test(s)) return 'prek'; if(/two|age 2\b/.test(s)) return 'twos'; return 'threes'; }
 // band: ONLY the set staff confirmed for this child (review H1/R1). Never inferred from a room name: a mixed-age room holds children of
 // several bands. null = not confirmed yet, and the portfolio asks a teacher to choose. Every set/change is kept in bandHistory.
 function bandOf(kid){ const pr=P2.progress[kid]; return pr && BANDS[pr.band] ? pr.band : null; }
 // a suggestion the teacher must confirm, never applied by itself: the date of birth, else a room set to exactly one age band
-const ONE_BAND_AGES = {'Infants (under 12 months)':'infant','Toddlers (12 to 23 months)':'toddler','Age 2':'twos','Age 3':'threes','Ages 4 to 5':'prek'};
+const ONE_BAND_AGES = {'Age 2':'twos','Age 3':'threes','Ages 4 to 5':'prek'};
 function bandSuggest(kid){ const k=P.kids[kid]||{}, dob=k.birthday||k.dob;
   if(/^\d{4}-\d{2}-\d{2}$/.test(String(dob||''))){ const m=monthsOld(dob, P.date), last=FS.bands[FS.bands.length-1]; const b=FS.bands.find(x=>m>=x.min && m<=x.max) || (last && m>last.max ? last : null); if(b) return {band:b.key, why:'from the date of birth on file'}; }
   const ages=String((P.rooms[k.room]||{}).ages||''); return ONE_BAND_AGES[ages] ? {band:ONE_BAND_AGES[ages], why:`the classroom is set to "${ages}"`} : null; }

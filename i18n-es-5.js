@@ -101,8 +101,8 @@ window.FFi18n.add('es', {
 if (!window.FFi18n) return;
 const T = {
   // ---- Futures at Home (library), Story Time
-  'Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Babies through pre-K are welcome, whether or not your child goes to a Futures Friends program.':
-    'Libros de cuentos, cosas para hacer esta noche, hojas para imprimir y pegar en el refri y un plan para tu semana, todo de parte de Booker, Lumi, Zuri y Bop. Los bebés y los niños hasta prekínder son bienvenidos, vayan o no a un programa de Futures Friends.',
+  'Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Made for children ages 2 to 5, whether or not your child goes to a Futures Friends program.':
+    'Libros de cuentos, cosas para hacer esta noche, hojas para imprimir y pegar en el refri y un plan para tu semana, todo de parte de Booker, Lumi, Zuri y Bop. Hecho para niños de 2 a 5 años, vayan o no a un programa de Futures Friends.',
   'Seven things to open, all free': 'Siete cosas para abrir, todas gratis',
   'After the video': 'Después del video',
   'A short video is a fine way to meet the friends. These pages are for what comes next: reading, printing, moving, doing.':

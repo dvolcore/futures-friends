@@ -13,7 +13,7 @@
 'use strict';
 const BLOCKS = ['arrival','circle','story','move','meal','outside','reset','goodbye'];
 const NAMES = {booker:'Booker', lumi:'Lumi', zuri:'Zuri', bop:'Bop'};
-const BAND_LABEL = {infant:'Infants', toddler:'Toddlers', twos:'Twos', threes:'Threes', prek:'Pre-K'};
+const BAND_LABEL = {twos:'Twos', threes:'Threes', prek:'Pre-K'};
 const MEDIA_LABEL = {print:'Print', video:'Video', audio:'Audio', puppet:'Puppet'};
 const STATUS_CHIP = {ready:['ok','Ready'], draft:['warn','Draft'], unavailable:['bad','Not available yet']};
 const TTL = 5*60*1000;   // hub answers are re-read after 5 minutes, so an approved correction shows without a reload

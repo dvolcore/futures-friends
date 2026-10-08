@@ -472,8 +472,8 @@ window.FFhooks.push(function(v, root, ok){
 
 // ---------------------------------------------------------------- IMPACT
 // Learning Steps claim, computed from learning-steps-summary.js (public counts only; the steps are private, IP lockdown 2026-10-07) so the site never says more than the crosswalk shows.
-function stepsClaim(){ const S=window.FFSteps; if(!S||!S.summary) return 'Teacher-observed Learning Steps for each age band, from infants to pre-K. Not a test or a screening.';
-  const t=S.summary, b=t.by_standard; return `${t.total} teacher-observed Learning Steps from birth to kindergarten. Each one cites its source (CDC milestones or the Missouri, Kansas or Head Start standards). ${b.kels.mapped} are matched to Kansas standards, ${b.mels.mapped} to Missouri and ${b.elof.mapped} to Head Start; the rest are marked not matched. A draft awaiting expert review, and never a test or a score.`; }
+function stepsClaim(){ const S=window.FFSteps; if(!S||!S.summary) return 'Teacher-observed Learning Steps for each age band, from twos to pre-K. Not a test or a screening.';
+  const t=S.summary, b=t.by_standard; return `${t.total} teacher-observed Learning Steps for ages 2 to 5. Each one cites its source (CDC milestones or the Missouri, Kansas or Head Start standards). ${b.kels.mapped} are matched to Kansas standards, ${b.mels.mapped} to Missouri and ${b.elof.mapped} to Head Start; the rest are marked not matched. A draft awaiting expert review, and never a test or a score.`; }
 V.impact = () => phero('Impact','Why the early years matter, and how we measure them','Early learning is among the most studied topics in education. We build on that research, and we plan to report our own results in plain numbers that a parent or a funder can check.',{anchors:[['why-early','The research'],['measure','What we measure'],['flagship','Flagship center']]}) + `
 <section id="why-early" class="band-paper"><div class="wrap">${head('The research','What the research says about the first five years','')}
  <div class="grid g3">
@@ -498,7 +498,7 @@ ${cta('See the program in action','Visit the flagship center or book a live walk
 // The Learning Steps band: counts and sources come from learning-steps-summary.js (generated from the fetched standards; counts only).
 function learningStepsBand(){ const S=window.FFSteps; if(!S||!S.summary) return '';
   const t=S.summary, B=S.bands, L=x=>`${x.mapped} of ${x.mapped+x.unmapped}`;
-  return `<section id="steps" class="band-paper"><div class="wrap">${head('Learning Steps','What teachers look for, from infants to pre-K',`${t.total} observable Learning Steps across seven areas of development. Each cites where it comes from, and each is checked against the official Missouri, Kansas and Head Start documents.`)}
+  return `<section id="steps" class="band-paper"><div class="wrap">${head('Learning Steps','What teachers look for, from twos to pre-K',`${t.total} observable Learning Steps across seven areas of development. Each cites where it comes from, and each is checked against the official Missouri, Kansas and Head Start documents.`)}
  <div class="tw"><table><tr><th>Age band</th><th>Learning Steps</th><th>Missouri (MELS 2021)</th><th>Kansas (KELS 2024)</th><th>Head Start (ELOF 2015)</th></tr>
   ${B.map(b=>{ const r=t.by_band_standard[b.key]; return `<tr><td>${esc(b.label)} <span class="small muted">${esc(b.ages)}</span></td><td>${t.by_band[b.key]}</td><td>${L(r.mels)} matched</td><td>${L(r.kels)} matched</td><td>${L(r.elof)} matched</td></tr>`; }).join('')}</table></div>
  <div class="grid g3" style="margin-top:16px">
@@ -514,7 +514,7 @@ V.readiness = () => phero('School readiness','How Futures Friends supports every
   <div style="background:var(--lumi)"><i>5</i><b>Explore</b><span>Learning zones</span></div><div style="background:var(--gold-deep)"><i>6</i><b>Take home</b><span>Family connection</span></div></div></div></section>
 <section id="adapt"><div class="wrap">${head('Observe and adapt','The teacher is the adaptive engine','Young children learn through relationships, not drills. The Futures Hub helps teachers see what each child needs next.')}
  <div class="steps">
-  ${card('Observe','Teachers note what a child does and says in play and routines, tagged to a Learning Step for the child\'s age band, from infants to pre-K.')}
+  ${card('Observe','Teachers note what a child does and says in play and routines, tagged to a Learning Step for the child\'s age band, from twos to pre-K.')}
   ${card('Describe in words','A level is a word (Emerging, Developing or Secure) backed by a dated note. Steps not seen yet show as "not yet observed", never as zero.')}
   ${card('See what comes next','Every Learning Step names the next step to watch for and an idea to try at home.')}
   ${card('Share with family','Families see what we saw, what\'s next and what to try at home. No scores, no rankings, no comparisons.')}
@@ -717,7 +717,7 @@ const FAQ = [
  ['Do we need the internet to teach?','No. Lessons are written to run from print: Unit 1 comes first as a printable teacher packet, and recipes print from this site. The Futures Hub adds planning, records and family updates.'],
  ['What comes in the welcome box?','It is planned to hold a founder letter, the curriculum binder, five storybooks, the cookbook, posters, zone signs, plush friends, the character carpet, badges and a 30-day quick-start guide. Most of these pieces are still being made, so your written quote marks each one available now, in development or coming later. Hub accounts come by email invitation.'],
  ['Is training included?','Yes. Level 1 Futures Friends Foundations is included for every staff member of a program member. Higher training levels are planned through memberships and seats. Completing a course gives a Futures Friends completion record; no course is state-approved yet.'],
- ['Do the menus follow the CACFP meal pattern?','Menus are written for the USDA CACFP meal pattern for ages 3 to 5, with crediting notes on each recipe. They are not reviewed or approved by USDA or a state agency: check crediting against your own product labels and your state agency\'s current rules. Age 1 needs unflavored whole milk and smaller portions, and babies under 12 months follow the separate infant meal pattern.'],
+ ['Do the menus follow the CACFP meal pattern?','Menus are written for the USDA CACFP meal pattern for ages 3 to 5, with crediting notes on each recipe. They are not reviewed or approved by USDA or a state agency: check crediting against your own product labels and your state agency\'s current rules. Two-year-olds fall in the CACFP ages 1 to 2 group, which has smaller portions.'],
  ['How does staffing work?','Staffing follows your state\'s ratios and your age mix. In Missouri that is 1 adult for every 8 two-year-olds and 1 for every 10 three- and four-year-olds. The Hub calculates it for you.'],
  ['Can home daycares join?','Yes. The Home Daycare tier includes a mixed-age plan, a home welcome box, the Hub for the provider and up to 3 assistants, and the Home Educator training path.'],
  ['How do families get the Imagination Library?','Availability depends on your county\'s local program and the current state enrollment status. Centers can help families check and enroll when sign-ups are open, and run a Futures lending library in the meantime.'],

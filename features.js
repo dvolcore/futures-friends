@@ -732,7 +732,7 @@ const tourHtml = () => { if (!FI().enabled()) return FI().soon('tour requests');
    <div style="display:grid;gap:8px"><span class="ffx-lbl" id="ffxTimeL">2. Pick a time</span><div class="ffx-slots ffx-times" role="group" aria-labelledby="ffxTimeL">${TIMES.map(x => `<button type="button" class="ffx-slot" data-ffx-time="${x[0]}" aria-pressed="${t.time === x[0]}"><b style="font-size:16px">${x[1]}</b><small>${x[0] === '3:30' ? 'Afternoon' : 'Morning'} \u00b7 30 min</small></button>`).join('')}</div><span class="ffx-err" id="ffxTime-e" aria-live="polite"></span></div>
    <span class="ffx-lbl">3. Your details</span>
    <div class="ffx-row">${inp('tName', 'Parent or guardian name', 'text', 'autocomplete="name"')}${inp('tPhone', 'Phone', 'tel', 'autocomplete="tel" inputmode="tel" placeholder="(816) 555-0123"')}</div>
-   <div class="ffx-row">${inp('tEmail', 'Email (optional, for a confirmation)', 'email', 'autocomplete="email"')}${sel('tAge', 'Child\'s age', ['2 years', '3 years', '4 years', '5 years', 'Under 2 (joining later)'])}</div>
+   <div class="ffx-row">${inp('tEmail', 'Email (optional, for a confirmation)', 'email', 'autocomplete="email"')}${sel('tAge', 'Child\'s age', ['2 years', '3 years', '4 years', '5 years'])}</div>
    ${FI().honeypot('ffiHpT')}
    <button class="btn gold" type="submit" style="justify-self:start">Request this tour</button>
    <p class="ffx-demo" style="font-size:12.5px">This is a request, not a booked tour. The center will call you to agree on a time.</p>
