@@ -52,3 +52,200 @@ window.FFi18n.add('es', {
     'Planeado con la prueba piloto de la app: reportes de progreso tres veces al año y logros del desarrollo en la app para familias.'
 });
 })();
+
+/* Spanish re-sync after the 2026-10-07 voice polish of the English copy (DRAFT, pending review by the center's Spanish teacher).
+   Every key below is the NEW English; the old English lines it replaces are left above, harmless and unused. Also the Learning
+   Zones Kit showcase (kit-showcase.js). Changed keys are listed in polish/LOG_es_site.md. */
+(function () {
+'use strict';
+if (!window.FFi18n) return;
+const T = {
+  // ---- Futures at Home (library), Story Time
+  'Storybooks, things to do tonight, printables for the fridge and a plan for your week, all from Booker, Lumi, Zuri and Bop. Babies through pre-K are welcome, whether or not your child goes to a Futures Friends program.':
+    'Libros de cuentos, cosas para hacer esta noche, hojas para imprimir y pegar en el refri y un plan para tu semana, todo de parte de Booker, Lumi, Zuri y Bop. Los bebés y los niños hasta prekínder son bienvenidos, vayan o no a un programa de Futures Friends.',
+  'Seven things to open, all free': 'Siete cosas para abrir, todas gratis',
+  'After the video': 'Después del video',
+  'A short video is a fine way to meet the friends. These pages are for what comes next: reading, printing, moving, doing.':
+    'Un video corto es una buena manera de conocer a los amigos. Estas páginas son para lo que sigue: leer, imprimir, moverse, hacer.',
+  'A few minutes together, most days, using the same words your child hears in a Futures classroom.':
+    'Unos minutos juntos, casi todos los días, con las mismas palabras que tu niño escucha en un salón de Futures.',
+  'Read a storybook together, one page at a time. Every page has a question to ask and a word to talk about, and some have a move or a breath to share.':
+    'Lean un libro de cuentos juntos, una página a la vez. Cada página tiene una pregunta para hacer y una palabra para conversar, y algunas traen un movimiento o una respiración para compartir.',
+  'Free and short': 'Gratis y cortas',
+  // ---- The whole-child day
+  'The whole day, planned on purpose.': 'Todo el día, planeado con intención.',
+  'Families get to see it.': 'Las familias lo pueden ver.',
+  'A story, a snack, a stomp around the room, a rest, one question at pickup: planned together as one day. The same four friends and the same few words turn up from arrival to pickup, so each part backs up the others.':
+    'Un cuento, una merienda, una vuelta pisando fuerte por el salón, un descanso, una pregunta a la salida: todo planeado como un solo día. Los mismos cuatro amigos y las mismas pocas palabras aparecen desde la llegada hasta la salida, y así cada parte refuerza a las demás.',
+  'One day, six steps.': 'Un día, seis pasos.',
+  'Every step has a friend who looks after it, and a family can see all six.':
+    'Cada paso tiene un amigo que se encarga de él, y la familia puede ver los seis.',
+  'Each friend looks after an area of development and a classroom routine that repeats every day.':
+    'Cada amigo se encarga de un área del desarrollo y de una rutina del salón que se repite todos los días.',
+  'Missions, stories, rhythm and outdoor quests. Children hear “Ready? Bop & Go!” and parents see movement worked into the whole day.':
+    'Misiones, cuentos, ritmo y búsquedas al aire libre. Los niños escuchan “¿Listos? ¡Bop y a moverse!” y las familias ven el movimiento presente en todo el día.',
+  'Our reset routine for transitions, rest and noticing your body.':
+    'Nuestra rutina de calma para las transiciones, el descanso y para darse cuenta de lo que siente el cuerpo.',
+  'Children learn to notice how their body feels, then follow the same four steps every time.':
+    'Los niños aprenden a notar cómo se siente su cuerpo y luego siguen los mismos cuatro pasos cada vez.',
+  'Story, snack, movement, rest and one question at pickup, planned as one day and led by the four friends.':
+    'Cuento, merienda, movimiento, descanso y una pregunta a la salida, planeados como un solo día y guiados por los cuatro amigos.',
+  // ---- Friends page, the town friends
+  'Four plush-and-felt friends share the Clubhouse. Each looks after one learning pillar and practices one value.':
+    'Cuatro amigos de peluche y fieltro comparten la Casa Club. Cada uno cuida un pilar de aprendizaje y practica un valor.',
+  'The four are the stars, but the rest of town has five-minute ideas too.':
+    'Los cuatro son las estrellas, pero el resto del pueblo también tiene ideas de cinco minutos.',
+  'Pick someone and try theirs.': 'Elige a alguien y prueba la suya.',
+  'Ms. June is the teacher who notices the quiet one by the window and asks what he sees. Try her picture-talk circle with Booker.':
+    'La maestra June es la que se fija en el niño callado junto a la ventana y le pregunta qué ve. Prueba su círculo para hablar de dibujos con Booker.',
+  'Wait for a question. Any question counts.': 'Espera una pregunta. Cualquier pregunta cuenta.',
+  'The goodbye at the door.': 'La despedida en la puerta.',
+  'In the story world, Rowan is the grown-up at the door at drop-off. Practice a goodbye with Lumi and someone you trust, so tomorrow\'s feels familiar.':
+    'En el mundo del cuento, Rowan es el adulto que está en la puerta a la hora de dejar a los niños. Practica una despedida con Lumi y con alguien de confianza, para que la de mañana se sienta conocida.',
+  'Pick your goodbye: a wave, a phrase or a gentle high-five.': 'Elige tu despedida: un saludo con la mano, una frase o un choca esos cinco suave.',
+  'Practice it once with a grown-up you trust.': 'Practícala una vez con un adulto de confianza.',
+  'Say who will be there next.': 'Di quién va a estar después.',
+  'Give the story a new ending.': 'Dale al cuento un final nuevo.',
+  'Tilly is the classmate who adds a surprise to every story. Take a story with Booker and change how it ends.':
+    'Tilly es la compañera que le agrega una sorpresa a cada cuento. Toma un cuento con Booker y cambia cómo termina.',
+  'Copy my rhythm!': '¡Copia mi ritmo!',
+  'Pip is new, and he notices everything. He taps out a little rhythm; Bop copies it, stomps it, makes it bigger. Your turn.':
+    'Pip es nuevo y se fija en todo. Toca un ritmito; Bop lo copia, lo pisotea y lo hace más grande. Ahora te toca a ti.',
+  // ---- For families
+  'You see what your child learned, ate and tried today. Then you get one small thing to do together before the week is out.':
+    'Ves lo que tu niño aprendió, comió y probó hoy. Y luego recibes una cosita para hacer juntos antes de que se acabe la semana.',
+  'Goodbyes go easier when they are the same every time. Rowan and Lumi have one they use at drop-off. Borrow it.':
+    'Las despedidas se hacen más fáciles cuando son iguales cada vez. Rowan y Lumi tienen una que usan al dejar a los niños. Tómala prestada.',
+  'Say who will be there next, and what comes after goodbye.': 'Di quién va a estar después y qué viene después de la despedida.',
+  // ---- Eat the Rainbow
+  'A rainbow on every plate': 'Un arcoíris en cada plato',
+  'Thirty-six recipes in three levels, plus a menu planner with the food cost worked out. Menus are designed around the USDA CACFP meal pattern for ages 3 to 5.':
+    'Treinta y seis recetas en tres niveles, más un planificador de menús con el costo de los alimentos ya calculado. Los menús están diseñados en torno al patrón de comidas del CACFP del USDA para niños de 3 a 5 años.',
+  'Illustration of an Eat the Rainbow dining room, with the rainbow colors on the wall': 'Ilustración de un comedor Come el arcoíris, con los colores del arcoíris en la pared',
+  // ---- Home, footer, entry gate
+  'Questions about Futures Friends for your program or your family, or about our pilot center in Independence, Missouri? Call or write and we will get back to you.':
+    '¿Tienes preguntas sobre Futures Friends para tu programa o tu familia, o sobre nuestro centro piloto en Independence, Missouri? Llama o escribe y te respondemos.',
+  'Questions about Futures Friends for your child, or about our pilot center in Independence? Call or write and we will get back to you.':
+    '¿Tienes preguntas sobre Futures Friends para tu niño, o sobre nuestro centro piloto en Independence? Llama o escribe y te respondemos.',
+  'Early learning for ages 2 to 5, for child care centers, home daycares and families. Booker, Lumi, Zuri and Bop live here.':
+    'Aprendizaje temprano para niños de 2 a 5 años, para centros de cuidado infantil, guarderías en casa y familias. Aquí viven Booker, Lumi, Zuri y Bop.',
+  'Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello. Sound on, if you can: there is music, birdsong and four voices.':
+    'Booker, Lumi, Zuri y Bop están en el prado y quieren saludarte. Si puedes, activa el sonido: hay música, cantos de pájaros y cuatro voces.',
+  'Each friend has a': 'Cada amigo tiene un',
+  'job': 'trabajo',
+  'in the room.': 'en el salón.',
+  'Booker reads, Lumi listens, Zuri wonders and Bop moves. Children meet them in stories, spot them around the classroom and take them home. Tap a friend to say hello.':
+    'Booker lee, Lumi escucha, Zuri se pregunta y Bop se mueve. Los niños los conocen en los cuentos, los descubren por el salón y se los llevan a casa. Toca a un amigo para saludar.',
+  'MEET THE FOUR': 'CONOCE A LOS CUATRO',
+  'Pick a friend. Say hi.': 'Elige un amigo. Saluda.',
+  'A bear who reads. A bunny who listens.': 'Un oso que lee. Una coneja que escucha.',
+  'A turtle who wonders. An elephant who stomps.': 'Una tortuga que se pregunta. Un elefante que pisa fuerte.',
+  'Booker reads, Lumi listens, Zuri wonders and Bop stomps. Early learning for ages 2 to 5, in classrooms, home daycares and at home.':
+    'Booker lee, Lumi escucha, Zuri se pregunta y Bop pisa fuerte. Aprendizaje temprano para niños de 2 a 5 años, en salones, guarderías en casa y en el hogar.',
+  '“Big breath. Brave heart. Try again!”': '“¡Respira hondo. Corazón valiente. Inténtalo otra vez!”',
+  '"Big breath. Brave heart. Try again!"': '"¡Respira hondo. Corazón valiente. Inténtalo otra vez!"',
+  'Big breath. Brave heart. Try again!': '¡Respira hondo. Corazón valiente. Inténtalo otra vez!',
+  '“I wonder what happens if we try!”': '“¡Me pregunto qué pasa si lo intentamos!”',
+  '"I wonder what happens if we try!"': '"¡Me pregunto qué pasa si lo intentamos!"',
+  'I wonder what happens if we try!': '¡Me pregunto qué pasa si lo intentamos!',
+  'FOR TEACHERS': 'PARA MAESTROS',
+  'The Futures Friends Academy.': 'La Academia Futures Friends.',
+  'Browse the training catalog, save a lesson for later and set a weekly hours goal.':
+    'Explora el catálogo de formación, guarda una lección para después y fija una meta semanal de horas.',
+  // ---- Home leftovers found in the live Spanish check (not edited by the polish, but English on the page)
+  'Who are you?': '¿Quién eres?',
+  'Who is visiting today?': '¿Quién nos visita hoy?',
+  'Free stories and activities': 'Cuentos y actividades gratis',
+  'Futures Friends is early learning for children ages 2 to 5. Here is what is free for your family today.':
+    'Futures Friends es aprendizaje temprano para niños de 2 a 5 años. Esto es lo que hoy es gratis para tu familia.',
+  'Read and play at home': 'Lee y juega en casa',
+  'Free storybooks, activities from things you already have and printables. No account, nothing to buy.':
+    'Libros de cuentos gratis, actividades con cosas que ya tienes y hojas para imprimir. Sin cuenta y sin nada que comprar.',
+  'Short videos with the four friends, a calm minute and movement breaks, plus tips to keep screen time small.':
+    'Videos cortos con los cuatro amigos, un minuto de calma y pausas de movimiento, además de consejos para mantener el tiempo de pantalla corto.',
+  'Futures Learning Center in Independence, Missouri: tours, applications and a day in the life.':
+    'Futures Learning Center en Independence, Missouri: visitas, solicitudes y un día en la vida del centro.',
+  'Plan a visit': 'Planea una visita',
+  'Free stories and activities, open now': 'Cuentos y actividades gratis, abiertos ahora',
+  'Counted from our own library, and every one is free to open with your child.':
+    'Contados de nuestra propia biblioteca, y todos son gratis para abrir con tu niño.',
+  'These are our real rooms and front door in Independence. The two rooms open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room to see each room today. Photos of children are only ever taken with their families’ permission.':
+    'Estos son nuestros salones reales y nuestra puerta de entrada en Independence. Los dos salones abren con un concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón, mostrado como una ilustración generada con IA y todavía no instalado. Toca Salón real para ver cada salón hoy. A los niños solo se les toman fotos con el permiso de sus familias.',
+  'Your device\'s reduced-motion preference always takes priority.': 'La preferencia de movimiento reducido de tu dispositivo siempre tiene prioridad.',
+  'Open the video file': 'Abrir el archivo de video',
+  'Search pages, friends, printables and questions': 'Busca páginas, amigos, hojas para imprimir y preguntas',
+  'Results update as you type. Use the up and down arrow keys to choose one, then press Enter to open it.':
+    'Los resultados se actualizan al escribir. Usa las flechas hacia arriba y hacia abajo para elegir uno y presiona Enter para abrirlo.',
+  'search from any page': 'busca desde cualquier página',
+  'Pause the animation': 'Pausar la animación',
+  'Replay the animation': 'Repetir la animación',
+  'Ms. June, story-world character, not a member of our staff': 'La maestra June, personaje del mundo del cuento, no es parte de nuestro personal',
+  'How we prepare every teacher': 'Cómo preparamos a cada maestro',
+  'Every rule a teacher must meet before working alone with children, how our training goes further, and where our courses stand today.':
+    'Todas las reglas que un maestro debe cumplir antes de trabajar a solas con los niños, hasta dónde llega nuestra formación y en qué punto están hoy nuestros cursos.',
+  'Story-world animation: Rose the rabbit does a happy hug.': 'Animación del mundo del cuento: Rose la coneja da un abrazo feliz.',
+  // ---- Learning Zones Kit showcase (kit-showcase.js)
+  'Five friend zones. One chime.': 'Cinco zonas de amigos. Una campanita.',
+  'Carpets, low see-through fences, signs and a cue your three-year-olds learn in a week, set up in the room you already have.':
+    'Tapetes, cercas bajas y transparentes, letreros y una señal que tus niños de tres años aprenden en una semana, instalados en el salón que ya tienes.',
+  'The five zones': 'Las cinco zonas',
+  'Friends Circle': 'Círculo de amigos',
+  "Booker's Reading Area": 'Área de lectura de Booker',
+  "Lumi's Calm Corner": 'Rincón de calma de Lumi',
+  "Zuri's Discovery Zone": 'Zona de descubrimiento de Zuri',
+  "Bop's Movement Zone": 'Zona de movimiento de Bop',
+  'All five zones': 'Las cinco zonas',
+  'Zone Boundaries add-on, mats, fences and floor paths': 'Complemento Límites de zona: tapetes, cercas y caminos en el piso',
+  'Zone Boundaries add-on': 'Complemento Límites de zona',
+  'home daycare': 'guardería en casa',
+  'classroom': 'salón',
+  'Ordering opens soon.': 'Los pedidos abren pronto.',
+  'Nothing is charged here. Prices are before tax and delivery; packages and the add-on are listed on the pricing page.':
+    'Aquí no se cobra nada. Los precios son antes de impuestos y envío; los paquetes y el complemento aparecen en la página de precios.',
+  'See the kit': 'Ver el kit',
+  'Plan your room': 'Planea tu salón',
+  'Get a quote': 'Pide una cotización',
+  'Concept rooms with the Learning Zones Kit': 'Salones conceptuales con el kit de zonas de aprendizaje',
+  'Swipe or use the arrow keys to see each room': 'Desliza o usa las flechas del teclado para ver cada salón',
+  'Previous room': 'Salón anterior',
+  'Next room': 'Salón siguiente',
+  'Concept illustration, not installed yet. The real room is one tap away.': 'Ilustración conceptual, todavía no instalada. El salón real está a un toque.',
+  'Concept illustration, not installed yet: our main classroom with every Futures Friends zone, centred on Bop\'s purple Movement Zone rug, with Booker, Friends Circle, Lumi and Zuri zone rugs and posters around the room':
+    'Ilustración conceptual, todavía no instalada: nuestro salón principal con todas las zonas de Futures Friends, centrado en el tapete morado de la Zona de movimiento de Bop, con los tapetes y pósteres de las zonas de Booker, el Círculo de amigos, Lumi y Zuri por todo el salón',
+  'Concept illustration, not installed yet: our reading corner with a blue Booker\'s Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench':
+    'Ilustración conceptual, todavía no instalada: nuestro rincón de lectura con un tapete azul del Área de lectura de Booker, un póster de Booker en la pared, un estante de libros ilustrados y un peluche de Booker en la banca',
+  'Concept illustration, not installed yet: our blue-table classroom with a green Zuri\'s Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves':
+    'Ilustración conceptual, todavía no instalada: nuestro salón de la mesa azul con un tapete verde de la Zona de descubrimiento de Zuri, un póster de Zuri, una mesa con bandejas de naturaleza, un caballete y casilleros',
+  'Concept illustration, not installed yet: our dress-up corner with a purple Bop\'s Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush':
+    'Ilustración conceptual, todavía no instalada: nuestro rincón de disfraces con un tapete morado de la Zona de movimiento de Bop, un póster de Bop sobre un estante de pelotas, pañuelos y bloques, y un peluche de Bop',
+  'Our carpet area: a large alphabet rug with animals for each letter, small armchairs, a bookshelf and low toy shelves':
+    'Nuestra área de la alfombra: un tapete grande del abecedario con un animal para cada letra, sillitas, un librero y estantes bajos para juguetes',
+  'Concept illustration, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, posters for Booker\'s Reading Area, Friends Circle and Lumi\'s Calm Corner, and friend plush on the bench':
+    'Ilustración conceptual, todavía no instalada: nuestra área de la alfombra con un tapete grande del Círculo de amigos que muestra a los cuatro amigos, pósteres del Área de lectura de Booker, el Círculo de amigos y el Rincón de calma de Lumi, y peluches de los amigos en la banca',
+  'Concept illustration, not installed yet: the same carpet area with the Friends Circle rug and a full poster wall for Booker, Lumi, Friends Circle, Zuri and Bop above the picture-book shelf':
+    'Ilustración conceptual, todavía no instalada: la misma área de la alfombra con el tapete del Círculo de amigos y una pared completa de pósteres de Booker, Lumi, el Círculo de amigos, Zuri y Bop sobre el estante de libros ilustrados',
+  'Concept: the Futures Friends Learning Zones kit in our classroom (Friends Circle added; not installed yet).':
+    'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con el Círculo de amigos; todavía no instalado).',
+  'Concept: the Futures Friends Learning Zones kit in our classroom (All five zones added; not installed yet).':
+    'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con las cinco zonas; todavía no instalado).',
+  'Concept: the Futures Friends Learning Zones kit in our classroom (Booker\'s Reading Area added; not installed yet).':
+    'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con el Área de lectura de Booker; todavía no instalado).',
+  'What is in each package': 'Qué incluye cada paquete',
+  'Home Daycare': 'Guardería en casa',
+  'Center Starter': 'Centro Inicial',
+  'Center Complete': 'Centro Completo',
+  'One home set: 6 ft Friends Circle rug, 5 zone signs, 4 posters, 4 printed friend puppets, bin labels, sit spots and the cue kit':
+    'Un set para casa: tapete del Círculo de amigos de 6 pies, 5 letreros de zona, 4 pósteres, 4 títeres impresos de los amigos, etiquetas para cajas, marcas para sentarse y el kit de señal',
+  'A model room with the 8 ft Friends Circle and the full Zones Starter, plus Zones Starter sets for 2 more rooms':
+    'Un salón modelo con el Círculo de amigos de 8 pies y el Zones Starter completo, más sets Zones Starter para 2 salones más',
+  'Four full room sets, each with an 8 ft Friends Circle and the full Zones Starter':
+    'Cuatro sets completos de salón, cada uno con un Círculo de amigos de 8 pies y el Zones Starter completo'
+};
+const F = {};
+for (const k of Object.keys(T)) { F[k] = T[k]; if (k.indexOf("'") > -1) F[k.replace(/'/g, '’')] = T[k]; }
+window.FFi18n.add('es', F, [
+  [/^Room (\d+) of (\d+): (.+)$/, (m, a, b, z) => `Salón ${a} de ${b}: ${window.FFi18n.lookup(z, 'es') || z}`],
+  [/^Room (\d+) of (\d+)$/, 'Salón $1 de $2'],
+  [/^\$([\d,]+) startup · \$([\d,]+) a month$/, (m, a, b) => `$${a} de inicio · $${b} al mes`]
+]);
+})();
