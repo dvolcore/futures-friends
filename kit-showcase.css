@@ -1,0 +1,56 @@
+/* Learning Zones Kit showcase (kit-showcase.js). A navy band with a swipeable gallery; text colours are fixed so it reads the same in
+   light and dark themes. Chips and price cards are light "felt islands". */
+.ks{position:relative;color:#fff;background:radial-gradient(60% 80% at 88% 20%,rgba(130,54,174,.38),transparent 70%),radial-gradient(50% 70% at 4% 0%,rgba(47,111,192,.36),transparent 70%),linear-gradient(160deg,#10243F,#16335A);padding-block:clamp(28px,4.5vw,64px);overflow:hidden;scroll-margin-top:110px}
+.ks-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3.5vw,48px);align-items:center}
+.ks-copy{display:grid;gap:14px;align-content:start;min-width:0}
+.ks-eyebrow{font:700 13px/1.2 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.ks h2{margin:0;color:#fff;font-size:clamp(28px,4vw,48px);line-height:1.05}
+.ks-pitch{margin:0;font-size:clamp(16px,1.6vw,19px);line-height:1.45;color:#E4EEF4;max-width:46ch}
+.ks-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ks-chips li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 8px;border-radius:999px;background:var(--zt);color:var(--zi);font:600 13.5px/1.2 var(--display);border:2px solid var(--zf)}
+.ks-dot{width:14px;height:14px;border-radius:50%;background:var(--zf);flex:none}
+.ks-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:12px 16px;border-radius:16px;background:#fff;color:#14313D}
+.ks-price b{flex-basis:100%;font:700 13px/1.2 var(--display);color:#5A4300;letter-spacing:.02em}
+.ks-price span{font-size:14px}
+.ks-price em{font:700 clamp(22px,2.6vw,28px)/1 var(--display);font-style:normal;color:#10243F;margin-right:4px}
+.ks-soon{margin:0;font-size:13.5px;color:#CFDEE8;max-width:52ch}
+.ks-soon b{color:#fff}
+.ks-cta{display:flex;flex-wrap:wrap;gap:10px}
+.ks-gallery{min-width:0;display:grid;gap:10px}
+.ks-track{margin:0;padding:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;border-radius:20px}
+.ks-track::-webkit-scrollbar{display:none}
+.ks-track:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.ks-slide{flex:0 0 100%;scroll-snap-align:center;min-width:0}
+.ks-fig{margin:0;background:#0B1B30;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(2,10,24,.45)}
+.ks-fig .ffa-kit-stage{border-radius:0;aspect-ratio:4/3}
+.ks-fig .ffa-kit-stage img{width:100%;height:100%;object-fit:cover;display:block}
+.ks-fig picture{display:block;height:100%}
+.ks-fig .ffa-kit-label{top:12px;left:12px;font-size:13px;padding:5px 12px}
+.ks-fig figcaption{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;padding:10px 16px;color:#E4EEF4;font-size:13px}
+.ks-fig figcaption b{color:#fff;font:700 15px/1.2 var(--display)}
+.ks-ctl{display:flex;align-items:center;justify-content:center;gap:14px}
+.ks-count{font:600 13px/1 var(--display);color:#E4EEF4;min-width:9ch;text-align:center}
+.ks-nav{appearance:none;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.6);background:rgba(255,255,255,.1);color:#fff;font:400 26px/1 var(--display);cursor:pointer;display:grid;place-items:center;padding:0 0 3px}
+.ks-nav:hover{background:rgba(255,255,255,.22)}
+.ks-nav:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ks-pkgs{list-style:none;margin:clamp(20px,3vw,34px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ks-pkgs li{display:grid;gap:5px;padding:14px 16px;border-radius:16px;background:#fff;color:#14313D;border-top:5px solid var(--c)}
+.ks-pkgs b{font:700 16px/1.2 var(--display);color:#10243F}
+.ks-pk-price{font-weight:600;font-size:14px;color:#5A4300}
+.ks-pk-in{font-size:13.5px;line-height:1.4}
+/* compact: same component, less height */
+.ks-compact{padding-block:clamp(22px,3vw,40px)}
+.ks-compact h2{font-size:clamp(24px,3vw,34px)}
+.ks-compact .ks-pitch{font-size:15px}
+.ks-compact .ks-fig .ffa-kit-stage{aspect-ratio:16/10}
+@media (max-width:820px){
+ .ks-grid{grid-template-columns:minmax(0,1fr)}
+ .ks-gallery{order:-1}
+ .ks .wrap{padding-inline:16px}
+ .ks-track{margin-inline:-16px;padding-inline:16px;scroll-padding-inline:16px;border-radius:0;gap:10px}
+ .ks-slide{flex-basis:92%}
+ .ks-pkgs{grid-template-columns:minmax(0,1fr)}
+ .ks-cta .btn{flex:1 1 auto;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){.ks-track{scroll-behavior:auto}}
+.ks-fig figcaption span{color:#D5E2EA;font-size:13px}

@@ -410,5 +410,5 @@ try {
   if (cols[1] && !cols[1].querySelector('[data-go="room-kit"]')) cols[1].insertAdjacentHTML('beforeend', '<button data-go="room-kit">Learning Zones Kit</button>');
 } catch (e) { /* the footer is optional */ }
 
-W.FFRoomKit = { ZONES, CUE, KIT, FENCE, LAYOUTS, TIERS: tiers, ADDONS, SAFETY, STATUS, TAGLINE, band, rooms: brandedRooms };
+W.FFRoomKit = { ZONES, CUE, KIT, FENCE, LAYOUTS, TIERS: tiers, ZS: ZONES_STARTER, ADDONS, SAFETY, STATUS, TAGLINE, band, rooms: brandedRooms };
 })();
