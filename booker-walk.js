@@ -6,8 +6,11 @@
    his friends for goodnight.
    Rules kept: Booker is the existing plush art (img/plush/characters, the standing and the waving pose), scaled uniformly, never
    mirrored (his hoodie's book and backpack read one way; he leans instead of turning). He never covers text or a control: every
-   frame his box is checked against the page's links, buttons and text, 16 px clear of tap targets, and he steps out of sight
-   (behind the felt) wherever the margin is too narrow, as on phones, where he is seen crossing the gaps between sections. While
+   frame his box is checked against the page's links, buttons and text, 16 px clear of tap targets, and on wide screens he steps
+   out of sight (behind the felt) wherever words come under him. On phones the margin is only about 20 px, so with the wide-screen
+   16 px clearance he was hidden almost everywhere (he popped in only at the gaps between sections). There he is small and tucks
+   against the screen edge (about two thirds of him on screen, the trail beside him), so he fits the margin, stays clear of every
+   word and tap target with no extra clearance, and is seen the whole way down. While
    the friends' own parade walks the day path (desktop), he is part of it, so this Booker waits out of sight.
    Reduced motion / motion switch: the trail is simply there, fully drawn; no walker. The layer is aria-hidden decoration with no
    information. Sends nothing (sound requests are `ff:sfx` events: footstep, wave, hop, land). */
@@ -23,7 +26,7 @@
   function geometry(root) {
     const de = document.documentElement, vw = de.clientWidth || innerWidth, vh = innerHeight, sy = scrollY;
     const phone = vw < 700;
-    const H = phone ? 46 : 64, W = Math.round(H * 0.7);
+    const H = phone ? 38 : 64, W = Math.round(H * 0.7);   // (phone: small, and tucked against the screen edge so he fits the 20 px page margin)
     const wrap = root.querySelector('.hc-doors > .wrap');
     if (!wrap) return null;
     const wr = wrap.getBoundingClientRect(), cs = getComputedStyle(wrap);
@@ -166,7 +169,9 @@
     try { if (gsap && MP) gsap.registerPlugin(MP); if (gsap && DS) gsap.registerPlugin(DS); } catch (e) { /* registered already */ }
 
     let layer = null, segs = [], T = [], g = null, walker = null, state = { dist: 0, steps: 0, lastX: null, lean: 0, waved: {}, home: false, pose: 'walk' };
-    let obs = [], obsAt = 0;
+    // phones: the exact boxes of words and controls (no extra clearance: the margin is too narrow for it); wide screens: 16 px / 4 px
+    const obstacles = () => (window.FFHomeDay && window.FFHomeDay.obstacles ? window.FFHomeDay.obstacles(g && g.phone ? 0 : 1) : []);
+    let obs = [], obsAt = 0, Sx = [], lastScroll = -1, lastMove = 0;
     const draw = (s, f) => {
       f = clamp(f, 0, 1);
       if (s.f === f) return; s.f = f;
@@ -183,28 +188,31 @@
       if (layer) layer.remove();
       g = geometry(root);
       if (!g) return;
+      state.lastPos = null;
       layer = document.createElement('div');
       layer.id = 'bw-layer';
       layer.setAttribute('aria-hidden', 'true');
       layer.style.height = Math.ceil(g.layerH) + 'px';
       document.body.appendChild(layer);
-      const S = segments(g);
+      const S = segments(g); Sx = S;
       segs = S.map(seg => Object.assign(svgSeg(layer, seg, g), { seg }));
       segs.forEach(s => { if (MP && MP.getRawPath) { try { s.raw = MP.getRawPath(s.band); MP.cacheRawPathMeasurements(s.raw); } catch (e) { s.raw = null; } } });
       T = timeline(S, g);
-      obs = window.FFHomeDay && window.FFHomeDay.obstacles ? window.FFHomeDay.obstacles() : []; obsAt = performance.now();
+      obs = obstacles(); obsAt = performance.now();
       layer.dataset.segments = String(segs.length);
       if (!motion) { segs.forEach(s => draw(s, 1)); return; }
       segs.forEach(s => draw(s, 0));
-      walker = document.createElement('span');
-      walker.className = 'bw-walker';
+      // a rebuild (resize, late pictures) keeps the same walker element, so he never blinks out and back in
+      const fresh = !walker;
+      if (fresh) walker = document.createElement('span');
+      walker.className = 'bw-walker' + (state.pose === 'wave' ? ' is-waving' : '') + (walker.classList.contains('is-on') ? ' is-on' : '');
       walker.dataset.surprise = 'booker'; walker.dataset.label = 'Tap Booker on his path: he hops';
       walker.style.setProperty('--bw-h', g.H + 'px');
       walker.style.setProperty('--bw-w', g.W + 'px');
       const P = window.FFPlush;
       walker.innerHTML = `<span class="bw-shadow"></span><span class="bw-body">${P ? P.img(POSE_WALK, { cls: 'bw-pose bw-walk', alt: '', h: g.H }) + P.img(POSE_WAVE, { cls: 'bw-pose bw-wave', alt: '', h: g.H }) : ''}</span>`;
       layer.appendChild(walker);
-      sc.listen(walker, 'click', () => {
+      if (fresh) sc.listen(walker, 'click', () => {
         sfx('hop', state.lastX == null ? 0 : state.lastX / g.vw * 2 - 1, 0.7);
         const body = walker.querySelector('.bw-body');
         body.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-34%)', offset: .4, easing: 'cubic-bezier(.2,.8,.4,1)' }, { transform: 'translateY(0)', offset: .8 }, { transform: 'translateY(-6%)', offset: .9 }, { transform: 'translateY(0)' }], { duration: 560 });
@@ -233,19 +241,22 @@
       const dx = state.lastPos ? pos.x - state.lastPos.x : 0;
       state.lean += ((Math.abs(dx) > 0.3 ? Math.sign(dx) * 3 : 0) - state.lean) * 0.25;
       state.lastPos = pos; state.lastX = pos.x;
+      // phone: down the margins he tucks against the screen edge (box from -11 px to W-11 px, clear of the words); in the gaps he walks free
+      let wx = pos.x;
+      if (g.phone) { const edge = Math.min(pos.x, g.vw - pos.x), tuck = clamp(1 - (edge - 14) / 26, 0, 1), home = pos.x < g.vw / 2 ? g.W / 2 - 11 : g.vw - g.W / 2 + 11; wx = pos.x + (home - pos.x) * tuck; }
       const ph = state.dist / 22 * Math.PI, bob = -Math.abs(Math.sin(ph)) * (g.phone ? 2.5 : 3.5), rock = Math.sin(ph) * 2.2;
-      walker.style.transform = `translate3d(${(pos.x - g.W / 2).toFixed(1)}px, ${(pos.y - g.H + 3).toFixed(1)}px, 0)`;
+      walker.style.transform = `translate3d(${(wx - g.W / 2).toFixed(1)}px, ${(pos.y - g.H + 3).toFixed(1)}px, 0)`;
       walker.style.setProperty('--bob', `${bob.toFixed(2)}px`);
       walker.style.setProperty('--rock', `${(rock + state.lean).toFixed(2)}deg`);
       // visible only where nothing is under him (16 px clear of tap targets), never over the hero, never beside the parade
-      const box = { l: pos.x - g.W / 2, r: pos.x + g.W / 2, t: pos.y - g.H, b: pos.y + 4 };
-      if (performance.now() - obsAt > 500) { obs = window.FFHomeDay && window.FFHomeDay.obstacles ? window.FFHomeDay.obstacles() : []; obsAt = performance.now(); }   // the page moves under him (photos, fonts, opened transcripts): never trust an old map
+      const box = { l: wx - g.W / 2, r: wx + g.W / 2, t: pos.y - g.H, b: pos.y + 4 };
+      if (performance.now() - obsAt > 500) { obs = obstacles(); obsAt = performance.now(); }   // the page moves under him (photos, fonts, opened transcripts): never trust an old map
       const blocked = obs.some(o => !(box.r <= o.l || box.l >= o.r || box.b <= o.t || box.t >= o.b));
       const parade = !g.phone && (() => { const p = root.querySelector('.hc-trail-live .hc-parade'); if (!p || !p.offsetParent) return false; const r = p.getBoundingClientRect(); return r.bottom > vh * 0.08 && r.top < vh * 0.92; })();
       // fixed controls stay clear too: back-to-top and the sound toggle (sound.js, bottom right)
-      const yv = pos.y - s;
-      const fixedHit = [...document.querySelectorAll('.totop.on, .ffs')].some(b => { const r = b.getBoundingClientRect(); return r.width && !(box.r <= r.left - 16 || box.l >= r.right + 16 || yv <= r.top - 16 || yv - g.H >= r.bottom + 16); });
-      const hdr = document.querySelector('header.bar'), hb = hdr ? hdr.getBoundingClientRect().bottom : 0, under = pos.y - s - g.H < hb + 16;
+      const yv = pos.y - s, fp = g.phone ? 0 : 16;
+      const fixedHit = [...document.querySelectorAll('.totop.on, .ffs')].some(b => { const r = b.getBoundingClientRect(); return r.width && !(box.r <= r.left - fp || box.l >= r.right + fp || yv <= r.top - fp || yv - g.H >= r.bottom + fp); });
+      const hdr = document.querySelector('header.bar'), hb = hdr ? hdr.getBoundingClientRect().bottom : 0, under = g.phone ? pos.y - s < hb + 2 : pos.y - s - g.H < hb + 16;
       const before = s < T[0].s0 + 4;
       const on = !blocked && !parade && !fixedHit && !under && !before && !state.home;
       walker.classList.toggle('is-on', on);
@@ -270,13 +281,32 @@
       if (!atEnd && state.joined && s < e.s0) { state.joined = false; state.home = false; }
     }
 
+    // one rAF loop that runs while the page is moving (and a moment after), so he is placed every frame of a scroll or a momentum
+    // fling, on the same frame the page paints, not only on the frames a scroll event happens to arrive (iOS delivers few of them)
     let id = 0;
-    const queue = () => { if (!id) id = requestAnimationFrame(() => { id = 0; tick(); }); };
+    const frame = () => {
+      id = 0; tick();
+      const now = performance.now();
+      if (scrollY !== lastScroll) { lastScroll = scrollY; lastMove = now; }
+      if (now - lastMove < 160 && !sc.aborted) id = requestAnimationFrame(frame);
+    };
+    function queue() { lastMove = performance.now(); if (!id) id = requestAnimationFrame(frame); }
     sc.add(() => { if (id) cancelAnimationFrame(id); if (layer) layer.remove(); });
     if (motion) sc.listen(window, 'scroll', queue, { passive: true });
     let bid = 0;
     const rebuild = () => { clearTimeout(bid); bid = setTimeout(() => { state = Object.assign(state, { lastPos: null }); build(); }, 180); };
-    sc.listen(window, 'resize', rebuild);
+    // iPhone Safari: the toolbar sliding in and out resizes the window (height only) many times during one scroll. That must not
+    // rebuild the trail (the old behaviour: the walker vanished and faded back in); only the screen height used by the timeline changes.
+    let lastW = document.documentElement.clientWidth || innerWidth;
+    const viewportChanged = () => {
+      const w = document.documentElement.clientWidth || innerWidth;
+      if (Math.abs(w - lastW) > 1) { lastW = w; rebuild(); return; }
+      const vh = (window.visualViewport && window.visualViewport.height) || innerHeight;
+      if (g && walker && Math.abs(vh - g.vh) > 1) { g.vh = Math.max(vh, innerHeight); T = timeline(Sx, g); }
+      queue();
+    };
+    sc.listen(window, 'resize', viewportChanged);
+    if (window.visualViewport) { sc.listen(window.visualViewport, 'resize', viewportChanged); sc.listen(window.visualViewport, 'scroll', () => queue(), { passive: true }); }
     if (typeof ResizeObserver === 'function') { const ro = new ResizeObserver(rebuild); ro.observe(root); sc.add(() => ro.disconnect()); }
     sc.add(() => clearTimeout(bid));
     // lazy: the trail is built once the page has settled (idle), never in the first frame
