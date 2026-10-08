@@ -363,7 +363,7 @@ function dashView(c){
   const dues = Object.entries(DM.all('dues')), open = dues.filter(([, d]) => !d.done).sort((x, y) => x[1].due.localeCompare(y[1].due)), today = DM.todayIso();
   const overdue = open.filter(([, d]) => d.due < today).length, waiting = approvalsWaiting(), apps = Object.values(DM.all('apps')).filter(x => ['inquiry','application'].includes(x.stage)).length;
   const tile = (n, l, cls, tab) => `<button class="card ffd-tile ffd-tbtn" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l}</span></button>`;
-  return libTile() + getStarted() + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
+  return libTile() + getStarted() + (window.FFStoreTeasers ? window.FFStoreTeasers.classroom() : '') + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
     ${tile(`${inRatio}<span class="ffd-of"> / ${rooms.length}</span>`, 'Rooms in ratio', inRatio < rooms.length ? 'ffd-bad' : '', 'staff')}${tile(waiting, 'Approvals waiting', waiting ? 'ffd-warn' : '', 'approvals')}</div>
   <div class="ffd-cols">
    <div class="card"><h3>Rooms right now</h3><div class="tw"><table><caption class="sr-only">Attendance and ratio by room</caption><tr><th scope="col">Room</th><th scope="col" class="n">Here</th><th scope="col">Staff on duty</th><th scope="col">Ratio</th><th scope="col"><span class="sr-only">Open</span></th></tr>

@@ -121,7 +121,7 @@
     'store-request': ['Store request', '', 'store', 'bop'],
     shop: ['Shop', 'centers', 'store', 'bop'],
     product: ['Shop', '', 'store', 'bop'],
-    cart: ['Cart', '', 'store', 'bop'],
+    cart: ['Bag', '', 'store', 'bop'],
     checkout: ['Checkout', '', 'cart', 'bop'],
     order: ['Order request', '', 'store', 'bop'],
     'order-return': ['Back from checkout', '', 'store', 'bop'],
@@ -518,6 +518,10 @@
 
   // ---------------------------------------------------------------- 6. breadcrumbs, back chip, closing band (run on every render)
   function chainOf(r, a) {
+    // the Futures Store (store-shop.js): a family item trails Home / Kids' Shop / section; a centers item trails the Futures Store. The side is the visitor's own.
+    if (r === 'product' && a != null && W.FFShopUI && W.FFShopUI.trail) return W.FFShopUI.trail(a, audience);
+    if ((r === 'cart' || r === 'checkout' || r === 'order') && audience === 'families') return [['home', 'Home'], ['kids-shop', 'Kids\u2019 Shop']];
+    if (r === 'shop' && a != null && audience === 'families') return [['home', 'Home'], ['kids-shop', 'Kids\u2019 Shop']];
     const chain = []; const seen = new Set();
     let p = a != null ? r : parentOf(r);
     while (p && !seen.has(p) && p !== 'home') { seen.add(p); chain.unshift(p); p = parentOf(p); }
@@ -568,6 +572,7 @@
     const prev = hist.length > 1 ? hist[hist.length - 2] : null;
     const k = keyOf(r, a);
     if (prev && prev.key !== k) return { href: '#' + prev.key, name: prev.name, back: true };
+    if (r === 'product') { const c = chainOf(r, a), l = c[c.length - 1]; if (l) return { href: '#' + l[0], name: l[1], back: false }; }
     return has(r) ? { href: '#' + r, name: nameOf(r), back: false } : null;
   }
   function ensureBack() {

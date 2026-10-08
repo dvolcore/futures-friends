@@ -74,7 +74,7 @@
       : `<div class="card"><h3>${esc(preset.heading)}</h3><p class="small">Online requests are not available on this page right now. Please call <b>${PHONE}</b> or email <b>${EMAIL}</b>.</p></div>`;
     return phero('Futures Store', list ? 'Tell me when it opens' : 'Request a quote', 'Nothing is charged and no order is placed from this page. A real person replies with a written price.', { chars: ['zuri', 'lumi'], crumb: ['store', 'Futures Store'] }) + `
 <section class="band-paper"><div class="wrap"><div class="grid g2" style="align-items:start">${form}
- <div class="card"><h3>Your cart</h3>${lines().length ? `<ul class="fs-lines">${lines().map(l => `<li><span>${esc(l.p.name)}${l.label ? ' (' + esc(l.label) + ')' : ''}</span><b>\u00d7 ${l.qty}</b></li>`).join('')}</ul>` : '<p class="small muted">Your cart is empty. You can still send a request.</p>'}<p class="small muted">Prices, shipping and timing are confirmed by a real person before anything is ordered.</p><button class="btn soft" data-go="${lines().length ? 'cart' : 'store'}">${lines().length ? 'Back to the cart' : 'Back to the store'}</button></div>
+ <div class="card"><h3>Your bag</h3>${lines().length ? `<ul class="fs-lines">${lines().map(l => `<li><span>${esc(l.p.name)}${l.label ? ' (' + esc(l.label) + ')' : ''}</span><b>\u00d7 ${l.qty}</b></li>`).join('')}</ul>` : '<p class="small muted">Your bag is empty. You can still send a request.</p>'}<p class="small muted">Prices, shipping and timing are confirmed by a real person before anything is ordered.</p><button class="btn soft" data-go="${lines().length ? 'cart' : 'store'}">${lines().length ? 'Back to the bag' : 'Back to the store'}</button></div>
 </div></div></section>`;
   };
 

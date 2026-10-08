@@ -400,5 +400,191 @@
    "type": "backpack",
    "front_copy": "Together we grow"
   }
+ ],
+ "replicas": [
+  {
+   "id": "booker-replica-backpack",
+   "name": "Booker Custom Backpack",
+   "description": "Rust-red canvas backpack with a soft flap, golden-brown trim, brass-tone buckles and open-book embroidery.",
+   "design": "Booker",
+   "character": "Booker",
+   "color": "rust red",
+   "front_copy": "Booker’s brave day"
+  },
+  {
+   "id": "zuri-replica-backpack",
+   "name": "Zuri Shell Backpack",
+   "description": "Padded chestnut turtle-shell backpack with quilted scute panels, brown straps and a small compass detail.",
+   "design": "Zuri",
+   "character": "Zuri",
+   "color": "chestnut brown",
+   "front_copy": "Wonder starts here"
+  },
+  {
+   "id": "bop-replica-backpack",
+   "name": "Bop Custom Backpack",
+   "description": "Yellow canvas backpack with green pockets and straps, bright piping and a cheerful star detail.",
+   "design": "Bop",
+   "character": "Bop",
+   "color": "green and yellow",
+   "front_copy": "Make room to move"
+  }
+ ],
+ "coloring": [
+  {
+   "id": "coloring-book-booker",
+   "name": "Color Your Story Coloring Book",
+   "description": "Draft coloring-book concept with a colored Booker reading cover and black-and-white sample interior page; full interior is not yet included.",
+   "character": "Booker",
+   "zone": "Reading Area",
+   "color": "blue",
+   "cta": "Enquire about this coloring book"
+  },
+  {
+   "id": "coloring-book-lumi",
+   "name": "Color Your Calm Coloring Book",
+   "description": "Draft coloring-book concept with a colored Lumi calm cover and black-and-white sample interior page; full interior is not yet included.",
+   "character": "Lumi",
+   "zone": "Calm Corner",
+   "color": "pink",
+   "cta": "Enquire about this coloring book"
+  },
+  {
+   "id": "coloring-book-zuri",
+   "name": "Color Your Curiosity Coloring Book",
+   "description": "Draft coloring-book concept with a colored Zuri discovery cover and black-and-white sample interior page; full interior is not yet included.",
+   "character": "Zuri",
+   "zone": "Discovery Zone",
+   "color": "green",
+   "cta": "Enquire about this coloring book"
+  },
+  {
+   "id": "coloring-book-bop",
+   "name": "Color Your Moves Coloring Book",
+   "description": "Draft coloring-book concept with a colored Bop movement cover and black-and-white sample interior page; full interior is not yet included.",
+   "character": "Bop",
+   "zone": "Movement Zone",
+   "color": "purple",
+   "cta": "Enquire about this coloring book"
+  },
+  {
+   "id": "coloring-book-universe",
+   "name": "Futures Friends Universe Coloring Pack",
+   "description": "A four-page printable coloring pack featuring the illustrated Futures Friends universe: lead friends, classmates, school team, and families.",
+   "character": "Futures Friends universe",
+   "color": "full cast",
+   "front_copy": "Every friend belongs",
+   "additional_images": [
+    "coloring-stickers/images/universe-coloring-classmates.png",
+    "coloring-stickers/images/universe-coloring-school.png",
+    "coloring-stickers/images/universe-coloring-families.png"
+   ],
+   "downloadable_file": "coloring-stickers/Futures_Friends_Universe_Coloring_Pack.pdf"
+  }
+ ],
+ "stickers": [
+  {
+   "id": "stickers-booker",
+   "name": "Booker Story Sticker Sheet",
+   "description": "Draft sticker sheet concept with Booker poses and reading-themed icons.",
+   "character": "Booker",
+   "zone": "Reading Area",
+   "color": "blue",
+   "cta": "Enquire about this sticker sheet"
+  },
+  {
+   "id": "stickers-lumi",
+   "name": "Lumi Calm Sticker Sheet",
+   "description": "Draft sticker sheet concept with Lumi poses and calm-corner themed icons.",
+   "character": "Lumi",
+   "zone": "Calm Corner",
+   "color": "pink",
+   "cta": "Enquire about this sticker sheet"
+  },
+  {
+   "id": "stickers-zuri",
+   "name": "Zuri Discovery Sticker Sheet",
+   "description": "Draft sticker sheet concept with Zuri poses and discovery-themed icons.",
+   "character": "Zuri",
+   "zone": "Discovery Zone",
+   "color": "green",
+   "cta": "Enquire about this sticker sheet"
+  },
+  {
+   "id": "stickers-bop",
+   "name": "Bop Movement Sticker Sheet",
+   "description": "Draft sticker sheet concept with Bop poses and movement-themed icons.",
+   "character": "Bop",
+   "zone": "Movement Zone",
+   "color": "purple",
+   "cta": "Enquire about this sticker sheet"
+  },
+  {
+   "id": "stickers-all-friends",
+   "name": "Core Four Sticker Sheet",
+   "description": "Draft sticker sheet concept with all four friends and shared learning-zone icons.",
+   "character": "Booker, Lumi, Zuri and Bop",
+   "zone": "Friends Circle",
+   "color": "blue/pink/green/purple",
+   "cta": "Enquire about this sticker sheet"
+  },
+  {
+   "id": "stickers-universe",
+   "name": "Futures Friends Universe Sticker Pack",
+   "description": "A four-sheet sticker pack covering the illustrated Futures Friends universe: lead friends, classmates, school team, and families.",
+   "character": "Futures Friends universe",
+   "color": "full cast",
+   "front_copy": "Every friend belongs",
+   "additional_images": [
+    "coloring-stickers/images/universe-stickers-classmates.png",
+    "coloring-stickers/images/universe-stickers-school.png",
+    "coloring-stickers/images/universe-stickers-families.png"
+   ],
+   "downloadable_file": "coloring-stickers/Futures_Friends_Universe_Sticker_Pack.pdf"
+  }
+ ],
+ "bottles": [
+  {
+   "id": "bottle-booker",
+   "name": "Booker Insulated Bottle",
+   "description": "Booker reading blue character art on a sturdy proposed insulated bottle.",
+   "character": "Booker",
+   "color": "royal blue",
+   "cta": "Enquire about this bottle concept"
+  },
+  {
+   "id": "bottle-lumi",
+   "name": "Lumi Insulated Bottle",
+   "description": "Lumi calm pink character art on a sturdy proposed insulated bottle.",
+   "character": "Lumi",
+   "color": "pink",
+   "cta": "Enquire about this bottle concept"
+  },
+  {
+   "id": "bottle-zuri",
+   "name": "Zuri Insulated Bottle",
+   "description": "Zuri discovery green character art on a sturdy proposed insulated bottle.",
+   "character": "Zuri",
+   "color": "leaf green",
+   "cta": "Enquire about this bottle concept"
+  },
+  {
+   "id": "bottle-bop",
+   "name": "Bop Insulated Bottle",
+   "description": "Bop movement purple character art on a sturdy proposed insulated bottle.",
+   "character": "Bop",
+   "color": "purple",
+   "cta": "Enquire about this bottle concept"
+  }
+ ],
+ "plates": [
+  {
+   "id": "eat-the-rainbow-plate",
+   "name": "Eat the Rainbow Divided Plate",
+   "description": "Draft realistic silicone plate concept with six physically raised compartments: red, orange, yellow, green, blue/purple color spaces, plus a separate protein section, with small Futures Friends characters around the outer rim.",
+   "character": "Futures Friends",
+   "color": "rainbow/silicone",
+   "cta": "Enquire about this plate concept"
+  }
  ]
 });
