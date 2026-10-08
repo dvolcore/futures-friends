@@ -64,3 +64,6 @@ html.ffe-open,html.ffe-open body{overflow:hidden}
 .ffe-centers{appearance:none;min-height:44px;padding:0 16px;border:2px solid #0A2B38;border-radius:999px;background:#fff;color:#0A2B38;font:600 14.5px/1 var(--body,"Poppins",system-ui,sans-serif);cursor:pointer}
 .ffe-centers:hover{background:#FBF6EC}
 .ffe-centers:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+
+/* 2026-10-08: entering moves focus to the page heading for screen readers; that is programmatic, so no visible ring (it drew a dashed box round the Home logo after a tap). Keyboard focus elsewhere is unchanged. */
+#view h1.ff-quiet-focus[tabindex="-1"]:focus,#view h1.ff-quiet-focus[tabindex="-1"]:focus-visible{outline:none!important;box-shadow:none!important}

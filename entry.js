@@ -73,7 +73,13 @@
   const here = h => (W.FF_ROOT_PATH || location.pathname) + location.search + h;   // a clean-path page (kids-shop, product-...) hops to the app address
   function focusH1() {
     const h1 = D.querySelector('#view h1');
-    if (h1) { if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1'); try { h1.focus({ preventScroll: true }); } catch (_) { /* gone */ } }
+    if (h1) {
+      if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1');
+      // programmatic focus for screen readers: no visible ring (it drew a dashed box round the Home logo after a tap); the ring
+      // comes back as soon as the visitor tabs, because the class goes on blur
+      h1.classList.add('ff-quiet-focus'); h1.addEventListener('blur', () => h1.classList.remove('ff-quiet-focus'), { once: true });
+      try { h1.focus({ preventScroll: true }); } catch (_) { /* gone */ }
+    }
   }
   // Home now, without a history entry; the hero's opening (waiting on FFEntry.wait) plays from the top of the page
   function hopHome() {
