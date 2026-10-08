@@ -63,7 +63,7 @@
     watch: ['Watch episodes', 'The planned Futures Friends micro-series: 3 to 6 minute episodes watched together with a teacher. No episode is finished yet; the welcome video plays here.'],
     talk: ['Talk about it cards', 'Printable talk-about-it cards for every planned Futures Friends episode: three questions, a feeling word and one thing to try at home.'],
     enroll: ['Visit Futures Learning Center', 'Futures Learning Center in Independence, Missouri: tours, online applications, tuition and a day in the life for children ages 2 to 5.'],
-    jobs: ['Careers and open positions', 'Teaching, kitchen and leadership roles at Futures Friends centers. Apply online.'],
+    jobs: ['Careers and open positions', 'Teaching, kitchen and leadership roles at Futures Friends centers. Online applications open soon; call or email in the meantime.'],
     job: ['Job opening', 'Position details and application for a Futures Friends opening.'],
     'whole-child': ['The Whole-Child Day: learning, meals, movement, Quiet Time', 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.'],
     'teacher-standard': ['Our Teacher Standard: training, background checks and mastery', 'What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.'],

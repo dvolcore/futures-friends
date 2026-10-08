@@ -97,7 +97,7 @@ function measures() {
    <p class="fp-note">Results are reported in aggregate. A program is named only with its permission.</p>`);
 }
 function who() {
-  return sect('fp-who', 'band-paper', `${lead('Who it’s for', 'Four kinds of programs, one pilot', 'A mix of program types in the Kansas City metro, on both sides of State Line, so the pilot shows how Futures Friends works in each kind of room.', 'fp-who-h')}
+  return sect('fp-who', 'band-paper', `${lead('Who it’s for', 'Who we are looking for', 'A mix of program types in the Kansas City metro, on both sides of State Line, so the pilot shows how Futures Friends works in each kind of room.', 'fp-who-h')}
    <div class="grid g4 fp-who">${WHO.map(w => `<div class="card fp-card" style="border-top:5px solid var(--${w[2]})"><h3>${E(w[0])}</h3><p class="small">${E(w[1])}</p></div>`).join('')}</div>`);
 }
 function how() {

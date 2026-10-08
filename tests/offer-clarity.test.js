@@ -54,8 +54,8 @@ test('program pages and pricing link to #membership; the brand kit is linked fro
 test('#enroll: owner slots, no invented staff, Ms. June labelled, honest daily schedule, parent hooks', () => {
   const c = site(), html = c.render('enroll'), t = text(html);
   assert.match(t, /Owner to provide/); assert.match(t, /Openings by room/); assert.match(t, /Registration fee/);
-  assert.match(t, /Meet the teachers\. See the classrooms\. Picture your child here\./);
-  assert.match(t, /A day full of discovery\. A place your child belongs\./);
+  assert.match(t, /Who will greet your child at the door/);
+  assert.match(t, /What a day looks like/);
   assert.doesNotMatch(t, /Families sign in on the tablet/);
   assert.doesNotMatch(t, /on episode days, one 3 to 6 minute episode/);
   assert.match(t, /Tablet sign-in comes with the app pilot/);

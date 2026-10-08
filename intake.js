@@ -308,7 +308,7 @@ async function loadJobs(force) {
 
 V.jobs = () => {
   setTimeout(() => loadJobs(), 0);
-  return phero('Careers', 'Teach with Futures Friends', 'Teaching, kitchen and leadership roles at Futures Friends centers. Openings appear here as they open. Applying takes about five minutes and asks for your resume.', { chars: KEYS }) + `
+  return phero('Careers', 'Teach with Futures Friends', 'Teachers, cooks and directors for Futures Friends centers. Openings appear here as they come up. Applying takes about five minutes and asks for your resume.', { chars: KEYS }) + `
 <section class="band-paper"><div class="wrap"><div id="ffiJobs" aria-live="polite">${enabled() ? loading('open positions') : soon('job applications')}</div></div></section>
 <section><div class="wrap"><div class="grid g3">
  ${card('What we look for', 'Warm, steady adults who like young children. A CDA or CPR/First Aid helps and is not required for every role; tell us what you have.', 'Teachers', 'booker')}

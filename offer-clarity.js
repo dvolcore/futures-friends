@@ -115,10 +115,10 @@ function monthSection(id) {
 }
 
 V.membership = () => hero('Monthly membership', 'What arrives every month, and who helps you use it',
-  'A Futures Friends membership is a startup package once, then a monthly fee. Here is everything the month holds, what is ready today and what costs extra.',
+  'You pay for a startup package once, then a monthly fee. This page lists what the month holds, what is ready today and what costs extra.',
   { crumb: ['pricing', 'Pricing'], chars: ['booker', 'zuri'], anchors: [['oc-month', 'Your month'], ['oc-cadence', 'Once, monthly, extra'], ['oc-grow', 'Grow your enrollment']] }) +
   monthSection('oc-month') +
-  `<section class="oc-sec band-paper" id="oc-cadence" aria-labelledby="oc-cadence-h"><div class="wrap">${lead('oc-cadence-h', 'Plainly', 'Once, every month, or extra', 'So your budget has no surprises.')}${cadenceCols()}${multisite()}</div></section>` +
+  `<section class="oc-sec band-paper" id="oc-cadence" aria-labelledby="oc-cadence-h"><div class="wrap">${lead('oc-cadence-h', 'Plainly', 'Once, every month, or extra', 'Sorted by when the money leaves your account.')}${cadenceCols()}${multisite()}</div></section>` +
   grow() +
   `<section class="tight"><div class="wrap"><div class="cta"><div style="display:grid;gap:8px"><h2>Talk through a membership</h2><p class="lede">Tell us your rooms, ages and enrollment. A real person confirms every item and price with you first. ${E(TAGLINE)}</p></div><a class="btn gold" href="#quote">Ask for a written quote</a></div></div></section>`;
 
@@ -179,7 +179,7 @@ function facts() {
 }
 const SIL = '<svg viewBox="0 0 80 80" aria-hidden="true" class="oc-sil"><circle cx="40" cy="30" r="14"/><path d="M14 74c2-16 13-24 26-24s24 8 26 24z"/></svg>';
 function team() {
-  return `<section class="oc-sec band-paper" id="oc-team" aria-labelledby="oc-team-h"><div class="wrap">${lead('oc-team-h', 'Our team', 'Meet the teachers. See the classrooms. Picture your child here.', 'The real people who will care for your child, with their permission. Until their photos and words are here, you meet them on your tour.')}
+  return `<section class="oc-sec band-paper" id="oc-team" aria-labelledby="oc-team-h"><div class="wrap">${lead('oc-team-h', 'Our team', 'Who will greet your child at the door', 'The real people who will care for your child, with their permission. Until their photos and words are here, you meet them on your tour.')}
    <div class="oc-team">${FLC_FACTS.team.map(p => `<article class="oc-person">${p.photo ? `<img src="${E(p.photo)}" alt="${E(p.name || p.role)}" width="160" height="160" loading="lazy">` : `<span class="oc-photo">${SIL}<span class="small">Photo</span></span>`}
      <div><span class="small muted">${E(p.role)}</span><h3>${p.name ? E(p.name) : 'Name'}</h3>${p.name ? '' : OWNER_TAG}<p class="small">${p.bio ? E(p.bio) : 'A short introduction: how long they have taught, what they love about this age and one thing children ask them about.'}</p></div></article>`).join('')}</div>
    <p class="small muted">We never show stock photos or made-up staff. Booker, Lumi, Zuri, Bop and Ms. June are story-world characters, not members of our staff.</p></div></section>`;
@@ -247,7 +247,7 @@ function brandKit() {
   <fieldset><legend>Background</legend><label><input type="radio" name="bg" value="light" checked> White</label><label><input type="radio" name="bg" value="dark"> Navy</label></fieldset>
   <button class="btn gold" type="button" data-oc-download>Download PNG</button><p class="small muted" id="ocLockMsg" role="status" aria-live="polite"></p></form>
   <figure class="oc-lockprev" id="ocLockPrev" data-bg="light">${lockupHtml('Your Center Name')}<figcaption class="small muted">Preview. Minimum size: 150 pixels wide on screen, 1 inch in print.</figcaption></figure></div></div></section>
-<section class="oc-sec band-paper" id="oc-rules" aria-labelledby="oc-rules-h"><div class="wrap">${lead('oc-rules-h', 'Usage rules', 'Keep the brand clear and the friends safe', '')}
+<section class="oc-sec band-paper" id="oc-rules" aria-labelledby="oc-rules-h"><div class="wrap">${lead('oc-rules-h', 'Usage rules', 'A few rules, so the friends always look right', '')}
  <div class="oc-rules"><div class="oc-card"><h3>Logo and name</h3><ul class="small"><li>Your center’s name first, then “featuring Futures Friends” with our logo.</li><li>Keep your own name; never call your program “Futures Learning Center” or suggest you are a branch of it.</li><li>Do not add “Futures Friends” to your Google Business Profile name.</li><li>Tagline, word for word: <b>${E(TAGLINE)}</b></li></ul></div>
   <div class="oc-card"><h3>Clear space and size</h3><ul class="small"><li>Clear space on every side equal to the height of the F in Futures.</li><li>At least 150 pixels wide on screen, 1 inch in print.</li><li>White, cream or a solid brand colour behind it. No busy photos.</li></ul></div>
   <div class="oc-card"><h3>Don’ts</h3><ul class="small"><li>No stretching, rotating, shadows, outlines or glows.</li><li>No recolouring the logo or the friends.</li><li>Never redraw Booker, Lumi, Zuri or Bop; use the supplied art.</li><li>No logo copied from a screenshot.</li></ul></div></div>
