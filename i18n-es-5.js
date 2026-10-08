@@ -23,16 +23,10 @@ window.FFi18n.add('es', {
   'Show the room': 'Ver el salón',
   'Real room': 'Salón real',
   'With the kit': 'Con el kit',
-  "Concept image, not installed yet: our main classroom with a pink Lumi's Calm Corner zone mat beside the turtle stepping stones and a Lumi poster on the pillar":
-    'Imagen de concepto, todavía no instalado: nuestro salón principal con un tapete rosa del Rincón de calma de Lumi junto a las piedritas de tortuga y un póster de Lumi en la columna',
   "Concept: the Futures Friends Learning Zones kit in our classroom (Lumi's Calm Corner added; not installed yet).":
     'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con el Rincón de calma de Lumi; todavía no instalado).',
-  "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone mat, a Bop zone sign above the shelf and a Bop plush on top of it":
-    'Imagen de concepto, todavía no instalado: nuestro rincón de disfraces con un tapete morado de la Zona de movimiento de Bop, un letrero de la zona de Bop sobre el estante y un peluche de Bop encima',
   "Concept: the Futures Friends Learning Zones kit in our classroom (Bop's Movement Zone added; not installed yet).":
     'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con la Zona de movimiento de Bop; todavía no instalado).',
-  "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone mat beside the table, a Zuri poster on the wall and a Zuri plush on the cubby":
-    'Imagen de concepto, todavía no instalado: nuestro salón de la mesa azul con un tapete verde de la Zona de descubrimiento de Zuri junto a la mesa, un póster de Zuri en la pared y un peluche de Zuri sobre el casillero',
   "Concept: the Futures Friends Learning Zones kit in our classroom (Zuri's Discovery Zone added; not installed yet).":
     'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con la Zona de descubrimiento de Zuri; todavía no instalado).',
   'A day full of discovery. A place your child belongs.': 'Un día lleno de descubrimientos. Un lugar al que tu niño pertenece.',
@@ -255,21 +249,27 @@ const T = {
   'Swipe or use the arrow keys to see each room': 'Desliza o usa las flechas del teclado para ver cada salón',
   'Previous room': 'Salón anterior',
   'Next room': 'Salón siguiente',
-  'Concept illustration, not installed yet. The real room is one tap away.': 'Ilustración conceptual, todavía no instalada. El salón real está a un toque.',
-  'Concept illustration, not installed yet: our main classroom with every Futures Friends zone, centred on Bop\'s purple Movement Zone rug, with Booker, Friends Circle, Lumi and Zuri zone rugs and posters around the room':
-    'Ilustración conceptual, todavía no instalada: nuestro salón principal con todas las zonas de Futures Friends, centrado en el tapete morado de la Zona de movimiento de Bop, con los tapetes y pósteres de las zonas de Booker, el Círculo de amigos, Lumi y Zuri por todo el salón',
-  'Concept illustration, not installed yet: our reading corner with a blue Booker\'s Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench':
-    'Ilustración conceptual, todavía no instalada: nuestro rincón de lectura con un tapete azul del Área de lectura de Booker, un póster de Booker en la pared, un estante de libros ilustrados y un peluche de Booker en la banca',
-  'Concept illustration, not installed yet: our blue-table classroom with a green Zuri\'s Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves':
-    'Ilustración conceptual, todavía no instalada: nuestro salón de la mesa azul con un tapete verde de la Zona de descubrimiento de Zuri, un póster de Zuri, una mesa con bandejas de naturaleza, un caballete y casilleros',
-  'Concept illustration, not installed yet: our dress-up corner with a purple Bop\'s Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush':
-    'Ilustración conceptual, todavía no instalada: nuestro rincón de disfraces con un tapete morado de la Zona de movimiento de Bop, un póster de Bop sobre un estante de pelotas, pañuelos y bloques, y un peluche de Bop',
+  "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls":
+    "Imagen de concepto, todavía no instalada: nuestro salón principal como propuesta, con el tapete morado de la Zona de movimiento de Bop al frente, los tapetes del Círculo de amigos, de Zuri y de Lumi atrás, y un póster de cada amigo en las paredes",
+  "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench":
+    "Imagen de concepto, todavía no instalada: nuestra área de la alfombra con un tapete grande del Círculo de amigos que muestra a los cuatro amigos, una pared con cinco pósteres de zona sobre el estante de libros ilustrados y peluches de los amigos en la banca",
+  "Concept image, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench":
+    "Imagen de concepto, todavía no instalada: nuestro rincón de lectura con un tapete azul del Área de lectura de Booker, un póster de Booker en la pared, un estante de libros ilustrados y un peluche de Booker en la banca",
+  "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush":
+    "Imagen de concepto, todavía no instalada: nuestro rincón de disfraces con un tapete morado de la Zona de movimiento de Bop, un póster de Bop sobre un estante de pelotas, pañuelos y bloques, y un peluche de Bop",
+  "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves":
+    "Imagen de concepto, todavía no instalada: nuestro salón de la mesa azul con un tapete verde de la Zona de descubrimiento de Zuri, un póster de Zuri, una mesa con bandejas de naturaleza, un caballete y casilleros",
+  "AI-generated proposed transformation — furnishings and products shown as concepts.": "Transformación propuesta generada con IA: el mobiliario y los productos se muestran como conceptos.",
+  "Not installed yet. The real room is one tap away.": "Todavía no instalado. El salón real está a un toque.",
+  "Concept view of a room like ours; it is not a photo of a finished room.": "Vista conceptual de un salón como el nuestro; no es una foto de un salón terminado.",
+  "Today and proposed": "Hoy y propuesto",
+  "Our main classroom": "Nuestro salón principal",
+  "The same room: our pilot center as it is today, and the proposed Futures Friends transformation.": "El mismo salón: nuestro centro piloto como es hoy y la transformación propuesta de Futures Friends.",
+  "Today (real photo)": "Hoy (foto real)",
+  "Proposed (concept)": "Propuesto (concepto)",
+  "Concept: the Futures Friends Learning Zones kit in our classroom; not installed yet.": "Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón; todavía no instalado.",
   'Our carpet area: a large alphabet rug with animals for each letter, small armchairs, a bookshelf and low toy shelves':
     'Nuestra área de la alfombra: un tapete grande del abecedario con un animal para cada letra, sillitas, un librero y estantes bajos para juguetes',
-  'Concept illustration, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, posters for Booker\'s Reading Area, Friends Circle and Lumi\'s Calm Corner, and friend plush on the bench':
-    'Ilustración conceptual, todavía no instalada: nuestra área de la alfombra con un tapete grande del Círculo de amigos que muestra a los cuatro amigos, pósteres del Área de lectura de Booker, el Círculo de amigos y el Rincón de calma de Lumi, y peluches de los amigos en la banca',
-  'Concept illustration, not installed yet: the same carpet area with the Friends Circle rug and a full poster wall for Booker, Lumi, Friends Circle, Zuri and Bop above the picture-book shelf':
-    'Ilustración conceptual, todavía no instalada: la misma área de la alfombra con el tapete del Círculo de amigos y una pared completa de pósteres de Booker, Lumi, el Círculo de amigos, Zuri y Bop sobre el estante de libros ilustrados',
   'Concept: the Futures Friends Learning Zones kit in our classroom (Friends Circle added; not installed yet).':
     'Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón (con el Círculo de amigos; todavía no instalado).',
   'Concept: the Futures Friends Learning Zones kit in our classroom (All five zones added; not installed yet).':
