@@ -14,10 +14,10 @@ const W = window;
 if (typeof V === 'undefined') return;
 const E = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const money = n => '$' + Number(n).toLocaleString('en-US');
-const ORDER = ['turtle-rug', 'reading-corner', 'blue-table-room', 'dress-up-corner', 'alphabet-rug'];   // all five zones first, then Booker, Zuri, Bop, Circle
+const ORDER = ['turtle-rug', 'reading-corner', 'blue-table-room', 'dress-up-corner', 'alphabet-rug', 'exterior'];   // all five zones first, then Booker, Zuri, Bop, Circle, then the proposed front entrance
 
-function rooms() {
-  const list = Array.isArray(W.FFBrandedRooms) ? W.FFBrandedRooms.filter(r => r && r.key && r.kit) : [];
+function rooms(full) {   // the proposed front entrance is a slide of the full #centers carousel only (the compact bands stay about the kit rooms)
+  const list = Array.isArray(W.FFBrandedRooms) ? W.FFBrandedRooms.filter(r => r && r.key && r.kit && (full !== false || !r.entrance)) : [];
   const at = r => { const i = ORDER.indexOf(r.key); return i < 0 ? 99 : i; };
   const out = list.slice().sort((a, b) => at(a) - at(b));
   return out;
@@ -36,16 +36,16 @@ function slide(r, i, n) {
     : `<span class="ffa-kit-real"><img src="${E(r.real)}" alt="" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span><span class="ffa-kit-concept"><img src="${E(r.kit)}" alt="${E(r.alt)}" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span>`;
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';
   return `<div class="ks-slide" role="group" aria-roledescription="slide" aria-label="Room ${i + 1} of ${n}: ${E(r.zone || '')}">
-   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"><div class="ffa-kit-stage">${img}<span class="ffa-kit-label" aria-hidden="true">Concept</span>${toggle}</div>
-   <figcaption><b>${E(r.zone || '')}</b><span class="ffa-kit-caption">${E((A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span><span>Not installed yet. The real room is one tap away.</span></figcaption></figure></div>`;
+   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"><div class="ffa-kit-stage">${img}<span class="ffa-kit-label${r.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${E(r.badge || 'Concept')}</span>${toggle}</div>
+   <figcaption><b>${E(r.zone || '')}</b><span class="ffa-kit-caption">${E(r.caption || (A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span><span>${E(r.soon || 'Not installed yet. The real room is one tap away.')}</span></figcaption></figure></div>`;
 }
 function chips(RK) {
   return `<ul class="ks-chips" aria-label="The five zones">${RK.ZONES.map(z => `<li style="--zf:${z.felt};--zi:${z.ink};--zt:${z.tint}"><span class="ks-dot" aria-hidden="true"></span>${E(z.name)}</li>`).join('')}</ul>`;
 }
 function band(variant) {
   const RK = W.FFRoomKit; if (!RK || !RK.ZONES) return '';
-  const list = rooms(); if (!list.length) return '';
   const full = variant === 'centers';
+  const list = rooms(full); if (!list.length) return '';
   const id = 'ks-' + (variant || 'centers');
   const addons = RK.ADDONS.filter(a => a.price != null);
   const home = addons.find(a => /home/i.test(a.name)), room = addons.find(a => /classroom/i.test(a.name));

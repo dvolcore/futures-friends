@@ -157,3 +157,7 @@ div.ffi-soon[role="alert"]::after{background-image:image-set(url(img/plush/chara
 @media (prefers-reduced-motion:reduce){.ffa-kit-stage>*{transition:none}}
 
 .ffa-compare-in{display:grid;gap:18px}.ffa-compare .ffa-compare-tag{font:600 12px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#233c50}.ffa-compare .ffa-photo{align-content:start}
+/* Proposed front entrance (owner 2026-10-07): the concept leads, the real building is one quiet tap away */
+.ffx-entrance .ffa-photo{max-width:860px;margin-inline:auto}
+/* the owner's own preview chip: CHARACTER CONCEPT, top-left */
+.ffa-kit-label.ffa-kit-label-char,.ks-fig .ffa-kit-label.ffa-kit-label-char{padding:7px 10px;border-radius:5px;background:#236858;border:0;font:800 11px/1.2 var(--display);letter-spacing:.07em;text-transform:uppercase}

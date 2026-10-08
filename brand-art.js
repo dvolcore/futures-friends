@@ -116,12 +116,16 @@
   // ---- branded-room CONCEPTS: the owner's AI-generated concept of the proposed kit in the same room (img/branded-rooms/<key>-kit-<w>.<ext>) ----
   const KIT_LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
   const KIT_CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
+  const ENTRANCE_CAPTION = 'Proposed Futures Learning Center character entrance — AI-generated design concept.';   // owner 2026-10-07, verbatim, visible beside the entrance concept
+  const ENTRANCE_LABEL = 'Concept: the proposed Futures Learning Center character entrance';
   const KIT = {
     'turtle-rug': { zone: 'All five zones', alt: "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
     'alphabet-rug': { zone: 'Friends Circle', alt: "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench" },
     'reading-corner': { zone: "Booker's Reading Area", alt: "Concept image, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench" },
     'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
-    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" }
+    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" },
+    // Owner 2026-10-07: the proposed front entrance REPLACES the plain exterior photo as the main image (06-front-entrance); the real building is one tap away.
+    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Character concept', real: 'See the building today', kit: 'Proposed', alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors' }
   };
   function kitImg(key, o = {}) {
     const k = KIT[key], p = CENTER[key]; if (!k || !p) return '';
@@ -130,8 +134,10 @@
     return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(k.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-kit-photo="${esc(key)}"></picture>`;
   }
   // The toggle: any [data-kit-show] button sets data-kit-view on its nearest [data-kit-view] holder (CSS shows that picture).
+  const capOf = key => (KIT[key] && KIT[key].caption) || KIT_CAPTION;
   function kitToggle(key) {
-    return `<span class="ffa-kit-toggle" role="group" aria-label="Show the room"><button type="button" data-kit-show="real" aria-pressed="false">Real room</button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</button></span>`;
+    const k = KIT[key] || {};
+    return `<span class="ffa-kit-toggle" role="group" aria-label="${k.real ? 'Show the building' : 'Show the room'}"><button type="button" data-kit-show="real" aria-pressed="false">${k.real || 'Real room'}</button><button type="button" data-kit-show="kit" aria-pressed="true">${k.kit || 'With the kit'}</button></span>`;
   }
   if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', e => {
     const b = e.target && e.target.closest && e.target.closest('[data-kit-show]'); if (!b) return;
@@ -147,12 +153,12 @@
     const kit = KIT[key] && o.kit !== false;
     const ratio = kit && CENTER[key] && CENTER[key].h > CENTER[key].w ? '' : o.ratio; // a portrait concept keeps its own shape: nothing is cropped away
     const cls = `ffa-photo${ratio ? ' ffa-photo-' + esc(ratio) : ''}${kit ? ' ffa-kit' : ''}${o.cls ? ' ' + esc(o.cls) : ''}`;
-    const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span><span class="ffa-kit-concept">${kitImg(key, o)}</span><span class="ffa-kit-label" aria-hidden="true">Concept</span>${kitToggle(key)}</div>` : photoImg(key, o);
+    const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span><span class="ffa-kit-concept">${kitImg(key, o)}</span><span class="ffa-kit-label${KIT[key].badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${KIT[key].badge || 'Concept'}</span>${kitToggle(key)}</div>` : photoImg(key, o);
     return `<figure class="${cls}"${kit ? ' data-kit-view="kit"' : ''}>${media}
-   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit ? `<span class="ffa-kit-caption">${KIT_CAPTION}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).</span>` : ''}<span class="ffa-credit">Photo: ${CENTER_CREDIT}</span></figcaption></figure>`;
+   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit ? `<span class="ffa-kit-caption">${capOf(key)}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT[key].note ? `${KIT[key].label}; ${KIT[key].note}.` : `${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).`}</span>` : ''}<span class="ffa-credit">${kit && KIT[key].note ? 'Photo of the building today: ' : 'Photo: '}${CENTER_CREDIT}</span></figcaption></figure>`;
   }
-  const FFBrandedRooms = Object.keys(KIT).map(key => ({ key, real: `img/center/${key}-800.jpg`, kit: `img/branded-rooms/${key}-kit-800.jpg`, alt: KIT[key].alt, w: CENTER[key].w, h: CENTER[key].h, zone: KIT[key].zone, label: KIT_LABEL }));
+  const FFBrandedRooms = Object.keys(KIT).map(key => ({ key, real: `img/center/${key}-800.jpg`, kit: `img/branded-rooms/${key}-kit-800.jpg`, alt: KIT[key].alt, w: CENTER[key].w, h: CENTER[key].h, zone: KIT[key].zone, label: KIT[key].label || KIT_LABEL, caption: capOf(key), badge: KIT[key].badge || '', soon: KIT[key].soon || '', entrance: key === 'exterior' }));
   window.FFBrandedRooms = FFBrandedRooms;
 
-  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL, KIT_CAPTION };
+  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL, KIT_CAPTION, ENTRANCE_CAPTION, capOf };
 })();

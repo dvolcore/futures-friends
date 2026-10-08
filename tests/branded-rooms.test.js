@@ -18,6 +18,7 @@ const man = JSON.parse(fs.readFileSync(path.join(DIR, 'manifest.json'), 'utf8'))
 const center = JSON.parse(read('img/center/manifest.json'));
 const art = () => { const w = {}; vm.runInNewContext(read('brand-art.js'), { window: w }); return w; };
 const CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';
+const ENTRANCE_CAPTION = 'Proposed Futures Learning Center character entrance — AI-generated design concept.';
 const LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
 
 function jpegSize(b) {
@@ -43,10 +44,11 @@ test('the manifest lists the owner concept images, one per real center room, nev
     assert.equal(r.generated, 'ai', r.key + ' is marked AI-generated'); assert.equal(r.kind, 'concept image');
     assert.ok(r.source_sha256 && r.source_file, r.key + ' names its owner source image');
     assert.equal(r.real, `img/center/${r.key}-800.jpg`); assert.equal(r.kit, `img/branded-rooms/${r.key}-kit-800.jpg`);
-    assert.match(r.alt, /^Concept image, not installed yet:/, r.key + ' alt says concept');
+    assert.match(r.alt, r.entrance ? /^Concept image, not built yet:/ : /^Concept image, not installed yet:/, r.key + ' alt says concept');
   }
   assert.ok(!center.photos.some(p => /kit|concept/i.test(p.key)), 'no concept in img/center');
-  assert.deepEqual(man.rooms.map(r => r.key).sort(), ['alphabet-rug', 'blue-table-room', 'dress-up-corner', 'reading-corner', 'turtle-rug']);
+  assert.deepEqual(man.rooms.map(r => r.key).sort(), ['alphabet-rug', 'blue-table-room', 'dress-up-corner', 'exterior', 'reading-corner', 'turtle-rug']);
+  const ex = man.rooms.find(r => r.key === 'exterior'); assert.equal(ex.entrance, true); assert.equal(ex.caption, ENTRANCE_CAPTION); assert.equal(ex.package_file, '07-front-entrance-flair.png');
   assert.match(man.about, /AI-generated/); assert.match(man.about, /not photos/i);
   assert.equal(man.caption, CAPTION);
   assert.ok(man.rooms.every(r => r.package_file), 'each image names its file in the owner package');
@@ -71,16 +73,18 @@ test('FFArt.photo shows the concept first, labelled, with the real photo one tap
   assert.deepEqual(Object.keys(A.KIT).sort(), man.rooms.map(r => r.key).sort());
   assert.deepEqual(JSON.parse(JSON.stringify(w.FFBrandedRooms.map(r => [r.key, r.real, r.kit, r.alt, r.w, r.h]))), man.rooms.map(r => [r.key, r.real, r.kit, r.alt, r.w, r.h]));
   for (const r of man.rooms) {
-    const fig = A.photo(r.key, { title: 'T' });
+    const fig = A.photo(r.key, { title: 'T' }), alt0 = r.entrance ? 'not built yet' : 'not installed yet';
     assert.match(fig, /data-kit-view="kit"/);
-    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Concept image, not installed yet:[^"]+"[^>]+data-kit-photo="${r.key}"`));
+    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Concept image, ${alt0}:[^"]+"[^>]+data-kit-photo="${r.key}"`));
     assert.match(fig, new RegExp(`data-real-photo="${r.key}"`), 'the real photo is still in the figure');
-    assert.match(fig, /data-kit-show="real"[^>]*>Real room<\/button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</);
-    assert.ok(fig.includes(LABEL), r.key + ' carries the concept label');
-    assert.match(fig, /class="ffa-kit-label"[^>]*>Concept</);
+    if (r.entrance) assert.match(fig, /data-kit-show="real"[^>]*>See the building today<\/button><button type="button" data-kit-show="kit" aria-pressed="true">Proposed</);
+    else assert.match(fig, /data-kit-show="real"[^>]*>Real room<\/button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</);
+    assert.ok(fig.includes(r.entrance ? A.KIT.exterior.label : LABEL), r.key + ' carries the concept label');
+    assert.match(fig, r.entrance ? /class="ffa-kit-label ffa-kit-label-char"[^>]*>Character concept</ : /class="ffa-kit-label"[^>]*>Concept</);
     assert.doesNotMatch(A.photo(r.key, { kit: false }), /branded-rooms|Concept/, 'kit:false gives the plain real photo');
   }
-  assert.doesNotMatch(A.photo('exterior'), /branded-rooms|data-kit-view/, 'the exterior has no concept');
+  assert.match(A.photo('exterior'), /branded-rooms\/exterior-kit-800\.jpg[\s\S]*img\/center\/exterior-800\.jpg|img\/center\/exterior-800\.jpg[\s\S]*branded-rooms\/exterior-kit-800\.jpg/, 'the exterior shows the entrance concept with the real building one tap away');
+  assert.match(A.photo('exterior'), /data-kit-view="kit"/, 'the concept leads');
   const css = read('brand-art.css');
   assert.match(css, /\.ffa-kit\[data-kit-view="kit"\] \.ffa-kit-real,\.ffa-kit\[data-kit-view="real"\] \.ffa-kit-concept\{opacity:0/);
 });
@@ -102,8 +106,10 @@ test('a portrait concept is never cropped; the required caption sits with every 
   assert.match(read('room-kit.css'), /\.rk-roomframe\{[^}]*aspect-ratio:4\/3/);
   assert.match(read('room-kit.css'), /blue-table-room"\] \.rk-roomframe\{aspect-ratio:4\/5\}/);
   assert.match(read('room-kit.css'), /\.rk-roomframe img\[hidden\]\{display:none\}/, 'the hidden half of the toggle really is hidden (img display beat the hidden attribute)');
-  for (const r of man.rooms) for (const o of [{}, { kitNote: false }]) assert.ok(A.photo(r.key, o).includes(`<span class="ffa-kit-caption">${CAPTION}</span>`), r.key + ' caption, even with kitNote false');
-  assert.ok(!A.photo('exterior').includes('ffa-kit-caption'));
+  for (const r of man.rooms) for (const o of [{}, { kitNote: false }]) assert.ok(A.photo(r.key, o).includes(`<span class="ffa-kit-caption">${r.entrance ? ENTRANCE_CAPTION : CAPTION}</span>`), r.key + ' caption, even with kitNote false');
+  assert.equal(A.ENTRANCE_CAPTION, 'Proposed Futures Learning Center character entrance — AI-generated design concept.');
+  assert.ok(!A.photo('exterior').includes(CAPTION), 'the entrance carries its own caption, not the kit one');
+  assert.ok(!A.photo('exterior', { kit: false }).includes('ffa-kit-caption'), 'kit:false is the plain real photo');
   assert.ok(read('room-kit.js').includes('KIT_CAPTION'), '#room-kit rooms carry it');
   assert.ok(read('kit-showcase.js').includes('KIT_CAPTION'), 'every showcase slide carries it');
   assert.ok(read('experience.js').includes('KIT_CAPTION'), 'the curriculum hero carries it');

@@ -99,10 +99,33 @@
    "source_file": "blue-table-room-kit.png",
    "source_sha256": "1a4b74c8c3bafc340bb85d93f2144b8845db4ba76aebaf5043f8fc9df5ddc5a0",
    "package_file": "05-zuri-discovery.png"
+  },
+  {
+   "key": "exterior",
+   "real": "img/center/exterior-800.jpg",
+   "kit": "img/branded-rooms/exterior-kit-800.jpg",
+   "alt": "Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors",
+   "w": 800,
+   "h": 600,
+   "zone": "Front entrance",
+   "added": "Proposed character entrance: a contour-cut welcome display of Booker, Lumi, Zuri and Bop on the lawn, the lawn sign, a wall shield, a Welcome banner on the lamp pole, navy doors and planters; both flags removed",
+   "real_photo": false,
+   "concept": true,
+   "people": false,
+   "kind": "concept image",
+   "generated": "ai",
+   "room_match": "same building, entrance and stairs as the real photo (both flags removed in the concept)",
+   "entrance": true,
+   "caption": "Proposed Futures Learning Center character entrance — AI-generated design concept.",
+   "source_file": "exterior-kit.png",
+   "source_sha256": "e11b5f382e2fb2f6e55e35762672bac8e38a040c05c2f9ee22236c2b8860dc6a",
+   "package_file": "07-front-entrance-flair.png",
+   "badge": "Character concept"
   }
  ],
  "source": "~/Downloads/Futures_Friends_Center_Transformation_2026-10-07/ (copied with its generation-prompts.json and asset-manifest.json to the project folder below)",
  "generator": "AI image generator (owner, ChatGPT Images)",
  "caption": "AI-generated proposed transformation — furnishings and products shown as concepts.",
- "package_review": "visual-review.json: all five scored 92 to 96, pass (threshold 90)"
+ "package_review": "visual-review.json: all five scored 92 to 96, pass (threshold 90)",
+ "entrance_note": "The character front-entrance concept (key exterior, package 07-front-entrance-flair.png, regenerated 2026-10-07 22:09) replaces the plain exterior photo as the main image where the site showed it; the real photo stays one tap away (See the building today) and in img/center/. The simple concept 06 is kept in the project folder only."
 }

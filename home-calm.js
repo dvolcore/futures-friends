@@ -207,7 +207,7 @@
   // people (owner), so that frame becomes the building itself. Without FFArt.photo the labelled frames stay, as before.
   const REAL = [null, ['reading-corner', 'Our reading corner', 'Picture books at child height, a cushioned bench and the reading wall'],
     ['blue-table-room', 'Set for hands-on learning', 'A classroom table with learning trays, a chalkboard easel and the days of the week'],
-    ['exterior', 'Our front door', 'The blue door under the Futures sign, 3625 S Blue Ridge Blvd']];
+    ['exterior', 'Our front entrance, proposed', 'The proposed entrance at 3625 S Blue Ridge Blvd; tap See the building today for the real front door']];
   const hasReal = () => !!(window.FFArt && typeof window.FFArt.photo === 'function');
   function slots() {
     if (!window.FFArt) return '';
@@ -224,7 +224,7 @@
     <p>Futures Friends is piloting at Futures Learning Center, 3625 S Blue Ridge Blvd. Call ${E(phone())} for the ages served right now and current hours.</p>
     <a class="hc-btn hc-btn-quiet" href="#enroll">Visit our pilot center ${icon('ArrowRight')}</a>
    </div>
-   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms and front door in Independence. The two rooms open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room to see each room today. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
+   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms in Independence, and our front entrance as we propose it. The first images open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
   </div></section>`;
   }
 

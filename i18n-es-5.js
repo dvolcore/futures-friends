@@ -209,8 +209,24 @@ const T = {
   'Free stories and activities, open now': 'Cuentos y actividades gratis, abiertos ahora',
   'Counted from our own library, and every one is free to open with your child.':
     'Contados de nuestra propia biblioteca, y todos son gratis para abrir con tu niño.',
-  'These are our real rooms and front door in Independence. The two rooms open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room to see each room today. Photos of children are only ever taken with their families’ permission.':
-    'Estos son nuestros salones reales y nuestra puerta de entrada en Independence. Los dos salones abren con un concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón, mostrado como una ilustración generada con IA y todavía no instalado. Toca Salón real para ver cada salón hoy. A los niños solo se les toman fotos con el permiso de sus familias.',
+  'These are our real rooms in Independence, and our front entrance as we propose it. The first images open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families’ permission.':
+    'Estos son nuestros salones reales en Independence y nuestra entrada principal como la proponemos. Las primeras imágenes abren con un concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón, mostrado como una ilustración generada con IA y todavía no instalado. Toca Salón real o Ver el edificio hoy para ver cada lugar como es ahora. A los niños solo se les toman fotos con el permiso de sus familias.',
+  // Proposed front entrance (owner 2026-10-07; Spanish is a draft until reviewed)
+  'Proposed Futures Learning Center character entrance — AI-generated design concept.': 'Entrada propuesta con personajes de Futures Learning Center: concepto de diseño generado con IA.',
+  'Concept: the proposed Futures Learning Center character entrance': 'Concepto: la entrada propuesta con personajes de Futures Learning Center',
+  'Character concept': 'Concepto con personajes',
+  'Not built yet. The building today is one tap away.': 'Todavía no está construida. El edificio de hoy está a un toque.',
+  'See the building today': 'Ver el edificio hoy',
+  'Proposed': 'Propuesta',
+  'Show the building': 'Mostrar el edificio',
+  'Photo of the building today: Futures Learning Center, Independence, Missouri': 'Foto del edificio hoy: Futures Learning Center, Independence, Missouri',
+  'Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors': 'Imagen de concepto, todavía no construida: la entrada propuesta de Futures Learning Center, con una exhibición recortada de bienvenida de Booker, Lumi, Zuri y Bop en el césped, un letrero con el escudo de FLC, un escudo en la pared, un banner de Bienvenidos en el poste de luz y puertas azul marino',
+  'Our front entrance, proposed': 'Nuestra entrada principal, propuesta',
+  'This is the entrance as we propose it. Tap See the building today to see the building as you will find it when you pull in.': 'Esta es la entrada como la proponemos. Toca Ver el edificio hoy para ver el edificio como lo encontrarás al llegar.',
+  'The proposed entrance, with the real building one tap away': 'La entrada propuesta, con el edificio real a un toque',
+  '3625 S Blue Ridge Blvd: the proposed entrance, with the building as it is today one tap away': '3625 S Blue Ridge Blvd: la entrada propuesta, con el edificio de hoy a un toque',
+  'The proposed entrance at 3625 S Blue Ridge Blvd; tap See the building today for the real front door': 'La entrada propuesta en 3625 S Blue Ridge Blvd; toca Ver el edificio hoy para ver la puerta real',
+  'Today the front door is the blue door under the Futures sign.': 'Hoy la puerta principal es la puerta azul bajo el letrero de Futures.',
   'Your device\'s reduced-motion preference always takes priority.': 'La preferencia de movimiento reducido de tu dispositivo siempre tiene prioridad.',
   'Open the video file': 'Abrir el archivo de video',
   'Search pages, friends, printables and questions': 'Busca páginas, amigos, hojas para imprimir y preguntas',
