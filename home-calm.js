@@ -224,7 +224,7 @@
     <p>Futures Friends is piloting at Futures Learning Center, 3625 S Blue Ridge Blvd. Call ${E(phone())} for the ages served right now and current hours.</p>
     <a class="hc-btn hc-btn-quiet" href="#enroll">Visit our pilot center ${icon('ArrowRight')}</a>
    </div>
-   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms in Independence, and our front entrance as we propose it. The first images open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
+   <div class="hc-real"><div>${hasReal() ? '<h3>Our center, in real photos</h3><p class="hc-realnote">These are our real rooms in Independence, and our front entrance as we propose it. The first images show our planned design: the Futures Friends Learning Zones kit in our classroom, not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families&rsquo; permission.</p>' : '<h3>Photos of our center are coming</h3><p class="hc-realnote">Everything else on this page is the storybook world. These frames mark where photos from our center will go after our photo day.</p>'}</div>${slots()}</div>
   </div></section>`;
   }
 

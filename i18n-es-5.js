@@ -213,8 +213,8 @@ const T = {
   'Free stories and activities, open now': 'Cuentos y actividades gratis, abiertos ahora',
   'Counted from our own library, and every one is free to open with your child.':
     'Contados de nuestra propia biblioteca, y todos son gratis para abrir con tu niño.',
-  'These are our real rooms in Independence, and our front entrance as we propose it. The first images open on a concept: the Futures Friends Learning Zones kit in our classroom, shown as an AI-generated illustration and not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families’ permission.':
-    'Estos son nuestros salones reales en Independence y nuestra entrada principal como la proponemos. Las primeras imágenes abren con un concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón, mostrado como una ilustración generada con IA y todavía no instalado. Toca Salón real o Ver el edificio hoy para ver cada lugar como es ahora. A los niños solo se les toman fotos con el permiso de sus familias.',
+  'These are our real rooms in Independence, and our front entrance as we propose it. The first images show our planned design: the Futures Friends Learning Zones kit in our classroom, not installed yet. Tap Real room or See the building today to see each place as it is now. Photos of children are only ever taken with their families’ permission.':
+    'Estos son nuestros salones reales en Independence y nuestra entrada principal como la proponemos. Las primeras imágenes muestran nuestro diseño planeado: el kit de zonas de aprendizaje de Futures Friends en nuestro salón, todavía no instalado. Toca Salón real o Ver el edificio hoy para ver cada lugar como es ahora. A los niños solo se les toman fotos con el permiso de sus familias.',
   // Proposed front entrance (owner 2026-10-07; Spanish is a draft until reviewed)
   'Proposed Futures Learning Center character entrance — AI-generated design concept.': 'Entrada propuesta con personajes de Futures Learning Center: concepto de diseño generado con IA.',
   'Concept: the proposed Futures Learning Center character entrance': 'Concepto: la entrada propuesta con personajes de Futures Learning Center',
@@ -292,7 +292,8 @@ const T = {
   "The same room: our pilot center as it is today, and the proposed Futures Friends transformation.": "El mismo salón: nuestro centro piloto como es hoy y la transformación propuesta de Futures Friends.",
   "Today (real photo)": "Hoy (foto real)",
   "Proposed (concept)": "Propuesto (concepto)",
-  "Concept: the Futures Friends Learning Zones kit in our classroom; not installed yet.": "Concepto: el kit de zonas de aprendizaje de Futures Friends en nuestro salón; todavía no instalado.",
+  "Concept view": "Diseño planeado",
+  "Concept: the Futures Friends Learning Zones kit in our classroom; not installed yet.": "Diseño planeado: el kit de zonas de aprendizaje de Futures Friends en nuestro salón; todavía no instalado.",
   'Our carpet area: a large alphabet rug with animals for each letter, small armchairs, a bookshelf and low toy shelves':
     'Nuestra área de la alfombra: un tapete grande del abecedario con un animal para cada letra, sillitas, un librero y estantes bajos para juguetes',
   'Concept: the Futures Friends Learning Zones kit in our classroom (Friends Circle added; not installed yet).':
