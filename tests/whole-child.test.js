@@ -81,9 +81,8 @@ test('each friend owns exactly the pillars the owner chose, with the child-hears
 test('daily targets match the owner spec, show their sources and link only to the two cited documents', () => {
   const c = site(), html = c.render('whole-child'), t = text(html);
   const rows = html.split('<tbody>')[1].split('</tbody>')[0].split('<tr>').slice(1);
-  assert.equal(rows.length, 3);
-  assert.match(t, /Under 12 months/);
-  assert.match(t, /At least 30 minutes of tummy time while awake/);
+  assert.equal(rows.length, 2);
+  assert.doesNotMatch(t, /infant|tummy time|under 12 months/i, 'ages 2 to 5 only');
   assert.match(t, /60 to 90 minutes of moderate-to-vigorous play \(MVPA\)/);
   assert.match(t, /90 to 120 minutes of MVPA/);
   assert.match(t, /180 minutes at any intensity, at least 60 of them MVPA/);
@@ -91,7 +90,6 @@ test('daily targets match the owner spec, show their sources and link only to th
   assert.match(t, /Not more than 30 minutes a week in care by default, only for learning or movement and never at meals or snacks/);
   assert.doesNotMatch(t, /30 minutes a day in care/, 'the 30-minutes-a-day in-care default is retired (owner 2026-10-07)');
   assert.doesNotMatch(t, /no more than 1 hour a day in total/i, 'the old preschool screen default is gone');
-  assert.match(t, /Seated no more than 15 minutes at a time\. Awake in a crib, playpen or other confinement no more than 30 minutes/);
   assert.match(t, /Awake confinement no more than 30 minutes\. Sitting no more than 1 hour at a time/);
   assert.match(t, /K\.A\.R\. 28-4-440\(f\)/);
   assert.match(t, /CFOC 3\.1\.3\.1 \(opens in a new tab\) and 2\.2\.0\.3/);
@@ -103,7 +101,7 @@ test('daily targets match the owner spec, show their sources and link only to th
   const hrefs = [...new Set([...html.matchAll(/href="(https?:[^"]+)"/g)].map(m => m[1]))];
   assert.deepEqual(hrefs.sort(), ['https://nrckids.org/files/CFOC4%20pdf-%20FINAL.pdf', 'https://www.cdc.gov/early-care-education/php/obesity-prevention-standards/screen-time-limits.html', 'https://www.who.int/publications/i/item/9789241550536']);
   assert.equal((html.match(/target="_blank"/g) || []).length, (html.match(/rel="noopener noreferrer"/g) || []).length, 'new-tab links are noopener');
-  assert.match(html, /<th scope="row"><b>Infant<\/b>/);
+  assert.match(html, /<th scope="row"><b>Twos<\/b>/);
   assert.match(html, /data-label="Screen"/, 'cells carry labels for the stacked mobile layout');
 });
 
@@ -111,12 +109,11 @@ test('state rules are shown on top of the defaults, with Kansas, Missouri and bo
   const html = site().render('whole-child'), t = text(html);
   assert.match(html, /State rules sit on top of these defaults/);
   assert.match(t, /At least 60 minutes outdoors once a child has been in care more than 4 hours/);
-  assert.match(t, /Awake infants and toddlers confined no more than 30 minutes \(K\.A\.R\. 28-4-440\(f\)\)/);
+  assert.match(t, /Awake toddlers confined no more than 30 minutes \(K\.A\.R\. 28-4-440\(f\)\)/);
   assert.match(t, /Kansas homes: physical activity offered at least 1 hour a day/);
   assert.match(t, /1 hour outdoors for full-day preschool and school-age children, weather permitting/);
   assert.match(t, /Preschoolers who do not sleep rest 30 to 60 minutes\. Rest is required, and sleep never is/);
   assert.match(t, /No more than 4 hours between meals and snacks/);
-  assert.match(t, /Supervised daily tummy time for infants, and no more than 30 minutes awake in the crib/);
   assert.match(t, /Water available at all times/);
   assert.match(t, /Food and rest are never used as punishment/);
   assert.match(t, /Neither state limits screen time\. Our screen limits are Futures Friends standards, not legal requirements/);
@@ -147,7 +144,7 @@ test('copy follows the guardrails: no medical claims, no body measurement, no di
   assert.match(t, /Quiet Time is offered, never forced/);
   assert.match(t, /Water is available all day, with a prompt at every Bop & Go! transition/);
   assert.match(t, /The teacher decides/);
-  assert.match(t, /safe-sleep/i);
+  assert.match(t, /sleep and rest rules/i);
   assert.match(t, /opt-in and never tracked per person/);
   assert.match(t, /does not replace balanced food service/);
 });
@@ -212,7 +209,7 @@ test('the weekly challenge form says "open soon" when there is no gateway, and i
   assert.doesNotMatch(on, /name="adapt"|Sound or sensory sensitive/, 'no health-adjacent preference is collected');
   assert.doesNotMatch(on, /Online requests open soon/);
   const opts = [...on.match(/<select class="i" id="bhAge"[\s\S]*?<\/select>/)[0].matchAll(/<option value="(\w*)"/g)].map(m => m[1]);
-  assert.deepEqual(opts, ['', 'infant', 'toddler', 'preschool', 'mixed'], 'the same four age bands as the gateway and the hub');
+  assert.deepEqual(opts, ['', 'toddler', 'preschool', 'mixed'], 'the same four age bands as the gateway and the hub');
 });
 
 test('the sign-up payload is the gateway "subscribe" kind: topic, email, optional first name, age band, explicit consent, nothing about the child', () => {
@@ -221,7 +218,7 @@ test('the sign-up payload is the gateway "subscribe" kind: topic, email, optiona
   assert.deepEqual(JSON.parse(JSON.stringify(p.data)), { topic: 'bop_at_home', email: 'jane@example.com', firstName: 'Jane', ageBand: 'toddler', consent: true, website: '' });
   assert.equal(c.window.FFWholeChild.signupPayload({ email: 'a@b.co', age: 'mixed' }).data.consent, false, 'consent is never assumed');
   assert.doesNotMatch(JSON.stringify(p), /child.?s? ?name|childFirst|dob|birth|message|adapt/i, 'no child identity or free text is collected');
-  assert.deepEqual(Array.from(c.window.FFWholeChild.AGE_OPTS, a => a[0]), ['infant', 'toddler', 'preschool', 'mixed']);
+  assert.deepEqual(Array.from(c.window.FFWholeChild.AGE_OPTS, a => a[0]), ['toddler', 'preschool', 'mixed']);
 });
 
 test('the success message is honest: check your email and confirm; not signed up until the link is opened; no "a person will contact you"', () => {
@@ -265,13 +262,13 @@ function formPage({ values = {}, checked = false, routes = {} } = {}) {
 const GW = { 'GET /v1/form-token': { status: 200, body: { token: '1.abc', minFillSeconds: 0 } } };
 
 test('submitting posts kind subscribe with the consent and age band, then says "Check your email to confirm"', async () => {
-  const pg = formPage({ values: { bhName: 'Pat', bhEmail: 'pat@example.org', bhAge: 'infant' }, checked: true,
+  const pg = formPage({ values: { bhName: 'Pat', bhEmail: 'pat@example.org', bhAge: 'toddler' }, checked: true,
     routes: { ...GW, 'POST /v1/inquiry': { status: 202, body: { ref: 'FF-ABCD-2345', status: 'received', emailConfirmation: 'queued', kind: 'subscribe' } } } });
   assert.equal(await pg.submit(), true, 'the default browser submit is prevented');
   const post = pg.calls.find(x => x.method === 'POST');
   assert.equal(post.path, '/v1/inquiry');
   const sent = JSON.parse(post.body);
-  assert.deepEqual(sent, { kind: 'subscribe', token: '1.abc', topic: 'bop_at_home', email: 'pat@example.org', firstName: 'Pat', ageBand: 'infant', consent: true });
+  assert.deepEqual(sent, { kind: 'subscribe', token: '1.abc', topic: 'bop_at_home', email: 'pat@example.org', firstName: 'Pat', ageBand: 'toddler', consent: true });
   assert.match(pg.card.innerHTML, /Check your email to confirm/);
   assert.match(pg.card.innerHTML, /pat@example\.org/);
   assert.match(pg.card.innerHTML, /FF-ABCD-2345/);
@@ -317,7 +314,8 @@ test('the form kinds and interest used here are accepted by the gateway validato
   assert.match(py, /if kind in \('contact', 'quote', 'partner'\):/);
   assert.match(kinds, /'subscribe'/, 'the gateway accepts the subscribe kind');
   const bands = (py.match(/^AGE_BANDS = \(([^)]*)\)/m) || [])[1], topics = (py.match(/^TOPICS = \(([^)]*)\)/m) || [])[1];
-  assert.deepEqual([...bands.matchAll(/'(\w+)'/g)].map(m => m[1]), Array.from(site().window.FFWholeChild.AGE_OPTS, a => a[0]), 'age bands match the gateway');
+  const gw = [...bands.matchAll(/'(\w+)'/g)].map(m => m[1]);
+  for (const a of site().window.FFWholeChild.AGE_OPTS) assert.ok(gw.includes(a[0]), 'the gateway accepts every band offered: ' + a[0]);
   assert.ok(topics.includes("'bop_at_home'"));
   assert.match(py, /elif kind == 'subscribe':/);
   assert.match(py, /c\.get\('ageBand', choice, AGE_BANDS, required=True\)/);

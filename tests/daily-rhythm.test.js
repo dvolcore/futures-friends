@@ -34,7 +34,7 @@ test('the weather card only suggests; the sitting nudge and the state rules are 
   assert.match(rhythm, /Default from CFOC 3\.1\.3\.2; center policy to confirm/);
   assert.match(rhythm, /Missouri allows no more than \$\{mg\.max\} hours between meals and snacks/);
   assert.match(rhythm, /Rest period \(required in Missouri preschool rooms\)/);
-  assert.match(rhythm, /No screens for infants, toddlers or any child through age 2/);
+  assert.match(rhythm, /No screens for any child through age 2/);
   assert.match(rhythm, /youngest_months >= 36/); // the client gate mirrors the database trigger
   assert.ok(!/disabled[^`]{0,40}weather|block(ed)? outdoor/i.test(rhythm));
 });

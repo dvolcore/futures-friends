@@ -74,9 +74,10 @@ const photoNotice = () => P.live ? 'Family photo view' : 'Sample photos on this 
 
 // ---------------- sample program (demo mode or one click to load)
 const SAMPLE_ROOMS = {twos:{name:'Twos Room',ages:'Age 2',level:1,order:1}, threes:{name:'Threes Room',ages:'Age 3',level:1,order:2}, prek:{name:'Pre-K Room',ages:'Ages 4 to 5',level:1,order:3}};
+// Child ids start at k6 so the sample ids stay stable after the under-2 sample children were removed (ages 2 to 5 only).
 const SAMPLE_KIDS = [['Ava','R','twos'],['Mateo','H','twos'],['Zoe','O','twos'],['Elijah','V','twos'],['Mia','C','threes'],['Noah','J','threes'],['Aria','Q','threes'],['Liam','X','threes'],['Nova','E','threes'],['Jayden','L','prek'],['Ivy','S','prek'],['Kai','Z','prek'],['Luna','G','prek'],['Malik','N','prek']];
 async function loadSample(){ for (const [id,r] of Object.entries(SAMPLE_ROOMS)) await put('rooms', id, Object.assign({sample:true}, r));
-  for (let i=0;i<SAMPLE_KIDS.length;i++){ const k=SAMPLE_KIDS[i]; await put('kids', 'k'+(i+1), {first:k[0], last:k[1], room:k[2], sample:true}); }
+  for (let i=0;i<SAMPLE_KIDS.length;i++){ const k=SAMPLE_KIDS[i]; await put('kids', 'k'+(i+6), {first:k[0], last:k[1], room:k[2], sample:true}); }
   P.room = 'threes'; render(); toast('Sample classes loaded'); }
 
 // ---------------- UI pieces
@@ -762,7 +763,7 @@ function goLive(){
   P.live = true; P.rooms = {}; P.kids = {}; P.room = null;
   C2.forEach(c=>P2[c]={}); subscribe2();
   P.db.collection('rooms').onSnapshot(q=>{ const r={}; q.docs.forEach(d=>r[d.id]=normRoom(d.id,d.data()));
-    if (!Object.keys(r).length && !P.canWrite && !P.hub) { P.live=false; for (const [id,x] of Object.entries(SAMPLE_ROOMS)) r[id]=Object.assign({sample:true},x); if(!Object.keys(P.kids).length) SAMPLE_KIDS.forEach((k,i)=>P.kids['k'+(i+1)]={first:k[0],last:k[1],room:k[2],sample:true}); }
+    if (!Object.keys(r).length && !P.canWrite && !P.hub) { P.live=false; for (const [id,x] of Object.entries(SAMPLE_ROOMS)) r[id]=Object.assign({sample:true},x); if(!Object.keys(P.kids).length) SAMPLE_KIDS.forEach((k,i)=>P.kids['k'+(i+6)]={first:k[0],last:k[1],room:k[2],sample:true}); }
     else P.live=true;
     P.rooms=r; if(!P.room||!r[P.room]){ const f=Object.entries(r).sort((a,b)=>(a[1].order||9)-(b[1].order||9))[0]; P.room=f?f[0]:null; } subscribeDays(); if(view==='portal'||view==='family-portal') render(); }, ()=>{});
   P.db.collection('kids').onSnapshot(q=>{ const k={}; q.docs.forEach(d=>k[d.id]=normKid(d.data())); if(!P.live && !Object.keys(k).length) return; P.kids=k; if(view==='portal'||view==='family-portal') render(); }, ()=>{});
@@ -786,7 +787,7 @@ async function connectHub(){
 (async ()=>{
   // demo seed so the portals work anywhere; replaced by live data when the store is available
   for (const [id,r] of Object.entries(SAMPLE_ROOMS)) P.rooms[id]=Object.assign({sample:true},r);
-  SAMPLE_KIDS.forEach((k,i)=>P.kids['k'+(i+1)]={first:k[0],last:k[1],room:k[2],sample:true});
+  SAMPLE_KIDS.forEach((k,i)=>P.kids['k'+(i+6)]={first:k[0],last:k[1],room:k[2],sample:true});
   P.room='threes';
   seed2(); ls2Load();
   if (window.FFHub && window.FFHub.configured) { window.FFHub.boot(); return; }
