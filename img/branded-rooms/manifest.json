@@ -134,12 +134,10 @@
      "id": 2,
      "label": "Design 2",
      "file": "exterior-2-kit",
+     "pending": true,
      "caption": "Planned design.",
      "badge": "Planned design",
-     "alt": "Planned design, not built yet: the Futures Learning Center entrance with four friend banners on the building wall (Booker, Lumi, Zuri and Bop), the lawn sign and the Welcome banner",
-     "description": "Four tall friend banners (Booker, Lumi, Zuri, Bop) on the building wall, the lawn sign and the Welcome pole banner. Third view of the entrance with Design 1 and See the building today. Composited 2026-10-08 from the real-building entrance image (06-front-entrance) and the friend poster art; layers in ~/Downloads/FUTURES_FRIENDS_PROJECT/14_Client_Package/branded_rooms/entrance_banners_2026-10-08/.",
-     "w": 800,
-     "h": 600
+     "description": "Four tall friend banners (Booker, Lumi, Zuri, Bop) on the building wall, the lawn sign and the Welcome pole banner. File not delivered yet: the Concept 1 / Concept 2 switch stays hidden until pending is cleared and img/branded-rooms/exterior-2-kit-{400,800,1200}.{jpg,webp} exist."
     }
    ]
   }
