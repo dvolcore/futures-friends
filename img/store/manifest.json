@@ -61,11 +61,12 @@
     {
      "n": 1,
      "src": "b1f25f01689c5f1b",
-     "w": 768,
-     "h": 1024,
+     "w": 1200,
+     "h": 800,
      "sizes": [
       400,
-      768
+      768,
+      1200
      ],
      "files": [
       [
@@ -75,38 +76,17 @@
       [
        "img/store/all-friends-hoodie-1-768.webp",
        768
+      ],
+      [
+       "img/store/all-friends-hoodie-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/all-friends-hoodie-1-400.webp",
      "w800": "img/store/all-friends-hoodie-1-768.webp",
-     "w1200": "img/store/all-friends-hoodie-1-768.webp",
+     "w1200": "img/store/all-friends-hoodie-1-1200.webp",
      "jpg": "img/store/all-friends-hoodie-1-768.jpg",
-     "ratio": 0.75
-    },
-    {
-     "n": 2,
-     "src": "1c814c3c55be9336",
-     "w": 768,
-     "h": 1024,
-     "sizes": [
-      400,
-      768
-     ],
-     "files": [
-      [
-       "img/store/all-friends-hoodie-2-400.webp",
-       400
-      ],
-      [
-       "img/store/all-friends-hoodie-2-768.webp",
-       768
-      ]
-     ],
-     "w400": "img/store/all-friends-hoodie-2-400.webp",
-     "w800": "img/store/all-friends-hoodie-2-768.webp",
-     "w1200": "img/store/all-friends-hoodie-2-768.webp",
-     "jpg": "img/store/all-friends-hoodie-2-768.jpg",
-     "ratio": 0.75
+     "ratio": 1.5
     }
    ]
   },
@@ -223,11 +203,12 @@
     {
      "n": 1,
      "src": "a2868123fd176946",
-     "w": 768,
-     "h": 1024,
+     "w": 1200,
+     "h": 800,
      "sizes": [
       400,
-      768
+      768,
+      1200
      ],
      "files": [
       [
@@ -237,38 +218,17 @@
       [
        "img/store/booker-hoodie-1-768.webp",
        768
+      ],
+      [
+       "img/store/booker-hoodie-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/booker-hoodie-1-400.webp",
      "w800": "img/store/booker-hoodie-1-768.webp",
-     "w1200": "img/store/booker-hoodie-1-768.webp",
+     "w1200": "img/store/booker-hoodie-1-1200.webp",
      "jpg": "img/store/booker-hoodie-1-768.jpg",
-     "ratio": 0.75
-    },
-    {
-     "n": 2,
-     "src": "b07769b6b66dcd1d",
-     "w": 768,
-     "h": 1024,
-     "sizes": [
-      400,
-      768
-     ],
-     "files": [
-      [
-       "img/store/booker-hoodie-2-400.webp",
-       400
-      ],
-      [
-       "img/store/booker-hoodie-2-768.webp",
-       768
-      ]
-     ],
-     "w400": "img/store/booker-hoodie-2-400.webp",
-     "w800": "img/store/booker-hoodie-2-768.webp",
-     "w1200": "img/store/booker-hoodie-2-768.webp",
-     "jpg": "img/store/booker-hoodie-2-768.jpg",
-     "ratio": 0.75
+     "ratio": 1.5
     }
    ]
   },
@@ -385,11 +345,12 @@
     {
      "n": 1,
      "src": "da97bc84cee68575",
-     "w": 768,
-     "h": 1024,
+     "w": 1200,
+     "h": 800,
      "sizes": [
       400,
-      768
+      768,
+      1200
      ],
      "files": [
       [
@@ -399,38 +360,17 @@
       [
        "img/store/bop-hoodie-1-768.webp",
        768
+      ],
+      [
+       "img/store/bop-hoodie-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/bop-hoodie-1-400.webp",
      "w800": "img/store/bop-hoodie-1-768.webp",
-     "w1200": "img/store/bop-hoodie-1-768.webp",
+     "w1200": "img/store/bop-hoodie-1-1200.webp",
      "jpg": "img/store/bop-hoodie-1-768.jpg",
-     "ratio": 0.75
-    },
-    {
-     "n": 2,
-     "src": "947df9aa0906d7b2",
-     "w": 768,
-     "h": 1024,
-     "sizes": [
-      400,
-      768
-     ],
-     "files": [
-      [
-       "img/store/bop-hoodie-2-400.webp",
-       400
-      ],
-      [
-       "img/store/bop-hoodie-2-768.webp",
-       768
-      ]
-     ],
-     "w400": "img/store/bop-hoodie-2-400.webp",
-     "w800": "img/store/bop-hoodie-2-768.webp",
-     "w1200": "img/store/bop-hoodie-2-768.webp",
-     "jpg": "img/store/bop-hoodie-2-768.jpg",
-     "ratio": 0.75
+     "ratio": 1.5
     }
    ]
   },
@@ -855,11 +795,12 @@
     {
      "n": 1,
      "src": "8b19932557eead23",
-     "w": 768,
-     "h": 1024,
+     "w": 1200,
+     "h": 800,
      "sizes": [
       400,
-      768
+      768,
+      1200
      ],
      "files": [
       [
@@ -869,38 +810,17 @@
       [
        "img/store/lumi-hoodie-1-768.webp",
        768
+      ],
+      [
+       "img/store/lumi-hoodie-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/lumi-hoodie-1-400.webp",
      "w800": "img/store/lumi-hoodie-1-768.webp",
-     "w1200": "img/store/lumi-hoodie-1-768.webp",
+     "w1200": "img/store/lumi-hoodie-1-1200.webp",
      "jpg": "img/store/lumi-hoodie-1-768.jpg",
-     "ratio": 0.75
-    },
-    {
-     "n": 2,
-     "src": "83deed48b3f3d65f",
-     "w": 768,
-     "h": 1024,
-     "sizes": [
-      400,
-      768
-     ],
-     "files": [
-      [
-       "img/store/lumi-hoodie-2-400.webp",
-       400
-      ],
-      [
-       "img/store/lumi-hoodie-2-768.webp",
-       768
-      ]
-     ],
-     "w400": "img/store/lumi-hoodie-2-400.webp",
-     "w800": "img/store/lumi-hoodie-2-768.webp",
-     "w1200": "img/store/lumi-hoodie-2-768.webp",
-     "jpg": "img/store/lumi-hoodie-2-768.jpg",
-     "ratio": 0.75
+     "ratio": 1.5
     }
    ]
   },
@@ -2183,11 +2103,12 @@
     {
      "n": 1,
      "src": "eb1106ec21e667e5",
-     "w": 768,
-     "h": 1024,
+     "w": 1200,
+     "h": 800,
      "sizes": [
       400,
-      768
+      768,
+      1200
      ],
      "files": [
       [
@@ -2197,38 +2118,17 @@
       [
        "img/store/zuri-hoodie-1-768.webp",
        768
+      ],
+      [
+       "img/store/zuri-hoodie-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/zuri-hoodie-1-400.webp",
      "w800": "img/store/zuri-hoodie-1-768.webp",
-     "w1200": "img/store/zuri-hoodie-1-768.webp",
+     "w1200": "img/store/zuri-hoodie-1-1200.webp",
      "jpg": "img/store/zuri-hoodie-1-768.jpg",
-     "ratio": 0.75
-    },
-    {
-     "n": 2,
-     "src": "d7fb9b27727884b5",
-     "w": 768,
-     "h": 1024,
-     "sizes": [
-      400,
-      768
-     ],
-     "files": [
-      [
-       "img/store/zuri-hoodie-2-400.webp",
-       400
-      ],
-      [
-       "img/store/zuri-hoodie-2-768.webp",
-       768
-      ]
-     ],
-     "w400": "img/store/zuri-hoodie-2-400.webp",
-     "w800": "img/store/zuri-hoodie-2-768.webp",
-     "w1200": "img/store/zuri-hoodie-2-768.webp",
-     "jpg": "img/store/zuri-hoodie-2-768.jpg",
-     "ratio": 0.75
+     "ratio": 1.5
     }
    ]
   },
