@@ -85,26 +85,42 @@ function membershipLine(p) {
 }
 const kitLinks = p => (p.kind === 'kit' || p.kind === 'addon') ? `<div class="sp-kitlinks">${lnk('room-kit', 'See the Learning Zones Kit ' + ico('arrow'), 'sp-link')}${lnk('room-planner', 'Open the Room Planner ' + ico('arrow'), 'sp-link')}</div>` : '';
 
+/* Official character backpacks (owner, 2026-10-08): the friend wearing it, then "Complete the look". Nothing here invents a price, size or date. */
+const HIS = { Booker: 'his', Zuri: 'her', Bop: 'his' };
+function story(p) {
+  if (!p.official) return '';
+  const g = C.gallery(p, U.rooms())[1]; if (!g) return '';
+  return `<section class="sp-story" aria-labelledby="spStoryH"><div class="wrap sp-story-in"><figure class="sp-story-fig">${imgTag(g, { sizes: '(max-width:900px) 80vw, 420px', alt: g.alt })}<figcaption>${E(p.worn)} wearing it</figcaption></figure>
+    <div class="sp-story-copy"><p class="sp-story-eyebrow">${U.badgeHtml('Official · Worn by ' + p.worn, 'official')}</p><h2 id="spStoryH">${E(p.tagline)}</h2><p>${E(p.story)}</p>
+      <p class="sp-story-note">Made to order. We confirm sizes, price and timing by email before anything is charged.</p></div></div></section>`;
+}
+function look(p) {
+  if (!p.official) return '';
+  const pl = C.product('plush-' + p.who); if (!pl) return '';
+  return `<section class="sp-look" aria-labelledby="spLookH"><div class="wrap"><h2 id="spLookH">Complete the look: ${E(p.worn)} + ${HIS[p.worn] || 'their'} backpack</h2><p class="sp-set-sub">The friend and the pack ${E(p.worn)} wears in every story.</p>
+    <ul class="sp-grid sp-look-grid">${U.card(pl)}<li class="sp-look-plus" aria-hidden="true">+</li>${U.card(p)}</ul></div></section>`;
+}
 V.product = () => {
   const p = C.product(typeof arg === 'string' ? arg : '');
   if (!p) return `<div class="sp"><header class="sp-pagehead"><div class="wrap"><h1>We could not find that product</h1><p class="sp-lede">It may have moved. Everything we sell is in the store.</p><div class="sp-hero-acts">${lnk('store', 'Back to the store', 'btn gold')}</div></div></header></div>`;
   if (PS.pid !== p.id) PS = { pid: p.id, opts: C.defaultOpts(p), qty: 1 };
   const col = C.collection(p.collection), back = p.collection === 'kids' ? ['kids-shop', 'Kids’ Shop'] : ['shop/' + col.id, col.name];
-  const pairs = C.completeSet(p, 4);
+  const pairs = C.completeSet(p, 4).filter(x => !(p.official && x.kind === 'plush'));
   const t = U.tone(p);
   const buyable = C.canOrder(p) || p.cta === 'notify';
-  return `<div class="sp sp-pro sp-pdp" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})">
+  return `<div class="sp sp-pro sp-pdp${p.official ? ' is-official' : ''}" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})">
    <div class="wrap">${U.crumbs([['store', 'Futures Store'], back, ['', p.name]])}
    <div class="sp-pdp-grid">${gallery(p)}
-    <div class="sp-info"><h1>${E(p.name)}</h1>
+    <div class="sp-info">${p.official ? `<p class="sp-official">${U.badgeHtml('Official · Worn by ' + p.worn, 'official')}</p>` : ''}<h1>${E(p.name)}</h1>${p.tagline ? `<p class="sp-tagline">${E(p.tagline)}</p>` : ''}
      <div class="sp-info-price" data-sp-pricewrap>${U.priceBlock(p, { big: true, opts: PS.opts })}</div>
      ${membershipLine(p)}
      <p class="sp-info-lede">${E(p.description || p.short)}</p>
-     <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => U.badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('')}</div>
+     <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b) && !(p.official && /^Official/.test(b))).map(b => U.badgeHtml(b, U.badgeKind(b))).join('')}</div>
      <div class="sp-buy" id="spBuy">${optsHtml(p)}${ctaHtml(p)}</div>
      ${facts(p)}${termsLine(p)}${kitLinks(p)}
      ${accordion(p)}
     </div></div></div>
+   ${story(p)}${look(p)}
    ${faq(p)}
    ${pairs.length ? `<section class="sp-pairs sp-set" aria-labelledby="spPairH"><div class="wrap"><h2 id="spPairH">Complete the set</h2>${C.charOf(p) ? `<p class="sp-set-sub">More with ${E(({ booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop', all: 'all four friends' })[C.charOf(p)])} on them.</p>` : ''}<ul class="sp-grid sp-grid-4">${pairs.map(x => U.card(x)).join('')}</ul></div></section>` : ''}
    ${buyable ? `<div class="sp-buybar" data-sp-buybar aria-hidden="true" inert><div class="sp-buybar-in"><div class="sp-buybar-t"><b>${E(p.name)}</b><span data-sp-barprice>${E(C.priceText(p, PS.opts))}</span></div>

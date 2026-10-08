@@ -232,6 +232,8 @@ def build_new_merch():
     save(place(load(CS + 'eat-the-rainbow-plate.png'), 1.25, 0.08), 'eat-the-rainbow-plate', 1)
     for k in ['booker', 'bop', 'zuri']:
         save(place(load(PKG + f'apparel/images/{k}-replica-backpack.png'), 2 / 3, 0.07), f'{k}-replica-backpack', 1)
+        # n=2: the friend wearing it (the single-shot doll), the "worn by" story picture on the product page
+        save(place(load(PKG + f'Single_Shot_Dolls/{k}-plush.png'), 2 / 3, 0.07), f'{k}-replica-backpack', 2)
 
 
 # ----------------------------------------------------------------------------- scenes (bundles / collections)

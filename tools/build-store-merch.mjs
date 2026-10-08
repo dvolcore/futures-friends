@@ -21,9 +21,15 @@ const PLAIN = [
   [/ concept carpet/g, ' carpet'],
   [/a sturdy proposed insulated bottle/g, 'a sturdy insulated bottle'],
   [/black-and-white sample (interior )?page/g, 'black-and-white $1page to color'],
-  [/Enquire about a (\w+) sample/, 'Ask about the $1 plush'], [/ concept\b/g, ''], [/\bproposed /g, '']
+  [/Enquire about a (\w+) sample/, 'Ask about the $1 plush'], [/ concept\b/g, ''], [/\bproposed /g, ''],
+  // Anti-bootleg (owner, 2026-10-08): nothing sold is offered as a print-it-yourself file, so no product copy says "printable".
+  [/four-page printable /g, 'four-page '], [/printable (coloring|sticker)/g, '$1']
 ];
-const plain = v => (typeof v === 'string' ? PLAIN.reduce((t, [a, b]) => t.replace(a, b), v) : v);
+/* Official character backpacks (owner, 2026-10-08): the replica backpacks are the ones each friend wears in the stories. */
+const OWN = { 'booker-replica-backpack': "Booker's Official Backpack", 'zuri-replica-backpack': "Zuri's Official Shell Backpack", 'bop-replica-backpack': "Bop's Official Backpack" };
+// Owner (2026-10-08): these packs are "Official", never "Custom". Any "Custom" the package brings is rewritten here, so the next import cannot reintroduce it.
+const NOCUSTOM = [[/\bCustom\b/g, 'Official'], [/\bcustom\b/g, 'official']];
+const plain = v => (typeof v === 'string' ? NOCUSTOM.concat(PLAIN).reduce((t, [a, b]) => t.replace(a, b), v) : v);
 const pick = (o, keys) => Object.fromEntries(keys.filter(k => o[k] != null).map(k => [k, (k === 'description' || k === 'name' || k === 'cta') ? plain(o[k]) : o[k]]));
 const data = {
   source: 'Futures_Friends_Merchandise_Campaign_2026-10-07 (store/products.json, apparel/products.json); every product is a draft',
@@ -33,9 +39,9 @@ const data = {
   posters: cat.products.filter(p => p.type === 'poster').map(p => pick(p, ['id', 'name', 'description', 'character', 'zone', 'variant', 'cta'])),
   bundles: cat.bundles.map(b => pick(b, ['id', 'name', 'description', 'includes', 'cta'])),
   apparel: app.filter(a => !a.id.endsWith('-replica-backpack')).map(a => pick(a, ['id', 'design', 'character', 'color', 'type', 'front_copy', 'back_copy'])),
-  replicas: all.filter(p => p.id.endsWith('-replica-backpack')).map(p => pick(p, ['id', 'name', 'description', 'design', 'character', 'color', 'front_copy'])),
-  coloring: all.filter(p => p.type === 'coloring-book').map(p => pick(p, ['id', 'name', 'description', 'character', 'zone', 'color', 'front_copy', 'additional_images', 'downloadable_file', 'cta'])),
-  stickers: all.filter(p => p.type === 'sticker-sheet').map(p => pick(p, ['id', 'name', 'description', 'character', 'zone', 'color', 'front_copy', 'additional_images', 'downloadable_file', 'cta'])),
+  replicas: all.filter(p => p.id.endsWith('-replica-backpack')).map(p => Object.assign(pick(p, ['id', 'name', 'description', 'design', 'character', 'color', 'front_copy']), { name: OWN[p.id] || p.name })),
+  coloring: all.filter(p => p.type === 'coloring-book').map(p => pick(p, ['id', 'name', 'description', 'character', 'zone', 'color', 'front_copy', 'cta'])),
+  stickers: all.filter(p => p.type === 'sticker-sheet').map(p => pick(p, ['id', 'name', 'description', 'character', 'zone', 'color', 'front_copy', 'cta'])),
   bottles: all.filter(p => p.type === 'insulated-bottle').map(p => pick(p, ['id', 'name', 'description', 'character', 'color', 'cta'])),
   plates: all.filter(p => p.type === 'divided-plate').map(p => pick(p, ['id', 'name', 'description', 'character', 'color', 'cta']))
 };
