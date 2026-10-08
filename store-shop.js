@@ -153,8 +153,8 @@ function editorial(side) {
   return `<section class="sp-edit" aria-labelledby="spEditH"><div class="sp-edit-img">${imgTag(g, { sizes: '100vw', alt: g.alt })}</div><div class="sp-edit-shade" aria-hidden="true"></div>
     <div class="wrap sp-edit-in"><div class="sp-edit-copy" data-rv><h2 id="spEditH">${side === 'families' ? 'Make a corner of home theirs.' : 'Five zones. One room that explains itself.'}</h2>
       <p>${side === 'families' ? 'A carpet for the reading nook, a poster above it, and a plush friend waiting in the middle.' : 'A rug marks each friend’s corner, a low fence keeps every child in sight, and the signs say where to go.'}</p>
-      <div class="sp-hero2-acts">${side === 'families' ? lnk('shop/carpets', 'Shop carpets ' + ico('arrow'), 'btn gold') : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${side === 'families' ? '' : lnk('room-kit', 'See the Learning Zones Kit', 'btn sp-btn-glass')}</div></div>
-    <p class="sp-edit-cap">${E(C.CONCEPT_CAPTION)}</p></div></section>`;
+      <div class="sp-hero2-acts">${side === 'families' ? lnk('shop/carpets', 'Shop carpets ' + ico('arrow'), 'btn gold') : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${side === 'families' ? '' : lnk('room-kit', 'See the Learning Zones Kit', 'btn sp-btn-glass')}</div></div></div>
+    <p class="sp-edit-cap">${E(C.CONCEPT_CAPTION)}</p></section>`;
 }
 function bridge() {
   return `<section class="sp-bridge" aria-labelledby="spBridgeH"><div class="wrap sp-bridge-grid">
@@ -227,12 +227,17 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' shop
 V['kids-shop'] = () => {
-  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['plush', 'Plush dolls'], ['backpacks', 'Backpacks'], ['drinkware', 'Bottles & plates'], ['stickers', 'Stickers & coloring'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free activity pages']];
+  // Owner 2026-10-08: the big carpet banner ("Make a corner of home theirs.") opens the Carpets section as its own mid-scroll band;
+  // the small "Designed for real corners." strip inside the section stays as it is.
+  const kidSecs = list => list.map(([name, col, items, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${items.map(p => card(p)).join('')}</ul></section>`).join('');
+  const secs = C.kidsSections(), cutAt = secs.findIndex(x => x[3] === 'carpets'), cut = cutAt < 0 ? secs.length : cutAt, jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['plush', 'Plush dolls'], ['backpacks', 'Backpacks'], ['drinkware', 'Bottles & plates'], ['stickers', 'Stickers & coloring'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free activity pages']];
   return wrapPage('families', `${heroHtml('families')}${rail('')}${friends()}
    <div class="wrap sp-shell sp-kidsbody" id="spResults"><ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-anchor="kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul>
-   ${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
+   ${kidSecs(secs.slice(0, cut))}</div>
+   ${cut < secs.length ? editorial('families') : ''}
+   <div class="wrap sp-shell sp-kidsbody sp-kidsbody-2">${kidSecs(secs.slice(cut))}
    ${termsLine('Kids’ Shop items')}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush is opening soon: leave your email on a plush page. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
-   ${editorial('families')}
+   ${cut < secs.length ? '' : editorial('families')}
    <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section>`);
 };
 
