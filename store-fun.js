@@ -191,5 +191,11 @@ function wireAll() { D.querySelectorAll('[data-sf-spin]').forEach(wireSpin); }
 });
 // the quick view builds its body on demand
 D.addEventListener('click', () => setTimeout(wireAll, 30), true);
+// pictures that arrive after the page rendered (quick view, turn-around, drawer) blend into their frame as soon as they have painted
+const ready = im => { if (im.classList) im.classList.add('is-ready'); };
+function markImgs(root) {
+  (root.matches && root.matches('img.sp-img') ? [root] : []).concat([...(root.querySelectorAll ? root.querySelectorAll('img.sp-img:not(.is-ready)') : [])]).forEach(im => { if (im.complete && im.naturalWidth) ready(im); else im.addEventListener('load', () => ready(im), { once: true }); });
+}
+if (typeof MutationObserver === 'function') new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) markImgs(n); }))).observe(D.body, { childList: true, subtree: true });
 W.FFFun = { spin, burst, wireAll };
 })();

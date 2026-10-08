@@ -226,3 +226,6 @@
   body:has(.sp-buybar.is-on) .sp-viewcart{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
   .sp-buybar-in{padding-right:0}
 }
+.sp-qv-info{min-width:0}
+.sp-qv-info .sp-buyrow{flex-wrap:wrap}
+.sp-qv-info .sp-addbtn{flex:1 1 190px;white-space:normal;line-height:1.2;min-height:50px}
