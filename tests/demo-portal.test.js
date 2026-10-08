@@ -555,7 +555,7 @@ test('data: capacity per room, tuition accounts and a paid history, two weeks of
   assert.ok(mia.length >= 8 && mia.every(x => x.status === 'paid' && x.receipt), 'the family has a paid history for statements');
   assert.ok(Object.values(D.all('invoices')).some(x => x.subsidy > 0), 'subsidy shares are kept apart');
   assert.ok(Object.keys(D.all('punches')).length > 20);
-  assert.deepEqual([...D.permsOf('s-carmen')], ['hours']); assert.deepEqual([...D.permsOf('s-alana')], ['hours', 'classroom']);
+  assert.deepEqual([...D.permsOf('s-carmen')], ['hours']); assert.deepEqual([...D.permsOf('s-alana')], ['hours', 'classroom', 'library']);
   assert.equal(D.presetOf(D.permsOf('s-dana')), 'director'); assert.equal(D.can('s-carmen', 'billing'), false);
   assert.doesNotMatch(JSON.stringify(D.all('accounts')) + JSON.stringify(Object.values(D.all('invoices')).map(x => [x.via, x.receipt])), /\d{9,}|routing|cvv|card number/i, 'no card or bank numbers anywhere');
   assert.equal(D.signIn('staff').home, 'timeclock');
