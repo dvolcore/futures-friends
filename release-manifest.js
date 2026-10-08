@@ -248,9 +248,9 @@
    "id": "family-library",
    "family": "family",
    "name": "Futures at Home free family library (activities, My Week, certificates for children)",
-   "count": 37,
+   "count": 27,
    "version": "Oct 2026",
-   "age": "0-5",
+   "age": "2-5",
    "approval": "internally_complete",
    "availability": "available_now",
    "note": "Free on the website, no account needed.",
@@ -262,9 +262,9 @@
    "id": "family-messages",
    "family": "family",
    "name": "Futures at Home weekly family messages",
-   "count": 780,
+   "count": 468,
    "version": "draft",
-   "age": "0-5",
+   "age": "2-5",
    "approval": "draft",
    "availability": "in_development",
    "note": "Written; awaiting review before any family receives them."
@@ -818,7 +818,7 @@
      "welcome-box-home"
     ],
     [
-     "6 ft round custom printed character carpet",
+     "6 ft round official character carpet",
      "carpet"
     ],
     [
@@ -864,7 +864,7 @@
      "welcome-box-center"
     ],
     [
-     "8 ft round custom printed character carpet",
+     "8 ft round official character carpet",
      "carpet"
     ],
     [
@@ -910,7 +910,7 @@
      "welcome-box-center"
     ],
     [
-     "8 ft round and 6 ft round custom printed character carpets",
+     "8 ft round and 6 ft round official character carpets",
      "carpet"
     ],
     [
