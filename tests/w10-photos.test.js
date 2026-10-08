@@ -103,7 +103,7 @@ test('FFArt.photo: the listed photo with alt text, width/height, srcset + sizes,
     const fig = A.photo(p.key, { title: 'T', line: 'L' });
     assert.match(fig, new RegExp(`<source type="image/webp" srcset="img/center/${p.key}-400\\.webp 400w, img/center/${p.key}-800\\.webp 800w, img/center/${p.key}-1200\\.webp 1200w" sizes="[^"]+">`));
     assert.match(fig, new RegExp(`<img src="img/center/${p.key}-800\\.jpg" srcset="img/center/${p.key}-400\\.jpg 400w, [^"]+1200w" sizes="[^"]+" alt="[^"]{40,}" width="${c.w}" height="${c.h}" loading="lazy" decoding="async"`));
-    assert.match(fig, /<span class="ffa-credit">Photo: Futures Learning Center, Independence, Missouri<\/span>/);
+    assert.match(fig, /<span class="ffa-credit">Photo( of the building today)?: Futures Learning Center, Independence, Missouri<\/span>/);
     assert.doesNotMatch(fig, /data-placeholder|ffa-flag|Placeholder/);
     const hero = A.photoImg(p.key, { eager: true });
     assert.match(hero, /fetchpriority="high"/); assert.doesNotMatch(hero, /loading="lazy"/);
