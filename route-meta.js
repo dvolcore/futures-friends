@@ -36,7 +36,7 @@
     quote: ['Request a quote', 'Send your rooms, ages and enrollment and we will price a Futures Friends startup package for you.'],
     friends: ['Booker Lumi Zuri Bop and storybooks', 'Meet Booker, Lumi, Zuri and Bop, and the storybooks and episodes now in development.'],
     rainbow: ['Eat the Rainbow recipes', 'The Eat the Rainbow cookbook and menu planner: 36 recipes in three levels, designed around the CACFP meal pattern.'],
-    store: ['Futures Store', 'The Futures Store: a family shop and Classroom Branding Kits for centers, home daycares and churches. Ordering opens soon.'],
+    store: ['Futures Store', 'Learning Zones Kits, carpets, posters, plush, apparel and classroom materials for centers, home daycares and churches, plus a small Kids\u2019 Shop. Orders go in as requests.'],
     'shop-families': ['Family shop', 'Tees, a library book tote, posters and, later, storybooks and plush with Booker, Lumi, Zuri and Bop. Ordering opens soon.'],
     'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
     'room-kit': ['Learning Zones Kit: carpets, fences and friend zones for your room', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],
@@ -45,6 +45,12 @@
     'brand-kit': ['Partner brand kit', 'Make your "featuring Futures Friends" lockup, read the usage rules and see which kit pieces are ready.'],
     'room-planner': ['Room Planner: lay out your Learning Zones room to scale', 'Enter your room’s measurements, place doors and each friend’s zone, and check space per child, exits and sightlines. Save, print or send for a quote.'],
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
+    shop: ['Shop the Futures Store', 'Kits, room add-ons, classroom materials and books for centers, home daycares and churches. Prices are shown where they are set; everything else is a quote.'],
+    product: ['Product', 'A Futures Store product: what is in the box, sizes, materials, care, safety notes and lead time.'],
+    cart: ['Your cart', 'Your Futures Store cart, saved on this device. Nothing is charged until you approve a written invoice.'],
+    checkout: ['Checkout', 'Send your Futures Store order request: contact, ship-to, purchase order and tax-exempt details. Nothing is charged.'],
+    order: ['Order request', 'Your Futures Store order request and a printable summary.'],
+    'order-return': ['Back from secure checkout', 'You returned from the payment provider. Payment is confirmed from the provider\u2019s own record.'],
     'store-request': ['Store request', 'Send your Futures Store list as a quote request or join the family shop list. Nothing is charged and no order is placed online.'],
     funding: ['Funding Help', 'Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.'],
     pricing: ['Pricing', 'Published startup packages and monthly fees for home daycares and child care centers, plus training and seasonal add-ons.'],
@@ -100,6 +106,8 @@
     if (route === 'post') {
       const posts = typeof POSTS !== 'undefined' ? POSTS : null, p = Array.isArray(posts) && posts.find(x => x.id === arg);   // POSTS is views.js's top-level const
       if (p) { title = p.t; desc = trim(p.b[0], 155); }
+    } else if (route === 'product' && window.FFCatalog && window.FFCatalog.product(arg)) {
+      const p = window.FFCatalog.product(arg); title = p.name + ' | Futures Store'; desc = p.short;
     } else if (route === 'academy' && arg) {
       const mods = (window.FF && window.FF.modules) || [], m = mods.find(x => x.code === arg);
       if (m) { title = m.code + ' ' + m.title + ' | Training Academy'; desc = 'Sample lesson preview: ' + m.title + '. No professional credential or approved training hours are issued.'; }

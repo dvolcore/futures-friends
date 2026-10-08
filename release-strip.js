@@ -19,6 +19,7 @@
     if (/^<section\b/.test(rest)) { const i = html.indexOf('</section>', at); return i < 0 ? 0 : i + 10; }
     if (/^<div class="wc u1[" ]/.test(rest)) { const i = html.indexOf('</header>', at); return i < 0 ? 0 : i + 9; }
     if (/^<div class="ex-[a-z]+">\s*<section\b/.test(rest)) { const i = html.indexOf('</section>', at); return i < 0 ? 0 : i + 10; }   // experience.js #curriculum
+    if (/^<div class="sp[ "]/.test(rest)) { const m = /<\/(section|header)>/.exec(rest); return m ? at + m.index + m[0].length : 0; }   // the store pages (store-shop.js): after the hero or page head
     return 0;
   }
   const wrap = route => {

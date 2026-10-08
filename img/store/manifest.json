@@ -1,0 +1,2290 @@
+{
+ "about": "Written by tools/import-store-images.mjs. Do not edit by hand. Product ids match store-catalog.js; collection hero pictures use collection-<id>.",
+ "generated": "2026-10-08",
+ "products": {
+  "all-friends-backpack": {
+   "images": [
+    {
+     "n": 1,
+     "src": "ae5387943e53efb5",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-backpack-1-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-backpack-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-backpack-1-400.webp",
+     "w800": "img/store/all-friends-backpack-1-768.webp",
+     "w1200": "img/store/all-friends-backpack-1-768.webp",
+     "jpg": "img/store/all-friends-backpack-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "bbcb066f124695c7",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-backpack-2-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-backpack-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-backpack-2-400.webp",
+     "w800": "img/store/all-friends-backpack-2-768.webp",
+     "w1200": "img/store/all-friends-backpack-2-768.webp",
+     "jpg": "img/store/all-friends-backpack-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "all-friends-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "b1f25f01689c5f1b",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-hoodie-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-hoodie-1-400.webp",
+     "w800": "img/store/all-friends-hoodie-1-768.webp",
+     "w1200": "img/store/all-friends-hoodie-1-768.webp",
+     "jpg": "img/store/all-friends-hoodie-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "1c814c3c55be9336",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-hoodie-2-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-hoodie-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-hoodie-2-400.webp",
+     "w800": "img/store/all-friends-hoodie-2-768.webp",
+     "w1200": "img/store/all-friends-hoodie-2-768.webp",
+     "jpg": "img/store/all-friends-hoodie-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "all-friends-tshirt": {
+   "images": [
+    {
+     "n": 1,
+     "src": "ce794d77a21d6055",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-tshirt-1-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-tshirt-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-tshirt-1-400.webp",
+     "w800": "img/store/all-friends-tshirt-1-768.webp",
+     "w1200": "img/store/all-friends-tshirt-1-768.webp",
+     "jpg": "img/store/all-friends-tshirt-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "09ca6da22397caf0",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/all-friends-tshirt-2-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-tshirt-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/all-friends-tshirt-2-400.webp",
+     "w800": "img/store/all-friends-tshirt-2-768.webp",
+     "w1200": "img/store/all-friends-tshirt-2-768.webp",
+     "jpg": "img/store/all-friends-tshirt-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "booker-backpack": {
+   "images": [
+    {
+     "n": 1,
+     "src": "26ab0e20bf26a86d",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-backpack-1-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-backpack-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-backpack-1-400.webp",
+     "w800": "img/store/booker-backpack-1-768.webp",
+     "w1200": "img/store/booker-backpack-1-768.webp",
+     "jpg": "img/store/booker-backpack-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "350c14fbc99992cd",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-backpack-2-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-backpack-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-backpack-2-400.webp",
+     "w800": "img/store/booker-backpack-2-768.webp",
+     "w1200": "img/store/booker-backpack-2-768.webp",
+     "jpg": "img/store/booker-backpack-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "booker-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "a2868123fd176946",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-hoodie-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-hoodie-1-400.webp",
+     "w800": "img/store/booker-hoodie-1-768.webp",
+     "w1200": "img/store/booker-hoodie-1-768.webp",
+     "jpg": "img/store/booker-hoodie-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "b07769b6b66dcd1d",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-hoodie-2-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-hoodie-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-hoodie-2-400.webp",
+     "w800": "img/store/booker-hoodie-2-768.webp",
+     "w1200": "img/store/booker-hoodie-2-768.webp",
+     "jpg": "img/store/booker-hoodie-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "booker-tshirt": {
+   "images": [
+    {
+     "n": 1,
+     "src": "d414179a70b24b38",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-tshirt-1-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-tshirt-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-tshirt-1-400.webp",
+     "w800": "img/store/booker-tshirt-1-768.webp",
+     "w1200": "img/store/booker-tshirt-1-768.webp",
+     "jpg": "img/store/booker-tshirt-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "68a6255096320073",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/booker-tshirt-2-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-tshirt-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/booker-tshirt-2-400.webp",
+     "w800": "img/store/booker-tshirt-2-768.webp",
+     "w1200": "img/store/booker-tshirt-2-768.webp",
+     "jpg": "img/store/booker-tshirt-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "bop-backpack": {
+   "images": [
+    {
+     "n": 1,
+     "src": "097f74bba499e22d",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-backpack-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-backpack-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-backpack-1-400.webp",
+     "w800": "img/store/bop-backpack-1-768.webp",
+     "w1200": "img/store/bop-backpack-1-768.webp",
+     "jpg": "img/store/bop-backpack-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "15e3bf1275533258",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-backpack-2-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-backpack-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-backpack-2-400.webp",
+     "w800": "img/store/bop-backpack-2-768.webp",
+     "w1200": "img/store/bop-backpack-2-768.webp",
+     "jpg": "img/store/bop-backpack-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "bop-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "da97bc84cee68575",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-hoodie-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-hoodie-1-400.webp",
+     "w800": "img/store/bop-hoodie-1-768.webp",
+     "w1200": "img/store/bop-hoodie-1-768.webp",
+     "jpg": "img/store/bop-hoodie-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "947df9aa0906d7b2",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-hoodie-2-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-hoodie-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-hoodie-2-400.webp",
+     "w800": "img/store/bop-hoodie-2-768.webp",
+     "w1200": "img/store/bop-hoodie-2-768.webp",
+     "jpg": "img/store/bop-hoodie-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "bop-tshirt": {
+   "images": [
+    {
+     "n": 1,
+     "src": "6dee5ae9e9589909",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-tshirt-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-tshirt-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-tshirt-1-400.webp",
+     "w800": "img/store/bop-tshirt-1-768.webp",
+     "w1200": "img/store/bop-tshirt-1-768.webp",
+     "jpg": "img/store/bop-tshirt-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "76ebbf94ade638bb",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/bop-tshirt-2-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-tshirt-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/bop-tshirt-2-400.webp",
+     "w800": "img/store/bop-tshirt-2-768.webp",
+     "w1200": "img/store/bop-tshirt-2-768.webp",
+     "jpg": "img/store/bop-tshirt-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "bundle-character-merchandising-kit": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f692269e67606ce4",
+     "w": 1672,
+     "h": 941,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1672
+     ],
+     "files": [
+      [
+       "img/store/bundle-character-merchandising-kit-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-1672.webp",
+       1672
+      ]
+     ],
+     "w400": "img/store/bundle-character-merchandising-kit-1-400.webp",
+     "w800": "img/store/bundle-character-merchandising-kit-1-800.webp",
+     "w1200": "img/store/bundle-character-merchandising-kit-1-1672.webp",
+     "jpg": "img/store/bundle-character-merchandising-kit-1-800.jpg",
+     "ratio": 1.7768
+    }
+   ]
+  },
+  "bundle-complete-learning-zones": {
+   "images": [
+    {
+     "n": 1,
+     "src": "30bf5cccfd701214",
+     "w": 1774,
+     "h": 887,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1774
+     ],
+     "files": [
+      [
+       "img/store/bundle-complete-learning-zones-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-1774.webp",
+       1774
+      ]
+     ],
+     "w400": "img/store/bundle-complete-learning-zones-1-400.webp",
+     "w800": "img/store/bundle-complete-learning-zones-1-800.webp",
+     "w1200": "img/store/bundle-complete-learning-zones-1-1774.webp",
+     "jpg": "img/store/bundle-complete-learning-zones-1-800.jpg",
+     "ratio": 2
+    }
+   ]
+  },
+  "bundle-four-zone-starter": {
+   "images": [
+    {
+     "n": 1,
+     "src": "b6ce1d1c1eca0a31",
+     "w": 1384,
+     "h": 887,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1384
+     ],
+     "files": [
+      [
+       "img/store/bundle-four-zone-starter-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-1384.webp",
+       1384
+      ]
+     ],
+     "w400": "img/store/bundle-four-zone-starter-1-400.webp",
+     "w800": "img/store/bundle-four-zone-starter-1-800.webp",
+     "w1200": "img/store/bundle-four-zone-starter-1-1384.webp",
+     "jpg": "img/store/bundle-four-zone-starter-1-800.jpg",
+     "ratio": 1.5603
+    }
+   ]
+  },
+  "collection-apparel": {
+   "images": [
+    {
+     "n": 1,
+     "src": "514c80114ce1f2c3",
+     "w": 2000,
+     "h": 1000,
+     "sizes": [
+      400,
+      800,
+      1200,
+      2000
+     ],
+     "files": [
+      [
+       "img/store/collection-apparel-1-400.webp",
+       400
+      ],
+      [
+       "img/store/collection-apparel-1-800.webp",
+       800
+      ],
+      [
+       "img/store/collection-apparel-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/collection-apparel-1-2000.webp",
+       2000
+      ]
+     ],
+     "w400": "img/store/collection-apparel-1-400.webp",
+     "w800": "img/store/collection-apparel-1-800.webp",
+     "w1200": "img/store/collection-apparel-1-2000.webp",
+     "jpg": "img/store/collection-apparel-1-800.jpg",
+     "ratio": 2
+    }
+   ]
+  },
+  "collection-carpets": {
+   "images": [
+    {
+     "n": 1,
+     "src": "30bf5cccfd701214",
+     "w": 1774,
+     "h": 887,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1774
+     ],
+     "files": [
+      [
+       "img/store/collection-carpets-1-400.webp",
+       400
+      ],
+      [
+       "img/store/collection-carpets-1-800.webp",
+       800
+      ],
+      [
+       "img/store/collection-carpets-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/collection-carpets-1-1774.webp",
+       1774
+      ]
+     ],
+     "w400": "img/store/collection-carpets-1-400.webp",
+     "w800": "img/store/collection-carpets-1-800.webp",
+     "w1200": "img/store/collection-carpets-1-1774.webp",
+     "jpg": "img/store/collection-carpets-1-800.jpg",
+     "ratio": 2
+    },
+    {
+     "n": 2,
+     "src": "772ac361383daa22",
+     "w": 1536,
+     "h": 1024,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1536
+     ],
+     "files": [
+      [
+       "img/store/collection-carpets-2-400.webp",
+       400
+      ],
+      [
+       "img/store/collection-carpets-2-800.webp",
+       800
+      ],
+      [
+       "img/store/collection-carpets-2-1200.webp",
+       1200
+      ],
+      [
+       "img/store/collection-carpets-2-1536.webp",
+       1536
+      ]
+     ],
+     "w400": "img/store/collection-carpets-2-400.webp",
+     "w800": "img/store/collection-carpets-2-800.webp",
+     "w1200": "img/store/collection-carpets-2-1536.webp",
+     "jpg": "img/store/collection-carpets-2-800.jpg",
+     "ratio": 1.5
+    }
+   ]
+  },
+  "collection-plush": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f692269e67606ce4",
+     "w": 1672,
+     "h": 941,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1672
+     ],
+     "files": [
+      [
+       "img/store/collection-plush-1-400.webp",
+       400
+      ],
+      [
+       "img/store/collection-plush-1-800.webp",
+       800
+      ],
+      [
+       "img/store/collection-plush-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/collection-plush-1-1672.webp",
+       1672
+      ]
+     ],
+     "w400": "img/store/collection-plush-1-400.webp",
+     "w800": "img/store/collection-plush-1-800.webp",
+     "w1200": "img/store/collection-plush-1-1672.webp",
+     "jpg": "img/store/collection-plush-1-800.jpg",
+     "ratio": 1.7768
+    }
+   ]
+  },
+  "collection-posters": {
+   "images": [
+    {
+     "n": 1,
+     "src": "6db43a81917c597b",
+     "w": 2000,
+     "h": 1000,
+     "sizes": [
+      400,
+      800,
+      1200,
+      2000
+     ],
+     "files": [
+      [
+       "img/store/collection-posters-1-400.webp",
+       400
+      ],
+      [
+       "img/store/collection-posters-1-800.webp",
+       800
+      ],
+      [
+       "img/store/collection-posters-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/collection-posters-1-2000.webp",
+       2000
+      ]
+     ],
+     "w400": "img/store/collection-posters-1-400.webp",
+     "w800": "img/store/collection-posters-1-800.webp",
+     "w1200": "img/store/collection-posters-1-2000.webp",
+     "jpg": "img/store/collection-posters-1-800.jpg",
+     "ratio": 2
+    }
+   ]
+  },
+  "lumi-backpack": {
+   "images": [
+    {
+     "n": 1,
+     "src": "84081e7e0387d194",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-backpack-1-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-backpack-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-backpack-1-400.webp",
+     "w800": "img/store/lumi-backpack-1-768.webp",
+     "w1200": "img/store/lumi-backpack-1-768.webp",
+     "jpg": "img/store/lumi-backpack-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "cc9420a7b2438d0a",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-backpack-2-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-backpack-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-backpack-2-400.webp",
+     "w800": "img/store/lumi-backpack-2-768.webp",
+     "w1200": "img/store/lumi-backpack-2-768.webp",
+     "jpg": "img/store/lumi-backpack-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "lumi-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "8b19932557eead23",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-hoodie-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-hoodie-1-400.webp",
+     "w800": "img/store/lumi-hoodie-1-768.webp",
+     "w1200": "img/store/lumi-hoodie-1-768.webp",
+     "jpg": "img/store/lumi-hoodie-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "83deed48b3f3d65f",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-hoodie-2-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-hoodie-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-hoodie-2-400.webp",
+     "w800": "img/store/lumi-hoodie-2-768.webp",
+     "w1200": "img/store/lumi-hoodie-2-768.webp",
+     "jpg": "img/store/lumi-hoodie-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "lumi-tshirt": {
+   "images": [
+    {
+     "n": 1,
+     "src": "99f6495f08e9055b",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-tshirt-1-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-tshirt-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-tshirt-1-400.webp",
+     "w800": "img/store/lumi-tshirt-1-768.webp",
+     "w1200": "img/store/lumi-tshirt-1-768.webp",
+     "jpg": "img/store/lumi-tshirt-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "df8e25c8e478fffe",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/lumi-tshirt-2-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-tshirt-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/lumi-tshirt-2-400.webp",
+     "w800": "img/store/lumi-tshirt-2-768.webp",
+     "w1200": "img/store/lumi-tshirt-2-768.webp",
+     "jpg": "img/store/lumi-tshirt-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "plush-booker": {
+   "images": [
+    {
+     "n": 1,
+     "src": "e0778b84650c3f24",
+     "w": 1013,
+     "h": 1553,
+     "sizes": [
+      400,
+      800,
+      1013
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-1-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-1-800.webp",
+       800
+      ],
+      [
+       "img/store/plush-booker-1-1013.webp",
+       1013
+      ]
+     ],
+     "w400": "img/store/plush-booker-1-400.webp",
+     "w800": "img/store/plush-booker-1-800.webp",
+     "w1200": "img/store/plush-booker-1-1013.webp",
+     "jpg": "img/store/plush-booker-1-800.jpg",
+     "ratio": 0.6523
+    },
+    {
+     "n": 2,
+     "src": "90eb24c385b54097",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-2-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-2-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-booker-2-400.webp",
+     "w800": "img/store/plush-booker-2-488.webp",
+     "w1200": "img/store/plush-booker-2-488.webp",
+     "jpg": "img/store/plush-booker-2-488.jpg",
+     "ratio": 0.4766
+    },
+    {
+     "n": 3,
+     "src": "10ffa67303a4b0dc",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-3-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-booker-3-400.webp",
+     "w800": "img/store/plush-booker-3-488.webp",
+     "w1200": "img/store/plush-booker-3-488.webp",
+     "jpg": "img/store/plush-booker-3-488.jpg",
+     "ratio": 0.4766
+    },
+    {
+     "n": 4,
+     "src": "10deee208ef1f88a",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-4-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-booker-4-400.webp",
+     "w800": "img/store/plush-booker-4-488.webp",
+     "w1200": "img/store/plush-booker-4-488.webp",
+     "jpg": "img/store/plush-booker-4-488.jpg",
+     "ratio": 0.4766
+    }
+   ]
+  },
+  "plush-bop": {
+   "images": [
+    {
+     "n": 1,
+     "src": "056018dc921a5eab",
+     "w": 1154,
+     "h": 1363,
+     "sizes": [
+      400,
+      800,
+      1154
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-1-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-1-800.webp",
+       800
+      ],
+      [
+       "img/store/plush-bop-1-1154.webp",
+       1154
+      ]
+     ],
+     "w400": "img/store/plush-bop-1-400.webp",
+     "w800": "img/store/plush-bop-1-800.webp",
+     "w1200": "img/store/plush-bop-1-1154.webp",
+     "jpg": "img/store/plush-bop-1-800.jpg",
+     "ratio": 0.8467
+    },
+    {
+     "n": 2,
+     "src": "d814fd37072ae744",
+     "w": 516,
+     "h": 971,
+     "sizes": [
+      400,
+      516
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-2-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-2-516.webp",
+       516
+      ]
+     ],
+     "w400": "img/store/plush-bop-2-400.webp",
+     "w800": "img/store/plush-bop-2-516.webp",
+     "w1200": "img/store/plush-bop-2-516.webp",
+     "jpg": "img/store/plush-bop-2-516.jpg",
+     "ratio": 0.5314
+    },
+    {
+     "n": 3,
+     "src": "3c48ea8bac6c6aa2",
+     "w": 516,
+     "h": 971,
+     "sizes": [
+      400,
+      516
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-3-516.webp",
+       516
+      ]
+     ],
+     "w400": "img/store/plush-bop-3-400.webp",
+     "w800": "img/store/plush-bop-3-516.webp",
+     "w1200": "img/store/plush-bop-3-516.webp",
+     "jpg": "img/store/plush-bop-3-516.jpg",
+     "ratio": 0.5314
+    },
+    {
+     "n": 4,
+     "src": "de1c95b20cdb61f5",
+     "w": 516,
+     "h": 971,
+     "sizes": [
+      400,
+      516
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-4-516.webp",
+       516
+      ]
+     ],
+     "w400": "img/store/plush-bop-4-400.webp",
+     "w800": "img/store/plush-bop-4-516.webp",
+     "w1200": "img/store/plush-bop-4-516.webp",
+     "jpg": "img/store/plush-bop-4-516.jpg",
+     "ratio": 0.5314
+    }
+   ]
+  },
+  "plush-lumi": {
+   "images": [
+    {
+     "n": 1,
+     "src": "9a5aa056d5458887",
+     "w": 1000,
+     "h": 1573,
+     "sizes": [
+      400,
+      800,
+      1000
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-1-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-1-800.webp",
+       800
+      ],
+      [
+       "img/store/plush-lumi-1-1000.webp",
+       1000
+      ]
+     ],
+     "w400": "img/store/plush-lumi-1-400.webp",
+     "w800": "img/store/plush-lumi-1-800.webp",
+     "w1200": "img/store/plush-lumi-1-1000.webp",
+     "jpg": "img/store/plush-lumi-1-800.jpg",
+     "ratio": 0.6357
+    },
+    {
+     "n": 2,
+     "src": "85f2c56519d6d925",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-2-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-2-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-lumi-2-400.webp",
+     "w800": "img/store/plush-lumi-2-488.webp",
+     "w1200": "img/store/plush-lumi-2-488.webp",
+     "jpg": "img/store/plush-lumi-2-488.jpg",
+     "ratio": 0.4766
+    },
+    {
+     "n": 3,
+     "src": "ce3cdfd58e0ea3bc",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-3-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-lumi-3-400.webp",
+     "w800": "img/store/plush-lumi-3-488.webp",
+     "w1200": "img/store/plush-lumi-3-488.webp",
+     "jpg": "img/store/plush-lumi-3-488.jpg",
+     "ratio": 0.4766
+    },
+    {
+     "n": 4,
+     "src": "7a179030b44cb9ee",
+     "w": 488,
+     "h": 1024,
+     "sizes": [
+      400,
+      488
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-4-488.webp",
+       488
+      ]
+     ],
+     "w400": "img/store/plush-lumi-4-400.webp",
+     "w800": "img/store/plush-lumi-4-488.webp",
+     "w1200": "img/store/plush-lumi-4-488.webp",
+     "jpg": "img/store/plush-lumi-4-488.jpg",
+     "ratio": 0.4766
+    }
+   ]
+  },
+  "plush-zuri": {
+   "images": [
+    {
+     "n": 1,
+     "src": "1f2c823886026ff4",
+     "w": 1071,
+     "h": 1469,
+     "sizes": [
+      400,
+      800,
+      1071
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-1-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-1-800.webp",
+       800
+      ],
+      [
+       "img/store/plush-zuri-1-1071.webp",
+       1071
+      ]
+     ],
+     "w400": "img/store/plush-zuri-1-400.webp",
+     "w800": "img/store/plush-zuri-1-800.webp",
+     "w1200": "img/store/plush-zuri-1-1071.webp",
+     "jpg": "img/store/plush-zuri-1-800.jpg",
+     "ratio": 0.7291
+    },
+    {
+     "n": 2,
+     "src": "e41e237ec589b539",
+     "w": 567,
+     "h": 887,
+     "sizes": [
+      400,
+      567
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-2-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-2-567.webp",
+       567
+      ]
+     ],
+     "w400": "img/store/plush-zuri-2-400.webp",
+     "w800": "img/store/plush-zuri-2-567.webp",
+     "w1200": "img/store/plush-zuri-2-567.webp",
+     "jpg": "img/store/plush-zuri-2-567.jpg",
+     "ratio": 0.6392
+    },
+    {
+     "n": 3,
+     "src": "0c6cf7fdcdeb900d",
+     "w": 568,
+     "h": 887,
+     "sizes": [
+      400,
+      568
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-3-568.webp",
+       568
+      ]
+     ],
+     "w400": "img/store/plush-zuri-3-400.webp",
+     "w800": "img/store/plush-zuri-3-568.webp",
+     "w1200": "img/store/plush-zuri-3-568.webp",
+     "jpg": "img/store/plush-zuri-3-568.jpg",
+     "ratio": 0.6404
+    },
+    {
+     "n": 4,
+     "src": "7f7afe0c1ce62f1f",
+     "w": 567,
+     "h": 887,
+     "sizes": [
+      400,
+      567
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-4-567.webp",
+       567
+      ]
+     ],
+     "w400": "img/store/plush-zuri-4-400.webp",
+     "w800": "img/store/plush-zuri-4-567.webp",
+     "w1200": "img/store/plush-zuri-4-567.webp",
+     "jpg": "img/store/plush-zuri-4-567.jpg",
+     "ratio": 0.6392
+    }
+   ]
+  },
+  "poster-booker-reading-area-v1": {
+   "images": [
+    {
+     "n": 1,
+     "src": "5fcf56475aa1a2f6",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-booker-reading-area-v1-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-booker-reading-area-v1-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-booker-reading-area-v1-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-booker-reading-area-v1-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-booker-reading-area-v1-1-400.webp",
+     "w800": "img/store/poster-booker-reading-area-v1-1-800.webp",
+     "w1200": "img/store/poster-booker-reading-area-v1-1-1600.webp",
+     "jpg": "img/store/poster-booker-reading-area-v1-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-booker-reading-area-v2": {
+   "images": [
+    {
+     "n": 1,
+     "src": "5f6c64cde41d55dd",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-booker-reading-area-v2-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-booker-reading-area-v2-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-booker-reading-area-v2-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-booker-reading-area-v2-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-booker-reading-area-v2-1-400.webp",
+     "w800": "img/store/poster-booker-reading-area-v2-1-800.webp",
+     "w1200": "img/store/poster-booker-reading-area-v2-1-1600.webp",
+     "jpg": "img/store/poster-booker-reading-area-v2-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-bop-movement-zone-v1": {
+   "images": [
+    {
+     "n": 1,
+     "src": "8d0b1d7ab6c82359",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-bop-movement-zone-v1-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v1-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v1-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v1-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-bop-movement-zone-v1-1-400.webp",
+     "w800": "img/store/poster-bop-movement-zone-v1-1-800.webp",
+     "w1200": "img/store/poster-bop-movement-zone-v1-1-1600.webp",
+     "jpg": "img/store/poster-bop-movement-zone-v1-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-bop-movement-zone-v2": {
+   "images": [
+    {
+     "n": 1,
+     "src": "cabd3ee853b09d85",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-bop-movement-zone-v2-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v2-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v2-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-bop-movement-zone-v2-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-bop-movement-zone-v2-1-400.webp",
+     "w800": "img/store/poster-bop-movement-zone-v2-1-800.webp",
+     "w1200": "img/store/poster-bop-movement-zone-v2-1-1600.webp",
+     "jpg": "img/store/poster-bop-movement-zone-v2-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-friends-circle-v1": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f1e19996e26007c5",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-friends-circle-v1-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-friends-circle-v1-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-friends-circle-v1-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-friends-circle-v1-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-friends-circle-v1-1-400.webp",
+     "w800": "img/store/poster-friends-circle-v1-1-800.webp",
+     "w1200": "img/store/poster-friends-circle-v1-1-1600.webp",
+     "jpg": "img/store/poster-friends-circle-v1-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-friends-circle-v2": {
+   "images": [
+    {
+     "n": 1,
+     "src": "3d4ef8468f002a63",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-friends-circle-v2-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-friends-circle-v2-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-friends-circle-v2-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-friends-circle-v2-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-friends-circle-v2-1-400.webp",
+     "w800": "img/store/poster-friends-circle-v2-1-800.webp",
+     "w1200": "img/store/poster-friends-circle-v2-1-1600.webp",
+     "jpg": "img/store/poster-friends-circle-v2-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-lumi-calm-corner-v1": {
+   "images": [
+    {
+     "n": 1,
+     "src": "0bfb6166d96f9c1d",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-lumi-calm-corner-v1-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v1-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v1-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v1-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-lumi-calm-corner-v1-1-400.webp",
+     "w800": "img/store/poster-lumi-calm-corner-v1-1-800.webp",
+     "w1200": "img/store/poster-lumi-calm-corner-v1-1-1600.webp",
+     "jpg": "img/store/poster-lumi-calm-corner-v1-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-lumi-calm-corner-v2": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f16f247e5a38d4a0",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-lumi-calm-corner-v2-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v2-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v2-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-lumi-calm-corner-v2-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-lumi-calm-corner-v2-1-400.webp",
+     "w800": "img/store/poster-lumi-calm-corner-v2-1-800.webp",
+     "w1200": "img/store/poster-lumi-calm-corner-v2-1-1600.webp",
+     "jpg": "img/store/poster-lumi-calm-corner-v2-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-zuri-discovery-zone-v1": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f73dd0a4feb86da4",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-zuri-discovery-zone-v1-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v1-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v1-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v1-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-zuri-discovery-zone-v1-1-400.webp",
+     "w800": "img/store/poster-zuri-discovery-zone-v1-1-800.webp",
+     "w1200": "img/store/poster-zuri-discovery-zone-v1-1-1600.webp",
+     "jpg": "img/store/poster-zuri-discovery-zone-v1-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "poster-zuri-discovery-zone-v2": {
+   "images": [
+    {
+     "n": 1,
+     "src": "d2fdf56dc12975f0",
+     "w": 1600,
+     "h": 2400,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1600
+     ],
+     "files": [
+      [
+       "img/store/poster-zuri-discovery-zone-v2-1-400.webp",
+       400
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v2-1-800.webp",
+       800
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v2-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/poster-zuri-discovery-zone-v2-1-1600.webp",
+       1600
+      ]
+     ],
+     "w400": "img/store/poster-zuri-discovery-zone-v2-1-400.webp",
+     "w800": "img/store/poster-zuri-discovery-zone-v2-1-800.webp",
+     "w1200": "img/store/poster-zuri-discovery-zone-v2-1-1600.webp",
+     "jpg": "img/store/poster-zuri-discovery-zone-v2-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "rug-booker-reading-area": {
+   "images": [
+    {
+     "n": 1,
+     "src": "97de00666cf610a9",
+     "w": 1024,
+     "h": 1536,
+     "sizes": [
+      400,
+      800,
+      1024
+     ],
+     "files": [
+      [
+       "img/store/rug-booker-reading-area-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-booker-reading-area-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-booker-reading-area-1-1024.webp",
+       1024
+      ]
+     ],
+     "w400": "img/store/rug-booker-reading-area-1-400.webp",
+     "w800": "img/store/rug-booker-reading-area-1-800.webp",
+     "w1200": "img/store/rug-booker-reading-area-1-1024.webp",
+     "jpg": "img/store/rug-booker-reading-area-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "rug-bop-movement-zone": {
+   "images": [
+    {
+     "n": 1,
+     "src": "96767d55e1175071",
+     "w": 1024,
+     "h": 1536,
+     "sizes": [
+      400,
+      800,
+      1024
+     ],
+     "files": [
+      [
+       "img/store/rug-bop-movement-zone-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-bop-movement-zone-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-bop-movement-zone-1-1024.webp",
+       1024
+      ]
+     ],
+     "w400": "img/store/rug-bop-movement-zone-1-400.webp",
+     "w800": "img/store/rug-bop-movement-zone-1-800.webp",
+     "w1200": "img/store/rug-bop-movement-zone-1-1024.webp",
+     "jpg": "img/store/rug-bop-movement-zone-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "rug-friends-circle": {
+   "images": [
+    {
+     "n": 1,
+     "src": "a17373c0625360f8",
+     "w": 1024,
+     "h": 1536,
+     "sizes": [
+      400,
+      800,
+      1024
+     ],
+     "files": [
+      [
+       "img/store/rug-friends-circle-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-friends-circle-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-friends-circle-1-1024.webp",
+       1024
+      ]
+     ],
+     "w400": "img/store/rug-friends-circle-1-400.webp",
+     "w800": "img/store/rug-friends-circle-1-800.webp",
+     "w1200": "img/store/rug-friends-circle-1-1024.webp",
+     "jpg": "img/store/rug-friends-circle-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "rug-lumi-calm-corner": {
+   "images": [
+    {
+     "n": 1,
+     "src": "cacce86d8e16e185",
+     "w": 1024,
+     "h": 1536,
+     "sizes": [
+      400,
+      800,
+      1024
+     ],
+     "files": [
+      [
+       "img/store/rug-lumi-calm-corner-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-lumi-calm-corner-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-lumi-calm-corner-1-1024.webp",
+       1024
+      ]
+     ],
+     "w400": "img/store/rug-lumi-calm-corner-1-400.webp",
+     "w800": "img/store/rug-lumi-calm-corner-1-800.webp",
+     "w1200": "img/store/rug-lumi-calm-corner-1-1024.webp",
+     "jpg": "img/store/rug-lumi-calm-corner-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "rug-square-booker-reading-area": {
+   "images": [
+    {
+     "n": 1,
+     "src": "ba087daee278fa22",
+     "w": 1200,
+     "h": 1200,
+     "sizes": [
+      400,
+      800,
+      1200
+     ],
+     "files": [
+      [
+       "img/store/rug-square-booker-reading-area-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-square-booker-reading-area-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-square-booker-reading-area-1-1200.webp",
+       1200
+      ]
+     ],
+     "w400": "img/store/rug-square-booker-reading-area-1-400.webp",
+     "w800": "img/store/rug-square-booker-reading-area-1-800.webp",
+     "w1200": "img/store/rug-square-booker-reading-area-1-1200.webp",
+     "jpg": "img/store/rug-square-booker-reading-area-1-800.jpg",
+     "ratio": 1
+    }
+   ]
+  },
+  "rug-square-bop-movement-zone": {
+   "images": [
+    {
+     "n": 1,
+     "src": "1e57041755d65b42",
+     "w": 1200,
+     "h": 1200,
+     "sizes": [
+      400,
+      800,
+      1200
+     ],
+     "files": [
+      [
+       "img/store/rug-square-bop-movement-zone-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-square-bop-movement-zone-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-square-bop-movement-zone-1-1200.webp",
+       1200
+      ]
+     ],
+     "w400": "img/store/rug-square-bop-movement-zone-1-400.webp",
+     "w800": "img/store/rug-square-bop-movement-zone-1-800.webp",
+     "w1200": "img/store/rug-square-bop-movement-zone-1-1200.webp",
+     "jpg": "img/store/rug-square-bop-movement-zone-1-800.jpg",
+     "ratio": 1
+    }
+   ]
+  },
+  "rug-square-friends-circle": {
+   "images": [
+    {
+     "n": 1,
+     "src": "23217b5f6c283f46",
+     "w": 1200,
+     "h": 1200,
+     "sizes": [
+      400,
+      800,
+      1200
+     ],
+     "files": [
+      [
+       "img/store/rug-square-friends-circle-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-square-friends-circle-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-square-friends-circle-1-1200.webp",
+       1200
+      ]
+     ],
+     "w400": "img/store/rug-square-friends-circle-1-400.webp",
+     "w800": "img/store/rug-square-friends-circle-1-800.webp",
+     "w1200": "img/store/rug-square-friends-circle-1-1200.webp",
+     "jpg": "img/store/rug-square-friends-circle-1-800.jpg",
+     "ratio": 1
+    }
+   ]
+  },
+  "rug-square-lumi-calm-corner": {
+   "images": [
+    {
+     "n": 1,
+     "src": "8d2a3d9913393f4b",
+     "w": 1200,
+     "h": 1200,
+     "sizes": [
+      400,
+      800,
+      1200
+     ],
+     "files": [
+      [
+       "img/store/rug-square-lumi-calm-corner-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-square-lumi-calm-corner-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-square-lumi-calm-corner-1-1200.webp",
+       1200
+      ]
+     ],
+     "w400": "img/store/rug-square-lumi-calm-corner-1-400.webp",
+     "w800": "img/store/rug-square-lumi-calm-corner-1-800.webp",
+     "w1200": "img/store/rug-square-lumi-calm-corner-1-1200.webp",
+     "jpg": "img/store/rug-square-lumi-calm-corner-1-800.jpg",
+     "ratio": 1
+    }
+   ]
+  },
+  "rug-square-zuri-discovery-zone": {
+   "images": [
+    {
+     "n": 1,
+     "src": "26fa73795c18db10",
+     "w": 1200,
+     "h": 1200,
+     "sizes": [
+      400,
+      800,
+      1200
+     ],
+     "files": [
+      [
+       "img/store/rug-square-zuri-discovery-zone-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-square-zuri-discovery-zone-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-square-zuri-discovery-zone-1-1200.webp",
+       1200
+      ]
+     ],
+     "w400": "img/store/rug-square-zuri-discovery-zone-1-400.webp",
+     "w800": "img/store/rug-square-zuri-discovery-zone-1-800.webp",
+     "w1200": "img/store/rug-square-zuri-discovery-zone-1-1200.webp",
+     "jpg": "img/store/rug-square-zuri-discovery-zone-1-800.jpg",
+     "ratio": 1
+    }
+   ]
+  },
+  "rug-zuri-discovery-zone": {
+   "images": [
+    {
+     "n": 1,
+     "src": "1c3630dc9a01e54b",
+     "w": 1024,
+     "h": 1536,
+     "sizes": [
+      400,
+      800,
+      1024
+     ],
+     "files": [
+      [
+       "img/store/rug-zuri-discovery-zone-1-400.webp",
+       400
+      ],
+      [
+       "img/store/rug-zuri-discovery-zone-1-800.webp",
+       800
+      ],
+      [
+       "img/store/rug-zuri-discovery-zone-1-1024.webp",
+       1024
+      ]
+     ],
+     "w400": "img/store/rug-zuri-discovery-zone-1-400.webp",
+     "w800": "img/store/rug-zuri-discovery-zone-1-800.webp",
+     "w1200": "img/store/rug-zuri-discovery-zone-1-1024.webp",
+     "jpg": "img/store/rug-zuri-discovery-zone-1-800.jpg",
+     "ratio": 0.6667
+    }
+   ]
+  },
+  "zuri-backpack": {
+   "images": [
+    {
+     "n": 1,
+     "src": "df80c463b87fc76a",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-backpack-1-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-backpack-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-backpack-1-400.webp",
+     "w800": "img/store/zuri-backpack-1-768.webp",
+     "w1200": "img/store/zuri-backpack-1-768.webp",
+     "jpg": "img/store/zuri-backpack-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "5fe0bf225679dd89",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-backpack-2-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-backpack-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-backpack-2-400.webp",
+     "w800": "img/store/zuri-backpack-2-768.webp",
+     "w1200": "img/store/zuri-backpack-2-768.webp",
+     "jpg": "img/store/zuri-backpack-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "zuri-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "eb1106ec21e667e5",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-hoodie-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-hoodie-1-400.webp",
+     "w800": "img/store/zuri-hoodie-1-768.webp",
+     "w1200": "img/store/zuri-hoodie-1-768.webp",
+     "jpg": "img/store/zuri-hoodie-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "d7fb9b27727884b5",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-hoodie-2-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-hoodie-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-hoodie-2-400.webp",
+     "w800": "img/store/zuri-hoodie-2-768.webp",
+     "w1200": "img/store/zuri-hoodie-2-768.webp",
+     "jpg": "img/store/zuri-hoodie-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  },
+  "zuri-tshirt": {
+   "images": [
+    {
+     "n": 1,
+     "src": "ff00d4fef10593b0",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-tshirt-1-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-tshirt-1-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-tshirt-1-400.webp",
+     "w800": "img/store/zuri-tshirt-1-768.webp",
+     "w1200": "img/store/zuri-tshirt-1-768.webp",
+     "jpg": "img/store/zuri-tshirt-1-768.jpg",
+     "ratio": 0.75
+    },
+    {
+     "n": 2,
+     "src": "f194f04b02debd2e",
+     "w": 768,
+     "h": 1024,
+     "sizes": [
+      400,
+      768
+     ],
+     "files": [
+      [
+       "img/store/zuri-tshirt-2-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-tshirt-2-768.webp",
+       768
+      ]
+     ],
+     "w400": "img/store/zuri-tshirt-2-400.webp",
+     "w800": "img/store/zuri-tshirt-2-768.webp",
+     "w1200": "img/store/zuri-tshirt-2-768.webp",
+     "jpg": "img/store/zuri-tshirt-2-768.jpg",
+     "ratio": 0.75
+    }
+   ]
+  }
+ }
+}
