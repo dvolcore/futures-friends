@@ -86,7 +86,8 @@
       + (es && es.vtt ? `<track kind="subtitles" srclang="es" label="Español (borrador)" src="${esc(es.vtt)}"${sp ? ' default' : ''}>` : ''); };
   const transcript = (src, title) => { const e = entry(src); if (!e || !e.transcript) return '';
     const es = esEntry(src), sp = !!(es && es.transcript && inSpanish()), body = sp ? es.transcript : e.transcript;
-    return `<details class="ffcap-tr"${sp ? ' lang="es" data-i18n-skip' : ''}><summary>${sp ? 'Leer la transcripción (traducción en borrador)' : 'Read the transcript'}${title ? `<span class="ffcap-vh">: ${esc(title)}</span>` : ''}</summary><div>${String(body).split(/\n{2,}/).map(p => `<p>${esc(p)}</p>`).join('')}</div></details>`; };
+    const tt = sp && title && window.FFi18n && window.FFi18n.t ? window.FFi18n.t(title) : title;
+    return `<details class="ffcap-tr"${sp ? ' lang="es" data-i18n-skip' : ''}><summary>${sp ? 'Leer la transcripción (traducción en borrador)' : 'Read the transcript'}${tt ? `<span class="ffcap-vh">: ${esc(tt)}</span>` : ''}</summary><div>${String(body).split(/\n{2,}/).map(p => `<p>${esc(p)}</p>`).join('')}</div></details>`; };
   // The honest note for a placeholder clip with no captions yet. Final videos with no captions say so plainly too.
   const note = src => { const e = entry(src); if (e && (e.vtt || e.transcript)) return '';
     if (e && !e.placeholder) return '';   // a finished silent film (the logo reveal) needs no note: it has no words

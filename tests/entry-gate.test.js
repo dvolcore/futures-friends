@@ -52,7 +52,12 @@ for (const width of [1280, 390]) {
     // (audience split 2026-10-07: the third stop is the quiet "Enter for centers & programs" door)
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-quiet');
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-centers');
+    // bilingual 2026-10-07: the English · Español choice (i18n.js) closes the card
+    await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.textContent), 'English');
+    await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.textContent), 'Español');
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-go');
+    await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.textContent), 'Español');
+    await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.textContent), 'English');
     await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-centers');
     await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-quiet');
     await page.keyboard.press('Shift+Tab');

@@ -141,8 +141,10 @@
   }
   // The entry gate (entry.js): a quiet "English · Español" choice under its buttons.
   function mountGate(root) {
-    const go = root && root.querySelector && root.querySelector('.ffe-quiet');
-    if (!go || go.parentNode.querySelector('.ff-lang-gate')) return;
+    // after the gate's last line (the centers door) so its own Tab order stays: Tap to enter, without sound, centers, then language
+    const card = root && root.querySelector && (root.querySelector('.ffe-card') || (root.matches && root.matches('.ffe-card') ? root : null));
+    const go = card && (card.querySelector('.ffe-who') || card.querySelector('.ffe-quiet'));
+    if (!go || card.querySelector('.ff-lang-gate')) return;
     const row = D.createElement('div'); row.className = 'ff-lang-gate'; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Language / Idioma'); row.setAttribute('data-i18n-skip', '');
     row.innerHTML = '<button type="button" data-ff-lang data-ff-lang-to="en" lang="en" data-ffs-ignore>English</button><span aria-hidden="true">·</span><button type="button" data-ff-lang data-ff-lang-to="es" lang="es" data-ffs-ignore>Español</button>';
     go.insertAdjacentElement('afterend', row);

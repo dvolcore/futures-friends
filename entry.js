@@ -193,10 +193,12 @@
       afterGate = 'centers';
       enter(true);
     });
-    // focus stays in the gate: Tab and Shift+Tab cycle between its two buttons
+    // focus stays in the gate: Tab and Shift+Tab cycle through its buttons (the last ones can be the English · Español choice that
+    // i18n.js adds at the end of the card, so the list is read on each key press)
     gate.addEventListener('keydown', e => {
       if (e.key !== 'Tab') return;
-      const first = go, last = centers;
+      const all = [...gate.querySelectorAll('button')].filter(b => !b.disabled && b.offsetParent !== null);
+      const first = all[0] || go, last = all[all.length - 1] || centers;
       if (e.shiftKey && D.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && D.activeElement === last) { e.preventDefault(); first.focus(); }
     });
