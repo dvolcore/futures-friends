@@ -404,7 +404,7 @@
  "replicas": [
   {
    "id": "booker-replica-backpack",
-   "name": "Booker Custom Backpack",
+   "name": "Booker's Official Backpack",
    "description": "Rust-red canvas backpack with a soft flap, golden-brown trim, brass-tone buckles and open-book embroidery.",
    "design": "Booker",
    "character": "Booker",
@@ -413,7 +413,7 @@
   },
   {
    "id": "zuri-replica-backpack",
-   "name": "Zuri Shell Backpack",
+   "name": "Zuri's Official Shell Backpack",
    "description": "Padded chestnut turtle-shell backpack with quilted scute panels, brown straps and a small compass detail.",
    "design": "Zuri",
    "character": "Zuri",
@@ -422,7 +422,7 @@
   },
   {
    "id": "bop-replica-backpack",
-   "name": "Bop Custom Backpack",
+   "name": "Bop's Official Backpack",
    "description": "Yellow canvas backpack with green pockets and straps, bright piping and a cheerful star detail.",
    "design": "Bop",
    "character": "Bop",
@@ -470,16 +470,10 @@
   {
    "id": "coloring-book-universe",
    "name": "Futures Friends Universe Coloring Pack",
-   "description": "A four-page printable coloring pack featuring the illustrated Futures Friends universe: lead friends, classmates, school team, and families.",
+   "description": "A four-page coloring pack featuring the illustrated Futures Friends universe: lead friends, classmates, school team, and families.",
    "character": "Futures Friends universe",
    "color": "full cast",
-   "front_copy": "Every friend belongs",
-   "additional_images": [
-    "coloring-stickers/images/universe-coloring-classmates.png",
-    "coloring-stickers/images/universe-coloring-school.png",
-    "coloring-stickers/images/universe-coloring-families.png"
-   ],
-   "downloadable_file": "coloring-stickers/Futures_Friends_Universe_Coloring_Pack.pdf"
+   "front_copy": "Every friend belongs"
   }
  ],
  "stickers": [
@@ -534,13 +528,7 @@
    "description": "A four-sheet sticker pack covering the illustrated Futures Friends universe: lead friends, classmates, school team, and families.",
    "character": "Futures Friends universe",
    "color": "full cast",
-   "front_copy": "Every friend belongs",
-   "additional_images": [
-    "coloring-stickers/images/universe-stickers-classmates.png",
-    "coloring-stickers/images/universe-stickers-school.png",
-    "coloring-stickers/images/universe-stickers-families.png"
-   ],
-   "downloadable_file": "coloring-stickers/Futures_Friends_Universe_Sticker_Pack.pdf"
+   "front_copy": "Every friend belongs"
   }
  ],
  "bottles": [

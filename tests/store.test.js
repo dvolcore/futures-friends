@@ -320,7 +320,7 @@ test('every product renders a real page: price text, honest status, no leaks, on
 
 test('the kids\' shop stays small and uses the same cards, product pages and cart', () => {
   const { c, W } = world(), C = W.FFCatalog, html = c.render('kids-shop');
-  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Stickers & coloring', 'Bottles & plates', 'Carpets', 'Posters', 'Free printables and a small carpet']);
+  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Plush dolls', 'Backpacks', 'Bottles & plates', 'Stickers & coloring', 'Carpets', 'Posters', 'A small carpet and free activity pages']);
   assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 8 + 4 + 11 + 5 + 10 + 10 + 2);
   for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone', 'poster-bop-movement-zone-v2', 'poster-friends-circle-v1', 'poster-lumi-calm-corner-v2']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
   assert.match(html, /data-go="product\/plush-lumi"/); assert.match(html, /Notify me/);
@@ -558,4 +558,28 @@ test('the fun layer: files are linked, motion respects reduced motion, product p
   const rules = css.replace(/\/\*[\s\S]*?\*\//g, '').split('}').filter(r => !/sp-cover|branded-rooms|sp-hero|sp-edit|sp-headfig|sp-vid/.test(r));
   assert.ok(!rules.some(r => /\.sp-media[^{]*\{[^}]*object-fit:\s*cover/.test(r)), 'cards never crop');
   assert.ok(!rules.some(r => /\.sp-gal-zoom[^{]*\{[^}]*object-fit:\s*cover/.test(r)), 'the product gallery never crops (room concept pictures excepted)');
+});
+
+// Owner, 2026-10-08: the character backpacks are "Official", never "Custom"; the Kids' Shop order is fixed; family products stay on the Families side.
+test('no product name, description or copy says "custom"; the official backpacks are named, badged and ordered', () => {
+  const { W } = world(), C = W.FFCatalog;
+  for (const p of C.PRODUCTS) assert.doesNotMatch([p.name, p.short, p.description, p.tagline || ''].join(' '), /\bcustom\b/i, p.id);
+  assert.doesNotMatch(read('store-merch-data.js'), /\bcustom\b/i);
+  assert.match(read('tools/build-store-merch.mjs'), /NOCUSTOM/, 'the importer rewrites "Custom"');
+  const off = C.PRODUCTS.filter(p => p.official);
+  assert.deepEqual(plain(off.map(p => p.name)), ["Booker's Official Backpack", "Zuri's Official Shell Backpack", "Bop's Official Backpack"]);
+  for (const p of off) assert.ok(p.badges.some(b => b === 'Official \u00b7 Worn by ' + p.worn), p.id);
+  const packs = C.kidsSections().find(s => s[3] === 'backpacks')[2].map(p => p.id);
+  assert.deepEqual(plain(packs.slice(0, 3)), ['zuri-replica-backpack', 'booker-replica-backpack', 'bop-replica-backpack']);
+  assert.deepEqual(plain(C.query('backpacks').slice(0, 3).map(p => p.id)), plain(packs.slice(0, 3)));
+  const secs = C.kidsSections().map(s => s[3]);
+  assert.deepEqual(plain(secs.slice(0, 6)), ['tshirts', 'hoodies', 'plush', 'backpacks', 'drinkware', 'stickers']);
+});
+test('every family product is on the Families side: Home / Kids\' Shop / section, whichever door opened it', () => {
+  const { c, W } = world(), C = W.FFCatalog, U = W.FFShopUI;
+  for (const p of C.PRODUCTS.filter(p => C.isFamily(p))) {
+    assert.equal(U.audienceOf(p.id), 'families', p.id);
+    const t = U.trail(p.id, 'centers'); assert.equal(t[1][0], 'kids-shop', p.id); assert.ok(!t.some(x => x[0] === 'centers' || x[0] === 'store'), p.id);
+  }
+  assert.ok(C.isFamily(C.product('booker-replica-backpack')) && C.isFamily(C.product('plush-lumi')) && !C.isFamily(C.product('kit-home')));
 });

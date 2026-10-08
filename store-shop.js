@@ -27,14 +27,17 @@ const crumbs = () => '';
 const SECTION = { tshirt: ['tshirts', 'T-shirts'], hoodie: ['hoodies', 'Hoodies'], backpack: ['backpacks', 'Backpacks'] };
 function trail(id, audience) {
   const p = C.product(id); if (!p) return [['home', 'Home']];
-  const fam = audience === 'families' || (p.audiences.length === 1 && p.audiences[0] === 'family') || p.collection === 'kids';
+  const fam = C.isFamily(p) || (audience === 'families' && p.kind !== 'kit');
   const sec = p.apparelType && SECTION[p.apparelType] ? ['shop/' + SECTION[p.apparelType][0], SECTION[p.apparelType][1]] : ['shop/' + p.collection, (C.collection(p.collection) || {}).name || 'Shop'];
   if (fam && p.collection !== 'kids') return [['home', 'Home'], ['kids-shop', 'Kids’ Shop'], sec];
   if (fam) return [['home', 'Home'], ['kids-shop', 'Kids’ Shop']];
   return [['home', 'Home'], ['centers', 'For centers & programs'], ['store', 'Futures Store'], sec];
 }
+/* Which side of the site a product page belongs to: 'families' for every family product (apparel, backpacks, plush, stickers, drinkware, Kids' posters), '' for the rest (the visitor keeps their side). */
+const audienceOf = id => { const p = C.product(id); return p && C.isFamily(p) ? 'families' : ''; };
 const badgeHtml = (t, kind) => `<span class="sp-badge${kind ? ' sp-badge-' + kind : ''}">${E(t)}</span>`;
-const chipsFor = (p, max) => p.badges.filter(b => !/^Concept/.test(b)).slice(0, max || 3).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('');
+const badgeKind = b => (/^Official/.test(b) ? 'official' : /safety|Sizes/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '');
+const chipsFor = (p, max) => p.badges.filter(b => !/^Concept/.test(b)).slice(0, max || 3).map(b => badgeHtml(b, badgeKind(b))).join('');
 function priceBlock(p, opts) {
   const big = opts && opts.big;
   let main, sub = '';
@@ -75,9 +78,9 @@ const termsLine = (name) => (W.FFRelease && W.FFRelease.terms ? W.FFRelease.term
 // ------------------------------------------------------------------ the sticky collection rail (picture chips) and the search pill
 const RAIL = {
   kits: ['Kits', null], carpets: ['Carpets', 'rug-friends-circle'], posters: ['Posters', 'poster-friends-circle-v1'], plush: ['Plush', 'plush-lumi'],
-  apparel: ['Apparel', 'all-friends-hoodie'], backpacks: ['Backpacks', 'zuri-replica-backpack'], stickers: ['Stickers', 'stickers-all-friends'], drinkware: ['Drinkware', 'bottle-zuri']
+  tshirts: ['T-shirts', 'booker-tshirt'], hoodies: ['Hoodies', 'booker-hoodie'], apparel: ['Apparel', 'all-friends-hoodie'], backpacks: ['Backpacks', 'booker-replica-backpack'], stickers: ['Stickers', 'stickers-all-friends'], drinkware: ['Drinkware', 'bottle-zuri']
 };
-const RAIL_ORDER = { families: ['apparel', 'backpacks', 'plush', 'stickers', 'drinkware', 'carpets', 'posters'], centers: ['kits', 'carpets', 'posters', 'plush', 'apparel', 'backpacks', 'stickers', 'drinkware'] };
+const RAIL_ORDER = { families: ['tshirts', 'hoodies', 'plush', 'backpacks', 'drinkware', 'stickers', 'carpets', 'posters'], centers: ['kits', 'carpets', 'posters', 'plush', 'apparel', 'backpacks', 'stickers', 'drinkware'] };
 function railChip(id, active) {
   const [label, pid] = RAIL[id];
   let g = pid ? C.gallery(C.product(pid), rooms())[0] : C.roomShot({ id: 'rail', name: 'Kits', kind: 'kit', room: 'turtle-rug' }, rooms());
@@ -93,20 +96,40 @@ const lnkAll = active => `<li><button type="button" class="sp-chip sp-chip-all${
 // ------------------------------------------------------------------ hero: full-bleed, a muted looping product video, a parallax collage
 const VIDEO = { centers: ['video/store/centers-preview.mp4', 'video/store/centers-preview-poster.webp', 'Product motion preview: the Friends Circle carpet and zone posters in a classroom'],
   families: ['video/store/families-preview.mp4', 'video/store/families-preview-poster.webp', 'Product motion preview: a reading corner with the friends’ carpet'] };
-function heroHtml(side) {
-  const fam = side === 'families', v = VIDEO[side];
-  const tiles = fam ? ['plush-bop', 'zuri-replica-backpack', 'lumi-hoodie'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1'];
-  const tile = (id, d, cls) => { const p = C.product(id), g = C.gallery(p, rooms())[0]; return g ? `<span class="sp-float ${cls}" style="--d:${d}">${imgTag(g, { sizes: '180px', alt: '', eager: true })}</span>` : ''; };
-  return `<section class="sp-hero2 sp-hero2-${side}" data-sp-hero aria-labelledby="spH1"><div class="sp-hero2-bg" aria-hidden="true"></div>
-    <div class="wrap sp-hero2-grid"><div class="sp-hero2-copy">
-      <h1 id="spH1">${fam ? 'Booker’s on a backpack. Lumi’s on a hoodie.' : 'Shop the room.'}</h1>
-      <p class="sp-hero2-lede">${fam ? 'Shirts, hoodies, backpacks, plush friends, carpets and posters. Add what you like and send the request. We write back with prices and sizes, and nothing is charged until you say yes.'
-        : 'Learning Zones kits, zone carpets, posters, plush and the apparel for the people in the room. Made to order for centers, home daycares and churches.'}</p>
-      <div class="sp-hero2-acts">${fam ? lnk('shop/apparel', 'Shop apparel ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('shop/plush', 'Meet the plush', 'btn sp-btn-lg sp-btn-glass')
-        : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('room-planner', 'Plan your room', 'btn sp-btn-lg sp-btn-glass')}</div>
-      <ul class="sp-hero2-facts"><li>Made to order</li><li>Real friends, real fun</li><li>Orders go in as requests</li></ul></div>
-    <div class="sp-hero2-stage" aria-hidden="false">
-      <div class="sf-coll">${(fam ? ['plush-bop', 'zuri-replica-backpack', 'plush-lumi', 'all-friends-hoodie', 'bottle-booker', 'stickers-all-friends'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1', 'plush-lumi', 'rug-friends-circle', 'plush-booker']).map((id, n) => { const q = C.product(id), g = q && C.gallery(q, rooms())[0]; return g ? `<a class="sf-coll-t sf-coll-${n + 1}" href="#product/${id}" data-go="product/${id}" tabindex="-1" aria-hidden="true">${imgTag(g, { sizes: '(max-width:900px) 40vw, 220px', alt: '', eager: true })}</a>` : ''; }).join('')}</div></div></div></section>`;
+/* The shop hero (owner, 2026-10-08: "this doesn't say shop now for a store to me ... way more slick, way more polished, and I don't think pink is a shop color").
+   Deep navy with the brand's gold CTA, product-first: big product pictures on studio tiles, a short headline, one line, "Shop now" and a quiet second link, then a slim honest trust strip.
+   Research: scratchpad/store-hero-research.md. Motion is a soft float and a little parallax on the pictures, transform only, and none of it runs under reduced motion. */
+const HERO = {
+  families: { eyebrow: 'The Kids’ Shop', h1: 'Gear up like <em>Booker.</em>', lede: 'Booker’s own backpack, hoodies and tees for every friend, and plush on the way.',
+    tiles: [['plush-booker', 't1', 'Booker · opening soon'], ['plush-lumi', 't2', 'Lumi · opening soon'], ['plush-zuri', 't3', 'Zuri · opening soon'], ['plush-bop', 't4', 'Bop · opening soon'], ['booker-replica-backpack', 't5', 'Official · Worn by Booker']],
+    shop: ['scroll', 'spResults'], second: ['scroll', 'spFriends', 'Shop by friend'],
+    trust: [['clock', 'Made to order. Nothing is charged until you say yes.'], ['shield', 'Prices and sizes are confirmed in writing first.'], ['phone', 'A real person writes back: ' + PHONE]] },
+  centers: { eyebrow: 'The Futures Store', h1: 'Shop the <em>room.</em>', lede: 'Learning Zones kits, friend carpets, posters and plush, made to order for centers, home daycares and churches.',
+    tiles: [['rug-friends-circle', 't1', 'The Friends Circle carpet'], ['poster-booker-reading-area-v1', 't2', ''], ['collection-carpets', 't3', 'Carpets for every zone']],
+    shop: ['go', 'shop/kits'], second: ['go', 'room-planner', 'Plan your room'],
+    trust: [['clock', 'Made to order. Nothing is charged until you say yes.'], ['shield', 'Purchase orders and tax-exempt certificates welcome.'], ['phone', 'A real person writes back: ' + PHONE]] }
+};
+function heroTile(id, cls, note) {
+  let p = C.product(id), g, href, name;
+  if (p) { g = C.gallery(p, rooms())[0]; href = 'product/' + id; name = p.name; }
+  else { g = C.heroImage(id.replace('collection-', '')); href = 'shop/' + id.replace('collection-', ''); name = (C.collection(id.replace('collection-', '')) || {}).name || ''; }
+  if (!g) return '';
+  const d = { t1: [-16, 34, '-2deg'], t2: [-30, 18, '-6deg'], t3: [22, 26, '4deg'], t4: [28, 50, '-3deg'], t5: [34, 58, '5deg'] }[cls] || [0, 0, '0deg'];
+  return `<a class="h3-tile h3-${cls}" href="#${href}" data-go="${href}" aria-label="${E(name)}${note ? ', ' + E(note) : ''}" style="--d:${d[0]};--s:${d[1]};--r:${d[2]}"><span class="h3-float"><span class="h3-pic">${imgTag(g, { sizes: cls === 't1' ? '(max-width:760px) 46vw, 340px' : '(max-width:760px) 30vw, 220px', alt: '', eager: true })}</span></span>
+    <span class="h3-cap"><b>${E(name)}</b>${note ? `<small>${E(note)}</small>` : ''}</span></a>`;
+}
+function heroHtml(side, opt) {
+  opt = opt || {};
+  const h = HERO[side === 'families' ? 'families' : 'centers'], fam = side === 'families';
+  const act = (spec, label, cls) => spec[0] === 'scroll' ? `<a class="${cls}" href="#${spec[1]}" data-sp-scroll="${spec[1]}">${label}</a>` : lnk(spec[1], label, cls);
+  return `<section class="h3 h3-${fam ? 'families' : 'centers'}${opt.compact ? ' is-compact' : ''}" data-h3 aria-labelledby="spH1"><div class="h3-bg" aria-hidden="true"></div>
+    <div class="wrap h3-grid"><div class="h3-copy">
+      <p class="h3-eyebrow"><span class="h3-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>${E(h.eyebrow)}</p>
+      <h1 id="spH1">${opt.title ? E(opt.title) : h.h1}</h1>
+      <p class="h3-lede">${E(opt.lede || h.lede)}</p>
+      <div class="h3-acts">${act(h.shop, 'Shop now ' + ico('arrow'), 'btn gold sp-btn-lg h3-shop')}${act(h.second, E(h.second[2]), 'btn sp-btn-lg sp-btn-glass h3-second')}</div></div>
+    <div class="h3-stage">${h.tiles.map(t => heroTile(t[0], t[1], t[2])).join('')}</div></div></section>
+  <section class="h3-trust" aria-label="Our ordering promise"><div class="wrap"><ul>${h.trust.map(t => `<li>${ico(t[0])}<span>${E(t[1])}</span></li>`).join('')}</ul></div></section>`;
 }
 function trustStrip() {
   const ic = { ships: 'truck', time: 'clock', licence: 'shield', support: 'phone' };
@@ -115,7 +138,7 @@ function trustStrip() {
 
 // ------------------------------------------------------------------ shop by friend: the four single-shot dolls
 function friends() {
-  return `<section class="sp-friends" aria-labelledby="spFriendsH"><div class="wrap"><div class="sp-sec-h"><h2 id="spFriendsH">Shop by friend</h2><p>Pick a friend and see everything they are on.</p></div>
+  return `<section class="sp-friends" id="spFriends" tabindex="-1" aria-labelledby="spFriendsH"><div class="wrap"><div class="sp-sec-h"><h2 id="spFriendsH">Shop by friend</h2><p>Pick a friend and see everything they are on.</p></div>
     <ul class="sp-friend-grid">${['booker', 'lumi', 'zuri', 'bop'].map(k => { const g = C.gallery(C.product('plush-' + k), rooms())[0], n = C.query('friend-' + k).length;
       return `<li data-rv><a class="sp-friend" href="#shop/friend-${k}" data-go="shop/friend-${k}" style="--tone:var(--${k});--tone-s:var(--${k}-s)"><span class="sp-friend-img">${g ? imgTag(g, { sizes: '(max-width:700px) 46vw, 260px', alt: '' }) : ''}</span>
         <span class="sp-friend-t"><b>${NAME[k]}</b><span>${n} things</span></span><span class="sp-friend-go">${ico('arrow')}</span></a></li>`; }).join('')}</ul>${sampleCap}</div></section>`;
@@ -159,7 +182,7 @@ V.store = () => wrapPage('centers', `${heroHtml('centers')}${rail('')}
   ${row('Posters', 'Each friend and the Friends Circle, in two designs. $16 a poster.', 'shop/posters', C.query('posters').filter(p => /-v1$/.test(p.id)), 'spRowPosters')}
   <div class="wrap">${caption}${sampleCap}${termsLine('Futures Store items')}</div>
   ${trustStrip()}${bridge()}${know()}
-  <section class="sp-fam"><div class="wrap"><img src="img/plush/characters/lumi-waving-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><p><b>Shopping for home?</b> The Kids’ Shop has shirts, hoodies and backpacks, plush friends, carpets, posters and free printables.</p>${lnk('kids-shop', 'Visit the Kids’ Shop ' + ico('arrow'), 'btn soft')}</div></section>`);
+  <section class="sp-fam"><div class="wrap"><img src="img/plush/characters/lumi-waving-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><p><b>Shopping for home?</b> The Kids’ Shop has shirts, hoodies and backpacks, plush friends, carpets, posters and free activity pages.</p>${lnk('kids-shop', 'Visit the Kids’ Shop ' + ico('arrow'), 'btn soft')}</div></section>`);
 
 // ------------------------------------------------------------------ collection pages: sticky rail, then the filter bar, then the grid
 const FS = { character: '', category: '', price: '', age: '', sort: 'featured' };
@@ -188,11 +211,12 @@ function collectionPage(colId) {
   if (lastCol !== colId) { FS.character = FS.category = FS.price = FS.age = ''; FS.sort = 'featured'; lastCol = colId; }
   const c = colId === 'all' ? { id: 'all', name: 'All products', blurb: 'Everything in the Futures Store, from kits to books.', tone: 'booker' } : C.anyCollection(colId);
   const hero = colId === 'all' ? null : C.heroImage(c.of || colId), side = aud() === 'families' ? 'families' : 'centers', t = TONES.includes(c.tone) ? c.tone : 'booker';
+  const head = colId === 'all' ? heroHtml(side, { compact: true, title: c.name, lede: c.blurb }) : `<header class="sp-pagehead sp-collhead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div><h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p></div>
+     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name })}</figure>` : ''}</div></header>`;
   const railOn = RAIL[colId] ? colId : (c.of && RAIL[c.of] ? (RAIL[c.id] ? c.id : c.of) : '');
   const sub = C.virtual(colId) && !c.friend ? null : null;
   return `<div class="sp sp-pro sp-coll sp-side-${side}" data-col="${E(c.id)}" style="--tone:var(--${t});--tone-s:var(--${t}-s)">
-   <header class="sp-pagehead sp-collhead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div><h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${sub || ''}</div>
-     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name })}</figure>` : ''}</div></header>
+   ${head}
    ${rail(railOn)}${filterBar(c)}
    <div class="wrap sp-shell"><div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div>${termsLine(c.name)}</div>
    ${['kits', 'carpets', 'addons'].includes(c.id) ? `<section class="sp-help sp-help-kit"><div class="wrap"><p><b>Not sure what goes in a room?</b> See how the five zones fit together, or lay out your own room to scale.</p><div class="sp-help-acts">${lnk('room-kit', 'See the Learning Zones Kit', 'btn soft')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div></div></section>` : ''}
@@ -203,7 +227,7 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' shop
 V['kids-shop'] = () => {
-  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['stickers', 'Stickers & coloring'], ['drinkware', 'Bottles & plates'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free printables']];
+  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['plush', 'Plush dolls'], ['backpacks', 'Backpacks'], ['drinkware', 'Bottles & plates'], ['stickers', 'Stickers & coloring'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free activity pages']];
   return wrapPage('families', `${heroHtml('families')}${rail('')}${friends()}
    <div class="wrap sp-shell sp-kidsbody" id="spResults"><ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-anchor="kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul>
    ${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
@@ -221,11 +245,11 @@ function qvBody(p) {
   const g = C.gallery(p, rooms()), x = g[QV.i] || g[0], t = tone(p);
   const buy = C.canOrder(p) ? `<div class="sp-buyrow"><div class="sp-step sp-step-lg" role="group" aria-label="Quantity"><button type="button" data-sp-qvq="-1" aria-label="Fewer"${QV.qty <= 1 ? ' disabled' : ''}>${ico('minus')}</button><output aria-live="polite">${QV.qty}</output><button type="button" data-sp-qvq="1" aria-label="More">${ico('plus')}</button></div>
       <button type="button" class="btn gold sp-addbtn" data-sp-qvadd>${p.priceState === 'fixed' ? 'Add to bag' : p.priceState === 'soon' ? 'Add to bag as a request' : 'Add to bag for a quote'}</button></div>`
-    : `<div class="sp-buyrow">${lnk('product/' + p.id, (p.cta === 'link' ? 'Open the printables' : 'Tell me when it opens') + ' ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">${p.kind === 'plush' ? 'Plush cannot be ordered until its safety tests are done.' : 'It cannot be ordered yet.'}</p>`;
+    : `<div class="sp-buyrow">${lnk('product/' + p.id, (p.cta === 'link' ? 'Open the activity pages' : 'Tell me when it opens') + ' ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">${p.kind === 'plush' ? 'Plush cannot be ordered until its safety tests are done.' : 'It cannot be ordered yet.'}</p>`;
   return `<div class="sp-qv-grid" style="--tone:var(--${t});--tone-s:var(--${tint(t)})"><div class="sp-qv-media"><div class="sp-qv-main${x && x.kind === 'sample' ? ' is-sample' : ''}">${x ? imgTag(x, { sizes: '(max-width:760px) 90vw, 460px', alt: x.alt, eager: true }) : ''}</div>
       ${g.length > 1 ? `<ul class="sp-gal-thumbs" aria-label="Choose a picture">${g.map((y, i) => `<li><button type="button" data-sp-qvth="${i}" aria-label="Show picture ${i + 1}"${i === QV.i ? ' aria-current="true"' : ''}>${imgTag(y, { sizes: '64px', alt: '' })}</button></li>`).join('')}</ul>` : ''}${W.FFFun ? W.FFFun.spin(p, 'qv') : ''}</div>
     <div class="sp-qv-info"><h2 id="spQvH">${E(p.name)}</h2><div data-sp-qvprice>${priceBlock(p, { big: true, opts: QV.opts })}</div><p class="sp-info-lede">${E(p.short)}</p>
-      <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : '')).join('')}</div>
+      <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => badgeHtml(b, badgeKind(b))).join('')}</div>
       <div class="sp-buy">${qvOpts(p)}${buy}</div>${p.kind === 'plush' || p.id.indexOf('rug') === 0 ? `<p class="sp-buyhint">${p.kind === 'plush' ? 'Opening soon: leave your email and we will tell you the day it opens.' : 'Made to order. We confirm size and ship date by email.'}</p>` : ''}
       <p class="sp-qv-more">${lnk('product/' + p.id, 'See full details ' + ico('arrow'), 'sp-link')}</p></div></div>`;
 }
@@ -268,6 +292,8 @@ document.addEventListener('click', e => {
     if (ad) { e.preventDefault(); const p = C.product(QV.pid), from = qvDlg._from && qvDlg._from.closest('.sp-card') || qvDlg._from; qvDlg._from = null; const o = { pid: QV.pid, opts: Object.assign({}, QV.opts), qty: QV.qty }; qvDlg.close(); K.addAnimated(o.pid, o.opts, o.qty, from && from.getClientRects().length ? from : document.getElementById('spCartBtn')); return; }
     if (t.closest('a[data-go]')) { qvDlg._from = null; qvDlg.close(); return; }
   }
+  const sc = t.closest('a[data-sp-scroll]');
+  if (sc) { e.preventDefault(); const el = document.getElementById(sc.dataset.spScroll); if (el) { el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); } return; }
   const jp = t.closest('a[data-sp-jump^="kids-"]');
   if (jp) { e.preventDefault(); const el = document.getElementById(jp.dataset.spJump); if (el) { el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); } return; }
   const add = t.closest('[data-sp-add]');
@@ -291,14 +317,16 @@ function markReveal(root) {
   setTimeout(() => els.forEach(el => el.classList.add('is-in')), 5000);   // safety: nothing stays hidden
   els.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.96) el.classList.add('is-in'); else { el.classList.add('is-pre'); io.observe(el); } });
 }
-// hero: the video plays only while visible and only with motion allowed; the collage drifts with the pointer
-let vio = null, rafId = 0;
+// hero: a little parallax on the product tiles (pointer and scroll), the soft float is CSS. Nothing runs under reduced motion or with the site's decorative motion switched off.
+let hscroll = null, rafId = 0, srafId = 0;
+const motionOk = () => !reduced() && !(W.FFMotion && W.FFMotion.allowed && !W.FFMotion.allowed());
 function heroInit() {
-  const hero = document.querySelector('[data-sp-hero]'); if (vio) { vio.disconnect(); vio = null; } if (!hero) return;
-  const v = hero.querySelector('video'), btn = hero.querySelector('[data-sp-vidbtn]');
-  if (reduced()) { if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.setAttribute('aria-label', 'Play the preview video'); btn.innerHTML = ico('play'); } return; }
-  if (v && typeof IntersectionObserver === 'function') { vio = new IntersectionObserver(en => { const on = en[0].isIntersecting, userPaused = btn && btn.getAttribute('aria-pressed') === 'true'; if (on && !userPaused) { v.play().catch(() => {}); } else v.pause(); }, { threshold: 0.25 }); vio.observe(v); }
+  if (hscroll) { removeEventListener('scroll', hscroll); hscroll = null; }
+  const hero = document.querySelector('[data-h3]'); if (!hero) return;
+  hero.classList.toggle('is-live', motionOk()); if (!motionOk()) return;
   if (matchMedia('(hover:hover) and (pointer:fine)').matches) hero.onpointermove = e => { if (rafId) return; rafId = requestAnimationFrame(() => { rafId = 0; const r = hero.getBoundingClientRect(); hero.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); hero.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); }); };
+  hscroll = () => { if (srafId) return; srafId = requestAnimationFrame(() => { srafId = 0; const r = hero.getBoundingClientRect(); hero.style.setProperty('--sy', Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight + r.height))).toFixed(3)); }); };
+  addEventListener('scroll', hscroll, { passive: true }); hscroll();
 }
 // the sticky rail keeps the active chip in view
 function railInit() { const on = document.querySelector('.sp-rail .is-on'); if (on && on.scrollIntoView) { const list = on.closest('.sp-rail-list'); if (list) list.scrollLeft = Math.max(0, on.offsetLeft - 24); } }
@@ -321,5 +349,5 @@ function loadManifest() {
   document.querySelectorAll('.sp-img').forEach(i => { if (i.complete) loaded(i); });
 });
 
-W.FFShopUI = { card, crumbs, trail, badgeHtml, chipsFor, priceBlock, caption, lnk, tone, tint, rooms, aud, PHONE, repaintResults, openQV, markReveal };
+W.FFShopUI = { card, crumbs, trail, audienceOf, badgeKind, badgeHtml, chipsFor, priceBlock, caption, lnk, tone, tint, rooms, aud, PHONE, repaintResults, openQV, markReveal };
 })();

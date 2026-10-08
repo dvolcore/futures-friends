@@ -231,7 +231,8 @@
   });
 
   // A families or centers page switches the whole site chrome to its side (remembered, not announced: the page itself says where you are).
-  function syncRouteAudience() { const a = audOfRoute(route()); if (a && a !== audience) setAudience(a, { source: 'route', announce: false }); }
+  // A family product page (apparel, backpacks, plush, stickers, drinkware, Kids' posters) is on the Families side whichever door opened it (owner, 2026-10-08).
+  function syncRouteAudience() { let a = audOfRoute(route()); if (route() === 'product' && curArg() != null && W.FFShopUI && W.FFShopUI.audienceOf) a = W.FFShopUI.audienceOf(curArg()) || a; if (a && a !== audience) setAudience(a, { source: 'route', announce: false }); }
   // Sign in is a link beside the two audience buttons, pressed on the portal pages.
   function syncSignin() { const on = (PAGES[route()] || [])[1] === 'portal' || route() === 'signin-family'; doc.querySelectorAll('.ffw-signin').forEach(l => { if (on) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current'); }); }
 

@@ -42,7 +42,7 @@
     { id: 'addons', name: 'Room add-ons', blurb: 'Zone Boundaries, Friend Fences, shelf bands and pack-away gear that mark each friend\u2019s corner.', side: 'centers', tone: 'booker', room: 'reading-corner' },
     { id: 'materials', name: 'Classroom materials', blurb: 'Zone signs, puppets, cue cards and labels. Replace one, or stock a new room.', side: 'centers', tone: 'zuri', room: 'blue-table-room' },
     { id: 'books', name: 'Books', blurb: 'The five Futures Friends storybooks. Read them online now; print editions are coming.', side: 'both', tone: 'lumi', room: 'alphabet-rug' },
-    { id: 'kids', name: 'Kids\u2019 Shop', blurb: 'A small shop for families: apparel, backpacks, plush friends, stickers and coloring, bottles and plates, a play carpet and free printables.', side: 'families', tone: 'lumi', room: null }
+    { id: 'kids', name: 'Kids\u2019 Shop', blurb: 'A small shop for families: apparel, backpacks, plush friends, stickers and coloring, bottles and plates, a play carpet and free activity pages.', side: 'families', tone: 'lumi', room: null }
   ];
 
 
@@ -50,7 +50,7 @@
   const FAQ = {
     freight: ['How does it ship?', 'Rugs, mats and fence panels travel by freight. We quote the carrier cost for your ZIP code on your invoice, so you see it before you pay. Tell us if you have no loading dock.'],
     lead: ['How long will it take?', 'Made-to-order items have a lead time that depends on the maker’s schedule. We state it in your written quote and never promise a ship date before it is confirmed.'],
-    returns: ['Can I return it?', 'Our returns policy is a draft that the owner and counsel are still confirming. Made-to-order and custom items will not be returnable unless damaged or wrong. We will send the final policy with your invoice.'],
+    returns: ['Can I return it?', 'Our returns policy is a draft that the owner and counsel are still confirming. Made-to-order items will not be returnable unless damaged or wrong. We will send the final policy with your invoice.'],
     tax: ['Is my center or church tax-exempt?', 'Send your exemption certificate with the order and we apply it to the invoice. We collect sales tax in Missouri and Kansas on taxable orders.'],
     po: ['Can we pay by purchase order?', 'Yes. Centers and programs can order on a PO and pay by invoice. Add the PO number at checkout.'],
     cert: ['Is it tested for children?', 'Children’s products carry a Children’s Product Certificate from a CPSC-accepted lab before they ship. Ask for the certificate with your order.'],
@@ -222,18 +222,26 @@
       pairs: ['plush-' + (FOUR.includes(key) ? key : 'booker'), 'poster-' + (FOUR.includes(key) ? ({ booker: 'booker-reading-area', lumi: 'lumi-calm-corner', zuri: 'zuri-discovery-zone', bop: 'bop-movement-zone' })[key] : 'friends-circle') + '-v1'] }));
   });
 
-  // Replica backpacks (owner package 2026-10-07): Booker, Zuri (the turtle shell, also drawn by the owner as a second picture) and Bop. Concept samples, no price, request lines.
+  // Official character backpacks (owner, 2026-10-08): "This is Booker's official backpack, the one that he wears." The three replica backpacks are the ones each friend wears
+  // in the stories, so they are premium hero products: an "Official" badge, the friend wearing it (picture 2), a story section and a plush pairing. No price, size or claim is invented.
   const ONE = { booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop' };
   const PAIR_POSTER = { booker: 'booker-reading-area', lumi: 'lumi-calm-corner', zuri: 'zuri-discovery-zone', bop: 'bop-movement-zone' };
   const requestFaq = [['Can I order it?', 'Not yet, but you can ask. Add it to your bag and send the request. We write back with the price, sizes and timing. A request is interest, not an order, and nothing is charged.'], ['Will mine look exactly like the picture?', 'Made-to-order items can differ a little in color and finish. We confirm the details by email before we make yours.'], FAQ.returns];
+  const OWN_RANK = { zuri: 1, booker: 2, bop: 3 };
+  const OWN_STORY = {
+    booker: 'Booker wears this rust-red canvas backpack, with its open-book badge, in every story. Same soft flap, same brass-tone buckles. Made to order, for kids who want one just like his.',
+    zuri: 'Zuri carries her turtle-shell backpack, with its little compass badge, on every adventure. Padded, quilted and shell-shaped. Made to order, for kids who want one just like hers.',
+    bop: 'Bop wears this yellow canvas backpack with green pockets and a cheerful star in every story. Made to order, for kids who want one just like his.'
+  };
   MERCH.replicas.forEach(r => {
-    const key = r.character.toLowerCase(), shell = key === 'zuri';
-    add(Object.assign({}, sampleBase, { id: r.id, name: r.name, collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: key, zones: [key], apparelType: 'backpack', who: key, kidsShop: false, heroPick: shell, options: [],
-      short: r.description + ' Sizes coming soon.', description: r.description + '',
-      badges: ['Sizes coming soon'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Add it to your bag, say which size you would want in the notes at checkout, and we will write back.',
+    const key = r.character.toLowerCase(), shell = key === 'zuri', who = ONE[key];
+    add(Object.assign({}, sampleBase, { id: r.id, name: r.name, collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: key, zones: [key], apparelType: 'backpack', who: key, kidsShop: false, official: true, heroPick: true, ownRank: OWN_RANK[key] || 9, options: [],
+      tagline: 'The backpack ' + who + ' wears in every story', worn: who, story: OWN_STORY[key],
+      short: 'The backpack ' + who + ' wears in every story.', description: 'The backpack ' + who + ' wears in every story. ' + r.description,
+      badges: ['Official \u00b7 Worn by ' + who, 'Sizes coming soon'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Add it to your bag, say which size you would want in the notes at checkout, and we will write back.',
       box: ['One ' + r.name.toLowerCase()], dims: ['Sizes, fit and measurements are confirmed before yours is made.'], materials: [shell ? 'Felt-look hexagon plates, embroidered compass badge, padded straps.' : 'Canvas body, trim, buckles and the embroidered badge follow the character art; any detail the reference sheet does not show is confirmed with the maker.', 'Fabric and construction are confirmed with the maker before yours is made.'], care: ['Care instructions follow the final fabric.'],
       safety: [APP_SAFETY.backpack], lead: 'Made to order. We confirm sizing and ship date by email.', faq: requestFaq,
-      pairs: [key + '-backpack', 'plush-' + key, key + '-tshirt'] }));
+      pairs: ['plush-' + key, key + '-hoodie', key + '-backpack'] }));
   });
 
   // Stickers and coloring (owner package 2026-10-07): sheets and books for each friend, and universe packs with all 22 friends. Children's paper goods: CPSIA.
@@ -253,7 +261,7 @@
     add(Object.assign({}, paperBase, { id: x.id, name: x.name, collection: 'stickers', kind: 'coloring', tone: key, zones: allf ? ['circle'] : [zoneOf(x)], who: allf ? 'all-friends' : key, kidsShop: true, options: [],
       short: uni ? 'A four-page coloring pack with all 22 friends: leads, classmates, school team and families.' : 'A coloring book with ' + x.character + ' on the cover and a black-and-white page to color.',
       description: uni ? x.description + '' : 'A coloring book with a colored ' + x.character + ' cover and a black-and-white page to color.',
-      box: [uni ? 'Four printable coloring pages (lead friends, classmates, school team, families)' : 'One coloring book'], dims: ['Page count and trim size are confirmed with the printer.'], materials: ['Uncoated paper that takes crayons and pencils. Confirmed with the printer and tested before sale.'], care: ['Keep dry.'],
+      box: [uni ? 'Four coloring pages (lead friends, classmates, school team, families)' : 'One coloring book'], dims: ['Page count and trim size are confirmed with the printer.'], materials: ['Uncoated paper that takes crayons and pencils. Confirmed with the printer and tested before sale.'], care: ['Keep dry.'],
       pairs: uni ? ['stickers-universe', 'coloring-book-booker', 'kids-printables'] : [x.id.replace('coloring-book-', 'stickers-'), 'plush-' + (ONE[key] ? key : 'booker'), 'kids-printables'] }));
   });
 
@@ -293,10 +301,10 @@
     badges: ['Made to order'], tone: 'bop', ages: ['twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing (specification targets, confirmed with the maker).'], care: ['Spot-clean; air dry.'],
     safety: [SAFETY.rug], lead: 'Price and size are still being set.', faq: [['When can I buy it?', 'Size and price are still being set, and the rug needs its flammability report first. Leave your email and we will write when it is ready.'], FAQ.freight],
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Made to order. We will post the size and price when they are final.' });
-  add({ id: 'kids-printables', name: 'Futures at Home printable packs', short: 'Picture schedule, calm-down cards, move cards, reading log and more. Free to print.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',
-    ships: 'digital', badges: ['Digital edition'], tone: 'lumi', ages: ['twos', 'threes', 'prek'], box: ['US Letter PDFs: daily rhythm, rainbow tracker, calm cards, move cards, reading log, sticker chart, story cards, certificates'], dims: ['US Letter, color or black and white'],
+  add({ id: 'kids-printables', name: 'Futures at Home activity pages', short: 'Free activity pages: picture schedule, calm-down cards, move cards, reading log and more.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',
+    ships: 'digital', badges: ['Digital edition'], tone: 'lumi', ages: ['twos', 'threes', 'prek'], box: ['US Letter activity pages: daily rhythm, rainbow tracker, calm cards, move cards, reading log, week chart, story cards, certificates'], dims: ['US Letter, color or black and white'],
     materials: ['Printed at home or at the library.'], care: [], safety: [], faq: [['Is this really free?', 'Yes. Print them at home or at the library. There is no account to make.'], ['What size are they?', 'US Letter, made to print in color or black and white. Spanish versions are included for most pages.']],
-    pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Fridge-ready pages to print yourself. No checkout, no account.' });
+    pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Fridge-ready activity pages for the family. No checkout, no account. Our products and their art are never offered as print-yourself files.' });
 
   // Store products are shown as regular products (owner, 2026-10-07). Compliance work lives in the launch checklist, not on the page: one plain line stays.
   const MADE = 'Made to order. We confirm sizing and ship date by email.';
@@ -328,6 +336,9 @@
     }
     return STATUS_LABEL[p.priceState] || 'Price coming soon';
   }
+  /* A family product lives on the Families side of the site (Home / Kids' Shop / section), whichever door the visitor came through: apparel, backpacks, plush, stickers and
+     coloring, bottles and plates, the Kids' Shop posters and the Kids' Shop items. Carpets, kits, add-ons, materials, books and the centers' posters stay audience-neutral. */
+  const isFamily = p => !!p && (p.collection === 'kids' || ['apparel', 'plush', 'sticker', 'coloring', 'bottle', 'plate'].includes(p.kind) || (p.kind === 'poster' && !!p.kidsShop) || (p.audiences.length === 1 && p.audiences[0] === 'family'));
   const canOrder = p => !!p.orderable && p.cta === 'cart';
   const inCollection = id => P.filter(p => p.collection === id);
   /* The friend a product belongs to: booker, lumi, zuri, bop, or 'all' for the four together. '' for things that are not about one friend (kits, signs, books). */
@@ -353,6 +364,7 @@
     if (f.category) list = list.filter(p => p.collection === f.category);
     if (f.price === 'priced') list = list.filter(p => p.priceState === 'fixed');
     else if (f.price === 'ask') list = list.filter(p => p.priceState !== 'fixed');
+    if (!sort || sort === 'featured') list = list.map((p, i) => [p, i]).sort((a, b) => ((a[0].ownRank || 99) - (b[0].ownRank || 99)) || (a[1] - b[1])).map(x => x[0]);
     const price = p => (p.priceState === 'fixed' ? priceFrom(p) : Infinity);
     if (sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
     else if (sort === 'price-asc') list.sort((a, b) => price(a) - price(b));
@@ -396,7 +408,8 @@
   function gallery(p, rooms) {
     const real = photos(p.id).filter(im => !im.angle).map((im, i) => ({ kind: 'photo', fit: 'contain',
       srcset: (im.files || [[im.w400, 400], [im.w800, 800], [im.w1200, 1200]]).filter(x => x[0]), src: im.jpg || im.w800, w: im.w || 4, h: im.h || 3,
-      alt: im.alt || p.name + (photos(p.id).filter(x => !x.angle).length > 1 ? ', picture ' + (i + 1) : ''), caption: '', bg: im.bg || '', bgt: im.bgt || '', bgb: im.bgb || '', bgl: im.bgl || '', bgr: im.bgr || '', ratio: im.ratio }));
+      alt: im.alt || (p.worn && i === 1 ? p.worn + ' wearing ' + p.name : p.name + (photos(p.id).filter(x => !x.angle).length > 1 ? ', picture ' + (i + 1) : '')), caption: '', bg: im.bg || '', bgt: im.bgt || '', bgb: im.bgb || '', bgl: im.bgl || '', bgr: im.bgr || '', ratio: im.ratio }));
+    if (p.worn && real[1]) real[1].caption = p.worn + ' wearing it';
     const room = roomShot(p, rooms);
     if (real.length) return room ? real.concat([room]) : real;
     return fallbacks(p, rooms);
@@ -415,14 +428,16 @@
   }
   /* The Kids' Shop, in sections: [heading, collection id, products, id]. Everything a family can browse lives here. */
   function kidsSections() {
-    const apparel = t => P.filter(p => p.kind === 'apparel' && p.apparelType === t).sort((a, b) => (b.heroPick ? 1 : 0) - (a.heroPick ? 1 : 0));
+    const apparel = t => P.filter(p => p.kind === 'apparel' && p.apparelType === t).sort((a, b) => (a.ownRank || 99) - (b.ownRank || 99));
     return [
-      ['T-shirts', 'apparel', apparel('tshirt'), 'tshirts'], ['Hoodies', 'apparel', apparel('hoodie'), 'hoodies'], ['Backpacks', 'apparel', apparel('backpack'), 'backpacks'],
-      ['Plush friends', 'plush', P.filter(p => p.kind === 'plush'), 'plush'],
-      ['Stickers & coloring', 'stickers', inCollection('stickers'), 'stickers'], ['Bottles & plates', 'drinkware', inCollection('drinkware'), 'drinkware'],
+      ['T-shirts', 'apparel', apparel('tshirt'), 'tshirts'], ['Hoodies', 'apparel', apparel('hoodie'), 'hoodies'],
+      ['Plush dolls', 'plush', P.filter(p => p.kind === 'plush'), 'plush'],
+      ['Backpacks', 'apparel', apparel('backpack'), 'backpacks'],
+      ['Bottles & plates', 'drinkware', inCollection('drinkware'), 'drinkware'],
+      ['Stickers & coloring', 'stickers', inCollection('stickers'), 'stickers'],
       ['Carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'zone').concat(P.filter(p => p.kind === 'carpet' && p.format === 'large-square')), 'carpets'],
       ['Posters', 'posters', P.filter(p => p.kind === 'poster'), 'posters'],
-      ['Free printables and a small carpet', '', inCollection('kids'), 'more']
+      ['A small carpet and free activity pages', '', inCollection('kids'), 'more']
     ];
   }
   const KW = { carpet: 'carpet carpets rug rugs mat floor', bundle: 'bundle set kit', plush: 'plush doll dolls stuffed toy soft', poster: 'poster posters wall art print', kit: 'kit kits package room startup', addon: 'add-on mats fence boundaries', material: 'sign signs labels cards puppets classroom materials', book: 'book books storybook story read', family: 'printable free pdf', sticker: 'sticker stickers sticker sheet decal', coloring: 'coloring color crayon crayons coloring book activity', bottle: 'bottle water bottle insulated drink cup tumbler drinkware', plate: 'plate dish divided plate lunch meal mealtime eat food drinkware' };
@@ -451,6 +466,6 @@
   ];
 
   return Object.freeze({ APPROVED, CONCEPT_CAPTION, DRAFT, AUDIENCES, AGES, ZONES, COLLECTIONS, PRODUCTS: P, LABELS, TRUST, FAQ, SAFETY, MEMBER,
-    product, collection, anyCollection, virtual, VIRTUAL, charOf, CHARS, completeSet, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
+    product, collection, anyCollection, isFamily, virtual, VIRTUAL, charOf, CHARS, completeSet, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
     setManifest, photos, rotation, gallery, heroImage, kidsSections, keywords, collectionKeywords, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
 });

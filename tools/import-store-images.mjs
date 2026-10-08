@@ -21,6 +21,7 @@ const MERGE = process.argv.includes('--merge');   // keep manifest entries (and 
 const DRY = process.argv.includes('--dry-run');
 const folder = args[0] || join(homedir(), 'Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/store_photos');
 const WIDTHS = [400, 800, 1200];
+const MAXSIDE = 1600;   // longest side, in pixels, of any picture the site serves
 const ANGLE = { 3: 'front', 4: 'side', 5: 'back' };
 const NAME = /^([a-z0-9][a-z0-9-]*)-(\d{1,2})\.(png|jpe?g|webp)$/i;
 
@@ -86,8 +87,10 @@ for (const { f, id, n } of found) {
   const ow = (() => { try { return +magick(['identify', '-format', '%w', src + '[0]']); } catch { return 0; } })();
   const oh = (() => { try { return +magick(['identify', '-format', '%h', src + '[0]']); } catch { return 0; } })();
   if (!ow || !oh) { skipped.push(f + ' (unreadable)'); continue; }
-  const sizes = WIDTHS.filter(w => w <= ow);
-  if (!sizes.length || ow > Math.max(...sizes) * 1.15) sizes.push(ow);   // keep the original's own width when it falls between the standard sizes
+  // Anti-bootleg (owner, 2026-10-08): public product pictures are web-size only. The longest side never exceeds MAXSIDE, so the site never serves a print-quality master.
+  const cap = Math.min(ow, Math.floor(ow * MAXSIDE / Math.max(ow, oh)));
+  const sizes = WIDTHS.filter(w => w <= cap);
+  if (!sizes.length || cap > Math.max(...sizes) * 1.15) sizes.push(cap);   // keep the picture's own (capped) width when it falls between the standard sizes
   const base = `${id}-${n}`;
   const need = prev && prev.src === hash && sizes.every(w => existsSync(join(OUT, `${base}-${w}.webp`)));
   if (need) same++;
@@ -101,7 +104,7 @@ for (const { f, id, n } of found) {
   }
   const top = sizes[sizes.length - 1], mid = sizes.includes(800) ? 800 : (sizes.filter(w => w >= 600)[0] || top);
   sizes.forEach(w => keep.add(`${base}-${w}.webp`)); keep.add(`${base}-${mid}.jpg`);
-  const entry = { n, src: hash, w: ow >= top ? top : ow, h: Math.round((oh / ow) * (ow >= top ? top : ow)), sizes,
+  const entry = { n, src: hash, w: top, h: Math.round((oh / ow) * top), sizes,
     files: sizes.map(w => [`img/store/${base}-${w}.webp`, w]), w400: `img/store/${base}-${sizes[0]}.webp`, w800: `img/store/${base}-${mid}.webp`, w1200: `img/store/${base}-${top}.webp`,
     jpg: `img/store/${base}-${mid}.jpg`, ratio: +(ow / oh).toFixed(4) };
   if (prev && prev.src === hash && prev.bgt) Object.assign(entry, { bg: prev.bg, bgt: prev.bgt, bgb: prev.bgb, bgl: prev.bgl, bgr: prev.bgr }); else if (!DRY) Object.assign(entry, cornerBg(join(OUT, `${base}-${sizes[0]}.webp`)));

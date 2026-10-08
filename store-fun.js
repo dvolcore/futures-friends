@@ -124,9 +124,9 @@ function ticker() {
   hero.insertAdjacentElement('afterend', t);
 }
 function collectionsCarousel() {
-  const rail = D.querySelector('.sp-rail'); if (!rail || D.querySelector('.sf-cols') || !D.querySelector('[data-sp-hero]')) return;
-  const fam = !!D.querySelector('.sp-hero2-families');
-  const ids = fam ? ['apparel', 'plush', 'stickers', 'drinkware', 'carpets', 'posters'] : ['kits', 'carpets', 'posters', 'plush', 'apparel', 'stickers', 'drinkware'];
+  const rail = D.querySelector('.sp-rail'); if (!rail || D.querySelector('.sf-cols') || !D.querySelector('[data-sp-hero],[data-h3]')) return;
+  const fam = !!D.querySelector('.sp-hero2-families,.h3-families');
+  const ids = fam ? ['apparel', 'plush', 'drinkware', 'stickers', 'carpets', 'posters'] : ['kits', 'carpets', 'posters', 'plush', 'apparel', 'stickers', 'drinkware'];
   const tiles = ids.map(id => {
     const col = C.collection(id); if (!col) return '';
     const h = C.heroImage(id), n = C.inCollection(id).length, tone = FRIENDS.includes(col.tone) ? col.tone : 'booker';
