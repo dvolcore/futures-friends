@@ -140,7 +140,8 @@ test('G42: every file under img/ and video/ is referenced by the site (directly 
   // img/branded-rooms/ (2026-10-07) holds the concept composites: brand-art.js builds <key>-kit-<400|800|1200>.<webp|jpg> from FFArt.KIT
   // keys, so a file counts as referenced when img/branded-rooms/manifest.json lists its key (tests/branded-rooms.test.js checks the folder).
   const kitMan = JSON.parse(read('img/branded-rooms/manifest.json')), kitKeys = kitMan.rooms.concat(kitMan.alternates || []).map(r => r.key);
-  const kit = f => { const g = f.split(path.sep).join('/'), m = g.match(/^img\/branded-rooms\/(.+)-kit-(?:400|800|1200)\.(?:webp|jpg)$/); return g === 'img/branded-rooms/manifest.json' || (!!m && kitKeys.includes(m[1]) && code.includes(`'${m[1]}'`)); };
+  const kitVariantFiles = kitMan.rooms.flatMap(r => (r.variants || []).map(v => v.file + '|' + r.key)), kitVar = (m, g) => !!m && kitVariantFiles.some(x => x.split('|')[0] === m[1] + '-kit' && code.includes(`'${m[1]}-kit'`) && g.length);
+  const kit = f => { const g = f.split(path.sep).join('/'), m = g.match(/^img\/branded-rooms\/(.+)-kit-(?:400|800|1200)\.(?:webp|jpg)$/); return g === 'img/branded-rooms/manifest.json' || (!!m && kitKeys.includes(m[1]) && code.includes(`'${m[1]}'`)) || kitVar(m, g); };
   // img/store/ (store-v3) holds the store pictures that tools/import-store-images.mjs converts; a file counts as referenced when img/store/manifest.json lists it
   // (tests/store.test.js checks the manifest against the folder).
   const storeFiles = new Set(Object.values(JSON.parse(read('img/store/manifest.json')).products).flatMap(p => p.images.flatMap(i => (i.files || []).map(x => x[0]).concat(i.jpg || []))).concat('img/store/manifest.json'));
