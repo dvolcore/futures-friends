@@ -41,7 +41,7 @@ function card(p, o) {
     <a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
       ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 280px', alt: '' }) : ''}
       ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 280px', alt: '', cls: 'sp-img2' }) : ''}
-      ${concept ? badgeHtml('Concept image', 'concept') : sample ? badgeHtml('Concept sample', 'concept') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
+      ${concept ? badgeHtml('Concept image', 'concept') : sample ? badgeHtml('Concept sample', 'sample') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
     </a>
     <div class="sp-card-body">
       <h3 class="sp-card-name">${lnk(href, E(p.name))}</h3>
@@ -59,10 +59,10 @@ const tradePills = `<ul class="sp-pills" aria-label="Collections">${C.COLLECTION
 function collTile(c, i) {
   const n = C.inCollection(c.id).length + (c.id === 'plush' ? 4 : 0), href = c.id === 'kids' ? 'kids-shop' : 'shop/' + c.id;
   const sizes = i === 0 ? '(max-width:900px) 92vw, 560px' : '(max-width:900px) 46vw, 300px';
-  let g = C.heroImage(c.id), badge = g ? badgeHtml('Concept sample', 'concept') : '', cls = '';
+  let g = C.heroImage(c.id), badge = g ? badgeHtml('Concept sample', 'sample') : '', cls = '';
   if (!g) { g = c.room ? C.roomShot({ id: c.id, name: c.name, kind: 'kit', room: c.room }, rooms()) : null; badge = g ? badgeHtml('Concept image', 'concept') : ''; }
   if (!g && c.id === 'books') { g = C.fallbacks(C.product('book-booker-tries-again'), rooms())[0]; g = Object.assign({}, g, { fit: 'contain' }); cls = ' is-tile'; }
-  if (!g) { g = C.gallery(C.product('plush-lumi'), rooms())[0]; badge = badgeHtml('Concept sample', 'concept'); cls = ' is-sample'; }
+  if (!g) { g = C.gallery(C.product('plush-lumi'), rooms())[0]; badge = badgeHtml('Concept sample', 'sample'); cls = ' is-sample'; }
   const count = c.id === 'kids' ? C.kidsSections().reduce((t, x) => t + x[2].length, 0) : n;
   return `<li class="sp-tilewrap sp-tw-${c.id}"><a class="sp-tile" href="#${href}" data-go="${href}" style="--tone:var(--${c.tone});--tone-s:var(--${c.tone}-s)">
     <span class="sp-tile-media${cls}">${imgTag(g, { sizes, alt: '' })}${badge}</span>
@@ -130,7 +130,7 @@ function collectionPage(colId) {
   const parents = [['store', 'Futures Store']], hero = colId === 'all' ? null : C.heroImage(colId);
   return `<div class="sp sp-coll" data-col="${E(c.id)}">
    <header class="sp-pagehead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div>${crumbs(parents.concat([['', c.name]]))}<h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${tradePills}</div>
-     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name + ', concept samples' })}${badgeHtml('Concept sample', 'concept')}<figcaption>${E(C.SAMPLE_CAPTION)}</figcaption></figure>` : ''}</div></header>
+     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name + ', concept samples' })}${badgeHtml('Concept sample', 'sample')}<figcaption>${E(C.SAMPLE_CAPTION)}</figcaption></figure>` : ''}</div></header>
    <div class="wrap sp-shell"><form class="sp-tools" role="search" aria-label="Filter and sort ${E(c.name)}" onsubmit="return false">
      <label class="sp-sel"><span>Who it is for</span><select data-sp-f="audience">${opt(C.AUDIENCES, FS.audience, 'Everyone')}</select></label>
      <label class="sp-sel"><span>Age band</span><select data-sp-f="age">${opt(C.AGES, FS.age, 'All ages')}</select></label>
@@ -146,12 +146,13 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' small shop (same cards, same product pages, same cart)
 V['kids-shop'] = () => {
-  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['posters', 'Posters'], ['carpets', 'Carpets'], ['squares', 'Corner carpets'], ['more', 'Free printables']];
+  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free printables']];
+  const hero = C.gallery(C.product('all-friends-hoodie'), rooms())[0];
   return `<div class="sp sp-kids">
    <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div><h1>The Kids\u2019 Shop</h1>
-     <p class="sp-lede">Shirts, hoodies and backpacks for every friend, plush friends, posters, carpets and printables that cost nothing. Add what you like to your cart and send a request; nothing is charged here.</p>
+     <p class="sp-lede">Booker, Lumi, Zuri and Bop on shirts, hoodies and backpacks. Plush friends to hug, carpets for the play corner, posters for the wall, and printables that cost nothing. Add what you like to your cart and send the request. We write back with prices, sizes and timing, and nothing is charged until you say yes.</p>
      <ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul></div>
-     <img class="sp-kidsart" src="img/plush/characters/lumi-heart-hands-480.webp" srcset="img/plush/characters/lumi-heart-hands-480.webp 480w, img/plush/characters/lumi-heart-hands-960.webp 960w" sizes="220px" alt="Lumi the bunny, a story-world character, holding a heart" width="480" height="480" loading="eager" decoding="async"></div></header>
+     <figure class="sp-kidsfig"><span class="sp-kidsfig-frame">${imgTag(hero, { eager: true, sizes: '(max-width:700px) 60vw, 300px', alt: 'The All Friends hoodie, concept sample' })}</span></figure></div></header>
    <div class="wrap sp-shell" id="spResults">${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + col, 'See the whole collection ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
    ${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [['Kids\u2019 Shop items', 'merch-pod']], { compact: true }) : ''}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
    <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section></div>`;

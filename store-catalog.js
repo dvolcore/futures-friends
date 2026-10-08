@@ -328,10 +328,9 @@
     return [
       ['T-shirts', 'apparel', apparel('tshirt'), 'tshirts'], ['Hoodies', 'apparel', apparel('hoodie'), 'hoodies'], ['Backpacks', 'apparel', apparel('backpack'), 'backpacks'],
       ['Plush friends', 'plush', P.filter(p => p.kind === 'plush'), 'plush'],
-      ['Posters', 'posters', P.filter(p => p.kind === 'poster' && /-v1$/.test(p.id)), 'posters'],
-      ['Carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'zone'), 'carpets'],
-      ['Large square corner carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'large-square'), 'squares'],
-      ['And two more', '', inCollection('kids'), 'more']
+      ['Carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'zone').concat(P.filter(p => p.kind === 'carpet' && p.format === 'large-square')), 'carpets'],
+      ['Posters', 'posters', P.filter(p => p.kind === 'poster'), 'posters'],
+      ['Free printables and a small carpet', '', inCollection('kids'), 'more']
     ];
   }
   const KW = { carpet: 'carpet carpets rug rugs mat floor', bundle: 'bundle set kit', plush: 'plush doll dolls stuffed toy soft', poster: 'poster posters wall art print', kit: 'kit kits package room startup', addon: 'add-on mats fence boundaries', material: 'sign signs labels cards puppets classroom materials', book: 'book books storybook story read', family: 'printable free pdf' };

@@ -267,9 +267,9 @@ test('every product renders a real page: price text, honest status, no leaks, on
 
 test('the kids\' shop stays small and uses the same cards, product pages and cart', () => {
   const { c, W } = world(), C = W.FFCatalog, html = c.render('kids-shop');
-  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Posters', 'Carpets', 'Large square corner carpets', 'And two more']);
-  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 5 + 4 + 5 + 5 + 5 + 2);
-  for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
+  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Carpets', 'Posters', 'Free printables and a small carpet']);
+  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 5 + 4 + 10 + 10 + 2);
+  for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone', 'poster-bop-movement-zone-v2', 'poster-friends-circle-v1', 'poster-lumi-calm-corner-v2']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
   assert.match(html, /data-go="product\/plush-lumi"/); assert.match(html, /Notify me/);
   assert.doesNotMatch(html, /kit-center|zone-boundaries/);
   assert.equal(vm.runInContext("typeof V['shop-families'] + typeof V['kids-shop']", c), 'functionfunction');
@@ -463,4 +463,19 @@ test('search finds the store: shop, buy, carpet, rug, backpack, shirt, hoodie, p
   await page.keyboard.press('Control+k'); await page.fill('#px-globalquery', 'booker backpack'); await page.waitForTimeout(250); await page.locator('#ffw-pal-list a[href="#product/booker-backpack"]').first().click();
   await page.waitForSelector('.sp-pdp'); assert.match(await page.locator('.sp-info h1').innerText(), /Booker backpack/);
   await ctx.close();
+});
+
+test('the header never overflows on a phone: ES, search, preferences, Shop and the menu button all sit inside 360, 390 and 430 px, with no sideways scroll', async () => {
+  const bad = [];
+  for (const w of [360, 390, 430]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 800 }, reducedMotion: 'reduce' }), page = await ctx.newPage();
+    for (const aud of ['families', 'centers']) for (const r of ['home', 'centers', 'pricing', 'kids-shop', 'store', 'product/booker-backpack']) {
+      await page.goto(`${srv.base}?fresh=${Date.now()}#pricing`); await page.evaluate(a => { try { localStorage.setItem('ff-audience', a); localStorage.setItem('ff-store-cart-v1', JSON.stringify({ v: 1, items: [{ pid: 'booker-backpack', opts: {}, qty: 12 }] })); } catch (_) { /* none */ } }, aud);
+      await h.goto(page, srv.base, r, 400);
+      const m = await page.evaluate(() => { const bar = document.querySelector('header.bar'), btns = [...bar.querySelectorAll('button, a.px-btn')].filter(b => b.getClientRects().length); return { sw: document.documentElement.scrollWidth, iw: innerWidth, right: Math.max(...btns.map(b => b.getBoundingClientRect().right)), menu: !!document.getElementById('menuT') && document.getElementById('menuT').getBoundingClientRect().right, shop: !!document.getElementById('spCartBtn') && document.getElementById('spCartBtn').getClientRects().length > 0 }; });
+      if (m.sw > m.iw || m.right > m.iw + 0.5 || !m.shop) bad.push(`${w}px ${aud} #${r}: scrollWidth ${m.sw}, rightmost header control ${Math.round(m.right)}, shop button ${m.shop}`);
+    }
+    await ctx.close();
+  }
+  assert.deepEqual(bad, []);
 });

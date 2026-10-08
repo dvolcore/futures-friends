@@ -147,7 +147,7 @@
   // Menu: each audience's big links (the menu shows only the chosen audience's group).
   const GROUPS = {
     families: [['kids-shop', 'Shop: Kids\' Shop'], ['at-home', 'Futures at Home'], ['story-time', 'Story Time'], ['family-videos', 'Watch together'], ['bop-at-home', 'Bop at Home'], ['enroll', 'Visit our pilot center']],
-    centers: [['store', 'Shop: Futures Store'], ['centers', 'Overview'], ['for-centers', 'Child care centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches and faith programs'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing']]
+    centers: [['store', 'Shop: Futures Store'], ['centers', 'Overview'], ['for-centers', 'Child care centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches and faith programs'], ['pricing', 'Pricing']]
   };
   // Everything else one tap away in the menu (small links), per audience: families never see the business pages here.
   const MORE_BY = {

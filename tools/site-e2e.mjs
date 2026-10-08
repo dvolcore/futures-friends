@@ -625,10 +625,10 @@ async function features() {
     return `drawer add/qty/remove/empty, request page (${/open soon|call/i.test(req.text) ? 'honest request state' : 'form'})`;
   });
   // audience split (2026-10-07): the old #shop-families link opens the families' Kids' Shop
-  await step('store', 'shop-families -> Kids\' Shop: posters, plush, apparel and two more, with Notify me', async () => {
+  await step('store', 'shop-families -> Kids\' Shop: every apparel, plush, carpet and poster, with Notify me', async () => {
     await open(page, 'shop-families', 900);
     const f = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.sp-card').length, notify: /Notify me/.test(document.getElementById('view').innerText) }));
-    assert(f.hash === '#kids-shop', `landed on ${f.hash}`); assert(f.n === 15, `${f.n} items`); assert(f.notify, 'no "Notify me"');
+    assert(f.hash === '#kids-shop', `landed on ${f.hash}`); assert(f.n === 41, `${f.n} items`); assert(f.notify, 'no "Notify me"');
     return 'ok';
   });
 
