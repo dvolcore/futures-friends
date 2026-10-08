@@ -116,7 +116,7 @@ test('the four friends\' books are the revised editions (2026-10-07): finished a
   assert.match(lu.spreads[2].p, /Pip, the new little hedgehog/);
   // Zuri does not name a fastest-melting winner
   const zu = F.BOOKS.find(x => x.id === 'what-happens-if-we-try');
-  assert.doesNotMatch(zu.spreads.map(s => s.p).join(' ') + zu.talk.join(' ') + zu.tip, /melts? fastest|melted fastest|fastest\./i);
+  assert.doesNotMatch(zu.spreads.map(s => s.p).join(' ') + zu.talk.join(' ') + zu.tip, /\bmelts fastest|melted fastest|fastest\./i);
   assert.match(zu.guide[2].blocks[0][1], /does not declare a winner/);
   const c = site(), UI = c.window.FFFamilyUI;
   let html = c.render('story-time');

@@ -152,7 +152,7 @@ test('room slots are labelled placeholders on the page and in the picture, never
   assert.match(compose, /placeholder\('The dining-room photo goes here'/);
   assert.match(compose, /Placeholder zone map: real photos of each learning zone come from our pilot classroom\./);
   assert.match(compose, /<span class="tag">Photo placeholder<\/span>/);
-  assert.match(compose, /Cover layout preview (·|\\u00b7) final illustration to come/);
+  assert.doesNotMatch(compose, /Cover layout preview/, 'the felt cover layouts are retired: all four books have finished covers');
   // wave 10 (owner 2026-10-07): the Curriculum hero is a real photo of the pilot classroom, credited, no longer the carpet placeholder
   assert.match(read('experience.js'), /window\.FFArt\.photoImg\('turtle-rug', \{cls: 'ex-heroimage', eager: true/);
   assert.match(read('experience.js'), /Photo: \$\{window\.FFArt\.CENTER_CREDIT\}/);

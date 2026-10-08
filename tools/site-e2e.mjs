@@ -372,17 +372,18 @@ async function features() {
     await step('story-time', `reader: ${b} (turn pages by button, keys, swipe; size; point-and-read; last page)`, async () => {
       await open(page, `story-time/${b}`, 900);
       const info = await page.evaluate(() => ({ count: document.getElementById('flCount')?.textContent, size: getComputedStyle(document.getElementById('flReader')).getPropertyValue('--fl-size') }));
-      assert(info.count === 'Cover', `starts on "${info.count}"`);
+      assert(/^Cover(, page 1 of \d+)?$/.test(info.count), `starts on "${info.count}"`);
       await clickSel(page, '#flReader [data-fl=next]'); await page.waitForTimeout(250);
       const p1 = await page.evaluate(() => document.getElementById('flCount').textContent);
-      assert(/^Page 1 of \d+$/.test(p1), `Next -> "${p1}"`);
-      const pages = +p1.split(' of ')[1];
+      assert(/^Page \d+ of \d+$/.test(p1), `Next -> "${p1}"`);
+      // the revised books count the cover as page 1 (their first story page is "Page 2 of 18"); Book 5 starts at "Page 1 of N"
+      const pages = +p1.split(' of ')[1], n1 = +p1.split(' ')[1];
       await page.locator('#flStage').focus().catch(() => {});
       await page.keyboard.press('ArrowRight'); await page.waitForTimeout(200);
       const p2 = await page.evaluate(() => document.getElementById('flCount').textContent);
-      assert(p2 === `Page 2 of ${pages}`, `ArrowRight -> "${p2}"`);
+      assert(p2 === `Page ${n1 + 1} of ${pages}`, `ArrowRight -> "${p2}"`);
       await page.keyboard.press('ArrowLeft'); await page.waitForTimeout(200);
-      assert((await page.evaluate(() => document.getElementById('flCount').textContent)) === `Page 1 of ${pages}`, 'ArrowLeft did not go back');
+      assert((await page.evaluate(() => document.getElementById('flCount').textContent)) === `Page ${n1} of ${pages}`, 'ArrowLeft did not go back');
       // swipe (touch events on the stage)
       const swiped = await page.evaluate(async () => {
         const st = document.getElementById('flStage'); const r = st.getBoundingClientRect(); const y = r.top + r.height / 2;
@@ -391,7 +392,7 @@ async function features() {
         document.getElementById('flStage').dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: [t(r.left + 20)] }));
         await new Promise((r) => setTimeout(r, 200)); return document.getElementById('flCount').textContent;
       });
-      assert(swiped === `Page 2 of ${pages}`, `swipe left -> "${swiped}"`);
+      assert(swiped === `Page ${n1 + 1} of ${pages}`, `swipe left -> "${swiped}"`);
       const pageText = await page.evaluate(() => document.getElementById('flStage').innerText.trim());
       assert(pageText.length > 20, 'page 2 has no text');
       // size controls

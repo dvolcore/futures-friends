@@ -95,12 +95,7 @@ const A = {
         <span style="display:grid;justify-items:center;gap:2px"><img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="height:66px;width:auto"><span style="font:600 12px/1 var(--display);color:#fff;white-space:nowrap">Learn. Move. Explore. Belong.</span></span>
         <span style="font:600 19px/1.3 var(--display);color:#fff;flex:1">Placeholder zone map: real photos of each learning zone come from our pilot classroom.</span>
         <span class="row" style="gap:0;align-self:flex-end">${K.map(k => cut(k, 92)).join('')}</span></div>`; }],
-  // G17: a cover layout for a title that IS in the series (Book 2, led by Lumi). It replaces a cover whose title was not in the series.
-  'cover-lumi': [1254, 1254, 12, () => cover('lumi', 'Book 2', 'Big Feelings,', 'Brighter Days')],
-  // G16: Book 4, led by Bop. It replaces a cover whose title was not in the series.
-  'cover-bop': [1254, 1254, 12, () => cover('bop', 'Book 4', 'Clean Up,', 'Team!')],
-  // Plush redesign 2026-10-06: Book 1 cover and the three classroom posters, rebuilt from the new plush cut-outs (no generated art).
-  'cover-booker': [1254, 1254, 12, () => cover('booker', 'Book 1', 'Booker', 'Tries Again')],
+  // Book covers: the four friends' books have their finished covers (img/books/<book id>/, revised editions 2026-10-07); the felt cover layouts are retired.
   'poster-booker': [1672, 941, 12, () => poster('booker', 'Booker', 'A New Friend at Futures')],
   'poster-bop': [1672, 941, 12, () => poster('bop', 'Bop', 'Teamwork Makes It Brighter')],
   'poster-lumi': [1672, 941, 12, () => poster('lumi', 'Lumi', 'Kindness Goes a Long Way')],
@@ -111,15 +106,6 @@ const A = {
   'ac4': [1280, 720, 8, () => slide('Your proposed path', 'Planned training levels', 'Short lessons and quick checks. Planned levels only: no course is state-approved yet, and no credential is issued.', `<div style="display:grid;gap:16px;width:440px">${[['Level 1','Foundations','#B5830C'],['Level 2','Classroom Practice','#8A9BA5'],['Level 3','Certified Educator (planned)','#E7A928']].map(l => `<div style="display:flex;align-items:center;gap:16px;background:#fff;border-radius:999px;padding:12px 26px 12px 12px"><span style="width:56px;height:56px;border-radius:50%;background:${l[2]};display:grid;place-items:center;color:#fff;font:700 24px var(--display)">★</span><b style="font:600 22px/1.2 var(--display);color:var(--navy)">${l[0]} · ${l[1]}</b></div>`).join('')}</div>`)]
 };
 
-function cover(k, book, l1, l2) {
-  return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
-   <div style="position:absolute;left:0;right:0;top:92px;display:grid;justify-items:center;gap:18px;text-align:center">
-     <img src="../../img/brand/ff-plush-wordmark-640.png" alt="" style="width:340px;height:auto"><span style="font:600 26px/1 var(--display);color:var(--navy);margin-top:-8px">Learn. Move. Explore. Belong.</span>
-     <span class="pill" style="--c:var(--${k});font-size:26px">${book} · A Futures Friends Story</span>
-     <div style="font:700 112px/1 var(--display);color:var(--navy)">${l1}<br><span style="color:var(--${k})">${l2}</span></div></div>
-   <div style="position:absolute;left:0;right:0;bottom:120px;display:grid;justify-items:center">${cut(k, 560)}</div>
-   <div style="position:absolute;left:0;right:0;bottom:46px;display:flex;justify-content:center"><span class="tag" style="font-size:22px">Cover layout preview · final illustration to come</span></div>`;
-}
 function poster(k, who, line) {
   return `<div class="stripes" style="--c:var(--${k});position:absolute;inset:0"></div><div class="stitch dark"></div>
    <div style="position:absolute;left:90px;top:0;bottom:0;width:820px;display:grid;align-content:center;gap:22px">

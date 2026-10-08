@@ -92,7 +92,7 @@ test('non-final art keeps its slot and carries a visible flag: AI rooms, draft p
   assert.doesNotMatch(features, /episode-sample\.mp4'/);
   assert.match(views, /const FIG_AI = \{'img\/zones\.jpg':\[1200,800\],'img\/kitchen\.jpg':\[1200,675\]\};/, 'zone map and dining room stay flagged placeholders');
   assert.equal((features.match(/\$\{draft\(\)\}\$\{pic\('img\/[a-z-]+-poster\.png'/g) || []).length, 3, 'three Watch posters flagged as draft');
-  assert.equal((views.match(/\$\{layout\(\)\}\$\{pic\('img\/[a-z-]+-cover\.png'/g) || []).length, 2, 'two Friends cover layouts flagged as layout previews');
+  assert.equal((views.match(/\$\{layout\(\)\}\$\{pic\('img\/[a-z-]+-cover\.png'/g) || []).length, 0, 'no Friends cover layouts left: all four books have their finished covers (revised editions 2026-10-07)');
   assert.match(read('home-calm.js'), /<div class="ffa-flagwrap"><img src="img\/group\.jpg"/, 'W4 G14: group.jpg is current-brand art now, so it carries no draft flag');
   assert.doesNotMatch(premium, /window\.FFArt\.flag\('video'\)/, 'W10: the Academy overview video is final, so it carries no placeholder flag');
   assert.match(premium, /poster="video\/academy-welcome-poster\.jpg" aria-label="Academy introduction: Ms\. June, a story-world teacher/);

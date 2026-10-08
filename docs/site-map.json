@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-07",
+ "generated": "2026-10-08",
  "tool": "tools/site-map.mjs",
  "pages": [
   {
@@ -7,6 +7,10 @@
    "title": "Futures Friends · Early learning for ages 2 to 5",
    "section": "",
    "sections": [
+    {
+     "id": "hc-intro-h",
+     "title": "Meet the Futures Friends"
+    },
     {
      "id": "hc-doors-h",
      "title": "Start where you are"
@@ -35,13 +39,13 @@
    "media": [
     {
      "type": "video",
-     "src": "video/ff-friend-booker-4x5.mp4",
-     "label": "Booker the bear sits in the meadow with his open picture book and waves hello."
+     "src": "video/ff-intro-titled-16x9.mp4",
+     "label": "Story-world animation: Booker the bear, Lumi the bunny, Zuri the turtle and Bop the elephant each say hello and introduce themselves in a felt meadow."
     },
     {
      "type": "video",
-     "src": "video/ff-intro-titled-16x9.mp4",
-     "label": "Story-world animation: Booker the bear, Lumi the bunny, Zuri the turtle and Bop the elephant each say hello and introduce themselves in a felt meadow."
+     "src": "video/ff-friend-booker-4x5.mp4",
+     "label": "Booker the bear sits in the meadow with his open picture book and waves hello."
     }
    ]
   },
@@ -140,6 +144,21 @@
      "type": "book",
      "src": "#story-time/booker-tries-again",
      "label": "Booker Tries Again"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/big-feelings-brighter-days",
+     "label": "Lumi’s Big Feelings, Brighter Days"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/what-happens-if-we-try",
+     "label": "Zuri: What Happens If We Try?"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/clean-up-team",
+     "label": "Bop’s Clean-Up Team"
     }
    ]
   },
@@ -155,6 +174,10 @@
     {
      "id": "rt-options",
      "title": "What each option includes today"
+    },
+    {
+     "id": "rk-band-options-h",
+     "title": "Turn one room into five friend zones"
     }
    ],
    "media": []
@@ -197,6 +220,18 @@
      "title": "Train your staff with us"
     },
     {
+     "id": "rk-band-centers-h",
+     "title": "Turn one room into five friend zones"
+    },
+    {
+     "id": "fp-band-centers-h",
+     "title": "Be one of our first programs"
+    },
+    {
+     "id": "oc-band-centers-h",
+     "title": "Your month with Futures Friends"
+    },
+    {
      "id": "ff-map",
      "title": "More than a login"
     }
@@ -223,6 +258,14 @@
     {
      "id": "ts-staff-h",
      "title": "Train your staff with us"
+    },
+    {
+     "id": "rk-band-home-h",
+     "title": "Set up your home room"
+    },
+    {
+     "id": "oc-band-home-h",
+     "title": "Your month with Futures Friends"
     }
    ],
    "media": []
@@ -253,8 +296,20 @@
      "title": "Where Futures Friends stands today"
     },
     {
+     "id": "oc-faith",
+     "title": "Three ways a church can run Futures Friends"
+    },
+    {
+     "id": "oc-faith2-h",
+     "title": "Schedules, volunteers, shared rooms and approvals"
+    },
+    {
      "id": "rt-package",
      "title": "What the package includes today"
+    },
+    {
+     "id": "oc-band-faith-h",
+     "title": "Your month with Futures Friends"
     }
    ],
    "media": []
@@ -294,7 +349,7 @@
     },
     {
      "id": "ts-fam-h",
-     "title": "Who will be with your child"
+     "title": "How we prepare every teacher"
     },
     {
      "id": "wc-co-h",
@@ -389,7 +444,12 @@
    "route": "support",
    "title": "Support and FAQ",
    "section": "Need help? Find answers here.",
-   "sections": [],
+   "sections": [
+    {
+     "id": "oc-support",
+     "title": "Hours, urgent help and what is included"
+    }
+   ],
    "media": []
   },
   {
@@ -425,6 +485,10 @@
    "section": "Booker, Lumi, Zuri and Bop",
    "sections": [
     {
+     "id": "friends-videos",
+     "title": "Every friend has videos to watch together"
+    },
+    {
      "id": "ff-rooms",
      "title": "Meet the Futures Friends"
     },
@@ -435,6 +499,66 @@
    ],
    "media": [
     {
+     "type": "video",
+     "src": "video/act-booker-brave-reader.mp4?v=4",
+     "label": "Booker leads Brave Reader Steps"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-first-sound.mp4?v=2",
+     "label": "Booker leads First-Sound Hunt"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-booker-watch-first.mp4",
+     "label": "You can watch first: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-calm-breath.mp4?v=4",
+     "label": "Lumi leads Smell the Flower, Blow the Candle"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=4",
+     "label": "Lumi leads Feeling Faces"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-kind-words.mp4?v=2",
+     "label": "Lumi leads Look, Listen, Lend a Hand"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-wonder-loop.mp4?v=4",
+     "label": "Zuri leads Zuri’s Wonder Loop"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-color-walk.mp4?v=2",
+     "label": "Zuri leads Color Walk"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-zuri-small-wave.mp4",
+     "label": "Small wave, same happy: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=4",
+     "label": "Bop leads Elephant Stomp & Sway"
+    },
+    {
+     "type": "video",
+     "src": "video/act-trunk-reach.mp4?v=4",
+     "label": "Bop leads Trunk Reach"
+    },
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=4",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
      "type": "book",
      "src": "#story-time/booker-tries-again",
      "label": "Booker Tries Again"
@@ -442,17 +566,17 @@
     {
      "type": "book",
      "src": "#story-time/big-feelings-brighter-days",
-     "label": "Big Feelings, Brighter Days"
+     "label": "Lumi’s Big Feelings, Brighter Days"
     },
     {
      "type": "book",
      "src": "#story-time/what-happens-if-we-try",
-     "label": "What Happens If We Try?"
+     "label": "Zuri: What Happens If We Try?"
     },
     {
      "type": "book",
      "src": "#story-time/clean-up-team",
-     "label": "Clean Up, Team! (preview)"
+     "label": "Bop’s Clean-Up Team"
     }
    ]
   },
@@ -499,6 +623,18 @@
     {
      "id": "pz-compare",
      "title": "What you can get today, next to what others sell"
+    },
+    {
+     "id": "rk-band-pricing-h",
+     "title": "What the Zones Starter includes"
+    },
+    {
+     "id": "fp-band-pricing-h",
+     "title": "Founding Partner pilot"
+    },
+    {
+     "id": "oc-band-pricing-h",
+     "title": "Your month with Futures Friends"
     }
    ],
    "media": []
@@ -567,16 +703,30 @@
    "media": []
   },
   {
+   "route": "account",
+   "title": "Account and Security",
+   "section": "Your Futures Hub account",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "reset-password",
+   "title": "Reset Your Password",
+   "section": "Forgot your password?",
+   "sections": [],
+   "media": []
+  },
+  {
    "route": "portal",
    "title": "Teacher Portal",
-   "section": "Teacher Portal",
+   "section": "Welcome back",
    "sections": [],
    "media": []
   },
   {
    "route": "family-portal",
    "title": "Family Portal",
-   "section": "Family Portal",
+   "section": "Welcome back",
    "sections": [],
    "media": []
   },
@@ -615,8 +765,28 @@
      "title": "Classroom player"
     },
     {
-     "id": "ffx-bop",
-     "title": "Move along with Bop"
+     "id": "ffx-v-meet",
+     "title": "Meet the friends"
+    },
+    {
+     "id": "ffx-v-moments",
+     "title": "Moments from the Clubhouse"
+    },
+    {
+     "id": "ffx-v-booker",
+     "title": "Read with Booker"
+    },
+    {
+     "id": "ffx-v-lumi",
+     "title": "Feel with Lumi"
+    },
+    {
+     "id": "ffx-v-zuri",
+     "title": "Wonder with Zuri"
+    },
+    {
+     "id": "ffx-v-move",
+     "title": "Move with Bop"
     },
     {
      "id": "ffx-artwork",
@@ -642,13 +812,143 @@
    "media": [
     {
      "type": "video",
-     "src": "video/episode-sample.mp4",
-     "label": "Futures Friends sample episode clip"
+     "src": "video/ff-intro-titled-16x9.mp4",
+     "label": "Story-world animation: Booker, Lumi, Zuri and Bop each say hello and introduce themselves in a felt meadow"
     },
     {
      "type": "video",
-     "src": "video/bop-move-along.mp4?v=2",
-     "label": "Move along with Bop: Bop the elephant leads Elephant Stomp and Sway"
+     "src": "video/ff-hello-4x5.mp4",
+     "label": "Wave hello: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-booker-4x5.mp4",
+     "label": "Booker says hi: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-lumi-4x5.mp4",
+     "label": "Lumi takes a calm breath: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-zuri-4x5.mp4",
+     "label": "Zuri explores: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-bop-4x5.mp4",
+     "label": "Bop dances: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-logo-reveal-navy.mp4",
+     "label": "The Futures Friends logo: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-lumi-hello-choices.mp4",
+     "label": "Hug, high-five, wave or space?: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-zuri-small-wave.mp4",
+     "label": "Small wave, same happy: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-bop-two-waves.mp4",
+     "label": "Two waves. Pick one!: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-lumi-hands-close.mp4",
+     "label": "Hands can stay here: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-booker-watch-first.mp4",
+     "label": "You can watch first: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-brave-reader.mp4?v=4",
+     "label": "Booker leads Brave Reader Steps"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-first-sound.mp4?v=2",
+     "label": "Booker leads First-Sound Hunt"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-calm-breath.mp4?v=4",
+     "label": "Lumi leads Smell the Flower, Blow the Candle"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=4",
+     "label": "Lumi leads Feeling Faces"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-kind-words.mp4?v=2",
+     "label": "Lumi leads Look, Listen, Lend a Hand"
+    },
+    {
+     "type": "video",
+     "src": "video/act-peekaboo-turns.mp4?v=2",
+     "label": "Lumi leads Peekaboo Turns"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-meadow-ambient-16x9.mp4",
+     "label": "Meadow breathing break: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-wonder-loop.mp4?v=4",
+     "label": "Zuri leads Zuri’s Wonder Loop"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-color-walk.mp4?v=2",
+     "label": "Zuri leads Color Walk"
+    },
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=4",
+     "label": "Bop leads Elephant Stomp & Sway"
+    },
+    {
+     "type": "video",
+     "src": "video/act-trunk-reach.mp4?v=4",
+     "label": "Bop leads Trunk Reach"
+    },
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=4",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
+     "type": "video",
+     "src": "video/act-animal-walks.mp4?v=4",
+     "label": "Bop leads Animal Walks"
+    },
+    {
+     "type": "video",
+     "src": "video/act-flamingo-balance.mp4?v=4",
+     "label": "Bop leads Flamingo Balance"
+    },
+    {
+     "type": "video",
+     "src": "video/act-clap-back.mp4?v=4",
+     "label": "Bop leads Clap-Back Rhythm"
+    },
+    {
+     "type": "video",
+     "src": "video/act-bop-bubble-chase.mp4?v=2",
+     "label": "Bop leads Bubble Chase"
     }
    ]
   },
@@ -658,20 +958,32 @@
    "section": "A Place to Learn, Play & Grow",
    "sections": [
     {
+     "id": "oc-facts",
+     "title": "Hours, ages, openings and fees"
+    },
+    {
      "id": "ffx-why",
      "title": "Three promises, every day"
     },
     {
      "id": "ffx-meet",
-     "title": "The building, the director and the team"
+     "title": "The building and the rooms"
+    },
+    {
+     "id": "oc-team",
+     "title": "Meet the teachers. See the classrooms. Picture your child here."
     },
     {
      "id": "ts-fam-h",
-     "title": "Who will be with your child"
+     "title": "How we prepare every teacher"
     },
     {
      "id": "ffx-day",
-     "title": "A day at Futures"
+     "title": "A day full of discovery. A place your child belongs."
+    },
+    {
+     "id": "oc-dayhere",
+     "title": "How the day works, from arrival to pickup"
     },
     {
      "id": "ffx-tuition",
@@ -741,14 +1053,30 @@
     },
     {
      "id": "wc-photos",
-     "title": "Photos from our center go here"
+     "title": "The day, with the friends"
     },
     {
      "id": "wc-promises",
      "title": "Promises, built into the software, the policy and the training"
     }
    ],
-   "media": []
+   "media": [
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=4",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-zuri-4x5.mp4",
+     "label": "Zuri the turtle explores the flowers with her magnifying glass. Story-world animation, no sound."
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-lumi-4x5.mp4",
+     "label": "Lumi the bunny closes her eyes and takes a slow, calm breath. Story-world animation, no sound."
+    }
+   ]
   },
   {
    "route": "bop-at-home",
@@ -764,6 +1092,14 @@
      "title": "Eight things to try tonight"
     },
     {
+     "id": "wc-bop-more",
+     "title": "More videos with Bop"
+    },
+    {
+     "id": "wc-book",
+     "title": "Bop's storybook"
+    },
+    {
      "id": "wc-signup",
      "title": "Join the weekly Bop at Home challenge"
     }
@@ -771,38 +1107,48 @@
    "media": [
     {
      "type": "video",
-     "src": "video/act-elephant-stomp.mp4?v=2",
+     "src": "video/act-elephant-stomp.mp4?v=4",
      "label": "Bop leads Elephant Stomp & Sway"
     },
     {
      "type": "video",
-     "src": "video/act-trunk-reach.mp4?v=2",
+     "src": "video/act-trunk-reach.mp4?v=4",
      "label": "Bop leads Trunk Reach"
     },
     {
      "type": "video",
-     "src": "video/act-freeze-try-again.mp4?v=2",
+     "src": "video/act-freeze-try-again.mp4?v=4",
      "label": "Bop leads Freeze & Try Again"
     },
     {
      "type": "video",
-     "src": "video/act-animal-walks.mp4?v=2",
+     "src": "video/act-animal-walks.mp4?v=4",
      "label": "Bop leads Animal Walks"
     },
     {
      "type": "video",
-     "src": "video/act-flamingo-balance.mp4?v=2",
+     "src": "video/act-flamingo-balance.mp4?v=4",
      "label": "Bop leads Flamingo Balance"
     },
     {
      "type": "video",
-     "src": "video/act-clap-back.mp4?v=2",
+     "src": "video/act-clap-back.mp4?v=4",
      "label": "Bop leads Clap-Back Rhythm"
     },
     {
      "type": "video",
-     "src": "video/bop-move-along.mp4?v=2",
-     "label": "Move along with Bop: Bop the elephant leads Elephant Stomp and Sway"
+     "src": "video/act-bop-bubble-chase.mp4?v=2",
+     "label": "Bop leads Bubble Chase"
+    },
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=4",
+     "label": "Bop leads Elephant Stomp & Sway"
+    },
+    {
+     "type": "book",
+     "src": "#story-time/clean-up-team",
+     "label": "Bop’s Clean-Up Team"
     }
    ]
   },
@@ -852,7 +1198,13 @@
      "title": "Questions families ask about our teachers"
     }
    ],
-   "media": []
+   "media": [
+    {
+     "type": "video",
+     "src": "video/academy-welcome.mp4",
+     "label": "Academy sample lesson: Ms. June, a story-world teacher, introduces Booker, Lumi, Zuri and Bop"
+    }
+   ]
   },
   {
    "route": "train-your-staff",
@@ -880,7 +1232,13 @@
      "title": "Tell us about your program"
     }
    ],
-   "media": []
+   "media": [
+    {
+     "type": "video",
+     "src": "video/academy-welcome.mp4",
+     "label": "Academy sample lesson: Ms. June, a story-world teacher, introduces Booker, Lumi, Zuri and Bop"
+    }
+   ]
   },
   {
    "route": "store",
@@ -926,6 +1284,10 @@
     {
      "id": "who",
      "title": ""
+    },
+    {
+     "id": "rk-band-shop-h",
+     "title": "Want the whole room, not just the signs?"
     }
    ],
    "media": []
@@ -934,7 +1296,12 @@
    "route": "corners",
    "title": "Name your corners: the learning zone guide",
    "section": "One friend in every learning corner",
-   "sections": [],
+   "sections": [
+    {
+     "id": "rk-band-corners-h",
+     "title": "Turn one room into five friend zones"
+    }
+   ],
    "media": []
   },
   {
@@ -942,6 +1309,146 @@
    "title": "Store request",
    "section": "Request a quote",
    "sections": [],
+   "media": []
+  },
+  {
+   "route": "room-kit",
+   "title": "Learning Zones Kit: carpets, fences and friend zones for your room",
+   "section": "The Learning Zones Kit",
+   "sections": [
+    {
+     "id": "rk-zones",
+     "title": "One space per friend, plus the circle they share"
+    },
+    {
+     "id": "rk-cue",
+     "title": "The same cue, every transition"
+    },
+    {
+     "id": "rk-room",
+     "title": "Our pilot classroom, today"
+    },
+    {
+     "id": "rk-kit",
+     "title": "What is in the kit"
+    },
+    {
+     "id": "rk-fence",
+     "title": "Low enough to see over, steady enough to stay put"
+    },
+    {
+     "id": "rk-layouts",
+     "title": "Three floor plans to start from"
+    },
+    {
+     "id": "rk-planner",
+     "title": "Plan your own room"
+    },
+    {
+     "id": "rk-packages",
+     "title": "The kit is part of every startup package"
+    },
+    {
+     "id": "rk-safety",
+     "title": "What we check before anything ships"
+    },
+    {
+     "id": "rk-ask",
+     "title": "Plan your room with us"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "founding-partners",
+   "title": "Become a Founding Partner: 90-day pilot",
+   "section": "Become a Founding Partner",
+   "sections": [
+    {
+     "id": "fp-terms",
+     "title": "What you get, and what we ask"
+    },
+    {
+     "id": "fp-measure",
+     "title": "What we’ll measure together"
+    },
+    {
+     "id": "fp-who",
+     "title": "Four kinds of programs, one pilot"
+    },
+    {
+     "id": "fp-how",
+     "title": "From application to day 90"
+    },
+    {
+     "id": "fp-apply",
+     "title": "Tell us about your program"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "membership",
+   "title": "Monthly Membership: what arrives every month",
+   "section": "What arrives every month, and who helps you use it",
+   "sections": [
+    {
+     "id": "oc-month",
+     "title": "Your month with Futures Friends"
+    },
+    {
+     "id": "oc-cadence",
+     "title": "Once, every month, or extra"
+    },
+    {
+     "id": "oc-grow",
+     "title": "Grow your enrollment"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "brand-kit",
+   "title": "Partner brand kit",
+   "section": "Show families you run Futures Friends",
+   "sections": [
+    {
+     "id": "oc-lockup",
+     "title": "Your center, featuring Futures Friends"
+    },
+    {
+     "id": "oc-rules",
+     "title": "Keep the brand clear and the friends safe"
+    },
+    {
+     "id": "oc-kit",
+     "title": "What the kit holds, and where each piece stands"
+    },
+    {
+     "id": "oc-approve",
+     "title": "Four steps before anything is printed or posted"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "room-planner",
+   "title": "Room Planner: lay out your Learning Zones room to scale",
+   "section": "Plan your room",
+   "sections": [
+    {
+     "id": "rp-app",
+     "title": "Your room, to scale"
+    },
+    {
+     "id": "rp-guide",
+     "title": "Before, during and after set-up"
+    },
+    {
+     "id": "rp-ask",
+     "title": "Send us your layout"
+    }
+   ],
    "media": []
   },
   {
@@ -979,7 +1486,7 @@
    "sections": [
     {
      "id": "fl-shelf",
-     "title": "Five stories, three free to read now"
+     "title": "Five stories, all free to read"
     },
     {
      "id": "fl-crowd",
@@ -999,22 +1506,22 @@
     {
      "type": "book",
      "src": "#story-time/big-feelings-brighter-days",
-     "label": "Big Feelings, Brighter Days"
+     "label": "Lumi’s Big Feelings, Brighter Days"
     },
     {
      "type": "book",
      "src": "#story-time/what-happens-if-we-try",
-     "label": "What Happens If We Try?"
+     "label": "Zuri: What Happens If We Try?"
     },
     {
      "type": "book",
      "src": "#story-time/clean-up-team",
-     "label": "Clean Up, Team! (preview)"
+     "label": "Bop’s Clean-Up Team"
     },
     {
      "type": "book",
      "src": "#story-time/the-rainbow-picnic",
-     "label": "The Rainbow Picnic (preview)"
+     "label": "The Rainbow Picnic"
     }
    ]
   },
@@ -1031,38 +1538,63 @@
    "media": [
     {
      "type": "video",
-     "src": "video/act-lumi-feelings-faces.mp4?v=1",
+     "src": "video/act-peekaboo-turns.mp4?v=2",
+     "label": "Lumi leads Peekaboo Turns"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=4",
      "label": "Lumi leads Feeling Faces"
     },
     {
      "type": "video",
-     "src": "video/act-lumi-calm-breath.mp4?v=1",
+     "src": "video/act-lumi-calm-breath.mp4?v=4",
      "label": "Lumi leads Smell the Flower, Blow the Candle"
     },
     {
      "type": "video",
-     "src": "video/act-animal-walks.mp4?v=2",
+     "src": "video/act-bop-bubble-chase.mp4?v=2",
+     "label": "Bop leads Bubble Chase"
+    },
+    {
+     "type": "video",
+     "src": "video/act-animal-walks.mp4?v=4",
      "label": "Bop leads Animal Walks"
     },
     {
      "type": "video",
-     "src": "video/act-booker-brave-reader.mp4?v=1",
+     "src": "video/act-booker-brave-reader.mp4?v=4",
      "label": "Booker leads Brave Reader Steps"
     },
     {
      "type": "video",
-     "src": "video/act-freeze-try-again.mp4?v=2",
+     "src": "video/act-freeze-try-again.mp4?v=4",
      "label": "Bop leads Freeze & Try Again"
     },
     {
      "type": "video",
-     "src": "video/act-lumi-feelings-faces.mp4?v=1",
+     "src": "video/act-lumi-feelings-faces.mp4?v=4",
      "label": "Lumi leads Feeling Faces"
     },
     {
      "type": "video",
-     "src": "video/act-flamingo-balance.mp4?v=2",
+     "src": "video/act-booker-first-sound.mp4?v=2",
+     "label": "Booker leads First-Sound Hunt"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-kind-words.mp4?v=2",
+     "label": "Lumi leads Look, Listen, Lend a Hand"
+    },
+    {
+     "type": "video",
+     "src": "video/act-flamingo-balance.mp4?v=4",
      "label": "Bop leads Flamingo Balance"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-color-walk.mp4?v=2",
+     "label": "Zuri leads Color Walk"
     }
    ]
   },
@@ -1095,22 +1627,22 @@
    "media": [
     {
      "type": "video",
-     "src": "video/act-lumi-calm-breath.mp4?v=1",
+     "src": "video/act-lumi-calm-breath.mp4?v=4",
      "label": "Lumi leads Smell the Flower, Blow the Candle"
     },
     {
      "type": "video",
-     "src": "video/act-booker-brave-reader.mp4?v=1",
+     "src": "video/act-booker-brave-reader.mp4?v=4",
      "label": "Booker leads Brave Reader Steps"
     },
     {
      "type": "video",
-     "src": "video/act-zuri-wonder-loop.mp4?v=1",
+     "src": "video/act-zuri-wonder-loop.mp4?v=4",
      "label": "Zuri leads Zuri’s Wonder Loop"
     },
     {
      "type": "video",
-     "src": "video/act-elephant-stomp.mp4?v=2",
+     "src": "video/act-elephant-stomp.mp4?v=4",
      "label": "Bop leads Elephant Stomp & Sway"
     }
    ]
@@ -1121,12 +1653,32 @@
    "section": "Watch together",
    "sections": [
     {
-     "id": "fl-now",
-     "title": "On the shelf today"
+     "id": "fl-v-meet",
+     "title": "Meet the friends"
+    },
+    {
+     "id": "fl-v-moments",
+     "title": "Moments from the Clubhouse"
+    },
+    {
+     "id": "fl-v-booker",
+     "title": "Read with Booker"
+    },
+    {
+     "id": "fl-v-lumi",
+     "title": "Feel with Lumi"
+    },
+    {
+     "id": "fl-v-zuri",
+     "title": "Wonder with Zuri"
+    },
+    {
+     "id": "fl-v-move",
+     "title": "Move with Bop"
     },
     {
      "id": "fl-next",
-     "title": "What we are filming"
+     "title": "Next on the shelf"
     },
     {
      "id": "fl-screens",
@@ -1137,17 +1689,142 @@
     {
      "type": "video",
      "src": "video/ff-intro-titled-16x9.mp4",
-     "label": "Meet the four friends: hello from Booker, Lumi, Zuri and Bop"
+     "label": "Meet the Futures Friends: story-world animation"
     },
     {
      "type": "video",
-     "src": "video/bop-move-along.mp4",
-     "label": "Move along with Bop: Elephant Stomp and Sway"
+     "src": "video/ff-hello-4x5.mp4",
+     "label": "Wave hello: story-world animation, no sound"
     },
     {
      "type": "video",
-     "src": "video/episode-sample.mp4",
-     "label": "Meet the four friends (sample clip)"
+     "src": "video/ff-friend-booker-4x5.mp4",
+     "label": "Booker says hi: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-lumi-4x5.mp4",
+     "label": "Lumi takes a calm breath: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-zuri-4x5.mp4",
+     "label": "Zuri explores: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-friend-bop-4x5.mp4",
+     "label": "Bop dances: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-logo-reveal-navy.mp4",
+     "label": "The Futures Friends logo: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-lumi-hello-choices.mp4",
+     "label": "Hug, high-five, wave or space?: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-zuri-small-wave.mp4",
+     "label": "Small wave, same happy: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-bop-two-waves.mp4",
+     "label": "Two waves. Pick one!: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-lumi-hands-close.mp4",
+     "label": "Hands can stay here: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/moments/ff-moment-booker-watch-first.mp4",
+     "label": "You can watch first: story-world animation"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-brave-reader.mp4?v=4",
+     "label": "Booker leads Brave Reader Steps"
+    },
+    {
+     "type": "video",
+     "src": "video/act-booker-first-sound.mp4?v=2",
+     "label": "Booker leads First-Sound Hunt"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-calm-breath.mp4?v=4",
+     "label": "Lumi leads Smell the Flower, Blow the Candle"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-feelings-faces.mp4?v=4",
+     "label": "Lumi leads Feeling Faces"
+    },
+    {
+     "type": "video",
+     "src": "video/act-lumi-kind-words.mp4?v=2",
+     "label": "Lumi leads Look, Listen, Lend a Hand"
+    },
+    {
+     "type": "video",
+     "src": "video/act-peekaboo-turns.mp4?v=2",
+     "label": "Lumi leads Peekaboo Turns"
+    },
+    {
+     "type": "video",
+     "src": "video/ff-meadow-ambient-16x9.mp4",
+     "label": "Meadow breathing break: story-world animation, no sound"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-wonder-loop.mp4?v=4",
+     "label": "Zuri leads Zuri’s Wonder Loop"
+    },
+    {
+     "type": "video",
+     "src": "video/act-zuri-color-walk.mp4?v=2",
+     "label": "Zuri leads Color Walk"
+    },
+    {
+     "type": "video",
+     "src": "video/act-elephant-stomp.mp4?v=4",
+     "label": "Bop leads Elephant Stomp & Sway"
+    },
+    {
+     "type": "video",
+     "src": "video/act-trunk-reach.mp4?v=4",
+     "label": "Bop leads Trunk Reach"
+    },
+    {
+     "type": "video",
+     "src": "video/act-freeze-try-again.mp4?v=4",
+     "label": "Bop leads Freeze & Try Again"
+    },
+    {
+     "type": "video",
+     "src": "video/act-animal-walks.mp4?v=4",
+     "label": "Bop leads Animal Walks"
+    },
+    {
+     "type": "video",
+     "src": "video/act-flamingo-balance.mp4?v=4",
+     "label": "Bop leads Flamingo Balance"
+    },
+    {
+     "type": "video",
+     "src": "video/act-clap-back.mp4?v=4",
+     "label": "Bop leads Clap-Back Rhythm"
+    },
+    {
+     "type": "video",
+     "src": "video/act-bop-bubble-chase.mp4?v=2",
+     "label": "Bop leads Bubble Chase"
     }
    ]
   },
@@ -1189,7 +1866,7 @@
   {
    "route": "learn-course",
    "title": "Course | Futures Friends Academy",
-   "section": "Course",
+   "section": "My training",
    "sections": [],
    "media": []
   },
@@ -1245,12 +1922,16 @@
      "title": "How families stay connected"
     },
     {
+     "id": "u1s-sample",
+     "title": "Day 9: Kind Hands, Kind Words"
+    },
+    {
      "id": "u1s-get-h",
      "title": "What a program receives"
     },
     {
      "id": "u1-ask-h",
-     "title": "Open the full curriculum in the Teacher Portal"
+     "title": "Licensed centers get the full program"
     }
    ],
    "media": []
@@ -1280,6 +1961,34 @@
    "route": "learn-approve",
    "title": "Content approval | Futures Friends Academy",
    "section": "Content approval",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "start-center",
+   "title": "Start your center",
+   "section": "Futures Hub for your program",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "c",
+   "title": "Center sign-in",
+   "section": "Find your center",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "enroll-link",
+   "title": "Enrollment form",
+   "section": "Enrollment",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "timeclock",
+   "title": "Time clock",
+   "section": "Clock in and out",
    "sections": [],
    "media": []
   }
@@ -1407,6 +2116,46 @@
   },
   {
    "from_route": "home",
+   "from_section": "hc-intro-h",
+   "label": "Booker",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#activities/booker shows the same page as #activities"
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-intro-h",
+   "label": "Lumi",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": "#activities/lumi shows the same page as #activities"
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-intro-h",
+   "label": "Zuri",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": "#activities/zuri shows the same page as #activities"
+  },
+  {
+   "from_route": "home",
+   "from_section": "hc-intro-h",
+   "label": "Bop",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
    "from_section": "hc-doors-h",
    "label": "For child care centers",
    "kind": "card",
@@ -1518,7 +2267,7 @@
   {
    "from_route": "home",
    "from_section": "hc-proof-h",
-   "label": "5 storybooks 3 free to read along today In development",
+   "label": "5 storybooks 5 free to read along today In development",
    "kind": "card",
    "to_route": "story-time",
    "to_section": "",
@@ -1761,6 +2510,16 @@
    "label": "Program Options",
    "kind": "footer",
    "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Learning Zones Kit",
+   "kind": "footer",
+   "to_route": "room-kit",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2208,9 +2967,9 @@
   {
    "from_route": "home",
    "from_section": "site-menu",
-   "label": "Curriculum by age",
+   "label": "Learning Zones Kit",
    "kind": "nav",
-   "to_route": "curriculum",
+   "to_route": "room-kit",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2598,7 +3357,7 @@
   {
    "from_route": "curriculum",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -2628,7 +3387,7 @@
   {
    "from_route": "curriculum",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -2758,6 +3517,36 @@
   {
    "from_route": "curriculum",
    "from_section": "books",
+   "label": "Read Lumi’s Big Feelings, Brighter Days in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "big-feelings-brighter-days",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "books",
+   "label": "Read Zuri: What Happens If We Try? in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "what-happens-if-we-try",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "books",
+   "label": "Read Bop’s Clean-Up Team in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "books",
    "label": "Explore the stories",
    "kind": "button",
    "to_route": "friends",
@@ -2798,7 +3587,7 @@
   {
    "from_route": "options",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -2828,7 +3617,7 @@
   {
    "from_route": "options",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -2947,6 +3736,16 @@
   },
   {
    "from_route": "options",
+   "from_section": "rk-band-options-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
    "from_section": "",
    "label": "Request a Quote",
    "kind": "button",
@@ -3018,7 +3817,7 @@
   {
    "from_route": "for-centers",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -3048,7 +3847,7 @@
   {
    "from_route": "for-centers",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -3237,6 +4036,46 @@
   },
   {
    "from_route": "for-centers",
+   "from_section": "rk-band-centers-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "fp-band-centers-h",
+   "label": "Become a Founding Partner",
+   "kind": "button",
+   "to_route": "founding-partners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "oc-band-centers-h",
+   "label": "See the whole month",
+   "kind": "button",
+   "to_route": "membership",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ff-map",
+   "label": "See the Learning Zones Kit",
+   "kind": "nav",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
    "from_section": "ff-map",
    "label": "View the curriculum",
    "kind": "button",
@@ -3328,7 +4167,7 @@
   {
    "from_route": "for-home",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -3358,7 +4197,7 @@
   {
    "from_route": "for-home",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -3517,6 +4356,26 @@
   },
   {
    "from_route": "for-home",
+   "from_section": "rk-band-home-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "oc-band-home-h",
+   "label": "See the whole month",
+   "kind": "button",
+   "to_route": "membership",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
    "from_section": "",
    "label": "Request Information",
    "kind": "button",
@@ -3588,7 +4447,7 @@
   {
    "from_route": "for-prek",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -3618,7 +4477,7 @@
   {
    "from_route": "for-prek",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -3778,7 +4637,7 @@
   {
    "from_route": "for-faith",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -3808,7 +4667,7 @@
   {
    "from_route": "for-faith",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -3857,6 +4716,36 @@
   },
   {
    "from_route": "for-faith",
+   "from_section": "oc-faith2-h",
+   "label": "See the pack-away layout in the Learning Zones Kit",
+   "kind": "card",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "oc-faith2-h",
+   "label": "Ask for a written quote",
+   "kind": "card",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "oc-faith2-h",
+   "label": "launch sequence on our Support page",
+   "kind": "nav",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
    "from_section": "",
    "label": "View the curriculum",
    "kind": "button",
@@ -3891,6 +4780,16 @@
    "label": "launch package",
    "kind": "nav",
    "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "oc-band-faith-h",
+   "label": "See the whole month",
+   "kind": "button",
+   "to_route": "membership",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3958,7 +4857,7 @@
   {
    "from_route": "for-employers",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -3988,7 +4887,7 @@
   {
    "from_route": "for-employers",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -4138,7 +5037,7 @@
   {
    "from_route": "for-families",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -4178,7 +5077,7 @@
   {
    "from_route": "for-families",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -4488,9 +5387,29 @@
   {
    "from_route": "signin-family",
    "from_section": "",
-   "label": "Contact the center",
+   "label": "Start your center (demo)",
    "kind": "card",
-   "to_route": "support",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-family",
+   "from_section": "",
+   "label": "Forgot your password?",
+   "kind": "card",
+   "to_route": "reset-password",
+   "to_section": "family",
+   "status": "ok",
+   "note": "#reset-password/family shows the same page as #reset-password"
+  },
+  {
+   "from_route": "signin-family",
+   "from_section": "",
+   "label": "contact Futures Learning Center",
+   "kind": "card",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -4508,9 +5427,29 @@
   {
    "from_route": "signin-teacher",
    "from_section": "",
-   "label": "Contact the center",
+   "label": "Start your center (demo)",
    "kind": "card",
-   "to_route": "support",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-teacher",
+   "from_section": "",
+   "label": "Forgot your password?",
+   "kind": "card",
+   "to_route": "reset-password",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "signin-teacher",
+   "from_section": "",
+   "label": "contact Futures Learning Center",
+   "kind": "card",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -4656,6 +5595,16 @@
    "note": ""
   },
   {
+   "from_route": "support",
+   "from_section": "oc-support",
+   "label": "See how churches run Futures Friends",
+   "kind": "card",
+   "to_route": "for-faith",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
    "from_route": "contact",
    "from_section": "",
    "label": "Home",
@@ -4718,7 +5667,7 @@
   {
    "from_route": "quote",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -4748,7 +5697,7 @@
   {
    "from_route": "quote",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -4817,13 +5766,213 @@
   },
   {
    "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Watch together",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "All of Booker's activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#activities/booker shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "More with Booker (1)",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "brave-reader-steps",
+   "status": "ok",
+   "note": "#activities/brave-reader-steps shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "letter-hunt",
+   "status": "ok",
+   "note": "#activities/letter-hunt shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "All of Lumi's activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": "#activities/lumi shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "More with Lumi (4)",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "feeling-faces",
+   "status": "ok",
+   "note": "#activities/feeling-faces shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "invite-practice",
+   "status": "ok",
+   "note": "#activities/invite-practice shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "All of Zuri's activities",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": "#activities/zuri shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "More with Zuri (1)",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Picture guide: try it together",
+   "kind": "nav",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "color-walk",
+   "status": "ok",
+   "note": "#activities/color-walk shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Bop at Home",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "More with Bop (6)",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Bop at Home: try it together",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "friends-videos",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "freeze-and-try-again",
+   "status": "ok",
+   "note": "#activities/freeze-and-try-again shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Watch Booker's videos",
+   "kind": "button",
+   "to_route": "activities",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#activities/booker shows the same page as #activities"
+  },
+  {
+   "from_route": "friends",
    "from_section": "ff-rooms",
    "label": "Read Booker's book",
    "kind": "button",
    "to_route": "story-time",
    "to_section": "booker-tries-again",
    "status": "fixed",
-   "note": "was #friends (same page). Opens Booker Tries Again in the Story Time reader."
+   "note": "was #friends (same page). Opens Booker Tries Again (revised edition) in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Watch Lumi's videos",
+   "kind": "button",
+   "to_route": "activities",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": "#activities/lumi shows the same page as #activities"
   },
   {
    "from_route": "friends",
@@ -4833,7 +5982,17 @@
    "to_route": "story-time",
    "to_section": "big-feelings-brighter-days",
    "status": "fixed",
-   "note": "was #friends (same page). Opens Big Feelings, Brighter Days in the Story Time reader."
+   "note": "was #friends (same page). Opens Lumi’s Big Feelings, Brighter Days (revised edition) in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Watch Zuri's videos",
+   "kind": "button",
+   "to_route": "activities",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": "#activities/zuri shows the same page as #activities"
   },
   {
    "from_route": "friends",
@@ -4843,7 +6002,17 @@
    "to_route": "story-time",
    "to_section": "what-happens-if-we-try",
    "status": "fixed",
-   "note": "was #friends (same page). Opens What Happens If We Try? in the Story Time reader."
+   "note": "was #friends (same page). Opens Zuri: What Happens If We Try? (revised edition) in the Story Time reader."
+  },
+  {
+   "from_route": "friends",
+   "from_section": "ff-rooms",
+   "label": "Watch Bop's videos",
+   "kind": "button",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
   },
   {
    "from_route": "friends",
@@ -4853,7 +6022,7 @@
    "to_route": "story-time",
    "to_section": "clean-up-team",
    "status": "fixed",
-   "note": "was #friends (same page). Opens the Clean Up, Team! preview (full read-along waits on the revised text)."
+   "note": "was #friends (same page). Opens Bop’s Clean-Up Team (revised edition) in the Story Time reader."
   },
   {
    "from_route": "friends",
@@ -4878,12 +6047,52 @@
   {
    "from_route": "friends",
    "from_section": "",
-   "label": "Read three of the stories free in Story Time",
+   "label": "Read Lumi’s Big Feelings, Brighter Days in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "big-feelings-brighter-days",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Read Zuri: What Happens If We Try? in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "what-happens-if-we-try",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Read Bop’s Clean-Up Team in Story Time",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Story Time",
+   "kind": "nav",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "friends",
+   "from_section": "",
+   "label": "Read all five stories free in Story Time",
    "kind": "button",
    "to_route": "story-time",
    "to_section": "#fl-shelf",
-   "status": "fixed",
-   "note": "was #story-time (page top). Lands on the bookshelf (#fl-shelf), the three free books highlighted."
+   "status": "ok",
+   "note": ""
   },
   {
    "from_route": "friends",
@@ -5118,7 +6327,7 @@
   {
    "from_route": "pricing",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -5148,7 +6357,7 @@
   {
    "from_route": "pricing",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -5191,6 +6400,36 @@
    "label": "Episodes: scripted or outlined, none made yet",
    "kind": "nav",
    "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "rk-band-pricing-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "fp-band-pricing-h",
+   "label": "Become a Founding Partner",
+   "kind": "button",
+   "to_route": "founding-partners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "oc-band-pricing-h",
+   "label": "See the whole month",
+   "kind": "button",
+   "to_route": "membership",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5356,6 +6595,66 @@
    "note": ""
   },
   {
+   "from_route": "account",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "account",
+   "from_section": "",
+   "label": "Teacher Sign-In",
+   "kind": "card",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "account",
+   "from_section": "",
+   "label": "Family Sign-In",
+   "kind": "card",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "reset-password",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "reset-password",
+   "from_section": "",
+   "label": "Teacher Sign-In",
+   "kind": "card",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "reset-password",
+   "from_section": "",
+   "label": "Family Sign-In",
+   "kind": "card",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
    "from_route": "portal",
    "from_section": "",
    "label": "Home",
@@ -5371,6 +6670,36 @@
    "label": "Teacher Portal",
    "kind": "hero",
    "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "portal",
+   "from_section": "",
+   "label": "Start your center (demo)",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "portal",
+   "from_section": "",
+   "label": "Forgot your password?",
+   "kind": "card",
+   "to_route": "reset-password",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "portal",
+   "from_section": "",
+   "label": "contact Futures Learning Center",
+   "kind": "card",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5398,9 +6727,29 @@
   {
    "from_route": "family-portal",
    "from_section": "",
-   "label": "Family Portal sign-in",
-   "kind": "nav",
-   "to_route": "signin-family",
+   "label": "Start your center (demo)",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-portal",
+   "from_section": "",
+   "label": "Forgot your password?",
+   "kind": "card",
+   "to_route": "reset-password",
+   "to_section": "family",
+   "status": "ok",
+   "note": "#reset-password/family shows the same page as #reset-password"
+  },
+  {
+   "from_route": "family-portal",
+   "from_section": "",
+   "label": "contact Futures Learning Center",
+   "kind": "card",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5431,6 +6780,16 @@
    "label": "Watch",
    "kind": "hero",
    "to_route": "watch",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "talk",
+   "from_section": "",
+   "label": "Watch together",
+   "kind": "nav",
+   "to_route": "family-videos",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5588,12 +6947,172 @@
   {
    "from_route": "watch",
    "from_section": "ffx-player",
-   "label": "Talk about it card for this clip",
+   "label": "Talk about it card for this video",
    "kind": "nav",
    "to_route": "talk",
    "to_section": "w0",
    "status": "ok",
    "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-player",
+   "label": "Watch together",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-meet",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-booker",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "brave-reader-steps",
+   "status": "ok",
+   "note": "#activities/brave-reader-steps shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-booker",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "letter-hunt",
+   "status": "ok",
+   "note": "#activities/letter-hunt shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "feeling-faces",
+   "status": "ok",
+   "note": "#activities/feeling-faces shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "invite-practice",
+   "status": "ok",
+   "note": "#activities/invite-practice shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "peekaboo-turns",
+   "status": "ok",
+   "note": "#activities/peekaboo-turns shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-zuri",
+   "label": "Picture guide: try it together",
+   "kind": "nav",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-zuri",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "color-walk",
+   "status": "ok",
+   "note": "#activities/color-walk shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Picture guide: try it together",
+   "kind": "nav",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Bop at Home: try it together",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "freeze-and-try-again",
+   "status": "ok",
+   "note": "#activities/freeze-and-try-again shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "animal-walks",
+   "status": "ok",
+   "note": "#activities/animal-walks shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "flamingo-balance",
+   "status": "ok",
+   "note": "#activities/flamingo-balance shows the same page as #activities"
+  },
+  {
+   "from_route": "watch",
+   "from_section": "ffx-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "bubble-chase",
+   "status": "ok",
+   "note": "#activities/bubble-chase shows the same page as #activities"
   },
   {
    "from_route": "watch",
@@ -5822,6 +7341,16 @@
    "kind": "hero",
    "to_route": "enroll",
    "to_section": "ffx-jobs",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll",
+   "from_section": "oc-facts",
+   "label": "apply online",
+   "kind": "chip",
+   "to_route": "enroll",
+   "to_section": "ffx-apply",
    "status": "ok",
    "note": ""
   },
@@ -6107,6 +7636,66 @@
   },
   {
    "from_route": "bop-at-home",
+   "from_section": "bop-act-bop-bubble-chase",
+   "label": "Try Bubble Chase together: the activity card",
+   "kind": "card",
+   "to_route": "activities",
+   "to_section": "bubble-chase",
+   "status": "ok",
+   "note": "#activities/bubble-chase shows the same page as #activities"
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-book",
+   "label": "Read Bop’s Clean-Up Team",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-book",
+   "label": "Read the book",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-book",
+   "label": "1 Start with one thing",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-book",
+   "label": "2 Lend a hand",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
+   "from_section": "wc-book",
+   "label": "3 The clean-up team",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "clean-up-team",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "bop-at-home",
    "from_section": "wc-signup",
    "label": "the whole-child page",
    "kind": "nav",
@@ -6358,7 +7947,7 @@
   {
    "from_route": "store",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -6398,7 +7987,7 @@
   {
    "from_route": "store",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -6518,7 +8107,7 @@
   {
    "from_route": "shop-families",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -6558,7 +8147,7 @@
   {
    "from_route": "shop-families",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -6698,7 +8287,7 @@
   {
    "from_route": "shop-programs",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -6728,7 +8317,7 @@
   {
    "from_route": "shop-programs",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -6796,6 +8385,16 @@
    "note": ""
   },
   {
+   "from_route": "shop-programs",
+   "from_section": "rk-band-shop-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
    "from_route": "corners",
    "from_section": "",
    "label": "Home",
@@ -6836,6 +8435,16 @@
    "note": ""
   },
   {
+   "from_route": "corners",
+   "from_section": "rk-band-corners-h",
+   "label": "See the Learning Zones Kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
    "from_route": "store-request",
    "from_section": "",
    "label": "Home",
@@ -6862,6 +8471,416 @@
    "kind": "card",
    "to_route": "shop-programs",
    "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "",
+   "label": "Request a quote",
+   "kind": "hero",
+   "to_route": "room-kit",
+   "to_section": "rk-ask",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "",
+   "label": "See the room layouts",
+   "kind": "hero",
+   "to_route": "room-kit",
+   "to_section": "rk-layouts",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-cue",
+   "label": "Watch Bop’s videos",
+   "kind": "button",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-layouts",
+   "label": "Open the full-size plan (opens in a new tab)",
+   "kind": "nav",
+   "to_route": "img/room-kit/home-12x14.svg",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-layouts",
+   "label": "Open the full-size plan (opens in a new tab)",
+   "kind": "nav",
+   "to_route": "img/room-kit/classroom-20x25.svg",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-layouts",
+   "label": "Open the full-size plan (opens in a new tab)",
+   "kind": "nav",
+   "to_route": "img/room-kit/church-packaway-22x28.svg",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-planner",
+   "label": "Open the Room Planner",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-planner",
+   "label": "Measuring, delivery and set-up help",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-packages",
+   "label": "pricing page",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "rk-ask",
+   "label": "See all prices",
+   "kind": "button",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
+   "label": "For centers",
+   "kind": "hero",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
+   "label": "Apply to be a Founding Partner",
+   "kind": "hero",
+   "to_route": "founding-partners",
+   "to_section": "fp-apply",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
+   "label": "What we will measure",
+   "kind": "hero",
+   "to_route": "founding-partners",
+   "to_section": "fp-measure",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Pricing",
+   "kind": "hero",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Your month",
+   "kind": "hero",
+   "to_route": "membership",
+   "to_section": "oc-month",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Once, monthly, extra",
+   "kind": "hero",
+   "to_route": "membership",
+   "to_section": "oc-cadence",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Grow your enrollment",
+   "kind": "hero",
+   "to_route": "membership",
+   "to_section": "oc-grow",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "oc-cadence",
+   "label": "See every price on the Pricing page",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "oc-cadence",
+   "label": "Ask for a multi-site quote",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "oc-grow",
+   "label": "partner brand kit",
+   "kind": "nav",
+   "to_route": "brand-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "Ask for a written quote",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Pricing",
+   "kind": "hero",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Monthly membership",
+   "kind": "hero",
+   "to_route": "membership",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Make your lockup",
+   "kind": "hero",
+   "to_route": "brand-kit",
+   "to_section": "oc-lockup",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Usage rules",
+   "kind": "hero",
+   "to_route": "brand-kit",
+   "to_section": "oc-rules",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Kit pieces",
+   "kind": "hero",
+   "to_route": "brand-kit",
+   "to_section": "oc-kit",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
+   "label": "Approval",
+   "kind": "hero",
+   "to_route": "brand-kit",
+   "to_section": "oc-approve",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "Program options",
+   "kind": "hero",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "Learning Zones Kit",
+   "kind": "hero",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "Start planning",
+   "kind": "hero",
+   "to_route": "room-planner",
+   "to_section": "rp-app",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "About the kit",
+   "kind": "hero",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "rp-app",
+   "label": "How to measure",
+   "kind": "chip",
+   "to_route": "room-planner",
+   "to_section": "rp-measure",
    "status": "ok",
    "note": ""
   },
@@ -6948,7 +8967,7 @@
   {
    "from_route": "at-home",
    "from_section": "fl-doors",
-   "label": "Story Time Three Futures Friends storybooks to read free, page by page, with a question to ask on every page.",
+   "label": "Story Time Five Futures Friends storybooks to read free, page by page, with a question to ask on every page.",
    "kind": "card",
    "to_route": "story-time",
    "to_section": "",
@@ -7028,10 +9047,40 @@
   {
    "from_route": "at-home",
    "from_section": "",
-   "label": "Family Portal sign-in",
+   "label": "Booker",
    "kind": "nav",
-   "to_route": "signin-family",
-   "to_section": "",
+   "to_route": "this-week",
+   "to_section": "booker",
+   "status": "ok",
+   "note": "#this-week/booker shows the same page as #this-week"
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Lumi",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "lumi",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Zuri",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "zuri",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "at-home",
+   "from_section": "",
+   "label": "Bop",
+   "kind": "nav",
+   "to_route": "this-week",
+   "to_section": "bop",
    "status": "ok",
    "note": ""
   },
@@ -7098,7 +9147,7 @@
   {
    "from_route": "story-time",
    "from_section": "fl-shelf",
-   "label": "See the preview",
+   "label": "Read it together",
    "kind": "card",
    "to_route": "story-time",
    "to_section": "clean-up-team",
@@ -7108,7 +9157,7 @@
   {
    "from_route": "story-time",
    "from_section": "fl-shelf",
-   "label": "See the preview",
+   "label": "Read it together",
    "kind": "card",
    "to_route": "story-time",
    "to_section": "the-rainbow-picnic",
@@ -7487,8 +9536,108 @@
   },
   {
    "from_route": "family-videos",
-   "from_section": "fl-now",
-   "label": "Bop at Home",
+   "from_section": "fl-v-meet",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-booker",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "brave-reader-steps",
+   "status": "ok",
+   "note": "#activities/brave-reader-steps shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-booker",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "letter-hunt",
+   "status": "ok",
+   "note": "#activities/letter-hunt shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "smell-the-flower",
+   "status": "ok",
+   "note": "#activities/smell-the-flower shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "feeling-faces",
+   "status": "ok",
+   "note": "#activities/feeling-faces shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "invite-practice",
+   "status": "ok",
+   "note": "#activities/invite-practice shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-lumi",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "peekaboo-turns",
+   "status": "ok",
+   "note": "#activities/peekaboo-turns shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-zuri",
+   "label": "Picture guide: try it together",
+   "kind": "nav",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-zuri",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "color-walk",
+   "status": "ok",
+   "note": "#activities/color-walk shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-move",
+   "label": "Picture guide: try it together",
+   "kind": "nav",
+   "to_route": "see-how",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-move",
+   "label": "Bop at Home: try it together",
    "kind": "nav",
    "to_route": "bop-at-home",
    "to_section": "",
@@ -7497,7 +9646,47 @@
   },
   {
    "from_route": "family-videos",
-   "from_section": "fl-now",
+   "from_section": "fl-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "freeze-and-try-again",
+   "status": "ok",
+   "note": "#activities/freeze-and-try-again shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "animal-walks",
+   "status": "ok",
+   "note": "#activities/animal-walks shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "flamingo-balance",
+   "status": "ok",
+   "note": "#activities/flamingo-balance shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-v-move",
+   "label": "Activity card: try it together",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "bubble-chase",
+   "status": "ok",
+   "note": "#activities/bubble-chase shows the same page as #activities"
+  },
+  {
+   "from_route": "family-videos",
+   "from_section": "fl-next",
    "label": "Story Time",
    "kind": "card",
    "to_route": "story-time",
@@ -7507,7 +9696,7 @@
   },
   {
    "from_route": "family-videos",
-   "from_section": "fl-now",
+   "from_section": "fl-next",
    "label": "Picture guides",
    "kind": "card",
    "to_route": "see-how",
@@ -7606,36 +9795,6 @@
    "note": ""
   },
   {
-   "from_route": "learn",
-   "from_section": "",
-   "label": "My training",
-   "kind": "hero",
-   "to_route": "learn",
-   "to_section": "",
-   "status": "ok",
-   "note": "links to the page it is on"
-  },
-  {
-   "from_route": "learn",
-   "from_section": "",
-   "label": "Verify a certificate",
-   "kind": "hero",
-   "to_route": "verify",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "learn",
-   "from_section": "",
-   "label": "See the Academy",
-   "kind": "button",
-   "to_route": "academy",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
    "from_route": "learn-course",
    "from_section": "",
    "label": "Home",
@@ -7661,36 +9820,6 @@
    "label": "Academy",
    "kind": "hero",
    "to_route": "learn",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "learn-course",
-   "from_section": "",
-   "label": "My training",
-   "kind": "hero",
-   "to_route": "learn",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "learn-course",
-   "from_section": "",
-   "label": "Verify a certificate",
-   "kind": "hero",
-   "to_route": "verify",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "learn-course",
-   "from_section": "",
-   "label": "See the Academy",
-   "kind": "button",
-   "to_route": "academy",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -7828,9 +9957,9 @@
   {
    "from_route": "unit-1",
    "from_section": "",
-   "label": "Educators: open the full curriculum",
+   "label": "Request the full program",
    "kind": "hero",
-   "to_route": "signin-teacher",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -7838,10 +9967,10 @@
   {
    "from_route": "unit-1",
    "from_section": "",
-   "label": "Talk to a real person",
+   "label": "See a sample day",
    "kind": "hero",
-   "to_route": "contact",
-   "to_section": "",
+   "to_route": "unit-1",
+   "to_section": "u1s-sample",
    "status": "ok",
    "note": ""
   },
@@ -7868,7 +9997,7 @@
   {
    "from_route": "unit-1",
    "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, three read-aloud storybooks and printable family pages (free, no account)",
+   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
    "kind": "nav",
    "to_route": "at-home",
    "to_section": "",
@@ -7908,7 +10037,7 @@
   {
    "from_route": "unit-1",
    "from_section": "rt-strip",
-   "label": "Units 2 to 12: outlined week by week, daily plans not written yet",
+   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -7997,10 +10126,30 @@
   },
   {
    "from_route": "unit-1",
+   "from_section": "u1s-sample",
+   "label": "Sample: Day 9 teacher packet",
+   "kind": "nav",
+   "to_route": "printables/sample/ff-sample-u1-day-09-teacher-packet.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "u1s-sample",
+   "label": "Request access",
+   "kind": "nav",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
    "from_section": "u1-ask-h",
-   "label": "Educator sign-in",
+   "label": "Request access",
    "kind": "card",
-   "to_route": "signin-teacher",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8048,9 +10197,9 @@
   {
    "from_route": "this-week",
    "from_section": "",
-   "label": "Family Portal sign-in",
+   "label": "Free activities for every family",
    "kind": "hero",
-   "to_route": "signin-family",
+   "to_route": "at-home",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8058,9 +10207,9 @@
   {
    "from_route": "this-week",
    "from_section": "",
-   "label": "Free activities for every family",
+   "label": "Ask us a question",
    "kind": "hero",
-   "to_route": "at-home",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8291,6 +10440,186 @@
    "label": "See the Academy",
    "kind": "button",
    "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
+   "label": "Futures Hub",
+   "kind": "hero",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
+   "label": "#c/futures-learning-center",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "futures-learning-center",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
+   "label": "#c/sunshine-daycare",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "sunshine-daycare",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
+   "label": "#c/grace-church-preschool",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "grace-church-preschool",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Teacher Portal",
+   "kind": "hero",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Futures Learning Center — Demo Classroom",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "futures-learning-center",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Sunshine Daycare (demo)",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "sunshine-daycare",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Grace Church Preschool (demo)",
+   "kind": "card",
+   "to_route": "c",
+   "to_section": "grace-church-preschool",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "c",
+   "from_section": "",
+   "label": "Start your center",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll-link",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "enroll-link",
+   "from_section": "",
+   "label": "Visit our center",
+   "kind": "hero",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "timeclock",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "timeclock",
+   "from_section": "",
+   "label": "Teacher Portal",
+   "kind": "hero",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "timeclock",
+   "from_section": "",
+   "label": "Start your center (demo)",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "timeclock",
+   "from_section": "",
+   "label": "Forgot your password?",
+   "kind": "card",
+   "to_route": "reset-password",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "timeclock",
+   "from_section": "",
+   "label": "contact Futures Learning Center",
+   "kind": "card",
+   "to_route": "contact",
    "to_section": "",
    "status": "ok",
    "note": ""

@@ -130,11 +130,11 @@ Decorative motion respects the device's reduced-motion setting and the display
 preference control. New views use supplied branding and assets; their use does
 not establish owner approval. Concept environments remain labeled as illustrations.
 
-`img/books/booker-tries-again/` holds the finished Booker Tries Again art (the
-October 7, 2026 Sister Edition): the cover and the 14 story illustrations as
-640 and 1200 pixel WebP copies of the 1254 by 1254 masters, shown in the Story
-Time read-along. They are screen copies, not print masters. Other book covers
-remain layout mockups. Private source PDFs are not included in the public site.
+`img/books/<book id>/` holds the finished art of the four friends' storybooks (the revised editions of October 7, 2026:
+`booker-tries-again`, `big-feelings-brighter-days`, `what-happens-if-we-try`, `clean-up-team`): the cover and the 14 story
+illustrations as 640 and 1200 pixel WebP copies of the 1254 by 1254 masters, shown in the Story Time read-along (cover, 14 story
+pages and the book's three family/educator pages, 18 pages in all). They are screen copies, not print masters. Story text and
+guide pages live in `family-library-data.js`. Private source PDFs are not included in the public site.
 
 ## Hub backend (optional, off on the live site)
 
