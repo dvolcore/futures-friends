@@ -1,0 +1,50 @@
+# Futures Friends
+
+> Futures Friends is a character-led early learning program for children ages 2 to 5. Four story-world friends, Booker the bear, Lumi the bunny, Zuri the turtle and Bop the elephant, lead a learning loop of story, movement, exploring and belonging. It is made for licensed child care centers, home daycares, church preschools and pre-K partners, and it offers free resources for families. Tagline: "Learn. Move. Explore. Belong."
+
+Futures Friends is a program of Futures Learning Center, a child care center at 3625 S Blue Ridge Blvd, Independence, MO 64052 (phone (816) 988-5661, email info@futureslearningcenter.com). The center is the flagship and pilot site; call for current ages served and hours. Parts of the program are still in development and the site labels what is available now, in development or planned. The full curriculum is private and licensed to member centers; this site publishes summaries only.
+
+## The four friends
+- Booker, the Brave Little Learner (brown bear): learning and reading. Lumi (bunny): belonging, feelings and calm. Zuri (turtle): exploring and curiosity. Bop (elephant): movement, the Mighty Mover.
+- [Booker Lumi Zuri Bop and storybooks](https://dvolcore.github.io/futures-friends/friends): meet the friends and their five storybooks
+- [Story Time: read-along storybooks](https://dvolcore.github.io/futures-friends/story-time): read the storybooks free, page by page
+- [Bop at Home: free family movement](https://dvolcore.github.io/futures-friends/bop-at-home): free family movement activities from Bop
+
+## For families
+- [Visit Futures Learning Center](https://dvolcore.github.io/futures-friends/enroll): visit Futures Learning Center in Independence, Missouri: tours and a day in the life
+- [Futures at Home: free family library](https://dvolcore.github.io/futures-friends/at-home): free family library: storybooks, activities, printables and a weekly plan
+- [Things to do at home, by age](https://dvolcore.github.io/futures-friends/activities): short activities for ages 2 to 5 from things you have at home
+- [Printables for families](https://dvolcore.github.io/futures-friends/printables): free printable PDFs for the fridge
+- [The Whole-Child Day, planned on purpose](https://dvolcore.github.io/futures-friends/whole-child): the whole-child day: learning, meals, movement and Quiet Time
+- [Watch episodes](https://dvolcore.github.io/futures-friends/watch): the planned micro-series and the welcome video
+- [Kids' Shop](https://dvolcore.github.io/futures-friends/kids-shop): a small shop for families: posters, plush friends (not yet orderable), apparel and more
+
+## For child care centers, home daycares and programs
+- [For centers and programs](https://dvolcore.github.io/futures-friends/centers): overview of Futures Friends for centers and programs
+- [Program Options](https://dvolcore.github.io/futures-friends/options): compare options for centers, home daycares, pre-K partners, faith-based programs and employers
+- [For Child Care Centers: what you get](https://dvolcore.github.io/futures-friends/for-centers): what a licensed center gets
+- [Home Daycares](https://dvolcore.github.io/futures-friends/for-home): a one-room, mixed-age program for licensed home daycares
+- [Pricing](https://dvolcore.github.io/futures-friends/pricing): published startup packages and monthly membership fees
+- [Monthly Membership: what you get](https://dvolcore.github.io/futures-friends/membership): what arrives each month and who helps you use it
+- [Curriculum by age](https://dvolcore.github.io/futures-friends/curriculum): twelve monthly units by age (summaries; drafts, none approved yet)
+- [School Readiness](https://dvolcore.github.io/futures-friends/readiness): how the learning loop and teacher observation support school readiness
+- [Our Teacher Standard: training and checks](https://dvolcore.github.io/futures-friends/teacher-standard): teacher training, background checks and mastery
+- [Become a Founding Partner: 90-day pilot](https://dvolcore.github.io/futures-friends/founding-partners): a 90-day pilot for 5 to 10 Kansas City area programs
+- [Book a demo](https://dvolcore.github.io/futures-friends/book-demo): book a demo
+
+## Store
+- [Futures Store](https://dvolcore.github.io/futures-friends/store): Learning Zones Kits, carpets, posters, plush, apparel and classroom materials; orders go in as requests and nothing is charged online
+- [Shop the Futures Store](https://dvolcore.github.io/futures-friends/shop): every product in one list
+- [Learning Zones Kit: carpets and zones](https://dvolcore.github.io/futures-friends/room-kit): the Learning Zones Kit: carpets, fences and friend zones
+- [Room Planner: lay out your zones](https://dvolcore.github.io/futures-friends/room-planner): lay out your room to scale
+Prices published on the site: Home Daycare Learning Zones Kit $1,495; Center Starter Learning Zones Kit $2,995; Center Complete Learning Zones Kit $5,995; Booker's Reading Area Poster, V1 $16; Booker's Reading Area Poster, V2 $16; Lumi's Calm Corner Poster, V1 $16; Lumi's Calm Corner Poster, V2 $16; Zuri's Discovery Zone Poster, V1 $16; Zuri's Discovery Zone Poster, V2 $16; Bop's Movement Zone Poster, V1 $16; Bop's Movement Zone Poster, V2 $16; Friends Circle Poster, V1 $16; Friends Circle Poster, V2 $16. Everything else is a quote request or "price coming soon". The plush friends cannot be ordered yet.
+
+## Help
+- [Support and FAQ](https://dvolcore.github.io/futures-friends/support): frequently asked questions
+- [Contact and support](https://dvolcore.github.io/futures-friends/contact): phone, email and form
+- [Funding Help](https://dvolcore.github.io/futures-friends/funding): guides to CACFP, subsidy, grants and tax credits
+- [Blog for Educators](https://dvolcore.github.io/futures-friends/blog): short, sourced guides for classrooms: screen time, ratios, snacks, CACFP
+
+## Optional
+- [Full text of the key pages](https://dvolcore.github.io/futures-friends/llms-full.txt): plain-text copy of the main public pages in one file.
+- [Sitemap](https://dvolcore.github.io/futures-friends/sitemap.xml)

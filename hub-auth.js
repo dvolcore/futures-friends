@@ -149,7 +149,7 @@ document.addEventListener('submit', async e => {
   const email = String(f.elements.email.value || '').trim();
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { ffaMsg('Enter the email address you sign in with.', true); return; }
   const b = f.querySelector('button[type=submit]'); b.disabled = true; ffaMsg('Sending...', false);
-  let r; try { await H.ready; r = await sb().auth.resetPasswordForEmail(email, {redirectTo:location.origin + location.pathname + '?for=' + f.dataset.for}); } catch (err) { r = {error:err}; }
+  let r; try { await H.ready; r = await sb().auth.resetPasswordForEmail(email, {redirectTo:location.origin + (window.FF_ROOT_PATH||location.pathname) + '?for=' + f.dataset.for}); } catch (err) { r = {error:err}; }
   b.disabled = false;
   if (r.error && (r.error.status === 429 || /rate limit|too many|seconds/i.test(r.error.message || ''))) { ffaMsg('A link was just sent. Wait a minute before asking for another.', true); return; }
   ffaMsg('If that address has an account, a reset link is on its way. Check your email, including spam.', false);   // same answer either way

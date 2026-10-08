@@ -30,7 +30,7 @@ const KIT_BUTTONS = 6;   // three concept photos (reading corner, blue-table roo
 // and 9,536); the small slot it left in the photo row is gone
 // 2026-10-07 owner: the required "AI-generated proposed transformation" caption sits beside each concept image on Home (+~35 px), so 7800 -> 7900 and 9900 -> 10000.
 // 2026-10-08 owner: the "Trusted by professionals" endorsement band under the hero (+~690 px at 1280, +~1,330 at 390; measured 8,825 and 11,705).
-const HEIGHT = { 1280: 8950, 390: 11800 };   // +350/+250 Kids Shop strip (store-teasers.js) on top of the entrance concept caption (390: +150)
+const HEIGHT = { 1280: 8950, 390: 12000 };   // +350/+250 Kids Shop strip (store-teasers.js) on top of the entrance concept caption (390: +150); 390: +200 for the owner's family picture in the Kids Shop teaser (store-campaign.js); +700/+1,330 for the endorsement band
 
 const homeFacts = page => page.evaluate(() => {
   const v = document.querySelector('#view');

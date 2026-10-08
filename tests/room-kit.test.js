@@ -130,7 +130,7 @@ test('story-world characters are labelled; room pictures are labelled real or co
   assert.match(t, /Real photo/);
   assert.match(read('room-kit.js'), /img\/branded-rooms\/manifest\.json/);
   assert.match(read('room-kit.js'), /W\.FFBrandedRooms/);
-  assert.match(read('room-kit.js'), /Concept view/);
+  assert.match(read('room-kit.js'), /Planned-design view/);
   for (const m of html.matchAll(/src="(img\/center\/[^"]+)"/g)) assert.ok(fs.existsSync(path.join(ROOT, m[1])), m[1]);
 });
 

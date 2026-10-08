@@ -6,7 +6,7 @@
   const SITE = 'Futures Friends';
   // route: [title, description]. Title is shown as "<title> | Futures Friends" (home keeps the static page title).
   const R = {
-    home: ['Futures Friends', 'Futures Friends: a character-led early learning program for child care centers, home daycares and families, ages 2 to 5. Home of Booker, Lumi, Zuri and Bop.'],
+    home: ['Futures Friends', 'Futures Friends is a character-led early learning program for child care centers, home daycares and families, ages 2 to 5, with Booker, Lumi, Zuri and Bop.'],
     centers: ['For centers and programs', 'Futures Friends for child care centers, home daycares, churches, pre-K partners and employers: programs, rooms, curriculum, training, pricing and a demo.'],
     'book-demo': ['Book a demo', 'Book a demo of Futures Friends and talk through a membership for your center, home daycare, church or program.'],
     'kids-shop': ['Kids\' Shop', 'A small Kids\' Shop for families: a friend poster, a plush friend and a small carpet. Ordering opens soon; nothing is charged here.'],
@@ -15,14 +15,14 @@
     readiness: ['School Readiness', 'How the Futures Friends learning loop, teacher observation and family activities support school readiness for children ages 2 to 5.'],
     curriculum: ['Curriculum by age', 'Twelve monthly units and 48 theme weeks for twos, threes and pre-K. Units 1 to 11 are written as drafts, none approved yet; Unit 12 is being written.'],
     options: ['Program Options', 'Compare Futures Friends program options for child care centers, home daycares, pre-K partners, faith-based centers, employers and families.'],
-    'for-centers': ['For Child Care Centers: what a licensed center gets', 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'],
+    'for-centers': ['For Child Care Centers: what you get', 'What a licensed Futures Friends center gets: media, curriculum, environment, family tools, training and optional merchandise. Talk to us about licensing.'],
     'for-home': ['Home Daycares', 'A one-room, mixed-age Futures Friends program sized for licensed home daycare providers.'],
     'for-prek': ['Pre-K and Head Start Partners', 'Futures Friends readiness units being mapped to the Missouri Early Learning Standards and the Head Start framework, with family engagement tools.'],
     'for-faith': ['Faith-Based Centers', 'An early learning program built around kindness, courage and helping others, with room for each church’s own prayers, songs and traditions.'],
     'for-employers': ['Employer Child Care', 'A branded Futures Friends program for on-site and partner child care for working families.'],
     'for-families': ['Families at Home', 'Take-home activities, books and a weekly question for families, with or without a Futures Friends program nearby.'],
     include: ['Futures Include', 'Lesson adaptations and inclusion supports for children with disabilities and developmental delays, plus early intervention guidance for families.'],
-    hub: ['Futures Hub', 'The Futures Hub for directors, classrooms and families: Today checklist, lunch planner, ratio checks and family updates. Built, not yet live; shown with sample data.'],
+    hub: ['Futures Hub', 'The Futures Hub for directors, classrooms and families: Today checklist, lunch planner, ratio checks and family updates. Built, not yet live; sample data.'],
     app: ['Get the App', 'The Futures Hub is a web app: use it in any browser on a classroom tablet, a director’s computer or a family’s phone, and add it to your home screen.'],
     'family-guide': ['Family App guide', 'A step-by-step tour of what families can see and do in the Futures Friends Family App.'],
     'signin-family': ['Family Sign-In', 'Family sign-in for the Futures Friends Family App.'],
@@ -36,14 +36,14 @@
     quote: ['Request a quote', 'Send your rooms, ages and enrollment and we will price a Futures Friends startup package for you.'],
     friends: ['Booker Lumi Zuri Bop and storybooks', 'Meet Booker, Lumi, Zuri and Bop, and the storybooks and episodes now in development.'],
     rainbow: ['Eat the Rainbow recipes', 'The Eat the Rainbow cookbook and menu planner: 36 recipes in three levels, designed around the CACFP meal pattern.'],
-    store: ['Futures Store', 'Learning Zones Kits, carpets, posters, plush, apparel and classroom materials for centers, home daycares and churches, plus a small Kids\u2019 Shop. Orders go in as requests.'],
+    store: ['Futures Store', 'Learning Zones Kits, carpets, posters, plush, apparel and room materials for centers, home daycares and churches, plus a Kids’ Shop. Orders are requests.'],
     'shop-families': ['Family shop', 'Tees, a library book tote, posters and, later, storybooks and plush with Booker, Lumi, Zuri and Bop. Ordering opens soon.'],
-    'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
-    'room-kit': ['Learning Zones Kit: carpets, fences and friend zones for your room', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],
+    'shop-programs': ['Classroom Branding Kits and supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
+    'room-kit': ['Learning Zones Kit: carpets and zones', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],
     'founding-partners': ['Become a Founding Partner: 90-day pilot', 'A 90-day pilot for 5 to 10 Kansas City area programs: home providers, centers and church preschools. Proposed terms, set in a written agreement.'],
-    membership: ['Monthly Membership: what arrives every month', 'What a Futures Friends membership delivers each month and who helps you use it, with what is ready now, launching with the pilot or planned.'],
+    membership: ['Monthly Membership: what you get', 'What a Futures Friends membership delivers each month and who helps you use it, with what is ready now, launching with the pilot or planned.'],
     'brand-kit': ['Partner brand kit', 'Make your "featuring Futures Friends" lockup, read the usage rules and see which kit pieces are ready.'],
-    'room-planner': ['Room Planner: lay out your Learning Zones room to scale', 'Enter your room’s measurements, place doors and each friend’s zone, and check space per child, exits and sightlines. Save, print or send for a quote.'],
+    'room-planner': ['Room Planner: lay out your zones', 'Enter your room’s measurements, place doors and each friend’s zone, and check space per child, exits and sightlines. Save, print or send for a quote.'],
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
     shop: ['Shop the Futures Store', 'Kits, room add-ons, classroom materials and books for centers, home daycares and churches. Prices are shown where they are set; everything else is a quote.'],
     product: ['Product', 'A Futures Store product: what is in the box, sizes, materials, care, safety notes and lead time.'],
@@ -65,25 +65,25 @@
     accessibility: ['Accessibility', 'Futures Friends accessibility goals: WCAG 2.2 Level AA across this site and the Futures Hub.'],
     portal: ['Teacher Portal', 'The Futures Hub teacher portal: classroom day, attendance, meals, milestones and messages. Sample local preview.'],
     'family-portal': ['Family Portal', 'The Futures Hub family portal: today at Futures, meals, milestones and messages. Sample local preview.'],
-    academy: ['Training Academy', 'A preview of the Futures Friends Training Academy with sample lessons and knowledge checks. No professional credential or approved training hours are issued.'],
+    academy: ['Training Academy', 'A preview of the Training Academy with sample lessons and knowledge checks. No professional credential or approved training hours are issued.'],
     watch: ['Watch episodes', 'The planned Futures Friends micro-series: 3 to 6 minute episodes watched together with a teacher. No episode is finished yet; the welcome video plays here.'],
     talk: ['Talk about it cards', 'Printable talk-about-it cards for every planned Futures Friends episode: three questions, a feeling word and one thing to try at home.'],
     enroll: ['Visit Futures Learning Center', 'Futures Learning Center in Independence, Missouri: tours, tuition and a day in the life for children ages 2 to 5.'],
     jobs: ['Careers and open positions', 'Teaching, kitchen and leadership roles at Futures Friends centers. Online applications open soon; call or email in the meantime.'],
     job: ['Job opening', 'Position details and application for a Futures Friends opening.'],
-    'whole-child': ['The Whole-Child Day: learning, meals, movement, Quiet Time', 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop. Evidence-informed routines families can see.'],
-    'teacher-standard': ['Our Teacher Standard: training, background checks and mastery', 'What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.'],
-    'unit-1': ['Unit 1 at a glance: the first month, in summary', 'The first Futures Friends unit in summary: four weeks, 20 teaching days and 161 activities for ages 2 to 5, plus one sample day. Full plans for licensed centers.'],
-    'train-your-staff': ['Train your staff with us', 'The Futures Friends course method for child care centers and home daycares: scenario mastery, time tracking and director checklists. In development, not open yet.'],
-    'this-week': ['This week with Booker, Lumi, Zuri and Bop: for enrolled families', 'The week\'s friend, theme and value. Families enrolled at Futures Learning Center get the week\'s activities and family cards from their child\'s classroom.'],
+    'whole-child': ['The Whole-Child Day, planned on purpose', 'One day, planned on purpose: learning, meals, movement, Quiet Time and a question at pickup, led by Booker, Lumi, Zuri and Bop.'],
+    'teacher-standard': ['Our Teacher Standard: training and checks', 'What every teacher must meet before working alone with children in Kansas and Missouri, how our training goes further, and where our courses stand today.'],
+    'unit-1': ['Unit 1 at a glance: the first month', 'The first Futures Friends unit in summary: four weeks, 20 teaching days and 161 activities for ages 2 to 5, plus one sample day.'],
+    'train-your-staff': ['Train your staff with us', 'The Futures Friends course method for child care centers and home daycares: scenario mastery, time tracking and director checklists. In development.'],
+    'this-week': ['This week: for enrolled families', 'The week\'s friend, theme and value. Families enrolled at Futures Learning Center get the week\'s activities and family cards from their child\'s classroom.'],
     'at-home': ['Futures at Home: free family library', 'Free storybooks to read together, activities by age, printables and a weekly plan from Booker, Lumi, Zuri and Bop. No account, nothing to buy.'],
     'story-time': ['Story Time: read-along storybooks', 'Read five Futures Friends storybooks free, page by page, with a question, a word and a move or breath to share on every page.'],
     activities: ['Things to do at home, by age', 'Short activities for ages 2 to 5 from things you have at home, with steps, what to notice and easier or harder versions.'],
     printables: ['Printables for families', 'Free PDFs: picture schedule, rainbow tracker, calm-down and move cards, reading log, sticker chart and certificates. Each one in Spanish too (draft).'],
     'see-how': ['See how: picture guides for routines', 'Everyday routines in pictures, one step at a time: calm breathing, brave reading, brushing teeth, movement breaks and bedtime.'],
-    'family-videos': ['Watch together: family videos', 'Short videos with Booker, Lumi, Zuri and Bop to watch together: the welcome video, Bop\'s movement breaks and a calm minute, and how to keep screen time small.'],
+    'family-videos': ['Watch together: family videos', 'Short videos with Booker, Lumi, Zuri and Bop to watch together: the welcome video, Bop\'s movement breaks, a calm minute and screen-time tips.'],
     'my-week': ['My Week: plan, stickers and certificates', 'A free weekly plan for your child\'s age that changes every Monday, a sticker chart and printable certificates. Saved only on your device.'],
-    'bop-at-home': ['Bop at Home: free family movement, Move Your Body Grow Your Mind', 'Free family movement activities from Bop: no equipment, every one with an adapted version. Join the weekly Bop at Home challenge. Move Your Body, Grow Your Mind.'],
+    'bop-at-home': ['Bop at Home: free family movement', 'Free family movement activities from Bop: no equipment, every one with an adapted version, plus a weekly challenge. Move Your Body, Grow Your Mind.'],
     learn: ['Futures Friends Academy', 'Futures Friends Academy: courses and training records for teachers and directors.'],
     'learn-course': ['Course | Futures Friends Academy', 'A Futures Friends Academy course.'],
     'learn-cert': ['Certificate | Futures Friends Academy', 'A Futures Friends Academy certificate.'],
@@ -92,10 +92,17 @@
     'learn-author': ['Course authoring | Futures Friends Academy', 'Futures Friends Academy course authoring tools.'],
     'learn-approve': ['Content approval | Futures Friends Academy', 'Futures Friends Academy content approval for reviewers.'],
     'start-center': ['Start your center', 'Set up a demo Futures Hub center for a child care program or church preschool, with its own name, color, sign-in page, staff and families.'],
-    'enroll-link': ['Enrollment form', 'The enrollment form a center sends to a family in the Futures Hub demo: child, contacts, a short staff alert and the health-forms promise. Demo only, nothing is sent.'],
+    'enroll-link': ['Enrollment form', 'The enrollment form a center sends to a family in the Futures Hub demo: child, contacts, a staff alert and the health-forms promise. Demo only.'],
     timeclock: ['Time clock', 'Staff clock in and out and see their own hours in the Futures Hub demo.'],
     c: ['Center sign-in', 'The sign-in page of one center in the Futures Hub demo: staff and families of that center sign in here.'],
     'not-found': ['Page not found', 'This page is not on the Futures Friends site. Try the home page, the whole-child day, Bop at Home or contact us.']
+  };
+  // Blog posts: a plain search title and description per article (the article's own headline stays on the page as its h1).
+  const POST_SEO = {
+    'screen-time': ['Screen time for ages 2 to 5 in child care', 'What national child care health standards say about screens for ages 2 to 5, and how short, shared episodes fit inside them.'],
+    'ratios': ['Missouri child care ratios by age mix', 'Missouri licensing sets 1 adult for 8 two-year-olds and 1 for 10 three- and four-year-olds. How to staff a room with mixed ages.'],
+    'choking': [null, 'How to cut, cook and serve foods so children under five can eat safely, following CDC guidance, and what our kitchens do about grapes.'],
+    'cacfp': [null, 'What the Child and Adult Care Food Program reimburses, the USDA rates for July 2026 to June 2027, and how menus meet the meal pattern.']
   };
   const trim = (s, n) => { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…'; };
   let first = null;                                                                       // the static title and description in index.html
@@ -105,9 +112,11 @@
     let title = r[0], desc = r[1];
     if (route === 'post') {
       const posts = typeof POSTS !== 'undefined' ? POSTS : null, p = Array.isArray(posts) && posts.find(x => x.id === arg);   // POSTS is views.js's top-level const
-      if (p) { title = p.t; desc = trim(p.b[0], 155); }
+      if (p) { const o = POST_SEO[p.id]; title = (o && o[0]) || p.t; desc = o ? o[1] : trim(p.b[0], 155); }
     } else if (route === 'product' && window.FFCatalog && window.FFCatalog.product(arg)) {
-      const p = window.FFCatalog.product(arg); title = p.name + ' | Futures Store'; desc = p.short;
+      const p = window.FFCatalog.product(arg); title = p.name + ' | Futures Store'; desc = /^Back print/.test(p.short) ? p.name + '. ' + p.short : p.short;   // T-shirt and hoodie share a back print: the name keeps each description its own
+    } else if (route === 'shop' && arg && window.FFCatalog && window.FFCatalog.collection && window.FFCatalog.collection(arg)) {
+      const c = window.FFCatalog.collection(arg); title = c.name + ' | Futures Store'; desc = c.blurb;
     } else if (route === 'academy' && arg) {
       const mods = (window.FF && window.FF.modules) || [], m = mods.find(x => x.code === arg);
       if (m) { title = m.code + ' ' + m.title + ' | Training Academy'; desc = 'Sample lesson preview: ' + m.title + '. No professional credential or approved training hours are issued.'; }

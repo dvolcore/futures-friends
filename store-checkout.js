@@ -144,7 +144,7 @@
   const linkKey = l => (l.pid + (Object.keys(l.optionIds || {}).length ? ':' + Object.values(l.optionIds)[0] : ''));
   async function submitStripe(o) {
     const s = cfg().stripe || {};
-    const payload = Object.assign({}, o, { mode: 'stripe', successUrl: s.successUrl || (location.origin + location.pathname + '#order-return/stripe'), cancelUrl: s.cancelUrl || (location.origin + location.pathname + '#checkout') });
+    const payload = Object.assign({}, o, { mode: 'stripe', successUrl: s.successUrl || (location.origin + (window.FF_ROOT_PATH||location.pathname) + '#order-return/stripe'), cancelUrl: s.cancelUrl || (location.origin + (window.FF_ROOT_PATH||location.pathname) + '#checkout') });
     // Centers on a PO / net-30 invoice: Stripe Invoicing, created by the server from the order.
     if (o.path === 'center' && o.payment === 'invoice' && https(s.invoiceEndpoint)) {
       const r = await postJson(s.invoiceEndpoint, payload);

@@ -70,7 +70,7 @@
   const parts = h => { const p = String(h || '').replace(/^#/, '').split('/'); let a = p[1]; try { a = a == null ? a : decodeURIComponent(a); } catch (_) { /* raw */ } return [p[0] || 'home', a]; };
   const known = v => { try { return typeof V === 'undefined' || !!V[v]; } catch (_) { return true; } };   // views.js's route table
   const target = () => (asked && !/^(#home(\/|$)|#?$)/.test(asked) && known(parts(asked)[0]) ? asked : null);
-  const here = h => location.pathname + location.search + h;
+  const here = h => (W.FF_ROOT_PATH || location.pathname) + location.search + h;   // a clean-path page (kids-shop, product-...) hops to the app address
   function focusH1() {
     const h1 = D.querySelector('#view h1');
     if (h1) { if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1'); try { h1.focus({ preventScroll: true }); } catch (_) { /* gone */ } }

@@ -167,7 +167,7 @@ function hero() {
 }
 
 function rooms() {
-  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept image of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
+  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled planned-design image of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
    <div class="rk-rooms" data-rk-rooms>${['turtle-rug', 'alphabet-rug', 'reading-corner'].map(k => roomFig({ key: k })).join('')}</div>`);
 }
 const REAL_ALT = {
@@ -185,7 +185,7 @@ function roomFig(r) {
   return `<figure class="rk-roomfig${has ? ' rk-has-kit' : ''}" data-room="${E(k)}"><div class="rk-roomframe">${real}${kit}
     <span class="rk-roomlabel" data-rk-label>Real photo</span></div>
     ${has ? `<div class="rk-toggle" role="group" aria-label="Show the room"><button type="button" aria-pressed="true" data-rk-view="real">Real room</button><button type="button" aria-pressed="false" data-rk-view="kit">With the kit</button></div>` : ''}
-    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'Planned design.'}</b> Planned view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
+    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'Planned design.'}</b> Planned view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Planned-design views with the kit are on the way.'}</figcaption></figure>`;
 }
 
 function zones() {
@@ -284,7 +284,7 @@ function ask() {
 }
 
 V['room-kit'] = () => `<div class="wc rk">${hero()}${zones()}${cue()}${rooms()}${kit()}${fence()}${layouts()}${packages()}${safety()}${ask()}
- <p class="wrap rk-foot">${TAGLINE} Booker, Lumi, Zuri and Bop are story-world characters. Room photos are real unless marked as a concept. Prices as of October 2026.</p></div>`;
+ <p class="wrap rk-foot">${TAGLINE} Booker, Lumi, Zuri and Bop are story-world characters. Room photos are real unless marked as a planned design. Prices as of October 2026.</p></div>`;
 
 // ---------------------------------------------------------------- behaviour (delegated; nothing runs until a visitor acts)
 let pick = 'bop', timers = [];

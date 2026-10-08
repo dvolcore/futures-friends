@@ -594,7 +594,7 @@ V['learn-cert'] = () => {
   const s = L.cert;
   if (!s || s.loading) return shell('learn', 'Certificate', '', skeleton());
   if (s.err) return shell('learn', 'Certificate', '', `<div class="lms-banner bad"><div><b>${esc(s.err)}</b><p style="margin-top:8px"><a class="btn gold" href="#learn">Back to my training</a></p></div></div>`);
-  const c = s.cert, url = `${location.origin}${location.pathname}#verify/${c.code}`;
+  const c = s.cert, url = `${location.origin}${(window.FF_ROOT_PATH||location.pathname)}#verify/${c.code}`;
   return shell('learn', 'Certificate', 'Print this page or choose "Save as PDF" in the print dialog.', `<div class="lms-cert-wrap"><div class="lms-row"><button class="btn gold" type="button" data-lms="cert-print">Print or save as PDF</button><a class="btn soft" href="#learn">Back to my training</a></div>
    <div class="lms-cert${c.revoked_at ? ' revoked' : ''}" style="--cc:${TRACK_COLOR[s.track] || '#2F6FC0'}" role="img" aria-label="Futures Friends completion record for ${esc(c.holder_name)}, ${esc(c.course_title)}">
     <div class="eyebrow" style="color:#B9820C">Futures Friends Academy</div><h2>Completion Record</h2><div>This records that</div><div class="nm">${esc(c.holder_name)}</div><div>has completed</div><div class="cr">${esc(c.course_title)}</div>
