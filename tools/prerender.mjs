@@ -93,7 +93,7 @@ async function snapshot(list) {
       const big = [...v.querySelectorAll('img')].find(i => (i.naturalWidth || 0) >= 300 && (i.getAttribute('src') || '').length);
       const h1 = v.querySelector('h1');
       return {
-        html: clone.innerHTML.replace(/\s*--bdl?:\s*[^;"]*;?/g, '').replace(/ style="\s*"/g, '').replace(/ data-id="i[a-z0-9]{6,9}"/g, ''),     // --bd/--bdl: random breathing delays set by script
+        html: clone.innerHTML.replace(/\s*--bdl?:\s*[^;"]*;?/g, '').replace(/ style="\s*"/g, '').replace(/ data-id="[a-z0-9]{6,9}"/g, '').replace(/ (?:id|for|aria-[a-z]+)="i[a-z0-9]{6,9}"/g, ''),     // --bd/--bdl: random breathing delays set by script
         text: v.innerText.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim(),
         h1: h1 ? (h1.innerText.replace(/\s+/g, ' ').trim() || (h1.querySelector('img[alt]') || {}).alt || '') : '',
         title: document.title,
