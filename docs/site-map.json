@@ -100,7 +100,7 @@
   {
    "route": "curriculum",
    "title": "Curriculum by age",
-   "section": "Futures FriendsA year of discovery.",
+   "section": "Futures FriendsTwelve months, four friends.",
    "sections": [
     {
      "id": "rt-strip",
@@ -108,11 +108,11 @@
     },
     {
      "id": "ages",
-     "title": "Growing at their own pace."
+     "title": "Twos, threes and pre-K do the same week differently."
     },
     {
      "id": "units",
-     "title": "Twelve adventures. Endless curiosity."
+     "title": "September to August, one theme a month."
     },
     {
      "id": "u1-band-curriculum",
@@ -120,7 +120,7 @@
     },
     {
      "id": "family-plan",
-     "title": "Your next little adventure."
+     "title": "Something to try at home this week."
     },
     {
      "id": "wc-cu-h",
@@ -132,11 +132,11 @@
     },
     {
      "id": "addons",
-     "title": "New seasons. New possibilities."
+     "title": "Summer camp and holiday weeks"
     },
     {
      "id": "books",
-     "title": "Meet their next favorite friend."
+     "title": "Four stories, four friends."
     }
    ],
    "media": [
@@ -740,7 +740,7 @@
   {
    "route": "academy",
    "title": "Training Academy",
-   "section": "Room to grow.",
+   "section": "Your training, in one place.",
    "sections": [
     {
      "id": "px-plan-title",
@@ -1159,7 +1159,7 @@
    "sections": [
     {
      "id": "ts-welcome-h",
-     "title": "Welcome, teachers, providers and families"
+     "title": "For teachers, providers and families"
     },
     {
      "id": "ts-law",
@@ -1179,11 +1179,11 @@
     },
     {
      "id": "ts-verify",
-     "title": "A completion means proof, not attendance"
+     "title": "What \"complete\" means"
     },
     {
      "id": "ts-year",
-     "title": "Training does not stop after the first month"
+     "title": "Training comes round every year"
     },
     {
      "id": "ts-ask",
@@ -1213,11 +1213,11 @@
    "sections": [
     {
      "id": "ts-staff-welcome-h",
-     "title": "Training your team should leave proof, not just hours"
+     "title": "Hours are easy to log. We want proof from the room."
     },
     {
      "id": "ts-offer",
-     "title": "One method, from the first week to every renewal"
+     "title": "Planned: one method for your whole team"
     },
     {
      "id": "ts-wont",
@@ -2278,7 +2278,7 @@
   {
    "from_route": "home",
    "from_section": "hc-proof-h",
-   "label": "12 family printables 9 in English and 3 in Spanish Free now, Spanish in draft",
+   "label": "17 family printables 9 in English and 8 in Spanish Free now, Spanish in draft",
    "kind": "card",
    "to_route": "printables",
    "to_section": "",
@@ -3428,7 +3428,7 @@
   {
    "from_route": "curriculum",
    "from_section": "",
-   "label": "Grow your teaching practice",
+   "label": "See how teachers train",
    "kind": "nav",
    "to_route": "academy",
    "to_section": "",
@@ -7068,7 +7068,7 @@
   {
    "from_route": "academy",
    "from_section": "",
-   "label": "Explore a classroom discovery",
+   "label": "See the curriculum",
    "kind": "nav",
    "to_route": "curriculum",
    "to_section": "",
@@ -9578,6 +9578,16 @@
   {
    "from_route": "printables",
    "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-tarjetas-de-movimiento.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
    "label": "Download Booker's Book Club reading log (PDF)",
    "kind": "card",
    "to_route": "printables/futures-at-home-booker-reading-log.pdf",
@@ -9591,6 +9601,16 @@
    "label": "Download PDF",
    "kind": "card",
    "to_route": "printables/futures-at-home-booker-reading-log.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-registro-de-lectura.pdf",
    "to_section": "",
    "status": "ok",
    "note": "file"
@@ -9618,6 +9638,16 @@
   {
    "from_route": "printables",
    "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-tabla-de-calcomanias.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
    "label": "Download Story Time talk cards (PDF)",
    "kind": "card",
    "to_route": "printables/futures-at-home-story-time-cards.pdf",
@@ -9638,6 +9668,16 @@
   {
    "from_route": "printables",
    "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-tarjetas-para-conversar.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
    "label": "Download Certificates from the four friends (PDF)",
    "kind": "card",
    "to_route": "printables/futures-at-home-certificates.pdf",
@@ -9651,6 +9691,16 @@
    "label": "Download PDF",
    "kind": "card",
    "to_route": "printables/futures-at-home-certificates.pdf",
+   "to_section": "",
+   "status": "ok",
+   "note": "file"
+  },
+  {
+   "from_route": "printables",
+   "from_section": "fl-pdfs",
+   "label": "En español (borrador)",
+   "kind": "card",
+   "to_route": "printables/es/futures-en-casa-certificados.pdf",
    "to_section": "",
    "status": "ok",
    "note": "file"
@@ -11148,7 +11198,7 @@
   {
    "from_route": "centers",
    "from_section": "hc-proof-h",
-   "label": "12 family printables 9 in English and 3 in Spanish Free now, Spanish in draft",
+   "label": "17 family printables 9 in English and 8 in Spanish Free now, Spanish in draft",
    "kind": "card",
    "to_route": "printables",
    "to_section": "",
