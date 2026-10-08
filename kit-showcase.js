@@ -42,7 +42,7 @@ function slide(r, i, n) {
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';
   return `<div class="ks-slide" role="group" aria-roledescription="slide" aria-label="Room ${i + 1} of ${n}: ${E(r.zone || '')}">
    <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"><div class="ffa-kit-stage">${img}<span class="ffa-kit-label" aria-hidden="true">Concept</span>${toggle}</div>
-   <figcaption><b>${E(r.zone || '')}</b><span>Concept, not installed yet. Pilot-center photo with the kit added.</span></figcaption></figure></div>`;
+   <figcaption><b>${E(r.zone || '')}</b><span>Concept illustration, not installed yet. The real room is one tap away.</span></figcaption></figure></div>`;
 }
 function chips(RK) {
   return `<ul class="ks-chips" aria-label="The five zones">${RK.ZONES.map(z => `<li style="--zf:${z.felt};--zi:${z.ink};--zt:${z.tint}"><span class="ks-dot" aria-hidden="true"></span>${E(z.name)}</li>`).join('')}</ul>`;
