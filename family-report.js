@@ -20,7 +20,7 @@ const msg = e => (e && e.message) ? e.message : 'That did not save. Try again in
 
 // The same words as the report email (hub/worker/daily-report.mjs RETENTION_NOTE) and the owner decision of 2026-10-05.
 const RETENTION = 'We keep daily care records for 3 years after a child leaves the program (a CACFP rule), and photos and messages for 1 year. Daily reports never include health information such as medication, allergies or diagnoses.';
-const BANDS = [['infant','Baby (birth to 12 months)'],['toddler','Toddler (12 to 24 months)'],['twos','Two-year-old'],['threes','Three-year-old'],['prek','Pre-K (4 and 5 years)']];
+const BANDS = [['twos','Two-year-old'],['threes','Three-year-old'],['prek','Pre-K (4 and 5 years)']];
 
 const S = { rep:{}, repBusy:{}, prefs:null, prefsBusy:false, prefsErr:null, open:false, saving:false, prev:{}, prevBusy:{}, prevErr:{}, draft:{}, urls:{}, urlBusy:{}, pf:null };
 const STYLE_ID = 'ff-report-css';

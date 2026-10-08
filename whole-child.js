@@ -33,7 +33,7 @@ const DAY = [
   { n: 'Learn', what: 'Story + DO', owner: 'booker', c: 'booker', text: 'A short story opens one idea. Then the screen goes off and hands-on play carries it.' },
   { n: 'Nourish', what: 'Meal or snack, and water', owner: 'zuri', c: 'zuri', text: 'Regular meals stay familiar and complete. Color becomes a low-pressure way to explore food. Water is there all day.' },
   { n: 'Move', what: 'Bop &amp; Go!', owner: 'bop', c: 'bop', text: 'Short movement moments through the day, with a water break at every transition.' },
-  { n: 'Reset', what: 'Quiet Time', owner: 'lumi', c: 'lumi', text: 'Notice, Breathe, Soften, Rest. Offered, never forced. Infants follow safe-sleep rules.' },
+  { n: 'Reset', what: 'Quiet Time', owner: 'lumi', c: 'lumi', text: 'Notice, Breathe, Soften, Rest. Offered, never forced.' },
   { n: 'Connect', what: 'Pickup prompt', owner: 'all', c: 'gold', text: '"What\'s your one thing?" One question, one take-home card, one no-cost family challenge.' }
 ];
 
@@ -85,8 +85,7 @@ const ext = (href, text) => `<a href="${href}" target="_blank" rel="noopener nor
 const WHO = ext(SRC.who, 'WHO 2019 under-5 guidelines'), CFOC = ext(SRC.cfoc, 'Caring for Our Children (CFOC)');
 // Defaults by age band. Editable per center; every number shows where it comes from.
 const TARGETS = [
-  { band: 'Infant', age: 'Under 12 months', active: 'Several times a day, floor-based play. At least 30 minutes of tummy time while awake, for babies not yet mobile.', out: '2 to 3 occasions a day, weather permitting.', screen: '<b>None.</b>', sit: 'Seated no more than 15 minutes at a time. Awake in a crib, playpen or other confinement no more than 30 minutes.', src: `${ext(SRC.who, 'WHO 2019')} (under 5); ${ext(SRC.cfoc, 'CFOC')} 4th ed.; K.A.R. 28-4-440(f)` },
-  { band: 'Toddler', age: '1 to under 3', active: '60 to 90 minutes of moderate-to-vigorous play (MVPA).', out: '60 to 90 minutes.', screen: '<b>None through age 2</b> (CFOC 2.2.0.3: &ldquo;ages 2 and younger&rdquo;).', sit: 'Awake confinement no more than 30 minutes. Sitting no more than 1 hour at a time.', src: `${ext(SRC.cfoc, 'CFOC 3.1.3.1')} and 2.2.0.3 (4th ed.); ${ext(SRC.who, 'WHO')}; K.A.R. 28-4-440(f)` },
+  { band: 'Twos', age: '2 to under 3', active: '60 to 90 minutes of moderate-to-vigorous play (MVPA).', out: '60 to 90 minutes.', screen: '<b>None through age 2</b> (CFOC 2.2.0.3: &ldquo;ages 2 and younger&rdquo;).', sit: 'Awake confinement no more than 30 minutes. Sitting no more than 1 hour at a time.', src: `${ext(SRC.cfoc, 'CFOC 3.1.3.1')} and 2.2.0.3 (4th ed.); ${ext(SRC.who, 'WHO')}; K.A.R. 28-4-440(f)` },
   { band: 'Preschool', age: '3 to 5', active: '90 to 120 minutes of MVPA. WHO: 180 minutes at any intensity, at least 60 of them MVPA.', out: '60 to 90 minutes.', screen: '<b>Not more than 30 minutes a week in care</b> by default, only for learning or movement and never at meals or snacks (the CDC early care and education standard for children 2 and older). Centers can lower it.', sit: 'No more than 1 hour at a time.', src: `${ext(SRC.cfoc, 'CFOC 3.1.3.1')} and 2.2.0.3; ${ext(SRC.who, 'WHO 2019')}; ${ext(SRC.cdc, 'CDC screen time limits in early care')}` }
 ];
 
@@ -97,7 +96,7 @@ const PROMISES = [
   ['We count minutes, not bodies', 'We measure what the day delivered: minutes, missions and outdoor occasions. Never a child\'s weight, BMI, calories or a "healthy" label. Motor skills are noted only as observed milestones.'],
   ['Screens fit the age', 'No episodes for children ages 2 and younger: songs, puppets and cards take their place. For preschoolers, not more than 30 minutes a week in care is the default, and a screen is the opening act, counted against that weekly cap.'],
   ['Water and weather, with care', 'Water is available all day, with a prompt at every Bop &amp; Go! transition. The forecast can suggest an indoor swap and shows why. The teacher decides.'],
-  ['Safe sleep comes first', 'For infants, Quiet Time follows the center\'s safe-sleep rules. Sleep rules always win.'],
+  ['Sleep rules come first', 'Quiet Time follows the center\'s sleep and rest rules. Those rules always win.'],
   ['Teachers move if they want to', 'Staff movement is opt-in and never tracked per person. Movement moments simply invite teachers to model.'],
   ['Evidence-informed routines', 'We use recognized guidance, and plan a qualified review of health-related content before release. Futures Friends owns the characters, stories, rituals and delivery. We do not sell medical claims.']
 ];
@@ -171,12 +170,12 @@ function targetsHtml() {
   <div class="wc-state wc-rv"><h3>State rules sit on top of these defaults</h3>
    <p class="wc-note" style="margin:0">Your center&rsquo;s state and program type decide which rules apply, and the daily plan shows the citation next to each one. These are summaries, not legal advice: your license and your state agency are the authority.</p>
    <div class="wc-state-grid">
-    <div style="--c:var(--wc-booker)"><h4>Kansas centers</h4><ul><li>At least 60 minutes outdoors once a child has been in care more than 4 hours, and daily outdoor time for infants.</li><li>Awake infants and toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).</li><li>Kansas homes: physical activity offered at least 1 hour a day.</li></ul></div>
-    <div style="--c:var(--wc-zuri)"><h4>Missouri</h4><ul><li>1 hour outdoors for full-day preschool and school-age children, weather permitting.</li><li>Preschoolers who do not sleep rest 30 to 60 minutes. Rest is required, and sleep never is.</li><li>No more than 4 hours between meals and snacks.</li><li>Supervised daily tummy time for infants, and no more than 30 minutes awake in the crib.</li></ul></div>
+    <div style="--c:var(--wc-booker)"><h4>Kansas centers</h4><ul><li>At least 60 minutes outdoors once a child has been in care more than 4 hours.</li><li>Awake toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).</li><li>Kansas homes: physical activity offered at least 1 hour a day.</li></ul></div>
+    <div style="--c:var(--wc-zuri)"><h4>Missouri</h4><ul><li>1 hour outdoors for full-day preschool and school-age children, weather permitting.</li><li>Preschoolers who do not sleep rest 30 to 60 minutes. Rest is required, and sleep never is.</li><li>No more than 4 hours between meals and snacks.</li></ul></div>
     <div style="--c:var(--wc-lumi)"><h4>Both states</h4><ul><li>Water available at all times.</li><li>Food and rest are never used as punishment.</li><li>Neither state limits screen time. Our screen limits are Futures Friends standards, not legal requirements.</li></ul></div></div>
    <p class="wc-note" style="margin:0">Missouri programs that are religious-exempt are excused from the daily-schedule rule. The defaults above still apply to them as Futures Friends standards, not as law.</p></div>
   <div class="wc-rules wc-rv">
-   <div><h3>How the day adds up</h3><ul><li>Activity can build up in bouts of 10 minutes or more.</li><li>Every child gets 2 to 3 outdoor occasions and 2 or more adult-led movement activities each day.</li><li>A gentle prompt appears when a room has gone too long without moving: after 15 minutes seated for infants, 30 minutes for toddlers and preschoolers. One hour is the ceiling.</li></ul></div>
+   <div><h3>How the day adds up</h3><ul><li>Activity can build up in bouts of 10 minutes or more.</li><li>Every child gets 2 to 3 outdoor occasions and 2 or more adult-led movement activities each day.</li><li>A gentle prompt appears when a room has gone too long without moving: after 30 minutes seated. One hour is the ceiling.</li></ul></div>
    <div><h3>What we measure</h3><ul><li>Minutes, missions and outdoor occasions the day delivered.</li><li>Never a child's weight, BMI or calories, and never a ranking.</li></ul></div>
    <div><h3>Sources</h3><ul><li>${CFOC}, 4th edition (2019), standards 3.1.3.1 and 2.2.0.3 (PDF).</li><li>${ext(SRC.who, 'WHO guidelines on physical activity, sedentary behaviour and sleep for children under 5 years')}.</li></ul></div></div>`);
 }
@@ -187,7 +186,7 @@ function quietHtml() {
    <div class="wc-split-copy">${lead('Lumi owns BELONG and RESET', 'Lumi\'s Quiet Time', 'Our reset routine for transitions, rest and noticing your body.', '{H}')}
     <ol class="wc-q">${q.map((s, i) => `<li class="wc-rv"><span class="wc-n" aria-hidden="true">${i + 1}</span>${pic(Q_PIC[i], 'wc-q-pic')}<div><b>${s[0]}</b><span>${s[1]}</span></div></li>`).join('')}</ol>
     <blockquote class="wc-quote">Children learn to notice how their body feels, then follow the same four steps every time.</blockquote>
-    <p class="wc-note">Quiet Time is offered, never forced. For infants, safe-sleep rules come first. Some state rules add a requirement: Missouri preschoolers who do not sleep must have a rest period of 30 to 60 minutes. In those rooms rest is required and sleep never is.</p></div>
+    <p class="wc-note">Quiet Time is offered, never forced. Some state rules add a requirement: Missouri preschoolers who do not sleep must have a rest period of 30 to 60 minutes. In those rooms rest is required and sleep never is.</p></div>
    <div class="wc-split-art wc-rv">${art('lumi', { cls: 'wc-big', pose: 'calm-breath', alt: 'Lumi the bunny, taking a calm breath' })}</div></div>`);
 }
 
@@ -271,7 +270,7 @@ const ACTS = [
 ];
 
 // The same four bands the gateway and the hub use (intake validate.AGE_BANDS): the weekly challenge is chosen for the band.
-const AGE_OPTS = [['infant', 'Baby (under 12 months)'], ['toddler', 'Toddler (1 to 2 years)'], ['preschool', 'Preschooler (3 to 5 years)'], ['mixed', 'More than one age']];
+const AGE_OPTS = [['toddler', 'Two-year-old (2 to under 3)'], ['preschool', 'Preschooler (3 to 5 years)'], ['mixed', 'More than one age']];
 const intake = () => window.FFIntake;
 const gateway = () => !!(intake() && intake().enabled());
 

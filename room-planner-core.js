@@ -33,12 +33,12 @@ const FRIENDS = ['booker', 'lumi', 'zuri', 'bop'];
 // ---------------------------------------------------------------- licensing: usable sq ft per child
 const STATES = { MO: 'Missouri', KS: 'Kansas' };
 const ROOM_TYPES = { home: 'Home daycare', center: 'Center classroom', church: 'Church multipurpose room (packs away)' };
-const AGES = { infant: 'Infants', toddler: 'Toddlers', twos: 'Twos', threes: 'Threes', prek: 'Pre-K' };
+const AGES = { twos: 'Twos', threes: 'Threes', prek: 'Pre-K' };   // the program serves ages 2 to 5 (infant and toddler choices removed 2026-10-07)
 const IT = a => a === 'infant' || a === 'toddler';
 const RULES = {
   MO: {
     home: { pre: 35, it: 35, cite: '5 CSR 25-400.085' },
-    center: { pre: 35, it: 45, cite: '5 CSR 25-500.082', itNote: 'Infants and toddlers need 35 or 45 sq ft depending on facility size; the planner uses 45. Your license says which applies.' },
+    center: { pre: 35, it: 45, cite: '5 CSR 25-500.082', itNote: 'Missouri sets 35 or 45 sq ft per child for its youngest children, depending on facility size; the planner uses 45. Your license says which applies.' },
     church: { pre: 35, it: 45, cite: '5 CSR 25-300.090', itNote: 'License-exempt religious programs still need the space rule.' }
   },
   KS: {
@@ -381,9 +381,8 @@ function check(state) {
   if (sp.children && !sp.ok) add('stop', 'space', `${r1(sp.perChild)} sq ft per child is under the ${STATES[setup.state] || ''} minimum of ${sp.min} sq ft (${sp.cite}). This room fits ${sp.capacity} children.`, []);
   // 12. ages and floors
   const ages = setup.ages || [];
-  if (setup.state === 'MO' && ages.some(IT) && items.some(i => i.t === 'mat' || i.t === 'circle')) add('warn', 'age', 'Missouri infant and toddler rooms use washable mats laundered daily, not carpet (5 CSR 25-500.082). Your quote switches every rug and mat to the washable version.', []);
-  if (ages.includes('infant') && items.some(i => i.t === 'fence' || i.t === 'corner')) add('warn', 'age', 'The Friend Fence is designed for ages 2 to 5. In an infant room, use low shelves instead and talk to us first.', []);
-  if (ages.some(a => a === 'toddler' || a === 'twos' || a === 'infant')) add('tip', 'age', 'Under-3 rooms: zone bins ship with a no-small-parts label and a small-parts tester card.', []);
+  if (setup.state === 'MO' && ages.some(IT) && items.some(i => i.t === 'mat' || i.t === 'circle')) add('warn', 'age', 'Missouri bars carpet in rooms for its youngest children and calls for washable mats laundered daily (5 CSR 25-500.082). Your quote switches every rug and mat to the washable version.', []);
+  if (ages.includes('twos')) add('tip', 'age', 'Rooms with twos: zone bins ship with a no-small-parts label and a small-parts tester card.', []);
   if (items.some(i => i.t === 'outlet')) add('tip', 'safety', 'Outlets: use tamper-resistant covers, and run no cords across mats, floor paths or walkways.', items.filter(i => i.t === 'outlet').map(i => i.id));
   return out;
 }
@@ -716,7 +715,7 @@ function bom(state, tiers) {
   if (!rugs.length) L('starter', `Friends Circle rug, ${std[1]}`, 1, 'Not placed in your layout yet', null, 'Included', 'dev');
   for (const r of rugs) {
     const sz = TYPES.circle.sizes.find(x => x[0] === r.sz) || ['custom', 'custom size'];
-    if (r.sz === tier.rug) L('starter', `Friends Circle rug, ${sz[1]}`, 1, washable ? 'Washable version for a Missouri infant or toddler room' : 'Made to order, ships with its flammability report', washable ? null : null, washable ? 'Quote' : 'Included', 'dev');
+    if (r.sz === tier.rug) L('starter', `Friends Circle rug, ${sz[1]}`, 1, washable ? 'Washable version where your state bars carpet' : 'Made to order, ships with its flammability report', washable ? null : null, washable ? 'Quote' : 'Included', 'dev');
     else L('starter', `Friends Circle rug, ${r.sz === 'custom' ? `custom ${dims(r)}` : sz[1]}`, 1, `Size change from the package’s ${std[1]} rug`, null, 'Quote', 'dev');
   }
   // Zone Boundaries
@@ -736,7 +735,7 @@ function bom(state, tiers) {
     if (bands.length > B.bands) L('boundaries', 'Extra Friend Shelf Bands', bands.length - B.bands, '', null, 'Quote', 'dev');
     const extra = pr.reduce((a, p) => a + Math.max(0, p.prints - PRINTS_PER_ZONE), 0);
     if (extra) L('boundaries', 'Extra floor-path prints', extra, `Your routes need ${prints} prints in all`, null, 'Quote', 'dev');
-    if (washable) L('boundaries', 'Washable mats instead of carpet', mats.length, 'Missouri infant and toddler rooms (5 CSR 25-500.082)', null, 'Quote', 'dev');
+    if (washable) L('boundaries', 'Washable mats instead of carpet', mats.length, 'Missouri rule for its youngest children’s rooms (5 CSR 25-500.082)', null, 'Quote', 'dev');
   }
   if (setup.type === 'church') L('addon', 'Church Pack-Away', 1, 'Banner stands, a rolling cart, rug bags, lidded bins and a Sunday reset card', null, 'Quote', 'dev');
   L('addon', 'Friend plush, about 12 in', 0, 'Only after toy-safety testing (ASTM F963)', null, 'Coming later', 'later');

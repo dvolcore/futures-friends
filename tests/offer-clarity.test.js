@@ -65,7 +65,7 @@ test('#enroll: owner slots, no invented staff, Ms. June labelled, honest daily s
 
 test('#for-faith: three versions, ages 2 to 5 and not a nursery, volunteers, pack-away layout link, purchasing approval', () => {
   const t = text(site().render('for-faith')), html = site().render('for-faith');
-  for (const s of ['Licensed weekday child care', 'Church preschool', 'Sunday or occasional', 'ages 2 to 5', 'not an infant or toddler nursery', 'Rotating volunteers', 'pack-away', 'Purchasing approval', 'Your own traditions']) assert.ok(t.includes(s), s);
+  for (const s of ['Licensed weekday child care', 'Church preschool', 'Sunday or occasional', 'ages 2 to 5', 'Rotating volunteers', 'pack-away', 'Purchasing approval', 'Your own traditions']) assert.ok(t.includes(s), s);
   assert.match(html, /href="#room-kit"/);
 });
 

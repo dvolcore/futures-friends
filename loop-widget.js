@@ -43,7 +43,7 @@
       label: 'Story-world animation: Bop the elephant leads Elephant Stomp and Sway.' }
   ];
   const DO_ID = 'ice-detectives';
-  const BANDS = { infant: 'babies', toddler: 'toddlers', twos: 'twos', threes: 'threes', prek: 'pre-K' };
+  const BANDS = { twos: 'twos', threes: 'threes', prek: 'pre-K' };
 
   // per-render state (a new render of #unit-1 makes a new widget and resets it)
   let S = { step: 0, talk: 0, flip: false, done: [], zone: 'booker', move: 0 };

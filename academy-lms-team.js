@@ -137,7 +137,7 @@ function settingsTab(d){
     <label class="f" for="pf-exp">Licensure year ends (license expires / renewal date)<input class="i" id="pf-exp" name="license_expires_on" type="date" value="${esc(p.license_expires_on || '')}"></label>
     <label class="f" for="pf-cap">Licensed capacity<input class="i" id="pf-cap" name="capacity" type="number" min="0" max="999" value="${esc(p.capacity ?? '')}"></label>
     <label class="f" for="pf-trk">Records tracked since<input class="i" id="pf-trk" name="tracking_since" type="date" value="${esc(p.tracking_since || '')}"></label></div>
-    <div class="lms-row"><label class="lms-check"><input type="checkbox" name="serves_infants"${p.serves_infants ? ' checked' : ''}> We care for infants (turns on infant-specific requirements)</label><label class="lms-check"><input type="checkbox" name="subsidy_contract"${p.subsidy_contract ? ' checked' : ''}> We hold a child care subsidy contract (turns on subsidy-provider requirements)</label></div>
+    <div class="lms-row"><label class="lms-check"><input type="checkbox" name="subsidy_contract"${p.subsidy_contract ? ' checked' : ''}> We hold a child care subsidy contract (turns on subsidy-provider requirements)</label></div>
     <p class="lms-note">Kansas counts training hours per licensure year, from the license effective date to its expiration. Update both dates when the license renews. Anything that fell due before "records tracked since" and has no record on file shows as missing data instead of overdue: enter when it was done and it clears. ${st === 'KS' ? 'Kansas has no religious exemption from licensing.' : ''}</p>
     <div class="lms-row"><button class="btn gold" type="submit">Save</button><span class="lms-note" role="status" data-lms-msg></span></div></form></section>
   <section class="lms-sec"><header><h2>Record evidence</h2><span class="lms-note">For things that are not a Futures course: background checks, a CPR card, a fire drill, a license renewal.</span></header>
@@ -251,7 +251,7 @@ F.onForm('t-staff-save', async form => {
 });
 F.onForm('t-profile', async form => {
   const f = form.elements, msg = form.querySelector('[data-lms-msg]');
-  const row = { center_id:L.center.center_id, state:f.state.value, facility_type:f.facility_type.value, license_number:f.license_number.value.trim() || null, license_issued_on:f.license_issued_on.value || null, license_expires_on:f.license_expires_on.value || null, capacity:f.capacity.value === '' ? null : Number(f.capacity.value), tracking_since:f.tracking_since.value || (T.data && T.data.profile ? null : todayYmd()), serves_infants:f.serves_infants.checked, subsidy_contract:f.subsidy_contract.checked };
+  const row = { center_id:L.center.center_id, state:f.state.value, facility_type:f.facility_type.value, license_number:f.license_number.value.trim() || null, license_issued_on:f.license_issued_on.value || null, license_expires_on:f.license_expires_on.value || null, capacity:f.capacity.value === '' ? null : Number(f.capacity.value), tracking_since:f.tracking_since.value || (T.data && T.data.profile ? null : todayYmd()), serves_infants:false, subsidy_contract:f.subsidy_contract.checked };
   if (!row.state) { msg.textContent = 'Choose a state.'; msg.style.color = 'var(--bad)'; return; }
   const btn = form.querySelector('button[type=submit]'); F.busy(btn, true);
   const r = await L.sb.from('compliance_centers').upsert(row, { onConflict:'center_id' });

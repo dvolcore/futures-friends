@@ -205,7 +205,7 @@ function todayCard(c){
 }
 
 // ---------------------------------------------------------------- Check-in, pickup and care log
-const CARE = [['Diaper','Diaper change'],['Potty','Potty'],['Water','Water'],['Bottle','Bottle']];
+const CARE = [['Diaper','Diaper change'],['Potty','Potty'],['Water','Water']];
 function checkinView(c){
   const a = api(), kids = kidsOf(c.room), date = c.date, rt = ratioOf(c.room), r = DM.get('rooms', c.room) || {};
   if (!kids.length) return `<div class="card"><h3>No children in this classroom</h3><p class="small">Add children on the Children tab.</p></div>`;

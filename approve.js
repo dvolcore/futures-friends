@@ -16,7 +16,7 @@ const ROUTE = 'learn-approve', TITLE = 'Content approval';
 const BLOCK = { arrival:'Arrival', circle:'Morning circle', 'picture-talk':'Picture-talk story', 'friends-live':'Friends Live', activity:'Connected activity',
   outside:'Outdoor activity', move:'Movement', zones:'Learning zones', story:'Read-aloud', meal:'Eat the Rainbow at the table', reset:'Reset',
   family:'Family share (optional)', goodbye:'Closing and take-home' };
-const BAND = [['infant','Infants'], ['toddler','Toddlers'], ['twos','Twos'], ['threes','Threes'], ['prek','Pre-K']];
+const BAND = [['twos','Twos'], ['threes','Threes'], ['prek','Pre-K']];
 const FRIEND = { booker:'Booker', lumi:'Lumi', zuri:'Zuri', bop:'Bop' };
 const WEEKDAY = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 const MEDIA = { ready:['ok','Ready'], draft:['warn','Draft'], unavailable:['bad','Not produced yet'] };
@@ -83,7 +83,7 @@ const FIELDS = [['theme','Theme'], ['objective','Objective'], ['block','Block'],
   ['duration_min_estimate','Minutes (estimate)'], ['age_adaptations','Age versions'], ['materials','Materials'], ['prompts','Say or ask'],
   ['participation_alternatives','Another way to join'], ['media','Printables and media'], ['kitchen_prompt','Kitchen prompt'],
   ['home_continuation','Family continuation'], ['learning_steps','Learning Steps'], ['sources','Sources']];
-const SUB = { twos:'Twos', threes:'Threes', prek:'Pre-K', infant:'Infants', toddler:'Toddlers', title:'Title', steps:'Steps', materials_from_home:'From home' };
+const SUB = { twos:'Twos', threes:'Threes', prek:'Pre-K', title:'Title', steps:'Steps', materials_from_home:'From home' };
 const str = x => x == null ? '' : typeof x === 'object' ? (x.ref ? `${x.type}: ${x.ref} (${x.status})` : JSON.stringify(x)) : String(x);
 function diffVal(a, b){
   if (Array.isArray(a) || Array.isArray(b)) {

@@ -24,10 +24,10 @@ const shortDay = s => fromIso(s).toLocaleDateString('en-US',{month:'short',day:'
 const timeOf = ts => new Date(ts).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 const msg = e => (e && e.message) ? e.message : 'That did not save. Try again in a moment.';
 
-const BAND = {infant:'Infants (under 12 months)', toddler:'Toddlers (1 to under 3)', preschool:'Preschool (3 to 5)'};
+const BAND = {toddler:'Twos (2 to under 3)', preschool:'Preschool (3 to 5)'};
 const SPACE = {small_indoor:'Small indoor space', large_indoor:'Large indoor space', outdoor:'Outdoors'};
 const SKILLS = ['Move','Balance','Reach','Control','Handle','Rhythm','Reset'];
-const MONTHS_OPTS = [[6,'Under 12 months (infants)'],[12,'12 to 23 months (under 2)'],[24,'2 years'],[36,'3 years'],[48,'4 to 5 years']];
+const MONTHS_OPTS = [[24,'2 years'],[36,'3 years'],[48,'4 to 5 years']];
 
 // ---------------------------------------------------------------- state
 const R = {
@@ -158,10 +158,8 @@ const STEPS = [
   {k:'reset', type:'reset', slot:'reset', label:'Reset: Quiet Time', hint:"Lumi's Notice, Breathe, Soften, Rest. Offered, never forced.", pick:true, routine:true, space:'small_indoor', min:15},
   {k:'connect', type:'connect', label:'Connect: pickup prompt', hint:'Ask each family: "What\'s your one thing?"', min:5},
 ];
-const INFANT_LABEL = {morning_wake_up:'Morning floor play', transition_move:'Transition: sing and sway', daily_adventure:'Daily Adventure: floor adventure', outside_quest:'Outside Quest: blanket or stroller outing'};
 const restRequired = day => !!(day && (day.targets||[]).some(t=>t.metric==='rest_min' && t.scope==='state'));
 function stepsFor(band, day){ return STEPS.map(s => {
-  if (band==='infant' && INFANT_LABEL[s.k]) s = Object.assign({}, s, {label:INFANT_LABEL[s.k]});
   if (s.k==='reset' && restRequired(day)) s = Object.assign({}, s, {label:'Rest period (required in Missouri preschool rooms)', hint:'Children who do not sleep rest at least 30 and at most 60 minutes. Sleeping is never forced. Lumi: Notice, Breathe, Soften, Rest.', min:30});
   if (s.k==='nourish' && day && (day.targets||[]).some(t=>t.metric==='meal_gap_max_hours')) s = Object.assign({}, s, {hint:s.hint+' Missouri: no more than 4 hours between meals and snacks.'});
   return s; }); }
@@ -187,7 +185,7 @@ function buckets(step, mission, minutes, o, band){
     x.active_min = m; x.mvpa_min = (mission && mission.intensity==='mvpa') ? m : 0;
     if (o && o.swap) { x.weather_swap = true; x.outdoor_min = 0; } else x.outdoor_min = m;
   }
-  if (step.type==='reset') { x.active_min = 0; x.mvpa_min = 0; x.rest_min = (!mission && band!=='infant') ? m : 0; } // a rest period (not a movement reset) counts as rest
+  if (step.type==='reset') { x.active_min = 0; x.mvpa_min = 0; x.rest_min = !mission ? m : 0; } // a rest period (not a movement reset) counts as rest
   if (mission && /tummy/i.test(mission.title)) x.tummy_min = m;
   return x;
 }
@@ -336,8 +334,7 @@ function pickerCard(day, step, c){
    ${step.k!=='reset'?`<div class="rh-chips" role="group" aria-label="Skill"><button class="rh-chipbtn" data-rh="pick-skill" data-v="" aria-pressed="${!p.skill}">Any skill</button>${SKILLS.map(s=>`<button class="rh-chipbtn" data-rh="pick-skill" data-v="${s}" aria-pressed="${p.skill===s}">${s}</button>`).join('')}</div>`:''}
    ${swapInfo?`<div class="rh-note">You picked an indoor space for outdoor time. It will be logged as a <b>weather swap</b> (it does not count as an outdoor occasion). You decide.</div>`:''}
    ${R.libErr?`<p class="small">${E(R.libErr)}</p>`:''}${!R.lib&&!R.libErr?'<p class="small muted">Loading missions...</p>':''}
-   ${day.age_band==='infant'&&step.routine?`<div class="rh-note"><b>Infants: safe sleep comes first.</b> Quiet Time never replaces safe-sleep rules. Back to sleep, firm flat surface, bare crib, always in sight.</div>`:''}
-   ${rows.map(r=>`<div class="rh-mission"><b>${E(r.title)}</b><span class="small">${E(r.teacher_words)}</span><details><summary>Steps, the adapted version and safety</summary><ol>${r.steps.map(x=>`<li>${E(x)}</li>`).join('')}</ol><p class="small"><b>Adapted version:</b> ${E(r.adapted_variant)}</p><p class="small"><b>Safety:</b> ${E(r.safety_note)}</p></details><div><button class="btn gold" data-rh="log-routine" data-rid="${E(r.id)}">Done: ${day.age_band==='infant'?'calm awake time':'Quiet Time offered'}</button></div></div>`).join('')}
+   ${rows.map(r=>`<div class="rh-mission"><b>${E(r.title)}</b><span class="small">${E(r.teacher_words)}</span><details><summary>Steps, the adapted version and safety</summary><ol>${r.steps.map(x=>`<li>${E(x)}</li>`).join('')}</ol><p class="small"><b>Adapted version:</b> ${E(r.adapted_variant)}</p><p class="small"><b>Safety:</b> ${E(r.safety_note)}</p></details><div><button class="btn gold" data-rh="log-routine" data-rid="${E(r.id)}">Done: Quiet Time offered</button></div></div>`).join('')}
    ${ms.length?ms.map(m=>missionCard(day, step, m)).join(''):(R.lib?'<p class="small muted">No missions match those filters. Try another space or skill.</p>':'')}
    <div><button class="btn soft" data-rh="log-quick" data-step="${E(step.k)}">Done without a mission (${step.min} min)</button></div></div>`;
 }
@@ -347,7 +344,7 @@ function screensBlocked(room){ const c = R.cfg[room]; return R.cfgLoaded && !(c 
 function screenCard(day, c){
   const room = c.room, t = (day.targets||[]).find(x=>x.metric==='screen_max_min'); const val = t ? t.value : 0;
   if (!day.configured) return `<div class="card"><h3>Screen time</h3><div class="rh-note">Screens stay off until this room's ages are set${c.role==='director'?'. Set them below.':'. Ask your director to set the room\'s ages.'} Use the song, puppet or card version meanwhile.</div>${altButtons(c)}</div>`;
-  if (!day.screens_allowed) return `<div class="card"><h3>Screen time</h3><div class="rh-note"><b>No screens for infants, toddlers or any child through age 2.</b> This room uses a song, a puppet or a card game instead.</div>${altButtons(c)}</div>`;
+  if (!day.screens_allowed) return `<div class="card"><h3>Screen time</h3><div class="rh-note"><b>No screens for any child through age 2.</b> This room uses a song, a puppet or a card game instead.</div>${altButtons(c)}</div>`;
   return `<div class="card"><h3>Screen time</h3><p class="small">Episodes played from the Today checklist or the episode player are logged here automatically and count against the weekly limit (Monday to today). ${t?`So far this week: <b>${val} min</b> of ${t.max}. <span class="mini">${E(t.standard||'')}: neither Kansas nor Missouri limits screen time.</span>`:''}</p>
    ${t && t.status==='over' ? `<div class="rh-banner warn"><span class="small">This week's screen limit is passed. Offer a song, a puppet or a card game instead.</span></div>${altButtons(c)}` : `<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end"><label class="f" for="rhScr">Log a clip or episode (minutes)<input class="i" id="rhScr" type="number" min="1" max="30" value="5" style="width:90px;padding:6px 8px"></label><button class="btn soft" data-rh="log-screen">Log screen time</button></div>`}</div>`;
 }
@@ -376,7 +373,7 @@ function teacherView(c){
   ${!day.configured?`<div class="rh-banner warn"><div><b>This room's ages are not set.</b><div class="small">Targets use the preschool defaults and screens stay off until a director sets the room's ages.</div></div>${c.role==='director'?roomAgesForm(room):''}</div>`:''}
   ${waterBanner()}
   ${mg?`<div class="rh-banner firm" role="status"><div><b>It has been about ${mg.hours} hours since ${mg.since}. Missouri allows no more than ${mg.max} hours between meals and snacks.</b><div class="small">Offer a meal or snack, then tap it done. <a href="${E(mg.t.source_url)}" target="_blank" rel="noopener">${E(mg.t.source_label)}</a></div></div><button class="btn gold" data-rh="tap" data-step="nourish" ${c.canWrite?'':'disabled'}>Meal or snack served</button></div>`:''}
-  ${n?`<div class="rh-banner ${n.firm?'firm':'warn'}" role="status"><div><b>${n.firm?`It has been about ${n.mins} minutes without a movement moment. The limit for sitting or confinement is ${n.limit} minutes at a time${n.src&&n.src.scope==='state'?' (state rule)':''}.`:`A gentle nudge: about ${n.mins} minutes since the last movement moment.`}</b><div class="small">${day.age_band==='infant'?'Offer floor play, a change of position or tummy time (awake and watched).':'A Transition Move can take 3 minutes.'} You decide.</div></div><button class="btn gold" data-rh="open-pick" data-step="transition_move">Pick a Transition Move</button></div>`:''}
+  ${n?`<div class="rh-banner ${n.firm?'firm':'warn'}" role="status"><div><b>${n.firm?`It has been about ${n.mins} minutes without a movement moment. The limit for sitting or confinement is ${n.limit} minutes at a time${n.src&&n.src.scope==='state'?' (state rule)':''}.`:`A gentle nudge: about ${n.mins} minutes since the last movement moment.`}</b><div class="small">A Transition Move can take 3 minutes. You decide.</div></div><button class="btn gold" data-rh="open-pick" data-step="transition_move">Pick a Transition Move</button></div>`:''}
   <div class="rh-cols"><div class="rh-stack">
     <div class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><h3>${E(c.rooms[room]?c.rooms[room].name:room)} · Daily Rhythm</h3><span class="mini">Tap a moment when it is done. You can change its minutes.</span></div>
      ${steps.map(s=>stepRow(day, s, c)).join('')}
@@ -413,12 +410,12 @@ function settingsCard(c){
   const s = R.settings || {}; const rooms = Object.entries(c.rooms||{});
   return `<div class="card rh-form"><h3>Center settings</h3>
    <div class="row"><label class="f" for="rsLat">Latitude<input class="i" id="rsLat" inputmode="decimal" value="${s.lat??''}" style="width:120px;padding:6px 8px"></label><label class="f" for="rsLon">Longitude<input class="i" id="rsLon" inputmode="decimal" value="${s.lon??''}" style="width:120px;padding:6px 8px"></label><label class="f" for="rsZip">ZIP<input class="i" id="rsZip" maxlength="5" value="${E(s.zip||'')}" style="width:90px;padding:6px 8px"></label><label class="f" for="rsContact">Weather contact (for the National Weather Service)<input class="i" id="rsContact" value="${E(s.weather_contact||'')}" placeholder="director@yourcenter.org" style="width:240px;padding:6px 8px"></label></div>
-   <div class="row"><label class="f" for="rsNudge">Gentle sitting nudge after (minutes, optional)<input class="i" id="rsNudge" type="number" min="10" max="60" value="${s.sitting_nudge_min??''}" placeholder="age default" style="width:110px;padding:6px 8px"></label><label class="f" for="rsFirm">Firm advice after (minutes, optional)<input class="i" id="rsFirm" type="number" min="30" max="120" value="${s.sitting_firm_min??''}" placeholder="age default" style="width:110px;padding:6px 8px"></label><span class="mini" style="align-self:center">Blank uses the age default (infants 15 then 30 minutes, toddlers and preschool 30 then 60). A center may shorten these, never lengthen them past a state rule.</span></div>
+   <div class="row"><label class="f" for="rsNudge">Gentle sitting nudge after (minutes, optional)<input class="i" id="rsNudge" type="number" min="10" max="60" value="${s.sitting_nudge_min??''}" placeholder="age default" style="width:110px;padding:6px 8px"></label><label class="f" for="rsFirm">Firm advice after (minutes, optional)<input class="i" id="rsFirm" type="number" min="30" max="120" value="${s.sitting_firm_min??''}" placeholder="age default" style="width:110px;padding:6px 8px"></label><span class="mini" style="align-self:center">Blank uses the age default (30 then 60 minutes). A center may shorten these, never lengthen them past a state rule.</span></div>
    <div class="row"><label class="f" for="rsHeat">Heat index suggestion line (F)<input class="i" id="rsHeat" type="number" min="70" max="130" value="${s.heat_index_f??90}" style="width:90px;padding:6px 8px"></label><label class="f" for="rsWind">Wind chill suggestion line (F)<input class="i" id="rsWind" type="number" min="-60" max="40" value="${s.wind_chill_f??-15}" style="width:90px;padding:6px 8px"></label></div>
    <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="rsConfirm" ${s.thresholds_confirmed_at?'checked':''} style="width:18px;height:18px"> These two lines match my center's written weather policy. ${s.thresholds_confirmed_at?'':'(Until confirmed, the defaults from CFOC 3.1.3.2 are shown as "center policy to confirm".)'}</label>
    <p class="mini">The weather card only suggests an indoor swap. Teachers decide, and the system never blocks outdoor play.</p>
    <div><button class="btn gold" data-rh="save-settings">Save settings</button></div>
-   <h3 style="margin-top:8px">Room ages</h3><p class="mini">The youngest child in each room sets its daily targets and turns screens off for infants, toddlers and every child through age 2 (rooms whose youngest child is 3 or older can use them).</p>
+   <h3 style="margin-top:8px">Room ages</h3><p class="mini">The youngest child in each room sets its daily targets and turns screens off for every child through age 2 (rooms whose youngest child is 3 or older can use them).</p>
    <div class="rh-tw"><table class="rh-tbl"><thead><tr><th>Room</th><th>Youngest child</th><th></th></tr></thead><tbody>${rooms.map(([id,r])=>{ const cf=R.cfg[id]; return `<tr><td>${E(r.name||id)}</td><td><select class="i" data-rh-ages="${E(id)}" aria-label="Youngest child in ${E(r.name||id)}" style="padding:6px 8px"><option value="" ${cf?'':'selected'}>Not set</option>${MONTHS_OPTS.map(([v,l])=>`<option value="${v}" ${cf&&((v===6&&cf.youngest_months<12)||(v===12&&cf.youngest_months>=12&&cf.youngest_months<24)||(v===24&&cf.youngest_months>=24&&cf.youngest_months<36)||(v===36&&cf.youngest_months>=36&&cf.youngest_months<48)||(v===48&&cf.youngest_months>=48))?'selected':''}>${l}</option>`).join('')}</select></td><td class="mini">${cf?E(BAND[cf.age_band]):'Screens stay off'}</td></tr>`; }).join('')}</tbody></table></div></div>`;
 }
 
@@ -482,7 +479,7 @@ document.addEventListener('click', async e => {
     const mins = +(R.pick.mins[m.id] ?? m.minutes) || m.minutes; const swap = s.type==='outside' && m.space!=='outdoor';
     const ok = await addMoment(room, date, buckets(s, m, mins, {swap}, day&&day.age_band)); if (ok) { R.pick.step = null; toast(swap?'Logged as a weather swap':'Logged. Nice moving!'); } return afterMove(ok); }
   if (a==='log-routine') { const s = steps.find(x=>x.k===R.pick.step); const r = R.lib.routines.find(x=>x.id===b.dataset.rid); if (!s||!r) return;
-    const ok = await addMoment(room, date, {moment_type:'reset', daily5_slot:'reset', title:r.title, minutes:r.minutes||s.min, rest_min: day&&day.age_band==='infant' ? 0 : (r.minutes||s.min), routine_id:r.id}); if (ok) R.pick.step = null; return afterMove(ok); }
+    const ok = await addMoment(room, date, {moment_type:'reset', daily5_slot:'reset', title:r.title, minutes:r.minutes||s.min, rest_min: (r.minutes||s.min), routine_id:r.id}); if (ok) R.pick.step = null; return afterMove(ok); }
   if (a==='undo') { const r = await sb().from('rhythm_moments').delete().eq('id', b.dataset.mid); if (r.error) toast(msg(r.error)); await loadDay(room, date, true); return rerender(); }
   if (a==='log-screen') { const el = document.getElementById('rhScr'); const mins = Math.max(1, Math.min(30, +el.value||5)); const ok = await addMoment(room, date, {moment_type:'learn', title:'Episode or clip (watched together)', minutes:mins, screen_min:mins, source:'clip', adult_led:false}); if (ok) toast('Screen time logged'); return rerender(); }
   if (a==='log-alt') { const t = {song:'Song time (no screen)', puppet:'Puppet story (no screen)', card:'Card game (no screen)'}[b.dataset.alt]; const ok = await addMoment(room, date, {moment_type:'learn', title:t, minutes:6}); if (ok) toast(t+' logged'); return rerender(); }

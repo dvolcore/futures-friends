@@ -127,7 +127,7 @@ const SAFETY = [
   ['rug', 'Flammability-tested rugs', 'Every rug and mat design needs a federal flammability report (16 CFR 1630 or 1631) and a Children’s Product Certificate before it ships.'],
   ['plush', 'Toy-safety-tested plush', 'Plush ship only after testing to the U.S. toy standard (ASTM F963): embroidered faces, no small parts. Until then, printed puppets.'],
   ['eye', 'Sightlines first', 'Fences stay 22 to 24 in with see-through tops, every plan marks the adult positions, and Lumi’s Calm Corner is always in view.'],
-  ['wash', 'Washable mats for infants and toddlers', 'Missouri does not allow carpet in new infant and toddler space (5 CSR 25-500.082), so those rooms get washable mats laundered daily.'],
+  ['wash', 'Washable mats where your state requires them', 'Some states bar carpet in rooms for the youngest children (Missouri does, 5 CSR 25-500.082). Those rooms get washable mats laundered daily.'],
   ['ruler', 'Square feet per child', 'Each layout is checked against your licensed space: Missouri 35 sq ft per child, Kansas centers 28, Kansas homes 25.'],
   ['door', 'Clear exits', 'Exit paths stay 36 in clear, nothing sits in a door swing, and wall art is planned under the 20 percent fire-code cap.']
 ];
