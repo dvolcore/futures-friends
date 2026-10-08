@@ -33,16 +33,16 @@ function jpegSize(b) {
   return { size, markers };
 }
 
-test('the manifest lists the owner concept illustrations, one per real center room, never as real photos', () => {
+test('the manifest lists the owner concept images, one per real center room, never as real photos', () => {
   assert.equal(man.label, LABEL);
   assert.ok(man.rooms.length >= 5);
   for (const r of man.rooms) {
     assert.equal(r.real_photo, false, r.key); assert.equal(r.concept, true, r.key); assert.equal(r.people, false, r.key);
     const base = center.photos.find(p => p.key === r.key); assert.ok(base, r.key + ' is a real photo in img/center');
-    assert.equal(r.generated, 'ai', r.key + ' is marked AI-generated'); assert.equal(r.kind, 'concept illustration');
+    assert.equal(r.generated, 'ai', r.key + ' is marked AI-generated'); assert.equal(r.kind, 'concept image');
     assert.ok(r.source_sha256 && r.source_file, r.key + ' names its owner source image');
     assert.equal(r.real, `img/center/${r.key}-800.jpg`); assert.equal(r.kit, `img/branded-rooms/${r.key}-kit-800.jpg`);
-    assert.match(r.alt, /^Concept illustration, not installed yet:/, r.key + ' alt says concept');
+    assert.match(r.alt, /^Concept image, not installed yet:/, r.key + ' alt says concept');
   }
   assert.ok(!center.photos.some(p => /kit|concept/i.test(p.key)), 'no concept in img/center');
   assert.deepEqual(man.rooms.map(r => r.key).sort(), ['alphabet-rug', 'blue-table-room', 'dress-up-corner', 'reading-corner', 'turtle-rug']);
@@ -50,7 +50,7 @@ test('the manifest lists the owner concept illustrations, one per real center ro
   for (const a of man.alternates) {
     assert.ok(man.rooms.some(r => r.key === a.room), a.key + ' belongs to a listed room');
     assert.equal(a.real_photo, false); assert.equal(a.concept, true); assert.equal(a.people, false); assert.equal(a.generated, 'ai');
-    assert.match(a.alt, /^Concept illustration, not installed yet:/);
+    assert.match(a.alt, /^Concept image, not installed yet:/);
   }
   assert.ok(man.alternates.some(a => a.key === 'alphabet-rug-wall'), 'the full-poster-wall Friends Circle concept is kept');
 });
@@ -76,7 +76,7 @@ test('FFArt.photo shows the concept first, labelled, with the real photo one tap
   for (const r of man.rooms) {
     const fig = A.photo(r.key, { title: 'T' });
     assert.match(fig, /data-kit-view="kit"/);
-    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Concept illustration, not installed yet:[^"]+"[^>]+data-kit-photo="${r.key}"`));
+    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Concept image, not installed yet:[^"]+"[^>]+data-kit-photo="${r.key}"`));
     assert.match(fig, new RegExp(`data-real-photo="${r.key}"`), 'the real photo is still in the figure');
     assert.match(fig, /data-kit-show="real"[^>]*>Real room<\/button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</);
     assert.ok(fig.includes(LABEL), r.key + ' carries the concept label');

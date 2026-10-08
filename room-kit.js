@@ -13,7 +13,7 @@
    - Booker, Lumi, Zuri and Bop are labelled story-world characters; room pictures are labelled (real photo or concept).
    - The cue demo plays each friend's hello line already on the site (friend-voices.js, audio/friends/<k>-hello) after the site's
      own chime (sound.js). Nothing autoplays; the site's sound switch is respected.
-   - Branded-room concept illustrations (the owner's AI-generated images, 2026-10-07) are picked up when they exist: window.FFBrandedRooms, or
+   - Branded-room concept images (the owner's AI-generated images, 2026-10-07) are picked up when they exist: window.FFBrandedRooms, or
      img/branded-rooms/manifest.json {rooms:[{key, real, kit, alt, w, h}]} (coordinator, 2026-10-07). Until then the real classroom photos show alone.
    Also adds entry bands to #for-centers, #for-home, #options, #pricing, #shop-programs and #corners, and a link under the zone map.
    Public: window.FFRoomKit = { ZONES, CUE, KIT, FENCE, LAYOUTS, TIERS, ADDONS, SAFETY, STATUS, band, rooms }. Sends nothing. */
@@ -167,7 +167,7 @@ function hero() {
 }
 
 function rooms() {
-  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept illustration of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
+  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept image of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
    <div class="rk-rooms" data-rk-rooms>${['turtle-rug', 'alphabet-rug', 'reading-corner'].map(k => roomFig({ key: k })).join('')}</div>`);
 }
 const REAL_ALT = {
@@ -358,7 +358,7 @@ function selectTab(k, focus) {
   $$('.rk-plan').forEach(p => { p.hidden = p.dataset.plan !== k; });
 }
 
-// Branded-room concept illustrations: picked up when another release ships them; the real photos stay the "Real room" half.
+// Branded-room concept images: picked up when another release ships them; the real photos stay the "Real room" half.
 let brandedCache = null;
 function brandedRooms() {
   if (Array.isArray(W.FFBrandedRooms)) return Promise.resolve(W.FFBrandedRooms);
