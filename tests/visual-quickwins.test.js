@@ -122,8 +122,8 @@ test('placeholder slots say what goes there and use only official art', () => {
   assert.match(s, /src="img\/plush\/characters\/bop-480\.webp"/);
   assert.match(art().slot({ title: 'Our front door' }), /Photo coming: Our front door/);
   // wave 10: 'Our front door and sign' (features.js + views.js contact) is a real photo now; the people/food/map slots stay placeholders
-  assert.match(read('views.js'), /window\.FFArt\.photo\('exterior',\{title:'Our front door and sign'/);
-  assert.match(read('features.js'), /window\.FFArt\.photo\('exterior', \{title: 'Our front door and sign'/);
+  assert.match(read('views.js'), /window\.FFArt\.photo\('exterior',\{title:'Our front entrance, proposed'/);
+  assert.match(read('features.js'), /window\.FFArt\.photo\('exterior', \{title: '3625 S Blue Ridge Blvd'/);
   for (const [f, re] of [['home-calm.js', /Photos of our center are coming/], ['features.js', /The building and the rooms/], ['features.js', /To meet the director and the teaching team, book a tour/], ['views.js', /Open 3625 S Blue Ridge Blvd in Google Maps/], ['whole-child.js', /See it in motion/]])
     assert.match(read(f), re, f);
   // the Bop video slot is filled (owner 2026-10-07): the real player with captions replaces its placeholder

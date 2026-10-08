@@ -157,3 +157,15 @@ div.ffi-soon[role="alert"]::after{background-image:image-set(url(img/plush/chara
 @media (prefers-reduced-motion:reduce){.ffa-kit-stage>*{transition:none}}
 
 .ffa-compare-in{display:grid;gap:18px}.ffa-compare .ffa-compare-tag{font:600 12px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#233c50}.ffa-compare .ffa-photo{align-content:start}
+/* Proposed front entrance (owner 2026-10-07): the concept leads, the real building is one quiet tap away */
+.ffx-entrance .ffa-photo{max-width:860px;margin-inline:auto}
+/* the owner's own preview chip: CHARACTER CONCEPT, top-left */
+.ffa-kit-label.ffa-kit-label-char,.ks-fig .ffa-kit-label.ffa-kit-label-char{padding:7px 10px;border-radius:5px;background:#236858;border:0;font:800 11px/1.2 var(--display);letter-spacing:.07em;text-transform:uppercase}
+/* Concept 1 / Concept 2 switch on the same image slot (shown only when both concepts exist) */
+.ffa-concept-switch{position:absolute;z-index:2;top:10px;right:10px;display:inline-flex;padding:3px;gap:2px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 4px 14px rgba(4,18,26,.22)}
+.ffa-concept-switch button{appearance:none;border:0;background:transparent;color:#233c50;font:600 12px/1 var(--display);padding:7px 10px;border-radius:999px;cursor:pointer;min-height:30px;white-space:nowrap}
+.ffa-concept-switch button[aria-pressed="true"]{background:#1F2A55;color:#fff}
+.ffa-concept-switch button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ffa-kit[data-concept-view="1"] [data-concept="2"],.ffa-kit[data-concept-view="2"] [data-concept="1"]{display:none}
+.ffa-kit[data-kit-view="real"] .ffa-concept-switch{display:none}
+@media (max-width:900px){.ffa-concept-switch{top:6px;right:6px;padding:2px}.ffa-concept-switch button{font-size:11px;padding:6px 8px;min-height:28px}}
