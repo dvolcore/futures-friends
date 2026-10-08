@@ -31,6 +31,10 @@ if (!document.getElementById('ff-intake-css')) {
 .ffi-soon{border:2px dashed var(--gold);border-radius:var(--r);padding:18px;display:grid;gap:8px;background:var(--paper)}
 .ffi-soon b{font-family:var(--display);font-size:20px;line-height:1.25}
 .ffi-soon .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.ffi-sum{border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;margin-top:10px;display:grid;gap:10px;background:var(--paper)}
+.ffi-sum summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+.ffi-sumacts{display:flex;gap:10px;flex-wrap:wrap}
+.ffi-banner{margin:0;border:2px dashed var(--gold);border-radius:var(--r);padding:12px 16px;background:var(--paper)}
 .ffi-ref{display:grid;gap:2px;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:12px 16px;justify-self:start;min-width:min(100%,260px)}
 .ffi-ref span{font-size:12px;color:var(--muted)}
 .ffi-ref b{font-family:var(--display);font-size:clamp(22px,4vw,28px);letter-spacing:.05em;overflow-wrap:anywhere}
@@ -157,9 +161,40 @@ const SUBJECTS = { 'tour requests': 'Tour request', applications: 'Enrollment ap
   'licensing inquiries': 'Licensing inquiry' };
 const subjectFor = what => 'Futures Friends website: ' + (SUBJECTS[what] || String(what || 'request').replace(/[^A-Za-z0-9 ,.'-]/g, '').slice(0, 60));
 const mailtoFor = what => 'mailto:' + email() + '?subject=' + encodeURIComponent(subjectFor(what));
+// Config-driven wording: say(onText, offText) returns the original online wording once the gateway is switched on (a valid https
+// url in intake-config.js) and the honest wording until then. Nothing here is deleted, only gated.
+const say = (on, off) => (enabled() ? on : off);
+const labelFor = what => SUBJECTS[what] || String(what || 'request');
+// A request summary the visitor can copy or print and send themselves. Nothing leaves the page: the text is built in the browser.
+let sumN = 0;
+const sumTool = what => { const n = ++sumN; return `<details class="ffi-sum" data-ffi-sum="${e(what)}"><summary>Write your request down to send yourself</summary>
+ <p class="small" style="margin:8px 0 0">Fill in what you like. This stays on your device; it is not sent anywhere. Then copy it or print it, and email it to us or bring it to the center.</p>
+ <label class="f" for="ffiSumName${n}">Your name<input class="i" id="ffiSumName${n}" data-ffi-sumf="name" autocomplete="name"></label>
+ <label class="f" for="ffiSumHow${n}">Phone or email to reach you<input class="i" id="ffiSumHow${n}" data-ffi-sumf="how" autocomplete="off"></label>
+ <label class="f" for="ffiSumMsg${n}">What you need, and any times that work<textarea class="i" id="ffiSumMsg${n}" data-ffi-sumf="msg" rows="3"></textarea></label>
+ <label class="f" for="ffiSumOut${n}">Your summary<textarea class="i" id="ffiSumOut${n}" data-ffi-sumout readonly rows="6"></textarea></label>
+ <span class="ffi-sumacts"><button type="button" class="btn gold" data-ffi-sumcopy>Copy summary</button><button type="button" class="btn soft" data-ffi-sumprint>Print summary</button></span>
+ <span class="small muted" role="status" aria-live="polite" data-ffi-sumnote></span></details>`; };
 const soon = what => `<div class="ffi-soon" role="note" data-ffi-soon="${e(what)}"><b>Online requests open soon.</b>
- <p class="small" style="margin:0">We have not turned on online ${e(what)} yet, so this page does not send anything. Please call or email us and a real person will help you.</p>
- <div class="acts"><a class="btn gold" href="${telHref()}">Call ${e(phone())}</a><a class="btn soft" href="${e(mailtoFor(what))}">Email ${e(email())}</a></div></div>`;
+ <p class="small" style="margin:0">Online ${e(what)} are not switched on yet, so this page sends nothing: no request goes out, there is no reference number and no automatic reply. Please call or email us and a real person will help you.</p>
+ <div class="acts"><a class="btn gold" href="${telHref()}">Call ${e(phone())}</a><a class="btn soft" href="${e(mailtoFor(what))}">Email ${e(email())}</a></div></div>${/sign-ups?$|lookups$|status$/.test(what) ? '' : sumTool(what)}`;
+function sumText(box) {
+  const g = k => ((box.querySelector('[data-ffi-sumf="' + k + '"]') || {}).value || '').trim();
+  const what = box.getAttribute('data-ffi-sum') || 'request', d = new Date();
+  return ['Futures Friends: ' + labelFor(what), 'Name: ' + (g('name') || '(add your name)'), 'Phone or email: ' + (g('how') || '(add how to reach you)'),
+    'What I need: ' + (g('msg') || '(add a few words)'), '', 'Send to ' + email() + ' or call ' + phone() + '.',
+    'Written ' + d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + ' on the Futures Friends website. This was not sent online.'].join('\n');
+}
+function sumRefresh(box) { const o = box.querySelector('[data-ffi-sumout]'); if (o) o.value = sumText(box); return o; }
+function sumNote(box, msg) { const n = box.querySelector('[data-ffi-sumnote]'); if (n) n.textContent = msg; }
+function sumPrint(text) {
+  try {
+    const fr = document.createElement('iframe'); fr.setAttribute('aria-hidden', 'true'); fr.style.cssText = 'position:fixed;left:-9999px;width:1px;height:1px;border:0';
+    document.body.appendChild(fr);
+    const d = fr.contentWindow.document; d.open(); d.write('<!doctype html><title>Futures Friends request</title><pre style="font:16px/1.5 Georgia,serif;white-space:pre-wrap">' + e(text) + '</pre>'); d.close();
+    fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 1500); return true;
+  } catch (_) { return false; }
+}
 
 const honeypot = (id = 'ffiHp') => `<div class="ffi-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" id="${id}" tabindex="-1" autocomplete="off"></label></div>`;
 
@@ -209,6 +244,7 @@ function showFailure(form, result, fieldIds) {
     msg.textContent = msg.textContent || result.message;
     if (first) first.focus();
   } else msg.textContent = result.message || 'We could not send this form.';
+  if (!result.errors && !/still (here|on this page)/.test(msg.textContent)) msg.textContent += ' It did not go through, and everything you typed is still here.';
   busy(form, false, result.network ? 'Try again' : null);
 }
 const clearMsg = form => { const m = form.querySelector('[data-ffi-msg]'); if (m) m.textContent = ''; };
@@ -308,12 +344,12 @@ async function loadJobs(force) {
 
 V.jobs = () => {
   setTimeout(() => loadJobs(), 0);
-  return phero('Careers', 'Teach with Futures Friends', 'Teachers, cooks and directors for Futures Friends centers. Openings appear here as they come up. Applying takes about five minutes and asks for your resume.', { chars: KEYS }) + `
+  return phero('Careers', 'Teach with Futures Friends', 'Teachers, cooks and directors for Futures Friends centers. Openings appear here as they come up.' + say(' Applying takes about five minutes and asks for your resume.', ' Online applications are not switched on yet, so call or email with your resume.'), { chars: KEYS }) + `
 <section class="band-paper"><div class="wrap"><div id="ffiJobs" aria-live="polite">${enabled() ? loading('open positions') : soon('job applications')}</div></div></section>
 <section><div class="wrap"><div class="grid g3">
  ${card('What we look for', 'Warm, steady adults who like young children. A CDA or CPR/First Aid helps and is not required for every role; tell us what you have.', 'Teachers', 'booker')}
  ${card('Background screening', 'Every person who works with children is screened through the Missouri Family Care Safety Registry. We tell you before we ask.', 'Safety first', 'zuri')}
- ${card('What happens after you apply', 'You get a reference number right away. The hiring team reviews applications and contacts people it would like to meet. Applying is not a job offer.', 'Honest timeline', 'lumi')}
+ ${card('What happens after you apply', say('You get a reference number right away. The hiring team reviews applications and contacts people it would like to meet. Applying is not a job offer.', 'Until online applications are switched on, call or email and the hiring team will take your details. They contact people they would like to meet. Applying is not a job offer.'), 'Honest timeline', 'lumi')}
 </div></div></section>`;
 };
 
@@ -406,10 +442,17 @@ document.addEventListener('click', ev => {
   const t = ev.target; if (!t || !t.closest) return;
   const j = t.closest('[data-job]'); if (j && j.tagName === 'BUTTON') { ev.preventDefault(); go('job', j.dataset.job); return; }
   if (t.closest('[data-ffi-reload]')) { ev.preventDefault(); jobsCache = null; if (el('ffiJob')) { el('ffiJob').innerHTML = loading('this opening'); loadJob(); } else { el('ffiJobs').innerHTML = loading('open positions'); loadJobs(true); } return; }
+  const sc = t.closest('[data-ffi-sumcopy]'), sp = t.closest('[data-ffi-sumprint]');
+  if (sc || sp) { ev.preventDefault(); const box = (sc || sp).closest('[data-ffi-sum]'), o = sumRefresh(box), text = o ? o.value : '';
+    if (sc) { let done = false; try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(() => sumNote(box, 'Copied. Paste it into an email to ' + email() + '.'), () => sumNote(box, 'Select the text above and copy it.')); done = true; } } catch (_) { /* fall through */ }
+      if (!done) { try { o.focus(); o.select(); sumNote(box, document.execCommand('copy') ? 'Copied.' : 'Select the text above and copy it.'); } catch (_) { sumNote(box, 'Select the text above and copy it.'); } } }
+    else sumNote(box, sumPrint(text) ? 'Opening your print dialog.' : 'Printing did not open. Copy the summary instead.');
+    return; }
   if (t.closest('[data-ffi-again]')) { ev.preventDefault(); const c = el('ffiContactCard'); if (c) c.outerHTML = contactHtml(view === 'quote' ? 'quote' : 'contact', PRESETS[c.getAttribute('data-ffi-preset')]); }
 }, true);
-document.addEventListener('input', ev => { const t = ev.target; if (t && t.getAttribute && t.getAttribute('aria-invalid') === 'true') setErr(t.id, ''); });
+document.addEventListener('toggle', ev => { const t = ev.target; if (t && t.matches && t.matches('[data-ffi-sum]') && t.open) sumRefresh(t); }, true);
+document.addEventListener('input', ev => { const t = ev.target; if (t && t.closest && t.hasAttribute && t.hasAttribute('data-ffi-sumf') && t.closest('[data-ffi-sum]')) sumRefresh(t.closest('[data-ffi-sum]')); if (t && t.getAttribute && t.getAttribute('aria-invalid') === 'true') setErr(t.id, ''); });
 
-window.FFIntake = { enabled, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
+window.FFIntake = { enabled, say, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
   _t: { interpret, keyFor, orderText } };
 })();

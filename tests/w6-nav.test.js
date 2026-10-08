@@ -264,8 +264,9 @@ for (const width of [1280, 390]) {
     assert.equal(f.opts, 0); assert.ok(f.talk && f.call); assert.match(f.text, /Talk to a real person/);
     // "/" inside a text field types a slash instead of opening search
     await page.keyboard.press('Escape'); await h.goto(page, site.base, 'contact');
-    const field = await page.$('#view input[type="text"], #view input:not([type]), #view textarea');
-    if (field) { await field.focus(); await page.keyboard.press('/'); assert.equal(await page.evaluate(() => document.getElementById('px-search').open), false); }
+    const field = (await page.$$('#view input[type="text"], #view input:not([type]), #view textarea')).reduce(async (acc, h) => (await acc) || ((await h.isVisible()) ? h : null), Promise.resolve(null));
+    const fieldH = await field;
+    if (fieldH) { await fieldH.focus(); await page.keyboard.press('/'); assert.equal(await page.evaluate(() => document.getElementById('px-search').open), false); }
     assert.deepEqual(errors.filter(noise), []);
     await ctx.close();
   });

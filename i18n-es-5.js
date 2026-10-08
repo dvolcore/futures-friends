@@ -247,8 +247,8 @@ const T = {
   'Story-world animation: Rose the rabbit does a happy hug.': 'Animación del mundo del cuento: Rose la coneja da un abrazo feliz.',
   // ---- Learning Zones Kit showcase (kit-showcase.js)
   'Five friend zones. One chime.': 'Cinco zonas de amigos. Una campanita.',
-  'Carpets, low see-through fences, signs and a cue your three-year-olds learn in a week, set up in the room you already have.':
-    'Tapetes, cercas bajas y transparentes, letreros y una señal que tus niños de tres años aprenden en una semana, instalados en el salón que ya tienes.',
+  'Carpets, low see-through fences, signs and a cue three-year-olds usually pick up quickly, set up in the room you already have.':
+    'Tapetes, cercas bajas y transparentes, letreros y una señal que los niños de tres años suelen aprender rápido, instalados en el salón que ya tienes.',
   'The five zones': 'Las cinco zonas',
   'Friends Circle': 'Círculo de amigos',
   "Booker's Reading Area": 'Área de lectura de Booker',
