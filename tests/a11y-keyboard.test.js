@@ -210,7 +210,7 @@ for (const width of [1280, 390]) {
     assert.equal(await page.getAttribute('#menuT', 'aria-expanded'), 'false');
     assert.equal(await page.evaluate(() => document.activeElement.id), 'menuT', 'focus returned to the Menu button');
     // the main list is a nav with a name, the current page is marked, and every link has a visible name
-    await h.goto(page, site.base, 'curriculum');
+    await h.goto(page, site.base, 'pricing');   // a centers page that is in the centers header (audience split)
     const nav = await page.evaluate(() => { const n = document.querySelector('nav.px-main'); return { name: n && n.getAttribute('aria-label'), current: document.querySelectorAll('.px-main [aria-current="page"]').length, unnamed: [...document.querySelectorAll('nav a, nav button')].filter(a => !(a.textContent.trim() || a.getAttribute('aria-label'))).length }; });
     assert.ok(nav.name, 'main navigation has an accessible name');
     assert.equal(nav.current, 1, 'the current page is marked in the header');

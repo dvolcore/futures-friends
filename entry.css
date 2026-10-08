@@ -59,3 +59,8 @@ html.ffe-open,html.ffe-open body{overflow:hidden}
 @media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .ffe-next{animation:ffe-next-in .45s cubic-bezier(.2,.9,.3,1.2) both}}
 @keyframes ffe-next-in{from{opacity:0;translate:0 20px}}
 @media print{.ffe-next{display:none!important}}
+/* the audience choice (2026-10-07): families take the big button; programs have their own quiet door */
+.ffe-who{margin:10px 0 0;padding-top:12px;border-top:1.5px dashed rgba(20,49,61,.25);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 8px;font:500 14px/1.4 var(--body,"Poppins",system-ui,sans-serif);color:#14313D}
+.ffe-centers{appearance:none;min-height:44px;padding:0 16px;border:2px solid #0A2B38;border-radius:999px;background:#fff;color:#0A2B38;font:600 14.5px/1 var(--body,"Poppins",system-ui,sans-serif);cursor:pointer}
+.ffe-centers:hover{background:#FBF6EC}
+.ffe-centers:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}

@@ -296,7 +296,7 @@ test("the site's own events sound: a button or link click taps, choosing an audi
   const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(200);
   const grow = async (act) => { const a = (await state(p)).src; await act(); await p.waitForTimeout(120); return (await state(p)).src - a; };
-  assert.ok(await grow(() => p.evaluate(() => window.FFAudience.set('families'))) >= 4, 'ff:audience -> chime (two bells)');
+  assert.ok(await grow(() => p.evaluate(() => window.FFAudience.set('centers'))) >= 4, 'ff:audience -> chime (two bells)');
   await p.waitForTimeout(300);
   assert.ok(await grow(() => p.evaluate(() => { location.hash = '#pricing'; })) >= 2, 'hashchange -> page-turn');
   await p.waitForTimeout(300);

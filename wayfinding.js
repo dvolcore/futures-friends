@@ -36,14 +36,22 @@
 
   // ---------------------------------------------------------------- 1. the map: who each page is for, its short name, parent and friend
   const AUD = {
-    families: { label: 'Families', short: 'Families', heading: 'For families', friend: 'lumi', wave: 'lumi-waving', c: 'var(--lumi)' },
-    centers: { label: 'Centers & home daycares', short: 'Centers', heading: 'For centers & home daycares', friend: 'booker', wave: 'booker-waving', c: 'var(--booker)' },
-    staff: { label: 'Teachers & staff', short: 'Staff', heading: 'For teachers & staff', friend: 'zuri', wave: 'zuri-pointing', c: 'var(--zuri)' }
+    families: { label: 'Families', short: 'Families', heading: 'For families', friend: 'lumi', wave: 'lumi-waving', c: 'var(--lumi)', landing: 'home' },
+    centers: { label: 'For Centers & Programs', short: 'Centers', heading: 'For centers & programs', friend: 'booker', wave: 'booker-waving', c: 'var(--booker)', landing: 'centers' }
   };
+  // Owner 2026-10-07: two audiences, kept apart. Families is the default for everyone; the sales and business pages live only under
+  // "For Centers & Programs". Every route belongs to one of them, to 'portal' (sign-in pages: the audience you came from stays) or to
+  // '' (help and legal pages everyone shares). Opening a families or centers route switches the header, menu and footer to it.
+  const DEFAULT_AUD = 'families';
+  const LEGACY = { staff: 'centers' };          // the old third audience ("Teachers & staff") folded into centers
   const AUDS = Object.keys(AUD);
   // route: [short name, audience or '' (everyone), parent route, friend]
   const PAGES = {
-    home: ['Home', '', '', 'booker'],
+    home: ['Home', 'families', '', 'booker'],
+    centers: ['For centers & programs', 'centers', 'home', 'booker'],
+    'book-demo': ['Book a demo', 'centers', 'centers', 'booker'],
+    'kids-shop': ['Kids\' Shop', 'families', 'home', 'bop'],
+    'sign-in': ['Sign in', 'portal', 'home', 'zuri'],
     enroll: ['Visit our center', 'families', 'home', 'lumi'],
     'at-home': ['Futures at Home', 'families', 'home', 'lumi'],
     'story-time': ['Story Time', 'families', 'at-home', 'booker'],
@@ -56,25 +64,25 @@
     'this-week': ['This week', 'families', 'at-home', 'lumi'],
     'whole-child': ['The whole-child day', 'families', 'home', 'zuri'],
     friends: ['Friends & Books', 'families', 'home', 'booker'],
-    'for-families': ['Families', 'families', 'options', 'lumi'],
-    'family-guide': ['Family app guide', 'families', 'hub', 'lumi'],
+    'for-families': ['Families', 'families', 'home', 'lumi'],
+    'family-guide': ['Family app guide', 'families', 'signin-family', 'lumi'],
     'signin-family': ['Family Portal', 'families', 'home', 'lumi'],
     'family-portal': ['Family Portal preview', 'families', 'signin-family', 'lumi'],
-    'shop-families': ['Family shop', 'families', 'store', 'bop'],
+    'shop-families': ['Kids\' Shop', 'families', 'home', 'bop'],
     events: ['Events', 'families', 'home', 'bop'],
-    options: ['Program options', 'centers', 'home', 'booker'],
+    options: ['Program options', 'centers', 'centers', 'booker'],
     'for-centers': ['For centers', 'centers', 'options', 'booker'],
     'for-home': ['Home daycares', 'centers', 'options', 'booker'],
     'for-prek': ['Pre-K and Head Start', 'centers', 'options', 'zuri'],
-    'for-faith': ['Faith-based centers', 'centers', 'options', 'lumi'],
+    'for-faith': ['Churches and faith programs', 'centers', 'options', 'lumi'],
     'for-employers': ['Employer child care', 'centers', 'options', 'bop'],
-    curriculum: ['Curriculum', 'centers', 'home', 'booker'],
+    curriculum: ['Curriculum', 'centers', 'centers', 'booker'],
     pricing: ['Pricing', 'centers', 'options', 'booker'],
     quote: ['Request a quote', 'centers', 'pricing', 'booker'],
     funding: ['Funding help', 'centers', 'pricing', 'booker'],
-    hub: ['Futures Hub', 'centers', 'home', 'zuri'],
+    hub: ['Futures Hub', 'centers', 'centers', 'zuri'],
     app: ['Get the app', 'centers', 'hub', 'zuri'],
-    impact: ['Impact', 'centers', 'home', 'zuri'],
+    impact: ['Impact', 'centers', 'centers', 'zuri'],
     'train-your-staff': ['Train your staff', 'centers', 'teacher-standard', 'zuri'],
     'shop-programs': ['Classroom kits', 'centers', 'store', 'bop'],
     corners: ['Learning zone guide', 'centers', 'store', 'zuri'],
@@ -84,34 +92,34 @@
     'brand-kit': ['Partner brand kit', 'centers', 'membership', 'bop'],
     'room-planner': ['Room Planner', 'centers', 'room-kit', 'bop'],
     'learn-team': ['Team training', 'centers', 'learn', 'zuri'],
-    'teacher-standard': ['Teacher Standard', 'staff', 'home', 'booker'],
-    'unit-1': ['Unit 1 at a glance', 'staff', 'curriculum', 'booker'],
-    talk: ['Talk About It cards', 'staff', 'watch', 'lumi'],
-    academy: ['Training Academy', 'staff', 'teacher-standard', 'zuri'],
-    training: ['Training path', 'staff', 'academy', 'zuri'],
-    summit: ['Educator summit', 'staff', 'training', 'zuri'],
-    jobs: ['Careers', 'staff', 'home', 'zuri'],
-    job: ['Job opening', 'staff', 'jobs', 'zuri'],
-    blog: ['Blog for educators', 'staff', 'home', 'zuri'],
-    post: ['Article', 'staff', 'blog', 'zuri'],
-    'signin-teacher': ['Teacher Portal', 'staff', 'home', 'zuri'],
-    portal: ['Teacher Portal preview', 'staff', 'signin-teacher', 'zuri'],
+    'teacher-standard': ['Teacher Standard', '', 'home', 'booker'],   // shared: parents read it from Home's trust band, programs from #centers
+    'unit-1': ['Unit 1 at a glance', 'centers', 'curriculum', 'booker'],
+    talk: ['Talk About It cards', 'centers', 'curriculum', 'lumi'],
+    academy: ['Training Academy', 'centers', 'teacher-standard', 'zuri'],
+    training: ['Training path', 'centers', 'academy', 'zuri'],
+    summit: ['Educator summit', 'centers', 'training', 'zuri'],
+    jobs: ['Careers', '', 'home', 'zuri'],
+    job: ['Job opening', '', 'jobs', 'zuri'],
+    blog: ['Blog for educators', 'centers', 'centers', 'zuri'],
+    post: ['Article', 'centers', 'blog', 'zuri'],
+    'signin-teacher': ['Teacher Portal', 'portal', 'home', 'zuri'],
+    portal: ['Teacher Portal preview', 'portal', 'signin-teacher', 'zuri'],
     'start-center': ['Start your center', 'centers', 'hub', 'zuri'],
-    c: ['Center sign-in', 'staff', 'signin-teacher', 'booker'],
+    c: ['Center sign-in', 'portal', 'signin-teacher', 'booker'],
     'enroll-link': ['Enrollment form', 'families', 'enroll', 'lumi'],
-    timeclock: ['Time clock', 'staff', 'signin-teacher', 'bop'],
-    learn: ['Academy', 'staff', 'teacher-standard', 'zuri'],
-    'learn-course': ['Course', 'staff', 'learn', 'zuri'],
-    'learn-cert': ['Certificate', 'staff', 'learn', 'zuri'],
-    'learn-author': ['Course authoring', 'staff', 'learn', 'zuri'],
-    'learn-approve': ['Content approval', 'staff', 'learn', 'zuri'],
-    readiness: ['School readiness', '', 'curriculum', 'booker'],
+    timeclock: ['Time clock', 'portal', 'signin-teacher', 'bop'],
+    learn: ['Academy', 'centers', 'teacher-standard', 'zuri'],
+    'learn-course': ['Course', 'centers', 'learn', 'zuri'],
+    'learn-cert': ['Certificate', 'centers', 'learn', 'zuri'],
+    'learn-author': ['Course authoring', 'centers', 'learn', 'zuri'],
+    'learn-approve': ['Content approval', 'centers', 'learn', 'zuri'],
+    readiness: ['School readiness', 'centers', 'curriculum', 'booker'],
     include: ['Futures Include', '', 'curriculum', 'lumi'],
-    watch: ['Watch', '', 'friends', 'bop'],
+    watch: ['Watch', 'families', 'family-videos', 'bop'],
     rainbow: ['Eat the Rainbow', '', 'whole-child', 'zuri'],
-    store: ['Futures Store', '', 'home', 'bop'],
+    store: ['Futures Store', 'centers', 'centers', 'bop'],
     'store-request': ['Store request', '', 'store', 'bop'],
-    why: ['Why Futures Friends', '', 'home', 'booker'],
+    why: ['Why Futures Friends', 'centers', 'centers', 'booker'],
     news: ['Newsroom', '', 'home', 'bop'],
     support: ['Support and FAQ', '', 'home', 'zuri'],
     contact: ['Contact', '', 'home', 'lumi'],
@@ -124,32 +132,33 @@
     verify: ['Verify a certificate', '', 'learn', 'zuri'],
     'not-found': ['Page not found', '', 'home', 'booker']
   };
-  // Header: at most four main links per audience. Default (no choice) keeps the neutral five from premium.js.
+  // Header: at most five main links per audience (the families' set is also premium.js's first paint, so nothing jumps).
   const MAIN = {
-    families: [['enroll', 'Visit our center'], ['at-home', 'Futures at Home'], ['whole-child', 'The whole-child day'], ['friends', 'Friends & Books']],
-    centers: [['for-centers', 'For centers'], ['for-home', 'Home daycares'], ['curriculum', 'Curriculum'], ['pricing', 'Pricing']],
-    staff: [['teacher-standard', 'Teacher Standard'], ['unit-1', 'Unit 1 at a glance'], ['academy', 'Academy'], ['jobs', 'Careers']]
+    families: [['friends', 'Friends & Books'], ['family-videos', 'Watch'], ['at-home', 'Futures at Home'], ['enroll', 'Visit our center']],
+    centers: [['centers', 'Overview'], ['for-centers', 'Centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches'], ['pricing', 'Pricing']]
   };
-  const NEUTRAL = (W.FFNav && W.FFNav.mainNav) || [['curriculum', 'Curriculum'], ['whole-child', 'Whole Child'], ['teacher-standard', 'Teacher Standard'], ['at-home', 'Futures at Home'], ['friends', 'Friends & Books']];
-  // Menu: each audience's 3 to 5 links in big type.
+  const NEUTRAL = MAIN[DEFAULT_AUD];
+  // Menu: each audience's big links (the menu shows only the chosen audience's group).
   const GROUPS = {
-    families: [['enroll', 'Visit our pilot center'], ['at-home', 'Futures at Home'], ['whole-child', 'The whole-child day'], ['bop-at-home', 'Bop at Home'], ['friends', 'Friends & Books']],
-    centers: [['for-centers', 'What a center gets'], ['for-home', 'Home daycares'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing'], ['train-your-staff', 'Train your staff']],
-    staff: [['teacher-standard', 'Our Teacher Standard'], ['unit-1', 'Unit 1 at a glance'], ['talk', 'Talk About It cards'], ['academy', 'Training Academy'], ['jobs', 'Careers']]
+    families: [['at-home', 'Futures at Home'], ['story-time', 'Story Time'], ['family-videos', 'Watch together'], ['bop-at-home', 'Bop at Home'], ['enroll', 'Visit our pilot center'], ['kids-shop', 'Kids\' Shop']],
+    centers: [['centers', 'Overview'], ['for-centers', 'Child care centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches and faith programs'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing']]
   };
-  // Everything else one tap away in the menu (small links).
-  const MORE = [['options', 'Program options'], ['hub', 'Futures Hub'], ['watch', 'Watch'], ['rainbow', 'Eat the Rainbow'], ['readiness', 'School readiness'], ['story-time', 'Story Time'], ['printables', 'Printables'], ['support', 'Support and FAQ'], ['contact', 'Contact']];
-  const PORTALS = [['signin-teacher', 'Teacher Portal'], ['signin-family', 'Family Portal']];
-  // The context card: the honest next step for each audience (first one that is not the page you are on).
+  // Everything else one tap away in the menu (small links), per audience: families never see the business pages here.
+  const MORE_BY = {
+    families: [['friends', 'Friends & Books'], ['whole-child', 'The whole-child day'], ['activities', 'Things to do at home'], ['printables', 'Printables'], ['my-week', 'My Week'], ['events', 'Events'], ['support', 'Support and FAQ'], ['contact', 'Contact']],
+    centers: [['book-demo', 'Book a demo'], ['membership', 'Monthly Membership'], ['founding-partners', 'Founding Partners'], ['brand-kit', 'Partner brand kit'], ['options', 'Program options'], ['for-prek', 'Pre-K and Head Start'], ['for-employers', 'Employer child care'], ['curriculum', 'Curriculum'], ['readiness', 'School readiness'], ['unit-1', 'Unit 1 at a glance'], ['teacher-standard', 'Teacher Standard'], ['academy', 'Training Academy'], ['train-your-staff', 'Train your staff'], ['room-planner', 'Room planner'], ['shop-programs', 'Classroom kits'], ['hub', 'Futures Hub'], ['start-center', 'Start your center'], ['funding', 'Funding help'], ['impact', 'Impact'], ['why', 'Why Futures Friends'], ['support', 'Support and FAQ'], ['contact', 'Contact']]
+  };
+  const MORE = MORE_BY[DEFAULT_AUD];
+  const PORTALS = [['signin-family', 'Family Portal'], ['signin-teacher', 'Teacher Portal'], ['sign-in', 'All sign-ins']];
+  // The context card: the honest next step for each audience (first one that is not the page you are on). Families: the pilot
+  // center and the free library. Centers: a membership conversation first (review 2026-10-07), never "visit our center".
   const NEXT = {
     families: [['enroll', 'Visit our pilot center', 'Futures Learning Center in Independence, Missouri. Ask us about a tour.', 'lumi-waving'],
       ['at-home', 'Try Futures at Home', 'Free storybooks, activities and printables. No account needed.', 'lumi-heart-hands']],
-    centers: [['for-centers', 'See what a center gets', 'Media, curriculum, family tools and training in one program.', 'booker-waving'],
-      ['pricing', 'See the package prices', 'Published startup packages and monthly fees.', 'booker']],
-    staff: [['teacher-standard', 'Read our Teacher Standard', 'What every teacher meets before working alone with children.', 'zuri-pointing'],
-      ['unit-1', 'See the curriculum and a sample day', 'The Unit 1 summary and one sample day. Partner programs get every day\'s plan.', 'zuri-magnifier']],
+    centers: [['book-demo', 'Book a demo or discuss your program', 'Thirty minutes on your rooms, ages and membership.', 'booker-waving'],
+      ['centers', 'See every program type', 'Centers, home daycares, churches and pre-K partners.', 'booker']],
     '': [['enroll', 'Visit our pilot center', 'Futures Learning Center in Independence, Missouri. Ask us about a tour.', 'lumi-waving'],
-      ['options', 'Find your program', 'Options for centers, home daycares and families.', 'bop-waving']]
+      ['at-home', 'Try Futures at Home', 'Free storybooks, activities and printables. No account needed.', 'lumi-heart-hands']]
   };
   const TALK = ['contact', 'Talk to a real person', `Call ${PHONE} or send us a note.`, 'lumi-waving'];
 
@@ -171,24 +180,29 @@
   }
 
   // ---------------------------------------------------------------- 2. audience
-  let audience = null;
-  { const saved = store.get('ff-audience'); if (AUD[saved]) audience = saved; }
+  let audience = DEFAULT_AUD;
+  { let saved = store.get('ff-audience'); saved = LEGACY[saved] || saved; if (AUD[saved]) audience = saved; }
+  // The address wins over the remembered choice: a link straight to a centers page opens the centers side, and a family page the
+  // families side (route = the first hash segment; #centers/<route> and #families/<route> are audiences.js's aliases).
+  const audOfRoute = r => { const a = PAGES[r] && PAGES[r][1]; return AUD[a] ? a : null; };
+  { const h = (W.location && W.location.hash || '').slice(1).split('/'); const a = AUD[h[0]] ? h[0] : audOfRoute(h[0] || 'home'); if (a) audience = a; }
   const listeners = [];
   function setAudience(a, o = {}) {
-    a = AUD[a] ? a : null;
+    const clearing = !AUD[LEGACY[a] || a];
+    a = clearing ? DEFAULT_AUD : (LEGACY[a] || a);
+    if (clearing) store.del('ff-audience'); else store.set('ff-audience', a);
     if (a === audience && !o.force) return audience;
     const previous = audience;
     audience = a;
-    if (a) store.set('ff-audience', a); else store.del('ff-audience');
     applyAudience();
-    if (o.announce !== false) announce(a ? `Showing the pages for ${AUD[a].label.toLowerCase()} first.` : 'Showing the pages for everyone.');
+    if (o.announce !== false) announce(`Showing the pages ${a === 'families' ? 'for families' : 'for centers and programs'}.`);
     const detail = { audience: a, previous, source: o.source || 'api' };
     try { doc.dispatchEvent(new CustomEvent('ff:audience', { detail })); } catch (_) { /* old browsers: listeners below still run */ }
     listeners.slice().forEach(fn => { try { fn(a, previous); } catch (e) { console.warn(e); } });
     return audience;
   }
   function applyAudience() {
-    if (audience) root.dataset.audience = audience; else delete root.dataset.audience;
+    root.dataset.audience = audience;
     renderMain();
     syncSwitchers();
     renderSitemap();
@@ -205,9 +219,15 @@
     get: () => audience,
     set: (a, o) => setAudience(a, Object.assign({ source: 'api' }, o || {})),
     clear: o => setAudience(null, Object.assign({ source: 'api' }, o || {})),
+    refresh: () => applyAudience(),               // redraw header/menu/footer (routes added by later scripts), no event
     links: a => (MAIN[AUD[a] ? a : ''] || NEUTRAL).filter(([r]) => has(r)).map(([r, n]) => ({ route: r, href: '#' + r, label: n })),
     on: fn => { if (typeof fn === 'function') listeners.push(fn); return () => { const i = listeners.indexOf(fn); if (i > -1) listeners.splice(i, 1); }; }
   });
+
+  // A families or centers page switches the whole site chrome to its side (remembered, not announced: the page itself says where you are).
+  function syncRouteAudience() { const a = audOfRoute(route()); if (a && a !== audience) setAudience(a, { source: 'route', announce: false }); }
+  // Sign in is a link beside the two audience buttons, pressed on the portal pages.
+  function syncSignin() { const on = (PAGES[route()] || [])[1] === 'portal' || route() === 'signin-family'; doc.querySelectorAll('.ffw-signin').forEach(l => { if (on) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current'); }); }
 
   // ---------------------------------------------------------------- 3. header: main links per audience, "you are here"
   function renderMain() {
@@ -218,6 +238,7 @@
   }
   function markCurrent() {
     const r = route();
+    syncSignin();
     doc.querySelectorAll('.px-main a, .ffw-m-link, .ffw-sitemap a').forEach(a => {
       const on = a.getAttribute('href') === '#' + r;
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
@@ -253,12 +274,10 @@
   }
   function renderMenuBody() {
     const groups = menu.querySelector('.ffw-m-groups'), side = menu.querySelector('.ffw-m-side');
-    const order = audience ? [audience].concat(AUDS.filter(k => k !== audience)) : AUDS;
-    groups.innerHTML = groupHTML('all', NEUTRAL, 'Start here', audience ? 'ffw-m-neutral' : 'ffw-m-neutral is-active')
-      + order.map(k => groupHTML(k, GROUPS[k], AUD[k].heading, k === audience ? 'is-active' : '')).join('');
+    groups.innerHTML = groupHTML(audience, GROUPS[audience], AUD[audience].heading, 'is-active');   // only the chosen side's pages
     const r = route();
     side.innerHTML = `<section class="ffw-m-portals" aria-labelledby="ffw-mp-h"><h2 class="ffw-m-sh" id="ffw-mp-h">Sign in</h2><div class="ffw-m-pills">${PORTALS.filter(([x]) => has(x)).map(([x, n]) => `<a class="ffw-m-pill" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${LOCK}<span>${E(n)}</span><small>preview</small></a>`).join('')}</div></section>
-      <section class="ffw-m-more" aria-labelledby="ffw-mm-h"><h2 class="ffw-m-sh" id="ffw-mm-h">More from Futures Friends</h2><ul>${MORE.filter(([x]) => has(x)).map(([x, n]) => `<li><a class="ffw-m-small" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${E(n)}</a></li>`).join('')}<li><button type="button" class="ffw-m-small ffw-m-search" data-ffw-search>${ic('Search')}Search the site</button></li></ul></section>`;
+      <section class="ffw-m-more" aria-labelledby="ffw-mm-h"><h2 class="ffw-m-sh" id="ffw-mm-h">More from Futures Friends</h2><ul>${MORE_BY[audience].filter(([x]) => has(x)).map(([x, n]) => `<li><a class="ffw-m-small" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${E(n)}</a></li>`).join('')}<li><button type="button" class="ffw-m-small ffw-m-search" data-ffw-search>${ic('Search')}Search the site</button></li></ul></section>`;
     const pal = audience ? AUD[audience].wave : 'bop-waving';
     menu.querySelectorAll('.ffw-m-pal').forEach(el => { if (el.dataset.slug !== pal) { el.dataset.slug = pal; el.innerHTML = plush(pal, el.classList.contains('ffw-m-pal-top') ? 72 : 190, 'ffw-m-palimg') + (el.classList.contains('ffw-m-pal-corner') ? '<span class="tx-ground"></span>' : ''); } });
     syncSwitchers();
@@ -384,9 +403,9 @@
     if (F && F.PRINTABLES) F.PRINTABLES.forEach(p => out.push({ kind: 'Printable', aud: 'families', title: p.t, desc: p.d, kw: `printable pdf print ${p.id.replace(/-/g, ' ')}`, href: '#printables', friend: p.c, reveal: { sel: `a.fl-thumb[href="${p.f}"]` } }));
     if (typeof FAQ !== 'undefined' && Array.isArray(FAQ)) FAQ.forEach(([q, a]) => out.push({ kind: 'Question', aud: 'centers', title: q, desc: a, kw: 'faq question', href: '#support', faq: 'support', reveal: { q } }));
     const T = W.FFTeacherStandard;
-    if (T && Array.isArray(T.FAQ)) T.FAQ.forEach(([q, a]) => out.push({ kind: 'Question', aud: 'staff', title: q, desc: a, kw: 'faq question teacher standard', href: '#teacher-standard', reveal: { q } }));
+    if (T && Array.isArray(T.FAQ)) T.FAQ.forEach(([q, a]) => out.push({ kind: 'Question', aud: 'centers', title: q, desc: a, kw: 'faq question teacher standard', href: '#teacher-standard', reveal: { q } }));
     const mods = (W.FF && W.FF.modules) || [];
-    mods.forEach(m => out.push({ kind: 'Lesson', aud: 'staff', title: m.title, desc: `${m.code}, sample lesson preview in the Training Academy`, kw: `${m.code} lesson course module`, href: '#academy/' + encodeURIComponent(m.code), friend: 'zuri', lesson: true }));
+    mods.forEach(m => out.push({ kind: 'Lesson', aud: 'centers', title: m.title, desc: `${m.code}, sample lesson preview in the Training Academy`, kw: `${m.code} lesson course module`, href: '#academy/' + encodeURIComponent(m.code), friend: 'zuri', lesson: true }));
     out.forEach(o => { o.nt = norm(o.title); o.nk = norm(o.kw); o.nd = norm(o.desc); });
     return out;
   }
@@ -403,10 +422,10 @@
     return s;
   }
   const KIND_ICON = { Page: 'Route', Printable: 'Download', Question: 'Sparkles', Lesson: 'BookOpen' };
-  const GROUP_LABEL = { families: 'For families', centers: 'For centers & home daycares', staff: 'For teachers & staff', '': 'For everyone' };
+  const GROUP_LABEL = { families: 'For families', centers: 'For centers & programs', portal: 'Sign in', '': 'For everyone' };
   let opts = [], active = -1;
   function suggestions() {
-    const pick = (audience ? GROUPS[audience] : NEUTRAL.concat([['enroll'], ['contact']])).map(([r]) => r).filter(has);
+    const pick = GROUPS[audience].map(([r]) => r).filter(has);
     return pick.map(r => INDEX.find(o => o.href === '#' + r && o.kind === 'Page')).filter(Boolean);
   }
   function renderResults() {
@@ -646,7 +665,13 @@
   // ---------------------------------------------------------------- 9. clicks: audience buttons, the menu button, the back chip
   doc.addEventListener('click', e => {
     const ab = e.target.closest('.ffw-audbtn[data-audience]');
-    if (ab) { const k = ab.dataset.audience; setAudience(audience === k ? null : k, { source: ab.closest('#ffw-menu') ? 'menu' : 'header' }); return; }
+    if (ab) {
+      const k = ab.dataset.audience, inMenu = !!ab.closest('#ffw-menu');
+      setAudience(k, { source: inMenu ? 'menu' : 'header' });
+      // the header switch takes you to that side's front page (Home or #centers); in the menu it only swaps the links shown
+      if (!inMenu && AUD[k] && route() !== AUD[k].landing && audOfRoute(route()) !== k) { intent(); go(AUD[k].landing); }
+      return;
+    }
     const mb = e.target.closest('#menuT');
     if (mb) { e.preventDefault(); openMenu(mb); return; }
   });
@@ -710,6 +735,7 @@
   let turning = false, turnN = 0, fromChrome = false;
   function afterRoute(prevKey, isUser) {
     const r = route(), a = curArg(), k = keyOf(r, a);
+    syncRouteAudience();
     const b = menuBtn(); if (b) b.setAttribute('aria-expanded', String(menu.open));
     renderNext();
     markCurrent();
@@ -784,6 +810,7 @@
   function setHeadVar() { const h = doc.querySelector('header.bar'); if (h) root.style.setProperty('--ffw-head', h.offsetHeight + 'px'); }
   W.FFhooks = W.FFhooks || [];
   W.FFhooks.push(() => {
+    syncRouteAudience();
     ensureCrumbs(); ensureBack(); syncClose(); markCurrent(); renderNext();
     if (!hist.length) recordHistory();
   });
@@ -800,5 +827,5 @@
   (W.requestIdleCallback || (fn => setTimeout(fn, 2500)))(() => ['booker', 'lumi', 'zuri', 'bop'].forEach(prefetch));
   reduceMQ.addEventListener && reduceMQ.addEventListener('change', () => { if (menu.open) renderMenuBody(); });
 
-  W.FFWay = Object.freeze({ AUD, PAGES, MAIN, NEUTRAL, GROUPS, MORE, PORTALS, NEXT, TALK, palette, openMenu, closeMenu, menu: () => menu, crumbs: crumbsHTML, chainOf, detailName, backTarget, history: () => hist.slice(), index: () => (INDEX || (INDEX = buildIndex())) });
+  W.FFWay = Object.freeze({ AUD, PAGES, MAIN, NEUTRAL, GROUPS, MORE, MORE_BY, PORTALS, DEFAULT_AUD, audOfRoute, NEXT, TALK, palette, openMenu, closeMenu, menu: () => menu, crumbs: crumbsHTML, chainOf, detailName, backTarget, history: () => hist.slice(), index: () => (INDEX || (INDEX = buildIndex())) });
 })();

@@ -628,13 +628,11 @@ async function features() {
     assert(cleared === 0, 'Clear list left lines');
     return `list add/change/remove, request page carries the list (${/open soon|call/i.test(req.text) ? 'honest request state' : 'form'}), clear ok`;
   });
-  await step('store', 'shop-families: wish list qty + "Tell me when it opens"', async () => {
+  // audience split (2026-10-07): the old #shop-families link opens the families' Kids' Shop (poster, plush, small carpet)
+  await step('store', 'shop-families -> Kids\' Shop: three items, honest status, "Tell me when it opens"', async () => {
     await open(page, 'shop-families', 900);
-    const id = await page.evaluate(() => document.querySelector('[id^=sq-FF-FAM]').id);
-    await page.fill('#' + id, '1'); await page.locator('#' + id).dispatchEvent('change'); await page.waitForTimeout(400);
-    const n = await page.evaluate(() => document.querySelectorAll('.fs-panel .fs-lines li').length);
-    assert(n === 1, `wish list has ${n} lines`);
-    await page.evaluate(() => { const b = document.querySelector('[data-store-clear]'); b && b.click(); });
+    const f = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.aud-kid').length, btn: !!document.querySelector('[data-go="store-request"][data-store-req="list"]') }));
+    assert(f.hash === '#kids-shop', `landed on ${f.hash}`); assert(f.n === 3, `${f.n} items`); assert(f.btn, 'no "Tell me when it opens"');
     return 'ok';
   });
 

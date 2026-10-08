@@ -1,6 +1,7 @@
 /* Futures Friends: the entry gate (owner 2026-10-07: "Make it start with it ON — for demonstration purposes I need ALL the effects on").
    Browsers allow no sound before the visitor's first tap or key, so the first page load of a session opens on one felt-sky moment:
-   the plush logo, "Welcome to the Futures Friends world" and one big "Tap to enter" button (Enter and Space work, it has focus).
+   the plush logo, "Welcome to the Futures Friends world" and one big "Tap to enter" button (Enter and Space work, it has focus), and a small "Enter for centers & programs" choice (the audience
+   split, 2026-10-07: it opens #centers on the business side; families, the default, take the big button).
    That single tap is the gesture that wakes sound (sound.js listens for it): the title tune and the nature ambience start at once,
    and the gate lifts away into the hero's fly-in, which waits for it (hero-world.js and hero-motion.js call FFEntry.wait).
    On Home with motion the title's own letters play the tune as they land, so sound.js plays no second one (data-ffe-tune).
@@ -178,16 +179,24 @@
    <p id="ffe-p" class="ffe-p">Booker, Lumi, Zuri and Bop are waiting in the meadow. Turn your sound up: the friends have music, birdsong and voices to share.</p>
    <button type="button" class="ffe-go"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg><span>Tap to enter</span></button>
    <button type="button" class="ffe-quiet" data-ffs-ignore>Enter without sound</button>
+   <p class="ffe-who"><span>Run a center, home daycare, church or program?</span> <button type="button" class="ffe-centers">Enter for centers &amp; programs</button></p>
   </div>`;
     D.body.appendChild(gate);
     hold(true);
-    const go = gate.querySelector('.ffe-go'), quiet = gate.querySelector('.ffe-quiet');
+    const go = gate.querySelector('.ffe-go'), quiet = gate.querySelector('.ffe-quiet'), centers = gate.querySelector('.ffe-centers');
     go.addEventListener('click', () => enter(true));
     quiet.addEventListener('click', () => enter(false));
+    // owner 2026-10-07: the gate is also the audience choice. Families is the default (the big button); programs go to #centers.
+    // The first visit always plays Home's opening first (owner hard requirement): the choice is held as W.FFEntry.afterGate and
+    // opened by done() right after the opening's 'ff:first-visit-done' (one navigation, no timer of our own).
+    centers.addEventListener('click', () => {
+      afterGate = 'centers';
+      enter(true);
+    });
     // focus stays in the gate: Tab and Shift+Tab cycle between its two buttons
     gate.addEventListener('keydown', e => {
       if (e.key !== 'Tab') return;
-      const first = go, last = quiet;
+      const first = go, last = centers;
       if (e.shiftKey && D.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && D.activeElement === last) { e.preventDefault(); first.focus(); }
     });

@@ -275,7 +275,7 @@ test('pick a friend works by keyboard and by tap; the proof numbers on the page 
   assert.match(await page.textContent('#hc-pickpanel'), /Zuri[\s\S]*Ice Detectives/);
   assert.deepEqual(await page.$$eval('[role=tab]', t => t.map(x => x.tabIndex)), [-1, -1, 0, -1], 'roving tab stop follows the choice');
   // proof numbers: the page shows exactly what the repo files say
-  const S = site(), want = Object.fromEntries(S.FFHomeCalm.proofData().map(x => [x.id, x.n]));
+  const S = site(), want = Object.fromEntries(S.FFHomeCalm.proofData().filter(x => S.FFHomeCalm.FAMILY_PROOF.includes(x.id)).map(x => [x.id, x.n]));   // Home (families) shows the family tiles; #centers the full set
   const got = await page.$$eval('[data-proof-id]', t => Object.fromEntries(t.map(x => [x.dataset.proofId, +x.querySelector('.ffa-sr').textContent.trim()])));
   assert.deepEqual(got, want);
   const f = await page.evaluate(() => { const v = document.querySelector('#view'), a = [...v.querySelectorAll('a[href]')]; return { links: a.length, dl: a.filter(x => x.hasAttribute('download') || /\.(pdf|zip|docx?|csv)(\?|#|$)/i.test(x.getAttribute('href'))).length }; });
@@ -347,7 +347,7 @@ test('motion off: doors keep their stitch drawn, headings are never held back, t
   assert.deepEqual(s.doorLinks, [1, 1, 1], 'each door stays one labelled link');
   assert.equal(s.wait, 0, 'nothing waits for an animation');
   assert.equal(s.foot, 1, 'the friends\' strip sits directly above the footer, in its own element');
-  assert.deepEqual(s.friends, [['Move with Bop', '#bop-at-home'], ['Belong with Lumi', '#whole-child'], ['Learn with Booker', '#curriculum'], ['Explore with Zuri', '#activities']]);
+  assert.deepEqual(s.friends, [['Move with Bop', '#bop-at-home'], ['Belong with Lumi', '#whole-child'], ['Learn with Booker', '#story-time'], ['Explore with Zuri', '#activities']]);
   assert.ok(s.kinetic.every(o => o === '1'), 'the kinetic line is fully there');
   await ctx.close();
 });

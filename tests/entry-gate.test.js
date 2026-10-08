@@ -49,8 +49,11 @@ for (const width of [1280, 390]) {
     const v = (await h.axe(page, { include: '.ffe', openDetails: false })).filter(x => ['serious', 'critical'].includes(x.impact));
     assert.deepEqual(v, []);
     // Tab stays in the gate
+    // (audience split 2026-10-07: the third stop is the quiet "Enter for centers & programs" door)
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-quiet');
+    await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-centers');
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-go');
+    await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-centers');
     await page.keyboard.press('Shift+Tab'); assert.equal(await page.evaluate(() => document.activeElement.className), 'ffe-quiet');
     await page.keyboard.press('Shift+Tab');
     // Enter: the one gesture that wakes sound (with Nature on); the gate lifts and the opening plays in view

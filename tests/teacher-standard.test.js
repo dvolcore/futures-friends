@@ -150,8 +150,11 @@ test('Train your staff uses the honest open-soon form while no gateway url is se
 test('entry points: main nav, More menu, home band, Enroll, For Families, For Centers, Home Daycares and footer', () => {
   const p = read('premium.js');
   // Wave 6 NAV: the neutral main list is `const mainNav` (rendered into <nav id="nav">); staff see it first in their own list too.
-  assert.match(p, /const mainNav=\[[^;]*\['teacher-standard','Teacher Standard'\]/, 'top-level main nav link');
-  assert.match(read('wayfinding.js'), /staff: \[\['teacher-standard', 'Teacher Standard'\]/, 'first link in the staff header list');
+  // Audience split (owner 2026-10-07): the Teacher Standard is a shared page (parents reach it from Home's trust band, programs
+  // from the centers menu and the #centers landing); the families' header is four family links.
+  assert.match(read('wayfinding.js'), /'teacher-standard': \['Teacher Standard', '', /, 'a shared page (no audience switch)');
+  assert.match(read('wayfinding.js'), /\['teacher-standard', 'Teacher Standard'\]/, 'in the centers menu');
+  assert.match(read('audiences.js'), /\['teacher-standard', 'Our Teacher Standard'/, 'on the #centers landing');
   assert.match(read('wayfinding.js'), /\['train-your-staff', 'Train your staff'\]/, 'in the centers group of the full-screen menu (wave 6; was the More menu)');
   assert.match(read('home-calm.js'), /window\.FFTeacherStandard \? window\.FFTeacherStandard\.callout\('home'\)/, 'Home trust section (wave 4)');
   const c = site();

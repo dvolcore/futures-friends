@@ -19,28 +19,31 @@ const premium = read('premium.js');
 const mainNav = premium.slice(premium.indexOf('const mainNav='), premium.indexOf('];', premium.indexOf('const mainNav=')) + 2);
 const way = read('wayfinding.js');
 const block = name => { const i = way.indexOf(`const ${name} = `); return vm.runInNewContext('(' + way.slice(i + `const ${name} = `.length, way.indexOf(';\n', i)) + ')'); };
-const GROUPS = JSON.parse(JSON.stringify(block('GROUPS'))), MORE = JSON.parse(JSON.stringify(block('MORE'))), PORTALS = JSON.parse(JSON.stringify(block('PORTALS')));
-const moreGroups = [['Families', GROUPS.families], ['Centers & home daycares', GROUPS.centers], ['Teachers & staff', GROUPS.staff], ['More from Futures Friends', MORE], ['Sign in', PORTALS]];
+const GROUPS = JSON.parse(JSON.stringify(block('GROUPS'))), MORE_BY = JSON.parse(JSON.stringify(block('MORE_BY'))), PORTALS = JSON.parse(JSON.stringify(block('PORTALS')));
+// Audience split (owner 2026-10-07): two audiences, each with its own big links and its own "More" list; portals are shared.
+const moreGroups = [['Families', GROUPS.families], ['For centers & programs', GROUPS.centers], ['More for families', MORE_BY.families], ['More for centers & programs', MORE_BY.centers], ['Sign in', PORTALS]];
 const routesIn = s => [...s.matchAll(/\['([a-z0-9-]+)','/g)].map(m => m[1]);
 const hrefs = html => [...html.matchAll(/href="#([^"]+)"/g)].map(m => m[1]);
 
-test('main nav is five grouped topics; Teacher Standard stays top level; every earlier nav destination is still one click away', () => {
-  assert.deepEqual(routesIn(mainNav), ['curriculum', 'whole-child', 'teacher-standard', 'at-home', 'friends']);
-  assert.match(premium, /<nav id="nav" class="main px-main" aria-label="Main">\$\{mainNav\.map/, 'the header renders the neutral list until an audience is chosen');
+test('main nav is the families\' four topics by default; every earlier nav destination is still one click away (menu, per audience)', () => {
+  assert.deepEqual(routesIn(mainNav), ['friends', 'family-videos', 'at-home', 'enroll']);
+  assert.match(premium, /<nav id="nav" class="main px-main" aria-label="Main">\$\{mainNav\.map/, 'the header renders the families list until wayfinding.js applies the audience');
   const more = moreGroups.flatMap(([, items]) => items.map(i => i[0]));
   const before = ['curriculum', 'whole-child', 'teacher-standard', 'friends', 'at-home', 'watch', 'rainbow', 'academy', 'bop-at-home', 'hub', 'readiness', 'options', 'for-centers', 'train-your-staff', 'pricing', 'jobs', 'contact', 'enroll', 'support', 'signin-family', 'signin-teacher'];
-  const reachable = new Set([...routesIn(mainNav), ...more, ...[...premium.matchAll(/link\('([a-z-]+)','(?:Visit our center|Teacher Portal|Family Portal)/g)].map(m => m[1])]);
-  for (const r of before) assert.ok(reachable.has(r), r + ' is still in the header');
+  const reachable = new Set([...routesIn(mainNav), ...more, 'rainbow', 'watch', 'jobs', ...[...premium.matchAll(/link\('([a-z-]+)','(?:Visit our center|Sign in|Book a demo|Teacher Portal|Family Portal)/g)].map(m => m[1])]);
+  for (const r of before.filter(r => !['rainbow', 'watch', 'jobs'].includes(r))) assert.ok(reachable.has(r), r + ' is still in the header or menu');
+  for (const r of ['rainbow', 'watch', 'jobs']) assert.match(read('index.html'), new RegExp(`<a href="#${r}">`), r + ' is in the footer site map');
   // Wave 6: the old five More groups became three audience groups (3 to 5 big links each) plus "More" and the portal pills.
-  assert.deepEqual(moreGroups.map(g => g[0]), ['Families', 'Centers & home daycares', 'Teachers & staff', 'More from Futures Friends', 'Sign in']);
-  for (const [, items] of moreGroups.slice(0, 3)) assert.ok(items.length >= 3 && items.length <= 5, 'audience groups stay scannable (3 to 5 links)');
-  for (const [, items] of moreGroups) assert.ok(items.length >= 2 && items.length <= 9, 'groups stay scannable');
+  for (const [, items] of moreGroups.slice(0, 2)) assert.ok(items.length >= 3 && items.length <= 6, 'audience groups stay scannable (3 to 6 links)');
+  for (const [, items] of moreGroups) assert.ok(items.length >= 2 && items.length <= 24, 'groups stay scannable');
+  // families never see the business pages in their menu
+  for (const [r] of GROUPS.families.concat(MORE_BY.families)) assert.ok(!['pricing', 'options', 'room-kit', 'for-centers', 'impact', 'academy', 'shop-programs', 'quote'].includes(r), r);
   assert.match(way, /<section class="ffw-m-group[^`]*aria-labelledby="ffw-mg-\$\{k\}"/, 'each menu group is a labelled section for screen readers');
 });
 
 test('the pending #unit-1 route is hidden in the menu until it exists and never linked to a 404; R8 scope is an in-page jump', () => {
   // Wave 6: the menu is rebuilt each time it opens and lists only routes that exist (has()), so #unit-1 is hidden until it exists.
-  assert.ok(moreGroups.flatMap(([, items]) => items).some(i => i[0] === 'unit-1'), 'the Unit 1 summary is in the staff group');
+  assert.ok(moreGroups.flatMap(([, items]) => items).some(i => i[0] === 'unit-1'), 'the Unit 1 summary is in the centers menu');
   assert.match(way, /const links = list\.filter\(\(\[x\]\) => has\(x\)\)/, 'menu groups drop routes that do not exist');
   assert.match(way, /const has = r => typeof V\[r\] === 'function';/);
   assert.match(premium, /querySelectorAll\('\[data-ff-pending\]'\)\.forEach\(el=>\{el\.hidden=typeof V\[el\.dataset\.ffPending\]!=='function';\}\)/, 'go() re-checks on every route change');
@@ -170,7 +173,7 @@ test('Home hero keeps the identity and uses the pillar line; the logo reveal mov
   const hero = premium.slice(premium.indexOf('V.home=()=>'), premium.indexOf('${window.FFHomeCalm'));
   assert.match(hero, /<p>Learn\. Move\. Explore\. Belong\.<\/p>/);
   assert.doesNotMatch(hero, /Read\. Move\./);
-  assert.match(hero, /link\('options','Find your program '\+icon\('ArrowRight'\),'px-btn px-primary'\)/, 'yellow program button kept');
+  assert.match(hero, /link\('at-home','Free stories and activities '\+icon\('ArrowRight'\),'px-btn px-primary'\)/, 'yellow button kept; Home is the families\' front door (audience split), so it opens the free library');
   assert.match(hero, /window\.FFArt\.homeStage\(\)/, 'four dimensional friends kept');
   assert.doesNotMatch(hero, /data-brand-reveal/);
   assert.match(read('home-calm.js'), /class="ff-brand-trigger hc-reveal" data-brand-reveal/, 'logo reveal still on Home, in the closing band');

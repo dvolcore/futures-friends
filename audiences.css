@@ -1,0 +1,69 @@
+/* Futures Friends: the two audiences (audiences.js + wayfinding.js). Families is the default (no attribute yet = families).
+   Header pieces and footer columns marked for one side are hidden on the other. */
+html[data-audience="centers"] .ffw-for-families,html:not([data-audience="centers"]) .ffw-for-centers{display:none!important}
+html[data-audience="centers"] .ffw-fcol[data-aud="families"],html:not([data-audience="centers"]) .ffw-fcol[data-aud="centers"]{display:none!important}
+html[data-audience="centers"] .ffw-cross[data-for="families"],html:not([data-audience="centers"]) .ffw-cross[data-for="centers"]{display:none!important}
+
+/* the Sign in link sits beside the two audience buttons */
+.px-utility .ffw-signin{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:6px 12px;margin-left:6px;border-radius:999px;color:#fff;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,.28);text-decoration:none}
+.px-utility .ffw-signin .ffw-lock{width:13px;height:13px;opacity:.85}
+.px-utility .ffw-signin:hover{background:rgba(255,255,255,.1)}
+.px-utility .ffw-signin[aria-current="page"]{background:var(--ffw-cream,#FBF6EC);color:var(--ffw-ink,#14313D);border-color:var(--ffw-cream,#FBF6EC)}
+.px-utility .ffw-signin:focus-visible{outline:2px solid #F5C553;outline-offset:2px}
+@media (max-width:640px){
+  header.bar .px-utility .wrap>.ffw-aud{gap:4px}
+  .px-utility .ffw-audbtn{padding:6px 6px;gap:5px;min-width:0}
+  .px-utility .ffw-signin{flex:0 0 auto;margin-left:2px;padding:6px 9px;min-height:30px;font-size:12.5px}
+}
+@media (max-width:380px){.px-utility .ffw-audbtn::before{display:none}.px-utility .ffw-signin .ffw-lock{display:none}}
+/* the header's primary button: one per side; on narrow screens it gives way to the menu button */
+@media (max-width:520px){.px-navactions .px-btn.px-primary{display:none!important}}
+
+/* footer: the quiet cross-link between the two sides */
+.ffw-cross{grid-column:1/-1;margin:6px 0 0;font-size:14px}
+.ffw-cross a{color:#E7EEF0;text-decoration:underline;text-underline-offset:3px}
+.ffw-cross a:hover{color:#fff}
+
+/* #centers, #sign-in: equal program cards */
+.aud-sec{padding-block:clamp(36px,5vw,64px)}
+.aud-head{display:grid;gap:8px;margin-bottom:22px;max-width:760px}
+.aud-head h2{margin:0}
+.aud-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.aud-card a{display:grid;grid-template-rows:auto 1fr auto;justify-items:start;gap:10px;height:100%;padding:16px 18px 14px;border-radius:18px;background:#fff;border:2px solid #E6DCCB;border-top:6px solid var(--c);color:var(--ffw-ink,#14313D);text-decoration:none;box-shadow:0 2px 0 #E6DCCB;transition:transform .2s,border-color .2s}
+.aud-card a:hover{border-color:var(--c);transform:translateY(-2px)}
+.aud-card a:focus-visible{outline:3px solid #B07A00;outline-offset:3px}
+.aud-cardart{display:flex;justify-content:flex-start;align-items:flex-end;height:104px}
+.aud-cardart img{max-height:104px;width:auto;object-fit:contain}
+.aud-cardtxt{display:grid;gap:6px;align-content:start}
+.aud-cardtxt b{font-family:var(--display);font-size:19px;line-height:1.2}
+.aud-cardtxt span{font-size:15px;line-height:1.45;color:#3c5560}
+.aud-card .px-icon{width:22px;height:22px;justify-self:end;color:var(--ffw-ink,#14313D)}
+.aud-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.aud-tiles a{display:grid;gap:4px;height:100%;padding:14px 16px;border-radius:14px;background:#fff;border:1.5px solid #E6DCCB;color:var(--ffw-ink,#14313D);text-decoration:none}
+.aud-tiles a:hover{border-color:#B07A00}
+.aud-tiles a:focus-visible{outline:3px solid #B07A00;outline-offset:2px}
+.aud-tiles b{font-size:16.5px}
+.aud-tiles span{font-size:14.5px;color:#3c5560;line-height:1.4}
+.band-paper .aud-tiles a{background:#fffdf8}
+.aud-famgrid{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.aud-famgrid h2{margin:.2em 0}
+.aud-famgrid p{max-width:640px}
+.aud-famcut{max-height:150px;width:auto}
+@media (max-width:560px){.aud-famgrid{grid-template-columns:1fr}.aud-card a{grid-template-columns:72px 1fr 20px;grid-template-rows:auto;align-items:center;padding:14px}.aud-card .px-icon{justify-self:center}.aud-cardart,.aud-cardart img{height:80px;max-height:80px}}
+.aud-signnote{margin-top:18px}
+.aud-steps ol{display:grid;gap:12px;padding-left:1.2em}
+.aud-steps li{display:grid;gap:2px}
+
+/* #kids-shop: three things, honest status */
+.aud-kids{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.aud-kid{display:grid;grid-template-rows:auto 1fr;border-radius:18px;overflow:hidden;background:#fff;border:2px solid #E6DCCB;border-top:6px solid var(--c)}
+.aud-kidart{position:relative;display:flex;justify-content:center;align-items:flex-end;height:220px;background:color-mix(in srgb,var(--c) 14%,#fff)}
+.aud-kidart img{max-height:190px;width:auto;object-fit:contain}
+.aud-kidph{position:absolute;left:10px;top:10px;font-size:12.5px;background:#fff;border-radius:999px;padding:3px 10px;color:#3c5560}
+.aud-kidbody{padding:16px 18px;display:grid;gap:8px;align-content:start}
+.aud-kidbody h2{font-size:21px;margin:0}
+.aud-kidtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0}
+.aud-kidprice{font-weight:700}
+.aud-kidsoon{margin-top:22px}
+.aud-kidsoon .btn{margin-top:10px}
+@media (min-width:981px){.ffw-sitemap{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}.ffw-fcol[data-aud="centers"] ul{grid-template-columns:1fr 1fr;column-gap:28px}}

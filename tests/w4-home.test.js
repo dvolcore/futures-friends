@@ -92,15 +92,20 @@ for (const width of [1280, 390]) {
     f.headings.forEach((x, i) => { if (i) assert.ok(x <= f.headings[i - 1] + 1, `heading order ${f.headings.join(',')}`); });
     // the hero is kept: four friends on the stage
     assert.equal(f.stage, 4, 'hero stage keeps its four friend buttons');
-    // three doors: one sentence and exactly one button each, to the audience pages
-    assert.deepEqual(f.doors.map(d => d.links), [['#for-centers'], ['#for-home'], ['#for-families']]);
+    // three doors: one sentence and exactly one button each, to family pages (audience split 2026-10-07: Home is the families'
+    // front door; the centers and home daycare doors are on #centers)
+    assert.deepEqual(f.doors.map(d => d.links), [['#at-home'], ['#family-videos'], ['#enroll']]);
+    // no sales or business page is linked from the families' Home
+    for (const r of ['#pricing', '#options', '#room-kit', '#for-centers', '#for-home', '#impact', '#academy', '#quote', '#shop-programs', '#store', '#centers'])
+      assert.ok(!f.hrefs.includes(r), `no ${r} link on Home`);
     for (const d of f.doors) assert.ok(d.words <= 25, 'one short sentence per door');
-    // ONE quiet status line, from the same release manifest as the strip
+    // ONE quiet status line. Audience split (2026-10-07): the families' version says where we are and what is free, and links the
+    // visit; the ordering status and its #pricing link are on #centers
     assert.equal(f.status.length, 1, 'one status line');
     assert.match(f.status[0].text, /Piloting in Independence, Missouri/);
-    assert.match(f.status[0].text, f.manifest.open ? /Ordering is open/ : /Ordering opens soon/);
+    assert.doesNotMatch(f.status[0].text, /Ordering/);
     assert.equal(f.status[0].version, f.manifest.version, 'status line reads the release manifest');
-    assert.equal(f.status[0].href, '#pricing', 'links to the full status on #pricing');
+    assert.equal(f.status[0].href, '#enroll', 'links to the visit, not to pricing');
     // placeholders are never removed, only labelled: the photo frames that promise our real center stay on Home, visible and
     // labelled. Wave 8: the first frame ("A short hello from the four friends", a story-world video) is now filled with the
     // owner-approved story-world animation, captioned as such; the three real-center frames stay placeholders.
@@ -124,6 +129,8 @@ const MOVED = [
   ['release strip on the center page', 'for-centers', '#rt-strip', /Available now/],
   ['doors: center lists and sample screenshots', 'for-centers', '.fj-provider', /See it, scope it, start it[\s\S]*Sample data/],
   ['doors: home daycare lists and sample screenshots', 'for-home', '.fj-provider', /See it, scope it, start it[\s\S]*Sample data/],
+  ['release status line (moved from Home, audience split)', 'centers', '.hc-status', /Piloting in Independence, Missouri[\s\S]*See what is available today/],
+  ['doors for centers, home daycares and churches (moved from Home, audience split)', 'centers', '.aud-programs', /Child care centers[\s\S]*Home daycares[\s\S]*Churches and faith-based programs/],
   ['doors: the family activity for tonight', 'for-families', '.fj-family', /Try one tonight/],
   ['More than a login (zone map and checklist)', 'for-centers', '#ff-map', /More than a login[\s\S]*Futures Hub/],
   ['A friend for every discovery (carousel)', 'friends', '#ff-rooms[data-interactive]', /Confidence/],
@@ -153,10 +160,11 @@ for (const width of [1280, 390]) {
     await h.goto(page, site.base, 'curriculum', 300);
     await page.click('#ff-loop [data-loop-step="3"]');
     assert.equal((await page.textContent('#ff-loop .ffhl-center b')).trim(), 'Move');
-    // the portals stay one tap away in the utility bar
+    // the portals stay one tap away: "Sign in" in the utility bar opens the portal chooser (audience split)
     await h.goto(page, site.base, 'home', 300);
-    assert.equal(await page.locator('.px-utility a[href="#signin-teacher"]').count(), 1);
-    assert.equal(await page.locator('.px-utility a[href="#signin-family"]').count(), 1);
+    assert.equal(await page.locator('.px-utility a[href="#sign-in"]').count(), 1);
+    await h.goto(page, site.base, 'sign-in', 300);
+    for (const r of ['#signin-family', '#signin-teacher']) assert.equal(await page.locator(`#view a[href="${r}"]`).count(), 1, r);
     assert.deepEqual(errors, [], 'no page errors');
     await ctx.close();
   });

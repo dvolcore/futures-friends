@@ -10,7 +10,7 @@
   const FRIENDS = [
     ['bop', 'bop-waving', 'Move with Bop', 'bop-at-home'],
     ['lumi', 'lumi-waving', 'Belong with Lumi', 'whole-child'],
-    ['booker', 'booker-waving', 'Learn with Booker', 'curriculum'],
+    ['booker', 'booker-waving', 'Learn with Booker', 'story-time'],   // audience split 2026-10-07: a family page (was #curriculum, a centers page)
     ['zuri', 'zuri-pointing', 'Explore with Zuri', 'activities']
   ];
   let el = null, live = null;

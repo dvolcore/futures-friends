@@ -328,7 +328,7 @@ test('liquid glass in three places: frosted with a rim and pointer specular; sol
 
 // Pixel contrast of the text that sits over the new backgrounds (the evidence report measures every text element on Home; this
 // test keeps a representative set, at the top and the bottom of the screen, where the fixed sky differs most).
-const KEY_TEXT = ['.hc-doorshead p', '.hc-door p', '.hc-door:nth-child(3) p', '.hc-door h3', '.hc-aside', '.hc-status-item', '.hc-friends .hc-head p', '.hc-day .hc-head p', '.hc-steps li > span:last-child', '.hc-proof .hc-head p', '.hc-kinetic [data-k=bop]', '.hc-trust-place > p', '.hc-realnote', '.hc-slots figcaption span', '.hc-close p', '.ff-footlabel'];
+const KEY_TEXT = ['.hc-doorshead p', '.hc-door p', '.hc-door:nth-child(3) p', '.hc-door h3', '.hc-status-item', '.hc-friends .hc-head p', '.hc-day .hc-head p', '.hc-steps li > span:last-child', '.hc-proof .hc-head p', '.hc-kinetic [data-k=bop]', '.hc-trust-place > p', '.hc-realnote', '.hc-slots figcaption span', '.hc-close p', '.ff-footlabel'];
 for (const width of [1280, 390]) {
   test(`AA contrast over the felt sky at ${width}px (motion on, top and bottom of the screen)`, async () => {
     const ctx = await ctxFor(width, true, { deviceScaleFactor: 1 });

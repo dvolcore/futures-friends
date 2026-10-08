@@ -387,10 +387,11 @@ test('the Whole-Child entry points exist on For Families (moved from Home in wav
   assert.equal((home.match(/<li style=/g) || []).length, 6);
   assert.match(cur, /href="#whole-child"/);
   assert.ok(cur.length < home.length, 'the curriculum band is a short pointer, not a copy of the page');
-  assert.match(read('premium.js'), /\['whole-child','Whole Child'\]/);
+  // audience split (2026-10-07): the families' header is four links; the whole-child day is a big link in their menu and Home's day steps
+  assert.match(read('wayfinding.js'), /\['friends', 'Friends & Books'\], \['whole-child', 'The whole-child day'\]/);
   // wave 6: the old More menu is the full-screen menu in wayfinding.js (families group; centers group)
   assert.match(read('wayfinding.js'), /\['bop-at-home', 'Bop at Home'\]/);
-  assert.match(read('wayfinding.js'), /\['for-centers', 'What a center gets'\]/);
+  assert.match(read('wayfinding.js'), /\['for-centers', 'Child care centers'\]/);
   assert.match(read('home-calm.js'), /'for-families': \['<section class="tight">', \(\) => \(window\.FFWholeChild \? window\.FFWholeChild\.callout\('home'\)/, 'the band moved to #for-families');
   assert.match(read('home-calm.js'), /href="#whole-child">See the whole-child day/, 'Home still points to the whole-child day');
   assert.match(read('experience.js'), /window\.FFWholeChild\?window\.FFWholeChild\.callout\('curriculum'\)/);

@@ -7,6 +7,10 @@
   // route: [title, description]. Title is shown as "<title> | Futures Friends" (home keeps the static page title).
   const R = {
     home: ['Futures Friends', 'Futures Friends: a character-led early learning program for child care centers, home daycares and families, ages 2 to 5. Home of Booker, Lumi, Zuri and Bop.'],
+    centers: ['For centers and programs', 'Futures Friends for child care centers, home daycares, churches, pre-K partners and employers: programs, rooms, curriculum, training, pricing and a demo.'],
+    'book-demo': ['Book a demo', 'Book a demo of Futures Friends and talk through a membership for your center, home daycare, church or program.'],
+    'kids-shop': ['Kids\' Shop', 'A small Kids\' Shop for families: a friend poster, a plush friend and a small carpet. Ordering opens soon; nothing is charged here.'],
+    'sign-in': ['Sign in', 'Sign in to the Futures Friends Family Portal, Teacher Portal, a center sign-in page or the Academy. Previews with demo accounts.'],
     impact: ['Impact and research', 'Why the early years matter, the published research behind early learning, and what Futures Friends plans to measure.'],
     readiness: ['School Readiness', 'How the Futures Friends learning loop, teacher observation and family activities support school readiness for children ages 2 to 5.'],
     curriculum: ['Curriculum by age', 'A planned year of twelve monthly units and 48 theme weeks for twos, threes and pre-K. Units 1 to 4 are written day by day (draft); Units 5 to 12 are outlined.'],

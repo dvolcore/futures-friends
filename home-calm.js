@@ -35,8 +35,13 @@
   const cut = (k, cls) => window.FFPlush.img(k, { cls, alt: '', h: 156 });
 
   // ---- 1. one quiet status line, from the same release manifest as the strip on every commercial page (review ticket E2/R8-01)
-  function status() {
+  // families (Home, audience split 2026-10-07): the same quiet line without the ordering status or the pricing link: where we are,
+  // what is free today, and the visit. The program version (ordering status -> #pricing) opens the #centers landing.
+  function status(families) {
     const R = window.FFRelease && window.FFRelease.data, C = R && R.commercial;
+    if (families) return `<div class="hc-status hc-status-family" data-release-version="${E(R ? R.version : '')}"><div class="wrap hc-status-row">
+   <p><span class="hc-status-item">${PIN}Piloting in Independence, Missouri</span><span class="hc-status-item">Free stories and activities, open now</span></p>
+   <a class="hc-status-link" href="#enroll">Plan a visit ${icon('ArrowRight')}</a></div></div>`;
     const ordering = C && C.ordering_open ? 'Ordering is open' : 'Ordering opens soon';
     return `<div class="hc-status" data-release-version="${E(R ? R.version : '')}"><div class="wrap hc-status-row">
    <p><span class="hc-status-item">${PIN}Piloting in Independence, Missouri</span><span class="hc-status-item" data-ordering="${C && C.ordering_open ? 'open' : 'soon'}">${ordering}</span></p>
@@ -46,22 +51,27 @@
   // ---- 2. three audience doors: who you are, one sentence, one button
   // Each door is hosted by a friend who peeks over its top edge and pops up to say hi when the door is pointed at or focused
   // (wave 6; home-alive.css). peek = the pose they pop up in.
+  // Owner 2026-10-07 (audience split): Home is the families' front door, so its doors lead to family pages. The doors for centers
+  // and home daycares (CENTER_DOORS) moved to the #centers landing (audiences.js), with churches and pre-K as equal doors there.
   const DOORS = [
-    { id: 'centers', k: 'booker', peek: 'booker-waving', h: 'Child care centers', p: 'Bring the four friends into every classroom, with lessons, family connections and support for your teachers.', go: ['for-centers', 'For child care centers'] },
-    { id: 'home', k: 'zuri', peek: 'zuri-pointing', h: 'Home daycares', p: 'The same friends and stories, sized for one room and children of mixed ages.', go: ['for-home', 'For home daycares'] },
-    { id: 'families', k: 'lumi', peek: 'lumi-heart-hands', h: 'Families', p: 'Free stories and activities to share at home, and our pilot center in Independence, Missouri.', go: ['for-families', 'For families'] }
+    { id: 'read', k: 'lumi', peek: 'lumi-heart-hands', h: 'Read and play at home', p: 'Free storybooks, activities from things you already have and printables. No account, nothing to buy.', go: ['at-home', 'Futures at Home'] },
+    { id: 'watch', k: 'bop', peek: 'bop-waving', h: 'Watch together', p: 'Short videos with the four friends, a calm minute and movement breaks, plus tips to keep screen time small.', go: ['family-videos', 'Watch together'] },
+    { id: 'visit', k: 'booker', peek: 'booker-waving', h: 'Visit our pilot center', p: 'Futures Learning Center in Independence, Missouri: tours, applications and a day in the life.', go: ['enroll', 'Plan a visit'] }
+  ];
+  const CENTER_DOORS = [
+    { id: 'centers', k: 'booker', h: 'Child care centers', go: 'for-centers' }, { id: 'home', k: 'zuri', h: 'Home daycares', go: 'for-home' },
+    { id: 'faith', k: 'lumi', h: 'Churches and faith-based programs', go: 'for-faith' }
   ];
   // the door's stitched outline: a dashed felt stitch that draws itself in when the door is pointed at or focused (home-alive.css)
   // (a solid stroke in a mask reveals the dashed stitch, so the stitch keeps its dashes while it draws)
   const STITCH = id => `<svg class="hc-stitch" aria-hidden="true" focusable="false"><defs><mask id="hc-stitch-${id}" maskUnits="userSpaceOnUse"><rect class="hc-stitch-mask" pathLength="100"/></mask></defs><rect class="hc-stitch-line" mask="url(#hc-stitch-${id})"/></svg>`;
   function doors() {
     return `<section class="hc-doors" aria-labelledby="hc-doors-h"><div class="wrap">
-   <div class="hc-doorshead"><h2 id="hc-doors-h" data-stitch>Start where <span class="hc-key">you</span> are</h2><p>Futures Friends is an early learning program for children ages 2 to 5, in three places they learn.</p></div>
+   <div class="hc-doorshead"><h2 id="hc-doors-h" data-stitch>Start where <span class="hc-key">you</span> are</h2><p>Futures Friends is early learning for children ages 2 to 5. Here is what is free for your family today.</p></div>
    <ul class="hc-doorlist">${DOORS.map(d => `<li class="hc-door" data-door="${d.id}" style="--c:var(--${d.k})">
     <div class="fj-doorart hc-doorart" aria-hidden="true"><span class="hc-peek">${window.FFPlush.img(d.peek || d.k, { cls: 'hc-doorcut', alt: '', h: 156 })}</span></div>
     <h3>${E(d.h)}</h3><p>${E(d.p)}</p>
     <a class="hc-btn hc-doorlink" href="#${d.go[0]}">${E(d.go[1])} ${icon('ArrowRight')}</a>${STITCH(d.id)}</li>`).join('')}</ul>
-   <p class="hc-aside">Running a pre-K, faith-based or employer program? <a href="#options">Compare every program option</a></p>
   </div></section>`;
   }
 
@@ -136,6 +146,8 @@
   // from the files that hold the thing itself, each linking to where it can be seen, each with its honest stage. No downloads.
   //   release manifest (release-manifest.js, generated from the CRM repo's docs/release/ASSET_MANIFEST.json), the family library
   //   (family-library-data.js) and the plush library (plush-cast.js). tests/w6-hero.test.js recomputes every number from the repo.
+  // Home (families) shows only the family tiles; the full set, with the curriculum and training counts, is on #centers.
+  const FAMILY_PROOF = ['activities', 'printables', 'books', 'characters'];
   function proofData() {
     const R = (window.FFReleaseData && window.FFReleaseData.assets) || {}, F = window.FFFamily || {}, P = window.FFPlush;
     const n = id => (R[id] && +R[id].count) || 0;
@@ -150,11 +162,11 @@
       { id: 'training', n: n('training-catalog'), what: 'training modules for teachers', line: 'The Futures Friends Academy catalog', stage: 'Draft, not yet state approved', href: '#academy', k: 'lumi', pose: 'lumi-waving' }
     ].filter(x => x.n > 0);
   }
-  function proof() {
-    const d = proofData();
+  function proof(families) {
+    const d = families ? proofData().filter(x => FAMILY_PROOF.includes(x.id)) : proofData();
     if (!d.length) return '';
     return `<section class="hc-proof" aria-labelledby="hc-proof-h"><div class="wrap">
-   <div class="hc-head"><h2 id="hc-proof-h" data-stitch>What we have <span class="hc-key">built</span> so far</h2><p>Counted from our own library, and every one is open to look at. Draft means no reviewer has approved it yet.</p></div>
+   <div class="hc-head"><h2 id="hc-proof-h" data-stitch>What we have <span class="hc-key">built</span> so far</h2><p>${families ? 'Counted from our own library, and every one is free to open with your child.' : 'Counted from our own library, and every one is open to look at. Draft means no reviewer has approved it yet.'}</p></div>
    <p class="hc-kinetic" data-kinetic>All of it so children can <span data-k="booker">learn</span>, <span data-k="bop">move</span>, <span data-k="zuri">explore</span> and <span data-k="lumi">belong</span>.</p>
    <ul class="hc-prooflist" data-proof>${d.map(x => `<li class="hc-prooftile" data-proof-id="${x.id}" style="--c:var(--${x.k})"><a href="${x.href}"${x.reveal ? ` data-reveal="${x.reveal}"` : ''}><span class="hc-proofn" aria-hidden="true" data-count="${x.n}">${x.n}</span><span class="ffa-sr">${x.n} </span><b>${E(x.what)}</b><span class="hc-proofline">${E(x.line)}</span><span class="hc-proofstage">${E(x.stage)}</span></a></li>`).join('')}</ul>
   </div></section>`;
@@ -220,13 +232,14 @@
   // footer-scene.js)
   function close() {
     return `<section class="hc-close" aria-labelledby="hc-close-h"><div class="wrap hc-closegrid">
-   <div><h2 id="hc-close-h" data-stitch>Talk to a <span class="hc-key">real person</span></h2><p>Questions about bringing Futures Friends to your program, or about our pilot center? We are happy to help.</p></div>
+   <div><h2 id="hc-close-h" data-stitch>Talk to a <span class="hc-key">real person</span></h2><p>Questions about Futures Friends for your child, or about our pilot center in Independence? We are happy to help.</p></div>
    <div class="hc-closeacts"><a class="hc-btn hc-btn-gold" href="#contact">Contact us ${icon('ArrowRight')}</a><a class="hc-btn hc-btn-line" href="${tel()}">Call ${E(phone())}</a>
     <button type="button" class="ff-brand-trigger hc-reveal" data-brand-reveal>${icon('Play')} Watch the logo reveal</button></div>
   </div></section>`;
   }
 
-  const body = () => intro() + doors() + status() + friends() + day() + proof() + trust() + close();
+  // The release status line ("Ordering opens soon", linking to #pricing) is for programs: it now opens the #centers landing.
+  const body = () => intro() + doors() + status(true) + friends() + day() + proof(true) + trust() + close();
 
   // ---------------------------------------------------------------- moved off Home, onto the page for its audience
   // "Meet the Futures Friends Academy": the training catalog is for teachers, so it now closes #teacher-standard.
@@ -248,5 +261,5 @@
   };
   Object.keys(MOVED).forEach(r => insert(r, MOVED[r][0], MOVED[r][1]));
 
-  window.FFHomeCalm = { body, intro, STARS, status, doors, friends, day, proof, proofData, pickPanel, trust, close, slots, academyBand, DOORS, SLOTS, MOVED, PICKS, PARADE, pathY, PATH_D, VIDEOS, videoFrame, hello };
+  window.FFHomeCalm = { body, intro, STARS, status, doors, CENTER_DOORS, FAMILY_PROOF, friends, day, proof, proofData, pickPanel, trust, close, slots, academyBand, DOORS, SLOTS, MOVED, PICKS, PARADE, pathY, PATH_D, VIDEOS, videoFrame, hello };
 })();

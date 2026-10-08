@@ -11,18 +11,24 @@ const way = read('wayfinding.js');
 const block = name => { const i = way.indexOf(`const ${name} = `); return JSON.parse(JSON.stringify(vm.runInNewContext('(' + way.slice(i + `const ${name} = `.length, way.indexOf(';\n', i)) + ')', { PHONE: '(816) 988-5661' }))); };
 
 // ---------------------------------------------------------------- static contract
-test('audience link sets: at most four header links per audience, three to five big links per menu group, every route exists', () => {
-  const MAIN = block('MAIN'), GROUPS = block('GROUPS'), PAGES = block('PAGES');
+test('audience link sets: two audiences, at most five header links each, three to six big links per menu group, every route exists', () => {
+  const MAIN = block('MAIN'), GROUPS = block('GROUPS'), PAGES = block('PAGES'), MORE_BY = block('MORE_BY');
   const routes = Object.keys(require('../route-meta.js').ROUTES);
-  assert.deepEqual(Object.keys(MAIN), ['families', 'centers', 'staff']);
+  // audience split (owner 2026-10-07): Families (default) and For Centers & Programs; the old staff audience folded into centers
+  assert.deepEqual(Object.keys(MAIN), ['families', 'centers']);
   for (const k of Object.keys(MAIN)) {
-    assert.ok(MAIN[k].length >= 3 && MAIN[k].length <= 4, `${k}: ${MAIN[k].length} header links`);
-    assert.ok(GROUPS[k].length >= 3 && GROUPS[k].length <= 5, `${k}: ${GROUPS[k].length} menu links`);
+    assert.ok(MAIN[k].length >= 3 && MAIN[k].length <= 5, `${k}: ${MAIN[k].length} header links`);
+    assert.ok(GROUPS[k].length >= 3 && GROUPS[k].length <= 6, `${k}: ${GROUPS[k].length} menu links`);
     for (const [r] of MAIN[k].concat(GROUPS[k])) assert.ok(routes.includes(r), `${r} is a real route`);
   }
+  // families never see a business page in their header, menu or "More"
+  for (const [r] of MAIN.families.concat(GROUPS.families, MORE_BY.families)) assert.equal(PAGES[r][1] === 'centers', false, `${r} is not a centers page`);
+  for (const [r] of MAIN.centers.concat(GROUPS.centers)) assert.equal(PAGES[r][1], 'centers', r);
   for (const r of routes) assert.ok(PAGES[r], `${r} has a short name, audience and parent for breadcrumbs`);
+  for (const r of ['pricing', 'options', 'room-kit', 'for-centers', 'for-home', 'for-faith', 'impact', 'academy', 'shop-programs', 'quote', 'centers', 'book-demo', 'curriculum', 'unit-1']) assert.equal(PAGES[r][1], 'centers', r);
+  for (const r of ['home', 'enroll', 'at-home', 'story-time', 'family-videos', 'friends', 'kids-shop', 'signin-family']) assert.equal(PAGES[r][1], 'families', r);
   for (const [r, [, aud, parent]] of Object.entries(PAGES)) {
-    assert.ok(['', 'families', 'centers', 'staff'].includes(aud), r);
+    assert.ok(['', 'families', 'centers', 'portal'].includes(aud), r);
     if (r !== 'home') assert.ok(PAGES[parent], `${r}: parent ${parent} is mapped`);
   }
 });
@@ -47,7 +53,9 @@ test('wiring: wayfinding.js after premium.js and before a11y.js; not-found.js th
   assert.ok(at('id="ffw-close"') < at('id="ff-prefooter"') && at('id="ff-prefooter"') < at('<footer>'));
   // the footer is a site map grouped by audience, with real links, and keeps every earlier destination
   const map = html.slice(at('<nav class="ffw-sitemap"'), html.indexOf('</nav>', at('<nav class="ffw-sitemap"')));
-  for (const k of ['families', 'centers', 'staff', 'program']) assert.match(map, new RegExp(`data-aud="${k}"`));
+  for (const k of ['families', 'centers', 'help']) assert.match(map, new RegExp(`data-aud="${k}"`));
+  assert.match(map, /class="ffw-cross" data-for="families"><a href="#centers"/, 'the families footer has the quiet "Run a center or program?" link');
+  assert.match(map, /class="ffw-cross" data-for="centers"><a href="#home"[^>]*>See what families experience/, 'centers link back to the family side');
   const linked = [...html.slice(at('<footer>')).matchAll(/href="#([a-z0-9-]+)"/g)].map(m => m[1]);
   for (const r of ['curriculum', 'readiness', 'include', 'friends', 'rainbow', 'academy', 'training', 'watch', 'summit', 'enroll', 'impact', 'options', 'for-centers', 'for-home', 'for-prek', 'for-faith', 'for-employers', 'for-families', 'at-home', 'app', 'family-guide', 'store', 'funding', 'blog', 'news', 'events', 'why', 'support', 'jobs', 'contact', 'privacy', 'child-privacy', 'terms', 'accessibility', 'teacher-standard', 'train-your-staff', 'whole-child', 'bop-at-home'])
     assert.ok(linked.includes(r), `footer still links #${r}`);
@@ -74,9 +82,9 @@ for (const width of [1280, 390]) {
   test(`page turns (${width}px): reduced motion swaps instantly, no View Transitions support swaps instantly, motion on morphs; focus lands on the new h1`, async () => {
     // 1. reduced motion (the harness default): no transition is started, focus moves to the new h1, the page is announced
     let { ctx, page, errors } = await h.open(browser, width);
-    await h.goto(page, site.base, 'curriculum');
+    await h.goto(page, site.base, 'friends');
     await page.evaluate(() => { window.__vt = 0; const o = document.startViewTransition; document.startViewTransition = function () { window.__vt++; return o.apply(document, arguments); }; });
-    await page.click(width > 900 ? '.px-main a[href="#whole-child"]' : '#ffw-close a[href="#contact"]');
+    await page.click(width > 900 ? '.px-main a[href="#at-home"]' : '#ffw-close a[href="#contact"]');
     await page.waitForTimeout(250);
     let f = await page.evaluate(() => ({ vt: window.__vt, tag: document.activeElement.tagName, inView: !!document.activeElement.closest('#view'), live: (document.getElementById('ff-announce') || {}).textContent, routeenter: document.getElementById('view').classList.contains('px-routeenter') }));
     assert.equal(f.vt, 0, 'no view transition with reduced motion');
@@ -96,9 +104,9 @@ for (const width of [1280, 390]) {
     await ctx.close();
     // 3. motion on with View Transitions: the turn runs, the h1 is named for the morph, the title card shows and is gone after; <= 350 ms of animation
     ({ ctx, page, errors } = await h.open(browser, width, { motion: true }));
-    await h.goto(page, site.base, 'curriculum', 700);
+    await h.goto(page, site.base, 'friends', 700);
     await page.evaluate(() => { window.__t = []; const o = document.startViewTransition.bind(document); document.startViewTransition = cb => { const t = o(() => { cb(); window.__named = [...document.querySelectorAll('*')].filter(e => e.style && e.style.viewTransitionName).map(e => e.style.viewTransitionName); window.__card = document.getElementById('ffw-card') && document.getElementById('ffw-card').textContent; }); t.ready.then(() => window.__t.push(performance.now())); t.finished.then(() => window.__t.push(performance.now())); return t; }; });
-    await page.click(width > 900 ? '.px-main a[href="#whole-child"]' : '#ffw-close a[href="#contact"]');
+    await page.click(width > 900 ? '.px-main a[href="#at-home"]' : '#ffw-close a[href="#contact"]');
     await page.waitForFunction(() => window.__t.length === 2, null, { timeout: 4000 });
     await page.waitForTimeout(60);
     f = await page.evaluate(() => ({ anim: window.__t[1] - window.__t[0], named: window.__named, card: window.__card, cardAfter: !!document.getElementById('ffw-card'), vtClass: document.documentElement.classList.contains('ffw-vt'), tag: document.activeElement.tagName, left: [...document.querySelectorAll('[style*="view-transition-name"]')].length }));
@@ -112,38 +120,45 @@ for (const width of [1280, 390]) {
     // 4. the site's own motion switch turns page turns off too
     ({ ctx, page, errors } = await h.open(browser, width, { motion: true }));
     await page.addInitScript(() => { try { localStorage.setItem('ff-display-preferences', JSON.stringify({ motion2: false })); } catch (_) {} });
-    await h.goto(page, site.base, 'curriculum');
+    await h.goto(page, site.base, 'friends');
     await page.evaluate(() => { window.__vt = 0; const o = document.startViewTransition; document.startViewTransition = function () { window.__vt++; return o.apply(document, arguments); }; });
     await page.click('#ffw-close a[href="#contact"]'); await page.waitForTimeout(150);
     assert.equal(await page.evaluate(() => window.__vt), 0, 'data-motion="off" means no page turn');
     await ctx.close();
   });
 
-  test(`audience switcher (${width}px): sets data-audience, reorders header and footer, persists, announces; the hook works`, async () => {
+  test(`audience switcher (${width}px): families by default; Centers goes to #centers and swaps header and footer, persists, announces; routes pick their side; the hook works`, async () => {
     const { ctx, page, errors } = await h.open(browser, width);
     await h.goto(page, site.base, 'home');
-    assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), undefined, 'no choice: neutral');
-    assert.deepEqual(await page.$$eval('.px-main a', as => as.map(a => a.getAttribute('href'))), ['#curriculum', '#whole-child', '#teacher-standard', '#at-home', '#friends'], 'default is the neutral nav');
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'families', 'families by default');
+    assert.deepEqual(await page.$$eval('.px-main a', as => as.map(a => a.getAttribute('href'))), ['#friends', '#family-videos', '#at-home', '#enroll'], 'the families nav');
+    assert.equal(await page.locator('.px-utility a.ffw-signin[href="#sign-in"]').count(), 1, 'Sign in sits beside the two audiences');
     await page.click('.px-utility .ffw-audbtn[data-audience="centers"]');
-    await page.waitForTimeout(150);
-    let f = await page.evaluate(() => ({ aud: document.documentElement.dataset.audience, pressed: [...document.querySelectorAll('.px-utility .ffw-audbtn')].map(b => b.getAttribute('aria-pressed')), main: [...document.querySelectorAll('.px-main a')].map(a => a.getAttribute('href')), first: document.querySelector('.ffw-sitemap > .ffw-fcol').dataset.aud, live: document.getElementById('ff-announce').textContent, stored: localStorage.getItem('ff-audience') }));
-    assert.equal(f.aud, 'centers'); assert.deepEqual(f.pressed, ['false', 'true', 'false']);
-    assert.deepEqual(f.main, ['#for-centers', '#for-home', '#curriculum', '#pricing']);
-    assert.ok(f.main.length <= 4);
-    assert.equal(f.first, 'centers', 'footer site map leads with their pages');
-    assert.match(f.live, /centers & home daycares first/);
+    await page.waitForTimeout(400);
+    let f = await page.evaluate(() => ({ hash: location.hash, aud: document.documentElement.dataset.audience, pressed: [...document.querySelectorAll('.px-utility .ffw-audbtn')].map(b => b.getAttribute('aria-pressed')), main: [...document.querySelectorAll('.px-main a')].map(a => a.getAttribute('href')), cols: [...document.querySelectorAll('.ffw-sitemap > .ffw-fcol')].filter(c => getComputedStyle(c).display !== 'none').map(c => c.dataset.aud), live: document.getElementById('ff-announce').textContent, stored: localStorage.getItem('ff-audience') }));
+    assert.equal(f.hash, '#centers', 'the header switch opens the centers landing');
+    assert.equal(f.aud, 'centers'); assert.deepEqual(f.pressed, ['false', 'true']);
+    assert.deepEqual(f.main, ['#centers', '#for-centers', '#for-home', '#for-faith', '#pricing']);
+    assert.deepEqual(f.cols, ['centers', 'help'], 'footer: centers pages and help; the families column is put away');
+    assert.match(f.live, /centers/i);
     assert.equal(f.stored, 'centers');
-    await h.goto(page, site.base, 'pricing');                          // a fresh document: the choice is remembered
+    await h.goto(page, site.base, 'contact');                          // a fresh document on a shared page: the choice is remembered
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'centers');
+    await h.goto(page, site.base, 'story-time');                       // a family page always opens the family side
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'families');
+    await h.goto(page, site.base, 'pricing');                          // and a business page the centers side
     assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'centers');
     // the hook the HERO lane calls from Booker's question
-    f = await page.evaluate(() => { let ev = null; document.addEventListener('ff:audience', e => { ev = e.detail; }); const r = window.FFAudience.set('families'); return { r, ev, aud: document.documentElement.dataset.audience, main: [...document.querySelectorAll('.px-main a')].map(a => a.getAttribute('href')), links: window.FFAudience.links('staff').map(l => l.route) }; });
+    f = await page.evaluate(() => { let ev = null; document.addEventListener('ff:audience', e => { ev = e.detail; }); const r = window.FFAudience.set('families'); return { r, ev, aud: document.documentElement.dataset.audience, main: [...document.querySelectorAll('.px-main a')].map(a => a.getAttribute('href')), links: window.FFAudience.links('centers').map(l => l.route), legacy: window.FFAudience.set('staff') }; });
     assert.equal(f.r, 'families'); assert.equal(f.aud, 'families'); assert.deepEqual(f.ev, { audience: 'families', previous: 'centers', source: 'api' });
-    assert.deepEqual(f.main, ['#enroll', '#at-home', '#whole-child', '#friends']);
-    assert.deepEqual(f.links, ['teacher-standard', 'unit-1', 'academy', 'jobs']);
-    // pressing the chosen audience again goes back to everyone
-    await page.click('.px-utility .ffw-audbtn[data-audience="families"]'); await page.waitForTimeout(100);
-    assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), undefined);
-    assert.equal(await page.evaluate(() => localStorage.getItem('ff-audience')), null);
+    assert.deepEqual(f.main, ['#friends', '#family-videos', '#at-home', '#enroll']);
+    assert.deepEqual(f.links, ['centers', 'for-centers', 'for-home', 'for-faith', 'pricing']);
+    assert.equal(f.legacy, 'centers', 'the old "staff" choice opens the centers side');
+    // aliases: #centers/<route> and #families/<route> open that route on that side; the old #shop-families opens the Kids' Shop
+    for (const [from, to, aud] of [['centers/room-kit', '#room-kit', 'centers'], ['families/story-time', '#story-time', 'families'], ['shop-families', '#kids-shop', 'families']]) {
+      await h.goto(page, site.base, from);
+      assert.deepEqual(await page.evaluate(() => [location.hash, document.documentElement.dataset.audience]), [to, aud], from);
+    }
     assert.deepEqual(errors.filter(noise), []);
     await ctx.close();
   });
@@ -154,8 +169,10 @@ test('audience switcher with storage blocked: still works for the visit, no erro
   await page.addInitScript(() => { const boom = () => { throw new Error('blocked'); }; Object.defineProperty(window, 'localStorage', { get: boom }); Object.defineProperty(window, 'sessionStorage', { get: boom }); });
   // with storage blocked the entry gate cannot remember the session (it would open on every load); ?nogate skips it (entry.js)
   await page.goto(`${site.base}?nogate&fresh=${Date.now()}#pricing`); await page.waitForFunction(() => document.querySelector('#view') && document.querySelector('#view').children.length > 0); await page.waitForTimeout(450);   // Home shows no context strip; dismiss it on a page that has one
-  await page.click('.px-utility .ffw-audbtn[data-audience="staff"]'); await page.waitForTimeout(100);
-  assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'staff');
+  await page.click('.px-utility .ffw-audbtn[data-audience="families"]'); await page.waitForTimeout(300);
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'families');
+  await page.click('.px-utility .ffw-audbtn[data-audience="centers"]'); await page.waitForTimeout(300);
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'centers');
   await page.click('.ffw-next-x'); await page.waitForTimeout(100);
   assert.equal(await page.evaluate(() => document.getElementById('ffw-next').hidden), true);
   assert.deepEqual(errors.filter(e => noise(e) && !/blocked/.test(e)), []);
@@ -179,27 +196,28 @@ for (const width of [1280, 390]) {
       return { full: m.getBoundingClientRect().width === innerWidth && Math.round(m.getBoundingClientRect().height) === innerHeight, groups, cur: cur && cur.getAttribute('href'), squiggle: !!(cur && cur.querySelector('.ffw-sq')), pills: [...m.querySelectorAll('.ffw-m-pill')].map(p => p.getAttribute('href') + ':' + /preview/.test(p.textContent) + ':' + !!p.querySelector('.ffw-lock')),
         talkBottom: Math.round(innerHeight - foot.getBoundingClientRect().bottom), talkH: talk.getBoundingClientRect().height, phone: vis(phone), rows: big.map(a => Math.round(a.getBoundingClientRect().height)), linksTop: big.length ? Math.min(...big.map(a => a.getBoundingClientRect().top)) : 0, body: getComputedStyle(document.body).position, aud: [...m.querySelectorAll('.ffw-m-audbtn')].length };
     });
-    assert.ok(f.full, 'covers the whole screen'); assert.equal(f.aud, 3, 'three audience buttons on top');
+    assert.ok(f.full, 'covers the whole screen'); assert.equal(f.aud, 2, 'two audience buttons on top');
     assert.equal(f.cur, '#pricing'); assert.ok(f.squiggle, 'a gold squiggle through the current page');
-    assert.deepEqual(f.pills, ['#signin-teacher:true:true', '#signin-family:true:true'], 'portals are separate lock "preview" pills');
+    assert.deepEqual(f.pills, ['#signin-family:true:true', '#signin-teacher:true:true', '#sign-in:true:true'], 'portals are separate lock "preview" pills');
     assert.ok(f.phone && f.talkBottom === 0 && f.talkH >= 48, '"Talk to a real person" and the phone are pinned at the bottom, 48 px+');
     assert.ok(f.rows.every(r => r >= 48), `48 px rows: ${f.rows}`);
     assert.equal(f.body, 'fixed', 'scroll lock that holds on iOS (body fixed)');
-    if (width === 390) { assert.deepEqual(f.groups, ['all'], 'phones: one group at a time (no audience yet: Start here)'); assert.ok(f.linksTop > 150 && f.linksTop < 844 / 2, `big links on the first screen, under the audience question: ${f.linksTop}`); }   // coordinator 2026-10-06: menu opens at the top in reading order (audience question, main links, More, Sign in); the old 'scrolled to the bottom so links sit in the lower half' start clipped a row under the logo bar. 'Talk to a real person' + phone stay pinned in the thumb zone
-    else assert.deepEqual(f.groups, ['families', 'centers', 'staff']);
+    assert.deepEqual(f.groups, ['centers'], 'only the chosen side\'s pages (#pricing is a centers page)');
+    if (width === 390) { assert.ok(f.linksTop > 150 && f.linksTop < 844 / 2, `big links on the first screen, under the audience question: ${f.linksTop}`); }   // coordinator 2026-10-06: menu opens at the top in reading order (audience question, main links, More, Sign in); the old 'scrolled to the bottom so links sit in the lower half' start clipped a row under the logo bar. 'Talk to a real person' + phone stay pinned in the thumb zone
+
     // switching audience inside the menu reorders it and sets the site-wide choice
-    await page.click('#ffw-menu .ffw-audbtn[data-audience="staff"]'); await page.waitForTimeout(120);
+    await page.click('#ffw-menu .ffw-audbtn[data-audience="families"]'); await page.waitForTimeout(120);
     f = await page.evaluate(() => ({ aud: document.documentElement.dataset.audience, first: [...document.querySelectorAll('#ffw-menu .ffw-m-group')].filter(g => g.getBoundingClientRect().height > 0)[0].dataset.aud, focus: document.activeElement.dataset.audience }));
-    assert.equal(f.aud, 'staff'); assert.equal(f.first, 'staff'); assert.equal(f.focus, 'staff', 'focus stays on the button just pressed');
+    assert.equal(f.aud, 'families'); assert.equal(f.first, 'families'); assert.equal(f.focus, 'families', 'focus stays on the button just pressed');
     // Escape restores the scroll position
     await page.keyboard.press('Escape'); await page.waitForTimeout(200);
     assert.equal(await page.evaluate(() => getComputedStyle(document.body).position), 'static');
     assert.equal(await page.evaluate(() => window.scrollY), y0, 'scroll position kept');
     // a menu link navigates, closes the menu and puts focus on the new page's h1
     await page.click('#menuT'); await page.waitForSelector('#ffw-menu[open]');
-    await page.click('#ffw-menu .ffw-m-link[href="#teacher-standard"]:visible'); await page.waitForTimeout(250);
+    await page.click('#ffw-menu .ffw-m-link[href="#story-time"]:visible'); await page.waitForTimeout(250);
     f = await page.evaluate(() => ({ open: document.getElementById('ffw-menu').open, hash: location.hash, tag: document.activeElement.tagName, y: window.scrollY, exp: document.getElementById('menuT').getAttribute('aria-expanded') }));
-    assert.deepEqual(f, { open: false, hash: '#teacher-standard', tag: 'H1', y: 0, exp: 'false' });
+    assert.deepEqual(f, { open: false, hash: '#story-time', tag: 'H1', y: 0, exp: 'false' });
     assert.deepEqual(errors.filter(noise), []);
     await ctx.close();
   });
@@ -308,14 +326,14 @@ test('context card at 390 px: in the page flow, never over a link or button at a
       assert.deepEqual(hits, [], `#${r} at scroll ${y}: the card covers nothing`);
     }
   }
-  await h.goto(page, site.base, 'curriculum');   // Home shows no strip; check wording, print and dismissal where it appears
+  await h.goto(page, site.base, 'story-time');   // Home shows no strip; check wording, print and dismissal where it appears
   assert.match(await page.$eval('#ffw-next', e => e.innerText), /Visit our pilot center/);
   await page.emulateMedia({ media: 'print' });
   assert.equal(await page.$eval('#ffw-next', e => getComputedStyle(e).display), 'none', 'hidden in print');
   await page.emulateMedia({ media: 'screen' });
   await page.click('.ffw-next-x'); await page.waitForTimeout(80);
   assert.equal(await page.$eval('#ffw-next', e => e.hidden), true);
-  await page.click('.px-utility .ffw-audbtn[data-audience="staff"]');
+  await page.click('.px-utility .ffw-audbtn[data-audience="centers"]');
   await page.evaluate(() => { location.hash = '#pricing'; }); await page.waitForTimeout(200);
   assert.equal(await page.$eval('#ffw-next', e => e.hidden), true, 'stays dismissed across pages');
   await page.reload(); await page.waitForTimeout(400);
@@ -328,13 +346,14 @@ test('context card hidden on Home; by audience and on wide screens: bottom-left 
   const ctx = await browser.newContext({ viewport: { width: 1600, height: 900 }, reducedMotion: 'reduce' });
   const page = await ctx.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
   await h.goto(page, site.base, 'friends');   // Home hides the strip (its own front door is Booker's question + the doors)
-  for (const [k, re, to] of [['families', /Visit our pilot center/, '#enroll'], ['centers', /See what a center gets/, '#for-centers'], ['staff', /Read our Teacher Standard/, '#teacher-standard']]) {
+  // audience split (2026-10-07): families get the visit; centers get a membership conversation first, never "visit our center"
+  for (const [k, re, to] of [['families', /Visit our pilot center/, '#enroll'], ['centers', /Book a demo or discuss your program/, '#book-demo']]) {
     await page.evaluate(k => window.FFAudience.set(k), k);
     assert.match(await page.$eval('#ffw-next', e => e.textContent), re, k);
     assert.equal(await page.$eval('#ffw-next .ffw-next-link', a => a.getAttribute('href')), to);
   }
-  await page.evaluate(() => window.FFAudience.set('centers')); await h.goto(page, site.base, 'for-centers');
-  assert.match(await page.$eval('#ffw-next', e => e.innerText), /package prices/, 'never suggests the page you are on');
+  await h.goto(page, site.base, 'book-demo');
+  assert.match(await page.$eval('#ffw-next', e => e.innerText), /See every program type/, 'never suggests the page you are on');
   const box = await page.$eval('#ffw-next', e => { const b = e.getBoundingClientRect(); return { pos: getComputedStyle(e).position, left: b.left, bottom: innerHeight - b.bottom, right: b.right }; });
   assert.equal(box.pos, 'fixed'); assert.ok(box.left < 40 && box.bottom < 40, 'bottom-left'); assert.ok(box.right <= (1600 - 1180) / 2, 'inside the empty margin');
   for (const r of ['home', 'pricing', 'academy', 'friends']) {
@@ -368,12 +387,12 @@ for (const width of [1280, 390]) {
     assert.deepEqual(missing, []);
     await h.goto(page, site.base, 'pricing');
     const f = await page.evaluate(() => ({ cols: [...document.querySelectorAll('.ffw-sitemap > .ffw-fcol')].map(c => c.dataset.aud), cur: [...document.querySelectorAll('.ffw-sitemap a[aria-current="page"]')].map(a => a.getAttribute('href')), btns: [...document.querySelectorAll('.ffw-fbtn')].map(b => b.getAttribute('aria-expanded')) }));
-    assert.deepEqual(f.cols, ['families', 'centers', 'staff', 'program']);
+    assert.deepEqual(f.cols, ['centers', 'families', 'help'], 'the side you are on leads (the other side\'s column is put away)');
     assert.deepEqual(f.cur, ['#pricing']);
     if (width === 390) {
-      assert.deepEqual(f.btns, ['false', 'false', 'false', 'false'], 'phones: the map folds (no audience yet)');
-      await page.click('.ffw-fcol[data-aud="staff"] .ffw-fbtn');
-      assert.equal(await page.$eval('#ffw-fl-staff', u => u.hidden), false);
+      assert.deepEqual(f.btns, ['true', 'false', 'false'], 'phones: the map folds, your side open');
+      await page.click('.ffw-fcol[data-aud="help"] .ffw-fbtn');
+      assert.equal(await page.$eval('#ffw-fl-help', u => u.hidden), false);
     } else assert.deepEqual(f.btns, [], 'desktop: every column open, plain headings');
     assert.deepEqual(errors.filter(noise), []);
     await ctx.close();

@@ -176,10 +176,10 @@ test('This Week: the week in summary for everyone, signed in or not (no activity
 test('menus, search, footer site map, context card, proof band, journey and release strip point at the summary, never a day or a file', () => {
   const way = read('wayfinding.js');
   const block = name => { const i = way.indexOf(`const ${name} = `); return JSON.parse(JSON.stringify(vm.runInNewContext('(' + way.slice(i + `const ${name} = `.length, way.indexOf(';\n', i)) + ')', { PHONE: '(816) 988-5661' }))); };
-  const all = JSON.stringify([block('MAIN'), block('GROUPS'), block('NEXT'), block('PAGES'), block('MORE')]);
+  const all = JSON.stringify([block('MAIN'), block('GROUPS'), block('NEXT'), block('PAGES'), block('MORE_BY')]);
   assert.doesNotMatch(all, /unit-1\/|printables\/unit-|\.pdf/);
-  assert.deepEqual(block('GROUPS').staff.find(x => x[0] === 'unit-1'), ['unit-1', 'Unit 1 at a glance']);
-  assert.deepEqual(block('NEXT').staff[1].slice(0, 2), ['unit-1', 'See the curriculum and a sample day'], 'the staff context card offers the summary and the sample (IP lockdown)');
+  assert.deepEqual(block('MORE_BY').centers.find(x => x[0] === 'unit-1'), ['unit-1', 'Unit 1 at a glance'], 'the centers menu offers the summary (audience split: staff pages live with centers)');
+  assert.ok(!JSON.stringify(block('NEXT')).includes('unit-1/'), 'no context card points at a day');
   assert.match(block('SYN')['unit-1'], /packets/, 'someone searching for packets lands on the summary, its sample and the request path');
   assert.doesNotMatch(block('SYN')['signin-teacher'], /packets|full curriculum/, 'the Teacher Portal sign-in never promises the curriculum');
   const foot = read('index.html').match(/<nav class="ffw-sitemap"[\s\S]*?<\/nav>/)[0];
