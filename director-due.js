@@ -28,7 +28,7 @@ const BUCKETS = [['overdue', 'Overdue', 'bad'], ['due_7', 'Due in 7 days', 'warn
 const DRILLS = [['fire', 'Fire drill'], ['tornado', 'Tornado drill'], ['disaster', 'Disaster drill'], ['shelter_in_place', 'Shelter-in-place practice'], ['relocation', 'Off-site relocation practice']];
 const CRITICAL = [['facility_damage', 'Damage to the facility that affects safety'], ['vehicle_collision', 'Vehicle collision with a child aboard'], ['missing_child', 'Missing child'],
   ['injury_medical_treatment', 'Injury that needed a health professional'], ['animal_injury', 'Injury by an animal'], ['death', 'Death of a child or staff member'], ['other_jeopardy', 'Anything else that put children at risk']];
-const AGES = [['infant', 'Infants (under 12 months)'], ['toddler', '12 to 23 months'], ['two', '24 to 29 months'], ['two_half', '30 to 35 months'],
+const AGES = [['two', '24 to 29 months'], ['two_half', '30 to 35 months'],
   ['three_four', '3 and 4 years'], ['five', '5 years (not in school)'], ['school_age', 'School age']];
 const NOTIFY = [['in_person', 'In person'], ['phone', 'Phone'], ['text', 'Text'], ['email', 'Email'], ['portal', 'Futures Hub message']];
 const label = (list, v) => (list.find(x => x[0] === v) || [v, v])[1];

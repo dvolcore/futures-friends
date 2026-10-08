@@ -422,7 +422,6 @@ window.FFi18n.add('es', {
   "Open the Smell the Flower, Blow the Candle card →": "Abre la tarjeta “Huele la flor, sopla la vela” →",
   "Open the Feelings Mirror card →": "Abre la tarjeta “El espejo de los sentimientos” →",
   "Open the Who Could We Invite? card →": "Abre la tarjeta “¿A quién podemos invitar?” →",
-  "Open the Peekaboo Turns card →": "Abre la tarjeta “Cucú por turnos” →",
   "Breathe along with Lumi, then read her book.": "Respira con Lumi y luego lee su libro.",
   "Read Big Feelings, Brighter Days": "Lee “Sentimientos grandes, días más brillantes”",
   "Pip is new and all alone. Breathe along with Lumi as she finds her calm and her kind words.": "Pip es nuevo y está solito. Respira con Lumi mientras ella encuentra su calma y sus palabras amables.",
@@ -490,7 +489,7 @@ window.FFi18n.add('es', {
       'twos': 'niños de 2 años', 'de 2 años': 'niños de 2 años', 'threes': 'niños de 3 años', 'de 3 años': 'niños de 3 años',
       'pre-k': 'prekínder', 'prekínder': 'prekínder' };
     return n + (n === '1' ? ' actividad' : ' actividades') + (band ? ' para ' + (B[band] || band) : '') + (who ? ' con ' + who : ''); }],
-  // activity card time line: "5 min · Floor · Babies", "1½ min · ...", "1 min 9 sec · ...", and the bare "39 sec" / "3 min" on Bop at Home
+  // activity card time line: "5 min · Floor · Anywhere", "1½ min · ...", "1 min 9 sec · ...", and the bare "39 sec" / "3 min" on Bop at Home
   [/^(?:(\d+½?) min(?: (\d+) sec)?|(\d+) sec)((?: · [^·]+)*)$/, function (m, mn, s1, s2, rest) {
     var P = { 'Floor': 'En el piso', 'Anywhere': 'En cualquier lugar', 'Cozy spot': 'En un rincón acogedor', 'Kitchen': 'En la cocina',
       'Bedtime': 'A la hora de dormir', 'Bath time': 'A la hora del baño', 'Outdoors': 'Al aire libre', 'Indoors': 'Dentro de casa',
