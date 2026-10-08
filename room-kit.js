@@ -13,7 +13,7 @@
    - Booker, Lumi, Zuri and Bop are labelled story-world characters; room pictures are labelled (real photo or concept).
    - The cue demo plays each friend's hello line already on the site (friend-voices.js, audio/friends/<k>-hello) after the site's
      own chime (sound.js). Nothing autoplays; the site's sound switch is respected.
-   - Branded-room concept illustrations (the owner's AI-generated images, 2026-10-07) are picked up when they exist: window.FFBrandedRooms, or
+   - Branded-room concept images (the owner's AI-generated images, 2026-10-07) are picked up when they exist: window.FFBrandedRooms, or
      img/branded-rooms/manifest.json {rooms:[{key, real, kit, alt, w, h}]} (coordinator, 2026-10-07). Until then the real classroom photos show alone.
    Also adds entry bands to #for-centers, #for-home, #options, #pricing, #shop-programs and #corners, and a link under the zone map.
    Public: window.FFRoomKit = { ZONES, CUE, KIT, FENCE, LAYOUTS, TIERS, ADDONS, SAFETY, STATUS, band, rooms }. Sends nothing. */
@@ -167,7 +167,7 @@ function hero() {
 }
 
 function rooms() {
-  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept illustration of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
+  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept image of the Learning Zones kit in the room. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
    <div class="rk-rooms" data-rk-rooms>${['turtle-rug', 'alphabet-rug', 'reading-corner'].map(k => roomFig({ key: k })).join('')}</div>`);
 }
 const REAL_ALT = {
@@ -185,7 +185,7 @@ function roomFig(r) {
   return `<figure class="rk-roomfig${has ? ' rk-has-kit' : ''}" data-room="${E(k)}"><div class="rk-roomframe">${real}${kit}
     <span class="rk-roomlabel" data-rk-label>Real photo</span></div>
     ${has ? `<div class="rk-toggle" role="group" aria-label="Show the room"><button type="button" aria-pressed="true" data-rk-view="real">Real room</button><button type="button" aria-pressed="false" data-rk-view="kit">With the kit</button></div>` : ''}
-    <figcaption>${has ? 'Concept view: an AI-generated illustration of the kit in a room like ours. It is not a photo of a finished room.' : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
+    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.'}</b> Concept view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
 }
 
 function zones() {
@@ -358,7 +358,7 @@ function selectTab(k, focus) {
   $$('.rk-plan').forEach(p => { p.hidden = p.dataset.plan !== k; });
 }
 
-// Branded-room concept illustrations: picked up when another release ships them; the real photos stay the "Real room" half.
+// Branded-room concept images: picked up when another release ships them; the real photos stay the "Real room" half.
 let brandedCache = null;
 function brandedRooms() {
   if (Array.isArray(W.FFBrandedRooms)) return Promise.resolve(W.FFBrandedRooms);
@@ -374,9 +374,7 @@ function mountRooms() {
     const ok = (list || []).filter(r => r && r.key && r.kit && REAL_ALT[r.key]);
     if (!ok.length || !document.body.contains(box)) return;
     const by = Object.fromEntries(ok.map(r => [r.key, r]));
-    // The owner's second concept for a room (manifest "alternates", FFBrandedAlternates): same real photo, a second labelled concept.
-    const alts = (Array.isArray(W.FFBrandedAlternates) ? W.FFBrandedAlternates : []).filter(x => x && x.room && x.kit && by[x.room]);
-    box.innerHTML = Object.keys(REAL_ALT).filter(k => by[k]).slice(0, 5).map(k => roomFig(by[k])).join('') + alts.map(x => roomFig({ key: x.room, kit: x.kit, alt: x.alt, w: x.w, h: x.h })).join('');
+    box.innerHTML = Object.keys(REAL_ALT).filter(k => by[k]).slice(0, 5).map(k => roomFig(by[k])).join('');
     box.querySelectorAll('.rk-has-kit').forEach(f => showRoom(f, 'kit'));
   });
 }

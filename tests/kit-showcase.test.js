@@ -47,10 +47,13 @@ test('prices come from the data sources: add-on from FFRoomKit.ADDONS, packages 
 });
 
 test('every concept image has its Concept badge, alt text, lazy loading and the Real room / With the kit toggle', () => {
-  const c = site(), n = c.window.FFBrandedRooms.length + (c.window.FFBrandedAlternates || []).length, h = c.render('centers');
+  const c = site(), n = c.window.FFBrandedRooms.length, h = c.render('centers');
   assert.ok(n >= 5);
-  assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room (plus any alternates)');
+  assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room');
   assert.equal((h.match(/class="ffa-kit-label"[^>]*>Concept</g) || []).length, n, 'Concept badge on every slide');
+  assert.equal((h.match(/<span class="ffa-kit-caption">AI-generated proposed transformation — furnishings and products shown as concepts\.<\/span>/g) || []).length, n, 'the required caption under every slide');
+  const fc = c.render('for-centers'); assert.ok(fc.indexOf('class="ks ') < fc.indexOf('ffa-compare'), 'the showcase (main classroom first) leads; the today vs proposed pair is underneath');
+  assert.match(fc, /ffa-compare[\s\S]*Today \(real photo\)[\s\S]*Proposed \(concept\)[\s\S]*AI-generated proposed transformation/);
   assert.equal((h.match(/data-kit-show="real"/g) || []).length, n);
   assert.equal((h.match(/data-kit-show="kit"/g) || []).length, n);
   const imgs = [...h.matchAll(/<img\b[^>]*>/g)].map(m => m[0]).filter(i => /data-(kit|real)-photo/.test(i));

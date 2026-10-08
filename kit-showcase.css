@@ -55,3 +55,5 @@
 }
 @media (prefers-reduced-motion:reduce){.ks-track{scroll-behavior:auto}}
 .ks-fig figcaption span{color:#D5E2EA;font-size:13px}
+
+.ks .ffa-photo figcaption .ffa-kit-caption{color:#fff;font-weight:600}

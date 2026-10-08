@@ -9,7 +9,7 @@
      its source file and sha256; wave 10, owner 2026-10-07: "We already have that, so there's no reason that should have a
      placeholder"). It fills a slot only where the photo shows what the slot promised (a room, a learning zone, the front door).
      Every one carries the credit line, so it reads as our pilot center and nothing else. Never put a render or AI image here.
-   - KIT / kitImg(key, o): "branded room" CONCEPT illustrations (img/branded-rooms/, listed in img/branded-rooms/manifest.json; owner
+   - KIT / kitImg(key, o): "branded room" CONCEPT images (img/branded-rooms/, listed in img/branded-rooms/manifest.json; owner
      2026-10-07: "They need our hypothetical carpets and our posters added so they're branded with our stuff"). The same real photo
      with the proposed Learning Zones kit (zone mat, poster or sign, plush) composited in locally. Never presented as the real
      center: photo() shows them behind a "Real room / With the kit" toggle (default: with the kit) and labels them
@@ -115,12 +115,13 @@
   }
   // ---- branded-room CONCEPTS: the owner's AI-generated concept of the proposed kit in the same room (img/branded-rooms/<key>-kit-<w>.<ext>) ----
   const KIT_LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
+  const KIT_CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
   const KIT = {
-    'turtle-rug': { zone: 'All five zones', alt: "Concept illustration, not installed yet: our main classroom with every Futures Friends zone, centred on Bop's purple Movement Zone rug, with Booker, Friends Circle, Lumi and Zuri zone rugs and posters around the room" },
-    'alphabet-rug': { zone: 'Friends Circle', alt: "Concept illustration, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, posters for Booker's Reading Area, Friends Circle and Lumi's Calm Corner, and friend plush on the bench" },
-    'reading-corner': { zone: "Booker's Reading Area", alt: "Concept illustration, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench" },
-    'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept illustration, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
-    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept illustration, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" }
+    'turtle-rug': { zone: 'All five zones', alt: "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
+    'alphabet-rug': { zone: 'Friends Circle', alt: "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench" },
+    'reading-corner': { zone: "Booker's Reading Area", alt: "Concept image, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench" },
+    'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
+    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" }
   };
   function kitImg(key, o = {}) {
     const k = KIT[key], p = CENTER[key]; if (!k || !p) return '';
@@ -148,11 +149,10 @@
     const cls = `ffa-photo${ratio ? ' ffa-photo-' + esc(ratio) : ''}${kit ? ' ffa-kit' : ''}${o.cls ? ' ' + esc(o.cls) : ''}`;
     const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span><span class="ffa-kit-concept">${kitImg(key, o)}</span><span class="ffa-kit-label" aria-hidden="true">Concept</span>${kitToggle(key)}</div>` : photoImg(key, o);
     return `<figure class="${cls}"${kit ? ' data-kit-view="kit"' : ''}>${media}
-   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).</span>` : ''}<span class="ffa-credit">Photo: ${CENTER_CREDIT}</span></figcaption></figure>`;
+   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit ? `<span class="ffa-kit-caption">${KIT_CAPTION}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).</span>` : ''}<span class="ffa-credit">Photo: ${CENTER_CREDIT}</span></figcaption></figure>`;
   }
-  const FFBrandedAlternates = [{ key: 'alphabet-rug-wall', room: 'alphabet-rug', kit: 'img/branded-rooms/alphabet-rug-wall-kit-800.jpg', alt: "Concept illustration, not installed yet: the same carpet area with the Friends Circle rug and a full poster wall for Booker, Lumi, Friends Circle, Zuri and Bop above the picture-book shelf", w: 800, h: 600, zone: 'Friends Circle', label: KIT_LABEL }];
   const FFBrandedRooms = Object.keys(KIT).map(key => ({ key, real: `img/center/${key}-800.jpg`, kit: `img/branded-rooms/${key}-kit-800.jpg`, alt: KIT[key].alt, w: CENTER[key].w, h: CENTER[key].h, zone: KIT[key].zone, label: KIT_LABEL }));
-  window.FFBrandedAlternates = FFBrandedAlternates; window.FFBrandedRooms = FFBrandedRooms;
+  window.FFBrandedRooms = FFBrandedRooms;
 
-  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL };
+  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL, KIT_CAPTION };
 })();
