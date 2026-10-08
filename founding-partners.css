@@ -1,0 +1,37 @@
+/* Futures Friends: the Founding Partner pilot (#founding-partners) and its link bands on #for-centers and #pricing.
+   Site tokens only (light and dark follow the site's variables); Bop purple #8236AE as the accent. Nothing moves. */
+.fp{--fp-accent:#8236AE;--fp-ink:#6B2A8E}
+.fp-sec{padding-block:clamp(40px,6vw,80px);scroll-margin-top:110px}
+.fp-head{display:grid;gap:10px;margin-bottom:clamp(18px,3vw,30px);max-width:72ch}
+.fp-head h2{font-size:clamp(26px,3.6vw,40px)}
+.fp-kick{font:600 14px/1.3 var(--display);color:var(--fp-ink)}
+.fp-note{font-size:13.5px;color:var(--muted);max-width:76ch;margin-top:14px}
+.fp-card{display:grid;gap:10px;align-content:start;min-width:0}
+.fp-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fp-list li{position:relative;padding-left:24px;font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+.fp-list li::before{content:"";position:absolute;left:4px;top:.5em;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.fp-ask .fp-list li::before{background:var(--fp-accent)}
+.fp-measures{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.fp-measure{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start}
+.fp-measure h3{font-size:18px;margin:0 0 4px}
+.fp-measure p{margin:0}
+.fp-num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--fp-accent);color:#fff;font:600 18px/1 var(--display)}
+.fp-target{font-size:13px;font-weight:600;color:var(--muted);margin-top:6px!important}
+.fp-who .fp-card h3{font-size:19px}
+.fp-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;counter-reset:fp}
+.fp-steps li{counter-increment:fp;display:grid;gap:4px;padding:16px 16px 16px 56px;position:relative;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.fp-steps li::before{content:counter(fp);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#14313D;font:600 15px/1 var(--display)}
+.fp-steps span{font-size:14px;color:var(--muted)}
+.fp-applygrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(20px,4vw,48px);align-items:start}
+@media (max-width:860px){.fp-applygrid{grid-template-columns:minmax(0,1fr)}}
+.fp-formcard{display:grid;gap:12px;min-width:0}
+.fp-formcard textarea{min-height:110px}
+.fp-tell{margin:0}
+.fp-foot{font-size:13px;color:var(--muted);padding-block:18px 36px}
+.fp-band{padding-block:clamp(22px,3vw,34px)}
+.fp-bandin{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;border:2px dashed var(--fp-accent,#8236AE);border-radius:var(--r);padding:clamp(16px,3vw,26px);background:var(--paper)}
+.fp-bandin>div{display:grid;gap:6px;flex:1 1 320px;min-width:0}
+.fp-bandin h2{font-size:clamp(21px,2.6vw,28px)}
+.fp-bandin p{margin:0;max-width:70ch}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fp-kick{color:#C9A2EC}}
+:root[data-theme="dark"] .fp-kick{color:#C9A2EC}
