@@ -140,3 +140,12 @@
 }
 :root[data-motion="off"] .sf-cloud,:root[data-motion="off"] .sf-mascot,:root[data-motion="off"] .sf-star,:root[data-motion="off"] .sf-tk-track{animation:none!important}
 :root[data-motion="off"] .sp-pro .sp-card,:root[data-motion="off"] .sp-friend,:root[data-motion="off"] .sf-col a{transform:none!important}
+
+/* hero collage: product tiles that float and tilt (replaces the preview video; no labels) */
+.sf-coll{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,18px);width:min(100%,560px);padding:10px}
+.sf-coll-t{position:relative;display:block;aspect-ratio:3/4;border-radius:24px;overflow:hidden;background:#FBF5E8;border:4px solid #fff;box-shadow:0 22px 40px -18px rgba(8,30,70,.55);transform:rotate(var(--r,0deg)) translateY(var(--ty,0));animation:sf-bob 5.5s ease-in-out infinite;transition:transform .4s var(--sf-spring)}
+.sf-coll-t .sp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%}
+.sf-coll-1{--r:-4deg}.sf-coll-2{--r:3deg;--ty:18px;animation-delay:-1s}.sf-coll-3{--r:-2deg;animation-delay:-2s}.sf-coll-4{--r:3deg;--ty:-6px;animation-delay:-3s}.sf-coll-5{--r:-3deg;--ty:14px;animation-delay:-.5s}.sf-coll-6{--r:4deg;animation-delay:-2.5s}
+@media (hover:hover) and (pointer:fine){.sf-coll-t:hover{transform:rotate(0) scale(1.07) translateY(-6px);z-index:3}}
+@media (max-width:900px){.sf-coll{width:100%;gap:8px}.sf-coll-t{border-radius:16px;border-width:3px}}
+@media (prefers-reduced-motion:reduce){.sf-coll-t{animation:none}}

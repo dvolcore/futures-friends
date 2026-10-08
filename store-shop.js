@@ -106,9 +106,7 @@ function heroHtml(side) {
         : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('room-planner', 'Plan your room', 'btn sp-btn-lg sp-btn-glass')}</div>
       <ul class="sp-hero2-facts"><li>Made to order</li><li>Real friends, real fun</li><li>Orders go in as requests</li></ul></div>
     <div class="sp-hero2-stage" aria-hidden="false">
-      <div class="sp-vid" data-sp-vidwrap><video class="sp-vid-el" data-sp-video muted loop playsinline preload="none" poster="${v[1]}" aria-label="${E(v[2])}" tabindex="-1"><source src="${v[0]}" type="video/mp4"></video>
-        <button type="button" class="sp-vid-btn" data-sp-vidbtn aria-pressed="false" aria-label="Pause the preview video">${ico('pause')}</button><span class="sp-vid-tag">Concept preview</span></div>
-      ${fam ? tile(tiles[0], 18, 'sp-float-a') + tile(tiles[1], 30, 'sp-float-b') + tile(tiles[2], 12, 'sp-float-c') : tile(tiles[0], 18, 'sp-float-a') + tile(tiles[1], 30, 'sp-float-b') + tile(tiles[2], 12, 'sp-float-c')}</div></div></section>`;
+      <div class="sf-coll">${(fam ? ['plush-bop', 'zuri-replica-backpack', 'plush-lumi', 'all-friends-hoodie', 'bottle-booker', 'stickers-all-friends'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1', 'plush-lumi', 'rug-friends-circle', 'plush-booker']).map((id, n) => { const q = C.product(id), g = q && C.gallery(q, rooms())[0]; return g ? `<a class="sf-coll-t sf-coll-${n + 1}" href="#product/${id}" data-go="product/${id}" tabindex="-1" aria-hidden="true">${imgTag(g, { sizes: '(max-width:900px) 40vw, 220px', alt: '', eager: true })}</a>` : ''; }).join('')}</div></div></div></section>`;
 }
 function trustStrip() {
   const ic = { ships: 'truck', time: 'clock', licence: 'shield', support: 'phone' };
