@@ -219,3 +219,10 @@
    so once it has painted the picture and its card are one surface: no visible inner rectangle */
 .sp-pro .sp-img[style*="--ibg"]{mix-blend-mode:normal!important}
 .sp-pro .sp-img.is-ready[style*="--ibg"]{background:var(--ibg)}
+
+/* the sticky add-to-bag bar reserves its own safe area: the floating sound and nature controls and the View bag pill sit above it, never over the button */
+@media (max-width:900px){
+  body:has(.sp-buybar.is-on) .ffs{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  body:has(.sp-buybar.is-on) .sp-viewcart{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .sp-buybar-in{padding-right:0}
+}

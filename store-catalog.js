@@ -79,7 +79,7 @@
     collection: 'kits', kind: 'kit', priceState: 'fixed', ships: 'freight', badges: ['Made to order', 'Concept image'],
     lead: 'Confirmed in your written quote. The kit is built after you sign.',
     care: ['Spot-clean mats and rugs with a damp cloth and mild soap; air dry flat.', 'Wipe signs and posters with a dry or lightly damp cloth.', 'Printed puppets are paper-based: keep them dry.'],
-    materials: ['Zone mats and rugs: felt-look printed face, low pile (1/2 in or less), bound and beveled edges, non-slip backing built in.', 'Signs and posters: printed on durable board and paper.', 'Final materials are confirmed when the sample is approved.'],
+    materials: ['Zone mats and rugs, specification targets confirmed at the sample: felt-look printed face, low pile (1/2 in or less), bound low-profile edges, non-slip backing.', 'Signs and posters: printed on durable board and paper.', 'Final materials are confirmed when the sample is approved.'],
     safety: [SAFETY.rug, SAFETY.puppets, SAFETY.print],
     faq: [FAQ.po, FAQ.tax, FAQ.freight, FAQ.lead, FAQ.returns, ['Does the price include the curriculum?', 'The startup package is the first order: the physical kit, the welcome materials and onboarding. ' + MEMBER]],
     room: 'turtle-rug', tone: 'booker'
@@ -119,13 +119,13 @@
       { id: 'classroom', label: 'Classroom', price: APPROVED.boundaries.classroom, note: '4 mats 4 x 6 ft, 8 Friend Fence panels, 4 shelf bands' }] }],
     box: ['Four zone mats in Booker blue, Lumi pink, Zuri green and Bop purple', 'Friend Fence panels (4 for a home room, 8 for a classroom)', 'Friend Shelf Bands in each friend’s colour', 'Floor paths: removable anti-slip prints from the Friends Circle to each zone'],
     dims: ['Home mats: 3 x 5 ft each', 'Classroom mats: 4 x 6 ft each', 'Fence panels: 22 to 24 in high'],
-    materials: ['Mats: felt-look printed face with a stitched-edge line, a friend in one corner, low pile, rounded corners, non-slip backing.', 'Fence: see-through upper half, washable sleeve.', 'Floor paths: removable anti-slip vinyl (R10 or better).', 'Final materials are confirmed when the sample is approved.'],
+    materials: ['Mats, specification targets confirmed at the sample: felt-look printed face with a stitched-edge line, a friend in one corner, low pile, rounded corners, non-slip backing.', 'Fence: see-through upper half, washable sleeve.', 'Floor paths: removable anti-slip vinyl (R10 or better).', 'Final materials are confirmed when the sample is approved.'],
     care: ['Machine or hand wash the fence sleeves cold; air dry.', 'Spot-clean mats; do not bleach.', 'Peel floor paths up before mopping a wet floor.'],
     safety: [SAFETY.rug, SAFETY.fence], lead: 'Made to order. Timing is confirmed in your quote.',
     faq: [FAQ.freight, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns, ['Do I need this to use the kit?', 'No. The kit works on its own. Zone Boundaries is the add-on that gives every friend a carpet and a low fence so children know they are going somewhere different.']],
     pairs: ['kit-center-starter', 'shelf-bands', 'zone-signs'], description: 'Children move from carpet to carpet and know where they are going. Each friend gets a mat in their colour, and a low fence keeps every corner in sight.' });
   add({ id: 'zone-mats-only', name: 'Zone mats only', short: 'Four classroom mats, shelf bands and floor paths. Your own low shelves are the zone edges.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order', 'Concept image'],
-    tone: 'zuri', room: 'blue-table-room', box: ['Four zone mats, 4 x 6 ft', 'Friend Shelf Bands', 'Floor paths'], dims: ['Mats: 4 x 6 ft each'], safety: rugSafety, materials: ['Felt-look printed face, low pile, bound edges, non-slip backing. Confirmed at sample approval.'],
+    tone: 'zuri', room: 'blue-table-room', box: ['Four zone mats, 4 x 6 ft', 'Friend Shelf Bands', 'Floor paths'], dims: ['Mats: 4 x 6 ft each'], safety: rugSafety, materials: ['Felt-look printed face, low pile, bound edges, non-slip backing (specification targets, confirmed at the sample).'],
     care: ['Spot-clean; air dry.'], faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.returns], pairs: ['zone-boundaries', 'shelf-bands'], description: 'The lighter way to mark zones if your room already has low shelves.' });
   add({ id: 'friend-fence', name: 'Friend Fence panel', short: 'A low, see-through divider for one zone edge.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order', 'Concept image'],
     tone: 'bop', room: 'dress-up-corner', options: [{ key: 'colour', label: 'Zone colour', values: [{ id: 'booker', label: 'Booker blue' }, { id: 'lumi', label: 'Lumi pink' }, { id: 'zuri', label: 'Zuri green' }, { id: 'bop', label: 'Bop purple' }] }],
@@ -174,7 +174,7 @@
       options: square ? [{ key: 'size', label: 'Proposed size', values: [{ id: 's6', label: '6 x 6 ft', note: 'A footprint, not a confirmed size.' }, { id: 's8', label: '8 x 8 ft', note: 'A footprint, not a confirmed size.' }, { id: 'ask', label: 'Match my room', note: 'Send your room measurements with the quote request.' }] }] : [],
       box: [square ? 'One large square corner carpet that holds a furnished ' + r.zone.toLowerCase() + ' corner' : 'One ' + r.zone + ' carpet'],
       dims: square ? ['Proposed footprints: 6 x 6 ft or 8 x 8 ft. These are not confirmed product sizes; we match your room measurements.'] : ['Final size is confirmed with the maker. Tell us your room and we quote the right one.'],
-      materials: [square ? 'Flat, low pile, felt-look printed face, bound edges, non-slip backing. Confirmed at sample approval.' : 'Felt-look printed face with a stitched-edge line, low pile, bound edges, non-slip backing. Confirmed at sample approval.'],
+      materials: [square ? 'Specification targets, confirmed at the sample: flat, low pile, felt-look printed face, bound edges, non-slip backing.' : 'Felt-look printed face with a stitched-edge line, low pile, bound edges, non-slip backing (specification targets, confirmed at the sample).'],
       care: ['Spot-clean with a damp cloth and mild soap; air dry flat.'], safety: [SAFETY.rug], lead: 'Made to order. Timing is confirmed in your written quote.',
       faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns, ['Will mine look exactly like the picture?', 'Made-to-order items can differ a little in size, color and finish. We confirm the details in your written quote before we make yours.']],
       pairs: square ? ['zone-boundaries', 'rug-friends-circle'] : ['zone-boundaries', 'kit-center-starter', 'poster-' + (z === 'circle' ? 'friends-circle' : ({ booker: 'booker-reading-area', lumi: 'lumi-calm-corner', zuri: 'zuri-discovery-zone', bop: 'bop-movement-zone' })[z]) + '-v1'] }));
@@ -290,7 +290,7 @@
 
   // Kids' Shop
   add({ id: 'kids-carpet', name: 'Small friend carpet', short: 'A small play carpet for a bedroom or reading nook.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'soon', orderable: false, cta: 'notify', ships: 'freight',
-    badges: ['Made to order', 'Concept image'], tone: 'bop', ages: ['toddler', 'twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing. Confirmed at sample approval.'], care: ['Spot-clean; air dry.'],
+    badges: ['Made to order', 'Concept image'], tone: 'bop', ages: ['toddler', 'twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing (specification targets, confirmed at the sample).'], care: ['Spot-clean; air dry.'],
     safety: [SAFETY.rug], lead: 'Price and size are still being set.', faq: [['When can I buy it?', 'Size and price are still being set, and the rug needs its flammability report first. Leave your email and we will write when it is ready.'], FAQ.freight],
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Made to order. We will post the size and price when they are final.' });
   add({ id: 'kids-printables', name: 'Futures at Home printable packs', short: 'Picture schedule, calm-down cards, move cards, reading log and more. Free to print.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',
@@ -394,12 +394,19 @@
   /* Gallery for a product: real pictures first (a product marked sample gets the "Concept sample" label), then the room concept; with no
      pictures yet, the best fallback art. */
   function gallery(p, rooms) {
-    const real = photos(p.id).map((im, i) => ({ kind: 'photo', fit: 'contain',
+    const real = photos(p.id).filter(im => !im.angle).map((im, i) => ({ kind: 'photo', fit: 'contain',
       srcset: (im.files || [[im.w400, 400], [im.w800, 800], [im.w1200, 1200]]).filter(x => x[0]), src: im.jpg || im.w800, w: im.w || 4, h: im.h || 3,
-      alt: im.alt || p.name + (photos(p.id).length > 1 ? ', picture ' + (i + 1) : ''), caption: '', bg: im.bg || '', ratio: im.ratio }));
+      alt: im.alt || p.name + (photos(p.id).filter(x => !x.angle).length > 1 ? ', picture ' + (i + 1) : ''), caption: '', bg: im.bg || '', ratio: im.ratio }));
     const room = roomShot(p, rooms);
     if (real.length) return room ? real.concat([room]) : real;
     return fallbacks(p, rooms);
+  }
+  /* The turn-around: front, side, back and the side again (mirrored) from the angle slices in the manifest (angle: front|side|back). [] when a product has none. */
+  function rotation(p) {
+    const by = {}; photos(p.id).forEach(im => { if (im.angle) by[im.angle] = im; });
+    if (!by.front || !by.side || !by.back) return [];
+    const mk = (im, label, mirror) => ({ kind: 'photo', fit: 'contain', srcset: (im.files || []).filter(x => x[0]), src: im.jpg || im.w800, w: im.w || 3, h: im.h || 4, ratio: im.ratio, bg: im.bg || '', alt: p.name + ', ' + label + ' view', label, mirror: !!mirror });
+    return [mk(by.front, 'front'), mk(by.side, 'side'), mk(by.back, 'back'), mk(by.side, 'other side', true)];
   }
   /* A collection's hero picture (the owner's group shots), from the manifest: collection-<id>-<n>. */
   function heroImage(id, n) {
@@ -445,5 +452,5 @@
 
   return Object.freeze({ APPROVED, CONCEPT_CAPTION, DRAFT, AUDIENCES, AGES, ZONES, COLLECTIONS, PRODUCTS: P, LABELS, TRUST, FAQ, SAFETY, MEMBER,
     product, collection, anyCollection, virtual, VIRTUAL, charOf, CHARS, completeSet, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
-    setManifest, photos, gallery, heroImage, kidsSections, keywords, collectionKeywords, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
+    setManifest, photos, rotation, gallery, heroImage, kidsSections, keywords, collectionKeywords, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
 });

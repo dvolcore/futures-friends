@@ -25,6 +25,7 @@ function gallery(p) {
       ${g.length > 1 ? `<button type="button" class="sp-gal-nav sp-gal-prev" data-sp-gstep="-1" aria-label="Previous picture">${ico('back')}</button><button type="button" class="sp-gal-nav sp-gal-next" data-sp-gstep="1" aria-label="Next picture">${ico('next')}</button>` : ''}
       <span class="sp-gal-count" aria-live="polite" data-sp-gcount>1 / ${g.length}</span></div>
     ${g.length > 1 ? `<ul class="sp-gal-thumbs" aria-label="Choose a picture">${g.map((x, i) => `<li><button type="button" data-sp-thumb="${i}" aria-label="Show picture ${i + 1}"${i === 0 ? ' aria-current="true"' : ''}>${imgTag(x, { sizes: '84px', alt: '' })}</button></li>`).join('')}</ul>` : ''}
+    ${W.FFFun ? W.FFFun.spin(p, 'pdp') : ''}
     <p class="sp-gal-cap" data-sp-gcap>${g[0].caption ? E(g[0].caption) : ''}</p>
     ${roomAt >= 0 ? `<div class="sp-room"><button type="button" class="btn soft" data-sp-room="${roomAt}">${ico('grid')} ${hasReal ? 'See it in a room' : 'See it in a real room'}</button>${lnk('room-planner', 'Plan it for your room ' + ico('arrow'), 'sp-link')}</div>` : ''}
   </div>`;
