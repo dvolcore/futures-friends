@@ -167,7 +167,7 @@ function hero() {
 }
 
 function rooms() {
-  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, before the kit. When a concept view with the kit is ready, the toggle shows it, clearly labelled.', 'rk-room-h')}
+  return sect('rk-room', 'band-paper rk-roomband', `${lead('In a real room', 'Our pilot classroom, today', 'Real photos of Futures Learning Center in Independence, Missouri, shown first as a labelled concept with the Learning Zones kit added. Tap “Real room” to see the room as it is today.', 'rk-room-h')}
    <div class="rk-rooms" data-rk-rooms>${['turtle-rug', 'alphabet-rug', 'reading-corner'].map(k => roomFig({ key: k })).join('')}</div>`);
 }
 const REAL_ALT = {
