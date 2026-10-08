@@ -91,13 +91,13 @@ test('the plush is not orderable: no add to bag, a Notify me form instead, and t
     const p = C.product(id);
     assert.equal(C.canOrder(p), false); assert.equal(p.cta, 'notify'); assert.equal(p.price, 26);
     const html = c.render('product', id);
-    assert.doesNotMatch(html, /data-sp-padd/); assert.match(html, /data-sp-notify=/); assert.match(html, /Ships after safety testing/);
+    assert.doesNotMatch(html, /data-sp-padd/); assert.match(html, /data-sp-notify=/); assert.match(html, /Opening soon|opening soon/);
     assert.equal(K.add(id, {}, 1), null);
   }
   for (const id of ['kids-carpet', 'book-booker-tries-again']) assert.equal(K.add(id, {}, 1), null, id);
   assert.ok(K.add('booker-backpack', {}, 1), 'a backpack goes in the cart as a request'); K._reset();
   assert.equal(K.count(), 0);
-  assert.match(text(c.render('product', 'plush-lumi')), /cannot be ordered until its safety tests are done/);
+  assert.match(text(c.render('product', 'plush-lumi')), /opening soon/i);
 });
 
 test('cart math: quantities merge, priced lines add up, quoted lines are counted and never priced', () => {
@@ -252,7 +252,7 @@ test('every product renders a real page: price text, honest status, no leaks, on
     if (p.priceState === 'soon') assert.match(text(html), /Price coming soon/, p.id);
     if (C.gallery(p, []).some(g => g.kind === 'concept')) assert.ok(text(html).includes(C.CONCEPT_CAPTION), p.id + ' carries the owner caption');
   }
-  for (const id of ['plush-lumi', 'rug-friends-circle', 'booker-tshirt']) assert.ok(text(c.render('product', id)).includes('Concept sample') || c.render('product', id).includes('Concept sample'), id);
+  for (const id of ['plush-lumi', 'booker-tshirt', 'bottle-zuri']) assert.doesNotMatch(c.render('product', id), /Concept sample|safety test/i, id + ' reads as a regular product');
   assert.match(text(c.render('product', 'nope')), /could not find that product/);
   // collections, filters and sort
   const kits = C.query('kits', {}, 'featured'); assert.deepEqual(plain(kits.map(p => p.id)), ['kit-home', 'kit-center-starter', 'kit-center-complete']);
@@ -267,8 +267,8 @@ test('every product renders a real page: price text, honest status, no leaks, on
 
 test('the kids\' shop stays small and uses the same cards, product pages and cart', () => {
   const { c, W } = world(), C = W.FFCatalog, html = c.render('kids-shop');
-  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Carpets', 'Posters', 'Free printables and a small carpet']);
-  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 6 + 4 + 10 + 10 + 2);
+  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Stickers & coloring', 'Bottles & plates', 'Carpets', 'Posters', 'Free printables and a small carpet']);
+  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 8 + 4 + 11 + 5 + 10 + 10 + 2);
   for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone', 'poster-bop-movement-zone-v2', 'poster-friends-circle-v1', 'poster-lumi-calm-corner-v2']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
   assert.match(html, /data-go="product\/plush-lumi"/); assert.match(html, /Notify me/);
   assert.doesNotMatch(html, /kit-center|zone-boundaries/);

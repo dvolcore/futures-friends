@@ -120,7 +120,9 @@
     o = o || {};
     const set = g.srcset.map(([u, w]) => E(u) + ' ' + w + 'w').join(', ');
     const fit = g.tile || g.fit === 'contain' ? ' sp-contain' : '';
-    return `<img class="sp-img${fit}${o.cls ? ' ' + o.cls : ''}" src="${E(g.src)}" srcset="${set}" sizes="${E(o.sizes || '(max-width:700px) 50vw, 320px')}" alt="${E(o.alt != null ? o.alt : g.alt)}" width="${g.w}" height="${g.h}" loading="${o.eager ? 'eager' : 'lazy'}" decoding="async"${o.eager ? ' fetchpriority="high"' : ''} draggable="false">`;
+    // the picture's own background colour (sampled from its corners at import): once it has painted, the picture blends into its card with no visible inner rectangle
+    const bg = /^#[0-9a-f]{6}$/i.test(g.bg || '') && (parseInt(g.bg.slice(1, 3), 16) * 0.3 + parseInt(g.bg.slice(3, 5), 16) * 0.59 + parseInt(g.bg.slice(5, 7), 16) * 0.11) > 205 ? ` style="--ibg:${g.bg}"` : '';
+    return `<img class="sp-img${fit}${o.cls ? ' ' + o.cls : ''}"${bg} src="${E(g.src)}" srcset="${set}" sizes="${E(o.sizes || '(max-width:700px) 50vw, 320px')}" alt="${E(o.alt != null ? o.alt : g.alt)}" width="${g.w}" height="${g.h}" loading="${o.eager ? 'eager' : 'lazy'}" decoding="async"${o.eager ? ' fetchpriority="high"' : ''} draggable="false">`;
   }
   const thumb = p => { const g = C.gallery(p, rooms())[0]; return g ? imgTag(g, { sizes: '96px', alt: '' }) : ''; };
   const optsText = l => l.label ? `<span class="sp-ln-opt">${E(l.label)}</span>` : '';

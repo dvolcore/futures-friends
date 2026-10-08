@@ -68,20 +68,20 @@ function card(p, o) {
     </div></article></li>`;
 }
 const caption = `<p class="sp-caption">Room pictures marked Concept image: ${E(C.CONCEPT_CAPTION)}</p>`;
-const sampleCap = `<p class="sp-caption">Pictures marked Concept sample are AI-generated development images. ${E(C.SAMPLE_CAPTION)}</p>`;
+const sampleCap = '';
 const captionFor = list => { const k = new Set(list.map(p => (C.gallery(p, rooms())[0] || {}).kind)); return (k.has('concept') ? caption : '') + (k.has('sample') ? sampleCap : ''); };
 const termsLine = (name) => (W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [[name, 'merch-pod']], { compact: true }) : '');
 
 // ------------------------------------------------------------------ the sticky collection rail (picture chips) and the search pill
 const RAIL = {
   kits: ['Kits', null], carpets: ['Carpets', 'rug-friends-circle'], posters: ['Posters', 'poster-friends-circle-v1'], plush: ['Plush', 'plush-lumi'],
-  apparel: ['Apparel', 'all-friends-hoodie'], backpacks: ['Backpacks', 'zuri-shell-backpack']
+  apparel: ['Apparel', 'all-friends-hoodie'], backpacks: ['Backpacks', 'zuri-replica-backpack'], stickers: ['Stickers', 'stickers-all-friends'], drinkware: ['Drinkware', 'bottle-zuri']
 };
-const RAIL_ORDER = { families: ['apparel', 'backpacks', 'plush', 'carpets', 'posters'], centers: ['kits', 'carpets', 'posters', 'plush', 'apparel', 'backpacks'] };
+const RAIL_ORDER = { families: ['apparel', 'backpacks', 'plush', 'stickers', 'drinkware', 'carpets', 'posters'], centers: ['kits', 'carpets', 'posters', 'plush', 'apparel', 'backpacks', 'stickers', 'drinkware'] };
 function railChip(id, active) {
   const [label, pid] = RAIL[id];
   let g = pid ? C.gallery(C.product(pid), rooms())[0] : C.roomShot({ id: 'rail', name: 'Kits', kind: 'kit', room: 'turtle-rug' }, rooms());
-  return `<li><a class="sp-chip${active === id ? ' is-on' : ''}" href="#shop/${id}" data-go="shop/${id}"${active === id ? ' aria-current="page"' : ''}><span class="sp-chip-i${g && g.kind === 'sample' ? ' is-sample' : ''}">${g ? imgTag(g, { sizes: '44px', alt: '' }) : ''}</span><span>${label}</span></a></li>`;
+  return `<li><a class="sp-chip${active === id ? ' is-on' : ''}" href="./#shop/${id}" data-go="shop/${id}"${active === id ? ' aria-current="page"' : ''}><span class="sp-chip-i${g && g.kind === 'sample' ? ' is-sample' : ''}">${g ? imgTag(g, { sizes: '44px', alt: '' }) : ''}</span><span>${label}</span></a></li>`;
 }
 function rail(active) {
   const side = aud() === 'families' ? 'families' : 'centers', ids = RAIL_ORDER[side];
@@ -95,7 +95,7 @@ const VIDEO = { centers: ['video/store/centers-preview.mp4', 'video/store/center
   families: ['video/store/families-preview.mp4', 'video/store/families-preview-poster.webp', 'Product motion preview: a reading corner concept with the friends’ carpet'] };
 function heroHtml(side) {
   const fam = side === 'families', v = VIDEO[side];
-  const tiles = fam ? ['plush-bop', 'zuri-shell-backpack', 'lumi-hoodie'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1'];
+  const tiles = fam ? ['plush-bop', 'zuri-replica-backpack', 'lumi-hoodie'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1'];
   const tile = (id, d, cls) => { const p = C.product(id), g = C.gallery(p, rooms())[0]; return g ? `<span class="sp-float ${cls}" style="--d:${d}">${imgTag(g, { sizes: '180px', alt: '', eager: true })}</span>` : ''; };
   return `<section class="sp-hero2 sp-hero2-${side}" data-sp-hero aria-labelledby="spH1"><div class="sp-hero2-bg" aria-hidden="true"></div>
     <div class="wrap sp-hero2-grid"><div class="sp-hero2-copy">
@@ -104,7 +104,7 @@ function heroHtml(side) {
         : 'Learning Zones kits, zone carpets, posters, plush and the apparel for the people in the room. Made to order for centers, home daycares and churches.'}</p>
       <div class="sp-hero2-acts">${fam ? lnk('shop/apparel', 'Shop apparel ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('shop/plush', 'Meet the plush', 'btn sp-btn-lg sp-btn-glass')
         : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('room-planner', 'Plan your room', 'btn sp-btn-lg sp-btn-glass')}</div>
-      <ul class="sp-hero2-facts"><li>Made to order</li><li>Concept samples, not stock photos</li><li>Orders go in as requests</li></ul></div>
+      <ul class="sp-hero2-facts"><li>Made to order</li><li>Real friends, real fun</li><li>Orders go in as requests</li></ul></div>
     <div class="sp-hero2-stage" aria-hidden="false">
       <div class="sp-vid" data-sp-vidwrap><video class="sp-vid-el" data-sp-video muted loop playsinline preload="none" poster="${v[1]}" aria-label="${E(v[2])}" tabindex="-1"><source src="${v[0]}" type="video/mp4"></video>
         <button type="button" class="sp-vid-btn" data-sp-vidbtn aria-pressed="false" aria-label="Pause the preview video">${ico('pause')}</button><span class="sp-vid-tag">Concept preview</span></div>
@@ -154,8 +154,10 @@ V.store = () => wrapPage('centers', `${heroHtml('centers')}${rail('')}
   ${row('Learning Zones Kits', 'The room, set up. Three sizes, from one home room to a four-room center.', 'shop/kits', C.query('kits'), 'spRowKits')}
   ${row('Carpets and corner rugs', 'A rug for each friend’s zone, and large square corner rugs for a furnished corner.', 'shop/carpets', C.query('carpets').filter(p => p.kind === 'carpet').slice(0, 10), 'spRowRugs')}
   ${editorial('centers')}
-  ${row('Plush friends', 'Opens for orders only after safety testing. Leave your email on a product page.', 'shop/plush', C.query('plush'), 'spRowPlush')}
+  ${row('Plush friends', 'Opening soon. Leave your email on a plush page and we will tell you the day it opens.', 'shop/plush', C.query('plush'), 'spRowPlush')}
   ${row('Apparel and backpacks', 'For the people in the room. Sizes and prices are still being set.', 'shop/apparel', C.query('apparel').filter(p => p.apparelType !== 'tshirt' || p.who === 'all-friends').slice(0, 10), 'spRowApp')}
+  ${row('Stickers and coloring', 'Sticker sheets and coloring books for each friend, plus universe packs with all 22 friends. Price coming soon.', 'shop/stickers', C.query('stickers'), 'spRowStickers')}
+  ${row('Drinkware and mealtime', 'Insulated character bottles and the Eat the Rainbow plate.', 'shop/drinkware', C.query('drinkware'), 'spRowDrink')}
   ${row('Posters', 'Each friend and the Friends Circle, in two designs. $16 a poster.', 'shop/posters', C.query('posters').filter(p => /-v1$/.test(p.id)), 'spRowPosters')}
   <div class="wrap">${caption}${sampleCap}${termsLine('Futures Store items')}</div>
   ${trustStrip()}${bridge()}${know()}
@@ -192,7 +194,7 @@ function collectionPage(colId) {
   const sub = C.virtual(colId) && !c.friend ? null : null;
   return `<div class="sp sp-pro sp-coll sp-side-${side}" data-col="${E(c.id)}" style="--tone:var(--${t});--tone-s:var(--${t}-s)">
    <header class="sp-pagehead sp-collhead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div><h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${sub || ''}</div>
-     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name + ', concept samples' })}${badgeHtml('Concept sample', 'sample')}<figcaption>${E(C.SAMPLE_CAPTION)}</figcaption></figure>` : ''}</div></header>
+     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name })}</figure>` : ''}</div></header>
    ${rail(railOn)}${filterBar(c)}
    <div class="wrap sp-shell"><div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div>${termsLine(c.name)}</div>
    ${['kits', 'carpets', 'addons'].includes(c.id) ? `<section class="sp-help sp-help-kit"><div class="wrap"><p><b>Not sure what goes in a room?</b> See how the five zones fit together, or lay out your own room to scale.</p><div class="sp-help-acts">${lnk('room-kit', 'See the Learning Zones Kit', 'btn soft')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div></div></section>` : ''}
@@ -203,11 +205,11 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' shop
 V['kids-shop'] = () => {
-  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free printables']];
+  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['stickers', 'Stickers & coloring'], ['drinkware', 'Bottles & plates'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free printables']];
   return wrapPage('families', `${heroHtml('families')}${rail('')}${friends()}
    <div class="wrap sp-shell sp-kidsbody" id="spResults"><ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul>
    ${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
-   ${termsLine('Kids’ Shop items')}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
+   ${termsLine('Kids’ Shop items')}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush is opening soon: leave your email on a plush page. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
    ${editorial('families')}
    <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section>`);
 };
@@ -226,7 +228,7 @@ function qvBody(p) {
       ${g.length > 1 ? `<ul class="sp-gal-thumbs" aria-label="Choose a picture">${g.map((y, i) => `<li><button type="button" data-sp-qvth="${i}" aria-label="Show picture ${i + 1}"${i === QV.i ? ' aria-current="true"' : ''}>${imgTag(y, { sizes: '64px', alt: '' })}</button></li>`).join('')}</ul>` : ''}</div>
     <div class="sp-qv-info"><h2 id="spQvH">${E(p.name)}</h2><div data-sp-qvprice>${priceBlock(p, { big: true, opts: QV.opts })}</div><p class="sp-info-lede">${E(p.short)}</p>
       <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : '')).join('')}</div>
-      <div class="sp-buy">${qvOpts(p)}${buy}</div>${p.kind === 'plush' || p.id.indexOf('rug') === 0 ? `<p class="sp-buyhint">${p.kind === 'plush' ? 'Safety testing comes before any sale.' : 'Rugs need a flammability report and a Children’s Product Certificate before they ship. Pre-order requests only.'}</p>` : ''}
+      <div class="sp-buy">${qvOpts(p)}${buy}</div>${p.kind === 'plush' || p.id.indexOf('rug') === 0 ? `<p class="sp-buyhint">${p.kind === 'plush' ? 'Opening soon: leave your email and we will tell you the day it opens.' : 'Made to order. We confirm size and ship date by email.'}</p>` : ''}
       <p class="sp-qv-more">${lnk('product/' + p.id, 'See full details ' + ico('arrow'), 'sp-link')}</p></div></div>`;
 }
 function openQV(pid, from) {
@@ -279,7 +281,7 @@ document.addEventListener('click', e => {
 if (W.addEventListener) W.addEventListener('hashchange', () => { if (qvDlg && qvDlg.open) { qvDlg._from = null; qvDlg.close(); } });
 
 // stop the loading shimmer once a picture has painted
-const loaded = img => { const m = img.closest && img.closest('.sp-media,.sp-gal-zoom,.sp-tile-media,.sp-friend-img,.sp-chip-i'); if (m) m.classList.add('is-loaded'); };
+const loaded = img => { img.classList.add('is-ready'); const m = img.closest && img.closest('.sp-media,.sp-gal-zoom,.sp-tile-media,.sp-friend-img,.sp-chip-i'); if (m) m.classList.add('is-loaded'); };
 document.addEventListener('load', e => { if (e.target && e.target.tagName === 'IMG' && e.target.classList.contains('sp-img')) loaded(e.target); }, true);
 
 // scroll-reveal: only for things below the fold, and never under reduced motion

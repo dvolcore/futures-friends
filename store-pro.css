@@ -214,3 +214,8 @@
   .sp-qvdlg[open]{opacity:1;transform:none}
   .sp-edit-img .sp-img{transform:none}
 }
+
+/* ---------------------------------------------------------------- picture backgrounds: each product picture carries its own corner colour (--ibg, sampled at import),
+   so once it has painted the picture and its card are one surface: no visible inner rectangle */
+.sp-pro .sp-img[style*="--ibg"]{mix-blend-mode:normal!important}
+.sp-pro .sp-img.is-ready[style*="--ibg"]{background:var(--ibg)}
