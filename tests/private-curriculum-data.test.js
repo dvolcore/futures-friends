@@ -14,7 +14,8 @@ const P = require('./private-curriculum');
 
 const SITE = path.join(__dirname, '..');
 const FFCRM = '/Volumes/FFCRM/app/hub/content/program';
-const UNITS = [2, 3, 4];
+// Units 2 to 4 are 4 weeks; Units 5 to 12 (180-day calendar) are 2 or 3. Every unit<n>-data.js present in the private store is checked.
+const UNITS = (() => { try { return fs.readdirSync(path.join(P.PRIV, 'data')).map(f => /^unit(\d+)-data\.js$/.exec(f)).filter(Boolean).map(m => Number(m[1])).filter(n => n >= 2).sort((a, b) => a - b); } catch (_) { return [2, 3, 4]; } })();
 const test = P.gated(nodeTest, 'unit1-data.js', 'unit1-family.js', 'unit1-prep.js', ...UNITS.map(n => `unit${n}-data.js`));
 const load = (f, g) => { if (!P.has(f)) return null; const c = vm.createContext({ window: {} }); vm.runInContext(P.readPriv(f), c); return JSON.parse(JSON.stringify(c.window[g])); };
 const DATA = load('unit1-data.js', 'FFUnit1Data'), FAM = load('unit1-family.js', 'FFUnit1Family');
@@ -129,10 +130,11 @@ test('family weeks: family words only (no health detail, no claim about a partic
 
 // ---------------------------------------------------------------- Units 2 to 4 (was tests/units.test.js)
 for (const n of UNITS) {
-  test(`Unit ${n}: 20 days, the full loop, three distinct age versions on every block, draft, and every file exists`, () => {
+  test(`Unit ${n}: 10 to 20 days (2 to 4 weeks), the full loop, three distinct age versions on every block, draft, and every file exists`, () => {
     const U = unit(n);
     assert.equal(U.n, n); assert.equal(U.status, 'draft'); assert.match(U.approval, /No content in this release has been approved/);
-    assert.equal(U.days.length, 20); assert.equal(U.counts.days, 20);
+    assert.equal(U.days.length, U.weeks.length * 5); assert.equal(U.counts.days, U.days.length);
+    assert.ok(n <= 4 ? U.weeks.length === 4 : [2, 3].includes(U.weeks.length), `Unit ${n}: weeks`);
     assert.equal(U.counts.activities, U.days.reduce((a, d) => a + d.blocks.length, 0));
     U.days.forEach((d, i) => {
       const b = d.blocks.map(x => x.block), fri = i % 5 === 4;

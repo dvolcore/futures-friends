@@ -6,9 +6,9 @@
 Reads the canonical records the FFCRM repo builds from its authoring source (hub/scripts/build-unit.mjs): unit-<n>/day-NN.json,
 unit-<n>-release.json and unit-<n>-supplies.json. IP LOCKDOWN (2026-10-07): writes to the PRIVATE platform repo
 (tools/private_paths.py: $FF_CURRICULUM_PRIVATE/files/printables/unit-<n>/ and .../data/), never into this public site:
-  u<n>-day-NN-teacher-packet.pdf (20): the day's supplies, every block with its three age versions, teacher words and the
+  u<n>-day-NN-teacher-packet.pdf (one per day; 20 for Units 2-4, 10 or 15 for Units 5-12 of the 180-day calendar): the day's supplies, every block with its three age versions, teacher words and the
       "Everyone can join" box, the picture-talk card (Monday to Thursday) and the family card;
-  u<n>-family-take-home-cards.pdf: the 20 family cards;
+  u<n>-family-take-home-cards.pdf: one family card per day;
   u<n>-classroom-printables.pdf: the unit's new printables (Unit 1 printables and stick puppets are reused from printables/unit-1/);
 and unit<n>-data.js at the site root, which the Teacher Portal loads only for a signed-in staff session (curriculum-gate.js).
 Everything is DRAFT: written by an AI builder, not reviewed by an early-childhood specialist. No AI art: plain type and shapes, plus
@@ -182,7 +182,7 @@ def family_flows(n, d, rec, act, lead):
 def day_packet(out, n, man, sup, recs, dinfo, wk):
     path = os.path.join(out, f'u{n}-day-{dinfo["day"]:02d}-teacher-packet.pdf')
     lead = wk['lead']
-    doc = Doc(path, f'Unit {n} · Day {dinfo["day"]}: {dinfo["title"]}', f'Week {dinfo["week"]} · {dinfo["weekday"]} · {wk["theme"]} · led by {NAME[lead]}',
+    doc = Doc(path, f'Unit {n} · Day {dinfo["day"]}: {dinfo["title"]}', f'{("Calendar day D%03d · " % dinfo["d"]) if dinfo.get("d") else ""}Week {dinfo["week"]} · {dinfo["weekday"]} · {wk["theme"]} · led by {NAME[lead]}',
               f'Futures Friends · {man["title"]} · Day {dinfo["day"]} teacher packet · draft, not reviewed · for your program\'s educators only',
               f'Futures Friends {man["title"]}, Day {dinfo["day"]} teacher packet (draft)', C[lead])
     total = sum(r['duration_min_estimate'] or 0 for r in recs)
@@ -223,7 +223,7 @@ def day_packet(out, n, man, sup, recs, dinfo, wk):
 
 def family_cards(out, n, man, days):
     path = os.path.join(out, f'u{n}-family-take-home-cards.pdf')
-    doc = Doc(path, f'Unit {n} family take-home cards', f'{man["title"]} · Days 1 to 20 · one card per day',
+    doc = Doc(path, f'Unit {n} family take-home cards', f'{man["title"]} · Days 1 to {len(days)} · one card per day',
               f'Futures Friends · {man["title"]} · family take-home cards · draft, not reviewed', f'Futures Friends {man["title"]} family take-home cards (draft)', GOLD)
     story = []
     for i, recs in enumerate(days):
@@ -266,7 +266,7 @@ def site_data(n, man, sup, days, sha, files):
     for i, recs in enumerate(days):
         d = man['days'][i]
         good = next(r for r in recs if r['block'] == 'goodbye')
-        ds.append({'day': d['day'], 'week': d['week'], 'weekday': d['weekday'], 'title': d['title'], 'packet': f'printables/unit-{n}/u{n}-day-{d["day"]:02d}-teacher-packet.pdf',
+        ds.append({'day': d['day'], **({'d': d['d']} if d.get('d') else {}), 'week': d['week'], 'weekday': d['weekday'], 'title': d['title'], 'packet': f'printables/unit-{n}/u{n}-day-{d["day"]:02d}-teacher-packet.pdf',
                    'supplies': supplies_for(sup, recs), 'picture_talk': man['picture_talk'].get(f'{d["day"]:02d}'),
                    'home': good['home_continuation'], 'family': man['family_activities'][good['id']],
                    'blocks': [{k: r[k] for k in ['id', 'block', 'character', 'pillars', 'objective', 'learning_steps', 'age_adaptations', 'duration_min_estimate',
@@ -303,7 +303,7 @@ def main():
         dinfo = man['days'][i]
         p = os.path.join(out, f'u{n}-day-{dinfo["day"]:02d}-teacher-packet.pdf') if a.data_only else day_packet(out, n, man, sup, recs, dinfo, man['weeks'][i // 5])
         files.append({'kind': 'day', 'day': dinfo['day'], 'title': f'Day {dinfo["day"]}: {dinfo["title"]} (teacher packet)', 'path': os.path.relpath(p, PP.FILES), 'pages': pages(p), 'status': 'draft'})
-    for kind, fn, title in [('family', family_cards, f'Unit {n} family take-home cards, Days 1 to 20'), ('classroom', classroom, f'Unit {n} classroom printables')]:
+    for kind, fn, title in [('family', family_cards, f'Unit {n} family take-home cards, Days 1 to {len(days)}'), ('classroom', classroom, f'Unit {n} classroom printables')]:
         p = os.path.join(out, f'u{n}-{"family-take-home-cards" if kind == "family" else "classroom-printables"}.pdf') if a.data_only else fn(out, n, man) if kind == 'classroom' else fn(out, n, man, days)
         files.append({'kind': kind, 'title': title, 'path': os.path.relpath(p, PP.FILES), 'pages': pages(p), 'status': 'draft'})
     js = site_data(n, man, sup, days, sha, files)
