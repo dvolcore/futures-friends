@@ -47,7 +47,7 @@ test('source: every Futures Friends logo in the markup is the plush wordmark; no
   assert.match(read('family-library.js'), /<img class="fl-cert-logo ff-plush-wm" src="img\/brand\/ff-plush-wordmark-320\.webp"/, 'family certificate');
   assert.match(read('features.js'), /<img class="ff-plush-wm" src="img\/brand\/ff-plush-wordmark-320\.webp"[^>]*alt="Futures Friends"/, 'Academy certificate');
   assert.match(read('views.js'), /<img src="img\/brand\/ff-plush-mark-96\.webp" width="96" height="96" alt="">/, 'sample notifications');
-  const site = fs.readdirSync(ROOT).filter(f => /\.(js|css|html)$/.test(f));
+  const site = fs.readdirSync(ROOT).filter(f => /\.(js|css|html)$/.test(f) && f !== 'library-catalog.js');   // the catalog lists brand-kit files by name
   for (const f of site) assert.doesNotMatch(read(f), /img\/brand\/ff-(sticker|sticker-sm|white|navy|flat|app-icon)\.png/, `${f} uses an old flat wordmark`);
   for (const f of site) for (const m of read(f).match(/<img[^>]*ff-plush-wm[^>]*>/g) || []) assert.doesNotMatch(m, /flc-/, `${f}: shield never merged into the plush wordmark`);
 });
