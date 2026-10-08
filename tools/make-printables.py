@@ -106,14 +106,34 @@ def draw_img(c, ref, x, y, h=None, w=None, cx=None):
 
 # ---------------------------------------------------------------- content from the site
 def site_data():
+    """the English data plus the Spanish drafts the site shows (family-library-es*.js merged over the English exactly as
+    family-library.js merges them, and the i18n-es*.js phrase tables for strings that live in page scripts, like Bop's moves)"""
     js = """
     const fs=require('fs'),vm=require('vm');const window={FFhooks:[],FF_INTAKE:{url:''}};
+    const T={};window.FFi18n={add(l,t){if(l==='es')Object.assign(T,t)}};
     const ctx=vm.createContext({console,window,setTimeout:()=>0,clearTimeout(){},innerHeight:800,document:{addEventListener(){},getElementById:()=>null,querySelector:()=>null}});
-    for(const f of ['data.js','supporting-cast.js','views.js','whole-child.js','family-library-data.js']) vm.runInContext(fs.readFileSync(f,'utf8'),ctx,{filename:f});
-    process.stdout.write(JSON.stringify({fam:window.FFFamily, bop:window.FFWholeChild.ACTS}));
+    for(const f of ['data.js','supporting-cast.js','views.js','whole-child.js','family-library-data.js','family-library-es.js','family-library-es-books.js',
+                    'i18n-es.js','i18n-es-2.js','i18n-es-3.js','i18n-es-4.js','i18n-es-5.js']) vm.runInContext(fs.readFileSync(f,'utf8'),ctx,{filename:f});
+    const isObj=v=>v&&typeof v==='object'&&!Array.isArray(v);
+    function merge(base,over){   // the same rule as family-library.js merge(): field by field, untranslated stays English
+      if(over==null)return base;
+      if(typeof base==='string')return typeof over==='string'&&over?over:base;
+      if(Array.isArray(base)){if(Array.isArray(over))return base.map((b,i)=>merge(b,over[i]));if(isObj(over))return base.map(b=>(b&&b.id!=null&&over[b.id]?merge(b,over[b.id]):b));return base;}
+      if(isObj(base)&&isObj(over)){const o=Object.assign({},base);for(const k of Object.keys(base))if(k in over)o[k]=merge(base[k],over[k]);return o;}
+      return base;}
+    const F=window.FFFamily,ES=window.FFFamilyES,miss=[];
+    const tr=s=>{const k=String(s).replace(/\\s+/g,' ').trim();if(T[k])return T[k];miss.push(k);return null;};
+    const bopEs=window.FFWholeChild.ACTS.map(a=>({t:tr(a.t),steps:a.steps.map(tr),adapt:tr(a.adapt)}));
+    const certEs={};for(const k of ['Brave Reader','Kindness Keeper','Wonder Scientist','Super Mover','for trying new words with a big breath and a brave heart.',
+      'for noticing feelings and lending a hand.','for asking questions and trying to find out.','for moving your body and trying again.'])certEs[k]=tr(k);
+    process.stdout.write(JSON.stringify({fam:F, bop:window.FFWholeChild.ACTS,
+      es:{BOOKS:merge(F.BOOKS,ES.books),CROWD:merge(F.CROWD,ES.crowd),FRIENDS:merge(F.FRIENDS,ES.friends),PRINTABLES:merge(F.PRINTABLES,ES.printables),
+          bop:bopEs,cert:certEs,missing:miss}}));
     """
     out = subprocess.run(['node', '-e', js], cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    return json.loads(out)
+    d = json.loads(out)
+    assert not d['es']['missing'], 'no Spanish on the site yet for: ' + repr(d['es']['missing'])
+    return d
 
 
 # ---------------------------------------------------------------- drawing helpers
@@ -142,8 +162,9 @@ def cutline(c, x, y, w, h):
     B.draw_icon(c, 'cut', x + 6, y + h - 5.5, 11, HexColor('#8C999E'), lw=2)
 
 
-def header(c, W, H, title, sub, color, es=False, friend='navy'):
-    """story-world band (felt in the friend's colour, plush logo, white title) over a plain-paper page"""
+def header(c, W, H, title, sub, color, es=False, friend='navy', pill_at=None):
+    """story-world band (felt in the friend's colour, plush logo, white title) over a plain-paper page; pill_at (x, y, align) moves
+    the Spanish draft label where a page has art or labels under the band's right end"""
     band = 1.18 * inch
     B.felt(c, -6, H - band, W + 12, band + 6, B.FRIEND[friend]['felt'], stitch=False)
     B.stitch_line(c, 0, H - band + 8, W, H - band + 8, B.FRIEND[friend]['thread'], 1.1)
@@ -152,7 +173,8 @@ def header(c, W, H, title, sub, color, es=False, friend='navy'):
     c.setFillColor(white); c.setFont('Fredoka', B.fit_size(title, 'Fredoka', 26, W - tx - 0.5 * inch, 14)); c.drawString(tx, H - 0.56 * inch, title)
     c.setFillColor(B.H('#FFFFFF')); c.setFont('Poppins', B.fit_size(sub, 'Poppins', 10.2, W - tx - 0.45 * inch, 7)); c.drawString(tx, H - 0.84 * inch, sub)
     if es:
-        B.pill(c, 'BORRADOR: traducción pendiente de revisión', W - 0.45 * inch, H - band - 0.34 * inch, 8.2, B.NAVY, B.GOLD, align='right')
+        px, py, pa = pill_at or (W - 0.45 * inch, H - band - 0.34 * inch, 'right')
+        B.pill(c, 'BORRADOR: traducción pendiente de revisión', px, py, 8.2, B.NAVY, B.GOLD, align=pa)
 
 
 def footer(c, W, es=False):
@@ -298,11 +320,17 @@ def cards(name, title, sub, items, es=False, adapt_label='Adapted version'):
             stitch(c, x + 8, y + 8, cw - 16, ch - 16, C[k], fill=TINT[k])
             figure(c, CARD_POSE[k][(start + n) % len(CARD_POSE[k])], x + cw - 0.68 * inch, y + ch - 1.5 * inch, 1.24 * inch)
             hh = para(c, t, x + 0.32 * inch, y + ch - 0.36 * inch, cw - 1.6 * inch, style(17, 'Fredoka', C[k], lead=20))
-            yy = y + ch - 0.36 * inch - max(hh, 1.25 * inch) - 0.1 * inch
-            for i, s in enumerate(steps):
-                yy -= para(c, f'<b>{i + 1}.</b> {s}', x + 0.32 * inch, yy, cw - 0.64 * inch, style(11.5, lead=15)) + 5
-            if adapt:
-                para(c, f'<b>{adapt_label}:</b> {adapt}', x + 0.32 * inch, yy - 4, cw - 0.64 * inch, style(9.5, color=MUTED, lead=12.5))
+            ytop, tw = y + ch - 0.36 * inch - max(hh, 1.25 * inch) - 0.1 * inch, cw - 0.64 * inch
+            blocks = lambda z: ([(f'<b>{i + 1}.</b> {s}', style(11.5 * z, lead=15 * z), 5) for i, s in enumerate(steps)] +
+                                ([(f'<b>{adapt_label}:</b> {adapt}', style(9.5 * z, color=MUTED, lead=12.5 * z), 0)] if adapt else []))
+            for z in (1, .96, .92, .88, .84):   # longer text (the Spanish drafts) steps down until it clears the stitched edge
+                need = sum(Paragraph(t, st).wrap(tw, 1000)[1] + gap for t, st, gap in blocks(z)) + (4 if adapt else 0)
+                if ytop - need >= y + 0.3 * inch:
+                    break
+            assert ytop - need >= y + 0.26 * inch, f'{title}: card "{t}" runs past its stitched edge'
+            yy = ytop
+            for n2, (txt, st, gap) in enumerate(blocks(z)):
+                yy -= para(c, txt, x + 0.32 * inch, yy - (4 if adapt and n2 == len(steps) else 0), tw, st) + gap
         footer(c, W, es)
         c.showPage()
     c.save()
@@ -320,22 +348,34 @@ def calm_cards(lang='en'):
                  items, es, adapt_label='Lumi dice' if es else 'Lumi says')
 
 
-def move_cards(bop_acts):
+def move_cards(bop_acts, lang='en'):
+    es = lang == 'es'
     items = [('bop', a['t'], a['steps'], a['adapt']) for a in bop_acts]
+    if es:
+        return cards('futures-en-casa-tarjetas-de-movimiento.pdf', 'Tarjetas de movimiento de Bop',
+                     '¿Listos? ¡Bop y a moverse! Una persona adulta participa. Paren cuando tu niño se canse.', items, es,
+                     adapt_label='Versión adaptada')
     return cards('futures-at-home-bop-move-cards.pdf', "Bop's move cards",
                  'Ready? Bop & Go! A grown-up joins in. Stop whenever your child is tired.', items)
 
 
 # ---------------------------------------------------------------- 5. Booker's Book Club reading log
-def reading_log(crowd):
-    c, path = new_canvas('futures-at-home-booker-reading-log.pdf', title="Booker's Book Club reading log")
+def reading_log(crowd, lang='en'):
+    es = lang == 'es'
+    c, path = new_canvas('futures-en-casa-registro-de-lectura.pdf' if es else 'futures-at-home-booker-reading-log.pdf', es=es,
+                         title='Registro de lectura del Club de Lectura de Booker' if es else "Booker's Book Club reading log")
     W, H = letter
-    header(c, W, H, "Booker's Book Club", 'Write down every book you share. Rereading a favorite counts. Babies count too.', NAVY, friend='booker')
+    header(c, W, H, 'Club de Lectura de Booker' if es else "Booker's Book Club",
+           'Anota cada libro que compartan. Releer un favorito también cuenta. Los bebés también cuentan.' if es else
+           'Write down every book you share. Rereading a favorite counts. Babies count too.', NAVY, es, friend='booker',
+           pill_at=(0.5 * inch, H - 1.52 * inch, 'left'))
     draw_img(c, art('booker-reading'), None, H - 2.42 * inch, h=1.2 * inch, cx=W - 0.95 * inch)
-    para(c, '<b>Try one question each time.</b> ' + ' '.join(f'<b>{v[0]}:</b> {v[1]}' for v in crowd.values()),
-         0.5 * inch, H - 1.3 * inch, W - 2.3 * inch, style(9.5, lead=12.5, color=INK))
+    qh = para(c, ('<b>Prueben una pregunta cada vez.</b> ' if es else '<b>Try one question each time.</b> ') + ' '.join(f'<b>{v[0]}:</b> {v[1]}' for v in crowd.values()),
+              0.5 * inch, H - (1.58 if es else 1.3) * inch, W - 2.3 * inch, style(9.5, lead=12.5, color=INK))
+    assert H - (1.58 if es else 1.3) * inch - qh > H - 2.62 * inch, 'reading log: the question line runs into the table'
     top, rowh, left = H - 2.75 * inch, 0.35 * inch, 0.5 * inch
-    cols = [(0.45, '#'), (3.9, 'Book title'), (1.3, 'Date'), (1.85, 'Sticker or stamp')]
+    cols = ([(0.45, '#'), (3.9, 'Título del libro'), (1.3, 'Fecha'), (1.85, 'Calcomanía o sello')] if es else
+            [(0.45, '#'), (3.9, 'Book title'), (1.3, 'Date'), (1.85, 'Sticker or stamp')])
     x = left
     c.setFont('Poppins-SemiBold', 10); c.setFillColor(MUTED)
     for w, t in cols:
@@ -348,56 +388,73 @@ def reading_log(crowd):
             c.setFillColor(GOLD); c.circle(W - 0.85 * inch, y + rowh / 2, 0.13 * inch, stroke=0, fill=1)
     c.setStrokeColor(C['booker']); c.setLineWidth(1); c.setDash(4, 3)
     c.roundRect(left, top - 20 * rowh, W - 1 * inch, 20 * rowh, 6, stroke=1, fill=0); c.setDash()
-    para(c, 'Gold dots at 10 and 20: time for a Book Club certificate. Print one free on the Futures at Home page, My Week.',
-         left, 0.92 * inch, W - 1 * inch, style(10, color=MUTED))
-    footer(c, W)
+    para(c, 'Puntos dorados en el 10 y el 20: ¡hora de un certificado del Club de Lectura! Imprime uno gratis en la página Futures en casa, Mi semana.'
+         if es else 'Gold dots at 10 and 20: time for a Book Club certificate. Print one free on the Futures at Home page, My Week.',
+         left, (1.13 if es else 0.92) * inch, W - 1 * inch, style(10, color=MUTED))
+    footer(c, W, es)
     c.showPage(); c.save()
     return path
 
 
 # ---------------------------------------------------------------- 6. Sticker chart
-def sticker_chart(friends):
-    c, path = new_canvas('futures-at-home-sticker-chart.pdf', size=landscape(letter), title='Our week sticker chart')
+def sticker_chart(friends, lang='en'):
+    es = lang == 'es'
+    c, path = new_canvas('futures-en-casa-tabla-de-calcomanias.pdf' if es else 'futures-at-home-sticker-chart.pdf', size=landscape(letter), es=es,
+                         title='Tabla de calcomanías de nuestra semana' if es else 'Our week sticker chart')
     W, H = landscape(letter)
-    header(c, W, H, 'Our week', 'A sticker means "we tried it." No scores, no comparing: trying is the win.', NAVY)
+    header(c, W, H, 'Nuestra semana' if es else 'Our week',
+           'Una calcomanía quiere decir "lo intentamos". Sin puntajes, sin comparar: intentarlo es ganar.' if es else
+           'A sticker means "we tried it." No scores, no comparing: trying is the win.', NAVY, es,
+           pill_at=(W - 0.5 * inch, 0.82 * inch, 'right'))
     left, top, labw = 0.5 * inch, H - 1.5 * inch, 2.4 * inch
     colw, rowh = (W - 1 * inch - labw) / 7, 1.38 * inch
     c.setFont('Poppins-SemiBold', 11); c.setFillColor(MUTED)
-    for j, d in enumerate(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']):
+    for j, d in enumerate(['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'] if es else ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']):
         c.drawCentredString(left + labw + colw * (j + .5), top, d)
     for i, k in enumerate(['booker', 'lumi', 'zuri', 'bop']):
         y = top - 0.15 * inch - (i + 1) * rowh
         stitch(c, left, y + 3, W - 1 * inch, rowh - 6, C[k], r=12, fill=TINT[k], lw=1.2)
         draw_img(c, art(k), left + 0.2 * inch, y + 0.14 * inch, h=rowh - 0.3 * inch)
         c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(left + 1.15 * inch, y + rowh / 2 + 4, NAME[k])
-        c.setFont('Poppins', 9); c.setFillColor(INK); c.drawString(left + 1.15 * inch, y + rowh / 2 - 10, friends[k]['p'] + ' · ' + friends[k]['p2'])
+        pill = friends[k]['p'] + ' · ' + friends[k]['p2']
+        c.setFont('Poppins', B.fit_size(pill, 'Poppins', 9, labw - 1.2 * inch, 6.5)); c.setFillColor(INK); c.drawString(left + 1.15 * inch, y + rowh / 2 - 10, pill)
         for j in range(7):
             c.setFillColor(white); c.setStrokeColor(C[k]); c.setLineWidth(1.4); c.setDash(4, 3)
             s = 0.92 * inch
             c.roundRect(left + labw + colw * (j + .5) - s / 2, y + (rowh - s) / 2, s, s, 10, stroke=1, fill=1); c.setDash()
-    footer(c, W)
+    footer(c, W, es)
     c.showPage(); c.save()
     return path
 
 
 # ---------------------------------------------------------------- 7. Story Time talk cards
-def story_cards(books):
-    c, path = new_canvas('futures-at-home-story-time-cards.pdf', title='Story Time talk cards')
+STORY_L = {'en': {'file': 'futures-at-home-story-time-cards.pdf', 'doc': 'Story Time talk cards', 'head': 'Story Time talk card',
+                  'sub': '{t} · Book {n} · read it free on the Futures at Home page, Story Time', 'say': 'Say-along line', 'talk': 'Talk about it',
+                  'words': 'Words to talk about', 'try': 'Try it together: {t} ({m} minutes)', 'need': 'You need', 'home': 'Take it home'},
+           'es': {'file': 'futures-en-casa-tarjetas-para-conversar.pdf', 'doc': 'Tarjetas para conversar de La hora del cuento',
+                  'head': 'Tarjeta para conversar', 'sub': '{t} · Libro {n} · léelo gratis en la página Futures en casa, La hora del cuento',
+                  'say': 'Para decir juntos', 'talk': 'Hablemos', 'words': 'Palabras para conversar',
+                  'try': 'Inténtenlo juntos: {t} ({m} minutos)', 'need': 'Necesitas', 'home': 'Para hacer en casa'}}
+
+
+def story_cards(books, lang='en'):
+    es, L = lang == 'es', STORY_L[lang]
+    c, path = new_canvas(L['file'], es=es, title=L['doc'])
     W, H = letter
     for b in books:
         k = b['c']
-        header(c, W, H, 'Story Time talk card', f'{b["title"]} · Book {b["n"]} · read it free on the Futures at Home page, Story Time', NAVY, friend=k)
+        header(c, W, H, L['head'], L['sub'].format(t=b['title'], n=b['n']), NAVY, es, friend=k, pill_at=(0.6 * inch, H - 1.52 * inch, 'left'))
         draw_img(c, art(B.POSE[k]['opener']), None, H - 3.0 * inch, h=1.8 * inch, cx=W - 1.15 * inch)
-        y = H - 1.4 * inch
+        y = H - (1.62 if es else 1.4) * inch   # the Spanish draft label sits above the title
         y -= para(c, b['title'], 0.6 * inch, y, W - 2.6 * inch, style(26, 'Fredoka', C[k], lead=30)) + 6
-        y -= para(c, f'<b>Say-along line:</b> <font color="#{C[k].hexval()[2:]}">{b["refrain"]}</font>', 0.6 * inch, y, W - 2.6 * inch, style(14, lead=18)) + 4
+        y -= para(c, f'<b>{L["say"]}:</b> <font color="#{C[k].hexval()[2:]}">{b["refrain"]}</font>', 0.6 * inch, y, W - 2.6 * inch, style(14, lead=18)) + 4
         y -= para(c, b['gesture'], 0.6 * inch, y, W - 2.6 * inch, style(11, color=MUTED)) + 16
         y = min(y, H - 3.2 * inch)
         bx, bw = 0.5 * inch, W - 1 * inch
         # talk about it
         h0 = y
         y -= 0.42 * inch
-        c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, 'Talk about it')
+        c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, L['talk'])
         for i, q in enumerate(b['talk']):
             y -= para(c, f'<b>{i + 1}.</b> {q}', bx + 0.25 * inch, y, bw - 0.5 * inch, style(11.5, lead=15)) + 3
         y -= 6
@@ -406,7 +463,7 @@ def story_cards(books):
         # words
         words = [s['w'] for s in b['spreads'] if s.get('w')][:6]
         h0 = y; y -= 0.42 * inch
-        c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, 'Words to talk about')
+        c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, L['words'])
         half = (bw - 0.5 * inch) / 2
         yl = yr = y
         for i, w in enumerate(words):
@@ -421,14 +478,15 @@ def story_cards(books):
         # try it + take home
         h0 = y; y -= 0.42 * inch
         a = b['act']
-        c.setFillColor(C[k]); c.setFont('Fredoka', 17); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, f'Try it together: {a["t"]} ({a["min"]} minutes)')
-        y -= para(c, '<b>You need:</b> ' + '; '.join(a['mat']), bx + 0.25 * inch, y, bw - 0.5 * inch, style(10, lead=13)) + 3
+        tt = L['try'].format(t=a['t'], m=a['min'])
+        c.setFillColor(C[k]); c.setFont('Fredoka', B.fit_size(tt, 'Fredoka', 17, bw - 0.5 * inch, 12)); c.drawString(bx + 0.25 * inch, y + 0.1 * inch, tt)
+        y -= para(c, f'<b>{L["need"]}:</b> ' + '; '.join(a['mat']), bx + 0.25 * inch, y, bw - 0.5 * inch, style(10, lead=13)) + 3
         for i, s in enumerate(a['steps']):
             y -= para(c, f'<b>{i + 1}.</b> {s}', bx + 0.25 * inch, y, bw - 0.5 * inch, style(10, lead=13)) + 2
-        y -= para(c, f'<b>Take it home:</b> {b["home"]}', bx + 0.25 * inch, y - 4, bw - 0.5 * inch, style(10.5, lead=13.5, color=C[k])) + 10
+        y -= para(c, f'<b>{L["home"]}:</b> {b["home"]}', bx + 0.25 * inch, y - 4, bw - 0.5 * inch, style(10.5, lead=13.5, color=C[k])) + (14 if es else 10)
         stitch(c, bx, y, bw, h0 - y, C[k], r=12, fill=None, lw=1.2)
         assert y > 0.55 * inch, f'{b["title"]}: talk card runs into the footer ({y / inch:.2f} in)'
-        footer(c, W)
+        footer(c, W, es)
         c.showPage()
     c.save()
     return path
@@ -441,22 +499,30 @@ CERTS = [('booker', 'Brave Reader', 'for trying new words with a big breath and 
          ('bop', 'Super Mover', 'for moving your body and trying again')]
 
 
-def certificates():
-    c, path = new_canvas('futures-at-home-certificates.pdf', size=landscape(letter), title='Certificates from the four friends')
+def certificates(lang='en', es_text=None):
+    """es_text: the site's own Spanish for the four titles and lines (i18n-es.js, the My Week certificate maker)"""
+    es = lang == 'es'
+    c, path = new_canvas('futures-en-casa-certificados.pdf' if es else 'futures-at-home-certificates.pdf', size=landscape(letter), es=es,
+                         title='Certificados de los cuatro amigos' if es else 'Certificates from the four friends')
     W, H = landscape(letter)
     for k, t, why in CERTS:
+        if es:
+            t, why = es_text[t], es_text[why + '.'].rstrip('.')
         B.felt(c, 0, 0, W, H, B.FRIEND[k]['felt'], stitch=False)
         c.setFillColor(HexColor('#FFFDF7')); c.roundRect(0.45 * inch, 0.45 * inch, W - 0.9 * inch, H - 0.9 * inch, 18, stroke=0, fill=1)
         B.stitch_rect(c, 0.3 * inch, 0.3 * inch, W - 0.6 * inch, H - 0.6 * inch, 22, B.FRIEND[k]['thread'], 1.6)
         B.stitch_rect(c, 0.6 * inch, 0.6 * inch, W - 1.2 * inch, H - 1.2 * inch, 14, B.FRIEND[k]['felt'], 1.4)
         draw_img(c, logo(), None, H - 1.75 * inch, h=1.0 * inch, cx=W / 2)
-        c.setFillColor(C['gold']); c.setFont('Poppins-SemiBold', 12); c.drawCentredString(W / 2, H - 2.1 * inch, 'C E R T I F I C A T E')
-        c.setFillColor(C[k]); c.setFont('Fredoka', 46); c.drawCentredString(W / 2, H - 2.85 * inch, t)
-        c.setFillColor(INK); c.setFont('Poppins', 14); c.drawCentredString(W / 2, H - 3.35 * inch, 'This certificate goes to')
+        c.setFillColor(C['gold']); c.setFont('Poppins-SemiBold', 12); c.drawCentredString(W / 2, H - 2.1 * inch, 'C E R T I F I C A D O' if es else 'C E R T I F I C A T E')
+        c.setFillColor(C[k]); c.setFont('Fredoka', B.fit_size(t, 'Fredoka', 46, W - 2.4 * inch, 30)); c.drawCentredString(W / 2, H - 2.85 * inch, t)
+        c.setFillColor(INK); c.setFont('Poppins', 14); c.drawCentredString(W / 2, H - 3.35 * inch, 'Este certificado es para' if es else 'This certificate goes to')
         c.setStrokeColor(INK); c.setLineWidth(1.4); c.line(2.2 * inch, H - 4.3 * inch, W - 2.2 * inch, H - 4.3 * inch)
-        c.setFont('Poppins', 14); c.drawCentredString(W / 2, H - 4.75 * inch, why + '.')
+        c.setFont('Poppins', B.fit_size(why + '.', 'Poppins', 14, W - 2.4 * inch, 11)); c.drawCentredString(W / 2, H - 4.75 * inch, why + '.')
         c.setFillColor(MUTED); c.setFont('Poppins', 11)
-        c.drawCentredString(W / 2, 1.05 * inch, f'With love from {NAME[k]} and the Futures Friends        Date: ____________________')
+        c.drawCentredString(W / 2, 1.05 * inch, f'Con cariño de {NAME[k]} y los Futures Friends        Fecha: ____________________' if es else
+                            f'With love from {NAME[k]} and the Futures Friends        Date: ____________________')
+        if es:
+            B.pill(c, 'BORRADOR: traducción pendiente de revisión', W - 0.85 * inch, H - 0.95 * inch, 7.5, B.NAVY, B.GOLD, align='right')
         pose = {'booker': 'booker-hero', 'lumi': 'lumi-heart-hands', 'zuri': 'zuri-magnifier', 'bop': 'bop-dancing'}[k]
         reader, (iw, ih) = art(pose)   # wider friends (Bop) keep clear of the dashed border
         B.ground(c, W - 0.82 * inch - 2.1 * inch * iw / ih - 0.2 * inch, 0.72 * inch, 2.1 * inch * iw / ih + 0.1 * inch, 8)
@@ -508,7 +574,10 @@ def main():
         'story-cards': story_cards(full),
         'certificates': certificates(),
     }
-    es = [daily_rhythm('es'), rainbow('es'), calm_cards('es')]
+    esd = data['es']
+    es_full = [b for b in esd['BOOKS'] if b['status'] == 'full' and b['n'] <= 3]
+    es = [daily_rhythm('es'), rainbow('es'), calm_cards('es'), move_cards(esd['bop'], 'es'), reading_log(esd['CROWD'], 'es'),
+          sticker_chart(esd['FRIENDS'], 'es'), story_cards(es_full, 'es'), certificates('es', esd['cert'])]
     for p in list(made.values()):
         B.finish(p)
     for p in es:

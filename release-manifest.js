@@ -223,14 +223,14 @@
    "id": "printables-family-es",
    "family": "printable",
    "name": "Spanish printables (draft translations)",
-   "count": 3,
+   "count": 8,
    "version": "BORRADOR (draft)",
    "age": "2-5",
    "approval": "draft",
    "availability": "available_now",
    "note": "Free downloads, clearly marked as draft translations.",
    "delivers": [
-    "Three Spanish printable PDFs, marked as draft translations"
+    "Eight Spanish printable PDFs (every family printable), marked as draft translations"
    ]
   },
   "printables-program": {
@@ -1028,7 +1028,7 @@
      "printables-family-en"
     ],
     [
-     "Three Spanish printables (draft translations)",
+     "Eight Spanish printables (draft translations)",
      "printables-family-es"
     ]
    ]

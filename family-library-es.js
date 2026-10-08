@@ -909,10 +909,10 @@ ES.printables = {
   'rainbow-tracker': { t: 'Registro semanal de Arcoíris en casa', d: 'Colorea un punto por cada color que tu familia note en las comidas: Cohetes Rojos, Sol Naranja, Rayos Amarillos, Brotes Verdes, Amigos Morados y Nubes Acogedoras. Cuenta colores, no bocados.' },
   'calm-cards': { t: 'Tarjetas de calma de Lumi', d: 'Seis tarjetas para recortar, para los sentimientos grandes: respiraciones de flor y vela, pancita de globo, estatuas tranquilas, tres sonidos suaves, cuerpo flojito y un abrazo.' },
   'move-cards': { t: 'Tarjetas de movimiento de Bop', d: 'Ocho tarjetas de movimiento para recortar, cada una con una versión adaptada para moverse sentado, en un espacio pequeño o sin mucho ruido.' },
-  'reading-log': { t: 'Registro de lectura del Club de Libros de Booker', d: 'Veinte espacios para los libros que lean juntos, con una pregunta para conversar que pueden probar cada vez.' },
+  'reading-log': { t: 'Registro de lectura del Club de Lectura de Booker', d: 'Veinte espacios para los libros que lean juntos, con una pregunta para conversar que pueden probar cada vez.' },
   'sticker-chart': { t: 'Tabla de calcomanías de nuestra semana', d: 'Una fila para cada amigo y un cuadro para cada día. Una calcomanía quiere decir "lo intentamos". Sin puntajes, sin comparar.' },
   'story-cards': { t: 'Tarjetas para conversar de La hora del cuento', d: 'Preguntas, palabras para conversar y los gestos para decir juntos de los Libros 1 a 3, una página por libro.' },
-  'certificates': { t: 'Certificados de los cuatro amigos', d: 'Cuatro certificados con una línea en blanco para el nombre de tu niño: Lector Valiente, Guardián de la Bondad, Científico Curioso y Súper en Movimiento.' }
+  'certificates': { t: 'Certificados de los cuatro amigos', d: 'Cuatro certificados con una línea en blanco para el nombre de tu niño: Lector valiente, Guardián de la bondad, Científico curioso y Súper movedor.' }
 };
 
 ES.printKit = {

@@ -148,7 +148,7 @@ const privacyNote = `<p class="fl-privacy"><b>No account. Nothing about your chi
 const DOORS = [
   ['story-time', 'Story Time', 'Five Futures Friends storybooks to read free, page by page, with a question to ask on every page.', 'booker'],
   ['activities', 'Things to do tonight', `${ACTS.length} activities for babies to pre-K, 3 to 15 minutes, made from things you already have.`, 'zuri'],
-  ['printables', 'Printables', 'Picture schedule, rainbow tracker, calm-down and move cards, a reading log, a sticker chart and certificates. Some in Spanish.', 'lumi'],
+  ['printables', 'Printables', 'Picture schedule, rainbow tracker, calm-down and move cards, a reading log, a sticker chart and certificates. Each one in Spanish too (draft).', 'lumi'],
   ['see-how', 'See how: picture guides', 'Eight routines shown in pictures, step by step, for when you would rather see it than read it.', 'bop'],
   ['my-week', 'My Week', 'A plan for your child\'s age that changes every Monday, a sticker chart and certificates you can print.', 'booker'],
   ['family-videos', 'Watch', 'What there is to watch today, what we are filming next and how to keep screen time small.', 'lumi'],
@@ -444,7 +444,7 @@ V.printables = () => `<div class="ffl">${hero('Printables', 'Printables', 'Print
     <div class="fl-pdf-bd"><h3>${E(p.t)}</h3><p>${E(p.d)}</p><p class="fl-meta">PDF &middot; ${p.pages} ${p.pages === 1 ? 'page' : 'pages'} &middot; US Letter</p>
      <div class="fl-acts"><a class="btn navy" href="${p.f}" download>Download PDF</a>${p.es ? `<a class="btn soft" href="${p.es}" download lang="es">En espa&ntilde;ol (borrador)</a>` : ''}</div></div></article>`).join('')}</div>
    <p class="fl-note" lang="es"><b>Espa&ntilde;ol:</b> tres materiales est&aacute;n disponibles en espa&ntilde;ol como borrador. La traducci&oacute;n est&aacute; pendiente de revisi&oacute;n por un hablante nativo.</p>
-   <p class="fl-note">Spanish versions of three printables are drafts awaiting review by a native speaker. Tip: print the cut-out cards on card stock, or glue them to a cereal box, so they last.</p>`)}
+   <p class="fl-note">The Spanish versions of the printables are drafts awaiting review by a native speaker. Tip: print the cut-out cards on card stock, or glue them to a cereal box, so they last.</p>`)}
  ${PRINT_KIT.some(k => k.family) ? sec('fl-kit', 'Books near you', 'Library cards and free books', 'A one-page sheet for families in and around Independence, Missouri: how to get a library card and join free reading programs. Every fact is sourced on the sheet.',
   `<ul class="fl-planned">${PRINT_KIT.filter(k => k.family).map(k => `<li>${k.draft ? '<span class="fl-chip fl-chip-soft">Draft</span>' : '<span class="fl-chip fl-chip-soft">Facts checked 2026-10-05</span>'}<b>${E(k.t)}</b><span class="fl-meta">PDF &middot; ${k.pages} ${k.pages === 1 ? 'page' : 'pages'} &middot; US Letter</span><span>${E(k.d)}</span><a class="btn soft" style="justify-self:start" href="${k.f}" download>Download PDF<span class="fl-vh">: ${E(k.t)}</span></a></li>`).join('')}</ul>`, 'band-paper') : ''}</div>`;
 

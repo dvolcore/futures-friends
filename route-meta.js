@@ -73,7 +73,7 @@
     'at-home': ['Futures at Home: free family library', 'Free storybooks to read together, activities by age, printables and a weekly plan from Booker, Lumi, Zuri and Bop. No account, nothing to buy.'],
     'story-time': ['Story Time: read-along storybooks', 'Read five Futures Friends storybooks free, page by page, with a question, a word and a move or breath to share on every page.'],
     activities: ['Things to do at home, by age', 'Short activities for babies to pre-K from things you have at home, with steps, what to notice and easier or harder versions.'],
-    printables: ['Printables for families', 'Free PDFs: picture schedule, rainbow tracker, calm-down and move cards, reading log, sticker chart and certificates. Some in Spanish.'],
+    printables: ['Printables for families', 'Free PDFs: picture schedule, rainbow tracker, calm-down and move cards, reading log, sticker chart and certificates. Each one in Spanish too (draft).'],
     'see-how': ['See how: picture guides for routines', 'Everyday routines in pictures, one step at a time: calm breathing, brave reading, brushing teeth, movement breaks and bedtime.'],
     'family-videos': ['Watch together: family videos', 'Short videos with Booker, Lumi, Zuri and Bop to watch together: the welcome video, Bop\'s movement breaks and a calm minute, and how to keep screen time small.'],
     'my-week': ['My Week: plan, stickers and certificates', 'A free weekly plan for your child\'s age that changes every Monday, a sticker chart and printable certificates. Saved only on your device.'],

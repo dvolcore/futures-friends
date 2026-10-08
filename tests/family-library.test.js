@@ -203,9 +203,16 @@ test('printables exist as real PDFs, have previews and are linked; the Spanish d
     assert.equal((buf.toString('latin1').match(/\/Type \/Page\b/g) || []).length, p.pages, p.f + ' page count');
     assert.ok(fs.existsSync(path.join(ROOT, 'printables/previews', p.id + '.png')), p.id + ' preview');
     assert.ok(html.includes(`href="${p.f}"`), p.f + ' is linked');
-    if (p.es) { assert.equal(fs.readFileSync(path.join(ROOT, p.es)).slice(0, 5).toString(), '%PDF-'); assert.ok(html.includes(`href="${p.es}"`)); }
+    if (p.es) {
+      const es = fs.readFileSync(path.join(ROOT, p.es));
+      assert.equal(es.slice(0, 5).toString(), '%PDF-'); assert.ok(html.includes(`href="${p.es}"`));
+      assert.equal((es.toString('latin1').match(/\/Type \/Page\b/g) || []).length, p.pages, p.es + ' has the same pages as the English');
+    }
   }
-  assert.equal(F.PRINTABLES.filter(p => p.es).length, 3);
+  // owner 2026-10-07: everything families use has a Spanish version (drafts until the center's Spanish teacher reviews them)
+  assert.equal(F.PRINTABLES.filter(p => p.es).length, 8);
+  assert.deepEqual(fs.readdirSync(path.join(ROOT, 'printables/es')).filter(f => f.endsWith('.pdf')).map(f => 'printables/es/' + f).sort(),
+    F.PRINTABLES.map(p => p.es).filter(Boolean).sort(), 'every Spanish PDF on disk is listed, and every listed one exists');
   assert.ok(fs.existsSync(path.join(ROOT, F.PACK)) && html.includes(`href="${F.PACK}"`));
   assert.match(html, /borrador/i); assert.match(html, /pendiente de revisi/);
   assert.match(read('tools/make-printables.py'), /BORRADOR/);

@@ -111,6 +111,7 @@ window.FFi18n.add('es', {
   "Free now": "Gratis ahora",
   "family printables": "materiales para imprimir para familias",
   "9 in English and 3 in Spanish": "9 en inglés y 3 en español",
+  "9 in English and 8 in Spanish": "9 en inglés y 8 en español",
   "Free now, Spanish in draft": "Gratis ahora, el español en borrador",
   "storybooks": "libros de cuentos",
   "5 free to read along today": "5 gratis para leer juntos hoy",
