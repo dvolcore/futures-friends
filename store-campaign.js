@@ -118,8 +118,9 @@ function wrap(route, fn) {
 const argNow = () => (typeof arg === 'string' ? arg : '');
 
 // #kids-shop: the band right under the hero, then a strip at the top of each collection section (the section order is the owner's and is not changed)
+// (owner 2026-10-08: when the Wonder Store film opens the page, kids-film.js, this band is left out: two big heroes would stack)
 wrap('kids-shop', h => {
-  let out = afterHero(h, heroBand());
+  let out = h.indexOf('data-kf') >= 0 ? h : afterHero(h, heroBand());
   ['tshirts', 'hoodies', 'plush', 'backpacks', 'drinkware', 'stickers', 'carpets', 'posters'].forEach(id => {
     const at = out.indexOf('id="kids-' + id + '"'); if (at < 0) return;
     out = insertBefore(out, '<ul class="sp-grid sp-grid-kids">', strip(id), at);

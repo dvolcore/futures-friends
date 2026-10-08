@@ -129,8 +129,9 @@ function heroHtml(side, opt) {
       <p class="h3-lede">${E(opt.lede || h.lede)}</p>
       <div class="h3-acts">${act(h.shop, 'Shop now ' + ico('arrow'), 'btn gold sp-btn-lg h3-shop')}${act(h.second, E(h.second[2]), 'btn sp-btn-lg sp-btn-glass h3-second')}</div></div>
     <div class="h3-stage">${h.tiles.map(t => heroTile(t[0], t[1], t[2])).join('')}</div></div></section>
-  <section class="h3-trust" aria-label="Our ordering promise"><div class="wrap"><ul>${h.trust.map(t => `<li>${ico(t[0])}<span>${E(t[1])}</span></li>`).join('')}</ul></div></section>`;
+  ${trustHtml(side)}`;
 }
+const trustHtml = side => `<section class="h3-trust" aria-label="Our ordering promise"><div class="wrap"><ul>${HERO[side === 'families' ? 'families' : 'centers'].trust.map(t => `<li>${ico(t[0])}<span>${E(t[1])}</span></li>`).join('')}</ul></div></section>`;
 function trustStrip() {
   const ic = { ships: 'truck', time: 'clock', licence: 'shield', support: 'phone' };
   return `<section class="sp-trust" aria-label="How ordering works"><div class="wrap"><ul>${C.TRUST.map(t => `<li data-rv>${ico(ic[t[0]])}<div><h3>${E(t[1])}</h3><p>${E(t[2])}</p></div></li>`).join('')}</ul></div></section>`;
@@ -239,7 +240,10 @@ V['kids-shop'] = () => {
   // the small "Designed for real corners." strip inside the section stays as it is.
   const kidSecs = list => list.map(([name, col, items, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${items.map(p => card(p)).join('')}</ul></section>`).join('');
   const secs = C.kidsSections(), cutAt = secs.findIndex(x => x[3] === 'carpets'), cut = cutAt < 0 ? secs.length : cutAt, jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['plush', 'Plush dolls'], ['backpacks', 'Backpacks'], ['drinkware', 'Bottles & plates'], ['stickers', 'Stickers & coloring'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free activity pages']];
-  return wrapPage('families', `${heroHtml('families')}${rail('')}${friends()}
+  // Owner 2026-10-08: the finished "Wonder Store" film is the opening (kids-film.js), with "Shop by friend" (Booker first) directly under it,
+  // then the rotating spotlight, the ordering promise and the rail. Without kids-film.js the product-tile hero stays.
+  const film = W.FFKidsFilm, top = film ? `${film.opening()}${friends()}${film.spotlight()}${trustHtml('families')}${rail('')}` : `${heroHtml('families')}${rail('')}${friends()}`;
+  return wrapPage('families', `${top}
    <div class="wrap sp-shell sp-kidsbody" id="spResults"><ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-anchor="kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul>
    ${kidSecs(secs.slice(0, cut))}</div>
    ${cut < secs.length ? editorial('families') : ''}
