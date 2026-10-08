@@ -36,7 +36,7 @@ test('readiness level: calm, guarded, elevated, critical follow the open items',
   assert.equal(lv({ a: due('A', 'Safety', '2026-09-20') }).level, 'critical', 'one item more than 10 days late');
   assert.equal(lv({ a: due('A', 'Safety', '2026-10-07', { done: true }) }).level, 'calm', 'done items never count');
   const e = lv({ a: due('Fire extinguisher monthly check', 'Safety', '2026-10-07'), b: due('Fire drill', 'Safety', '2026-10-11') });
-  assert.match(e.why, /Fire extinguisher monthly check/); assert.match(e.drops, /^Guarded/); assert.match(e.rises, /^Critical if Fire extinguisher monthly check is still open on Oct 18/);
+  assert.match(e.why, /Fire extinguisher monthly check/); assert.match(e.drops, /^Guarded/); assert.match(e.rises, /^Fire extinguisher monthly check is still open on Oct 18/);
 });
 
 test('exposures: severity, evidence, owners inferred from the area, staff checks folded into the item that names them', () => {

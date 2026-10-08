@@ -90,18 +90,18 @@ function readiness(items, today){
     why = `${word(crit.length)} ${crit.length === 1 ? 'item is' : 'items are'} past due with nothing logged: ${names(crit)}.`;
     drops = `Guarded as soon as ${crit.length === 1 ? 'it is' : 'they are'} logged.`;
     const need = 3 - crit.length, next = high.slice().sort((a, b) => String(a.due).localeCompare(String(b.due))).slice(0, need);
-    rises = `Critical if ${oldest.title.replace(/\s*\(log it\)/i, '')} is still open on ${fmtD(addDays(oldest.due, 11))}` +
+    rises = `${oldest.title.replace(/\s*\(log it\)/i, '')} is still open on ${fmtD(addDays(oldest.due, 11))}` +
       (next.length === need ? `, or if ${need === 1 ? next[0].title.replace(/\s*\(log it\)/i, '') + ' also passes its due date' : `${word(need).toLowerCase()} more items pass their due date (next: ${next[0].title.replace(/\s*\(log it\)/i, '')}, ${fmtD(next[0].due)})`}.` : '.');
     head = `${word(crit.length)} ${crit.length === 1 ? 'item' : 'items'} would be written up on a visit today.`;
   } else if (idx === 1) {
     why = `Nothing is past due, but ${plural(high.length, 'item comes', 'items come')} due within 7 days.`;
     drops = `Calm once ${high.length === 1 ? 'it is' : 'they are'} logged.`;
-    rises = `Elevated if ${soonHigh.title.replace(/\s*\(log it\)/i, '')} is still open after ${fmtD(soonHigh.due)}.`;
+    rises = `${soonHigh.title.replace(/\s*\(log it\)/i, '')} is still open after ${fmtD(soonHigh.due)}.`;
     head = `Nothing would be written up today. ${word(high.length)} ${high.length === 1 ? 'item comes' : 'items come'} due this week.`;
   } else {
     why = 'Nothing is past due and nothing comes due within 7 days.';
     drops = 'It is already at the lowest level.';
-    rises = soonWatch ? `Guarded from ${fmtD(addDays(soonWatch.due, -7))}, when ${soonWatch.title.replace(/\s*\(log it\)/i, '')} comes within 7 days, unless it is logged first.` : 'Guarded if anything comes due within 7 days.';
+    rises = soonWatch ? `${soonWatch.title.replace(/\s*\(log it\)/i, '')} comes within 7 days (from ${fmtD(addDays(soonWatch.due, -7))}) without being logged.` : 'Anything comes due within 7 days.';
     head = 'Nothing would be written up today, and nothing is due this week.';
   }
   return {idx, level:LEVELS[idx].key, label:LEVELS[idx].label, tone:LEVELS[idx].tone, crit:crit.length, high:high.length, watch:watch.length, worst, why, drops, rises, head};
