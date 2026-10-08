@@ -35,9 +35,10 @@ function slide(r, i, n) {
     ? `<span class="ffa-kit-real">${A.photoImg(r.key, { sizes })}</span><span class="ffa-kit-concept">${A.kitImg(r.key, { sizes })}</span>`
     : `<span class="ffa-kit-real"><img src="${E(r.real)}" alt="" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span><span class="ffa-kit-concept"><img src="${E(r.kit)}" alt="${E(r.alt)}" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span>`;
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';
+  const km = A && A.kitMedia && A.liveVariants && r.entrance && A.liveVariants(r.key).length > 1 ? A.kitMedia(r.key, { sizes }) : null;   // Concept 1 / Concept 2 on the entrance slide, once both exist
   return `<div class="ks-slide" role="group" aria-roledescription="slide" aria-label="Room ${i + 1} of ${n}: ${E(r.zone || '')}">
-   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"><div class="ffa-kit-stage">${img}<span class="ffa-kit-label${r.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${E(r.badge || 'Concept')}</span>${toggle}</div>
-   <figcaption><b>${E(r.zone || '')}</b><span class="ffa-kit-caption">${E(r.caption || (A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span><span>${E(r.soon || 'Not installed yet. The real room is one tap away.')}</span></figcaption></figure></div>`;
+   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"${km ? ' data-concept-view="1"' : ''}><div class="ffa-kit-stage">${km ? `<span class="ffa-kit-real">${A.photoImg(r.key, { sizes })}</span>${km.concept}${km.label}${km.sw}` : `${img}<span class="ffa-kit-label${r.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${E(r.badge || 'Concept')}</span>`}${toggle}</div>
+   <figcaption><b>${E(r.zone || '')}</b>${km ? km.caption : `<span class="ffa-kit-caption">${E(r.caption || (A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span>`}<span>${E(r.soon || 'Not installed yet. The real room is one tap away.')}</span></figcaption></figure></div>`;
 }
 function chips(RK) {
   return `<ul class="ks-chips" aria-label="The five zones">${RK.ZONES.map(z => `<li style="--zf:${z.felt};--zi:${z.ink};--zt:${z.tint}"><span class="ks-dot" aria-hidden="true"></span>${E(z.name)}</li>`).join('')}</ul>`;

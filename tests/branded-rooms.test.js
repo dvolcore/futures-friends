@@ -115,3 +115,25 @@ test('a portrait concept is never cropped; the required caption sits with every 
   assert.ok(read('experience.js').includes('KIT_CAPTION'), 'the curriculum hero carries it');
   assert.ok(read('views.js').includes('KIT_CAPTION'), 'the For centers comparison carries it');
 });
+
+test('entrance Concept 1 / Concept 2: Concept 2 is pending (no switch, no file) until its file lands, then the switch appears on the same slot', () => {
+  const w = art(), A = w.FFArt, ex = man.rooms.find(r => r.key === 'exterior');
+  assert.deepEqual(ex.variants.map(v => [v.id, v.label, !!v.pending]), [[1, 'Concept 1', false], [2, 'Concept 2', true]]);
+  assert.equal(ex.variants[1].caption, 'Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.');
+  assert.equal(A.KIT.exterior.variants[1].caption, ex.variants[1].caption);
+  assert.equal(A.KIT.exterior.variants[1].pending, true);
+  assert.ok(!fs.existsSync(path.join(DIR, 'exterior-2-kit-800.jpg')), 'Concept 2 file not delivered yet');
+  const one = A.photo('exterior');
+  assert.doesNotMatch(one, /data-concept-show|Concept 2|friend banners/, 'switch hidden while Concept 2 is pending');
+  assert.match(one, /See the building today/);
+  A.KIT.exterior.variants[1].pending = false;   // the follow-up that adds the file clears this flag
+  const two = A.photo('exterior');
+  assert.match(two, /data-concept-view="1"/);
+  assert.match(two, /data-concept-show="1" aria-pressed="true">Concept 1<\/button><button type="button" data-concept-show="2" aria-pressed="false">Concept 2</);
+  assert.match(two, /exterior-2-kit-800\.jpg/);
+  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="1">Proposed Futures Learning Center character entrance — AI-generated design concept.</span>'));
+  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="2">Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.</span>'));
+  assert.match(two, /ffa-kit-label ffa-kit-label-char" data-concept="2"[^>]*>Friend banners concept</);
+  assert.match(two, /data-kit-show="real"[^>]*>See the building today</);
+  assert.match(read('brand-art.css'), /\[data-concept-view="1"\] \[data-concept="2"\]/);
+});

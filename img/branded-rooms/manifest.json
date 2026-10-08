@@ -120,7 +120,26 @@
    "source_file": "exterior-kit.png",
    "source_sha256": "e11b5f382e2fb2f6e55e35762672bac8e38a040c05c2f9ee22236c2b8860dc6a",
    "package_file": "07-front-entrance-flair.png",
-   "badge": "Character concept"
+   "badge": "Character concept",
+   "variants": [
+    {
+     "id": 1,
+     "label": "Concept 1",
+     "file": "exterior-kit",
+     "package_file": "07-front-entrance-flair.png",
+     "caption": "Proposed Futures Learning Center character entrance — AI-generated design concept.",
+     "badge": "Character concept"
+    },
+    {
+     "id": 2,
+     "label": "Concept 2",
+     "file": "exterior-2-kit",
+     "pending": true,
+     "caption": "Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.",
+     "badge": "Friend banners concept",
+     "description": "Four tall friend banners (Booker, Lumi, Zuri, Bop) on the building wall, the lawn sign and the Welcome pole banner. File not delivered yet: the Concept 1 / Concept 2 switch stays hidden until pending is cleared and img/branded-rooms/exterior-2-kit-{400,800,1200}.{jpg,webp} exist."
+    }
+   ]
   }
  ],
  "source": "~/Downloads/Futures_Friends_Center_Transformation_2026-10-07/ (copied with its generation-prompts.json and asset-manifest.json to the project folder below)",

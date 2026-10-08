@@ -117,6 +117,7 @@
   const KIT_LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
   const KIT_CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
   const ENTRANCE_CAPTION = 'Proposed Futures Learning Center character entrance — AI-generated design concept.';   // owner 2026-10-07, verbatim, visible beside the entrance concept
+  const ENTRANCE2_CAPTION = 'Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.';   // owner 2026-10-07: Concept 2 (four friend banners on the wall); ships when its file lands
   const ENTRANCE_LABEL = 'Concept: the proposed Futures Learning Center character entrance';
   const KIT = {
     'turtle-rug': { zone: 'All five zones', alt: "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
@@ -125,21 +126,39 @@
     'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
     'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" },
     // Owner 2026-10-07: the proposed front entrance REPLACES the plain exterior photo as the main image (06-front-entrance); the real building is one tap away.
-    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Character concept', real: 'See the building today', kit: 'Proposed', alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors' }
+    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Character concept', real: 'See the building today', kit: 'Proposed', alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors', variants: [   // Concept 1 ships now; Concept 2 is `pending` until its file exists (img/branded-rooms/exterior-2-kit-*), and the Concept 1 / Concept 2 switch stays hidden until then. Mirrors the manifest's variants.
+      { id: 1, label: 'Concept 1', file: 'exterior-kit', caption: ENTRANCE_CAPTION, badge: 'Character concept' },
+      { id: 2, label: 'Concept 2', file: 'exterior-2-kit', caption: ENTRANCE2_CAPTION, badge: 'Friend banners concept', pending: true, alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance with four tall friend banners (Booker, Lumi, Zuri and Bop) on the building wall, a lawn sign carrying the FLC shield and a Welcome banner on the lamp pole' }
+    ] }
   };
   function kitImg(key, o = {}) {
     const k = KIT[key], p = CENTER[key]; if (!k || !p) return '';
-    const b = 'img/branded-rooms/' + key + '-kit', set = ext => [400, 800, 1200].map(w => `${b}-${w}.${ext} ${w}w`).join(', ');
+    const v = o.variant && k.variants ? k.variants.find(x => x.id === o.variant) : null;
+    const b = 'img/branded-rooms/' + (v ? v.file : key + '-kit'), set = ext => [400, 800, 1200].map(w => `${b}-${w}.${ext} ${w}w`).join(', ');
     const sizes = esc(o.sizes || '(max-width:820px) 92vw, 560px');
-    return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(k.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-kit-photo="${esc(key)}"></picture>`;
+    return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(v && v.alt ? v.alt : k.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-kit-photo="${esc(key)}"></picture>`;
   }
   // The toggle: any [data-kit-show] button sets data-kit-view on its nearest [data-kit-view] holder (CSS shows that picture).
   const capOf = key => (KIT[key] && KIT[key].caption) || KIT_CAPTION;
+  // Concept 1 / Concept 2: a room with several live (not pending) concepts gets one picture, badge and caption per concept and a switch;
+  // with one live concept the markup is the plain single-concept one.
+  const liveVariants = key => (KIT[key] && KIT[key].variants || []).filter(v => !v.pending);
+  function kitMedia(key, o = {}) {
+    const vs = liveVariants(key), k = KIT[key];
+    if (vs.length < 2) return { multi: false, concept: `<span class="ffa-kit-concept">${kitImg(key, o)}</span>`, label: `<span class="ffa-kit-label${k.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${k.badge || 'Concept'}</span>`, caption: `<span class="ffa-kit-caption">${capOf(key)}</span>`, sw: '' };
+    return { multi: true,
+      concept: vs.map(v => `<span class="ffa-kit-concept" data-concept="${v.id}">${kitImg(key, Object.assign({}, o, { variant: v.id }))}</span>`).join(''),
+      label: vs.map(v => `<span class="ffa-kit-label ffa-kit-label-char" data-concept="${v.id}" aria-hidden="true">${v.badge}</span>`).join(''),
+      caption: vs.map(v => `<span class="ffa-kit-caption" data-concept="${v.id}">${v.caption}</span>`).join(''),
+      sw: `<span class="ffa-concept-switch" role="group" aria-label="Choose an entrance concept">${vs.map((v, i) => `<button type="button" data-concept-show="${v.id}" aria-pressed="${i === 0}">${v.label}</button>`).join('')}</span>` };
+  }
   function kitToggle(key) {
     const k = KIT[key] || {};
     return `<span class="ffa-kit-toggle" role="group" aria-label="${k.real ? 'Show the building' : 'Show the room'}"><button type="button" data-kit-show="real" aria-pressed="false">${k.real || 'Real room'}</button><button type="button" data-kit-show="kit" aria-pressed="true">${k.kit || 'With the kit'}</button></span>`;
   }
   if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', e => {
+    const c = e.target && e.target.closest && e.target.closest('[data-concept-show]');
+    if (c) { const h = c.closest('[data-concept-view]'); if (h) { h.dataset.conceptView = c.dataset.conceptShow; h.querySelectorAll('[data-concept-show]').forEach(x => x.setAttribute('aria-pressed', String(x === c))); } return; }
     const b = e.target && e.target.closest && e.target.closest('[data-kit-show]'); if (!b) return;
     const h = b.closest('[data-kit-view]'); if (!h) return;
     const v = b.dataset.kitShow; h.dataset.kitView = v;
@@ -153,12 +172,13 @@
     const kit = KIT[key] && o.kit !== false;
     const ratio = kit && CENTER[key] && CENTER[key].h > CENTER[key].w ? '' : o.ratio; // a portrait concept keeps its own shape: nothing is cropped away
     const cls = `ffa-photo${ratio ? ' ffa-photo-' + esc(ratio) : ''}${kit ? ' ffa-kit' : ''}${o.cls ? ' ' + esc(o.cls) : ''}`;
-    const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span><span class="ffa-kit-concept">${kitImg(key, o)}</span><span class="ffa-kit-label${KIT[key].badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${KIT[key].badge || 'Concept'}</span>${kitToggle(key)}</div>` : photoImg(key, o);
-    return `<figure class="${cls}"${kit ? ' data-kit-view="kit"' : ''}>${media}
-   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit ? `<span class="ffa-kit-caption">${capOf(key)}</span>` : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT[key].note ? `${KIT[key].label}; ${KIT[key].note}.` : `${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).`}</span>` : ''}<span class="ffa-credit">${kit && KIT[key].note ? 'Photo of the building today: ' : 'Photo: '}${CENTER_CREDIT}</span></figcaption></figure>`;
+    const km = kit ? kitMedia(key, o) : null;
+    const media = kit ? `<div class="ffa-kit-stage"><span class="ffa-kit-real">${photoImg(key, o)}</span>${km.concept}${km.label}${km.sw}${kitToggle(key)}</div>` : photoImg(key, o);
+    return `<figure class="${cls}"${kit ? ' data-kit-view="kit"' : ''}${kit && km.multi ? ' data-concept-view="1"' : ''}>${media}
+   <figcaption>${o.title ? `<b>${esc(o.title)}</b>` : ''}${o.line ? `<span>${esc(o.line)}</span>` : ''}${kit ? km.caption : ''}${kit && o.kitNote !== false ? `<span class="ffa-kit-note">${KIT[key].note ? `${KIT[key].label}; ${KIT[key].note}.` : `${KIT_LABEL} (${esc(KIT[key].zone)} added; not installed yet).`}</span>` : ''}<span class="ffa-credit">${kit && KIT[key].note ? 'Photo of the building today: ' : 'Photo: '}${CENTER_CREDIT}</span></figcaption></figure>`;
   }
   const FFBrandedRooms = Object.keys(KIT).map(key => ({ key, real: `img/center/${key}-800.jpg`, kit: `img/branded-rooms/${key}-kit-800.jpg`, alt: KIT[key].alt, w: CENTER[key].w, h: CENTER[key].h, zone: KIT[key].zone, label: KIT[key].label || KIT_LABEL, caption: capOf(key), badge: KIT[key].badge || '', soon: KIT[key].soon || '', entrance: key === 'exterior' }));
   window.FFBrandedRooms = FFBrandedRooms;
 
-  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL, KIT_CAPTION, ENTRANCE_CAPTION, capOf };
+  window.FFArt = { flag, slot, homeStage, cut, scene, photo, photoImg, kitImg, kitMedia, kitToggle, FLAGS, CAST, HERO_H, CENTER, CENTER_CREDIT, KIT, KIT_LABEL, KIT_CAPTION, ENTRANCE_CAPTION, ENTRANCE2_CAPTION, capOf, liveVariants };
 })();
