@@ -58,7 +58,7 @@ function band(variant) {
   return `<section class="ks ks-${full ? 'full' : 'compact'}" id="${id}" aria-labelledby="${id}-h" data-ks="${E(variant || 'centers')}">
   <div class="wrap ks-grid"><div class="ks-copy"><span class="ks-eyebrow">Learning Zones Kit</span>
    <h2 id="${id}-h">Five friend zones. One chime.</h2>
-   <p class="ks-pitch">Carpets, low see-through fences, signs and a cue your three-year-olds learn in a week, set up in the room you already have.</p>
+   <p class="ks-pitch">Carpets, low see-through fences, signs and a cue three-year-olds usually pick up quickly, set up in the room you already have.</p>
    ${chips(RK)}${prices}
    <p class="ks-soon"><b>Ordering opens soon.</b> Nothing is charged here. Prices are before tax and delivery; packages and the add-on are listed on the pricing page.</p>
    <div class="ks-cta"><a class="btn gold" href="#room-kit">See the kit</a><a class="btn soft" href="#room-planner">Plan your room</a><a class="btn soft" href="#quote">Get a quote</a></div></div>

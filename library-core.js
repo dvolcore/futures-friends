@@ -28,14 +28,40 @@ var FFLibraryCore = (function () {
     if (r === 'teacher') return !!item.family_facing && !item.financial && item.vis !== 'director';
     return false;
   }
-  function sendReason(item, role) {
+  // ---- approval and audience gate (audit A2) ---------------------------------------------------------------------------------
+  // Only an item whose status is "ready" (approved) may go to families, and only if it is made for families. Draft, review and
+  // coming-soon items, internal items, staff-only items and money items never go to families; the most a director may do with
+  // an internal or unapproved item is send it to staff.
+  function isApproved(item) { return !!item && item.status === 'ready'; }
+  function audienceOf(item) { return item && item.family_facing && !item.financial && item.vis !== 'director' ? 'families' : 'staff'; }
+  function audiences(item, role) {
+    var r = normRole(role), out = [];
+    if (!canSend(item, role)) return out;
+    if (isApproved(item) && audienceOf(item) === 'families') out.push('families');
+    if (r === 'director') out.push('staff');
+    return out;
+  }
+  function canSendTo(item, role, audience) { return audiences(item, role).indexOf(audience) !== -1; }
+  var NOT_APPROVED = 'Not approved for sending yet';
+  function sendReason(item, role, audience) {
     var r = normRole(role);
     if (!item.sendable || item.status === 'soon') return item.status === 'soon' ? 'Not made yet, so there is nothing to send.' : 'This is reference material, not something to send.';
     if (r === 'teacher' && item.financial) return 'Money items are for directors and the owner only.';
     if (r === 'teacher' && !item.family_facing) return 'Teachers can send items made for families. Ask your director to send this one.';
     if (r !== 'director' && r !== 'teacher') return 'Sending is for directors and teachers.';
+    if (audience === 'families' || !audience) {
+      if (!isApproved(item)) return NOT_APPROVED + '. It is a ' + (item.status === 'review' ? 'review copy' : 'draft') + ', so it cannot go to families.';
+      if (audienceOf(item) !== 'families') return 'Staff only. This item is for your team, so it can be sent to staff but not to families.';
+    }
     return '';
   }
+  // true counts, computed from the catalog (never typed in)
+  function statusCounts(items) {
+    var c = { ready: 0, review: 0, draft: 0, soon: 0, total: 0 };
+    (items || []).forEach(function (i) { if (c[i.status] != null) c[i.status] += 1; c.total += 1; });
+    return c;
+  }
+  function countsLine(c) { return c.ready + ' ready · ' + c.review + ' in review · ' + c.draft + (c.draft === 1 ? ' draft' : ' drafts') + ' · ' + c.soon + ' coming'; }
   function visibleItems(items, role) { return items.filter(function (i) { return canView(i, role); }); }
 
   // ---- search and filters --------------------------------------------------------------------------------------------------
@@ -160,7 +186,7 @@ var FFLibraryCore = (function () {
     return 'link';
   }
 
-  var api = { ROLES: ROLES, AGE_LABEL: AGE_LABEL, STATUS_LABEL: STATUS_LABEL, TYPE_LABEL: TYPE_LABEL, normRole: normRole, canView: canView, canSend: canSend, sendReason: sendReason,
+  var api = { ROLES: ROLES, AGE_LABEL: AGE_LABEL, STATUS_LABEL: STATUS_LABEL, TYPE_LABEL: TYPE_LABEL, normRole: normRole, canView: canView, canSend: canSend, canSendTo: canSendTo, audiences: audiences, audienceOf: audienceOf, isApproved: isApproved, NOT_APPROVED: NOT_APPROVED, statusCounts: statusCounts, countsLine: countsLine, sendReason: sendReason,
     visibleItems: visibleItems, filterItems: filterItems, matchesQuery: matchesQuery, groupCounts: groupCounts, bySub: bySub, newThisWeek: newThisWeek, defaultStart: defaultStart,
     position: position, todayPlan: todayPlan, sizeLabel: sizeLabel, fileLabel: fileLabel, langLabel: langLabel, ageLabel: ageLabel, previewKind: previewKind, isoOf: isoOf, fromIso: fromIso };
   if (typeof window !== 'undefined') window.FFLibraryCore = api;

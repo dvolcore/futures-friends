@@ -7,7 +7,7 @@
    - Prices: the three packages are the ones already published on #pricing (read from window.FFPricing when it is loaded, the same
      numbers otherwise). The only add-on prices shown are the two the owner set on 2026-10-07: Zone Boundaries $1,195 home /
      $1,995 classroom. Every other add-on says "Quote".
-   - Kits ship with printed stick puppets now; plush follow only after toy-safety testing. Every kit piece carries an honest status:
+   - Kits are planned with printed stick puppets; plush follow only after toy-safety testing. Every kit piece carries an honest status:
      Available now / In development / Coming later.
    - Names, friends, colours and room structure only: no curriculum lesson content (IP lockdown 2026-10-07).
    - Booker, Lumi, Zuri and Bop are labelled story-world characters; room pictures are labelled (real photo or concept).
@@ -62,7 +62,7 @@ const STATUS = { now: 'Available now', dev: 'In development', later: 'Coming lat
 const KIT = [
   ['Zone signs, English and Spanish', '12 x 18 in', '9 x 12 in', 'On banner stands', 'now', 'Print-ready, friend pop-out on felt'],
   ['Character posters', '18 x 24 in', '18 x 24 in', 'On banner stands', 'now', 'Hung at child eye level'],
-  ['Printed friend stick puppets', '1 per zone', '1 per zone', '1 per zone', 'now', 'Ship with every kit today'],
+  ['Printed friend stick puppets', '1 per zone', '1 per zone', '1 per zone', 'now', 'Printed and packed with every kit once kit production starts'],
   ['Picture + word bin labels', '12 per zone', '12 per zone', '12 per zone, with lidded bins', 'now', 'An icon and a word on every label, never colour alone'],
   ['Cue kit: hand chime, 6 friend cue cards, set-up card', '1 per room', '1', '1, plus a Sunday reset card', 'now', 'The same cue in every room'],
   ['Friends Circle rug', '8 ft round', '6 ft round', '6 ft round, rolls up', 'dev', 'Made to order; each design ships only with its flammability report'],
@@ -221,7 +221,7 @@ function kit() {
    <div class="tw rk-kittable"><table><caption class="wc-vh">Learning Zones Kit pieces by room type, with status</caption>
     <thead><tr><th scope="col">Piece</th><th scope="col">Center classroom</th><th scope="col">Home daycare</th><th scope="col">Church pack-away</th><th scope="col">Status</th></tr></thead>
     <tbody>${KIT.map(r => `<tr><th scope="row">${E(r[0])}<span class="rk-kitnote">${E(r[5])}</span></th><td data-l="Center">${E(r[1])}</td><td data-l="Home">${E(r[2])}</td><td data-l="Church">${E(r[3])}</td><td>${chip(r[4])}</td></tr>`).join('')}</tbody></table></div>
-   <p class="rk-note">Plush friends are in development and must pass toy-safety testing first. Kits ship now with printed friend stick puppets, and the plush follow once they pass.</p>`);
+   <p class="rk-note">Plush friends are in development and must pass toy-safety testing first. Kits are planned to include printed friend stick puppets, and the plush follow once they pass.</p>`);
 }
 
 function fence() {
@@ -384,7 +384,7 @@ W.FFhooks.push(() => { try { if (typeof view !== 'undefined' && view === 'room-k
 // ---------------------------------------------------------------- entry bands on other pages (wrap, never edit their source)
 function band(where) {
   const copy = {
-    home: ['Set up your home room', 'Five friend zones sized for a 12 x 14 ft room, with a floor plan, a cue children learn in a week and an optional carpet-and-fence add-on.'],
+    home: ['Set up your home room', 'Five friend zones sized for a 12 x 14 ft room, with a floor plan, a cue children usually pick up quickly and an optional carpet-and-fence add-on.'],
     pricing: ['What the Zones Starter includes', 'Every package includes the Friends Circle, signs, posters and printed friend puppets. Zone carpets and fences are an add-on: $1,195 home, $1,995 classroom.'],
     shop: ['Want the whole room, not just the signs?', 'The Learning Zones Kit adds friend carpets, low fences, paw-print paths and a transition cue to your learning zones.']
   }[where] || ['Turn one room into five friend zones', 'Carpets, low see-through fences, signs, friend puppets, paw-print paths and one transition cue, with to-scale layouts for centers, homes and church halls.'];

@@ -46,6 +46,14 @@ function thumb(it){
     : `<span class="rl-img rl-ph" style="--c:var(--${f})" aria-hidden="true"><b>${E(CORE.TYPE_LABEL[it.type] || 'File')}</b></span>`;
 }
 const sampleLabel = it => isPublic(it) && SAMPLE_RE.test(filePath(it)) && it.kind !== 'sample' ? 'Sample' : 'Preview';
+// The approval and audience gate: Send to families only for approved, family-facing items; staff-only and unapproved items go to staff at most.
+function sendControl(it, role, i){
+  const aud = CORE.audiences(it, role);
+  if (aud.indexOf('families') !== -1) return `<button type="button" class="btn navy rl-act" data-lib="send" data-i="${i}" aria-label="Send ${E(it.title)} to families">Send</button>`;
+  const staff = aud.indexOf('staff') !== -1 ? `<button type="button" class="btn soft rl-act" data-lib="send" data-i="${i}" aria-label="Send ${E(it.title)} to staff">Send to staff</button>` : '';
+  const why = (it.sendable && it.status !== 'soon' && CORE.normRole(role) !== 'none') ? `<span class="rl-hub rl-gate" role="note" title="${E(CORE.sendReason(it, role, 'families'))}"><span aria-hidden="true">⛔</span> ${E(it.status === 'ready' ? 'Staff only' : CORE.NOT_APPROVED)}</span>` : '';
+  return why + staff;
+}
 function actions(it, role){
   const i = idx(it), pub = isPublic(it), p = filePath(it), a = [];
   if (pub) {
@@ -54,7 +62,7 @@ function actions(it, role){
     if (p && /\.(pdf|png|jpe?g|webp|svg)$/i.test(p)) a.push(`<button type="button" class="btn soft rl-act" data-lib="print" data-i="${i}" aria-label="Print ${E(it.title)}">Print</button>`);
   } else if (it.status !== 'soon') a.push(`<span class="rl-hub" role="note"><span aria-hidden="true">⌂</span> ${HUB_LINE}</span>`);
   else a.push(`<span class="rl-hub" role="note"><span aria-hidden="true">…</span> Not made yet</span>`);
-  if (CORE.canSend(it, role)) a.push(`<button type="button" class="btn navy rl-act" data-lib="send" data-i="${i}" aria-label="Send ${E(it.title)} to families">Send</button>`);
+  a.push(sendControl(it, role, i));
   return a.join('');
 }
 function card(it, role, opt){
@@ -127,7 +135,7 @@ function sentPanel(role){
   const when = t => new Date(t).toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
   return `<section class="rl-sent" aria-labelledby="rlSentH"><h3 id="rlSentH">Sent items</h3>
    <p class="rl-lead">${E(OFF_LINE)} Until then a send waits here as Queued.</p>
-   ${sends.length ? `<ul class="rl-q">${sends.slice(0, 10).map(([id, s]) => `<li><span class="rl-chip rl-st-queued"><span aria-hidden="true">⏳</span> Queued</span><span><b>${E(s.title)}</b><span class="rl-meta">${s.recipients.length} ${s.recipients.length === 1 ? 'family' : 'families'} (${E(s.scopeLabel)}) · ${s.recipients.filter(r => r.lang === 'es').length} in Spanish · ${E(s.byName)}, ${E(when(s.at))}</span></span></li>`).join('')}</ul>`
+   ${sends.length ? `<ul class="rl-q">${sends.slice(0, 10).map(([id, s]) => `<li><span class="rl-chip rl-st-queued"><span aria-hidden="true">⏳</span> Queued</span><span><b>${E(s.title)}</b><span class="rl-meta">${s.kind === 'staff' ? `${s.recipients.length} staff` : `${s.recipients.length} ${s.recipients.length === 1 ? 'family' : 'families'} (${E(s.scopeLabel)}) · ${s.recipients.filter(r => r.lang === 'es').length} in Spanish`} · ${E(s.byName)}, ${E(when(s.at))}</span></span></li>`).join('')}</ul>`
      : '<p class="rl-empty-s">Nothing queued yet. Pick a card and press Send.</p>'}
    ${role === 'director' ? `<details class="rl-log"><summary>Library activity</summary>${log.length ? `<ul>${log.map(l => `<li><span class="rl-meta">${E(when(l.at))}</span> ${E(l.byName)} ${E(l.what)}: ${E(l.title)}</li>`).join('')}</ul>` : '<p class="rl-empty-s">No activity yet.</p>'}</details>` : ''}</section>`;
 }
@@ -135,8 +143,8 @@ function page(){
   const w = who(); if (!w) return '';
   const vis = mine(), role = w.role;
   return `<div class="rlib" id="ffLib"><header class="rl-head"><div><p class="rl-eyebrow">${role === 'director' ? 'Director' : 'Teacher'} library</p><h2>Resource Library</h2>
-    <p class="rl-lead">Everything we have made, in one place. Find it, look at it, send it home.</p></div>
-    <div class="rl-stat"><b>${vis.length}</b><span>items open to you${role === 'teacher' ? '. Directors see a few more.' : '.'}</span></div></header>
+    <p class="rl-lead">Everything we have made, in one place. Find it and look at it. Only approved family items can be sent home.</p></div>
+    <div class="rl-stat"><b>${vis.length}</b><span>items open to you${role === 'teacher' ? '. Directors see a few more.' : '.'} ${E(CORE.countsLine(CORE.statusCounts(vis)))}.</span></div></header>
     <p class="rl-demo" role="note">Demo: full curriculum files open in your hosted Futures Hub. Here you see the cards, the public samples, and how sending works.</p>
     ${groupTiles(vis)}
     <div class="rl-bar"><label class="f rl-search" for="rlQ">Search the library<input class="i" id="rlQ" type="search" data-lib-f="q" value="${E(ST.q)}" placeholder="Try &ldquo;rainbow&rdquo;, &ldquo;day 9&rdquo; or &ldquo;Spanish&rdquo;" autocomplete="off"></label>
@@ -158,8 +166,8 @@ const say = m => { const l = document.getElementById('rlLive'); if (l) { l.textC
 function tile(){
   const w = who(); if (!w) return '';
   const vis = mine(), nw = CORE.newThisWeek(vis, new Date(), 4), shown = nw.items.length ? nw.items : vis.filter(i => i.thumb && i.status === 'ready').slice(0, 4);
-  return `<section class="rl-hero" aria-labelledby="rlHeroH"><div class="rl-hero-t"><p class="rl-eyebrow">Resource Library</p><h3 id="rlHeroH">${vis.length} things ready to use or send</h3>
-    <p class="rl-lead">Packets, menus, move cards, letters, forms, the brand kit and every email. ${nw.total ? `${nw.total} new this week.` : ''}</p>
+  return `<section class="rl-hero" aria-labelledby="rlHeroH"><div class="rl-hero-t"><p class="rl-eyebrow">Resource Library</p><h3 id="rlHeroH">${E(CORE.countsLine(CORE.statusCounts(vis)))}</h3>
+    <p class="rl-lead">Packets, menus, move cards, letters, forms, the brand kit and every email. Only approved items can go to families. ${nw.total ? `${nw.total} new this week.` : ''}</p>
     <button type="button" class="btn navy" data-ptab="library">Open the Library</button></div>
     <div class="rl-hero-s" aria-hidden="true">${shown.map(it => `<span class="rl-hs">${thumb(it)}</span>`).join('')}</div></section>`;
 }
@@ -192,7 +200,7 @@ function preview(it, opener){
   dlg(`<div class="rl-dh"><div><p class="rl-eyebrow">${E(it.sub)}</p><h2 id="rlDT">${E(it.title)}</h2><div class="rl-chips">${chips(it)}</div></div><button type="button" class="btn soft rl-x" data-lib="close" aria-label="Close preview">Close</button></div>
     ${samp ? '<p class="rl-demo" role="note">This is the watermarked Day 9 sample. The real file for this item opens in your hosted Futures Hub.</p>' : ''}
     <div class="rl-view">${viewerBody(it)}</div>
-    <div class="rl-dfoot">${p && !/\.mp4$/i.test(p) ? `<a class="btn soft" href="${E(p)}" download data-lib="dl" data-i="${idx(it)}">Download</a>` : ''}${CORE.canSend(it, who().role) ? `<button type="button" class="btn navy" data-lib="send" data-i="${idx(it)}">Send to families</button>` : ''}</div>`, 'rl-wide');
+    <div class="rl-dfoot">${p && !/\.mp4$/i.test(p) ? `<a class="btn soft" href="${E(p)}" download data-lib="dl" data-i="${idx(it)}">Download</a>` : ''}${(a => a.indexOf('families') !== -1 ? `<button type="button" class="btn navy" data-lib="send" data-i="${idx(it)}">Send to families</button>` : a.length ? `<button type="button" class="btn soft" data-lib="send" data-i="${idx(it)}">Send to staff</button>` : '')(CORE.audiences(it, who().role))}${CORE.canSend(it, who().role) && CORE.audiences(it, who().role).indexOf('families') === -1 ? `<span class="rl-meta" role="note">${E(CORE.sendReason(it, who().role, 'families'))}</span>` : ''}</div>`, 'rl-wide');
   note('Previewed', it);
 }
 function famRows(){
@@ -203,7 +211,19 @@ function langOK(it, l){ return it.lang === 'bi' ? true : it.lang === l; }
 function sendDialog(it, opener){
   LAST = opener; const w = who(), rooms = Object.entries(DM.all('rooms')).sort((a, b) => (a[1].order || 9) - (b[1].order || 9));
   ST.sendFor = idx(it); ST.scope = 'all'; ST.pick = {}; ST.langs = {};
-  dlg(sendHtml(it, rooms, w), '');
+  ST.audience = CORE.canSendTo(it, w.role, 'families') ? 'families' : 'staff';
+  dlg(ST.audience === 'staff' ? staffHtml(it) : sendHtml(it, rooms, w), '');
+}
+function staffRows(){ return Object.entries(DM.all('staff')).map(([id, s]) => ({id, name: s.name || id, role: s.role || 'Staff'})); }
+function staffHtml(it){
+  const rows = staffRows();
+  return `<div class="rl-dh"><div><p class="rl-eyebrow">Send to staff</p><h2 id="rlDT">${E(it.title)}</h2><div class="rl-chips">${chips(it)}</div></div><button type="button" class="btn soft rl-x" data-lib="close" aria-label="Close">Close</button></div>
+   <p class="rl-demo" role="note">${E(OFF_LINE)} Your send waits in the Sent items list as Queued. In this demo nothing leaves your browser.</p>
+   <p class="rl-warn" role="note"><b>${E(it.status === 'ready' ? 'Staff only.' : CORE.NOT_APPROVED + '.')}</b> ${E(it.status === 'ready' ? 'This item is for your team, so it can go to staff but not to families.' : 'It is a ' + (it.status === 'review' ? 'review copy' : 'draft') + ', so it can go to staff to read but not to families.')}</p>
+   <ul class="rl-fams" aria-label="Staff">${rows.map(r => `<li class="rl-fam"><label class="rl-fc"><input type="checkbox" data-lib-staff="${E(r.id)}" checked> <span><b>${E(r.name)}</b><span class="rl-meta">${E(r.role)}</span></span></label></li>`).join('') || '<li class="rl-empty-s">No staff in this center.</li>'}</ul>
+   <p class="rl-count" role="status" aria-live="polite" id="rlSendN">${rows.length} staff selected</p>
+   <div class="rl-dfoot"><button type="button" class="btn navy" data-lib="queue" ${rows.length ? '' : 'disabled'}>Queue the send</button></div>
+   <p class="rl-meta" id="rlSendMsg" role="status" aria-live="polite"></p>`;
 }
 function sendHtml(it, rooms, w){
   const fams = famRows(), sc = ST.scope, inScope = f => sc === 'all' || (sc === 'pick' ? true : f.room === sc);
@@ -227,13 +247,24 @@ function sendHtml(it, rooms, w){
    <p class="rl-meta" id="rlSendMsg" role="status" aria-live="polite"></p>`;
 }
 function rerenderSend(){ const d = document.querySelector('dialog.rl-dlg'); if (!d || ST.sendFor == null) return; const it = itemAt(ST.sendFor), w = who();
-  const a = document.activeElement && document.activeElement.id; d.innerHTML = sendHtml(it, Object.entries(DM.all('rooms')).sort((x, y) => (x[1].order || 9) - (y[1].order || 9)), w);
+  const a = document.activeElement && document.activeElement.id; d.innerHTML = ST.audience === 'staff' ? staffHtml(it) : sendHtml(it, Object.entries(DM.all('rooms')).sort((x, y) => (x[1].order || 9) - (y[1].order || 9)), w);
   if (a) { const n = document.getElementById(a); if (n) n.focus({preventScroll:true}); } }
 async function note(what, it){ const w = who(); if (!w) return;
   await DM.put('liblog', 'l' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), {what, title:it.title, by:w.id, byName:w.name, at:Date.now()}); }
 async function queue(){
-  const it = itemAt(ST.sendFor), w = who(); if (!it || !w || !CORE.canSend(it, w.role)) return;   // the rule is enforced here too, not only by hiding the button
-  const d = document.querySelector('dialog.rl-dlg'), fams = famRows(), sc = ST.scope;
+  const it = itemAt(ST.sendFor), w = who(); if (!it || !w || !CORE.canSendTo(it, w.role, ST.audience || 'families')) return;   // the gate is enforced here too, not only by hiding the button
+  const d = document.querySelector('dialog.rl-dlg');
+  if (ST.audience === 'staff') {
+    const chosen = [...d.querySelectorAll('[data-lib-staff]')].filter(x => x.checked).map(x => x.dataset.libStaff), all = staffRows();
+    const rows = chosen.map(id => ({staff:id, name:(all.find(x => x.id === id) || {}).name || id}));
+    if (!rows.length) return;
+    const id = 's' + Date.now().toString(36);
+    await DM.put('libsends', id, {item:it.id, title:it.title, kind:'staff', scopeLabel:'staff', recipients:rows, status:'queued', by:w.id, byName:w.name, byRole:w.role, at:Date.now(), email:'off'});
+    await DM.put('liblog', 'l' + id, {what:'queued a send', title:`${it.title} to ${rows.length} staff`, by:w.id, byName:w.name, at:Date.now()});
+    closeDlg(); setTimeout(() => { paint(); say(`Queued for ${rows.length} staff. Nothing is delivered until email is connected.`); }, 30);
+    return;
+  }
+  const fams = famRows(), sc = ST.scope;
   const chosen = [...d.querySelectorAll('[data-lib-fam]')].filter(x => x.checked).map(x => x.dataset.libFam);
   const rows = chosen.map(id => { const f = fams.find(x => x.id === id), s = d.querySelector(`[data-lib-lang="${id}"]`); return {kid:id, family:`${f.name}’s family`, lang:s ? s.value : f.lang}; });
   if (!rows.length) return;
@@ -281,6 +312,7 @@ document.addEventListener('change', e => {
   if (t.dataset.libF && who()) { const k = t.dataset.libF; if (k === 'start') ST.start = t.value; else if (k !== 'q' && k !== 'day') ST[k] = t.value; ST.filtersOpen = true; paint(); return; }
   if (t.dataset.libScope) { ST.scope = t.value; ST.pick = {}; return rerenderSend(); }
   if (t.dataset.libFam) { ST.pick[t.dataset.libFam] = t.checked; if (ST.scope !== 'pick') { ST.scope = 'pick'; fams2pick(t.dataset.libFam, t.checked); return rerenderSend(); } const n = document.querySelectorAll('dialog.rl-dlg [data-lib-fam]:checked').length; const el = document.getElementById('rlSendN'); if (el) el.textContent = `${n} ${n === 1 ? 'family' : 'families'} selected`; const q = document.querySelector('[data-lib="queue"]'); if (q) q.disabled = !n; return; }
+  if (t.dataset.libStaff != null) { const n = document.querySelectorAll('dialog.rl-dlg [data-lib-staff]:checked').length, el = document.getElementById('rlSendN'); if (el) el.textContent = `${n} staff selected`; const q = document.querySelector('[data-lib="queue"]'); if (q) q.disabled = !n; return; }
   if (t.dataset.libLang) ST.langs[t.dataset.libLang] = t.value;
 });
 // moving from a room or everyone to "pick": keep who was checked

@@ -36,6 +36,7 @@ const FROM_MANIFEST = { available_now: 'now', in_development: 'pilot', coming_la
 const statusOf = row => { const a = row.asset && REL && REL.assets[row.asset]; return a ? (FROM_MANIFEST[a.availability] || row.s) : row.s; };
 const chip = k => `<span class="rt-chip ${STATUS[k][1]}" data-oc-status="${k}">${STATUS[k][0]}</span>`;
 const legend = () => `<p class="small muted oc-legend">${Object.keys(STATUS).map(k => `${chip(k)} ${STATUS[k][2]}`).join(' ')}</p>`;
+const vocab = () => { const S = window.FFStatus; if (!S) return ''; return `<div class="oc-vocab" data-status-vocab><p class="small"><b>How far a piece has come.</b> We use six words, always in this order: ${S.STATES.map(x => `<b>${x[1]}</b> (${x[2]})`).join(' ')}</p><p class="small"><b>The curriculum today.</b> ${E(S.curriculum.long)}</p></div>`; };
 const OWNER_TAG = '<span class="oc-owner">Owner to provide</span>';
 const CONFIRM_TAG = '<span class="oc-owner">Owner to confirm</span>';
 const PROPOSED = '<span class="chip warn">Proposed, owner to confirm</span>';
@@ -44,8 +45,8 @@ const PROPOSED = '<span class="chip warn">Proposed, owner to confirm</span>';
 // s = status when no manifest asset applies; asset = release-manifest id (its availability wins).
 const MONTH = [
   { k: 'classroom', c: 'booker', h: 'Classroom program', who: 'For every classroom', rows: [
-    { t: 'This month’s lesson plans: four theme weeks of daily plans', d: 'Unit 1 now (draft, in the Teacher Portal). Then one new unit each month as it is written; Units 2 to 4 are written in draft.', asset: 'curriculum-unit1-days' },
-    { t: 'A new unit every month', d: 'Units 2 to 12 arrive one a month once your membership starts.', asset: 'curriculum-units-2-12' },
+    { t: 'This month’s lesson plans: four theme weeks of daily plans', d: 'Unit 1 now (a draft, in the Teacher Portal). Then one new unit each month as it is finished. ' + ((window.FFStatus && window.FFStatus.curriculum.short) || 'Units are written as drafts and none is approved yet.'), asset: 'curriculum-unit1-days' },
+    { t: 'A new unit every month', d: 'Units 2 to 12 arrive one a month once your membership starts, as each is finished. Today they are drafts.', asset: 'curriculum-units-2-12' },
     { t: 'Age adaptations in every activity', d: 'A version for twos, threes and pre-K in each plan, so mixed rooms use one plan.', asset: 'curriculum-unit1-days' },
     { t: 'Supply lists, with everyday substitutions', d: 'Each week lists what to gather. Notes on swapping in everyday items you already have are being added.', s: 'pilot' },
     { t: 'Printables for the month', d: 'Unit 1’s day materials are in the Teacher Portal now. Picture cards and companion printables are planned.', asset: 'printables-program' }] },
@@ -95,7 +96,7 @@ function monthGrid() {
 }
 function cadenceCols() {
   const col = (h, sub, list, cls) => `<div class="oc-col ${cls}"><h3>${h}</h3><p class="small muted">${sub}</p><ul>${list.map(x => `<li>${E(x)}</li>`).join('')}</ul></div>`;
-  return `<div class="oc-cols">${col('Arrives once', 'The startup package: paid once, shipped as each piece is made.', ONCE, 'oc-once')}${col('Renews every month', 'The monthly fee: it begins only when the Hub is live for your program and Unit 2 is delivered.', RENEWS, 'oc-renew')}${col('Costs extra', 'Only if you want it. Every package works without these.', EXTRA, 'oc-extra')}</div>
+  return `<div class="oc-cols">${col('Arrives once', 'The startup package: paid once, shipped as each piece is made.', ONCE, 'oc-once')}${col('Renews every month', ((window.FFStatus && window.FFStatus.feeTrigger) || 'The monthly fee starts only when your program\u2019s Hub is live and Unit 2 is delivered.'), RENEWS, 'oc-renew')}${col('Costs extra', 'Only if you want it. Every package works without these.', EXTRA, 'oc-extra')}</div>
    <p class="small"><a href="#pricing">See every price on the Pricing page</a>, before tax.</p>`;
 }
 const GROW = [
@@ -111,7 +112,7 @@ function grow() {
 }
 function monthSection(id) {
   return `<section class="oc-sec" id="${id || 'oc-month'}" aria-labelledby="${id || 'oc-month'}-h"><div class="wrap">${lead((id || 'oc-month') + '-h', 'Monthly membership', 'Your month with Futures Friends', 'What we deliver every month, and who helps you use it. Each row says where it stands today.')}
-   ${legend()}${monthGrid()}${promise()}</div></section>`;
+   ${legend()}${vocab()}${monthGrid()}${promise()}</div></section>`;
 }
 
 V.membership = () => hero('Monthly membership', 'What arrives every month, and who helps you use it',
@@ -175,7 +176,7 @@ function facts() {
     ${fact('Registration fee', F.registrationFee, 'Ask on your tour.')}${fact('Tuition conditions', F.tuitionConditions, 'Tuition is $210 a week, billed weekly. Ask about sibling and subsidy options on your tour.')}</div>
    <div class="tw"><table class="oc-table"><caption>Openings by room</caption><thead><tr><th scope="col">Room</th><th scope="col">Right now</th></tr></thead><tbody>
     ${F.openings.map(o => `<tr><td>${E(o.room)}</td><td>${o.status ? E(o.status) : OWNER_TAG}</td></tr>`).join('')}</tbody></table></div>
-   <p class="small">Room full? Join the waitlist: <button class="rl" type="button" data-anchor="ffx-apply">apply online</button> or call ${call}. When a spot opens, the center calls families in order of application date.</p></div></section>`;
+   <p class="small">Room full? Join the waitlist: <button class="rl" type="button" data-anchor="ffx-apply">${(window.FFIntake && window.FFIntake.say) ? window.FFIntake.say('apply online', 'see how to apply') : 'see how to apply'}</button> or call ${call}. When a spot opens, the center calls families in order of application date.</p></div></section>`;
 }
 const SIL = '<svg viewBox="0 0 80 80" aria-hidden="true" class="oc-sil"><circle cx="40" cy="30" r="14"/><path d="M14 74c2-16 13-24 26-24s24 8 26 24z"/></svg>';
 function team() {

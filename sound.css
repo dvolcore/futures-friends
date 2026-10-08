@@ -3,7 +3,7 @@
    never moves when that button appears. Bottom-left was not clean: the hero cast's name tags at 1280, the wayfinding context card from
    1440 px. Desktop: "Nature" stacks above "Sound" (narrow, inside the empty right margin on wide screens); phones: side by side.
    44 px targets. Transform and opacity only for motion; complete and still with motion off. */
-.ffs{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;flex-direction:column;
+.ffs{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateY(calc(-1 * var(--ffs-lift,0px)));z-index:45;display:flex;flex-direction:column;
   align-items:flex-end;gap:6px;font-family:var(--body,"Poppins",system-ui,sans-serif)}
 /* Phones: two round 44 px icon buttons stacked in the corner, so nothing covers the hero cast (owner check 2026-10-06: the labelled
    pills sat over Booker, Lumi and Zuri). The words stay as each button's accessible name; on/off shows as the speaker waves / leaf colour
@@ -59,3 +59,7 @@
 .ff-dock-tuck .ffs-hint{display:none}
 @media (prefers-reduced-motion:reduce){.ffs-btn,.totop{transition:none}}
 :root[data-motion=off] .ffs-btn,:root[data-motion=off] .totop{transition:none}
+
+@media (prefers-reduced-motion:no-preference){.ffs{transition:transform 180ms ease-out}}
+/* the page's last links never end up under the controls: on phones the footer gets the height of the stacked pair */
+@media (max-width:640px){.ff-footscene{padding-bottom:calc(176px + env(safe-area-inset-bottom,0px))}}

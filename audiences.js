@@ -75,7 +75,7 @@
     const I = W.FFIntake;
     const form = I && I.contactHtml ? I.contactHtml('contact', DEMO)
       : `<div class="card"><h3>${DEMO.heading}</h3><p class="small">Online requests open soon. Please call <b>${E(PHONE_)}</b>${EMAIL_ ? ` or email <b>${E(EMAIL_)}</b>` : ''}.</p></div>`;
-    return hero('For centers &amp; programs', 'Book a demo', 'See the Futures Hub, the rooms and the curriculum summaries, and talk through membership for your program. A real person replies; nothing is charged.', { chars: ['booker', 'zuri'] })
+    return hero('For centers &amp; programs', 'Book a demo', 'See the Futures Hub, the rooms and the curriculum summaries, and talk through membership for your program. ' + (I && I.enabled && I.enabled() ? 'A real person replies; nothing is charged.' : 'Online demo requests are not switched on yet, so call or email to set up a time. Nothing is charged.'), { chars: ['booker', 'zuri'] })
       + `<section class="band-paper"><div class="wrap"><div class="grid g2" style="align-items:start"><div class="aud-steps"><h2>What happens next</h2><ol><li><b>Call</b><span>Thirty minutes on your rooms, ages and enrollment.</span></li><li><b>Demo</b><span>The Futures Hub, the Learning Zones Kit and a sample day.</span></li><li><b>Your plan</b><span>A written membership quote that marks what is ready now and what comes later.</span></li></ol><p class="small">Or call <a class="rl" href="tel:+18169885661">${E(PHONE_)}</a>.</p></div>${form}</div></div></section>`;
   };
 

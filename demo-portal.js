@@ -31,6 +31,7 @@ const nowOn = date => { const n = new Date(), d = api() ? api().fromIso(date) : 
 const shortD = s => { try { return api().shortDate(s); } catch (_) { return s; } };
 const chipFor = st => ({draft:['','Draft'], submitted:['warn','Waiting for approval'], approved:['ok','Approved'], returned:['bad','Returned with a note']}[st] || ['','No plan yet']);
 const roleLabel = r => ({teacher:'Demo Teacher', director:'Demo Director', family:'Demo Family', academy:'Demo Academy staff', staff:'Demo Staff (hours only)'}[r] || 'Demo');
+const SAMPLE = '<span class="ffd-samp">Sample data</span>';
 const BADGE = '<span class="ffd-badge" role="note"><span aria-hidden="true">●</span> Demo · sample data, resets anytime</span>';
 const say = m => { try { toast(m); } catch (_) {} };
 function rerender(focus){ render(); if (focus) { const el = document.querySelector(focus); if (el) try { el.focus({preventScroll:true}); } catch (_) {} } }
@@ -225,9 +226,9 @@ function checkinView(c){
   }).join('');
   const xs = kids.map(([id]) => a.kd(id, date));
   return `${alertsCard()}<div class="grid g4 ffd-tiles">
-    <div class="card ffd-tile"><b>${xs.filter(x => x.present === true && !x.outAt).length}</b><span class="small muted">Here now</span></div>
-    <div class="card ffd-tile"><b>${xs.filter(x => x.present == null).length}</b><span class="small muted">Not here yet</span></div>
-    <div class="card ffd-tile"><b>${xs.filter(x => x.outAt).length}</b><span class="small muted">Picked up</span></div>
+    <div class="card ffd-tile"><b>${xs.filter(x => x.present === true && !x.outAt).length}</b><span class="small muted">Here now ${SAMPLE}</span></div>
+    <div class="card ffd-tile"><b>${xs.filter(x => x.present == null).length}</b><span class="small muted">Not here yet ${SAMPLE}</span></div>
+    <div class="card ffd-tile"><b>${xs.filter(x => x.outAt).length}</b><span class="small muted">Picked up ${SAMPLE}</span></div>
     <div class="card ffd-tile"><b class="${rt.ok ? '' : 'ffd-bad'}">${rt.staff} : ${rt.here}</b><span class="small muted">Staff to children now (${E(r.name || '')} limit 1:${rt.max}) · ${rt.ok ? 'In ratio' : 'Needs another adult'}</span></div></div>
    <div class="card"><div class="ffd-row sp"><h3>Arrivals and pickups · ${E(shortD(date))}</h3>${c.canWrite ? `<button class="btn soft" data-dm="allin">Check in everyone not here yet</button>` : ''}</div>
     <ul class="ffd-kids" aria-live="polite">${rows}</ul>
@@ -362,11 +363,11 @@ function dashView(c){
   const rts = rooms.map(([id, r]) => [id, r, ratioOf(id)]), inRatio = rts.filter(x => x[2].ok).length;
   const dues = Object.entries(DM.all('dues')), open = dues.filter(([, d]) => !d.done).sort((x, y) => x[1].due.localeCompare(y[1].due)), today = DM.todayIso();
   const overdue = open.filter(([, d]) => d.due < today).length, waiting = approvalsWaiting(), apps = Object.values(DM.all('apps')).filter(x => ['inquiry','application'].includes(x.stage)).length;
-  const tile = (n, l, cls, tab) => `<button class="card ffd-tile ffd-tbtn" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l}</span></button>`;
+  const tile = (n, l, cls, tab) => `<button class="card ffd-tile ffd-tbtn" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l} ${SAMPLE}</span></button>`;
   return libTile() + getStarted() + (window.FFStoreTeasers ? window.FFStoreTeasers.classroom() : '') + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
     ${tile(`${inRatio}<span class="ffd-of"> / ${rooms.length}</span>`, 'Rooms in ratio', inRatio < rooms.length ? 'ffd-bad' : '', 'staff')}${tile(waiting, 'Approvals waiting', waiting ? 'ffd-warn' : '', 'approvals')}</div>
   <div class="ffd-cols">
-   <div class="card"><h3>Rooms right now</h3><div class="tw"><table><caption class="sr-only">Attendance and ratio by room</caption><tr><th scope="col">Room</th><th scope="col" class="n">Here</th><th scope="col">Staff on duty</th><th scope="col">Ratio</th><th scope="col"><span class="sr-only">Open</span></th></tr>
+   <div class="card"><h3>Rooms right now ${SAMPLE}</h3><div class="tw"><table><caption class="sr-only">Attendance and ratio by room</caption><tr><th scope="col">Room</th><th scope="col" class="n">Here</th><th scope="col">Staff on duty</th><th scope="col">Ratio</th><th scope="col"><span class="sr-only">Open</span></th></tr>
     ${rts.map(([id, r, rt]) => `<tr><td><b>${E(r.name)}</b><span class="mini"> · ${kidsOf(id).length} enrolled</span></td><td class="n">${rt.here}</td><td class="small">${staffOn(id).map(([, s]) => E(s.name)).join(', ') || '<span class="ffd-bad">Nobody</span>'}</td>
       <td><span class="chip ${rt.ok ? 'ok' : 'bad'}">${rt.staff}:${rt.here} · ${rt.ok ? 'In ratio' : 'Out of ratio'}</span><span class="mini"> limit 1:${rt.max}</span></td><td><button class="rl" data-dm="openroom" data-room="${id}">Open room</button></td></tr>`).join('')}</table></div>
     <p class="note">Ratios update as teachers check children in and out and as staff clock in on the Staff tab. Demo limits: Twos 1:8, Threes and Pre-K 1:10.</p></div>
@@ -376,8 +377,8 @@ function dashView(c){
   </div>
   <div class="grid g3">
    <div class="card"><h3>Today's plans</h3><ul class="ffd-plain">${rooms.map(([id, r]) => { const p = planOf(id, date), [cls, lbl] = chipFor(p && p.status); return `<li class="small"><b>${E(r.name)}:</b> ${p ? E(p.title) : 'No plan'} <span class="chip ${cls}">${lbl}</span></li>`; }).join('')}</ul><button class="btn soft" data-ptab="approvals">Review plans</button></div>
-   <div class="card"><h3>Enrollment</h3><p class="small">${apps} new ${apps === 1 ? 'inquiry or application' : 'inquiries and applications'} to answer.</p><button class="btn soft" data-ptab="enroll">Open the enrollment desk</button></div>
-   <div class="card"><h3>Family messages</h3><p class="small">${Object.values(a.msgs()).filter(m => m.from === 'family' && !(m.read || {}).teacher).length} unread from families.</p><button class="btn soft" data-ptab="messages">Open messages</button></div></div>`;
+   <div class="card"><h3>Enrollment ${SAMPLE}</h3><p class="small">${apps} new ${apps === 1 ? 'inquiry or application' : 'inquiries and applications'} to answer.</p><button class="btn soft" data-ptab="enroll">Open the enrollment desk</button></div>
+   <div class="card"><h3>Family messages ${SAMPLE}</h3><p class="small">${Object.values(a.msgs()).filter(m => m.from === 'family' && !(m.read || {}).teacher).length} unread from families.</p><button class="btn soft" data-ptab="messages">Open messages</button></div></div>`;
 }
 
 // ---------------------------------------------------------------- Director: staff
@@ -464,9 +465,9 @@ function dReportsView(c){
   const meals = kd.reduce((s, x) => s + ['breakfast','lunch','snack'].filter(m => (x.meals || {})[m] && x.meals[m] !== 'Not recorded').length, 0);
   const reps = Object.values(DM.all('reports')).filter(r => days.includes(r.date)).length, obs = Object.values(a.obs()).filter(o => days.includes(o.date)).length;
   const plans = Object.values(DM.all('plans')).filter(p => days.includes(p.date) && p.status === 'approved').length;
-  return `<div class="grid g4 ffd-tiles"><div class="card ffd-tile"><b>${meals}</b><span class="small muted">Meals recorded this week</span></div><div class="card ffd-tile"><b>${reps}</b><span class="small muted">Daily reports sent</span></div>
-    <div class="card ffd-tile"><b>${obs}</b><span class="small muted">Learning notes written</span></div><div class="card ffd-tile"><b>${plans}</b><span class="small muted">Plans approved</span></div></div>
-  <div class="card"><div class="ffd-row sp"><h3>Attendance · week of ${E(shortD(days[0]))}</h3><span class="ffd-row"><button class="btn soft" data-dm="csv">Download attendance (CSV)</button><button class="btn soft" data-dm="print">Print</button></span></div>
+  return `<div class="grid g4 ffd-tiles"><div class="card ffd-tile"><b>${meals}</b><span class="small muted">Meals recorded this week ${SAMPLE}</span></div><div class="card ffd-tile"><b>${reps}</b><span class="small muted">Daily reports sent ${SAMPLE}</span></div>
+    <div class="card ffd-tile"><b>${obs}</b><span class="small muted">Learning notes written ${SAMPLE}</span></div><div class="card ffd-tile"><b>${plans}</b><span class="small muted">Plans approved ${SAMPLE}</span></div></div>
+  <div class="card"><div class="ffd-row sp"><h3>Attendance · week of ${E(shortD(days[0]))} ${SAMPLE}</h3><span class="ffd-row"><button class="btn soft" data-dm="csv">Download attendance (CSV)</button><button class="btn soft" data-dm="print">Print</button></span></div>
    <div class="tw"><table><caption class="sr-only">Children present by room and day</caption><tr><th scope="col">Room</th>${days.map(d => `<th scope="col" class="n">${E(shortD(d))}</th>`).join('')}</tr>
    ${rooms.map(([id, r]) => `<tr><th scope="row">${E(r.name)}</th>${days.map(d => { const x = cell(id, d); return `<td class="n">${d > DM.todayIso() ? '—' : `${x.here} of ${x.n}`}</td>`; }).join('')}</tr>`).join('')}</table></div>
    <p class="note">Counts children checked in each day. The live Hub also exports CACFP meal counts and licensing attendance in the formats the state asks for.</p></div>`;
@@ -559,7 +560,7 @@ V.learn = () => {
   const others = mine.filter(code => code !== COURSE);
   const team = s.role === 'director' ? `<section class="lms-sec"><header><h2>My team (${COURSE})</h2></header><div class="tw"><table><caption class="sr-only">Team training</caption><tr><th scope="col">Staff</th><th scope="col">${COURSE}</th></tr>${Object.entries(DM.all('staff')).map(([id, st]) => { const x = trainingOf(id); return `<tr><td>${E(st.name)}</td><td><span class="chip ${x.done ? 'ok' : x.n ? 'warn' : ''}">${x.done ? 'Complete' : x.n ? `${x.n} of 3 lessons` : 'Not started'}</span></td></tr>`; }).join('')}</table></div></section>` : '';
   return lmsShell('My training', 'Your courses, clock hours and completion records.', `
-   <div class="grid g3 ffd-tiles"><div class="card ffd-tile"><b>${hours}</b><span class="small muted">Clock hours completed (demo)</span></div><div class="card ffd-tile"><b>${mine.length || 1}</b><span class="small muted">Courses in my list</span></div><div class="card ffd-tile"><b>${p.done ? 1 : 0}</b><span class="small muted">Completion records</span></div></div>
+   <div class="grid g3 ffd-tiles"><div class="card ffd-tile"><b>${hours}</b><span class="small muted">Clock hours completed (demo) ${SAMPLE}</span></div><div class="card ffd-tile"><b>${mine.length || 1}</b><span class="small muted">Courses in my list ${SAMPLE}</span></div><div class="card ffd-tile"><b>${p.done ? 1 : 0}</b><span class="small muted">Completion records ${SAMPLE}</span></div></div>
    <section class="lms-sec"><header><h2>My courses</h2></header><div class="lms-grid">
     <div class="lms-card ffd-course" style="--c:var(--booker)"><span class="lms-note">${COURSE} · ${E(String(f101.hours))} clock hours · ${E(f101.format || '')}</span><h3>${E(f101.title)}</h3>
      <div class="meter" role="progressbar" aria-label="${COURSE} progress" aria-valuemin="0" aria-valuemax="${p.total}" aria-valuenow="${p.n}"><i style="width:${Math.round(p.n / p.total * 100)}%"></i></div>
@@ -782,8 +783,8 @@ function billingView(){
     return `<tr><td><b>${E(k.first)} ${E(k.last || '')}.</b><span class="mini"> · ${E(roomName(a.plan || k.room))}</span></td><td class="n">${money(rate)}</td><td class="n">${sub ? money(sub) : '—'}</td><td class="n">${money(rate - sub)}</td>
      <td><button class="ffd-toggle" type="button" data-pg="autopay" data-id="${id}" aria-pressed="${!!a.autopay}" aria-label="Autopay for ${E(k.first)}">${a.autopay ? 'Autopay on' : 'Autopay off'}</button></td>
      <td class="n${bal ? ' ffd-bad' : ''}">${money(bal)}</td><td>${bal ? `<button class="rl" type="button" data-pg="payrec" data-id="${id}">Record payment</button>` : '<span class="mini">Paid up</span>'}</td></tr>`; }).join('');
-  return `${DEMO_PAY}<div class="grid g4 ffd-tiles"><div class="card ffd-tile"><b>${money(billed)}</b><span class="small muted">Billed this month</span></div><div class="card ffd-tile"><b>${money(got)}</b><span class="small muted">Collected this month</span></div>
-    <div class="card ffd-tile"><b>${money(open.reduce((s, [, x]) => s + x.family, 0))}</b><span class="small muted">Families owe now</span></div><div class="card ffd-tile"><b class="${late ? 'ffd-bad' : ''}">${late}</b><span class="small muted">Past-due invoices</span></div></div>
+  return `${DEMO_PAY}<div class="grid g4 ffd-tiles"><div class="card ffd-tile"><b>${money(billed)}</b><span class="small muted">Billed this month ${SAMPLE}</span></div><div class="card ffd-tile"><b>${money(got)}</b><span class="small muted">Collected this month ${SAMPLE}</span></div>
+    <div class="card ffd-tile"><b>${money(open.reduce((s, [, x]) => s + x.family, 0))}</b><span class="small muted">Families owe now ${SAMPLE}</span></div><div class="card ffd-tile"><b class="${late ? 'ffd-bad' : ''}">${late}</b><span class="small muted">Past-due invoices ${SAMPLE}</span></div></div>
    ${PG.receipt ? receiptHtml(PG.receipt) : ''}
    <div class="card"><div class="ffd-row sp"><h3>Families and tuition</h3><span class="ffd-row"><button class="btn navy" type="button" data-pg="invweek">Create next week's invoices</button><button class="btn gold" type="button" data-pg="autorun">Run autopay now (demo)</button></span></div>
     <div class="tw"><table class="ffd-bill"><caption class="sr-only">Tuition by family</caption><tr><th scope="col">Child</th><th scope="col" class="n">Weekly</th><th scope="col" class="n">Subsidy pays</th><th scope="col" class="n">Family pays</th><th scope="col">Autopay</th><th scope="col" class="n">Owes</th><th scope="col"><span class="sr-only">Payment</span></th></tr>${rows}</table></div>
@@ -951,7 +952,7 @@ function hoursPanel(sid, name){
   const perms = DM.permsOf(sid), preset = DM.presetOf(perms);
   return `<div class="card ffd-clock" id="pgClock"><div class="ffd-row sp"><h3>${E(name)}</h3><span class="chip ${op ? 'ok' : ''}">${op ? `Clocked in since ${fmtTime(op.in)}` : 'Clocked out'}</span></div>
     <button class="btn ${op ? 'navy' : 'gold'} ffd-big" type="button" data-pg="punch" data-id="${E(sid)}">${op ? 'Clock out' : 'Clock in'}</button>
-    <div class="grid g2 ffd-tiles"><div class="card ffd-tile"><b>${sum(wk).toFixed(2)}</b><span class="small muted">Hours this week</span></div><div class="card ffd-tile"><b>${sum(last).toFixed(2)}</b><span class="small muted">Hours this pay period (2 weeks)</span></div></div>
+    <div class="grid g2 ffd-tiles"><div class="card ffd-tile"><b>${sum(wk).toFixed(2)}</b><span class="small muted">Hours this week ${SAMPLE}</span></div><div class="card ffd-tile"><b>${sum(last).toFixed(2)}</b><span class="small muted">Hours this pay period (2 weeks) ${SAMPLE}</span></div></div>
     <div class="tw"><table><caption class="sr-only">My punches</caption><tr><th scope="col">Day</th><th scope="col">In</th><th scope="col">Out</th><th scope="col" class="n">Hours</th></tr>
      ${ps.filter(p => p.date >= last).map(p => `<tr><th scope="row">${E(shortD(p.date))}</th><td>${fmtTime(p.in)}</td><td>${p.out ? fmtTime(p.out) : 'On the clock'}</td><td class="n">${hoursOf(p).toFixed(2)}</td></tr>`).join('')}</table></div>
     <p class="mini">Your access: <b>${E(DM.PRESET_LABEL[preset])}</b>. The director decides what each employee can see. A wrong punch? Ask the director to fix it; every change is logged.</p></div>`;
