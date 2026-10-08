@@ -842,7 +842,8 @@ def songs_for(man, recs):
     text = json.dumps(recs)
     keys = [('Come-to-the-Carpet', 'Bop Come-to-the-Carpet Song'), ('reeting song', 'Greeting song'), ('leanup Song', 'Bop Cleanup Song'), ('leanup song', 'Bop Cleanup Song'),
             ('Pick it up, put it back', 'Clean Up, Team! chant (original, no tune)'), ('Brave Learner chant', 'Brave Learner chant'), ('Ma-ya', 'Name chant'),
-            ('turn the page, turn the page', 'Turn the page'), ('reading place', 'Friend Match'), ('how are you', 'Hello ball song'), ('My turn, your turn, now', 'My turn, your turn'),
+            ('turn the page, turn the page', 'Turn the page'), ('reading place', 'Friend Match'), ('how are you', 'Hello ball song'), ('My turn, your turn, now', 'My turn, your turn'), ('My turn, (pat pat)', 'My turn, your turn'),
+            ("Lumi's Feelings Song", "Lumi's Feelings Song"),
             ('reach up high', 'Bop cheer'), ('One arm in', 'Coat song'), ('Learn! Belong! Explore! Move!', 'Pillar chant')]
     names = ['Bop Come-to-the-Carpet Song', 'Greeting song', 'Bop Cleanup Song', 'Bop Handwashing Song']
     for k, n in keys:
