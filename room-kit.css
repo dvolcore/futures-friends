@@ -97,8 +97,10 @@
 /* real room / concept toggle */
 .rk-rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
 .rk-roomfig{margin:0;display:grid;gap:8px}
-.rk-roomframe{position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:var(--paper2)}
+.rk-roomframe{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:var(--paper2)}
 .rk-roomframe img{width:100%;height:100%;object-fit:cover}
+.rk-roomframe img[hidden]{display:none}
+.rk-roomfig[data-room="blue-table-room"] .rk-roomframe{aspect-ratio:4/5}
 .rk-roomlabel{position:absolute;left:10px;top:10px;font-size:12px;font-weight:700;color:#0A2B38;background:rgba(255,255,255,.92);padding:4px 10px;border-radius:999px}
 .rk-roomlabel.is-concept{background:#6B2A8E;color:#fff}
 .rk-roomfig figcaption{font-size:12.5px;color:var(--muted)}
