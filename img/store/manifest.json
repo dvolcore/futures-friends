@@ -2,17 +2,105 @@
  "about": "Written by tools/import-store-images.mjs. Do not edit by hand. Product ids match store-catalog.js; collection hero pictures use collection-<id>.",
  "generated": "2026-10-08",
  "products": {
+  "all-friends-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "d5b0a2a7304842a5",
+     "w": 1781,
+     "h": 1188,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1781
+     ],
+     "files": [
+      [
+       "img/store/all-friends-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/all-friends-hoodie-1-800.webp",
+       800
+      ],
+      [
+       "img/store/all-friends-hoodie-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/all-friends-hoodie-1-1781.webp",
+       1781
+      ]
+     ],
+     "w400": "img/store/all-friends-hoodie-1-400.webp",
+     "w800": "img/store/all-friends-hoodie-1-800.webp",
+     "w1200": "img/store/all-friends-hoodie-1-1781.webp",
+     "jpg": "img/store/all-friends-hoodie-1-800.jpg",
+     "ratio": 1.4992,
+     "bg": "#f6f1ea",
+     "bgt": "#f7f1ea",
+     "bgb": "#f7f1ea",
+     "bgl": "#f7f1ea",
+     "bgr": "#f7f1ea"
+    }
+   ]
+  },
+  "booker-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "6fc93f2860760a39",
+     "w": 1778,
+     "h": 1185,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1778
+     ],
+     "files": [
+      [
+       "img/store/booker-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/booker-hoodie-1-800.webp",
+       800
+      ],
+      [
+       "img/store/booker-hoodie-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/booker-hoodie-1-1778.webp",
+       1778
+      ]
+     ],
+     "w400": "img/store/booker-hoodie-1-400.webp",
+     "w800": "img/store/booker-hoodie-1-800.webp",
+     "w1200": "img/store/booker-hoodie-1-1778.webp",
+     "jpg": "img/store/booker-hoodie-1-800.jpg",
+     "ratio": 1.5004,
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
+    }
+   ]
+  },
   "booker-replica-backpack": {
    "images": [
     {
      "n": 1,
-     "src": "f4b8df62d79fc0c6",
-     "w": 1024,
-     "h": 1536,
+     "src": "4ee8812b2bd44a1e",
+     "w": 1141,
+     "h": 1711,
      "sizes": [
       400,
       800,
-      1024
+      1141
      ],
      "files": [
       [
@@ -24,20 +112,64 @@
        800
       ],
       [
-       "img/store/booker-replica-backpack-1-1024.webp",
-       1024
+       "img/store/booker-replica-backpack-1-1141.webp",
+       1141
       ]
      ],
      "w400": "img/store/booker-replica-backpack-1-400.webp",
      "w800": "img/store/booker-replica-backpack-1-800.webp",
-     "w1200": "img/store/booker-replica-backpack-1-1024.webp",
+     "w1200": "img/store/booker-replica-backpack-1-1141.webp",
      "jpg": "img/store/booker-replica-backpack-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fdf5e7",
-     "bgt": "#fcf2e6",
-     "bgb": "#fef5e9",
-     "bgl": "#faf0e1",
-     "bgr": "#fdf4e6"
+     "ratio": 0.6669,
+     "bg": "#fcf6eb",
+     "bgt": "#fdf6eb",
+     "bgb": "#fdf6eb",
+     "bgl": "#fdf6eb",
+     "bgr": "#fdf6ea"
+    }
+   ]
+  },
+  "bop-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "9a97b022fa31cc1c",
+     "w": 1780,
+     "h": 1187,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1780
+     ],
+     "files": [
+      [
+       "img/store/bop-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bop-hoodie-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bop-hoodie-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bop-hoodie-1-1780.webp",
+       1780
+      ]
+     ],
+     "w400": "img/store/bop-hoodie-1-400.webp",
+     "w800": "img/store/bop-hoodie-1-800.webp",
+     "w1200": "img/store/bop-hoodie-1-1780.webp",
+     "jpg": "img/store/bop-hoodie-1-800.jpg",
+     "ratio": 1.4996,
+     "bg": "#f8f4ec",
+     "bgt": "#f9f4ec",
+     "bgb": "#f9f4ec",
+     "bgl": "#f9f4ec",
+     "bgr": "#f8f4ec"
     }
    ]
   },
@@ -45,13 +177,13 @@
    "images": [
     {
      "n": 1,
-     "src": "7c779a8d7797ed5d",
-     "w": 1024,
-     "h": 1536,
+     "src": "5da581f848228916",
+     "w": 1137,
+     "h": 1706,
      "sizes": [
       400,
       800,
-      1024
+      1137
      ],
      "files": [
       [
@@ -63,20 +195,20 @@
        800
       ],
       [
-       "img/store/bop-replica-backpack-1-1024.webp",
-       1024
+       "img/store/bop-replica-backpack-1-1137.webp",
+       1137
       ]
      ],
      "w400": "img/store/bop-replica-backpack-1-400.webp",
      "w800": "img/store/bop-replica-backpack-1-800.webp",
-     "w1200": "img/store/bop-replica-backpack-1-1024.webp",
+     "w1200": "img/store/bop-replica-backpack-1-1137.webp",
      "jpg": "img/store/bop-replica-backpack-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#faf1e6",
-     "bgt": "#fbf4e8",
-     "bgb": "#fbf3e8",
-     "bgl": "#faf2e8",
-     "bgr": "#f9f3e8"
+     "ratio": 0.6665,
+     "bg": "#faf0e6",
+     "bgt": "#faf0e6",
+     "bgb": "#faf0e6",
+     "bgl": "#faf0e6",
+     "bgr": "#faf0e6"
     }
    ]
   },
@@ -84,13 +216,13 @@
    "images": [
     {
      "n": 1,
-     "src": "38a98f77e2d6bbe8",
-     "w": 1024,
-     "h": 1536,
+     "src": "c83892c4e10f0602",
+     "w": 1138,
+     "h": 1707,
      "sizes": [
       400,
       800,
-      1024
+      1138
      ],
      "files": [
       [
@@ -102,20 +234,20 @@
        800
       ],
       [
-       "img/store/bottle-booker-1-1024.webp",
-       1024
+       "img/store/bottle-booker-1-1138.webp",
+       1138
       ]
      ],
      "w400": "img/store/bottle-booker-1-400.webp",
      "w800": "img/store/bottle-booker-1-800.webp",
-     "w1200": "img/store/bottle-booker-1-1024.webp",
+     "w1200": "img/store/bottle-booker-1-1138.webp",
      "jpg": "img/store/bottle-booker-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdfdf9",
-     "bgt": "#e4e6e9",
-     "bgb": "#faf8f4",
+     "bg": "#fefcf9",
+     "bgt": "#fefdf9",
+     "bgb": "#fefdf9",
      "bgl": "#fefdf9",
-     "bgr": "#fdfdf9"
+     "bgr": "#fefdf9"
     }
    ]
   },
@@ -123,13 +255,13 @@
    "images": [
     {
      "n": 1,
-     "src": "5134be442da1329a",
-     "w": 1024,
-     "h": 1536,
+     "src": "8ee67d1d04dd9523",
+     "w": 1156,
+     "h": 1734,
      "sizes": [
       400,
       800,
-      1024
+      1156
      ],
      "files": [
       [
@@ -141,20 +273,20 @@
        800
       ],
       [
-       "img/store/bottle-bop-1-1024.webp",
-       1024
+       "img/store/bottle-bop-1-1156.webp",
+       1156
       ]
      ],
      "w400": "img/store/bottle-bop-1-400.webp",
      "w800": "img/store/bottle-bop-1-800.webp",
-     "w1200": "img/store/bottle-bop-1-1024.webp",
+     "w1200": "img/store/bottle-bop-1-1156.webp",
      "jpg": "img/store/bottle-bop-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdfaf5",
-     "bgt": "#e7e1e5",
-     "bgb": "#e6e1dd",
-     "bgl": "#fcf9f3",
-     "bgr": "#fdfaf3"
+     "bg": "#fdfcf4",
+     "bgt": "#fdfcf5",
+     "bgb": "#fdfcf5",
+     "bgl": "#fdfcf5",
+     "bgr": "#fdfcf5"
     }
    ]
   },
@@ -162,13 +294,13 @@
    "images": [
     {
      "n": 1,
-     "src": "37e3298a3f0b9bf6",
-     "w": 1024,
-     "h": 1536,
+     "src": "7d645562c87613e0",
+     "w": 1156,
+     "h": 1734,
      "sizes": [
       400,
       800,
-      1024
+      1156
      ],
      "files": [
       [
@@ -180,19 +312,19 @@
        800
       ],
       [
-       "img/store/bottle-lumi-1-1024.webp",
-       1024
+       "img/store/bottle-lumi-1-1156.webp",
+       1156
       ]
      ],
      "w400": "img/store/bottle-lumi-1-400.webp",
      "w800": "img/store/bottle-lumi-1-800.webp",
-     "w1200": "img/store/bottle-lumi-1-1024.webp",
+     "w1200": "img/store/bottle-lumi-1-1156.webp",
      "jpg": "img/store/bottle-lumi-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fcf7ef",
-     "bgt": "#f4d3d4",
-     "bgb": "#f4eae3",
-     "bgl": "#fbf5ec",
+     "bg": "#fdf8ee",
+     "bgt": "#fdf8ee",
+     "bgb": "#fdf8ee",
+     "bgl": "#fdf8ee",
      "bgr": "#fdf8ee"
     }
    ]
@@ -201,13 +333,13 @@
    "images": [
     {
      "n": 1,
-     "src": "766f3e00b36c29ff",
-     "w": 1024,
-     "h": 1536,
+     "src": "88b94c92d8719a2a",
+     "w": 1139,
+     "h": 1708,
      "sizes": [
       400,
       800,
-      1024
+      1139
      ],
      "files": [
       [
@@ -219,18 +351,18 @@
        800
       ],
       [
-       "img/store/bottle-zuri-1-1024.webp",
-       1024
+       "img/store/bottle-zuri-1-1139.webp",
+       1139
       ]
      ],
      "w400": "img/store/bottle-zuri-1-400.webp",
      "w800": "img/store/bottle-zuri-1-800.webp",
-     "w1200": "img/store/bottle-zuri-1-1024.webp",
+     "w1200": "img/store/bottle-zuri-1-1139.webp",
      "jpg": "img/store/bottle-zuri-1-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6669,
      "bg": "#fbf6ee",
-     "bgt": "#f0ece4",
-     "bgb": "#f6f1e9",
+     "bgt": "#fcf6ef",
+     "bgb": "#fcf6ef",
      "bgl": "#fcf6ef",
      "bgr": "#fcf6ef"
     }
@@ -240,14 +372,14 @@
    "images": [
     {
      "n": 1,
-     "src": "f692269e67606ce4",
-     "w": 1672,
-     "h": 941,
+     "src": "2553c6144516f638",
+     "w": 1791,
+     "h": 1008,
      "sizes": [
       400,
       800,
       1200,
-      1672
+      1791
      ],
      "files": [
       [
@@ -263,20 +395,20 @@
        1200
       ],
       [
-       "img/store/bundle-character-merchandising-kit-1-1672.webp",
-       1672
+       "img/store/bundle-character-merchandising-kit-1-1791.webp",
+       1791
       ]
      ],
      "w400": "img/store/bundle-character-merchandising-kit-1-400.webp",
      "w800": "img/store/bundle-character-merchandising-kit-1-800.webp",
-     "w1200": "img/store/bundle-character-merchandising-kit-1-1672.webp",
+     "w1200": "img/store/bundle-character-merchandising-kit-1-1791.webp",
      "jpg": "img/store/bundle-character-merchandising-kit-1-800.jpg",
      "ratio": 1.7768,
-     "bg": "#f6e9db",
-     "bgt": "#f4e7d9",
-     "bgb": "#f6e9dd",
-     "bgl": "#f4e5d6",
-     "bgr": "#efe2d6"
+     "bg": "#f8e8d9",
+     "bgt": "#f8e8d9",
+     "bgb": "#f8e8d9",
+     "bgl": "#f8e8d9",
+     "bgr": "#f7e8d9"
     }
    ]
   },
@@ -284,7 +416,7 @@
    "images": [
     {
      "n": 1,
-     "src": "30bf5cccfd701214",
+     "src": "d8a0f2c644073359",
      "w": 1774,
      "h": 887,
      "sizes": [
@@ -316,7 +448,7 @@
      "w1200": "img/store/bundle-complete-learning-zones-1-1774.webp",
      "jpg": "img/store/bundle-complete-learning-zones-1-800.jpg",
      "ratio": 2,
-     "bg": "#cca57e",
+     "bg": "#cba47d",
      "bgt": "#dbb895",
      "bgb": "#d4ac84",
      "bgl": "#8d888d",
@@ -328,14 +460,14 @@
    "images": [
     {
      "n": 1,
-     "src": "b6ce1d1c1eca0a31",
-     "w": 1384,
+     "src": "14c441bc3d9b710b",
+     "w": 1430,
      "h": 887,
      "sizes": [
       400,
       800,
       1200,
-      1384
+      1430
      ],
      "files": [
       [
@@ -351,20 +483,20 @@
        1200
       ],
       [
-       "img/store/bundle-four-zone-starter-1-1384.webp",
-       1384
+       "img/store/bundle-four-zone-starter-1-1430.webp",
+       1430
       ]
      ],
      "w400": "img/store/bundle-four-zone-starter-1-400.webp",
      "w800": "img/store/bundle-four-zone-starter-1-800.webp",
-     "w1200": "img/store/bundle-four-zone-starter-1-1384.webp",
+     "w1200": "img/store/bundle-four-zone-starter-1-1430.webp",
      "jpg": "img/store/bundle-four-zone-starter-1-800.jpg",
-     "ratio": 1.5603,
-     "bg": "#d0aa83",
-     "bgt": "#dfbe9e",
-     "bgb": "#d4ad85",
-     "bgl": "#a89688",
-     "bgr": "#874f87"
+     "ratio": 1.6122,
+     "bg": "#d1aa83",
+     "bgt": "#dfbe9d",
+     "bgb": "#d5ad85",
+     "bgl": "#a39389",
+     "bgr": "#cfab8c"
     }
    ]
   },
@@ -372,7 +504,7 @@
    "images": [
     {
      "n": 1,
-     "src": "ecd3827e678edc47",
+     "src": "672525cd87f30ae9",
      "w": 2000,
      "h": 1000,
      "sizes": [
@@ -404,11 +536,11 @@
      "w1200": "img/store/collection-apparel-1-2000.webp",
      "jpg": "img/store/collection-apparel-1-800.jpg",
      "ratio": 2,
-     "bg": "#fbf6ef",
+     "bg": "#fcf6ee",
      "bgt": "#fcf6ef",
      "bgb": "#fcf6ef",
-     "bgl": "#f6f5f0",
-     "bgr": "#f6f1ee"
+     "bgl": "#fcf6ef",
+     "bgr": "#fcf6ef"
     }
    ]
   },
@@ -416,7 +548,7 @@
    "images": [
     {
      "n": 1,
-     "src": "30bf5cccfd701214",
+     "src": "d8a0f2c644073359",
      "w": 1774,
      "h": 887,
      "sizes": [
@@ -448,7 +580,7 @@
      "w1200": "img/store/collection-carpets-1-1774.webp",
      "jpg": "img/store/collection-carpets-1-800.jpg",
      "ratio": 2,
-     "bg": "#cca57e",
+     "bg": "#cba47d",
      "bgt": "#dbb895",
      "bgb": "#d4ac84",
      "bgl": "#8d888d",
@@ -456,7 +588,7 @@
     },
     {
      "n": 2,
-     "src": "772ac361383daa22",
+     "src": "5b4212a7677903ff",
      "w": 1536,
      "h": 1024,
      "sizes": [
@@ -488,7 +620,7 @@
      "w1200": "img/store/collection-carpets-2-1536.webp",
      "jpg": "img/store/collection-carpets-2-800.jpg",
      "ratio": 1.5,
-     "bg": "#cba376",
+     "bg": "#cba377",
      "bgt": "#d2aa7e",
      "bgb": "#d1a87b",
      "bgl": "#d4ad82",
@@ -500,7 +632,7 @@
    "images": [
     {
      "n": 1,
-     "src": "9c9e1d52b03689b5",
+     "src": "7dcba51cfd1f3c21",
      "w": 2000,
      "h": 1000,
      "sizes": [
@@ -535,8 +667,8 @@
      "bg": "#f7f3e9",
      "bgt": "#f8f3e9",
      "bgb": "#f8f3e9",
-     "bgl": "#fcfaf6",
-     "bgr": "#eee5d8"
+     "bgl": "#f8f3e9",
+     "bgr": "#f8f3e9"
     }
    ]
   },
@@ -544,14 +676,14 @@
    "images": [
     {
      "n": 1,
-     "src": "f692269e67606ce4",
-     "w": 1672,
-     "h": 941,
+     "src": "2553c6144516f638",
+     "w": 1791,
+     "h": 1008,
      "sizes": [
       400,
       800,
       1200,
-      1672
+      1791
      ],
      "files": [
       [
@@ -567,20 +699,20 @@
        1200
       ],
       [
-       "img/store/collection-plush-1-1672.webp",
-       1672
+       "img/store/collection-plush-1-1791.webp",
+       1791
       ]
      ],
      "w400": "img/store/collection-plush-1-400.webp",
      "w800": "img/store/collection-plush-1-800.webp",
-     "w1200": "img/store/collection-plush-1-1672.webp",
+     "w1200": "img/store/collection-plush-1-1791.webp",
      "jpg": "img/store/collection-plush-1-800.jpg",
      "ratio": 1.7768,
-     "bg": "#f6e9db",
-     "bgt": "#f4e7d9",
-     "bgb": "#f6e9dd",
-     "bgl": "#f4e5d6",
-     "bgr": "#efe2d6"
+     "bg": "#f8e8d9",
+     "bgt": "#f8e8d9",
+     "bgb": "#f8e8d9",
+     "bgl": "#f8e8d9",
+     "bgr": "#f7e8d9"
     }
    ]
   },
@@ -588,7 +720,7 @@
    "images": [
     {
      "n": 1,
-     "src": "6db43a81917c597b",
+     "src": "63f991825729a97f",
      "w": 2000,
      "h": 1000,
      "sizes": [
@@ -620,11 +752,11 @@
      "w1200": "img/store/collection-posters-1-2000.webp",
      "jpg": "img/store/collection-posters-1-800.jpg",
      "ratio": 2,
-     "bg": "#f8f3e9",
-     "bgt": "#f8f3e9",
-     "bgb": "#f8f3e9",
-     "bgl": "#acc8e0",
-     "bgr": "#ddcad5"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -632,7 +764,7 @@
    "images": [
     {
      "n": 1,
-     "src": "cad43569915a0251",
+     "src": "be22704cecfd39ce",
      "w": 2000,
      "h": 1000,
      "sizes": [
@@ -664,11 +796,11 @@
      "w1200": "img/store/collection-stickers-1-2000.webp",
      "jpg": "img/store/collection-stickers-1-800.jpg",
      "ratio": 2,
-     "bg": "#f8f3e9",
+     "bg": "#f7f3e9",
      "bgt": "#f8f3e9",
      "bgb": "#f8f3e9",
-     "bgl": "#cdcad1",
-     "bgr": "#efe8ee"
+     "bgl": "#f8f3e9",
+     "bgr": "#f8f3e9"
     }
    ]
   },
@@ -676,14 +808,14 @@
    "images": [
     {
      "n": 1,
-     "src": "6417fc85d6a69a62",
-     "w": 1536,
-     "h": 1024,
+     "src": "6eb6a07260c7c41f",
+     "w": 1666,
+     "h": 1111,
      "sizes": [
       400,
       800,
       1200,
-      1536
+      1666
      ],
      "files": [
       [
@@ -699,20 +831,20 @@
        1200
       ],
       [
-       "img/store/coloring-book-booker-1-1536.webp",
-       1536
+       "img/store/coloring-book-booker-1-1666.webp",
+       1666
       ]
      ],
      "w400": "img/store/coloring-book-booker-1-400.webp",
      "w800": "img/store/coloring-book-booker-1-800.webp",
-     "w1200": "img/store/coloring-book-booker-1-1536.webp",
+     "w1200": "img/store/coloring-book-booker-1-1666.webp",
      "jpg": "img/store/coloring-book-booker-1-800.jpg",
-     "ratio": 1.5,
-     "bg": "#fbf0e1",
-     "bgt": "#fbf2e5",
-     "bgb": "#f7eade",
-     "bgl": "#f7e9d8",
-     "bgr": "#fbeedf"
+     "ratio": 1.4995,
+     "bg": "#f9eede",
+     "bgt": "#f9efde",
+     "bgb": "#f9efde",
+     "bgl": "#f9efde",
+     "bgr": "#f9efde"
     }
    ]
   },
@@ -720,14 +852,14 @@
    "images": [
     {
      "n": 1,
-     "src": "57ac0669f278c34c",
-     "w": 1536,
-     "h": 1024,
+     "src": "77399599f884dc9c",
+     "w": 1786,
+     "h": 1191,
      "sizes": [
       400,
       800,
       1200,
-      1536
+      1786
      ],
      "files": [
       [
@@ -743,20 +875,20 @@
        1200
       ],
       [
-       "img/store/coloring-book-bop-1-1536.webp",
-       1536
+       "img/store/coloring-book-bop-1-1786.webp",
+       1786
       ]
      ],
      "w400": "img/store/coloring-book-bop-1-400.webp",
      "w800": "img/store/coloring-book-bop-1-800.webp",
-     "w1200": "img/store/coloring-book-bop-1-1536.webp",
+     "w1200": "img/store/coloring-book-bop-1-1786.webp",
      "jpg": "img/store/coloring-book-bop-1-800.jpg",
-     "ratio": 1.5,
-     "bg": "#f8eddf",
-     "bgt": "#f7ece0",
-     "bgb": "#f6ebde",
-     "bgl": "#f1e5d7",
-     "bgr": "#eadfce"
+     "ratio": 1.4996,
+     "bg": "#f9ede2",
+     "bgt": "#f9eee2",
+     "bgb": "#f9eee2",
+     "bgl": "#f9eee2",
+     "bgr": "#f9eee2"
     }
    ]
   },
@@ -764,14 +896,14 @@
    "images": [
     {
      "n": 1,
-     "src": "c6df12583770c5b8",
-     "w": 1536,
-     "h": 1024,
+     "src": "76bd433a42c36dc9",
+     "w": 1681,
+     "h": 1121,
      "sizes": [
       400,
       800,
       1200,
-      1536
+      1681
      ],
      "files": [
       [
@@ -787,20 +919,20 @@
        1200
       ],
       [
-       "img/store/coloring-book-lumi-1-1536.webp",
-       1536
+       "img/store/coloring-book-lumi-1-1681.webp",
+       1681
       ]
      ],
      "w400": "img/store/coloring-book-lumi-1-400.webp",
      "w800": "img/store/coloring-book-lumi-1-800.webp",
-     "w1200": "img/store/coloring-book-lumi-1-1536.webp",
+     "w1200": "img/store/coloring-book-lumi-1-1681.webp",
      "jpg": "img/store/coloring-book-lumi-1-800.jpg",
-     "ratio": 1.5,
-     "bg": "#f2e6d9",
-     "bgt": "#f4e7db",
-     "bgb": "#f4e3d7",
-     "bgl": "#eadccc",
-     "bgr": "#f0e4d5"
+     "ratio": 1.4996,
+     "bg": "#f2e6d6",
+     "bgt": "#f3e6d6",
+     "bgb": "#f3e6d6",
+     "bgl": "#f3e6d6",
+     "bgr": "#f3e6d6"
     }
    ]
   },
@@ -808,13 +940,13 @@
    "images": [
     {
      "n": 1,
-     "src": "2625da9e667ec811",
-     "w": 1024,
-     "h": 1536,
+     "src": "b520bc7c715c17e8",
+     "w": 1144,
+     "h": 1716,
      "sizes": [
       400,
       800,
-      1024
+      1144
      ],
      "files": [
       [
@@ -826,30 +958,30 @@
        800
       ],
       [
-       "img/store/coloring-book-universe-1-1024.webp",
-       1024
+       "img/store/coloring-book-universe-1-1144.webp",
+       1144
       ]
      ],
      "w400": "img/store/coloring-book-universe-1-400.webp",
      "w800": "img/store/coloring-book-universe-1-800.webp",
-     "w1200": "img/store/coloring-book-universe-1-1024.webp",
+     "w1200": "img/store/coloring-book-universe-1-1144.webp",
      "jpg": "img/store/coloring-book-universe-1-800.jpg",
      "ratio": 0.6667,
      "bg": "#fefefe",
-     "bgt": "#c6c6c6",
-     "bgb": "#d2d2d2",
-     "bgl": "#fdfdfd",
-     "bgr": "#fdfdfd"
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     },
     {
      "n": 2,
-     "src": "8d73e09de74a7e06",
-     "w": 1024,
-     "h": 1536,
+     "src": "e009fbcefb25d11e",
+     "w": 1139,
+     "h": 1709,
      "sizes": [
       400,
       800,
-      1024
+      1139
      ],
      "files": [
       [
@@ -861,30 +993,30 @@
        800
       ],
       [
-       "img/store/coloring-book-universe-2-1024.webp",
-       1024
+       "img/store/coloring-book-universe-2-1139.webp",
+       1139
       ]
      ],
      "w400": "img/store/coloring-book-universe-2-400.webp",
      "w800": "img/store/coloring-book-universe-2-800.webp",
-     "w1200": "img/store/coloring-book-universe-2-1024.webp",
+     "w1200": "img/store/coloring-book-universe-2-1139.webp",
      "jpg": "img/store/coloring-book-universe-2-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6665,
      "bg": "#fefefe",
-     "bgt": "#dcdcdc",
-     "bgb": "#d6d6d6",
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
      "bgl": "#fefefe",
-     "bgr": "#fdfdfd"
+     "bgr": "#fefefe"
     },
     {
      "n": 3,
-     "src": "a87626b60fe3deea",
-     "w": 1024,
-     "h": 1536,
+     "src": "1b05001bc0af8311",
+     "w": 1135,
+     "h": 1702,
      "sizes": [
       400,
       800,
-      1024
+      1135
      ],
      "files": [
       [
@@ -896,30 +1028,30 @@
        800
       ],
       [
-       "img/store/coloring-book-universe-3-1024.webp",
-       1024
+       "img/store/coloring-book-universe-3-1135.webp",
+       1135
       ]
      ],
      "w400": "img/store/coloring-book-universe-3-400.webp",
      "w800": "img/store/coloring-book-universe-3-800.webp",
-     "w1200": "img/store/coloring-book-universe-3-1024.webp",
+     "w1200": "img/store/coloring-book-universe-3-1135.webp",
      "jpg": "img/store/coloring-book-universe-3-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6669,
      "bg": "#fefefe",
-     "bgt": "#c8c7c8",
-     "bgb": "#d8d8d8",
-     "bgl": "#fdfdfd",
-     "bgr": "#fbfbfb"
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     },
     {
      "n": 4,
-     "src": "c9673e49bb2bceef",
-     "w": 1024,
-     "h": 1536,
+     "src": "180602d0d9ac1822",
+     "w": 1151,
+     "h": 1726,
      "sizes": [
       400,
       800,
-      1024
+      1151
      ],
      "files": [
       [
@@ -931,20 +1063,20 @@
        800
       ],
       [
-       "img/store/coloring-book-universe-4-1024.webp",
-       1024
+       "img/store/coloring-book-universe-4-1151.webp",
+       1151
       ]
      ],
      "w400": "img/store/coloring-book-universe-4-400.webp",
      "w800": "img/store/coloring-book-universe-4-800.webp",
-     "w1200": "img/store/coloring-book-universe-4-1024.webp",
+     "w1200": "img/store/coloring-book-universe-4-1151.webp",
      "jpg": "img/store/coloring-book-universe-4-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6669,
      "bg": "#fefefe",
-     "bgt": "#e5e5e5",
-     "bgb": "#e9e9e9",
-     "bgl": "#fcfcfc",
-     "bgr": "#fafafa"
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     }
    ]
   },
@@ -952,14 +1084,14 @@
    "images": [
     {
      "n": 1,
-     "src": "92a0ce3930bb4ecc",
-     "w": 1536,
-     "h": 1024,
+     "src": "c5c7c8952167c891",
+     "w": 1680,
+     "h": 1120,
      "sizes": [
       400,
       800,
       1200,
-      1536
+      1680
      ],
      "files": [
       [
@@ -975,20 +1107,20 @@
        1200
       ],
       [
-       "img/store/coloring-book-zuri-1-1536.webp",
-       1536
+       "img/store/coloring-book-zuri-1-1680.webp",
+       1680
       ]
      ],
      "w400": "img/store/coloring-book-zuri-1-400.webp",
      "w800": "img/store/coloring-book-zuri-1-800.webp",
-     "w1200": "img/store/coloring-book-zuri-1-1536.webp",
+     "w1200": "img/store/coloring-book-zuri-1-1680.webp",
      "jpg": "img/store/coloring-book-zuri-1-800.jpg",
      "ratio": 1.5,
-     "bg": "#faeddd",
-     "bgt": "#fbefdf",
-     "bgb": "#f7e9d6",
-     "bgl": "#d4bea4",
-     "bgr": "#fcf0e0"
+     "bg": "#f9ebdb",
+     "bgt": "#f9ebdb",
+     "bgb": "#f9ebdb",
+     "bgl": "#f9ebdb",
+     "bgr": "#f9ebda"
     }
    ]
   },
@@ -996,14 +1128,14 @@
    "images": [
     {
      "n": 1,
-     "src": "19d64389805e663e",
-     "w": 1402,
-     "h": 1122,
+     "src": "23e0df0d29f4a90b",
+     "w": 1628,
+     "h": 1302,
      "sizes": [
       400,
       800,
       1200,
-      1402
+      1628
      ],
      "files": [
       [
@@ -1019,20 +1151,64 @@
        1200
       ],
       [
-       "img/store/eat-the-rainbow-plate-1-1402.webp",
-       1402
+       "img/store/eat-the-rainbow-plate-1-1628.webp",
+       1628
       ]
      ],
      "w400": "img/store/eat-the-rainbow-plate-1-400.webp",
      "w800": "img/store/eat-the-rainbow-plate-1-800.webp",
-     "w1200": "img/store/eat-the-rainbow-plate-1-1402.webp",
+     "w1200": "img/store/eat-the-rainbow-plate-1-1628.webp",
      "jpg": "img/store/eat-the-rainbow-plate-1-800.jpg",
-     "ratio": 1.2496,
-     "bg": "#fdf9f2",
-     "bgt": "#fbf5eb",
-     "bgb": "#d4c3af",
-     "bgl": "#fef8ef",
-     "bgr": "#e9ded1"
+     "ratio": 1.2504,
+     "bg": "#fefaf2",
+     "bgt": "#fefaf2",
+     "bgb": "#fefaf2",
+     "bgl": "#fefaf2",
+     "bgr": "#fefaf2"
+    }
+   ]
+  },
+  "lumi-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "5cd52f384d7872da",
+     "w": 1780,
+     "h": 1187,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1780
+     ],
+     "files": [
+      [
+       "img/store/lumi-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/lumi-hoodie-1-800.webp",
+       800
+      ],
+      [
+       "img/store/lumi-hoodie-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/lumi-hoodie-1-1780.webp",
+       1780
+      ]
+     ],
+     "w400": "img/store/lumi-hoodie-1-400.webp",
+     "w800": "img/store/lumi-hoodie-1-800.webp",
+     "w1200": "img/store/lumi-hoodie-1-1780.webp",
+     "jpg": "img/store/lumi-hoodie-1-800.jpg",
+     "ratio": 1.4996,
+     "bg": "#f7f2eb",
+     "bgt": "#f8f2eb",
+     "bgb": "#f8f2eb",
+     "bgl": "#f8f2eb",
+     "bgr": "#f8f2eb"
     }
    ]
   },
@@ -1040,13 +1216,13 @@
    "images": [
     {
      "n": 1,
-     "src": "e0778b84650c3f24",
-     "w": 1013,
-     "h": 1553,
+     "src": "92f9e1bbfeeeea44",
+     "w": 1200,
+     "h": 1600,
      "sizes": [
       400,
       800,
-      1013
+      1200
      ],
      "files": [
       [
@@ -1058,24 +1234,24 @@
        800
       ],
       [
-       "img/store/plush-booker-1-1013.webp",
-       1013
+       "img/store/plush-booker-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/plush-booker-1-400.webp",
      "w800": "img/store/plush-booker-1-800.webp",
-     "w1200": "img/store/plush-booker-1-1013.webp",
+     "w1200": "img/store/plush-booker-1-1200.webp",
      "jpg": "img/store/plush-booker-1-800.jpg",
-     "ratio": 0.6523,
-     "bg": "#f8e9da",
-     "bgt": "#f1dece",
-     "bgb": "#f3e1d1",
-     "bgl": "#f6e7d8",
-     "bgr": "#f6e7d7"
+     "ratio": 0.7501,
+     "bg": "#f7e9d7",
+     "bgt": "#f8e9d7",
+     "bgb": "#f8e9d7",
+     "bgl": "#f8e9d7",
+     "bgr": "#f8e9d7"
     },
     {
      "n": 2,
-     "src": "8c014d8a1a5f8c92",
+     "src": "b6d0a978a44dd525",
      "w": 1536,
      "h": 1024,
      "sizes": [
@@ -1112,6 +1288,99 @@
      "bgb": "#f9eadc",
      "bgl": "#eddbcd",
      "bgr": "#efdfd1"
+    },
+    {
+     "n": 3,
+     "src": "996cc8a84a5d8598",
+     "w": 800,
+     "h": 1066,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-3-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-booker-3-400.webp",
+     "w800": "img/store/plush-booker-3-800.webp",
+     "w1200": "img/store/plush-booker-3-800.webp",
+     "jpg": "img/store/plush-booker-3-800.jpg",
+     "ratio": 0.7502,
+     "bg": "#faeadd",
+     "angle": "front",
+     "bgt": "#faeadd",
+     "bgb": "#faeadd",
+     "bgl": "#faeadd",
+     "bgr": "#faeadd"
+    },
+    {
+     "n": 4,
+     "src": "22e4e696a2699b4c",
+     "w": 800,
+     "h": 1067,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-4-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-booker-4-400.webp",
+     "w800": "img/store/plush-booker-4-800.webp",
+     "w1200": "img/store/plush-booker-4-800.webp",
+     "jpg": "img/store/plush-booker-4-800.jpg",
+     "ratio": 0.7498,
+     "bg": "#faeadd",
+     "angle": "side",
+     "bgt": "#faeadd",
+     "bgb": "#faeadd",
+     "bgl": "#faeadd",
+     "bgr": "#faeadd"
+    },
+    {
+     "n": 5,
+     "src": "a9eb3f57c5151ccc",
+     "w": 800,
+     "h": 1068,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-booker-5-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-booker-5-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-booker-5-400.webp",
+     "w800": "img/store/plush-booker-5-800.webp",
+     "w1200": "img/store/plush-booker-5-800.webp",
+     "jpg": "img/store/plush-booker-5-800.jpg",
+     "ratio": 0.7493,
+     "bg": "#faeadd",
+     "angle": "back",
+     "bgt": "#faeadd",
+     "bgb": "#faeadd",
+     "bgl": "#faeadd",
+     "bgr": "#faeadd"
     }
    ]
   },
@@ -1119,13 +1388,13 @@
    "images": [
     {
      "n": 1,
-     "src": "056018dc921a5eab",
-     "w": 1154,
-     "h": 1363,
+     "src": "582643f0b53606aa",
+     "w": 1177,
+     "h": 1570,
      "sizes": [
       400,
       800,
-      1154
+      1177
      ],
      "files": [
       [
@@ -1137,24 +1406,24 @@
        800
       ],
       [
-       "img/store/plush-bop-1-1154.webp",
-       1154
+       "img/store/plush-bop-1-1177.webp",
+       1177
       ]
      ],
      "w400": "img/store/plush-bop-1-400.webp",
      "w800": "img/store/plush-bop-1-800.webp",
-     "w1200": "img/store/plush-bop-1-1154.webp",
+     "w1200": "img/store/plush-bop-1-1177.webp",
      "jpg": "img/store/plush-bop-1-800.jpg",
-     "ratio": 0.8467,
-     "bg": "#f8efe5",
-     "bgt": "#f8efe5",
-     "bgb": "#f4eadf",
-     "bgl": "#f8eee4",
-     "bgr": "#f9f0e5"
+     "ratio": 0.7497,
+     "bg": "#f9efe4",
+     "bgt": "#f9efe5",
+     "bgb": "#f9efe5",
+     "bgl": "#f9efe5",
+     "bgr": "#f9efe5"
     },
     {
      "n": 2,
-     "src": "20cc082dce0add4b",
+     "src": "5ca175e0967e2961",
      "w": 1620,
      "h": 971,
      "sizes": [
@@ -1187,10 +1456,103 @@
      "jpg": "img/store/plush-bop-2-800.jpg",
      "ratio": 1.6684,
      "bg": "#f9f0e5",
-     "bgt": "#fbf2e7",
+     "bgt": "#fbf1e7",
      "bgb": "#f8eee4",
      "bgl": "#ece2da",
      "bgr": "#f1e7de"
+    },
+    {
+     "n": 3,
+     "src": "4cfd603e483c4f15",
+     "w": 743,
+     "h": 990,
+     "sizes": [
+      400,
+      743
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-3-743.webp",
+       743
+      ]
+     ],
+     "w400": "img/store/plush-bop-3-400.webp",
+     "w800": "img/store/plush-bop-3-743.webp",
+     "w1200": "img/store/plush-bop-3-743.webp",
+     "jpg": "img/store/plush-bop-3-743.jpg",
+     "ratio": 0.7505,
+     "bg": "#faf1e4",
+     "angle": "front",
+     "bgt": "#faf1e4",
+     "bgb": "#faf1e4",
+     "bgl": "#faf1e4",
+     "bgr": "#faf1e4"
+    },
+    {
+     "n": 4,
+     "src": "211b2eea31879752",
+     "w": 742,
+     "h": 989,
+     "sizes": [
+      400,
+      742
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-4-742.webp",
+       742
+      ]
+     ],
+     "w400": "img/store/plush-bop-4-400.webp",
+     "w800": "img/store/plush-bop-4-742.webp",
+     "w1200": "img/store/plush-bop-4-742.webp",
+     "jpg": "img/store/plush-bop-4-742.jpg",
+     "ratio": 0.7503,
+     "bg": "#faf1e4",
+     "angle": "side",
+     "bgt": "#faf1e4",
+     "bgb": "#faf1e4",
+     "bgl": "#faf1e4",
+     "bgr": "#faf1e4"
+    },
+    {
+     "n": 5,
+     "src": "8e6a1c1511e299fb",
+     "w": 738,
+     "h": 985,
+     "sizes": [
+      400,
+      738
+     ],
+     "files": [
+      [
+       "img/store/plush-bop-5-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-bop-5-738.webp",
+       738
+      ]
+     ],
+     "w400": "img/store/plush-bop-5-400.webp",
+     "w800": "img/store/plush-bop-5-738.webp",
+     "w1200": "img/store/plush-bop-5-738.webp",
+     "jpg": "img/store/plush-bop-5-738.jpg",
+     "ratio": 0.7492,
+     "bg": "#faf1e4",
+     "angle": "back",
+     "bgt": "#faf1e4",
+     "bgb": "#faf1e4",
+     "bgl": "#faf1e4",
+     "bgr": "#faf1e4"
     }
    ]
   },
@@ -1198,13 +1560,13 @@
    "images": [
     {
      "n": 1,
-     "src": "9a5aa056d5458887",
-     "w": 1000,
-     "h": 1573,
+     "src": "80c6817914933edb",
+     "w": 1200,
+     "h": 1599,
      "sizes": [
       400,
       800,
-      1000
+      1200
      ],
      "files": [
       [
@@ -1216,24 +1578,24 @@
        800
       ],
       [
-       "img/store/plush-lumi-1-1000.webp",
-       1000
+       "img/store/plush-lumi-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/plush-lumi-1-400.webp",
      "w800": "img/store/plush-lumi-1-800.webp",
-     "w1200": "img/store/plush-lumi-1-1000.webp",
+     "w1200": "img/store/plush-lumi-1-1200.webp",
      "jpg": "img/store/plush-lumi-1-800.jpg",
-     "ratio": 0.6357,
-     "bg": "#f6eee4",
-     "bgt": "#f7ede2",
-     "bgb": "#f3e8dc",
-     "bgl": "#f5ede3",
+     "ratio": 0.7503,
+     "bg": "#f6efe4",
+     "bgt": "#f6efe4",
+     "bgb": "#f6efe4",
+     "bgl": "#f6efe4",
      "bgr": "#f6efe4"
     },
     {
      "n": 2,
-     "src": "07b37e09d39f874f",
+     "src": "c5fcf370178164eb",
      "w": 1536,
      "h": 1024,
      "sizes": [
@@ -1267,9 +1629,102 @@
      "ratio": 1.5,
      "bg": "#f8f0e7",
      "bgt": "#f9f0e7",
-     "bgb": "#f7eee6",
+     "bgb": "#f7eee5",
      "bgl": "#f7efe6",
      "bgr": "#f7f0e7"
+    },
+    {
+     "n": 3,
+     "src": "58842803fed9f1b0",
+     "w": 800,
+     "h": 1067,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-3-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-lumi-3-400.webp",
+     "w800": "img/store/plush-lumi-3-800.webp",
+     "w1200": "img/store/plush-lumi-3-800.webp",
+     "jpg": "img/store/plush-lumi-3-800.jpg",
+     "ratio": 0.7495,
+     "bg": "#f9f0e8",
+     "angle": "front",
+     "bgt": "#f9f1e8",
+     "bgb": "#f9f1e8",
+     "bgl": "#f9f1e8",
+     "bgr": "#f9f1e8"
+    },
+    {
+     "n": 4,
+     "src": "759001fc8bb406b7",
+     "w": 800,
+     "h": 1067,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-4-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-lumi-4-400.webp",
+     "w800": "img/store/plush-lumi-4-800.webp",
+     "w1200": "img/store/plush-lumi-4-800.webp",
+     "jpg": "img/store/plush-lumi-4-800.jpg",
+     "ratio": 0.7495,
+     "bg": "#f9f0e8",
+     "angle": "side",
+     "bgt": "#f9f1e8",
+     "bgb": "#f9f1e8",
+     "bgl": "#f9f1e8",
+     "bgr": "#f9f1e8"
+    },
+    {
+     "n": 5,
+     "src": "2fb3da311efe8bd3",
+     "w": 800,
+     "h": 1067,
+     "sizes": [
+      400,
+      800
+     ],
+     "files": [
+      [
+       "img/store/plush-lumi-5-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-lumi-5-800.webp",
+       800
+      ]
+     ],
+     "w400": "img/store/plush-lumi-5-400.webp",
+     "w800": "img/store/plush-lumi-5-800.webp",
+     "w1200": "img/store/plush-lumi-5-800.webp",
+     "jpg": "img/store/plush-lumi-5-800.jpg",
+     "ratio": 0.7498,
+     "bg": "#f9f0e8",
+     "angle": "back",
+     "bgt": "#f9f1e8",
+     "bgb": "#f9f1e8",
+     "bgl": "#f9f1e8",
+     "bgr": "#f9f1e8"
     }
    ]
   },
@@ -1277,13 +1732,13 @@
    "images": [
     {
      "n": 1,
-     "src": "1f2c823886026ff4",
-     "w": 1071,
-     "h": 1469,
+     "src": "00052aed9aca4a1d",
+     "w": 1200,
+     "h": 1600,
      "sizes": [
       400,
       800,
-      1071
+      1200
      ],
      "files": [
       [
@@ -1295,24 +1750,24 @@
        800
       ],
       [
-       "img/store/plush-zuri-1-1071.webp",
-       1071
+       "img/store/plush-zuri-1-1200.webp",
+       1200
       ]
      ],
      "w400": "img/store/plush-zuri-1-400.webp",
      "w800": "img/store/plush-zuri-1-800.webp",
-     "w1200": "img/store/plush-zuri-1-1071.webp",
+     "w1200": "img/store/plush-zuri-1-1200.webp",
      "jpg": "img/store/plush-zuri-1-800.jpg",
-     "ratio": 0.7291,
-     "bg": "#f5e9d6",
-     "bgt": "#f4e5cf",
-     "bgb": "#f7e9d9",
-     "bgl": "#f5e7d5",
-     "bgr": "#f6e9d6"
+     "ratio": 0.75,
+     "bg": "#f6ead5",
+     "bgt": "#f6ead5",
+     "bgb": "#f6ead5",
+     "bgl": "#f6ead5",
+     "bgr": "#f6ead5"
     },
     {
      "n": 2,
-     "src": "47d3a134f20bf78d",
+     "src": "931fd0999ae28375",
      "w": 1774,
      "h": 887,
      "sizes": [
@@ -1349,6 +1804,99 @@
      "bgb": "#f5e9da",
      "bgl": "#f0e5d1",
      "bgr": "#f1e6d2"
+    },
+    {
+     "n": 3,
+     "src": "88409d29eaa686cf",
+     "w": 738,
+     "h": 985,
+     "sizes": [
+      400,
+      738
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-3-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-3-738.webp",
+       738
+      ]
+     ],
+     "w400": "img/store/plush-zuri-3-400.webp",
+     "w800": "img/store/plush-zuri-3-738.webp",
+     "w1200": "img/store/plush-zuri-3-738.webp",
+     "jpg": "img/store/plush-zuri-3-738.jpg",
+     "ratio": 0.7492,
+     "bg": "#f3e9d8",
+     "angle": "front",
+     "bgt": "#f4e9d8",
+     "bgb": "#f4e9d8",
+     "bgl": "#f4e9d8",
+     "bgr": "#f4e9d8"
+    },
+    {
+     "n": 4,
+     "src": "15eb30499dd7b9e7",
+     "w": 734,
+     "h": 979,
+     "sizes": [
+      400,
+      734
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-4-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-4-734.webp",
+       734
+      ]
+     ],
+     "w400": "img/store/plush-zuri-4-400.webp",
+     "w800": "img/store/plush-zuri-4-734.webp",
+     "w1200": "img/store/plush-zuri-4-734.webp",
+     "jpg": "img/store/plush-zuri-4-734.jpg",
+     "ratio": 0.7497,
+     "bg": "#f4e9d8",
+     "angle": "side",
+     "bgt": "#f4e9d8",
+     "bgb": "#f4e9d8",
+     "bgl": "#f4e9d8",
+     "bgr": "#f4e9d8"
+    },
+    {
+     "n": 5,
+     "src": "cb0f559b79ff0a95",
+     "w": 743,
+     "h": 990,
+     "sizes": [
+      400,
+      743
+     ],
+     "files": [
+      [
+       "img/store/plush-zuri-5-400.webp",
+       400
+      ],
+      [
+       "img/store/plush-zuri-5-743.webp",
+       743
+      ]
+     ],
+     "w400": "img/store/plush-zuri-5-400.webp",
+     "w800": "img/store/plush-zuri-5-743.webp",
+     "w1200": "img/store/plush-zuri-5-743.webp",
+     "jpg": "img/store/plush-zuri-5-743.jpg",
+     "ratio": 0.7505,
+     "bg": "#f3e9d8",
+     "angle": "back",
+     "bgt": "#f4e9d8",
+     "bgb": "#f4e9d8",
+     "bgl": "#f4e9d8",
+     "bgr": "#f4e9d8"
     }
    ]
   },
@@ -1356,14 +1904,13 @@
    "images": [
     {
      "n": 1,
-     "src": "5fcf56475aa1a2f6",
-     "w": 1600,
-     "h": 2400,
+     "src": "4269726797d8d93a",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1375,24 +1922,20 @@
        800
       ],
       [
-       "img/store/poster-booker-reading-area-v1-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-booker-reading-area-v1-1-1600.webp",
-       1600
+       "img/store/poster-booker-reading-area-v1-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-booker-reading-area-v1-1-400.webp",
      "w800": "img/store/poster-booker-reading-area-v1-1-800.webp",
-     "w1200": "img/store/poster-booker-reading-area-v1-1-1600.webp",
+     "w1200": "img/store/poster-booker-reading-area-v1-1-1100.webp",
      "jpg": "img/store/poster-booker-reading-area-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#d0e8fc",
-     "bgt": "#9ec7eb",
-     "bgb": "#b9daf4",
-     "bgl": "#b0d4f1",
-     "bgr": "#b2d6f1"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1400,14 +1943,13 @@
    "images": [
     {
      "n": 1,
-     "src": "5f6c64cde41d55dd",
-     "w": 1600,
-     "h": 2400,
+     "src": "7100aeb0c0a0f129",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1419,24 +1961,20 @@
        800
       ],
       [
-       "img/store/poster-booker-reading-area-v2-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-booker-reading-area-v2-1-1600.webp",
-       1600
+       "img/store/poster-booker-reading-area-v2-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-booker-reading-area-v2-1-400.webp",
      "w800": "img/store/poster-booker-reading-area-v2-1-800.webp",
-     "w1200": "img/store/poster-booker-reading-area-v2-1-1600.webp",
+     "w1200": "img/store/poster-booker-reading-area-v2-1-1100.webp",
      "jpg": "img/store/poster-booker-reading-area-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#c3d2e4",
-     "bgt": "#fbf8f0",
-     "bgb": "#faf7f0",
-     "bgl": "#6c93c5",
-     "bgr": "#f9f7f1"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1444,14 +1982,13 @@
    "images": [
     {
      "n": 1,
-     "src": "8d0b1d7ab6c82359",
-     "w": 1600,
-     "h": 2400,
+     "src": "b4ffcc6cfb10fa87",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1463,24 +2000,20 @@
        800
       ],
       [
-       "img/store/poster-bop-movement-zone-v1-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-bop-movement-zone-v1-1-1600.webp",
-       1600
+       "img/store/poster-bop-movement-zone-v1-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-bop-movement-zone-v1-1-400.webp",
      "w800": "img/store/poster-bop-movement-zone-v1-1-800.webp",
-     "w1200": "img/store/poster-bop-movement-zone-v1-1-1600.webp",
+     "w1200": "img/store/poster-bop-movement-zone-v1-1-1100.webp",
      "jpg": "img/store/poster-bop-movement-zone-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f1e6fc",
-     "bgt": "#c6a9dc",
-     "bgb": "#efe4fa",
-     "bgl": "#f1e6fc",
-     "bgr": "#f0e6fc"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1488,14 +2021,13 @@
    "images": [
     {
      "n": 1,
-     "src": "cabd3ee853b09d85",
-     "w": 1600,
-     "h": 2400,
+     "src": "527a493057bf032c",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1507,24 +2039,20 @@
        800
       ],
       [
-       "img/store/poster-bop-movement-zone-v2-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-bop-movement-zone-v2-1-1600.webp",
-       1600
+       "img/store/poster-bop-movement-zone-v2-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-bop-movement-zone-v2-1-400.webp",
      "w800": "img/store/poster-bop-movement-zone-v2-1-800.webp",
-     "w1200": "img/store/poster-bop-movement-zone-v2-1-1600.webp",
+     "w1200": "img/store/poster-bop-movement-zone-v2-1-1100.webp",
      "jpg": "img/store/poster-bop-movement-zone-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#d8cbe1",
-     "bgt": "#fbf8f0",
-     "bgb": "#faf7f0",
-     "bgl": "#a185c0",
-     "bgr": "#f9f6f1"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1532,14 +2060,13 @@
    "images": [
     {
      "n": 1,
-     "src": "f1e19996e26007c5",
-     "w": 1600,
-     "h": 2400,
+     "src": "31489d4e35987451",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1551,24 +2078,20 @@
        800
       ],
       [
-       "img/store/poster-friends-circle-v1-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-friends-circle-v1-1-1600.webp",
-       1600
+       "img/store/poster-friends-circle-v1-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-friends-circle-v1-1-400.webp",
      "w800": "img/store/poster-friends-circle-v1-1-800.webp",
-     "w1200": "img/store/poster-friends-circle-v1-1-1600.webp",
+     "w1200": "img/store/poster-friends-circle-v1-1-1100.webp",
      "jpg": "img/store/poster-friends-circle-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf0d7",
-     "bgt": "#ddac4a",
-     "bgb": "#daab56",
-     "bgl": "#dbab57",
-     "bgr": "#d7a858"
+     "bg": "#f7f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1576,14 +2099,13 @@
    "images": [
     {
      "n": 1,
-     "src": "3d4ef8468f002a63",
-     "w": 1600,
-     "h": 2400,
+     "src": "62346d9d8d19d967",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1595,24 +2117,20 @@
        800
       ],
       [
-       "img/store/poster-friends-circle-v2-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-friends-circle-v2-1-1600.webp",
-       1600
+       "img/store/poster-friends-circle-v2-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-friends-circle-v2-1-400.webp",
      "w800": "img/store/poster-friends-circle-v2-1-800.webp",
-     "w1200": "img/store/poster-friends-circle-v2-1-1600.webp",
+     "w1200": "img/store/poster-friends-circle-v2-1-1100.webp",
      "jpg": "img/store/poster-friends-circle-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#c2c7d0",
-     "bgt": "#fbf8f0",
-     "bgb": "#faf7f0",
-     "bgl": "#667591",
-     "bgr": "#f9f7f1"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1620,14 +2138,13 @@
    "images": [
     {
      "n": 1,
-     "src": "0bfb6166d96f9c1d",
-     "w": 1600,
-     "h": 2400,
+     "src": "f4e73586fb67bb4a",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1639,24 +2156,20 @@
        800
       ],
       [
-       "img/store/poster-lumi-calm-corner-v1-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-lumi-calm-corner-v1-1-1600.webp",
-       1600
+       "img/store/poster-lumi-calm-corner-v1-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-lumi-calm-corner-v1-1-400.webp",
      "w800": "img/store/poster-lumi-calm-corner-v1-1-800.webp",
-     "w1200": "img/store/poster-lumi-calm-corner-v1-1-1600.webp",
+     "w1200": "img/store/poster-lumi-calm-corner-v1-1-1100.webp",
      "jpg": "img/store/poster-lumi-calm-corner-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fbd5de",
-     "bgt": "#ef9eb5",
-     "bgb": "#f6c4cf",
-     "bgl": "#f4c1ce",
-     "bgr": "#f4c1ce"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1664,14 +2177,13 @@
    "images": [
     {
      "n": 1,
-     "src": "f16f247e5a38d4a0",
-     "w": 1600,
-     "h": 2400,
+     "src": "eb83aa3905c58132",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1683,24 +2195,20 @@
        800
       ],
       [
-       "img/store/poster-lumi-calm-corner-v2-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-lumi-calm-corner-v2-1-1600.webp",
-       1600
+       "img/store/poster-lumi-calm-corner-v2-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-lumi-calm-corner-v2-1-400.webp",
      "w800": "img/store/poster-lumi-calm-corner-v2-1-800.webp",
-     "w1200": "img/store/poster-lumi-calm-corner-v2-1-1600.webp",
+     "w1200": "img/store/poster-lumi-calm-corner-v2-1-1100.webp",
      "jpg": "img/store/poster-lumi-calm-corner-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f6d7df",
-     "bgt": "#fbf8f0",
-     "bgb": "#fbf7f0",
-     "bgl": "#eca2bf",
-     "bgr": "#fbf7f0"
+     "bg": "#f7f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1708,14 +2216,13 @@
    "images": [
     {
      "n": 1,
-     "src": "f73dd0a4feb86da4",
-     "w": 1600,
-     "h": 2400,
+     "src": "b9f9f2d4230794a1",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1727,24 +2234,20 @@
        800
       ],
       [
-       "img/store/poster-zuri-discovery-zone-v1-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-zuri-discovery-zone-v1-1-1600.webp",
-       1600
+       "img/store/poster-zuri-discovery-zone-v1-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-zuri-discovery-zone-v1-1-400.webp",
      "w800": "img/store/poster-zuri-discovery-zone-v1-1-800.webp",
-     "w1200": "img/store/poster-zuri-discovery-zone-v1-1-1600.webp",
+     "w1200": "img/store/poster-zuri-discovery-zone-v1-1-1100.webp",
      "jpg": "img/store/poster-zuri-discovery-zone-v1-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#ddf5dd",
-     "bgt": "#81c194",
-     "bgb": "#d6f4d6",
-     "bgl": "#d9f4d9",
-     "bgr": "#d9f5d9"
+     "bg": "#f7f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1752,14 +2255,13 @@
    "images": [
     {
      "n": 1,
-     "src": "d2fdf56dc12975f0",
-     "w": 1600,
-     "h": 2400,
+     "src": "bbeba52cefae9c85",
+     "w": 1100,
+     "h": 1650,
      "sizes": [
       400,
       800,
-      1200,
-      1600
+      1100
      ],
      "files": [
       [
@@ -1771,24 +2273,20 @@
        800
       ],
       [
-       "img/store/poster-zuri-discovery-zone-v2-1-1200.webp",
-       1200
-      ],
-      [
-       "img/store/poster-zuri-discovery-zone-v2-1-1600.webp",
-       1600
+       "img/store/poster-zuri-discovery-zone-v2-1-1100.webp",
+       1100
       ]
      ],
      "w400": "img/store/poster-zuri-discovery-zone-v2-1-400.webp",
      "w800": "img/store/poster-zuri-discovery-zone-v2-1-800.webp",
-     "w1200": "img/store/poster-zuri-discovery-zone-v2-1-1600.webp",
+     "w1200": "img/store/poster-zuri-discovery-zone-v2-1-1100.webp",
      "jpg": "img/store/poster-zuri-discovery-zone-v2-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#cee4ce",
-     "bgt": "#fbf8f0",
-     "bgb": "#faf8ef",
-     "bgl": "#8bbf94",
-     "bgr": "#f9f8ef"
+     "bg": "#f6f2e8",
+     "bgt": "#f7f2e8",
+     "bgb": "#f7f2e8",
+     "bgl": "#f7f2e8",
+     "bgr": "#f7f2e8"
     }
    ]
   },
@@ -1796,13 +2294,13 @@
    "images": [
     {
      "n": 1,
-     "src": "97de00666cf610a9",
-     "w": 1024,
-     "h": 1536,
+     "src": "169897bac88848b9",
+     "w": 1178,
+     "h": 1766,
      "sizes": [
       400,
       800,
-      1024
+      1178
      ],
      "files": [
       [
@@ -1814,20 +2312,20 @@
        800
       ],
       [
-       "img/store/rug-booker-reading-area-1-1024.webp",
-       1024
+       "img/store/rug-booker-reading-area-1-1178.webp",
+       1178
       ]
      ],
      "w400": "img/store/rug-booker-reading-area-1-400.webp",
      "w800": "img/store/rug-booker-reading-area-1-800.webp",
-     "w1200": "img/store/rug-booker-reading-area-1-1024.webp",
+     "w1200": "img/store/rug-booker-reading-area-1-1178.webp",
      "jpg": "img/store/rug-booker-reading-area-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fcf5eb",
-     "bgt": "#4975b0",
-     "bgb": "#5d7fad",
-     "bgl": "#597aa9",
-     "bgr": "#6387b5"
+     "ratio": 0.667,
+     "bg": "#fcf6eb",
+     "bgt": "#fdf6eb",
+     "bgb": "#fdf6eb",
+     "bgl": "#fdf6eb",
+     "bgr": "#fdf6eb"
     }
    ]
   },
@@ -1835,13 +2333,13 @@
    "images": [
     {
      "n": 1,
-     "src": "96767d55e1175071",
-     "w": 1024,
-     "h": 1536,
+     "src": "e76477eae7ce6ca3",
+     "w": 1175,
+     "h": 1763,
      "sizes": [
       400,
       800,
-      1024
+      1175
      ],
      "files": [
       [
@@ -1853,20 +2351,20 @@
        800
       ],
       [
-       "img/store/rug-bop-movement-zone-1-1024.webp",
-       1024
+       "img/store/rug-bop-movement-zone-1-1175.webp",
+       1175
       ]
      ],
      "w400": "img/store/rug-bop-movement-zone-1-400.webp",
      "w800": "img/store/rug-bop-movement-zone-1-800.webp",
-     "w1200": "img/store/rug-bop-movement-zone-1-1024.webp",
+     "w1200": "img/store/rug-bop-movement-zone-1-1175.webp",
      "jpg": "img/store/rug-bop-movement-zone-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fef7ec",
-     "bgt": "#8d55a8",
-     "bgb": "#9368a3",
-     "bgl": "#966ca8",
-     "bgr": "#986fab"
+     "ratio": 0.6665,
+     "bg": "#fdf7ec",
+     "bgt": "#fef7ec",
+     "bgb": "#fef7ec",
+     "bgl": "#fef7ec",
+     "bgr": "#fef7ec"
     }
    ]
   },
@@ -1874,13 +2372,13 @@
    "images": [
     {
      "n": 1,
-     "src": "a17373c0625360f8",
-     "w": 1024,
-     "h": 1536,
+     "src": "e3a907c2c8ac6732",
+     "w": 1173,
+     "h": 1759,
      "sizes": [
       400,
       800,
-      1024
+      1173
      ],
      "files": [
       [
@@ -1892,20 +2390,20 @@
        800
       ],
       [
-       "img/store/rug-friends-circle-1-1024.webp",
-       1024
+       "img/store/rug-friends-circle-1-1173.webp",
+       1173
       ]
      ],
      "w400": "img/store/rug-friends-circle-1-400.webp",
      "w800": "img/store/rug-friends-circle-1-800.webp",
-     "w1200": "img/store/rug-friends-circle-1-1024.webp",
+     "w1200": "img/store/rug-friends-circle-1-1173.webp",
      "jpg": "img/store/rug-friends-circle-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fbf1de",
-     "bgt": "#dbae5d",
-     "bgb": "#d7a958",
-     "bgl": "#d7a858",
-     "bgr": "#d5a85b"
+     "ratio": 0.6669,
+     "bg": "#fcf1de",
+     "bgt": "#fcf1de",
+     "bgb": "#fcf1de",
+     "bgl": "#fcf1de",
+     "bgr": "#fcf1de"
     }
    ]
   },
@@ -1913,13 +2411,13 @@
    "images": [
     {
      "n": 1,
-     "src": "cacce86d8e16e185",
-     "w": 1024,
-     "h": 1536,
+     "src": "47928633c04175c8",
+     "w": 1180,
+     "h": 1770,
      "sizes": [
       400,
       800,
-      1024
+      1180
      ],
      "files": [
       [
@@ -1931,20 +2429,20 @@
        800
       ],
       [
-       "img/store/rug-lumi-calm-corner-1-1024.webp",
-       1024
+       "img/store/rug-lumi-calm-corner-1-1180.webp",
+       1180
       ]
      ],
      "w400": "img/store/rug-lumi-calm-corner-1-400.webp",
      "w800": "img/store/rug-lumi-calm-corner-1-800.webp",
-     "w1200": "img/store/rug-lumi-calm-corner-1-1024.webp",
+     "w1200": "img/store/rug-lumi-calm-corner-1-1180.webp",
      "jpg": "img/store/rug-lumi-calm-corner-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#f7eae0",
-     "bgt": "#c44269",
-     "bgb": "#cc6883",
-     "bgl": "#bc4f6f",
-     "bgr": "#bf4d6f"
+     "bg": "#f8e9de",
+     "bgt": "#f8e9de",
+     "bgb": "#f8e9de",
+     "bgl": "#f8e9de",
+     "bgr": "#f8e9de"
     }
    ]
   },
@@ -1952,13 +2450,14 @@
    "images": [
     {
      "n": 1,
-     "src": "ba087daee278fa22",
-     "w": 1200,
-     "h": 1200,
+     "src": "4a7658c0f8e23734",
+     "w": 1401,
+     "h": 1401,
      "sizes": [
       400,
       800,
-      1200
+      1200,
+      1401
      ],
      "files": [
       [
@@ -1972,18 +2471,22 @@
       [
        "img/store/rug-square-booker-reading-area-1-1200.webp",
        1200
+      ],
+      [
+       "img/store/rug-square-booker-reading-area-1-1401.webp",
+       1401
       ]
      ],
      "w400": "img/store/rug-square-booker-reading-area-1-400.webp",
      "w800": "img/store/rug-square-booker-reading-area-1-800.webp",
-     "w1200": "img/store/rug-square-booker-reading-area-1-1200.webp",
+     "w1200": "img/store/rug-square-booker-reading-area-1-1401.webp",
      "jpg": "img/store/rug-square-booker-reading-area-1-800.jpg",
      "ratio": 1,
-     "bg": "#d2a67b",
-     "bgt": "#e0b996",
-     "bgb": "#d7ae85",
-     "bgl": "#deb891",
-     "bgr": "#ddb489"
+     "bg": "#fbf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -1991,13 +2494,14 @@
    "images": [
     {
      "n": 1,
-     "src": "1e57041755d65b42",
-     "w": 1200,
-     "h": 1200,
+     "src": "aa9d9c1e0bca2efd",
+     "w": 1381,
+     "h": 1381,
      "sizes": [
       400,
       800,
-      1200
+      1200,
+      1381
      ],
      "files": [
       [
@@ -2011,18 +2515,22 @@
       [
        "img/store/rug-square-bop-movement-zone-1-1200.webp",
        1200
+      ],
+      [
+       "img/store/rug-square-bop-movement-zone-1-1381.webp",
+       1381
       ]
      ],
      "w400": "img/store/rug-square-bop-movement-zone-1-400.webp",
      "w800": "img/store/rug-square-bop-movement-zone-1-800.webp",
-     "w1200": "img/store/rug-square-bop-movement-zone-1-1200.webp",
+     "w1200": "img/store/rug-square-bop-movement-zone-1-1381.webp",
      "jpg": "img/store/rug-square-bop-movement-zone-1-800.jpg",
      "ratio": 1,
-     "bg": "#dbb891",
-     "bgt": "#ddbb94",
-     "bgb": "#d9b58b",
-     "bgl": "#dcb992",
-     "bgr": "#debd98"
+     "bg": "#fbf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -2030,13 +2538,14 @@
    "images": [
     {
      "n": 1,
-     "src": "23217b5f6c283f46",
-     "w": 1200,
-     "h": 1200,
+     "src": "e23d1cfeacb5e713",
+     "w": 1383,
+     "h": 1383,
      "sizes": [
       400,
       800,
-      1200
+      1200,
+      1383
      ],
      "files": [
       [
@@ -2050,18 +2559,22 @@
       [
        "img/store/rug-square-friends-circle-1-1200.webp",
        1200
+      ],
+      [
+       "img/store/rug-square-friends-circle-1-1383.webp",
+       1383
       ]
      ],
      "w400": "img/store/rug-square-friends-circle-1-400.webp",
      "w800": "img/store/rug-square-friends-circle-1-800.webp",
-     "w1200": "img/store/rug-square-friends-circle-1-1200.webp",
+     "w1200": "img/store/rug-square-friends-circle-1-1383.webp",
      "jpg": "img/store/rug-square-friends-circle-1-800.jpg",
      "ratio": 1,
-     "bg": "#ceb192",
-     "bgt": "#d4b597",
-     "bgb": "#cbaa87",
-     "bgl": "#c6a582",
-     "bgr": "#dfc8b0"
+     "bg": "#fbf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -2069,13 +2582,14 @@
    "images": [
     {
      "n": 1,
-     "src": "8d2a3d9913393f4b",
-     "w": 1200,
-     "h": 1200,
+     "src": "407c2472aaad27bf",
+     "w": 1432,
+     "h": 1432,
      "sizes": [
       400,
       800,
-      1200
+      1200,
+      1432
      ],
      "files": [
       [
@@ -2089,18 +2603,22 @@
       [
        "img/store/rug-square-lumi-calm-corner-1-1200.webp",
        1200
+      ],
+      [
+       "img/store/rug-square-lumi-calm-corner-1-1432.webp",
+       1432
       ]
      ],
      "w400": "img/store/rug-square-lumi-calm-corner-1-400.webp",
      "w800": "img/store/rug-square-lumi-calm-corner-1-800.webp",
-     "w1200": "img/store/rug-square-lumi-calm-corner-1-1200.webp",
+     "w1200": "img/store/rug-square-lumi-calm-corner-1-1432.webp",
      "jpg": "img/store/rug-square-lumi-calm-corner-1-800.jpg",
      "ratio": 1,
-     "bg": "#cbae93",
-     "bgt": "#d5b89f",
-     "bgb": "#cdaf94",
-     "bgl": "#d1ad9b",
-     "bgr": "#c8a28a"
+     "bg": "#fbf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -2108,7 +2626,7 @@
    "images": [
     {
      "n": 1,
-     "src": "26fa73795c18db10",
+     "src": "c5b0930c7823dc00",
      "w": 1200,
      "h": 1200,
      "sizes": [
@@ -2135,11 +2653,11 @@
      "w1200": "img/store/rug-square-zuri-discovery-zone-1-1200.webp",
      "jpg": "img/store/rug-square-zuri-discovery-zone-1-800.jpg",
      "ratio": 1,
-     "bg": "#d2af8d",
-     "bgt": "#cfaa88",
-     "bgb": "#cfa985",
-     "bgl": "#cea987",
-     "bgr": "#d6b291"
+     "bg": "#fbf3ea",
+     "bgt": "#fbf3ea",
+     "bgb": "#fbf3ea",
+     "bgl": "#fbf3ea",
+     "bgr": "#fbf3ea"
     }
    ]
   },
@@ -2147,13 +2665,13 @@
    "images": [
     {
      "n": 1,
-     "src": "1c3630dc9a01e54b",
-     "w": 1024,
-     "h": 1536,
+     "src": "50d1bc26db74ba62",
+     "w": 1178,
+     "h": 1766,
      "sizes": [
       400,
       800,
-      1024
+      1178
      ],
      "files": [
       [
@@ -2165,20 +2683,20 @@
        800
       ],
       [
-       "img/store/rug-zuri-discovery-zone-1-1024.webp",
-       1024
+       "img/store/rug-zuri-discovery-zone-1-1178.webp",
+       1178
       ]
      ],
      "w400": "img/store/rug-zuri-discovery-zone-1-400.webp",
      "w800": "img/store/rug-zuri-discovery-zone-1-800.webp",
-     "w1200": "img/store/rug-zuri-discovery-zone-1-1024.webp",
+     "w1200": "img/store/rug-zuri-discovery-zone-1-1178.webp",
      "jpg": "img/store/rug-zuri-discovery-zone-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fef3e7",
-     "bgt": "#439160",
-     "bgb": "#5a946c",
-     "bgl": "#5a926b",
-     "bgr": "#60976f"
+     "ratio": 0.667,
+     "bg": "#fdf4e8",
+     "bgt": "#fef4e8",
+     "bgb": "#fef4e8",
+     "bgl": "#fef4e8",
+     "bgr": "#fef4e8"
     }
    ]
   },
@@ -2186,13 +2704,13 @@
    "images": [
     {
      "n": 1,
-     "src": "839ae4f77fcb6308",
-     "w": 1024,
-     "h": 1536,
+     "src": "fbdef7c93b51f05b",
+     "w": 1122,
+     "h": 1683,
      "sizes": [
       400,
       800,
-      1024
+      1122
      ],
      "files": [
       [
@@ -2204,18 +2722,18 @@
        800
       ],
       [
-       "img/store/stickers-all-friends-1-1024.webp",
-       1024
+       "img/store/stickers-all-friends-1-1122.webp",
+       1122
       ]
      ],
      "w400": "img/store/stickers-all-friends-1-400.webp",
      "w800": "img/store/stickers-all-friends-1-800.webp",
-     "w1200": "img/store/stickers-all-friends-1-1024.webp",
+     "w1200": "img/store/stickers-all-friends-1-1122.webp",
      "jpg": "img/store/stickers-all-friends-1-800.jpg",
      "ratio": 0.6667,
      "bg": "#fefefe",
-     "bgt": "#ccd0e1",
-     "bgb": "#fbfbfb",
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
      "bgl": "#fefefe",
      "bgr": "#fefefe"
     }
@@ -2225,13 +2743,13 @@
    "images": [
     {
      "n": 1,
-     "src": "2f447c972e9b7c9d",
-     "w": 1024,
-     "h": 1536,
+     "src": "8d1dedcd17ea07f1",
+     "w": 1148,
+     "h": 1723,
      "sizes": [
       400,
       800,
-      1024
+      1148
      ],
      "files": [
       [
@@ -2243,20 +2761,20 @@
        800
       ],
       [
-       "img/store/stickers-booker-1-1024.webp",
-       1024
+       "img/store/stickers-booker-1-1148.webp",
+       1148
       ]
      ],
      "w400": "img/store/stickers-booker-1-400.webp",
      "w800": "img/store/stickers-booker-1-800.webp",
-     "w1200": "img/store/stickers-booker-1-1024.webp",
+     "w1200": "img/store/stickers-booker-1-1148.webp",
      "jpg": "img/store/stickers-booker-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fdfcfd",
-     "bgt": "#dcebf4",
-     "bgb": "#e6f1f8",
-     "bgl": "#daeaf6",
-     "bgr": "#d9eaf6"
+     "ratio": 0.6663,
+     "bg": "#fefefe",
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     }
    ]
   },
@@ -2264,13 +2782,13 @@
    "images": [
     {
      "n": 1,
-     "src": "c978e20316b0337a",
-     "w": 1024,
-     "h": 1536,
+     "src": "3752e6a5876be4da",
+     "w": 1112,
+     "h": 1668,
      "sizes": [
       400,
       800,
-      1024
+      1112
      ],
      "files": [
       [
@@ -2282,20 +2800,20 @@
        800
       ],
       [
-       "img/store/stickers-bop-1-1024.webp",
-       1024
+       "img/store/stickers-bop-1-1112.webp",
+       1112
       ]
      ],
      "w400": "img/store/stickers-bop-1-400.webp",
      "w800": "img/store/stickers-bop-1-800.webp",
-     "w1200": "img/store/stickers-bop-1-1024.webp",
+     "w1200": "img/store/stickers-bop-1-1112.webp",
      "jpg": "img/store/stickers-bop-1-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fefefe",
-     "bgt": "#efe8f5",
-     "bgb": "#fbfafb",
-     "bgl": "#f9f9fa",
-     "bgr": "#faf9fa"
+     "bg": "#fafafb",
+     "bgt": "#fafafc",
+     "bgb": "#fafafc",
+     "bgl": "#fafafc",
+     "bgr": "#fafafc"
     }
    ]
   },
@@ -2303,13 +2821,13 @@
    "images": [
     {
      "n": 1,
-     "src": "fed8a15d5809a679",
-     "w": 1024,
-     "h": 1536,
+     "src": "90a1a22ac99397ab",
+     "w": 1128,
+     "h": 1692,
      "sizes": [
       400,
       800,
-      1024
+      1128
      ],
      "files": [
       [
@@ -2321,20 +2839,20 @@
        800
       ],
       [
-       "img/store/stickers-lumi-1-1024.webp",
-       1024
+       "img/store/stickers-lumi-1-1128.webp",
+       1128
       ]
      ],
      "w400": "img/store/stickers-lumi-1-400.webp",
      "w800": "img/store/stickers-lumi-1-800.webp",
-     "w1200": "img/store/stickers-lumi-1-1024.webp",
+     "w1200": "img/store/stickers-lumi-1-1128.webp",
      "jpg": "img/store/stickers-lumi-1-800.jpg",
      "ratio": 0.6667,
      "bg": "#fefefe",
-     "bgt": "#f7eaf0",
-     "bgb": "#fcf8fb",
-     "bgl": "#fbf4f8",
-     "bgr": "#fbf5f8"
+     "bgt": "#fefefe",
+     "bgb": "#fefefe",
+     "bgl": "#fefefe",
+     "bgr": "#fefefe"
     }
    ]
   },
@@ -2342,13 +2860,13 @@
    "images": [
     {
      "n": 1,
-     "src": "4329b6495e67e3f3",
-     "w": 1024,
-     "h": 1536,
+     "src": "c7da1390da04bb09",
+     "w": 1121,
+     "h": 1682,
      "sizes": [
       400,
       800,
-      1024
+      1121
      ],
      "files": [
       [
@@ -2360,30 +2878,30 @@
        800
       ],
       [
-       "img/store/stickers-universe-1-1024.webp",
-       1024
+       "img/store/stickers-universe-1-1121.webp",
+       1121
       ]
      ],
      "w400": "img/store/stickers-universe-1-400.webp",
      "w800": "img/store/stickers-universe-1-800.webp",
-     "w1200": "img/store/stickers-universe-1-1024.webp",
+     "w1200": "img/store/stickers-universe-1-1121.webp",
      "jpg": "img/store/stickers-universe-1-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6665,
      "bg": "#fefaf0",
-     "bgt": "#f3ede1",
-     "bgb": "#f7f6e8",
-     "bgl": "#fefbef",
-     "bgr": "#fdfaef"
+     "bgt": "#fefbf0",
+     "bgb": "#fefbf0",
+     "bgl": "#fefbf0",
+     "bgr": "#fefbf0"
     },
     {
      "n": 2,
-     "src": "63dc173baf55e86d",
-     "w": 1024,
-     "h": 1536,
+     "src": "bdeff090e3da6b7b",
+     "w": 1114,
+     "h": 1670,
      "sizes": [
       400,
       800,
-      1024
+      1114
      ],
      "files": [
       [
@@ -2395,30 +2913,30 @@
        800
       ],
       [
-       "img/store/stickers-universe-2-1024.webp",
-       1024
+       "img/store/stickers-universe-2-1114.webp",
+       1114
       ]
      ],
      "w400": "img/store/stickers-universe-2-400.webp",
      "w800": "img/store/stickers-universe-2-800.webp",
-     "w1200": "img/store/stickers-universe-2-1024.webp",
+     "w1200": "img/store/stickers-universe-2-1114.webp",
      "jpg": "img/store/stickers-universe-2-800.jpg",
-     "ratio": 0.6667,
+     "ratio": 0.6671,
      "bg": "#fefaf0",
-     "bgt": "#fcf8ed",
-     "bgb": "#f9f8ef",
-     "bgl": "#fdfaef",
-     "bgr": "#fdfaf0"
+     "bgt": "#fefbf0",
+     "bgb": "#fefbf0",
+     "bgl": "#fefbf0",
+     "bgr": "#fefbf0"
     },
     {
      "n": 3,
-     "src": "387b949ca409387d",
-     "w": 1024,
-     "h": 1536,
+     "src": "0ca6d13ac86a66a9",
+     "w": 1120,
+     "h": 1680,
      "sizes": [
       400,
       800,
-      1024
+      1120
      ],
      "files": [
       [
@@ -2430,30 +2948,30 @@
        800
       ],
       [
-       "img/store/stickers-universe-3-1024.webp",
-       1024
+       "img/store/stickers-universe-3-1120.webp",
+       1120
       ]
      ],
      "w400": "img/store/stickers-universe-3-400.webp",
      "w800": "img/store/stickers-universe-3-800.webp",
-     "w1200": "img/store/stickers-universe-3-1024.webp",
+     "w1200": "img/store/stickers-universe-3-1120.webp",
      "jpg": "img/store/stickers-universe-3-800.jpg",
      "ratio": 0.6667,
-     "bg": "#fdf9ed",
-     "bgt": "#f6f3e4",
-     "bgb": "#f7f1e0",
-     "bgl": "#fdf9ed",
-     "bgr": "#fdf9ed"
+     "bg": "#fffbf3",
+     "bgt": "#fffbf3",
+     "bgb": "#fffbf3",
+     "bgl": "#fffbf3",
+     "bgr": "#fffbf3"
     },
     {
      "n": 4,
-     "src": "0cb8569c25538ccf",
-     "w": 1024,
-     "h": 1536,
+     "src": "8e6a96b647ef882d",
+     "w": 1120,
+     "h": 1681,
      "sizes": [
       400,
       800,
-      1024
+      1120
      ],
      "files": [
       [
@@ -2465,20 +2983,20 @@
        800
       ],
       [
-       "img/store/stickers-universe-4-1024.webp",
-       1024
+       "img/store/stickers-universe-4-1120.webp",
+       1120
       ]
      ],
      "w400": "img/store/stickers-universe-4-400.webp",
      "w800": "img/store/stickers-universe-4-800.webp",
-     "w1200": "img/store/stickers-universe-4-1024.webp",
+     "w1200": "img/store/stickers-universe-4-1120.webp",
      "jpg": "img/store/stickers-universe-4-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fefbf3",
-     "bgt": "#f4f1ec",
-     "bgb": "#fdf9f2",
-     "bgl": "#fefbf3",
-     "bgr": "#fefbf2"
+     "ratio": 0.6663,
+     "bg": "#fefaee",
+     "bgt": "#fffaee",
+     "bgb": "#fffaee",
+     "bgl": "#fffaee",
+     "bgr": "#fffaee"
     }
    ]
   },
@@ -2486,13 +3004,13 @@
    "images": [
     {
      "n": 1,
-     "src": "9d964a9d55a84b54",
-     "w": 1024,
-     "h": 1536,
+     "src": "d2e811549f1b904d",
+     "w": 1107,
+     "h": 1660,
      "sizes": [
       400,
       800,
-      1024
+      1107
      ],
      "files": [
       [
@@ -2504,20 +3022,64 @@
        800
       ],
       [
-       "img/store/stickers-zuri-1-1024.webp",
-       1024
+       "img/store/stickers-zuri-1-1107.webp",
+       1107
       ]
      ],
      "w400": "img/store/stickers-zuri-1-400.webp",
      "w800": "img/store/stickers-zuri-1-800.webp",
-     "w1200": "img/store/stickers-zuri-1-1024.webp",
+     "w1200": "img/store/stickers-zuri-1-1107.webp",
      "jpg": "img/store/stickers-zuri-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#f9f9f9",
-     "bgt": "#dae2cd",
-     "bgb": "#fbfbfa",
-     "bgl": "#f9f9f8",
-     "bgr": "#f9faf9"
+     "ratio": 0.6669,
+     "bg": "#fcfbfc",
+     "bgt": "#fcfbfc",
+     "bgb": "#fcfbfc",
+     "bgl": "#fcfbfc",
+     "bgr": "#fcfbfc"
+    }
+   ]
+  },
+  "zuri-hoodie": {
+   "images": [
+    {
+     "n": 1,
+     "src": "3cd1611252a6a0ca",
+     "w": 1778,
+     "h": 1185,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1778
+     ],
+     "files": [
+      [
+       "img/store/zuri-hoodie-1-400.webp",
+       400
+      ],
+      [
+       "img/store/zuri-hoodie-1-800.webp",
+       800
+      ],
+      [
+       "img/store/zuri-hoodie-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/zuri-hoodie-1-1778.webp",
+       1778
+      ]
+     ],
+     "w400": "img/store/zuri-hoodie-1-400.webp",
+     "w800": "img/store/zuri-hoodie-1-800.webp",
+     "w1200": "img/store/zuri-hoodie-1-1778.webp",
+     "jpg": "img/store/zuri-hoodie-1-800.jpg",
+     "ratio": 1.5004,
+     "bg": "#fcf9f1",
+     "bgt": "#fcf9f1",
+     "bgb": "#fcf9f1",
+     "bgl": "#fcf9f1",
+     "bgr": "#fcf9f1"
     }
    ]
   },
@@ -2525,13 +3087,13 @@
    "images": [
     {
      "n": 1,
-     "src": "76fc025723bf6ef0",
-     "w": 1024,
-     "h": 1536,
+     "src": "c6469b16fbdc86ef",
+     "w": 1099,
+     "h": 1648,
      "sizes": [
       400,
       800,
-      1024
+      1099
      ],
      "files": [
       [
@@ -2543,55 +3105,20 @@
        800
       ],
       [
-       "img/store/zuri-replica-backpack-1-1024.webp",
-       1024
+       "img/store/zuri-replica-backpack-1-1099.webp",
+       1099
       ]
      ],
      "w400": "img/store/zuri-replica-backpack-1-400.webp",
      "w800": "img/store/zuri-replica-backpack-1-800.webp",
-     "w1200": "img/store/zuri-replica-backpack-1-1024.webp",
+     "w1200": "img/store/zuri-replica-backpack-1-1099.webp",
      "jpg": "img/store/zuri-replica-backpack-1-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fdf4e6",
-     "bgt": "#faf0e1",
-     "bgb": "#fef7ea",
-     "bgl": "#fcf3e5",
-     "bgr": "#fdf7ea"
-    },
-    {
-     "n": 2,
-     "src": "76fc025723bf6ef0",
-     "w": 1024,
-     "h": 1536,
-     "sizes": [
-      400,
-      800,
-      1024
-     ],
-     "files": [
-      [
-       "img/store/zuri-replica-backpack-2-400.webp",
-       400
-      ],
-      [
-       "img/store/zuri-replica-backpack-2-800.webp",
-       800
-      ],
-      [
-       "img/store/zuri-replica-backpack-2-1024.webp",
-       1024
-      ]
-     ],
-     "w400": "img/store/zuri-replica-backpack-2-400.webp",
-     "w800": "img/store/zuri-replica-backpack-2-800.webp",
-     "w1200": "img/store/zuri-replica-backpack-2-1024.webp",
-     "jpg": "img/store/zuri-replica-backpack-2-800.jpg",
-     "ratio": 0.6667,
-     "bg": "#fdf4e6",
-     "bgt": "#faf0e1",
-     "bgb": "#fef7ea",
-     "bgl": "#fcf3e5",
-     "bgr": "#fdf7ea"
+     "ratio": 0.6669,
+     "bg": "#fdf8e8",
+     "bgt": "#fef8e8",
+     "bgb": "#fef8e8",
+     "bgl": "#fef8e8",
+     "bgr": "#fef8e8"
     }
    ]
   },
@@ -2656,45 +3183,6 @@
      "bgb": "#f6eee8",
      "bgl": "#f6eee8",
      "bgr": "#f6eee8"
-    }
-   ]
-  },
-  "all-friends-hoodie": {
-   "images": [
-    {
-     "n": 1,
-     "src": "b1f25f01689c5f1b",
-     "w": 1200,
-     "h": 800,
-     "sizes": [
-      400,
-      768,
-      1200
-     ],
-     "files": [
-      [
-       "img/store/all-friends-hoodie-1-400.webp",
-       400
-      ],
-      [
-       "img/store/all-friends-hoodie-1-768.webp",
-       768
-      ],
-      [
-       "img/store/all-friends-hoodie-1-1200.webp",
-       1200
-      ]
-     ],
-     "w400": "img/store/all-friends-hoodie-1-400.webp",
-     "w800": "img/store/all-friends-hoodie-1-768.webp",
-     "w1200": "img/store/all-friends-hoodie-1-1200.webp",
-     "jpg": "img/store/all-friends-hoodie-1-768.jpg",
-     "ratio": 1.5,
-     "bg": "#f7f1ea",
-     "bgt": "#f8f2eb",
-     "bgb": "#f5eee6",
-     "bgl": "#fae7b3",
-     "bgr": "#edd8ab"
     }
    ]
   },
@@ -2826,45 +3314,6 @@
     }
    ]
   },
-  "booker-hoodie": {
-   "images": [
-    {
-     "n": 1,
-     "src": "a2868123fd176946",
-     "w": 1200,
-     "h": 800,
-     "sizes": [
-      400,
-      768,
-      1200
-     ],
-     "files": [
-      [
-       "img/store/booker-hoodie-1-400.webp",
-       400
-      ],
-      [
-       "img/store/booker-hoodie-1-768.webp",
-       768
-      ],
-      [
-       "img/store/booker-hoodie-1-1200.webp",
-       1200
-      ]
-     ],
-     "w400": "img/store/booker-hoodie-1-400.webp",
-     "w800": "img/store/booker-hoodie-1-768.webp",
-     "w1200": "img/store/booker-hoodie-1-1200.webp",
-     "jpg": "img/store/booker-hoodie-1-768.jpg",
-     "ratio": 1.5,
-     "bg": "#f7f0e7",
-     "bgt": "#f8f1e8",
-     "bgb": "#f6efe6",
-     "bgl": "#a3b8d7",
-     "bgr": "#b2c8e6"
-    }
-   ]
-  },
   "booker-tshirt": {
    "images": [
     {
@@ -2990,45 +3439,6 @@
      "bgb": "#fcf6ef",
      "bgl": "#fcf6ef",
      "bgr": "#fcf6ef"
-    }
-   ]
-  },
-  "bop-hoodie": {
-   "images": [
-    {
-     "n": 1,
-     "src": "da97bc84cee68575",
-     "w": 1200,
-     "h": 800,
-     "sizes": [
-      400,
-      768,
-      1200
-     ],
-     "files": [
-      [
-       "img/store/bop-hoodie-1-400.webp",
-       400
-      ],
-      [
-       "img/store/bop-hoodie-1-768.webp",
-       768
-      ],
-      [
-       "img/store/bop-hoodie-1-1200.webp",
-       1200
-      ]
-     ],
-     "w400": "img/store/bop-hoodie-1-400.webp",
-     "w800": "img/store/bop-hoodie-1-768.webp",
-     "w1200": "img/store/bop-hoodie-1-1200.webp",
-     "jpg": "img/store/bop-hoodie-1-768.jpg",
-     "ratio": 1.5,
-     "bg": "#f9f3ed",
-     "bgt": "#f8f2eb",
-     "bgb": "#f7f1ea",
-     "bgl": "#bfadc2",
-     "bgr": "#ccb9d1"
     }
    ]
   },
@@ -3160,45 +3570,6 @@
     }
    ]
   },
-  "lumi-hoodie": {
-   "images": [
-    {
-     "n": 1,
-     "src": "8b19932557eead23",
-     "w": 1200,
-     "h": 800,
-     "sizes": [
-      400,
-      768,
-      1200
-     ],
-     "files": [
-      [
-       "img/store/lumi-hoodie-1-400.webp",
-       400
-      ],
-      [
-       "img/store/lumi-hoodie-1-768.webp",
-       768
-      ],
-      [
-       "img/store/lumi-hoodie-1-1200.webp",
-       1200
-      ]
-     ],
-     "w400": "img/store/lumi-hoodie-1-400.webp",
-     "w800": "img/store/lumi-hoodie-1-768.webp",
-     "w1200": "img/store/lumi-hoodie-1-1200.webp",
-     "jpg": "img/store/lumi-hoodie-1-768.jpg",
-     "ratio": 1.5,
-     "bg": "#f7f1ea",
-     "bgt": "#f7f1ea",
-     "bgb": "#f7f1ea",
-     "bgl": "#edc6c9",
-     "bgr": "#f6cacf"
-    }
-   ]
-  },
   "lumi-tshirt": {
    "images": [
     {
@@ -3324,45 +3695,6 @@
      "bgb": "#fbf3ea",
      "bgl": "#fbf3ea",
      "bgr": "#fbf3ea"
-    }
-   ]
-  },
-  "zuri-hoodie": {
-   "images": [
-    {
-     "n": 1,
-     "src": "eb1106ec21e667e5",
-     "w": 1200,
-     "h": 800,
-     "sizes": [
-      400,
-      768,
-      1200
-     ],
-     "files": [
-      [
-       "img/store/zuri-hoodie-1-400.webp",
-       400
-      ],
-      [
-       "img/store/zuri-hoodie-1-768.webp",
-       768
-      ],
-      [
-       "img/store/zuri-hoodie-1-1200.webp",
-       1200
-      ]
-     ],
-     "w400": "img/store/zuri-hoodie-1-400.webp",
-     "w800": "img/store/zuri-hoodie-1-768.webp",
-     "w1200": "img/store/zuri-hoodie-1-1200.webp",
-     "jpg": "img/store/zuri-hoodie-1-768.jpg",
-     "ratio": 1.5,
-     "bg": "#fcf7f0",
-     "bgt": "#fdf7f0",
-     "bgb": "#fcf8f0",
-     "bgl": "#cadbc3",
-     "bgr": "#cad5bd"
     }
    ]
   },

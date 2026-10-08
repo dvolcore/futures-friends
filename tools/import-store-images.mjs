@@ -21,6 +21,7 @@ const MERGE = process.argv.includes('--merge');   // keep manifest entries (and 
 const DRY = process.argv.includes('--dry-run');
 const folder = args[0] || join(homedir(), 'Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/store_photos');
 const WIDTHS = [400, 800, 1200];
+const ANGLE = { 3: 'front', 4: 'side', 5: 'back' };
 const NAME = /^([a-z0-9][a-z0-9-]*)-(\d{1,2})\.(png|jpe?g|webp)$/i;
 
 const README = `# Store product pictures
@@ -60,6 +61,11 @@ function cornerBg(f) {
 }
 const sha = f => createHash('sha256').update(readFileSync(f)).digest('hex').slice(0, 16);
 
+if (process.argv.includes('--bg-only')) {   // add the picture-background colours to manifest entries that lack them (no conversion, no folder needed)
+  const mp = join(OUT, 'manifest.json'), m = JSON.parse(readFileSync(mp, 'utf8')); let k = 0;
+  for (const p of Object.values(m.products)) for (const i of p.images) if (!i.bgt) { Object.assign(i, cornerBg(join(SITE, i.files[0][0]))); k++; }
+  writeFileSync(mp, JSON.stringify(m, null, 1) + '\n'); console.log('backgrounds added to', k, 'pictures'); process.exit(0);
+}
 if (!existsSync(folder)) { if (!DRY) mkdirSync(folder, { recursive: true }); console.log('created', folder); }
 if (!DRY && !existsSync(join(folder, 'README.md'))) writeFileSync(join(folder, 'README.md'), README);
 
@@ -99,6 +105,7 @@ for (const { f, id, n } of found) {
     files: sizes.map(w => [`img/store/${base}-${w}.webp`, w]), w400: `img/store/${base}-${sizes[0]}.webp`, w800: `img/store/${base}-${mid}.webp`, w1200: `img/store/${base}-${top}.webp`,
     jpg: `img/store/${base}-${mid}.jpg`, ratio: +(ow / oh).toFixed(4) };
   if (prev && prev.src === hash && prev.bgt) Object.assign(entry, { bg: prev.bg, bgt: prev.bgt, bgb: prev.bgb, bgl: prev.bgl, bgr: prev.bgr }); else if (!DRY) Object.assign(entry, cornerBg(join(OUT, `${base}-${sizes[0]}.webp`)));
+  if (/^plush-/.test(id) && ANGLE[n]) entry.angle = ANGLE[n];   // plush n=3/4/5 are the uncropped front/side/back slices for the turn-around viewer (n=2 is the whole board)
   if (alts[id] && alts[id][n - 1]) entry.alt = alts[id][n - 1];
   (products[id] = products[id] || { images: [] }).images.push(entry);
 }
