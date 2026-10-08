@@ -17,7 +17,7 @@
     },
     {
      "id": "hc-friends-h",
-     "title": "Four friends. Four things children practice every day."
+     "title": "Each friend has a job in the room."
     },
     {
      "id": "hc-day-h",
@@ -56,7 +56,7 @@
    "sections": [
     {
      "id": "why-early",
-     "title": "Strong foundations before kindergarten"
+     "title": "What the research says about the first five years"
     },
     {
      "id": "measure",
@@ -188,6 +188,10 @@
    "section": "Bring Futures Friends to your child care center, starting with Unit 1",
    "sections": [
     {
+     "id": "ks-for-centers",
+     "title": "Five friend zones. One chime."
+    },
+    {
      "id": "rt-strip",
      "title": "Where Futures Friends stands today"
     },
@@ -220,10 +224,6 @@
      "title": "Train your staff with us"
     },
     {
-     "id": "rk-band-centers-h",
-     "title": "Turn one room into five friend zones"
-    },
-    {
      "id": "fp-band-centers-h",
      "title": "Be one of our first programs"
     },
@@ -244,6 +244,10 @@
    "section": "A big program sized for your home daycare",
    "sections": [
     {
+     "id": "ks-for-home",
+     "title": "Five friend zones. One chime."
+    },
+    {
      "id": "rt-strip",
      "title": "Where Futures Friends stands today"
     },
@@ -258,10 +262,6 @@
     {
      "id": "ts-staff-h",
      "title": "Train your staff with us"
-    },
-    {
-     "id": "rk-band-home-h",
-     "title": "Set up your home room"
     },
     {
      "id": "oc-band-home-h",
@@ -353,7 +353,7 @@
     },
     {
      "id": "wc-co-h",
-     "title": "More than daycare. A system families can see."
+     "title": "The whole day, planned on purpose."
     }
    ],
    "media": []
@@ -395,7 +395,7 @@
   {
    "route": "family-guide",
    "title": "Family App guide",
-   "section": "Everything families can see and do",
+   "section": "What you will see in the Family App",
    "sections": [],
    "media": []
   },
@@ -583,7 +583,7 @@
   {
    "route": "rainbow",
    "title": "Eat the Rainbow recipes",
-   "section": "Rainbow meals for little ones",
+   "section": "A rainbow on every plate",
    "sections": [
     {
      "id": "ffr-game",
@@ -605,6 +605,10 @@
    "section": "Published package prices before tax",
    "sections": [
     {
+     "id": "ks-pricing",
+     "title": "Five friend zones. One chime."
+    },
+    {
      "id": "rt-strip",
      "title": "Where Futures Friends stands today"
     },
@@ -623,10 +627,6 @@
     {
      "id": "pz-compare",
      "title": "What you can get today, next to what others sell"
-    },
-    {
-     "id": "rk-band-pricing-h",
-     "title": "What the Zones Starter includes"
     },
     {
      "id": "fp-band-pricing-h",
@@ -1021,11 +1021,11 @@
   {
    "route": "whole-child",
    "title": "The Whole-Child Day: learning, meals, movement, Quiet Time",
-   "section": "More than daycare. A system families can see.",
+   "section": "The whole day, planned on purpose. Families get to see it.",
    "sections": [
     {
      "id": "wc-day",
-     "title": "One day. One connected system."
+     "title": "One day, six steps."
     },
     {
      "id": "wc-friends",
@@ -1254,14 +1254,9 @@
   },
   {
    "route": "shop-families",
-   "title": "Family shop",
-   "section": "The family shop",
-   "sections": [
-    {
-     "id": "rt-strip",
-     "title": "Where Futures Friends stands today"
-    }
-   ],
+   "title": "Kids' Shop",
+   "section": "The Kids' Shop",
+   "sections": [],
    "media": []
   },
   {
@@ -1462,11 +1457,11 @@
     },
     {
      "id": "fl-doors",
-     "title": "Everything here is free"
+     "title": "Seven things to open, all free"
     },
     {
      "id": "fl-diff",
-     "title": "More than a video in your feed"
+     "title": "After the video"
     },
     {
      "id": "fl-how",
@@ -1991,9 +1986,85 @@
    "section": "Clock in and out",
    "sections": [],
    "media": []
+  },
+  {
+   "route": "centers",
+   "title": "For centers and programs",
+   "section": "Bring Futures Friends to your program",
+   "sections": [
+    {
+     "id": "ks-centers",
+     "title": "Five friend zones. One chime."
+    },
+    {
+     "id": "aud-prog-h",
+     "title": "Which program are you?"
+    },
+    {
+     "id": "aud-rooms-h",
+     "title": "Set up the learning zones"
+    },
+    {
+     "id": "aud-team-h",
+     "title": "Curriculum and training"
+    },
+    {
+     "id": "aud-run-h",
+     "title": "Run it, fund it, compare it"
+    },
+    {
+     "id": "hc-proof-h",
+     "title": "What we have built so far"
+    },
+    {
+     "id": "aud-fam-h",
+     "title": "See what families experience"
+    },
+    {
+     "id": "aud-close-h",
+     "title": "Talk to a real person"
+    }
+   ],
+   "media": []
+  },
+  {
+   "route": "book-demo",
+   "title": "Book a demo",
+   "section": "Book a demo",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "kids-shop",
+   "title": "Kids' Shop",
+   "section": "The Kids' Shop",
+   "sections": [],
+   "media": []
+  },
+  {
+   "route": "sign-in",
+   "title": "Sign in",
+   "section": "Sign in to Futures Friends",
+   "sections": [
+    {
+     "id": "aud-sign-h",
+     "title": "Portals"
+    }
+   ],
+   "media": []
   }
  ],
  "links": [
+  {
+   "from_route": "home",
+   "from_section": "site-header",
+   "label": "Sign in",
+   "kind": "nav",
+   "to_route": "sign-in",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
   {
    "from_route": "home",
    "from_section": "site-header",
@@ -2007,19 +2078,9 @@
   {
    "from_route": "home",
    "from_section": "site-header",
-   "label": "Teacher Portal preview",
+   "label": "Book a demo",
    "kind": "nav",
-   "to_route": "signin-teacher",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-header",
-   "label": "Family Portal preview",
-   "kind": "nav",
-   "to_route": "signin-family",
+   "to_route": "book-demo",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2037,9 +2098,9 @@
   {
    "from_route": "home",
    "from_section": "site-header",
-   "label": "Curriculum",
+   "label": "Friends & Books",
    "kind": "nav",
-   "to_route": "curriculum",
+   "to_route": "friends",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2047,19 +2108,9 @@
   {
    "from_route": "home",
    "from_section": "site-header",
-   "label": "Whole Child",
+   "label": "Watch",
    "kind": "nav",
-   "to_route": "whole-child",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-header",
-   "label": "Teacher Standard",
-   "kind": "nav",
-   "to_route": "teacher-standard",
+   "to_route": "family-videos",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2077,19 +2128,9 @@
   {
    "from_route": "home",
    "from_section": "site-header",
-   "label": "Friends & Books",
+   "label": "Free stories",
    "kind": "nav",
-   "to_route": "friends",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-header",
-   "label": "Find your program",
-   "kind": "nav",
-   "to_route": "options",
+   "to_route": "at-home",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2097,9 +2138,9 @@
   {
    "from_route": "home",
    "from_section": "",
-   "label": "Find your program",
+   "label": "Free stories and activities",
    "kind": "hero",
-   "to_route": "options",
+   "to_route": "at-home",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2157,9 +2198,9 @@
   {
    "from_route": "home",
    "from_section": "hc-doors-h",
-   "label": "For child care centers",
+   "label": "Futures at Home",
    "kind": "card",
-   "to_route": "for-centers",
+   "to_route": "at-home",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2167,9 +2208,9 @@
   {
    "from_route": "home",
    "from_section": "hc-doors-h",
-   "label": "For home daycares",
+   "label": "Watch together",
    "kind": "card",
-   "to_route": "for-home",
+   "to_route": "family-videos",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2177,19 +2218,9 @@
   {
    "from_route": "home",
    "from_section": "hc-doors-h",
-   "label": "For families",
+   "label": "Plan a visit",
    "kind": "card",
-   "to_route": "for-families",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "hc-doors-h",
-   "label": "Compare every program option",
-   "kind": "card",
-   "to_route": "options",
+   "to_route": "enroll",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2197,9 +2228,9 @@
   {
    "from_route": "home",
    "from_section": "",
-   "label": "See what is available today",
+   "label": "Plan a visit",
    "kind": "nav",
-   "to_route": "pricing",
+   "to_route": "enroll",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2230,16 +2261,6 @@
    "label": "See the whole-child day",
    "kind": "nav",
    "to_route": "whole-child",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "hc-proof-h",
-   "label": "20 teaching days in Unit 1 Written day by day for twos, threes and pre-K Draft, summary free to read",
-   "kind": "card",
-   "to_route": "unit-1",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2283,16 +2304,6 @@
    "to_section": "#ff-town-h",
    "status": "fixed",
    "note": "was #friends (page top). Lands on Meet the whole town (#ff-town-h)."
-  },
-  {
-   "from_route": "home",
-   "from_section": "hc-proof-h",
-   "label": "37 training modules for teachers The Futures Friends Academy catalog Draft, not yet state approved",
-   "kind": "card",
-   "to_route": "academy",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
   },
   {
    "from_route": "home",
@@ -2349,7 +2360,7 @@
    "from_section": "footer-friends",
    "label": "Learn with Booker",
    "kind": "footer",
-   "to_route": "curriculum",
+   "to_route": "story-time",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2367,7 +2378,7 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Enroll at Futures Learning Center",
+   "label": "Visit Futures Learning Center",
    "kind": "footer",
    "to_route": "enroll",
    "to_section": "",
@@ -2387,9 +2398,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "The Whole-Child Day",
+   "label": "Story Time",
    "kind": "footer",
-   "to_route": "whole-child",
+   "to_route": "story-time",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2397,9 +2408,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Friends & Books",
+   "label": "Watch together",
    "kind": "footer",
-   "to_route": "friends",
+   "to_route": "family-videos",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2417,9 +2428,19 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Story Time",
+   "label": "Friends & Books",
    "kind": "footer",
-   "to_route": "story-time",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "The Whole-Child Day",
+   "kind": "footer",
+   "to_route": "whole-child",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2447,6 +2468,16 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
+   "label": "Kids’ Shop",
+   "kind": "footer",
+   "to_route": "kids-shop",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
    "label": "Family App Guide",
    "kind": "footer",
    "to_route": "family-guide",
@@ -2460,6 +2491,16 @@
    "label": "Family Portal (preview)",
    "kind": "footer",
    "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Centers & programs overview",
+   "kind": "footer",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2487,39 +2528,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Curriculum",
+   "label": "Churches & Faith-Based Programs",
    "kind": "footer",
-   "to_route": "curriculum",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
-   "label": "Pricing",
-   "kind": "footer",
-   "to_route": "pricing",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
-   "label": "Program Options",
-   "kind": "footer",
-   "to_route": "options",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
-   "label": "Learning Zones Kit",
-   "kind": "footer",
-   "to_route": "room-kit",
+   "to_route": "for-faith",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2537,16 +2548,6 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Faith-Based Centers",
-   "kind": "footer",
-   "to_route": "for-faith",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
    "label": "Employer Child Care",
    "kind": "footer",
    "to_route": "for-employers",
@@ -2557,9 +2558,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Train Your Staff",
+   "label": "Program Options",
    "kind": "footer",
-   "to_route": "train-your-staff",
+   "to_route": "options",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2567,9 +2568,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Funding Help",
+   "label": "Pricing",
    "kind": "footer",
-   "to_route": "funding",
+   "to_route": "pricing",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2577,9 +2578,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Futures Hub",
+   "label": "Learning Zones Kit",
    "kind": "footer",
-   "to_route": "hub",
+   "to_route": "room-kit",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2587,9 +2588,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Get the App",
+   "label": "Futures Store",
    "kind": "footer",
-   "to_route": "app",
+   "to_route": "store",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2597,9 +2598,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Impact",
+   "label": "Curriculum",
    "kind": "footer",
-   "to_route": "impact",
+   "to_route": "curriculum",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2607,9 +2608,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Our Teacher Standard",
+   "label": "School Readiness",
    "kind": "footer",
-   "to_route": "teacher-standard",
+   "to_route": "readiness",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2627,6 +2628,16 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
+   "label": "Our Teacher Standard",
+   "kind": "footer",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
    "label": "Training Academy",
    "kind": "footer",
    "to_route": "academy",
@@ -2637,9 +2648,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Careers",
+   "label": "Train Your Staff",
    "kind": "footer",
-   "to_route": "jobs",
+   "to_route": "train-your-staff",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2687,9 +2698,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Teacher Portal (preview)",
+   "label": "Futures Hub",
    "kind": "footer",
-   "to_route": "signin-teacher",
+   "to_route": "hub",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2697,9 +2708,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "School Readiness",
+   "label": "Get the App",
    "kind": "footer",
-   "to_route": "readiness",
+   "to_route": "app",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2707,9 +2718,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Futures Include",
+   "label": "Funding Help",
    "kind": "footer",
-   "to_route": "include",
+   "to_route": "funding",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2717,29 +2728,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Watch Episodes",
+   "label": "Impact",
    "kind": "footer",
-   "to_route": "watch",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
-   "label": "Eat the Rainbow",
-   "kind": "footer",
-   "to_route": "rainbow",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-footer",
-   "label": "Futures Store",
-   "kind": "footer",
-   "to_route": "store",
+   "to_route": "impact",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2750,6 +2741,66 @@
    "label": "Why Futures",
    "kind": "footer",
    "to_route": "why",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Book a demo",
+   "kind": "footer",
+   "to_route": "book-demo",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Support & FAQ",
+   "kind": "footer",
+   "to_route": "support",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Contact Us",
+   "kind": "footer",
+   "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Sign in",
+   "kind": "footer",
+   "to_route": "sign-in",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Teacher Portal (preview)",
+   "kind": "footer",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Careers",
+   "kind": "footer",
+   "to_route": "jobs",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2777,9 +2828,9 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Support & FAQ",
+   "label": "Watch Episodes",
    "kind": "footer",
-   "to_route": "support",
+   "to_route": "watch",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2787,9 +2838,39 @@
   {
    "from_route": "home",
    "from_section": "site-footer",
-   "label": "Contact Us",
+   "label": "Eat the Rainbow",
    "kind": "footer",
-   "to_route": "contact",
+   "to_route": "rainbow",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Futures Include",
+   "kind": "footer",
+   "to_route": "include",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "Run a center or program? See Futures Friends for centers",
+   "kind": "footer",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-footer",
+   "label": "See what families experience",
+   "kind": "footer",
+   "to_route": "home",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -2867,249 +2948,9 @@
   {
    "from_route": "home",
    "from_section": "site-menu",
-   "label": "Curriculum",
-   "kind": "nav",
-   "to_route": "curriculum",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Whole Child",
-   "kind": "nav",
-   "to_route": "whole-child",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Teacher Standard",
-   "kind": "nav",
-   "to_route": "teacher-standard",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
    "label": "Futures at Home",
    "kind": "nav",
    "to_route": "at-home",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Friends & Books",
-   "kind": "nav",
-   "to_route": "friends",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Visit our pilot center",
-   "kind": "nav",
-   "to_route": "enroll",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "The whole-child day",
-   "kind": "nav",
-   "to_route": "whole-child",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Bop at Home",
-   "kind": "nav",
-   "to_route": "bop-at-home",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "What a center gets",
-   "kind": "nav",
-   "to_route": "for-centers",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Home daycares",
-   "kind": "nav",
-   "to_route": "for-home",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Learning Zones Kit",
-   "kind": "nav",
-   "to_route": "room-kit",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Pricing",
-   "kind": "nav",
-   "to_route": "pricing",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Train your staff",
-   "kind": "nav",
-   "to_route": "train-your-staff",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Our Teacher Standard",
-   "kind": "nav",
-   "to_route": "teacher-standard",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Unit 1 at a glance",
-   "kind": "nav",
-   "to_route": "unit-1",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Talk About It cards",
-   "kind": "nav",
-   "to_route": "talk",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Training Academy",
-   "kind": "nav",
-   "to_route": "academy",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Careers",
-   "kind": "nav",
-   "to_route": "jobs",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Teacher Portalpreview",
-   "kind": "nav",
-   "to_route": "signin-teacher",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Family Portalpreview",
-   "kind": "nav",
-   "to_route": "signin-family",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Program options",
-   "kind": "nav",
-   "to_route": "options",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Futures Hub",
-   "kind": "nav",
-   "to_route": "hub",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Watch",
-   "kind": "nav",
-   "to_route": "watch",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "Eat the Rainbow",
-   "kind": "nav",
-   "to_route": "rainbow",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "home",
-   "from_section": "site-menu",
-   "label": "School readiness",
-   "kind": "nav",
-   "to_route": "readiness",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3127,9 +2968,129 @@
   {
    "from_route": "home",
    "from_section": "site-menu",
+   "label": "Watch together",
+   "kind": "nav",
+   "to_route": "family-videos",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Bop at Home",
+   "kind": "nav",
+   "to_route": "bop-at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Visit our pilot center",
+   "kind": "nav",
+   "to_route": "enroll",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Kids' Shop",
+   "kind": "nav",
+   "to_route": "kids-shop",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Family Portalpreview",
+   "kind": "nav",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Teacher Portalpreview",
+   "kind": "nav",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "All sign-inspreview",
+   "kind": "nav",
+   "to_route": "sign-in",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Friends & Books",
+   "kind": "nav",
+   "to_route": "friends",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "The whole-child day",
+   "kind": "nav",
+   "to_route": "whole-child",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Things to do at home",
+   "kind": "nav",
+   "to_route": "activities",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
    "label": "Printables",
    "kind": "nav",
    "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "My Week",
+   "kind": "nav",
+   "to_route": "my-week",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "home",
+   "from_section": "site-menu",
+   "label": "Events",
+   "kind": "nav",
+   "to_route": "events",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3160,6 +3121,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "impact",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3210,6 +3181,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "readiness",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3300,6 +3281,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "curriculum",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -3566,6 +3557,16 @@
   },
   {
    "from_route": "options",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "options",
    "from_section": "rt-strip",
    "label": "Launch package and prices",
    "kind": "nav",
@@ -3767,6 +3768,16 @@
   {
    "from_route": "for-centers",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -3779,6 +3790,36 @@
    "from_section": "",
    "label": "Request More Information",
    "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ks-for-centers",
+   "label": "See the kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ks-for-centers",
+   "label": "Plan your room",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-centers",
+   "from_section": "ks-for-centers",
+   "label": "Get a quote",
+   "kind": "button",
    "to_route": "quote",
    "to_section": "",
    "status": "ok",
@@ -4036,16 +4077,6 @@
   },
   {
    "from_route": "for-centers",
-   "from_section": "rk-band-centers-h",
-   "label": "See the Learning Zones Kit",
-   "kind": "button",
-   "to_route": "room-kit",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "for-centers",
    "from_section": "fp-band-centers-h",
    "label": "Become a Founding Partner",
    "kind": "button",
@@ -4117,6 +4148,16 @@
   {
    "from_route": "for-home",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -4129,6 +4170,36 @@
    "from_section": "",
    "label": "Request More Information",
    "kind": "hero",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "ks-for-home",
+   "label": "See the kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "ks-for-home",
+   "label": "Plan your room",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-home",
+   "from_section": "ks-for-home",
+   "label": "Get a quote",
+   "kind": "button",
    "to_route": "quote",
    "to_section": "",
    "status": "ok",
@@ -4356,16 +4427,6 @@
   },
   {
    "from_route": "for-home",
-   "from_section": "rk-band-home-h",
-   "label": "See the Learning Zones Kit",
-   "kind": "button",
-   "to_route": "room-kit",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "for-home",
    "from_section": "oc-band-home-h",
    "label": "See the whole month",
    "kind": "button",
@@ -4390,6 +4451,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-prek",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -4580,6 +4651,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-faith",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -4817,6 +4898,16 @@
   {
    "from_route": "for-employers",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "for-employers",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -5000,16 +5091,6 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "for-families",
-   "from_section": "",
-   "label": "Program options",
-   "kind": "hero",
-   "to_route": "options",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5217,6 +5298,16 @@
   {
    "from_route": "include",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "include",
+   "from_section": "",
    "label": "Curriculum",
    "kind": "hero",
    "to_route": "curriculum",
@@ -5287,6 +5378,16 @@
   {
    "from_route": "hub",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "hub",
+   "from_section": "",
    "label": "Get the app",
    "kind": "hero",
    "to_route": "app",
@@ -5347,6 +5448,16 @@
   {
    "from_route": "app",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "app",
+   "from_section": "",
    "label": "Futures Hub",
    "kind": "hero",
    "to_route": "hub",
@@ -5367,9 +5478,9 @@
   {
    "from_route": "family-guide",
    "from_section": "",
-   "label": "Futures Hub",
+   "label": "Family Portal",
    "kind": "hero",
-   "to_route": "hub",
+   "to_route": "signin-family",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -5620,6 +5731,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "quote",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6257,6 +6378,16 @@
   {
    "from_route": "funding",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "funding",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -6287,9 +6418,49 @@
   {
    "from_route": "pricing",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "ks-pricing",
+   "label": "See the kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "ks-pricing",
+   "label": "Plan your room",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "pricing",
+   "from_section": "ks-pricing",
+   "label": "Get a quote",
+   "kind": "button",
+   "to_route": "quote",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6406,16 +6577,6 @@
   },
   {
    "from_route": "pricing",
-   "from_section": "rk-band-pricing-h",
-   "label": "See the Learning Zones Kit",
-   "kind": "button",
-   "to_route": "room-kit",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "pricing",
    "from_section": "fp-band-pricing-h",
    "label": "Become a Founding Partner",
    "kind": "button",
@@ -6455,6 +6616,16 @@
    "note": ""
   },
   {
+   "from_route": "why",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
    "from_route": "news",
    "from_section": "",
    "label": "Home",
@@ -6470,6 +6641,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "blog",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6520,6 +6701,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "post",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6767,9 +6958,9 @@
   {
    "from_route": "talk",
    "from_section": "",
-   "label": "Friends & Books",
+   "label": "For centers & programs",
    "kind": "hero",
-   "to_route": "friends",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6777,9 +6968,9 @@
   {
    "from_route": "talk",
    "from_section": "",
-   "label": "Watch",
+   "label": "Curriculum",
    "kind": "hero",
-   "to_route": "watch",
+   "to_route": "curriculum",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -6907,9 +7098,19 @@
   {
    "from_route": "watch",
    "from_section": "",
-   "label": "Friends & Books",
+   "label": "Futures at Home",
    "kind": "hero",
-   "to_route": "friends",
+   "to_route": "at-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "watch",
+   "from_section": "",
+   "label": "Watch together",
+   "kind": "hero",
+   "to_route": "family-videos",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -7926,6 +8127,16 @@
   },
   {
    "from_route": "store",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store",
    "from_section": "rt-strip",
    "label": "Launch package and prices",
    "kind": "nav",
@@ -8077,128 +8288,8 @@
   {
    "from_route": "shop-families",
    "from_section": "",
-   "label": "Futures Store",
-   "kind": "hero",
-   "to_route": "store",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Launch package and prices",
-   "kind": "nav",
-   "to_route": "pricing",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Unit 1 curriculum: a summary anyone can read; the full teaching plans are for educators at a Futures Friends program (dr",
-   "kind": "nav",
-   "to_route": "unit-1",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Futures at Home: activities by age, five read-aloud storybooks and printable family pages (free, no account)",
-   "kind": "nav",
-   "to_route": "at-home",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Print it or find more for your child's age",
-   "kind": "nav",
-   "to_route": "activities",
-   "to_section": "smell-the-flower",
-   "status": "ok",
-   "note": "#activities/smell-the-flower shows the same page as #activities"
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "A live virtual session to start Unit 1 with your staff (90 minutes, up to 15 staff)",
-   "kind": "nav",
-   "to_route": "pricing",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Optional on-site launch day in the Kansas City metro",
-   "kind": "nav",
-   "to_route": "pricing",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Units 2 to 12: Units 2 to 4 daily plans written as drafts (not yet reviewed); Units 5 to 12 outlined week by week",
-   "kind": "nav",
-   "to_route": "curriculum",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Futures Hub for your program: built and tested, not hosted yet",
-   "kind": "nav",
-   "to_route": "hub",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Level 1 Foundations training: courses being written, not state-approved",
-   "kind": "nav",
-   "to_route": "teacher-standard",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Printed storybooks, plush, carpet and the welcome box: not made yet",
-   "kind": "nav",
-   "to_route": "options",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "rt-strip",
-   "label": "Episodes: scripted or outlined, none made yet",
-   "kind": "nav",
-   "to_route": "watch",
-   "to_section": "",
-   "status": "ok",
-   "note": ""
-  },
-  {
-   "from_route": "shop-families",
-   "from_section": "",
    "label": "Tell me when it opens",
-   "kind": "card",
+   "kind": "button",
    "to_route": "store-request",
    "to_section": "",
    "status": "ok",
@@ -8210,6 +8301,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "shop-programs",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8407,6 +8508,16 @@
   {
    "from_route": "corners",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "corners",
+   "from_section": "",
    "label": "Futures Store",
    "kind": "hero",
    "to_route": "store",
@@ -8457,6 +8568,16 @@
   {
    "from_route": "store-request",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "store-request",
+   "from_section": "",
    "label": "Futures Store",
    "kind": "hero",
    "to_route": "store",
@@ -8480,6 +8601,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-kit",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8607,6 +8738,16 @@
   {
    "from_route": "founding-partners",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "founding-partners",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -8650,6 +8791,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "membership",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -8757,6 +8908,16 @@
   {
    "from_route": "brand-kit",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "brand-kit",
+   "from_section": "",
    "label": "Program options",
    "kind": "hero",
    "to_route": "options",
@@ -8830,6 +8991,16 @@
    "label": "Home",
    "kind": "hero",
    "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "room-planner",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
    "to_section": "",
    "status": "ok",
    "note": ""
@@ -9947,6 +10118,16 @@
   {
    "from_route": "unit-1",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "unit-1",
+   "from_section": "",
    "label": "Curriculum",
    "kind": "hero",
    "to_route": "curriculum",
@@ -10457,6 +10638,16 @@
   {
    "from_route": "start-center",
    "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "start-center",
+   "from_section": "",
    "label": "Futures Hub",
    "kind": "hero",
    "to_route": "hub",
@@ -10620,6 +10811,496 @@
    "label": "contact Futures Learning Center",
    "kind": "card",
    "to_route": "contact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "",
+   "label": "Book a demo",
+   "kind": "hero",
+   "to_route": "book-demo",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "",
+   "label": "See pricing",
+   "kind": "hero",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "",
+   "label": "See what is available today",
+   "kind": "nav",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "ks-centers",
+   "label": "See the kit",
+   "kind": "button",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "ks-centers",
+   "label": "Plan your room",
+   "kind": "button",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "ks-centers",
+   "label": "Get a quote",
+   "kind": "button",
+   "to_route": "quote",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-prog-h",
+   "label": "Child care centers Every classroom, with lessons, family connections and support for your teachers.",
+   "kind": "card",
+   "to_route": "for-centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-prog-h",
+   "label": "Home daycares The same friends and stories, sized for one room and children of mixed ages.",
+   "kind": "card",
+   "to_route": "for-home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-prog-h",
+   "label": "Churches and faith-based programs Kindness, courage and curiosity, with room for your own traditions and shared Sunday r",
+   "kind": "card",
+   "to_route": "for-faith",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-prog-h",
+   "label": "Pre-K and Head Start partners Readiness units being mapped to the Missouri standards and the Head Start framework.",
+   "kind": "card",
+   "to_route": "for-prek",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-prog-h",
+   "label": "Employer child care A branded program for on-site and partner care for working families.",
+   "kind": "card",
+   "to_route": "for-employers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-rooms-h",
+   "label": "Learning Zones Kit Carpets, low fences, signs and a transition cue for five friend zones.",
+   "kind": "card",
+   "to_route": "room-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-rooms-h",
+   "label": "Room planner Lay out your own room to scale.",
+   "kind": "card",
+   "to_route": "room-planner",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-rooms-h",
+   "label": "Classroom Branding Kits Zone signs, posters and carpets at member prices.",
+   "kind": "card",
+   "to_route": "shop-programs",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-rooms-h",
+   "label": "Name your corners What goes in each learning zone.",
+   "kind": "card",
+   "to_route": "corners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-team-h",
+   "label": "Curriculum by age Twelve monthly units for twos, threes and pre-K.",
+   "kind": "card",
+   "to_route": "curriculum",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-team-h",
+   "label": "Unit 1 at a glance The first month in summary, with one sample day.",
+   "kind": "card",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-team-h",
+   "label": "Our Teacher Standard Training, background checks and mastery.",
+   "kind": "card",
+   "to_route": "teacher-standard",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-team-h",
+   "label": "Training Academy Sample lessons from the staff training catalog.",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-team-h",
+   "label": "Train your staff Scenario mastery, time tracking and director checklists.",
+   "kind": "card",
+   "to_route": "train-your-staff",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Pricing Startup packages and monthly membership.",
+   "kind": "card",
+   "to_route": "pricing",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Monthly Membership What a membership includes, month by month.",
+   "kind": "card",
+   "to_route": "membership",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Founding Partners The founding partner program for early programs.",
+   "kind": "card",
+   "to_route": "founding-partners",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Partner brand kit Logos, colours and signs for your program.",
+   "kind": "card",
+   "to_route": "brand-kit",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Compare program options Which program fits your site.",
+   "kind": "card",
+   "to_route": "options",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Futures Hub Today checklist, ratios, meals and family updates.",
+   "kind": "card",
+   "to_route": "hub",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Start your center (demo) Your own name, colour, sign-in page, staff and families.",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Funding help CACFP, subsidy, grants and tax credits.",
+   "kind": "card",
+   "to_route": "funding",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Impact and research Why the early years matter and what we will measure.",
+   "kind": "card",
+   "to_route": "impact",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-run-h",
+   "label": "Why Futures Friends Teacher-led and hands-on, not video-first.",
+   "kind": "card",
+   "to_route": "why",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "20 teaching days in Unit 1 Written day by day for twos, threes and pre-K Draft, summary free to read",
+   "kind": "card",
+   "to_route": "unit-1",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "37 activities for families From things you already have at home Free now",
+   "kind": "card",
+   "to_route": "activities",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "12 family printables 9 in English and 3 in Spanish Free now, Spanish in draft",
+   "kind": "card",
+   "to_route": "printables",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "5 storybooks 5 free to read along today In development",
+   "kind": "card",
+   "to_route": "story-time",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "21 story-world characters Names beyond the four friends are proposals In development",
+   "kind": "card",
+   "to_route": "friends",
+   "to_section": "#ff-town-h",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "hc-proof-h",
+   "label": "37 training modules for teachers The Futures Friends Academy catalog Draft, not yet state approved",
+   "kind": "card",
+   "to_route": "academy",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-fam-h",
+   "label": "See the family side",
+   "kind": "button",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "centers",
+   "from_section": "aud-close-h",
+   "label": "Book a demo",
+   "kind": "button",
+   "to_route": "book-demo",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "book-demo",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "book-demo",
+   "from_section": "",
+   "label": "For centers & programs",
+   "kind": "hero",
+   "to_route": "centers",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "kids-shop",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "kids-shop",
+   "from_section": "",
+   "label": "Tell me when it opens",
+   "kind": "button",
+   "to_route": "store-request",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "",
+   "label": "Home",
+   "kind": "hero",
+   "to_route": "home",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "aud-sign-h",
+   "label": "Family Portal Your child's day, meals, notes and messages from the classroom.",
+   "kind": "card",
+   "to_route": "signin-family",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "aud-sign-h",
+   "label": "Teacher and director portal The classroom day, check-in, plans, progress and reports.",
+   "kind": "card",
+   "to_route": "signin-teacher",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "aud-sign-h",
+   "label": "Futures Friends Academy Courses and training records for staff.",
+   "kind": "card",
+   "to_route": "learn",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "aud-sign-h",
+   "label": "A center's own sign-in page Create a demo center with its own name, colour and sign-in page.",
+   "kind": "card",
+   "to_route": "start-center",
+   "to_section": "",
+   "status": "ok",
+   "note": ""
+  },
+  {
+   "from_route": "sign-in",
+   "from_section": "aud-sign-h",
+   "label": "Reset your password",
+   "kind": "nav",
+   "to_route": "reset-password",
    "to_section": "",
    "status": "ok",
    "note": ""

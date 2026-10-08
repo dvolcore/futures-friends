@@ -61,7 +61,8 @@ function lib() {
 
 test('Spanish books: every book, every page, the same lists, and the say-along line where the English has it', () => {
   const { F, ES } = lib();
-  for (const b of F.BOOKS) {
+  // the four revised books (2026-10-07) stay English until re-translated: see the next-but-one test
+  for (const b of F.BOOKS.filter(x => !x.rev)) {
     const e = ES.books[b.id]; assert.ok(e, `no Spanish for ${b.id}`);
     assert.ok(e.title && e.refrain, `${b.id}: title and refrain`);
     assert.equal(e.spreads.length, b.spreads.length, `${b.id}: page count`);
@@ -92,14 +93,18 @@ test('Story Time reads Spanish when the site is in Spanish, and the read-aloud w
   } } });
   const { ES } = lib();
   const shelf = text(s.render('story-time'));
-  assert.match(shelf, /Booker lo intenta otra vez/);
-  const cover = text(s.render('story-time', 'booker-tries-again'));
-  assert.ok(cover.includes(ES.books['booker-tries-again'].refrain), 'the cover shows the Spanish say-along line');
-  const L = vm.runInContext('window.FFFamilyLocalized', s);
-  const sp = L.BOOKS[0].spreads[0].p;
-  assert.equal(sp, ES.books['booker-tries-again'].spreads[0].p, 'the reader data is the Spanish page text');
-  const spans = L.words(sp, L.BOOKS[0].refrain);
-  assert.ok(spans.includes(`data-wi="0" data-at="0">${sp.split(/\s+/)[0]}</span>`), 'word spans are built from the Spanish words');
+  const rp = 'the-rainbow-picnic', L = vm.runInContext('window.FFFamilyLocalized', s);
+  assert.ok(ES.books[rp].title && shelf.includes(ES.books[rp].title), 'the Rainbow Picnic shows its Spanish title');
+  const cover = text(s.render('story-time', rp));
+  assert.ok(cover.includes(ES.books[rp].refrain), 'the cover shows the Spanish say-along line');
+  const rb = L.BOOKS.find(x => x.id === rp);
+  assert.equal(rb.spreads[0].p, ES.books[rp].spreads[0].p, 'the reader data is the Spanish page text');
+  const spans = L.words(rb.spreads[0].p, rb.refrain);
+  assert.ok(spans.includes(`data-wi="0" data-at="0">${rb.spreads[0].p.split(/\s+/)[0]}</span>`), 'word spans are built from the Spanish words');
+  // The revised four stay in their revised English (the Spanish drafts translate the previous text) and say so.
+  const bk = L.BOOKS[0], en0 = vm.runInContext('window.FFFamily.BOOKS[0]', s);
+  assert.equal(bk.id, 'booker-tries-again'); assert.equal(bk.spreads[0].p, en0.spreads[0].p, 'revised English text, not the old Spanish draft');
+  assert.match(text(s.render('story-time', 'booker-tries-again')), /su versión en español está en preparación/);
   // English stays English with no switch.
   const en = site();
   assert.match(text(en.render('story-time')), /Booker Tries Again/);

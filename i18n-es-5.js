@@ -51,6 +51,52 @@ window.FFi18n.add('es', {
   'Planned with the app pilot: progress reports three times a year and milestones in the Family App.':
     'Planeado con la prueba piloto de la app: reportes de progreso tres veces al año y logros del desarrollo en la app para familias.'
 });
+// Revised storybooks plugged in (2026-10-07): the chrome around the four revised books. The books' own page text stays English until re-translated.
+window.FFi18n.add('es', {
+  "Read every page of all five books here. The four friends' books are the revised editions, with their finished pictures and the book's own pages for grown-ups. In The Rainbow Picnic, each page tells you what the picture shows, so your child can imagine it, or draw it.": "Lee aquí todas las páginas de los cinco libros. Los libros de los cuatro amigos son las ediciones revisadas, con sus ilustraciones terminadas y las páginas del propio libro para los adultos. En El picnic arcoíris, cada página te dice qué muestra el dibujo, para que tu niño o niña lo imagine, o lo dibuje.",
+  "Lumi’s Big Feelings, Brighter Days cover: Lumi the bunny in the sunny Clubhouse yard, smiling, with one paw by her long ear.": "Portada de Lumi’s Big Feelings, Brighter Days: Lumi, la conejita, en el patio soleado del Clubhouse, sonriendo, con una patita junto a su oreja larga.",
+  "Zuri: What Happens If We Try? cover: Zuri the turtle on a sunny trail, wearing her hat and glasses and holding up her compass.": "Portada de Zuri: What Happens If We Try?: Zuri, la tortuga, en un sendero soleado, con su sombrero y sus anteojos, sosteniendo su brújula.",
+  "Bop’s Clean-Up Team cover: Bop the elephant in the Clubhouse playroom, smiling and holding up a red block.": "Portada de Bop’s Clean-Up Team: Bop, el elefante, en el cuarto de juegos del Clubhouse, sonriendo y sosteniendo un bloque rojo.",
+  "[Step 3, Slide your finger: a paw slides under K, I, T, E. K, I and T light up as their sounds appear: /k/ ... /ī/ ... /t/. The E stays pale: the e is quiet.]": "[Paso 3, Desliza tu dedo: una patita se desliza debajo de K, I, T, E. K, I y T se iluminan cuando aparecen sus sonidos: /k/ ... /ī/ ... /t/. La E se queda pálida: la e es callada.]",
+  "Move with Bop, then read his book.": "Muévete con Bop y luego lee su libro.",
+  "Read Bop’s Clean-Up Team": "Lee Bop’s Clean-Up Team",
+  "The Clubhouse is a giant mess. Bop starts with one small thing, tries again, and finishes the job with his clean-up team.": "El Clubhouse es un gran desorden. Bop empieza con una cosita, lo intenta otra vez y termina el trabajo con su equipo de limpieza.",
+  "Start with one thing": "Empieza con una sola cosa",
+  "Lend a hand": "Echa una mano",
+  "The clean-up team": "El equipo de limpieza",
+  "The storybooks": "Los cuentos",
+  "Four finished covers": "Cuatro portadas terminadas",
+  "The revised editions of October 2026: each friend's book with its finished story-world art. Tap a cover to read it.": "Las ediciones revisadas de octubre de 2026: el libro de cada amigo con su arte terminado del mundo del cuento. Toca una portada para leerlo.",
+  "Book 1 · A story about practice and asking for help": "Libro 1 · Un cuento sobre practicar y pedir ayuda",
+  "Read Lumi’s Big Feelings, Brighter Days in Story Time": "Lee Lumi’s Big Feelings, Brighter Days en la Hora del cuento",
+  "Lumi’s Big Feelings, Brighter Days cover: Lumi the bunny in the sunny Clubhouse yard, smiling, with one paw by her long ear": "Portada de Lumi’s Big Feelings, Brighter Days: Lumi, la conejita, en el patio soleado del Clubhouse, sonriendo, con una patita junto a su oreja larga",
+  "Book 2 · A story about noticing, listening, and inviting": "Libro 2 · Un cuento sobre notar, escuchar e invitar",
+  "Read Zuri: What Happens If We Try? in Story Time": "Lee Zuri: What Happens If We Try? en la Hora del cuento",
+  "Zuri: What Happens If We Try? cover: Zuri the turtle on a sunny trail, wearing her hat and glasses and holding up her compass": "Portada de Zuri: What Happens If We Try?: Zuri, la tortuga, en un sendero soleado, con su sombrero y sus anteojos, sosteniendo su brújula",
+  "Read Bop’s Clean-Up Team in Story Time": "Lee Bop’s Clean-Up Team en la Hora del cuento",
+  "Bop’s Clean-Up Team cover: Bop the elephant in the Clubhouse playroom, smiling and holding up a red block": "Portada de Bop’s Clean-Up Team: Bop, el elefante, en el cuarto de juegos del Clubhouse, sonriendo y sosteniendo un bloque rojo",
+  "Book 3 · A story about ice, water, and wondering": "Libro 3 · Un cuento sobre el hielo, el agua y la curiosidad",
+  "Book 4 · A story about small steps and helping together": "Libro 4 · Un cuento sobre pasos pequeños y ayudar juntos",
+  "Every word of all five stories is free to read now in": "Cada palabra de los cinco cuentos se puede leer gratis ahora en la",
+  ". Printed editions are not available yet.": ". Las ediciones impresas todavía no están disponibles.",
+  "Illustrated · 18 pages": "Ilustrado · 18 páginas",
+  "The four friends' books are the revised, illustrated editions (October 2026), read free in Story Time page by page. The Rainbow Picnic's pictures are still a layout, and printed editions are not available yet.": "Los libros de los cuatro amigos son las ediciones revisadas e ilustradas (octubre de 2026), que se leen gratis en la Hora del cuento, página por página. Las ilustraciones de El picnic arcoíris todavía son un diseño, y las ediciones impresas todavía no están disponibles.",
+  "proud": "orgulloso",
+  "Text and illustrations finished in the revised digital edition (18 pages), read free in Story Time; print edition not finished.": "Texto e ilustraciones terminados en la edición digital revisada (18 páginas), que se lee gratis en la Hora del cuento; la edición impresa todavía no está terminada.",
+  "Booker's new book has a word he does not know yet. Watch him look at every letter, ask for help, and try again.": "El libro nuevo de Booker tiene una palabra que todavía no conoce. Míralo mirar cada letra, pedir ayuda e intentarlo otra vez.",
+  "Look at all four letters: k-i-t-e": "Mira las cuatro letras: k-i-t-e",
+  "Say /k/ /ī/ /t/, then blend: kite": "Di /k/ /ī/ /t/ y luego júntalos: kite",
+  "Read Lumi’s Big Feelings, Brighter Days": "Lee Lumi’s Big Feelings, Brighter Days",
+  "Pip is new and standing by the fence. Lumi asks kindly, takes a slow breath, and lets Pip choose.": "Pip es nuevo y está junto a la cerca. Lumi pregunta con cariño, respira despacio y deja que Pip decida.",
+  "Lumi notices Pip": "Lumi nota a Pip",
+  "A slow breath": "Un respiro lento",
+  "A kind invitation": "Una invitación amable",
+  "Read Zuri: What Happens If We Try?": "Lee Zuri: What Happens If We Try?",
+  "An ice cube disappears from the sunny porch. Wonder along with Zuri as she guesses, watches closely, and finds out.": "Un cubito de hielo desaparece del porche soleado. Pregúntate junto con Zuri mientras ella adivina, observa de cerca y descubre.",
+  "Three cubes, the same size": "Tres cubitos, del mismo tamaño",
+  "Sunny and shady": "Al sol y a la sombra",
+  "Look closely": "Mira de cerca"
+});
 })();
 
 /* Spanish re-sync after the 2026-10-07 voice polish of the English copy (DRAFT, pending review by the center's Spanish teacher).
