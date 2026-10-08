@@ -233,11 +233,11 @@ dialog.ffw-pal::backdrop{background:rgba(6,24,32,.55)}
 .ffw-next-x{flex:0 0 auto;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:#4F616A;cursor:pointer}
 .ffw-next-x .px-icon{width:18px;height:18px}
 .ffw-next-x:hover{background:#F1E8D6;color:var(--ffw-ink)}
-@media (max-width:1719px){@container (max-width:620px){.ffw-next-sub{display:none}}}
-@media (max-width:1719px){.ffw-next.is-detail{display:none}}
+@media (max-width:1599px){@container (max-width:620px){.ffw-next-sub{display:none}}}
+@media (max-width:1599px){.ffw-next.is-detail{display:none}}
 @media (max-width:640px){.ffw-next-in{padding:4px 6px 4px 14px}.ffw-next-txt b{font-size:15px}}
-/* wide screens (1720 px and up, where the margin is wide enough for a readable card): the card floats in the empty left margin, bottom-left; it steps aside (is-away) whenever anything is under it */
-@media (min-width:1720px){
+/* wide screens (1600 px and up, where the margin is wide enough for a readable card): the card floats in the empty left margin, bottom-left; it steps aside (is-away) whenever anything is under it */
+@media (min-width:1600px){
   .ffw-next{position:fixed;left:14px;bottom:18px;width:min(300px,calc((100vw - 1180px) / 2 - 28px));z-index:40;background:transparent;border:0;
     transition:opacity .25s,transform .3s var(--ffw-ease),visibility 0s}
   .ffw-next-in{position:relative;display:block;padding:12px 12px 14px;border-radius:20px;background:var(--ffw-cream);background-image:var(--tx-cream);background-size:var(--tx-tile);

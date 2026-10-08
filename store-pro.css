@@ -20,7 +20,7 @@
 .sp-btn-lg{min-height:54px;padding-inline:26px;font-size:16px}
 .sp .btn.sp-btn-glass{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .sp .btn.sp-btn-glass:hover{background:rgba(255,255,255,.2);border-color:#fff}
-.sp-hero2-facts{list-style:none;margin:0;padding:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;color:#C9DAE4}
+.sp-hero2-facts{position:relative;z-index:3;list-style:none;margin:0;padding:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;color:#C9DAE4}
 .sp-hero2-facts li{display:inline-flex;align-items:center;gap:8px}
 .sp-hero2-facts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .sp-hero2-stage{position:relative;display:grid;justify-items:center;min-height:clamp(380px,60vh,560px);align-content:center}

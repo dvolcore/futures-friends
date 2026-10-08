@@ -12,7 +12,7 @@
 .sp-hero2.has-fun>*:not(.sf-deco):not(.sp-hero2-bg){position:relative;z-index:2}
 .sf-deco{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .sf-cloud{position:absolute;width:clamp(150px,20vw,300px);aspect-ratio:2.2/1;background:radial-gradient(circle at 24% 62%,#fff 0 25%,transparent 26%),radial-gradient(circle at 46% 42%,#fff 0 32%,transparent 33%),radial-gradient(circle at 70% 56%,#fff 0 28%,transparent 29%),linear-gradient(#fff,#fff) 50% 88%/78% 34% no-repeat;border-radius:40px;opacity:.5;filter:blur(1px);animation:sf-drift 38s ease-in-out infinite alternate;transform:translate3d(calc((var(--sy) - .5)*-60px),0,0)}
-.sf-cloud-1{left:30%;top:4%}.sf-cloud-2{right:6%;top:3%;width:clamp(150px,20vw,300px);animation-duration:46s;animation-direction:alternate-reverse}.sf-cloud-3{left:38%;bottom:8%;width:clamp(120px,16vw,240px);opacity:.75;animation-duration:54s}
+.sf-cloud-1{left:30%;top:4%}.sf-cloud-2{right:6%;top:3%;width:clamp(150px,20vw,300px);animation-duration:46s;animation-direction:alternate-reverse}.sf-cloud-3{left:58%;bottom:2%;width:clamp(120px,16vw,240px);opacity:.75;animation-duration:54s}
 @keyframes sf-drift{from{margin-left:-16px}to{margin-left:26px}}
 .sf-mascot{position:absolute;width:clamp(92px,12.5vw,190px);height:auto;filter:drop-shadow(0 14px 14px rgba(0,0,0,.3));transform-origin:50% 100%;animation:sf-bob 4.2s ease-in-out infinite}
 .sf-mascot-a{left:51%;bottom:-1%;animation-delay:-.4s}.sf-mascot-b{display:none}.sf-mascot-c{right:1.5%;bottom:-1%;animation-delay:-3s}
