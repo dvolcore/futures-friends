@@ -13,7 +13,7 @@ function i18nCtx() {
   const sb = { console, window: null, document: null, location: { search: '', hash: '' } };
   sb.window = sb; sb.globalThis = sb; const c = vm.createContext(sb);
   vm.runInContext(read('i18n.js'), c, { filename: 'i18n.js' });
-  for (const f of ['i18n-es.js', 'i18n-es-2.js', 'i18n-es-3.js', 'i18n-es-4.js']) if (fs.existsSync(path.join(ROOT, f))) vm.runInContext(read(f), c, { filename: f });
+  for (const f of ['i18n-es.js', 'i18n-es-2.js', 'i18n-es-3.js', 'i18n-es-4.js', 'i18n-es-5.js']) if (fs.existsSync(path.join(ROOT, f))) vm.runInContext(read(f), c, { filename: f });
   return c.FFi18n;
 }
 const dec = s => s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;|&#x27;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')

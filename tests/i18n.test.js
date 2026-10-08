@@ -8,7 +8,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { site, read, text, ROOT } = require('./site-vm.js');
 
-const TABLES = ['i18n-es.js', 'i18n-es-2.js', 'i18n-es-3.js', 'i18n-es-4.js'];
+const TABLES = ['i18n-es.js', 'i18n-es-2.js', 'i18n-es-3.js', 'i18n-es-4.js', 'i18n-es-5.js'];
 function i18n({ search = '', stored = null } = {}) {
   const ls = new Map(stored ? [['ff-lang', stored]] : []);
   const sb = { console, location: { search, hash: '' }, localStorage: { getItem: k => (ls.has(k) ? ls.get(k) : null), setItem: (k, v) => ls.set(k, String(v)) } };
