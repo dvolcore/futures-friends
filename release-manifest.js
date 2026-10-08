@@ -283,7 +283,7 @@
   "carpet": {
    "id": "carpet",
    "family": "physical",
-   "name": "Character carpet (8 ft round center; 6 x 9 ft home)",
+   "name": "Character carpet (8 ft round center; 6 ft round home)",
    "count": 2,
    "version": "design draft",
    "age": "2-5",
@@ -818,7 +818,7 @@
      "welcome-box-home"
     ],
     [
-     "6 x 9 ft custom printed character carpet",
+     "6 ft round custom printed character carpet",
      "carpet"
     ],
     [
@@ -910,7 +910,7 @@
      "welcome-box-center"
     ],
     [
-     "8 ft round and 6 x 9 ft custom printed character carpets",
+     "8 ft round and 6 ft round custom printed character carpets",
      "carpet"
     ],
     [

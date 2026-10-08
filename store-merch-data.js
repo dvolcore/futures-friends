@@ -6,7 +6,7 @@
   {
    "id": "rug-booker-reading-area",
    "name": "Booker's Reading Area Carpet",
-   "description": "A blue Reading Area concept carpet centered on Booker and reading moments.",
+   "description": "A blue Reading Area carpet centered on Booker and reading moments.",
    "character": "Booker",
    "zone": "Reading Area",
    "color": "blue",
@@ -15,7 +15,7 @@
   {
    "id": "rug-lumi-calm-corner",
    "name": "Lumi's Calm Corner Carpet",
-   "description": "A pink Calm Corner concept carpet for breathing, quiet connection and belonging with Lumi.",
+   "description": "A pink Calm Corner carpet for breathing, quiet connection and belonging with Lumi.",
    "character": "Lumi",
    "zone": "Calm Corner",
    "color": "pink",
@@ -24,7 +24,7 @@
   {
    "id": "rug-zuri-discovery-zone",
    "name": "Zuri's Discovery Zone Carpet",
-   "description": "A green Discovery Zone concept carpet that invites looking, wondering and exploring with Zuri.",
+   "description": "A green Discovery Zone carpet that invites looking, wondering and exploring with Zuri.",
    "character": "Zuri",
    "zone": "Discovery Zone",
    "color": "green",
@@ -33,7 +33,7 @@
   {
    "id": "rug-bop-movement-zone",
    "name": "Bop's Movement Zone Carpet",
-   "description": "A purple Movement Zone concept carpet designed around active play and growing with Bop.",
+   "description": "A purple Movement Zone carpet designed around active play and growing with Bop.",
    "character": "Bop",
    "zone": "Movement Zone",
    "color": "purple",
@@ -42,7 +42,7 @@
   {
    "id": "rug-friends-circle",
    "name": "Friends Circle Carpet",
-   "description": "A shared multicolor concept carpet bringing Booker, Lumi, Zuri and Bop together.",
+   "description": "A shared multicolor carpet bringing Booker, Lumi, Zuri and Bop together.",
    "character": "Booker, Lumi, Zuri and Bop",
    "zone": "Friends Circle",
    "color": "blue/pink/green/purple",
@@ -51,7 +51,7 @@
   {
    "id": "rug-square-booker-reading-area",
    "name": "Booker's Furnished Reading Corner Carpet",
-   "description": "A large square footprint concept for placing reading furniture into Booker's blue Reading Area.",
+   "description": "A large square carpet for placing reading furniture into Booker's blue Reading Area.",
    "character": "Booker",
    "zone": "Reading Area",
    "color": "blue",
@@ -61,7 +61,7 @@
   {
    "id": "rug-square-lumi-calm-corner",
    "name": "Lumi's Furnished Calm Corner Carpet",
-   "description": "A large square footprint concept for placing calm-corner furniture into Lumi's pink zone.",
+   "description": "A large square carpet for placing calm-corner furniture into Lumi's pink zone.",
    "character": "Lumi",
    "zone": "Calm Corner",
    "color": "pink",
@@ -71,7 +71,7 @@
   {
    "id": "rug-square-zuri-discovery-zone",
    "name": "Zuri's Furnished Discovery Corner Carpet",
-   "description": "A large square footprint concept for discovery furniture and materials in Zuri's green zone.",
+   "description": "A large square carpet for discovery furniture and materials in Zuri's green zone.",
    "character": "Zuri",
    "zone": "Discovery Zone",
    "color": "green",
@@ -81,7 +81,7 @@
   {
    "id": "rug-square-bop-movement-zone",
    "name": "Bop's Furnished Movement Corner Carpet",
-   "description": "A large square footprint concept for movement furniture and activity in Bop's purple zone.",
+   "description": "A large square carpet for movement furniture and activity in Bop's purple zone.",
    "character": "Bop",
    "zone": "Movement Zone",
    "color": "purple",
@@ -91,7 +91,7 @@
   {
    "id": "rug-square-friends-circle",
    "name": "Friends Circle Furnished Gathering Carpet",
-   "description": "A large square footprint concept for shared seating and gathering with all four friends.",
+   "description": "A large square carpet for shared seating and gathering with all four friends.",
    "character": "Booker, Lumi, Zuri and Bop",
    "zone": "Friends Circle",
    "color": "blue/pink/green/purple",
@@ -103,34 +103,34 @@
   {
    "id": "plush-booker",
    "name": "Booker Plush Sample",
-   "description": "A proposed soft plush interpretation of Booker using the approved brown bear and blue hoodie source sheet.",
+   "description": "A soft plush interpretation of Booker using the approved brown bear and blue hoodie source sheet.",
    "character": "Booker",
    "color": "brown/blue",
-   "cta": "Enquire about a Booker sample"
+   "cta": "Ask about the Booker plush"
   },
   {
    "id": "plush-lumi",
    "name": "Lumi Plush Sample",
-   "description": "A proposed soft plush interpretation of Lumi using the approved peach-pink bunny source sheet.",
+   "description": "A soft plush interpretation of Lumi using the approved peach-pink bunny source sheet.",
    "character": "Lumi",
    "color": "peach-pink/pink",
-   "cta": "Enquire about a Lumi sample"
+   "cta": "Ask about the Lumi plush"
   },
   {
    "id": "plush-zuri",
    "name": "Zuri Plush Sample",
-   "description": "A proposed soft plush interpretation of Zuri using the approved green turtle source sheet.",
+   "description": "A soft plush interpretation of Zuri using the approved green turtle source sheet.",
    "character": "Zuri",
    "color": "green",
-   "cta": "Enquire about a Zuri sample"
+   "cta": "Ask about the Zuri plush"
   },
   {
    "id": "plush-bop",
    "name": "Bop Plush Sample",
-   "description": "A proposed soft plush interpretation of Bop using the approved grey elephant source sheet.",
+   "description": "A soft plush interpretation of Bop using the approved grey elephant source sheet.",
    "character": "Bop",
    "color": "grey/green",
-   "cta": "Enquire about a Bop sample"
+   "cta": "Ask about the Bop plush"
   }
  ],
  "posters": [
@@ -229,7 +229,7 @@
   {
    "id": "bundle-four-zone-starter",
    "name": "Four-Zone Starter Set",
-   "description": "Four individual activity-zone carpet concepts.",
+   "description": "Four individual activity-zone carpets.",
    "includes": [
     "rug-booker-reading-area",
     "rug-lumi-calm-corner",
@@ -241,7 +241,7 @@
   {
    "id": "bundle-complete-learning-zones",
    "name": "Complete Learning Zones Set",
-   "description": "All five carpet concepts including Friends Circle.",
+   "description": "All five carpets including Friends Circle.",
    "includes": [
     "rug-booker-reading-area",
     "rug-lumi-calm-corner",
@@ -254,7 +254,7 @@
   {
    "id": "bundle-character-merchandising-kit",
    "name": "Character Merchandising Kit",
-   "description": "Four proposed plush samples and one poster variation per zone.",
+   "description": "Four plush friends and a poster for every zone, Friends Circle included.",
    "includes": [
     "plush-booker",
     "plush-lumi",
@@ -434,7 +434,7 @@
   {
    "id": "coloring-book-booker",
    "name": "Color Your Story Coloring Book",
-   "description": "Draft coloring-book concept with a colored Booker reading cover and black-and-white sample interior page; full interior is not yet included.",
+   "description": "Draft coloring-book with a colored Booker reading cover and black-and-white interior page to color; full interior is not yet included.",
    "character": "Booker",
    "zone": "Reading Area",
    "color": "blue",
@@ -443,7 +443,7 @@
   {
    "id": "coloring-book-lumi",
    "name": "Color Your Calm Coloring Book",
-   "description": "Draft coloring-book concept with a colored Lumi calm cover and black-and-white sample interior page; full interior is not yet included.",
+   "description": "Draft coloring-book with a colored Lumi calm cover and black-and-white interior page to color; full interior is not yet included.",
    "character": "Lumi",
    "zone": "Calm Corner",
    "color": "pink",
@@ -452,7 +452,7 @@
   {
    "id": "coloring-book-zuri",
    "name": "Color Your Curiosity Coloring Book",
-   "description": "Draft coloring-book concept with a colored Zuri discovery cover and black-and-white sample interior page; full interior is not yet included.",
+   "description": "Draft coloring-book with a colored Zuri discovery cover and black-and-white interior page to color; full interior is not yet included.",
    "character": "Zuri",
    "zone": "Discovery Zone",
    "color": "green",
@@ -461,7 +461,7 @@
   {
    "id": "coloring-book-bop",
    "name": "Color Your Moves Coloring Book",
-   "description": "Draft coloring-book concept with a colored Bop movement cover and black-and-white sample interior page; full interior is not yet included.",
+   "description": "Draft coloring-book with a colored Bop movement cover and black-and-white interior page to color; full interior is not yet included.",
    "character": "Bop",
    "zone": "Movement Zone",
    "color": "purple",
@@ -486,7 +486,7 @@
   {
    "id": "stickers-booker",
    "name": "Booker Story Sticker Sheet",
-   "description": "Draft sticker sheet concept with Booker poses and reading-themed icons.",
+   "description": "Draft sticker sheet with Booker poses and reading-themed icons.",
    "character": "Booker",
    "zone": "Reading Area",
    "color": "blue",
@@ -495,7 +495,7 @@
   {
    "id": "stickers-lumi",
    "name": "Lumi Calm Sticker Sheet",
-   "description": "Draft sticker sheet concept with Lumi poses and calm-corner themed icons.",
+   "description": "Draft sticker sheet with Lumi poses and calm-corner themed icons.",
    "character": "Lumi",
    "zone": "Calm Corner",
    "color": "pink",
@@ -504,7 +504,7 @@
   {
    "id": "stickers-zuri",
    "name": "Zuri Discovery Sticker Sheet",
-   "description": "Draft sticker sheet concept with Zuri poses and discovery-themed icons.",
+   "description": "Draft sticker sheet with Zuri poses and discovery-themed icons.",
    "character": "Zuri",
    "zone": "Discovery Zone",
    "color": "green",
@@ -513,7 +513,7 @@
   {
    "id": "stickers-bop",
    "name": "Bop Movement Sticker Sheet",
-   "description": "Draft sticker sheet concept with Bop poses and movement-themed icons.",
+   "description": "Draft sticker sheet with Bop poses and movement-themed icons.",
    "character": "Bop",
    "zone": "Movement Zone",
    "color": "purple",
@@ -522,7 +522,7 @@
   {
    "id": "stickers-all-friends",
    "name": "Core Four Sticker Sheet",
-   "description": "Draft sticker sheet concept with all four friends and shared learning-zone icons.",
+   "description": "Draft sticker sheet with all four friends and shared learning-zone icons.",
    "character": "Booker, Lumi, Zuri and Bop",
    "zone": "Friends Circle",
    "color": "blue/pink/green/purple",
@@ -547,44 +547,44 @@
   {
    "id": "bottle-booker",
    "name": "Booker Insulated Bottle",
-   "description": "Booker reading blue character art on a sturdy proposed insulated bottle.",
+   "description": "Booker reading blue character art on a sturdy insulated bottle.",
    "character": "Booker",
    "color": "royal blue",
-   "cta": "Enquire about this bottle concept"
+   "cta": "Enquire about this bottle"
   },
   {
    "id": "bottle-lumi",
    "name": "Lumi Insulated Bottle",
-   "description": "Lumi calm pink character art on a sturdy proposed insulated bottle.",
+   "description": "Lumi calm pink character art on a sturdy insulated bottle.",
    "character": "Lumi",
    "color": "pink",
-   "cta": "Enquire about this bottle concept"
+   "cta": "Enquire about this bottle"
   },
   {
    "id": "bottle-zuri",
    "name": "Zuri Insulated Bottle",
-   "description": "Zuri discovery green character art on a sturdy proposed insulated bottle.",
+   "description": "Zuri discovery green character art on a sturdy insulated bottle.",
    "character": "Zuri",
    "color": "leaf green",
-   "cta": "Enquire about this bottle concept"
+   "cta": "Enquire about this bottle"
   },
   {
    "id": "bottle-bop",
    "name": "Bop Insulated Bottle",
-   "description": "Bop movement purple character art on a sturdy proposed insulated bottle.",
+   "description": "Bop movement purple character art on a sturdy insulated bottle.",
    "character": "Bop",
    "color": "purple",
-   "cta": "Enquire about this bottle concept"
+   "cta": "Enquire about this bottle"
   }
  ],
  "plates": [
   {
    "id": "eat-the-rainbow-plate",
    "name": "Eat the Rainbow Divided Plate",
-   "description": "Draft realistic silicone plate concept with six physically raised compartments: red, orange, yellow, green, blue/purple color spaces, plus a separate protein section, with small Futures Friends characters around the outer rim.",
+   "description": "Draft realistic silicone plate with six physically raised compartments: red, orange, yellow, green, blue/purple color spaces, plus a separate protein section, with small Futures Friends characters around the outer rim.",
    "character": "Futures Friends",
    "color": "rainbow/silicone",
-   "cta": "Enquire about this plate concept"
+   "cta": "Enquire about this plate"
   }
  ]
 });

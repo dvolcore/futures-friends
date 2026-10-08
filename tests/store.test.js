@@ -76,7 +76,7 @@ test('the owner\'s merchandise package: every stable id is in the catalog, every
   for (const p of pkg.store.products.filter(p => p.format === 'large-square')) {
     const x = C.product(p.id);
     assert.ok(x.options[0].values.some(v => /6 x 6/.test(v.label)) && x.options[0].values.some(v => /8 x 8/.test(v.label)));
-    assert.match(x.dims.join(' '), /not confirmed product sizes/);
+    assert.match(x.dims.join(' '), /6 x 6 ft \(home\) or 8 x 8 ft \(center\)\. Final size is confirmed in your written quote/);
   }
   // apparel: slogans come from the package; no price, sizes "coming soon"
   for (const a of pkg.apparel) { const x = C.product(a.id); assert.equal(C.canOrder(x), true, 'apparel can be added to the cart as a request'); assert.equal(x.priceState, 'soon'); assert.equal(x.price, null); assert.match(x.badges.join(' '), /Sizes coming soon/); if (a.back_copy) assert.ok(x.description.includes(a.back_copy), a.id); }
@@ -216,6 +216,59 @@ test('stripe and shopify modes stay off until their keys exist, then redirect an
   assert.equal(inv.status, 'redirect'); assert.equal(inv.kind, 'invoice');
   // shopify without a shop domain falls back too
   W.FF_STORE.mode = 'shopify'; assert.equal(X.activeMode().mode, 'request');
+});
+
+test('the final checkout step is config-driven: intake off says the order is not sent and offers email, copy, print and phone; intake on shows the real confirmation', async () => {
+  const fill = (W, K) => { K._reset(); K.add('zone-boundaries', { size: 'home' }, 1); const S = W.FFStoreOrder.state(); W.FFStoreOrder.reset(); Object.assign(S, W.FFStoreOrder.state()); return W.FFStoreOrder.state(); };
+  // ---- intake OFF (the shipped intake-config.js has an empty url)
+  {
+    const { c, W } = world(), K = W.FFCart, X = W.FFCheckout;
+    assert.equal(X.activeMode().mode, 'request');
+    W.FFIntake = { enabled: () => false, submit: async () => { throw new Error('nothing may be sent while intake is off'); } };
+    assert.equal(X.canSendOnline(), false);
+    K._reset(); K.add('zone-boundaries', { size: 'home' }, 1);
+    const S = W.FFStoreOrder.state(); S.path = 'family'; S.step = 2; Object.assign(S, { name: 'Sam Lee', email: 'sam@example.org' }); Object.assign(S.ship, { line1: '1 Main St', city: 'Kansas City', state: 'MO', zip: '64111' });
+    const t = text(c.render('checkout'));
+    assert.match(t, /Online ordering is not open yet/); assert.match(t, /Nothing is sent from this page and nothing is charged/);
+    assert.match(t, /Get my order summary/); assert.doesNotMatch(t, /Send order request/); assert.match(t, /Your summary/); assert.doesNotMatch(t, /Request sent/);
+    const o = X.buildOrder(K.lines(), { path: 'family', name: 'Sam Lee', email: 'sam@example.org', ship: S.ship }, 'FF-OFF001');
+    const r = await X.submit(o);
+    assert.equal(r.status, 'gateway_off'); assert.equal(r.order.ref, 'FF-OFF001');
+    W.FFStoreOrder.state().result = r;
+    const html = c.render('order'), ot = text(html);
+    assert.match(ot, /Ordering opens soon/); assert.match(ot, /nothing has been sent and nothing was charged/); assert.doesNotMatch(ot, /Request received/);
+    for (const bit of ['Email this summary', 'Call (816) 988-5661', 'Print or save as PDF', 'Copy summary']) assert.ok(ot.includes(bit), bit);
+    assert.match(html, /href="tel:\+18169885661"/);
+    const mailto = decodeURIComponent(html.match(/href="(mailto:[^"]+)"/)[1].replace(/&amp;/g, '&'));
+    assert.match(mailto, /^mailto:info@futureslearningcenter\.com\?subject=Order request FF-OFF001&body=/); assert.match(mailto, /Zone Boundaries pack \(Home room\)/); assert.match(mailto, /Sam Lee/);
+  }
+  // ---- intake ON: the request is sent and the real confirmation shows
+  {
+    const { c, W } = world(), K = W.FFCart, X = W.FFCheckout, sent = [];
+    W.FFIntake = { enabled: () => true, submit: async (kind, data) => { sent.push([kind, data]); return { ok: true, ref: 'QT-42', days: 2, emailConfirmation: 'queued' }; } };
+    assert.equal(X.canSendOnline(), true);
+    K._reset(); K.add('zone-boundaries', { size: 'home' }, 1);
+    const S = W.FFStoreOrder.state(); S.path = 'family'; S.step = 2; Object.assign(S, { name: 'Sam Lee', email: 'sam@example.org' }); Object.assign(S.ship, { line1: '1 Main St', city: 'Kansas City', state: 'MO', zip: '64111' });
+    const t = text(c.render('checkout'));
+    assert.match(t, /Send order request/); assert.match(t, /Request sent/); assert.doesNotMatch(t, /Get my order summary|Online ordering is not open yet/);
+    const r = await X.submit(X.buildOrder(K.lines(), { path: 'family', name: 'Sam Lee', email: 'sam@example.org', ship: S.ship }, 'FF-ON0001'));
+    assert.equal(r.status, 'received'); assert.equal(sent.length, 1); assert.equal(sent[0][0], 'quote'); assert.match(sent[0][1].message, /Zone Boundaries pack/);
+    W.FFStoreOrder.state().result = r;
+    const ot = text(c.render('order'));
+    assert.match(ot, /Request received/); assert.match(ot, /QT-42/); assert.match(ot, /No payment was taken/); assert.doesNotMatch(ot, /Ordering opens soon|Not sent/);
+    assert.doesNotMatch(c.render('order'), /Email this summary/);
+  }
+});
+
+test('copy: no concept, proposed or sample wording on any store product page or card; rug sizes are the merch package footprints everywhere', () => {
+  const { c, W } = world(), C = W.FFCatalog, RK = W.FFRoomKit;
+  const pages = ['store', 'kids-shop', 'shop/carpets'].map(r => c.render(r.split('/')[0], r.split('/')[1])).concat(C.PRODUCTS.map(p => c.render('product', p.id)));
+  for (const html of pages) assert.doesNotMatch(text(html).replace(/Proposed, owner to confirm:?/g, ''), /\bconcepts?\b|\bproposed\b|\bsamples?\b|\bprototype\b/i);
+  const kit = id => C.product(id).box.concat(C.product(id).dims).join(' | ');
+  assert.match(kit('kit-home'), /6 ft round Friends Circle rug/); assert.match(kit('kit-center-starter'), /8 ft round Friends Circle rug/); assert.match(kit('kit-center-complete'), /8 ft round Friends Circle rug/);
+  for (const id of ['kit-home', 'kit-center-starter', 'kit-center-complete', 'rug-friends-circle', 'rug-square-friends-circle']) assert.doesNotMatch(kit(id) + C.product(id).description, /6 x 9/);
+  const rk = JSON.stringify(RK); assert.doesNotMatch(rk, /6 x 9/);
+  assert.deepEqual(plain(C.product('rug-friends-circle').options[0].values.map(v => v.label)), ['6 x 6 ft', '8 x 8 ft', 'Match my room']);
 });
 
 test('no fake success state: no screen says paid, payment successful or order confirmed', async () => {

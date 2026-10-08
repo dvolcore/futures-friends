@@ -60,7 +60,7 @@
   const EXTRAS = [
     ['Program add-ons', [
       ['Additional classroom set (5 storybooks, 4 plush, 4 character posters, Eat the Rainbow poster, 5 zone signs)', [[395, 'cat26']], 'classroom-set'],
-      ['Additional carpet, 8 ft round / 6 x 9 ft (freight included)', [[795, 'cat26'], [745, 'cat26']], 'carpet'],
+      ['Additional carpet, 8 ft round / 6 ft round (freight included)', [[795, 'cat26'], [745, 'cat26']], 'carpet'],
       ['Family Welcome Kit, center price / suggested retail (10-kit minimum)', [[42, 'cat26'], [59, 'cat26']], 'family-welcome-kit'],
       ['Extra Hub users for Home Daycare, beyond the provider and 3 assistants', [[5, 'cat26', ' per user a month']], 'hub-portals'],
       ['Extra live virtual training session (90 minutes, up to 15 staff)', [[150, 'cat26']], 'service-onboarding'],

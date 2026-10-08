@@ -65,7 +65,7 @@ const KIT = [
   ['Printed friend stick puppets', '1 per zone', '1 per zone', '1 per zone', 'now', 'Ship with every kit today'],
   ['Picture + word bin labels', '12 per zone', '12 per zone', '12 per zone, with lidded bins', 'now', 'An icon and a word on every label, never colour alone'],
   ['Cue kit: hand chime, 6 friend cue cards, set-up card', '1 per room', '1', '1, plus a Sunday reset card', 'now', 'The same cue in every room'],
-  ['Friends Circle rug', '8 ft round', '6 ft round', '6 x 9 ft roll-up', 'dev', 'Made to order; each design ships only with its flammability report'],
+  ['Friends Circle rug', '8 ft round', '6 ft round', '6 ft round, rolls up', 'dev', 'Made to order; each design ships only with its flammability report'],
   ['Zone mats (Zone Boundaries add-on)', '4 x 6 ft, one per zone', '3 x 5 ft, one per zone', '3 x 5 ft in a carry bag', 'dev', 'Felt-look print, low pile, beveled edges, non-slip back'],
   ['Friend Fence panels (Zone Boundaries add-on)', '2 per zone', '1 per zone', '6, fold flat', 'dev', 'Prototype and tip test before any sale'],
   ['Friend Shelf Bands', '4', '2', 'None', 'dev', 'Turn your own low shelves into zone edges'],

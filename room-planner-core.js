@@ -72,7 +72,7 @@ const TYPES = {
   lowshelf: { g: 'own', cat: 'solid', name: 'Low shelf', w: 48, l: 13, h: 28, band: true },
   tallshelf: { g: 'own', cat: 'solid', name: 'Tall shelf', w: 36, l: 15, h: 60 },
   piano: { g: 'own', cat: 'solid', name: 'Piano or stage edge', w: 60, l: 26, h: 48 },
-  circle: { g: 'kit', cat: 'floor', name: 'Friends Circle rug', zone: 'circle', sizes: [['r6', '6 ft round', 72, 72, true], ['r8', '8 ft round', 96, 96, true], ['r69', '6 x 9 ft', 72, 108, false], ['custom', 'Custom size (quote)']] },
+  circle: { g: 'kit', cat: 'floor', name: 'Friends Circle rug', zone: 'circle', sizes: [['r6', '6 ft round', 72, 72, true], ['r8', '8 ft round', 96, 96, true], ['custom', 'Custom size (quote)']] },
   mat: { g: 'kit', cat: 'floor', name: 'Zone mat', friend: true, sizes: [['35', '3 x 5 ft (home)', 36, 60], ['46', '4 x 6 ft (center)', 48, 72], ['custom', 'Custom size (quote)']] },
   fence: { g: 'kit', cat: 'solid', name: 'Friend Fence panel', h: 24, sizes: [['36', '36 in panel', 36, 3], ['24', '24 in short panel', 24, 3]], friend: true },
   corner: { g: 'kit', cat: 'solid', name: 'Friend Fence corner', w: 24, l: 24, h: 24, friend: true },
@@ -508,7 +508,7 @@ function arrange(state, opt) {
   const { room } = s, type = s.setup.type, area = room.w * room.l / 144;
   const small = area < 230;
   const matSz = type === 'center' && area >= 330 ? '46' : '35';
-  const circSz = type === 'church' && area >= 300 ? 'r69' : type === 'center' && area >= 330 ? 'r8' : 'r6';
+  const circSz = type === 'center' && area >= 330 ? 'r8' : 'r6';
   const perZone = type === 'center' && area >= 330 ? 2 : 1;
   const exits = s.items.filter(i => i.t === 'door'), door = exits.find(d => d.exit) || exits[0];
   const dp = door ? doorInside(door, room, 0) : { x: room.w / 2, y: room.l };

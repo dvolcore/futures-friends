@@ -5,8 +5,8 @@
 
    Design (owner, 2026-10-07: "a high-tech store, not a landing page"): a full-bleed hero with a looping muted product video and a parallax collage; a sticky collection
    rail with picture chips; studio-tone product cards that swap to the back view on hover and open a quick view; a "Shop by friend" section built from the four single-shot
-   dolls; an editorial band from the branded-room concept images. Motion is transform and opacity only and every bit of it stops under prefers-reduced-motion.
-   Truth rules: no ratings, no reviews, no "sold" counts, no invented price, size, date or stock. Room pictures carry the owner's concept caption; product pictures say Concept sample. */
+   dolls; an editorial band from the branded-room pictures. Motion is transform and opacity only and every bit of it stops under prefers-reduced-motion.
+   Truth rules: no ratings, no reviews, no "sold" counts, no invented price, size, date or stock. One plain line says room pictures are design renderings; product pictures carry no label. */
 (function () {
 'use strict';
 if (typeof V === 'undefined' || !window.FFCatalog || !window.FFCart) return;
@@ -91,8 +91,8 @@ function rail(active) {
 const lnkAll = active => `<li><button type="button" class="sp-chip sp-chip-all${active === 'all' ? ' is-on' : ''}" data-go="shop/all"${active === 'all' ? ' aria-current="page"' : ''}><span class="sp-chip-i sp-chip-grid">${ico('grid')}</span><span>All</span></button></li>`;
 
 // ------------------------------------------------------------------ hero: full-bleed, a muted looping product video, a parallax collage
-const VIDEO = { centers: ['video/store/centers-preview.mp4', 'video/store/centers-preview-poster.webp', 'Product motion preview: the Friends Circle carpet and zone posters in a classroom concept'],
-  families: ['video/store/families-preview.mp4', 'video/store/families-preview-poster.webp', 'Product motion preview: a reading corner concept with the friends’ carpet'] };
+const VIDEO = { centers: ['video/store/centers-preview.mp4', 'video/store/centers-preview-poster.webp', 'Product motion preview: the Friends Circle carpet and zone posters in a classroom'],
+  families: ['video/store/families-preview.mp4', 'video/store/families-preview-poster.webp', 'Product motion preview: a reading corner with the friends’ carpet'] };
 function heroHtml(side) {
   const fam = side === 'families', v = VIDEO[side];
   const tiles = fam ? ['plush-bop', 'zuri-replica-backpack', 'lumi-hoodie'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1'];

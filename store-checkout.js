@@ -43,6 +43,15 @@
     return r.ok ? { mode: asked, asked, fellBack: false } : { mode: 'request', asked, fellBack: true, why: r.why };
   }
 
+  /* True when the final step can really send or hand off: the request gateway (intake-config.js) is on, or a payment mode is ready. While it is false the
+     final step says plainly that the order is NOT sent online yet and offers the order summary to email, copy, print or call in. */
+  function canSendOnline() {
+    const m = activeMode().mode;
+    if (m !== 'request') return true;
+    const I = W.FFIntake;
+    return !!(I && I.enabled && I.enabled());
+  }
+
   // ------------------------------------------------------------------ the order
   const newRef = () => { const a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s = ''; for (let i = 0; i < 6; i++) s += a[Math.floor(Math.random() * a.length)]; return 'FF-' + s; };
   const needsShipping = lines => lines.some(l => l.p.ships !== 'digital' && l.p.ships !== 'none');
@@ -183,5 +192,5 @@
     return submitRequest(o);
   }
 
-  return Object.freeze({ MODES, PHONE, EMAIL, cfg, ready, activeMode, newRef, needsShipping, buildOrder, validate, summaryText, mailtoHref, submit, _t: { submitRequest, submitStripe, submitShopify, linkKey } });
+  return Object.freeze({ MODES, PHONE, EMAIL, cfg, ready, activeMode, newRef, needsShipping, buildOrder, validate, summaryText, mailtoHref, submit, canSendOnline, _t: { submitRequest, submitStripe, submitShopify, linkKey } });
 });

@@ -7,7 +7,7 @@
 const W = window;
 if (typeof V === 'undefined') return;
 const E = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const KIT_CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';
+const KIT_CAPTION = 'Room pictures are design renderings of how the zones can look.';
 const PLUSH = [['plush-booker', 'Booker', 'blue'], ['plush-lumi', 'Lumi', 'pink'], ['plush-zuri', 'Zuri', 'green'], ['plush-bop', 'Bop', 'purple']];
 
 function plushPic(id, name) {
@@ -18,8 +18,8 @@ function plushPic(id, name) {
 function kitBand() {
   const b = 'img/branded-rooms/blue-table-room-kit-';
   return `<section class="st-band st-kit" aria-labelledby="stKitH"><div class="wrap st-kit-in">
-    <figure class="st-kit-fig"><picture><source type="image/webp" srcset="${b}400.webp 400w, ${b}800.webp 800w, ${b}1200.webp 1200w" sizes="(max-width:820px) 92vw, 520px"><img src="${b}800.jpg" srcset="${b}400.jpg 400w, ${b}800.jpg 800w, ${b}1200.jpg 1200w" sizes="(max-width:820px) 92vw, 520px" alt="Concept picture of a classroom table zone with the Futures Friends kit" width="800" height="600" loading="lazy" decoding="async"></picture>
-    <span class="st-chip">Concept</span><figcaption class="st-cap">${E(KIT_CAPTION)}</figcaption></figure>
+    <figure class="st-kit-fig"><picture><source type="image/webp" srcset="${b}400.webp 400w, ${b}800.webp 800w, ${b}1200.webp 1200w" sizes="(max-width:820px) 92vw, 520px"><img src="${b}800.jpg" srcset="${b}400.jpg 400w, ${b}800.jpg 800w, ${b}1200.jpg 1200w" sizes="(max-width:820px) 92vw, 520px" alt="Design rendering of a classroom table zone with the Futures Friends kit" width="800" height="600" loading="lazy" decoding="async"></picture>
+    <figcaption class="st-cap">${E(KIT_CAPTION)}</figcaption></figure>
     <div class="st-kit-copy"><p class="st-eyebrow">Futures Store</p><h2 id="stKitH">Shop the kit</h2>
     <p>Learning Zones kits, rugs and classroom signs for your rooms. Pick what fits, send a request, and we reply with a quote. Nothing is charged online.</p>
     <p class="st-row"><a class="btn gold" href="#shop/kits" data-go="shop/kits">Shop the kit</a><a class="btn soft" href="#store" data-go="store">See the whole store</a></p></div></div></section>`;

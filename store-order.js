@@ -36,6 +36,7 @@ function payInfo() {
   const am = X.activeMode();
   if (am.mode === 'stripe') return { send: CK.path === 'center' && CK.pay === 'invoice' ? 'Request invoice' : 'Continue to secure payment', note: 'Card payments are handled on Stripe’s own page. We never see or store your card number.' };
   if (am.mode === 'shopify') return { send: 'Continue to secure checkout', note: 'Payment is handled on the shop’s own secure page.' };
+  if (!X.canSendOnline()) return { send: 'Get my order summary', note: 'Online ordering is not switched on yet, so nothing is sent from this page and nothing is charged. You get an order summary to email, copy, print or call in.' };
   return { send: 'Send order request', note: 'This sends a request, not a payment. Nothing is charged. We confirm availability and shipping, then send an invoice.' };
 }
 function details() {
@@ -82,11 +83,11 @@ function review() {
       ${o.shipTo ? `<div><dt>Ship to</dt><dd>${E(o.shipTo.line1)}${o.shipTo.line2 ? ', ' + E(o.shipTo.line2) : ''}<br>${E(o.shipTo.city)}, ${E(o.shipTo.state)} ${E(o.shipTo.zip)}</dd></div>` : ''}
       ${o.po ? `<div><dt>PO number</dt><dd>${E(o.po)}</dd></div>` : ''}
       ${o.taxExempt.claimed ? `<div><dt>Tax-exempt</dt><dd>Certificate ${E(o.taxExempt.certificate)} (${E(o.taxExempt.state)}). Email the certificate to ${EMAIL}.</dd></div>` : ''}
-      <div><dt>Proceed</dt><dd>${o.path === 'center' ? (o.payment === 'invoice' ? 'Pay by invoice' : 'Request a quote first') : 'Send an order request'}</dd></div>
+      <div><dt>Proceed</dt><dd>${o.path === 'center' ? (o.payment === 'invoice' ? 'Pay by invoice' : 'Request a quote first') : (X.canSendOnline() ? 'Send an order request' : 'Order summary to email or call in')}</dd></div>
       ${o.notes ? `<div><dt>Notes</dt><dd>${E(o.notes)}</dd></div>` : ''}</dl>
       <button type="button" class="sp-link" data-ck-edit>Edit details</button></section>
     <section class="sp-rv"><h2>Items</h2>${reviewLines()}</section>
-    <div class="sp-ck-acts"><button type="button" class="btn gold sp-wide" data-ck-place${CK.busy ? ' disabled aria-busy="true"' : ''}>${CK.busy ? 'Sending...' : E(pay.send)}</button><button type="button" class="btn soft" data-ck-edit>Back</button></div>
+    <div class="sp-ck-acts"><button type="button" class="btn gold sp-wide" data-ck-place${CK.busy ? ' disabled aria-busy="true"' : ''}>${CK.busy ? (X.canSendOnline() ? 'Sending...' : 'Preparing...') : E(pay.send)}</button><button type="button" class="btn soft" data-ck-edit>Back</button></div>
     <p class="sp-fnote">${E(pay.note)} ${E(C.DRAFT)}: <button type="button" class="rl" data-go="terms">terms of sale</button> and returns.</p></div>`;
 }
 function aside() {
@@ -97,13 +98,13 @@ function aside() {
     ${t.quoteCount ? `<p class="sp-note">${t.quoteCount} item${t.quoteCount === 1 ? '' : 's'} priced in your written quote.</p>` : ''}
     <p class="sp-note">${E(K.TAX_NOTE)}</p></aside>`;
 }
-const stepper = () => `<ol class="sp-steps" aria-label="Checkout steps"><li${CK.step === 1 ? ' aria-current="step"' : ''} class="${CK.step > 1 ? 'is-done' : ''}"><span>1</span> Details</li><li${CK.step === 2 ? ' aria-current="step"' : ''}><span>2</span> Review</li><li><span>3</span> Request sent</li></ol>`;
+const stepper = () => `<ol class="sp-steps" aria-label="Checkout steps"><li${CK.step === 1 ? ' aria-current="step"' : ''} class="${CK.step > 1 ? 'is-done' : ''}"><span>1</span> Details</li><li${CK.step === 2 ? ' aria-current="step"' : ''}><span>2</span> Review</li><li><span>3</span> ${X.canSendOnline() ? 'Request sent' : 'Your summary'}</li></ol>`;
 V.checkout = () => {
   if (!CK.path) CK.path = defPath();
   if (!K.lines().length) return `<div class="sp sp-checkout"><header class="sp-pagehead"><div class="wrap"><h1>Checkout</h1></div></header><div class="wrap sp-shell">${K.bodyHtml('page')}</div></div>`;
   const am = X.activeMode();
   return `<div class="sp sp-checkout"><header class="sp-pagehead"><div class="wrap">${U.crumbs([['store', 'Futures Store'], ['cart', 'Bag'], ['', 'Checkout']])}<h1>Checkout</h1>${stepper()}
-    ${am.mode === 'request' ? `<p class="sp-lede sp-lede-s">Online payment is not open yet, so this sends an order request. We reply with availability, shipping and an invoice.</p>` : ''}</div></header>
+    ${am.mode === 'request' ? `<p class="sp-lede sp-lede-s">${X.canSendOnline() ? 'Online payment is not open yet, so this sends an order request. We reply with availability, shipping and an invoice.' : 'Online ordering is not open yet. You will get your order summary to email, copy, print or call in. Nothing is sent from this page and nothing is charged.'}</p>` : ''}</div></header>
     <div class="wrap sp-shell sp-ckgrid"><div id="spCk" data-sp-ck>${CK.step === 1 ? details() : review()}</div>${aside()}</div></div>`;
 };
 function toCustomer() { return { path: CK.path, name: CK.name, email: CK.email, phone: CK.phone, org: CK.org, orgType: CK.orgType, po: CK.po, taxExempt: CK.taxExempt, taxCert: CK.taxCert, taxState: CK.taxState, ship: CK.ship, pay: CK.pay, notes: CK.notes }; }

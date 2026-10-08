@@ -12,7 +12,19 @@ const PKG = process.argv[2] || join(homedir(), 'Downloads/Futures_Friends_Mercha
 const cat = JSON.parse(readFileSync(join(PKG, 'store/products.json'), 'utf8'));
 const appRaw = JSON.parse(readFileSync(join(PKG, 'apparel/products.json'), 'utf8')), app = Array.isArray(appRaw) ? appRaw : appRaw.products;
 const all = JSON.parse(readFileSync(join(PKG, 'store/all-products.json'), 'utf8')).products;   // the 58-product catalog: new coloring, sticker, drinkware and replica-backpack items live here
-const pick = (o, keys) => Object.fromEntries(keys.filter(k => o[k] != null).map(k => [k, o[k]]));
+/* Owner rule (2026-10-08): no "concept", "proposed" or "sample" wording on any store product. The package's own copy still uses it, so the
+   customer-facing text is cleaned here, once, and the package files are never edited. */
+const PLAIN = [
+  [/Four proposed plush samples and one poster variation per zone\./, 'Four plush friends and a poster for every zone, Friends Circle included.'],
+  [/A large square footprint concept for /g, 'A large square carpet for '],
+  [/carpet concepts/g, 'carpets'],
+  [/ concept carpet/g, ' carpet'],
+  [/a sturdy proposed insulated bottle/g, 'a sturdy insulated bottle'],
+  [/black-and-white sample (interior )?page/g, 'black-and-white $1page to color'],
+  [/Enquire about a (\w+) sample/, 'Ask about the $1 plush'], [/ concept\b/g, ''], [/\bproposed /g, '']
+];
+const plain = v => (typeof v === 'string' ? PLAIN.reduce((t, [a, b]) => t.replace(a, b), v) : v);
+const pick = (o, keys) => Object.fromEntries(keys.filter(k => o[k] != null).map(k => [k, (k === 'description' || k === 'name' || k === 'cta') ? plain(o[k]) : o[k]]));
 const data = {
   source: 'Futures_Friends_Merchandise_Campaign_2026-10-07 (store/products.json, apparel/products.json); every product is a draft',
   status: cat.catalog_status,
