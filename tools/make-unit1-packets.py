@@ -461,7 +461,7 @@ def classroom(man):
     # rainbow band labels: 3 per page
     for i, (nm, col, hx, fs) in enumerate(BAND):
         if i % 3 == 0:
-            start('print:u1-rainbow-bands', 'Rainbow wall band labels', 'Six color names, not health claims. Children add a sticker for looking, smelling, touching or tasting.')
+            start('print:u1-rainbow-bands', 'Rainbow wall band labels', 'Six color names, not health claims. The teacher adds one food picture to a band for each food the class meets. Nothing is earned or counted for eating.')
         y0 = H - 1.35 * inch - (i % 3 + 1) * 3.05 * inch
         c.setFillColor(HexColor(hx)); c.roundRect(0.6 * inch, y0 + 0.15 * inch, W - 1.2 * inch, 2.85 * inch, 16, stroke=0, fill=1)
         c.setFillColor(white); c.roundRect(0.85 * inch, y0 + 0.4 * inch, 2.6 * inch, 2.35 * inch, 12, stroke=0, fill=1)
