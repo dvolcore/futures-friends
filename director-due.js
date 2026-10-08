@@ -90,7 +90,7 @@ function itemHtml(it, i){
 function eligHtml(){
   if (!S.elig) return '';
   if (!S.elig.length) return '';
-  return `<section class="dd-sec" aria-labelledby="ddElig"><h3 id="ddElig">Who can be left alone with children</h3>
+  return `<section class="dd-sec" aria-labelledby="ddElig"><h3 id="ddElig">Who can be left alone with children ${(window.FFOffer?window.FFOffer.lvl('advisory'):'')}</h3>
    <ul class="dd-list">${S.elig.map(p => `<li class="dd-item ${p.eligible ? 'due_90' : 'overdue'}"><div class="dd-row"><div><b>${E(p.full_name)}</b> <span class="small muted">${E(String(p.job_role || '').replace(/_/g, ' '))}</span></div>
    <span class="chip ${p.eligible ? 'ok' : 'warn'}">${p.eligible === null ? 'No rule for this license type' : p.eligible ? 'Eligible' : 'Not yet'}</span></div>
    ${(p.missing || []).length ? `<span class="small">Missing: ${p.missing.map(m => E(m.title)).join('; ')}</span>` : ''}
@@ -108,7 +108,7 @@ function dueView(c){
   const n = b => S.due.filter(x => x.bucket === b).length;
   const shown = S.filter ? S.due.filter(x => x.bucket === S.filter) : S.due;
   const idx = it => S.due.indexOf(it);
-  return `<div class="dd" id="ddDue"><div class="dd-head"><div><h2>What’s due</h2><p class="small" style="margin:2px 0 0">Worked out from your state’s rules for your license type. Every item shows the rule it comes from.</p></div>
+  return `<div class="dd" id="ddDue"><div class="dd-head"><div><h2>What’s due</h2><p class="small" style="margin:2px 0 0">Worked out from your state’s rules for your license type. Every item shows the rule it comes from. Due dates are ${(window.FFOffer?window.FFOffer.lvl('reminder'):'')}s.</p>${window.FFOffer?window.FFOffer.legend():''}</div>
    <div class="dd-acts"><button class="btn gold" type="button" data-dd="binder">Inspection binder</button><button class="btn soft" type="button" data-dd="refresh">Refresh</button></div></div>
    ${errBox('due')}${noteBox()}
    <div class="dd-tiles" role="group" aria-label="Filter by when it is due">${BUCKETS.map(([k, l, cls]) => `<button type="button" class="dd-tile ${cls}" data-dd="filter" data-b="${k}" aria-pressed="${S.filter === k}"><b>${n(k)}</b><span class="small">${l}</span></button>`).join('')}</div>
@@ -151,13 +151,13 @@ function excHtml(it){
 function excView(){
   if (S.exc === null) return '';
   const list = S.exc || [];
-  return `<section class="dd-sec" id="ddExc" aria-labelledby="ddExcH"><h3 id="ddExcH">Needs action now <span class="chip ${list.length ? 'warn' : 'ok'}">${list.length}</span></h3>
+  return `<section class="dd-sec" id="ddExc" aria-labelledby="ddExcH"><h3 id="ddExcH">Needs action now ${(window.FFOffer?window.FFOffer.lvl('advisory'):'')} <span class="chip ${list.length ? 'warn' : 'ok'}">${list.length}</span></h3>
    <p class="small muted">Things that failed, are stuck or out of date. Each one says who owns it, why, and what happens next.</p>${errBox('exc')}
    ${list.length ? `<ul class="dd-list">${list.map(excHtml).join('')}</ul>` : '<p class="small">Nothing is stuck or failing right now.</p>'}</section>`;
 }
 function accessView(){
   if (!S.access || !S.access.length) return S.err.access ? errBox('access') : '';
-  return `<section class="dd-sec" id="ddAccess" aria-labelledby="ddAccessH"><h3 id="ddAccessH">Classroom access</h3>
+  return `<section class="dd-sec" id="ddAccess" aria-labelledby="ddAccessH"><h3 id="ddAccessH">Classroom access ${(window.FFOffer?window.FFOffer.lvl('enforced'):'')}</h3>
    <p class="small">Training opens when someone is hired. Children, families, photos and messages open only once their background checks are on file and current. The database enforces this, not this page.</p>
    <ul class="dd-list">${S.access.map(p => { const [lab, cls] = ACCESS[p.access] || [p.access, '']; const miss = (p.missing || []);
      const canHold = p.access !== 'on_hold' && p.role !== 'director';

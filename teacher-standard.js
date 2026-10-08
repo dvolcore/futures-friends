@@ -343,8 +343,8 @@ V['train-your-staff'] = () => `<div class="wc ts ts-staff">
 
 // ---------------------------------------------------------------- entry bands
 function callout(where) {
-  if (where === 'family') return `<section class="wc-callout wc-callout-slim ts-band" aria-labelledby="ts-fam-h"><div class="wrap wc-cu">${SC() && SC().portrait ? `<span class="ts-band-june">${SC().portrait('june', '', true, 120)}<small class="ff-story-tag">Ms. June, story-world character</small></span>` : ''}
-   <div><h2 id="ts-fam-h">Who will be with your child</h2><p>Every rule a teacher must meet before working alone with children, how our training goes further, and where our courses stand today.</p></div>${lnk('teacher-standard', 'Read our Teacher Standard')}</div></section>`;
+  if (where === 'family') return `<section class="wc-callout wc-callout-slim ts-band" aria-labelledby="ts-fam-h"><div class="wrap wc-cu">${SC() && SC().portrait ? `<span class="ts-band-june">${SC().portrait('june', '', true, 120)}<small class="ff-story-tag">Ms. June, story-world character, not a member of our staff</small></span>` : ''}
+   <div><h2 id="ts-fam-h">How we prepare every teacher</h2><p>Every rule a teacher must meet before working alone with children, how our training goes further, and where our courses stand today.</p></div>${lnk('teacher-standard', 'Read our Teacher Standard')}</div></section>`;
   if (where === 'staff') return `<section class="wc-callout wc-callout-slim ts-band" aria-labelledby="ts-staff-h"><div class="wrap wc-cu">${SC() && SC().portrait ? `<span class="ts-band-june">${SC().portrait('hazel', '', true, 120)}<small class="ff-story-tag">Principal Hazel, story-world character</small></span>` : ''}
    <div><h2 id="ts-staff-h">Train your staff with us</h2><p>The course method we are building for our own teachers, planned for your team: scenario mastery, time tracking and director checklists. In development, not open yet.</p></div>${lnk('train-your-staff', 'See the staff training plan')}</div></section>`;
   // 'home': the brief version inside Home's trust section (home-calm.js). Wave 4 calm Home: the staff-training link and Ms. June

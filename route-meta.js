@@ -37,6 +37,8 @@
     'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
     'room-kit': ['Learning Zones Kit: carpets, fences and friend zones for your room', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],
     'founding-partners': ['Become a Founding Partner: 90-day pilot', 'A 90-day pilot for 5 to 10 Kansas City area programs: home providers, centers and church preschools. Proposed terms, set in a written agreement.'],
+    membership: ['Monthly Membership: what arrives every month', 'What a Futures Friends membership delivers each month and who helps you use it, with what is ready now, launching with the pilot or planned.'],
+    'brand-kit': ['Partner brand kit', 'Make your "featuring Futures Friends" lockup, follow the usage rules and see which partner kit pieces are ready.'],
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
     'store-request': ['Store request', 'Send your Futures Store list as a quote request or join the family shop list. Nothing is charged and no order is placed online.'],
     funding: ['Funding Help', 'Guides to CACFP, child care subsidy, grants and tax credits, with optional done-for-you help.'],

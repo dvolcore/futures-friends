@@ -80,6 +80,8 @@
     corners: ['Learning zone guide', 'centers', 'store', 'zuri'],
     'room-kit': ['Learning Zones Kit', 'centers', 'options', 'bop'],
     'founding-partners': ['Founding Partners', 'centers', 'for-centers', 'booker'],
+    membership: ['Monthly membership', 'centers', 'pricing', 'zuri'],
+    'brand-kit': ['Partner brand kit', 'centers', 'membership', 'bop'],
     'learn-team': ['Team training', 'centers', 'learn', 'zuri'],
     'teacher-standard': ['Teacher Standard', 'staff', 'home', 'booker'],
     'unit-1': ['Unit 1 at a glance', 'staff', 'curriculum', 'booker'],

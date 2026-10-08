@@ -367,7 +367,7 @@ function dashView(c){
       <td><span class="chip ${rt.ok ? 'ok' : 'bad'}">${rt.staff}:${rt.here} · ${rt.ok ? 'In ratio' : 'Out of ratio'}</span><span class="mini"> limit 1:${rt.max}</span></td><td><button class="rl" data-dm="openroom" data-room="${id}">Open room</button></td></tr>`).join('')}</table></div>
     <p class="note">Ratios update as teachers check children in and out and as staff clock in on the Staff tab. Demo limits: Twos 1:8, Threes and Pre-K 1:10.</p></div>
    <div class="card"><div class="ffd-row sp"><h3>What's due</h3><span class="chip ${overdue ? 'bad' : 'ok'}">${overdue ? `${overdue} overdue` : 'Nothing overdue'}</span></div>
-    <ul class="ffd-due">${open.map(([id, d]) => `<li class="${d.due < today ? 'is-late' : ''}"><span><b>${E(d.title)}</b><span class="mini">${E(d.area)} · ${d.due < today ? 'was due' : 'due'} ${E(shortD(d.due))}</span></span><button class="btn soft" data-dm="duedone" data-id="${id}">Mark done</button></li>`).join('') || '<li class="small">All caught up.</li>'}</ul>
+    <ul class="ffd-due">${open.map(([id, d]) => `<li class="${d.due < today ? 'is-late' : ''}"><span><b>${E(d.title)}</b><span class="mini">${E(d.area)} · ${d.due < today ? 'was due' : 'due'} ${E(shortD(d.due))}</span></span><button class="btn soft" data-dm="duedone" data-id="${id}">Mark done</button></li>`).join('') || '<li class="small">All caught up.</li>'}</ul><p class="mini">${(window.FFOffer?window.FFOffer.lvl('reminder'):'')} Due dates remind you; they do not block anyone.</p>
     ${dues.some(([, d]) => d.done) ? `<details><summary class="mini">Done recently</summary><ul class="ffd-plain">${dues.filter(([, d]) => d.done).map(([id, d]) => `<li class="small">${E(d.title)} · ${E(a.who(d.doneBy))}, ${fmtTime(d.doneAt)} <button class="rl" data-dm="dueundo" data-id="${id}">Undo</button></li>`).join('')}</ul></details>` : ''}</div>
   </div>
   <div class="grid g3">
@@ -388,9 +388,9 @@ function staffView(c){
    ${list.map(([id, s]) => { const t = trainingOf(id); return `<tr><td><b>${E(s.name)}</b><span class="mini"> · ${E(s.role)}</span></td>
      <td><label class="sr-only" for="dmSR_${id}">Room for ${E(s.name)}</label>${roomSel('dmSR_' + id, s.room).replace('data-dm-ch="staffroom"', `data-dm-ch="staffroom" data-id="${id}"`)}</td>
      <td><button class="ffd-toggle" data-dm="duty" data-id="${id}" aria-pressed="${!!s.onDuty}" aria-label="${E(s.name)} on duty">${s.onDuty ? `On since ${fmtTime(s.clockIn)}` : 'Off · clock in'}</button></td>
-     <td><span class="chip ${s.bg === 'Cleared' ? 'ok' : 'warn'}">${E(s.bg)}</span><span class="mini"> renew by ${E(shortD(s.bgDue))}</span></td>
-     <td><span class="chip ${t.done ? 'ok' : t.n ? 'warn' : ''}">${t.done ? 'Complete' : t.n ? `${t.n} of 3 lessons` : 'Not started'}</span></td>
-     <td>${id === 's-dana' ? '' : `<button class="rl" data-dm="staffdel" data-id="${id}" ${DS.armed['st' + id] ? 'data-armed="1"' : ''}>${DS.armed['st' + id] ? 'Click again to remove' : 'Remove'}</button>`}</td></tr>`; }).join('')}</table></div></div>
+     <td><span class="chip ${s.bg === 'Cleared' ? 'ok' : 'warn'}">${E(s.bg)}</span>${s.bg === 'Cleared' ? '' : ' ' + (window.FFOffer?window.FFOffer.lvl('enforced'):'')}<span class="mini"> renew by ${E(shortD(s.bgDue))}</span></td>
+     <td><span class="chip ${t.done ? 'ok' : t.n ? 'warn' : ''}">${t.done ? 'Complete' : t.n ? `${t.n} of 3 lessons` : 'Not started'}</span>${t.done ? '' : ' ' + (window.FFOffer?window.FFOffer.lvl('advisory'):'')}</td>
+     <td>${id === 's-dana' ? '' : `<button class="rl" data-dm="staffdel" data-id="${id}" ${DS.armed['st' + id] ? 'data-armed="1"' : ''}>${DS.armed['st' + id] ? 'Click again to remove' : 'Remove'}</button>`}</td></tr>`; }).join('')}</table></div>${window.FFOffer?window.FFOffer.legend():''}<p class="mini">A background check that has not cleared blocks classroom access in the live Hub; unfinished training is a warning only.</p></div>
   <form class="card" id="dmStaffForm" novalidate><h3>Add a staff member</h3><p class="small">Demo: use a made-up name (first name and last initial).</p>
    <div class="ffd-row"><label class="f" for="dmStName">Name<input class="i" id="dmStName" autocomplete="off" placeholder="e.g. Ms. Rosa V."></label>
    <label class="f" for="dmStRole">Role<select class="i" id="dmStRole">${STAFF_ROLES.map(r => `<option>${r}</option>`).join('')}</select></label>
