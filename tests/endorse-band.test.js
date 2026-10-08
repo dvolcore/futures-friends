@@ -86,7 +86,7 @@ test('the full band renders on #home, #centers, #for-centers, #why, #enroll, #me
 
 test('placement sits right after the hero or the offer, and below the store hero and campaign band', () => {
   const src = read('endorse-band.js');
-  assert.match(src, /home: \{[^}]*after: \['\.px-homehero'/);
+  assert.match(src, /home: \{[^}]*before: \['\.hc-trust'/);
   assert.match(src, /enroll: \{[^}]*'\.phero \+ section\.tight'/);
   assert.match(src, /pricing: \{[^}]*'#launch'/);
   assert.match(src, /'kids-shop': \{[^}]*'\.sf-cols'/);

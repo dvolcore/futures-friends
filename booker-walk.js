@@ -39,7 +39,7 @@
     // the first words under the hero (the doors' heading): the trail's turn out of the hero must be finished above them
     const head = root.querySelector('.hc-doors > .wrap > *');
     const firstTop = head ? box(head).top : Infinity;
-    const secs = ['.hc-doors', '.hc-friends', '.hc-day', '.hc-proof', '.hc-trust', '.hc-close'].map(s => root.querySelector(s)).filter(Boolean);
+    const secs = ['.hc-doors', '.hc-friends', '.hc-day', '.hc-proof', '.ff-endorse', '.hc-trust', '.hc-close'].map(s => root.querySelector(s)).filter(Boolean);
     const inner = s => { const w = s.querySelector(':scope > .wrap') || s; return box(w); };
     // the doors' band runs on through the status line
     const status = root.querySelector('.hc-status');

@@ -19,7 +19,7 @@
 
   // route -> { variant, lead (who is shown first), after: selectors tried in order, inside #view }
   const PLACE = {
-    home: { variant: 'full', lead: 'melissa', after: ['.px-homehero', '.phero'] },
+    home: { variant: 'full', lead: 'melissa', before: ['.hc-trust', '.hc-close'], after: ['.px-homehero', '.phero'] },
     centers: { variant: 'full', lead: 'melissa', after: ['.phero'] },
     'for-centers': { variant: 'full', lead: 'melissa', after: ['.phero'] },
     why: { variant: 'full', lead: 'melissa', after: ['.phero'] },
@@ -78,9 +78,11 @@
     const cfg = PLACE[view];
     if (!cfg || !root || !root.querySelector || root.querySelector('.ff-endorse')) return false;
     if (!data('melissa') || !data('laurie')) return false;
-    let at = anchor(root, cfg.after);
+    // Owner 2026-10-08: on Home the band sits at the bottom, right before the real-photos section ("Who is with your child").
+    const pre = cfg.before ? anchor(root, cfg.before) : null;
+    const at = pre || anchor(root, cfg.after);
     if (!at) return false;
-    at.insertAdjacentHTML('afterend', band(cfg.variant, cfg.lead));
+    at.insertAdjacentHTML(pre ? 'beforebegin' : 'afterend', band(cfg.variant, cfg.lead));
     // The band moves everything below it; let scroll-linked motion re-measure.
     if (W.ScrollTrigger && W.requestAnimationFrame) W.requestAnimationFrame(() => { try { W.ScrollTrigger.refresh(); } catch (_) {} });
     return true;
