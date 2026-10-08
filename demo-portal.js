@@ -141,18 +141,22 @@ function addTabs(tabs, role){
   const waiting = role === 'director' ? approvalsWaiting() : 0;
   const out = [];
   const s = ses() || {}, may = k => role === 'director' || (!!s.id && DM.can(s.id, k));
-  if (role === 'director') out.push(['dash','Dashboard'], window.FFDemoInbox ? ['inbox', 'Inbox' + (window.FFDemoInbox.open() ? ` <span class="ffd-count" aria-label="${window.FFDemoInbox.open()} waiting">${window.FFDemoInbox.open()}</span>` : '')] : null, ['staff','Staff'], ['approvals', 'Approvals' + (waiting ? ` <span class="ffd-count" aria-label="${waiting} waiting">${waiting}</span>` : '')], ['invite','Invite']);
+  const lib = !!(window.FFLibraryDemo && window.FFLibraryDemo.allowed());
+  if (role === 'director') out.push(['dash','Dashboard'], ...(lib ? [['library','Library']] : []), window.FFDemoInbox ? ['inbox', 'Inbox' + (window.FFDemoInbox.open() ? ` <span class="ffd-count" aria-label="${window.FFDemoInbox.open()} waiting">${window.FFDemoInbox.open()}</span>` : '')] : null, ['staff','Staff'], ['approvals', 'Approvals' + (waiting ? ` <span class="ffd-count" aria-label="${waiting} waiting">${waiting}</span>` : '')], ['invite','Invite']);
   if (may('enroll')) out.push(['enroll','Enrollment']);
   if (may('billing')) out.push(['billing','Billing']);
   if (may('reports')) out.push(['dreports','Reports']);
   if (may('staff')) out.push(['access','Hours and access']);
-  out.push(T.today, ['checkin','Check-in'], ['plans','Daily plan'], T.children, T.progress, T.messages, ['reports','Family reports'], T.calendar, T.lunch, T.curriculum, T.account, T.setup, ['hours','My hours']);
+  out.push(T.today, ...(role !== 'director' && lib ? [['library','Library']] : []), ['checkin','Check-in'], ['plans','Daily plan'], T.children, T.progress, T.messages, ['reports','Family reports'], T.calendar, T.lunch, T.curriculum, T.account, T.setup, ['hours','My hours']);
   tabs.splice(0, tabs.length, ...out.filter(Boolean));
 }
+function libraryView(){ return window.FFLibraryDemo.view(); }
+function libTile(){ return window.FFLibraryDemo && window.FFLibraryDemo.allowed() ? window.FFLibraryDemo.tile() : ''; }
 function view(tab, c){
   const f = {inbox:c2 => window.FFDemoInbox ? window.FFDemoInbox.view(c2) : null, checkin:checkinView, plans:plansView, reports:reportsView, dash:dashView, staff:staffView, approvals:approvalsView, enroll:enrollView, dreports:dReportsView, invite:inviteView,
-    billing:billingView, access:accessView, hours:hoursTab}[tab];
+    billing:billingView, access:accessView, hours:hoursTab, library:libraryView}[tab];
   if (!f) return null;
+  if (tab === 'library' && !(window.FFLibraryDemo && window.FFLibraryDemo.allowed())) return null;
   if (['dash','inbox','staff','approvals','invite'].includes(tab) && c.role !== 'director') return null;
   const need = {enroll:'enroll', billing:'billing', dreports:'reports', access:'staff'}[tab];
   if (need && c.role !== 'director' && !DM.can(c.me, need)) return null;
@@ -190,7 +194,7 @@ const areaSel = (id, val) => `<select class="i" id="${id}"><option value="">No a
 function todayCard(c){
   const p = planOf(c.room, c.date), [cls, lbl] = chipFor(p && p.status), a = api(), kids = kidsOf(c.room);
   const xs = kids.map(([id]) => a.kd(id, c.date)), here = xs.filter(x => x.present === true && !x.outAt).length, out = xs.filter(x => x.outAt).length, notYet = xs.filter(x => x.present == null).length;
-  return `<div class="card ffd-today" style="--c:var(--${p ? E(p.friend) : 'gold'})"><div class="ffd-row sp"><h3>Today's plan</h3><span class="chip ${cls}">${lbl}</span></div>
+  return libTile() + `<div class="card ffd-today" style="--c:var(--${p ? E(p.friend) : 'gold'})"><div class="ffd-row sp"><h3>Today's plan</h3><span class="chip ${cls}">${lbl}</span></div>
    ${p ? `<p class="ffd-ptitle"><img src="${E(FFcut(p.friend))}" alt="" width="40" height="40"><span><b>${E(p.title || 'Untitled plan')}</b><span class="mini">With ${FNAME[p.friend] || ''}${p.area ? ' · ' + E(areaLabel(p.area)) : ''}</span></span></p>
      <ol class="ffd-loop">${LOOP.filter(([k]) => p.steps && p.steps[k]).map(([k, n]) => `<li style="--c:var(--${STEP_FRIEND[k]})"><b>${n}</b> ${E(p.steps[k])}</li>`).join('')}</ol>`
    : `<p class="small">No plan for today yet. Write it in a few minutes with the six-step loop, or start from the sample day.</p>`}
@@ -359,7 +363,7 @@ function dashView(c){
   const dues = Object.entries(DM.all('dues')), open = dues.filter(([, d]) => !d.done).sort((x, y) => x[1].due.localeCompare(y[1].due)), today = DM.todayIso();
   const overdue = open.filter(([, d]) => d.due < today).length, waiting = approvalsWaiting(), apps = Object.values(DM.all('apps')).filter(x => ['inquiry','application'].includes(x.stage)).length;
   const tile = (n, l, cls, tab) => `<button class="card ffd-tile ffd-tbtn" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l}</span></button>`;
-  return getStarted() + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
+  return libTile() + getStarted() + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
     ${tile(`${inRatio}<span class="ffd-of"> / ${rooms.length}</span>`, 'Rooms in ratio', inRatio < rooms.length ? 'ffd-bad' : '', 'staff')}${tile(waiting, 'Approvals waiting', waiting ? 'ffd-warn' : '', 'approvals')}</div>
   <div class="ffd-cols">
    <div class="card"><h3>Rooms right now</h3><div class="tw"><table><caption class="sr-only">Attendance and ratio by room</caption><tr><th scope="col">Room</th><th scope="col" class="n">Here</th><th scope="col">Staff on duty</th><th scope="col">Ratio</th><th scope="col"><span class="sr-only">Open</span></th></tr>
