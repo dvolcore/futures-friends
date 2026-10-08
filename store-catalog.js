@@ -258,7 +258,7 @@
   });
 
   // Drinkware and mealtime: insulated character bottles and the Eat the Rainbow divided plate. Food-contact items: FDA food-contact and CPSIA testing come first.
-  const foodBase = Object.assign({}, sampleBase, { collection: 'drinkware', priceState: 'soon', ships: 'parcel', ages: ['toddler', 'twos', 'threes', 'prek'], badges: ['Made to order'], safety: [SAFETY.foodcontact], lead: 'Made to order. We confirm the price and ship date by email.', faq: requestFaq, options: [] });
+  const foodBase = Object.assign({}, sampleBase, { collection: 'drinkware', priceState: 'soon', ships: 'parcel', ages: ['twos', 'threes', 'prek'], badges: ['Made to order'], safety: [SAFETY.foodcontact], lead: 'Made to order. We confirm the price and ship date by email.', faq: requestFaq, options: [] });
   const NEXT = { booker: 'lumi', lumi: 'zuri', zuri: 'bop', bop: 'booker' };
   MERCH.bottles.forEach(x => {
     const key = x.character.toLowerCase();
