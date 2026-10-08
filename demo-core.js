@@ -288,6 +288,15 @@ function load(){
 }
 function save(){ if (DB) store.set(dbKey(DB.center), JSON.stringify(DB)); }
 
+// Sample dates for the director's countdowns (invented; the dashboard labels them "typed by hand, sample"): the licensing visit and
+// the next unit start, counted from the day the demo was seeded and rolled forward if the demo is older than that.
+function sampleDates(){
+  const db = load(), today = todayIso(), base = db.seededFor && db.seededFor <= today ? db.seededFor : today;
+  let visit = addDays(base, 35); while (visit < today) visit = addDays(visit, 35);
+  let unit = mondayOf(addDays(base, 19)); while (unit <= today) unit = addDays(unit, 28);
+  return {licensingVisit:visit, nextUnit:unit, sample:true};
+}
+
 // ---------------------------------------------------------------- centers (self-serve, like the platform: each is its own space)
 let CS = null;
 function centersDoc(){
@@ -402,5 +411,5 @@ W.FFDemo = {VERSION, TEACHER_ROOM, TYPE_LABEL, COLORS, get CENTER(){ return cent
   enabled, session, signIn, signInWith, signOut, reset, ensureSeed, db, all, get, put, del, familyKids, staffNames, setFamily, familyName,
   centers, center, bySlug, createCenter, switchCenter, setViewCenter,
   PERMS, PRESETS, PRESET_LABEL, FINANCIAL, isDirector, permsOf, can, presetOf, mondayOf, addDays, receiptNo,
-  persistent:() => { load(); return persistent; }, todayIso, weekdayOffset, _seed:seed};
+  persistent:() => { load(); return persistent; }, todayIso, weekdayOffset, sampleDates, _seed:seed};
 })();

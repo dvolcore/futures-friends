@@ -356,30 +356,217 @@ function familyEnd(c){
     <a class="btn soft" href="#this-week">This week with the friends</a><a class="btn soft" href="#at-home">Futures at Home</a><a class="btn soft" href="#story-time">Story Time</a><a class="btn soft" href="#bop-at-home">Bop at Home</a><a class="btn soft" href="#family-videos">Family videos</a></div></div>`;
 }
 
-// ---------------------------------------------------------------- Director: dashboard
-function dashView(c){
-  const a = api(), rooms = Object.entries(DM.all('rooms')).sort((x, y) => (x[1].order || 9) - (y[1].order || 9)), date = c.date;
-  const allKids = Object.keys(DM.all('kids')), here = allKids.filter(id => { const x = a.kd(id, date); return x.present === true && !x.outAt; }).length;
-  const staff = Object.values(DM.all('staff')), onDuty = staff.filter(s => s.onDuty).length;
+// ---------------------------------------------------------------- Director: dashboard (the front door)
+// 2026-10-08, ported from the QEP CEO Operating Spine (portal-spine.js): a greeting with countdowns, "Only you can make these" (two
+// gold decision cards), the "Measures off target" ledger, then the center right now (rooms, what's due, plans, enrollment, messages,
+// library, store) and the sources. Every figure is derived here from the demo data, never typed, and labelled sample data (A7).
+const WEEKDAY_FMT = {weekday:'long', month:'long', day:'numeric'};
+const longD = iso => { try { return api().fromIso(iso).toLocaleDateString('en-US', WEEKDAY_FMT); } catch (_) { return iso; } };
+const usd0 = n => '$' + Math.round(n).toLocaleString('en-US');
+const firstName = n => String(n || '').replace(/^(Ms\.|Mr\.|Mrs\.)\s*/, '').split(' ')[0];
+function dashData(c){
+  const a = api(), today = DM.todayIso(), date = c.date, SP = window.FFSpine;
+  const rooms = Object.entries(DM.all('rooms')).sort((x, y) => (x[1].order || 9) - (y[1].order || 9));
+  const kids = DM.all('kids'), allKids = Object.keys(kids);
+  const here = allKids.filter(id => { const x = a.kd(id, date); return x.present === true && !x.outAt; }).length;
+  const staffE = Object.entries(DM.all('staff')), staff = staffE.map(([, s]) => s), onDuty = staff.filter(s => s.onDuty).length;
   const rts = rooms.map(([id, r]) => [id, r, ratioOf(id)]), inRatio = rts.filter(x => x[2].ok).length;
-  const dues = Object.entries(DM.all('dues')), open = dues.filter(([, d]) => !d.done).sort((x, y) => x[1].due.localeCompare(y[1].due)), today = DM.todayIso();
-  const overdue = open.filter(([, d]) => d.due < today).length, waiting = approvalsWaiting(), apps = Object.values(DM.all('apps')).filter(x => ['inquiry','application'].includes(x.stage)).length;
-  const tile = (n, l, cls, tab) => `<button class="card ffd-tile ffd-tbtn" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l} ${SAMPLE}</span></button>`;
-  return libTile() + getStarted() + (window.FFStoreTeasers ? window.FFStoreTeasers.classroom() : '') + `<div class="grid g4 ffd-tiles">${tile(`${here}<span class="ffd-of"> / ${allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${tile(onDuty, 'Staff on duty now', '', 'staff')}
-    ${tile(`${inRatio}<span class="ffd-of"> / ${rooms.length}</span>`, 'Rooms in ratio', inRatio < rooms.length ? 'ffd-bad' : '', 'staff')}${tile(waiting, 'Approvals waiting', waiting ? 'ffd-warn' : '', 'approvals')}</div>
-  <div class="ffd-cols">
+  const dues = Object.entries(DM.all('dues')), open = dues.filter(([, d]) => !d.done).sort((x, y) => x[1].due.localeCompare(y[1].due));
+  const overdueL = open.filter(([, d]) => d.due < today), waiting = approvalsWaiting();
+  const apps = Object.entries(DM.all('apps')), pipe = apps.filter(([, x]) => ['inquiry','tour','application','waitlist'].includes(x.stage));
+  const cap = rooms.reduce((s, [id]) => s + capOf(id), 0), enrolled = rooms.reduce((s, [id]) => s + enrolledIn(id), 0);
+  const openBy = Object.fromEntries(rooms.map(([id]) => [id, Math.max(0, capOf(id) - enrolledIn(id))])), openSeats = Object.values(openBy).reduce((s, n) => s + n, 0);
+  const rate = rid => +(DM.get('rates', rid) || 225);
+  const left = Object.assign({}, openBy), matched = pipe.filter(([, x]) => { if (left[x.room] > 0) { left[x.room]--; return true; } return false; });
+  const weekly = matched.reduce((s, [, x]) => s + rate(x.room), 0);
+  const stuck = pipe.filter(([, x]) => x.stage === 'waitlist' && openBy[x.room] > 0);
+  const dates = DM.sampleDates ? DM.sampleDates() : null;
+  return {a, today, date, SP, rooms, kids, allKids, here, staffE, staff, onDuty, rts, inRatio, dues, open, overdueL, waiting, apps, pipe, cap, enrolled, openBy, openSeats, rate, matched, weekly, stuck, dates};
+}
+function dashNarrative(x){
+  const parts = [];
+  parts.push(x.inRatio === x.rooms.length ? 'Every room is in ratio,' : x.rooms.length - x.inRatio === 1 ? 'One room is out of ratio right now,' : 'Some rooms are out of ratio right now,');
+  const share = x.allKids.length ? x.here / x.allKids.length : 0;
+  parts.push(share >= .85 ? 'nearly every child is here,' : share >= .6 ? 'most children are here,' : 'the rooms are still filling up,');
+  parts.push(x.overdueL.length ? (x.overdueL.length === 1 ? 'but one thing on the due list has slipped past its date.' : 'but a few things on the due list have slipped past their dates.') : 'and nothing on the due list is late.');
+  parts.push(x.openSeats && x.pipe.length ? 'The open seats and the families asking for them are the decision that is yours alone.' : 'The rest of the morning runs without you.');
+  return parts.map(t => `<span>${E(t)}</span>`).join(' ');
+}
+function decisionCards(x){
+  const SP = x.SP, out = [];
+  // 01: seats. Open seats against the families asking for them; the tuition is modelled (open seats times the weekly rate).
+  if (x.openSeats && x.pipe.length) {
+    const unit = x.dates && x.dates.nextUnit, toUnit = unit ? SP.daysBetween(x.today, unit) : null;
+    const avg = x.rooms.reduce((s, [id]) => s + x.rate(id), 0) / (x.rooms.length || 1);
+    const st = x.stuck[0] && x.stuck[0][1];
+    out.push(`<article class="spt-dec" data-sp-reveal aria-labelledby="sptDec1">
+      <div class="spt-dk"><span class="spt-n">01</span><span class="spt-kick">Seats and families</span>${unit ? `<span class="spt-due${toUnit <= 3 ? ' is-soon' : ''}">Decide by ${E(shortD(unit))}</span>` : ''}</div>
+      <h3 id="sptDec1">Offer the open seats now, or hold them for the new unit</h3>
+      <div class="spt-why"><span class="spt-big">${SP.count(x.openSeats)}</span><small>seats open, with ${x.pipe.length} ${x.pipe.length === 1 ? 'family' : 'families'} in the enrollment pipeline ${SAMPLE}</small></div>
+      ${st ? `<p>${E(st.child)} is on the waitlist for the ${E(roomName(st.room))}, which has ${x.openBy[st.room]} open ${x.openBy[st.room] === 1 ? 'seat' : 'seats'}.</p>` : ''}
+      <div class="spt-opts">
+        <div class="spt-opt"><b>Offer seats now</b><span>${x.matched.length} ${x.matched.length === 1 ? 'family wants' : 'families want'} a room with space. About <b>${usd0(x.weekly)}</b> a week more tuition once they start ${SP.chip('modelled')}</span></div>
+        <div class="spt-opt"><b>Hold for the new unit</b><span>Seats stay empty${toUnit != null ? ` for ${toUnit} days` : ''}. A family that waits may enroll somewhere else.</span></div>
+      </div>
+      <p class="spt-if"><b>If you wait:</b> each empty seat is about ${usd0(avg)} a week of tuition not billed (modelled).</p>
+      <button class="btn gold" type="button" data-ptab="enroll">Open the enrollment desk</button></article>`);
+  }
+  // 02: a staff file. The earliest background check that is not cleared, against the room it keeps in ratio.
+  const due = x.staffE.filter(([, s]) => s.bg !== 'Cleared' && s.bgDue).sort((p, q) => p[1].bgDue.localeCompare(q[1].bgDue))[0];
+  if (due) {
+    const [sid, s] = due, days = SP.daysBetween(x.today, s.bgDue), room = s.room ? DM.get('rooms', s.room) : null;
+    const others = x.staffE.filter(([id, o]) => id !== sid && o.room === s.room && o.bg === 'Cleared').map(([, o]) => o.name);
+    const nKids = s.room ? enrolledIn(s.room) : 0, off = Object.values(DM.all('requests')).find(r => r.status === 'pending' && r.staff === sid);
+    out.push(`<article class="spt-dec" data-sp-reveal aria-labelledby="sptDec2">
+      <div class="spt-dk"><span class="spt-n">02</span><span class="spt-kick">A staff file</span><span class="spt-due${days <= 3 ? ' is-soon' : ''}">${days < 0 ? 'Overdue' : `Renew by ${E(shortD(s.bgDue))}`}</span></div>
+      <h3 id="sptDec2">Book ${E(s.name)}’s background check renewal, or take ${E(firstName(s.name))} off the floor</h3>
+      <div class="spt-why"><span class="spt-big">${SP.count(Math.max(0, days), {suf:'d'})}</span><small>until the renewal date ${SAMPLE}</small></div>
+      <p>${E(s.name)} works in the ${E(room ? room.name : 'center')}.${off ? ` A time-off request from ${E(firstName(s.name))} is also waiting for you.` : ''}</p>
+      <div class="spt-opts">
+        <div class="spt-opt"><b>Book it this week</b><span>${E(firstName(s.name))} stays on the schedule. The Hub clears the file once the result is on record.</span></div>
+        <div class="spt-opt"><b>Take ${E(firstName(s.name))} off the floor</b><span>${room ? `The ${E(room.name)} runs with ${others.length ? E(others.join(' and ')) : 'nobody cleared'} only: ${nKids} children at a 1:${room.ratio || 10} limit${others.length && Math.ceil(nKids / (room.ratio || 10)) <= others.length ? ' stays in ratio, with no break cover' : ' goes out of ratio'}.` : 'Cover the shift from the floater list.'}</span></div>
+      </div>
+      <p class="spt-if"><b>If you wait:</b> after ${E(shortD(s.bgDue))} ${E(firstName(s.name))} cannot be counted in ratio, and a licensing visit would find the renewal overdue.</p>
+      <button class="btn gold" type="button" data-ptab="staff">Open staff files</button></article>`);
+  } else if (x.waiting) {
+    out.push(`<article class="spt-dec" data-sp-reveal aria-labelledby="sptDec2"><div class="spt-dk"><span class="spt-n">0${out.length + 1}</span><span class="spt-kick">Approvals</span></div>
+      <h3 id="sptDec2">Approve or return what is waiting for you</h3><div class="spt-why"><span class="spt-big">${SP.count(x.waiting)}</span><small>plans and requests waiting ${SAMPLE}</small></div>
+      <p>Teachers and families cannot go ahead until you answer.</p><button class="btn gold" type="button" data-ptab="approvals">Open approvals</button></article>`);
+  }
+  if (!out.length) return `<div class="spt-calm" data-sp-reveal><b>Nothing needs only you right now.</b><span class="small">When a decision only the director can make comes up, it shows here first.</span></div>`;
+  return `<div class="spt-decs">${out.join('')}</div>`;
+}
+function measureRows(x){
+  const SP = x.SP, a = x.a, today = x.today, dana = (x.staffE.find(([, s]) => s.owner) || [, {}])[1].name || 'Director';
+  const pct = (v, t) => t ? Math.min(100, v / t * 100) : null;
+  const rows = [];
+  // ratios: safety, not performance (anything under 1 is "needs you now")
+  rows.push({name:'Rooms in ratio', sub:'Right now, every room', src:'attendance', att:x.rooms.length ? x.inRatio / x.rooms.length : null, safety:true,
+    val:`${x.inRatio}/${x.rooms.length}`, tgt:'every room, all day', pct:pct(x.inRatio, x.rooms.length), series:null,
+    tr:[x.inRatio === x.rooms.length ? 'Steady' : 'Out of ratio now', 'checked at every check-in'], own:dana, st:x.inRatio === x.rooms.length ? 'On track' : 'Act now', due:'Now', age:''});
+  // the due list
+  const od = x.overdueL, firstOd = od[0] && od[0][1];
+  rows.push({name:'Due list items past their date', sub:firstOd ? firstOd.title : 'Nothing past due', src:'dues', att:od.length ? .4 : 1,
+    val:String(od.length), tgt:'0 past due', pct:od.length ? 100 : 0, zeroGood:true, series:null, tr:[`${x.open.length} open in all`, 'due dates remind; they never block'],
+    own:dana, st:od.length ? 'Not started' : 'On track', due:firstOd ? shortD(firstOd.due) : '—', age:firstOd ? `${SP.daysBetween(firstOd.due, today)}d past due, untouched` : '', overdue:!!od.length});
+  // attendance: the last four complete weekdays
+  const days = [4, 3, 2, 1].map(n => DM.weekdayOffset(today, -n));
+  const att = days.map(d => { const n = x.allKids.filter(id => (DM.get('kidday', `${id}_${d}`) || {}).present === true).length; return x.allKids.length ? n / x.allKids.length * 100 : null; });
+  const lastAtt = att[att.length - 1];
+  rows.push({name:'Attendance', sub:'Children present, last 4 weekdays', src:'attendance', att:lastAtt == null ? null : lastAtt / 90,
+    val:lastAtt == null ? null : `${Math.round(lastAtt)}%`, tgt:'goal 90%', pct:pct(lastAtt || 0, 90), series:att,
+    tr:[`${att[3] - att[0] >= 0 ? '+' : '−'}${Math.abs(Math.round(att[3] - att[0]))} pts in 4 days`, 'from teacher check-in'], own:dana, st:lastAtt >= 90 ? 'On track' : 'Watching', due:'Weekly', age:''});
+  // family reports sent yesterday, per room
+  const y1 = DM.weekdayOffset(today, -1), presentY = x.allKids.filter(id => (DM.get('kidday', `${id}_${y1}`) || {}).present === true);
+  const sentY = Object.values(DM.all('reports')).filter(r => r.date === y1), sentKids = new Set(sentY.map(r => r.kid));
+  const silent = x.rooms.filter(([id]) => presentY.some(k => x.kids[k].room === id) && !presentY.some(k => x.kids[k].room === id && sentKids.has(k))).map(([, r]) => r.name);
+  const sentShare = presentY.length ? presentY.filter(k => sentKids.has(k)).length / presentY.length : null;
+  rows.push({name:'Family reports sent', sub:silent.length ? `Yesterday. None from ${silent.join(' or ')}` : 'Yesterday, every room', src:'reports', att:sentShare,
+    val:sentShare == null ? null : `${Math.round(sentShare * 100)}%`, tgt:'every child, every day', pct:sentShare == null ? null : sentShare * 100, series:null,
+    tr:[`${sentY.length} of ${presentY.length} children`, 'reports go out in the evening'], own:(x.staffE.find(([id]) => id === 's-alana') || [, {name:dana}])[1].name, st:sentShare >= 1 ? 'On track' : 'In progress', due:'Daily', age:''});
+  // seats
+  rows.push({name:'Seats filled', sub:`${x.openSeats} open, ${x.pipe.length} ${x.pipe.length === 1 ? 'family' : 'families'} in the pipeline`, src:'enroll', att:x.cap ? (x.enrolled / x.cap) / .9 : null,
+    val:`${x.enrolled}/${x.cap}`, tgt:'goal 90% full', pct:pct(x.cap ? x.enrolled / x.cap * 100 : 0, 90), series:null,
+    tr:[`${x.matched.length} could start soon`, 'licensed capacity per room'], own:dana, st:x.openSeats && x.pipe.length ? 'Decision 01' : 'On track', due:x.dates ? shortD(x.dates.nextUnit) : '—', age:''});
+  // background checks
+  const cleared = x.staff.filter(s => s.bg === 'Cleared').length, nextBg = x.staffE.filter(([, s]) => s.bg !== 'Cleared').sort((p, q) => String(p[1].bgDue).localeCompare(String(q[1].bgDue)))[0];
+  const bgDays = nextBg ? SP.daysBetween(today, nextBg[1].bgDue) : null;
+  rows.push({name:'Background checks cleared', sub:nextBg ? `${nextBg[1].name}: renewal due` : 'Every staff file is cleared', src:'staff', att:x.staff.length ? cleared / x.staff.length : null,
+    val:`${cleared}/${x.staff.length}`, tgt:'every staff file', pct:pct(cleared, x.staff.length), series:null, tr:[nextBg ? 'Renewal not booked' : 'Steady', 'checked before classroom access'],
+    own:dana, st:nextBg ? 'Decision 02' : 'On track', due:nextBg ? shortD(nextBg[1].bgDue) : '—', age:bgDays != null ? (bgDays < 0 ? `${-bgDays}d overdue` : `${bgDays}d left`) : '', overdue:bgDays != null && bgDays < 0});
+  // training
+  const tr = x.staffE.map(([id]) => trainingOf(id)), done = tr.filter(t => t.done).length, part = x.staffE.filter(([id]) => { const t = trainingOf(id); return !t.done && t.n; });
+  const trDue = x.open.find(([, d]) => d.area === 'Training');
+  rows.push({name:'Course F-101 complete', sub:part.length ? `${part[0][1].name}: ${trainingOf(part[0][0]).n} of 3 lessons` : 'Futures Friends staff course', src:'staff', att:x.staff.length ? done / x.staff.length / .9 : null,
+    val:`${done}/${x.staff.length}`, tgt:'goal 90% of staff', pct:pct(done / (x.staff.length || 1) * 100, 90), series:null,
+    tr:[`${x.staff.length - done} still to finish`, 'a warning only, never a block'], own:dana, st:done === x.staff.length ? 'On track' : part.length ? 'In progress' : 'Not started',
+    due:trDue ? shortD(trDue[1].due) : '—', age:trDue ? `${SP.daysBetween(today, trDue[1].due)}d left` : '', overdue:!!(trDue && trDue[1].due < today)});
+  // approvals
+  const reqs = Object.values(DM.all('requests')).filter(r => r.status === 'pending'), plansW = Object.values(DM.all('plans')).filter(p => p.status === 'submitted');
+  const stamps = reqs.map(r => r.at).concat(plansW.map(p => p.submittedAt || p.at || Date.now())).filter(Boolean), oldest = stamps.length ? Math.min(...stamps) : null;
+  const ageD = oldest ? Math.max(0, Math.floor((Date.now() - oldest) / 864e5)) : 0;
+  rows.push({name:'Approvals waiting', sub:`${plansW.length} ${plansW.length === 1 ? 'plan' : 'plans'}, ${reqs.length} ${reqs.length === 1 ? 'request' : 'requests'}`, src:'dues', att:x.waiting ? (ageD >= 2 ? .45 : .8) : 1,
+    val:String(x.waiting), tgt:'none older than a day', pct:x.waiting ? 100 : 0, zeroGood:true, series:null, tr:[x.waiting ? `Oldest ${ageD ? ageD + 'd' : 'today'}` : 'Clear', 'teachers wait on these'],
+    own:dana, st:x.waiting ? 'Waiting on you' : 'On track', due:'Today', age:x.waiting && ageD ? `${ageD}d untouched` : ''});
+  // tuition past due (demo billing; directors and the owner only)
+  const inv = Object.values(DM.all('invoices')), weeks = [...new Set(inv.map(i => i.week))].sort().slice(-4);
+  const pd = inv.filter(i => i.status === 'pastdue'), pdSum = pd.reduce((s, i) => s + (i.family || 0), 0);
+  const lastWk = weeks[weeks.length - 1], wkInv = inv.filter(i => i.week === lastWk), paidShare = wkInv.length ? wkInv.filter(i => i.status === 'paid').length / wkInv.length : null;
+  rows.push({name:'Tuition collected', sub:pd.length ? `${pd.length} ${pd.length === 1 ? 'family' : 'families'} past due, ${usd0(pdSum)}` : 'Nobody past due', src:'billing', att:paidShare,
+    val:paidShare == null ? null : `${Math.round(paidShare * 100)}%`, tgt:'of last week billed', pct:paidShare == null ? null : paidShare * 100,
+    series:weeks.map(w => { const xs = inv.filter(i => i.week === w); return xs.length ? xs.filter(i => i.status === 'paid').length / xs.length * 100 : null; }),
+    tr:[pd.length ? 'Reminder ready' : 'Steady', 'weekly, autopay or recorded'], own:dana, st:pd.length ? 'In progress' : 'On track', due:'Friday', age:''});
+  // a feed that is not connected: absent, never zero
+  rows.push({name:'State subsidy payments owed', sub:'What the state still owes the center', src:'subsidy', att:null, val:null, tgt:'not connected', pct:null, series:null,
+    tr:['No feed', 'subsidy portal not linked'], own:'', st:'No owner', due:'—', age:'never measured'});
+  const order = {severe:0, off:1, watch:2, near:3, none:4, ok:5};
+  rows.forEach(r => { r.band = SP.band(r.att, {safety:r.safety}); });
+  return rows.sort((p, q) => (q.overdue ? 1 : 0) - (p.overdue ? 1 : 0) || order[p.band] - order[q.band]);
+}
+function ledger(x){
+  const SP = x.SP, rows = measureRows(x), offN = rows.filter(r => !['ok','near'].includes(r.band)).length;
+  const row = r => `<li class="psp-row${r.overdue ? ' is-overdue' : ''}">
+    <i class="psp-dot psp-b-${r.band}${r.overdue ? ' is-overdue' : ''}" aria-hidden="true"></i>
+    <div class="psp-mname"><b>${E(r.name)}</b><small>${E(r.sub)}</small>${SP.chip((SP.feed(r.src) || {}).state)}</div>
+    <div class="psp-mval psp-b-${r.band}"><b>${r.val == null ? '—' : E(r.val)}</b>${r.zeroGood ? '' : SP.bar(r.pct, r.band)}<small>${E(r.tgt)}<span class="sr-only">, ${E(SP.bandLabel(r.band))}</span></small></div>
+    <div class="psp-mspark">${SP.spark(r.series, r.band)}</div>
+    <div class="psp-mtr">${E(r.tr[0])}<small>${E(r.tr[1])}</small></div>
+    <div class="psp-mown">${SP.avatar(r.own)}<span><b>${E(r.own || 'Unassigned')}</b><small class="${/Not started|No owner|Act now/.test(r.st) ? 'is-bad' : ''}">${E(r.st)}</small></span></div>
+    <div class="psp-mdue"><b>${E(r.due)}</b>${r.age ? `<small>${E(r.age)}</small>` : ''}</div></li>`;
+  return `<div class="psp-ledgerbox" data-sp-reveal><ol class="psp-ledger" aria-label="Measures, worst first">
+    <li class="psp-lhead" aria-hidden="true"><span></span><span>Measure</span><span>Value and target</span><span>Last days</span><span>Trend</span><span>Owner</span><span>Due</span></li>
+    ${rows.map(row).join('')}</ol><p class="psp-lsum">${offN} of ${rows.length} measures need attention. ${SAMPLE}</p></div>`;
+}
+function dashView(c){
+  if (!window.FFSpine) return dashCenter(c, dashData(c));
+  const x = dashData(c), SP = x.SP, s = ses() || {}, me = firstName((DM.get('staff', s.id) || {}).name || s.name || 'Director');
+  const vis = x.dates ? SP.daysBetween(x.today, x.dates.licensingVisit) : null, unit = x.dates ? SP.daysBetween(x.today, x.dates.nextUnit) : null;
+  const stat = (n, l, cls, tab) => `<button class="spt-stat" type="button" ${tab ? `data-ptab="${tab}"` : 'disabled'}><b class="${cls || ''}">${n}</b><span class="small muted">${l} ${SAMPLE}</span></button>`;
+  const cast = [['lumi', 17, 76], ['zuri', 35, 80], ['bop', 79, 78], ['booker', 55, 92]];
+  return `<div class="psp-today" data-sp-root="dash">
+  <section class="spt-hero" data-sp-reveal aria-labelledby="sptGreet">
+    <div class="spt-copy">
+      <p class="spt-date"><b>${E(longD(x.today))}</b><i aria-hidden="true"></i><span>${E(DM.CENTER)}</span></p>
+      <h2 class="spt-greet" id="sptGreet"><span>Good ${SP.daypart()},</span> <span>${E(me)}</span></h2>
+      <p class="spt-lead">${dashNarrative(x)}</p>
+      <div class="spt-counts">
+        ${vis != null ? `<div class="spt-cd" style="--c:${vis <= 14 ? 'var(--sp-severe)' : 'var(--ink)'}"><b>${SP.count(vis)}</b><span>days to the licensing visit</span><small>${E(shortD(x.dates.licensingVisit))}, sample date</small></div>` : ''}
+        ${unit != null ? `<div class="spt-cd" style="--c:var(--booker)"><b>${SP.count(unit)}</b><span>days to the next unit</span><small>Starts ${E(shortD(x.dates.nextUnit))}, sample date</small></div>` : ''}
+        <div class="spt-cd" style="--c:var(--lumi)"><b>${SP.count(x.pipe.length)}</b><span>families asking for a seat</span><small>${x.openSeats} seats open now</small></div>
+      </div>
+    </div>
+    <div class="spt-stage" aria-hidden="true"><span class="spt-tag">Story-world friends</span><span class="spt-ground"></span>
+      <span class="spt-cast">${cast.map(([f, l, h]) => `<img class="c-${f}" src="img/plush/characters/${f}-480.webp" srcset="img/plush/characters/${f}-480.webp 1x, img/plush/characters/${f}-960.webp 2x" alt="" loading="lazy" decoding="async" style="left:${l}%;--h:${h}%">`).join('')}</span></div>
+    <div class="spt-strip">${stat(`${x.here}<span class="ffd-of"> / ${x.allKids.length}</span>`, 'Children here now / enrolled', '', 'checkin')}${stat(x.onDuty, 'Staff on duty now', '', 'staff')}${stat(`${x.inRatio}<span class="ffd-of"> / ${x.rooms.length}</span>`, 'Rooms in ratio', x.inRatio < x.rooms.length ? 'ffd-bad' : '', 'staff')}${stat(x.waiting, 'Approvals waiting', x.waiting ? 'ffd-warn' : '', 'approvals')}</div>
+  </section>
+  ${SP.provStrip(['attendance','staff','dues','enroll','reports','billing','dates','forecast','subsidy'], {note:'Demo center: every person, family and figure here is invented. In a live center the Hub figures come straight from the Hub.'})}
+  <div class="spt-h" data-sp-reveal><h2>Only you can make these</h2><p>A promise to a family, a staff file or a money trade that nobody below you can sign off.</p></div>
+  ${decisionCards(x)}
+  <div class="spt-h" data-sp-reveal><h2>Measures off target</h2><p>Worst first: what a licensing visit, a family or the bank would notice before anything else.</p></div>
+  ${ledger(x)}
+  <div class="spt-h" data-sp-reveal><h2>The center right now</h2><p>Rooms, ratios and the due list update as teachers check children in and staff clock in.</p></div>
+  ${dashCenter(c, x)}
+  ${SP.sources()}
+  </div>`;
+}
+function dashCenter(c, x){
+  const a = x.a, date = x.date, today = x.today, rooms = x.rooms, overdue = x.overdueL.length, dues = x.dues, open = x.open;
+  return `<div class="spt-now">
+  <div class="ffd-cols" data-sp-reveal>
    <div class="card"><h3>Rooms right now ${SAMPLE}</h3><div class="tw"><table><caption class="sr-only">Attendance and ratio by room</caption><tr><th scope="col">Room</th><th scope="col" class="n">Here</th><th scope="col">Staff on duty</th><th scope="col">Ratio</th><th scope="col"><span class="sr-only">Open</span></th></tr>
-    ${rts.map(([id, r, rt]) => `<tr><td><b>${E(r.name)}</b><span class="mini"> · ${kidsOf(id).length} enrolled</span></td><td class="n">${rt.here}</td><td class="small">${staffOn(id).map(([, s]) => E(s.name)).join(', ') || '<span class="ffd-bad">Nobody</span>'}</td>
+    ${x.rts.map(([id, r, rt]) => `<tr><td><b>${E(r.name)}</b><span class="mini"> · ${kidsOf(id).length} enrolled</span></td><td class="n">${rt.here}</td><td class="small">${staffOn(id).map(([, s]) => E(s.name)).join(', ') || '<span class="ffd-bad">Nobody</span>'}</td>
       <td><span class="chip ${rt.ok ? 'ok' : 'bad'}">${rt.staff}:${rt.here} · ${rt.ok ? 'In ratio' : 'Out of ratio'}</span><span class="mini"> limit 1:${rt.max}</span></td><td><button class="rl" data-dm="openroom" data-room="${id}">Open room</button></td></tr>`).join('')}</table></div>
     <p class="note">Ratios update as teachers check children in and out and as staff clock in on the Staff tab. Demo limits: Twos 1:8, Threes and Pre-K 1:10.</p></div>
    <div class="card"><div class="ffd-row sp"><h3>What's due</h3><span class="chip ${overdue ? 'bad' : 'ok'}">${overdue ? `${overdue} overdue` : 'Nothing overdue'}</span></div>
     <ul class="ffd-due">${open.map(([id, d]) => `<li class="${d.due < today ? 'is-late' : ''}"><span><b>${E(d.title)}</b><span class="mini">${E(d.area)} · ${d.due < today ? 'was due' : 'due'} ${E(shortD(d.due))}</span></span><button class="btn soft" data-dm="duedone" data-id="${id}">Mark done</button></li>`).join('') || '<li class="small">All caught up.</li>'}</ul><p class="mini">${(window.FFOffer?window.FFOffer.lvl('reminder'):'')} Due dates remind you; they do not block anyone.</p>
     ${dues.some(([, d]) => d.done) ? `<details><summary class="mini">Done recently</summary><ul class="ffd-plain">${dues.filter(([, d]) => d.done).map(([id, d]) => `<li class="small">${E(d.title)} · ${E(a.who(d.doneBy))}, ${fmtTime(d.doneAt)} <button class="rl" data-dm="dueundo" data-id="${id}">Undo</button></li>`).join('')}</ul></details>` : ''}</div>
   </div>
-  <div class="grid g3">
+  <div class="grid g3" data-sp-reveal>
    <div class="card"><h3>Today's plans</h3><ul class="ffd-plain">${rooms.map(([id, r]) => { const p = planOf(id, date), [cls, lbl] = chipFor(p && p.status); return `<li class="small"><b>${E(r.name)}:</b> ${p ? E(p.title) : 'No plan'} <span class="chip ${cls}">${lbl}</span></li>`; }).join('')}</ul><button class="btn soft" data-ptab="approvals">Review plans</button></div>
-   <div class="card"><h3>Enrollment ${SAMPLE}</h3><p class="small">${apps} new ${apps === 1 ? 'inquiry or application' : 'inquiries and applications'} to answer.</p><button class="btn soft" data-ptab="enroll">Open the enrollment desk</button></div>
-   <div class="card"><h3>Family messages ${SAMPLE}</h3><p class="small">${Object.values(a.msgs()).filter(m => m.from === 'family' && !(m.read || {}).teacher).length} unread from families.</p><button class="btn soft" data-ptab="messages">Open messages</button></div></div>`;
+   <div class="card"><h3>Enrollment ${SAMPLE}</h3><p class="small">${x.apps.filter(([, y]) => ['inquiry','application'].includes(y.stage)).length} new ${x.apps.filter(([, y]) => ['inquiry','application'].includes(y.stage)).length === 1 ? 'inquiry or application' : 'inquiries and applications'} to answer.</p><button class="btn soft" data-ptab="enroll">Open the enrollment desk</button></div>
+   <div class="card"><h3>Family messages ${SAMPLE}</h3><p class="small">${Object.values(a.msgs()).filter(m => m.from === 'family' && !(m.read || {}).teacher).length} unread from families.</p><button class="btn soft" data-ptab="messages">Open messages</button></div></div>
+  <div data-sp-reveal>${libTile()}${getStarted()}${window.FFStoreTeasers ? window.FFStoreTeasers.classroom() : ''}</div>
+  </div>`;
 }
 
 // ---------------------------------------------------------------- Director: staff
