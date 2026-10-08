@@ -205,15 +205,15 @@
   const TYPE = { 'short-sleeve T-shirt': ['T-shirt', 'tshirt'], 'pullover hoodie': ['hoodie', 'hoodie'], backpack: ['backpack', 'backpack'] };
   const APP_SAFETY = { tshirt: 'Children’s clothing carries permanent tracking labels and meets the federal flammability rule. Care and fiber labels follow the final fabric.', hoodie: 'Children’s hoodies are made with no hood or neck drawstrings, as CPSC guidance requires for sizes 2T to 12, and carry permanent tracking labels.', backpack: 'Children’s backpacks carry tracking labels, and any zipper pulls or buckles are checked for small parts and strength at the sample stage.' };
   MERCH.apparel.forEach(a => {
-    const ty = (TYPE[a.type] || [a.type, 'tshirt']), key = a.character === 'All Friends' ? 'all-friends' : a.character.toLowerCase(), isPack = ty[1] === 'backpack';
-    const nm = (a.character === 'All Friends' ? 'All Friends' : a.character) + ' ' + ty[0];
-    add(Object.assign({}, sampleBase, { id: a.id, name: nm, collection: 'apparel', kind: 'apparel', priceState: 'soon', orderable: false, cta: 'notify', tone: TONE[key], zones: FOUR.includes(key) ? [key] : ['circle'], kidsShop: ty[1] === 'tshirt', apparelType: ty[1], who: key,
+    const isAll = a.id.indexOf('all-friends') === 0, ty = (TYPE[a.type] || [a.type, 'tshirt']), key = isAll ? 'all-friends' : a.character.toLowerCase(), isPack = ty[1] === 'backpack';
+    const nm = (isAll ? 'All Friends' : a.character) + ' ' + ty[0];
+    add(Object.assign({}, sampleBase, { id: a.id, name: nm, collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: TONE[key], zones: FOUR.includes(key) ? [key] : ['circle'], kidsShop: ty[1] === 'tshirt', apparelType: ty[1], who: key,
       short: (isPack ? 'Front print: “' + a.front_copy + '.”' : 'Back print: “' + a.back_copy + '”') + ' Sizes coming soon.',
-      description: a.character === 'All Friends' ? 'All four friends together on a golden-yellow ' + ty[0] + '.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back carries our tagline, “' + a.back_copy + '”') : a.character + ' on a ' + a.color + ' ' + ty[0] + ', with the Futures Friends wordmark.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back reads “' + a.back_copy + '”'),
-      badges: ['Sizes coming soon', 'Concept sample'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Tell us which size you would want and we will write when it is ready.',
+      description: isAll ? 'All four friends together on a golden-yellow ' + ty[0] + '.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back carries our tagline, “' + a.back_copy + '”') : a.character + ' on a ' + a.color + ' ' + ty[0] + ', with the Futures Friends wordmark.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back reads “' + a.back_copy + '”'),
+      badges: ['Sizes coming soon', 'Concept sample'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Add it to your cart, say which size you would want in the notes at checkout, and we will write back.',
       box: ['One ' + ty[0] + ' in ' + a.color], dims: ['Sizes, fit and measurements are confirmed after the first sample.'], materials: ['Fabric, weight and print method are confirmed with the maker after sample approval.'], care: ['Care instructions follow the final fabric and print method.'],
       safety: [APP_SAFETY[ty[1]]], lead: 'Not available yet. A sample is made and checked before anything is sold.',
-      faq: [['Can I order it?', 'Not yet. Leave your email and the size you would want, and we will write when it is ready. Leaving your email is interest, not an order.'], ['Is the picture the real product?', 'No. It is a concept sample picture. The finished product may differ in color, fit and print.'], FAQ.returns],
+      faq: [['Can I order it?', 'Not yet, but you can ask. Add it to your cart and send the request. We write back with the price, sizes and timing. A request is interest, not an order, and nothing is charged.'], ['Is the picture the real product?', 'No. It is a concept sample picture. The finished product may differ in color, fit and print.'], FAQ.returns],
       pairs: ['plush-' + (FOUR.includes(key) ? key : 'booker'), 'poster-' + (FOUR.includes(key) ? ({ booker: 'booker-reading-area', lumi: 'lumi-calm-corner', zuri: 'zuri-discovery-zone', bop: 'bop-movement-zone' })[key] : 'friends-circle') + '-v1'] }));
   });
 
@@ -322,11 +322,24 @@
     const im = photos('collection-' + id)[(n || 1) - 1]; if (!im) return null;
     return { kind: 'sample', fit: 'cover', srcset: im.files || [[im.w400, 400], [im.w800, 800], [im.w1200, 1200]], src: im.jpg || im.w800, w: im.w, h: im.h, ratio: im.ratio, alt: '', caption: SAMPLE_CAPTION };
   }
-  /* The Kids' Shop, in sections. */
+  /* The Kids' Shop, in sections: [heading, collection id, products, id]. Everything a family can browse lives here. */
   function kidsSections() {
-    return [['Posters', 'posters', P.filter(p => p.kidsShop && p.kind === 'poster')], ['Plush friends', 'plush', P.filter(p => p.kidsShop && p.kind === 'plush')],
-      ['Apparel', 'apparel', P.filter(p => p.kidsShop && p.kind === 'apparel')], ['And two more', '', inCollection('kids')]];
+    const apparel = t => P.filter(p => p.kind === 'apparel' && p.apparelType === t);
+    return [
+      ['T-shirts', 'apparel', apparel('tshirt'), 'tshirts'], ['Hoodies', 'apparel', apparel('hoodie'), 'hoodies'], ['Backpacks', 'apparel', apparel('backpack'), 'backpacks'],
+      ['Plush friends', 'plush', P.filter(p => p.kind === 'plush'), 'plush'],
+      ['Posters', 'posters', P.filter(p => p.kind === 'poster' && /-v1$/.test(p.id)), 'posters'],
+      ['Carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'zone'), 'carpets'],
+      ['Large square corner carpets', 'carpets', P.filter(p => p.kind === 'carpet' && p.format === 'large-square'), 'squares'],
+      ['And two more', '', inCollection('kids'), 'more']
+    ];
   }
+  const KW = { carpet: 'carpet carpets rug rugs mat floor', bundle: 'bundle set kit', plush: 'plush doll dolls stuffed toy soft', poster: 'poster posters wall art print', kit: 'kit kits package room startup', addon: 'add-on mats fence boundaries', material: 'sign signs labels cards puppets classroom materials', book: 'book books storybook story read', family: 'printable free pdf' };
+  const AKW = { tshirt: 'shirt t-shirt tshirt tee shirts apparel clothing clothes', hoodie: 'hoodie hoodies sweatshirt apparel clothing clothes', backpack: 'backpack backpacks bag school bag apparel' };
+  const CKW = { kits: 'kit kits room package startup', carpets: 'carpet carpets rug rugs mat floor', posters: 'poster posters wall art print', plush: 'plush doll dolls stuffed toy soft', apparel: 'apparel clothes clothing shirt t-shirt tee hoodie backpack bag', addons: 'add-on fence mats boundaries', materials: 'signs labels cards puppets classroom materials', books: 'book books storybook story read', kids: 'kids family children' };
+  const collectionKeywords = id => CKW[id] || '';
+  /* Search words for a product (the site search, wayfinding.js). */
+  const keywords = p => ['shop store buy order purchase', KW[p.kind] || '', p.apparelType ? AKW[p.apparelType] : '', p.kind === 'apparel' ? 'apparel' : '', (p.zones || []).join(' '), p.who || '', p.collection].join(' ');
 
   // ------------------------------------------------------------------ compliance labels (short; the long form is STORE_BLINDSPOTS.md)
   const LABELS = [
@@ -348,5 +361,5 @@
 
   return Object.freeze({ APPROVED, CONCEPT_CAPTION, DRAFT, AUDIENCES, AGES, ZONES, COLLECTIONS, PRODUCTS: P, LABELS, TRUST, FAQ, SAFETY, MEMBER,
     product, collection, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
-    setManifest, photos, gallery, heroImage, kidsSections, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
+    setManifest, photos, gallery, heroImage, kidsSections, keywords, collectionKeywords, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
 });

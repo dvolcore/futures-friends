@@ -39,8 +39,8 @@ function ctaHtml(p) {
   if (C.canOrder(p)) {
     const quoted = p.priceState !== 'fixed';
     return `<div class="sp-buyrow"><div class="sp-step sp-step-lg" role="group" aria-label="Quantity"><button type="button" data-sp-pq="-1" aria-label="Fewer"${PS.qty <= 1 ? ' disabled' : ''}>${ico('minus')}</button><output aria-live="polite" data-sp-q>${PS.qty}</output><button type="button" data-sp-pq="1" aria-label="More">${ico('plus')}</button></div>
-      <button type="button" class="btn gold sp-addbtn" data-sp-padd>${quoted ? 'Add to cart for a quote' : 'Add to cart'}</button></div>
-      ${quoted ? '<p class="sp-buyhint">No public price yet. We price it in your written quote, with shipping, before anything is charged.</p>' : '<p class="sp-buyhint">Nothing is charged when you add it. You approve a written invoice first.</p>'}`;
+      <button type="button" class="btn gold sp-addbtn" data-sp-padd>${quoted ? (p.priceState === 'soon' ? 'Add to cart as a request' : 'Add to cart for a quote') : 'Add to cart'}</button></div>
+      ${quoted ? `<p class="sp-buyhint">${p.priceState === 'soon' ? (p.sizesNote || 'Price coming soon.') + ' This sends a request, not an order.' : 'No public price yet. We price it in your written quote, with shipping, before anything is charged.'}</p>` : '<p class="sp-buyhint">Nothing is charged when you add it. You approve a written invoice first.</p>'}`;
   }
   if (p.cta === 'link') return `<div class="sp-buyrow">${lnk('printables', 'Open the printables ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">Free to print at home or at the library. No account.</p>`;
   const read = p.edition === 'digital' ? `<p class="sp-buyhint">${lnk('story-time', 'Read this book online in Story Time', 'sp-link')}, free.</p>` : '';

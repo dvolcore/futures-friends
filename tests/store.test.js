@@ -79,7 +79,7 @@ test('the owner\'s merchandise package: every stable id is in the catalog, every
     assert.match(x.dims.join(' '), /not confirmed product sizes/);
   }
   // apparel: slogans come from the package; no price, sizes "coming soon"
-  for (const a of pkg.apparel) { const x = C.product(a.id); assert.equal(x.cta, 'notify'); assert.equal(x.orderable, false); assert.match(x.badges.join(' '), /Sizes coming soon/); if (a.back_copy) assert.ok(x.description.includes(a.back_copy), a.id); }
+  for (const a of pkg.apparel) { const x = C.product(a.id); assert.equal(C.canOrder(x), true, 'apparel can be added to the cart as a request'); assert.equal(x.priceState, 'soon'); assert.equal(x.price, null); assert.match(x.badges.join(' '), /Sizes coming soon/); if (a.back_copy) assert.ok(x.description.includes(a.back_copy), a.id); }
   assert.ok(C.product('all-friends-tshirt').description.includes('Learn. Move. Explore. Belong.'));
   // the curriculum is never a store item
   for (const p of C.PRODUCTS) assert.doesNotMatch(p.name + ' ' + (p.short || ''), /curriculum|lesson plan|unit \d/i, p.id);
@@ -94,7 +94,8 @@ test('the plush is not orderable: no add to cart, a Notify me form instead, and 
     assert.doesNotMatch(html, /data-sp-padd/); assert.match(html, /data-sp-notify=/); assert.match(html, /Ships after safety testing/);
     assert.equal(K.add(id, {}, 1), null);
   }
-  for (const id of ['kids-carpet', 'booker-tshirt', 'book-booker-tries-again']) assert.equal(K.add(id, {}, 1), null, id);
+  for (const id of ['kids-carpet', 'book-booker-tries-again']) assert.equal(K.add(id, {}, 1), null, id);
+  assert.ok(K.add('booker-backpack', {}, 1), 'a backpack goes in the cart as a request'); K._reset();
   assert.equal(K.count(), 0);
   assert.match(text(c.render('product', 'plush-lumi')), /cannot be ordered until its safety tests are done/);
 });
@@ -266,10 +267,11 @@ test('every product renders a real page: price text, honest status, no leaks, on
 
 test('the kids\' shop stays small and uses the same cards, product pages and cart', () => {
   const { c, W } = world(), C = W.FFCatalog, html = c.render('kids-shop');
-  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['Posters', 'Plush friends', 'Apparel', 'And two more']);
-  assert.equal((html.match(/class="sp-card"/g) || []).length, 4 + 4 + 5 + 2);
+  assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Posters', 'Carpets', 'Large square corner carpets', 'And two more']);
+  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 5 + 4 + 5 + 5 + 5 + 2);
+  for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
   assert.match(html, /data-go="product\/plush-lumi"/); assert.match(html, /Notify me/);
-  assert.doesNotMatch(html, /kit-center|zone-boundaries|rug-/);
+  assert.doesNotMatch(html, /kit-center|zone-boundaries/);
   assert.equal(vm.runInContext("typeof V['shop-families'] + typeof V['kids-shop']", c), 'functionfunction');
 });
 
@@ -337,7 +339,7 @@ test('the cart drawer is an accessible modal: labelled dialog, focus moves in an
   await h.goto(page, srv.base, 'product/zone-boundaries');
   await page.evaluate(() => { try { localStorage.removeItem('ff-store-cart-v1'); } catch (_) { /* none */ } });
   const btn = page.locator('.sp-addbtn').first();
-  assert.equal(await page.locator('#spCartBtn').getAttribute('aria-haspopup'), 'dialog');
+  assert.equal(await page.locator('#spViewCart').count(), 1);
   await btn.click(); await page.waitForSelector('#spDrawer.is-open'); await page.waitForTimeout(250);
   const d = page.locator('#spDrawer .sp-panel');
   assert.equal(await d.getAttribute('role'), 'dialog'); assert.equal(await d.getAttribute('aria-modal'), 'true'); assert.equal(await d.getAttribute('aria-labelledby'), 'spDrawerH');
@@ -345,7 +347,7 @@ test('the cart drawer is an accessible modal: labelled dialog, focus moves in an
   assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'focus is inside');
   assert.ok(await page.evaluate(() => ['#view', 'header.bar', 'footer'].every(s => document.querySelector(s).hasAttribute('inert'))), 'the page behind is inert');
   assert.match(await page.locator('#spLive').innerText(), /Zone Boundaries pack added\. 1 item in your cart\./);
-  assert.match(await page.locator('#spCartBtn').innerText(), /1/);
+  assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /1 item in your cart/);
   // Tab never leaves the dialog
   for (let i = 0; i < 14; i++) { await page.keyboard.press('Tab'); assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'Tab ' + i); }
   for (let i = 0; i < 6; i++) { await page.keyboard.press('Shift+Tab'); assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'Shift+Tab ' + i); }
@@ -359,8 +361,8 @@ test('the cart drawer is an accessible modal: labelled dialog, focus moves in an
   assert.ok(await page.evaluate(() => !document.querySelector('#view').hasAttribute('inert')), 'the page is live again');
   // the header button opens it, the scrim closes it
   await page.setViewportSize({ width: 1280, height: 800 });   // on a phone the panel covers the whole screen, so the scrim is only reachable on a wider one
-  await page.locator('#spCartBtn').click(); await page.waitForSelector('#spDrawer.is-open'); await page.locator('.sp-scrim').click({ position: { x: 4, y: 300 } }); await page.waitForFunction(() => document.getElementById('spDrawer').hidden);
-  assert.equal(await page.evaluate(() => document.activeElement.id), 'spCartBtn');
+  await page.locator('#spViewCart').click(); await page.waitForSelector('#spDrawer.is-open'); await page.locator('.sp-scrim').click({ position: { x: 4, y: 300 } }); await page.waitForFunction(() => document.getElementById('spDrawer').hidden);
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'spViewCart');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -402,4 +404,63 @@ test('axe: no violations on the store pages at 1280 and 390', async () => {
     await ctx.close();
   }
   assert.deepEqual(bad, []);
+});
+
+test('shop from anywhere: the header Shop entry and live cart count, the menu, the footer and the View cart pill, on both audiences, desktop and phone', async () => {
+  for (const w of [1280, 390]) for (const aud of ['families', 'centers']) {
+    const { ctx, page, errors } = await h.open(browser, w);
+    await h.goto(page, srv.base, aud === 'families' ? 'home' : 'centers');
+    await page.evaluate(a => { try { localStorage.removeItem('ff-store-cart-v1'); localStorage.setItem('ff-audience', a); } catch (_) { /* none */ } }, aud);
+    await h.goto(page, srv.base, aud === 'families' ? 'home' : 'centers');
+    const btn = page.locator('#spCartBtn'); assert.equal(await btn.count(), 1, `${w} ${aud}: header Shop button`);
+    assert.ok(await btn.isVisible(), `${w} ${aud}: visible`);
+    assert.match(await btn.getAttribute('class'), /sp-cartbtn/);
+    assert.equal(await page.locator('#spCartBtn .sp-cartlabel').isVisible(), w >= 1000, 'the word Shop shows on wide screens; the bag and count alone on phones');
+    const box = await btn.boundingBox(); assert.ok(box.x + box.width <= w + 1 && box.x >= 0, 'inside the viewport');
+    await btn.click(); await page.waitForFunction(r => location.hash.startsWith(r), aud === 'families' ? '#kids-shop' : '#store');
+    // the live count and the sticky View cart pill follow the cart
+    await page.evaluate(() => { try { localStorage.setItem('ff-store-cart-v1', JSON.stringify({ v: 1, items: [{ pid: 'booker-backpack', opts: {}, qty: 2 }] })); } catch (_) { /* none */ } });
+    await h.goto(page, srv.base, aud === 'families' ? 'kids-shop' : 'store');
+    assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /2 items in your cart/);
+    assert.ok(await page.locator('#spViewCart').isVisible(), 'View cart pill');
+    await page.locator('#spViewCart').click(); await page.waitForSelector('#spDrawer.is-open'); assert.match(await page.locator('#spDrawer').innerText(), /Booker backpack/);
+    await page.keyboard.press('Escape'); await page.waitForFunction(() => document.getElementById('spDrawer').hidden);
+    await h.goto(page, srv.base, 'cart'); assert.ok(!(await page.locator('#spViewCart').isVisible()), 'no pill on the cart page');
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+
+test('shop is in the menu (near the top, both audiences) and in the footer site map', async () => {
+  const way = read('wayfinding.js');
+  assert.match(way, /families: \[\['kids-shop', 'Shop: Kids\\' Shop'\]/); assert.match(way, /centers: \[\['store', 'Shop: Futures Store'\]/);
+  const html = read('index.html');
+  assert.match(html, /<a href="#kids-shop">Shop: Kids&rsquo; Shop<\/a>/); assert.match(html, /<a href="#store">Shop: Futures Store<\/a>/);
+  const { ctx, page } = await h.open(browser, 390);
+  for (const aud of ['families', 'centers']) {
+    await h.goto(page, srv.base, 'pricing'); await page.evaluate(a => { try { localStorage.setItem('ff-audience', a); } catch (_) { /* none */ } }, aud);
+    await h.goto(page, srv.base, aud === 'families' ? 'home' : 'centers'); await page.click('#menuT'); await page.waitForSelector('#ffw-menu[open]');
+    const first = await page.evaluate(() => [...document.querySelectorAll('#ffw-menu a[href^="#"]')].filter(a => a.offsetParent !== null).slice(0, 4).map(a => a.getAttribute('href')));
+    assert.ok(first.includes(aud === 'families' ? '#kids-shop' : '#store'), `${aud} menu top links ${first}`);
+    await page.keyboard.press('Escape');
+  }
+  await ctx.close();
+});
+
+test('search finds the store: shop, buy, carpet, rug, backpack, shirt, hoodie, plush, doll, poster, apparel, kit, and friend names with them', async () => {
+  const { ctx, page } = await h.open(browser, 1280);
+  await h.goto(page, srv.base, 'home');
+  const find = async q => { await page.evaluate(() => { const i = document.getElementById('px-globalquery'); if (i) i.value = ''; }); await page.keyboard.press('Control+k'); await page.waitForSelector('#px-globalquery', { state: 'visible' }); await page.fill('#px-globalquery', q); await page.waitForTimeout(250);
+    const hrefs = await page.evaluate(() => [...document.querySelectorAll('#ffw-pal-list a[href^="#"]')].map(a => a.getAttribute('href'))); await page.keyboard.press('Escape'); return hrefs; };
+  const SHOP = /^#(product\/|shop|store|kids-shop)/;
+  for (const q of ['shop', 'store', 'buy', 'order', 'carpet', 'rug', 'backpack', 'shirt', 't-shirt', 'hoodie', 'plush', 'doll', 'poster', 'apparel', 'kit']) {
+    const r = await find(q); assert.ok(r.length && (SHOP.test(r[0]) || (q === 'kit' && r[0] === '#room-kit')), `"${q}" first result is ${r[0]} (all: ${r.slice(0, 4)})`);
+  }
+  const want = { 'backpack': /^#product\/[a-z-]+-backpack$/, 'hoodie': /^#product\/[a-z-]+-hoodie$/, 'doll': /^#(shop\/plush|product\/plush-)/, 'booker backpack': /^#product\/booker-backpack$/, 'lumi plush': /^#product\/plush-lumi$/, 'zuri hoodie': /^#product\/zuri-hoodie$/, 'bop poster': /^#product\/poster-bop/, 'lumi t-shirt': /^#product\/lumi-tshirt$/, 'all friends shirt': /^#product\/all-friends-tshirt$/, 'booker carpet': /^#product\/rug-(square-)?booker/ };
+  for (const [q, re] of Object.entries(want)) { const r = await find(q); assert.ok(r.slice(0, 3).some(x => re.test(x)), `"${q}" -> ${r.slice(0, 3)}`); }
+  assert.ok((await find('carpet')).some(x => x === '#shop/carpets'), 'the carpets collection is found');
+  // choosing a result lands on the product
+  await page.keyboard.press('Control+k'); await page.fill('#px-globalquery', 'booker backpack'); await page.waitForTimeout(250); await page.locator('#ffw-pal-list a[href="#product/booker-backpack"]').first().click();
+  await page.waitForSelector('.sp-pdp'); assert.match(await page.locator('.sp-info h1').innerText(), /Booker backpack/);
+  await ctx.close();
 });

@@ -146,8 +146,8 @@
   const NEUTRAL = MAIN[DEFAULT_AUD];
   // Menu: each audience's big links (the menu shows only the chosen audience's group).
   const GROUPS = {
-    families: [['at-home', 'Futures at Home'], ['story-time', 'Story Time'], ['family-videos', 'Watch together'], ['bop-at-home', 'Bop at Home'], ['enroll', 'Visit our pilot center'], ['kids-shop', 'Kids\' Shop']],
-    centers: [['centers', 'Overview'], ['for-centers', 'Child care centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches and faith programs'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing']]
+    families: [['kids-shop', 'Shop: Kids\' Shop'], ['at-home', 'Futures at Home'], ['story-time', 'Story Time'], ['family-videos', 'Watch together'], ['bop-at-home', 'Bop at Home'], ['enroll', 'Visit our pilot center']],
+    centers: [['store', 'Shop: Futures Store'], ['centers', 'Overview'], ['for-centers', 'Child care centers'], ['for-home', 'Home daycares'], ['for-faith', 'Churches and faith programs'], ['room-kit', 'Learning Zones Kit'], ['pricing', 'Pricing']]
   };
   // Everything else one tap away in the menu (small links), per audience: families never see the business pages here.
   const MORE_BY = {
@@ -391,9 +391,13 @@
     'for-home': 'home daycare family child care provider in home',
     'for-centers': 'center child care centre license licensing director',
     hub: 'app software attendance ratios portal director tools',
-    academy: 'training course courses lessons teacher learning'
+    academy: 'training course courses lessons teacher learning',
+    store: 'shop store buy order purchase cart',
+    'kids-shop': 'shop store buy order purchase cart',
+    shop: 'shop store buy order purchase all products catalog',
+    cart: 'cart basket bag checkout order'
   };
-  const EXCLUDE = new Set(['post', 'job', 'learn-course', 'learn-cert', 'learn-team', 'learn-author', 'learn-approve', 'verify', 'account', 'reset-password', 'not-found', 'portal', 'family-portal', 'home']);
+  const EXCLUDE = new Set(['product', 'checkout', 'order', 'order-return', 'store-request', 'post', 'job', 'learn-course', 'learn-cert', 'learn-team', 'learn-author', 'learn-approve', 'verify', 'account', 'reset-password', 'not-found', 'portal', 'family-portal', 'home']);
   let INDEX = null;
   function buildIndex() {
     const out = [], R = (W.FFRouteMeta && W.FFRouteMeta.ROUTES) || {}, extra = Object.fromEntries((W.FFSearchPages || []).map(([r, t]) => [r, t]));
@@ -412,6 +416,11 @@
     if (T && Array.isArray(T.FAQ)) T.FAQ.forEach(([q, a]) => out.push({ kind: 'Question', aud: 'centers', title: q, desc: a, kw: 'faq question teacher standard', href: '#teacher-standard', reveal: { q } }));
     const mods = (W.FF && W.FF.modules) || [];
     mods.forEach(m => out.push({ kind: 'Lesson', aud: 'centers', title: m.title, desc: `${m.code}, sample lesson preview in the Training Academy`, kw: `${m.code} lesson course module`, href: '#academy/' + encodeURIComponent(m.code), friend: 'zuri', lesson: true }));
+    const SC = W.FFCatalog;      // the Futures Store (store-catalog.js): every collection and every product is findable by what it is
+    if (SC && SC.PRODUCTS) {
+      SC.COLLECTIONS.forEach(c => out.push({ kind: 'Shop', aud: c.side === 'families' ? 'families' : '', title: c.name, desc: c.blurb, kw: `shop store buy order purchase ${c.id} ${c.name} ${SC.collectionKeywords(c.id)}`, href: '#' + (c.id === 'kids' ? 'kids-shop' : 'shop/' + c.id), friend: c.tone === 'gold' ? 'booker' : c.tone }));
+      SC.PRODUCTS.forEach(p => out.push({ kind: 'Product', aud: p.audiences.length === 1 && p.audiences[0] === 'family' ? 'families' : '', title: p.name, desc: p.short, kw: SC.keywords(p), href: '#product/' + p.id, friend: ['booker', 'lumi', 'zuri', 'bop'].includes(p.tone) ? p.tone : 'booker' }));
+    }
     out.forEach(o => { o.nt = norm(o.title); o.nk = norm(o.kw); o.nd = norm(o.desc); });
     return out;
   }
@@ -423,11 +432,11 @@
       s += inT ? ((' ' + o.nt).includes(' ' + t) ? 24 : 12) : inK ? 7 : 2;
     }
     if (o.nt === q) s += 120; else if (o.nt.startsWith(q)) s += 60;
-    if (o.kind === 'Page') s += 6; else if (o.kind === 'Lesson') s -= 6;
+    if (o.kind === 'Page') s += 6; else if (o.kind === 'Lesson') s -= 6; else if (o.kind === 'Shop') s += 4;
     if (audience && o.aud === audience) s += 4;
     return s;
   }
-  const KIND_ICON = { Page: 'Route', Printable: 'Download', Question: 'Sparkles', Lesson: 'BookOpen' };
+  const KIND_ICON = { Page: 'Route', Printable: 'Download', Question: 'Sparkles', Lesson: 'BookOpen', Shop: 'Blocks', Product: 'Heart' };
   const GROUP_LABEL = { families: 'For families', centers: 'For centers & programs', portal: 'Sign in', '': 'For everyone' };
   let opts = [], active = -1;
   function suggestions() {

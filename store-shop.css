@@ -322,7 +322,7 @@ a.sp-link{color:var(--booker)}
 .sp-cartbtn .sp-i{width:20px;height:20px}
 .sp-count{min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--gold);color:#0A2B38;font:700 12.5px/22px var(--body);text-align:center;font-variant-numeric:tabular-nums;transition:background-color 200ms ease}
 .sp-count.is-zero{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
-@media (max-width:560px){.sp-cartlabel{display:none}.sp-cartbtn{padding:0 10px;gap:6px}}
+@media (max-width:760px){.sp-cartlabel{display:none}.sp-cartbtn{position:relative;width:44px;padding:0;justify-content:center;flex:none}.sp-count{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;font-size:11.5px;line-height:20px}.sp-count.is-zero{display:none}}
 header.bar .sp-cartbtn{margin-left:auto}
 header.bar .acts+.sp-cartbtn{margin-left:0}
 .sp-fly{position:fixed;z-index:400;width:22px;height:22px;border-radius:50%;background:var(--fly,var(--gold));border:2px solid #fff;box-shadow:0 6px 16px rgba(10,43,56,.4);pointer-events:none}
@@ -560,3 +560,27 @@ html.sp-lock{overflow:hidden}
 @media (max-width:900px){.sp-headgrid{grid-template-columns:1fr}.sp-headfig{order:-1}.sp-tw-kits{grid-column:1/-1}}
 .sp-help-acts{display:flex;flex-wrap:wrap;gap:10px}
 .sp-help-kit{border-top:0;background:var(--cream)}
+/* the persistent View cart pill: whenever the cart has something, on every page but the cart and checkout */
+.sp-viewcart{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;display:inline-flex;align-items:center;gap:9px;height:50px;padding:0 18px 0 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,.25);background:var(--navy);color:#fff;font:600 14.5px/1 var(--body);box-shadow:0 12px 30px -10px rgba(10,43,56,.6);cursor:pointer;transition:transform 160ms var(--sp-ease),bottom 260ms var(--sp-drawer)}
+.sp-viewcart[hidden]{display:none}
+.sp-viewcart:hover{background:var(--navy2)}
+.sp-viewcart:active{transform:scale(.96)}
+.sp-viewcart:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.sp-viewcart .sp-i{width:20px;height:20px}
+.sp-viewcart .sp-count{background:var(--gold);color:#0A2B38}
+.sp-vc-sub{font-weight:500;opacity:.85;padding-left:4px;border-left:1px solid rgba(255,255,255,.3);margin-left:2px;padding-left:10px}
+.sp-vc-sub:empty{display:none}
+@media (max-width:900px){html.sp-onpdp .sp-viewcart{bottom:calc(86px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:400px){
+  .sp-viewcart{left:12px;height:48px;padding:0 14px}
+  .sp-vc-sub{display:none}
+  header.bar .px-navactions{gap:3px}
+  header.bar .ff-lang-mini{width:36px;min-width:36px}
+  header.bar .px-iconbtn{width:36px;height:36px}
+  header.bar .px-logo img{width:100px;height:auto}
+  .sp-cartbtn{width:38px;height:38px}
+}
+@media (min-width:401px) and (max-width:700px){header.bar .px-navactions{gap:4px}}
+.sp-kidsec{scroll-margin-top:calc(var(--sp-head) + 12px)}
+.sp-kidsec:focus{outline:none}
+.sp-jump{margin-top:16px}

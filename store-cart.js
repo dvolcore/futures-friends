@@ -173,6 +173,7 @@
     if (!hasDoc || drawer || !document.body) return;
     const host = document.createElement('div'); host.id = 'spRoot';
     host.innerHTML = spriteHtml() + `<div class="sp-live" id="spLive" role="status" aria-live="polite" aria-atomic="true"></div>
+      <button type="button" class="sp-viewcart" id="spViewCart" data-sp-open aria-haspopup="dialog" aria-controls="spDrawer" hidden>${ico('bag')}<span class="sp-vc-t">View cart</span><span class="sp-count" data-sp-vccount>0</span><span class="sp-vc-sub sp-num" data-sp-vcsub></span></button>
       <div class="sp-drawer" id="spDrawer" hidden><div class="sp-scrim" data-sp-close></div>
       <div class="sp-panel" role="dialog" aria-modal="true" aria-labelledby="spDrawerH" tabindex="-1">
         <header class="sp-panel-h"><h2 id="spDrawerH">Your cart</h2><button type="button" class="sp-x" data-sp-close aria-label="Close cart">${ico('x')}</button></header>
@@ -185,17 +186,18 @@
     if (btn && document.contains(btn)) return;
     const menu = document.getElementById('menuT'), bar = $('header.bar .wrap:last-of-type') || $('header.bar .wrap');
     if (!bar) return;
-    btn = document.createElement('button'); btn.type = 'button'; btn.className = 'sp-cartbtn'; btn.id = 'spCartBtn'; btn.setAttribute('data-sp-open', '');
-    btn.setAttribute('aria-haspopup', 'dialog'); btn.setAttribute('aria-controls', 'spDrawer');
-    btn.innerHTML = `${ico('bag')}<span class="sp-cartlabel">Cart</span><span class="sp-count" data-sp-count>0</span><span class="sp-sr" data-sp-cartsr> (0 items)</span>`;
+    btn = document.createElement('button'); btn.type = 'button'; btn.className = 'sp-cartbtn'; btn.id = 'spCartBtn'; btn.setAttribute('data-sp-shop', '');
+    btn.innerHTML = `${ico('bag')}<span class="sp-cartlabel">Shop</span><span class="sp-count" data-sp-count>0</span><span class="sp-sr" data-sp-cartsr>, 0 items in your cart</span>`;
     if (menu && menu.parentNode) menu.parentNode.insertBefore(btn, menu); else bar.appendChild(btn);
     paintCount();
   }
   function paintCount(bump) {
     if (!hasDoc || !btn) return;
+    const vc = document.getElementById('spViewCart');
+    if (vc) { const n0 = count(), t0 = totals(); vc.hidden = n0 === 0 || document.documentElement.classList.contains('sp-nopill'); $('[data-sp-vccount]', vc).textContent = n0 > 99 ? '99+' : String(n0); $('[data-sp-vcsub]', vc).textContent = t0.pricedCount ? fmt(t0.subtotal) : ''; }
     const n = count(), c = $('[data-sp-count]', btn), s = $('[data-sp-cartsr]', btn);
     c.textContent = n > 99 ? '99+' : String(n); c.classList.toggle('is-zero', n === 0);
-    s.textContent = ' (' + n + ' item' + (n === 1 ? '' : 's') + ')';
+    s.textContent = ', ' + n + ' item' + (n === 1 ? '' : 's') + ' in your cart';
     if (bump && !reduced() && c.animate) c.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.35)' }, { transform: 'scale(1)' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
   }
   const say = msg => { if (liveEl) { liveEl.textContent = ''; setTimeout(() => { if (liveEl) liveEl.textContent = msg; }, 30); } };
@@ -217,7 +219,7 @@
     if (!hasDoc) return; ensureDom(); if (!drawer) return;
     if (!drawer.hidden && drawer.classList.contains('is-open')) return;
     clearTimeout(closing); opener = from || document.activeElement;
-    paintDrawer(); drawer.hidden = false; void drawer.offsetWidth; drawer.classList.add('is-open');
+    paintDrawer(); const vc0 = document.getElementById('spViewCart'); if (vc0) vc0.hidden = true; drawer.hidden = false; void drawer.offsetWidth; drawer.classList.add('is-open');
     outside().forEach(e => e.setAttribute('inert', ''));
     document.documentElement.classList.add('sp-lock');
     if (btn) btn.setAttribute('aria-expanded', 'true');
@@ -230,8 +232,13 @@
     outside().forEach(e => e.removeAttribute('inert'));
     document.documentElement.classList.remove('sp-lock');
     if (btn) btn.setAttribute('aria-expanded', 'false');
-    closing = setTimeout(() => { drawer.hidden = true; }, reduced() ? 0 : 260);
-    if (restore !== false && opener && opener.focus && document.contains(opener)) opener.focus({ preventScroll: true }); else if (restore !== false && btn) btn.focus({ preventScroll: true });
+    closing = setTimeout(() => {
+      drawer.hidden = true; paintCount();
+      if (restore === false) return;
+      const vis = el => el && el.focus && document.contains(el) && !el.hidden && el.getClientRects().length > 0;
+      const vc = document.getElementById('spViewCart'), target = vis(opener) ? opener : vis(vc) ? vc : btn;
+      if (target) target.focus({ preventScroll: true });
+    }, reduced() ? 0 : 260);
   }
   const isOpen = () => !!drawer && !drawer.hidden && drawer.classList.contains('is-open');
   /* A felt dot flies from the Add to cart button to the count, then the count bumps and the drawer opens. */
@@ -255,6 +262,7 @@
     subs.push((why) => { paintCount(); if (drawer && !drawer.hidden) paintDrawer(); if (why !== 'add') { /* announce */ } });
     document.addEventListener('click', e => {
       const t = e.target && e.target.closest ? e.target : null; if (!t) return;
+      const sh = t.closest('[data-sp-shop]'); if (sh) { e.preventDefault(); let a = ''; try { a = W.FFAudience && W.FFAudience.get ? W.FFAudience.get() : ''; } catch (_) { /* none */ } if (typeof W.go === 'function') W.go(a === 'families' ? 'kids-shop' : 'store'); return; }
       const op = t.closest('[data-sp-open]'); if (op) { e.preventDefault(); open(op); return; }
       const q = t.closest('[data-sp-qty]');
       if (q) { e.preventDefault(); const key = q.getAttribute('data-sp-qty'), it = items.find(i => keyOf(i.pid, i.opts) === key); if (it) { setQty(key, it.qty + (+q.dataset.d)); say('Quantity ' + (items.find(i => keyOf(i.pid, i.opts) === key) || { qty: 0 }).qty); } return; }
@@ -275,7 +283,7 @@
     const boot = () => { load(); ensureDom(); ensureButton(); paintCount(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
     // wayfinding.js may redraw the header: put the button back
-    (W.FFhooks = W.FFhooks || []).push(() => { ensureButton(); paintCount(); });
+    (W.FFhooks = W.FFhooks || []).push(v => { const r = document.documentElement.classList; r.toggle('sp-onpdp', v === 'product'); r.toggle('sp-nopill', v === 'cart' || v === 'checkout' || v === 'order'); ensureButton(); paintCount(); });
   }
 
   const api = { swap, KEY, MAXQ, keyOf, add, addAnimated, setQty, remove, clear, load, lines, totals, shipping, count, subscribe, open, close, isOpen, bodyHtml, footHtml, paintCount, say,

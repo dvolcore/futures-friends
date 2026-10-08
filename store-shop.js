@@ -146,13 +146,14 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' small shop (same cards, same product pages, same cart)
 V['kids-shop'] = () => {
-  const secs = C.kidsSections();
+  const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['posters', 'Posters'], ['carpets', 'Carpets'], ['squares', 'Corner carpets'], ['more', 'Free printables']];
   return `<div class="sp sp-kids">
-   <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div>${crumbs([['store', 'Futures Store'], ['', 'Kids\u2019 Shop']])}<h1>The Kids\u2019 Shop</h1>
-     <p class="sp-lede">A small shop for the friends at home. Posters for the bedroom wall, plush that opens after safety testing, T-shirts on the way, and printables that cost nothing.</p></div>
+   <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div><h1>The Kids\u2019 Shop</h1>
+     <p class="sp-lede">Shirts, hoodies and backpacks for every friend, plush friends, posters, carpets and printables that cost nothing. Add what you like to your cart and send a request; nothing is charged here.</p>
+     <ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul></div>
      <img class="sp-kidsart" src="img/plush/characters/lumi-heart-hands-480.webp" srcset="img/plush/characters/lumi-heart-hands-480.webp 480w, img/plush/characters/lumi-heart-hands-960.webp 960w" sizes="220px" alt="Lumi the bunny, a story-world character, holding a heart" width="480" height="480" loading="eager" decoding="async"></div></header>
-   <div class="wrap sp-shell" id="spResults">${secs.map(([name, col, list], i) => `<section class="sp-kidsec" aria-labelledby="spk${i}"><div class="sp-kidsec-h"><h2 id="spk${i}">${E(name)}</h2>${col ? lnk('shop/' + col, 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
-   ${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [['Kids\u2019 Shop items', 'merch-pod']], { compact: true }) : ''}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done, and apparel sizes are still being set. Leave your email on a product page and we will write the day it opens.</p></div>
+   <div class="wrap sp-shell" id="spResults">${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + col, 'See the whole collection ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
+   ${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [['Kids\u2019 Shop items', 'merch-pod']], { compact: true }) : ''}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
    <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section></div>`;
 };
 
@@ -169,6 +170,8 @@ function repaintResults() {
 document.addEventListener('click', e => {
   const t = e.target && e.target.closest ? e.target : null; if (!t) return;
   if (t.closest('[data-sp-clear]')) { e.preventDefault(); FS.audience = FS.age = FS.zone = ''; FS.sort = 'featured'; document.querySelectorAll('[data-sp-f]').forEach(s => { s.value = s.dataset.spF === 'sort' ? 'featured' : ''; }); repaintResults(); return; }
+  const jp = t.closest('a[data-sp-jump^="kids-"]');
+  if (jp) { e.preventDefault(); const el = document.getElementById(jp.dataset.spJump); if (el) { const rm = matchMedia('(prefers-reduced-motion: reduce)').matches; el.scrollIntoView({ behavior: rm ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); } return; }
   const add = t.closest('[data-sp-add]');
   if (add) { e.preventDefault(); const p = C.product(add.dataset.spAdd); if (p) K.addAnimated(p.id, p.options.length ? C.defaultOpts(p) : {}, 1, add); }
 }, true);
