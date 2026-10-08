@@ -29,7 +29,7 @@ const phero = (eyebrow, title, lede, opts={}) => `<div class="phero"><div class=
   <div class="eyebrow">${eyebrow}</div><h1 style="font-size:clamp(30px,4.4vw,48px)">${title}</h1>${lede?`<p class="lede">${lede}</p>`:''}
   ${opts.cta?`<div style="display:flex;gap:10px;flex-wrap:wrap">${opts.cta}</div>`:''}
   ${opts.anchors?`<div class="anchors">${opts.anchors.map(a=>`<button data-anchor="${a[0]}">${a[1]}</button>`).join('')}</div>`:''}</div>
-  <div class="art${opts.scene?' art-scene':''}">${opts.scene || (opts.chars||KEYS).map(k=>pimg(k,{alt:CH[k].n,h:150,eager:true})).join('')}</div></div></div>`;
+  <div class="art${opts.scene?' art-scene':''}">${opts.scene || (opts.chars||KEYS).map(k=>pimg(k,{alt:CH[k].n+' the '+CH[k].a,h:150,eager:true})).join('')}</div></div></div>`;
 const head = (e,t,l) => `<div class="head"><div class="eyebrow">${e}</div><h2>${t}</h2>${l?`<p class="lede">${l}</p>`:''}</div>`;
 const cta = (t,l,btn='Request a Quote',go='quote') => `<section class="tight"><div class="wrap"><div class="cta"><div style="display:grid;gap:8px"><h2>${t}</h2><p class="lede">${l}</p></div><button class="btn gold" data-go="${go}">${btn}</button></div></div></section>`;
 const card = (title, body, tag, color) => `<div class="card">${tag?`<span class="tag c" style="--c:var(--${color||'booker'});justify-self:start">${tag}</span>`:''}<h3>${title}</h3><p class="small">${body}</p></div>`;
