@@ -165,7 +165,7 @@ The law sets the minimum before any teacher is alone with children. Our training
 Before day one
 Background checks, orientation and safety training, by state law
 100% on life-safety
-Safe sleep, reporting and missing-child questions, every time
+Rest-time supervision, reporting and missing-child questions, every time
 Seen in the room
 A director checklist within 30 days of each course
 
@@ -3191,7 +3191,6 @@ Your center’s state and program type decide which rules apply, and the daily p
 
 Kansas centers
 At least 60 minutes outdoors once a child has been in care more than 4 hours.
-Awake toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).
 Kansas homes: physical activity offered at least 1 hour a day.
 Missouri
 1 hour outdoors for full-day preschool and school-age children, weather permitting.
@@ -3367,9 +3366,9 @@ Water and weather, with care
 
 Water is available all day, with a prompt at every Bop & Go! transition. The forecast can suggest an indoor swap and shows why. The teacher decides.
 
-Sleep rules come first
+Rest rules come first
 
-Quiet Time follows the center's sleep and rest rules. Those rules always win.
+Quiet Time follows the center's rest-time rules. Those rules always win.
 
 Teachers move if they want to
 
@@ -3600,7 +3599,7 @@ And before being left alone with children
 KANSAS
 A facility orientation: the licensing rules, emergency procedures, behavior and discipline policies, the daily schedule, each child's allergies and special needs, health and safety, and confidentiality. K.A.R. 28-4-428a(a)
 MISSOURI
-A documented facility orientation: a tour, the licensing rules, medication, illness and discipline practices, the needs of the children assigned, the safe sleep policy, the emergency plan and how to report suspected abuse or neglect. 5 CSR 25-500.102(1)(K)
+A documented facility orientation: a tour, the licensing rules, medication, illness and discipline practices, the needs of the children assigned, the emergency plan and how to report suspected abuse or neglect. 5 CSR 25-500.102(1)(K)
 Every caregiver reviews the licensing rules when they start. 5 CSR 25-500.102(1)(H)
 3
 Within 30 days
@@ -3608,13 +3607,11 @@ Within 30 days
 In Kansas, also before sole responsibility for children
 
 KANSAS
-Health and safety training approved by the state, in 10 subject areas: abuse and neglect, child development and supervision, safe sleep, illness and infection, food and allergy emergencies, building safety, emergency preparedness, hazardous materials, transportation and medication. K.A.R. 28-4-428a(b)
+Health and safety training approved by the state, in 10 subject areas set by the state, including abuse and neglect, child development and supervision, illness and infection, food and allergy emergencies, building safety, emergency preparedness, hazardous materials, transportation and medication. K.A.R. 28-4-428a(b)
 Pediatric first aid and pediatric CPR, with the skills shown in person to an instructor, and kept current. K.A.R. 28-4-428a(c)
 A negative TB test or chest x-ray. K.A.R. 28-4-126(c)
-Lead teachers in infant rooms: 4 hours of infant-specific training. K.A.R. 28-4-428a(d)
 MISSOURI
 A medical exam report signed by a physician or a supervised nurse, with a TB risk assessment or a negative TB skin test. 5 CSR 25-500.122(1)
-In programs licensed for infants: safe sleep training approved by the state and based on the AAP recommendations, repeated every 3 years. 5 CSR 25-500.102(4)
 4
 Every day
 
@@ -3633,7 +3630,7 @@ Every year
 For as long as they work with children
 
 KANSAS
-16 clock hours of training approved by the state each licensure year, at least 4 of them in health and safety. Infant caregivers: 4 of the 16 infant-specific. Directors: 6 in program administration. Family home providers: 10 hours. K.A.R. 28-4-428a(e); 28-4-114a(d)(2)
+16 clock hours of training approved by the state each licensure year, at least 4 of them in health and safety. Directors: 6 in program administration. Family home providers: 10 hours. K.A.R. 28-4-428a(e); 28-4-114a(d)(2)
 An updated staff health status form, and practice of shelter-in-place and off-site relocation. K.A.R. 28-4-126(b); 28-4-128(a)
 MISSOURI
 12 clock hours of training approved by the state each calendar year, recorded in the state's MOPD system. Repeating a course in the same year earns no extra credit. 5 CSR 25-500.102(3)
@@ -3659,7 +3656,7 @@ Plain-language summaries of the Kansas rules in effect September 4, 2026 (K.A.R.
 OUR STANDARD
 Where our training goes further than the law
 
-The states set the minimum. We designed our courses to add the seven things below. They are in the course design now and will apply to our teachers as each course launches.
+The states set the minimum. We designed our courses to add the six things below. They are in the course design now and will apply to our teachers as each course launches.
 
 STORY-WORLD ANIMATION
 Mr. Moss
@@ -3671,7 +3668,7 @@ Safety questions need 100%
 
 Life-safety questions must be answered 100% correctly, whatever the overall score. A miss sends the teacher back to that lesson, then retests with a different question on the same point.
 
-Life-safety topics include safe sleep, reporting abuse and neglect, and missing-child counts.
+Life-safety topics include rest-time supervision, reporting abuse and neglect, and missing-child counts.
 
 Seen doing it, in the room
 
@@ -3691,19 +3688,11 @@ No fast-forward and no skipping slides. An activity at least every 5 minutes mea
 
 Active time is logged for each part of the course.
 
-No swaddling, in either state
+Rest time for everyone who covers a nap
 
-Kansas rules ban swaddling in child care. Missouri's rules do not mention it, so in Missouri it is our policy.
+Our rest-time course is built for directors, teachers, floaters, substitutes and volunteers: anyone who may be in the room at nap time. It sets out our own practice for ages 2 to 5. Rest rules differ by state, so we confirm them with our licensing consultant.
 
-National guidance agrees: Caring for Our Children
-(opens in a new tab)
- 3.1.4.2 calls swaddling not necessary or recommended in child care.
-
-Safe sleep for everyone who covers a nap
-
-Missouri requires safe sleep training in programs licensed for infants. Our safe sleep course is built for directors, teachers, floaters, substitutes and volunteers, and we recommend it for every Kansas teacher who may cover an infant room or nap time.
-
-Infant safe sleep always comes before Quiet Time.
+Quiet Time is offered, never forced and never a punishment.
 
 One named person signs every course
 
@@ -3714,7 +3703,7 @@ That role is not filled yet. Kansas and Missouri editions differ wherever the ru
 HOW TRAINING WORKS
 Why scenario practice beats a video you can click through
 
-A teacher can sit through a video and still not know what to do when a baby rolls over at nap time. So every course is short lessons, constant practice and real decisions, then proof in the classroom.
+A teacher can sit through a video and still not know what to do when a child will not settle at rest time. So every course is short lessons, constant practice and real decisions, then proof in the classroom.
 
 STORY-WORLD ANIMATION
 Ms. June
@@ -3738,7 +3727,7 @@ Do
 
 An activity every few minutes
 
-Spot the hazards in a crib photo, put the reporting steps in order, choose what to do next. Progress waits for an answer.
+Spot the hazards in a rest-area photo, put the reporting steps in order, choose what to do next. Progress waits for an answer.
 
 3
 Decide
@@ -3782,9 +3771,9 @@ This design also follows the states' rules for online training. Missouri does no
 , Oct. 2025). Our platform has not been approved yet. Pediatric first aid and CPR are taught in person by an outside partner, never online.
 
 THE PILOT COURSE, IN DEVELOPMENT
-Safe Sleep and Lumi's Quiet Time
+Rest Time and Lumi's Quiet Time
 
-The first course we are building. Safe sleep is the rule that matters most for babies, and Missouri reviews every word of a safe sleep course against the AAP recommendations. If this course meets the bar, the format does.
+The first course we are building. Rest time is when one adult must see and hear every child, so we start there. If this course meets the bar, the format does.
 
 LENGTH
 1.5
@@ -3805,26 +3794,26 @@ REFLECTIONS
 2
 read by a coach
 What teachers practice
-Every infant under 12 months goes on their back for every nap, in their own crib or play yard that meets the rules. A baby who falls asleep anywhere else is moved.
-Spot every unsafe item in a sleep space: soft bedding, bumpers, positioners, swaddles, weighted products, bibs, pacifier clips, covered heads and overdressing.
-The rolling rule: place every baby on the back. A baby who rolls both ways may stay in the position they choose; a baby who cannot yet roll both ways is returned to the back.
-Watch sleeping babies by sight and sound, with enough light to see each face and skin color.
-Lead Lumi's Quiet Time (Notice, Breathe, Soften, Rest) for toddlers and preschoolers: offered, never forced, never a punishment, and within each state's rest rule.
+Set up the rest area: each child on their own labeled cot or mat, cots spaced apart, with clear walkways to every exit.
+Check every cot: the child's own labeled bedding, cords kept away, and no food, drink or hazard objects on the cot. Shoes off and stored.
+Keep every resting child in sight and in hearing, with lighting that lets you see each child.
+After the rest period, give children who do not sleep a quiet activity so the others can keep resting.
+Lead Lumi's Quiet Time (Notice, Breathe, Soften, Rest) for twos through pre-K: offered, never forced, never a punishment, and within each state's rest rule.
 What the director checks in the room, within 30 days
-Every infant placed on the back in their own crib or play yard
-Fitted sheet only in the sleep space
-No swaddles, bibs, necklaces, pacifier clips or positioners
-A baby asleep anywhere else is moved promptly
-Light enough to see each face and skin color
-Staff placed to see and hear every sleeping baby
+Each child on their own labeled cot or mat
+Cots or mats spaced apart, with clear walkways
+Each child's own labeled bedding
+Lighting that lets staff see each child
+Staff placed to see and hear every resting child
 No equipment that blocks seeing or hearing
-Babies dressed for the room: one layer more than an adult
-An awake baby is out of the crib within 30 minutes
+No food, drink or hazard objects on cots
+Shoes off and stored, cords kept away
+Quiet activities ready for children who do not sleep after the rest period
 Quiet Time led with the four steps
 Children who do not sleep get a quiet activity, per the state rule
 Rest is never used as punishment
 
-This course is a design (draft 0.1). It has not yet been reviewed by our trainer of record or by either state. For babies, safe sleep always comes first; Quiet Time is for toddlers and preschoolers.
+This course is a design (draft 0.1). It has not yet been reviewed by our trainer of record or by either state. This is the program's own rest-time practice for ages 2 to 5. Confirm the exact rest rules with your licensing consultant. Quiet Time is for twos through pre-K.
 
 HOW WE VERIFY MASTERY
 What "complete" means
@@ -3849,7 +3838,7 @@ If a grown-up misses a safety question, they go back and learn it again. That is
 
 EXAMPLE
 Course record: SR-120
-Safe Sleep and Lumi's Quiet Time, version 0.1 (draft)
+Rest Time and Lumi's Quiet Time, version 0.1 (draft)
 COURSE WORK
 Videos
 Activities
@@ -3880,13 +3869,12 @@ A needs check every year
 In Kansas, the director must assess each teacher's training needs every licensure year (K.A.R. 28-4-428a(e)(2)).
 Every new course brings its own director checklist.
 Renewals that matter
-Missouri infant programs: safe sleep training again every 3 years.
 Pediatric first aid and CPR kept current, in person.
 SAMPLE PLAN
-A Missouri teacher in an infant-licensed center
+A Missouri center teacher
 Sample annual training plan, 12.5 hours
 COURSE HOURS
-SR-120 Safe Sleep and Lumi's Quiet Time 1.5
+SR-120 Rest Time and Lumi's Quiet Time 1.5
 SR-200 Lumi's Calm Corner: Developmentally Appropriate Guidance and Discipline 1.5
 FF-110 The Whole-Child Daily Rhythm 1.0
 FF-120 Bop & Go!: Move Your Body, Grow Your Mind 1.5
@@ -3903,11 +3891,11 @@ What you can ask to see
 
 Any licensed program should be able to answer these questions. Ask us too.
 
-The written safe sleep policy
+The written rest-time policy
 
-Kansas programs must share their safe sleep plan before a baby's first day. Missouri programs give you a copy of their policy at enrollment.
+Ask to see the center's rest-time plan: where children rest, how adults see and hear them, and what children do if they do not sleep. Rules differ by state, so confirm with your licensing consultant.
 
-K.A.R. 28-4-436(b); 5 CSR 25-500.132
+The program's own practice
 
 The emergency plan
 
@@ -3946,10 +3934,10 @@ We are preparing our courses for state review. Nothing on this page is approved 
 
 Done
 A draft course map for Kansas and Missouri, with every state rule tied to its citation (draft 0.1).
-The pilot course designed: Safe Sleep and Lumi's Quiet Time.
+The pilot course designed: Rest Time and Lumi's Quiet Time.
 The course design standard: short videos, activities every few minutes, scenario checks, 100% life-safety mastery, coach-read reflections and director sign-off.
 In progress
-Building the first courses: what a new teacher needs first, starting with safe sleep, reporting abuse and neglect, emergency preparedness, guidance and discipline, and the Futures Friends daily rhythm.
+Building the first courses: what a new teacher needs first, starting with rest time, reporting abuse and neglect, emergency preparedness, guidance and discipline, and the Futures Friends daily rhythm.
 Preparing our courses for state review in Kansas (Cape) and Missouri (MOPD).
 Not yet
 No course has been reviewed or approved by Kansas or Missouri. Until one is, its hours do not count toward required training.
@@ -3968,7 +3956,7 @@ Can a teacher finish a course by letting the video play?
 What happens if a teacher misses a safety question?
 Do teachers learn CPR online?
 Is a background check done before a teacher starts?
-Does Lumi's Quiet Time replace the safe sleep rules?
+Is Lumi's Quiet Time the same as nap time?
 Who checks that the courses are correct?
 Is Ms. June a real teacher?
 Are Principal Hazel, Mr. Moss and Ms. Fern real staff?

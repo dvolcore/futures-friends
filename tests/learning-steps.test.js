@@ -1,7 +1,7 @@
 // Learning Steps (curriculum-indicators.js, generated in the CRM repo by hub/scripts/build-curriculum.mjs; since the IP lockdown of
 // 2026-10-07 it lives in the PRIVATE repo, tests/private-curriculum.js, and the site carries only learning-steps-summary.js):
 // every step has a source and an age band, crosswalk codes come only from the fetched official documents, no child ever
-// gets a number (percent, score, readiness label), and the infant and toddler sets render in the teacher and family views.
+// gets a number (percent, score, readiness label), and the twos, threes and pre-K sets render in the teacher and family views (the program serves ages 2 to 5 only; there are no infant or toddler sets).
 const P = require('./private-curriculum');
 const test = P.gated(require('node:test'), 'curriculum-indicators.js');   // the steps are private: skipped where not mounted
 const publicTest = require('node:test');
@@ -38,9 +38,9 @@ function site() {
 }
 const visible = (html) => html.replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ');
 
-test('curriculum-indicators.js parses and carries five age bands from birth to kindergarten', () => {
+test('curriculum-indicators.js parses and carries three age bands, twos to pre-K', () => {
   const S = steps();
-  assert.equal(JSON.stringify(S.bands.map((b) => b.key)), JSON.stringify(['infant', 'toddler', 'twos', 'threes', 'prek']));
+  assert.equal(JSON.stringify(S.bands.map((b) => b.key)), JSON.stringify(['twos', 'threes', 'prek']));
   assert.equal(JSON.stringify(S.levels.map((l) => l.label)), JSON.stringify(['Emerging', 'Developing', 'Secure']));
   assert.equal(S.steps.length, S.summary.total);
   for (const b of S.bands) assert.ok(S.steps.filter((s) => s.band === b.key).length >= 15, b.key);

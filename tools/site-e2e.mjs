@@ -965,7 +965,7 @@ async function consistency() {
   });
   await step('consistency', `activity count: library has ${nActs}; pages that state a number agree`, async () => {
     if (!nActs) return { status: 'warn', detail: 'FFFamily.ACTS not exposed' };
-    const h = hits(/\b(\d{2}) activities for babies/i).filter((x) => !x.includes(`${nActs} activities`));
+    const h = hits(/\b(\d{2}) activities for ages 2 to 5/i).filter((x) => !x.includes(`${nActs} activities`));
     if (h.length) return { status: 'broken', detail: h.join(' | ') };
     return `${nActs} activities`;
   });

@@ -53,7 +53,7 @@ test('the law section covers background checks, orientation, health and safety, 
     for (const [t, cite] of g[st]) { assert.ok(t.length > 20); assert.ok(cite.length > 3, 'cited: ' + t.slice(0, 40)); }
   }
   const t = text(site().render('teacher-standard'));
-  for (const s of ['K.A.R. 28-4-125', '5 CSR 25-600.020(1)', 'K.A.R. 28-4-428a(b)', 'K.A.R. 28-4-428a(c)', 'K.A.R. 28-4-126(c)', '5 CSR 25-500.122(1)', '5 CSR 25-500.102(4)', '5 CSR 25-500.102(3)', 'K.A.R. 28-4-428a(e)'])
+  for (const s of ['K.A.R. 28-4-125', '5 CSR 25-600.020(1)', 'K.A.R. 28-4-428a(b)', 'K.A.R. 28-4-428a(c)', 'K.A.R. 28-4-126(c)', '5 CSR 25-500.122(1)', '5 CSR 25-500.102(3)', 'K.A.R. 28-4-428a(e)'])
     assert.ok(t.includes(s), 'cites ' + s);
   assert.match(t, /16 clock hours/);
   assert.match(t, /12 clock hours/);
@@ -71,7 +71,7 @@ test('the method, mastery and pilot facts match the owner-approved design', () =
   assert.match(t, /coaching plan/);
   assert.match(t, /self-study with a quiz/);
   assert.match(t, /taught in person/);
-  assert.equal(api.PILOT.title, "Safe Sleep and Lumi's Quiet Time");
+  assert.equal(api.PILOT.title, "Rest Time and Lumi's Quiet Time");
   assert.equal(api.CHECKLIST.length, 12);
   assert.equal(api.PLAN.reduce((a, r) => a + r[2], 0), 12.5, 'the sample Missouri plan adds up');
   assert.match(t, /Illustrative example only/);
@@ -191,4 +191,17 @@ test('route meta, index.html wiring and cache-busting', () => {
 
 test('the Enroll careers card no longer says hours are being submitted', () => {
   assert.doesNotMatch(read('features.js'), /being submitted/);
+});
+
+test('owner order 2026-10-08: no infant or baby content; rest time is for twos through pre-K', () => {
+  const c = site(), api = c.window.FFTeacherStandard;
+  const BANNED = /\b(infants?|babies|baby|newborns?|cribs?|play[- ]?yards?|swaddl\w*|pacifiers?|bumpers?|positioners?|sids)\b|safe[- ]sleep|rolling rule|sleeping bab/i;
+  for (const r of ROUTES) assert.doesNotMatch(text(c.render(r)), BANNED, r + ' has no infant wording');
+  const all = JSON.stringify([api.GATES, api.FURTHER, api.METHOD, api.PILOT, api.CHECKLIST, api.PLAN, api.ASK, api.FAQ, api.OFFER, api.WONT, api.STATUS]);
+  assert.doesNotMatch(all, BANNED, 'no infant wording in the page data');
+  const list = api.CHECKLIST.join(' | ');
+  for (const s of [/labeled cot or mat/, /spaced apart, with clear walkways/, /see each child/, /see and hear every resting child/, /No food, drink or hazard objects on cots/, /Shoes off/, /cords kept away/, /quiet activit/i])
+    assert.match(list, s);
+  assert.match(text(c.render('teacher-standard')), /What the director checks in the room, within 30 days/);
+  assert.match(text(c.render('teacher-standard')), /licensing consultant/);
 });

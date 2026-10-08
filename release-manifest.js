@@ -437,10 +437,10 @@
   "course-sr-120": {
    "id": "course-sr-120",
    "family": "training",
-   "name": "SR-120 Safe Sleep and Lumi's Quiet Time (KS and MO LMS drafts)",
+   "name": "SR-120 Rest Time and Lumi's Quiet Time (KS and MO LMS drafts)",
    "count": 2,
    "version": "0.1 (draft)",
-   "age": "adults (infant rooms)",
+   "age": "adults (twos through pre-K rooms)",
    "approval": "draft",
    "availability": "in_development",
    "note": "Pilot course draft; not yet reviewed or filed for state approval."
@@ -1323,22 +1323,22 @@
   {
    "body": "Caring for Our Children (AAP, APHA, NRC), 4th ed. 2019, Standard 2.2.0.3",
    "url": "https://nrckids.org/files/CFOC4%20pdf-%20FINAL.pdf",
-   "says": "No screen time/digital media in early care and education for children 2 and younger; for ages 2 to 5, total exposure in care and at home combined limited to 1 hour per day of high-quality programming, viewed with an adult."
+   "says": "For ages 2 to 5, total exposure in care and at home combined limited to 1 hour per day of high-quality programming, viewed with an adult."
   },
   {
    "body": "CDC early care and education obesity-prevention standards (HIOPS, developed 2010)",
    "url": "https://www.cdc.gov/early-care-education/php/obesity-prevention-standards/screen-time-limits.html",
-   "says": "No media or computers under 2; total media time for 2 and older not more than 30 minutes weekly; educational or physical-activity use only; none at meals."
+   "says": "Total media time for children 2 and older not more than 30 minutes weekly; educational or physical-activity use only; none at meals."
   },
   {
    "body": "WHO guidelines on physical activity, sedentary behaviour and sleep for children under 5 (2019)",
    "url": "https://www.who.int/news/item/24-04-2019-to-grow-up-healthy-children-need-to-sit-less-and-play-more",
-   "says": "Screen time not recommended under 2; ages 2 to 4 no more than 1 hour, less is better."
+   "says": "Ages 2 to 4: no more than 1 hour of sedentary screen time a day, less is better."
   },
   {
    "body": "AAP via HealthyChildren.org, 'Why to Avoid TV Before Age 2' (last updated 10/21/2016)",
    "url": "https://www.healthychildren.org/English/family-life/Media/Pages/Why-to-Avoid-TV-Before-Age-2.aspx",
-   "says": "Avoid screens before 18 months except video chat; about 1 hour a day from 18 months to 5; watch together."
+   "says": "About 1 hour a day for ages 2 to 5; watch together."
   },
   {
    "body": "AAP via HealthyChildren.org, co-viewing tips (last updated 6/25/2026) and 'Helping kids thrive in a digital world' (6/3/2026)",

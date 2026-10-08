@@ -11,7 +11,7 @@
       statement: 'The Futures Learning Center curriculum is thoughtfully designed, developmentally appropriate, and intentionally inclusive. It provides meaningful, standards-aligned learning experiences that nurture the whole child while building essential skills for lifelong success. I\u2019m impressed by the way it combines empathy, structure, and real-world readiness in a way that educators can confidently implement.',
       focus: ['Curriculum development', 'Instructional design', 'Educator support'],
       background: ['Doctoral Studies, Educational Leadership (ABD) / Northcentral University', 'Master of Education, Elementary Education / Rockhurst University', 'Bachelor of Science, Criminal Justice / University of Phoenix', 'Associate of Applied Science, Paralegal Studies / Brown Mackie College'],
-      expertise: ['Curriculum & Instruction', 'Educator Coaching & Mentoring', 'Instructional Design', 'Differentiated Instruction', 'Assessment & Standards-Based Grading', 'Educational Technology', 'Montessori Education (Birth to 6th Grade)', 'Student Interventions', 'Data-Driven Instruction', 'Adult & Professional Learning']
+      expertise: ['Curriculum & Instruction', 'Educator Coaching & Mentoring', 'Instructional Design', 'Differentiated Instruction', 'Assessment & Standards-Based Grading', 'Educational Technology', 'Montessori Education', 'Student Interventions', 'Data-Driven Instruction', 'Adult & Professional Learning']
     },
     laurie: {
       name: 'Laurie Ouding, RN, LNC',

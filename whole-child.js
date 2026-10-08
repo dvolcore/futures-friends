@@ -96,7 +96,7 @@ const PROMISES = [
   ['We count minutes, not bodies', 'We measure what the day delivered: minutes, missions and outdoor occasions. Never a child\'s weight, BMI, calories or a "healthy" label. Motor skills are noted only as observed milestones.'],
   ['Screens fit the age', 'No episodes for children ages 2 and younger: songs, puppets and cards take their place. For preschoolers, not more than 30 minutes a week in care is the default, and a screen is the opening act, counted against that weekly cap.'],
   ['Water and weather, with care', 'Water is available all day, with a prompt at every Bop &amp; Go! transition. The forecast can suggest an indoor swap and shows why. The teacher decides.'],
-  ['Sleep rules come first', 'Quiet Time follows the center\'s sleep and rest rules. Those rules always win.'],
+  ['Rest rules come first', 'Quiet Time follows the center\'s rest-time rules. Those rules always win.'],
   ['Teachers move if they want to', 'Staff movement is opt-in and never tracked per person. Movement moments simply invite teachers to model.'],
   ['Evidence-informed routines', 'We use recognized guidance, and plan a qualified review of health-related content before release. Futures Friends owns the characters, stories, rituals and delivery. We do not sell medical claims.']
 ];
@@ -170,7 +170,7 @@ function targetsHtml() {
   <div class="wc-state wc-rv"><h3>State rules sit on top of these defaults</h3>
    <p class="wc-note" style="margin:0">Your center&rsquo;s state and program type decide which rules apply, and the daily plan shows the citation next to each one. These are summaries, not legal advice: your license and your state agency are the authority.</p>
    <div class="wc-state-grid">
-    <div style="--c:var(--wc-booker)"><h4>Kansas centers</h4><ul><li>At least 60 minutes outdoors once a child has been in care more than 4 hours.</li><li>Awake toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).</li><li>Kansas homes: physical activity offered at least 1 hour a day.</li></ul></div>
+    <div style="--c:var(--wc-booker)"><h4>Kansas centers</h4><ul><li>At least 60 minutes outdoors once a child has been in care more than 4 hours.</li><li>Kansas homes: physical activity offered at least 1 hour a day.</li></ul></div>
     <div style="--c:var(--wc-zuri)"><h4>Missouri</h4><ul><li>1 hour outdoors for full-day preschool and school-age children, weather permitting.</li><li>Preschoolers who do not sleep rest 30 to 60 minutes. Rest is required, and sleep never is.</li><li>No more than 4 hours between meals and snacks.</li></ul></div>
     <div style="--c:var(--wc-lumi)"><h4>Both states</h4><ul><li>Water available at all times.</li><li>Food and rest are never used as punishment.</li><li>Neither state limits screen time. Our screen limits are Futures Friends standards, not legal requirements.</li></ul></div></div>
    <p class="wc-note" style="margin:0">Missouri programs that are religious-exempt are excused from the daily-schedule rule. The defaults above still apply to them as Futures Friends standards, not as law.</p></div>

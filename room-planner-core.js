@@ -5,11 +5,11 @@
    Units: everything is stored in INCHES. x runs along the room's width (west to east), y along its length (north to south).
    Rules this file keeps:
    - Space per child (usable indoor floor), from the platform's regulation research (/Volumes/FFCRM/app/research/regulations,
-     verified official text, retrieved 2026-10-04): Missouri centers 35 sq ft, infants and toddlers 35 or 45 by facility size
-     (5 CSR 25-500.082); Missouri family homes 35 (5 CSR 25-400.085); Missouri license-exempt religious programs 35, infants and
-     toddlers 45 (5 CSR 25-300.090); Kansas centers 28 (K.S.A. 65-539(b)); Kansas homes 25 (K.A.R. 28-4-115(c)). Kansas has no
+     verified official text, retrieved 2026-10-04): Missouri centers 35 sq ft, the youngest children 35 or 45 by facility size
+     (5 CSR 25-500.082); Missouri family homes 35 (5 CSR 25-400.085); Missouri license-exempt religious programs 35, the youngest
+     children 45 (5 CSR 25-300.090); Kansas centers 28 (K.S.A. 65-539(b)); Kansas homes 25 (K.A.R. 28-4-115(c)). Kansas has no
      religious exemption, so a Kansas church program uses the center number. The planner uses the stricter number when unsure.
-   - Missouri infant and toddler rooms: washable mats laundered daily, not carpet (5 CSR 25-500.082).
+   - Missouri rooms for the youngest children: washable mats laundered daily, not carpet (5 CSR 25-500.082).
    - Exit paths 36 in clear; wheelchair turning space 60 in; Friend Fence 24 in high (adults see over it); heaters keep 36 in clear.
    - Prices: only owner-approved numbers. The packages published on #pricing and Zone Boundaries $1,195 home / $1,995 classroom.
      Everything else is "Quote" (or "Included" / "Coming later"). Totals are sums of approved lines only.
@@ -33,8 +33,8 @@ const FRIENDS = ['booker', 'lumi', 'zuri', 'bop'];
 // ---------------------------------------------------------------- licensing: usable sq ft per child
 const STATES = { MO: 'Missouri', KS: 'Kansas' };
 const ROOM_TYPES = { home: 'Home daycare', center: 'Center classroom', church: 'Church multipurpose room (packs away)' };
-const AGES = { twos: 'Twos', threes: 'Threes', prek: 'Pre-K' };   // the program serves ages 2 to 5 (infant and toddler choices removed 2026-10-07)
-const IT = a => a === 'infant' || a === 'toddler';
+const AGES = { twos: 'Twos', threes: 'Threes', prek: 'Pre-K' };   // the program serves ages 2 to 5 (younger choices removed 2026-10-07)
+const IT = a => a === 'toddler';
 const RULES = {
   MO: {
     home: { pre: 35, it: 35, cite: '5 CSR 25-400.085' },

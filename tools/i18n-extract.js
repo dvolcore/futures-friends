@@ -55,7 +55,7 @@ function main() {
     for (const s of segments(html)) note(s, r);
   }
   // Sub-pages that families reach: the activities by band and friend, the book shelf.
-  for (const a of ['infant', 'toddler', 'twos', 'threes', 'prek', 'booker', 'lumi', 'zuri', 'bop']) { try { for (const s of segments(ctx.render('activities', a))) note(s, 'activities/' + a); } catch (_) {} }
+  for (const a of ['twos', 'threes', 'prek', 'booker', 'lumi', 'zuri', 'bop']) { try { for (const s of segments(ctx.render('activities', a))) note(s, 'activities/' + a); } catch (_) {} }
   for (const s of staticParts()) note(s, 'chrome');
   // Strings that come from the library data are localized by family-library-es*.js, not by the phrase table.
   const dataStr = new Set(); const walk = v => { if (typeof v === 'string') dataStr.add(v.replace(/\s+/g, ' ').trim()); else if (v && typeof v === 'object') Object.values(v).forEach(walk); };
