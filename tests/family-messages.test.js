@@ -163,7 +163,7 @@ test('#at-home: honest "Online requests open soon" without a gateway, a real dou
   assert.equal((off.match(/<h1[ >]/g) || []).length, 1);
   const on = site({ intake: 'real' }).render('at-home');
   assert.match(on, /<form class="ffi-form" id="fhForm" novalidate>/);
-  for (const [v] of [['infant'], ['toddler'], ['twos'], ['threes'], ['prek']]) assert.match(on, new RegExp(`<option value="${v}">`));
+  for (const [v] of [['twos'], ['threes'], ['prek']]) assert.match(on, new RegExp(`<option value="${v}">`));
   assert.match(text(on), /Monday: .* Wednesday: .* Friday:/);
   assert.match(text(on), /nothing about your child is collected here/);
   assert.match(text(on), /READY4K.*York, Loeb and Doss, 2019/);
@@ -199,6 +199,7 @@ test('#at-home sign-up posts topic futures_at_home with the age band and consent
 test('the age bands and topic the sign-up sends are the ones the gateway accepts (skipped when the CRM repo is not mounted)', { skip: !fs.existsSync('/Volumes/FFCRM/app/intake/ffintake/validate.py') }, () => {
   const py = fs.readFileSync('/Volumes/FFCRM/app/intake/ffintake/validate.py', 'utf8');
   assert.match(py, /TOPICS = \('bop_at_home', 'futures_at_home'\)/);
-  assert.match(py, /FAH_AGE_BANDS = \('infant', 'toddler', 'twos', 'threes', 'prek'\)/);
-  assert.match(signup, /\[\['infant', [^\]]+\], \['toddler', [^\]]+\], \['twos', [^\]]+\], \['threes', [^\]]+\], \['prek', [^\]]+\]\]/);
+  assert.match(py, /FAH_AGE_BANDS = \([^)]*'twos', 'threes', 'prek'\)/);
+  assert.match(signup, /\[\['twos', [^\]]+\], \['threes', [^\]]+\], \['prek', [^\]]+\]\]/);
+  assert.doesNotMatch(signup, /'infant'|'toddler'/);
 });

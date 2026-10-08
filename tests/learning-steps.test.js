@@ -91,11 +91,11 @@ test('portal.js has no readiness score, percentages, rings or side-by-side child
   assert.doesNotMatch(index, /curriculum-indicators\.js/, 'the full Learning Steps are private (IP lockdown)');
 });
 
-test('teacher view: infant and toddler rooms show their Learning Steps, words only, selectable in the observation entry', async () => {
+test('teacher view: the twos and pre-K rooms show their Learning Steps, words only, selectable in the observation entry', async () => {
   const { c, html, fire, node } = site();
   const S = c.FFSteps;
   await fire('click', node({ ptab: 'progress' }));
-  for (const [room, band] of [['infants', 'infant'], ['toddlers', 'toddler'], ['twos', 'twos'], ['prek', 'prek']]) {
+  for (const [room, band] of [['twos', 'twos'], ['threes', 'threes'], ['prek', 'prek']]) {
     await fire('change', { id: 'pRoom', value: room, dataset: {} });
     const out = html('portal');
     const mine = S.steps.filter((s) => s.band === band);
@@ -116,9 +116,9 @@ test('teacher view: infant and toddler rooms show their Learning Steps, words on
 
 test('teacher view: a level needs a Learning Step and a note; saving stores a dated word level, never a number', async () => {
   const { c, html, fire, node, fields, toast, saved } = site();
-  const S = c.FFSteps, step = S.steps.find((s) => s.band === 'toddler'), kid = 'k3'; // Rosa, Toddler Room
+  const S = c.FFSteps, step = S.steps.find((s) => s.band === 'twos'), kid = 'k6'; // Ava, Twos Room
   await fire('click', node({ ptab: 'progress' }));
-  await fire('change', { id: 'pRoom', value: 'toddlers', dataset: {} });
+  await fire('change', { id: 'pRoom', value: 'twos', dataset: {} });
   await fire('click', node({ p2kid: kid }));
   await fire('click', node({ p2step: step.id }));
   assert.match(html('portal'), new RegExp(`<option value="${step.id}" selected>`), 'Record preselects the step');
@@ -142,16 +142,16 @@ test('teacher view: a level needs a Learning Step and a note; saving stores a da
   assert.match(out, new RegExp(`data-step-row="${step.id}"[\\s\\S]*?TEST walked across the room[\\s\\S]*?data-l="secure">Secure`));
 });
 
-test('family view: infant and toddler children get the friendly version (what we saw, what\'s next, try at home) and fixed referral guidance', async () => {
+test('family view: twos and threes children get the friendly version (what we saw, what\'s next, try at home) and fixed referral guidance', async () => {
   const { c, html, fire } = site();
   vm.runInContext("view='family-portal'", c);
   const S = c.FFSteps;
-  for (const room of ['infants', 'toddlers', 'threes']) {
-    const kid = { infants: 'k1', toddlers: 'k3', threes: 'k10' }[room];
+  for (const room of ['twos', 'threes']) {
+    const kid = { twos: 'k6', threes: 'k10' }[room];
     await fire('change', { id: 'fKid', value: kid, dataset: {} });
     const out = html('family-portal'), text = visible(out);
     for (const h of ['What we saw', 'Things', "What's next", 'Try at home', 'What the words mean', S.referral.title]) assert.ok(text.includes(h), `${room}: ${h}`);
-    const band = { infants: 'infant', toddlers: 'toddler', threes: 'threes' }[room];
+    const band = room;
     assert.ok(S.steps.filter((s) => s.band === band).some((s) => text.includes(s.home) || text.includes(s.next) || text.includes(s.family)), `${room}: shows its own band's steps`);
     assert.match(text, /First Steps/); assert.match(text, /tiny-k/);
     assert.doesNotMatch(text, /\d\s*%|readiness|Strong foundations|Building steadily|Early days|Kindergarten readiness/i, room);
@@ -176,12 +176,16 @@ publicTest('learning-steps-summary.js (public) carries the counts, bands, areas 
   const S = summary();
   assert.equal(S.summary_only, true);
   assert.equal(S.steps.length, 0);
-  assert.equal(JSON.stringify(S.bands.map((b) => b.key)), JSON.stringify(['infant', 'toddler', 'twos', 'threes', 'prek']));
+  assert.equal(JSON.stringify(S.bands.map((b) => b.key)), JSON.stringify(['twos', 'threes', 'prek']));
   assert.ok(S.summary.total > 0);
   assert.ok(read('learning-steps-summary.js').length < 12000, 'a summary, not the crosswalk');
   assert.doesNotMatch(read('learning-steps-summary.js'), /"codes":|"excerpt":|"next":/, 'no step text, quotes or crosswalk codes');
 });
 
 test('the public summary counts equal the private Learning Steps', () => {
-  assert.deepEqual(JSON.parse(JSON.stringify(summary().summary)), JSON.parse(JSON.stringify(steps().summary)));
+  // the public summary covers ages 2 to 5 only (twos, threes, pre-K); the private set may still hold under-2 bands
+  const pub = JSON.parse(JSON.stringify(summary().summary)), priv = JSON.parse(JSON.stringify(steps().summary));
+  for (const b of ['twos', 'threes', 'prek']) { assert.equal(pub.by_band[b], priv.by_band[b], b); assert.deepEqual(pub.by_band_standard[b], priv.by_band_standard[b], b); }
+  assert.deepEqual(Object.keys(pub.by_band), ['twos', 'threes', 'prek']);
+  assert.equal(pub.total, pub.by_band.twos + pub.by_band.threes + pub.by_band.prek);
 });

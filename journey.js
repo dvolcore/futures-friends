@@ -31,7 +31,7 @@
   const route = id => (PENDING[id] && !has(id) ? PENDING[id].fallback : id);
   const label = id => (PENDING[id] ? (has(id) ? PENDING[id].label : PENDING[id].fallbackLabel) : id);
 
-  // The activity a family can do tonight: short, no materials, every age from toddlers to pre-K.
+  // The activity a family can do tonight: short, no materials, every age from twos to pre-K.
   const TONIGHT = 'smell-the-flower';
   function tonight() {
     const F = window.FFFamily;

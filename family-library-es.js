@@ -6,8 +6,6 @@
 const ES = window.FFFamilyES = window.FFFamilyES || {};
 
 ES.bands = {
-  infant: { n: 'Bebés', age: 'Del nacimiento a los 12 meses' },
-  toddler: { n: 'Niños pequeños (1 año)', age: 'De 12 a 24 meses' },
   twos: { n: 'De 2 años', age: '2 años' },
   threes: { n: 'De 3 años', age: '3 años' },
   prek: { n: 'Prekínder', age: '4 y 5 años' }
@@ -29,226 +27,10 @@ ES.crowd = {
 };
 
 ES.acts = {
-  'tummy-time-treasure': {
-    t: 'El tesoro del tiempo boca abajo',
-    where: 'En el piso',
-    mat: ['Una cobija limpia', 'Un espejo seguro para bebés o un juguete favorito'],
-    steps: [
-      'Extiende la cobija en el piso y pon a tu bebé boca abajo, solo mientras esté despierto y alguien lo esté vigilando.',
-      'Acuéstate frente a frente, a la altura de sus ojos, con el espejo o el juguete un poquito fuera de su alcance.',
-      'Canta suavecito. Cuando tu bebé levante la cabeza, sonríe y dile lo que está haciendo: "¡Levantaste la cabeza!"',
-      'Si se pone inquieto, voltéalo boca arriba, abrázalo y vuelvan a intentarlo más tarde. Unos minutos, muchas veces al día, se van sumando.'
-    ],
-    notice: [
-      'Cómo tu bebé levanta y gira la cabeza, y cómo eso cambia con las semanas.',
-      'Si se empuja hacia arriba con los brazos o intenta alcanzar el juguete.'
-    ],
-    adapt: [
-      'Acuesta a tu bebé boca abajo sobre tu pecho mientras te reclinas hacia atrás.',
-      'Mueve el juguete un poco hacia un lado para que gire la cabeza o el cuerpo hacia él.',
-      'Sigue cualquier plan de posiciones que te haya dado el profesional de salud de tu bebé. Acostarlo de lado, con una toalla enrollada detrás de la espalda, también cuenta como juego en el piso.'
-    ],
-    safety: 'Siempre despierto y siempre vigilado. Nunca dejes a un bebé solo boca abajo, y para dormir, siempre boca arriba.',
-    say: '¿Listos? ¡Bop y a moverse! ¡Mira cómo levantas la cabeza!'
-  },
-  'reach-and-grab': {
-    t: 'Estira y agarra',
-    where: 'En el piso',
-    mat: ['Un sonajero suave o un recipiente de plástico con la tapa bien pegada con cinta'],
-    steps: [
-      'Sienta a tu bebé en tu regazo, bien sostenido, o acuéstalo boca arriba sobre una cobija.',
-      'Sostén el sonajero cerquita, a menos de un brazo de distancia, donde su mano lo pueda encontrar.',
-      'Espera. Deja que lo golpee, lo empuje o lo agarre. Agítalo suavemente cuando lo toque.',
-      'Muévelo un poco a la izquierda o a la derecha y deja que se estire otra vez para alcanzarlo.'
-    ],
-    notice: [
-      'Con qué mano se estira tu bebé, y si se lleva el juguete a la boca.',
-      'Cuánto tiempo sigue mirando el juguete cuando se mueve.'
-    ],
-    adapt: [
-      'Acerca el juguete hasta la mano de tu bebé para que lo pueda sentir.',
-      'Sostenlo un poco más alto para que se estire y se gire hacia él.',
-      'Si tu bebé todavía no se estira para agarrar cosas, toca suavemente la palma de su mano con el juguete y dile cómo se llama.'
-    ],
-    safety: 'Usa juguetes de una sola pieza, más grandes que el puño de tu bebé, sin cordones ni piezas sueltas.',
-    say: '¡Estira, estira, estira! ¡Lo hiciste sonar!'
-  },
-  'peekaboo-turns': {
-    t: 'Cucú por turnos',
-    where: 'En cualquier lugar',
-    mat: ['Tus manos, o una tela ligera que tú sostienes'],
-    steps: [
-      'Siéntate frente a frente con tu bebé.',
-      'Tápate la cara con las manos y di: "¿Dónde estoy?" Luego destápate: "¡Cucú!"',
-      'Haz una pausa y espera una sonrisa, un sonido o una patadita. Ese es el turno de tu bebé.',
-      'Responde a su turno con una sonrisa o una palabra, y vuelvan a jugar.'
-    ],
-    notice: [
-      'Cómo tu bebé "toma su turno": una sonrisa, un sonido, o voltear la mirada cuando necesita un descanso.',
-      'Si empieza a esperar que vuelvas a aparecer.'
-    ],
-    adapt: [
-      'Juega despacio y en voz baja con un bebé que se asusta fácilmente.',
-      'Deja que un bebé más grande te quite la tela de la cara.',
-      'Para un bebé con baja visión, conviértelo en un juego de sonidos: tararea, haz una pausa y luego di "¡Cucú!" cerca de él.'
-    ],
-    safety: 'Nunca le tapes la cara a tu bebé. Guarda la tela al terminar el juego.',
-    say: '¿Dónde está Lumi? ¡Cucú, aquí estoy!'
-  },
-  'point-and-name-book': {
-    t: 'Señala y nombra con un libro de cartón',
-    where: 'En un rincón acogedor',
-    mat: ['Cualquier libro de cartón o libro ilustrado', 'Un álbum de fotos o una caja de cereal también sirven'],
-    steps: [
-      'Sienta a tu bebé en tu regazo para que los dos vean las páginas.',
-      'Señala un dibujo y dile el nombre despacio: "Perro. Un perro grande."',
-      'Haz una pausa para que tu bebé mire, dé palmaditas en la página o haga un sonido. Respóndele como si te hubiera hablado: "¡Sí! El perro dice guau."',
-      'Deja que pase las páginas, aunque sea hacia atrás. Paren cuando pierda el interés y vuelvan a intentarlo más tarde.'
-    ],
-    notice: [
-      'Hacia dónde mira tu bebé cuando nombras un dibujo.',
-      'Los sonidos, palmaditas o sonrisas en las pausas: esa es la parte de la conversación que le toca a tu bebé.'
-    ],
-    adapt: [
-      'Usa fotos de las caras de la familia, que a los bebés muchas veces les encantan.',
-      'Con bebés más grandes, pregunta "¿Dónde está el perro?" y espera a que lo señale.',
-      'Usa dibujos de alto contraste y libros para tocar y sentir con un bebé con baja visión.'
-    ],
-    say: 'Booker dice: ¡Mira! ¡Señala! ¡Nómbralo!'
-  },
-  'kitchen-sound-shakers': {
-    t: 'Maracas de cocina',
-    where: 'En la cocina',
-    mat: ['Dos botellas o recipientes de plástico limpios, con tapa', 'Arroz crudo en uno y una cucharada grande de frijoles crudos en el otro, con las tapas bien pegadas con cinta'],
-    steps: [
-      'Agita un recipiente cerca de tu bebé y espera. ¿Se volteó hacia el sonido?',
-      'Agita el otro. Di: "¡Este suena fuerte! Este suena suave."',
-      'Deja que tu bebé sostenga y agite uno mientras tú sostienes el otro.',
-      'Agítenlos juntos y luego paren juntos: "¡Alto!"'
-    ],
-    notice: [
-      'Si tu bebé se voltea hacia el sonido o se queda quieto para escuchar.',
-      'Si lo vuelve a agitar a propósito para que suene.'
-    ],
-    adapt: [
-      'Agítalo suavemente con un bebé que se asusta con los sonidos fuertes.',
-      'Con niños pequeños, esconde uno detrás de tu espalda y adivinen cuál es cuál.',
-      'Apoya el recipiente sobre la pancita de tu bebé para que sienta cómo se mueve.'
-    ],
-    safety: 'Pega bien las tapas con cinta y revísalas cada vez. Tira cualquier recipiente que se agriete.',
-    say: 'Zuri dice: ¡Escucha! ¿Qué oyes?'
-  },
-  'baby-bounce-and-sing': {
-    t: 'Rebota y canta',
-    where: 'En cualquier lugar',
-    mat: ['Cualquier canción que te sepas'],
-    steps: [
-      'Siéntate en el piso con tu bebé en tu regazo, mirándote de frente. Sostenlo con firmeza y con la cabeza bien apoyada.',
-      'Canta una canción corta con un ritmo parejo y mueve las rodillas suavemente al compás.',
-      'Haz una pausa en la última palabra y luego baja las rodillas un poquito, con suavidad.',
-      'Canta la misma canción otra vez para que tu bebé aprenda lo que viene después.'
-    ],
-    notice: [
-      'Si tu bebé se emociona justo antes de la bajadita: eso quiere decir que se acuerda.',
-      'Sonidos o movimientos que piden "¡otra vez!"'
-    ],
-    adapt: [
-      'Mécelo de lado a lado en lugar de rebotar, con tu bebé recostado sobre tus antebrazos.',
-      'Con bebés más grandes, detente y espera a que te pidan más con un rebote o un sonido.',
-      'Con un bebé con poco tono muscular, mécelo suavemente y no hagas la bajadita.'
-    ],
-    safety: 'Que cada rebote sea pequeño y lento, y sostén la cabeza y el cuello. Nunca sacudas ni lances a un bebé.',
-    say: 'Rebota, rebota, rebota con Bop. ¿Otra vez? ¡Otra vez!'
-  },
-  'gentle-sway': {
-    t: 'Arrullo suave para relajarse',
-    where: 'A la hora de dormir',
-    mat: ['Un cuarto tranquilo', 'Una canción suave y lenta'],
-    steps: [
-      'Abraza a tu bebé cerca de ti, con la cabeza apoyada.',
-      'Párate con los pies separados y mécete despacio de lado a lado mientras tarareas.',
-      'Baja la voz y baja las luces si puedes.',
-      'Cuando tu bebé esté tranquilo, acuéstalo boca arriba para dormir en una cuna sin nada más adentro.'
-    ],
-    notice: [
-      'Qué ayuda a tu bebé a calmarse: tu voz, el arrullo, la luz baja.',
-      'Las señales de que tu bebé tiene sueño, como tallarse los ojos o voltear la mirada.'
-    ],
-    adapt: [
-      'Siéntate y mécelo en lugar de estar de pie.',
-      'Usa la misma canción todas las noches para que se vuelva una señal de que es hora de dormir.',
-      'Respeta cualquier rutina para calmarse que tu familia ya tenga.'
-    ],
-    safety: 'Boca arriba para dormir, cada vez que duerma: sobre una superficie firme y plana, sin nada más en la cuna.',
-    say: 'Lumi dice: Despacito y con suavidad. Shh, aquí estoy.'
-  },
-  'sparkle-gums': {
-    t: 'Encías brillantes',
-    where: 'A la hora del baño',
-    mat: ['Una toallita limpia y húmeda'],
-    steps: [
-      'Lávate las manos y sienta a tu bebé en tu regazo.',
-      'Envuelve tu dedo con la toallita húmeda.',
-      'Limpia con suavidad las encías, y los dientes si ya tiene, haciendo circulitos suaves.',
-      'Di "¡Encías brillantes!" y sonríe. Lava la toallita después de cada uso.'
-    ],
-    notice: [
-      'Cómo reacciona tu bebé a la toallita. A algunos bebés les gusta sentir la presión en las encías adoloridas.'
-    ],
-    adapt: [
-      'Deja que tu bebé sostenga primero una mordedera limpia y fresca.',
-      'Cuando le salgan los dientes, cambia a un cepillo de dientes suave para bebé con una capa de pasta dental con fluoruro del tamaño de un grano de arroz.',
-      'Hazlo después de una canción si a tu bebé no le gusta.'
-    ],
-    say: 'Booker dice: ¡Encías brillantes! Circulitos suaves.'
-  },
-  'cruise-and-cheer': {
-    t: 'Pasitos y aplausos',
-    where: 'En el piso',
-    mat: ['Un sofá firme o una mesa baja y pesada', 'Un juguete favorito'],
-    steps: [
-      'Ayuda a tu niño a pararse agarrado del sofá, y quédate justo a su lado.',
-      'Pon el juguete a uno o dos pasos, a lo largo del sofá, para que dé pasitos de lado para alcanzarlo.',
-      'Celebra cada pasito.',
-      'Deja que se siente a descansar cuando quiera.'
-    ],
-    notice: [
-      'Cómo se mueve tu niño: de lado, soltándose con una mano, o gateando en lugar de caminar.'
-    ],
-    adapt: [
-      'Que se arrodille junto al sofá y se estire hacia el juguete.',
-      'Pon el juguete al final del sofá para que intente dar un paso hasta la silla de al lado.',
-      'Usa un juguete de empujar, una andadera o los apoyos que tu niño ya usa.'
-    ],
-    safety: 'Usa solo muebles tan pesados que no se puedan voltear. Quédate a menos de un brazo de distancia y quita los juguetes duros del piso.',
-    say: '¿Listos? ¡Bop y a moverse! ¡Un paso, dos pasos!'
-  },
-  'in-and-out-box': {
-    t: 'La caja de adentro y afuera',
-    where: 'En el piso',
-    mat: ['Una caja de zapatos vacía o un tazón', 'Cinco cosas grandes que sea seguro agarrar: bloques, cucharas, calcetines hechos bolita'],
-    steps: [
-      'Echa una cosa en la caja y di "¡Adentro!" Agita la caja: ¡qué ruido!',
-      'Voltéala y di "¡Afuera!"',
-      'Deja que tu niño meta cosas y las saque todas las veces que quiera.',
-      'Ponle una tapa con un agujero para un nuevo reto.'
-    ],
-    notice: [
-      'Cómo agarra tu niño cada cosa, y si la busca cuando desaparece.',
-      'Palabras o sonidos nuevos, como "adentro", "afuera" o "¡uy!"'
-    ],
-    adapt: [
-      'Empieza con una sola cosa grande y un tazón ancho.',
-      'Corta una ranura pequeña para cosas planas, como tapas de frascos, para que tenga que girarlas para que entren.',
-      'Pon la caja sobre una charola a la altura correcta para un niño que está sentado en una silla.'
-    ],
-    safety: 'Usa solo cosas demasiado grandes para caber en la boca de tu niño.',
-    say: 'Zuri dice: ¡Adentro! ¡Afuera! ¿Qué pasa si lo intentamos?'
-  },
   'name-it-walk': {
     t: 'Paseo para nombrar cosas',
     where: 'Al aire libre',
-    mat: ['Zapatos', 'Una carriola o un portabebés, si usas uno'],
+    mat: ['Zapatos', 'Una carriola, si usas una'],
     steps: [
       'Salgan a dar un paseo corto afuera, o por la casa.',
       'Cuando tu niño señale o mire algo, dile cómo se llama: "¡Un pájaro! Un pajarito café."',
@@ -282,7 +64,7 @@ ES.acts = {
       'Qué sentimientos parece que ya conoce.'
     ],
     adapt: [
-      'Con los más pequeños, usa solo feliz y triste.',
+      'Con los de 2 años más chiquitos, usa solo feliz y triste.',
       'Con niños de 2 años, cuenta un cuento chiquito: "La pelota se fue rodando. ¿Cómo me siento?"',
       'Si el espejo es demasiado, usa un libro ilustrado con caras claras.'
     ],
@@ -303,7 +85,7 @@ ES.acts = {
       'Cuando empieza a usarlo por su cuenta, por ejemplo cuando está molesto.'
     ],
     adapt: [
-      'Los niños pequeños pueden imitar solo la parte de soplar.',
+      'Los niños de 2 años pueden imitar solo la parte de soplar.',
       'Los niños más grandes pueden guiarte a ti, o intentar cuatro respiraciones lentas.',
       'Soplen una pluma o un rehilete si es difícil imaginar una vela.'
     ],
@@ -325,7 +107,7 @@ ES.acts = {
       'Lo que adivina, y palabras como "más", "lleno" o "vacío".'
     ],
     adapt: [
-      'Con los más pequeños, solo viertan y chapoteen.',
+      'Con los de 2 años más chiquitos, solo viertan y chapoteen.',
       'Con niños de 3 años, separen las cosas en dos montones: "flotan" y "se hunden".',
       'Háganlo en una mesa a la altura de una silla o de una silla de ruedas.'
     ],
@@ -796,7 +578,7 @@ ES.acts = {
   'color-walk': {
     t: 'Paseo de colores',
     where: 'Al aire libre',
-    mat: ['Zapatos', 'Una carriola o un portabebés, si hace falta'],
+    mat: ['Zapatos', 'Una carriola, si hace falta'],
     steps: [
       'Salgan afuera, o caminen frente a las ventanas.',
       'Escojan un color y búsquenlo juntos.',
@@ -891,17 +673,6 @@ ES.guides = {
       ['choice', 'Tu niño decide qué comer y cuánto.']
     ]
   },
-  'tummy-time': {
-    t: 'Tiempo boca abajo, poquito a poquito',
-    when: 'Bebés, mientras están despiertos y vigilados',
-    steps: [
-      ['blanket', 'Una cobija en el piso; el bebé boca abajo, despierto.'],
-      ['face', 'Ponte a su altura, cara a cara.'],
-      ['toy', 'Un juguete o un espejo un poquito fuera de su alcance.'],
-      ['cuddle', '¿Se pone inquieto? Abrázalo y vuelvan a intentarlo más tarde.'],
-      ['back', 'Para dormir, siempre boca arriba.']
-    ]
-  }
 };
 
 ES.printables = {
@@ -966,7 +737,6 @@ ES.videos = {
         { len: '39 segundos', note: 'Huele la flor (toma aire), sopla la vela (suelta el aire). Respira junto con Lumi.' },
         { len: '39 segundos', note: 'Lumi pone una cara de un sentimiento y espera la tuya. ¿Puedes mostrar feliz?' },
         { len: '39 segundos', note: 'Mira, escucha, echa una mano: Lumi muestra los tres gestos amables y las palabras "¿Quieres jugar conmigo?"' },
-        { len: '99 segundos', note: 'Para bebés y niños pequeños: Lumi se esconde, dice "¡Cucú!" y espera el turno de tu bebé. Mírenlo una vez y luego jueguen cara a cara.' },
         { t: 'Pausa para respirar en la pradera', len: '8 segundos, se repite, sin sonido', note: 'Sin palabras, solo la pradera. Mira cómo se mece el pasto y respira despacio tres veces, como Lumi.' }
       ]
     },

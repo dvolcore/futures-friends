@@ -136,7 +136,7 @@ const FAITH_VERSIONS = [
   ['Sunday or occasional programming', 'One session a week or a few a month, with rotating volunteers. One story, one activity and one take-home page per session.', 'planned', 'Session guide']
 ];
 function faith() {
-  return `<section class="oc-sec" id="oc-faith" aria-labelledby="oc-faith-h"><div class="wrap">${lead('oc-faith-h', 'Churches and faith-based programs', 'Three ways a church can run Futures Friends', 'For children <b>ages 2 to 5</b>. It is not an infant or toddler nursery program. Follow your state’s licensing rules; we do not decide whether your program needs a license.')}
+  return `<section class="oc-sec" id="oc-faith" aria-labelledby="oc-faith-h"><div class="wrap">${lead('oc-faith-h', 'Churches and faith-based programs', 'Three ways a church can run Futures Friends', 'For children <b>ages 2 to 5</b>. Follow your state’s licensing rules; we do not decide whether your program needs a license.')}
    ${legend()}<div class="oc-faithv">${FAITH_VERSIONS.map(v => `<article class="oc-card"><h3>${v[0]}</h3>${chip(v[2])}<p class="small">${v[1]}</p><span class="small muted">${v[3]}</span></article>`).join('')}</div></div></section>
   <section class="oc-sec band-paper" aria-labelledby="oc-faith2-h"><div class="wrap">${lead('oc-faith2-h', 'How it fits your church', 'Schedules, volunteers, shared rooms and approvals', '')}
    <div class="oc-faithgrid">

@@ -194,7 +194,6 @@ window.FFi18n.add('es', {
   "Meal or snack, and water": "Comida o refrigerio, y agua",
   "Regular meals stay familiar and complete. Color becomes a low-pressure way to explore food. Water is there all day.": "Las comidas de siempre siguen siendo conocidas y completas. El color se vuelve una forma sin presión de explorar la comida. Hay agua todo el día.",
   "Short movement moments through the day, with a water break at every transition.": "Momentos cortos de movimiento durante el día, con una pausa para tomar agua en cada transición.",
-  "Notice, Breathe, Soften, Rest. Offered, never forced. Infants follow safe-sleep rules.": "Observar, respirar, suavizar, descansar. Se ofrece, nunca se obliga. Los bebés siguen las reglas de sueño seguro.",
   "Connect": "Conectar",
   "Pickup prompt": "La pregunta de la salida",
   "\"What's your one thing?\" One question, one take-home card, one no-cost family challenge.": "\"¿Cuál es tu cosa de hoy?\" Una pregunta, una tarjeta para la casa, un reto familiar sin costo.",
@@ -263,16 +262,10 @@ window.FFi18n.add('es', {
   "Screen": "Pantallas",
   "Sitting or restrained": "Sentado o sujeto",
   "Source": "Fuente",
-  "Infant": "Bebés",
-  "Under 12 months": "Menos de 12 meses",
-  "Several times a day, floor-based play. At least 30 minutes of tummy time while awake, for babies not yet mobile.": "Varias veces al día, juego en el piso. Al menos 30 minutos de tiempo boca abajo mientras están despiertos, para bebés que todavía no se desplazan.",
-  "2 to 3 occasions a day, weather permitting.": "De 2 a 3 veces al día, si el clima lo permite.",
-  "None.": "Ninguna.",
-  "Seated no more than 15 minutes at a time. Awake in a crib, playpen or other confinement no more than 30 minutes.": "Sentado no más de 15 minutos seguidos. Despierto en una cuna, un corral u otro espacio de confinamiento no más de 30 minutos.",
-  "(under 5);": "(menores de 5 años);",
-  "4th ed.; K.A.R. 28-4-440(f)": "4.ª ed.; K.A.R. 28-4-440(f)",
-  "Toddler": "Niños pequeños",
-  "1 to under 3": "De 1 a menos de 3 años",
+  "Sleep rules come first": "Las reglas de sueño van primero",
+  "Quiet Time follows the center's sleep and rest rules. Those rules always win.": "El Tiempo tranquilo sigue las reglas de sueño y descanso del centro. Esas reglas siempre ganan.",
+  "Twos": "De 2 años",
+  "2 to under 3": "De 2 a menos de 3 años",
   "60 to 90 minutes of moderate-to-vigorous play (MVPA).": "De 60 a 90 minutos de juego de intensidad moderada a vigorosa (AFMV).",
   "60 to 90 minutes.": "De 60 a 90 minutos.",
   "None through age 2": "Ninguna hasta los 2 años",
@@ -290,13 +283,12 @@ window.FFi18n.add('es', {
   "State rules sit on top of these defaults": "Las reglas estatales se suman a estos valores predeterminados",
   "Your center’s state and program type decide which rules apply, and the daily plan shows the citation next to each one. These are summaries, not legal advice: your license and your state agency are the authority.": "El estado y el tipo de programa de tu centro deciden qué reglas aplican, y el plan diario muestra la cita junto a cada una. Son resúmenes, no asesoría legal: tu licencia y la agencia de tu estado son la autoridad.",
   "Kansas centers": "Centros en Kansas",
-  "At least 60 minutes outdoors once a child has been in care more than 4 hours, and daily outdoor time for infants.": "Al menos 60 minutos al aire libre una vez que un niño lleva más de 4 horas en el cuidado, y tiempo diario al aire libre para los bebés.",
-  "Awake infants and toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).": "Bebés y niños pequeños despiertos confinados no más de 30 minutos (K.A.R. 28-4-440(f)).",
+  "At least 60 minutes outdoors once a child has been in care more than 4 hours.": "Al menos 60 minutos al aire libre una vez que un niño lleva más de 4 horas en el cuidado.",
+  "Awake toddlers confined no more than 30 minutes (K.A.R. 28-4-440(f)).": "Niños pequeños despiertos confinados no más de 30 minutos (K.A.R. 28-4-440(f)).",
   "Kansas homes: physical activity offered at least 1 hour a day.": "Hogares en Kansas: actividad física ofrecida al menos 1 hora al día.",
   "1 hour outdoors for full-day preschool and school-age children, weather permitting.": "1 hora al aire libre para niños de preescolar y de edad escolar en jornada completa, si el clima lo permite.",
   "Preschoolers who do not sleep rest 30 to 60 minutes. Rest is required, and sleep never is.": "Los preescolares que no duermen descansan de 30 a 60 minutos. El descanso es obligatorio; dormir nunca lo es.",
   "No more than 4 hours between meals and snacks.": "No más de 4 horas entre comidas y refrigerios.",
-  "Supervised daily tummy time for infants, and no more than 30 minutes awake in the crib.": "Tiempo boca abajo supervisado todos los días para los bebés, y no más de 30 minutos despiertos en la cuna.",
   "Both states": "Ambos estados",
   "Water available at all times.": "Agua disponible en todo momento.",
   "Food and rest are never used as punishment.": "La comida y el descanso nunca se usan como castigo.",
@@ -305,7 +297,7 @@ window.FFi18n.add('es', {
   "How the day adds up": "Cómo se suma el día",
   "Activity can build up in bouts of 10 minutes or more.": "La actividad puede acumularse en periodos de 10 minutos o más.",
   "Every child gets 2 to 3 outdoor occasions and 2 or more adult-led movement activities each day.": "Cada niño tiene de 2 a 3 salidas al aire libre y 2 o más actividades de movimiento dirigidas por un adulto cada día.",
-  "A gentle prompt appears when a room has gone too long without moving: after 15 minutes seated for infants, 30 minutes for toddlers and preschoolers. One hour is the ceiling.": "Aparece un recordatorio suave cuando un salón lleva demasiado tiempo sin moverse: después de 15 minutos sentados para los bebés, y de 30 minutos para niños pequeños y preescolares. Una hora es el máximo.",
+  "A gentle prompt appears when a room has gone too long without moving: after 30 minutes seated. One hour is the ceiling.": "Aparece un recordatorio suave cuando un salón lleva demasiado tiempo sin moverse: después de 30 minutos sentados. Una hora es el máximo.",
   "What we measure": "Lo que medimos",
   "Minutes, missions and outdoor occasions the day delivered.": "Los minutos, las misiones y las salidas al aire libre que ofreció el día.",
   "Never a child's weight, BMI or calories, and never a ranking.": "Nunca el peso, el IMC ni las calorías de un niño, y nunca una clasificación.",
@@ -320,7 +312,7 @@ window.FFi18n.add('es', {
   "Slower movement and a quieter voice.": "Movimientos más lentos y una voz más baja.",
   "A predictable transition into quiet or rest.": "Una transición predecible hacia la tranquilidad o el descanso.",
   "This is not “calm down.” It teaches children to notice their own state and move through a predictable routine.": "Esto no es “cálmate”. Enseña a los niños a notar su propio estado y a pasar por una rutina predecible.",
-  "Quiet Time is offered, never forced. For infants, safe-sleep rules come first. Some state rules add a requirement: Missouri preschoolers who do not sleep must have a rest period of 30 to 60 minutes. In those rooms rest is required and sleep never is.": "El Tiempo tranquilo se ofrece, nunca se obliga. Para los bebés, las reglas de sueño seguro van primero. Algunas reglas estatales agregan un requisito: en Missouri, los preescolares que no duermen deben tener un periodo de descanso de 30 a 60 minutos. En esos salones el descanso es obligatorio y dormir nunca lo es.",
+  "Quiet Time is offered, never forced. Some state rules add a requirement: Missouri preschoolers who do not sleep must have a rest period of 30 to 60 minutes. In those rooms rest is required and sleep never is.": "El Tiempo tranquilo se ofrece, nunca se obliga. Algunas reglas estatales agregan un requisito: en Missouri, los preescolares que no duermen deben tener un periodo de descanso de 30 a 60 minutos. En esos salones el descanso es obligatorio y dormir nunca lo es.",
   "Lumi the bunny, taking a calm breath": "Lumi la conejita, respirando con calma",
   "Plush-world snack and handwashing area: a round table with small chairs on a rug, child-height sinks with step stools, towels and mirrors. Zuri and Poppy are in front.": "Área de refrigerio y lavado de manos en el mundo de peluche: una mesa redonda con sillitas sobre un tapete, lavabos a la altura de los niños con banquitos, toallas y espejos. Zuri y Poppy están al frente.",
   "The storybook snack table, not a photo of our center": "La mesa de refrigerio del cuento, no una foto de nuestro centro",
@@ -407,8 +399,6 @@ window.FFi18n.add('es', {
   "No episodes for children ages 2 and younger: songs, puppets and cards take their place. For preschoolers, not more than 30 minutes a week in care is the default, and a screen is the opening act, counted against that weekly cap.": "No hay episodios para niños de 2 años o menos: canciones, títeres y tarjetas toman su lugar. Para preescolares, el valor predeterminado es no más de 30 minutos a la semana en el cuidado infantil, y una pantalla es el acto de apertura, que cuenta dentro de ese límite semanal.",
   "Water and weather, with care": "Agua y clima, con cuidado",
   "Water is available all day, with a prompt at every Bop & Go! transition. The forecast can suggest an indoor swap and shows why. The teacher decides.": "Hay agua disponible todo el día, con un recordatorio en cada transición de ¡Bop y a moverse! El pronóstico puede sugerir cambiar a una actividad bajo techo y muestra por qué. El maestro o la maestra decide.",
-  "Safe sleep comes first": "El sueño seguro va primero",
-  "For infants, Quiet Time follows the center's safe-sleep rules. Sleep rules always win.": "Para los bebés, el Tiempo tranquilo sigue las reglas de sueño seguro del centro. Las reglas de sueño siempre ganan.",
   "Teachers move if they want to": "Los maestros se mueven si quieren",
   "Staff movement is opt-in and never tracked per person. Movement moments simply invite teachers to model.": "El movimiento del personal es opcional y nunca se registra por persona. Los momentos de movimiento simplemente invitan a los maestros a dar el ejemplo.",
   "Evidence-informed routines": "Rutinas informadas por la evidencia",
@@ -432,7 +422,6 @@ window.FFi18n.add('es', {
   "Open the Smell the Flower, Blow the Candle card →": "Abre la tarjeta “Huele la flor, sopla la vela” →",
   "Open the Feelings Mirror card →": "Abre la tarjeta “El espejo de los sentimientos” →",
   "Open the Who Could We Invite? card →": "Abre la tarjeta “¿A quién podemos invitar?” →",
-  "Open the Peekaboo Turns card →": "Abre la tarjeta “Cucú por turnos” →",
   "Breathe along with Lumi, then read her book.": "Respira con Lumi y luego lee su libro.",
   "Read Big Feelings, Brighter Days": "Lee “Sentimientos grandes, días más brillantes”",
   "Pip is new and all alone. Breathe along with Lumi as she finds her calm and her kind words.": "Pip es nuevo y está solito. Respira con Lumi mientras ella encuentra su calma y sus palabras amables.",
@@ -490,21 +479,21 @@ window.FFi18n.add('es', {
   "Choking-safe prep for under-fives": "Preparación segura contra el atragantamiento para menores de cinco años",
   "Recipes scaled for 10, 20 and 40 children": "Recetas ajustadas para 10, 20 y 40 niños"
 }, [
-  // "37 short activities for babies to pre-K, ..." (the count is the library size)
-  [/^(\d+) short activities for babies to pre-K, made from things you already have at home\. Each one has steps, what you might notice and ways to make it easier or harder\.$/,
-    '$1 actividades cortas para bebés hasta prekínder, hechas con cosas que ya tienes en casa. Cada una tiene pasos, lo que podrías notar y formas de hacerla más fácil o más difícil.'],
-  // the library count line: "37 activities", "1 activity", "9 activities for babies", "4 activities for pre-k with Booker"
+  // "27 short activities for ages 2 to 5, ..." (the count is the library size)
+  [/^(\d+) short activities for ages 2 to 5, made from things you already have at home\. Each one has steps, what you might notice and ways to make it easier or harder\.$/,
+    '$1 actividades cortas para niños de 2 a 5 años, hechas con cosas que ya tienes en casa. Cada una tiene pasos, lo que podrías notar y formas de hacerla más fácil o más difícil.'],
+  // the library count line: "37 activities", "1 activity", "9 activities for twos", "4 activities for pre-k with Booker"
   // (the band name may already be Spanish, lower-cased, when family-library-es.js is loaded)
   [/^(\d+) (activity|activities)(?: for (.+?))?(?: with (Booker|Lumi|Zuri|Bop))?$/, function (m, n, w, band, who) {
-    var B = { 'babies': 'bebés', 'bebés': 'bebés', 'toddlers': 'niños pequeños (1 año)', 'niños pequeños (1 año)': 'niños pequeños (1 año)',
+    var B = { 'ages 2 to 5': 'niños de 2 a 5 años',
       'twos': 'niños de 2 años', 'de 2 años': 'niños de 2 años', 'threes': 'niños de 3 años', 'de 3 años': 'niños de 3 años',
       'pre-k': 'prekínder', 'prekínder': 'prekínder' };
     return n + (n === '1' ? ' actividad' : ' actividades') + (band ? ' para ' + (B[band] || band) : '') + (who ? ' con ' + who : ''); }],
-  // activity card time line: "5 min · Floor · Babies", "1½ min · ...", "1 min 9 sec · ...", and the bare "39 sec" / "3 min" on Bop at Home
+  // activity card time line: "5 min · Floor · Anywhere", "1½ min · ...", "1 min 9 sec · ...", and the bare "39 sec" / "3 min" on Bop at Home
   [/^(?:(\d+½?) min(?: (\d+) sec)?|(\d+) sec)((?: · [^·]+)*)$/, function (m, mn, s1, s2, rest) {
     var P = { 'Floor': 'En el piso', 'Anywhere': 'En cualquier lugar', 'Cozy spot': 'En un rincón acogedor', 'Kitchen': 'En la cocina',
       'Bedtime': 'A la hora de dormir', 'Bath time': 'A la hora del baño', 'Outdoors': 'Al aire libre', 'Indoors': 'Dentro de casa',
-      'Babies': 'Bebés', 'Toddlers': 'Niños pequeños (1 año)', 'Twos': 'De 2 años', 'Threes': 'De 3 años', 'Pre-K': 'Prekínder' };
+      'Twos': 'De 2 años', 'Threes': 'De 3 años', 'Pre-K': 'Prekínder' };
     var t = mn ? mn + ' min' + (s1 ? ' ' + s1 + ' seg' : '') : s2 + ' seg';
     var parts = rest ? rest.split(' · ').slice(1).map(function (p) { return p.split(', ').map(function (x) { return P[x] || x; }).join(', '); }) : [];
     return [t].concat(parts).join(' · '); }],
