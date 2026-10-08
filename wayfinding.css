@@ -56,7 +56,7 @@ html[data-audience] .px-main>a:not([aria-current]){color:#193b38}
 
 /* ---------------------------------------------------------------- the full-screen felt menu */
 dialog.ffw-menu{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;
-  color:var(--ffw-cream);background-color:#0E3646;background-image:var(--tx-felt);background-size:var(--tx-tile);background-blend-mode:multiply;
+  color:var(--ffw-cream);background-color:#0E3646;background-image:linear-gradient(rgba(14,54,70,.9),rgba(14,54,70,.9)),var(--tx-felt);background-size:auto,var(--tx-tile);
   overflow:hidden;overscroll-behavior:contain;box-shadow:none;--focus-ring:#F5C553}
 dialog.ffw-menu::backdrop{background:var(--ffw-navy)}
 .ffw-menu :focus-visible{outline:3px solid #F5C553;outline-offset:3px}
@@ -353,6 +353,7 @@ header.bar{view-transition-name:ffw-header}
 @keyframes ffw-glow{50%{box-shadow:0 0 0 10px rgba(231,169,40,.28)}}
 
 @media (prefers-reduced-data: reduce){dialog.ffw-menu,.ffw-card,.ffw-next-in{background-image:none!important}}
+/* Safari draws the modal dialog in the top layer without the felt blend: the navy now comes from a gradient layer, no blend mode needed */
 @media print{
   .ffw-next,.ffw-backbar,.ffw-close,.ffw-crumbs .ffw-cs,#ffw-menu,#px-search,.ffw-card{display:none!important}
   .ffw-aud{display:none!important}

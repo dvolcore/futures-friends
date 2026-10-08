@@ -763,7 +763,7 @@
         afterRoute(prevKey, isUser);
         return res;
       };
-      const turn = user && moving() && typeof doc.startViewTransition === 'function' && doc.visibilityState === 'visible' && !turning;
+      const turn = user && moving() && typeof doc.startViewTransition === 'function' && doc.visibilityState === 'visible' && !turning && !menu.open && !(pal && pal.open);   // no page turn while the menu or search dialog is closing: Safari can drop the tap
       if (!turn) return run(this, arguments, user);
       // Old state: name the h1 and the hero friend (only if they are on screen, so nothing flies in from far away).
       const oldH1 = doc.querySelector('#view h1'), oldFriend = [...doc.querySelectorAll('#view ' + HERO_FRIEND.split(', ').join(', #view '))].find(inView);
