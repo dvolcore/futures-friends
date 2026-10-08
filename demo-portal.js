@@ -148,6 +148,7 @@ function addTabs(tabs, role){
   if (may('billing')) out.push(['billing','Billing']);
   if (may('reports')) out.push(['dreports','Reports']);
   if (may('staff')) out.push(['access','Hours and access']);
+  if (window.FFReady && window.FFReady.addTabs) window.FFReady.addTabs(out, role, may);   // War Room, Exposure, Briefs, Cash (portal-ready.js)
   out.push(T.today, ...(role !== 'director' && lib ? [['library','Library']] : []), ['checkin','Check-in'], ['plans','Daily plan'], T.children, T.progress, T.messages, ['reports','Family reports'], T.calendar, T.lunch, T.curriculum, T.account, T.setup, ['hours','My hours']);
   tabs.splice(0, tabs.length, ...out.filter(Boolean));
 }
@@ -156,7 +157,7 @@ function libTile(){ return window.FFLibraryDemo && window.FFLibraryDemo.allowed(
 function view(tab, c){
   const f = {inbox:c2 => window.FFDemoInbox ? window.FFDemoInbox.view(c2) : null, checkin:checkinView, plans:plansView, reports:reportsView, dash:dashView, staff:staffView, approvals:approvalsView, enroll:enrollView, dreports:dReportsView, invite:inviteView,
     billing:billingView, access:accessView, hours:hoursTab, library:libraryView}[tab];
-  if (!f) return null;
+  if (!f) return window.FFReady && window.FFReady.has && window.FFReady.has(tab) ? window.FFReady.view(tab, c) : null;
   if (tab === 'library' && !(window.FFLibraryDemo && window.FFLibraryDemo.allowed())) return null;
   if (['dash','inbox','staff','approvals','invite'].includes(tab) && c.role !== 'director') return null;
   const need = {enroll:'enroll', billing:'billing', dreports:'reports', access:'staff'}[tab];
@@ -443,7 +444,7 @@ function enrollView(c){
     else if (x.stage === 'declined') acts = `<div class="ffd-row"><button class="btn soft" data-dm="appstage" data-stage="inquiry" data-id="${id}">Reopen</button></div>`;
     return `<li class="ffd-app"><div class="ffd-row sp"><b>${E(x.child)}</b><span class="mini">${E(x.age)}</span></div>
       <span class="mini">${E(x.guardian)} · wants ${E((DM.get('rooms', x.room) || {}).name || 'a room')}${x.start ? ` from ${E(shortD(x.start))}` : ''}${x.tour ? ` · tour ${E(x.tour.replace('T', ' '))}` : ''}</span>
-      ${x.notes ? `<span class="small">${E(x.notes)}</span>` : ''}${linkDetails(id, x)}${acts}</li>`; };
+      ${x.notes ? `<span class="small">${E(x.notes)}</span>` : ''}${linkDetails(id, x)}${acts}${window.FFReady && window.FFReady.briefLink ? window.FFReady.briefLink(id, x) : ''}</li>`; };
   return `<div class="ffd-cols">${linkCard()}${capacityCard()}</div><div class="ffd-pipe">${STAGES.map(([st, label]) => { const xs = apps.filter(([, x]) => x.stage === st);
      if (st === 'declined' && !xs.length) return ''; return `<section class="card ffd-stage" aria-labelledby="dmSt_${st}"><div class="ffd-row sp"><h3 id="dmSt_${st}">${label}</h3><span class="chip">${xs.length}</span></div>${xs.length ? `<ul class="ffd-apps">${xs.map(card).join('')}</ul>` : '<p class="small muted">None right now.</p>'}</section>`; }).join('')}</div>
   <form class="card" id="dmAppForm" novalidate><h3>Add an inquiry</h3><p class="small">A family called or stopped by. Demo: use a made-up child and parent (first name and last initial).</p>
