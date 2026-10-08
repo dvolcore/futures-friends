@@ -125,7 +125,7 @@ test('G42: every file under img/ and video/ is referenced by the site (directly 
   const code = fs.readdirSync(ROOT).filter(f => /\.(js|css|html)$/.test(f)).map(read).join('\n');
   // Wave 5: the web pages draw every character from img/plush/; img/cut_*.webp (the same new designs, tight-cropped) stay for the
   // print kit (printables/marketing/src) and tools/brand-art/compose.html, which this scan of root files does not read.
-  const dynamic = [/^img\/rainbow\//, /^img\/community\//, /^img\/brand\//, /^img\/email\//, /^img\/cut_(booker|lumi|zuri|bop)\.webp$/];   // img/rainbow/${food}.svg, img/community/${key}.webp; img/brand/ holds the official masters that the CRM, emails and billing use by path or URL, so it is never pruned;
+  const dynamic = [/^img\/rainbow\//, /^img\/community\//, /^img\/campaign\//, /^img\/brand\//, /^img\/email\//, /^img\/cut_(booker|lumi|zuri|bop)\.webp$/];   // img/rainbow/${food}.svg, img/community/${key}.webp; img/campaign/<name>-<800|1200|1536>.<webp|jpg> is built by pic() in store-campaign.js (the owner's campaign pictures); img/brand/ holds the official masters that the CRM, emails and billing use by path or URL, so it is never pruned;
   // img/email/ holds PNG copies of the friends and the felt texture that the hub's emails load by absolute URL (Outlook cannot show WebP)
   // Resized WebP copies (<name>-400.webp, <name>-800.webp) are built from their original's name by the pic() helper in views.js,
   // so they count as referenced when the original is.

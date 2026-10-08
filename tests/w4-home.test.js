@@ -26,7 +26,7 @@ const KIT_BUTTONS = 6;   // three concept photos (reading corner, blue-table roo
 // 2026-10-07 (owner): the welcome video got its own big section under the hero (+1,100 px at 1280, +800 at 390, measured 7,558
 // and 9,536); the small slot it left in the photo row is gone
 // 2026-10-07 owner: the required "AI-generated proposed transformation" caption sits beside each concept image on Home (+~35 px), so 7800 -> 7900 and 9900 -> 10000.
-const HEIGHT = { 1280: 8250, 390: 10400 };   // +350/+250 Kids Shop strip (store-teasers.js) on top of the entrance concept caption (390: +150)
+const HEIGHT = { 1280: 8250, 390: 10600 };   // +350/+250 Kids Shop strip (store-teasers.js) on top of the entrance concept caption (390: +150); 390: +200 for the owner's family picture in the Kids Shop teaser (store-campaign.js)
 
 const homeFacts = page => page.evaluate(() => {
   const v = document.querySelector('#view');
