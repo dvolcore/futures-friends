@@ -36,7 +36,7 @@
     quote: ['Request a quote', 'Send your rooms, ages and enrollment and we will price a Futures Friends startup package for you.'],
     friends: ['Booker Lumi Zuri Bop and storybooks', 'Meet Booker, Lumi, Zuri and Bop, and the storybooks and episodes now in development.'],
     rainbow: ['Eat the Rainbow recipes', 'The Eat the Rainbow cookbook and menu planner: 36 recipes in three levels, designed around the CACFP meal pattern.'],
-    store: ['Futures Store', 'The Futures Store: Learning Zones Kits, room add-ons, classroom materials and books for centers, home daycares and churches, plus a small Kids\u2019 Shop for families. Orders go in as requests; nothing is charged online yet.'],
+    store: ['Futures Store', 'Learning Zones Kits, carpets, posters, plush, apparel and classroom materials for centers, home daycares and churches, plus a small Kids\u2019 Shop. Orders go in as requests.'],
     'shop-families': ['Family shop', 'Tees, a library book tote, posters and, later, storybooks and plush with Booker, Lumi, Zuri and Bop. Ordering opens soon.'],
     'shop-programs': ['Classroom Branding Kits and program supplies', 'Home, Classroom and Center branding kits, zone signs, posters and carpets at member prices. Send a list as a quote request.'],
     'room-kit': ['Learning Zones Kit: carpets, fences and friend zones for your room', 'Turn one room into five Futures Friends zones: carpets, low see-through fences, signs, a transition cue and floor plans for homes, centers and churches.'],

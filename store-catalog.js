@@ -34,13 +34,13 @@
   const COLLECTIONS = [
     { id: 'kits', name: 'Learning Zones Kits', blurb: 'The room, set up. Three sizes, from one home room to a four-room center.', side: 'centers', tone: 'booker', room: 'turtle-rug' },
     { id: 'carpets', name: 'Carpets and corner rugs', blurb: 'A rug for each friend\u2019s zone, and large square corner rugs that hold a furnished reading, calm, discovery or movement corner.', side: 'centers', tone: 'bop', room: 'dress-up-corner' },
-    { id: 'posters', name: 'Posters', blurb: 'Booker, Lumi, Zuri, Bop and the Friends Circle, each in two designs. $16 each.', side: 'both', tone: 'zuri', room: null },
+    { id: 'posters', name: 'Posters', blurb: 'Booker, Lumi, Zuri, Bop and the Friends Circle, each in two designs, $16 a poster.', side: 'both', tone: 'zuri', room: null },
     { id: 'plush', name: 'Plush friends', blurb: 'Soft Booker, Lumi, Zuri and Bop. They open for orders only after safety testing.', side: 'both', tone: 'lumi', room: null },
     { id: 'apparel', name: 'Apparel', blurb: 'T-shirts, hoodies and backpacks for each friend and for all four together. Sizes and prices are still being set.', side: 'both', tone: 'bop', room: null },
     { id: 'addons', name: 'Room add-ons', blurb: 'Zone Boundaries, Friend Fences, shelf bands and pack-away gear that mark each friend\u2019s corner.', side: 'centers', tone: 'booker', room: 'reading-corner' },
     { id: 'materials', name: 'Classroom materials', blurb: 'Zone signs, puppets, cue cards and labels. Replace one, or stock a new room.', side: 'centers', tone: 'zuri', room: 'blue-table-room' },
     { id: 'books', name: 'Books', blurb: 'The five Futures Friends storybooks. Read them online now; print editions are coming.', side: 'both', tone: 'lumi', room: 'alphabet-rug' },
-    { id: 'kids', name: 'Kids\u2019 Shop', blurb: 'A small shop for families: a friend poster, a plush friend, apparel, a play carpet and free printables.', side: 'families', tone: 'lumi', room: null }
+    { id: 'kids', name: 'Kids\u2019 Shop', blurb: 'A small shop for families: friend posters, plush friends, T-shirts, a play carpet and free printables.', side: 'families', tone: 'lumi', room: null }
   ];
 
 
@@ -178,7 +178,7 @@
   const NAMES = Object.fromEntries([].concat(MERCH.rugs, MERCH.plush, MERCH.posters).map(x => [x.id, x.name.replace(' Sample', '').replace(' \u2014 ', ', ')]));
   MERCH.bundles.forEach(b => {
     const rugSet = b.includes.every(i => i.startsWith('rug-')), t = rugSet ? 'bop' : 'lumi';
-    add(Object.assign({}, sampleBase, { id: b.id, name: b.name, short: b.description, description: b.description, collection: rugSet ? 'carpets' : 'plush', kind: 'bundle', ships: rugSet ? 'freight' : 'parcel', tone: t,
+    add(Object.assign({}, sampleBase, { id: b.id, name: b.name, short: b.description, description: b.description, collection: rugSet ? 'carpets' : 'plush', kind: 'bundle', ships: rugSet ? 'freight' : 'parcel', tone: t, ages: rugSet ? ['infant', 'toddler', 'twos', 'threes', 'prek'] : ['toddler', 'twos', 'threes', 'prek'],
       zones: rugSet ? ['circle', 'booker', 'lumi', 'zuri', 'bop'].slice(b.includes.length === 4 ? 1 : 0) : ['circle', 'booker', 'lumi', 'zuri', 'bop'], room: rugSet ? 'turtle-rug' : null,
       badges: ['Made to order', rugSet ? 'Ships after safety testing' : 'Plush ships after safety testing', 'Concept sample'], includes: b.includes,
       box: b.includes.map(i => (NAMES[i] || i)), dims: ['Sizes are confirmed with the maker.'], materials: ['Confirmed at sample approval.'], care: ['Care follows each item.'],
@@ -194,7 +194,7 @@
   });
   MERCH.plush.forEach(pl => {
     const z = pl.character.toLowerCase();
-    add(Object.assign({}, sampleBase, { id: pl.id, name: pl.name.replace(' Sample', ''), short: 'Soft ' + pl.character + ' to hug. Opens for orders only after safety testing.', description: pl.description.replace('A proposed soft plush interpretation of', 'A soft plush ' + pl.character + ', based on').replace(' using the approved ', ' in the approved ').replace(/ source sheet\.$/, '. The first sample is still being made.'),
+    add(Object.assign({}, sampleBase, { id: pl.id, name: pl.name.replace(' Sample', ''), short: 'Soft ' + pl.character + ' to hug. Opens for orders only after safety testing.', description: 'A soft plush ' + pl.character + ', one of the four story-world friends. The first sample is still being made, so the picture is a concept and the finished plush may differ.',
       collection: 'plush', kind: 'plush', priceState: 'fixed', price: APPROVED.kids.plush, orderable: false, cta: 'notify', tone: z, zones: [z], kidsShop: true, ships: 'parcel',
       badges: ['Ships after safety testing', 'Concept sample'], ages: ['toddler', 'twos', 'threes', 'prek'], box: ['One plush ' + pl.character + ' (about 12 in)'], dims: ['About 12 in tall (proposed)'],
       materials: ['Embroidered face, no hard parts, washable. Illustrated cords, buckles and buttons become sewn details. Confirmed at the production sample.'], care: ['Surface-wash by hand until the production care label is final.'],
@@ -238,7 +238,7 @@
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Made to order. We will post the size and price when they are final.' });
   add({ id: 'kids-printables', name: 'Futures at Home printable packs', short: 'Picture schedule, calm-down cards, move cards, reading log and more. Free to print.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',
     ships: 'digital', badges: ['Digital edition'], tone: 'lumi', ages: ['twos', 'threes', 'prek'], box: ['US Letter PDFs: daily rhythm, rainbow tracker, calm cards, move cards, reading log, sticker chart, story cards, certificates'], dims: ['US Letter, color or black and white'],
-    materials: ['Printed at home or at the library.'], care: [], safety: [], faq: [['Is this really free?', 'Yes. Print them at home or at the library. There is no account to make.']],
+    materials: ['Printed at home or at the library.'], care: [], safety: [], faq: [['Is this really free?', 'Yes. Print them at home or at the library. There is no account to make.'], ['What size are they?', 'US Letter, made to print in color or black and white. Spanish versions are included for most pages.']],
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Fridge-ready pages to print yourself. No checkout, no account.' });
 
   // ------------------------------------------------------------------ helpers

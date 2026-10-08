@@ -174,9 +174,9 @@
     const host = document.createElement('div'); host.id = 'spRoot';
     host.innerHTML = spriteHtml() + `<div class="sp-live" id="spLive" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="sp-drawer" id="spDrawer" hidden><div class="sp-scrim" data-sp-close></div>
-      <aside class="sp-panel" role="dialog" aria-modal="true" aria-labelledby="spDrawerH" tabindex="-1">
+      <div class="sp-panel" role="dialog" aria-modal="true" aria-labelledby="spDrawerH" tabindex="-1">
         <header class="sp-panel-h"><h2 id="spDrawerH">Your cart</h2><button type="button" class="sp-x" data-sp-close aria-label="Close cart">${ico('x')}</button></header>
-        <div class="sp-panel-b" data-sp-body></div><div class="sp-panel-f" data-sp-foot></div></aside></div>`;
+        <div class="sp-panel-b" data-sp-body></div><div class="sp-panel-f" data-sp-foot></div></div></div>`;
     document.body.appendChild(host);
     drawer = $('#spDrawer'); scrim = $('.sp-scrim', drawer); panel = $('.sp-panel', drawer); liveEl = $('#spLive');
   }

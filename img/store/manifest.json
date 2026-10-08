@@ -488,6 +488,123 @@
     }
    ]
   },
+  "bundle-character-merchandising-kit": {
+   "images": [
+    {
+     "n": 1,
+     "src": "f692269e67606ce4",
+     "w": 1672,
+     "h": 941,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1672
+     ],
+     "files": [
+      [
+       "img/store/bundle-character-merchandising-kit-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-character-merchandising-kit-1-1672.webp",
+       1672
+      ]
+     ],
+     "w400": "img/store/bundle-character-merchandising-kit-1-400.webp",
+     "w800": "img/store/bundle-character-merchandising-kit-1-800.webp",
+     "w1200": "img/store/bundle-character-merchandising-kit-1-1672.webp",
+     "jpg": "img/store/bundle-character-merchandising-kit-1-800.jpg",
+     "ratio": 1.7768
+    }
+   ]
+  },
+  "bundle-complete-learning-zones": {
+   "images": [
+    {
+     "n": 1,
+     "src": "30bf5cccfd701214",
+     "w": 1774,
+     "h": 887,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1774
+     ],
+     "files": [
+      [
+       "img/store/bundle-complete-learning-zones-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-complete-learning-zones-1-1774.webp",
+       1774
+      ]
+     ],
+     "w400": "img/store/bundle-complete-learning-zones-1-400.webp",
+     "w800": "img/store/bundle-complete-learning-zones-1-800.webp",
+     "w1200": "img/store/bundle-complete-learning-zones-1-1774.webp",
+     "jpg": "img/store/bundle-complete-learning-zones-1-800.jpg",
+     "ratio": 2
+    }
+   ]
+  },
+  "bundle-four-zone-starter": {
+   "images": [
+    {
+     "n": 1,
+     "src": "b6ce1d1c1eca0a31",
+     "w": 1384,
+     "h": 887,
+     "sizes": [
+      400,
+      800,
+      1200,
+      1384
+     ],
+     "files": [
+      [
+       "img/store/bundle-four-zone-starter-1-400.webp",
+       400
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-800.webp",
+       800
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-1200.webp",
+       1200
+      ],
+      [
+       "img/store/bundle-four-zone-starter-1-1384.webp",
+       1384
+      ]
+     ],
+     "w400": "img/store/bundle-four-zone-starter-1-400.webp",
+     "w800": "img/store/bundle-four-zone-starter-1-800.webp",
+     "w1200": "img/store/bundle-four-zone-starter-1-1384.webp",
+     "jpg": "img/store/bundle-four-zone-starter-1-800.jpg",
+     "ratio": 1.5603
+    }
+   ]
+  },
   "collection-apparel": {
    "images": [
     {

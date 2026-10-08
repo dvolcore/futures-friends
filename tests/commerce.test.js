@@ -11,7 +11,7 @@ const { site, read, text, ROOT } = require('./site-vm');
 const M = require('../release-manifest.js');
 const P = require('../pricing-all-in.js');
 const C = M.commercial;
-const LATE = ['plush-cast.js', 'advisor-profiles.js', 'curriculum-gate.js', 'intake.js', 'whole-child.js', 'teacher-standard.js', 'unit-1.js', 'futures-at-home-signup.js', 'journey.js', 'premium.js', 'experience.js', 'home-calm.js', 'release-strip.js'];   // index.html order of the files that shape these routes
+const LATE = ['plush-cast.js', 'advisor-profiles.js', 'curriculum-gate.js', 'intake.js', 'whole-child.js', 'teacher-standard.js', 'unit-1.js', 'futures-at-home-signup.js', 'journey.js', 'premium.js', 'experience.js', 'home-calm.js', 'release-strip.js', 'store-config.js', 'store-merch-data.js', 'store-catalog.js', 'store-cart.js', 'store-checkout.js', 'store-shop.js', 'store-product.js', 'store-order.js'];   // index.html order of the files that shape these routes
 function full() {
   const c = site();
   c.addEventListener = () => {};
@@ -149,13 +149,14 @@ test('E1: every priced package lists the exact files delivered today, what is no
   check(S.render('quote'), 'welcome-box', 'quote');
   // the monthly lesson drop is its own line, tied to the unwritten units, never folded into "Unit 1 is available"
   for (const k of C.annual.packages) assert.ok(M.packages[k].items.some(([l, id]) => id === 'curriculum-units-2-12' && /monthly lesson drop/.test(l)), k);
-  // the store: every kit and family item states delivery today, start and billing
-  for (const r of ['shop-programs', 'shop-families']) {
-    const h = S.render(r), n = r === 'shop-programs' ? S.FFStore.KITS.length : S.FFStore.FAMILY.length;
-    assert.equal((h.match(/<p class="rt-terms rt-terms-line small" data-sku="store">/g) || []).length, n, r);
-    assert.match(text(h), /Delivered today: nothing yet\. Starts: When ordering opens and each item is made/);
-    assert.match(text(h), /Recurring billing: None: one-time orders\./);
+  // the store: every collection page and every product page states delivery today, start and billing (store-v3 pages)
+  for (const [r, arg] of [['shop-programs'], ['shop-families'], ['product', 'zone-boundaries'], ['product', 'plush-lumi'], ['product', 'kit-home']]) {
+    const h = S.render(r, arg || null);
+    assert.ok(/<p class="rt-terms rt-terms-line small" data-sku="[a-z]+">/.test(h), r + ' ' + (arg || ''));
+    assert.match(text(h), /Starts:/);
+    assert.match(text(h), /Recurring billing:/);
   }
+  assert.match(text(S.render('product', 'plush-lumi')), /Delivered today: nothing yet\. Starts: When ordering opens and each item is made.*Recurring billing: None: one-time orders\./);
 });
 
 test('E9: the calculator and the written quote apply the same coverage rules; proposed prices carry one label everywhere', () => {

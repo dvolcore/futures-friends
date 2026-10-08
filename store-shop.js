@@ -16,8 +16,8 @@ const lnk = (route, html, cls) => `<a class="${cls || ''}" href="#${route}" data
 const aud = () => { try { return W.FFAudience && W.FFAudience.get ? W.FFAudience.get() : ''; } catch (_) { return ''; } };
 
 // ------------------------------------------------------------------ pieces shared with the other store files
-const crumbs = list => `<nav class="sp-crumbs" aria-label="Breadcrumb"><ol>${list.map((c, i) => i === list.length - 1
-  ? `<li aria-current="page">${E(c[1])}</li>` : `<li>${lnk(c[0], E(c[1]))}</li>`).join('')}</ol></nav>`;
+// Breadcrumbs and the "Back to" chip come from wayfinding.js (it replaces any trail a page draws), so pages here draw none.
+const crumbs = () => '';
 const badgeHtml = (t, kind) => `<span class="sp-badge${kind ? ' sp-badge-' + kind : ''}">${E(t)}</span>`;
 const chipsFor = (p, max) => p.badges.filter(b => b !== 'Concept image').slice(0, max || 3).map(b => badgeHtml(b, /safety/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('');
 function priceBlock(p, opts) {
@@ -33,15 +33,15 @@ function priceBlock(p, opts) {
 /* One product card. Same frame for every picture; a second picture on hover when there is one. */
 function card(p, o) {
   o = o || {};
-  const g = C.gallery(p, rooms()), a = g[0], b = g[1] && g[1].kind !== a.kind ? g[1] : g[1];
-  const concept = a && a.kind === 'concept';
+  const g = C.gallery(p, rooms()), a = g[0], b = g[1];
+  const concept = a && a.kind === 'concept', sample = a && a.kind === 'sample';
   const href = 'product/' + p.id, t = tone(p);
   const cta = C.canOrder(p) ? '' : p.cta === 'notify' ? 'Notify me' : p.cta === 'link' ? 'Free to print' : '';
   return `<li class="sp-cardwrap"><article class="sp-card" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})" data-pid="${E(p.id)}">
-    <a class="sp-media${a && a.tile ? ' is-tile' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
+    <a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
       ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 280px', alt: '' }) : ''}
       ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 280px', alt: '', cls: 'sp-img2' }) : ''}
-      ${concept ? badgeHtml('Concept image', 'concept') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
+      ${concept ? badgeHtml('Concept image', 'concept') : sample ? badgeHtml('Concept sample', 'concept') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
     </a>
     <div class="sp-card-body">
       <h3 class="sp-card-name">${lnk(href, E(p.name))}</h3>
@@ -51,21 +51,22 @@ function card(p, o) {
     </div></article></li>`;
 }
 const caption = `<p class="sp-caption">Room pictures marked Concept image: ${E(C.CONCEPT_CAPTION)}</p>`;
+const sampleCap = `<p class="sp-caption">Pictures marked Concept sample are AI-generated development images. ${E(C.SAMPLE_CAPTION)}</p>`;
+const captionFor = list => { const k = new Set(list.map(p => (C.gallery(p, rooms())[0] || {}).kind)); return (k.has('concept') ? caption : '') + (k.has('sample') ? sampleCap : ''); };
 const tradePills = `<ul class="sp-pills" aria-label="Collections">${C.COLLECTIONS.filter(c => c.id !== 'kids').map(c => `<li>${lnk('shop/' + c.id, E(c.name), 'sp-pill')}</li>`).join('')}<li>${lnk('kids-shop', 'Kids’ Shop', 'sp-pill')}</li></ul>`;
 
 // ------------------------------------------------------------------ #store: the home of the shop
 function collTile(c, i) {
-  const n = C.inCollection(c.id).length, href = c.id === 'kids' ? 'kids-shop' : 'shop/' + c.id;
-  let fig;
-  const rs = c.room ? C.roomShot({ id: c.id, name: c.name, kind: 'kit', room: c.room }, rooms()) : null;
-  if (rs) fig = imgTag(rs, { sizes: i === 0 ? '(max-width:700px) 92vw, 560px' : '(max-width:700px) 46vw, 300px', alt: '' }) + badgeHtml('Concept image', 'concept');
-  else {
-    const art = c.id === 'books' ? C.fallbacks(C.product('book-booker-tries-again'), rooms())[0] : { srcset: [['img/plush/characters/lumi-480.webp', 480], ['img/plush/characters/lumi-960.webp', 960]], src: 'img/plush/characters/lumi-960.webp', w: 1, h: 1, tile: true };
-    fig = imgTag(Object.assign({}, art, { tile: c.id !== 'books' }), { sizes: '(max-width:700px) 46vw, 300px', alt: '' });
-  }
+  const n = C.inCollection(c.id).length + (c.id === 'plush' ? 4 : 0), href = c.id === 'kids' ? 'kids-shop' : 'shop/' + c.id;
+  const sizes = i === 0 ? '(max-width:900px) 92vw, 560px' : '(max-width:900px) 46vw, 300px';
+  let g = C.heroImage(c.id), badge = g ? badgeHtml('Concept sample', 'concept') : '', cls = '';
+  if (!g) { g = c.room ? C.roomShot({ id: c.id, name: c.name, kind: 'kit', room: c.room }, rooms()) : null; badge = g ? badgeHtml('Concept image', 'concept') : ''; }
+  if (!g && c.id === 'books') { g = C.fallbacks(C.product('book-booker-tries-again'), rooms())[0]; g = Object.assign({}, g, { fit: 'contain' }); cls = ' is-tile'; }
+  if (!g) { g = C.gallery(C.product('plush-lumi'), rooms())[0]; badge = badgeHtml('Concept sample', 'concept'); cls = ' is-sample'; }
+  const count = c.id === 'kids' ? C.kidsSections().reduce((t, x) => t + x[2].length, 0) : n;
   return `<li class="sp-tilewrap sp-tw-${c.id}"><a class="sp-tile" href="#${href}" data-go="${href}" style="--tone:var(--${c.tone});--tone-s:var(--${c.tone}-s)">
-    <span class="sp-tile-media${rs ? '' : ' is-tile'}">${fig}</span>
-    <span class="sp-tile-body"><span class="sp-tile-name">${E(c.name)}</span><span class="sp-tile-blurb">${E(c.blurb)}</span><span class="sp-tile-go">${n} ${n === 1 ? 'item' : 'items'} ${ico('arrow')}</span></span></a></li>`;
+    <span class="sp-tile-media${cls}">${imgTag(g, { sizes, alt: '' })}${badge}</span>
+    <span class="sp-tile-body"><span class="sp-tile-name">${E(c.name)}</span><span class="sp-tile-blurb">${E(c.blurb)}</span><span class="sp-tile-go">${count} ${count === 1 ? 'item' : 'items'} ${ico('arrow')}</span></span></a></li>`;
 }
 function trustStrip() {
   const ic = { ships: 'truck', time: 'clock', licence: 'shield', support: 'phone' };
@@ -99,13 +100,13 @@ V.store = () => {
       <p class="sp-lede">Rugs, mats, fences, signs and posters for a room that runs on Booker, Lumi, Zuri and Bop. Made for centers, home daycares and churches.</p>
       <div class="sp-hero-acts">${lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div>
       <p class="sp-hero-note">Orders go in as requests while safety testing finishes and online payment opens. You see a written price and shipping cost, and approve it, before anything is charged.</p></div>
-    <figure class="sp-hero-fig"><span class="sp-hero-frame">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 620px', alt: hero.alt })}${badgeHtml('Concept image', 'concept')}</span>
-      <img class="sp-hero-bop" src="img/plush/characters/bop-waving-480.webp" srcset="img/plush/characters/bop-waving-480.webp 480w, img/plush/characters/bop-waving-960.webp 960w" sizes="150px" alt="" width="480" height="480" loading="eager" decoding="async">
+    <figure class="sp-hero-fig"><span class="sp-hero-stage"><span class="sp-hero-frame">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 620px', alt: hero.alt })}${badgeHtml('Concept image', 'concept')}</span>
+      <img class="sp-hero-bop" src="img/plush/characters/bop-waving-480.webp" srcset="img/plush/characters/bop-waving-480.webp 480w, img/plush/characters/bop-waving-960.webp 960w" sizes="150px" alt="" width="480" height="480" loading="eager" decoding="async"></span>
       <figcaption>${E(C.CONCEPT_CAPTION)}</figcaption></figure>
   </div></section>
   ${trustStrip()}
   <section class="sp-collections" aria-labelledby="spCollH"><div class="wrap"><h2 id="spCollH">Shop by collection</h2>
-    <ul class="sp-mosaic">${C.COLLECTIONS.map(collTile).join('')}</ul>${caption}</div></section>
+    <ul class="sp-mosaic">${C.COLLECTIONS.map(collTile).join('')}</ul>${caption}${sampleCap}</div></section>
   ${featured()}
   ${bridge()}
   ${know()}
@@ -119,24 +120,25 @@ const opt = (list, cur, any) => `<option value="">${any}</option>` + list.map(o 
 const SORTS = [['featured', 'Featured'], ['name', 'Name, A to Z'], ['price-asc', 'Price, low to high'], ['price-desc', 'Price, high to low']];
 function results(colId) {
   const list = C.query(colId, FS, FS.sort), n = list.length, filtered = !!(FS.audience || FS.age || FS.zone);
-  const conceptIn = list.some(p => { const g = C.gallery(p, rooms())[0]; return g && g.kind === 'concept'; });
-  const grid = n ? `<ul class="sp-grid">${list.map(p => card(p)).join('')}</ul>${conceptIn ? caption : ''}` : `<div class="sp-empty sp-empty-results">
+  const grid = n ? `<ul class="sp-grid">${list.map(p => card(p)).join('')}</ul>${captionFor(list)}` : `<div class="sp-empty sp-empty-results">
     <img src="img/plush/characters/zuri-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><h3>Nothing matches those filters</h3>
     <p>Try a different age band or zone, or clear the filters to see everything in this collection.</p><button type="button" class="btn gold" data-sp-clear>Clear filters</button></div>`;
   return `<p class="sp-count-line" role="status" aria-live="polite">${n} ${n === 1 ? 'item' : 'items'}${filtered ? ' match' : ''}</p>${grid}`;
 }
 function collectionPage(colId) {
   const c = colId === 'all' ? { id: 'all', name: 'All products', blurb: 'Everything in the Futures Store, from kits to books.', tone: 'booker' } : C.collection(colId);
-  const parents = [['store', 'Futures Store']];
+  const parents = [['store', 'Futures Store']], hero = colId === 'all' ? null : C.heroImage(colId);
   return `<div class="sp sp-coll" data-col="${E(c.id)}">
-   <header class="sp-pagehead"><div class="wrap">${crumbs(parents.concat([['', c.name]]))}<h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${tradePills}</div></header>
+   <header class="sp-pagehead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div>${crumbs(parents.concat([['', c.name]]))}<h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${tradePills}</div>
+     ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name + ', concept samples' })}${badgeHtml('Concept sample', 'concept')}<figcaption>${E(C.SAMPLE_CAPTION)}</figcaption></figure>` : ''}</div></header>
    <div class="wrap sp-shell"><form class="sp-tools" role="search" aria-label="Filter and sort ${E(c.name)}" onsubmit="return false">
      <label class="sp-sel"><span>Who it is for</span><select data-sp-f="audience">${opt(C.AUDIENCES, FS.audience, 'Everyone')}</select></label>
      <label class="sp-sel"><span>Age band</span><select data-sp-f="age">${opt(C.AGES, FS.age, 'All ages')}</select></label>
      <label class="sp-sel"><span>Zone</span><select data-sp-f="zone">${opt(C.ZONES, FS.zone, 'All zones')}</select></label>
      <label class="sp-sel"><span>Sort</span><select data-sp-f="sort">${SORTS.map(s => `<option value="${s[0]}"${FS.sort === s[0] ? ' selected' : ''}>${s[1]}</option>`).join('')}</select></label>
      <button type="button" class="sp-link sp-clear" data-sp-clear${FS.audience || FS.age || FS.zone ? '' : ' hidden'}>Clear filters</button></form>
-   <div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div></div>
+   <div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div>${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [[c.name, 'merch-pod']], { compact: true }) : ''}</div>
+   ${['kits', 'carpets', 'addons'].includes(c.id) ? `<section class="sp-help sp-help-kit"><div class="wrap"><p><b>Not sure what goes in a room?</b> See how the five zones fit together, or lay out your own room to scale.</p><div class="sp-help-acts">${lnk('room-kit', 'See the Learning Zones Kit', 'btn soft')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div></div></section>` : ''}
    <section class="sp-help"><div class="wrap"><p><b>Need something that is not here?</b> Send us the list and we will price it.</p>${lnk('store-request', 'Request a quote', 'btn soft')}</div></section></div>`;
 }
 V.shop = () => { const id = typeof arg === 'string' && arg && (arg === 'all' || C.collection(arg)) ? arg : 'all'; if (id === 'kids') return V['kids-shop'](); return collectionPage(id); };
@@ -144,14 +146,14 @@ V['shop-programs'] = () => collectionPage('kits');
 
 // ------------------------------------------------------------------ #kids-shop: the families' small shop (same cards, same product pages, same cart)
 V['kids-shop'] = () => {
-  const list = C.inCollection('kids');
+  const secs = C.kidsSections();
   return `<div class="sp sp-kids">
-   <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div>${crumbs([['store', 'Futures Store'], ['', 'Kids’ Shop']])}<h1>The Kids’ Shop</h1>
-     <p class="sp-lede">A small shop for the friends at home: a poster for the bedroom wall, a plush friend that opens after safety testing, and printables that cost nothing.</p></div>
+   <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div>${crumbs([['store', 'Futures Store'], ['', 'Kids\u2019 Shop']])}<h1>The Kids\u2019 Shop</h1>
+     <p class="sp-lede">A small shop for the friends at home. Posters for the bedroom wall, plush that opens after safety testing, T-shirts on the way, and printables that cost nothing.</p></div>
      <img class="sp-kidsart" src="img/plush/characters/lumi-heart-hands-480.webp" srcset="img/plush/characters/lumi-heart-hands-480.webp 480w, img/plush/characters/lumi-heart-hands-960.webp 960w" sizes="220px" alt="Lumi the bunny, a story-world character, holding a heart" width="480" height="480" loading="eager" decoding="async"></div></header>
-   <div class="wrap sp-shell"><div id="spResults"><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></div>
-   <p class="sp-note-line">Lumi is a story-world character. The plush cannot be ordered until its safety tests are done; leave your email on its page and we will write the day it opens.</p></div>
-   <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, mats and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section></div>`;
+   <div class="wrap sp-shell" id="spResults">${secs.map(([name, col, list], i) => `<section class="sp-kidsec" aria-labelledby="spk${i}"><div class="sp-kidsec-h"><h2 id="spk${i}">${E(name)}</h2>${col ? lnk('shop/' + col, 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
+   ${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [['Kids\u2019 Shop items', 'merch-pod']], { compact: true }) : ''}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done, and apparel sizes are still being set. Leave your email on a product page and we will write the day it opens.</p></div>
+   <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section></div>`;
 };
 
 // ------------------------------------------------------------------ events: filters, add to cart, notify
@@ -170,6 +172,11 @@ document.addEventListener('click', e => {
   const add = t.closest('[data-sp-add]');
   if (add) { e.preventDefault(); const p = C.product(add.dataset.spAdd); if (p) K.addAnimated(p.id, p.options.length ? C.defaultOpts(p) : {}, 1, add); }
 }, true);
+
+// stop the loading shimmer once a picture has painted
+const loaded = img => { const m = img.closest && img.closest('.sp-media,.sp-gal-zoom,.sp-tile-media'); if (m) m.classList.add('is-loaded'); };
+document.addEventListener('load', e => { if (e.target && e.target.tagName === 'IMG' && e.target.classList.contains('sp-img')) loaded(e.target); }, true);
+(W.FFhooks = W.FFhooks || []).push(() => document.querySelectorAll('.sp-img').forEach(i => { if (i.complete) loaded(i); }));
 
 // images that arrive late (img/store/manifest.json) repaint the store pages once, if the visitor is not typing
 const STORE_VIEWS = ['store', 'shop', 'shop-programs', 'kids-shop', 'product', 'cart'];

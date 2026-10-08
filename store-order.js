@@ -192,5 +192,9 @@ V['order-return'] = () => `<div class="sp"><header class="sp-pagehead"><div clas
   <p class="sp-lede">We confirm payment from the payment provider’s own record, not from this page. You will get a receipt by email from the provider and a confirmation from us. If neither arrives within a day, call ${E(PHONE)} and give us your name and the date.</p>
   <div class="sp-hero-acts">${lnk('store', 'Back to the store', 'btn gold')}${lnk('contact', 'Contact us', 'btn soft')}</div></div></header></div>`;
 
+// The release status strip (release-strip.js, E2) goes on the commercial store pages, after their hero. #shop-families is the old address of the Kids' Shop.
+V['shop-families'] = V['kids-shop'];
+if (W.FFReleaseStrip && W.FFReleaseStrip.wrap) ['store', 'shop-programs', 'shop-families'].forEach(W.FFReleaseStrip.wrap);
+
 W.FFStoreOrder = { state: () => CK, reset: () => { CK = blank(); }, blank };
 })();

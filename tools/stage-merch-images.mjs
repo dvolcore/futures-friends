@@ -35,6 +35,10 @@ for (const p of cat.products) {
 for (const p of (Array.isArray(app) ? app : app.products)) {
   ['0', '1'].forEach((c, i) => put(p.id, i + 1, [P(p.image ? 'apparel/' + p.image : `apparel/images/${p.id}.png`), '-crop', '2x1@', '+repage', '-delete', i === 0 ? '1' : '0', '+repage']));
 }
+// bundles use the owner's group shots
+put('bundle-complete-learning-zones', 1, [P('carpets/all-five-carpets.png')]);
+put('bundle-four-zone-starter', 1, [P('carpets/all-five-carpets.png'), '-gravity', 'West', '-crop', '78%x100%+0+0', '+repage']);
+put('bundle-character-merchandising-kit', 1, [P('plush/all-four-plush.png')]);
 // collection heroes
 put('collection-carpets', 1, [P('carpets/all-five-carpets.png')]);
 put('collection-carpets', 2, [P('carpets/square/all-five-square-carpets.png')]);

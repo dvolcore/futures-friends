@@ -120,7 +120,7 @@
     store: ['Futures Store', 'centers', 'centers', 'bop'],
     'store-request': ['Store request', '', 'store', 'bop'],
     shop: ['Shop', 'centers', 'store', 'bop'],
-    product: ['Product', '', 'shop', 'bop'],
+    product: ['Shop', '', 'store', 'bop'],
     cart: ['Cart', '', 'store', 'bop'],
     checkout: ['Checkout', '', 'cart', 'bop'],
     order: ['Order request', '', 'store', 'bop'],

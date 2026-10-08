@@ -141,6 +141,9 @@ test('G42: every file under img/ and video/ is referenced by the site (directly 
   // keys, so a file counts as referenced when img/branded-rooms/manifest.json lists its key (tests/branded-rooms.test.js checks the folder).
   const kitMan = JSON.parse(read('img/branded-rooms/manifest.json')), kitKeys = kitMan.rooms.concat(kitMan.alternates || []).map(r => r.key);
   const kit = f => { const g = f.split(path.sep).join('/'), m = g.match(/^img\/branded-rooms\/(.+)-kit-(?:400|800|1200)\.(?:webp|jpg)$/); return g === 'img/branded-rooms/manifest.json' || (!!m && kitKeys.includes(m[1]) && code.includes(`'${m[1]}'`)); };
-  const orphans = files.filter(f => !code.includes(path.basename(f)) && !(copyOf(f) && code.includes(copyOf(f))) && !dynamic.some(re => re.test(f.split(path.sep).join('/'))) && !plush.has(f.split(path.sep).join('/')) && !center(f) && !kit(f));
+  // img/store/ (store-v3) holds the store pictures that tools/import-store-images.mjs converts; a file counts as referenced when img/store/manifest.json lists it
+  // (tests/store.test.js checks the manifest against the folder).
+  const storeFiles = new Set(Object.values(JSON.parse(read('img/store/manifest.json')).products).flatMap(p => p.images.flatMap(i => (i.files || []).map(x => x[0]).concat(i.jpg || []))).concat('img/store/manifest.json'));
+  const orphans = files.filter(f => !storeFiles.has(f.split(path.sep).join('/')) && !code.includes(path.basename(f)) && !(copyOf(f) && code.includes(copyOf(f))) && !dynamic.some(re => re.test(f.split(path.sep).join('/'))) && !plush.has(f.split(path.sep).join('/')) && !center(f) && !kit(f));
   assert.deepEqual(orphans, []);
 });

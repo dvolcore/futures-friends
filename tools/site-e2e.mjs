@@ -607,33 +607,28 @@ async function features() {
     return 'ok';
   });
 
-  // ---- store: request list
-  await step('store', 'shop-programs: qty adds to list, change qty, clear; "Ordering opens soon" honest; request page', async () => {
-    await open(page, 'shop-programs', 1000);
-    await page.fill('#sq-FF-KIT-HOME', '2'); await page.locator('#sq-FF-KIT-HOME').dispatchEvent('change'); await page.waitForTimeout(400);
-    let list = await page.evaluate(() => [...document.querySelectorAll('.fs-panel .fs-lines li')].map((l) => l.innerText.replace(/\s+/g, ' ')));
-    assert(list.length === 1 && /× 2/.test(list[0]), `list after qty 2: ${JSON.stringify(list)}`);
-    await page.fill('#sq-FF-CAT-0', '3'); await page.locator('#sq-FF-CAT-0').dispatchEvent('change'); await page.waitForTimeout(400);
-    await page.fill('#sq-FF-KIT-HOME', '0'); await page.locator('#sq-FF-KIT-HOME').dispatchEvent('change'); await page.waitForTimeout(400);
-    list = await page.evaluate(() => [...document.querySelectorAll('.fs-panel .fs-lines li')].map((l) => l.innerText.replace(/\s+/g, ' ')));
-    assert(list.length === 1 && /× 3/.test(list[0]), `list after qty change: ${JSON.stringify(list)}`);
-    const honest = await page.evaluate(() => /Ordering opens soon/.test(document.getElementById('view').innerText) && !/checkout|pay now|add to cart/i.test(document.getElementById('view').innerText));
-    assert(honest, 'no honest "Ordering opens soon" or a checkout/pay control exists');
-    await clickSel(page, '.fs-panel [data-store-req]'); await page.waitForTimeout(900);
-    const req = await page.evaluate(() => ({ hash: location.hash, list: document.querySelectorAll('#view .fs-lines li').length, text: document.getElementById('view').innerText }));
-    assert(req.hash === '#store-request', `request button went to ${req.hash}`); assert(req.list === 1, `request page shows ${req.list} list lines`);
-    await open(page, 'shop-programs', 800);
-    const keep = await page.evaluate(() => document.querySelectorAll('.fs-panel .fs-lines li').length);
-    if (keep) { await clickSel(page, '[data-store-clear]'); await page.waitForTimeout(300); }
-    const cleared = await page.evaluate(() => document.querySelectorAll('.fs-panel .fs-lines li').length);
-    assert(cleared === 0, 'Clear list left lines');
-    return `list add/change/remove, request page carries the list (${/open soon|call/i.test(req.text) ? 'honest request state' : 'form'}), clear ok`;
+  // ---- store: product page, cart drawer, request
+  await step('store', 'store v3: product page adds to the cart drawer, quantity and remove work, "Ordering opens soon" is honest, the request page carries the cart', async () => {
+    await open(page, 'product/zone-boundaries', 1000);
+    await page.evaluate(() => { try { localStorage.removeItem('ff-store-cart-v1'); } catch (e) { /* none */ } });
+    await clickSel(page, '.sp-addbtn'); await page.waitForSelector('#spDrawer.is-open', { timeout: 4000 }); await page.waitForTimeout(400);
+    let n = await page.evaluate(() => document.querySelectorAll('#spDrawer .sp-ln').length); assert(n === 1, `drawer lines ${n}`);
+    await page.locator('#spDrawer [data-sp-qty][data-d="1"]').click(); await page.waitForTimeout(300);
+    const q = await page.evaluate(() => document.querySelector('#spDrawer .sp-step output').textContent.trim()); assert(q === '2', `qty ${q}`);
+    const honest = await page.evaluate(() => !/payment successful|you have paid|pay now/i.test(document.getElementById('spDrawer').innerText));
+    assert(honest, 'drawer claims a payment');
+    await page.locator('#spDrawer [data-sp-rm]').click(); await page.waitForTimeout(300);
+    const empty = await page.evaluate(() => /Your cart is empty/.test(document.getElementById('spDrawer').innerText)); assert(empty, 'no designed empty state');
+    await page.keyboard.press('Escape'); await page.waitForTimeout(400);
+    await open(page, 'store-request', 800);
+    const req = await page.evaluate(() => ({ hash: location.hash, text: document.getElementById('view').innerText })); assert(req.hash === '#store-request', req.hash);
+    return `drawer add/qty/remove/empty, request page (${/open soon|call/i.test(req.text) ? 'honest request state' : 'form'})`;
   });
-  // audience split (2026-10-07): the old #shop-families link opens the families' Kids' Shop (poster, plush, small carpet)
-  await step('store', 'shop-families -> Kids\' Shop: three items, honest status, "Tell me when it opens"', async () => {
+  // audience split (2026-10-07): the old #shop-families link opens the families' Kids' Shop
+  await step('store', 'shop-families -> Kids\' Shop: posters, plush, apparel and two more, with Notify me', async () => {
     await open(page, 'shop-families', 900);
-    const f = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.aud-kid').length, btn: !!document.querySelector('[data-go="store-request"][data-store-req="list"]') }));
-    assert(f.hash === '#kids-shop', `landed on ${f.hash}`); assert(f.n === 3, `${f.n} items`); assert(f.btn, 'no "Tell me when it opens"');
+    const f = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.sp-card').length, notify: /Notify me/.test(document.getElementById('view').innerText) }));
+    assert(f.hash === '#kids-shop', `landed on ${f.hash}`); assert(f.n === 15, `${f.n} items`); assert(f.notify, 'no "Notify me"');
     return 'ok';
   });
 

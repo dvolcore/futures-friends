@@ -13,9 +13,9 @@ const reduced = () => { try { return W.matchMedia('(prefers-reduced-motion: redu
 // ------------------------------------------------------------------ gallery
 function slideHtml(g, i, p, eager) {
   const room = g.kind === 'concept';
-  return `<li class="sp-gal-slide" role="group" aria-roledescription="slide" aria-label="Picture ${i + 1}"><button type="button" class="sp-gal-zoom${g.tile ? ' is-tile' : ''}" data-sp-zoom="${i}" aria-label="Zoom picture ${i + 1}: ${E(g.alt)}">
+  return `<li class="sp-gal-slide"><button type="button" class="sp-gal-zoom${g.tile ? ' is-tile' : ''}${g.kind === 'sample' ? ' is-sample' : ''}" data-sp-zoom="${i}" aria-label="Zoom picture ${i + 1}: ${E(g.alt)}">
     ${imgTag(g, { eager: eager && i === 0, sizes: '(max-width:900px) 100vw, 640px', alt: g.alt })}</button>
-    ${room ? U.badgeHtml('Concept image', 'concept') : (g.tile ? U.badgeHtml('Product photo coming', 'ph') : '')}<span class="sp-gal-zi" aria-hidden="true">${ico('zoom')}</span></li>`;
+    ${room ? U.badgeHtml('Concept image', 'concept') : g.kind === 'sample' ? U.badgeHtml('Concept sample', 'concept') : (g.tile ? U.badgeHtml('Product photo coming', 'ph') : '')}<span class="sp-gal-zi" aria-hidden="true">${ico('zoom')}</span></li>`;
 }
 function gallery(p) {
   const g = C.gallery(p, U.rooms()), roomAt = g.findIndex(x => x.kind === 'concept');
@@ -44,10 +44,11 @@ function ctaHtml(p) {
   }
   if (p.cta === 'link') return `<div class="sp-buyrow">${lnk('printables', 'Open the printables ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">Free to print at home or at the library. No account.</p>`;
   const read = p.edition === 'digital' ? `<p class="sp-buyhint">${lnk('story-time', 'Read this book online in Story Time', 'sp-link')}, free.</p>` : '';
-  return `<div class="sp-notify" id="spNotify"><h2>${p.collection === 'books' ? 'Tell me when the print edition is ready' : 'Tell me when it opens'}</h2>
-    <p class="sp-buyhint">${E(p.collection === 'books' ? 'There is no print edition yet.' : p.id === 'kids-plush' ? 'Plush cannot be ordered until its safety tests are done.' : 'It cannot be ordered yet.')} Leave your email and we write once, the day it opens.</p>
+  return `<div class="sp-notify" id="spNotify"><h2>${p.collection === 'books' ? 'Tell me when the print edition is ready' : p.kind === 'apparel' ? 'Tell me when it is ready' : 'Tell me when it opens'}</h2>
+    <p class="sp-buyhint">${E(p.collection === 'books' ? 'There is no print edition yet.' : p.kind === 'plush' ? 'Plush cannot be ordered until its safety tests are done.' : p.sizesNote || 'It cannot be ordered yet.')} Leave your email and we write once, the day it opens. That is interest, not an order.</p>
     <form class="sp-notify-form" data-sp-notify="${E(p.id)}" novalidate><label class="f" for="spNn">Your name<input class="i" id="spNn" name="name" autocomplete="name"></label>
       <label class="f" for="spNe">Email<input class="i" id="spNe" name="email" type="email" autocomplete="email" aria-describedby="spNe-e"><span class="ffx-err" id="spNe-e" aria-live="polite"></span></label>
+      ${p.kind === 'apparel' ? '<label class="f" for="spNs">Size you would want <span class="sp-opt-t">optional</span><input class="i" id="spNs" name="size" placeholder="For example 4T, youth M, adult L"></label>' : ''}
       <button class="btn gold" type="submit">Notify me</button></form><div data-sp-notify-out aria-live="polite"></div></div>${read}`;
 }
 function facts(p) {
@@ -56,6 +57,12 @@ function facts(p) {
   if (p.ships !== 'none') rows.push(['truck', 'Shipping', p.kind === 'kit' ? 'Shipping for the startup box and carpets is part of the package price. Freight is arranged with you.' : ship]);
   rows.push(['shield', 'Returns', 'Returns and refunds: ' + C.DRAFT + '. Made-to-order items are not returnable unless damaged or wrong.']);
   return `<ul class="sp-facts">${rows.map(r => `<li>${ico(r[0])}<div><b>${E(r[1])}</b><span>${E(r[2])}</span></div></li>`).join('')}</ul>`;
+}
+/* E1 (release-truth.js): every item says what is delivered today, when it starts and how it bills. Nothing here ships before it exists. */
+const ASSET = { carpet: 'carpet', bundle: 'carpet', addon: 'carpet', kit: 'carpet', poster: 'posters', plush: 'plush', apparel: 'merch-pod', book: 'book-1', family: 'printables-family-en', material: 'zone-signs' };
+function termsLine(p) {
+  const R = W.FFRelease; if (!R || !R.terms) return '';
+  return p.tier ? R.terms(p.tier, undefined, { compact: true }) : R.terms('store', [[p.name, p.kind === 'book' ? 'book-' + p.bookNo : (ASSET[p.kind] || 'merch-pod')]], { compact: true });
 }
 const ul = a => `<ul>${a.map(x => `<li>${E(x)}</li>`).join('')}</ul>`;
 function accordion(p) {
@@ -88,9 +95,9 @@ V.product = () => {
      <div class="sp-info-price" data-sp-pricewrap>${U.priceBlock(p, { big: true, opts: PS.opts })}</div>
      ${membershipLine(p)}
      <p class="sp-info-lede">${E(p.description || p.short)}</p>
-     <div class="sp-info-badges">${p.badges.map(b => U.badgeHtml(b, /safety/i.test(b) ? 'hold' : b === 'Concept image' ? 'concept' : /Digital|Print/.test(b) ? 'soft' : '')).join('')}</div>
+     <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => U.badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('')}</div>
      <div class="sp-buy" id="spBuy">${optsHtml(p)}${ctaHtml(p)}</div>
-     ${facts(p)}${kitLinks(p)}
+     ${facts(p)}${termsLine(p)}${kitLinks(p)}
      ${accordion(p)}
     </div></div></div>
    ${faq(p)}
@@ -187,7 +194,7 @@ document.addEventListener('submit', async e => {
   const err = document.getElementById('spNe-e'), ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
   if (err) err.textContent = ok ? '' : 'Enter a valid email address.'; f.elements.email.setAttribute('aria-invalid', ok ? 'false' : 'true');
   if (!ok) { f.elements.email.focus(); return; }
-  const I = W.FFIntake, msg = 'Please notify me when this opens: ' + p.name + ' (' + p.id + ').';
+  const I = W.FFIntake, msg = 'Please notify me when this opens: ' + p.name + ' (' + p.id + ').' + (f.elements.size && f.elements.size.value.trim() ? ' Size I would want: ' + f.elements.size.value.trim() + '.' : '');
   const off = () => { out.innerHTML = `<div class="sp-note-box" role="status"><b>Notify-me opens soon.</b><p>We have not turned on online requests yet, so nothing was sent. Email <a class="rl" href="mailto:${EMAIL}?subject=${encodeURIComponent('Notify me: ' + p.name)}&body=${encodeURIComponent(msg)}">${EMAIL}</a> or call ${U.PHONE} and we will add you by hand.</p></div>`; };
   if (!I || !I.enabled || !I.enabled()) return off();
   const btn = f.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Sending...';
