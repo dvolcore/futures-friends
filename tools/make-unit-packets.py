@@ -65,20 +65,26 @@ class Doc(BaseDocTemplate):
     def deco(self, c, doc):
         c.setFillColor(NAVY); c.rect(0, H - 1.05 * inch, W, 1.05 * inch, stroke=0, fill=1)
         c.setFillColor(self.color); c.rect(0, H - 1.05 * inch - 4, W, 4, stroke=0, fill=1)
-        mp.draw_img(c, mp.logo(), 0.45 * inch, H - 0.95 * inch, h=0.82 * inch)
-        size, room = 21, W - 1.95 * inch - 1.75 * inch
+        lw, _ = mp.draw_img(c, mp.logo(), 0.45 * inch, H - 0.95 * inch, h=0.82 * inch)
+        tx = 0.45 * inch + lw + 0.22 * inch  # text starts after the logo's real width, never over it
+        size, room = 21, W - tx - 1.75 * inch
         while stringWidth(self.h_title, 'Fredoka', size) > room and size > 12:
             size -= 1
-        c.setFillColor(white); c.setFont('Fredoka', size); c.drawString(1.95 * inch, H - 0.55 * inch, self.h_title)
+        c.setFillColor(white); c.setFont('Fredoka', size); c.drawString(tx, H - 0.55 * inch, self.h_title)
         ss = 9.5
-        while stringWidth(self.h_sub, 'Poppins', ss) > W - 1.95 * inch - 0.4 * inch and ss > 6.5:
+        while stringWidth(self.h_sub, 'Poppins', ss) > W - tx - 0.4 * inch and ss > 6.5:
             ss -= 0.25
-        c.setFillColor(HexColor('#C6D7DD')); c.setFont('Poppins', ss); c.drawString(1.95 * inch, H - 0.82 * inch, self.h_sub)
+        c.setFillColor(HexColor('#C6D7DD')); c.setFont('Poppins', ss); c.drawString(tx, H - 0.82 * inch, self.h_sub)
         c.setFillColor(GOLD); c.roundRect(W - 1.62 * inch, H - 0.66 * inch, 1.3 * inch, 0.26 * inch, 6, stroke=0, fill=1)
         c.setFillColor(NAVY); c.setFont('Poppins-SemiBold', 8); c.drawCentredString(W - 0.97 * inch, H - 0.57 * inch, 'DRAFT · not reviewed')
         c.setFillColor(MUTED); c.setFont('Poppins', 7.4)
-        c.drawString(0.6 * inch, 0.4 * inch, self.foot)
-        c.drawRightString(W - 0.6 * inch, 0.4 * inch, f'Page {doc.page}')
+        # footer: shrink to fit and keep a clear gap before the page number
+        pg = f'Page {doc.page}'
+        fsz, avail = 7.4, W - 1.2 * inch - stringWidth(pg, 'Poppins', 7.4) - 0.5 * inch
+        while stringWidth(self.foot, 'Poppins', fsz) > avail and fsz > 5.5:
+            fsz -= 0.1
+        c.setFont('Poppins', fsz); c.drawString(0.6 * inch, 0.4 * inch, self.foot)
+        c.setFont('Poppins', 7.4); c.drawRightString(W - 0.6 * inch, 0.4 * inch, pg)
 
 
 def boxed(flows, color, tint=None, pad=8):
