@@ -602,7 +602,7 @@ async function lessonDone(k){
 document.addEventListener('ended', e => { if (e.target && e.target.id === 'dmVideo' && view === 'learn-course') lessonDone('meet'); }, true);
 
 // ---------------------------------------------------------------- self-serve centers (the platform's business model, in the demo)
-// Each demo center is its own space: its own name, colour, sign-in page (#c/<slug>), rooms, children, staff, plans and families.
+// Each demo center is its own space: its own name, color, sign-in page (#c/<slug>), rooms, children, staff, plans and families.
 // Director = the center owner. "Start your center" makes a new, empty center with a Get started list; Invite staff / Invite families
 // add people to it. The switcher moves between centers; nothing from one center ever shows in another (separate storage keys).
 function getStarted(){
@@ -647,7 +647,7 @@ V['start-center'] = () => {
    <label class="f" for="dmScName">Center name<input class="i" id="dmScName" autocomplete="off" maxlength="60" placeholder="e.g. Little Acorns Learning Center (demo)"></label>
    <fieldset class="ffd-fs"><legend>Type of program</legend><label class="ffd-opt"><input type="radio" name="dmScType" value="child_care" checked> Child care center</label><label class="ffd-opt"><input type="radio" name="dmScType" value="church"> Church program (preschool or ministry)</label></fieldset>
    <label class="f" for="dmScState">State<select class="i" id="dmScState"><option value="MO">Missouri</option><option value="KS">Kansas</option></select></label>
-   <fieldset class="ffd-fs"><legend>Your center's colour</legend><div class="ffd-swatches">${DM.COLORS.map((col, i) => `<label class="ffd-sw"><input type="radio" name="dmScColor" value="${col}" ${i === 0 ? 'checked' : ''}><span style="background:${col}" aria-hidden="true"></span><span class="sr-only">Colour ${i + 1}</span></label>`).join('')}</div></fieldset>
+   <fieldset class="ffd-fs"><legend>Your center's color</legend><div class="ffd-swatches">${DM.COLORS.map((col, i) => `<label class="ffd-sw"><input type="radio" name="dmScColor" value="${col}" ${i === 0 ? 'checked' : ''}><span style="background:${col}" aria-hidden="true"></span><span class="sr-only">Colour ${i + 1}</span></label>`).join('')}</div></fieldset>
    <label class="f" for="dmScOwner">Your name as the owner (made up)<input class="i" id="dmScOwner" autocomplete="off" maxlength="40" placeholder="e.g. Ms. Kim R."></label>
    <button class="btn gold" type="submit">Create my center</button><p class="note" id="dmScMsg" role="alert" aria-live="polite"></p>
    <p class="mini">You become the owner and director. Next: Get started, invite staff and invite families.</p></form>

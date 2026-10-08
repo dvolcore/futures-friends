@@ -109,14 +109,14 @@ function heroHtml() {
 
 function welcomeHtml() {
   return `<section class="wc-sec ts-welcome" aria-labelledby="ts-welcome-h"><div class="wrap ts-welcome-grid">
-  <div class="ts-welcome-copy">${lead('Welcome', 'Welcome, teachers, providers and families', 'Training is how a promise to families becomes something you can check. This page shows the rules, the method and the record, in plain words.', 'ts-welcome-h')}
+  <div class="ts-welcome-copy">${lead('Welcome', 'For teachers, providers and families', 'A promise to families means little unless someone can check it. This page sets out the state rules, how our training works and what a teacher has to show.', 'ts-welcome-h')}
    ${june('Every grown-up in the room starts as a learner. Let\'s look closely at what that learning asks of them.', { quote: JUNE_Q })}</div>
   ${videoSlot('ts-video-welcome', 'Welcome, teachers &amp; providers', 'A sample lesson from the Futures Friends Academy (about 1.5 minutes). Ms. June is a teacher in our story world, not a member of our staff. Story-world animation.')}
  </div></section>`;
 }
 
 function lawHtml() {
-  return sect('band-paper ts-law-sec', 'ts-law', `${lead('The law, in plain words', 'Before any teacher is alone with your child', 'These are the minimums every licensed child care center must meet in Kansas and Missouri. They are not ours to choose. We list them so you know exactly what to expect and what to ask.', 'ts-law-h')}
+  return sect('band-paper ts-law-sec', 'ts-law', `${lead('The law, in plain words', 'Before any teacher is alone with your child', 'These are the minimums every licensed child care center must meet in Kansas and Missouri. They are not ours to choose. We list them so you know what to expect and what to ask.', 'ts-law-h')}
   ${guideBy('hazel', 'First things first: before a grown-up teaches, the law asks who they are and whether they are ready.')}
   <ol class="ts-gates">${GATES.map((g, i) => `<li class="ts-gate wc-rv" style="--c:${col(g.c)};--i:${i % 3}">
    <div class="ts-when"><span class="wc-node" aria-hidden="true">${i + 1}</span><div><h3>${g.when}</h3><p>${g.sub}</p></div></div>
@@ -127,16 +127,16 @@ function lawHtml() {
 
 // ---------------------------------------------------------------- where our standard goes further (curriculum.json design_standard)
 const FURTHER = [
-  ['Mastery, not attendance', 'Life-safety questions must be answered 100% correctly, whatever the overall score. A miss sends the teacher back to that lesson, then retests with a different question on the same point.', 'Life-safety topics include safe sleep, reporting abuse and neglect, and missing-child counts.', 'lumi'],
+  ['Safety questions need 100%', 'Life-safety questions must be answered 100% correctly, whatever the overall score. A miss sends the teacher back to that lesson, then retests with a different question on the same point.', 'Life-safety topics include safe sleep, reporting abuse and neglect, and missing-child counts.', 'lumi'],
   ['Seen doing it, in the room', 'Within 30 days of each course, the director (or a senior mentor teacher) watches the teacher at work and signs a short checklist for that course. A missed life-safety item starts a coaching plan.', 'The checklist is not counted as clock hours. It is proof the training reached the classroom.', 'booker'],
-  ['Thinking, not clicking', 'Every course ends with one or two short written reflections, read by a coach. They are marked complete or not complete, never graded.', 'Example: "Walk through your infant room in your head. What one thing will you check differently at the next nap?"', 'zuri'],
+  ['Writing it down', 'Every course ends with one or two short written reflections, read by a coach. They are marked complete or not complete, never graded.', 'Example: "Walk through your infant room in your head. What one thing will you check differently at the next nap?"', 'zuri'],
   ['Real time on task', 'No fast-forward and no skipping slides. An activity at least every 5 minutes means the course moves only when the teacher takes part, and the clock pauses when they step away.', 'Active time is logged for each part of the course.', 'bop'],
   ['No swaddling, in either state', 'Kansas rules ban swaddling in child care. Missouri\'s rules do not mention it, so in Missouri it is our policy.', `National guidance agrees: ${ext(SRC.cfoc, 'Caring for Our Children')} 3.1.4.2 calls swaddling not necessary or recommended in child care.`, 'lumi'],
   ['Safe sleep for everyone who covers a nap', 'Missouri requires safe sleep training in programs licensed for infants. Our safe sleep course is built for directors, teachers, floaters, substitutes and volunteers, and we recommend it for every Kansas teacher who may cover an infant room or nap time.', 'Infant safe sleep always comes before Quiet Time.', 'booker'],
   ['One named person signs every course', 'Each version of each course must be checked against the current rule text and signed by our Training Content Lead and Trainer of Record before teachers use it.', 'That role is not filled yet. Kansas and Missouri editions differ wherever the rules differ.', 'zuri']
 ];
 function furtherHtml() {
-  return sect('ts-further-sec', 'ts-further', `${lead('Our standard', 'Where our training goes further than the law', 'The states set the minimum. Our courses are designed to add the seven things below. They are written into the course design now, and they will apply to our teachers as each course launches.', 'ts-further-h')}
+  return sect('ts-further-sec', 'ts-further', `${lead('Our standard', 'Where our training goes further than the law', 'The states set the minimum. We designed our courses to add the seven things below. They are in the course design now and will apply to our teachers as each course launches.', 'ts-further-h')}
   ${guideBy('moss', 'Knowing the rule is the start. Showing it, every day, is the standard.')}
   <ul class="ts-further">${FURTHER.map((f, i) => `<li class="wc-rv" style="--c:var(--wc-${f[3]});--i:${i % 3}"><span class="wc-check" aria-hidden="true"></span><h3>${f[0]}</h3><p>${f[1]}</p><p class="ts-why">${f[2]}</p></li>`).join('')}</ul>`);
 }
@@ -202,7 +202,7 @@ function pilotHtml() {
 const RECORD = ['Every video segment watched, with no skipping', 'Every activity answered', 'Life-safety questions: 100%', 'Overall knowledge check: 80% or higher, within 3 attempts', 'Reflections read and marked complete by a coach', 'Active time logged for each part, with idle time paused', 'Director\'s on-the-job checklist signed within 30 days'];
 function verifyHtml() {
   return sect('band-paper ts-verify-sec', 'ts-verify', `<div class="wc-split">
-   <div class="wc-split-copy">${lead('How we verify mastery', 'A completion means proof, not attendance', 'When a course is live, a teacher\'s record for it is complete only when every line below is true.', 'ts-verify-h')}
+   <div class="wc-split-copy">${lead('How we verify mastery', 'What "complete" means', 'When a course is live, a teacher\'s record for it is complete only when every line below is true.', 'ts-verify-h')}
     ${ck(RECORD)}
     <p class="wc-note">The completion certificate shows the course code, version and hours. State credit appears on it only after Kansas (through Cape, the state's training registry) or Missouri (through the MOPD system) has approved the course and recorded the completion.</p>
     ${guideBy('fern', 'If a grown-up misses a safety question, they go back and learn it again. That is not a failure. That is the point.')}</div>
@@ -219,7 +219,7 @@ function verifyHtml() {
 const PLAN = [['SR-120', 'Safe Sleep and Lumi\'s Quiet Time', 1.5], ['SR-200', 'Lumi\'s Calm Corner: Developmentally Appropriate Guidance and Discipline', 1.5], ['FF-110', 'The Whole-Child Daily Rhythm', 1.0], ['FF-120', 'Bop &amp; Go!: Move Your Body, Grow Your Mind', 1.5], ['FF-140', 'Booker\'s Watch, Do, Repeat, Take Home', 2.0], ['SR-160', 'Ready for Anything: Emergency Preparedness, Drills and Reunification', 1.5], ['SR-130', 'Healthy Rooms: Recognizing Illness and Preventing Infection', 1.5], ['FF-170', 'Observing and Documenting Children\'s Learning', 2.0]];
 const planTotal = () => PLAN.reduce((a, r) => a + r[2], 0);
 function yearHtml() {
-  return sect('ts-year-sec', 'ts-year', `${lead('Every year after', 'Training does not stop after the first month', 'The states require training every year. Our draft catalog plans it by role, so the minimum is met without repeating a course.', 'ts-year-h')}
+  return sect('ts-year-sec', 'ts-year', `${lead('Every year after', 'Training comes round every year', 'The states require training every year. Our draft catalog plans it by role, so the minimum is met without repeating a course.', 'ts-year-h')}
   <div class="ts-year-grid">
    <div class="wc-rules ts-year-rules">
     <div><h3>The hours, planned by role</h3><ul><li>Kansas centers: 16 hours a licensure year, at least 4 in health and safety. Kansas homes: 10.</li><li>Missouri: 12 hours a calendar year.</li><li>Each plan in our draft catalog meets the state minimum without repeating a course in the same year.</li></ul></div>
@@ -294,7 +294,7 @@ V['teacher-standard'] = () => `<div class="wc ts">${heroHtml()}${welcomeHtml()}$
 // ---------------------------------------------------------------- #train-your-staff (for center and home daycare owners)
 const OFFER = [
   ['The same courses', 'Kansas and Missouri editions of the state-required topics (safe sleep, reporting abuse and neglect, emergencies, medication and more), plus the Futures Friends methods.', 'booker'],
-  ['Mastery, not attendance', 'Two to four minute videos, activities every few minutes, scenario checks and 100% on life-safety questions.', 'lumi'],
+  ['Pass the safety questions', 'Two to four minute videos, activities every few minutes, scenario checks and 100% on life-safety questions.', 'lumi'],
   ['Director dashboards', 'Who has finished what, what is due, and each person\'s hours against your state\'s clock: the Kansas licensure year or the Missouri calendar year.', 'zuri'],
   ['Time tracking', 'Active time for each lesson, idle time paused, and completion records ready for the state registry once a course is approved.', 'bop'],
   ['Observation checklists', 'A short on-the-job checklist for each course, for the director to sign within 30 days. A missed life-safety item starts a coaching plan.', 'purple'],
@@ -326,13 +326,13 @@ V['train-your-staff'] = () => `<div class="wc ts ts-staff">
    <figure class="wc-fig" style="--c:var(--wc-booker)">${art('booker', { eager: true })}<figcaption><b>Booker</b></figcaption></figure>
   </div></div></header>
  <section class="wc-sec ts-welcome" aria-labelledby="ts-staff-welcome-h"><div class="wrap ts-welcome-grid">
-  <div class="ts-welcome-copy">${lead('Directors and providers', 'Training your team should leave proof, not just hours', 'Every course is built the same way: watch, do, decide, master, reflect and show it in the room. Your director signs off on what they saw.', 'ts-staff-welcome-h')}
+  <div class="ts-welcome-copy">${lead('Directors and providers', 'Hours are easy to log. We want proof from the room.', 'Every course is built the same way: watch, do, decide, master, reflect and show it in the room. Your director signs off on what they saw.', 'ts-staff-welcome-h')}
    ${june('Small steps. Big stories. A team learns the same way children do: one clear step, practiced until it sticks.')}</div>
   ${videoSlot('ts-video-welcome-staff', 'Welcome, teachers &amp; providers', 'A sample lesson from the Futures Friends Academy (about 1.5 minutes). Ms. June is a teacher in our story world, not a member of our staff. Story-world animation.')}
  </div></section>
- <section class="wc-sec wc-lic" id="ts-offer" aria-labelledby="ts-offer-h"><div class="wrap">${lead('What your team would get', 'One method, from the first week to every renewal', 'These are planned features. Nothing here is available to outside programs yet.', 'ts-offer-h')}
+ <section class="wc-sec wc-lic" id="ts-offer" aria-labelledby="ts-offer-h"><div class="wrap">${lead('What your team would get', 'Planned: one method for your whole team', 'These are planned features. Nothing here is available to outside programs yet.', 'ts-offer-h')}
   <ul class="wc-six">${OFFER.map((o, i) => `<li class="wc-rv" style="--c:var(--wc-${o[2]});--i:${i % 3}"><b>${o[0]}</b><span>${o[1]}</span></li>`).join('')}</ul></div></section>
- <section class="wc-sec band-paper" id="ts-wont" aria-labelledby="ts-wont-h"><div class="wrap">${lead('Plainly', 'What it will not do', 'So nobody is surprised later.', 'ts-wont-h')}
+ <section class="wc-sec band-paper" id="ts-wont" aria-labelledby="ts-wont-h"><div class="wrap">${lead('Plainly', 'What it will not do', 'Four things people sometimes assume.', 'ts-wont-h')}
   <ul class="ts-wont">${WONT.map(w => `<li class="wc-rv"><h3>${w[0]}</h3><p>${w[1]}</p></li>`).join('')}</ul></div></section>
  ${statusHtml(true)}
  <section class="wc-sec" id="ts-staff-ask" aria-labelledby="ts-staff-ask-h"><div class="wrap wc-pilot-grid">

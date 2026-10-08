@@ -140,7 +140,7 @@ function summaryHtml() {
    ${statusHtml()}</div></section>
   <section class="wc-sec band-paper u1-ask" aria-labelledby="u1-ask-h"><div class="wrap u1s-cta">
    <div class="u1s-door"><span class="wc-kick">Licensed centers</span><h2 id="u1-ask-h">Licensed centers get the full program</h2><p>Every day's plan, the packets, the Start Monday files and the printables. Ask us for access. The Futures Hub is not hosted yet, so staff access is through Futures Learning Center for now.</p><a class="btn gold" href="#contact">Request access</a></div>
-   <div class="u1s-door"><span class="wc-kick">Centers and families</span><h2>Bring Futures Friends to your program</h2><p>Ask a person about your rooms and ages, or visit our pilot center in Independence, Missouri.</p><div class="wc-acts"><a class="btn navy" href="#contact">Talk to a real person</a><a class="btn soft" href="#enroll">Ask about a tour</a></div></div></div></section></div>`;
+   <div class="u1s-door"><span class="wc-kick">Centers and families</span><h2>Ask a person, or come see the room</h2><p>Ask a person about your rooms and ages, or visit our pilot center in Independence, Missouri.</p><div class="wc-acts"><a class="btn navy" href="#contact">Talk to a real person</a><a class="btn soft" href="#enroll">Ask about a tour</a></div></div></div></section></div>`;
 }
 
 // #unit-1 and any old #unit-1/<day> link land on the summary.

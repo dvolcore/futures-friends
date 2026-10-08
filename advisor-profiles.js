@@ -6,7 +6,7 @@
       area: 'Education & curriculum',
       role: 'Education Adjunct Faculty / Curriculum & Instruction / Educator Development',
       image: 'img/advisors/melissa-hill.webp',
-      heading: 'Thoughtful learning. Whole-child possibilities.',
+      heading: 'A curriculum educator\'s read.',
       excerpt: 'I\u2019m impressed by the way it combines empathy, structure, and real-world readiness in a way that educators can confidently implement.',
       statement: 'The Futures Learning Center curriculum is thoughtfully designed, developmentally appropriate, and intentionally inclusive. It provides meaningful, standards-aligned learning experiences that nurture the whole child while building essential skills for lifelong success. I\u2019m impressed by the way it combines empathy, structure, and real-world readiness in a way that educators can confidently implement.',
       focus: ['Curriculum development', 'Instructional design', 'Educator support'],
