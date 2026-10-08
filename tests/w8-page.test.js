@@ -187,8 +187,8 @@ for (const width of [390, 1280]) {
         const w = document.querySelector('.bw-walker');
         if (!w || !w.classList.contains('is-on')) return null;
         const b = w.getBoundingClientRect();
-        const hits = [];
-        document.querySelectorAll('#view a[href], #view button, #view [role=tab], .ff-footscene a, header a, header button, .totop.on, .ffs button').forEach(t => { const q = t.getBoundingClientRect(); if (q.width && !(b.right <= q.left - 16 || b.left >= q.right + 16 || b.bottom <= q.top - 16 || b.top >= q.bottom + 16)) hits.push('tap ' + (t.textContent || t.className).trim().slice(0, 30)); });
+        const hits = [], pad = innerWidth < 700 ? 0 : 16;   // phones: the 20 px margin cannot hold 16 px of clearance; he tucks against the screen edge and never touches a control or a word
+        document.querySelectorAll('#view a[href], #view button, #view [role=tab], .ff-footscene a, header a, header button, .totop.on, .ffs button').forEach(t => { const q = t.getBoundingClientRect(); if (q.width && !(b.right <= q.left - pad || b.left >= q.right + pad || b.bottom <= q.top - pad || b.top >= q.bottom + pad)) hits.push('tap ' + (t.textContent || t.className).trim().slice(0, 30)); });
         document.querySelectorAll('#view h1, #view h2, #view h3, #view p, #view li').forEach(t => { const q = t.getBoundingClientRect(); if (q.width && !(b.right <= q.left || b.left >= q.right || b.bottom <= q.top || b.top >= q.bottom)) hits.push('text ' + t.textContent.trim().slice(0, 30)); });
         return hits;
       });

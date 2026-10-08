@@ -81,9 +81,10 @@
   }
 
   // ---------------------------------------------------------------- tap targets the decoration must stay clear of (16 px)
-  function obstacles() {
+  // k scales the clearance: 1 = 16 px around controls and 4 px around words (default); 0 = their exact boxes (the phone walker)
+  function obstacles(k = 1) {
     const out = [];
-    const add = (el, pad) => { const shut = el.closest('details:not([open])'); if (shut && !el.closest('summary')) return;   // a closed transcript's words are not on screen
+    const add = (el, pad0) => { const pad = pad0 * k; const shut = el.closest('details:not([open])'); if (shut && !el.closest('summary')) return;   // a closed transcript's words are not on screen
       const r = el.getBoundingClientRect(); if (r.width && r.height) out.push({ l: r.left + scrollX - pad, t: r.top + scrollY - pad, r: r.right + scrollX + pad, b: r.bottom + scrollY + pad }); };
     document.querySelectorAll('#view a[href], #view button, #view [role=tab], #view input, #view select, #view textarea, #view [tabindex="0"], .ff-footscene a').forEach(e => add(e, 16));
     document.querySelectorAll('#view h1, #view h2, #view h3, #view p, #view li, #view figure, #view .hc-pickstage, #view .hc-doorlist, #view .hc-prooflist, #view .hc-closegrid, .ff-footscene .ff-footfriend').forEach(e => add(e, 4));
