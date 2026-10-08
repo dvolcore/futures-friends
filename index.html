@@ -69,7 +69,9 @@ nav.main button:focus-visible,.btn:focus-visible,button:focus-visible{outline:2p
   .menu-t{display:inline-flex;margin-left:auto}
   .acts .ghost{display:none}
 }
-@media (max-width:520px){.acts .gold{display:none}}
+@media (max-width:520px){header .acts .gold{display:none}}
+/* phones: the "Online requests open soon" Call and Email buttons stay visible and are at least 44px tall (tests/browser/call-btn.browser.mjs) */
+.ffi-soon .acts .btn{min-height:44px}
 /* sections */
 section{padding-block:clamp(44px,6vw,80px)}
 section.tight{padding-block:36px}
