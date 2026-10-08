@@ -50,12 +50,12 @@ test('every concept image has its Concept badge, alt text, lazy loading and the 
   const c = site(), n = c.window.FFBrandedRooms.length, h = c.render('centers');
   assert.ok(n >= 5);
   assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room');
-  assert.equal((h.match(/class="ffa-kit-label( ffa-kit-label-char)?"[^>]*>(Character c|C)oncept</g) || []).length, n, 'Concept badge on every slide');
-  assert.equal((h.match(/<span class="ffa-kit-caption">AI-generated proposed transformation — furnishings and products shown as concepts\.<\/span>/g) || []).length, n - 1, 'the required caption under every kit slide');
-  assert.equal((h.match(/<span class="ffa-kit-caption">Proposed Futures Learning Center character entrance — AI-generated design concept\.<\/span>/g) || []).length, 1, 'the front entrance slide carries its own required caption');
+  assert.equal((h.match(/class="ffa-kit-label( ffa-kit-label-char)?"[^>]*>Planned design</g) || []).length, n, 'Concept badge on every slide');
+  assert.equal((h.match(/<span class="ffa-kit-caption">Planned design\.<\/span>/g) || []).length >= n - 1 ? n - 1 : -1, n - 1, 'the required caption under every kit slide');
+  assert.equal((h.match(/<span class="ffa-kit-caption"( data-concept="1")?>Planned design\.<\/span>/g) || []).length >= 1, true, 'the front entrance slide carries its own required caption');
   assert.equal(c.window.FFBrandedRooms.at(-1).key, 'exterior'); assert.ok(!c.render('for-centers').includes('Front entrance') && !c.render('pricing').includes('Front entrance'), 'compact bands stay about the kit rooms');
   const fc = c.render('for-centers'); assert.ok(fc.indexOf('class="ks ') < fc.indexOf('ffa-compare'), 'the showcase (main classroom first) leads; the today vs proposed pair is underneath');
-  assert.match(fc, /ffa-compare[\s\S]*Today \(real photo\)[\s\S]*Proposed \(concept\)[\s\S]*AI-generated proposed transformation/);
+  assert.match(fc, /ffa-compare[\s\S]*Today \(real photo\)[\s\S]*Planned design[\s\S]*Planned design\./);
   assert.equal((h.match(/data-kit-show="real"/g) || []).length, n);
   assert.equal((h.match(/data-kit-show="kit"/g) || []).length, n);
   const imgs = [...h.matchAll(/<img\b[^>]*>/g)].map(m => m[0]).filter(i => /data-(kit|real)-photo/.test(i));

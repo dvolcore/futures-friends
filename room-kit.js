@@ -181,11 +181,11 @@ const realSrc = (k, w) => `img/center/${k}-${w}.webp`;
 function roomFig(r) {
   const k = String(r.key || ''), has = !!(r.kit && /^img\//.test(r.kit) && !/["<>]/.test(r.kit));
   const real = `<img class="rk-room-real" src="${realSrc(k, 800)}" srcset="${realSrc(k, 400)} 400w, ${realSrc(k, 800)} 800w, ${realSrc(k, 1200)} 1200w" sizes="(max-width:760px) 92vw, 33vw" alt="${E(REAL_ALT[k] || 'A classroom at Futures Learning Center')}" width="1200" height="800" loading="lazy" decoding="async">`;
-  const kit = has ? `<img class="rk-room-kit" src="${E(r.kit)}" alt="${E(r.alt || 'Concept: the same room with the Learning Zones Kit added')}" width="${+r.w || 1200}" height="${+r.h || 800}" loading="lazy" decoding="async" hidden>` : '';
+  const kit = has ? `<img class="rk-room-kit" src="${E(r.kit)}" alt="${E(r.alt || 'Planned design: the same room with the Learning Zones Kit added')}" width="${+r.w || 1200}" height="${+r.h || 800}" loading="lazy" decoding="async" hidden>` : '';
   return `<figure class="rk-roomfig${has ? ' rk-has-kit' : ''}" data-room="${E(k)}"><div class="rk-roomframe">${real}${kit}
     <span class="rk-roomlabel" data-rk-label>Real photo</span></div>
     ${has ? `<div class="rk-toggle" role="group" aria-label="Show the room"><button type="button" aria-pressed="true" data-rk-view="real">Real room</button><button type="button" aria-pressed="false" data-rk-view="kit">With the kit</button></div>` : ''}
-    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.'}</b> Concept view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
+    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'Planned design.'}</b> Planned view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
 }
 
 function zones() {
@@ -323,7 +323,7 @@ function showRoom(fig, which) {
   const kitOn = which === 'kit';
   kitImg.hidden = !kitOn; realImg.hidden = kitOn;
   $$('[data-rk-view]', fig).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.rkView === which)));
-  const lab = fig.querySelector('[data-rk-label]'); if (lab) { lab.textContent = kitOn ? 'Concept view' : 'Real photo'; lab.classList.toggle('is-concept', kitOn); }
+  const lab = fig.querySelector('[data-rk-label]'); if (lab) { lab.textContent = kitOn ? 'Planned design' : 'Real photo'; lab.classList.toggle('is-concept', kitOn); }
 }
 if (typeof document !== 'undefined' && document.addEventListener) {
   document.addEventListener('click', e => {

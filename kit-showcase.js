@@ -5,7 +5,7 @@
    Sources, nothing copied: the concept rooms come from window.FFBrandedRooms (brand-art.js, the same list as img/branded-rooms/
    manifest.json), so new concept images show up here with no edit; the zones, the Zone Boundaries prices ($1,195 home, $1,995
    classroom) and the package copy come from window.FFRoomKit (room-kit.js), and the package prices from window.FFPricing via it.
-   Every image keeps its "Concept" badge and its Real room / With the kit toggle (brand-art.js). Ordering is not open: the band says so.
+   Every image keeps its "Planned design" badge and its Real room / With the kit toggle (brand-art.js). Ordering is not open: the band says so.
    Carousel: native scroll-snap (swipe on phones), Previous / Next buttons, arrow keys on the track, a live "Room 2 of 5" count;
    images lazy-load; with reduced motion the buttons jump instead of gliding. Sends nothing. */
 (function () {
@@ -37,8 +37,8 @@ function slide(r, i, n) {
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';
   const km = A && A.kitMedia && A.liveVariants && r.entrance && A.liveVariants(r.key).length > 1 ? A.kitMedia(r.key, { sizes }) : null;   // Concept 1 / Concept 2 on the entrance slide, once both exist
   return `<div class="ks-slide" role="group" aria-roledescription="slide" aria-label="Room ${i + 1} of ${n}: ${E(r.zone || '')}">
-   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"${km ? ' data-concept-view="1"' : ''}><div class="ffa-kit-stage">${km ? `<span class="ffa-kit-real">${A.photoImg(r.key, { sizes })}</span>${km.concept}${km.label}${km.sw}` : `${img}<span class="ffa-kit-label${r.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${E(r.badge || 'Concept')}</span>`}${toggle}</div>
-   <figcaption><b>${E(r.zone || '')}</b>${km ? km.caption : `<span class="ffa-kit-caption">${E(r.caption || (A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span>`}<span>${E(r.soon || 'Not installed yet. The real room is one tap away.')}</span></figcaption></figure></div>`;
+   <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"${km ? ' data-concept-view="1"' : ''}><div class="ffa-kit-stage">${km ? `<span class="ffa-kit-real">${A.photoImg(r.key, { sizes })}</span>${km.concept}${km.label}${km.sw}` : `${img}<span class="ffa-kit-label${r.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${E(r.badge || 'Planned design')}</span>`}${toggle}</div>
+   <figcaption><b>${E(r.zone || '')}</b>${km ? km.caption : `<span class="ffa-kit-caption">${E(r.caption || (A && A.KIT_CAPTION) || 'Planned design.')}</span>`}<span>${E(r.soon || 'Not installed yet. The real room is one tap away.')}</span></figcaption></figure></div>`;
 }
 function chips(RK) {
   return `<ul class="ks-chips" aria-label="The five zones">${RK.ZONES.map(z => `<li style="--zf:${z.felt};--zi:${z.ink};--zt:${z.tint}"><span class="ks-dot" aria-hidden="true"></span>${E(z.name)}</li>`).join('')}</ul>`;
@@ -62,7 +62,7 @@ function band(variant) {
    ${chips(RK)}${prices}
    <p class="ks-soon"><b>Ordering opens soon.</b> Nothing is charged here. Prices are before tax and delivery; packages and the add-on are listed on the pricing page.</p>
    <div class="ks-cta"><a class="btn gold" href="#room-kit">See the kit</a><a class="btn soft" href="#room-planner">Plan your room</a><a class="btn soft" href="#quote">Get a quote</a></div></div>
-   <div class="ks-gallery" role="region" aria-roledescription="carousel" aria-label="Concept rooms with the Learning Zones Kit" data-ks-gallery>
+   <div class="ks-gallery" role="region" aria-roledescription="carousel" aria-label="Planned rooms with the Learning Zones Kit" data-ks-gallery>
     <div class="ks-track" tabindex="0" aria-label="Swipe or use the arrow keys to see each room" data-ks-track>${list.map((r, i) => slide(r, i, list.length)).join('')}</div>
     <div class="ks-ctl"><button type="button" class="ks-nav" data-ks-step="-1" aria-label="Previous room">&#8249;</button><span class="ks-count" aria-live="polite" data-ks-count>Room 1 of ${list.length}</span><button type="button" class="ks-nav" data-ks-step="1" aria-label="Next room">&#8250;</button></div>
    </div></div>${pkgs}</section>`;
