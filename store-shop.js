@@ -156,6 +156,14 @@ function editorial(side) {
       <div class="sp-hero2-acts">${side === 'families' ? lnk('shop/carpets', 'Shop carpets ' + ico('arrow'), 'btn gold') : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${side === 'families' ? '' : lnk('room-kit', 'See the Learning Zones Kit', 'btn sp-btn-glass')}</div></div></div>
     <p class="sp-edit-cap">${E(C.CONCEPT_CAPTION)}</p></section>`;
 }
+// Owner 2026-10-08: the Kids' Shop closes on a second big band, the owner's own campaign picture (img/campaign, web sizes only).
+function closing() {
+  const b = 'img/campaign/family-swing-ad-', set = ext => [800, 1200, 1536].map(w => `${b}${w}.${ext} ${w}w`).join(', ');
+  return `<section class="sp-edit sp-edit-b" aria-labelledby="spCloseH"><div class="sp-edit-img"><picture><source type="image/webp" srcset="${set('webp')}" sizes="100vw"><img class="sp-img" src="${b}1200.jpg" srcset="${set('jpg')}" sizes="100vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Three children walk along a sunny park path, each in different Futures Friends gear: a purple Bop tee and backpack, a green Zuri tee, and a blue Booker tee with a Booker bottle"></picture></div><div class="sp-edit-shade" aria-hidden="true"></div>
+    <div class="wrap sp-edit-in"><div class="sp-edit-copy" data-rv><h2 id="spCloseH">Bring the friends everywhere.</h2>
+      <p>Different favorite friends, one shared adventure: a tee, a backpack and a bottle for every kind of learner.</p>
+      <div class="sp-hero2-acts">${lnk('shop/apparel', 'Shop the gear ' + ico('arrow'), 'btn gold')}${lnk('shop/backpacks', 'See the backpacks', 'btn sp-btn-glass')}</div></div></div></section>`;
+}
 function bridge() {
   return `<section class="sp-bridge" aria-labelledby="spBridgeH"><div class="wrap sp-bridge-grid">
     <div class="sp-bridge-copy"><h2 id="spBridgeH">Measure the room, then order.</h2>
@@ -237,7 +245,7 @@ V['kids-shop'] = () => {
    ${cut < secs.length ? editorial('families') : ''}
    <div class="wrap sp-shell sp-kidsbody sp-kidsbody-2">${kidSecs(secs.slice(cut))}
    ${termsLine('Kids’ Shop items')}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush is opening soon: leave your email on a plush page. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
-   ${cut < secs.length ? '' : editorial('families')}
+   ${cut < secs.length ? closing() : editorial('families')}
    <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section>`);
 };
 

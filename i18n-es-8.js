@@ -13,6 +13,11 @@ const MONL = {January:'enero', February:'febrero', March:'marzo', April:'abril',
 const sd = s => String(s).replace(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{1,2})\b/g, (m, d, mo, n) => `${DAY[d]}, ${n} de ${MON[mo]}`);
 const room = r => (window.FFi18n.lookup && window.FFi18n.lookup(r, 'es')) || r;
 window.FFi18n.add('es', {
+  // Kids' Shop closing band (2026-10-08)
+  'Bring the friends everywhere.': 'Lleva a los amigos a todas partes.',
+  'Different favorite friends, one shared adventure: a tee, a backpack and a bottle for every kind of learner.': 'Distintos amigos favoritos, una misma aventura: una camiseta, una mochila y una botella para cada tipo de niño.',
+  'Shop the gear': 'Ver la ropa y accesorios',
+  'See the backpacks': 'Ver las mochilas',
   'Good morning,': 'Buenos días,',
   'Good afternoon,': 'Buenas tardes,',
   'Good evening,': 'Buenas noches,',
