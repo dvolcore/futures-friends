@@ -39,7 +39,7 @@
     const p = data(key), w = WHO[key];
     if (!p) return '';
     return `<article class="ffe-item ffe-${key}">
-      <div class="ffe-photo"><img src="${w.portrait}" width="300" height="375" loading="lazy" decoding="async" alt="${esc(p.name)}, ${esc(p.role.split(' / ')[0])}"></div>
+      <div class="ffe-photo"><img src="${w.portrait}" width="260" height="325" loading="lazy" decoding="async" alt="${esc(p.name)}, ${esc(p.role.split(' / ')[0])}"></div>
       <div class="ffe-body"><p class="ffe-tag">${esc(w.reviewed)}</p>
       <figure class="ffe-quote"><blockquote><p>${esc(p.excerpt)}</p></blockquote>
       <figcaption><cite>${esc(p.name)}</cite><span class="ffe-role">${esc(p.role)}</span>${w.extra && variant === 'full' ? `<span class="ffe-extra">${esc(w.extra)}</span>` : ''}</figcaption></figure>
@@ -50,7 +50,7 @@
     const items = order(lead).map(key => {
       const p = data(key), w = WHO[key];
       if (!p) return '';
-      return `<li class="ffe-s-item"><img src="${w.portrait}" width="300" height="375" loading="lazy" decoding="async" alt="${esc(p.name)}, ${esc(p.role.split(' / ')[0])}"><span class="ffe-s-text">${esc(w.short)} <b>${esc(p.name)}</b></span>${readBtn(key, p, 'ffe-s-link', 'Read statement', true)}</li>`;
+      return `<li class="ffe-s-item"><img src="${w.portrait}" width="260" height="325" loading="lazy" decoding="async" alt="${esc(p.name)}, ${esc(p.role.split(' / ')[0])}"><span class="ffe-s-text">${esc(w.short)} <b>${esc(p.name)}</b></span>${readBtn(key, p, 'ffe-s-link', 'Read statement', true)}</li>`;
     }).join('');
     return `<aside class="ff-endorse ffe-strip" data-endorse="strip" aria-label="Professional reviews"><div class="wrap"><p class="ffe-s-lead">Trusted by professionals</p><ul>${items}</ul></div></aside>`;
   }

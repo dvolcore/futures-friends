@@ -468,7 +468,9 @@ test('budgets: no layout shift on cold loads (CLS < 0.01) and the rest of Home o
   const all = [...sizes.entries()], clip = u => /\/video\/ff-(intro|friend)-[\w.-]+\.(webm|mp4)(\?|$)/.test(u);
   const kb = all.filter(([u]) => !clip(u)).reduce((a, [, b]) => a + b, 0) / 1024;
   const vkb = [...got.entries()].filter(([id]) => clip(urlOf.get(id) || '')).reduce((a, [, b]) => a + b, 0) / 1024;
-  assert.ok(kb <= 600, `below the fold on a phone (art, scripts, posters): ${kb.toFixed(0)} KB ${JSON.stringify(all.filter(([u]) => !clip(u)).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([u, b]) => [u.replace(/^.*?\/\/[^/]+\//, ''), Math.round(b / 1024)]))}`);
+  // 2026-10-08 owner: the "Trusted by professionals" band under the Home hero (two ~12 KB portraits, ~11 KB script and style) lengthens the phone page
+  // by ~1,330 px, which brings the picked friend's loop poster (89 KB) inside the swept range: 542 -> ~620 KB, so 600 -> 700.
+  assert.ok(kb <= 700, `below the fold on a phone (art, scripts, posters): ${kb.toFixed(0)} KB ${JSON.stringify(all.filter(([u]) => !clip(u)).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([u, b]) => [u.replace(/^.*?\/\/[^/]+\//, ''), Math.round(b / 1024)]))}`);
   assert.ok(vkb <= 2000, `story-world clips streamed on a full scroll of a phone: ${vkb.toFixed(0)} KB`);
   await ctx.close();
 });
