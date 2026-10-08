@@ -1,4 +1,4 @@
-/* Futures Friends extras: L) "Build a rainbow plate" micro-game on #rainbow, M) storybooks that open on #friends.
+/* Futures Friends extras: L) "Build a rainbow plate" micro-game on #rainbow (M, the flip-open storybooks, was removed).
    Attaches through window.FFhooks (called by motion.js after each render) plus a MutationObserver on #view,
    so it also survives in-page re-renders (menu level/week buttons) that skip the hooks. */
 (function(){
@@ -6,7 +6,6 @@
   var RMQ = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var rm = function(){ return !!RMQ.matches; };
   var G = function(){ return window.gsap || null; };
-  var FINE = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ------------------------------------------------------------------ CSS */
   var CSS = `
@@ -65,26 +64,6 @@
  .ffr-food:hover{transform:none}
 }
 
-/* M) books that open */
-.card.book.ffb-open{position:relative;z-index:6}
-.ffb{position:relative;width:100%;aspect-ratio:3/4;perspective:1000px;cursor:pointer;border-radius:10px;transform-origin:0 0;outline:none}
-.ffb:focus-visible{box-shadow:0 0 0 3px var(--gold)}
-.ffb-r,.ffb-leaf{position:absolute;inset:0;border-radius:4px 10px 10px 4px}
-.ffb-r{overflow:hidden;background:radial-gradient(90% 70% at 50% 35%,rgba(255,255,255,.55),transparent 70%),var(--w);box-shadow:inset 6px 0 10px -6px rgba(10,43,56,.35),0 10px 24px rgba(10,43,56,.18);display:flex;align-items:flex-end;justify-content:center}
-.ffb-r img{height:84%;width:auto;max-width:92%;object-fit:contain;display:block;filter:drop-shadow(0 4px 4px rgba(10,43,56,.2))}
-.ffb-r.all{gap:0;padding-inline:4px}
-.ffb-r.all img{height:52%;max-width:27%;margin-inline:-1px}
-.ffb-r::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9%;background:color-mix(in srgb,var(--c) 22%,transparent)}
-.ffb-r img{position:relative;z-index:1}
-.ffb-leaf{transform-style:preserve-3d;transform-origin:0 50%;z-index:2}
-.ffb-leaf>.cover{position:absolute;inset:0;aspect-ratio:auto;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 16px rgba(10,43,56,.16)}
-.ffb-back{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--paper);color:var(--ink);border-radius:10px 4px 4px 10px;padding:9% 9% 8%;display:flex;flex-direction:column;gap:6px;box-shadow:inset -6px 0 10px -6px rgba(10,43,56,.35),0 10px 24px rgba(10,43,56,.18);overflow:hidden}
-.ffb-back b{font-family:var(--display);font-weight:600;font-size:12.5px;line-height:1.12;color:var(--t,var(--c))}
-.ffb-back p{margin:0;font-size:10.5px;line-height:1.36;color:var(--ink)}
-.ffb-back small{margin-top:auto;font-size:9.5px;color:var(--muted)}
-.ffb-hint{font-size:12px;color:var(--muted)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ffb-r{background:radial-gradient(90% 70% at 50% 35%,rgba(255,255,255,.08),transparent 70%),var(--w)}}
-:root[data-theme="dark"] .ffb-r{background:radial-gradient(90% 70% at 50% 35%,rgba(255,255,255,.08),transparent 70%),var(--w)}
 `;
   function injectCSS(){
     if (document.getElementById('ff-extras-css')) return;
@@ -331,101 +310,16 @@
     }
   }
 
-  /* ================================================================== M) BOOKS THAT OPEN */
-  var BOOK_KEYS = ['booker', 'lumi', 'zuri', 'bop'];
-  function oneLine(s){ s = String(s || ''); var m = s.match(/^.*?[.!?](\s|$)/); return (m ? m[0] : s).trim(); }
-
-  function wrapBook(cover, idx){
-    if (cover.tagName === 'A') return;
-    var card = cover.parentNode, books = (window.FF && window.FF.books) || [];
-    var em = cover.querySelector('em'), title = em ? em.textContent.trim() : '';
-    var data = books.filter(function(b){ return b.title === title; })[0] || books[idx] || { c: 'booker', title: title, log: '' };
-    var k = data.c, all = k === 'all';
-    var book = h('div', 'ffb');
-    book.tabIndex = 0; book.setAttribute('role', 'button'); book.setAttribute('aria-expanded', 'false');
-    book.setAttribute('aria-label', 'Peek inside ' + (data.title || title));
-    book.style.setProperty('--c', all ? 'var(--navy)' : 'var(--' + k + ')');
-    if (all) book.style.setProperty('--t', 'var(--ink)');
-    book.style.setProperty('--w', all ? 'linear-gradient(160deg,var(--booker-s),var(--lumi-s) 35%,var(--zuri-s) 65%,var(--bop-s))' : 'var(--' + k + '-s)');
-    var right = h('div', 'ffb-r' + (all ? ' all' : ''), (all ? BOOK_KEYS : [k]).map(function(x){ return '<img src="' + window.FFcut(x) + '" alt="" loading="lazy">'; }).join(''));
-    right.setAttribute('aria-hidden', 'true');
-    var leaf = h('div', 'ffb-leaf');
-    var back = h('div', 'ffb-back', '<b>' + esc(data.title || title) + '</b><p>' + esc(oneLine(data.log)) + '</p><small>' + (all ? 'Booker, Lumi, Zuri and Bop' : esc(k.charAt(0).toUpperCase() + k.slice(1))) + '</small>');
-    back.setAttribute('aria-hidden', 'true');
-    card.insertBefore(book, cover);
-    leaf.appendChild(cover); leaf.appendChild(back);
-    book.appendChild(right); book.appendChild(leaf);
-    setupBook(book, leaf, card);
-  }
-
-  var openBook = null;
-  function setBook(book, open, animate){
-    var leaf = book.querySelector('.ffb-leaf'), card = book.parentNode;
-    book.setAttribute('aria-expanded', open ? 'true' : 'false');
-    var w = book.offsetWidth || 120;
-    var avail = card.clientWidth - (parseFloat(getComputedStyle(card).paddingLeft) || 0) - (parseFloat(getComputedStyle(card).paddingRight) || 0);
-    var s = open ? Math.max(1, Math.min(FINE ? 1.35 : 1.3, (avail - 4) / (2 * w))) : 1;
-    var x = open ? w * s : 0;
-    if (open) card.classList.add('ffb-open');
-    if (open && openBook && openBook !== book) setBook(openBook, false, animate);
-    if (open) openBook = book; else if (openBook === book) openBook = null;
-    var gs = G();
-    var done = function(){ if (!open && book.getAttribute('aria-expanded') === 'false') card.classList.remove('ffb-open'); };
-    if (gs) {
-      gs.killTweensOf([book, leaf]);
-      if (animate && !rm()) {
-        gs.to(leaf, { rotationY: open ? -180 : 0, duration: open ? .95 : .7, ease: open ? 'power3.inOut' : 'power2.inOut' });
-        gs.to(book, { x: x, scale: s, duration: open ? .95 : .7, ease: open ? 'back.out(1.4)' : 'power2.inOut', onComplete: done });
-      } else { gs.set(leaf, { rotationY: open ? -180 : 0 }); gs.set(book, { x: x, scale: s }); done(); }
-    } else {
-      leaf.style.transform = open ? 'rotateY(-180deg)' : '';
-      book.style.transform = open ? 'translateX(' + x + 'px) scale(' + s + ')' : '';
-      done();
-    }
-  }
-
-  function setupBook(book, leaf, card){
-    var t = 0, lastType = 'mouse';
-    book.addEventListener('pointerdown', function(e){ lastType = e.pointerType || 'mouse'; });
-    book.addEventListener('pointerenter', function(e){
-      if (e.pointerType !== 'mouse' || !FINE) return;
-      clearTimeout(t); t = setTimeout(function(){ setBook(book, true, true); }, 110);
-    });
-    book.addEventListener('pointerleave', function(e){
-      if (e.pointerType !== 'mouse' || !FINE) return;
-      clearTimeout(t); if (book.getAttribute('aria-expanded') === 'true') setBook(book, false, true);
-    });
-    book.addEventListener('click', function(e){
-      // a mouse on a hover device already opened it by hovering; touch/pen and keyboard-less clicks toggle
-      if (lastType === 'mouse' && FINE) { if (book.getAttribute('aria-expanded') !== 'true') setBook(book, true, true); return; }
-      e.stopPropagation();
-      setBook(book, book.getAttribute('aria-expanded') !== 'true', true);
-    });
-    book.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setBook(book, book.getAttribute('aria-expanded') !== 'true', true); }
-      else if (e.key === 'Escape' && book.getAttribute('aria-expanded') === 'true') { setBook(book, false, true); }
-    });
-    book.addEventListener('blur', function(){ if (lastType === 'kbd' && book.getAttribute('aria-expanded') === 'true') setBook(book, false, true); });
-    book.addEventListener('keyup', function(){ lastType = 'kbd'; });
-  }
-
-  // a tap anywhere else closes an open book (touch)
-  document.addEventListener('click', function(e){
-    if (openBook && !openBook.contains(e.target) && openBook.isConnected) setBook(openBook, false, true);
-  });
-
-  function attachBooks(root){
-    if (openBook && !openBook.isConnected) openBook = null;
-    var covers = root.querySelectorAll('.card.book > .cover');
-    covers.forEach(function(c, i){ wrapBook(c, i); });
-  }
+  /* M) "Books that open" (a 3D flip-book that wrapped each .card.book cover) was removed 2026-10-07: on a phone
+     a tap scaled the open spread over the card's own description, and in WebKit the rotated leaf's front face
+     (positioned title layer) bled through backface-visibility, garbling the title. Covers are static now (views.js
+     cover() + index.html .book rules); tests/book-cover-layout.test.js guards it. */
 
   /* ================================================================== wiring */
   function attach(root){
     root = root || document.getElementById('view');
     if (!root) return;
     try { attachRainbow(root); } catch (e) { console.warn(e); }
-    try { attachBooks(root); } catch (e) { console.warn(e); }
   }
   window.FFhooks = window.FFhooks || [];
   window.FFhooks.push(function(view, root){ attach(root); });

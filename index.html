@@ -154,7 +154,9 @@ details.unit[open] summary{border-bottom:1px solid var(--line)}
 .cover{aspect-ratio:3/4;border-radius:10px;background:var(--c);position:relative;display:grid;place-items:end center;overflow:hidden;color:#fff}
 .cover::after{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(255,255,255,.7);border-radius:7px}
 .cover img{height:60%;width:auto;object-fit:contain}
-.cover em{position:absolute;top:10px;left:10px;right:10px;font-style:normal;font-family:var(--display);font-size:12.5px;line-height:1.15;text-align:center;overflow-wrap:anywhere;z-index:1}
+.cover em{position:absolute;top:10px;left:10px;right:10px;font-style:normal;font-family:var(--display);font-size:12.5px;line-height:1.15;text-align:center;overflow-wrap:break-word;text-wrap:balance;z-index:1}
+/* narrow cards (phones, tablets in 2 columns): cover on top, then the text, never side by side in a 120px squeeze */
+@media (max-width:899px){.book{grid-template-columns:minmax(0,1fr);gap:14px}.book>.cover{width:min(176px,100%);justify-self:start}.book>.cover em{font-size:15px;top:14px;left:14px;right:14px}}
 /* demo */
 .demo{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(10,43,56,.12)}
 .demo .top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--navy);color:#fff;flex-wrap:wrap}
@@ -298,7 +300,7 @@ nav.main .mob{display:none}
 .phero::after{content:"";position:absolute;width:420px;height:420px;left:-160px;bottom:-220px;border-radius:50%;background:radial-gradient(circle,rgba(47,111,192,.28),transparent 65%);z-index:-1}
 </style>
 <link rel="stylesheet" href="premium.css?v=4">
-<link rel="stylesheet" href="experience.css?v=7">
+<link rel="stylesheet" href="experience.css?v=8">
 <link rel="stylesheet" href="supporting-cast.css?v=5">
 <link rel="stylesheet" href="advisor-profiles.css?v=1">
 <link rel="stylesheet" href="home-signatures.css?v=1">
@@ -439,7 +441,7 @@ nav.main .mob{display:none}
 <script src="intake.js?v=5"></script>
 <script src="enroll-desk.js?v=1"></script>
 <script src="tour-booking.js?v=1"></script>
-<script src="extras.js?v=12"></script>
+<script src="extras.js?v=13"></script>
 <script src="motion.js?v=15"></script>
 <script src="premium-core.js?v=1"></script>
 <script src="route-meta.js?v=20"></script>
