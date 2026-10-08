@@ -41,6 +41,7 @@ img[src*="cut_"],img[src*="/community/"],img[src*="img/characters/"],img[src*="i
 .ffa-photo img{display:block;width:100%;height:auto;border-radius:var(--r)}
 .ffa-photo-wide img{aspect-ratio:16/9;object-fit:cover}
 .ffa-photo-land img{aspect-ratio:3/2;object-fit:cover}
+.ffa-kit.ffa-photo-wide img,.ffa-kit.ffa-photo-land img{aspect-ratio:4/3}
 .ffa-photo figcaption{display:grid;gap:2px}
 .ffa-photo figcaption b{font:600 16px/1.25 var(--display)}
 .ffa-photo figcaption span{font-size:13px;color:var(--muted);line-height:1.4}
