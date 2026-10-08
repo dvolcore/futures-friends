@@ -139,6 +139,13 @@
     chip.querySelector('b').textContent = name;
     chip.querySelector('.ffe-next-go').setAttribute('aria-label', 'Open ' + name);
     D.body.appendChild(chip);
+    // never over the hero: bottom-centre when the hero ends above it (phones); on a wide screen the hero fills the window, so the
+    // note sits top-right, just under the header, over the open sky
+    const hero = D.querySelector('#view .mh-hero'), bar = D.querySelector('header.bar');
+    if (hero && hero.getBoundingClientRect().bottom > innerHeight - chip.offsetHeight - 24 && innerWidth >= 900) {
+      chip.classList.add('ffe-next-top');
+      chip.style.top = Math.round(Math.max(0, bar ? bar.getBoundingClientRect().bottom : 0) + 14) + 'px';
+    }
     let timer = 0, holdOn = false;
     const arm = () => { clearTimeout(timer); timer = setTimeout(() => { if (!holdOn) close(); }, 8000); };
     const close = () => { clearTimeout(timer); W.removeEventListener('hashchange', close); W.removeEventListener('popstate', close); const had = chip && chip.contains(D.activeElement); pending = null; drop(); if (had) focusH1(); };

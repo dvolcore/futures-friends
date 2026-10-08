@@ -66,8 +66,12 @@ for (const width of [1280, 390]) {
     assert.ok(fv.letters >= 14, `the flying letters were there: ${fv.letters}`);
     assert.match(await page.textContent('.ffe-next'), /You were sent to: Curriculum by age/);
     assert.equal(fv.chip.focus, false, 'the note never takes focus');
-    const box = await page.evaluate(() => { const c = document.querySelector('.ffe-next').getBoundingClientRect(); return [c.left >= 0, c.right <= innerWidth, c.bottom <= innerHeight, c.height <= 60]; });
-    assert.deepEqual(box, [true, true, true, true], 'small, inside the screen');
+    const box = await page.evaluate(() => { const c = document.querySelector('.ffe-next').getBoundingClientRect(); const H = document.querySelector('#view .mh-hero'), hero = H.getBoundingClientRect();
+      const card = [...H.querySelectorAll('*')].filter(e => /Learn\. Move/.test(e.textContent) && e.querySelector('a,button')).pop().getBoundingClientRect();
+      const over = (a, b) => b.width > 0 && a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+      const friends = [...H.querySelectorAll('img')].filter(i => /(booker|lumi|zuri|bop)/i.test(i.currentSrc || i.src) && getComputedStyle(i).opacity !== '0').some(f => over(c, f.getBoundingClientRect()));
+      return [c.left >= 0, c.right <= innerWidth, c.bottom <= innerHeight, c.height <= 60, !over(c, card), !friends, c.top >= hero.bottom || c.top < hero.top + 80]; });
+    assert.deepEqual(box, [true, true, true, true, true, true, true], `small, inside the screen, off the hero's card and friends: ${box}`);
     await page.waitForTimeout(2500);
     assert.equal(await page.evaluate(() => location.hash), '#home', 'stays on Home: no auto-continue');
     assert.equal(await page.evaluate(() => history.length), len0, 'no extra history entry for the hop');
