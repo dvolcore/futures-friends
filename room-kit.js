@@ -185,7 +185,7 @@ function roomFig(r) {
   return `<figure class="rk-roomfig${has ? ' rk-has-kit' : ''}" data-room="${E(k)}"><div class="rk-roomframe">${real}${kit}
     <span class="rk-roomlabel" data-rk-label>Real photo</span></div>
     ${has ? `<div class="rk-toggle" role="group" aria-label="Show the room"><button type="button" aria-pressed="true" data-rk-view="real">Real room</button><button type="button" aria-pressed="false" data-rk-view="kit">With the kit</button></div>` : ''}
-    <figcaption>${has ? 'Concept view: an AI-generated illustration of the kit in a room like ours. It is not a photo of a finished room.' : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
+    <figcaption>${has ? `<b class="rk-roomcap">${(W.FFArt && W.FFArt.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.'}</b> Concept view of a room like ours; it is not a photo of a finished room.` : 'Real photo, no people. Concept views with the kit are on the way.'}</figcaption></figure>`;
 }
 
 function zones() {
@@ -374,9 +374,7 @@ function mountRooms() {
     const ok = (list || []).filter(r => r && r.key && r.kit && REAL_ALT[r.key]);
     if (!ok.length || !document.body.contains(box)) return;
     const by = Object.fromEntries(ok.map(r => [r.key, r]));
-    // The owner's second concept for a room (manifest "alternates", FFBrandedAlternates): same real photo, a second labelled concept.
-    const alts = (Array.isArray(W.FFBrandedAlternates) ? W.FFBrandedAlternates : []).filter(x => x && x.room && x.kit && by[x.room]);
-    box.innerHTML = Object.keys(REAL_ALT).filter(k => by[k]).slice(0, 5).map(k => roomFig(by[k])).join('') + alts.map(x => roomFig({ key: x.room, kit: x.kit, alt: x.alt, w: x.w, h: x.h })).join('');
+    box.innerHTML = Object.keys(REAL_ALT).filter(k => by[k]).slice(0, 5).map(k => roomFig(by[k])).join('');
     box.querySelectorAll('.rk-has-kit').forEach(f => showRoom(f, 'kit'));
   });
 }

@@ -20,11 +20,6 @@ function rooms() {
   const list = Array.isArray(W.FFBrandedRooms) ? W.FFBrandedRooms.filter(r => r && r.key && r.kit) : [];
   const at = r => { const i = ORDER.indexOf(r.key); return i < 0 ? 99 : i; };
   const out = list.slice().sort((a, b) => at(a) - at(b));
-  // extra concepts for a room (window.FFBrandedAlternates, brand-art.js) follow that room's own concept
-  (Array.isArray(W.FFBrandedAlternates) ? W.FFBrandedAlternates : []).forEach(a => {
-    if (!a || !a.kit || !a.room) return;
-    const i = out.findIndex(r => r.key === a.room); out.splice(i < 0 ? out.length : i + 1, 0, a);
-  });
   return out;
 }
 function pic(src, alt, w, h, cls) {   // our -800 jpg plus its 400/1200 and webp siblings
@@ -42,7 +37,7 @@ function slide(r, i, n) {
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';
   return `<div class="ks-slide" role="group" aria-roledescription="slide" aria-label="Room ${i + 1} of ${n}: ${E(r.zone || '')}">
    <figure class="ffa-photo ffa-kit ks-fig" data-kit-view="kit"><div class="ffa-kit-stage">${img}<span class="ffa-kit-label" aria-hidden="true">Concept</span>${toggle}</div>
-   <figcaption><b>${E(r.zone || '')}</b><span>Concept illustration, not installed yet. The real room is one tap away.</span></figcaption></figure></div>`;
+   <figcaption><b>${E(r.zone || '')}</b><span class="ffa-kit-caption">${E((A && A.KIT_CAPTION) || 'AI-generated proposed transformation — furnishings and products shown as concepts.')}</span><span>Not installed yet. The real room is one tap away.</span></figcaption></figure></div>`;
 }
 function chips(RK) {
   return `<ul class="ks-chips" aria-label="The five zones">${RK.ZONES.map(z => `<li style="--zf:${z.felt};--zi:${z.ink};--zt:${z.tint}"><span class="ks-dot" aria-hidden="true"></span>${E(z.name)}</li>`).join('')}</ul>`;

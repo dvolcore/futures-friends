@@ -152,4 +152,8 @@ div.ffi-soon[role="alert"]::after{background-image:image-set(url(img/plush/chara
 .ffa-kit-toggle button[aria-pressed="true"]{background:#1F2A55;color:#fff}
 .ffa-kit-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .ffa-photo .ffa-kit-note{font-size:12.5px}
+.ffa-photo figcaption .ffa-kit-caption{font-size:13px;font-weight:600;color:#4B2A66;line-height:1.35}
+.band-navy .ffa-photo figcaption .ffa-kit-caption{color:#E6D6F5}
 @media (prefers-reduced-motion:reduce){.ffa-kit-stage>*{transition:none}}
+
+.ffa-compare-in{display:grid;gap:18px}.ffa-compare .ffa-compare-tag{font:600 12px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#233c50}.ffa-compare .ffa-photo{align-content:start}
