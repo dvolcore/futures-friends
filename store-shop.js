@@ -1,9 +1,12 @@
-/* Futures Friends Store: the shop pages. #store (home), #shop and #shop/<collection> (collection pages with filters and sort), #shop-programs (the centers'
-   door, same pages) and #kids-shop (the families' small shop, same product cards, product pages and cart).
+/* Futures Friends Store: the shop pages. #store (home), #shop and #shop/<collection> (collection pages with a sticky rail and filter bar), #shop-programs (the centers'
+   door, same pages) and #kids-shop (the families' shop: same cards, quick view, product pages and bag).
    Loaded after audiences.js and room-kit.js so it replaces the old store views; store.js keeps the corner guide and #store-request.
    Shared helpers go out on window.FFShopUI for store-product.js and store-order.js. Sends nothing by itself.
-   Design: pop-up storybook. Product pictures sit on warm felt, all in the same frame; a second picture shows on hover. Room pictures are the owner's
-   branded-room concepts and always carry the "Concept image" badge and the owner's caption. Nothing here invents a price, a date or a stock count. */
+
+   Design (owner, 2026-10-07: "a high-tech store, not a landing page"): a full-bleed hero with a looping muted product video and a parallax collage; a sticky collection
+   rail with picture chips; studio-tone product cards that swap to the back view on hover and open a quick view; a "Shop by friend" section built from the four single-shot
+   dolls; an editorial band from the branded-room concept images. Motion is transform and opacity only and every bit of it stops under prefers-reduced-motion.
+   Truth rules: no ratings, no reviews, no "sold" counts, no invented price, size, date or stock. Room pictures carry the owner's concept caption; product pictures say Concept sample. */
 (function () {
 'use strict';
 if (typeof V === 'undefined' || !window.FFCatalog || !window.FFCart) return;
@@ -11,15 +14,27 @@ const W = window, C = W.FFCatalog, K = W.FFCart, E = K.E, ico = K.ico, imgTag = 
 const PHONE = '(816) 988-5661';
 const TONES = ['booker', 'lumi', 'zuri', 'bop'];
 const tone = p => (TONES.includes(p.tone) ? p.tone : 'gold');
+const tint = t => (t === 'gold' ? 'cream' : t + '-s');
 const rooms = () => K.rooms();
 const lnk = (route, html, cls) => `<a class="${cls || ''}" href="#${route}" data-go="${route}">${html}</a>`;
 const aud = () => { try { return W.FFAudience && W.FFAudience.get ? W.FFAudience.get() : ''; } catch (_) { return ''; } };
+const reduced = () => { try { return W.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) { return false; } };
+const NAME = { booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop', all: 'All four friends' };
 
 // ------------------------------------------------------------------ pieces shared with the other store files
-// Breadcrumbs and the "Back to" chip come from wayfinding.js (it replaces any trail a page draws), so pages here draw none.
+// Breadcrumbs and the "Back to" chip come from wayfinding.js (it replaces any trail a page draws), so pages here draw none. trail() tells it which side the visitor is on.
 const crumbs = () => '';
+const SECTION = { tshirt: ['tshirts', 'T-shirts'], hoodie: ['hoodies', 'Hoodies'], backpack: ['backpacks', 'Backpacks'] };
+function trail(id, audience) {
+  const p = C.product(id); if (!p) return [['home', 'Home']];
+  const fam = audience === 'families' || (p.audiences.length === 1 && p.audiences[0] === 'family') || p.collection === 'kids';
+  const sec = p.apparelType && SECTION[p.apparelType] ? ['shop/' + SECTION[p.apparelType][0], SECTION[p.apparelType][1]] : ['shop/' + p.collection, (C.collection(p.collection) || {}).name || 'Shop'];
+  if (fam && p.collection !== 'kids') return [['home', 'Home'], ['kids-shop', 'Kids’ Shop'], sec];
+  if (fam) return [['home', 'Home'], ['kids-shop', 'Kids’ Shop']];
+  return [['home', 'Home'], ['centers', 'For centers & programs'], ['store', 'Futures Store'], sec];
+}
 const badgeHtml = (t, kind) => `<span class="sp-badge${kind ? ' sp-badge-' + kind : ''}">${E(t)}</span>`;
-const chipsFor = (p, max) => p.badges.filter(b => b !== 'Concept image').slice(0, max || 3).map(b => badgeHtml(b, /safety/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('');
+const chipsFor = (p, max) => p.badges.filter(b => !/^Concept/.test(b)).slice(0, max || 3).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : /Digital|Print/.test(b) ? 'soft' : '')).join('');
 function priceBlock(p, opts) {
   const big = opts && opts.big;
   let main, sub = '';
@@ -30,56 +45,95 @@ function priceBlock(p, opts) {
   } else main = `<span class="sp-price sp-price-text">${E(C.priceText(p))}</span>`;
   return `<p class="sp-pricewrap${big ? ' is-big' : ''}">${main}${sub ? ` <span class="sp-pricesub">${sub}</span>` : ''}</p>`;
 }
-/* One product card. Same frame for every picture; a second picture on hover when there is one. */
+/* One product card: a studio-tone frame, the back view on hover, a quick view button, the friend's color. */
 function card(p, o) {
   o = o || {};
   const g = C.gallery(p, rooms()), a = g[0], b = g[1];
   const concept = a && a.kind === 'concept', sample = a && a.kind === 'sample';
-  const href = 'product/' + p.id, t = tone(p);
-  const cta = C.canOrder(p) ? '' : p.cta === 'notify' ? 'Notify me' : p.cta === 'link' ? 'Free to print' : '';
-  return `<li class="sp-cardwrap"><article class="sp-card" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})" data-pid="${E(p.id)}">
-    <a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
-      ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 280px', alt: '' }) : ''}
-      ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 280px', alt: '', cls: 'sp-img2' }) : ''}
+  const href = 'product/' + p.id, t = tone(p), ch = C.charOf(p);
+  const cta = C.canOrder(p) ? (p.priceState === 'fixed' ? 'Add to bag' : 'Request') : p.cta === 'notify' ? 'Notify me' : p.cta === 'link' ? 'Free to print' : 'View';
+  return `<li class="sp-cardwrap" data-rv><article class="sp-card" style="--tone:var(--${t});--tone-s:var(--${tint(t)})" data-pid="${E(p.id)}">
+    <div class="sp-mwrap"><a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
+      ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 300px', alt: '' }) : ''}
+      ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 300px', alt: '', cls: 'sp-img2' }) : ''}
       ${concept ? badgeHtml('Concept image', 'concept') : sample ? badgeHtml('Concept sample', 'sample') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
     </a>
+    <button type="button" class="sp-qv" data-sp-qv="${E(p.id)}" aria-label="Quick view: ${E(p.name)}">${ico('eye')}<span>Quick view</span></button></div>
     <div class="sp-card-body">
+      ${ch ? `<p class="sp-who"><i aria-hidden="true"></i>${E(NAME[ch])}</p>` : ''}
       <h3 class="sp-card-name">${lnk(href, E(p.name))}</h3>
       <p class="sp-card-short">${E(p.short)}</p>
       <div class="sp-card-chips">${chipsFor(p, 2)}</div>
-      <div class="sp-card-foot">${priceBlock(p)}${cta ? `<span class="sp-card-cta">${E(cta)} ${ico('arrow')}</span>` : `<span class="sp-card-cta">View ${ico('arrow')}</span>`}</div>
+      <div class="sp-card-foot">${priceBlock(p)}<span class="sp-card-cta">${E(cta)} ${ico('arrow')}</span></div>
     </div></article></li>`;
 }
 const caption = `<p class="sp-caption">Room pictures marked Concept image: ${E(C.CONCEPT_CAPTION)}</p>`;
 const sampleCap = `<p class="sp-caption">Pictures marked Concept sample are AI-generated development images. ${E(C.SAMPLE_CAPTION)}</p>`;
 const captionFor = list => { const k = new Set(list.map(p => (C.gallery(p, rooms())[0] || {}).kind)); return (k.has('concept') ? caption : '') + (k.has('sample') ? sampleCap : ''); };
-const tradePills = `<ul class="sp-pills" aria-label="Collections">${C.COLLECTIONS.filter(c => c.id !== 'kids').map(c => `<li>${lnk('shop/' + c.id, E(c.name), 'sp-pill')}</li>`).join('')}<li>${lnk('kids-shop', 'Kids’ Shop', 'sp-pill')}</li></ul>`;
+const termsLine = (name) => (W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [[name, 'merch-pod']], { compact: true }) : '');
 
-// ------------------------------------------------------------------ #store: the home of the shop
-function collTile(c, i) {
-  const n = C.inCollection(c.id).length + (c.id === 'plush' ? 4 : 0), href = c.id === 'kids' ? 'kids-shop' : 'shop/' + c.id;
-  const sizes = i === 0 ? '(max-width:900px) 92vw, 560px' : '(max-width:900px) 46vw, 300px';
-  let g = C.heroImage(c.id), badge = g ? badgeHtml('Concept sample', 'sample') : '', cls = '';
-  if (!g) { g = c.room ? C.roomShot({ id: c.id, name: c.name, kind: 'kit', room: c.room }, rooms()) : null; badge = g ? badgeHtml('Concept image', 'concept') : ''; }
-  if (!g && c.id === 'books') { g = C.fallbacks(C.product('book-booker-tries-again'), rooms())[0]; g = Object.assign({}, g, { fit: 'contain' }); cls = ' is-tile'; }
-  if (!g) { g = C.gallery(C.product('plush-lumi'), rooms())[0]; badge = badgeHtml('Concept sample', 'sample'); cls = ' is-sample'; }
-  const count = c.id === 'kids' ? C.kidsSections().reduce((t, x) => t + x[2].length, 0) : n;
-  return `<li class="sp-tilewrap sp-tw-${c.id}"><a class="sp-tile" href="#${href}" data-go="${href}" style="--tone:var(--${c.tone});--tone-s:var(--${c.tone}-s)">
-    <span class="sp-tile-media${cls}">${imgTag(g, { sizes, alt: '' })}${badge}</span>
-    <span class="sp-tile-body"><span class="sp-tile-name">${E(c.name)}</span><span class="sp-tile-blurb">${E(c.blurb)}</span><span class="sp-tile-go">${count} ${count === 1 ? 'item' : 'items'} ${ico('arrow')}</span></span></a></li>`;
+// ------------------------------------------------------------------ the sticky collection rail (picture chips) and the search pill
+const RAIL = {
+  kits: ['Kits', null], carpets: ['Carpets', 'rug-friends-circle'], posters: ['Posters', 'poster-friends-circle-v1'], plush: ['Plush', 'plush-lumi'],
+  apparel: ['Apparel', 'all-friends-hoodie'], backpacks: ['Backpacks', 'zuri-shell-backpack']
+};
+const RAIL_ORDER = { families: ['apparel', 'backpacks', 'plush', 'carpets', 'posters'], centers: ['kits', 'carpets', 'posters', 'plush', 'apparel', 'backpacks'] };
+function railChip(id, active) {
+  const [label, pid] = RAIL[id];
+  let g = pid ? C.gallery(C.product(pid), rooms())[0] : C.roomShot({ id: 'rail', name: 'Kits', kind: 'kit', room: 'turtle-rug' }, rooms());
+  return `<li><a class="sp-chip${active === id ? ' is-on' : ''}" href="#shop/${id}" data-go="shop/${id}"${active === id ? ' aria-current="page"' : ''}><span class="sp-chip-i${g && g.kind === 'sample' ? ' is-sample' : ''}">${g ? imgTag(g, { sizes: '44px', alt: '' }) : ''}</span><span>${label}</span></a></li>`;
+}
+function rail(active) {
+  const side = aud() === 'families' ? 'families' : 'centers', ids = RAIL_ORDER[side];
+  return `<nav class="sp-rail" aria-label="Shop collections" data-sp-rail><div class="wrap sp-rail-in"><ul class="sp-rail-list">${lnkAll(active)}${ids.map(i => railChip(i, active)).join('')}</ul>
+    <button type="button" class="sp-rail-search" data-sp-search aria-label="Search the store">${ico('search')}<span>Search</span></button></div></nav>`;
+}
+const lnkAll = active => `<li><button type="button" class="sp-chip sp-chip-all${active === 'all' ? ' is-on' : ''}" data-go="shop/all"${active === 'all' ? ' aria-current="page"' : ''}><span class="sp-chip-i sp-chip-grid">${ico('grid')}</span><span>All</span></button></li>`;
+
+// ------------------------------------------------------------------ hero: full-bleed, a muted looping product video, a parallax collage
+const VIDEO = { centers: ['video/store/centers-preview.mp4', 'video/store/centers-preview-poster.webp', 'Product motion preview: the Friends Circle carpet and zone posters in a classroom concept'],
+  families: ['video/store/families-preview.mp4', 'video/store/families-preview-poster.webp', 'Product motion preview: a reading corner concept with the friends’ carpet'] };
+function heroHtml(side) {
+  const fam = side === 'families', v = VIDEO[side];
+  const tiles = fam ? ['plush-bop', 'zuri-shell-backpack', 'lumi-hoodie'] : ['plush-zuri', 'rug-bop-movement-zone', 'poster-booker-reading-area-v1'];
+  const tile = (id, d, cls) => { const p = C.product(id), g = C.gallery(p, rooms())[0]; return g ? `<span class="sp-float ${cls}" style="--d:${d}">${imgTag(g, { sizes: '180px', alt: '', eager: true })}</span>` : ''; };
+  return `<section class="sp-hero2 sp-hero2-${side}" data-sp-hero aria-labelledby="spH1"><div class="sp-hero2-bg" aria-hidden="true"></div>
+    <div class="wrap sp-hero2-grid"><div class="sp-hero2-copy">
+      <h1 id="spH1">${fam ? 'Booker’s on a backpack. Lumi’s on a hoodie.' : 'Shop the room.'}</h1>
+      <p class="sp-hero2-lede">${fam ? 'Shirts, hoodies, backpacks, plush friends, carpets and posters. Add what you like and send the request. We write back with prices and sizes, and nothing is charged until you say yes.'
+        : 'Learning Zones kits, zone carpets, posters, plush and the apparel for the people in the room. Made to order for centers, home daycares and churches.'}</p>
+      <div class="sp-hero2-acts">${fam ? lnk('shop/apparel', 'Shop apparel ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('shop/plush', 'Meet the plush', 'btn sp-btn-lg sp-btn-glass')
+        : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold sp-btn-lg') + lnk('room-planner', 'Plan your room', 'btn sp-btn-lg sp-btn-glass')}</div>
+      <ul class="sp-hero2-facts"><li>Made to order</li><li>Concept samples, not stock photos</li><li>Orders go in as requests</li></ul></div>
+    <div class="sp-hero2-stage" aria-hidden="false">
+      <div class="sp-vid" data-sp-vidwrap><video class="sp-vid-el" data-sp-video muted loop playsinline preload="none" poster="${v[1]}" aria-label="${E(v[2])}" tabindex="-1"><source src="${v[0]}" type="video/mp4"></video>
+        <button type="button" class="sp-vid-btn" data-sp-vidbtn aria-pressed="false" aria-label="Pause the preview video">${ico('pause')}</button><span class="sp-vid-tag">Concept preview</span></div>
+      ${fam ? tile(tiles[0], 18, 'sp-float-a') + tile(tiles[1], 30, 'sp-float-b') + tile(tiles[2], 12, 'sp-float-c') : tile(tiles[0], 18, 'sp-float-a') + tile(tiles[1], 30, 'sp-float-b') + tile(tiles[2], 12, 'sp-float-c')}</div></div></section>`;
 }
 function trustStrip() {
   const ic = { ships: 'truck', time: 'clock', licence: 'shield', support: 'phone' };
-  return `<section class="sp-trust" aria-label="How ordering works"><div class="wrap"><ul>${C.TRUST.map(t => `<li>${ico(ic[t[0]])}<div><h3>${E(t[1])}</h3><p>${E(t[2])}</p></div></li>`).join('')}</ul></div></section>`;
+  return `<section class="sp-trust" aria-label="How ordering works"><div class="wrap"><ul>${C.TRUST.map(t => `<li data-rv>${ico(ic[t[0]])}<div><h3>${E(t[1])}</h3><p>${E(t[2])}</p></div></li>`).join('')}</ul></div></section>`;
 }
-function featured() {
-  const p = C.product('kit-center-starter'), g = C.gallery(p, rooms())[0];
-  return `<section class="sp-feature" aria-labelledby="spFeatH"><div class="wrap sp-feature-grid">
-    <figure class="sp-feature-fig">${imgTag(g, { sizes: '(max-width:820px) 92vw, 600px', alt: g.alt })}${badgeHtml('Concept image', 'concept')}<figcaption>${E(C.CONCEPT_CAPTION)}</figcaption></figure>
-    <div class="sp-feature-copy"><h2 id="spFeatH">Start with the Center Starter Kit</h2>
-      <p class="sp-feature-lede">A model room with an 8 ft Friends Circle rug, five zone signs, four posters and printed puppets, plus lighter starter sets for your next two classrooms.</p>
-      ${priceBlock(p, { big: true })}<p class="sp-feature-sub">${E(C.MEMBER)}</p>
-      <div class="sp-feature-acts"><button type="button" class="btn gold" data-sp-add="${p.id}">Add to cart</button>${lnk('product/' + p.id, 'See what is in the box ' + ico('arrow'), 'btn soft')}</div></div></div></section>`;
+
+// ------------------------------------------------------------------ shop by friend: the four single-shot dolls
+function friends() {
+  return `<section class="sp-friends" aria-labelledby="spFriendsH"><div class="wrap"><div class="sp-sec-h"><h2 id="spFriendsH">Shop by friend</h2><p>Pick a friend and see everything they are on.</p></div>
+    <ul class="sp-friend-grid">${['booker', 'lumi', 'zuri', 'bop'].map(k => { const g = C.gallery(C.product('plush-' + k), rooms())[0], n = C.query('friend-' + k).length;
+      return `<li data-rv><a class="sp-friend" href="#shop/friend-${k}" data-go="shop/friend-${k}" style="--tone:var(--${k});--tone-s:var(--${k}-s)"><span class="sp-friend-img">${g ? imgTag(g, { sizes: '(max-width:700px) 46vw, 260px', alt: '' }) : ''}</span>
+        <span class="sp-friend-t"><b>${NAME[k]}</b><span>${n} things</span></span><span class="sp-friend-go">${ico('arrow')}</span></a></li>`; }).join('')}</ul>${sampleCap}</div></section>`;
+}
+// ------------------------------------------------------------------ a horizontal product row ("See all")
+function row(title, sub, href, list, id) {
+  return `<section class="sp-rowsec" aria-labelledby="${id}"><div class="wrap"><div class="sp-sec-h"><div><h2 id="${id}">${E(title)}</h2>${sub ? `<p>${E(sub)}</p>` : ''}</div>${lnk(href, 'See all ' + ico('arrow'), 'sp-link sp-seeall')}</div></div>
+    <ul class="sp-row" tabindex="0" aria-label="${E(title)}, swipe for more">${list.map(p => card(p, { sizes: '(max-width:700px) 62vw, 300px' })).join('')}</ul></section>`;
+}
+function editorial(side) {
+  const g = C.roomShot({ id: 'band', name: 'Learning Zones Kit', kind: 'kit', room: side === 'families' ? 'alphabet-rug' : 'turtle-rug' }, rooms());
+  return `<section class="sp-edit" aria-labelledby="spEditH"><div class="sp-edit-img">${imgTag(g, { sizes: '100vw', alt: g.alt })}</div><div class="sp-edit-shade" aria-hidden="true"></div>
+    <div class="wrap sp-edit-in"><div class="sp-edit-copy" data-rv><h2 id="spEditH">${side === 'families' ? 'Make a corner of home theirs.' : 'Five zones. One room that explains itself.'}</h2>
+      <p>${side === 'families' ? 'A carpet for the reading nook, a poster above it, and a plush friend waiting in the middle.' : 'A rug marks each friend’s corner, a low fence keeps every child in sight, and the signs say where to go.'}</p>
+      <div class="sp-hero2-acts">${side === 'families' ? lnk('shop/carpets', 'Shop carpets ' + ico('arrow'), 'btn gold') : lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${side === 'families' ? '' : lnk('room-kit', 'See the Learning Zones Kit', 'btn sp-btn-glass')}</div></div>
+    <p class="sp-edit-cap">${E(C.CONCEPT_CAPTION)}</p></div></section>`;
 }
 function bridge() {
   return `<section class="sp-bridge" aria-labelledby="spBridgeH"><div class="wrap sp-bridge-grid">
@@ -92,95 +146,162 @@ function know() {
   return `<section class="sp-know" aria-labelledby="spKnowH"><div class="wrap"><h2 id="spKnowH">Before you order</h2>
     <dl class="sp-knowlist">${C.LABELS.map(l => { const draft = /Draft/.test(l[2]); return `<div><dt>${E(l[1])}${draft ? ' <span class="sp-badge sp-badge-hold">Draft</span>' : ''}</dt><dd>${E(l[2])}</dd></div>`; }).join('')}</dl></div></section>`;
 }
-V.store = () => {
-  const hero = C.roomShot({ id: 'hero', name: 'Learning Zones Kit', room: 'turtle-rug', kind: 'kit' }, rooms());
-  return `<div class="sp sp-home">
-  <section class="sp-hero"><div class="wrap sp-hero-grid">
-    <div class="sp-hero-copy"><h1>The Futures Store</h1>
-      <p class="sp-lede">Rugs, mats, fences, signs and posters for a room that runs on Booker, Lumi, Zuri and Bop. Made for centers, home daycares and churches.</p>
-      <div class="sp-hero-acts">${lnk('shop/kits', 'Shop the kits ' + ico('arrow'), 'btn gold')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div>
-      <p class="sp-hero-note">Orders go in as requests while safety testing finishes and online payment opens. You see a written price and shipping cost, and approve it, before anything is charged.</p></div>
-    <figure class="sp-hero-fig"><span class="sp-hero-stage"><span class="sp-hero-frame">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 620px', alt: hero.alt })}${badgeHtml('Concept image', 'concept')}</span>
-      <img class="sp-hero-bop" src="img/plush/characters/bop-waving-480.webp" srcset="img/plush/characters/bop-waving-480.webp 480w, img/plush/characters/bop-waving-960.webp 960w" sizes="150px" alt="" width="480" height="480" loading="eager" decoding="async"></span>
-      <figcaption>${E(C.CONCEPT_CAPTION)}</figcaption></figure>
-  </div></section>
-  ${trustStrip()}
-  <section class="sp-collections" aria-labelledby="spCollH"><div class="wrap"><h2 id="spCollH">Shop by collection</h2>
-    <ul class="sp-mosaic">${C.COLLECTIONS.map(collTile).join('')}</ul>${caption}${sampleCap}</div></section>
-  ${featured()}
-  ${bridge()}
-  ${know()}
-  <section class="sp-fam"><div class="wrap"><img src="img/plush/characters/lumi-waving-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><p><b>Shopping for home?</b> The Kids’ Shop has a friend poster, a plush friend that opens after safety testing, and free printables.</p>${lnk('kids-shop', 'Visit the Kids’ Shop ' + ico('arrow'), 'btn soft')}</div></section>
-  </div>`;
-};
+const wrapPage = (side, inner) => `<div class="sp sp-pro sp-side-${side}">${inner}</div>`;
 
-// ------------------------------------------------------------------ #shop / #shop/<collection>
-const FS = { audience: '', age: '', zone: '', sort: 'featured' };
+// ------------------------------------------------------------------ #store: the centers' shop
+V.store = () => wrapPage('centers', `${heroHtml('centers')}${rail('')}
+  ${friends()}
+  ${row('Learning Zones Kits', 'The room, set up. Three sizes, from one home room to a four-room center.', 'shop/kits', C.query('kits'), 'spRowKits')}
+  ${row('Carpets and corner rugs', 'A rug for each friend’s zone, and large square corner rugs for a furnished corner.', 'shop/carpets', C.query('carpets').filter(p => p.kind === 'carpet').slice(0, 10), 'spRowRugs')}
+  ${editorial('centers')}
+  ${row('Plush friends', 'Opens for orders only after safety testing. Leave your email on a product page.', 'shop/plush', C.query('plush'), 'spRowPlush')}
+  ${row('Apparel and backpacks', 'For the people in the room. Sizes and prices are still being set.', 'shop/apparel', C.query('apparel').filter(p => p.apparelType !== 'tshirt' || p.who === 'all-friends').slice(0, 10), 'spRowApp')}
+  ${row('Posters', 'Each friend and the Friends Circle, in two designs. $16 a poster.', 'shop/posters', C.query('posters').filter(p => /-v1$/.test(p.id)), 'spRowPosters')}
+  <div class="wrap">${caption}${sampleCap}${termsLine('Futures Store items')}</div>
+  ${trustStrip()}${bridge()}${know()}
+  <section class="sp-fam"><div class="wrap"><img src="img/plush/characters/lumi-waving-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><p><b>Shopping for home?</b> The Kids’ Shop has shirts, hoodies and backpacks, plush friends, carpets, posters and free printables.</p>${lnk('kids-shop', 'Visit the Kids’ Shop ' + ico('arrow'), 'btn soft')}</div></section>`);
+
+// ------------------------------------------------------------------ collection pages: sticky rail, then the filter bar, then the grid
+const FS = { character: '', category: '', price: '', age: '', sort: 'featured' };
+let lastCol = '';
 const opt = (list, cur, any) => `<option value="">${any}</option>` + list.map(o => `<option value="${o[0]}"${cur === o[0] ? ' selected' : ''}>${E(o[1])}</option>`).join('');
 const SORTS = [['featured', 'Featured'], ['name', 'Name, A to Z'], ['price-asc', 'Price, low to high'], ['price-desc', 'Price, high to low']];
+const filtered = () => !!(FS.character || FS.category || FS.price || FS.age);
 function results(colId) {
-  const list = C.query(colId, FS, FS.sort), n = list.length, filtered = !!(FS.audience || FS.age || FS.zone);
+  const list = C.query(colId, FS, FS.sort), n = list.length;
   const grid = n ? `<ul class="sp-grid">${list.map(p => card(p)).join('')}</ul>${captionFor(list)}` : `<div class="sp-empty sp-empty-results">
     <img src="img/plush/characters/zuri-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><h3>Nothing matches those filters</h3>
-    <p>Try a different age band or zone, or clear the filters to see everything in this collection.</p><button type="button" class="btn gold" data-sp-clear>Clear filters</button></div>`;
-  return `<p class="sp-count-line" role="status" aria-live="polite">${n} ${n === 1 ? 'item' : 'items'}${filtered ? ' match' : ''}</p>${grid}`;
+    <p>Try another friend or age band, or clear the filters to see everything here.</p><button type="button" class="btn gold" data-sp-clear>Clear filters</button></div>`;
+  return `<p class="sp-count-line" role="status" aria-live="polite">${n} ${n === 1 ? 'item' : 'items'}${filtered() ? ' match' : ''}</p>${grid}`;
+}
+function filterBar(c) {
+  const real = !!C.collection(c.id) && c.id !== 'all';
+  return `<form class="sp-bar" role="search" aria-label="Filter and sort ${E(c.name)}" onsubmit="return false"><div class="wrap sp-bar-in">
+    <label class="sp-sel"><span>Friend</span><select data-sp-f="character">${opt(C.CHARS, FS.character, 'Any friend')}</select></label>
+    ${real || c.friend ? '' : `<label class="sp-sel"><span>Category</span><select data-sp-f="category">${opt(C.COLLECTIONS.map(x => [x.id, x.name]), FS.category, 'Everything')}</select></label>`}
+    <label class="sp-sel"><span>Price</span><select data-sp-f="price">${opt([['priced', 'Has a price'], ['ask', 'Request a quote or coming soon']], FS.price, 'Any')}</select></label>
+    <label class="sp-sel"><span>Age</span><select data-sp-f="age">${opt(C.AGES, FS.age, 'All ages')}</select></label>
+    <label class="sp-sel"><span>Sort</span><select data-sp-f="sort">${SORTS.map(s => `<option value="${s[0]}"${FS.sort === s[0] ? ' selected' : ''}>${s[1]}</option>`).join('')}</select></label>
+    <button type="button" class="sp-link sp-clear" data-sp-clear${filtered() ? '' : ' hidden'}>Clear filters</button></div></form>`;
 }
 function collectionPage(colId) {
-  const c = colId === 'all' ? { id: 'all', name: 'All products', blurb: 'Everything in the Futures Store, from kits to books.', tone: 'booker' } : C.collection(colId);
-  const parents = [['store', 'Futures Store']], hero = colId === 'all' ? null : C.heroImage(colId);
-  return `<div class="sp sp-coll" data-col="${E(c.id)}">
-   <header class="sp-pagehead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div>${crumbs(parents.concat([['', c.name]]))}<h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${tradePills}</div>
+  if (lastCol !== colId) { FS.character = FS.category = FS.price = FS.age = ''; FS.sort = 'featured'; lastCol = colId; }
+  const c = colId === 'all' ? { id: 'all', name: 'All products', blurb: 'Everything in the Futures Store, from kits to books.', tone: 'booker' } : C.anyCollection(colId);
+  const hero = colId === 'all' ? null : C.heroImage(c.of || colId), side = aud() === 'families' ? 'families' : 'centers', t = TONES.includes(c.tone) ? c.tone : 'booker';
+  const railOn = RAIL[colId] ? colId : (c.of && RAIL[c.of] ? (RAIL[c.id] ? c.id : c.of) : '');
+  const sub = C.virtual(colId) && !c.friend ? null : null;
+  return `<div class="sp sp-pro sp-coll sp-side-${side}" data-col="${E(c.id)}" style="--tone:var(--${t});--tone-s:var(--${t}-s)">
+   <header class="sp-pagehead sp-collhead"><div class="wrap${hero ? ' sp-headgrid' : ''}"><div><h1>${E(c.name)}</h1><p class="sp-lede">${E(c.blurb)}</p>${sub || ''}</div>
      ${hero ? `<figure class="sp-headfig">${imgTag(hero, { eager: true, sizes: '(max-width:900px) 92vw, 520px', alt: c.name + ', concept samples' })}${badgeHtml('Concept sample', 'sample')}<figcaption>${E(C.SAMPLE_CAPTION)}</figcaption></figure>` : ''}</div></header>
-   <div class="wrap sp-shell"><form class="sp-tools" role="search" aria-label="Filter and sort ${E(c.name)}" onsubmit="return false">
-     <label class="sp-sel"><span>Who it is for</span><select data-sp-f="audience">${opt(C.AUDIENCES, FS.audience, 'Everyone')}</select></label>
-     <label class="sp-sel"><span>Age band</span><select data-sp-f="age">${opt(C.AGES, FS.age, 'All ages')}</select></label>
-     <label class="sp-sel"><span>Zone</span><select data-sp-f="zone">${opt(C.ZONES, FS.zone, 'All zones')}</select></label>
-     <label class="sp-sel"><span>Sort</span><select data-sp-f="sort">${SORTS.map(s => `<option value="${s[0]}"${FS.sort === s[0] ? ' selected' : ''}>${s[1]}</option>`).join('')}</select></label>
-     <button type="button" class="sp-link sp-clear" data-sp-clear${FS.audience || FS.age || FS.zone ? '' : ' hidden'}>Clear filters</button></form>
-   <div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div>${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [[c.name, 'merch-pod']], { compact: true }) : ''}</div>
+   ${rail(railOn)}${filterBar(c)}
+   <div class="wrap sp-shell"><div id="spResults" data-col-id="${E(c.id)}">${results(c.id)}</div>${termsLine(c.name)}</div>
    ${['kits', 'carpets', 'addons'].includes(c.id) ? `<section class="sp-help sp-help-kit"><div class="wrap"><p><b>Not sure what goes in a room?</b> See how the five zones fit together, or lay out your own room to scale.</p><div class="sp-help-acts">${lnk('room-kit', 'See the Learning Zones Kit', 'btn soft')}${lnk('room-planner', 'Plan your room', 'btn soft')}</div></div></section>` : ''}
    <section class="sp-help"><div class="wrap"><p><b>Need something that is not here?</b> Send us the list and we will price it.</p>${lnk('store-request', 'Request a quote', 'btn soft')}</div></section></div>`;
 }
-V.shop = () => { const id = typeof arg === 'string' && arg && (arg === 'all' || C.collection(arg)) ? arg : 'all'; if (id === 'kids') return V['kids-shop'](); return collectionPage(id); };
+V.shop = () => { const id = typeof arg === 'string' && arg && (arg === 'all' || C.anyCollection(arg)) ? arg : 'all'; if (id === 'kids') return V['kids-shop'](); return collectionPage(id); };
 V['shop-programs'] = () => collectionPage('kits');
 
-// ------------------------------------------------------------------ #kids-shop: the families' small shop (same cards, same product pages, same cart)
+// ------------------------------------------------------------------ #kids-shop: the families' shop
 V['kids-shop'] = () => {
   const secs = C.kidsSections(), jump = [['tshirts', 'T-shirts'], ['hoodies', 'Hoodies'], ['backpacks', 'Backpacks'], ['plush', 'Plush'], ['carpets', 'Carpets'], ['posters', 'Posters'], ['more', 'Free printables']];
-  const hero = C.gallery(C.product('all-friends-hoodie'), rooms())[0];
-  return `<div class="sp sp-kids">
-   <header class="sp-pagehead sp-kidshead"><div class="wrap sp-kidsgrid"><div><h1>The Kids\u2019 Shop</h1>
-     <p class="sp-lede">Booker, Lumi, Zuri and Bop on shirts, hoodies and backpacks. Plush friends to hug, carpets for the play corner, posters for the wall, and printables that cost nothing. Add what you like to your cart and send the request. We write back with prices, sizes and timing, and nothing is charged until you say yes.</p>
-     <ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul></div>
-     <figure class="sp-kidsfig"><span class="sp-kidsfig-frame">${imgTag(hero, { eager: true, sizes: '(max-width:700px) 60vw, 300px', alt: 'The All Friends hoodie, concept sample' })}</span></figure></div></header>
-   <div class="wrap sp-shell" id="spResults">${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + col, 'See the whole collection ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
-   ${W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [['Kids\u2019 Shop items', 'merch-pod']], { compact: true }) : ''}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
-   <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section></div>`;
+  return wrapPage('families', `${heroHtml('families')}${rail('')}${friends()}
+   <div class="wrap sp-shell sp-kidsbody" id="spResults"><ul class="sp-pills sp-jump" aria-label="Jump to a section">${jump.map(j => `<li><a class="sp-pill" href="#kids-${j[0]}" data-sp-jump="kids-${j[0]}">${E(j[1])}</a></li>`).join('')}</ul>
+   ${secs.map(([name, col, list, id]) => `<section class="sp-kidsec" id="kids-${id}" tabindex="-1" aria-labelledby="spk-${id}"><div class="sp-kidsec-h"><h2 id="spk-${id}">${E(name)}</h2>${col ? lnk('shop/' + (id === 'tshirts' || id === 'hoodies' || id === 'backpacks' ? id : col), 'See all ' + ico('arrow'), 'sp-link') : ''}</div><ul class="sp-grid sp-grid-kids">${list.map(p => card(p)).join('')}</ul></section>`).join('')}
+   ${termsLine('Kids’ Shop items')}${sampleCap}<p class="sp-note-line">Lumi is a story-world character. Plush cannot be ordered until its safety tests are done. Apparel, carpets and anything without a price go in as requests: we write back with price, sizes and timing.</p></div>
+   ${editorial('families')}
+   <section class="sp-fam sp-fam-b"><div class="wrap"><p><b>Running a classroom?</b> Kits, rugs and signs for centers, home daycares and churches are in the Futures Store.</p>${lnk('store', 'Visit the store ' + ico('arrow'), 'btn soft')}</div></section>`);
 };
 
-// ------------------------------------------------------------------ events: filters, add to cart, notify
+// ------------------------------------------------------------------ quick view: gallery, size picker, quantity, add to bag, without leaving the grid
+let QV = { pid: '', opts: {}, qty: 1, i: 0 }, qvDlg = null;
+function qvOpts(p) {
+  return p.options.map(o => `<fieldset class="sp-opt"><legend>${E(o.label)}</legend><div class="sp-opt-row${o.values.length > 6 ? ' is-sizes' : ''}">${o.values.map(v => `<label class="sp-radio"><input type="radio" name="qv-${E(o.key)}" value="${E(v.id)}" data-sp-qvopt="${E(o.key)}"${QV.opts[o.key] === v.id ? ' checked' : ''}><span>${E(v.label)}${typeof v.price === 'number' ? `<small class="sp-num">${C.fmt(v.price)}</small>` : ''}</span></label>`).join('')}</div></fieldset>`).join('');
+}
+function qvBody(p) {
+  const g = C.gallery(p, rooms()), x = g[QV.i] || g[0], t = tone(p);
+  const buy = C.canOrder(p) ? `<div class="sp-buyrow"><div class="sp-step sp-step-lg" role="group" aria-label="Quantity"><button type="button" data-sp-qvq="-1" aria-label="Fewer"${QV.qty <= 1 ? ' disabled' : ''}>${ico('minus')}</button><output aria-live="polite">${QV.qty}</output><button type="button" data-sp-qvq="1" aria-label="More">${ico('plus')}</button></div>
+      <button type="button" class="btn gold sp-addbtn" data-sp-qvadd>${p.priceState === 'fixed' ? 'Add to bag' : p.priceState === 'soon' ? 'Add to bag as a request' : 'Add to bag for a quote'}</button></div>`
+    : `<div class="sp-buyrow">${lnk('product/' + p.id, (p.cta === 'link' ? 'Open the printables' : 'Tell me when it opens') + ' ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">${p.kind === 'plush' ? 'Plush cannot be ordered until its safety tests are done.' : 'It cannot be ordered yet.'}</p>`;
+  return `<div class="sp-qv-grid" style="--tone:var(--${t});--tone-s:var(--${tint(t)})"><div class="sp-qv-media"><div class="sp-qv-main${x && x.kind === 'sample' ? ' is-sample' : ''}">${x ? imgTag(x, { sizes: '(max-width:760px) 90vw, 460px', alt: x.alt, eager: true }) : ''}${x && x.kind === 'sample' ? badgeHtml('Concept sample', 'sample') : x && x.kind === 'concept' ? badgeHtml('Concept image', 'concept') : ''}</div>
+      ${g.length > 1 ? `<ul class="sp-gal-thumbs" aria-label="Choose a picture">${g.map((y, i) => `<li><button type="button" data-sp-qvth="${i}" aria-label="Show picture ${i + 1}"${i === QV.i ? ' aria-current="true"' : ''}>${imgTag(y, { sizes: '64px', alt: '' })}</button></li>`).join('')}</ul>` : ''}</div>
+    <div class="sp-qv-info"><h2 id="spQvH">${E(p.name)}</h2><div data-sp-qvprice>${priceBlock(p, { big: true, opts: QV.opts })}</div><p class="sp-info-lede">${E(p.short)}</p>
+      <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : '')).join('')}</div>
+      <div class="sp-buy">${qvOpts(p)}${buy}</div>${p.kind === 'plush' || p.id.indexOf('rug') === 0 ? `<p class="sp-buyhint">${p.kind === 'plush' ? 'Safety testing comes before any sale.' : 'Rugs need a flammability report and a Children’s Product Certificate before they ship. Pre-order requests only.'}</p>` : ''}
+      <p class="sp-qv-more">${lnk('product/' + p.id, 'See full details ' + ico('arrow'), 'sp-link')}</p></div></div>`;
+}
+function openQV(pid, from) {
+  const p = C.product(pid); if (!p || typeof HTMLDialogElement === 'undefined') { if (p && typeof go === 'function') go('product', pid); return; }
+  QV = { pid, opts: C.defaultOpts(p), qty: 1, i: 0 };
+  if (!qvDlg) {
+    qvDlg = document.createElement('dialog'); qvDlg.className = 'sp-qvdlg'; qvDlg.setAttribute('aria-labelledby', 'spQvH');
+    qvDlg.innerHTML = `<button type="button" class="sp-x sp-qv-x" data-sp-qvclose aria-label="Close quick view">${ico('x')}</button><div data-sp-qvbody></div>`;
+    document.body.appendChild(qvDlg);
+    qvDlg.addEventListener('click', e => { if (e.target === qvDlg) qvDlg.close(); });
+    qvDlg.addEventListener('close', () => { document.documentElement.classList.remove('sp-lock'); const f = qvDlg._from; if (f && document.contains(f) && f.getClientRects().length) f.focus({ preventScroll: true }); });
+  }
+  qvDlg._from = from; qvDlg.querySelector('[data-sp-qvbody]').innerHTML = qvBody(p);
+  document.documentElement.classList.add('sp-lock'); qvDlg.showModal();
+}
+const qvRepaint = () => { const p = C.product(QV.pid); if (!p || !qvDlg) return; const ae = document.activeElement, key = ae && ae.getAttribute && (ae.getAttribute('data-sp-qvth') !== null ? '[data-sp-qvth="' + ae.getAttribute('data-sp-qvth') + '"]' : ae.getAttribute('data-sp-qvq') !== null ? '[data-sp-qvq="' + ae.getAttribute('data-sp-qvq') + '"]' : ''); qvDlg.querySelector('[data-sp-qvbody]').innerHTML = qvBody(p); if (key) { const n = qvDlg.querySelector(key + ':not([disabled])'); if (n) n.focus({ preventScroll: true }); } };
+
+// ------------------------------------------------------------------ events: filters, quick view, add to bag, hero video, search
 document.addEventListener('change', e => {
-  const s = e.target && e.target.closest && e.target.closest('[data-sp-f]'); if (!s) return;
-  FS[s.dataset.spF] = s.value; repaintResults();
+  const s = e.target && e.target.closest && e.target.closest('[data-sp-f]');
+  if (s) { FS[s.dataset.spF] = s.value; repaintResults(); return; }
+  const o = e.target && e.target.closest && e.target.closest('[data-sp-qvopt]');
+  if (o) { QV.opts[o.dataset.spQvopt] = o.value; const p = C.product(QV.pid), pw = qvDlg.querySelector('[data-sp-qvprice]'); if (pw) pw.innerHTML = priceBlock(p, { big: true, opts: QV.opts }); }
 });
 function repaintResults() {
   const box = document.getElementById('spResults'); if (!box || !box.dataset.colId) return;
-  box.innerHTML = results(box.dataset.colId);
-  const clr = document.querySelector('.sp-clear'); if (clr) clr.hidden = !(FS.audience || FS.age || FS.zone);
+  box.innerHTML = results(box.dataset.colId); markReveal(box);
+  const clr = document.querySelector('.sp-clear'); if (clr) clr.hidden = !filtered();
 }
 document.addEventListener('click', e => {
   const t = e.target && e.target.closest ? e.target : null; if (!t) return;
-  if (t.closest('[data-sp-clear]')) { e.preventDefault(); FS.audience = FS.age = FS.zone = ''; FS.sort = 'featured'; document.querySelectorAll('[data-sp-f]').forEach(s => { s.value = s.dataset.spF === 'sort' ? 'featured' : ''; }); repaintResults(); return; }
+  if (t.closest('[data-sp-clear]')) { e.preventDefault(); FS.character = FS.category = FS.price = FS.age = ''; FS.sort = 'featured'; document.querySelectorAll('[data-sp-f]').forEach(s => { s.value = s.dataset.spF === 'sort' ? 'featured' : ''; }); repaintResults(); return; }
+  const qv = t.closest('[data-sp-qv]'); if (qv) { e.preventDefault(); e.stopPropagation(); openQV(qv.dataset.spQv, qv); return; }
+  if (qvDlg && qvDlg.open) {
+    if (t.closest('[data-sp-qvclose]')) { qvDlg.close(); return; }
+    const th = t.closest('[data-sp-qvth]'); if (th) { QV.i = +th.dataset.spQvth; qvRepaint(); return; }
+    const q = t.closest('[data-sp-qvq]'); if (q) { QV.qty = Math.max(1, Math.min(K.MAXQ, QV.qty + (+q.dataset.spQvq))); qvRepaint(); return; }
+    const ad = t.closest('[data-sp-qvadd]');
+    if (ad) { e.preventDefault(); const p = C.product(QV.pid), from = qvDlg._from && qvDlg._from.closest('.sp-card') || qvDlg._from; qvDlg._from = null; const o = { pid: QV.pid, opts: Object.assign({}, QV.opts), qty: QV.qty }; qvDlg.close(); K.addAnimated(o.pid, o.opts, o.qty, from && from.getClientRects().length ? from : document.getElementById('spCartBtn')); return; }
+    if (t.closest('a[data-go]')) { qvDlg._from = null; qvDlg.close(); return; }
+  }
   const jp = t.closest('a[data-sp-jump^="kids-"]');
-  if (jp) { e.preventDefault(); const el = document.getElementById(jp.dataset.spJump); if (el) { const rm = matchMedia('(prefers-reduced-motion: reduce)').matches; el.scrollIntoView({ behavior: rm ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); } return; }
+  if (jp) { e.preventDefault(); const el = document.getElementById(jp.dataset.spJump); if (el) { el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); } return; }
   const add = t.closest('[data-sp-add]');
-  if (add) { e.preventDefault(); const p = C.product(add.dataset.spAdd); if (p) K.addAnimated(p.id, p.options.length ? C.defaultOpts(p) : {}, 1, add); }
+  if (add) { e.preventDefault(); const p = C.product(add.dataset.spAdd); if (p) K.addAnimated(p.id, p.options.length ? C.defaultOpts(p) : {}, 1, add); return; }
+  if (t.closest('[data-sp-search]')) { e.preventDefault(); try { W.FFWay.palette.open(t.closest('[data-sp-search]')); } catch (_) { /* no palette */ } return; }
+  const vb = t.closest('[data-sp-vidbtn]');
+  if (vb) { const v = vb.closest('[data-sp-vidwrap]').querySelector('video'); if (v.paused) { v.play().catch(() => {}); vb.setAttribute('aria-pressed', 'false'); vb.setAttribute('aria-label', 'Pause the preview video'); vb.innerHTML = ico('pause'); } else { v.pause(); vb.setAttribute('aria-pressed', 'true'); vb.setAttribute('aria-label', 'Play the preview video'); vb.innerHTML = ico('play'); } }
 }, true);
+if (W.addEventListener) W.addEventListener('hashchange', () => { if (qvDlg && qvDlg.open) { qvDlg._from = null; qvDlg.close(); } });
 
 // stop the loading shimmer once a picture has painted
-const loaded = img => { const m = img.closest && img.closest('.sp-media,.sp-gal-zoom,.sp-tile-media'); if (m) m.classList.add('is-loaded'); };
+const loaded = img => { const m = img.closest && img.closest('.sp-media,.sp-gal-zoom,.sp-tile-media,.sp-friend-img,.sp-chip-i'); if (m) m.classList.add('is-loaded'); };
 document.addEventListener('load', e => { if (e.target && e.target.tagName === 'IMG' && e.target.classList.contains('sp-img')) loaded(e.target); }, true);
-(W.FFhooks = W.FFhooks || []).push(() => document.querySelectorAll('.sp-img').forEach(i => { if (i.complete) loaded(i); }));
+
+// scroll-reveal: only for things below the fold, and never under reduced motion
+let io = null;
+function markReveal(root) {
+  if (reduced() || typeof IntersectionObserver !== 'function') return;
+  const els = [...(root || document).querySelectorAll('[data-rv]:not(.is-in)')]; if (!els.length) return;
+  if (!io) io = new IntersectionObserver(en => en.forEach(x => { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+  setTimeout(() => els.forEach(el => el.classList.add('is-in')), 5000);   // safety: nothing stays hidden
+  els.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.96) el.classList.add('is-in'); else { el.classList.add('is-pre'); io.observe(el); } });
+}
+// hero: the video plays only while visible and only with motion allowed; the collage drifts with the pointer
+let vio = null, rafId = 0;
+function heroInit() {
+  const hero = document.querySelector('[data-sp-hero]'); if (vio) { vio.disconnect(); vio = null; } if (!hero) return;
+  const v = hero.querySelector('video'), btn = hero.querySelector('[data-sp-vidbtn]');
+  if (reduced()) { if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.setAttribute('aria-label', 'Play the preview video'); btn.innerHTML = ico('play'); } return; }
+  if (v && typeof IntersectionObserver === 'function') { vio = new IntersectionObserver(en => { const on = en[0].isIntersecting, userPaused = btn && btn.getAttribute('aria-pressed') === 'true'; if (on && !userPaused) { v.play().catch(() => {}); } else v.pause(); }, { threshold: 0.25 }); vio.observe(v); }
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) hero.onpointermove = e => { if (rafId) return; rafId = requestAnimationFrame(() => { rafId = 0; const r = hero.getBoundingClientRect(); hero.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); hero.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); }); };
+}
+// the sticky rail keeps the active chip in view
+function railInit() { const on = document.querySelector('.sp-rail .is-on'); if (on && on.scrollIntoView) { const list = on.closest('.sp-rail-list'); if (list) list.scrollLeft = Math.max(0, on.offsetLeft - 24); } }
 
 // images that arrive late (img/store/manifest.json) repaint the store pages once, if the visitor is not typing
 const STORE_VIEWS = ['store', 'shop', 'shop-programs', 'kids-shop', 'product', 'cart'];
@@ -194,7 +315,11 @@ function loadManifest() {
     if (STORE_VIEWS.includes(typeof view === 'string' ? view : '') && !(a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) && !K.isOpen()) render();
   }).catch(() => { /* no real pictures yet: the concept images stay */ });
 }
-(W.FFhooks = W.FFhooks || []).push(v => { if (STORE_VIEWS.includes(v)) loadManifest(); });
+(W.FFhooks = W.FFhooks || []).push(v => {
+  document.querySelectorAll('.sp-qvdlg[open]').forEach(d => d.close());
+  if (STORE_VIEWS.includes(v)) { loadManifest(); markReveal(); heroInit(); railInit(); }
+  document.querySelectorAll('.sp-img').forEach(i => { if (i.complete) loaded(i); });
+});
 
-W.FFShopUI = { card, crumbs, badgeHtml, chipsFor, priceBlock, caption, lnk, tone, rooms, aud, PHONE, repaintResults };
+W.FFShopUI = { card, crumbs, trail, badgeHtml, chipsFor, priceBlock, caption, lnk, tone, tint, rooms, aud, PHONE, repaintResults, openQV, markReveal };
 })();

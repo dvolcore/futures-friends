@@ -85,7 +85,7 @@ test('the owner\'s merchandise package: every stable id is in the catalog, every
   for (const p of C.PRODUCTS) assert.doesNotMatch(p.name + ' ' + (p.short || ''), /curriculum|lesson plan|unit \d/i, p.id);
 });
 
-test('the plush is not orderable: no add to cart, a Notify me form instead, and the cart refuses it', () => {
+test('the plush is not orderable: no add to bag, a Notify me form instead, and the cart refuses it', () => {
   const { c, W } = world(), C = W.FFCatalog, K = W.FFCart;
   for (const id of ['plush-booker', 'plush-lumi', 'plush-zuri', 'plush-bop']) {
     const p = C.product(id);
@@ -268,7 +268,7 @@ test('every product renders a real page: price text, honest status, no leaks, on
 test('the kids\' shop stays small and uses the same cards, product pages and cart', () => {
   const { c, W } = world(), C = W.FFCatalog, html = c.render('kids-shop');
   assert.deepEqual(plain(C.kidsSections().map(s => s[0])), ['T-shirts', 'Hoodies', 'Backpacks', 'Plush friends', 'Carpets', 'Posters', 'Free printables and a small carpet']);
-  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 5 + 4 + 10 + 10 + 2);
+  assert.equal((html.match(/class="sp-card"/g) || []).length, 5 + 5 + 6 + 4 + 10 + 10 + 2);
   for (const id of ['booker-tshirt', 'all-friends-hoodie', 'zuri-backpack', 'plush-bop', 'rug-lumi-calm-corner', 'rug-square-bop-movement-zone', 'poster-bop-movement-zone-v2', 'poster-friends-circle-v1', 'poster-lumi-calm-corner-v2']) assert.match(html, new RegExp('data-go="product/' + id + '"'), id);
   assert.match(html, /data-go="product\/plush-lumi"/); assert.match(html, /Notify me/);
   assert.doesNotMatch(html, /kit-center|zone-boundaries/);
@@ -325,7 +325,7 @@ test('mobile: no sideways scroll at 360, 390 and 430 px on the store, a collecti
     for (const r of routes) {
       await h.goto(page, srv.base, r, 350);
       await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { scrollTo(0, y); await new Promise(x => setTimeout(x, 30)); } scrollTo(0, 0); });
-      const over = await page.evaluate(() => [...document.querySelectorAll('#view *')].filter(e => { const b = e.getBoundingClientRect(); return b.width > 0 && b.right > innerWidth + 1 && !e.closest('.sp-gal-track,.sp-pills,.sp-gal-thumbs,.tw'); }).slice(0, 4).map(e => e.tagName + '.' + String(e.className).slice(0, 30)));
+      const over = await page.evaluate(() => [...document.querySelectorAll('#view *')].filter(e => { const b = e.getBoundingClientRect(); return b.width > 0 && b.right > innerWidth + 1 && !e.closest('.sp-gal-track,.sp-pills,.sp-gal-thumbs,.tw,.sp-rail-list,.sp-row,.sp-bar-in,.sp-float'); }).slice(0, 4).map(e => e.tagName + '.' + String(e.className).slice(0, 30)));
       if (over.length) bad.push(`${w}px #${r}: ${over.join(', ')}`);
     }
     assert.deepEqual(errors, [], 'no page errors at ' + w);
@@ -343,11 +343,11 @@ test('the cart drawer is an accessible modal: labelled dialog, focus moves in an
   await btn.click(); await page.waitForSelector('#spDrawer.is-open'); await page.waitForTimeout(250);
   const d = page.locator('#spDrawer .sp-panel');
   assert.equal(await d.getAttribute('role'), 'dialog'); assert.equal(await d.getAttribute('aria-modal'), 'true'); assert.equal(await d.getAttribute('aria-labelledby'), 'spDrawerH');
-  assert.equal(await page.locator('#spDrawerH').innerText(), 'Your cart');
+  assert.equal(await page.locator('#spDrawerH').innerText(), 'Your bag');
   assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'focus is inside');
   assert.ok(await page.evaluate(() => ['#view', 'header.bar', 'footer'].every(s => document.querySelector(s).hasAttribute('inert'))), 'the page behind is inert');
-  assert.match(await page.locator('#spLive').innerText(), /Zone Boundaries pack added\. 1 item in your cart\./);
-  assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /1 item in your cart/);
+  assert.match(await page.locator('#spLive').innerText(), /Zone Boundaries pack added\. 1 item in your bag\./);
+  assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /1 item in your bag/);
   // Tab never leaves the dialog
   for (let i = 0; i < 14; i++) { await page.keyboard.press('Tab'); assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'Tab ' + i); }
   for (let i = 0; i < 6; i++) { await page.keyboard.press('Shift+Tab'); assert.ok(await page.evaluate(() => document.getElementById('spDrawer').contains(document.activeElement)), 'Shift+Tab ' + i); }
@@ -370,10 +370,10 @@ test('the cart drawer is an accessible modal: labelled dialog, focus moves in an
 test('browse, product, add to cart, checkout and the request confirmation work end to end, at 390 and 1280, with no payment claim', async () => {
   for (const w of [390, 1280]) {
     const { ctx, page, errors } = await h.open(browser, w);
-    await h.goto(page, srv.base, 'store'); assert.equal(await page.locator('h1').first().innerText(), 'The Futures Store');
-    await page.locator('.sp-tile', { hasText: 'Posters' }).first().click(); await page.waitForSelector('.sp-grid');
+    await h.goto(page, srv.base, 'store'); assert.equal(await page.locator('h1').first().innerText(), 'Shop the room.');
+    await page.locator('.sp-chip', { hasText: 'Posters' }).first().click(); await page.waitForSelector('.sp-grid');
     assert.equal(await page.locator('.sp-card').count(), 10);
-    await page.selectOption('[data-sp-f="zone"]', 'bop'); assert.equal(await page.locator('.sp-card').count(), 2);
+    await page.selectOption('[data-sp-f="character"]', 'bop'); assert.equal(await page.locator('.sp-card').count(), 2);
     await page.locator('.sp-card-name a').first().click(); await page.waitForSelector('.sp-pdp');
     assert.match(await page.locator('.sp-info h1').innerText(), /Bop/);
     await page.locator('.sp-addbtn').first().click(); await page.waitForSelector('#spDrawer.is-open');
@@ -421,7 +421,7 @@ test('shop from anywhere: the header Shop entry and live cart count, the menu, t
     // the live count and the sticky View cart pill follow the cart
     await page.evaluate(() => { try { localStorage.setItem('ff-store-cart-v1', JSON.stringify({ v: 1, items: [{ pid: 'booker-backpack', opts: {}, qty: 2 }] })); } catch (_) { /* none */ } });
     await h.goto(page, srv.base, aud === 'families' ? 'kids-shop' : 'store');
-    assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /2 items in your cart/);
+    assert.match(await page.locator('#spCartBtn .sp-sr').innerText(), /2 items in your bag/);
     assert.ok(await page.locator('#spViewCart').isVisible(), 'View cart pill');
     await page.locator('#spViewCart').click(); await page.waitForSelector('#spDrawer.is-open'); assert.match(await page.locator('#spDrawer').innerText(), /Booker backpack/);
     await page.keyboard.press('Escape'); await page.waitForFunction(() => document.getElementById('spDrawer').hidden);

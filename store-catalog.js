@@ -202,12 +202,21 @@
       faq: [['Why can’t I order it?', 'Children’s toys must pass third-party testing and carry a Children’s Product Certificate before they are sold. We will not take an order until that is done. Leave your email and we will tell you the day it opens.'], ['Is the picture the real plush?', 'No. It is a concept sample picture of the plush we plan to make. The finished plush may differ.'], FAQ.returns],
       pairs: ['poster-' + ({ booker: 'booker-reading-area', lumi: 'lumi-calm-corner', zuri: 'zuri-discovery-zone', bop: 'bop-movement-zone' })[z] + '-v1', z + '-tshirt', 'book-booker-tries-again'] }));
   });
+  // The Zuri shell backpack (owner image, 2026-10-07): a plush turtle-shell backpack with an embroidered compass badge. Concept sample, no price, request line.
+  add(Object.assign({}, sampleBase, { id: 'zuri-shell-backpack', name: 'Zuri Shell Backpack', collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: 'zuri', zones: ['zuri'], apparelType: 'backpack', who: 'zuri', kidsShop: false, heroPick: true,
+    short: 'A soft felt turtle shell with an embroidered compass badge. Sizes coming soon.', description: 'Zuri\u2019s shell, made into a backpack: brown felt hexagon plates, a compass badge stitched on the middle plate and padded straps. It is a concept sample, so the finished bag may differ.',
+    badges: ['Sizes coming soon', 'Concept sample'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Add it to your cart, say which size you would want in the notes at checkout, and we will write back.',
+    box: ['One felt shell backpack'], dims: ['Sizes, fit and measurements are confirmed after the first sample.'], materials: ['Felt-look hexagon plates, embroidered compass badge, padded straps. Fabric and construction are confirmed with the maker after sample approval.'], care: ['Care instructions follow the final fabric.'],
+    safety: ['Children\u2019s backpacks carry tracking labels, and any zipper pulls or buckles are checked for small parts and strength at the sample stage.'], lead: 'Not available yet. A sample is made and checked before anything is sold.',
+    faq: [['Can I order it?', 'Not yet, but you can ask. Add it to your cart and send the request. We write back with the price, sizes and timing. A request is interest, not an order, and nothing is charged.'], ['Is the picture the real product?', 'No. It is a concept sample picture. The finished product may differ in color, fit and finish.'], FAQ.returns],
+    pairs: ['zuri-backpack', 'plush-zuri', 'zuri-tshirt'] }));
   const TYPE = { 'short-sleeve T-shirt': ['T-shirt', 'tshirt'], 'pullover hoodie': ['hoodie', 'hoodie'], backpack: ['backpack', 'backpack'] };
   const APP_SAFETY = { tshirt: 'Children’s clothing carries permanent tracking labels and meets the federal flammability rule. Care and fiber labels follow the final fabric.', hoodie: 'Children’s hoodies are made with no hood or neck drawstrings, as CPSC guidance requires for sizes 2T to 12, and carry permanent tracking labels.', backpack: 'Children’s backpacks carry tracking labels, and any zipper pulls or buckles are checked for small parts and strength at the sample stage.' };
   MERCH.apparel.forEach(a => {
     const isAll = a.id.indexOf('all-friends') === 0, ty = (TYPE[a.type] || [a.type, 'tshirt']), key = isAll ? 'all-friends' : a.character.toLowerCase(), isPack = ty[1] === 'backpack';
     const nm = (isAll ? 'All Friends' : a.character) + ' ' + ty[0];
-    add(Object.assign({}, sampleBase, { id: a.id, name: nm, collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: TONE[key], zones: FOUR.includes(key) ? [key] : ['circle'], kidsShop: ty[1] === 'tshirt', apparelType: ty[1], who: key,
+    const SIZES = isPack ? [] : [{ key: 'size', label: 'Size you would want (not final)', values: [{ id: 'unsure', label: 'Not sure yet', cart: 'Size to be confirmed' }].concat(['2T', '3T', '4T', '5T', 'Youth S', 'Youth M', 'Youth L', 'Adult S', 'Adult M', 'Adult L', 'Adult XL'].map(z => ({ id: z.toLowerCase().replace(' ', '-'), label: z, cart: 'Size wanted: ' + z }))) }];
+    add(Object.assign({}, sampleBase, { options: SIZES, id: a.id, name: nm, collection: 'apparel', kind: 'apparel', priceState: 'soon', tone: TONE[key], zones: FOUR.includes(key) ? [key] : ['circle'], kidsShop: ty[1] === 'tshirt', apparelType: ty[1], who: key,
       short: (isPack ? 'Front print: “' + a.front_copy + '.”' : 'Back print: “' + a.back_copy + '”') + ' Sizes coming soon.',
       description: isAll ? 'All four friends together on a golden-yellow ' + ty[0] + '.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back carries our tagline, “' + a.back_copy + '”') : a.character + ' on a ' + a.color + ' ' + ty[0] + ', with the Futures Friends wordmark.' + (isPack ? ' The front reads “' + a.front_copy + '.”' : ' The back reads “' + a.back_copy + '”'),
       badges: ['Sizes coming soon', 'Concept sample'], ships: 'parcel', sizesNote: 'Sizes are coming soon. Add it to your cart, say which size you would want in the notes at checkout, and we will write back.',
@@ -254,7 +263,7 @@
     for (const o of p.options) { const v = optionById(p, o.key, (opts || {})[o.key] || o.values[0].id); if (v && typeof v.price === 'number') return v.price; }
     return typeof p.price === 'number' ? p.price : null;
   }
-  const optLabel = (p, opts) => p.options.map(o => { const v = optionById(p, o.key, (opts || {})[o.key] || o.values[0].id); return v ? v.label : ''; }).filter(Boolean).join(', ');
+  const optLabel = (p, opts) => p.options.map(o => { const v = optionById(p, o.key, (opts || {})[o.key] || o.values[0].id); return v ? (v.cart || v.label) : ''; }).filter(Boolean).join(', ');
   const priceFrom = p => { if (p.priceState !== 'fixed') return null; const all = p.options.flatMap(o => o.values.map(v => v.price)).filter(n => typeof n === 'number'); return all.length ? Math.min(...all) : p.price; };
   const fmt = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
   /* Price text exactly as shown on cards and pages. */
@@ -269,18 +278,41 @@
   }
   const canOrder = p => !!p.orderable && p.cta === 'cart';
   const inCollection = id => P.filter(p => p.collection === id);
-  /* Filter + sort for the collection pages. f: { audience, age, zone }, sort: featured | name | price-asc | price-desc */
+  /* The friend a product belongs to: booker, lumi, zuri, bop, or 'all' for the four together. '' for things that are not about one friend (kits, signs, books). */
+  const charOf = p => (['carpet', 'plush', 'poster', 'apparel'].includes(p.kind) ? (p.tone === 'gold' ? 'all' : p.tone) : '');
+  const CHARS = [['booker', 'Booker'], ['lumi', 'Lumi'], ['zuri', 'Zuri'], ['bop', 'Bop'], ['all', 'All four friends']];
+  // Virtual collections: a slice of a real one, or everything for one friend. They get a page, a rail chip and a search entry like any other.
+  const VIRTUAL = [
+    { id: 'tshirts', name: 'T-shirts', blurb: 'A T-shirt for each friend and one for all four. The back carries a line in their voice.', of: 'apparel', test: p => p.apparelType === 'tshirt', tone: 'booker' },
+    { id: 'hoodies', name: 'Hoodies', blurb: 'Pullover hoodies for Booker, Lumi, Zuri, Bop and all four together.', of: 'apparel', test: p => p.apparelType === 'hoodie', tone: 'lumi' },
+    { id: 'backpacks', name: 'Backpacks', blurb: 'A backpack for every friend, and Zuri\u2019s felt turtle shell.', of: 'apparel', test: p => p.apparelType === 'backpack', tone: 'zuri' }
+  ].concat(CHARS.filter(c => c[0] !== 'all').map(c => ({ id: 'friend-' + c[0], name: 'Everything ' + c[1], blurb: 'Plush, apparel, posters and carpets with ' + c[1] + ' on them.', test: p => charOf(p) === c[0], tone: c[0], friend: c[0] })));
+  const virtual = id => VIRTUAL.find(v => v.id === id) || null;
+  const anyCollection = id => collection(id) || virtual(id);
+  /* Filter + sort for the collection pages. f: { audience, age, zone, character, category, price }, sort: featured | name | price-asc | price-desc */
   function query(collectionId, f, sort) {
     f = f || {};
-    let list = collectionId && collectionId !== 'all' ? inCollection(collectionId) : P.slice();
+    const v = virtual(collectionId);
+    let list = v ? P.filter(p => (!v.of || p.collection === v.of) && v.test(p)) : (collectionId && collectionId !== 'all' ? inCollection(collectionId) : P.slice());
     if (f.audience) list = list.filter(p => p.audiences.includes(f.audience));
     if (f.age) list = list.filter(p => p.ages.includes(f.age));
     if (f.zone) list = list.filter(p => p.zones.includes(f.zone));
+    if (f.character) list = list.filter(p => charOf(p) === f.character);
+    if (f.category) list = list.filter(p => p.collection === f.category);
+    if (f.price === 'priced') list = list.filter(p => p.priceState === 'fixed');
+    else if (f.price === 'ask') list = list.filter(p => p.priceState !== 'fixed');
     const price = p => (p.priceState === 'fixed' ? priceFrom(p) : Infinity);
     if (sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
     else if (sort === 'price-asc') list.sort((a, b) => price(a) - price(b));
     else if (sort === 'price-desc') list.sort((a, b) => (price(b) === Infinity ? -1 : price(b)) - (price(a) === Infinity ? -1 : price(a)));
     return list;
+  }
+  /* "Complete the set": the same friend in other things (one of each kind), else the product's own pairs. */
+  function completeSet(p, max) {
+    max = max || 4; const ch = charOf(p), out = [], seen = new Set([p.id, p.apparelType ? 'a:' + p.apparelType : 'k:' + p.kind]);
+    if (ch) for (const q of P) { const key = q.apparelType ? 'a:' + q.apparelType : 'k:' + q.kind; if (q.id !== p.id && charOf(q) === ch && !seen.has(key) && !(q.kind === 'carpet' && q.format === 'large-square')) { seen.add(key); out.push(q); } }
+    for (const id of p.pairs) { const q = byId[id]; if (q && !out.includes(q) && q.id !== p.id) out.push(q); }
+    return out.slice(0, max);
   }
 
   // ------------------------------------------------------------------ images
@@ -324,7 +356,7 @@
   }
   /* The Kids' Shop, in sections: [heading, collection id, products, id]. Everything a family can browse lives here. */
   function kidsSections() {
-    const apparel = t => P.filter(p => p.kind === 'apparel' && p.apparelType === t);
+    const apparel = t => P.filter(p => p.kind === 'apparel' && p.apparelType === t).sort((a, b) => (b.heroPick ? 1 : 0) - (a.heroPick ? 1 : 0));
     return [
       ['T-shirts', 'apparel', apparel('tshirt'), 'tshirts'], ['Hoodies', 'apparel', apparel('hoodie'), 'hoodies'], ['Backpacks', 'apparel', apparel('backpack'), 'backpacks'],
       ['Plush friends', 'plush', P.filter(p => p.kind === 'plush'), 'plush'],
@@ -359,6 +391,6 @@
   ];
 
   return Object.freeze({ APPROVED, CONCEPT_CAPTION, DRAFT, AUDIENCES, AGES, ZONES, COLLECTIONS, PRODUCTS: P, LABELS, TRUST, FAQ, SAFETY, MEMBER,
-    product, collection, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
+    product, collection, anyCollection, virtual, VIRTUAL, charOf, CHARS, completeSet, optionById, defaultOpts, cleanOpts, unitPrice, optLabel, priceFrom, priceText, fmt, canOrder, inCollection, query,
     setManifest, photos, gallery, heroImage, kidsSections, keywords, collectionKeywords, SAMPLE_CAPTION, fallbacks, roomShot, manifest: () => manifest });
 });

@@ -47,7 +47,7 @@
     corners: ['Name your corners: the learning zone guide', 'Booker\'s Reading Area, Lumi\'s Calm Corner, Zuri\'s Discovery Zone, Bop\'s Movement Zone and the Eat the Rainbow wall: what goes in each.'],
     shop: ['Shop the Futures Store', 'Kits, room add-ons, classroom materials and books for centers, home daycares and churches. Prices are shown where they are set; everything else is a quote.'],
     product: ['Product', 'A Futures Store product: what is in the box, sizes, materials, care, safety notes and lead time.'],
-    cart: ['Your cart', 'Your Futures Store cart, saved on this device. Nothing is charged until you approve a written invoice.'],
+    cart: ['Your bag', 'Your Futures Store bag, saved on this device. Nothing is charged until you approve a written invoice.'],
     checkout: ['Checkout', 'Send your Futures Store order request: contact, ship-to, purchase order and tax-exempt details. Nothing is charged.'],
     order: ['Order request', 'Your Futures Store order request and a printable summary.'],
     'order-return': ['Back from secure checkout', 'You returned from the payment provider. Payment is confirmed from the provider\u2019s own record.'],

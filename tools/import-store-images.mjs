@@ -19,7 +19,7 @@ const OUT = join(SITE, 'img', 'store');
 const args = process.argv.slice(2).filter(a => !a.startsWith('--') || a === '--dry-run');
 const DRY = process.argv.includes('--dry-run');
 const folder = args.find(a => a !== '--dry-run') || join(homedir(), 'Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/store_photos');
-const WIDTHS = [400, 800, 1200];
+const WIDTHS = [400, 800, 1200, 1600];
 const NAME = /^([a-z0-9][a-z0-9-]*)-(\d{1,2})\.(png|jpe?g|webp)$/i;
 
 const README = `# Store product pictures
@@ -37,7 +37,7 @@ Drop product pictures in this folder, then run \`node tools/import-store-images.
 
 ## Sizes
 
-Any size is fine. The importer makes WebP at 400, 800 and 1200 px wide plus one JPG fallback and never enlarges a small original. Aim for at least 1600 px on the long side, a clean background and the same lighting across a product family.
+Any size is fine. The importer makes WebP at 400, 800, 1200 and 1600 px wide plus one JPG fallback and never enlarges a small original. Aim for at least 1600 px on the long side, a clean background and the same lighting across a product family.
 
 ## Labels
 

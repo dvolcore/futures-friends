@@ -109,6 +109,7 @@
     mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
     copy: '<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
     check: '<path d="M20 6 9 17l-5-5"/>', filter: '<path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/>', grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+    eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>', search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>', pause: '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>', play: '<path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/>', ruler2: '<path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2"/><path d="m10 10 2 2"/><path d="m13 7 2 2"/>',
     bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>', book: '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>'
   };
   const ico = (n, cls) => `<svg class="sp-i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n] || ''}</svg>`;
@@ -130,8 +131,8 @@
     const ls = lines(), t = totals(ls), sh = shipping(t), page = variant === 'page';
     if (!ls.length) return `<div class="sp-empty">
       <div class="sp-empty-art" aria-hidden="true"><img src="img/plush/props/circle-rug-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></div>
-      <h3>Your cart is empty</h3>
-      <p>Start with a kit, or add one sign or one rug. Kits and add-ons you save here stay on this device.</p>
+      <h3>Your bag is empty</h3>
+      <p>Start with a kit, a rug or a hoodie. What you add here stays on this device.</p>
       <div class="sp-empty-acts"><button class="btn gold" type="button" data-go="shop/kits" data-sp-close>Shop the kits ${ico('arrow')}</button><button class="btn soft" type="button" data-go="room-planner" data-sp-close>Plan your room</button></div></div>`;
     const rows = ls.map(l => `<li class="sp-ln" data-key="${E(l.key)}">
       <button type="button" class="sp-ln-img" data-go="product/${E(l.pid)}" data-sp-close aria-label="View ${E(l.p.name)}">${thumb(l.p)}</button>
@@ -155,13 +156,13 @@
         <div><input class="i" id="spPromo-${page ? 'p' : 'd'}" type="text" autocomplete="off" disabled aria-describedby="spPromoN-${page ? 'p' : 'd'}"><button class="btn soft" type="button" disabled>Apply</button></div>
         <span class="sp-note" id="spPromoN-${page ? 'p' : 'd'}">Promo codes switch on when online payment does.</span></form>
       ${page ? `<div class="sp-foot-acts"><button type="button" class="btn gold sp-wide" data-go="checkout">Check out ${ico('arrow')}</button><button type="button" class="btn soft sp-wide" data-go="store">Keep shopping</button></div>
-      <p class="sp-saved">${store.get() ? 'Saved on this device.' : 'Not saved: your browser blocks storage.'} <button type="button" class="sp-link" data-sp-print>Print this list</button> <button type="button" class="sp-link" data-sp-emailcart>Email it</button> <button type="button" class="sp-link" data-sp-clearcart>Empty cart</button></p>` : ''}
+      <p class="sp-saved">${store.get() ? 'Saved on this device.' : 'Not saved: your browser blocks storage.'} <button type="button" class="sp-link" data-sp-print>Print this list</button> <button type="button" class="sp-link" data-sp-emailcart>Email it</button> <button type="button" class="sp-link" data-sp-clearcart>Empty bag</button></p>` : ''}
     </div>`;
   }
   const footHtml = () => {
     const n = lines().length;
     if (!n) return '';
-    return `<div class="sp-foot-acts"><button type="button" class="btn gold sp-wide" data-go="checkout" data-sp-close>Check out ${ico('arrow')}</button><button type="button" class="btn soft sp-wide" data-go="cart" data-sp-close>View full cart</button></div>
+    return `<div class="sp-foot-acts"><button type="button" class="btn gold sp-wide" data-go="checkout" data-sp-close>Check out ${ico('arrow')}</button><button type="button" class="btn soft sp-wide" data-go="cart" data-sp-close>View full bag</button></div>
     <p class="sp-saved">${store.get() ? 'Saved on this device.' : 'Not saved: your browser blocks storage. Finish this order in one visit.'}</p>`;
   };
 
@@ -173,10 +174,10 @@
     if (!hasDoc || drawer || !document.body) return;
     const host = document.createElement('div'); host.id = 'spRoot';
     host.innerHTML = spriteHtml() + `<div class="sp-live" id="spLive" role="status" aria-live="polite" aria-atomic="true"></div>
-      <button type="button" class="sp-viewcart" id="spViewCart" data-sp-open aria-haspopup="dialog" aria-controls="spDrawer" hidden>${ico('bag')}<span class="sp-vc-t">View cart</span><span class="sp-count" data-sp-vccount>0</span><span class="sp-vc-sub sp-num" data-sp-vcsub></span></button>
+      <button type="button" class="sp-viewcart" id="spViewCart" data-sp-open aria-haspopup="dialog" aria-controls="spDrawer" hidden>${ico('bag')}<span class="sp-vc-t">View bag</span><span class="sp-count" data-sp-vccount>0</span><span class="sp-vc-sub sp-num" data-sp-vcsub></span></button>
       <div class="sp-drawer" id="spDrawer" hidden><div class="sp-scrim" data-sp-close></div>
       <div class="sp-panel" role="dialog" aria-modal="true" aria-labelledby="spDrawerH" tabindex="-1">
-        <header class="sp-panel-h"><h2 id="spDrawerH">Your cart</h2><button type="button" class="sp-x" data-sp-close aria-label="Close cart">${ico('x')}</button></header>
+        <header class="sp-panel-h"><h2 id="spDrawerH">Your bag</h2><button type="button" class="sp-x" data-sp-close aria-label="Close bag">${ico('x')}</button></header>
         <div class="sp-panel-b" data-sp-body></div><div class="sp-panel-f" data-sp-foot></div></div></div>`;
     document.body.appendChild(host);
     drawer = $('#spDrawer'); scrim = $('.sp-scrim', drawer); panel = $('.sp-panel', drawer); liveEl = $('#spLive');
@@ -187,7 +188,7 @@
     const menu = document.getElementById('menuT'), bar = $('header.bar .wrap:last-of-type') || $('header.bar .wrap');
     if (!bar) return;
     btn = document.createElement('button'); btn.type = 'button'; btn.className = 'sp-cartbtn'; btn.id = 'spCartBtn'; btn.setAttribute('data-sp-shop', '');
-    btn.innerHTML = `${ico('bag')}<span class="sp-cartlabel">Shop</span><span class="sp-count" data-sp-count>0</span><span class="sp-sr" data-sp-cartsr>, 0 items in your cart</span>`;
+    btn.innerHTML = `${ico('bag')}<span class="sp-cartlabel">Shop</span><span class="sp-count" data-sp-count>0</span><span class="sp-sr" data-sp-cartsr>, 0 items in your bag</span>`;
     if (menu && menu.parentNode) menu.parentNode.insertBefore(btn, menu); else bar.appendChild(btn);
     paintCount();
   }
@@ -197,7 +198,7 @@
     if (vc) { const n0 = count(), t0 = totals(); vc.hidden = n0 === 0 || document.documentElement.classList.contains('sp-nopill'); $('[data-sp-vccount]', vc).textContent = n0 > 99 ? '99+' : String(n0); $('[data-sp-vcsub]', vc).textContent = t0.pricedCount ? fmt(t0.subtotal) : ''; }
     const n = count(), c = $('[data-sp-count]', btn), s = $('[data-sp-cartsr]', btn);
     c.textContent = n > 99 ? '99+' : String(n); c.classList.toggle('is-zero', n === 0);
-    s.textContent = ', ' + n + ' item' + (n === 1 ? '' : 's') + ' in your cart';
+    s.textContent = ', ' + n + ' item' + (n === 1 ? '' : 's') + ' in your bag';
     if (bump && !reduced() && c.animate) c.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.35)' }, { transform: 'scale(1)' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
   }
   const say = msg => { if (liveEl) { liveEl.textContent = ''; setTimeout(() => { if (liveEl) liveEl.textContent = msg; }, 30); } };
@@ -253,7 +254,7 @@
   }
   function addAnimated(pid, opts, qty, fromEl) {
     const p = C.product(pid), k = add(pid, opts, qty); if (!k) return null;
-    say((p ? p.name : 'Item') + ' added. ' + count() + ' item' + (count() === 1 ? '' : 's') + ' in your cart.');
+    say((p ? p.name : 'Item') + ' added. ' + count() + ' item' + (count() === 1 ? '' : 's') + ' in your bag.');
     fly(fromEl, p && ['booker', 'lumi', 'zuri', 'bop'].includes(p.tone) ? p.tone : 'gold', () => { paintCount(true); open(fromEl); });
     return k;
   }
@@ -267,7 +268,7 @@
       const q = t.closest('[data-sp-qty]');
       if (q) { e.preventDefault(); const key = q.getAttribute('data-sp-qty'), it = items.find(i => keyOf(i.pid, i.opts) === key); if (it) { setQty(key, it.qty + (+q.dataset.d)); say('Quantity ' + (items.find(i => keyOf(i.pid, i.opts) === key) || { qty: 0 }).qty); } return; }
       const rm = t.closest('[data-sp-rm]'); if (rm) { e.preventDefault(); const p = C.product(rm.getAttribute('data-sp-rm').split('|')[0]); remove(rm.getAttribute('data-sp-rm')); say((p ? p.name : 'Item') + ' removed.'); return; }
-      const cc = t.closest('[data-sp-clearcart]'); if (cc) { e.preventDefault(); clear(); say('Cart emptied.'); return; }
+      const cc = t.closest('[data-sp-clearcart]'); if (cc) { e.preventDefault(); clear(); say('Bag emptied.'); return; }
       const cl = t.closest('[data-sp-close]'); if (cl) { if (cl.hasAttribute('data-go')) close(false); else { e.preventDefault(); close(); } }
     }, true);
     document.addEventListener('keydown', e => {

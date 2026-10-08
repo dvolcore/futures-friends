@@ -32,14 +32,14 @@ function gallery(p) {
 
 // ------------------------------------------------------------------ buy box
 function optsHtml(p) {
-  return p.options.map(o => `<fieldset class="sp-opt"><legend>${E(o.label)}</legend><div class="sp-opt-row">${o.values.map(v => `<label class="sp-radio"><input type="radio" name="spo-${E(o.key)}" value="${E(v.id)}" data-sp-opt="${E(o.key)}"${PS.opts[o.key] === v.id ? ' checked' : ''}><span>${E(v.label)}${typeof v.price === 'number' ? `<small class="sp-num">${C.fmt(v.price)}</small>` : ''}</span></label>`).join('')}</div>
+  return p.options.map(o => `<fieldset class="sp-opt"><legend>${E(o.label)}${o.key === 'size' && p.kind === 'apparel' ? ` <button type="button" class="sp-sizeguide" data-sp-sg>${ico('ruler2')} Size guide</button>` : ''}</legend><div class="sp-opt-row${o.values.length > 6 ? ' is-sizes' : ''}">${o.values.map(v => `<label class="sp-radio"><input type="radio" name="spo-${E(o.key)}" value="${E(v.id)}" data-sp-opt="${E(o.key)}"${PS.opts[o.key] === v.id ? ' checked' : ''}><span>${E(v.label)}${typeof v.price === 'number' ? `<small class="sp-num">${C.fmt(v.price)}</small>` : ''}</span></label>`).join('')}</div>
     ${o.values.some(v => v.note) ? `<p class="sp-opt-note" data-sp-optnote="${E(o.key)}">${E((o.values.find(v => v.id === PS.opts[o.key]) || {}).note || '')}</p>` : ''}</fieldset>`).join('');
 }
 function ctaHtml(p) {
   if (C.canOrder(p)) {
     const quoted = p.priceState !== 'fixed';
     return `<div class="sp-buyrow"><div class="sp-step sp-step-lg" role="group" aria-label="Quantity"><button type="button" data-sp-pq="-1" aria-label="Fewer"${PS.qty <= 1 ? ' disabled' : ''}>${ico('minus')}</button><output aria-live="polite" data-sp-q>${PS.qty}</output><button type="button" data-sp-pq="1" aria-label="More">${ico('plus')}</button></div>
-      <button type="button" class="btn gold sp-addbtn" data-sp-padd>${quoted ? (p.priceState === 'soon' ? 'Add to cart as a request' : 'Add to cart for a quote') : 'Add to cart'}</button></div>
+      <button type="button" class="btn gold sp-addbtn" data-sp-padd>${quoted ? (p.priceState === 'soon' ? 'Add to bag as a request' : 'Add to bag for a quote') : 'Add to bag'}</button></div>
       ${quoted ? `<p class="sp-buyhint">${p.priceState === 'soon' ? (p.sizesNote || 'Price coming soon.') + ' This sends a request, not an order.' : 'No public price yet. We price it in your written quote, with shipping, before anything is charged.'}</p>` : '<p class="sp-buyhint">Nothing is charged when you add it. You approve a written invoice first.</p>'}`;
   }
   if (p.cta === 'link') return `<div class="sp-buyrow">${lnk('printables', 'Open the printables ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">Free to print at home or at the library. No account.</p>`;
@@ -68,7 +68,10 @@ const ul = a => `<ul>${a.map(x => `<li>${E(x)}</li>`).join('')}</ul>`;
 function accordion(p) {
   const S = [['In the box', p.box.length && ul(p.box)], ['Dimensions', p.dims.length && ul(p.dims)], ['Materials', p.materials.length && ul(p.materials)], ['Care', p.care.length && ul(p.care)],
     ['Safety and compliance', p.safety.length && ul(p.safety)]].filter(s => s[1]);
-  return `<div class="sp-acc">${S.map((s, i) => `<details${i === 0 ? ' open' : ''}><summary>${E(s[0])}${ico('down')}</summary><div class="sp-acc-b">${s[1]}</div></details>`).join('')}</div>`;
+  if (p.apparelType && p.apparelType !== 'backpack') S.push(['Size guide', `<div class="sp-sizetable" id="spSizeGuide"><p>Sizes are not set yet. The picker above records the size you would want, so we can plan the first sample around real sizes. Nothing here is final.</p><p>The size chart, with chest, length and sleeve measurements for each size, is published with the first sample. Until then we do not give measurements.</p></div>`]);
+  else if (p.apparelType === 'backpack') S.push(['Size guide', '<p>Backpack dimensions are confirmed with the first sample. We will publish height, width and depth, and the strap range, then.</p>']);
+  S.push(['Shipping and returns', `<ul><li>${p.ships === 'freight' ? 'Ships by freight. The carrier cost for your ZIP code is quoted before you pay.' : p.ships === 'digital' || p.ships === 'none' ? 'Nothing ships.' : p.kind === 'kit' ? 'Shipping for the startup box and carpets is part of the package price.' : 'Ships by parcel. The cost is quoted on your invoice.'}</li><li>Lead time: ${E(p.lead || 'Confirmed in your written quote.')}</li><li>Returns and refunds: ${E(C.DRAFT)}. Made-to-order items are not returnable unless damaged or wrong.</li></ul>`]);
+  return `<div class="sp-acc">${S.map((s, i) => `<details${i === 0 ? ' open' : ''}${s[0] === 'Size guide' ? ' data-sp-sgbox' : ''}><summary>${E(s[0])}${ico('down')}</summary><div class="sp-acc-b">${s[1]}</div></details>`).join('')}</div>`;
 }
 function faq(p) {
   const f = p.faq.filter(Boolean); if (!f.length) return '';
@@ -85,10 +88,10 @@ V.product = () => {
   if (!p) return `<div class="sp"><header class="sp-pagehead"><div class="wrap"><h1>We could not find that product</h1><p class="sp-lede">It may have moved. Everything we sell is in the store.</p><div class="sp-hero-acts">${lnk('store', 'Back to the store', 'btn gold')}</div></div></header></div>`;
   if (PS.pid !== p.id) PS = { pid: p.id, opts: C.defaultOpts(p), qty: 1 };
   const col = C.collection(p.collection), back = p.collection === 'kids' ? ['kids-shop', 'Kids’ Shop'] : ['shop/' + col.id, col.name];
-  const pairs = p.pairs.map(C.product).filter(Boolean).slice(0, 3);
+  const pairs = C.completeSet(p, 4);
   const t = U.tone(p);
   const buyable = C.canOrder(p) || p.cta === 'notify';
-  return `<div class="sp sp-pdp" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})">
+  return `<div class="sp sp-pro sp-pdp" style="--tone:var(--${t});--tone-s:var(--${t === 'gold' ? 'cream' : t + '-s'})">
    <div class="wrap">${U.crumbs([['store', 'Futures Store'], back, ['', p.name]])}
    <div class="sp-pdp-grid">${gallery(p)}
     <div class="sp-info"><h1>${E(p.name)}</h1>
@@ -101,9 +104,9 @@ V.product = () => {
      ${accordion(p)}
     </div></div></div>
    ${faq(p)}
-   ${pairs.length ? `<section class="sp-pairs" aria-labelledby="spPairH"><div class="wrap"><h2 id="spPairH">Pairs well with</h2><ul class="sp-grid sp-grid-3">${pairs.map(x => U.card(x)).join('')}</ul></div></section>` : ''}
+   ${pairs.length ? `<section class="sp-pairs sp-set" aria-labelledby="spPairH"><div class="wrap"><h2 id="spPairH">Complete the set</h2>${C.charOf(p) ? `<p class="sp-set-sub">More with ${E(({ booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop', all: 'all four friends' })[C.charOf(p)])} on them.</p>` : ''}<ul class="sp-grid sp-grid-4">${pairs.map(x => U.card(x)).join('')}</ul></div></section>` : ''}
    ${buyable ? `<div class="sp-buybar" data-sp-buybar aria-hidden="true" inert><div class="sp-buybar-in"><div class="sp-buybar-t"><b>${E(p.name)}</b><span data-sp-barprice>${E(C.priceText(p, PS.opts))}</span></div>
-     ${C.canOrder(p) ? `<button type="button" class="btn gold" data-sp-padd tabindex="-1">Add to cart</button>` : `<a class="btn gold" href="#spNotify" data-sp-jump="spNotify" tabindex="-1">Notify me</a>`}</div></div>` : ''}
+     ${C.canOrder(p) ? `<button type="button" class="btn gold" data-sp-padd tabindex="-1">Add to bag</button>` : `<a class="btn gold" href="#spNotify" data-sp-jump="spNotify" tabindex="-1">Notify me</a>`}</div></div>` : ''}
   </div>`;
 };
 
@@ -170,6 +173,7 @@ document.addEventListener('click', e => {
   if (zoomDlg && t.closest('.sp-zoom-img') && zoomDlg.open) { toggleZoom(); return; }
   const pq = t.closest('[data-sp-pq]'); if (pq) { PS.qty = Math.max(1, Math.min(K.MAXQ, PS.qty + (+pq.dataset.spPq))); paintBuy(); return; }
   const pa = t.closest('[data-sp-padd]'); if (pa) { e.preventDefault(); const p = C.product(PS.pid); if (p) K.addAnimated(p.id, PS.opts, PS.qty, pa.closest('.sp-buybar') ? pa : (document.querySelector('.sp-addbtn') || pa)); return; }
+  if (t.closest('[data-sp-sg]')) { e.preventDefault(); const d = document.querySelector('[data-sp-sgbox]'); if (d) { d.open = true; d.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); const sm = d.querySelector('summary'); if (sm) sm.focus({ preventScroll: true }); } return; }
   const j = t.closest('[data-sp-jump]'); if (j) { e.preventDefault(); const el = document.getElementById(j.dataset.spJump); if (el) { el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'center' }); const f = el.querySelector('input'); if (f) f.focus({ preventScroll: true }); } }
 }, true);
 document.addEventListener('change', e => {

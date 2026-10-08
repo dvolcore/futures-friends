@@ -14,7 +14,7 @@ const STATES = ['MO', 'KS', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL'
 // ------------------------------------------------------------------ cart page
 V.cart = () => {
   const n = K.count();
-  return `<div class="sp sp-cartpage"><header class="sp-pagehead"><div class="wrap">${U.crumbs([['store', 'Futures Store'], ['', 'Cart']])}<h1>Your cart</h1>
+  return `<div class="sp sp-cartpage"><header class="sp-pagehead"><div class="wrap">${U.crumbs([['store', 'Futures Store'], ['', 'Bag']])}<h1>Your bag</h1>
     <p class="sp-lede">${n ? n + (n === 1 ? ' item' : ' items') + ', saved on this device. Nothing is charged until you approve a written invoice.' : 'Nothing here yet.'}</p></div></header>
     <div class="wrap sp-shell"><div class="sp-cartwrap" data-sp-cartpage>${K.bodyHtml('page')}</div></div></div>`;
 };
@@ -67,7 +67,7 @@ function details() {
         <label class="sp-radio"><input type="radio" name="ckpay" value="quote" data-ck-pay${CK.pay === 'quote' ? ' checked' : ''}><span>Request a quote first<small>Get written prices and shipping, then decide.</small></span></label></div>`
       : `<p class="sp-fnote sp-fnote-lg">We confirm availability, then send an invoice or a secure payment link. You decide after you see the final price.</p>`}</fieldset>
     <label class="f" for="ck-notes">Notes <span class="sp-opt-t">optional</span><textarea class="i" id="ck-notes" data-ck="notes" rows="3" maxlength="1000" placeholder="Room size, delivery dock, when you open, anything we should know">${E(CK.notes)}</textarea></label>
-    <div class="sp-ck-acts"><button class="btn gold sp-wide" type="submit">Review your order ${ico('arrow')}</button>${lnk('cart', 'Back to cart', 'btn soft')}</div>
+    <div class="sp-ck-acts"><button class="btn gold sp-wide" type="submit">Review your order ${ico('arrow')}</button>${lnk('cart', 'Back to bag', 'btn soft')}</div>
     <p class="sp-fnote">${E(payInfo().note)}</p></form>`;
 }
 function reviewLines() {
@@ -102,7 +102,7 @@ V.checkout = () => {
   if (!CK.path) CK.path = defPath();
   if (!K.lines().length) return `<div class="sp sp-checkout"><header class="sp-pagehead"><div class="wrap"><h1>Checkout</h1></div></header><div class="wrap sp-shell">${K.bodyHtml('page')}</div></div>`;
   const am = X.activeMode();
-  return `<div class="sp sp-checkout"><header class="sp-pagehead"><div class="wrap">${U.crumbs([['store', 'Futures Store'], ['cart', 'Cart'], ['', 'Checkout']])}<h1>Checkout</h1>${stepper()}
+  return `<div class="sp sp-checkout"><header class="sp-pagehead"><div class="wrap">${U.crumbs([['store', 'Futures Store'], ['cart', 'Bag'], ['', 'Checkout']])}<h1>Checkout</h1>${stepper()}
     ${am.mode === 'request' ? `<p class="sp-lede sp-lede-s">Online payment is not open yet, so this sends an order request. We reply with availability, shipping and an invoice.</p>` : ''}</div></header>
     <div class="wrap sp-shell sp-ckgrid"><div id="spCk" data-sp-ck>${CK.step === 1 ? details() : review()}</div>${aside()}</div></div>`;
 };
@@ -175,7 +175,7 @@ function doc(o) {
 }
 V.order = () => {
   const r = CK.result;
-  if (!r || !r.order) return `<div class="sp"><header class="sp-pagehead"><div class="wrap"><h1>No order request in this tab</h1><p class="sp-lede">Order requests are not kept on this device. If you sent one, your confirmation email has the reference. Questions: ${E(PHONE)}.</p><div class="sp-hero-acts">${lnk('store', 'Back to the store', 'btn gold')}${lnk('cart', 'Open your cart', 'btn soft')}</div></div></header></div>`;
+  if (!r || !r.order) return `<div class="sp"><header class="sp-pagehead"><div class="wrap"><h1>No order request in this tab</h1><p class="sp-lede">Order requests are not kept on this device. If you sent one, your confirmation email has the reference. Questions: ${E(PHONE)}.</p><div class="sp-hero-acts">${lnk('store', 'Back to the store', 'btn gold')}${lnk('cart', 'Open your bag', 'btn soft')}</div></div></header></div>`;
   const o = r.order, sent = r.status === 'received';
   const head = sent
     ? `<span class="sp-badge sp-badge-ok">Request received</span><h1>Request received</h1><p class="sp-lede">We will confirm availability and send an invoice. A real person replies within ${r.days || 2} business days. No payment was taken, and nothing ships until you approve the invoice.</p>

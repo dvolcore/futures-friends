@@ -2,8 +2,8 @@
 /* Stage the owner's merchandise campaign pictures (Futures_Friends_Merchandise_Campaign_2026-10-07) as store pictures.
    Reads the package's store/products.json and apparel/products.json, then writes <product-id>-<n>.png files into the store_photos folder
    (default ~/Downloads/FUTURES_FRIENDS_PROJECT/05_Brand_and_Art/store_photos/) for tools/import-store-images.mjs to convert.
-   - plush: n=1 the product shot, n=2..4 the front, side and back panels of the three-view turnaround board
-   - apparel and backpacks: n=1 the front view, n=2 the back view (each source is a front|back pair)
+   - plush: n=1 the single-shot doll (Single_Shot_Dolls/), n=2 the three-view turnaround board
+   - apparel and backpacks: n=1 the front view, n=2 the back view, n=3 the whole front|back composite
    - rugs, square corner rugs, posters: n=1 (poster V1 = poster-a, V2 = poster-b)
    - collection heroes: the owner's group shots (five carpets, five square carpets, four plush) and montages of posters and apparel
    Usage: node tools/stage-merch-images.mjs [packageDir] [outFolder]. Needs ImageMagick. */
@@ -28,13 +28,23 @@ for (const p of cat.products) {
   const k = key(p.id);
   if (p.type === 'rug') put(p.id, 1, [p.id.includes('-square-') ? P(`carpets/square/${k}-square-carpet.png`) : P(`carpets/${k}-carpet.png`)]);
   else if (p.type === 'plush') {
-    put(p.id, 1, [P(`plush/${k}-plush.png`)]);
-    [0, 1, 2].forEach(i => put(p.id, i + 2, [P(`plush/${k}-turnaround.png`), '-crop', '3x1@', '+repage', '-delete', ['1,2', '0,2', '0,1'][i], '+repage', '-shave', '12x0', '+repage']));
+    // the owner's clean single-shot doll is the primary picture; the three-view turnaround board is the secondary "all angles" picture
+    put(p.id, 1, [existsSync(join(PKG, `Single_Shot_Dolls/${k}-plush.png`)) ? P(`Single_Shot_Dolls/${k}-plush.png`) : P(`plush/${k}-plush.png`)]);
+    put(p.id, 2, [P(`plush/${k}-turnaround.png`)]);
   } else if (p.type === 'poster') put(p.id, 1, [P(`posters/${k}-poster-${p.id.endsWith('-v1') ? 'a' : 'b'}.png`), '-resize', '1600x']);
 }
+// apparel sources are front|back compositions: the front and back garments do not meet at the middle for every type, so split where the gap is
+// (T-shirt 50%, hoodie 52%, backpack 61.7%). View 1 is the front, 2 the back, 3 the whole composite.
+const SPLIT = { tshirt: 0.5, hoodie: 0.522, backpack: 0.617 };
 for (const p of (Array.isArray(app) ? app : app.products)) {
-  ['0', '1'].forEach((c, i) => put(p.id, i + 1, [P(p.image ? 'apparel/' + p.image : `apparel/images/${p.id}.png`), '-crop', '2x1@', '+repage', '-delete', i === 0 ? '1' : '0', '+repage']));
+  const src = P(p.image ? 'apparel/' + p.image : `apparel/images/${p.id}.png`), t = p.id.split('-').pop(), r = SPLIT[t] || 0.5;
+  put(p.id, 1, [src, '-gravity', 'West', '-crop', `${Math.round(r * 1000) / 10}%x100%+0+0`, '+repage']);
+  put(p.id, 2, [src, '-gravity', 'East', '-crop', `${Math.round((1 - r) * 1000) / 10}%x100%+0+0`, '+repage']);
+  put(p.id, 3, [src]);
 }
+// the Zuri shell backpack (owner image, 2026-10-07 10:38 PM): a plush turtle-shell backpack, hero of the Backpacks section
+const SHELL = join(homedir(), 'Downloads', 'ChatGPT Image Oct 7, 2026, 10_38_40 PM.png');
+if (existsSync(SHELL)) put('zuri-shell-backpack', 1, [SHELL]);
 // bundles use the owner's group shots
 put('bundle-complete-learning-zones', 1, [P('carpets/all-five-carpets.png')]);
 put('bundle-four-zone-starter', 1, [P('carpets/all-five-carpets.png'), '-gravity', 'West', '-crop', '78%x100%+0+0', '+repage']);
