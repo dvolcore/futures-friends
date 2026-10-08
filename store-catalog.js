@@ -64,7 +64,7 @@
     plush: 'Plush friends will have embroidered faces and no small parts, and will ship only after third-party testing to ASTM F963 with a Children’s Product Certificate and a tracking label.',
     book: 'Print books will carry a tracking label. Board-book formats for under-3s are not planned yet.',
     foodcontact: 'Anything that touches food or drink (bottles, plates) needs FDA food-contact material testing and CPSIA children’s product testing, and a Children’s Product Certificate, before it is sold. These are concepts: we take pre-order requests only, and nothing is charged.',
-    paper: 'Children’s stickers and coloring books need CPSIA testing and a Children’s Product Certificate (including the inks, paper and adhesive) before they are sold. Concept samples: pre-order requests only, nothing is charged. Stickers are not for children who still put things in their mouths.',
+    paper: 'Children’s stickers and coloring books need CPSIA testing and a Children’s Product Certificate (including the inks, paper and adhesive) before they are sold.',
     small: 'Small-parts warning: not for children under 3 unless the listing says it has been tested for that age.'
   };
   const MEMBER = 'The monthly membership (curriculum, Futures Hub, training) is set up separately on the Membership page. It is not a store item and is not charged here.';
@@ -76,7 +76,7 @@
 
   // Kits: the startup packages. Shipping for the box and carpets is part of the package price (Pricing page).
   const kitCommon = {
-    collection: 'kits', kind: 'kit', priceState: 'fixed', ships: 'freight', badges: ['Made to order', 'Concept image'],
+    collection: 'kits', kind: 'kit', priceState: 'fixed', ships: 'freight', badges: ['Made to order'],
     lead: 'Confirmed in your written quote. The kit is built after you sign.',
     care: ['Spot-clean mats and rugs with a damp cloth and mild soap; air dry flat.', 'Wipe signs and posters with a dry or lightly damp cloth.', 'Printed puppets are paper-based: keep them dry.'],
     materials: ['Zone mats and rugs, specification targets confirmed at the sample: felt-look printed face, low pile (1/2 in or less), bound low-profile edges, non-slip backing.', 'Signs and posters: printed on durable board and paper.', 'Final materials are confirmed when the sample is approved.'],
@@ -113,7 +113,7 @@
   // Add-ons
   const rugSafety = [SAFETY.rug];
   add({ id: 'zone-boundaries', name: 'Zone Boundaries pack', short: 'Four zone mats, Friend Fence panels, shelf bands and floor paths.', collection: 'addons', kind: 'addon', priceState: 'fixed', ships: 'freight',
-    badges: ['Made to order', 'Concept image'], tone: 'bop', room: 'dress-up-corner', audiences: ['center', 'home', 'church'],
+    badges: ['Made to order'], tone: 'bop', room: 'dress-up-corner', audiences: ['center', 'home', 'church'],
     options: [{ key: 'size', label: 'Room size', values: [
       { id: 'home', label: 'Home room', price: APPROVED.boundaries.home, note: '4 mats 3 x 5 ft, 4 Friend Fence panels, 2 shelf bands' },
       { id: 'classroom', label: 'Classroom', price: APPROVED.boundaries.classroom, note: '4 mats 4 x 6 ft, 8 Friend Fence panels, 4 shelf bands' }] }],
@@ -124,26 +124,26 @@
     safety: [SAFETY.rug, SAFETY.fence], lead: 'Made to order. Timing is confirmed in your quote.',
     faq: [FAQ.freight, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns, ['Do I need this to use the kit?', 'No. The kit works on its own. Zone Boundaries is the add-on that gives every friend a carpet and a low fence so children know they are going somewhere different.']],
     pairs: ['kit-center-starter', 'shelf-bands', 'zone-signs'], description: 'Children move from carpet to carpet and know where they are going. Each friend gets a mat in their colour, and a low fence keeps every corner in sight.' });
-  add({ id: 'zone-mats-only', name: 'Zone mats only', short: 'Four classroom mats, shelf bands and floor paths. Your own low shelves are the zone edges.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order', 'Concept image'],
+  add({ id: 'zone-mats-only', name: 'Zone mats only', short: 'Four classroom mats, shelf bands and floor paths. Your own low shelves are the zone edges.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order'],
     tone: 'zuri', room: 'blue-table-room', box: ['Four zone mats, 4 x 6 ft', 'Friend Shelf Bands', 'Floor paths'], dims: ['Mats: 4 x 6 ft each'], safety: rugSafety, materials: ['Felt-look printed face, low pile, bound edges, non-slip backing (specification targets, confirmed at the sample).'],
     care: ['Spot-clean; air dry.'], faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.returns], pairs: ['zone-boundaries', 'shelf-bands'], description: 'The lighter way to mark zones if your room already has low shelves.' });
-  add({ id: 'friend-fence', name: 'Friend Fence panel', short: 'A low, see-through divider for one zone edge.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order', 'Concept image'],
+  add({ id: 'friend-fence', name: 'Friend Fence panel', short: 'A low, see-through divider for one zone edge.', collection: 'addons', kind: 'addon', ships: 'freight', badges: ['Made to order'],
     tone: 'bop', room: 'dress-up-corner', options: [{ key: 'colour', label: 'Zone colour', values: [{ id: 'booker', label: 'Booker blue' }, { id: 'lumi', label: 'Lumi pink' }, { id: 'zuri', label: 'Zuri green' }, { id: 'bop', label: 'Bop purple' }] }],
     dims: ['22 to 24 in high; never above 30 in'], safety: [SAFETY.fence], materials: ['Felt-look panel with a see-through upper half and a washable sleeve. Prototype and tip test come first.'], care: ['Wash the sleeve cold; air dry.'],
     box: ['One panel with self-stable feet'], faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.returns], pairs: ['zone-boundaries', 'shelf-bands'], description: 'Low enough for a seated adult to see over. This is the riskiest new product we make, so it ships only after it passes a tip test and a lab review.' });
-  add({ id: 'shelf-bands', name: 'Friend Shelf Band', short: 'A felt band in a friend’s colour that wraps a low shelf you already own.', collection: 'addons', kind: 'addon', badges: ['Made to order', 'Concept image'], tone: 'lumi',
+  add({ id: 'shelf-bands', name: 'Friend Shelf Band', short: 'A felt band in a friend’s colour that wraps a low shelf you already own.', collection: 'addons', kind: 'addon', badges: ['Made to order'], tone: 'lumi',
     options: [{ key: 'colour', label: 'Zone colour', values: [{ id: 'booker', label: 'Booker blue' }, { id: 'lumi', label: 'Lumi pink' }, { id: 'zuri', label: 'Zuri green' }, { id: 'bop', label: 'Bop purple' }] }],
     box: ['One shelf band'], dims: ['Sized to a low shelf; send the shelf measurements with your request'], materials: ['Felt-look fabric band with hook-and-loop closure. Confirmed at sample approval.'], care: ['Spot-clean; air dry.'],
     safety: [SAFETY.print], faq: [FAQ.quote, FAQ.lead, FAQ.returns], pairs: ['zone-boundaries', 'zone-mats-only'], description: 'The cheapest way to turn shelves you already own into zone edges.' });
-  add({ id: 'church-pack-away', name: 'Church Pack-Away pack', short: 'Banner stands, a rolling cart, rug bags and a Sunday reset card.', collection: 'addons', kind: 'addon', ships: 'freight', audiences: ['church', 'center'], badges: ['Made to order', 'Concept image'],
+  add({ id: 'church-pack-away', name: 'Church Pack-Away pack', short: 'Banner stands, a rolling cart, rug bags and a Sunday reset card.', collection: 'addons', kind: 'addon', ships: 'freight', audiences: ['church', 'center'], badges: ['Made to order'],
     tone: 'lumi', box: ['Five banner stands', 'A rolling cart', 'Rug bags', 'Lidded bins', 'A Sunday reset card'], dims: ['Sized for a 22 x 28 ft multipurpose room'], materials: ['Confirmed at sample approval.'], care: ['Wipe stands and bins; launder rug bags cold.'],
     safety: [SAFETY.print], faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns], pairs: ['kit-home', 'zone-mats-only'], description: 'For rooms that become something else on Sunday. Everything packs onto one cart and comes back out on Monday.' });
-  add({ id: 'extra-room-starter', name: 'Extra room Zones Starter', short: 'Signs, posters, puppets, labels, sit spots and cue cards for one more room (no rug).', collection: 'addons', kind: 'addon', badges: ['Made to order', 'Concept image'],
+  add({ id: 'extra-room-starter', name: 'Extra room Zones Starter', short: 'Signs, posters, puppets, labels, sit spots and cue cards for one more room (no rug).', collection: 'addons', kind: 'addon', badges: ['Made to order'],
     tone: 'booker', box: ['Zone signs', 'Four posters', 'Printed stick puppets', 'Bin labels', 'Sit spots', 'Friend cue cards'], dims: ['Signs 12 x 18 in; posters 18 x 24 in'], materials: ['Printed board and paper.'], care: ['Wipe clean.'],
     safety: [SAFETY.print, SAFETY.puppets], faq: [FAQ.quote, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns], pairs: ['rug-friends-circle', 'zone-boundaries'], description: 'Opening one more classroom? This is the kit without the rug.' });
   // Classroom materials
   const sizeOpt = { key: 'size', label: 'Size', values: [{ id: 'home', label: 'Home, 9 x 12 in' }, { id: 'center', label: 'Center, 12 x 18 in' }] };
-  add({ id: 'zone-signs', name: 'Zone sign set', short: 'Five signs with each friend, the zone name and two words, in English and Spanish.', collection: 'materials', kind: 'material', badges: ['Made to order', 'Concept image'], tone: 'zuri', room: 'reading-corner',
+  add({ id: 'zone-signs', name: 'Zone sign set', short: 'Five signs with each friend, the zone name and two words, in English and Spanish.', collection: 'materials', kind: 'material', badges: ['Made to order'], tone: 'zuri', room: 'reading-corner',
     options: [sizeOpt], box: ['Five zone signs'], dims: ['Home 9 x 12 in; center 12 x 18 in'], materials: ['Friend pop-out on felt-look print, mounted on durable board.'], care: ['Wipe with a dry cloth.'], safety: [SAFETY.print],
     faq: [FAQ.quote, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns], pairs: ['poster-booker-reading-area-v1', 'bin-labels'], description: 'The signs that tell a child which friend lives in which corner.' });
   add({ id: 'rainbow-poster', name: 'Eat the Rainbow poster', short: 'The six colour bands for the dining wall, 24 x 36 in.', collection: 'materials', kind: 'material', badges: ['Made to order'], tone: 'zuri',
@@ -290,7 +290,7 @@
 
   // Kids' Shop
   add({ id: 'kids-carpet', name: 'Small friend carpet', short: 'A small play carpet for a bedroom or reading nook.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'soon', orderable: false, cta: 'notify', ships: 'freight',
-    badges: ['Made to order', 'Concept image'], tone: 'bop', ages: ['twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing (specification targets, confirmed at the sample).'], care: ['Spot-clean; air dry.'],
+    badges: ['Made to order'], tone: 'bop', ages: ['twos', 'threes', 'prek'], box: ['One carpet'], dims: ['Size still being set'], materials: ['Low pile, non-slip backing (specification targets, confirmed at the sample).'], care: ['Spot-clean; air dry.'],
     safety: [SAFETY.rug], lead: 'Price and size are still being set.', faq: [['When can I buy it?', 'Size and price are still being set, and the rug needs its flammability report first. Leave your email and we will write when it is ready.'], FAQ.freight],
     pairs: ['poster-bop-movement-zone-v1', 'book-booker-tries-again'], description: 'Made to order. We will post the size and price when they are final.' });
   add({ id: 'kids-printables', name: 'Futures at Home printable packs', short: 'Picture schedule, calm-down cards, move cards, reading log and more. Free to print.', collection: 'kids', kind: 'family', audiences: ['family'], priceState: 'free', cta: 'link', link: 'printables',
@@ -389,7 +389,7 @@
     if (!p.room || p.kind === 'book' || p.kind === 'family') return null;
     const list = Array.isArray(rooms) ? rooms : [], hit = list.find(r => r.key === p.room) || { key: p.room };
     const base = 'img/branded-rooms/' + hit.key + '-kit';
-    return { kind: 'concept', room: true, srcset: sets(base, [400, 800, 1200], 'webp'), src: base + '-800.jpg', w: hit.w || 800, h: hit.h || 600, alt: 'Concept image: the ' + p.name + ' in a classroom', caption: CONCEPT_CAPTION };
+    return { kind: 'concept', room: true, srcset: sets(base, [400, 800, 1200], 'webp'), src: base + '-800.jpg', w: hit.w || 800, h: hit.h || 600, alt: 'Design rendering: the ' + p.name + ' in a classroom', caption: CONCEPT_CAPTION };
   }
   /* Gallery for a product: real pictures first (a product marked sample gets the "Concept sample" label), then the room concept; with no
      pictures yet, the best fallback art. */
