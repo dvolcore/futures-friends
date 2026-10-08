@@ -114,21 +114,21 @@
     return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img${o.cls ? ` class="${esc(o.cls)}"` : ''} src="${b}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(o.alt || p.alt)}" width="${p.w}" height="${p.h}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" data-real-photo="${esc(key)}"></picture>`;
   }
   // ---- branded-room CONCEPTS: the owner's AI-generated concept of the proposed kit in the same room (img/branded-rooms/<key>-kit-<w>.<ext>) ----
-  const KIT_LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
-  const KIT_CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
-  const ENTRANCE_CAPTION = 'Proposed Futures Learning Center character entrance — AI-generated design concept.';   // owner 2026-10-07, verbatim, visible beside the entrance concept
-  const ENTRANCE2_CAPTION = 'Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.';   // owner 2026-10-07: Concept 2 (four friend banners on the wall); ships when its file lands
-  const ENTRANCE_LABEL = 'Concept: the proposed Futures Learning Center character entrance';
+  const KIT_LABEL = 'Planned design: the Futures Friends Learning Zones kit in our classroom';
+  const KIT_CAPTION = 'Planned design.';   // owner 2026-10-07: shown adjacent to every one of these images, always visible, never called an installed facility
+  const ENTRANCE_CAPTION = 'Planned design.';   // owner 2026-10-07, verbatim, visible beside the entrance concept
+  const ENTRANCE2_CAPTION = 'Planned design.';   // owner 2026-10-07: Concept 2 (four friend banners on the wall); ships when its file lands
+  const ENTRANCE_LABEL = 'Planned design: the Futures Learning Center character entrance';
   const KIT = {
-    'turtle-rug': { zone: 'All five zones', alt: "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
-    'alphabet-rug': { zone: 'Friends Circle', alt: "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench" },
-    'reading-corner': { zone: "Booker's Reading Area", alt: "Concept image, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench" },
-    'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Concept image, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
-    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Concept image, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" },
+    'turtle-rug': { zone: 'All five zones', alt: "Planned design, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls" },
+    'alphabet-rug': { zone: 'Friends Circle', alt: "Planned design, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench" },
+    'reading-corner': { zone: "Booker's Reading Area", alt: "Planned design, not installed yet: our reading corner with a blue Booker's Reading Area rug, a Booker poster on the wall, a picture-book shelf and a Booker plush on the bench" },
+    'dress-up-corner': { zone: "Bop's Movement Zone", alt: "Planned design, not installed yet: our dress-up corner with a purple Bop's Movement Zone rug, a Bop poster above a shelf of balls, scarves and blocks, and a Bop plush" },
+    'blue-table-room': { zone: "Zuri's Discovery Zone", alt: "Planned design, not installed yet: our blue-table classroom with a green Zuri's Discovery Zone rug, a Zuri poster, a nature-tray table, an easel and cubby shelves" },
     // Owner 2026-10-07: the proposed front entrance REPLACES the plain exterior photo as the main image (06-front-entrance); the real building is one tap away.
-    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Character concept', real: 'See the building today', kit: 'Proposed', alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors', variants: [   // Concept 1 ships now; Concept 2 is `pending` until its file exists (img/branded-rooms/exterior-2-kit-*), and the Concept 1 / Concept 2 switch stays hidden until then. Mirrors the manifest's variants.
-      { id: 1, label: 'Concept 1', file: 'exterior-kit', caption: ENTRANCE_CAPTION, badge: 'Character concept' },
-      { id: 2, label: 'Concept 2', file: 'exterior-2-kit', caption: ENTRANCE2_CAPTION, badge: 'Friend banners concept', pending: true, alt: 'Concept image, not built yet: the proposed Futures Learning Center entrance with four tall friend banners (Booker, Lumi, Zuri and Bop) on the building wall, a lawn sign carrying the FLC shield and a Welcome banner on the lamp pole' }
+    exterior: { zone: 'Front entrance', caption: ENTRANCE_CAPTION, label: ENTRANCE_LABEL, note: 'not built yet', soon: 'Not built yet. The building today is one tap away.', badge: 'Planned design', real: 'See the building today', kit: 'Proposed', alt: 'Planned design, not built yet: the proposed Futures Learning Center entrance, with a cut-out welcome display of Booker, Lumi, Zuri and Bop on the lawn, a lawn sign carrying the FLC shield, a shield on the wall, a Welcome banner on the lamp pole and navy doors', variants: [   // Concept 1 ships now; Concept 2 is `pending` until its file exists (img/branded-rooms/exterior-2-kit-*), and the Concept 1 / Concept 2 switch stays hidden until then. Mirrors the manifest's variants.
+      { id: 1, label: 'Design 1', file: 'exterior-kit', caption: ENTRANCE_CAPTION, badge: 'Planned design' },
+      { id: 2, label: 'Design 2', file: 'exterior-2-kit', caption: ENTRANCE2_CAPTION, badge: 'Planned design', pending: true, alt: 'Planned design, not built yet: the proposed Futures Learning Center entrance with four tall friend banners (Booker, Lumi, Zuri and Bop) on the building wall, a lawn sign carrying the FLC shield and a Welcome banner on the lamp pole' }
     ] }
   };
   function kitImg(key, o = {}) {
@@ -145,7 +145,7 @@
   const liveVariants = key => (KIT[key] && KIT[key].variants || []).filter(v => !v.pending);
   function kitMedia(key, o = {}) {
     const vs = liveVariants(key), k = KIT[key];
-    if (vs.length < 2) return { multi: false, concept: `<span class="ffa-kit-concept">${kitImg(key, o)}</span>`, label: `<span class="ffa-kit-label${k.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${k.badge || 'Concept'}</span>`, caption: `<span class="ffa-kit-caption">${capOf(key)}</span>`, sw: '' };
+    if (vs.length < 2) return { multi: false, concept: `<span class="ffa-kit-concept">${kitImg(key, o)}</span>`, label: `<span class="ffa-kit-label${k.badge ? ' ffa-kit-label-char' : ''}" aria-hidden="true">${k.badge || 'Planned design'}</span>`, caption: `<span class="ffa-kit-caption">${capOf(key)}</span>`, sw: '' };
     return { multi: true,
       concept: vs.map(v => `<span class="ffa-kit-concept" data-concept="${v.id}">${kitImg(key, Object.assign({}, o, { variant: v.id }))}</span>`).join(''),
       label: vs.map(v => `<span class="ffa-kit-label ffa-kit-label-char" data-concept="${v.id}" aria-hidden="true">${v.badge}</span>`).join(''),

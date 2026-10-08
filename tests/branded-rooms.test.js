@@ -17,9 +17,9 @@ const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const man = JSON.parse(fs.readFileSync(path.join(DIR, 'manifest.json'), 'utf8'));
 const center = JSON.parse(read('img/center/manifest.json'));
 const art = () => { const w = {}; vm.runInNewContext(read('brand-art.js'), { window: w }); return w; };
-const CAPTION = 'AI-generated proposed transformation — furnishings and products shown as concepts.';
-const ENTRANCE_CAPTION = 'Proposed Futures Learning Center character entrance — AI-generated design concept.';
-const LABEL = 'Concept: the Futures Friends Learning Zones kit in our classroom';
+const CAPTION = 'Planned design.';
+const ENTRANCE_CAPTION = 'Planned design.';
+const LABEL = 'Planned design: the Futures Friends Learning Zones kit in our classroom';
 
 function jpegSize(b) {
   let i = 2; const markers = []; let size = null;
@@ -44,7 +44,7 @@ test('the manifest lists the owner concept images, one per real center room, nev
     assert.equal(r.generated, 'ai', r.key + ' is marked AI-generated'); assert.equal(r.kind, 'concept image');
     assert.ok(r.source_sha256 && r.source_file, r.key + ' names its owner source image');
     assert.equal(r.real, `img/center/${r.key}-800.jpg`); assert.equal(r.kit, `img/branded-rooms/${r.key}-kit-800.jpg`);
-    assert.match(r.alt, r.entrance ? /^Concept image, not built yet:/ : /^Concept image, not installed yet:/, r.key + ' alt says concept');
+    assert.match(r.alt, r.entrance ? /^Planned design, not built yet:/ : /^Planned design, not installed yet:/, r.key + ' alt says concept');
   }
   assert.ok(!center.photos.some(p => /kit|concept/i.test(p.key)), 'no concept in img/center');
   assert.deepEqual(man.rooms.map(r => r.key).sort(), ['alphabet-rug', 'blue-table-room', 'dress-up-corner', 'exterior', 'reading-corner', 'turtle-rug']);
@@ -75,13 +75,13 @@ test('FFArt.photo shows the concept first, labelled, with the real photo one tap
   for (const r of man.rooms) {
     const fig = A.photo(r.key, { title: 'T' }), alt0 = r.entrance ? 'not built yet' : 'not installed yet';
     assert.match(fig, /data-kit-view="kit"/);
-    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Concept image, ${alt0}:[^"]+"[^>]+data-kit-photo="${r.key}"`));
+    assert.match(fig, new RegExp(`<img src="img/branded-rooms/${r.key}-kit-800\\.jpg"[^>]+alt="Planned design, ${alt0}:[^"]+"[^>]+data-kit-photo="${r.key}"`));
     assert.match(fig, new RegExp(`data-real-photo="${r.key}"`), 'the real photo is still in the figure');
     if (r.entrance) assert.match(fig, /data-kit-show="real"[^>]*>See the building today<\/button><button type="button" data-kit-show="kit" aria-pressed="true">Proposed</);
     else assert.match(fig, /data-kit-show="real"[^>]*>Real room<\/button><button type="button" data-kit-show="kit" aria-pressed="true">With the kit</);
     assert.ok(fig.includes(r.entrance ? A.KIT.exterior.label : LABEL), r.key + ' carries the concept label');
-    assert.match(fig, r.entrance ? /class="ffa-kit-label ffa-kit-label-char"[^>]*>Character concept</ : /class="ffa-kit-label"[^>]*>Concept</);
-    assert.doesNotMatch(A.photo(r.key, { kit: false }), /branded-rooms|Concept/, 'kit:false gives the plain real photo');
+    assert.match(fig, r.entrance ? /class="ffa-kit-label ffa-kit-label-char"[^>]*>Planned design</ : /class="ffa-kit-label"[^>]*>Planned design</);
+    assert.doesNotMatch(A.photo(r.key, { kit: false }), /branded-rooms|Planned design/, 'kit:false gives the plain real photo');
   }
   assert.match(A.photo('exterior'), /branded-rooms\/exterior-kit-800\.jpg[\s\S]*img\/center\/exterior-800\.jpg|img\/center\/exterior-800\.jpg[\s\S]*branded-rooms\/exterior-kit-800\.jpg/, 'the exterior shows the entrance concept with the real building one tap away');
   assert.match(A.photo('exterior'), /data-kit-view="kit"/, 'the concept leads');
@@ -107,8 +107,7 @@ test('a portrait concept is never cropped; the required caption sits with every 
   assert.match(read('room-kit.css'), /blue-table-room"\] \.rk-roomframe\{aspect-ratio:4\/5\}/);
   assert.match(read('room-kit.css'), /\.rk-roomframe img\[hidden\]\{display:none\}/, 'the hidden half of the toggle really is hidden (img display beat the hidden attribute)');
   for (const r of man.rooms) for (const o of [{}, { kitNote: false }]) assert.ok(A.photo(r.key, o).includes(`<span class="ffa-kit-caption">${r.entrance ? ENTRANCE_CAPTION : CAPTION}</span>`), r.key + ' caption, even with kitNote false');
-  assert.equal(A.ENTRANCE_CAPTION, 'Proposed Futures Learning Center character entrance — AI-generated design concept.');
-  assert.ok(!A.photo('exterior').includes(CAPTION), 'the entrance carries its own caption, not the kit one');
+  assert.equal(A.ENTRANCE_CAPTION, 'Planned design.');
   assert.ok(!A.photo('exterior', { kit: false }).includes('ffa-kit-caption'), 'kit:false is the plain real photo');
   assert.ok(read('room-kit.js').includes('KIT_CAPTION'), '#room-kit rooms carry it');
   assert.ok(read('kit-showcase.js').includes('KIT_CAPTION'), 'every showcase slide carries it');
@@ -118,22 +117,22 @@ test('a portrait concept is never cropped; the required caption sits with every 
 
 test('entrance Concept 1 / Concept 2: Concept 2 is pending (no switch, no file) until its file lands, then the switch appears on the same slot', () => {
   const w = art(), A = w.FFArt, ex = man.rooms.find(r => r.key === 'exterior');
-  assert.deepEqual(ex.variants.map(v => [v.id, v.label, !!v.pending]), [[1, 'Concept 1', false], [2, 'Concept 2', true]]);
-  assert.equal(ex.variants[1].caption, 'Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.');
+  assert.deepEqual(ex.variants.map(v => [v.id, v.label, !!v.pending]), [[1, 'Design 1', false], [2, 'Design 2', true]]);
+  assert.equal(ex.variants[1].caption, 'Planned design.');
   assert.equal(A.KIT.exterior.variants[1].caption, ex.variants[1].caption);
   assert.equal(A.KIT.exterior.variants[1].pending, true);
   assert.ok(!fs.existsSync(path.join(DIR, 'exterior-2-kit-800.jpg')), 'Concept 2 file not delivered yet');
   const one = A.photo('exterior');
-  assert.doesNotMatch(one, /data-concept-show|Concept 2|friend banners/, 'switch hidden while Concept 2 is pending');
+  assert.doesNotMatch(one, /data-concept-show|Design 2|friend banners/, 'switch hidden while Concept 2 is pending');
   assert.match(one, /See the building today/);
   A.KIT.exterior.variants[1].pending = false;   // the follow-up that adds the file clears this flag
   const two = A.photo('exterior');
   assert.match(two, /data-concept-view="1"/);
-  assert.match(two, /data-concept-show="1" aria-pressed="true">Concept 1<\/button><button type="button" data-concept-show="2" aria-pressed="false">Concept 2</);
+  assert.match(two, /data-concept-show="1" aria-pressed="true">Design 1<\/button><button type="button" data-concept-show="2" aria-pressed="false">Design 2</);
   assert.match(two, /exterior-2-kit-800\.jpg/);
-  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="1">Proposed Futures Learning Center character entrance — AI-generated design concept.</span>'));
-  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="2">Proposed Futures Learning Center entrance with friend banners — AI-generated design concept.</span>'));
-  assert.match(two, /ffa-kit-label ffa-kit-label-char" data-concept="2"[^>]*>Friend banners concept</);
+  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="1">Planned design.</span>'));
+  assert.ok(two.includes('<span class="ffa-kit-caption" data-concept="2">Planned design.</span>'));
+  assert.match(two, /ffa-kit-label ffa-kit-label-char" data-concept="2"[^>]*>Planned design</);
   assert.match(two, /data-kit-show="real"[^>]*>See the building today</);
   assert.match(read('brand-art.css'), /\[data-concept-view="1"\] \[data-concept="2"\]/);
 });
