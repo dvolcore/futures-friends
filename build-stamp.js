@@ -26,6 +26,18 @@
       location.reload();
     })
     .catch(() => { /* offline or blocked: keep the page as it is */ });
+  // GitHub Pages sometimes answers 503 for a file for a minute after a publish; a page that lost a stylesheet looks broken.
+  // Once the page has loaded, any stylesheet that failed is fetched again, once, with a retry marker (no loop: one pass).
+  const healCss = () => { try { healAll(); } catch (e) { /* leave the page as it is */ } };
+  const healAll = () => document.querySelectorAll('link[rel="stylesheet"]').forEach(l => {
+    let ok = false; try { ok = !!(l.sheet && l.sheet.cssRules && l.sheet.cssRules.length); } catch (e) { ok = true; }   // cross-origin sheets (fonts) throw: leave them
+    if (ok || l.dataset.healed) return;
+    const n = l.cloneNode(); n.dataset.healed = '1'; n.href = l.href + (l.href.includes('?') ? '&' : '?') + 'retry=' + Date.now();
+    l.after(n);
+  });
+  try {
+    if (document.readyState === 'complete') setTimeout(healCss, 400); else window.addEventListener('load', () => setTimeout(healCss, 400), { once: true });
+  } catch (e) { /* no DOM to heal */ }
   check();
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
   window.FFBuildStamp = { check, busy };
