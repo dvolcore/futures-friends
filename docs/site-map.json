@@ -88,11 +88,11 @@
     },
     {
      "id": "support",
-     "title": "Every child supported"
+     "title": "Mixed ages, one plan"
     },
     {
      "id": "stars",
-     "title": "Motivation that young children understand"
+     "title": "Stars for effort, not points"
     }
    ],
    "media": []
@@ -165,7 +165,7 @@
   {
    "route": "options",
    "title": "Program Options",
-   "section": "Deploy Futures Friends your way",
+   "section": "Pick the version that fits your building",
    "sections": [
     {
      "id": "rt-strip",
@@ -289,7 +289,7 @@
   {
    "route": "for-faith",
    "title": "Faith-Based Centers",
-   "section": "Values children live out every day",
+   "section": "Kindness and courage, one week at a time",
    "sections": [
     {
      "id": "rt-strip",
@@ -381,7 +381,7 @@
   {
    "route": "hub",
    "title": "Futures Hub",
-   "section": "The app that runs the whole program",
+   "section": "Office, classroom and family in one app",
    "sections": [],
    "media": []
   },
@@ -443,7 +443,7 @@
   {
    "route": "support",
    "title": "Support and FAQ",
-   "section": "Need help? Find answers here.",
+   "section": "Answers, and a person to call",
    "sections": [
     {
      "id": "oc-support",
@@ -595,7 +595,7 @@
   {
    "route": "funding",
    "title": "Funding Help",
-   "section": "Find the funding your program may qualify for",
+   "section": "Funding your program may qualify for",
    "sections": [],
    "media": []
   },
@@ -656,7 +656,7 @@
   {
    "route": "blog",
    "title": "Blog for Educators",
-   "section": "Ideas for child care classrooms",
+   "section": "Notes for the classroom",
    "sections": [],
    "media": []
   },
@@ -963,7 +963,7 @@
     },
     {
      "id": "ffx-why",
-     "title": "Three promises, every day"
+     "title": "What we hold ourselves to"
     },
     {
      "id": "ffx-meet",
@@ -971,7 +971,7 @@
     },
     {
      "id": "oc-team",
-     "title": "Meet the teachers. See the classrooms. Picture your child here."
+     "title": "Who will greet your child at the door"
     },
     {
      "id": "ts-fam-h",
@@ -979,7 +979,7 @@
     },
     {
      "id": "ffx-day",
-     "title": "A day full of discovery. A place your child belongs."
+     "title": "What a day looks like"
     },
     {
      "id": "oc-dayhere",
@@ -987,7 +987,7 @@
     },
     {
      "id": "ffx-tuition",
-     "title": "One simple weekly rate"
+     "title": "One weekly rate"
     },
     {
      "id": "ffx-tour",
@@ -1369,7 +1369,7 @@
     },
     {
      "id": "fp-who",
-     "title": "Four kinds of programs, one pilot"
+     "title": "Who we are looking for"
     },
     {
      "id": "fp-how",
@@ -1413,7 +1413,7 @@
     },
     {
      "id": "oc-rules",
-     "title": "Keep the brand clear and the friends safe"
+     "title": "A few rules, so the friends always look right"
     },
     {
      "id": "oc-kit",
@@ -3268,7 +3268,7 @@
   {
    "from_route": "readiness",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
@@ -3788,7 +3788,7 @@
   {
    "from_route": "for-centers",
    "from_section": "",
-   "label": "Request More Information",
+   "label": "Ask about your rooms",
    "kind": "hero",
    "to_route": "quote",
    "to_section": "",
@@ -4128,7 +4128,7 @@
   {
    "from_route": "for-centers",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
@@ -4168,7 +4168,7 @@
   {
    "from_route": "for-home",
    "from_section": "",
-   "label": "Request More Information",
+   "label": "Ask about your rooms",
    "kind": "hero",
    "to_route": "quote",
    "to_section": "",
@@ -4438,7 +4438,7 @@
   {
    "from_route": "for-home",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
@@ -4478,7 +4478,7 @@
   {
    "from_route": "for-prek",
    "from_section": "",
-   "label": "Request More Information",
+   "label": "Ask about your rooms",
    "kind": "hero",
    "to_route": "quote",
    "to_section": "",
@@ -4638,7 +4638,7 @@
   {
    "from_route": "for-prek",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
@@ -4678,7 +4678,7 @@
   {
    "from_route": "for-faith",
    "from_section": "",
-   "label": "Request More Information",
+   "label": "Ask about your rooms",
    "kind": "hero",
    "to_route": "quote",
    "to_section": "",
@@ -4878,7 +4878,7 @@
   {
    "from_route": "for-faith",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
@@ -4918,7 +4918,7 @@
   {
    "from_route": "for-employers",
    "from_section": "",
-   "label": "Request More Information",
+   "label": "Ask about your rooms",
    "kind": "hero",
    "to_route": "quote",
    "to_section": "",
@@ -5078,7 +5078,7 @@
   {
    "from_route": "for-employers",
    "from_section": "",
-   "label": "Request Information",
+   "label": "Request information",
    "kind": "button",
    "to_route": "quote",
    "to_section": "",
