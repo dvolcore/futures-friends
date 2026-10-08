@@ -22,10 +22,10 @@ const OUT = opt('--out') || join(SITE, 'docs/site-map.json');
 // is marked "fixed" (when it is otherwise ok) so the visual graph can show what moved.
 export const FIXED = [
   ['home', 'Meet the friends', '#friends', 'Hero button with a play icon: now lands on the talking intro (each friend introduces themself) and starts it.'],
-  ['friends', "Read Booker's book", '#friends (same page)', 'Opens Booker Tries Again in the Story Time reader.'],
-  ['friends', "Read Lumi's book", '#friends (same page)', 'Opens Big Feelings, Brighter Days in the Story Time reader.'],
-  ['friends', "Read Zuri's book", '#friends (same page)', 'Opens What Happens If We Try? in the Story Time reader.'],
-  ['friends', "Read Bop's book", '#friends (same page)', 'Opens the Clean Up, Team! preview (full read-along waits on the revised text).'],
+  ['friends', "Read Booker's book", '#friends (same page)', 'Opens Booker Tries Again (revised edition) in the Story Time reader.'],
+  ['friends', "Read Lumi's book", '#friends (same page)', 'Opens Lumi’s Big Feelings, Brighter Days (revised edition) in the Story Time reader.'],
+  ['friends', "Read Zuri's book", '#friends (same page)', 'Opens Zuri: What Happens If We Try? (revised edition) in the Story Time reader.'],
+  ['friends', "Read Bop's book", '#friends (same page)', 'Opens Bop’s Clean-Up Team (revised edition) in the Story Time reader.'],
   ['friends', 'Read Booker Tries Again in Story Time', 'img/booker-tries-again-preview.png (raw image, new tab)', 'The cover opens the reader.'],
   ['at-home', 'Watch What there is to watch today', '#family-videos with one placeholder clip', 'The shelf now holds the friends\' talking hello and Bop\'s move-along (captioned), and points to Bop at Home.'],
   ['home', '21 story-world characters', '#friends (page top)', 'Lands on Meet the whole town (#ff-town-h).'],

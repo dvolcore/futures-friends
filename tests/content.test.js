@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 function site() {
   const context = vm.createContext({window: {}, document: {addEventListener() {}}});
-  for (const file of ['data.js', 'plush-cast.js', 'supporting-cast.js', 'views.js']) {
+  for (const file of ['data.js', 'plush-cast.js', 'supporting-cast.js', 'views.js', 'family-library-data.js']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', file), 'utf8'), context);
   }
   return context;
@@ -23,13 +23,15 @@ test('training distinguishes the available catalog from planned continuing educa
   assert.match(html, /Catalog hours/);
 });
 
-test('storybook art: Booker has his finished cover (read-along in Story Time); the others stay layout previews, not published editions', () => {
+test('storybook art: the four friends\' books show their finished revised covers (read-along in Story Time); The Rainbow Picnic stays a layout preview', () => {
   const html = vm.runInContext('V.friends()', site());
-  assert.match(html, /href="#story-time\/booker-tries-again"[^>]*><img src="img\/books\/booker-tries-again\/cover-640\.webp"/);
+  for (const id of ['booker-tries-again', 'big-feelings-brighter-days', 'what-happens-if-we-try', 'clean-up-team'])
+    assert.match(html, new RegExp(`href="#story-time/${id}"[^>]*><img src="img/books/${id}/cover-640\\.webp"`), id);
   assert.match(html, /width="1200" height="1200" loading="lazy"/);
-  assert.match(html, /Finished cover/);
+  assert.match(html, /Finished cover/); assert.match(html, /Illustrated · 18 pages/);
   assert.match(html, /Layout preview/);
   assert.match(html, /planned pages/);
+  assert.doesNotMatch(html, /Cover layout preview|big-feelings-brighter-days-cover|clean-up-team-cover/);
   assert.match(html, /printed editions are not available yet/);
   assert.doesNotMatch(html, /booker-tries-again-preview/);
   assert.doesNotMatch(html, /Final illustrations are in production/);
@@ -37,7 +39,7 @@ test('storybook art: Booker has his finished cover (read-along in Story Time); t
 
 test('layout previews escape book titles', () => {
   const context = site();
-  const html = vm.runInContext('cover({title: "<script>test</script>", c: "lumi"})', context);
+  const html = vm.runInContext('cover({title: "<script>test</script>", c: "all"})', context);
   assert.ok(html.includes('&lt;script&gt;test&lt;/script&gt;'));
   assert.ok(!html.includes('<script>'));
 });

@@ -127,15 +127,18 @@ test('G13: the share image is its own 1200x630 file, not the 1600x900 hero', () 
   assert.doesNotMatch(html, /og:image" content="[^"]*hero\.jpg/);
 });
 
-test('G16-G17: the two covers show titles that are in the series, are labelled layout previews, and the retired titles are gone', () => {
+test('G16-G17: the storybook covers are the finished covers of the revised editions (2026-10-07), titles in the series; the layouts and retired titles are gone', () => {
   const books = JSON.parse(read('data.js').match(/"books":(\[.*?\]),"episodes"/)[1]).map(b => b.title);
-  const v = read('views.js');
-  for (const [file, title, book] of [['big-feelings-brighter-days-cover', 'Big Feelings, Brighter Days', 'Book 2'], ['clean-up-team-cover', 'Clean Up, Team!', 'Book 4']]) {
+  const F = require(path.join(ROOT, 'family-library-data.js'));
+  for (const [id, title] of [['booker-tries-again', 'Booker Tries Again'], ['big-feelings-brighter-days', 'Lumi’s Big Feelings, Brighter Days'], ['what-happens-if-we-try', 'Zuri: What Happens If We Try?'], ['clean-up-team', 'Bop’s Clean-Up Team']]) {
     assert.ok(books.includes(title), title + ' is in the storybook series');
-    assert.deepEqual(imageSize(`img/${file}.png`), [1254, 1254]);
-    for (const w of [400, 800]) assert.ok(fs.statSync(path.join(ROOT, `img/${file}-${w}.webp`)).size < 140 * 1024);
-    assert.match(v, new RegExp(`\\$\\{layout\\(\\)\\}\\$\\{pic\\('img/${file}\\.png',1254,1254,'Cover layout preview: ${title.replace(/[!,]/g, m => '\\' + m)}, ${book}`));
+    const b = F.BOOKS.find(x => x.id === id);
+    assert.equal(b.title, title);
+    for (const f of b.cover) assert.ok(fs.statSync(path.join(ROOT, f)).size < 250 * 1024, f);
   }
+  // the old layout mockups (old titles) left the site with the revised covers
+  assert.deepEqual(hits(/big-feelings-brighter-days-cover|clean-up-team-cover|Cover layout preview/), []);
+  for (const f of ['big-feelings-brighter-days-cover.png', 'clean-up-team-cover.png']) assert.ok(!fs.existsSync(path.join(ROOT, 'img', f)), f + ' removed (no orphans)');
   assert.deepEqual(hits(/Lumi Chooses Kindness|Bop Shows Empathy|chooses-kindness-cover|shows-empathy-cover/i), []);
   for (const f of ['lumi-chooses-kindness-cover.png', 'bop-shows-empathy-cover.png']) assert.ok(!fs.existsSync(path.join(ROOT, 'img', f)), f + ' removed (no orphans)');
 });

@@ -64,16 +64,18 @@ test('Story Time publishes all five books in full (gap fill 2026-10-07): Books 4
   }
   for (const id of ['clean-up-team', 'the-rainbow-picnic']) {
     const b = F.BOOKS.find(x => x.id === id), words = b.spreads.map(s => s.p).join(' ');
-    assert.ok(Math.abs(b.words - (id === 'clean-up-team' ? 319 : 568)) <= 6, 'within a few words of the manuscript');
-    assert.match(b.src, /manuscript v1\.0/); assert.match(b.src, /MOVE/);
-    assert.doesNotMatch(words + b.tip + b.back, /happy doer|big hearts|brain|strong bones|super sight|heart helpers|sunny energy|grow strong|growing strong|healthy/i);
+    assert.ok(Math.abs(b.words - (id === 'clean-up-team' ? 308 : 568)) <= 6, 'within a few words of the manuscript');
+    assert.match(b.src, id === 'clean-up-team' ? /Revised Digital Edition/ : /manuscript v1\.0/); assert.match(b.src, /MOVE/);
+    assert.doesNotMatch(words + b.tip + b.back + JSON.stringify(b.guide || []), /happy doer|big hearts|brain|strong bones|super sight|heart helpers|sunny energy|grow strong|growing strong|healthy/i);
   }
+  // Bop's revised edition (2026-10-07): page 2 keeps his MOVE role (website edition) and the ending credits the whole clean-up team
   assert.match(F.BOOKS.find(b => b.id === 'clean-up-team').spreads[0].p, /Bop loves to move/);
-  assert.match(F.BOOKS.find(b => b.id === 'clean-up-team').spreads[13].p, /Ready\? Bop & Go!/);
+  assert.match(F.BOOKS.find(b => b.id === 'clean-up-team').spreads[12].p, /Booker, Lumi, Zuri, and Bop tidied together\..*The clean-up team was on the job\./);
+  assert.match(F.BOOKS.find(b => b.id === 'clean-up-team').spreads[13].p, /“We finished together!” Small steps\. Helping friends\. A job well done!$/);
   const c = site(), UI = c.window.FFFamilyUI;
   UI.R.page = 0; let html = c.render('story-time', 'clean-up-team');
   assert.match(html, /fl-reader/); assert.doesNotMatch(html, /coming soon|preview/i);
-  assert.match(html, /website edition: Bop&#39;s lines updated|website edition: Bop's lines updated/);
+  assert.match(html, /Revised Digital Edition \(October 7, 2026\)/); assert.match(html, /website edition: page 2 says/);
   c.render('story-time', 'the-rainbow-picnic'); UI.R.page = 19; html = c.render('story-time', 'the-rainbow-picnic');
   for (const k of ['booker', 'lumi', 'zuri', 'bop']) assert.match(html, new RegExp(`data-fl="sticker" data-k="${k}"`), 'the ensemble book offers every friend\'s sticker');
   UI.R.page = 0;
@@ -82,28 +84,48 @@ test('Story Time publishes all five books in full (gap fill 2026-10-07): Books 4
   assert.equal((shelf.match(/Read it together/g) || []).length, 5);
 });
 
-test('Booker Tries Again is the finished, illustrated Sister Edition: every page shows its art, the cover is real, and Pip is now his little sister', () => {
-  const b = F.BOOKS[0], dir = 'img/books/booker-tries-again/';
-  assert.equal(b.id, 'booker-tries-again');
-  // owner 2026-10-07: spreads 13 and 14 of the finished book (Sister_Edition/QC.json) replace Pip with Booker's little sister
-  assert.equal(b.spreads[12].p, 'Then Booker saw his little sister by the door. She held a book and looked worried. “I can’t read yet,” she said. “Hard things are just new things,” said Booker.');
-  assert.equal(b.spreads[13].p, 'Booker and his sister sat side by side. They looked at the pictures. They said the first sounds. Then together they said, “Big breath. Brave heart. We can try again!”');
-  assert.doesNotMatch(JSON.stringify(b), /\bPip\b/, 'no Pip left in Booker\'s book');
-  assert.match(b.log, /his little sister/);
-  const pairs = b.spreads.map(s => s.img).concat([b.cover]);
-  for (const pair of pairs) {
-    assert.ok(Array.isArray(pair) && pair.length === 2 && pair[0].startsWith(dir) && /-640\.webp$/.test(pair[0]) && /-1200\.webp$/.test(pair[1]), String(pair));
-    for (const f of pair) { assert.ok(fs.existsSync(path.join(ROOT, f)), f + ' exists'); assert.ok(fs.statSync(path.join(ROOT, f)).size < 250 * 1024, f + ' is under 250 KB'); }
+const REV = require('node:fs').existsSync('/Users/ralphd/Downloads/Futures_Friends_Books_Revised_2026-10-07/Manuscripts.json')
+  ? require('/Users/ralphd/Downloads/Futures_Friends_Books_Revised_2026-10-07/Manuscripts.json') : null;
+const REV_IDS = { Booker: 'booker-tries-again', Lumi: 'big-feelings-brighter-days', Zuri: 'what-happens-if-we-try', Bop: 'clean-up-team' };
+
+test('the four friends\' books are the revised editions (2026-10-07): finished art on the cover and every page, the revised text, no PDF', () => {
+  for (const id of Object.values(REV_IDS)) {
+    const b = F.BOOKS.find(x => x.id === id), dir = `img/books/${id}/`;
+    assert.equal(b.rev, '2026-10-07', id);
+    const pairs = b.spreads.map(s => s.img).concat([b.cover]);
+    for (const pair of pairs) {
+      assert.ok(Array.isArray(pair) && pair.length === 2 && pair[0].startsWith(dir) && /-640\.webp$/.test(pair[0]) && /-1200\.webp$/.test(pair[1]), String(pair));
+      for (const f of pair) { assert.ok(fs.existsSync(path.join(ROOT, f)), f + ' exists'); assert.ok(fs.statSync(path.join(ROOT, f)).size < 250 * 1024, f + ' is under 250 KB'); }
+    }
+    assert.equal(new Set(pairs.flat()).size, 30, id + ': fifteen different pictures');
+    assert.equal(b.guide.length, 3, id + ': the three family/educator pages');
   }
-  assert.equal(new Set(pairs.flat()).size, 30, 'fifteen different pictures');
+  const bk = F.BOOKS[0];
+  assert.equal(bk.id, 'booker-tries-again');
+  // Booker teaches the whole kite pattern and welcomes his little sister
+  assert.match(bk.spreads[6].p, /the quiet e helps i say its name.*k-i-t-e/);
+  assert.match(bk.spreads[7].p, /\/k\/ … \/ī\/ … \/t\/.*The e was quiet/);
+  assert.match(bk.spreads[12].p, /Booker’s little sister held a book\. “I can’t read yet,” she said\./);
+  assert.doesNotMatch(JSON.stringify(bk), /\bPip\b/, 'no Pip left in Booker\'s book');
+  assert.match(bk.log, /little sister/);
+  assert.doesNotMatch(bk.spreads.map(s => s.p).join(' '), /first letter|first sound/, 'the story never says a first letter is enough');
+  // Lumi asks instead of deciding, and the candle is pretend
+  const lu = F.BOOKS.find(x => x.id === 'big-feelings-brighter-days');
+  assert.match(lu.spreads[4].p, /Pip might feel lonely,” Lumi thought\. “Or shy\. I can ask\./);
+  assert.match(lu.spreads[7].p, /Blow the pretend candle/);
+  assert.match(lu.spreads[2].p, /Pip, the new little hedgehog/);
+  // Zuri does not name a fastest-melting winner
+  const zu = F.BOOKS.find(x => x.id === 'what-happens-if-we-try');
+  assert.doesNotMatch(zu.spreads.map(s => s.p).join(' ') + zu.talk.join(' ') + zu.tip, /melts? fastest|melted fastest|fastest\./i);
+  assert.match(zu.guide[2].blocks[0][1], /does not declare a winner/);
   const c = site(), UI = c.window.FFFamilyUI;
   let html = c.render('story-time');
-  assert.ok(html.includes(`src="${b.cover[0]}" srcset="${b.cover[0]} 640w, ${b.cover[1]} 1200w"`), 'the shelf card shows the real cover');
-  UI.R.page = 0; html = c.render('story-time', b.id);
-  assert.ok(html.includes(`src="${b.cover[0]}"`) && /fetchpriority="high"/.test(html), 'the cover page shows the cover, not lazy');
-  for (let p = 1; p <= b.spreads.length; p++) {
-    const s = b.spreads[p - 1];
-    UI.R.page = p; html = c.render('story-time', b.id);
+  for (const id of Object.values(REV_IDS)) { const b = F.BOOKS.find(x => x.id === id); assert.ok(html.includes(`src="${b.cover[0]}" srcset="${b.cover[0]} 640w, ${b.cover[1]} 1200w"`), id + ': the shelf card shows the real cover'); }
+  UI.R.page = 0; html = c.render('story-time', bk.id);
+  assert.ok(html.includes(`src="${bk.cover[0]}"`) && /fetchpriority="high"/.test(html), 'the cover page shows the cover, not lazy');
+  for (let p = 1; p <= bk.spreads.length; p++) {
+    const s = bk.spreads[p - 1];
+    UI.R.page = p; html = c.render('story-time', bk.id);
     assert.ok(html.includes(`<img class="fl-art-img" src="${s.img[0]}" srcset="${s.img[0]} 640w, ${s.img[1]} 1200w"`), 'page ' + p + ' shows its picture');
     assert.ok(html.includes(`alt="${s.pic.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`), 'page ' + p + ' alt is the picture description');
     assert.match(html, /width="1200" height="1200" loading="lazy"/);
@@ -111,13 +133,44 @@ test('Booker Tries Again is the finished, illustrated Sister Edition: every page
     assert.doesNotMatch(html, /Pictures are still being made|The picture will show|Picture this/);
   }
   UI.R.page = 0;
-  // the other four books still describe their pictures (gap fill 2026-10-07: worded as an invitation, not a 'coming' note)
-  html = c.render('story-time', 'big-feelings-brighter-days');
-  UI.R.page = 1; html = c.render('story-time', 'big-feelings-brighter-days');
+  // The Rainbow Picnic still describes its pictures (worded as an invitation, not a 'coming' note)
+  html = c.render('story-time', 'the-rainbow-picnic');
+  UI.R.page = 1; html = c.render('story-time', 'the-rainbow-picnic');
   assert.match(html, /Picture this/); assert.match(html, /On this page: /); assert.doesNotMatch(html, /still being made|coming soon/i);
   UI.R.page = 0;
-  // no PDF and no download control for the book
-  assert.doesNotMatch(read('family-library.js') + read('family-library-data.js'), /Sister_Digital_Edition|\.pdf['"][^\n]*booker-tries-again|download="[^"]*booker/i);
+  // no PDF and no download control for the books (Story Time is the public edition; the PDFs stay in the project folder)
+  assert.doesNotMatch(read('family-library.js') + read('family-library-data.js'), /Digital_Edition|\.pdf['"][^\n]*(booker-tries-again|big-feelings|what-happens|clean-up-team)|download="[^"]*(booker|lumi|zuri|bop)/i);
+});
+
+test('each of the four revised books reads as 18 pages with the revised manuscript text (cover, 14 story pages, 3 family/educator pages)', () => {
+  const c = site(), UI = c.window.FFFamilyUI;
+  for (const [who, id] of Object.entries(REV_IDS)) {
+    const b = F.BOOKS.find(x => x.id === id), m = REV && REV[who];
+    if (m) {   // the revised manuscript, word for word (Bop's page 2: the website-edition MOVE line)
+      assert.equal(b.title, m.title); assert.equal(b.sub, m.subtitle);
+      m.story.forEach((p, i) => assert.equal(b.spreads[i].p, who === 'Bop' && i === 0 ? p.replace('Bop is a happy doer.', 'Bop loves to move.') : p, `${who} page ${i + 2}`));
+      m.back.forEach((g, i) => { assert.equal(b.guide[i].t, g.title); assert.deepEqual(b.guide[i].blocks, g.blocks); });
+    }
+    const seen = [];
+    for (let p = 0; p <= 18; p++) {
+      UI.R.page = p; const html = c.render('story-time', id), tx = text(html);
+      if (p < 18) {
+        seen.push(p + 1);
+        assert.match(html, new RegExp(p === 0 ? 'Cover, page 1 of 18' : `Page ${p + 1} of 18`), `${id} page ${p + 1}`);
+        if (p === 0) assert.ok(tx.includes(b.title) && tx.includes(b.sub));
+        else if (p <= 14) assert.ok(tx.includes(b.spreads[p - 1].p.split(' ').slice(0, 6).join(' ')), `${id} page ${p + 1} shows its text`);
+        else { const g = b.guide[p - 15]; assert.ok(tx.includes(g.t) && g.blocks.every(([h, d]) => tx.includes(h) && tx.includes(d.slice(0, 40))), `${id} page ${p + 1}: ${g.t}`); }
+      } else {
+        assert.match(html, /The End/); assert.match(html, /data-fl="next" disabled/); assert.match(html, /data-fl="sticker"/);
+      }
+    }
+    assert.equal(seen.length, 18, id + ' has 18 pages');
+  }
+  UI.R.page = 0;
+  const bop = F.BOOKS.find(x => x.id === 'clean-up-team');
+  UI.R.page = 14; assert.match(text(c.render('story-time', 'clean-up-team')), /We finished together!/);
+  UI.R.page = 0; c.render('story-time', 'booker-tries-again');
+  assert.ok(bop.spreads[13].p.includes('Small steps. Helping friends. A job well done!'));
 });
 
 test('the reader turns pages, marks refrain words, and asks a question on every page', () => {
@@ -125,17 +178,19 @@ test('the reader turns pages, marks refrain words, and asks a question on every 
   const b = F.BOOKS[0];
   let html = c.render('story-time', b.id);
   assert.match(html, /id="flReader"/); assert.match(html, /Cover/); assert.match(html, /Before you read/);
-  for (let p = 1; p <= b.spreads.length + 1; p++) {
+  for (let p = 1; p <= b.spreads.length + b.guide.length + 1; p++) {
     UI.R.page = p; html = c.render('story-time', b.id);
     if (p <= b.spreads.length) {
       const s = b.spreads[p - 1];
       assert.match(html, /Read with your child/);
       assert.ok(html.includes(F.CROWD[s.q[0]][0]), 'page ' + p + ' shows its prompt type');
       assert.equal((html.match(/class="fl-w/g) || []).length, s.p.split(/\s+/).length, 'every word is a highlightable span');
-      assert.match(html, new RegExp(`Page ${p} of 14`));
+      assert.match(html, new RegExp(`Page ${p + 1} of 18`));
+    } else if (p <= b.spreads.length + b.guide.length) {
+      assert.match(html, /fl-page-guide/); assert.doesNotMatch(html, /class="fl-w/);
+      if (p === b.spreads.length + 1) for (const q of b.talk.slice(0, 3)) assert.ok(text(html).includes(q.slice(0, 30)), q);
     } else {
-      assert.match(html, /The End/); for (const q of b.talk) assert.ok(text(html).includes(q.slice(0, 30)), q);
-      assert.match(html, /data-fl="next" disabled/);
+      assert.match(html, /The End/); assert.match(html, /data-fl="next" disabled/);
     }
   }
   const w = UI.words('Booker took a big breath. "Big breath. Brave heart. I can try again!"', b.refrain);

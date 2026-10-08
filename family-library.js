@@ -187,7 +187,7 @@ const SIZES = [['Smaller', .86], ['Regular', 1], ['Big', 1.2], ['Biggest', 1.42]
 
 function shelf() {
   return `<div class="ffl">${hero('Story Time', 'Story Time', 'Read a storybook together, one page at a time. Every page has a question to ask and a word to talk about, and some have a move or a breath to share.', 'booker', `<a class="btn gold" href="#story-time/${BOOKS[0].id}">Start with Booker</a>`, scene('reading-corner', [['booker-reading', 33], ['tilly', 63], ['mimi', 80]], { u: 78, line: 'The storybook reading corner, not a photo of our center' }))}
-  ${sec('fl-shelf', 'The bookshelf', 'Five stories, all free to read', 'Read every page of all five books here. Booker Tries Again has its finished pictures. For the other four, each page tells you what the picture shows, so your child can imagine it, or draw it.',
+  ${sec('fl-shelf', 'The bookshelf', 'Five stories, all free to read', 'Read every page of all five books here. The four friends\' books are the revised editions, with their finished pictures and the book\'s own pages for grown-ups. In The Rainbow Picnic, each page tells you what the picture shows, so your child can imagine it, or draw it.',
    `<div class="fl-shelfgrid">${BOOKS.map(b => `<article class="fl-book" style="--c:${col(b.c)}">${b.cover ? `<div class="fl-cover fl-cover-real">${bookImg(b.cover, b.title + ' cover: ' + b.coverAlt, 'fl-cover-img', '(max-width:460px) 180px, 200px')}<span class="fl-cover-n">Book ${b.n}</span></div>` : `<div class="fl-cover">${art(b.c === 'booker' ? 'booker-reading' : b.c)}<span class="fl-cover-t">${E(b.title)}</span><span class="fl-cover-n">Book ${b.n}</span></div>`}
      <div class="fl-book-bd">${friendChip(b.c)} ${b.status === 'full' ? chip('zuri', 'Free to read') : `<span class="fl-chip fl-chip-soft">Preview &middot; full book soon</span>`}
       <h3>${E(b.title)}</h3><p>${E(b.log)}</p><p class="fl-meta">${b.words} words &middot; about ${b.mins} minutes aloud &middot; ages 2 to 5</p>
@@ -224,17 +224,37 @@ function words(text, refrain) {
 // For recorded narration (none exists yet): which word is being read at time t, given each word's start time in seconds.
 function wordAt(times, t) { let i = -1; for (let k = 0; k < times.length; k++) { if (times[k] <= t) i = k; else break; } return i; }
 
+// The revised books (b.guide) are read as the printed book: the cover (page 1), the 14 story pages (2 to 15) and the book's three
+// family/educator pages (16 to 18), then a closing page with stickers. The Rainbow Picnic (no guide) keeps cover, pages, The End.
+const gN = b => (b.guide || []).length;
+const endAt = b => b.spreads.length + gN(b) + 1;         // index of the closing page
+const bookPages = b => b.spreads.length + gN(b) + 1;     // pages in the book itself, the cover included
+function pageLabel(b, p = R.page) {
+  if (p === endAt(b)) return 'The End';
+  if (gN(b)) return p === 0 ? `Cover, page 1 of ${bookPages(b)}` : `Page ${p + 1} of ${bookPages(b)}`;
+  return p === 0 ? 'Cover' : `Page ${p} of ${b.spreads.length}`;
+}
 function readerPage(b) {
-  const last = b.spreads.length + 1, p = R.page;
+  const last = endAt(b), p = R.page;
   if (p === 0) return `<div class="fl-page fl-page-cover${b.cover ? ' fl-page-art' : ''}" style="--c:${col(b.c)}">
-    <div class="fl-text"><span class="fl-kick">Book ${b.n} &middot; A Futures Friends Story</span><h2 class="fl-btitle">${E(b.title)}</h2>
+    <div class="fl-text"><span class="fl-kick">Book ${b.n} &middot; A Futures Friends Story</span><h2 class="fl-btitle">${E(b.title)}</h2>${b.sub ? `<p class="fl-sub">${E(b.sub)}</p>` : ''}
      <p class="fl-say">Say-along line: <span class="fl-ref">${E(b.refrain)}</span></p><p>${E(b.gesture)}</p></div>
     <div class="fl-pic">${b.cover ? `<figure class="fl-art">${bookImg(b.cover, b.title + ' cover: ' + b.coverAlt, 'fl-art-img', '(max-width:760px) 92vw, 460px', true)}<figcaption>${ART_NOTE}</figcaption></figure>` : art(b.c, 'fl-pic-art')}<p><b>Before you read:</b> look at the cover together and ask, "What do you think will happen?"</p><p class="fl-meta">${E(b.back)}</p></div></div>`;
+  if (p > b.spreads.length && p < last) {
+    const g = b.guide[p - b.spreads.length - 1];
+    return `<div class="fl-page fl-page-guide" style="--c:${col(b.c)}">
+    <div class="fl-text"><span class="fl-kick">For families and educators &middot; from the book</span><h2 class="fl-btitle">${E(g.t)}</h2>
+     <dl class="fl-guide">${g.blocks.map(([h, d]) => `<div><dt>${E(h)}</dt><dd>${E(d)}</dd></div>`).join('')}</dl></div></div>`;
+  }
+  const stickers = `<div class="fl-acts">${(b.c === 'all' ? FK : [b.c]).map(k => `<button type="button" class="btn gold" data-fl="sticker" data-k="${k}">Add a ${FRIENDS[k].n} sticker to My Week</button>`).join('')}<button type="button" class="btn soft" data-fl="bookread">Count it in the Book Club</button></div>`;
+  if (p === last && gN(b)) return `<div class="fl-page fl-page-end" style="--c:${col(b.c)}">
+    <div class="fl-text"><h2 class="fl-btitle">The End</h2><p class="fl-say">Say it once more: <span class="fl-ref">${E(b.refrain)}</span></p><p class="fl-meta"><b>Reading tip:</b> ${E(b.tip)}</p></div>
+    <div class="fl-pic fl-endside"><p class="fl-home"><b>Take it home:</b> ${E(b.home)}</p>${stickers}</div></div>`;
   if (p === last) return `<div class="fl-page fl-page-end" style="--c:${col(b.c)}">
     <div class="fl-text"><h2 class="fl-btitle">The End</h2><h3>Talk about it</h3><ol>${b.talk.map(q => `<li>${E(q)}</li>`).join('')}</ol><p class="fl-meta"><b>Reading tip:</b> ${E(b.tip)}</p></div>
     <div class="fl-pic fl-endside"><h3>Try it together: ${E(b.act.t)}</h3><p class="fl-meta">${b.act.min} minutes &middot; ${b.act.mat.map(E).join(' &middot; ')}</p><ol>${b.act.steps.map(s => `<li>${E(s)}</li>`).join('')}</ol><p class="fl-meta"><b>Adapt it:</b> ${E(b.act.adapt)}</p>
      <p class="fl-home"><b>Take it home:</b> ${E(b.home)}</p>
-     <div class="fl-acts">${(b.c === 'all' ? FK : [b.c]).map(k => `<button type="button" class="btn gold" data-fl="sticker" data-k="${k}">Add a ${FRIENDS[k].n} sticker to My Week</button>`).join('')}<button type="button" class="btn soft" data-fl="bookread">Count it in the Book Club</button></div></div></div>`;
+     ${stickers}</div></div>`;
   const s = b.spreads[p - 1];
   return `<div class="fl-page${s.img ? ' fl-page-art' : ''}" style="--c:${col(b.c)}">
    <div class="fl-text"><p class="fl-story" id="flStory" data-i18n-skip lang="${LANG()}">${words(s.p, b.refrain)}</p></div>
@@ -248,7 +268,7 @@ function readerPage(b) {
 }
 
 function reader(b) {
-  const total = b.spreads.length + 2;
+  const total = endAt(b) + 1;
   return `<div class="ffl fl-readerwrap">
   <section class="fl-reader" id="flReader" aria-labelledby="flReaderH" style="--c:${col(b.c)};--fl-size:${SIZES[R.size][1]}" data-book="${b.id}">
    <div class="wrap">
@@ -258,14 +278,14 @@ function reader(b) {
      <button type="button" class="fl-tool" data-fl="point" aria-pressed="${R.point}">Point and read</button>
      <button type="button" class="fl-tool" data-fl="speak" id="flSpeak" hidden>Read to me</button></div>
     <p class="fl-pointhelp" id="flPointHelp" ${R.point ? '' : 'hidden'}>Point and read: tap a word, or press <kbd>Space</kbd> or the Next word button, to move the highlight one word at a time, the way Booker slides his paw under each word.</p>
-    <div class="fl-stage" id="flStage" tabindex="-1" role="group" aria-label="${R.page === 0 ? 'Cover' : R.page === total - 1 ? 'The End' : `Page ${R.page} of ${b.spreads.length}`}">${readerPage(b)}</div>
+    <div class="fl-stage" id="flStage" tabindex="-1" role="group" aria-label="${pageLabel(b)}">${readerPage(b)}</div>
     <div class="fl-nav"><button type="button" class="btn soft" data-fl="prev" ${R.page === 0 ? 'disabled' : ''}>&larr; Back</button>
-     <span class="fl-count" id="flCount">${R.page === 0 ? 'Cover' : R.page === total - 1 ? 'The End' : `Page ${R.page} of ${b.spreads.length}`}</span>
-     <button type="button" class="btn soft" data-fl="nextword" ${R.point && R.page > 0 && R.page < total - 1 ? '' : 'hidden'}>Next word</button>
+     <span class="fl-count" id="flCount">${pageLabel(b)}</span>
+     <button type="button" class="btn soft" data-fl="nextword" ${R.point && R.page > 0 && R.page <= b.spreads.length ? '' : 'hidden'}>Next word</button>
      <button type="button" class="btn navy" data-fl="next" ${R.page === total - 1 ? 'disabled' : ''}>Next &rarr;</button></div>
     <p class="fl-voice" id="flVoice" aria-live="polite"></p>
     <div class="fl-dots" aria-hidden="true">${Array.from({ length: total }, (_, i) => `<i class="${i === R.page ? 'on' : ''}"></i>`).join('')}</div>
-    <p class="fl-note">Use the arrow keys or swipe to turn pages. Text from <i>${E(b.title)}</i>, Futures Friends Storybook Series, ${b.cover ? 'digital Sister Edition, text and illustrations' : E(b.src || 'manuscript v1.0')}. &copy; 2026 Futures Friends. Questions written for families using the dialogic-reading method (${ext('dialogic', 'Reading Rockets')}).</p>
+    <p class="fl-note">Use the arrow keys or swipe to turn pages. Text from <i>${E(b.title)}</i>, Futures Friends Storybook Series, ${E(b.src || 'manuscript v1.0')}. &copy; 2026 Futures Friends. Questions written for families using the dialogic-reading method (${ext('dialogic', 'Reading Rockets')}).</p>
    </div></section></div>`;
 }
 
@@ -293,14 +313,13 @@ function redrawReader() {
     if (again) again.focus({ preventScroll: true });
   }
 }
-function pageLabel(b) { return R.page === 0 ? 'Cover' : R.page === b.spreads.length + 1 ? 'The End' : `Page ${R.page} of ${b.spreads.length}`; }
 function say(text) { if (window.FFA11y) window.FFA11y.announce(text); }
 function turn(d) {
   const b = curBook(); if (!b) return;
-  const n = Math.min(b.spreads.length + 1, Math.max(0, R.page + d));
+  const n = Math.min(endAt(b), Math.max(0, R.page + d));
   if (n === R.page) { say(d > 0 ? 'This is the last page.' : 'This is the cover.'); return; }
   R.page = n; redrawReader();
-  const s = R.page > 0 && R.page <= b.spreads.length ? b.spreads[R.page - 1].p : '';
+  const s = R.page > 0 && R.page <= b.spreads.length ? b.spreads[R.page - 1].p : R.page > b.spreads.length && R.page < endAt(b) ? b.guide[R.page - b.spreads.length - 1].t : '';
   say(`${pageLabel(b)}.${s ? ' ' + s : ''}`);
 }
 function mark(i) {
@@ -383,17 +402,17 @@ function friendVideos(k) {
      return `<div class="fl-friendvid">${C.actPlayer(slug, t)}${c && ACTS.includes(c) ? `<a class="fl-meta" href="#activities/${c.id}">Open the ${E(c.t)} card &rarr;</a>` : ''}</div>`; }).join('')}</div>${book}`);
 }
 // A friend's own storybook, shown in that friend's section (#activities/<friend>, and #bop-at-home for Bop via FFFamilyUI.friendBook).
-// Booker's book has its finished art, so it shows the real cover and the three pages where he does the brave reader steps from his
-// video. Lumi's and Bop's covers are the labeled layout previews (the same files as #friends); Zuri's book has no cover art yet, so it
-// gets the shelf's felt cover. Books without finished pictures peek at their opening words instead.
+// All four books are the revised editions (2026-10-07) with finished art: the real cover and three pages from the book. Booker's three
+// pages are the brave reader steps of his revised kite pattern (look at the picture, look at every letter k-i-t-e, say /k/ /ī/ /t/ and blend).
 const FB = {
-  booker: { link: 'Watch Booker\'s brave reader steps, then read his book.', blurb: 'Booker\'s new book has a word he cannot read... yet. Watch him try, and try again.',
-    peek: [[5, 'Look at the picture'], [6, 'Say the first sound'], [7, 'Slide your paw under the word']] },
-  lumi: { link: 'Breathe along with Lumi, then read her book.', blurb: 'Pip is new and all alone. Breathe along with Lumi as she finds her calm and her kind words.',
-    cover: ['img/big-feelings-brighter-days-cover-400.webp', 'img/big-feelings-brighter-days-cover-800.webp'] },
-  zuri: { link: 'Wonder along with Zuri, then read her book.', blurb: 'An ice cube disappears from the sunny porch. Wonder along with Zuri as she guesses, tries and finds out.' },
-  bop: { link: 'Move with Bop, then peek at his book.', blurb: 'The Clubhouse is a giant mess. One toy at a time and one happy song, Bop learns he can do it himself.',
-    cover: ['img/clean-up-team-cover-400.webp', 'img/clean-up-team-cover-800.webp'] }
+  booker: { link: 'Watch Booker\'s brave reader steps, then read his book.', blurb: 'Booker\'s new book has a word he does not know yet. Watch him look at every letter, ask for help, and try again.',
+    peek: [[5, 'Look at the picture'], [6, 'Look at all four letters: k-i-t-e'], [7, 'Say /k/ /ī/ /t/, then blend: kite']] },
+  lumi: { link: 'Breathe along with Lumi, then read her book.', blurb: 'Pip is new and standing by the fence. Lumi asks kindly, takes a slow breath, and lets Pip choose.',
+    peek: [[2, 'Lumi notices Pip'], [7, 'A slow breath'], [9, 'A kind invitation']] },
+  zuri: { link: 'Wonder along with Zuri, then read her book.', blurb: 'An ice cube disappears from the sunny porch. Wonder along with Zuri as she guesses, watches closely, and finds out.',
+    peek: [[5, 'Three cubes, the same size'], [6, 'Sunny and shady'], [9, 'Look closely']] },
+  bop: { link: 'Move with Bop, then read his book.', blurb: 'The Clubhouse is a giant mess. Bop starts with one small thing, tries again, and finishes the job with his clean-up team.',
+    peek: [[5, 'Start with one thing'], [11, 'Lend a hand'], [12, 'The clean-up team']] }
 };
 // the opening of a page: whole sentences up to about 120 characters (a page that starts "Plink!" still says something)
 const firstLine = p => { const parts = String(p).match(/[^.!?]+[.!?]+[\u201D"]?\s*/g) || [String(p)]; let o = '';
@@ -404,9 +423,7 @@ function friendBook(k) {
   const n = FRIENDS[k].n, full = b.status === 'full', href = `#story-time/${b.id}`, go = full ? `Read ${E(b.title)}` : `See the preview of ${E(b.title)}`;
   const cover = b.cover
     ? `<a class="fl-fb-cover" href="${href}" aria-label="${go}">${bookImg(b.cover, b.title + ' cover: ' + b.coverAlt, 'fl-fb-cover-img', '(max-width:640px) 62vw, 260px')}</a>`
-    : f.cover
-      ? `<a class="fl-fb-cover" href="${href}" aria-label="${go}"><img class="fl-fb-cover-img" src="${f.cover[0]}" srcset="${f.cover[0]} 400w, ${f.cover[1]} 800w" sizes="(max-width:640px) 62vw, 260px" alt="Cover layout preview: ${E(b.title)}, Book ${b.n}, with ${n}" width="800" height="800" loading="lazy" decoding="async"></a>`
-      : `<a class="fl-fb-cover fl-cover" style="--c:${col(k)}" href="${href}" aria-label="${go}">${art(k)}<span class="fl-cover-t">${E(b.title)}</span><span class="fl-cover-n">Book ${b.n}</span></a>`;
+    : `<a class="fl-fb-cover fl-cover" style="--c:${col(k)}" href="${href}" aria-label="${go}">${art(k)}<span class="fl-cover-t">${E(b.title)}</span><span class="fl-cover-n">Book ${b.n}</span></a>`;
   const sp = b.spreads || [];
   const peek = f.peek && sp.length
     ? `<ol class="fl-fb-peek" aria-label="Three pages from the book">${f.peek.map(([i, cap], j) => sp[i] && sp[i].img ? `<li><a href="${href}"><img src="${sp[i].img[0]}" alt="${E(sp[i].pic)}" width="640" height="640" loading="lazy" decoding="async"><span><b>${j + 1}</b> ${E(cap)}</span></a></li>` : '').join('')}</ol>`

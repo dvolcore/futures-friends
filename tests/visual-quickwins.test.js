@@ -80,7 +80,7 @@ test('non-final art keeps its slot and carries a visible flag: AI rooms, draft p
   // every slot is still there
   for (const f of ['video/ff-intro-titled-16x9.mp4', 'video/academy-welcome.mp4', 'img/booker-a-new-friend-at-futures-poster.png', 'img/bop-teamwork-makes-it-brighter-poster.png', 'img/lumi-kindness-goes-a-long-way-poster.png'])
     assert.ok(features.includes(f), f + ' still on the page');
-  for (const f of ['img/big-feelings-brighter-days-cover.png', 'img/clean-up-team-cover.png', 'img/zones.jpg', 'img/kitchen.jpg']) assert.ok(views.includes(f), f + ' still on the page');
+  for (const f of ['img/zones.jpg', 'img/kitchen.jpg']) assert.ok(views.includes(f), f + ' still on the page');   // the two cover layouts gave way to the finished covers (2026-10-07)
   // wave 10 (owner 2026-10-07): the classroom slots (carpet.jpg) are filled with REAL photos of the pilot center, never a render
   assert.ok(!/img\/carpet\.jpg/.test(views + features + read('experience.js')), 'carpet.jpg placeholder replaced by real photos');
   for (const [f, k] of [['views.js', 'alphabet-rug'], ['views.js', 'reading-corner'], ['views.js', 'dress-up-corner'], ['views.js', 'exterior'], ['features.js', 'exterior'], ['features.js', 'blue-table-room'], ['experience.js', 'turtle-rug']])
@@ -131,7 +131,7 @@ test('placeholder slots say what goes there and use only official art', () => {
 });
 
 test('page weight: heavy posters and covers are served as resized WebP copies with sizes, lazy loading and dimensions', () => {
-  for (const b of ['booker-a-new-friend-at-futures-poster', 'bop-teamwork-makes-it-brighter-poster', 'lumi-kindness-goes-a-long-way-poster', 'big-feelings-brighter-days-cover', 'clean-up-team-cover'])
+  for (const b of ['booker-a-new-friend-at-futures-poster', 'bop-teamwork-makes-it-brighter-poster', 'lumi-kindness-goes-a-long-way-poster'])
     for (const w of [400, 800]) {
       const f = path.join(ROOT, `img/${b}-${w}.webp`);
       assert.ok(fs.existsSync(f), f);
@@ -142,8 +142,8 @@ test('page weight: heavy posters and covers are served as resized WebP copies wi
   const tag = ctx.pic('img/x-cover.png', 1254, 1254, 'Alt', '50vw');
   assert.match(tag, /<source type="image\/webp" srcset="img\/x-cover-400\.webp 400w, img\/x-cover-800\.webp 800w" sizes="50vw">/);
   assert.match(tag, /<img src="img\/x-cover\.png" alt="Alt" width="1254" height="1254" loading="lazy" decoding="async">/);
-  // Booker Tries Again's finished cover (2026-10-07) is a 640/1200 WebP pair from the Sister Edition art (tests/family-library.test.js checks the files).
-  assert.match(read('views.js'), /src="img\/books\/booker-tries-again\/cover-640\.webp" srcset="img\/books\/booker-tries-again\/cover-640\.webp 640w, img\/books\/booker-tries-again\/cover-1200\.webp 1200w"/);
+  // The friends' finished covers (revised editions, 2026-10-07) are 640/1200 WebP pairs from the Story Time data (tests/family-library.test.js checks the files).
+  assert.match(read('views.js'), /<img src="\$\{f\.cover\[0\]\}" srcset="\$\{f\.cover\[0\]\} 640w, \$\{f\.cover\[1\]\} 1200w" sizes="[^"]+" alt="[^"]+" width="1200" height="1200" loading="lazy" decoding="async">/);
 });
 
 test('Bop at Home and Whole-Child get pictures: a pictogram per activity, per step, the MOVE band and the Eat the Rainbow names', () => {

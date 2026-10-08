@@ -13,10 +13,10 @@ const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf
 const want = (k) => !only || only.includes(k);
 const ff = (...a) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...a], { stdio: 'inherit' });
 const P = (...a) => join(SITE, ...a);
-// asset -> [output file, format]. (Booker Tries Again has its finished cover since 2026-10-07, img/books/booker-tries-again/; the
-// compose.html 'cover-booker' layout is no longer written to the site.) Order matters: ac1 shows the new group.jpg; the episode clip pans over the new hero.jpg.
+// asset -> [output file, format]. (All four friends' books have their finished covers since the revised editions of 2026-10-07,
+// img/books/<book id>/cover-*.webp; the compose.html 'cover-booker', 'cover-lumi' and 'cover-bop' layouts are no longer written to the site.) Order matters: ac1 shows the new group.jpg; the episode clip pans over the new hero.jpg.
 const OUT = { hero: ['img/hero.jpg', 'jpeg'], group: ['img/group.jpg', 'jpeg'], carpet: ['img/carpet.jpg', 'jpeg'], kitchen: ['img/kitchen.jpg', 'jpeg'],
-  zones: ['img/zones.jpg', 'jpeg'], 'cover-lumi': ['img/big-feelings-brighter-days-cover.png', 'png'], 'cover-bop': ['img/clean-up-team-cover.png', 'png'],
+  zones: ['img/zones.jpg', 'jpeg'],
   'poster-booker': ['img/booker-a-new-friend-at-futures-poster.png', 'png'],
   'poster-bop': ['img/bop-teamwork-makes-it-brighter-poster.png', 'png'], 'poster-lumi': ['img/lumi-kindness-goes-a-long-way-poster.png', 'png'] };
 

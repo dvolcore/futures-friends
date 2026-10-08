@@ -447,7 +447,7 @@ test('back chip: a link back to an earlier page is a new step, so the chip names
   await h.goto(page, site.base, 'story-time');
   const nav = href => page.evaluate(href => { const a = document.createElement('a'); a.href = href; document.getElementById('ff-prefooter').appendChild(a); a.click(); }, href).then(() => page.waitForTimeout(150));
   for (const x of ['#story-time/booker-tries-again', '#story-time/big-feelings-brighter-days', '#story-time/booker-tries-again']) await nav(x);
-  assert.match(await page.$eval('.ffw-back', a => a.textContent), /Back to Big Feelings, Brighter Days/);
+  assert.match(await page.$eval('.ffw-back', a => a.textContent), /Back to Lumi’s Big Feelings, Brighter Days/);
   await page.click('.ffw-back'); await page.waitForTimeout(300);
   assert.equal(await page.evaluate(() => location.hash), '#story-time/big-feelings-brighter-days', 'the chip and the browser agree');
   await page.goBack(); await page.waitForTimeout(300);                  // a real Back pops the in-app list too
