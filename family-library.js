@@ -11,8 +11,47 @@
 'use strict';
 if (typeof V === 'undefined' || typeof CH === 'undefined' || !window.FFFamily) return;
 const F = window.FFFamily;
-const { BOOKS, ACTS, BANDS, FRIENDS, CROWD, GUIDES, PRINTABLES, VIDEOS, SRC } = F;
-const PRINT_KIT = F.PRINT_KIT || [];
+const { SRC } = F;
+// English / Spanish (i18n.js, owner 2026-10-07): the Spanish drafts (family-library-es.js, family-library-es-books.js; window.FFFamilyES)
+// are merged over the English data, field by field, so anything not translated yet stays English. Swapped when the language changes.
+let BOOKS, ACTS, BANDS, FRIENDS, CROWD, GUIDES, PRINTABLES, VIDEOS, PRINT_KIT;
+const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+function merge(base, over) {
+  if (over == null) return base;
+  if (typeof base === 'string') return typeof over === 'string' && over ? over : base;
+  if (Array.isArray(base)) {
+    if (Array.isArray(over)) return base.map((b, i) => merge(b, over[i]));
+    if (isObj(over)) return base.map(b => (b && b.id != null && over[b.id] ? merge(b, over[b.id]) : b));
+    return base;
+  }
+  if (isObj(base) && isObj(over)) { const o = Object.assign({}, base); for (const k of Object.keys(base)) if (k in over) o[k] = merge(base[k], over[k]); return o; }
+  return base;
+}
+const LANG = () => (window.FFi18n && window.FFi18n.lang) || 'en';
+function localize() {
+  const es = LANG() === 'es' && window.FFFamilyES ? window.FFFamilyES : {};
+  BOOKS = merge(F.BOOKS, es.books); ACTS = merge(F.ACTS, es.acts); BANDS = merge(F.BANDS, es.bands); FRIENDS = merge(F.FRIENDS, es.friends);
+  CROWD = merge(F.CROWD, es.crowd); GUIDES = merge(F.GUIDES, es.guides); PRINTABLES = merge(F.PRINTABLES, es.printables);
+  VIDEOS = merge(F.VIDEOS, es.videos); PRINT_KIT = merge(F.PRINT_KIT || [], es.printKit);
+}
+localize();
+// The same titles, blurbs and lines also appear on pages drawn by other files (Friends & Books, Home, Watch): the English-to-Spanish
+// pairs from this data join the phrase table, so those pages say the same Spanish (a blurb's first sentence too, used as a teaser).
+if (window.FFi18n && window.FFi18n.add && window.FFFamilyES) {
+  const ES = window.FFFamilyES, pairs = {};
+  const first = t => t.split(/(?<=[.!?])\s+/)[0];
+  const walk = (en, es) => {
+    if (typeof en === 'string') {
+      if (typeof es === 'string' && es && es !== en && en.length > 2) { pairs[en] = es; const a = first(en), b = first(es); if (a !== en && b !== es && a.length > 12) pairs[a] = b; }
+    } else if (Array.isArray(en)) en.forEach((x, i) => walk(x, es && es[i]));
+    else if (isObj(en) && isObj(es)) Object.keys(en).forEach(k => walk(en[k], es[k]));
+  };
+  [['BOOKS', 'books'], ['ACTS', 'acts'], ['FRIENDS', 'friends'], ['GUIDES', 'guides'], ['PRINTABLES', 'printables'], ['VIDEOS', 'videos'], ['BANDS', 'bands']]
+    .forEach(([K, k]) => { if (F[K] && ES[k]) walk(F[K], merge(F[K], ES[k])); });
+  window.FFi18n.add('es', pairs);
+}
+if (window.FFi18n && window.FFi18n.on) window.FFi18n.on(() => { stopSpeech(); localize(); });
+window.FFFamilyLocalized = { merge, localize, words: (t, r) => words(t, r), get BOOKS() { return BOOKS; }, get ACTS() { return ACTS; } };
 const FK = ['booker', 'lumi', 'zuri', 'bop'];
 const E = s => esc(s);
 const col = k => k === 'all' ? 'var(--gold-deep)' : `var(--fl-${k})`;
@@ -61,7 +100,7 @@ function buildPlan(o, when = new Date()) {
   const doPool = shuffle(forBand.filter(a => pick.includes(a.c) && fit(a)), r);
   const moves = shuffle(forBand.filter(a => a.c === 'bop'), r);
   const calms = shuffle(forBand.filter(a => a.c === 'lumi'), r);
-  const outside = shuffle(forBand.filter(a => a.where === 'Outdoors'), r);
+  const outside = shuffle(forBand.filter(a => (F.ACTS.find(x => x.id === a.id) || a).where === 'Outdoors' /* the English value: in Spanish it is 'Al aire libre' */), r);
   const full = BOOKS.filter(x => x.status === 'full');
   const young = b === 'infant' || b === 'toddler';
   const types = Object.keys(CROWD);
@@ -198,7 +237,7 @@ function readerPage(b) {
      <div class="fl-acts">${(b.c === 'all' ? FK : [b.c]).map(k => `<button type="button" class="btn gold" data-fl="sticker" data-k="${k}">Add a ${FRIENDS[k].n} sticker to My Week</button>`).join('')}<button type="button" class="btn soft" data-fl="bookread">Count it in the Book Club</button></div></div></div>`;
   const s = b.spreads[p - 1];
   return `<div class="fl-page${s.img ? ' fl-page-art' : ''}" style="--c:${col(b.c)}">
-   <div class="fl-text"><p class="fl-story" id="flStory">${words(s.p, b.refrain)}</p></div>
+   <div class="fl-text"><p class="fl-story" id="flStory" data-i18n-skip lang="${LANG()}">${words(s.p, b.refrain)}</p></div>
    ${s.img ? `<figure class="fl-pic fl-art">${bookImg(s.img, s.pic, 'fl-art-img', '(max-width:760px) 92vw, 460px', false)}<figcaption>${ART_NOTE}</figcaption></figure>`
     : `<div class="fl-pic"><span class="fl-kick">Picture this</span>${art(b.c, 'fl-pic-art')}<p>On this page: ${E(s.pic)}</p><p class="fl-meta">Close your eyes and picture it together, then ask your child to draw this page.</p></div>`}
    <div class="fl-prompt" role="group" aria-labelledby="flPromptH"><h3 id="flPromptH">Read with your child</h3>
@@ -275,8 +314,10 @@ function mark(i) {
 let voice = null;
 function pickVoice() {
   const ss = window.speechSynthesis; if (!ss || !window.SpeechSynthesisUtterance) return null;
-  const local = ss.getVoices().filter(v => v.localService && /^en(-|_|$)/i.test(v.lang));
-  return local.find(v => /en-US/i.test(v.lang)) || local[0] || null;
+  // The book's language picks the voice: Spanish books read with a Spanish device voice (es-US or es-MX first), English with en-US.
+  const es = LANG() === 'es', re = es ? /^es(-|_|$)/i : /^en(-|_|$)/i, best = es ? /es[-_](US|MX|419)/i : /en[-_]US/i;
+  const local = ss.getVoices().filter(v => v.localService && re.test(v.lang));
+  return local.find(v => best.test(v.lang)) || local[0] || null;
 }
 // Voices load late in some browsers (Chrome fills getVoices() only after "voiceschanged"), so "no voice" is said only once
 // the list has settled; the note sits under the page so it never moves the book.

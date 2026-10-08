@@ -13,6 +13,15 @@
     tilly: {name:'Tilly',role:'The imaginative classmate',image:'tilly',color:'#b0466a',title:'What could you create?',text:'Tilly brings a little imagination to the day. Add a new idea to a story with Booker, then make it your own.',activity:'A brand-new story ending',steps:['Draw a place you would like to explore.','Add a friend and something surprising.','Tell a grown-up what happens next.'],route:'friends',link:'Explore the storybooks'},
     pip: {name:'Pip',role:'The new friend',image:'pip',color:'#8a5a2b',title:'A little joy goes a long way.',text:'Pip is new to the classroom and notices everything. He brings a cheerful little rhythm to the group. Join Bop for a playful rhythm that everyone can make their own.',activity:'Copy my happy rhythm',steps:['Clap or tap a simple two-beat rhythm.','Invite a friend to copy it in their own way.','Take turns leading; movement and sound are both welcome.'],route:'curriculum',link:'Find another playful discovery'}
   });
+  // Bilingual canon (owner 2026-10-07): Zuri is the bilingual friend: she mixes Spanish words into what she says, Spanish first and then
+  // English ("¡Mira! Look!", "¿Qué es esto? What is it?"), and every Spanish word means something in that moment; nobody mocks an accent.
+  // A new adult story-world character, the Spanish teacher, leads the daily Spanish Circle (greeting song, Zuri's word of the day, a game).
+  // The name is the owner's pick from three proposals (BILINGUAL_PROGRAM_2026-10-07.md); until then the copy says "the Spanish teacher
+  // (name TBD)". No plush art exists yet, so she is NOT in `cast`/`more` (every entry there needs an image); `planned` holds her role.
+  const planned = Object.freeze({
+    spanishTeacher: Object.freeze({ name: 'the Spanish teacher (name TBD)', nameEs: 'la maestra de español (nombre por decidir)', role: 'The Spanish teacher', group: 'school',
+      line: 'Leads the Spanish Circle every day: a greeting song, Zuri\'s word of the day and a game everyone can play.', art: null })
+  });
   // The rest of the town: who they are, in one line of story copy. `group` places them in town().
   const more = Object.freeze({
     hazel: {name:'Principal Hazel',role:'The principal',image:'principal-hazel',color:'#7a2236',group:'school',line:'Knows every cubby by its felt symbol and greets each family at the door.'},
@@ -505,5 +514,5 @@
     if(D.body)start(); else D.addEventListener('DOMContentLoaded',start);
     return Object.freeze({scan,sign:card=>sign(card,true)});
   })();
-  window.FFSupporting=Object.freeze({community,teacher,arrival,detail,guide,cameo,town,LABEL,portrait:(key,cls='',decorative=false,h=340)=>portrait(anyKey(key),cls,decorative,h),profile,keys,allKeys,CLIPS,clipIds,RIG,alive:ALIVE});
+  window.FFSupporting=Object.freeze({planned,community,teacher,arrival,detail,guide,cameo,town,LABEL,portrait:(key,cls='',decorative=false,h=340)=>portrait(anyKey(key),cls,decorative,h),profile,keys,allKeys,CLIPS,clipIds,RIG,alive:ALIVE});
 })();

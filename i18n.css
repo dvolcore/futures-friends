@@ -1,0 +1,17 @@
+/* English / Spanish switch (i18n.js). The header button sits in the util bar and inherits its button style. */
+.util .ff-lang,.px-utility .ff-lang{font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.util .ff-lang:focus-visible,.px-utility .ff-lang:focus-visible{outline:3px solid #F5C451;outline-offset:2px}
+/* The draft note above the page while Spanish is on. */
+.ff-lang-note{margin:0;padding:10px 16px;background:#FFF6DC;color:#3A2A00;font-size:14px;line-height:1.45;text-align:center;border-bottom:1px solid #EBD9A2}
+.ff-lang-note a{color:#6B2A8E;font-weight:600}
+.ff-lang-note button{appearance:none;margin-left:8px;min-height:32px;padding:2px 12px;border:1px solid #6B2A8E;border-radius:999px;background:#fff;color:#6B2A8E;font:600 13px/1 var(--body,"Poppins",system-ui,sans-serif);cursor:pointer}
+.ff-lang-note button:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+/* The entry gate's language choice (entry.js draws the gate; i18n.js adds this row under its buttons). */
+.ff-lang-gate{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:6px;color:#14313D}
+.ff-lang-gate button{appearance:none;min-height:44px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:none;color:#14313D;font:600 15px/1 var(--body,"Poppins",system-ui,sans-serif);cursor:pointer}
+.ff-lang-gate button[aria-pressed="true"]{background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 2px #14313D}
+.ff-lang-gate button:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ff-lang-note{background:#2C2410;color:#F6E7BF;border-color:#5A4A1C}:root:not([data-theme="light"]) .ff-lang-note a{color:#C9A2EC}}
+/* Phones: the short language button beside search and menu (the utility row's links are hidden under 640px). */
+.ff-lang-mini{display:none}
+@media (max-width:640px){.ff-lang-mini{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px;border:1.5px solid #14313D;border-radius:999px;background:#fff;color:#14313D;font:700 14px/1 var(--body,"Poppins",system-ui,sans-serif);cursor:pointer}.ff-lang-mini:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}}

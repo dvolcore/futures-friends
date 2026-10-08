@@ -3,6 +3,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const vm = require('node:vm');
 const path = require('node:path');
 const { site, read, text, ROOT } = require('./site-vm');
 
@@ -15,7 +16,9 @@ const withVtt = () => site({ before: { 'captions.js': ctx => {
 
 test('no fake captions: every registered caption file exists, and no .vtt sits in video/ unregistered', () => {
   const vtts = fs.readdirSync(path.join(ROOT, 'video')).filter(f => /\.vtt$/i.test(f));
-  const registered = Object.values(C.CAPS).filter(e => e.vtt).map(e => e.vtt);
+  // Spanish subtitle tracks (DRAFT, owner 2026-10-07) are registered in captions-es.js (window.FFCaptionsES).
+  const sb = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'captions-es.js'), 'utf8'), Object.assign(sb, { window: sb }));
+  const registered = Object.values(C.CAPS).concat(Object.values(sb.FFCaptionsES || {})).filter(e => e.vtt).map(e => e.vtt);
   for (const v of registered) assert.ok(fs.existsSync(path.join(ROOT, v)), v);
   for (const v of vtts) assert.ok(registered.includes('video/' + v), `${v} is not registered`);
 });

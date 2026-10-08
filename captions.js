@@ -77,9 +77,16 @@
   const entry = src => CAPS[String(src || '').split(/[?#]/)[0]] || null;
   const has = src => { const e = entry(src); return !!(e && e.vtt); };
   // The <track> for a player. Empty string when no caption file exists, so no player ever points at a missing file.
-  const tracks = src => has(src) ? `<track kind="captions" srclang="en" label="English" src="${esc(entry(src).vtt)}" default>` : '';
+  // Spanish (owner 2026-10-07): captions-es.js (window.FFCaptionsES) adds a second track, Spanish subtitles of the English audio, as a
+  // DRAFT translation. When the site is in Spanish (i18n.js) the Spanish track is the default and the transcript is the Spanish one.
+  const esEntry = src => { const m = typeof window !== 'undefined' && window.FFCaptionsES; return (m && m[String(src || '').split(/[?#]/)[0]]) || null; };
+  const inSpanish = () => typeof window !== 'undefined' && window.FFi18n && window.FFi18n.lang === 'es';
+  const tracks = src => { if (!has(src)) return ''; const es = esEntry(src), sp = !!(es && es.vtt && inSpanish());
+    return `<track kind="captions" srclang="en" label="English" src="${esc(entry(src).vtt)}"${sp ? '' : ' default'}>`
+      + (es && es.vtt ? `<track kind="subtitles" srclang="es" label="Español (borrador)" src="${esc(es.vtt)}"${sp ? ' default' : ''}>` : ''); };
   const transcript = (src, title) => { const e = entry(src); if (!e || !e.transcript) return '';
-    return `<details class="ffcap-tr"><summary>Read the transcript${title ? `<span class="ffcap-vh">: ${esc(title)}</span>` : ''}</summary><div>${String(e.transcript).split(/\n{2,}/).map(p => `<p>${esc(p)}</p>`).join('')}</div></details>`; };
+    const es = esEntry(src), sp = !!(es && es.transcript && inSpanish()), body = sp ? es.transcript : e.transcript;
+    return `<details class="ffcap-tr"${sp ? ' lang="es" data-i18n-skip' : ''}><summary>${sp ? 'Leer la transcripción (traducción en borrador)' : 'Read the transcript'}${title ? `<span class="ffcap-vh">: ${esc(title)}</span>` : ''}</summary><div>${String(body).split(/\n{2,}/).map(p => `<p>${esc(p)}</p>`).join('')}</div></details>`; };
   // The honest note for a placeholder clip with no captions yet. Final videos with no captions say so plainly too.
   const note = src => { const e = entry(src); if (e && (e.vtt || e.transcript)) return '';
     if (e && !e.placeholder) return '';   // a finished silent film (the logo reveal) needs no note: it has no words
