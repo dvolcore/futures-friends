@@ -47,9 +47,9 @@ test('prices come from the data sources: add-on from FFRoomKit.ADDONS, packages 
 });
 
 test('every concept image has its Concept badge, alt text, lazy loading and the Real room / With the kit toggle', () => {
-  const c = site(), n = c.window.FFBrandedRooms.length, h = c.render('centers');
+  const c = site(), n = c.window.FFBrandedRooms.length + (c.window.FFBrandedAlternates || []).length, h = c.render('centers');
   assert.ok(n >= 5);
-  assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room');
+  assert.equal((h.match(/class="ks-slide"/g) || []).length, n, 'one slide per FFBrandedRooms room (plus any alternates)');
   assert.equal((h.match(/class="ffa-kit-label"[^>]*>Concept</g) || []).length, n, 'Concept badge on every slide');
   assert.equal((h.match(/data-kit-show="real"/g) || []).length, n);
   assert.equal((h.match(/data-kit-show="kit"/g) || []).length, n);

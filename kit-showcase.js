@@ -14,16 +14,29 @@ const W = window;
 if (typeof V === 'undefined') return;
 const E = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const money = n => '$' + Number(n).toLocaleString('en-US');
-const ORDER = ['reading-corner', 'turtle-rug', 'blue-table-room', 'dress-up-corner', 'alphabet-rug'];   // Booker, Lumi, Zuri, Bop, Circle
+const ORDER = ['turtle-rug', 'reading-corner', 'blue-table-room', 'dress-up-corner', 'alphabet-rug'];   // all five zones first, then Booker, Zuri, Bop, Circle
 
 function rooms() {
   const list = Array.isArray(W.FFBrandedRooms) ? W.FFBrandedRooms.filter(r => r && r.key && r.kit) : [];
   const at = r => { const i = ORDER.indexOf(r.key); return i < 0 ? 99 : i; };
-  return list.slice().sort((a, b) => at(a) - at(b));
+  const out = list.slice().sort((a, b) => at(a) - at(b));
+  // extra concepts for a room (window.FFBrandedAlternates, brand-art.js) follow that room's own concept
+  (Array.isArray(W.FFBrandedAlternates) ? W.FFBrandedAlternates : []).forEach(a => {
+    if (!a || !a.kit || !a.room) return;
+    const i = out.findIndex(r => r.key === a.room); out.splice(i < 0 ? out.length : i + 1, 0, a);
+  });
+  return out;
+}
+function pic(src, alt, w, h, cls) {   // our -800 jpg plus its 400/1200 and webp siblings
+  const b = src.replace(/-800\.jpg$/, ''), set = ext => [400, 800, 1200].map(x => `${b}-${x}.${ext} ${x}w`).join(', '), sizes = '(max-width:820px) 92vw, 720px';
+  return `<picture><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img src="${E(src)}" srcset="${set('jpg')}" sizes="${sizes}" alt="${E(alt)}" width="${w || 800}" height="${h || 600}" loading="lazy" decoding="async" data-kit-photo="${E(cls)}"></picture>`;
 }
 function slide(r, i, n) {
   const A = W.FFArt, sizes = '(max-width:820px) 92vw, 720px';
-  const img = A && A.kitImg && A.CENTER && A.CENTER[r.key] && A.KIT && A.KIT[r.key]
+  const alt = !!r.room;
+  const img = alt && A && A.photoImg && A.CENTER && A.CENTER[r.room]
+    ? `<span class="ffa-kit-real">${A.photoImg(r.room, { sizes })}</span><span class="ffa-kit-concept">${pic(r.kit, r.alt, r.w, r.h, r.key)}</span>`
+    : A && A.kitImg && A.CENTER && A.CENTER[r.key] && A.KIT && A.KIT[r.key]
     ? `<span class="ffa-kit-real">${A.photoImg(r.key, { sizes })}</span><span class="ffa-kit-concept">${A.kitImg(r.key, { sizes })}</span>`
     : `<span class="ffa-kit-real"><img src="${E(r.real)}" alt="" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span><span class="ffa-kit-concept"><img src="${E(r.kit)}" alt="${E(r.alt)}" loading="lazy" decoding="async" width="${r.w || 800}" height="${r.h || 600}"></span>`;
   const toggle = A && A.kitToggle ? A.kitToggle(r.key) : '';

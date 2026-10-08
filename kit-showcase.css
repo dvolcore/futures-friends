@@ -23,7 +23,8 @@
 .ks-slide{flex:0 0 100%;scroll-snap-align:center;min-width:0}
 .ks-fig{margin:0;background:#0B1B30;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(2,10,24,.45)}
 .ks-fig .ffa-kit-stage{border-radius:0;aspect-ratio:4/3}
-.ks-fig .ffa-kit-stage img{width:100%;height:100%;object-fit:cover;display:block}
+.ks-fig .ffa-kit-stage img{width:100%;height:100%;object-fit:contain;display:block}   /* nothing cropped: a portrait room sits in the frame whole */
+.ks-fig .ffa-kit-stage{background:#0B1B30}
 .ks-fig picture{display:block;height:100%}
 .ks-fig .ffa-kit-label{top:12px;left:12px;font-size:13px;padding:5px 12px}
 .ks-fig figcaption{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;padding:10px 16px;color:#E4EEF4;font-size:13px}
