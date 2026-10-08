@@ -56,7 +56,7 @@ function card(p, o) {
     <div class="sp-mwrap"><a class="sp-media${a && a.tile ? ' is-tile' : ''}${sample ? ' is-sample' : ''}" href="#${href}" data-go="${href}" tabindex="-1" aria-hidden="true">
       ${a ? imgTag(a, { sizes: o.sizes || '(max-width:700px) 46vw, (max-width:1100px) 31vw, 300px', alt: '' }) : ''}
       ${b ? imgTag(b, { sizes: o.sizes || '(max-width:700px) 46vw, 300px', alt: '', cls: 'sp-img2' }) : ''}
-      ${concept ? badgeHtml('Concept image', 'concept') : sample ? badgeHtml('Concept sample', 'sample') : (a && a.tile ? badgeHtml('Product photo coming', 'ph') : '')}
+      ${(!concept && !sample && a && a.tile) ? badgeHtml('Product photo coming', 'ph') : ''}
     </a>
     <button type="button" class="sp-qv" data-sp-qv="${E(p.id)}" aria-label="Quick view: ${E(p.name)}">${ico('eye')}<span>Quick view</span></button></div>
     <div class="sp-card-body">
@@ -67,7 +67,7 @@ function card(p, o) {
       <div class="sp-card-foot">${priceBlock(p)}<span class="sp-card-cta">${E(cta)} ${ico('arrow')}</span></div>
     </div></article></li>`;
 }
-const caption = `<p class="sp-caption">Room pictures marked Concept image: ${E(C.CONCEPT_CAPTION)}</p>`;
+const caption = `<p class="sp-caption">Room pictures are design renderings of how the zones can look.</p>`;
 const sampleCap = '';
 const captionFor = list => { const k = new Set(list.map(p => (C.gallery(p, rooms())[0] || {}).kind)); return (k.has('concept') ? caption : '') + (k.has('sample') ? sampleCap : ''); };
 const termsLine = (name) => (W.FFRelease && W.FFRelease.terms ? W.FFRelease.terms('store', [[name, 'merch-pod']], { compact: true }) : '');
@@ -222,7 +222,7 @@ function qvBody(p) {
   const buy = C.canOrder(p) ? `<div class="sp-buyrow"><div class="sp-step sp-step-lg" role="group" aria-label="Quantity"><button type="button" data-sp-qvq="-1" aria-label="Fewer"${QV.qty <= 1 ? ' disabled' : ''}>${ico('minus')}</button><output aria-live="polite">${QV.qty}</output><button type="button" data-sp-qvq="1" aria-label="More">${ico('plus')}</button></div>
       <button type="button" class="btn gold sp-addbtn" data-sp-qvadd>${p.priceState === 'fixed' ? 'Add to bag' : p.priceState === 'soon' ? 'Add to bag as a request' : 'Add to bag for a quote'}</button></div>`
     : `<div class="sp-buyrow">${lnk('product/' + p.id, (p.cta === 'link' ? 'Open the printables' : 'Tell me when it opens') + ' ' + ico('arrow'), 'btn gold sp-addbtn')}</div><p class="sp-buyhint">${p.kind === 'plush' ? 'Plush cannot be ordered until its safety tests are done.' : 'It cannot be ordered yet.'}</p>`;
-  return `<div class="sp-qv-grid" style="--tone:var(--${t});--tone-s:var(--${tint(t)})"><div class="sp-qv-media"><div class="sp-qv-main${x && x.kind === 'sample' ? ' is-sample' : ''}">${x ? imgTag(x, { sizes: '(max-width:760px) 90vw, 460px', alt: x.alt, eager: true }) : ''}${x && x.kind === 'sample' ? badgeHtml('Concept sample', 'sample') : x && x.kind === 'concept' ? badgeHtml('Concept image', 'concept') : ''}</div>
+  return `<div class="sp-qv-grid" style="--tone:var(--${t});--tone-s:var(--${tint(t)})"><div class="sp-qv-media"><div class="sp-qv-main${x && x.kind === 'sample' ? ' is-sample' : ''}">${x ? imgTag(x, { sizes: '(max-width:760px) 90vw, 460px', alt: x.alt, eager: true }) : ''}</div>
       ${g.length > 1 ? `<ul class="sp-gal-thumbs" aria-label="Choose a picture">${g.map((y, i) => `<li><button type="button" data-sp-qvth="${i}" aria-label="Show picture ${i + 1}"${i === QV.i ? ' aria-current="true"' : ''}>${imgTag(y, { sizes: '64px', alt: '' })}</button></li>`).join('')}</ul>` : ''}${W.FFFun ? W.FFFun.spin(p, 'qv') : ''}</div>
     <div class="sp-qv-info"><h2 id="spQvH">${E(p.name)}</h2><div data-sp-qvprice>${priceBlock(p, { big: true, opts: QV.opts })}</div><p class="sp-info-lede">${E(p.short)}</p>
       <div class="sp-info-badges">${p.badges.filter(b => !/^Concept/.test(b)).map(b => badgeHtml(b, /safety|Sizes/i.test(b) ? 'hold' : '')).join('')}</div>

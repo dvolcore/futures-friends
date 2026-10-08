@@ -15,7 +15,7 @@ function slideHtml(g, i, p, eager) {
   const room = g.kind === 'concept';
   return `<li class="sp-gal-slide"><button type="button" class="sp-gal-zoom${g.tile ? ' is-tile' : ''}${g.kind === 'sample' ? ' is-sample' : ''}" data-sp-zoom="${i}" aria-label="Zoom picture ${i + 1}: ${E(g.alt)}">
     ${imgTag(g, { eager: eager && i === 0, sizes: '(max-width:900px) 100vw, 640px', alt: g.alt })}</button>
-    ${room ? U.badgeHtml('Concept image', 'concept') : g.kind === 'sample' ? U.badgeHtml('Concept sample', 'sample') : (g.tile ? U.badgeHtml('Product photo coming', 'ph') : '')}<span class="sp-gal-zi" aria-hidden="true">${ico('zoom')}</span></li>`;
+    ${(g.tile && !room && g.kind !== 'sample') ? U.badgeHtml('Product photo coming', 'ph') : ''}<span class="sp-gal-zi" aria-hidden="true">${ico('zoom')}</span></li>`;
 }
 function gallery(p) {
   const g = C.gallery(p, U.rooms()), roomAt = g.findIndex(x => x.kind === 'concept');
