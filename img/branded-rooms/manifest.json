@@ -1,5 +1,5 @@
 {
- "about": "CONCEPT illustrations, not photos of what is installed: the owner's AI-generated concept images (2026-10-07) of the proposed Futures Friends Learning Zones kit (zone mats, posters, plush) in classrooms laid out like the real Futures Learning Center rooms in img/center/. They replace the earlier Pillow composites, which the owner rejected. No people. Always shown with the label below and the plain real photo one tap away (brand-art.js photo(): Real room / With the kit). Served at 400/800/1200 px as WebP + JPEG, metadata stripped. Some posters read 'Move. Play. Grow.' as poster art.",
+ "about": "CONCEPT images, not photos of what is installed: the owner's AI-generated proposed-transformation images (package Futures_Friends_Center_Transformation_2026-10-07, regenerated 2026-10-07 20:25 after feedback on Lumi's role) of the Futures Friends Learning Zones kit (zone mats, posters, plush) in classrooms laid out like the real Futures Learning Center rooms in img/center/. They replace the earlier Pillow composites, which the owner rejected. Not an installed facility; furnishings and products are concepts, not scale drawings. No people. Always shown with the label and the caption below, and the plain real photo one tap away (brand-art.js photo(): Real room / With the kit). Served at 400/800/1200 px as WebP + JPEG, metadata stripped. Some posters read 'Move. Play. Grow.' as poster art.",
  "label": "Concept: the Futures Friends Learning Zones kit in our classroom",
  "credit": "Photo: Futures Learning Center, Independence, Missouri; kit shown as an AI-generated concept image",
  "added": "2026-10-07",
@@ -9,7 +9,7 @@
    "key": "turtle-rug",
    "real": "img/center/turtle-rug-800.jpg",
    "kit": "img/branded-rooms/turtle-rug-kit-800.jpg",
-   "alt": "Concept image, not installed yet: our main classroom with every Futures Friends zone, centred on Bop's purple Movement Zone rug, with Booker, Friends Circle, Lumi and Zuri zone rugs and posters around the room",
+   "alt": "Concept image, not installed yet: our main classroom as a proposal, with Bop's purple Movement Zone rug in front, Friends Circle, Zuri's and Lumi's rugs behind, and a poster for each friend on the walls",
    "w": 800,
    "h": 600,
    "zone": "All five zones",
@@ -21,18 +21,18 @@
    "generated": "ai",
    "room_match": "same room layout as the real photo (doors, pillars, windows, shelves)",
    "source_file": "turtle-rug-kit.png",
-   "source_sha256": "de587a10539ed878ae5c5186a69dc17396bdc298e3211d449f59478584d9cb8c",
-   "note": "owner image 08_24_10 PM chosen over the near-duplicate 08_21_39 PM (sharper poster text); the other is kept as an alternate in the project folder only"
+   "source_sha256": "a9549b68c9f8e6f61195ace029d89d6f76ecc7f8d8b1bda0c88a0d12f59df731",
+   "package_file": "01-main-classroom.png"
   },
   {
    "key": "alphabet-rug",
    "real": "img/center/alphabet-rug-800.jpg",
    "kit": "img/branded-rooms/alphabet-rug-kit-800.jpg",
-   "alt": "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, posters for Booker's Reading Area, Friends Circle and Lumi's Calm Corner, and friend plush on the bench",
+   "alt": "Concept image, not installed yet: our carpet area with a large Friends Circle rug showing all four friends, a wall of five zone posters above the picture-book shelf, and friend plush on the bench",
    "w": 800,
    "h": 600,
    "zone": "Friends Circle",
-   "added": "Friends Circle rug (all four friends) in place of the alphabet rug; Booker, Friends Circle and Lumi posters; friend plush on the bench",
+   "added": "Friends Circle rug (all four friends) in place of the alphabet rug; a five-poster wall; friend plush on the bench",
    "real_photo": false,
    "concept": true,
    "people": false,
@@ -40,7 +40,8 @@
    "generated": "ai",
    "room_match": "same room layout as the real photo (doors, pillars, windows, shelves)",
    "source_file": "alphabet-rug-kit.png",
-   "source_sha256": "b3ef721fb180f0da20e11b9e2eb6225f984379744424d7a18d70e53eaef57e28"
+   "source_sha256": "10cd0e73607c692795756e1fdf5ea55e5a356dcc47d0b7579915ab0ab4d429b5",
+   "package_file": "02-friends-circle.png"
   },
   {
    "key": "reading-corner",
@@ -58,7 +59,8 @@
    "generated": "ai",
    "room_match": "same room layout as the real photo (doors, pillars, windows, shelves)",
    "source_file": "reading-corner-kit.png",
-   "source_sha256": "88c08de1da303d4d834e53d57b39eafa240cc81f6b4206a37d67f03db2b8acd4"
+   "source_sha256": "88c08de1da303d4d834e53d57b39eafa240cc81f6b4206a37d67f03db2b8acd4",
+   "package_file": "03-booker-reading.png"
   },
   {
    "key": "dress-up-corner",
@@ -76,7 +78,8 @@
    "generated": "ai",
    "room_match": "same room layout as the real photo (doors, pillars, windows, shelves)",
    "source_file": "dress-up-corner-kit.png",
-   "source_sha256": "8e07abf1d0aef3317291c2f08b9ff7bc66537a5162a120a98ce3c0ec59f8d1e8"
+   "source_sha256": "8e07abf1d0aef3317291c2f08b9ff7bc66537a5162a120a98ce3c0ec59f8d1e8",
+   "package_file": "04-bop-movement.png"
   },
   {
    "key": "blue-table-room",
@@ -94,28 +97,12 @@
    "generated": "ai",
    "room_match": "same room layout as the real photo (doors, pillars, windows, shelves)",
    "source_file": "blue-table-room-kit.png",
-   "source_sha256": "1a4b74c8c3bafc340bb85d93f2144b8845db4ba76aebaf5043f8fc9df5ddc5a0"
+   "source_sha256": "1a4b74c8c3bafc340bb85d93f2144b8845db4ba76aebaf5043f8fc9df5ddc5a0",
+   "package_file": "05-zuri-discovery.png"
   }
  ],
- "source": "owner concept images, ~/Downloads/FUTURES_FRIENDS_PROJECT/14_Client_Package/branded_rooms/owner_concepts_2026-10-07/",
+ "source": "~/Downloads/Futures_Friends_Center_Transformation_2026-10-07/ (copied with its generation-prompts.json and asset-manifest.json to the project folder below)",
  "generator": "AI image generator (owner, ChatGPT Images)",
- "alternates": [
-  {
-   "key": "alphabet-rug-wall",
-   "room": "alphabet-rug",
-   "kit": "img/branded-rooms/alphabet-rug-wall-kit-800.jpg",
-   "alt": "Concept image, not installed yet: the same carpet area with the Friends Circle rug and a full poster wall for Booker, Lumi, Friends Circle, Zuri and Bop above the picture-book shelf",
-   "w": 800,
-   "h": 600,
-   "zone": "Friends Circle",
-   "added": "Friends Circle rug with the full poster wall (all five zone posters)",
-   "real_photo": false,
-   "concept": true,
-   "people": false,
-   "kind": "concept image",
-   "generated": "ai",
-   "source_file": "alphabet-rug-wall-kit-alternate.png",
-   "source_sha256": "10cd0e73607c692795756e1fdf5ea55e5a356dcc47d0b7579915ab0ab4d429b5"
-  }
- ]
+ "caption": "AI-generated proposed transformation — furnishings and products shown as concepts.",
+ "package_review": "visual-review.json: all five scored 92 to 96, pass (threshold 90)"
 }
