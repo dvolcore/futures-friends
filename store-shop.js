@@ -41,7 +41,7 @@ function priceBlock(p, opts) {
   if (p.priceState === 'fixed') {
     main = `<span class="sp-price sp-num">${E(C.priceText(p, opts && opts.opts))}</span>`;
     if (p.membership) sub = 'startup package';
-    else if (!C.canOrder(p)) sub = 'planned price';
+    else if (!C.canOrder(p)) sub = 'when it opens';
   } else main = `<span class="sp-price sp-price-text">${E(C.priceText(p))}</span>`;
   return `<p class="sp-pricewrap${big ? ' is-big' : ''}">${main}${sub ? ` <span class="sp-pricesub">${sub}</span>` : ''}</p>`;
 }

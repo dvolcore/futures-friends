@@ -4,7 +4,8 @@
    Every product picture is object-fit: contain: the whole item shows, never cropped. */
 .sp-pro{--sp-rail-h:68px;--sp-studio:radial-gradient(90% 80% at 50% 30%,#FFFDF8 0%,#F5ECDA 100%)}
 .sp-pro .sp-img{object-fit:contain}
-.sp-pro .sp-img.sp-cover,.sp-pro .sp-hero-frame .sp-img,.sp-pro .sp-edit-img .sp-img,.sp-pro .sp-headfig .sp-img{object-fit:cover}
+.sp-pro .sp-img.sp-cover,.sp-pro .sp-hero-frame .sp-img,.sp-pro .sp-edit-img .sp-img{object-fit:cover}
+.sp-pro .sp-headfig .sp-img{object-fit:contain;aspect-ratio:auto}
 .sp-pro .sp-edit-img .sp-img{width:100%;height:100%}
 
 /* ---------------------------------------------------------------- hero */
@@ -72,7 +73,7 @@
 .sp-pro .sp-media.is-tile{background:var(--tone-s)}
 .sp-pro .sp-media .sp-img{padding:6%;mix-blend-mode:multiply}
 .sp-pro .sp-media .sp-img.sp-cover{padding:0;mix-blend-mode:normal;object-fit:cover}
-.sp-pro .sp-media[href] .sp-img[src*="branded-rooms"]{padding:0;mix-blend-mode:normal;object-fit:cover}
+.sp-pro .sp-media[href] .sp-img[src*="branded-rooms"]{padding:0;mix-blend-mode:normal;object-fit:contain;background:#F6F0E4}
 .sp-pro .sp-media::after{display:none}
 .sp-pro .sp-media::before{background-size:220% 100%}
 .sp-pro .sp-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--tone);z-index:3;border-radius:24px 24px 0 0}
@@ -143,7 +144,7 @@
 .sp-qv-media{display:grid;gap:10px;padding:18px;align-content:start;background:var(--sp-studio)}
 .sp-qv-main{position:relative;aspect-ratio:1/1;border-radius:22px;overflow:hidden}
 .sp-qv-main .sp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%;mix-blend-mode:multiply}
-.sp-qv-main .sp-img[src*="branded-rooms"]{object-fit:cover;padding:0;mix-blend-mode:normal}
+.sp-qv-main .sp-img[src*="branded-rooms"]{object-fit:contain;padding:0;mix-blend-mode:normal;background:#F6F0E4}
 .sp-qv-media .sp-gal-thumbs button{background:#fff}
 .sp-qv-media .sp-gal-thumbs .sp-img{mix-blend-mode:multiply}
 .sp-qv-info{display:grid;gap:14px;align-content:start;padding:clamp(20px,3vw,34px) clamp(20px,3vw,34px) clamp(20px,3vw,30px)}
@@ -160,7 +161,7 @@
 
 /* ---------------------------------------------------------------- product page additions */
 .sp-pdp .sp-gal-zoom .sp-img{mix-blend-mode:multiply}
-.sp-pdp .sp-gal-zoom .sp-img[src*="branded-rooms"]{mix-blend-mode:normal;object-fit:cover}
+.sp-pdp .sp-gal-zoom .sp-img[src*="branded-rooms"]{mix-blend-mode:normal;object-fit:contain;background:#F6F0E4}
 .sp-pdp .sp-gal-zoom.is-sample,.sp-pdp .sp-gal-track{background:var(--sp-studio)}
 .sp-sizeguide{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--booker);font:600 14px/1 var(--body);text-decoration:underline;text-underline-offset:3px}
 .sp-sizeguide:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}

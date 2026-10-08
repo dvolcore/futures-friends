@@ -95,7 +95,7 @@
   }));
   add(Object.assign({}, kitCommon, {
     id: 'kit-center-starter', name: 'Center Starter Learning Zones Kit', short: 'A model room plus starter sets for up to three classrooms.', price: APPROVED.packages.starter, tier: 'starter',
-    audiences: ['center', 'church'], membership: { monthly: APPROVED.monthly.starter }, tone: 'booker',
+    audiences: ['center', 'church'], membership: { monthly: APPROVED.monthly.starter }, tone: 'booker', room: 'alphabet-rug',
     box: ['8 ft round Friends Circle rug for the model room', 'Zone signs, 12 x 18 in (five)', 'Four character posters, 18 x 24 in', 'Printed stick puppets for all four friends', 'Bin labels, 12 per zone', '30 sit spots', 'Six friend cue cards', 'Hand chime', 'Two more room starter sets (no rug)', 'Center welcome box and onboarding'],
     dims: ['Friends Circle rug: 8 ft round (an 8 x 8 ft footprint)', 'Zone signs: 12 x 18 in', 'Posters: 18 x 24 in', 'Cue cards: 8.5 x 11 in'],
     pairs: ['zone-boundaries', 'extra-room-starter', 'rug-friends-circle'],
@@ -103,7 +103,7 @@
   }));
   add(Object.assign({}, kitCommon, {
     id: 'kit-center-complete', name: 'Center Complete Learning Zones Kit', short: 'A full set for each of four classrooms.', price: APPROVED.packages.complete, tier: 'complete',
-    audiences: ['center', 'church'], membership: { monthly: APPROVED.monthly.complete }, tone: 'zuri',
+    audiences: ['center', 'church'], membership: { monthly: APPROVED.monthly.complete }, tone: 'zuri', room: 'blue-table-room',
     box: ['Four room kits, each with an 8 ft round Friends Circle rug', 'Zone signs, 12 x 18 in (five per room)', 'Four character posters per room', 'Printed stick puppets', 'Bin labels, 30 sit spots, cue cards and a chime for each room', 'Center welcome box, setup visit and onboarding'],
     dims: ['Friends Circle rug: 8 ft round (an 8 x 8 ft footprint), four of them', 'Zone signs: 12 x 18 in', 'Posters: 18 x 24 in'],
     pairs: ['zone-boundaries', 'friend-fence', 'rainbow-poster'],
@@ -173,7 +173,7 @@
       audiences: ['center', 'home', 'church'], badges: ['Made to order'], format: square ? 'large-square' : 'zone',
       options: [{ key: 'size', label: 'Size', values: [{ id: 's6', label: '6 x 6 ft', note: 'A suggested footprint. Final size is confirmed in your written quote.' }, { id: 's8', label: '8 x 8 ft', note: 'A suggested footprint. Final size is confirmed in your written quote.' }, { id: 'ask', label: 'Match my room', note: 'Send your room measurements with the quote request.' }] }],
       box: [square ? 'One large square corner carpet that holds a furnished ' + r.zone.toLowerCase() + ' corner' : 'One ' + r.zone + ' carpet'],
-      dims: ['Footprints: 6 x 6 ft (home) or 8 x 8 ft (center). Final size is confirmed in your written quote, matched to your room measurements.'],
+      dims: ['Footprints: 6 x 6 ft (home) or 8 x 8 ft (center). Final size is confirmed in your written quote, matched to your room measurements.'].concat(r.zone === 'Friends Circle' ? ['In the Learning Zones Kits the Friends Circle rug is 6 ft round for a home room and 8 ft round for a center.'] : []),
       materials: [square ? 'Specification targets, confirmed with the maker: flat, low pile, felt-look printed face, bound edges, non-slip backing.' : 'Felt-look printed face with a stitched-edge line, low pile, bound edges, non-slip backing (specification targets, confirmed with the maker).'],
       care: ['Spot-clean with a damp cloth and mild soap; air dry flat.'], safety: [SAFETY.rug], lead: 'Made to order. Timing is confirmed in your written quote.',
       faq: [FAQ.freight, FAQ.quote, FAQ.lead, FAQ.po, FAQ.tax, FAQ.returns, ['Will mine look exactly like the picture?', 'Made-to-order items can differ a little in size, color and finish. We confirm the details in your written quote before we make yours.']],
