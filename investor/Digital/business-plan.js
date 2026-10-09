@@ -153,6 +153,7 @@
   document.addEventListener('fullscreenchange',()=>{$('#fullscreenButton').textContent=document.fullscreenElement?'Exit full screen':'Full screen';});
 
   function capital(principal) {
+    document.dispatchEvent(new CustomEvent('ff-loan-change',{detail:{principal}}));
     const d=loan(principal);
     $('#loanIO').textContent=money(d.first_year_monthly_interest);
     $('#loanPayment').textContent=money(d.amortizing_monthly_payment,true);

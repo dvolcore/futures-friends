@@ -18,8 +18,8 @@
       "sha256": "a5584463fde20b79b7b737dcdb11fc7cbfcd9f3ad6aa288500d8923b8f07b013"
     },
     "05_Investor_One_Sheet.pdf": {
-      "bytes": 1479587,
-      "sha256": "8550e30a8b31050a76f1a068fd255db4d1cbd4410a53dd85570d9ea4234fd592"
+      "bytes": 2361141,
+      "sha256": "c0c695da360c8104d0cbbab0d49b0c833d88d8aa2b76765a217cd7a598ad6f1c"
     },
     "Digital/README.md": {
       "bytes": 5411,
@@ -134,16 +134,16 @@
       "sha256": "91b86db428cadbb866e33eea3aef6c6738d9a047720727e0c7cf8b4226f2323b"
     },
     "Digital/business-plan.html": {
-      "bytes": 161767,
-      "sha256": "b9eb165d2386d70711b4e7db0ba9294cf3f27e5e8c5dc65bcb309f90ebf3d8f0"
+      "bytes": 168008,
+      "sha256": "5d17e69748c059136a0c561bc773c4cfe0d71c6eaed4f46bfebca1591ea84ee1"
     },
     "Digital/business-plan.js": {
-      "bytes": 20061,
-      "sha256": "5994704a02d6ccc5e967a13786c56c7d163fb9255f1ac9955057f6669434c1e8"
+      "bytes": 20145,
+      "sha256": "b3b042e1a54074d7765b2f015f3bc881e7dd71c83c17d199a32c1f8265ca7f84"
     },
     "Digital/index.html": {
-      "bytes": 68723,
-      "sha256": "7a15e06e775b39fe417dee49bb2bf94848b80ecec98a4c420be421a747fc3de9"
+      "bytes": 75092,
+      "sha256": "32af37b89196ad644f7858cbaeb099525ca5cede05a5a59380a48742856357bd"
     },
     "Digital/model/business-designed.md": {
       "bytes": 86228,
@@ -176,6 +176,17 @@
     ".gitattributes": {
       "bytes": 13,
       "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
+    },
+    "Digital/investor-return.css": {
+      "bytes": 7272,
+      "sha256": "45e6eb87f30bbd1b1b312989462572f5cdbc7278a769e85aef04cc289a0e6988"
+    },
+    "Digital/investor-return.js": {
+      "bytes": 5839,
+      "sha256": "094e8e405f2b985d268e8b9e7cbc853d0328fcc9aff83d55b35f659870383d70"
     }
+  },
+  "revisions": {
+    "2026-10-09": "Investor return timeline, monthly payment download, and investor one-sheet refreshed; master documents retained."
   }
 }
