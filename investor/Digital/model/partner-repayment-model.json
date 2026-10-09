@@ -1,0 +1,219 @@
+{
+  "status": "planning sensitivity; noncontractual and not underwritten",
+  "inputs": {
+    "opening_cash": "240000",
+    "prices": {
+      "home": {
+        "setup": "1495",
+        "monthly": "89"
+      },
+      "starter": {
+        "setup": "2995",
+        "monthly": "229"
+      },
+      "complete": {
+        "setup": "5995",
+        "monthly": "349"
+      }
+    },
+    "mix": {
+      "home": "0.40",
+      "starter": "0.40",
+      "complete": "0.20"
+    },
+    "recurring_contribution_tests": [
+      "0.40",
+      "0.60"
+    ],
+    "setup_contribution_tests": [
+      "0.10",
+      "0.00"
+    ],
+    "churn": "2% monthly active subscriptions",
+    "b2b_overhead": "$500/month from each rollout launch; delayed starts month 7",
+    "launch_months": {
+      "measured": 4,
+      "delayed": 7,
+      "growth": 4
+    },
+    "noncenter_spend_first12": "115000",
+    "debt": "$240,000; 9%; 12 IO months at $1,800, then 60 months at $4,982.01"
+  },
+  "weighted_site_monthly_gross": "197.0",
+  "required_active_sites_for_1_25x_after_month12": {
+    "base_34_40pct": 22,
+    "downside_24_40pct": 128,
+    "base_34_60pct": 15,
+    "downside_24_60pct": 86
+  },
+  "scenarios": {
+    "measured_40pct_10pct_setup": {
+      "month12_active_sites": "4.4310198934925056000000",
+      "month24_active_sites": "3.477095413625161585165669864",
+      "month12_base_net_after_debt": "3109.16",
+      "month12_downside_net_after_debt": "-5290.84",
+      "month24_base_net_after_debt": "-148.01",
+      "month24_downside_net_after_debt": "-8548.01",
+      "month12_base_ending_cash": "28468.45",
+      "month12_downside_ending_cash": "-29491.55",
+      "month24_base_ending_cash": "27087.62",
+      "month24_downside_ending_cash": "-131672.38",
+      "month24_recurring_gross": "684.99",
+      "month24_recurring_net": "274.00"
+    },
+    "measured_40pct_0pct_setup": {
+      "month12_active_sites": "4.4310198934925056000000",
+      "month24_active_sites": "3.477095413625161585165669864",
+      "month12_base_net_after_debt": "3109.16",
+      "month12_downside_net_after_debt": "-5290.84",
+      "month24_base_net_after_debt": "-148.01",
+      "month24_downside_net_after_debt": "-8548.01",
+      "month12_base_ending_cash": "26970.95",
+      "month12_downside_ending_cash": "-30989.05",
+      "month24_base_ending_cash": "25590.12",
+      "month24_downside_ending_cash": "-133169.88",
+      "month24_recurring_gross": "684.99",
+      "month24_recurring_net": "274.00"
+    },
+    "measured_60pct_10pct_setup": {
+      "month12_active_sites": "4.4310198934925056000000",
+      "month24_active_sites": "3.477095413625161585165669864",
+      "month12_base_net_after_debt": "3283.75",
+      "month12_downside_net_after_debt": "-5116.25",
+      "month24_base_net_after_debt": "-11.02",
+      "month24_downside_net_after_debt": "-8411.02",
+      "month12_base_ending_cash": "29763.92",
+      "month12_downside_ending_cash": "-28196.08",
+      "month24_base_ending_cash": "30224.74",
+      "month24_downside_ending_cash": "-128535.26",
+      "month24_recurring_gross": "684.99",
+      "month24_recurring_net": "410.99"
+    },
+    "measured_60pct_0pct_setup": {
+      "month12_active_sites": "4.4310198934925056000000",
+      "month24_active_sites": "3.477095413625161585165669864",
+      "month12_base_net_after_debt": "3283.75",
+      "month12_downside_net_after_debt": "-5116.25",
+      "month24_base_net_after_debt": "-11.02",
+      "month24_downside_net_after_debt": "-8411.02",
+      "month12_base_ending_cash": "28266.42",
+      "month12_downside_ending_cash": "-29693.58",
+      "month24_base_ending_cash": "28727.24",
+      "month24_downside_ending_cash": "-130032.76",
+      "month24_recurring_gross": "684.99",
+      "month24_recurring_net": "410.99"
+    },
+    "delayed_40pct_10pct_setup": {
+      "month12_active_sites": "4.7078809568000000000000",
+      "month24_active_sites": "3.694352920153551650636288732",
+      "month12_base_net_after_debt": "3130.98",
+      "month12_downside_net_after_debt": "-5269.02",
+      "month24_base_net_after_debt": "-130.89",
+      "month24_downside_net_after_debt": "-8530.89",
+      "month12_base_ending_cash": "28899.43",
+      "month12_downside_ending_cash": "-29060.57",
+      "month24_base_ending_cash": "27748.74",
+      "month24_downside_ending_cash": "-131011.26",
+      "month24_recurring_gross": "727.79",
+      "month24_recurring_net": "291.12"
+    },
+    "delayed_40pct_0pct_setup": {
+      "month12_active_sites": "4.7078809568000000000000",
+      "month24_active_sites": "3.694352920153551650636288732",
+      "month12_base_net_after_debt": "3130.98",
+      "month12_downside_net_after_debt": "-5269.02",
+      "month24_base_net_after_debt": "-130.89",
+      "month24_downside_net_after_debt": "-8530.89",
+      "month12_base_ending_cash": "27401.93",
+      "month12_downside_ending_cash": "-30558.07",
+      "month24_base_ending_cash": "26251.24",
+      "month24_downside_ending_cash": "-132508.76",
+      "month24_recurring_gross": "727.79",
+      "month24_recurring_net": "291.12"
+    },
+    "delayed_60pct_10pct_setup": {
+      "month12_active_sites": "4.7078809568000000000000",
+      "month24_active_sites": "3.694352920153551650636288732",
+      "month12_base_net_after_debt": "3316.47",
+      "month12_downside_net_after_debt": "-5083.53",
+      "month24_base_net_after_debt": "14.66",
+      "month24_downside_net_after_debt": "-8385.34",
+      "month12_base_ending_cash": "29660.40",
+      "month12_downside_ending_cash": "-28299.60",
+      "month24_base_ending_cash": "30466.43",
+      "month24_downside_ending_cash": "-128293.57",
+      "month24_recurring_gross": "727.79",
+      "month24_recurring_net": "436.67"
+    },
+    "delayed_60pct_0pct_setup": {
+      "month12_active_sites": "4.7078809568000000000000",
+      "month24_active_sites": "3.694352920153551650636288732",
+      "month12_base_net_after_debt": "3316.47",
+      "month12_downside_net_after_debt": "-5083.53",
+      "month24_base_net_after_debt": "14.66",
+      "month24_downside_net_after_debt": "-8385.34",
+      "month12_base_ending_cash": "28162.90",
+      "month12_downside_ending_cash": "-29797.10",
+      "month24_base_ending_cash": "28968.93",
+      "month24_downside_ending_cash": "-129791.07",
+      "month24_recurring_gross": "727.79",
+      "month24_recurring_net": "436.67"
+    },
+    "growth_40pct_10pct_setup": {
+      "month12_active_sites": "12.7436317869850112000000",
+      "month24_active_sites": "20.76430479762553143219929552",
+      "month12_base_net_after_debt": "4063.70",
+      "month12_downside_net_after_debt": "-4336.30",
+      "month24_base_net_after_debt": "1513.72",
+      "month24_downside_net_after_debt": "-6886.28",
+      "month12_base_ending_cash": "34527.29",
+      "month12_downside_ending_cash": "-23432.71",
+      "month24_base_ending_cash": "49367.75",
+      "month24_downside_ending_cash": "-109392.25",
+      "month24_recurring_gross": "4090.57",
+      "month24_recurring_net": "1636.23"
+    },
+    "growth_40pct_0pct_setup": {
+      "month12_active_sites": "12.7436317869850112000000",
+      "month24_active_sites": "20.76430479762553143219929552",
+      "month12_base_net_after_debt": "3764.20",
+      "month12_downside_net_after_debt": "-4635.80",
+      "month24_base_net_after_debt": "1214.22",
+      "month24_downside_net_after_debt": "-7185.78",
+      "month12_base_ending_cash": "30334.29",
+      "month12_downside_ending_cash": "-27625.71",
+      "month24_base_ending_cash": "41580.75",
+      "month24_downside_ending_cash": "-117179.25",
+      "month24_recurring_gross": "4090.57",
+      "month24_recurring_net": "1636.23"
+    },
+    "growth_60pct_10pct_setup": {
+      "month12_active_sites": "12.7436317869850112000000",
+      "month24_active_sites": "20.76430479762553143219929552",
+      "month12_base_net_after_debt": "4565.80",
+      "month12_downside_net_after_debt": "-3834.20",
+      "month24_base_net_after_debt": "2331.83",
+      "month24_downside_net_after_debt": "-6068.17",
+      "month12_base_ending_cash": "37504.43",
+      "month12_downside_ending_cash": "-20455.57",
+      "month24_base_ending_cash": "60500.18",
+      "month24_downside_ending_cash": "-98259.82",
+      "month24_recurring_gross": "4090.57",
+      "month24_recurring_net": "2454.34"
+    },
+    "growth_60pct_0pct_setup": {
+      "month12_active_sites": "12.7436317869850112000000",
+      "month24_active_sites": "20.76430479762553143219929552",
+      "month12_base_net_after_debt": "4266.30",
+      "month12_downside_net_after_debt": "-4133.70",
+      "month24_base_net_after_debt": "2032.33",
+      "month24_downside_net_after_debt": "-6367.67",
+      "month12_base_ending_cash": "33311.43",
+      "month12_downside_ending_cash": "-24648.57",
+      "month24_base_ending_cash": "52713.18",
+      "month24_downside_ending_cash": "-106046.82",
+      "month24_recurring_gross": "4090.57",
+      "month24_recurring_net": "2454.34"
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "source_package": "Futures_Friends_Investor_Premium_2026-10-08",
+  "files": {
+    "01_Investor_Business_Plan.pdf": {
+      "bytes": 4681260,
+      "sha256": "cfa0fdbfe1fc25605c3a000789d01d7f337f9925625f822354d4d5d294ccf400"
+    },
+    "02_Series_Curriculum_Production_Bible.pdf": {
+      "bytes": 27609272,
+      "sha256": "dbc02d91ea0205eb4f79de237af320db4037c4c07031bfc7cbbe15463b6b6b20"
+    },
+    "03_Program_Operations_Evidence_Companion.pdf": {
+      "bytes": 61369675,
+      "sha256": "32ddcceb7bff9dea8b737110fd8b3570c3c4be9884220db6b9edb76e7522141a"
+    },
+    "04_Platform_One_Sheet.pdf": {
+      "bytes": 1464663,
+      "sha256": "a5584463fde20b79b7b737dcdb11fc7cbfcd9f3ad6aa288500d8923b8f07b013"
+    },
+    "05_Investor_One_Sheet.pdf": {
+      "bytes": 1479587,
+      "sha256": "8550e30a8b31050a76f1a068fd255db4d1cbd4410a53dd85570d9ea4234fd592"
+    },
+    "Digital/README.md": {
+      "bytes": 5411,
+      "sha256": "60fc9eb7d284a385b55f680220773131a524b8634c98a15f409b0903e2afa04b"
+    },
+    "Digital/assets/backpack.webp": {
+      "bytes": 432702,
+      "sha256": "5630409915e060a4f74ec9e3b5910452b5ab353af5552e19c1a9577f81d7ed88"
+    },
+    "Digital/assets/binder.webp": {
+      "bytes": 171986,
+      "sha256": "ed1975100da6d2aef5b6c85cfb6ccacc81952d656562240c385d12004bc5f365"
+    },
+    "Digital/assets/booker-cover.png": {
+      "bytes": 2626539,
+      "sha256": "4bbf129f5cfa3d9ff7d21707bf6bc1807dbcfeabd20a95abd5321afc4180f521"
+    },
+    "Digital/assets/booker-room.webp": {
+      "bytes": 342292,
+      "sha256": "fb37cb4781329716a91d609a4592207f122dfe9c809c3459b84f8caf62268b23"
+    },
+    "Digital/assets/booker.webp": {
+      "bytes": 129284,
+      "sha256": "28cd8c11cb0dc8bb4e9c3e28c2721f39986fceb86c64a32aee793d134d18e4b0"
+    },
+    "Digital/assets/bop-cover.png": {
+      "bytes": 2720163,
+      "sha256": "8fca6107e212beccacdcd47632a99a39916a7f4e846b34a7baf9cc353c9fcf7e"
+    },
+    "Digital/assets/bop-room.webp": {
+      "bytes": 317910,
+      "sha256": "69f3565bb30bc0b176d0bae3ea52cfce70f7df0c7d81a0ef9727bd096f4a082e"
+    },
+    "Digital/assets/bottle.webp": {
+      "bytes": 143834,
+      "sha256": "9b5d3fdec5d447a72e520c4094e32225d360eb0700ce8fdde6dd2d5b2a5fa341"
+    },
+    "Digital/assets/center-photo.webp": {
+      "bytes": 403352,
+      "sha256": "e1987163ab83fb17bb6709a878cdc348a028ae013388bd51fd6c7fe1f9ea5ee2"
+    },
+    "Digital/assets/classroom.webp": {
+      "bytes": 127746,
+      "sha256": "7799565ba84b977e982cb25a398d729998161816e10ecde35bb193e22e726b12"
+    },
+    "Digital/assets/day-plan.webp": {
+      "bytes": 49426,
+      "sha256": "4c8cd4fbf034e2fd261f5e934033ab6fb38c25ade6193aca785f827ec867f8f9"
+    },
+    "Digital/assets/family-day.webp": {
+      "bytes": 33668,
+      "sha256": "ab4973d3987e1d9b76d7f8b12749533ca3fecfe4bacd72722ff50dd9e4ea585d"
+    },
+    "Digital/assets/ff-wordmark.webp": {
+      "bytes": 58830,
+      "sha256": "ff8601d20b0275c6990e306adf6f914d929c6e0855cd164a7d382498df4e82f6"
+    },
+    "Digital/assets/film-poster.webp": {
+      "bytes": 103268,
+      "sha256": "a5862ef9d7da9f0489aa72924efb8844bfb834cca093255a69411ab8262af09f"
+    },
+    "Digital/assets/flc-shield.png": {
+      "bytes": 138430,
+      "sha256": "77e3d4673c84496bab546ad88187ca7d25945a83cfee25fdbd7fcf0f0fe58fff"
+    },
+    "Digital/assets/keyart.webp": {
+      "bytes": 536202,
+      "sha256": "27c08778aca482d91a10a54831463866d046de06cba78a5e71b685d87ee89962"
+    },
+    "Digital/assets/logo.webp": {
+      "bytes": 113252,
+      "sha256": "5ead2ec3d24afcf22aa77f02739c8258dbbbd2c4e690d57234cfed1f8bb8d404"
+    },
+    "Digital/assets/lumi-en.vtt": {
+      "bytes": 217,
+      "sha256": "5b851890bc2f8bb4422ea8b90da8c067231da0bdd21738fc0f00270389184505"
+    },
+    "Digital/assets/lumi-es.vtt": {
+      "bytes": 376,
+      "sha256": "a343f40405b60201ffa66f4c979cddd47a943542ef32ef4d36fb37082e4be32c"
+    },
+    "Digital/assets/lumi-hello.mp4": {
+      "bytes": 1395920,
+      "sha256": "fd99ead8527010807d5a6d40f48ac3c0856ee42ef642d7f8abd5e39031d8c9c6"
+    },
+    "Digital/assets/printed.webp": {
+      "bytes": 251192,
+      "sha256": "ac39449352d699afa95a586a5724b511c4db37aa0592ed9db1e734df546a8181"
+    },
+    "Digital/assets/rainbow.webp": {
+      "bytes": 106072,
+      "sha256": "5694645a6041f9f35b341211857e9de961aeefcd40975d10b258f51861d2ca0e"
+    },
+    "Digital/assets/reading-photo.webp": {
+      "bytes": 268324,
+      "sha256": "2c77cd8dbbf795647c2adebff79a1ba708852463eb34c25c7f9b8d5e914895e7"
+    },
+    "Digital/assets/shirt.webp": {
+      "bytes": 229744,
+      "sha256": "2ef1f59be51c380cdd71a8ba95e5b9ad174735f38602785f18bdf6ce693c7a4d"
+    },
+    "Digital/assets/zuri-cover.png": {
+      "bytes": 2670853,
+      "sha256": "f9a86c4f541495cf5b9f1bab266859be24ecfac521c278773f323dbadf8f79c9"
+    },
+    "Digital/assets/zuri-room.webp": {
+      "bytes": 276700,
+      "sha256": "a6d99cd51dcd43e52628b55b4d945317007f7baf22b68128952ba0b486e12172"
+    },
+    "Digital/business-plan.css": {
+      "bytes": 29557,
+      "sha256": "91b86db428cadbb866e33eea3aef6c6738d9a047720727e0c7cf8b4226f2323b"
+    },
+    "Digital/business-plan.html": {
+      "bytes": 161661,
+      "sha256": "1e1d4107082b6c4084b05f215b5d786875f5e22492a87b32e0e2405de234ec68"
+    },
+    "Digital/business-plan.js": {
+      "bytes": 20061,
+      "sha256": "5994704a02d6ccc5e967a13786c56c7d163fb9255f1ac9955057f6669434c1e8"
+    },
+    "Digital/index.html": {
+      "bytes": 68343,
+      "sha256": "b7e12e68a1feab8caa4386ee87b285d0218bcb5f1dbc59ec4e3fa478b70a4637"
+    },
+    "Digital/model/business-designed.md": {
+      "bytes": 86228,
+      "sha256": "ee3e982ed8fce82f30d1cae70a27828cf26a066a085daf5f48865a6c223171b4"
+    },
+    "Digital/model/debt-schedule.csv": {
+      "bytes": 11343,
+      "sha256": "7449aadd89b499e685e1ecbc32090ab2245fa2ebb119c5231cb2d86d43ae53c3"
+    },
+    "Digital/model/financials.json": {
+      "bytes": 21536,
+      "sha256": "b6bf592398d4a16f7ae430a1eaba4788d0514f6bcccb9b4d3539eecd07de1f6b"
+    },
+    "Digital/model/partner-repayment-model.json": {
+      "bytes": 8895,
+      "sha256": "7a69482eecd54cc29730681e86f73c806a9d94849e5c25545763167952c3223f"
+    },
+    "Digital/model/partner-repayment-monthly.csv": {
+      "bytes": 51901,
+      "sha256": "9f79d13e604debb8c73825ec47f7de4b2529eb16ef4b608af811d1a05429454a"
+    },
+    "README.md": {
+      "bytes": 925,
+      "sha256": "a1a1c7411890b433e2cc7c4568ff3062642fdd0156c2acc492b4564b4bdc652b"
+    },
+    "index.html": {
+      "bytes": 485,
+      "sha256": "af04bc6f8b8597723be2349e767050fd5684757bdb0a6edcb605e45b8c6cf422"
+    },
+    ".gitattributes": {
+      "bytes": 13,
+      "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
+    }
+  }
+}
