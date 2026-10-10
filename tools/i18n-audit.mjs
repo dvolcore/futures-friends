@@ -17,10 +17,19 @@ const EXTRA = [
   ['cart', null], ['checkout', null], ['store-request', null], ['sign-in', null], ['signin-family', null], ['signin-teacher', null],
   ['reset-password', null], ['not-found', null], ['this-week', null], ['shop-families', null]
 ];
+// Deep pages with no address of their own: every activity card, every talk card and each friend's week.
+function deep() {
+  const out = [];
+  const acts = readFileSync(join(SITE, 'family-library-data.js'), 'utf8').match(/\{\s*id: ?['"]([a-z0-9-]+)['"],\s*t: /g) || [];
+  for (const a of acts) out.push(['activities', /['"]([a-z0-9-]+)['"]/.exec(a)[1]]);
+  for (const m of readFileSync(join(SITE, 'talk-cards.js'), 'utf8').matchAll(/code: ?'(\d+)'/g)) out.push(['talk', m[1]]);
+  for (const k of ['booker', 'lumi', 'zuri', 'bop']) out.push(['this-week', k]);
+  return out;
+}
 export function routes(opts = {}) {
   const m = JSON.parse(readFileSync(join(SITE, 'docs/seo-manifest.json'), 'utf8'));
   const out = m.pages.map(p => ({ route: p.route, arg: p.arg || null, file: p.file }));
-  for (const [route, arg] of EXTRA) out.push({ route, arg, file: '#' + route });
+  for (const [route, arg] of EXTRA.concat(deep())) out.push({ route, arg, file: '#' + route });
   if (opts.flows !== false) for (const f of FLOWS) out.push(Object.assign({ arg: null, file: 'flow' }, f));
   return out.filter(r => !/^investor/.test(r.route));
 }
@@ -61,6 +70,18 @@ export const FLOWS = [
     await page.waitForTimeout(900);
     await submitAll(page);
   } },
+  // the phone back bar names the page you came from ("Back to Story Time"): reach pages by navigating, not by address
+  ...[['story-time', 'story-time/booker-tries-again'], ['kids-shop', 'product/plush-bop'], ['habits', 'habit/wash-hands'], ['shop/kits', 'product/kit-home'], ['at-home', 'activities']]
+    .map(([from, to]) => ({ flow: 'back/' + to, route: from, run: async page => { await page.evaluate(h => { location.hash = '#' + h; }, to); await page.waitForTimeout(900); } })),
+  // every page of every Story Time book, turned one by one (the reader's own Next button)
+  ...['booker-tries-again', 'big-feelings-brighter-days', 'what-happens-if-we-try', 'clean-up-team', 'the-rainbow-picnic'].map(id => ({ flow: 'book/' + id, route: 'story-time', arg: id, run: async (page, snap) => {
+    for (let i = 0; i < 24; i++) {
+      await snap();
+      const more = await page.evaluate(() => { const b = document.querySelector('[data-fl="next"]:not([disabled])'); if (b) b.click(); return !!b; });
+      if (!more) break;
+      await page.waitForTimeout(250);
+    }
+  } })),
   { flow: 'search/bop', route: 'home', run: async page => {
     await page.evaluate(() => { if (window.FFWay && window.FFWay.palette) window.FFWay.palette.open(document.body); });
     await page.waitForTimeout(500);
@@ -199,8 +220,10 @@ export async function audit(list, opts = {}) {
       await pg.waitForFunction(() => { const v = document.querySelector('#view'); return v && v.children.length > 0; }, null, { timeout: 20000 });
       if (r.route === 'support') await pg.evaluate(() => { try { st.help = 'faq'; render(); } catch (_) { /* no FAQ tab */ } });
       await pg.waitForTimeout(opts.wait || 700);
-      if (r.run) { await r.run(pg); await pg.waitForTimeout(300); }
+      const snaps = [];
+      if (r.run) { await r.run(pg, async () => snaps.push(await pg.evaluate(collect))); await pg.waitForTimeout(300); }
       const d = await pg.evaluate(collect);
+      for (const x of snaps) d.items.push(...x.items);
       if (r.flow) await pg.evaluate(() => { try { localStorage.removeItem('ff-store-cart-v1'); sessionStorage.clear(); sessionStorage.setItem('ff-entered', '1'); } catch (_) { /* blocked storage */ } });
       return d;
     };
