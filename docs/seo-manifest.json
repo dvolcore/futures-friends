@@ -473,6 +473,16 @@
    "h1": "A rainbow on every plate"
   },
   {
+   "file": "habits.html",
+   "url": "https://dvolcore.github.io/futures-friends/habits",
+   "route": "habits",
+   "arg": null,
+   "kind": "page",
+   "title": "Habit cards for home and classroom | Futures Friends",
+   "description": "Small QR cards for the sink, the toy shelf and the door: scan one and a Futures Friend shows your child the habit in under a minute.",
+   "h1": "Habit cards"
+  },
+  {
    "file": "store.html",
    "url": "https://dvolcore.github.io/futures-friends/store",
    "route": "store",
@@ -751,6 +761,136 @@
    "title": "Books | Futures Store",
    "description": "The five Futures Friends storybooks. Read them online now; print editions are coming.",
    "h1": "Books"
+  },
+  {
+   "file": "habit-wash-hands.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-wash-hands",
+   "route": "habit",
+   "arg": "wash-hands",
+   "kind": "habit",
+   "title": "Wash your hands with Bop | Habit cards",
+   "description": "Wash your hands with Bop: a 45-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Wash your hands with Bop"
+  },
+  {
+   "file": "habit-brush-teeth.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-brush-teeth",
+   "route": "habit",
+   "arg": "brush-teeth",
+   "kind": "habit",
+   "title": "Brush your teeth with Booker | Habit cards",
+   "description": "Brush your teeth with Booker: a 30-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Brush your teeth with Booker"
+  },
+  {
+   "file": "habit-toys-away.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-toys-away",
+   "route": "habit",
+   "arg": "toys-away",
+   "kind": "habit",
+   "title": "Put toys away with Zuri | Habit cards",
+   "description": "Put toys away with Zuri: a 28-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Put toys away with Zuri"
+  },
+  {
+   "file": "habit-clean-up-song.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-clean-up-song",
+   "route": "habit",
+   "arg": "clean-up-song",
+   "kind": "habit",
+   "title": "Clean-up song with Bop | Habit cards",
+   "description": "Clean-up song with Bop: a 28-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Clean-up song with Bop"
+  },
+  {
+   "file": "habit-shoes-on.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-shoes-on",
+   "route": "habit",
+   "arg": "shoes-on",
+   "kind": "habit",
+   "title": "Shoes on with Zuri | Habit cards",
+   "description": "Shoes on with Zuri: a 30-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Shoes on with Zuri"
+  },
+  {
+   "file": "habit-gentle-hands.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-gentle-hands",
+   "route": "habit",
+   "arg": "gentle-hands",
+   "kind": "habit",
+   "title": "Gentle hands with Lumi | Habit cards",
+   "description": "Gentle hands with Lumi: a 28-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Gentle hands with Lumi"
+  },
+  {
+   "file": "habit-take-turns.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-take-turns",
+   "route": "habit",
+   "arg": "take-turns",
+   "kind": "habit",
+   "title": "Take turns with Booker | Habit cards",
+   "description": "Take turns with Booker: a 32-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Take turns with Booker"
+  },
+  {
+   "file": "habit-water-break.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-water-break",
+   "route": "habit",
+   "arg": "water-break",
+   "kind": "habit",
+   "title": "Water break with Bop | Habit cards",
+   "description": "Water break with Bop: a 24-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Water break with Bop"
+  },
+  {
+   "file": "habit-rest-time.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-rest-time",
+   "route": "habit",
+   "arg": "rest-time",
+   "kind": "habit",
+   "title": "Rest time with Lumi | Habit cards",
+   "description": "Rest time with Lumi: a 42-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Rest time with Lumi"
+  },
+  {
+   "file": "habit-calm-breathing.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-calm-breathing",
+   "route": "habit",
+   "arg": "calm-breathing",
+   "kind": "habit",
+   "title": "Calm-down breathing with Lumi | Habit cards",
+   "description": "Calm-down breathing with Lumi: a 39-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Calm-down breathing with Lumi"
+  },
+  {
+   "file": "habit-kind-friend.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-kind-friend",
+   "route": "habit",
+   "arg": "kind-friend",
+   "kind": "habit",
+   "title": "Be a kind friend with Lumi | Habit cards",
+   "description": "Be a kind friend with Lumi: a 39-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Be a kind friend with Lumi"
+  },
+  {
+   "file": "habit-feelings-check.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-feelings-check",
+   "route": "habit",
+   "arg": "feelings-check",
+   "kind": "habit",
+   "title": "How do I feel? with Lumi | Habit cards",
+   "description": "How do I feel? with Lumi: a 39-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "How do I feel? with Lumi"
+  },
+  {
+   "file": "habit-wiggle-break.html",
+   "url": "https://dvolcore.github.io/futures-friends/habit-wiggle-break",
+   "route": "habit",
+   "arg": "wiggle-break",
+   "kind": "habit",
+   "title": "Movement break with Bop | Habit cards",
+   "description": "Movement break with Bop: a 39-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.",
+   "h1": "Movement break with Bop"
   },
   {
    "file": "product-kit-home.html",

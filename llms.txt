@@ -16,6 +16,7 @@ Futures Friends is a program of Futures Learning Center, a child care center at 
 - [Things to do at home, by age](https://dvolcore.github.io/futures-friends/activities): short activities for ages 2 to 5 from things you have at home
 - [Printables for families](https://dvolcore.github.io/futures-friends/printables): free printable PDFs for the fridge
 - [The Whole-Child Day, planned on purpose](https://dvolcore.github.io/futures-friends/whole-child): the whole-child day: learning, meals, movement and Quiet Time
+- [Habit cards for home and classroom](https://dvolcore.github.io/futures-friends/habits): QR habit cards: 15 to 45 second friend moments for hand washing, clean-up, shoes, water, rest and calm breathing, in English and Spanish
 - [Watch episodes](https://dvolcore.github.io/futures-friends/watch): the planned micro-series and the welcome video
 - [Kids' Shop](https://dvolcore.github.io/futures-friends/kids-shop): a small shop for families: posters, plush friends (not yet orderable), apparel and more
 

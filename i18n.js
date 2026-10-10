@@ -29,7 +29,7 @@
 
   // Family-facing routes that have Spanish (wayfinding.js audience 'families', plus Home and the Futures at Home pages).
   const FAMILY = new Set(['home', 'enroll', 'at-home', 'story-time', 'activities', 'printables', 'see-how', 'family-videos', 'my-week',
-    'bop-at-home', 'this-week', 'whole-child', 'friends', 'for-families', 'rainbow', 'watch', 'contact', 'not-found']);
+    'bop-at-home', 'this-week', 'whole-child', 'friends', 'for-families', 'rainbow', 'watch', 'contact', 'not-found', 'habit', 'habits']);
   // Later (business / centers / staff pages, listed in BILINGUAL_PROGRAM_2026-10-07.md): everything else stays English for now.
 
   const store = {

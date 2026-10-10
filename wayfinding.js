@@ -61,6 +61,7 @@
     'family-videos': ['Watch together', 'families', 'at-home', 'bop'],
     'my-week': ['My Week', 'families', 'at-home', 'booker'],
     'bop-at-home': ['Bop at Home', 'families', 'at-home', 'bop'],
+    habits: ['Habit cards', 'families', 'at-home', 'bop'],
     'this-week': ['This week', 'families', 'at-home', 'lumi'],
     'whole-child': ['The whole-child day', 'families', 'home', 'zuri'],
     friends: ['Friends & Books', 'families', 'home', 'booker'],
@@ -523,6 +524,7 @@
     if (r === 'product' && a != null && W.FFShopUI && W.FFShopUI.trail) return W.FFShopUI.trail(a, audience);
     if ((r === 'cart' || r === 'checkout' || r === 'order') && audience === 'families') return [['home', 'Home'], ['kids-shop', 'Kids\u2019 Shop']];
     if (r === 'shop' && a != null && audience === 'families') return [['home', 'Home'], ['kids-shop', 'Kids\u2019 Shop']];
+    if (r === 'habit') return [['home', 'Home'], ['at-home', nameOf('at-home')], ['habits', nameOf('habits')]];   // a habit card's player (habits.js)
     const chain = []; const seen = new Set();
     let p = a != null ? r : parentOf(r);
     while (p && !seen.has(p) && p !== 'home') { seen.add(p); chain.unshift(p); p = parentOf(p); }
@@ -573,7 +575,7 @@
     const prev = hist.length > 1 ? hist[hist.length - 2] : null;
     const k = keyOf(r, a);
     if (prev && prev.key !== k) return { href: '#' + prev.key, name: prev.name, back: true };
-    if (r === 'product') { const c = chainOf(r, a), l = c[c.length - 1]; if (l) return { href: '#' + l[0], name: l[1], back: false }; }
+    if (r === 'product' || r === 'habit') { const c = chainOf(r, a), l = c[c.length - 1]; if (l) return { href: '#' + l[0], name: l[1], back: false }; }
     return has(r) ? { href: '#' + r, name: nameOf(r), back: false } : null;
   }
   function ensureBack() {

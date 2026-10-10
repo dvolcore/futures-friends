@@ -95,6 +95,7 @@
     'enroll-link': ['Enrollment form', 'The enrollment form a center sends to a family in the Futures Hub demo: child, contacts, a staff alert and the health-forms promise. Demo only.'],
     timeclock: ['Time clock', 'Staff clock in and out and see their own hours in the Futures Hub demo.'],
     c: ['Center sign-in', 'The sign-in page of one center in the Futures Hub demo: staff and families of that center sign in here.'],
+    habits: ['Habit cards for home and classroom', 'Small QR cards for the sink, the toy shelf and the door: scan one and a Futures Friend shows your child the habit in under a minute.'],
     'not-found': ['Page not found', 'This page is not on the Futures Friends site. Try the home page, the whole-child day, Bop at Home or contact us.']
   };
   // Blog posts: a plain search title and description per article (the article's own headline stays on the page as its h1).
@@ -117,6 +118,9 @@
       const p = window.FFCatalog.product(arg); title = p.name + ' | Futures Store'; desc = /^Back print/.test(p.short) ? p.name + '. ' + p.short : p.short;   // T-shirt and hoodie share a back print: the name keeps each description its own
     } else if (route === 'shop' && arg && window.FFCatalog && window.FFCatalog.collection && window.FFCatalog.collection(arg)) {
       const c = window.FFCatalog.collection(arg); title = c.name + ' | Futures Store'; desc = c.blurb;
+    } else if (route === 'habit' && window.FFHabits && window.FFHabits.get(arg)) {
+      const h = window.FFHabits.get(arg); title = h.en.name + ' ' + h.en.with + ' | Habit cards';
+      desc = `${h.en.name} ${h.en.with}: a ${window.FFHabits.seconds(h)}-second Futures Friends habit moment for ages 2 to 5. Tap to play, then do it together.`;
     } else if (route === 'academy' && arg) {
       const mods = (window.FF && window.FF.modules) || [], m = mods.find(x => x.code === arg);
       if (m) { title = m.code + ' ' + m.title + ' | Training Academy'; desc = 'Sample lesson preview: ' + m.title + '. No professional credential or approved training hours are issued.'; }

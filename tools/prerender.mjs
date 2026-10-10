@@ -20,6 +20,7 @@ import { loadChromium, startSite, SITE } from '../tests/a11y-harness.mjs';
 
 const require = createRequire(import.meta.url);
 const C = require('../store-catalog.js');
+const HB = require('../habits.js');                                    // habit card players: habit-<id>.html (the QR cards' addresses)
 const CFG = JSON.parse(readFileSync(join(SITE, 'tools/seo-config.json'), 'utf8'));
 const CHECK = process.argv.includes('--check');
 const ORIGIN = CFG.origin.replace(/\/+$/, '');
@@ -46,7 +47,7 @@ const PAGES = [
   ['kids-shop', 'families', 0.9], ['enroll', 'families', 0.9], ['friends', 'families', 0.9], ['story-time', 'families', 0.8], ['at-home', 'families', 0.8],
   ['bop-at-home', 'families', 0.8], ['whole-child', 'families', 0.8], ['printables', 'families', 0.7], ['activities', 'families', 0.7], ['see-how', 'families', 0.6],
   ['family-videos', 'families', 0.6], ['watch', 'families', 0.7], ['talk', 'families', 0.6], ['my-week', 'families', 0.5], ['for-families', 'families', 0.7],
-  ['family-guide', 'families', 0.4], ['rainbow', 'families', 0.7],
+  ['family-guide', 'families', 0.4], ['rainbow', 'families', 0.7], ['habits', 'families', 0.6],
   ['store', 'store', 0.9], ['shop', 'store', 0.8], ['shop-programs', 'store', 0.7], ['room-kit', 'store', 0.8],
   ['support', 'about', 0.7], ['contact', 'about', 0.8], ['news', 'about', 0.4], ['blog', 'about', 0.5], ['events', 'about', 0.4], ['jobs', 'about', 0.4],
   ['privacy', 'about', 0.2], ['child-privacy', 'about', 0.2], ['terms', 'about', 0.2], ['accessibility', 'about', 0.3]
@@ -59,6 +60,7 @@ function targets() {
   for (const [route, section, priority] of PAGES) out.push({ route, arg: null, file: route + '.html', path: route, kind: 'page', section, priority });
   for (const id of POST_IDS) out.push({ route: 'post', arg: id, file: 'blog-' + id + '.html', path: 'blog-' + id, kind: 'post', section: 'about', priority: 0.5 });
   for (const id of COLLECTION_IDS) out.push({ route: 'shop', arg: id, file: 'shop-' + id + '.html', path: 'shop-' + id, kind: 'collection', section: 'store', priority: 0.7 });
+  for (const h of HB.HABITS) out.push({ route: 'habit', arg: h.id, file: 'habit-' + h.id + '.html', path: 'habit-' + h.id, kind: 'habit', section: 'families', priority: 0.4 });
   for (const p of C.PRODUCTS) out.push({ route: 'product', arg: p.id, file: 'product-' + p.id + '.html', path: 'product-' + p.id, kind: 'product', section: 'store', priority: 0.6 });
   const seen = new Set();
   for (const t of out) { if (seen.has(t.path)) throw new Error('duplicate address ' + t.path); seen.add(t.path); }
@@ -114,6 +116,7 @@ function cleanPath(route, arg) {
   if (route === 'home') return '';
   if (route === 'product' && arg) return 'product-' + arg;
   if (route === 'post' && arg) return 'blog-' + arg;
+  if (route === 'habit' && arg && HB.get(arg)) return 'habit-' + arg;
   if (route === 'shop' && arg && COLLECTION_IDS.includes(arg)) return 'shop-' + arg;
   if (route === 'shop' && !arg) return 'shop';
   if (route === 'shop-families') return 'kids-shop';
@@ -162,6 +165,7 @@ function crumbs(t, h1) {
   const sec = t.section && SECTION[t.section];
   if (sec && sec[1] && sec[1] !== t.route) items.push([sec[0], abs(sec[1])]);
   if (t.kind === 'post') items.push(['Blog for Educators', abs('blog')]);
+  if (t.kind === 'habit') items.push(['Habit cards', abs('habits')]);
   if (t.kind === 'collection') items.push(['Shop the Futures Store', abs('shop')]);
   if (t.kind === 'product') { const p = C.product(t.arg), col = p && C.COLLECTIONS.find(c => c.id === p.collection); if (col) items.push([col.name, abs(col.id === 'kids' ? 'kids-shop' : 'shop-' + col.id)]); }
   items.push([h1 || t.route, abs(t.path)]);
@@ -288,6 +292,7 @@ ${L('at-home', null, 'free family library: storybooks, activities, printables an
 ${L('activities', null, 'short activities for ages 2 to 5 from things you have at home')}
 ${L('printables', null, 'free printable PDFs for the fridge')}
 ${L('whole-child', null, 'the whole-child day: learning, meals, movement and Quiet Time')}
+${L('habits', null, 'QR habit cards: 15 to 45 second friend moments for hand washing, clean-up, shoes, water, rest and calm breathing, in English and Spanish')}
 ${L('watch', null, 'the planned micro-series and the welcome video')}
 ${L('kids-shop', null, 'a small shop for families: posters, plush friends (not yet orderable), apparel and more')}
 
@@ -375,7 +380,7 @@ out.set('docs/seo-manifest.json', JSON.stringify({
 
 // stale generated pages (a product removed from the catalog) are deleted
 const keep = new Set(out.keys());
-const gen = readdirSync(SITE).filter(f => /^(product|shop|blog)-[a-z0-9-]+\.html$/.test(f) && !keep.has(f));
+const gen = readdirSync(SITE).filter(f => /^(product|shop|blog|habit)-[a-z0-9-]+\.html$/.test(f) && !keep.has(f));
 let stale = 0;
 for (const [f, body] of out) {
   const p = join(SITE, f);

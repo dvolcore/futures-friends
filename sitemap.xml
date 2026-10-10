@@ -47,6 +47,7 @@
   <url><loc>https://dvolcore.github.io/futures-friends/for-families</loc><priority>0.7</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/family-guide</loc><priority>0.4</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/rainbow</loc><priority>0.7</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habits</loc><priority>0.6</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/store</loc><priority>0.9</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/shop</loc><priority>0.8</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/shop-programs</loc><priority>0.7</priority></url>
@@ -75,6 +76,19 @@
   <url><loc>https://dvolcore.github.io/futures-friends/shop-addons</loc><priority>0.7</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/shop-materials</loc><priority>0.7</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/shop-books</loc><priority>0.7</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-wash-hands</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-brush-teeth</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-toys-away</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-clean-up-song</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-shoes-on</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-gentle-hands</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-take-turns</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-water-break</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-rest-time</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-calm-breathing</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-kind-friend</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-feelings-check</loc><priority>0.4</priority></url>
+  <url><loc>https://dvolcore.github.io/futures-friends/habit-wiggle-break</loc><priority>0.4</priority></url>
   <url><loc>https://dvolcore.github.io/futures-friends/product-kit-home</loc><priority>0.6</priority><image:image><image:loc>https://dvolcore.github.io/futures-friends/img/branded-rooms/turtle-rug-kit-800.jpg</image:loc><image:title>Home Daycare Learning Zones Kit</image:title></image:image></url>
   <url><loc>https://dvolcore.github.io/futures-friends/product-kit-center-starter</loc><priority>0.6</priority><image:image><image:loc>https://dvolcore.github.io/futures-friends/img/branded-rooms/alphabet-rug-kit-800.jpg</image:loc><image:title>Center Starter Learning Zones Kit</image:title></image:image></url>
   <url><loc>https://dvolcore.github.io/futures-friends/product-kit-center-complete</loc><priority>0.6</priority><image:image><image:loc>https://dvolcore.github.io/futures-friends/img/branded-rooms/blue-table-room-kit-800.jpg</image:loc><image:title>Center Complete Learning Zones Kit</image:title></image:image></url>

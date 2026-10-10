@@ -33,7 +33,10 @@
   const mark = () => { try { W.sessionStorage.setItem(KEY, '1'); } catch (_) { /* blocked storage: once per page load */ } };
   const still = () => D.documentElement.dataset.motion === 'off' || (typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches);
   const home = () => /^(#home(\/|$)|#?$)/.test(location.hash);
-  const skip = /[?&]nogate\b/.test(location.search) || seen();
+  // a habit card's QR player (#habit/<id>, habits.js) opens straight on the friend: a child holding a phone at the sink gets no gate and
+  // no fly-through, and the visit is not marked as "entered" (the family's first visit to the site itself still opens on the gate)
+  const habitCard = /^#habit\//.test(location.hash);
+  const skip = /[?&]nogate\b/.test(location.search) || seen() || habitCard;
 
   function release() { shown = false; waiting.splice(0).forEach(f => { try { f(); } catch (e) { setTimeout(() => { throw e; }); } }); }
   function wait(fn) { if (typeof fn !== 'function') return; if (shown) waiting.push(fn); else fn(); }

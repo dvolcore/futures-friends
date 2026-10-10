@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const FILES = ['data.js', 'captions.js', 'plush-cast.js', 'supporting-cast.js', 'brand-art.js', 'views.js', 'talk-cards.js', 'features.js', 'store.js', 'store-config.js', 'store-merch-data.js', 'store-catalog.js', 'store-cart.js', 'store-checkout.js', 'store-shop.js', 'store-product.js', 'store-order.js', 'release-manifest.js', 'pricing-all-in.js', 'release-truth.js', 'family-library-data.js', 'family-library.js'];
+const FILES = ['data.js', 'captions.js', 'plush-cast.js', 'supporting-cast.js', 'brand-art.js', 'views.js', 'talk-cards.js', 'habits.js', 'features.js', 'store.js', 'store-config.js', 'store-merch-data.js', 'store-catalog.js', 'store-cart.js', 'store-checkout.js', 'store-shop.js', 'store-product.js', 'store-order.js', 'release-manifest.js', 'pricing-all-in.js', 'release-truth.js', 'family-library-data.js', 'family-library.js'];
 
 function site({ before } = {}) {
   const el = () => ({ style: {}, classList: { add() {}, remove() {}, toggle() {} }, setAttribute() {}, appendChild() {}, addEventListener() {}, querySelector: () => null, querySelectorAll: () => [] });
