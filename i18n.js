@@ -13,7 +13,9 @@
    - Content that needs real Spanish structure (Story Time books with read-along word highlighting, activities, captions) is not
      phrase-swapped: those files read FFi18n.lang and use their own Spanish data (family-library-es*.js, captions-es.js).
      Mark any element data-i18n-skip (or translate="no") to keep the pass out of it; elements already marked lang="es" are left alone.
-   - Family pages are translated first. On a page that is not translated yet, Spanish visitors see a short note saying so.
+   - Every public page has Spanish (2026-10-10, owner: "so that somebody who is bilingual does not miss out"); tools/i18n-audit.mjs
+     lists any English left per route and tests/i18n-site.test.js keeps it that way. A browser that prefers Spanish gets a one-line
+     offer to switch until a language is chosen. The tab title and meta description follow the language (head()).
    Public: window.FFi18n = { lang, set(lang), toggle(), t(en), add(lang, table, patterns), apply(root), family(route), on(fn) }.
    Fires 'ff:lang' on document with {lang, previous}. */
 (function () {
@@ -150,18 +152,67 @@
     go.insertAdjacentElement('afterend', row);
     syncButtons();
   }
-  // While Spanish is on: a draft note at the top of every page, and on pages not translated yet, a note that says so.
+  // While Spanish is on: a draft note at the top of every page (every public page has Spanish since 2026-10-10). While English is on
+  // and this browser prefers Spanish (navigator.languages) and no language was ever chosen here: a one-line offer to switch.
+  const OFFER = 'ff-lang-offer';
+  const offered = () => { try { return !!(W.localStorage && (W.localStorage.getItem(KEY) || W.localStorage.getItem(OFFER))); } catch (_) { return true; } };
+  const prefersEs = () => { try { const n = W.navigator || {}; const l = (n.languages && n.languages.length ? n.languages : [n.language || '']).find(x => x); return /^es\b/i.test(l || ''); } catch (_) { return false; } };
   function note() {
     if (!D || !D.getElementById) return;
     const view = D.getElementById('view'); if (!view) return;
     let n = D.getElementById('ff-lang-note');
-    if (lang === 'en') { if (n) n.remove(); return; }
+    const offer = lang === 'en' && prefersEs() && !offered();
+    if (lang === 'en' && !offer) { if (n) n.remove(); return; }
     if (!n) { n = D.createElement('p'); n.id = 'ff-lang-note'; n.className = 'ff-lang-note'; n.setAttribute('lang', 'es'); n.setAttribute('role', 'note'); }
-    const html = family()
-      ? '<b>Español (borrador).</b> La traducción está pendiente de revisión por nuestra maestra de español. <button type="button" data-ff-lang data-ff-lang-to="en" lang="en">English</button>'
-      : '<b>Esta página todavía está en inglés.</b> Ya están en español (borrador) las páginas para familias: <a href="#at-home">Futures en casa</a>, <a href="#story-time">La hora del cuento</a> y más. <button type="button" data-ff-lang data-ff-lang-to="en" lang="en">English</button>';
+    const html = offer
+      ? '<b>¿Prefieres español?</b> Todo el sitio está en español (borrador). <button type="button" data-ff-lang data-ff-lang-to="es" lang="es">Ver en español</button> <button type="button" data-ff-lang-offer-no lang="es">No, gracias</button>'
+      : '<b>Español (borrador).</b> La traducción está pendiente de revisión por nuestra maestra de español. <button type="button" data-ff-lang data-ff-lang-to="en" lang="en">English</button>';
     if (n._ffv !== html) { n._ffv = html; n.innerHTML = html; }   // unchanged: no DOM write, so the observer cannot loop
     if (n.parentNode !== view.parentNode || n.nextSibling !== view) view.parentNode.insertBefore(n, view);
+  }
+
+  // The tab title and the meta description (route-meta.js sets them on every navigation) follow the language too, from the same
+  // phrase tables: "Page | Futures Friends" is looked up whole, then by its first part. The English is kept to switch back.
+  let headOrig = null, headSet = null;
+  function metaText(s) {
+    const whole = lookup(s, lang); if (whole != null) return whole;
+    const i = s.lastIndexOf(' | '); if (i < 0) return null;
+    const a = lookup(s.slice(0, i), lang); if (a == null) return null;
+    const b = lookup(s.slice(i + 3), lang); return a + ' | ' + (b == null ? s.slice(i + 3) : b);
+  }
+  function head() {
+    if (!D || !D.querySelector) return;
+    const md = D.querySelector('meta[name="description"]');
+    const cur = { title: D.title, desc: md ? md.getAttribute('content') || '' : '' };
+    // the app wrote a new English title or description since our last write: that is the new original (each one on its own: a
+    // render hook may rewrite only the description)
+    if (!headOrig) headOrig = Object.assign({}, cur);
+    if (!headSet || cur.title !== headSet.title) headOrig.title = cur.title;
+    if (!headSet || cur.desc !== headSet.desc) headOrig.desc = cur.desc;
+    const want = lang === 'en' ? headOrig : { title: metaText(headOrig.title) || headOrig.title, desc: (headOrig.desc && metaText(headOrig.desc)) || headOrig.desc };
+    headSet = Object.assign({}, want);
+    if (D.title !== want.title) D.title = want.title;
+    if (md && md.getAttribute('content') !== want.desc) md.setAttribute('content', want.desc);
+    // Search engines: a Spanish address (?lang=es) names itself as its canonical, so the hreflang pair in the page head is consistent.
+    const can = D.querySelector('link[rel="canonical"]');
+    if (can && fromUrl() === 'es') { const h = can.getAttribute('href') || ''; if (!/[?&]lang=es\b/.test(h)) can.setAttribute('href', h + (h.indexOf('?') > -1 ? '&' : '?') + 'lang=es'); }
+  }
+
+  // ---------------------------------------------------------------- the site-wide Spanish pack
+  // i18n-es-site.js (every public page beyond the family pages, ~4,000 strings) is downloaded only while Spanish is on, so English
+  // visitors never pay for it. It sits next to this file; ?v= is the build (window.FF_BUILD), so each build fetches it fresh.
+  const SELF = (D && D.currentScript && D.currentScript.src) || '';
+  let pack = null;
+  function loadPack() {
+    if (pack || !D || !D.createElement || !D.head) return pack;
+    pack = new Promise(res => {
+      const s = D.createElement('script');
+      const base = SELF ? SELF.replace(/[^/]*$/, '') : '';
+      s.src = base + 'i18n-es-site.js?v=' + encodeURIComponent(W.FF_BUILD || '1');
+      s.async = true; s.onload = () => res(true); s.onerror = () => res(false);
+      D.head.appendChild(s);
+    }).then(ok => { if (ok && lang === 'es' && D.body) { apply(D.body); note(); head(); } return ok; });
+    return pack;
   }
 
   // ---------------------------------------------------------------- switching
@@ -176,9 +227,11 @@
     observer = new W.MutationObserver(recs => {
       for (const r of recs) for (const n of r.addedNodes) { if (n.nodeType === 1 || n.nodeType === 3) queued.push(n); }
       if (queued.length && !scheduled) { scheduled = true; Promise.resolve().then(flush); }
-      if (lang === 'es') note();
+      note();
     });
     observer.observe(D.body, { childList: true, subtree: true });
+    if (D.head) new W.MutationObserver(() => { if (headSet && (D.title !== headSet.title)) head(); else if (headSet) { const md = D.querySelector('meta[name="description"]'); if (md && md.getAttribute('content') !== headSet.desc) head(); } })
+      .observe(D.head, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['content'] });
   }
   function reflect() {
     if (!D || !D.documentElement) return;
@@ -190,30 +243,37 @@
     if (l === lang && !o.force) { syncButtons(); return lang; }
     const previous = lang;
     lang = l; store.set(l); reflect();
+    if (l === 'es') loadPack();
     if (l === 'en') restore();
     // Listeners first (they swap their data to the new language), then the route is rebuilt from that data; the static header,
     // footer and gate are swapped in place.
     listeners.slice().forEach(fn => { try { fn(lang, previous); } catch (e) { console.warn(e); } });
     try { D.dispatchEvent(new CustomEvent('ff:lang', { detail: { lang, previous } })); } catch (_) { /* old browsers */ }
     try { if (typeof W.render === 'function' && D && D.getElementById('view')) W.render(); } catch (e) { console.warn(e); }
-    if (D && D.body) { apply(D.body); note(); syncButtons(); }
+    if (D && D.body) { apply(D.body); note(); syncButtons(); head(); }
     if (W.FFA11y && W.FFA11y.announce) W.FFA11y.announce(lang === 'es' ? 'Sitio en español (traducción en borrador).' : 'Site in English.');
     return lang;
   }
   if (D && D.addEventListener) {
     D.addEventListener('click', e => {
       const b = e.target && e.target.closest && e.target.closest('[data-ff-lang]'); if (!b) return;
-      e.preventDefault(); set(b.getAttribute('data-ff-lang-to') || other(), { source: 'button' });
+      e.preventDefault(); const to = b.getAttribute('data-ff-lang-to') || other(); store.set(to); set(to, { source: 'button' }); note();
     });
-    const boot = () => { reflect(); mountButtons(); watch(); if (lang === 'es') { apply(D.body); note(); } mountGate(D.body); };
+    D.addEventListener('click', e => {
+      const b = e.target && e.target.closest && e.target.closest('[data-ff-lang-offer-no]'); if (!b) return;
+      try { if (W.localStorage) W.localStorage.setItem(OFFER, 'no'); } catch (_) { /* blocked storage: the offer shows again next page */ }
+      note();
+    });
+    if (lang === 'es') loadPack();
+    const boot = () => { reflect(); mountButtons(); watch(); if (lang === 'es') apply(D.body); note(); head(); mountGate(D.body); };
     if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', boot); else boot();
-    if (W.addEventListener) W.addEventListener('hashchange', () => { if (lang === 'es') setTimeout(note, 0); });
+    if (W.addEventListener) W.addEventListener('hashchange', () => setTimeout(() => { note(); head(); }, 0));
   }
 
   W.FFi18n = Object.freeze({
     get lang() { return lang; },
     LANGS: LANGS.slice(),
-    set, toggle: () => set(other()), t, add, apply, family, lookup,
+    set, toggle: () => set(other()), t, add, apply, family, lookup, loadPack,
     on: fn => { if (typeof fn === 'function') listeners.push(fn); return () => { const i = listeners.indexOf(fn); if (i > -1) listeners.splice(i, 1); }; },
     _norm: norm, _tables: tables, _patterns: patterns, FAMILY
   });

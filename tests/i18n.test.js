@@ -61,9 +61,10 @@ function lib() {
 
 test('Spanish books: every book, every page, the same lists, and the say-along line where the English has it', () => {
   const { F, ES } = lib();
-  // the four revised books (2026-10-07) stay English until re-translated: see the next-but-one test
-  for (const b of F.BOOKS.filter(x => !x.rev)) {
+  // the four revised books (2026-10-07) were re-translated 2026-10-10: each Spanish draft names the edition it translates (rev)
+  for (const b of F.BOOKS) {
     const e = ES.books[b.id]; assert.ok(e, `no Spanish for ${b.id}`);
+    if (b.rev) assert.equal(e.rev, b.rev, `${b.id}: the Spanish translates the revised edition`);
     assert.ok(e.title && e.refrain, `${b.id}: title and refrain`);
     assert.equal(e.spreads.length, b.spreads.length, `${b.id}: page count`);
     b.spreads.forEach((s, i) => {
@@ -101,9 +102,15 @@ test('Story Time reads Spanish when the site is in Spanish, and the read-aloud w
   assert.equal(rb.spreads[0].p, ES.books[rp].spreads[0].p, 'the reader data is the Spanish page text');
   const spans = L.words(rb.spreads[0].p, rb.refrain);
   assert.ok(spans.includes(`data-wi="0" data-at="0">${rb.spreads[0].p.split(/\s+/)[0]}</span>`), 'word spans are built from the Spanish words');
-  // The revised four stay in their revised English (the Spanish drafts translate the previous text) and say so.
-  const bk = L.BOOKS[0], en0 = vm.runInContext('window.FFFamily.BOOKS[0]', s);
-  assert.equal(bk.id, 'booker-tries-again'); assert.equal(bk.spreads[0].p, en0.spreads[0].p, 'revised English text, not the old Spanish draft');
+  // The revised four read in Spanish from their re-translation of the revised edition (same rev); a draft of an older edition
+  // would be left out (the book stays English and says so).
+  const bk = L.BOOKS[0];
+  assert.equal(bk.id, 'booker-tries-again'); assert.equal(bk.spreads[0].p, ES.books['booker-tries-again'].spreads[0].p, 'the revised edition reads in Spanish');
+  assert.doesNotMatch(text(s.render('story-time', 'booker-tries-again')), /su versión en español está en preparación/);
+  const L2 = vm.runInContext('window.FFFamilyLocalized', s);
+  vm.runInContext("window.FFFamilyES.books['booker-tries-again'].rev = '2026-01-01'; window.FFFamilyLocalized.localize();", s);
+  const en0 = vm.runInContext('window.FFFamily.BOOKS[0]', s);
+  assert.equal(L2.BOOKS[0].spreads[0].p, en0.spreads[0].p, 'a translation of an older edition is never merged over the revised English');
   assert.match(text(s.render('story-time', 'booker-tries-again')), /su versión en español está en preparación/);
   // English stays English with no switch.
   const en = site();

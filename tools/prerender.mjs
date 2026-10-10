@@ -157,7 +157,7 @@ function centerNode() {
   };
 }
 function websiteNode() {
-  return { '@type': 'WebSite', '@id': SITE_ID, url: abs(''), name: CFG.siteName, description: 'Early learning for ages 2 to 5: Booker, Lumi, Zuri and Bop.', inLanguage: 'en-US', publisher: { '@id': ORG_ID } };
+  return { '@type': 'WebSite', '@id': SITE_ID, url: abs(''), name: CFG.siteName, description: 'Early learning for ages 2 to 5: Booker, Lumi, Zuri and Bop.', inLanguage: ['en-US', 'es-US'], publisher: { '@id': ORG_ID } };
 }
 function crumbs(t, h1) {
   const items = [['Home', abs('')]];
@@ -224,7 +224,9 @@ function headBlock(t, snap, meta) {
   const url = abs(t.path), img = ogImageFor(t, snap);
   const ogTitle = t.kind === 'home' ? 'Futures Friends' : snap.title, ogDesc = t.kind === 'home' ? 'Four friends. One complete early learning program for ages 2 to 5.' : snap.description;
   const ld = JSON.stringify(graphFor(t, snap, meta));
-  return `<!--seo:start--><link rel="canonical" href="${E(url)}"><meta property="og:type" content="${t.kind === 'post' ? 'article' : 'website'}"><meta property="og:site_name" content="${E(CFG.siteName)}"><meta property="og:locale" content="en_US"><meta property="og:url" content="${E(url)}">`
+  // English and Spanish (i18n.js): the same address with ?lang=es renders the whole page in Spanish (draft), so each page names both.
+  const es = url + (url.includes('?') ? '&' : '?') + 'lang=es';
+  return `<!--seo:start--><link rel="canonical" href="${E(url)}"><link rel="alternate" hreflang="en" href="${E(url)}"><link rel="alternate" hreflang="es" href="${E(es)}"><link rel="alternate" hreflang="x-default" href="${E(url)}"><meta property="og:type" content="${t.kind === 'post' ? 'article' : 'website'}"><meta property="og:site_name" content="${E(CFG.siteName)}"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="es_US"><meta property="og:url" content="${E(url)}">`
     + `<meta property="og:title" content="${E(ogTitle)}"><meta property="og:description" content="${E(ogDesc)}"><meta property="og:image" content="${E(img.url)}">`
     + (img.w ? `<meta property="og:image:width" content="${img.w}"><meta property="og:image:height" content="${img.h}">` : '') + `<meta property="og:image:alt" content="${E(img.alt)}">`
     + `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${E(ogTitle)}"><meta name="twitter:description" content="${E(ogDesc)}"><meta name="twitter:image" content="${E(img.url)}">`
@@ -339,16 +341,23 @@ function llmsFull(list, snaps) {
 }
 function notFoundHtml() {
   const links = [['Home', ''], ['Visit Futures Learning Center', 'enroll'], ['The whole-child day', 'whole-child'], ['Bop at Home', 'bop-at-home'], ['Friends and books', 'friends'], ['Futures Store', 'store'], ['Contact us', 'contact']];
+  // Spanish (DRAFT, pending review by the center's Spanish teacher): the same page, shown first when the visitor chose Spanish on the
+  // site (localStorage 'ff-lang', set by i18n.js) or asked for it with ?lang=es.
+  const linksEs = [['Inicio', ''], ['Visita Futures Learning Center', 'enroll'], ['El día del niño completo', 'whole-child'], ['Bop en casa', 'bop-at-home'], ['Amigos y libros', 'friends'], ['Tienda Futures', 'store'], ['Contáctanos', 'contact']];
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="${E(BASE_PATH)}">
 <title>Page not found | Futures Friends</title><meta name="robots" content="noindex"><meta name="theme-color" content="#174B45">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png?v=2"><link rel="stylesheet" href="fonts/fonts.css?v=1">
-<style>body{margin:0;font:16px/1.6 Poppins,system-ui,sans-serif;background:#FBF6EC;color:#14313D}main{max-width:640px;margin:0 auto;padding:56px 20px}h1{font:600 clamp(30px,6vw,44px)/1.12 Fredoka,Poppins,sans-serif;margin:0 0 12px}a{color:#0A2B38}ul{padding-left:20px}li{margin:6px 0}.top{background:#0A2B38;box-shadow:0 2px 0 #E7A928;padding:12px 20px}.top img{display:block;width:142px;height:auto}</style></head>
+<style>body{margin:0;font:16px/1.6 Poppins,system-ui,sans-serif;background:#FBF6EC;color:#14313D}main{max-width:640px;margin:0 auto;padding:56px 20px}h1{font:600 clamp(30px,6vw,44px)/1.12 Fredoka,Poppins,sans-serif;margin:0 0 12px}a{color:#0A2B38}ul{padding-left:20px}li{margin:6px 0}.top{background:#0A2B38;box-shadow:0 2px 0 #E7A928;padding:12px 20px}.top img{display:block;width:142px;height:auto}section+section{border-top:1px solid #E5DCC8;margin-top:32px;padding-top:24px}.draft{font-size:14px;color:#5A4A1C}</style></head>
 <body><div class="top"><a href=""><img src="img/brand/ff-plush-wordmark-320.webp" width="142" height="66" alt="Futures Friends"></a></div>
-<main><h1>We can&rsquo;t find that page</h1><p>The page may have moved, or the link has a typo. Try one of these instead.</p>
+<main><section id="nf-en" lang="en"><h1>We can&rsquo;t find that page</h1><p>The page may have moved, or the link has a typo. Try one of these instead.</p>
 <ul>${links.map(l => `<li><a href="${l[1]}">${E(l[0])}</a></li>`).join('')}</ul>
-<p>Still stuck? Call <a href="tel:+18169885661">(816) 988-5661</a> and a real person will help.</p></main>
-<script>/* an address with a trailing slash (/kids-shop/) is the same page without it */(function(){var p=location.pathname;if(/\\/$/.test(p)&&p.length>${BASE_PATH.length}){var q=p.replace(/\\/+$/,'');location.replace(q+location.search+location.hash);}})();</script>
+<p>Still stuck? Call <a href="tel:+18169885661">(816) 988-5661</a> and a real person will help.</p></section>
+<section id="nf-es" lang="es"><h2>No encontramos esa página</h2><p>Es posible que la página se haya movido o que el enlace tenga un error. Prueba una de estas.</p>
+<ul>${linksEs.map(l => `<li><a href="${l[1]}">${E(l[0])}</a></li>`).join('')}</ul>
+<p>¿Sigues sin encontrarla? Llama al <a href="tel:+18169885661">(816) 988-5661</a> y una persona real te ayudará.</p><p class="draft">Español (borrador): traducción pendiente de revisión.</p></section></main>
+<script>/* an address with a trailing slash (/kids-shop/) is the same page without it */(function(){var p=location.pathname;if(/\\/$/.test(p)&&p.length>${BASE_PATH.length}){var q=p.replace(/\\/+$/,'');location.replace(q+location.search+location.hash);}})();
+/* Spanish first for a visitor who chose Spanish */(function(){var l=null;try{l=localStorage.getItem('ff-lang')}catch(e){}if(/[?&]lang=es\\b/.test(location.search))l='es';if(l!=='es')return;var m=document.querySelector('main'),es=document.getElementById('nf-es'),en=document.getElementById('nf-en');if(m&&es&&en){m.insertBefore(es,en);var h=es.querySelector('h2'),h1=document.createElement('h1');h1.innerHTML=h.innerHTML;h.parentNode.replaceChild(h1,h);var e=en.querySelector('h1'),h2=document.createElement('h2');h2.innerHTML=e.innerHTML;e.parentNode.replaceChild(h2,e);}document.documentElement.lang='es';document.title='Página no encontrada | Futures Friends';})();</script>
 </body></html>
 `;
 }

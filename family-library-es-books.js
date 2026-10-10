@@ -1,123 +1,1140 @@
 /* Spanish (DRAFT) for the five Story Time books. Every string is a draft translation pending review by the center's Spanish
    teacher (native speaker). Merged over family-library-data.js by family-library.js when the site language is Spanish:
-   same keys and same array order as the English; any field left out falls back to English. */
+   same keys and same array order as the English; any field left out falls back to English. The four friends' books carry
+   rev: '2026-10-07': they translate the revised editions (re-translated 2026-10-10), and family-library.js merges a book only when its
+   rev matches the English rev, so an older translation can never sit on newer pages. */
 (function () {
 'use strict';
 const ES = window.FFFamilyES = window.FFFamilyES || {};
 ES.books = {
-  'booker-tries-again': {
-    title: 'Booker lo intenta otra vez',
-    refrain: 'Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!',
-    gesture: 'Mano en el pecho para “respiro grande”, puño sobre el corazón para “corazón valiente” y pulgar arriba para “¡puedo intentarlo otra vez!”.',
-    log: 'Booker encuentra un libro nuevecito con una palabra que no sabe leer. Con una palabra amable de Lumi y cuatro pasos de lector valiente, la descubre él solito, y luego les pasa sus palabras valientes a su hermanita.',
-    coverAlt: 'Booker en el Área de lectura, sonriendo con su libro nuevo, que tiene una cometa roja en la portada.',
-    back: 'A Booker le encantan los libros. Pero el libro nuevo de hoy tiene una palabra que todavía no sabe leer. Respira hondo y busca tu corazón valiente mientras Booker lo intenta, y lo intenta otra vez.',
-    goals: ['Usar una pista del dibujo y el sonido de la primera letra para descubrir una palabra nueva.', 'Seguir el texto de izquierda a derecha señalando cada palabra.', 'Notar un sentimiento de frustración y usar palabras valientes para seguir intentando.', 'Aprender que los errores son parte de aprender: las cosas difíciles solo son cosas nuevas.'],
-    spreads: [
-      { p: 'Este es Booker. A Booker le encantan los libros. ¡Libros grandes, libros chiquitos y libros con solapas que hacen flip!', pic: 'Booker de pie sobre la alfombra azul del Área de lectura, con un libro de solapas abierto del que se asoma un conejito.', q: ['D', '¿Qué libros te gustan más? ¿Los grandes, los chiquitos o los que tienen solapas?'], w: ['solapa', 'una puertita de papel en el libro que levantas para ver qué hay debajo'] },
-      { p: 'Una mañana, había un libro nuevecito en el estante. Tenía una cometa roja y brillante en la portada. “Este lo voy a leer yo solito”, dijo Booker.', pic: 'Booker estirándose para tomar del estante un libro nuevo con una cometa roja en la portada.', q: ['O', 'Booker quiere leerlo él solito. ¿Qué crees que va a pasar?'], w: ['nuevecito', 'tan nuevo que nadie lo ha usado todavía'] },
-      { p: 'Booker abrió el libro. En la página había una palabra grande. Puso la pata debajo de la palabra, como hacen los lectores valientes.', pic: 'Booker sentado en la alfombra con el libro abierto en las piernas, una pata debajo de la palabra grande KITE, junto al dibujo de una cometa roja.', q: ['W', '¿Dónde puso Booker la pata? ¿Puedes poner tu dedo debajo de una palabra de esta página?'], w: ['palabra', 'letras juntas que dicen algo'], b: 'Señala y lee: pasen el dedo juntos debajo del título del libro, de izquierda a derecha.' },
-      { p: '“¡Cat!”, dijo Booker. Pero en el dibujo no había ningún gato. Booker agachó las orejas. “Esto es muy difícil”, susurró.', pic: 'Booker sentado en la alfombra con las orejas agachadas y cara de preocupación. El libro abierto en sus piernas muestra una cometa, no un gato.', q: ['O', '¿Cómo crees que se siente Booker ahora? ¿Qué hicieron sus orejas?'], w: ['agachó', 'las bajó, como una flor cansada'], b: 'Haz orejas caídas con las manos. ¡Ahora levántalas de un salto!' },
-      { p: 'Lumi llegó saltando y se sentó cerquita. “Las cosas difíciles solo son cosas nuevas”, dijo con voz suave. Booker respiró hondo. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”', pic: 'Lumi sentada muy cerca de Booker en la alfombra, con una pata en su brazo. Booker respira hondo, con los ojos cerrados y una pata sobre el corazón.', q: ['C', 'Haz una pausa antes del final: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra...” y deja que tu peque diga “¡vez!”.'], w: ['suave', 'con una voz bajita y tranquila'], b: 'Hagan el saludo valiente: mano en el pecho, puño sobre el corazón, pulgar arriba.' },
-      { p: 'Primero, Booker miró el dibujo. Algo rojo volaba en el cielo azul. Tenía una cola larga y ondulada, y un hilo. “¿Qué será?”', pic: 'Booker inclinado para estudiar el dibujo de su libro abierto: una cometa roja con una cola larga volando en el cielo azul.', q: ['W', '¿Qué podrá ser esa cosa roja con la cola larga y ondulada?'], w: ['pista', 'una ayudita que te sirve para descubrir algo'], b: 'Haz binoculares de pata con las manos y mira de cerca, como Booker.' },
-      { p: 'Después, Booker miró la primera letra. “La K suena /k/”, dijo Booker. “/k/, /k/, /k/.” Sus orejas se movieron. Respiro grande. Corazón valiente.', pic: 'Booker señalando la primera letra de la palabra KITE en su libro, con la boca abierta para hacer el sonido /k/.', q: ['W', '¿Qué sonido hace la K? ¿Encuentras algo cerca que empiece con /k/, como casa, cama o carro?'], w: ['letra', 'una forma que usamos para escribir un sonido'], tip: 'Haz el sonido /k/ corto y seco, no el nombre de la letra (“ka”).' },
-      { p: 'Luego Booker deslizó la pata debajo de la palabra, lento como la miel. “Kkk... iii... t... Kkk-iii-t...”', pic: 'Booker sentado en la alfombra, deslizando la pata despacito debajo de la palabra KITE en el libro abierto sobre sus piernas.', q: ['C', 'Díganlo juntos, lento como la miel: “Kkk... iii... t...”'], w: ['lento como la miel', 'muy, muy despacio, como la miel que gotea de una cuchara'], b: 'Desliza una mano despacito por tu otro brazo mientras estiras los sonidos.' },
-      { p: '“¡KITE!”, gritó Booker. “¡La palabra es KITE!” Lo dijo tan fuerte que Zuri y Bop llegaron corriendo.', pic: 'Booker sonriendo de oreja a oreja con el libro de la cometa en las piernas, mientras Bop y Zuri llegan corriendo a su lado para celebrar.', q: ['R', '¿Cuál era la palabra? ¿Cómo la descubrió Booker?'], w: ['kite', 'así se dice “cometa” (o “papalote”) en inglés: un juguete que vuela con el viento, atado a un hilo largo'], b: 'Salta y celebra como Booker: “¡KITE!”' },
-      { p: 'Booker pasó la página. ¡Ahora había cuatro palabras! Señaló cada una. “Up... goes... the... kite!” Arriba, arriba, arriba subió la sonrisa de Booker.', pic: 'Booker de pie, muy derechito y con una gran sonrisa, mostrando la página que dice “Up goes the kite!” (“¡Arriba va la cometa!”).', q: ['W', 'Señala cada palabra conmigo: “Up... goes... the... kite!” ¿Cuántas palabras son?'], w: ['cuatro', 'uno, dos, tres, cuatro'] },
-      { p: 'En la página siguiente había otra palabra nueva. Las orejas de Booker empezaron a agacharse. Pero enseguida se levantaron de golpe. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”', pic: 'Booker de pie con una sonrisa valiente y decidida, con el libro en una pata y la otra pata sobre el corazón.', q: ['R', '¿Qué hizo Booker esta vez, cuando la palabra nueva se sintió difícil?'], w: ['de golpe', 'rapidísimo, de un salto'], b: 'Hagan el saludo valiente otra vez, un poquito más fuerte.' },
-      { p: 'Booker les leyó cada página a sus amigos. Algunas palabras salieron rápido. Otras salieron despacio. Pero cada palabra era suya.', pic: 'Booker leyendo en voz alta en la alfombra mientras Lumi, Bop y Zuri se sientan cerquita a escucharlo.', q: ['O', '¿Qué crees que quiere decir “cada palabra era suya”?'], w: ['rápido', 'veloz, en poquito tiempo'] },
-      { p: 'Entonces Booker vio a su hermanita junto a la puerta. Tenía un libro y se veía preocupada. “Yo todavía no sé leer”, dijo ella. “Las cosas difíciles solo son cosas nuevas”, dijo Booker.', pic: 'Booker arrodillado junto a su hermanita en la puerta. Ella abraza un librito de la cometa y se ve preocupada.', q: ['O', '¿Cómo se siente la hermanita de Booker? ¿Cómo la está ayudando Booker?'], w: ['preocupada', 'con miedito de que algo salga mal'] },
-      { p: 'Booker y su hermanita se sentaron lado a lado. Miraron los dibujos. Dijeron los primeros sonidos. Y luego dijeron juntos: “Respiro grande. Corazón valiente. ¡Podemos intentarlo otra vez!”', pic: 'Booker y su hermanita sentados lado a lado en la alfombra, compartiendo el libro de la cometa y sonriendo.', q: ['D', '¿Qué es algo que se te hace difícil? Digamos las palabras valientes de Booker para eso.'], w: ['juntos', 'con otra persona, al mismo tiempo'], b: 'Díganlo juntos, con los gestos: “Respiro grande. Corazón valiente. ¡Podemos intentarlo otra vez!”' }
+  "booker-tries-again": {
+    "title": "Booker lo intenta otra vez",
+    "sub": "Un cuento sobre practicar y pedir ayuda",
+    "rev": "2026-10-07",
+    "src": "Edición digital revisada (7 de octubre de 2026), texto e ilustraciones",
+    "refrain": "Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!",
+    "gesture": "Mano en el pecho para “respiro grande”, puño sobre el corazón para “corazón valiente” y pulgar arriba para “intentarlo otra vez”.",
+    "log": "Booker encuentra un libro nuevo con una palabra que todavía no sabe. Lumi lo ayuda a mirar las cuatro letras de k-i-t-e, donde la e callada ayuda a la i a decir su nombre, y la leen juntos. Luego Booker invita a su hermanita a la hora del cuento, aunque ella todavía no sabe leer.",
+    "coverAlt": "Booker en el Área de lectura, sonriendo con su libro nuevo, que tiene una cometa roja en la portada.",
+    "back": "A Booker le encantan los libros. Pero el libro nuevo de hoy tiene una palabra que todavía no sabe. Respira hondo y busca tu corazón valiente mientras Booker practica, pide ayuda y lo intenta otra vez.",
+    "goals": [
+      "Mirar todas las letras de una palabra, no solo la primera.",
+      "Decir cada sonido y luego unir los sonidos para formar una palabra: /k/ /ī/ /t/, kite (cometa).",
+      "Notar un sentimiento de frustración, pedir ayuda y usar palabras valientes para seguir adelante.",
+      "Disfrutar los libros juntos, incluso antes de saber leer las palabras."
     ],
-    talk: ['¿Cómo se sintió Booker cuando dijo “cat” y no era la palabra correcta? ¿Qué hicieron sus orejas?', '¿Qué ayudó a Booker a descubrir la palabra? (Mirar el dibujo, decir el primer sonido, deslizarse por los sonidos, intentarlo otra vez.)', 'Lumi dijo: “Las cosas difíciles solo son cosas nuevas”. ¿Qué es algo nuevo que estás aprendiendo?', 'Digamos juntos las palabras valientes de Booker. ¿Cuándo las podrías usar?'],
-    tip: 'Cuando Booker dice “/k/”, haz el sonido corto y seco de la letra, no su nombre (“ka”). Haz una pausa después de cada intento para que tu peque diga la frase contigo.',
-    act: { t: 'Los pasos del lector valiente', mat: ['Tres pedacitos de papel', 'Un crayón o un marcador'], steps: ['Dibuja un sol, un gato y una cometa sencillos, uno en cada papel, y escribe la palabra debajo de cada dibujo: SUN, CAT, KITE (como en el libro de Booker). También pueden hacerlo en español: SOL, GATO, COMETA.', 'Muestra la tarjeta de KITE. Pregunta: “¿Qué haría Booker primero?” (Mirar el dibujo.) Hagan binoculares de pata.', 'Señalen la primera letra y digan su sonido juntos. Tóquense los labios al decirlo.', 'Desliza un dedo despacito debajo de la palabra mientras tu peque desliza una mano por su brazo. Lean la palabra juntos y luego hagan el saludo valiente.', 'Prueben con SUN y CAT. Luego deja que tu peque “sea Booker” y te guíe por los pasos.'], adapt: 'Con niños de 2 años, quédense en el dibujo y nómbrenlo juntos. Con niños de 4 y 5 años, tapen el dibujo e intenten el primer sonido antes de mirar.' },
-    home: 'Cuando algo se sienta difícil esta noche, respiren hondo juntos y digan las palabras de Booker: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”'
+    "spreads": [
+      {
+        "p": "Este es Booker. A Booker le encantan los libros. ¡Libros grandes, libros chiquitos y libros con solapas que hacen flip!",
+        "pic": "Booker de pie sobre la alfombra azul del Área de lectura, con un libro de solapas abierto del que se asoma un conejito.",
+        "q": [
+          "D",
+          "¿Qué libros te gustan más? ¿Los grandes, los chiquitos o los que tienen solapas?"
+        ],
+        "w": [
+          "solapa",
+          "una puertita de papel en el libro que levantas para ver qué hay debajo"
+        ]
+      },
+      {
+        "p": "Una mañana, Booker encontró un libro nuevo con una cometa roja y brillante en la portada. “¡Quiero intentar leer este!”, dijo.",
+        "pic": "Booker estirándose para tomar del estante un libro nuevo con una cometa roja en la portada.",
+        "q": [
+          "O",
+          "Booker quiere intentar leer el libro nuevo. ¿Qué crees que va a pasar?"
+        ],
+        "w": [
+          "intentar",
+          "probar a hacer algo, aunque sea nuevo"
+        ]
+      },
+      {
+        "p": "Booker abrió el libro. En la página había una palabra grande. Booker la miró. “¿Qué dirá ahí?”",
+        "pic": "Booker sentado en la alfombra con el libro de la cometa abierto en las piernas, que muestra la palabra grande KITE junto al dibujo de una cometa roja.",
+        "q": [
+          "W",
+          "¿Encuentras la palabra grande en la página de Booker? Pon tu dedo debajo."
+        ],
+        "w": [
+          "palabra",
+          "letras juntas que dicen algo"
+        ],
+        "b": "Señala y lee: pasen el dedo juntos debajo del título del libro, de izquierda a derecha."
+      },
+      {
+        "p": "“¡Cat!”, adivinó Booker. Luego volvió a mirar. La palabra empezaba con k, no con c. Booker agachó las orejas. “Todavía no sé esta palabra.”",
+        "pic": "Booker sentado en la alfombra con las orejas agachadas y cara de preocupación, mirando el libro de la cometa abierto.",
+        "q": [
+          "O",
+          "¿Cómo crees que se siente Booker ahora? ¿Qué hicieron sus orejas?"
+        ],
+        "w": [
+          "adivinó",
+          "dijo lo que pensaba antes de saberlo con seguridad"
+        ],
+        "b": "Haz orejas caídas con las manos. ¡Ahora levántalas de un salto!"
+      },
+      {
+        "p": "Lumi se sentó cerquita. “Las cosas nuevas pueden sentirse difíciles”, dijo. “Podemos practicar juntos.” Booker respiró. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”",
+        "pic": "Lumi sentada muy cerca de Booker en la alfombra. Booker respira hondo, con los ojos cerrados y una pata sobre el corazón.",
+        "q": [
+          "C",
+          "Haz una pausa antes del final: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra...” y deja que tu peque diga “¡vez!”."
+        ],
+        "w": [
+          "practicar",
+          "hacer algo una y otra vez para que se vuelva más fácil"
+        ],
+        "b": "Hagan el saludo valiente: mano en el pecho, puño sobre el corazón, pulgar arriba."
+      },
+      {
+        "p": "Booker miró el dibujo. Una cometa roja volaba en el cielo. “Yo sé lo que es una cometa”, dijo. “Ahora miremos las letras.”",
+        "pic": "Booker en la alfombra con el libro abierto, mirando de cerca el dibujo de una cometa roja que vuela en el cielo azul.",
+        "q": [
+          "W",
+          "¿Qué hay en el dibujo? ¿Qué sabes de las cometas?"
+        ],
+        "w": [
+          "cometa",
+          "un juguete que vuela con el viento al final de un hilo largo; en inglés se dice kite"
+        ],
+        "b": "Haz binoculares de pata con las manos y mira de cerca, como Booker."
+      },
+      {
+        "p": "“La K hace el sonido /k/”, dijo Lumi. “Y en esta palabra, la e callada ayuda a la i a decir su nombre.” Booker miró las cuatro letras: k-i-t-e.",
+        "pic": "Booker levantando el libro abierto para mostrar la palabra KITE, sonriendo mientras mira las cuatro letras.",
+        "q": [
+          "W",
+          "Señalemos juntos las cuatro letras: k, i, t, e. ¿Qué letra está callada?"
+        ],
+        "w": [
+          "letra",
+          "una forma que usamos para escribir un sonido"
+        ],
+        "tip": "Di /k/ corto y seco, no “ka”. En kite, la i dice su nombre en inglés, /ī/ (suena como “ai”), y la e del final está callada."
+      },
+      {
+        "p": "Juntos probaron los sonidos: /k/ … /ī/ … /t/. Luego los unieron: “¡Kite!” La e se quedó callada. Booker sonrió de oreja a oreja. “¡Leí la palabra!”",
+        "pic": "Booker sentado en la alfombra con el libro abierto en las piernas, con la palabra KITE debajo del dibujo de una cometa roja.",
+        "q": [
+          "C",
+          "Digan los sonidos juntos: /k/ ... /ī/ ... /t/. Ahora únanlos: ¡kite!"
+        ],
+        "w": [
+          "unir",
+          "juntar, para que los sonidos formen una sola palabra"
+        ],
+        "b": "Desliza una mano por tu otro brazo mientras dices cada sonido, y luego bájala rápido para decir la palabra completa."
+      },
+      {
+        "p": "“¡KITE!”, celebró Booker. Zuri y Bop se acercaron. “¡Seguiste intentando!”, dijo Lumi. “Y pediste ayuda.”",
+        "pic": "Booker sonriendo con el libro de la cometa en las piernas, mientras Bop y Zuri se sientan a su lado para celebrar.",
+        "q": [
+          "R",
+          "¿Quiénes se acercaron? ¿Qué dijo Lumi que hizo Booker?"
+        ],
+        "w": [
+          "celebró",
+          "gritó de alegría"
+        ],
+        "b": "Celebra como Booker: “¡KITE!”"
+      },
+      {
+        "p": "Booker pasó la página. ¡Cuatro palabras! Lumi lo ayudó con las que no sabía. Juntos leyeron: “Up goes the kite!” (“¡Arriba va la cometa!”). Y arriba subió la sonrisa de Booker.",
+        "pic": "Booker de pie, muy derechito y con una gran sonrisa, mostrando la página que dice “Up goes the kite!” (“¡Arriba va la cometa!”).",
+        "q": [
+          "W",
+          "Señala cada palabra conmigo: “Up... goes... the... kite!” ¿Cuántas palabras son?"
+        ],
+        "w": [
+          "cuatro",
+          "uno, dos, tres, cuatro"
+        ]
+      },
+      {
+        "p": "En la página siguiente había otra palabra nueva. Booker hizo una pausa. “¿Me ayudas con esta?”, preguntó. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”",
+        "pic": "Booker de pie con una sonrisa valiente, con el libro en una pata y la otra pata sobre el corazón.",
+        "q": [
+          "R",
+          "¿Qué hizo Booker cuando encontró otra palabra nueva?"
+        ],
+        "w": [
+          "hizo una pausa",
+          "se detuvo por un momento"
+        ],
+        "b": "Hagan el saludo valiente otra vez, un poquito más fuerte."
+      },
+      {
+        "p": "Booker y Lumi les leyeron a sus amigos. Algunas palabras Booker las sabía. Otras las practicaron juntos. Página por página, el cuento cobró vida.",
+        "pic": "Booker leyendo en voz alta en la alfombra mientras Lumi, Bop y Zuri se sientan cerquita a escucharlo.",
+        "q": [
+          "O",
+          "¿Qué crees que quiere decir “el cuento cobró vida”?"
+        ],
+        "w": [
+          "página por página",
+          "una página, luego la siguiente, y luego la siguiente"
+        ]
+      },
+      {
+        "p": "Junto a la puerta, la hermanita de Booker tenía un libro. “Yo todavía no sé leer”, dijo ella. “Está bien”, dijo Booker. “Podemos disfrutar un libro juntos.”",
+        "pic": "Booker arrodillado junto a su hermanita en la puerta. Ella abraza un librito de la cometa.",
+        "q": [
+          "O",
+          "La hermanita de Booker todavía no sabe leer. ¿Cómo la ayuda Booker a sentirse bienvenida?"
+        ],
+        "w": [
+          "disfrutar",
+          "pasarla bien haciendo algo que te gusta"
+        ]
+      },
+      {
+        "p": "Se sentaron lado a lado. Hablaron de los dibujos y escucharon mientras Lumi leía. “Respiro grande. Corazón valiente”, dijo Booker. “¡Podemos aprender juntos!”",
+        "pic": "Booker y su hermanita sentados lado a lado en la alfombra, compartiendo el libro de la cometa y sonriendo.",
+        "q": [
+          "D",
+          "¿Con quién te gusta compartir un libro? ¿De qué te gusta hablar?"
+        ],
+        "w": [
+          "lado a lado",
+          "uno justo al lado del otro"
+        ],
+        "b": "Díganlo juntos, con los gestos: “Respiro grande. Corazón valiente. ¡Podemos aprender juntos!”"
+      }
+    ],
+    "guide": [
+      {
+        "t": "Hablemos del cuento",
+        "blocks": [
+          [
+            "Observa",
+            "¿Cómo se sintió Booker cuando encontró una palabra que no sabía?"
+          ],
+          [
+            "Recuerda",
+            "¿Quién ayudó a Booker? ¿Qué practicaron juntos?"
+          ],
+          [
+            "Conecta",
+            "¿Cuándo le has pedido a alguien que te ayude a aprender?"
+          ],
+          [
+            "Prueben la frase",
+            "Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!"
+          ]
+        ]
+      },
+      {
+        "t": "Practica con una persona adulta",
+        "blocks": [
+          [
+            "Empiecen poco a poco",
+            "Escojan una palabra con sonidos que tu peque ya aprendió, como cat (gato). Señala cada letra: /k/ /a/ /t/. Unan los sonidos: cat."
+          ],
+          [
+            "Miren todas las letras",
+            "La primera letra sola no nos dice la palabra completa. Enseña las letras o los patrones que tu peque no conoce antes de esperar que los lea."
+          ],
+          [
+            "Sobre kite",
+            "En kite (cometa), i_e escribe el sonido largo de la i. Digan /k/ /ī/ /t/ y luego únanlos. La e está callada. Este patrón hay que enseñarlo; no es igual que en cat."
+          ],
+          [
+            "Disfruten el significado",
+            "Después de leer una palabra, hablen de lo que quiere decir. Los dibujos nos ayudan a entender el cuento."
+          ]
+        ]
+      },
+      {
+        "t": "Para familias y educadores",
+        "blocks": [
+          [
+            "Compartan la lectura",
+            "Este es un cuento para leer en voz alta, no un libro para principiantes que se pueda descifrar por completo. Léanlo juntos; ofrece ayuda sin convertir la lectura en un examen."
+          ],
+          [
+            "Celebren la práctica",
+            "Di: “Miraste las letras” o “Pediste ayuda”. Deja que tu peque escuche, cuente el cuento con los dibujos o se una a una frase conocida."
+          ],
+          [
+            "Que todos se sientan bienvenidos",
+            "La hermana de Booker forma parte de la hora del cuento antes de saber leer palabras. Disfrutar los libros también es parte de aprender."
+          ],
+          [
+            "Conozcan a los Futures Friends",
+            "Booker practica. Lumi escucha. Bop ayuda. Zuri hace preguntas. Cada quien aprende a su propio ritmo."
+          ]
+        ]
+      }
+    ],
+    "talk": [
+      "¿Cómo se sintió Booker cuando encontró una palabra que no sabía?",
+      "¿Quién ayudó a Booker? ¿Qué practicaron juntos?",
+      "¿Cuándo le has pedido a alguien que te ayude a aprender?",
+      "Digamos juntos la frase: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”"
+    ],
+    "tip": "Haz el sonido /k/ corto y seco, no “ka”. En kite, i_e escribe el sonido largo de la i (en inglés, /ī/, que suena como “ai”): digan /k/ /ī/ /t/ y luego únanlos. La e está callada. Este es un cuento para leer en voz alta, no un examen de lectura.",
+    "act": {
+      "t": "Miren todas las letras",
+      "min": 5,
+      "mat": [
+        "Papel",
+        "Un crayón o un marcador"
+      ],
+      "steps": [
+        "Escribe una palabra cuyos sonidos tu peque ya conoce, como CAT (gato). Señala cada letra y di su sonido: /k/ /a/ /t/.",
+        "Unan los sonidos: “cat”. Pasa el dedo debajo de toda la palabra mientras la dices.",
+        "Escribe KITE (cometa). Señala las cuatro letras y di: “En kite, la e callada ayuda a la i a decir su nombre”.",
+        "Digan juntos /k/ /ī/ /t/ y luego únanlos: “kite”. La e se queda callada.",
+        "Hablen de lo que es una cometa. Luego digan juntos las palabras de Booker: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”"
+      ],
+      "adapt": "Con niños de 2 años, disfruten los dibujos y nómbrenlos juntos; leer palabras puede esperar. Con niños de 4 y 5 años, enséñales otra palabra con el mismo patrón, como bike (bicicleta) o time (tiempo), y luego léanla juntos."
+    },
+    "home": "Cuando algo se sienta difícil esta noche, respiren hondo juntos y digan las palabras de Booker: “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”"
   },
-  'big-feelings-brighter-days': {
-    title: 'Sentimientos grandes, días más brillantes',
-    refrain: 'Mira. Escucha. Echa una mano.',
-    gesture: 'Señala tus ojos para “mira”, haz conchita con las manos en las orejas para “escucha” y extiende la mano abierta para “echa una mano”.',
-    log: 'Lumi nota que Pip, el patito nuevo, está solo durante el juego del Desfile. Antes de poder ayudarlo, tiene que calmar su propia pancita preocupada con respiraciones de flor y vela. Luego encuentra las palabras que convierten un día solitario en uno más brillante.',
-    back: 'Pip es nuevo en la Casa Club, y Pip está solito. Lumi quiere ayudar, pero siente la pancita temblorosa. Respira con Lumi mientras encuentra su calma, y sus palabras amables, en un cuento sobre sentimientos y amistad.',
-    goals: ['Nombrar cinco sentimientos: feliz, solo, preocupado, tranquilo y orgulloso.', 'Notar las pistas del cuerpo que muestran cómo se siente alguien (cabeza abajo, alas apretadas, orejas caídas).', 'Practicar la respiración de flor y vela para sentir calma.', 'Usar palabras para invitar: “¿Quieres jugar con nosotros?”'],
-    spreads: [
-      { p: 'Esta es Lumi. Lumi tiene orejas largas para escuchar y ojos grandes para mirar. Lumi siempre nota cómo se sienten sus amigos.', pic: 'Lumi en el patio soleado de la Casa Club, con las orejas paradas, mirando alrededor con una sonrisa dulce.', q: ['W', '¿Para qué usa Lumi sus orejas largas? ¿Y sus ojos grandes?'], w: ['nota', 've algo y le pone atención'] },
-      { p: 'Hoy los amigos jugaban al Desfile en el patio de la Casa Club. Booker tocaba el tambor. Bop pisaba fuerte. Zuri agitaba una bandera de hoja. “¡Marcha, marcha, marcha!”', pic: 'Un desfile alegre por el patio: Booker con un tambor, Bop pisando fuerte y Zuri agitando una gran bandera de hoja.', q: ['R', '¿Qué hizo cada amigo en el desfile?'], w: ['desfile', 'una fila de amigos que marchan y hacen música'], b: 'Marchen en su lugar: “¡Marcha, marcha, marcha!”' },
-      { p: 'Pero Lumi vio a alguien junto a la cerca. Era Pip, el patito nuevo. Pip no marchaba. Pip no cantaba. Pip estaba solito.', pic: 'Lumi se detiene a mitad de la marcha y mira hacia atrás, donde el pequeño Pip está solo junto a la cerca del fondo.', q: ['O', '¿Qué está haciendo Pip? ¿Por qué crees que Pip no está marchando?'], w: ['solito', 'tú solo, sin nadie más'] },
-      { p: 'Lumi miró con sus ojos. Pip tenía la cabeza abajo. Pip tenía las alas bien apretadas. Lumi escuchó con sus orejas. Pip soltó un suspiro chiquitito.', pic: 'Pip de cerca junto a la cerca, con la cabeza abajo y las alas apretadas, y las orejas largas de Lumi asomándose por un lado.', q: ['W', 'Muéstrame cómo estaba el cuerpo de Pip: cabeza abajo, alas bien apretadas.'], w: ['suspiro', 'un aire largo y lento que sueltas cuando te sientes triste o cansado'], b: 'Escucha como Lumi: cierra los ojos y nombra un sonido que oigas ahora mismo.' },
-      { p: '“Creo que Pip se siente solo”, dijo Lumi. “Sentirse solo es cuando quieres un amigo, pero todavía no lo tienes.” Mira. Escucha. Echa una mano.', pic: 'Lumi con cara pensativa, la pata en la mejilla, y una burbuja de pensamiento de fieltro suave que muestra a Pip solito.', q: ['C', 'Haz una pausa antes del final: “Mira. Escucha. Echa una...” y deja que tu peque diga “¡mano!”.'], w: ['solo', 'cuando quieres un amigo, pero todavía no lo tienes'], b: 'Hagan los gestos: señalen sus ojos, hagan conchita en las orejas, extiendan la mano abierta.' },
-      { p: 'Lumi quería ayudar. Pero sentía la pancita temblorosa, y sus orejas se cayeron, plof. Lumi se sintió preocupada. ¿Y si Pip decía que no?', pic: 'Lumi con las orejas caídas, las patas en la pancita y una carita preocupada.', q: ['D', 'Lumi siente la preocupación en la pancita. ¿Dónde la sientes tú cuando estás preocupado o preocupada?'], w: ['temblorosa', 'que tiembla, que no está firme'] },
-      { p: 'Así que Lumi fue saltando al Rincón de calma. Se sentó en el cojín rosado y suavecito. Puso una pata en la pancita y se quedó muy quieta.', pic: 'Lumi sentada con las piernas cruzadas sobre un gran cojín rosado en el acogedor Rincón de calma, con una pata en la pancita.', q: ['D', '¿Qué lugar acogedor de nuestra casa te ayuda a sentir calma?'], w: ['quieta', 'sin moverse nada'], b: 'Pon una mano en tu pancita y quédate muy quieto o quieta, como Lumi.' },
-      { p: '“Huele la flor”, dijo Lumi, y respiró despacito. “Sopla la vela”, dijo Lumi, y soltó el aire despacito. Huele la flor. Sopla la vela.', pic: 'Dos momentos en un solo dibujo: Lumi oliendo una flor de fieltro (toma aire) y luego soplando una vela de fieltro (suelta el aire).', q: ['C', 'Lean despacio y respiren juntos. Deja que tu peque diga “Sopla la...” “¡vela!”.'], w: ['respirar', 'tomar aire por la nariz y dejarlo salir'], b: 'Tres respiraciones lentas: huele la flor (toma aire por la nariz), sopla la vela (suéltalo por la boca).' },
-      { p: 'La pancita de Lumi se sintió tranquila. Sus orejas se pararon bien altas. Lumi se sintió en calma y lista. Mira. Escucha. Echa una mano. ¡Y allá fue, saltando!', pic: 'Lumi a medio salto, saliendo del Rincón de calma, con las orejas altas y una sonrisa tranquila y segura.', q: ['W', 'Mira las orejas de Lumi ahora. ¿Cómo se siente?'], w: ['en calma', 'tranquila y firme por dentro'] },
-      { p: '“Hola, Pip”, dijo Lumi. “Te ves solito. ¿Sientes que te dejaron fuera?” Pip dijo que sí con la cabeza. “No sé jugar al Desfile”, dijo Pip con una vocecita.', pic: 'Lumi agachada a la altura de Pip junto a la cerca, con cara amable, y Pip asintiendo con timidez.', q: ['R', '¿Qué le dijo Lumi a Pip? ¿Por qué Pip no se unió al desfile?'], w: ['dejar fuera', 'no invitar a alguien a jugar'] },
-      { p: '“No pasa nada”, dijo Lumi. “¿Quieres marchar conmigo? Yo te enseño cómo.” Pero a Pip le temblaban las plumas. Pip también estaba preocupado.', pic: 'Lumi extiende su pata mientras Pip tiembla, con las plumas esponjadas, mirando hacia el desfile tan movido.', q: ['O', 'Pip también está preocupado. ¿Qué podría ayudar a Pip a sentirse listo?'], w: ['enseñar', 'hacer algo para que alguien vea cómo se hace'] },
-      { p: 'Así que Lumi le enseñó a Pip su truco para la calma. Juntos olieron la flor. Juntos soplaron la vela. “Estoy listo”, dijo Pip.', pic: 'Lumi y Pip lado a lado en el pasto, los dos respirando con los ojos cerrados y flores de fieltro en la mano.', q: ['R', '¿Cuál es el truco de Lumi para la calma? ¿Me lo puedes enseñar?'], w: ['listo', 'preparado para empezar'], b: 'Deja que tu peque te guíe en dos respiraciones de flor y vela.' },
-      { p: 'Lumi y Pip marcharon al Desfile. “¡Hagan lugar!”, dijo Booker. “¡Pip puede ir al frente!”, dijo Bop. Pip abrió el camino. ¡Marcha, marcha, cuac!', pic: 'Pip muy orgulloso al frente del desfile; detrás va Lumi, luego Booker con el tambor, y Bop y Zuri celebrando.', q: ['O', '¿Quién iba al frente del desfile? ¿Cómo crees que se sentía Pip ahora?'], w: ['ir al frente', 'ir primero para que los demás te sigan'], b: 'Marchen juntos por el cuarto: “¡Marcha, marcha, cuac!”' },
-      { p: 'Esa noche, Pip se sintió feliz. Lumi se sintió orgullosa. Y toda la Casa Club se sintió un poquito más brillante. Mira. Escucha. Echa una mano. ¡La bondad ilumina cada día!', pic: 'Atardecer en la Casa Club: ventanas con luz tibia, los amigos diciendo adiós con la mano, y Pip y Lumi abrazándose.', q: ['D', '¿A quién podrías invitar a jugar mañana? ¿Qué palabras usarías?'], w: ['orgullosa', 'contenta por algo que hiciste'] }
+  "big-feelings-brighter-days": {
+    "title": "Sentimientos grandes de Lumi, días más brillantes",
+    "sub": "Un cuento sobre notar, escuchar e invitar",
+    "rev": "2026-10-07",
+    "src": "Edición digital revisada (7 de octubre de 2026), texto e ilustraciones",
+    "refrain": "Mira. Escucha. Echa una mano.",
+    "gesture": "Señala tus ojos para “mira”, haz conchita con las manos en las orejas para “escucha” y extiende la mano abierta para “echa una mano”.",
+    "log": "Lumi nota que Pip, el pequeño erizo nuevo, está en silencio junto a la cerca durante el juego del Desfile. En lugar de decidir cómo se siente Pip, Lumi le pregunta. Una respiración lenta la ayuda a sentirse lista aunque tenga la pancita temblorosa, y una invitación amable, al ritmo de Pip, ilumina el día de Pip.",
+    "coverAlt": "Lumi, la conejita, en el patio soleado de la Casa Club, sonriendo, con una pata junto a su oreja larga.",
+    "back": "Pip es nuevo en la Casa Club y está junto a la cerca. Lumi se pregunta si Pip quiere compañía, pero siente la pancita temblorosa. Respira con Lumi mientras pregunta con amabilidad, escucha y deja que Pip decida.",
+    "goals": [
+      "Notar las pistas del cuerpo y preguntarle a alguien cómo se siente en lugar de decidirlo por esa persona.",
+      "Usar palabras para invitar: “¿Quieres compañía?”",
+      "Probar una respiración suave de flor y vela de mentiritas, y saber que está bien parar.",
+      "Respetar el “tal vez” y el “todavía no”, y hacerle lugar a un amigo a su propio ritmo."
     ],
-    talk: ['¿Cómo se dio cuenta Lumi de que Pip se sentía solo? ¿Qué mostraba el cuerpo de Pip?', '¿Qué hizo Lumi cuando su propia pancita se sintió temblorosa y preocupada? Vamos a oler la flor y soplar la vela juntos.', '¿Qué palabras usó Lumi para invitar a Pip a jugar?', '¿A quién podrías invitar a jugar contigo mañana?'],
-    tip: 'Lee la página de la respiración despacio y respira con tu peque. Nombra los sentimientos sin tratar de arreglarlos: “Te ves preocupado. Está bien.”',
-    act: { t: 'Caras de sentimientos y respiraciones de flor', mat: ['Un espejo, si tienes uno', 'Una flor de verdad, una flor de papel o simplemente tu dedo'], steps: ['Hagan cinco caras juntos frente al espejo: feliz, solo, preocupado, tranquilo y orgulloso. Digan el nombre de cada sentimiento.', 'Pregunta: “¿Qué cara tenía Pip junto a la cerca?” (Solo.) “¿Qué cara tenía Lumi al final?” (Orgullosa.)', 'Levanta la flor. Hagan juntos tres respiraciones de flor y vela: huele la flor, sopla la vela.', 'Practiquen cómo invitar: tu peque dice “¿Quieres jugar conmigo?” y tú contestas “¡Sí!”. Luego cambien.', 'Terminen con los gestos: “Mira. Escucha. Echa una mano. ¡La bondad ilumina cada día!”'], adapt: 'Con niños de 2 años, usen solo feliz, preocupado y tranquilo. Con niños de 4 y 5 años, muestren un sentimiento solo con el cuerpo y dejen que la otra persona adivine.' },
-    home: 'A la hora de dormir, pregunta: “¿Cómo te sentiste hoy?”. Luego huelan la flor y soplen la vela juntos tres veces.'
+    "spreads": [
+      {
+        "p": "Esta es Lumi. Lumi tiene orejas largas para escuchar y ojos grandes para mirar. A Lumi le gusta notar cómo podrían sentirse sus amigos.",
+        "pic": "Lumi de pie en el patio soleado de la Casa Club, con una pata junto a su oreja larga, sonriendo.",
+        "q": [
+          "W",
+          "¿Para qué usa Lumi sus orejas largas? ¿Y sus ojos grandes?"
+        ],
+        "w": [
+          "notar",
+          "ver algo y ponerle atención"
+        ]
+      },
+      {
+        "p": "Hoy los amigos jugaban al Desfile en el patio de la Casa Club. Booker tocaba el tambor. Bop pisaba fuerte. Zuri agitaba una bandera de hoja. “¡Marcha, marcha, marcha!”",
+        "pic": "Un desfile alegre por el patio: Lumi aplaudiendo, Booker con un tambor, Bop pisando fuerte y Zuri agitando una gran bandera de hoja.",
+        "q": [
+          "R",
+          "¿Qué hizo cada amigo en el desfile?"
+        ],
+        "w": [
+          "desfile",
+          "una fila de amigos que marchan y hacen música"
+        ],
+        "b": "Marchen en su lugar: “¡Marcha, marcha, marcha!”"
+      },
+      {
+        "p": "Junto a la cerca estaba Pip, el pequeño erizo nuevo. Pip no marchaba ni cantaba. Lumi se preguntó si Pip quería compañía.",
+        "pic": "Lumi se detiene junto a Pip, el pequeño erizo nuevo, que está junto a la cerca mirando hacia abajo.",
+        "q": [
+          "O",
+          "¿Qué está haciendo Pip? ¿Qué te preguntas sobre Pip?"
+        ],
+        "w": [
+          "compañía",
+          "alguien con quien estar, para no estar solo"
+        ]
+      },
+      {
+        "p": "Lumi miró con sus ojos. Pip tenía la cabeza abajo. Pip tenía las patas bien recogidas. Lumi escuchó con sus orejas. Pip soltó un suspiro chiquitito.",
+        "pic": "Pip sentado junto a la cerca, con la cabeza abajo y las patas recogidas, mientras Lumi lo mira con dulzura desde cerca.",
+        "q": [
+          "W",
+          "Muéstrame cómo estaba el cuerpo de Pip: cabeza abajo, patas bien recogidas."
+        ],
+        "w": [
+          "suspiro",
+          "un aire largo y lento que sueltas"
+        ],
+        "b": "Escucha como Lumi: cierra los ojos y nombra un sonido que oigas ahora mismo."
+      },
+      {
+        "p": "“Tal vez Pip se siente sin compañía”, pensó Lumi. “O le da timidez. Puedo preguntar.” Mira. Escucha. Echa una mano.",
+        "pic": "Lumi de pie cerca de Pip, con una pata abierta y amable, preguntándose cómo se siente Pip.",
+        "q": [
+          "C",
+          "Haz una pausa antes del final: “Mira. Escucha. Echa una...” y deja que tu peque diga “¡mano!”."
+        ],
+        "w": [
+          "timidez",
+          "cuando no sabes bien si unirte o hablar con alguien nuevo"
+        ],
+        "b": "Hagan los gestos: señalen sus ojos, hagan conchita en las orejas, extiendan la mano abierta."
+      },
+      {
+        "p": "Lumi quería ayudar, pero sentía la pancita temblorosa. ¿Y si Pip decía que no? “Puedo preguntar con amabilidad”, se dijo. “Pip puede decidir.”",
+        "pic": "Lumi junto a la cerca blanca, con las patas en la pancita y una carita insegura.",
+        "q": [
+          "D",
+          "Lumi siente la pancita temblorosa. ¿Dónde lo sientes tú cuando estás nervioso o nerviosa?"
+        ],
+        "w": [
+          "decidir",
+          "escoger tú mismo o tú misma"
+        ]
+      },
+      {
+        "p": "Primero, Lumi fue al Rincón de calma. Se sentó en un cojín rosado y suavecito y puso una pata en la pancita. Se tomó su tiempo.",
+        "pic": "Lumi sentada sobre un gran cojín rosado y suave en el acogedor Rincón de calma, con una pata en la pancita.",
+        "q": [
+          "D",
+          "¿Qué lugar acogedor de nuestra casa te sirve para tomarte tu tiempo?"
+        ],
+        "w": [
+          "cojín",
+          "una almohada suave para sentarse"
+        ],
+        "b": "Pon una mano en tu pancita y quédate quieto o quieta un momento, como Lumi."
+      },
+      {
+        "p": "“Huele la flor”, susurró Lumi, tomando aire con suavidad. “Sopla la vela de mentiritas”, dijo, soltando el aire despacio. Adentro… y afuera.",
+        "pic": "Lumi en el Rincón de calma oliendo una flor rosada, con una vela de fieltro de mentiritas a su lado.",
+        "q": [
+          "C",
+          "Lean despacio y respiren juntos, si tu peque quiere. Deja que tu peque diga “Sopla la...” “¡vela de mentiritas!”."
+        ],
+        "w": [
+          "con suavidad",
+          "de manera suave y lenta"
+        ],
+        "b": "Huele la flor (toma aire), sopla la vela de mentiritas (suelta el aire). Respiren con comodidad; está bien parar."
+      },
+      {
+        "p": "Lumi todavía se sentía un poquito nerviosa. Pero se sentía lista para intentarlo. Mira. Escucha. Echa una mano. ¡Y allá fue, saltando!",
+        "pic": "Lumi saliendo a saltos del Rincón de calma por el caminito del jardín, con las orejas arriba.",
+        "q": [
+          "W",
+          "Lumi todavía se siente un poquito nerviosa. ¿Qué la ayuda a intentarlo de todos modos?"
+        ],
+        "w": [
+          "nerviosa",
+          "un sentimiento inquieto y tembloroso por algo nuevo"
+        ]
+      },
+      {
+        "p": "“Hola, Pip. ¿Quieres compañía?”, preguntó Lumi. Pip dijo que sí con la cabeza. “Quiero jugar, pero no sé jugar al Desfile.”",
+        "pic": "Lumi junto a Pip en la cerca, extendiendo una pata amistosa mientras Pip escucha.",
+        "q": [
+          "R",
+          "¿Qué le preguntó Lumi a Pip? ¿Qué quería Pip?"
+        ],
+        "w": [
+          "invitar",
+          "pedirle a alguien que se una a ti"
+        ]
+      },
+      {
+        "p": "“¿Quieres que te enseñe?”, preguntó Lumi. “Tal vez”, dijo Pip. “Siento la pancita temblorosa.” “Yo también la sentía así”, dijo Lumi. “Podemos tomarnos nuestro tiempo.”",
+        "pic": "Dentro de la Casa Club, Pip se abraza con los dos brazos mientras Lumi está cerca, con cara amable y paciente.",
+        "q": [
+          "O",
+          "Pip dijo “Tal vez”. ¿Qué podría ayudar a Pip a sentirse con ganas de empezar?"
+        ],
+        "w": [
+          "tal vez",
+          "ni sí ni no; todavía no estás seguro"
+        ]
+      },
+      {
+        "p": "“¿Quieres probar una respiración lenta conmigo?”, preguntó Lumi. Pip dijo que sí con la cabeza. Adentro… y afuera. Se sentaron juntos. “Ahora me gustaría intentar marchar”, dijo Pip.",
+        "pic": "Lumi y Pip sentados lado a lado sobre una alfombra rosada, con los ojos cerrados, respirando despacio, con una flor y una vela de fieltro de mentiritas.",
+        "q": [
+          "R",
+          "¿Qué hicieron Lumi y Pip juntos antes de que Pip intentara marchar?"
+        ],
+        "w": [
+          "listo",
+          "preparado para empezar"
+        ],
+        "b": "Si tu peque quiere, deja que te guíe en una respiración lenta."
+      },
+      {
+        "p": "Lumi le enseñó a Pip los primeros pasos. Pip marchó a su lado. Booker tocó el tambor. Bop hizo lugar. Zuri agitó la bandera. ¡Marcha, marcha, marcha!",
+        "pic": "El desfile por el caminito del jardín: Pip marchando al lado de Lumi, Booker con su tambor, y Bop y Zuri agitando una bandera de hoja.",
+        "q": [
+          "O",
+          "¿Cómo crees que se siente Pip ahora?"
+        ],
+        "w": [
+          "primeros pasos",
+          "el comienzo de algo nuevo"
+        ],
+        "b": "Marchen juntos por el cuarto: “¡Marcha, marcha, marcha!”"
+      },
+      {
+        "p": "Pip sonrió. “Me alegra que me hayas preguntado.” Lumi también sonrió. Mira. Escucha. Echa una mano. ¡Una invitación amable puede iluminar el día de alguien!",
+        "pic": "Los amigos juntos bajo la luz tibia del atardecer afuera de la Casa Club, con Pip sonriendo en el medio.",
+        "q": [
+          "D",
+          "¿A quién podrías invitar a jugar? ¿Qué palabras usarías?"
+        ],
+        "w": [
+          "invitación",
+          "pedirle con amabilidad a alguien que se una a ti"
+        ]
+      }
+    ],
+    "guide": [
+      {
+        "t": "Hablemos del cuento",
+        "blocks": [
+          [
+            "Observa",
+            "¿Qué vio y qué oyó Lumi cuando notó a Pip?"
+          ],
+          [
+            "Escucha",
+            "¿Cómo supo Lumi lo que Pip quería?"
+          ],
+          [
+            "Conecta",
+            "¿Alguna vez quisiste unirte a un juego pero no estabas seguro o segura? ¿Qué te ayudó?"
+          ],
+          [
+            "Hagan lugar",
+            "¿Cómo podría tu grupo darle la bienvenida a alguien nuevo?"
+          ]
+        ]
+      },
+      {
+        "t": "Prueben una invitación amable",
+        "blocks": [
+          [
+            "Pregunta",
+            "Túrnense para decir: “¿Quieres jugar conmigo?” o “¿Quieres compañía?”"
+          ],
+          [
+            "Escucha la respuesta",
+            "Practiquen “Sí”, “Todavía no” y “No, gracias”. Un amigo amable puede decir: “Está bien. Puedes unirte cuando estés listo”."
+          ],
+          [
+            "Ofrece opciones",
+            "Prueben: “Podemos mirar primero, jugar juntos o buscar un juego más tranquilo”."
+          ],
+          [
+            "Respiren con suavidad",
+            "Si tu peque quiere, hagan como que huelen una flor y soplan una vela de mentiritas. Respiren con comodidad; está bien parar."
+          ]
+        ]
+      },
+      {
+        "t": "Para familias y educadores",
+        "blocks": [
+          [
+            "Los sentimientos son pistas",
+            "Una voz bajita o la cabeza agachada pueden querer decir muchas cosas. Den el ejemplo con “Te noto callado. ¿Cómo te sientes?” en lugar de decidir por el niño o la niña."
+          ],
+          [
+            "Cualquiera puede sentirse solo",
+            "Un niño o una niña puede sentirse solo aunque tenga amigos. Escuchen cómo lo describe con sus propias palabras."
+          ],
+          [
+            "La calma tiene muchas formas",
+            "Respirar ayuda a algunos niños. Otros prefieren compañía tranquila, moverse o tiempo. Sentirse nervioso no quiere decir que un niño haya fallado."
+          ],
+          [
+            "Mantengan abierta la invitación",
+            "Puede que los niños miren antes de unirse. Respeten el “todavía no” y hagan un espacio para que pertenezcan, a su propio ritmo."
+          ]
+        ]
+      }
+    ],
+    "talk": [
+      "¿Qué vio y qué oyó Lumi cuando notó a Pip?",
+      "¿Cómo supo Lumi lo que Pip quería?",
+      "¿Alguna vez quisiste unirte a un juego pero no estabas seguro o segura? ¿Qué te ayudó?",
+      "¿Cómo podría tu grupo darle la bienvenida a alguien nuevo?"
+    ],
+    "tip": "Respira con tu peque solo si quiere. Pregunta por los sentimientos en lugar de nombrarlos: “Te noto callado. ¿Cómo te sientes?”",
+    "act": {
+      "t": "Prueben una invitación amable",
+      "min": 5,
+      "mat": [
+        "Nada más que ustedes",
+        "Dos juguetes de peluche, si quieren"
+      ],
+      "steps": [
+        "Túrnense para preguntar: “¿Quieres jugar conmigo?” o “¿Quieres compañía?”",
+        "Practiquen las respuestas “Sí”, “Todavía no” y “No, gracias”. Un amigo amable dice: “Está bien. Puedes unirte cuando estés listo”.",
+        "Ofrece opciones: “Podemos mirar primero, jugar juntos o buscar un juego más tranquilo”.",
+        "Si tu peque quiere, hagan como que huelen una flor y soplan una vela de mentiritas. Respiren con comodidad; está bien parar."
+      ],
+      "adapt": "Con niños de 2 años, practiquen solo “Sí” y “Todavía no” con un juguete de peluche. Con niños de 4 y 5 años, actúen el cuento con dos juguetes y dejen que tu peque sea Lumi."
+    },
+    "home": "A la hora de dormir, pregunta: “¿Cómo te sentiste hoy?” y escucha las propias palabras de tu peque. Si tu peque quiere, huelan la flor y soplen juntos la vela de mentiritas."
   },
-  'what-happens-if-we-try': {
-    title: '¿Qué pasa si lo intentamos?',
-    refrain: 'Me pregunto, me pregunto... ¿qué pasa si lo intentamos?',
-    gesture: 'Tócate la barbilla para “me pregunto, me pregunto” y luego abre bien las dos manos para “¿qué pasa si lo intentamos?”.',
-    log: 'Un cubito de hielo desaparece del porche soleado y solo deja un charquito. Zuri convierte el misterio en un experimento con tres cubitos, observa lo que el calor y el frío le hacen al agua, y termina con una pregunta nuevecita.',
-    back: '¡Plinc! Un cubito de hielo desaparece del porche soleado. ¿Se lo comió el sol? ¿Se escapó? Pregúntate cosas con Zuri mientras ella hace preguntas, adivina y lo prueba para descubrirlo.',
-    goals: ['Hacer una pregunta y adivinar qué va a pasar.', 'Observar con atención y comparar: más rápido y más lento, más grande y más chico.', 'Aprender que el calor derrite el hielo y el frío congela el agua.', 'Usar palabras de ciencia: derretir, congelar, caliente, frío, adivinar, observar.'],
-    spreads: [
-      { p: 'Esta es Zuri. Zuri tiene un sombrero para los días de sol, una brújula para encontrar el camino y una cabeza llena de preguntas.', pic: 'Zuri en la Zona de descubrimiento con su brújula en la mano y su sombrero para el sol, con una sonrisa curiosa.', q: ['W', '¿Qué lleva Zuri consigo? ¿Para qué sirve su brújula?'], w: ['brújula', 'una herramienta que te muestra hacia dónde ir'] },
-      { p: 'Era una mañana calurosa y soleada en la Casa Club. Bop llevaba un tazón de hielo para tener agua fresquita. ¡Clin, clin, clin!', pic: 'Bop cruzando el porche soleado con un gran tazón transparente lleno de cubitos de hielo, y el aire caliente ondulando.', q: ['O', '¿Por qué crees que Bop trajo hielo en un día caluroso?'], w: ['hielo', 'agua que se puso tan fría que se volvió dura'], b: 'Digan juntos el sonido: “¡Clin, clin, clin!”' },
-      { p: '¡Plinc! Un cubito de hielo saltó del tazón. Se deslizó por el porche soleado y se detuvo junto a los escalones.', pic: 'Un cubito de hielo deslizándose por el porche soleado hacia los escalones.', q: ['W', '¿Adónde se fue el cubito de hielo?'], w: ['porche', 'un lugar techado afuera de la puerta de entrada'], b: 'Desliza la mano por el piso o la mesa como el cubito de hielo: ¡Plinc!' },
-      { p: 'Más tarde, Zuri fue a buscarlo. ¡Pero el cubito de hielo ya no estaba! Solo había un charquito. “¿Adónde se fue el hielo?”, preguntó Zuri.', pic: 'Zuri agachada sobre un charquito brillante junto a los escalones del porche, con cara de no entender.', q: ['O', '¿Adónde crees que se fue el cubito de hielo?'], w: ['charquito', 'una pocita de agua en el suelo'] },
-      { p: '“¡A lo mejor el sol se lo comió!”, dijo Booker. “¡A lo mejor se escapó!”, dijo Bop. “A lo mejor se calentó demasiado”, dijo Lumi.', pic: 'Booker, Bop y Lumi alrededor del charquito, compartiendo sus ideas chistosas y serias.', q: ['O', '¿Qué idea crees que es la correcta? ¿Tienes otra idea?'], w: ['a lo mejor', 'puede ser verdad, pero todavía no estamos seguros'] },
-      { p: 'Zuri se tocó la barbilla. “Me pregunto, me pregunto... ¿qué pasa si lo intentamos? ¡Vamos a averiguarlo con tres cubitos de hielo!”', pic: 'Zuri tocándose la barbilla con una sonrisa de gran idea.', q: ['C', 'Haz una pausa antes del final: “Me pregunto, me pregunto... ¿qué pasa si lo...” y deja que tu peque diga “¡intentamos!”.'], w: ['preguntarse', 'pensar en algo y querer descubrirlo'], b: 'Tócate la barbilla para “me pregunto, me pregunto” y luego abre bien las dos manos.' },
-      { p: 'Zuri puso un cubito en la ventana soleada. Puso otro en el rincón fresco y con sombra. Y sostuvo otro en su pata calientita. “¡Brrr!”', pic: 'Zuri colocando tres cubitos de hielo en tres lugares: la ventana soleada, el rincón con sombra y su propia pata.', q: ['W', '¿Qué lugar está caliente? ¿Qué lugar está fresco?'], w: ['con sombra', 'donde no da el sol y hace más fresco'], b: 'Tiembla y di “¡Brrr!” como Zuri con el hielo en la pata.' },
-      { p: '“¿Qué cubito se derretirá primero?”, preguntó Zuri. Todos adivinaron. Booker escogió la ventana. Bop escogió la pata. Lumi escogió el rincón con sombra.', pic: 'Los amigos señalando cada uno su respuesta.', q: ['O', '¿Qué cubito crees que se derretirá primero? ¿Por qué?'], w: ['derretirse', 'cuando el hielo se calienta y vuelve a ser agua'] },
-      { p: 'Miraron y esperaron. Plic... plic... plic. “¡Miren!”, dijo Zuri. “¡El hielo de mi pata se está haciendo más y más chiquito!”', pic: 'Zuri con la pata extendida y el cubito de hielo encogiéndose y goteando.', q: ['R', '¿Qué cubito se hizo más chiquito primero?'], w: ['más chiquito', 'menos grande que antes'], b: 'Mueve los dedos hacia abajo como gotitas: “Plic... plic... plic.”' },
-      { p: 'El hielo de la ventana soleada también se estaba haciendo más chiquito. Pero el hielo del rincón con sombra seguía grande y frío.', pic: 'Lado a lado: el hielo de la ventana encogiéndose y el cubito grande del rincón con sombra.', q: ['O', '¿Por qué crees que el hielo del rincón con sombra se quedó grande?'], w: ['frío', 'nada caliente, como la nieve o el congelador'] },
-      { p: '“Observo algo”, dijo Zuri. “El calor derrite el hielo. ¡Y el hielo derretido se vuelve agua!” “Entonces el sol no se lo comió”, se rio Booker.', pic: 'Zuri explicando con una gran sonrisa mientras Booker se ríe.', q: ['R', '¿Qué observó Zuri sobre el calor y el hielo?'], w: ['observar', 'ver algo y pensar en eso'], b: 'Empieza una frase como Zuri: “Observo...” y di una cosa que veas ahora mismo.' },
-      { p: 'Entonces Zuri tuvo una pregunta nuevecita. “¿El agua puede volver a ser hielo? Me pregunto, me pregunto... ¿qué pasa si lo intentamos?” Nana Hoot la ayudó a poner un vaso de agua en el congelador.', pic: 'Nana Hoot ayudando a Zuri a poner un vaso de agua en el congelador.', q: ['O', '¿El agua puede volver a ser hielo? ¿Tú qué crees?'], w: ['congelador', 'una caja muy fría que mantiene las cosas congeladas'] },
-      { p: 'A la mañana siguiente, Zuri y Nana Hoot abrieron el congelador. El agua estaba dura, fría y brillante. “¡Es hielo otra vez!”, celebró Zuri. “¡El frío congela el agua!”', pic: 'Zuri celebrando con un vaso de hielo brillante mientras Nana Hoot sonríe.', q: ['R', '¿Qué le pasó al agua en el congelador?'], w: ['congelarse', 'cuando el agua se pone tan fría que se vuelve hielo'] },
-      { p: '“El calor derrite el hielo. El frío congela el agua”, dijo Zuri. “¡Y las preguntas nos ayudan a aprender!” Luego sonrió. “Mañana me pregunto... ¿qué pasa si congelamos arándanos?”', pic: 'Zuri sonriendo con una idea nueva, con un tazoncito de arándanos cerca.', q: ['D', '¿Tú qué te preguntas? ¿Cómo podríamos probarlo juntos?'], w: ['pregunta', 'algo que preguntas para poder descubrirlo'] }
+  "what-happens-if-we-try": {
+    "title": "Zuri: ¿Qué pasa si lo intentamos?",
+    "sub": "Un cuento sobre el hielo, el agua y preguntarse cosas",
+    "rev": "2026-10-07",
+    "src": "Edición digital revisada (7 de octubre de 2026), texto e ilustraciones",
+    "refrain": "Me pregunto, me pregunto... ¿qué pasa si lo intentamos?",
+    "gesture": "Tócate la barbilla para “me pregunto, me pregunto” y luego abre bien las dos manos para “¿qué pasa si lo intentamos?”.",
+    "log": "Un cubito de hielo desaparece del porche soleado y solo deja un charquito. Zuri y sus amigos adivinan, preparan tres cubitos de hielo más o menos del mismo tamaño y observan con atención: el hielo se derrite cuando se calienta lo suficiente, y el agua se congela cuando se enfría lo suficiente. Sin ganador, solo lo que vieron, y una pregunta nuevecita.",
+    "coverAlt": "Zuri, la tortuga, en un sendero soleado, con su sombrero y sus lentes, mostrando su brújula.",
+    "back": "¡Plinc! Un cubito de hielo desaparece del porche soleado. ¿Se lo comió el sol? ¿Se escapó? Pregúntate cosas con Zuri mientras ella adivina, observa lo que pasa de verdad y hace una pregunta nuevecita.",
+    "goals": [
+      "Adivinar y luego observar con atención para descubrirlo.",
+      "Notar que el hielo se derrite y se vuelve agua cuando se calienta lo suficiente, y que el agua se congela cuando se enfría lo suficiente.",
+      "Comparar lo que ves sin escoger un ganador: contar lo que pasó de verdad.",
+      "Hacer una pregunta nueva y probarla con una persona adulta."
     ],
-    talk: ['¿Qué le pasó al cubito de hielo del porche?', '¿Dónde se derritió más rápido el hielo? ¿Dónde se derritió más lento? ¿Por qué crees que pasó eso?', '¿Cómo hizo Zuri para que el agua volviera a ser hielo?', '¿Tú qué te preguntas? ¿Cómo podríamos probarlo y descubrirlo?'],
-    tip: 'Toda respuesta es una buena respuesta. Celebra que piense (“¡Adivinaste y lo comprobaste!”) más que acertar.',
-    act: { t: 'Detectives del hielo', mat: ['Tres cubitos de hielo, lo más grandes que puedas hacerlos', 'Tres platitos', 'Una toalla de papel o un guante'], steps: ['Pon un plato en un lugar soleado y otro en un lugar con sombra. Tu peque sostiene el tercer cubito en una toalla de papel o con un guante.', 'Pregunta: “¿Cuál se derretirá primero?”. Deja que tu peque señale su respuesta, y tú también adivina.', 'Observen durante 3 minutos. Túrnense para decir lo que notan: gotas, más chiquito, charquito, sigue grande.', 'Digan juntos lo que descubrió Zuri: “El calor derrite el hielo. El frío congela el agua.”', 'Revisen los platos otra vez más tarde y hablen de lo que cambió.'], adapt: 'Usen solo cubitos grandes y no dejen que se metan el hielo a la boca. Con niños de 2 años, comparen solo dos platos: sol y sombra. Con niños de 4 y 5 años, hagan un dibujo de antes y otro de después.' },
-    home: 'Pon un cubito de hielo en un plato en casa y pregúntale a tu peque: “¿Dónde crees que se va a derretir más rápido?”. Luego pruébenlo y descúbranlo juntos.'
+    "spreads": [
+      {
+        "p": "Esta es Zuri. Zuri tiene un sombrero para los días de sol, una brújula para encontrar el camino y una cabeza llena de preguntas.",
+        "pic": "Zuri en un sendero soleado junto a un letrero, con su sombrero y sus lentes, y su brújula en la mano.",
+        "q": [
+          "W",
+          "¿Qué lleva Zuri? ¿Para qué le podría servir cada cosa?"
+        ],
+        "w": [
+          "brújula",
+          "una herramienta que te muestra hacia dónde ir"
+        ]
+      },
+      {
+        "p": "Era una mañana calurosa y soleada en la Casa Club. Bop llevaba un tazón de hielo para tener agua fresquita. ¡Clin, clin, clin!",
+        "pic": "Bop en el porche soleado de la Casa Club, llevando un tazón lleno de cubitos de hielo.",
+        "q": [
+          "W",
+          "¿Qué lleva Bop? ¿Qué sonido hace el hielo?"
+        ],
+        "w": [
+          "hielo",
+          "agua que se puso tan fría que se volvió dura"
+        ],
+        "b": "Sacude un tazón de hielo de mentiritas: ¡clin, clin, clin!"
+      },
+      {
+        "p": "¡Plinc! Un cubito de hielo saltó del tazón. Se deslizó por el porche soleado y se detuvo junto a los escalones.",
+        "pic": "Un cubito de hielo deslizándose por el piso del porche mientras Bop y Zuri lo miran con sorpresa.",
+        "q": [
+          "O",
+          "¿Adónde crees que va a ir el cubito de hielo?"
+        ],
+        "w": [
+          "porche",
+          "un piso con techo, justo afuera de una puerta"
+        ]
+      },
+      {
+        "p": "Más tarde, Zuri fue a buscarlo. ¡El cubito de hielo ya no estaba! Un charquito brillaba junto a los escalones. “¿Adónde se fue el hielo?”, preguntó.",
+        "pic": "Zuri y Bop mirando un charquito en el porche, donde antes estaba el cubito de hielo.",
+        "q": [
+          "W",
+          "¿Qué encontró Zuri donde antes estaba el cubito de hielo?"
+        ],
+        "w": [
+          "charquito",
+          "una pocita de agua"
+        ]
+      },
+      {
+        "p": "“¡A lo mejor el sol se lo comió!”, dijo Booker. “¡A lo mejor se escapó!”, dijo Bop. “A lo mejor se calentó y se derritió”, dijo Lumi.",
+        "pic": "Booker, Bop, Lumi y Zuri reunidos en el porche alrededor del charquito, cada uno con una idea.",
+        "q": [
+          "R",
+          "¿Qué pensó cada amigo que le pasó al hielo?"
+        ],
+        "w": [
+          "se derritió",
+          "pasó de ser hielo duro a ser agua"
+        ]
+      },
+      {
+        "p": "Zuri se quedó pensando. “¿Cómo podríamos descubrirlo?” Los amigos juntaron tres cubitos de hielo más o menos del mismo tamaño. “Me pregunto, me pregunto... ¿qué pasa si lo intentamos?”",
+        "pic": "Los cuatro amigos en una mesa con tres cubitos de hielo más o menos del mismo tamaño, cada uno en su propio platito.",
+        "q": [
+          "C",
+          "“Me pregunto, me pregunto... ¿qué pasa si lo...” Deja que tu peque diga “¿intentamos?”."
+        ],
+        "w": [
+          "del mismo tamaño",
+          "igual de grandes"
+        ],
+        "b": "Tócate la barbilla para “me pregunto, me pregunto” y luego abre bien las manos."
+      },
+      {
+        "p": "Zuri puso un cubito junto a la ventana soleada y otro en el rincón con sombra. “Vamos a probar un tercero en mi pata calientita”, dijo. “Observémoslos juntos.”",
+        "pic": "Zuri señalando un cubito de hielo en un plato junto a la ventana soleada, con un segundo plato en el rincón con sombra.",
+        "q": [
+          "W",
+          "¿Dónde puso Zuri los cubitos de hielo? ¿Qué lugar tiene sol? ¿Cuál tiene sombra?"
+        ],
+        "w": [
+          "con sombra",
+          "donde no da el sol, un poquito más fresco"
+        ]
+      },
+      {
+        "p": "“¿Cuál creen que se va a derretir más rápido?”, preguntó Zuri. Cada amigo adivinó. “Ahora vamos a observar qué pasa”, dijo.",
+        "pic": "Zuri y sus amigos en una mesa con dos platos de hielo, y cada amigo adivinando.",
+        "q": [
+          "O",
+          "¿Qué adivinas que le va a pasar a cada cubito de hielo? ¿Por qué?"
+        ],
+        "w": [
+          "adivinar",
+          "decir lo que crees que va a pasar, antes de descubrirlo"
+        ]
+      },
+      {
+        "p": "Zuri sostuvo el tercer cubito un ratito sobre un tazón. “¡Brrr!” Plic… plic… plic. “¡Miren! Se está haciendo más chiquito. ¡Tengo agua en la pata!”",
+        "pic": "Zuri sosteniendo un cubito de hielo pequeño en la pata mientras sus amigos lo ven gotear.",
+        "q": [
+          "W",
+          "¿Qué le pasó al hielo en la pata calientita de Zuri?"
+        ],
+        "w": [
+          "gota",
+          "un poquito de agua que cae"
+        ],
+        "b": "Dilo despacio, moviendo los dedos como gotitas: plic... plic... plic."
+      },
+      {
+        "p": "El cubito de la ventana soleada también se estaba haciendo más chiquito. El cubito de la sombra había cambiado menos. Miraron con atención. “En lugares distintos, el hielo se puede calentar de forma distinta”, dijo Zuri.",
+        "pic": "Los amigos inclinándose para mirar con atención los cubitos de hielo en sus platos.",
+        "q": [
+          "R",
+          "¿Qué cubito había cambiado menos? ¿Dónde estaba?"
+        ],
+        "w": [
+          "mirar con atención",
+          "mirar con cuidado los detallitos"
+        ]
+      },
+      {
+        "p": "“Cuando el hielo se calienta lo suficiente, se derrite y se vuelve agua”, dijo Zuri. “¡Entonces el hielo no se escapó!”, se rio Bop. “¡Cambió!”",
+        "pic": "Zuri y Booker frente a una tabla con dibujos del sol, un copo de nieve, hielo y agua.",
+        "q": [
+          "R",
+          "¿Se escapó el hielo? ¿Qué le pasó?"
+        ],
+        "w": [
+          "cambió",
+          "se volvió diferente"
+        ]
+      },
+      {
+        "p": "“¿El agua puede volver a ser hielo?”, preguntó Zuri. “Me pregunto, me pregunto... ¿qué pasa si lo intentamos?” Nana Hoot la ayudó a poner un vaso de agua en el congelador.",
+        "pic": "Zuri mirando a Nana Hoot poner un vaso de agua en el congelador.",
+        "q": [
+          "O",
+          "¿Qué crees que le va a pasar al agua en el congelador?"
+        ],
+        "w": [
+          "congelador",
+          "una caja muy fría que puede convertir el agua en hielo"
+        ]
+      },
+      {
+        "p": "A la mañana siguiente, revisaron el vaso. ¡Hielo duro y frío! “El congelador enfrió el agua lo suficiente para que se congelara”, dijo Nana Hoot. “¡Es hielo otra vez!”, celebró Zuri.",
+        "pic": "Zuri y Nana Hoot frente al congelador abierto a la mañana siguiente, donde el vaso de agua se volvió hielo.",
+        "q": [
+          "R",
+          "¿Qué le pasó al agua durante la noche?"
+        ],
+        "w": [
+          "congelarse",
+          "ponerse tan frío que el agua se vuelve dura, se vuelve hielo"
+        ]
+      },
+      {
+        "p": "“El hielo se puede derretir. El agua se puede congelar. ¡Y las preguntas nos ayudan a aprender!”, dijo Zuri. Luego sonrió. “Mañana me pregunto… ¿qué pasa si congelamos arándanos?”",
+        "pic": "Los amigos alrededor de una mesita con un tazón de arándanos, listos para una pregunta nueva.",
+        "q": [
+          "D",
+          "¿Qué te gustaría preguntarte y probar con una persona adulta?"
+        ],
+        "w": [
+          "pregunta",
+          "algo que preguntas para descubrirlo"
+        ]
+      }
+    ],
+    "guide": [
+      {
+        "t": "Hablemos del cuento",
+        "blocks": [
+          [
+            "Observa",
+            "¿Qué encontró Zuri donde antes estaba el cubito de hielo que se cayó?"
+          ],
+          [
+            "Recuerda",
+            "¿Qué cambió cuando el hielo se derritió? ¿Qué cambió en el congelador?"
+          ],
+          [
+            "Piensa como Zuri",
+            "¿Los amigos solo adivinaron o buscaron pruebas?"
+          ],
+          [
+            "Sigue preguntándote cosas",
+            "¿Qué te gustaría probar con una persona adulta?"
+          ]
+        ]
+      },
+      {
+        "t": "Investiguen el hielo",
+        "blocks": [
+          [
+            "Prepárenlo juntos",
+            "Con una persona adulta, escojan tres cubitos de hielo parecidos. Pongan uno en un plato junto a una ventana soleada y otro en un plato a la sombra. Empiecen al mismo tiempo."
+          ],
+          [
+            "Prueben el tercer cubito",
+            "Sostenlo un ratito en la mano sin guante sobre un tazón. Para si se siente incómodo; ponlo en el tazón y fíjate en el cambio. No lo sigas sosteniendo hasta que se derrita por completo."
+          ],
+          [
+            "Observen y comparen",
+            "Primero adivinen. Revisen a los mismos tiempos, por ejemplo cada dos minutos. Describan o dibujen los cambios. Sus resultados pueden ser distintos de los de Zuri."
+          ],
+          [
+            "Hagan otra pregunta",
+            "¿Qué cubito cambió más? ¿Qué siguió igual? ¿Qué podríamos probar después? Nunca prueben el agua del experimento."
+          ]
+        ]
+      },
+      {
+        "t": "Para familias y educadores",
+        "blocks": [
+          [
+            "Sigan las pruebas",
+            "Este cuento compara cambios observados; no declara un ganador. Las condiciones afectan cómo se derrite el hielo. Dejen que los niños cuenten lo que de verdad ven."
+          ],
+          [
+            "Que la comparación tenga sentido",
+            "Usen cubitos de tamaño parecido y empiecen al mismo tiempo. Mantengan parecidos los dos platos. Si el cubito de la mano pasa al tazón, anoten ese cambio."
+          ],
+          [
+            "Expliquen con claridad",
+            "El hielo se derrite cuando recibe suficiente calor. El agua se congela cuando se enfría lo suficiente. Un cuarto fresco, por sí solo, no necesariamente congela el agua."
+          ],
+          [
+            "Amplíenlo con una persona adulta",
+            "Congelen un poquito de agua en un vaso apto para el congelador, dejando espacio para que se expanda. Revísenlo juntos más tarde. Hagan lugar para preguntas nuevas."
+          ]
+        ]
+      }
+    ],
+    "talk": [
+      "¿Qué encontró Zuri donde antes estaba el cubito de hielo que se cayó?",
+      "¿Qué cambió cuando el hielo se derritió? ¿Qué cambió en el congelador?",
+      "¿Los amigos solo adivinaron o buscaron pruebas?",
+      "¿Qué te gustaría probar con una persona adulta?"
+    ],
+    "tip": "Toda respuesta es una buena respuesta. Celebra que mire y describa (“¡Notaste que se hizo más chiquito!”) más que acertar. Sus resultados pueden ser distintos de los de Zuri, y eso está bien.",
+    "act": {
+      "t": "Investigación del hielo",
+      "min": 10,
+      "mat": [
+        "Tres cubitos de hielo más o menos del mismo tamaño",
+        "Dos platitos y un tazón",
+        "Una ventana soleada y un lugar con sombra"
+      ],
+      "steps": [
+        "Con una persona adulta, pongan un cubito de hielo en un plato junto a una ventana soleada y otro en un plato a la sombra. Empiecen al mismo tiempo.",
+        "Primero adivinen: ¿qué le va a pasar a cada cubito?",
+        "Sostén el tercer cubito un ratito en la mano sin guante sobre un tazón. Para si se siente incómodo y ponlo en el tazón.",
+        "Revisen todos los cubitos a los mismos tiempos, por ejemplo cada dos minutos. Describan o dibujen lo que ven.",
+        "Pregunten: ¿Qué cambió? ¿Qué siguió igual? ¿Qué podríamos probar después? Nunca prueben el agua del experimento."
+      ],
+      "adapt": "Con niños de 2 años, usen un solo cubito en un tazón y hablen de frío, mojado y más chiquito. Con niños de 4 y 5 años, dibujen los cubitos en cada revisión y comparen los dibujos."
+    },
+    "home": "Pon un cubito de hielo en un plato en casa y pregúntale a tu peque: “¿Qué crees que va a pasar?”. Luego observen juntos y hablen de lo que ven."
   },
-  'clean-up-team': {
-    title: '¡A recoger, equipo!',
-    src: 'manuscrito v1.0 (octubre de 2026), edición para el sitio web: las frases de Bop se actualizaron a su papel de MOVERSE',
-    refrain: 'Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!',
-    gesture: 'Pisa fuerte dos veces para “¡pum, pum!” y luego aplaude dos veces para “¡plas, plas!”.',
-    log: 'Después de una gran mañana de juego, Bop se encuentra con el desorden más grande de la Casa Club. Un juguete a la vez y una canción alegre convierten un trabajo demasiado grande en un trabajo que puede hacer él solito, y luego les presta su trompa a sus amigos.',
-    back: 'A Bop le encanta moverse y jugar en GRANDE. Pero cuando suena la campanita de recoger, Bop ve el desorden más grande del mundo. Pisa fuerte y aplaude con Bop mientras descubre que, un juguete a la vez, los trabajos grandes se terminan.',
-    goals: ['Seguir una rutina para recoger: cada juguete tiene su casa.', 'Emparejar los juguetes con los dibujos de las etiquetas en cajas y estantes (clasificar).', 'Dividir un trabajo grande en pasos pequeños y seguir intentando después de un error.', 'Hacerlo yo solito o solita y luego ayudar a un amigo; lavarse las manos con jabón después de jugar con cosas que ensucian.'],
-    spreads: [
-      { p: 'Este es Bop. Bop es grande. Bop es fuerte. A Bop le encanta moverse. ¡Y a Bop le ENCANTA jugar!', pic: 'Bop a medio pisotón en la Zona de movimiento, con los brazos arriba y una enorme sonrisa de alegría.', q: ['W', '¿Qué le encanta hacer a Bop? ¡Muéstrame cómo pisa fuerte Bop!'], w: ['fuerte', 'que puede levantar y empujar cosas grandes y pesadas'], b: 'Pónganse de pie y den juntos un gran pisotón de Bop.' },
-      { p: 'Bop construyó una torre de bloques tan alta como un árbol. Bop hizo correr los carritos. ¡Brum, brum! Bop pintó un gran sol anaranjado.', pic: 'Tres momentos felices de juego: Bop junto a una torre alta de bloques, haciendo correr carritos y pintando un gran sol anaranjado en un caballete.', q: ['W', 'Señala la torre. ¿Dónde están los carritos? ¿Qué pintó Bop?'], w: ['torre', 'algo construido muy, muy alto'], b: 'Mueve las manos como carritos: “¡Brum, brum!”' },
-      { p: 'Bop jugó y jugó. Bloques por aquí. Carritos por allá. ¡Libros, pinceles y sombreros de disfraz por todas partes!', pic: 'El cuarto ahora lleno de juguetes regados, con Bop dando vueltas feliz en medio con un sombrero de disfraz.', q: ['O', '¿Qué ves en el piso? ¿Con qué jugarías primero?'], w: ['por todas partes', 'en cada lugar, por todos lados'] },
-      { p: '¡Tilín, tilín! Nana Hoot tocó la campanita de recoger. “¡Hora de recoger, amigos!” Bop miró a su alrededor. Ay, ay, ay. Qué desorden tan, tan grande.', pic: 'Nana Hoot tocando una campanita mientras Bop se queda congelado, con los ojos muy abiertos, mirando todo el desorden a su alrededor.', q: ['D', '¿Qué te avisa que es hora de recoger en casa o en la escuela?'], w: ['campanita', 'un sonidito que nos avisa que es hora'], b: 'Toquen juntos una campanita de mentiritas: “¡Tilín, tilín!”' },
-      { p: '“¡Es demasiado grande!”, dijo Bop. Bajó las orejas. Bajó la trompa. Se sentó con un ¡plof! grande y triste. “No puedo recoger todo esto.”', pic: 'Bop sentado en medio del desorden, con las orejas y la trompa caídas, sintiéndose abrumado.', q: ['O', '¿Cómo crees que se siente Bop? ¿Cómo te das cuenta?'], w: ['bajar', 'dejar caer hacia abajo, como una flor cansada'], b: 'Deja caer los brazos bien abajo como la trompa de Bop, y luego siéntate con un ¡plof! suavecito.' },
-      { p: 'Entonces Bop tuvo una idea. “No puedo hacerlo todo de una vez. Pero puedo hacer una cosa.” Y levantó un bloque.', pic: 'Bop sosteniendo un solo bloque con la trompa, con los ojos brillantes por una idea nueva.', q: ['R', '¿Qué idea tuvo Bop cuando el trabajo se sentía demasiado grande?'], w: ['idea', 'un pensamiento nuevo sobre qué hacer'], tip: 'Esta es la gran idea del libro. Díganla juntos: “Puedo hacer una cosa.”' },
-      { p: 'Cada juguete tiene su casa. Los bloques tienen una caja con el dibujo de un bloque. Bop cantó: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” ¡Clonc, clonc, clonc!', pic: 'Bop echando bloques en una gran caja azul con la etiqueta de un bloque, cantando y pisando fuerte.', q: ['C', 'Haz una pausa antes del final: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas...” y deja que tu peque diga “¡plas!”.'], w: ['casa', 'el lugar donde va algo'], b: '¡Pum, pum! ¡Plas, plas! Canten la frase juntos.' },
-      { p: 'Después siguieron los libros. El estante tenía el dibujo de un libro. “Los libros van al estante”, cantó Bop. “¡Yo solito, adelante!”', pic: 'Bop llevando un montón de libros en los brazos hacia un estante bajito marcado con el dibujo de un libro.', q: ['W', '¿Cómo supo Bop dónde van los libros?'], w: ['estante', 'una tabla en la pared o en un librero para guardar cosas'] },
-      { p: '¡Uy! Los libros se resbalaron. ¡Plof, plof, plof! Bop no se rindió. Lo intentó otra vez, un libro a la vez. Recógelo, guárdalo.', pic: 'Los libros resbalándose de los brazos de Bop; después, Bop poniendo con calma un libro a la vez en el estante.', q: ['R', '¿Qué les pasó a los libros? ¿Qué hizo Bop después?'], w: ['rendirse', 'dejar de intentar'], tip: 'Celebra el intento, no el cuarto ordenado: “¡Bop lo intentó otra vez!”' },
-      { p: 'Los carritos entraron a la canasta: ¡brum! Los sombreros se colgaron en sus ganchos. “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”', pic: 'Bop metiendo carritos a toda velocidad en una canasta y colgando sombreros de disfraz en ganchos, bailando mientras trabaja.', q: ['W', '¿Dónde van los carritos? ¿Dónde van los sombreros?'], w: ['ganchos', 'clavijas dobladas en la pared para colgar cosas'], b: 'Bailen en su lugar mientras cantan: “¡Recógelo, guárdalo!”' },
-      { p: 'Bop llevó los pinceles al lavabo. ¡Chap, chap! Luego se lavó las patas con jabón, y también la puntita de la trompa.', pic: 'Bop en un lavabo pequeño con burbujas de jabón en las patas y en la puntita de la trompa, riéndose.', q: ['D', '¿Cuándo te lavas las manos con jabón?'], w: ['jabón', 'lo que usamos con agua para quitar los gérmenes y la pintura'], b: 'Frota las manos como si te las lavaras con jabón: “¡Chap, chap!”' },
-      { p: 'Entonces Bop vio a Zuri con una montaña de piezas de rompecabezas. “¿Necesitas una mano?”, preguntó Bop. “¡Yo tengo una trompa!”', pic: 'Bop ofreciéndole la trompa a Zuri, que está sentada junto a un gran montón de piezas de rompecabezas y sonríe aliviada.', q: ['O', '¿Por qué crees que Bop quiso ayudar a Zuri?'], w: ['montaña', 'un montón muy, muy grande (o un cerro gigante)'] },
-      { p: 'Booker, Lumi, Zuri y Bop cantaron juntos. Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas! Muy pronto toda la Casa Club estaba limpia.', pic: 'Los cuatro amigos aplaudiendo y pisando fuerte en círculo mientras los últimos juguetes llegan a sus casas.', q: ['C', 'Cántenlo juntos y deja que tu peque termine: “Recógelo...” “¡guárdalo!”'], w: ['juntos', 'todos al mismo tiempo, como un equipo'], b: '¡Pum, pum! ¡Plas, plas! Hagan un círculo con todos los que estén en el cuarto.' },
-      { p: 'Bop miró a su alrededor. Cada juguete estaba en su casa. “Lo hice yo solito”, dijo Bop. “¡Y ayudé a mis amigos!” ¿Listos? ¡Bop y a moverse!', pic: 'Bop de pie, muy orgulloso, en el cuarto ordenado, con las patas en la cintura, mientras sus amigos y Nana Hoot lo celebran.', q: ['D', '¿Qué puedes recoger tú solito o solita? ¿A quién puedes ayudar?'], w: ['yo solito', 'yo, sin ayuda'] }
+  "clean-up-team": {
+    "title": "El equipo de limpieza de Bop",
+    "sub": "Un cuento sobre pasos pequeños y ayudar juntos",
+    "rev": "2026-10-07",
+    "src": "Edición digital revisada (7 de octubre de 2026), texto e ilustraciones; edición para el sitio web: la página 2 dice “A Bop le encanta moverse” (su papel de MOVERSE) en lugar de la frase retirada sobre su papel",
+    "refrain": "Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!",
+    "gesture": "Pisa fuerte dos veces para “¡pum, pum!” y luego aplaude dos veces para “¡plas, plas!”. Primero deja el juguete.",
+    "log": "Después de una gran mañana de juego, Bop ve el desorden más grande de la Casa Club. Empieza con una cosa pequeña, lo intenta otra vez cuando los libros se resbalan, le echa una mano a Zuri (y una trompa), y todo el equipo de limpieza termina el trabajo junto.",
+    "coverAlt": "Bop, el elefante, en el cuarto de juegos de la Casa Club, sonriendo y mostrando un bloque rojo.",
+    "back": "A Bop le encanta jugar en GRANDE. Pero cuando suena la campanita de recoger, Bop ve el desorden más grande del mundo. Pisa fuerte y aplaude, ¡pum, pum, plas, plas!, mientras Bop empieza con poquito, lo intenta otra vez y termina el trabajo con su equipo de limpieza.",
+    "goals": [
+      "Dividir un trabajo grande en pasos pequeños: empezar con una cosa.",
+      "Usar etiquetas con dibujos para guardar cada juguete en su casa.",
+      "Intentarlo otra vez cuando algo sale mal.",
+      "Ofrecer ayuda y trabajar juntos como equipo."
     ],
-    talk: ['¿Cómo se sintió Bop cuando vio el gran desorden? ¿Qué hicieron sus orejas y su trompa?', '¿Qué idea tuvo Bop cuando el trabajo se sentía demasiado grande?', '¿Cómo sabía Bop dónde va cada juguete?', '¿Qué pasó cuando los libros se resbalaron? ¿Cómo puedes ayudar a un amigo a recoger?'],
-    tip: 'Canten la frase cada vez que aparezca, con pisotones y aplausos. A la hora de recoger de verdad, señala dónde vive cada juguete, como hace Bop.',
-    act: { t: 'Un juguete a la vez', mat: ['Los juguetes que estén fuera', 'Dos o tres cajas, canastas o lugares en un estante'], steps: ['Denle una “casa” a cada tipo de juguete: una caja para los bloques, un lugar en el estante para los libros, una canasta para los carritos. Si quieren, péguenle un dibujito a cada una.', 'Cuando el desorden se vea demasiado grande, digan la idea de Bop: “No puedo hacerlo todo de una vez. Pero puedo hacer una cosa.”', 'Recojan un juguete cada uno, llévenlo a su casa y digan: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”', 'Sigan, un juguete a la vez, hasta que cada juguete esté en su casa. Luego pregunta: “¿Qué hiciste tú solito o solita? ¿A quién ayudaste?”'], adapt: 'Con los más pequeños, usen una sola caja y acompáñalos con cada juguete. Con niños de 4 y 5 años, déjalos ser el “revisor de etiquetas” que se asegura de que cada juguete esté en su casa.' },
-    home: 'Denles una “casa” a los juguetes en casa (una caja o un lugar en el estante) y canten “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” a la hora de recoger.'
+    "spreads": [
+      {
+        "p": "Este es Bop. Bop es grande. Bop es fuerte. A Bop le encanta moverse. ¡Y a Bop le ENCANTA jugar!",
+        "pic": "Bop sentado en la alfombra del cuarto de juegos, apilando bloques de colores junto a unos carritos de juguete.",
+        "q": [
+          "W",
+          "¿Qué le encanta hacer a Bop? ¿A qué te encanta jugar a ti?"
+        ],
+        "w": [
+          "jugar",
+          "divertirse con juguetes, juegos y amigos"
+        ],
+        "b": "Pisa fuerte en tu lugar como Bop: ¡pum, pum!"
+      },
+      {
+        "p": "Bop construyó una torre de bloques tan alta como un árbol. Hizo correr los carritos. ¡Brum, brum! Luego pintó un gran sol anaranjado.",
+        "pic": "Bop junto a una torre alta de bloques, con carritos de juguete sobre una alfombra con carreteras y una pintura de un sol anaranjado sonriente.",
+        "q": [
+          "R",
+          "¿Qué construyó Bop? ¿Qué pintó?"
+        ],
+        "w": [
+          "torre",
+          "algo construido muy alto"
+        ],
+        "b": "Haz correr un carrito de mentiritas con la mano: ¡brum, brum!"
+      },
+      {
+        "p": "Bop jugó y jugó. Bloques por aquí. Carritos por allá. ¡Libros, pinceles y sombreros de disfraz por todas partes!",
+        "pic": "Bop moviendo la trompa sobre un cuarto de juegos lleno de juguetes: bloques, carritos, libros, pinceles y sombreros de disfraz por todas partes.",
+        "q": [
+          "W",
+          "¿Qué juguetes encuentras por todo el piso?"
+        ],
+        "w": [
+          "por todas partes",
+          "en cada lugar, por todos lados"
+        ]
+      },
+      {
+        "p": "¡Tilín, tilín! Nana Hoot tocó la campanita de recoger. “¡Hora de recoger, amigos!” Bop miró a su alrededor. Ay, ay, ay. Qué desorden tan, tan grande.",
+        "pic": "Nana Hoot tocando la campanita de recoger mientras Bop mira a su alrededor el gran desorden.",
+        "q": [
+          "O",
+          "¿Qué crees que va a hacer Bop ahora?"
+        ],
+        "w": [
+          "campanita",
+          "un sonido de campana que nos avisa que es hora de algo"
+        ]
+      },
+      {
+        "p": "“¡Es demasiado grande!”, dijo Bop. Bajó las orejas. Bajó la trompa. Se sentó con un ¡plof! triste. “¿Por dónde empiezo?”",
+        "pic": "Bop sentado en el piso en medio del desorden, con las orejas y la trompa caídas.",
+        "q": [
+          "O",
+          "¿Cómo se siente Bop? ¿Qué hicieron sus orejas y su trompa?"
+        ],
+        "w": [
+          "bajar",
+          "dejar caer hacia abajo"
+        ],
+        "b": "Haz un ¡plof! triste y luego siéntate bien derechito otra vez."
+      },
+      {
+        "p": "Entonces Bop tuvo una idea. “Puedo empezar con una cosa.” Levantó un bloque. ¡Un pequeño comienzo!",
+        "pic": "Bop en el piso entre los juguetes, señalando hacia arriba con una idea brillante y una sonrisa.",
+        "q": [
+          "R",
+          "¿Qué idea tuvo Bop cuando el desorden se sentía demasiado grande?"
+        ],
+        "w": [
+          "comienzo",
+          "la primerísima parte de un trabajo"
+        ]
+      },
+      {
+        "p": "Cada juguete tenía su casa. La caja de los bloques tenía el dibujo de un bloque. Bop cantó: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” ¡Clonc, clonc, clonc!",
+        "pic": "Bop guardando bloques uno por uno en una caja que tiene el dibujo de un bloque al frente.",
+        "q": [
+          "C",
+          "Cántenlo juntos: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”"
+        ],
+        "w": [
+          "casa",
+          "el lugar donde va algo"
+        ],
+        "b": "Canten la canción de recoger con pisotones y aplausos. Deja el juguete antes de aplaudir."
+      },
+      {
+        "p": "Después siguieron los libros. El estante tenía el dibujo de un libro. “Los libros van a su casa en el estante”, cantó Bop. “Uno a la vez. ¡Puedo intentarlo!”",
+        "pic": "Bop poniendo un libro en el estante que tiene el dibujo de un libro.",
+        "q": [
+          "W",
+          "¿Cómo supo Bop dónde van los libros?"
+        ],
+        "w": [
+          "estante",
+          "una tabla plana donde guardamos cosas"
+        ]
+      },
+      {
+        "p": "¡Uy! Los libros se resbalaron. ¡Plof, plof, plof! Bop lo intentó otra vez, un libro a la vez. Recógelo, guárdalo.",
+        "pic": "Bop agachándose para recoger los libros que se resbalaron del estante.",
+        "q": [
+          "O",
+          "Los libros se resbalaron. ¿Qué hizo Bop?"
+        ],
+        "w": [
+          "uy",
+          "una palabra que decimos cuando algo sale mal sin querer"
+        ]
+      },
+      {
+        "p": "Los carritos entraron a la canasta: ¡brum! Los sombreros se colgaron en sus ganchos. “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”",
+        "pic": "Bop metiendo carritos de juguete en una canasta, con los sombreros de disfraz colgados en sus ganchos detrás de él.",
+        "q": [
+          "W",
+          "¿Dónde van los carritos? ¿Dónde van los sombreros?"
+        ],
+        "w": [
+          "ganchos",
+          "clavijas pequeñas en la pared para colgar cosas"
+        ]
+      },
+      {
+        "p": "Bop llevó los pinceles al lavabo. ¡Chap, chap! Luego se lavó las patas con agua y jabón, y también la puntita de la trompa.",
+        "pic": "Bop en el lavabo, lavándose las patas y lavando los pinceles con jabón, salpicando agua.",
+        "q": [
+          "D",
+          "¿Cuándo te lavas las manos con agua y jabón?"
+        ],
+        "w": [
+          "jabón",
+          "algo que hace burbujas y ayuda a quitar la suciedad"
+        ],
+        "b": "Haz como que te lavas las manos: por delante, por detrás y entre los dedos."
+      },
+      {
+        "p": "Zuri tenía una montaña de piezas de rompecabezas. “¿Quieres una mano?”, preguntó Bop. “¡Yo tengo una trompa!” Zuri sonrió. “¡Sí, por favor!”",
+        "pic": "Bop y Zuri en una mesa llena de piezas de rompecabezas, con Bop ofreciendo una pieza para ayudar.",
+        "q": [
+          "R",
+          "¿Qué le preguntó Bop a Zuri? ¿Qué dijo Zuri?"
+        ],
+        "w": [
+          "una mano",
+          "un poco de ayuda"
+        ]
+      },
+      {
+        "p": "Booker, Lumi, Zuri y Bop ordenaron juntos. Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas! El equipo de limpieza estaba manos a la obra.",
+        "pic": "Booker, Lumi, Zuri y Bop ordenando juntos, guardando juguetes en una canasta y cantando.",
+        "q": [
+          "C",
+          "Canta con el equipo de limpieza: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”"
+        ],
+        "w": [
+          "equipo",
+          "amigos que trabajan juntos en un mismo trabajo"
+        ],
+        "b": "¡Pum, pum! ¡Plas, plas! con todo el equipo."
+      },
+      {
+        "p": "Bop miró a su alrededor. Cada juguete estaba en su casa. “Empecé con un juguete”, dijo. “¡Terminamos juntos!” Pasos pequeños. Amigos que ayudan. ¡Un trabajo bien hecho!",
+        "pic": "Bop, Booker, Lumi y Zuri de pie juntos en el cuarto de juegos ordenado, con cada juguete en su casa.",
+        "q": [
+          "D",
+          "¿Quién ayuda a recoger en nuestra casa? ¿Cómo podríamos ser un equipo?"
+        ],
+        "w": [
+          "juntos",
+          "unos con otros, al mismo tiempo"
+        ]
+      }
+    ],
+    "guide": [
+      {
+        "t": "Hablemos del cuento",
+        "blocks": [
+          [
+            "Observa",
+            "¿Cómo se sintió Bop cuando vio todo el desorden?"
+          ],
+          [
+            "Recuerda",
+            "¿Cuál fue la primera cosa pequeña que hizo Bop?"
+          ],
+          [
+            "Piensen juntos",
+            "¿Qué intentó Bop cuando se cayeron los libros?"
+          ],
+          [
+            "Celebren al equipo",
+            "¿Quién ayudó a terminar el trabajo? ¿Cómo ayudaron?"
+          ]
+        ]
+      },
+      {
+        "t": "Denle una casa a cada juguete",
+        "blocks": [
+          [
+            "Escojan un trabajo pequeño",
+            "Escojan un tipo de juguete para guardar. Empiecen con una sola cosa; agreguen más cuando tu peque esté listo o lista."
+          ],
+          [
+            "Hagan una etiqueta con dibujo",
+            "Dibujen o tómenles una foto a los juguetes que van en cada canasta. Pongan la etiqueta donde tu peque la pueda ver."
+          ],
+          [
+            "Canten mientras trabajan",
+            "Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas! Dejen el juguete antes de aplaudir o pisar fuerte."
+          ],
+          [
+            "Ofrezcan ayuda",
+            "Prueben: “Tú guardaste los bloques. Yo te ayudo con los libros”. Pedir ayuda es parte de aprender."
+          ]
+        ]
+      },
+      {
+        "t": "Para familias y educadores",
+        "blocks": [
+          [
+            "Dividan un trabajo grande en pasos pequeños",
+            "En lugar de “Recoge todo”, prueben: “Vamos a guardar estos tres carritos en su canasta”. Pongan las casas de los juguetes donde se alcancen fácilmente."
+          ],
+          [
+            "Creen una rutina compartida",
+            "Avisen un poco antes de la hora de recoger. Usen la misma canción o campanita, y luego únanse cuando los niños necesiten apoyo."
+          ],
+          [
+            "Elogien el esfuerzo",
+            "Digan: “Encontraste la canasta de los carritos” o “Ayudaste a Zuri”. La meta es un hábito útil, no un cuarto perfecto."
+          ],
+          [
+            "Que el trabajo en equipo se vea",
+            "Bop empieza un trabajo y ayuda a una amiga. Todos aportan. La independencia y la cooperación pueden crecer juntas."
+          ]
+        ]
+      }
+    ],
+    "talk": [
+      "¿Cómo se sintió Bop cuando vio todo el desorden?",
+      "¿Cuál fue la primera cosa pequeña que hizo Bop?",
+      "¿Qué intentó Bop cuando se cayeron los libros?",
+      "¿Quién ayudó a terminar el trabajo? ¿Cómo ayudaron?"
+    ],
+    "tip": "Canten la frase cada vez que aparezca, y dejen el juguete antes de pisar fuerte o aplaudir. A la hora de recoger de verdad, empiecen juntos con un trabajo pequeño.",
+    "act": {
+      "t": "Denle una casa a cada juguete",
+      "min": 10,
+      "mat": [
+        "Los juguetes que estén fuera",
+        "Dos o tres cajas, canastas o lugares en un estante",
+        "Papel y un crayón, o la cámara de un teléfono"
+      ],
+      "steps": [
+        "Escojan un tipo de juguete para guardar. Empiecen con una sola cosa; agreguen más cuando tu peque esté listo o lista.",
+        "Dibujen o tómenles una foto a los juguetes que van en cada canasta, y pongan la etiqueta con el dibujo donde tu peque la pueda ver.",
+        "Canten mientras trabajan: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” Dejen el juguete antes de aplaudir o pisar fuerte.",
+        "Ofrece ayuda: “Tú guardaste los bloques. Yo te ayudo con los libros”. Pedir ayuda es parte de aprender."
+      ],
+      "adapt": "Con niños de 2 años, dales un juguete a la vez y señala su casa. Con niños de 4 y 5 años, deja que tu peque haga las etiquetas con dibujos y dirija la canción."
+    },
+    "home": "Denles una “casa” a los juguetes en casa con una etiqueta con dibujo, y canten “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” a la hora de recoger."
   },
   'the-rainbow-picnic': {
     title: 'El pícnic del arcoíris',

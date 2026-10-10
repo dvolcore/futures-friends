@@ -28,10 +28,11 @@ function merge(base, over) {
   return base;
 }
 const LANG = () => (window.FFi18n && window.FFi18n.lang) || 'en';
-// The four friends' books are the revised editions of 2026-10-07. Their Spanish drafts (family-library-es-books.js) translate the
-// PREVIOUS text page by page, so they are not merged over the revised English until each is re-translated: those books stay in
-// English (with a note in the reader) instead of showing old wording on the new pages. The Rainbow Picnic keeps its Spanish.
-const esBooks = es => { if (!es || !es.books) return es && es.books; const o = {}; for (const k of Object.keys(es.books)) { const b = F.BOOKS.find(x => x.id === k); if (!(b && b.rev)) o[k] = es.books[k]; } return o; };
+// The four friends' books are the revised editions of 2026-10-07. A Spanish draft (family-library-es-books.js) is merged over a
+// revised book only when it carries the same rev (it translates that edition); a draft of an older edition is left out, so the book
+// stays in English (with a note in the reader) instead of showing old wording on the new pages. The Rainbow Picnic has no rev.
+const esBooks = es => { if (!es || !es.books) return es && es.books; const o = {}; for (const k of Object.keys(es.books)) { const b = F.BOOKS.find(x => x.id === k); if (!(b && b.rev) || es.books[k].rev === b.rev) o[k] = es.books[k]; } return o; };
+const esReady = b => { const x = window.FFFamilyES && window.FFFamilyES.books && window.FFFamilyES.books[b.id]; return !b.rev || !!(x && x.rev === b.rev); };
 function localize() {
   const es = LANG() === 'es' && window.FFFamilyES ? window.FFFamilyES : {};
   BOOKS = merge(F.BOOKS, esBooks(es)); ACTS = merge(F.ACTS, es.acts); BANDS = merge(F.BANDS, es.bands); FRIENDS = merge(F.FRIENDS, es.friends);
@@ -286,7 +287,7 @@ function reader(b) {
      <button type="button" class="btn navy" data-fl="next" ${R.page === total - 1 ? 'disabled' : ''}>Next &rarr;</button></div>
     <p class="fl-voice" id="flVoice" aria-live="polite"></p>
     <div class="fl-dots" aria-hidden="true">${Array.from({ length: total }, (_, i) => `<i class="${i === R.page ? 'on' : ''}"></i>`).join('')}</div>
-    <p class="fl-note">Use the arrow keys or swipe to turn pages. Text from <i>${E(b.title)}</i>, Futures Friends Storybook Series, ${E(b.src || 'manuscript v1.0')}. &copy; 2026 Futures Friends.${b.rev && LANG() === 'es' ? ' <span lang="es">Este libro es la edición revisada de octubre de 2026; su versión en español está en preparación.</span>' : ''} Questions written for families using the dialogic-reading method (${ext('dialogic', 'Reading Rockets')}).</p>
+    <p class="fl-note">Use the arrow keys or swipe to turn pages. Text from <i>${E(b.title)}</i>, Futures Friends Storybook Series, ${E(b.src || 'manuscript v1.0')}. &copy; 2026 Futures Friends.${b.rev && LANG() === 'es' && !esReady(b) ? ' <span lang="es">Este libro es la edición revisada de octubre de 2026; su versión en español está en preparación.</span>' : ''} Questions written for families using the dialogic-reading method (${ext('dialogic', 'Reading Rockets')}).</p>
    </div></section></div>`;
 }
 

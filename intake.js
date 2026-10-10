@@ -111,6 +111,13 @@ async function submit(kind, data) {
   if (!enabled()) return report(kind, unavailable);
   let t; try { t = await token(); } catch (_) { return report(kind, interpret({ network: true })); }
   const body = Object.assign({ kind, token: t }, data);
+  // Sent from the Spanish site: the request says so in its message (the gateway keeps no other free field), so the center can
+  // answer in Spanish. Only when it fits the gateway's message limit (2000 contact/quote/partner, 500 tour/enrollment).
+  if (window.FFi18n && window.FFi18n.lang === 'es' && /^(contact|quote|partner|tour|enrollment)$/.test(kind)) {
+    const tag = '[Idioma preferido: español / Preferred language: Spanish]', msg = String(body.message || '').trim();
+    const max = /^(tour|enrollment)$/.test(kind) ? 500 : 2000;
+    if (msg.indexOf(tag) < 0 && msg.length + tag.length + 2 <= max) body.message = msg ? msg + '\n\n' + tag : tag;
+  }
   const key = keyFor(kind, JSON.stringify(data));
   return report(kind, interpret(await http('POST', '/v1/inquiry', { headers: { 'Content-Type': 'application/json', 'Idempotency-Key': key }, body: JSON.stringify(body) })));
 }
