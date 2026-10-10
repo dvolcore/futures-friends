@@ -187,6 +187,7 @@
       media.innerHTML = player(key);
       const v = media.querySelector('video');
       v.addEventListener('error', fallback, true);
+      if (window.FF_SOUND_OFF) { v.muted = true; v.defaultMuted = true; }   // the sound kill switch (sound-switch.js): always muted
       const p = v.play(); if (p && p.catch) p.catch(() => {});   // started by the visitor's press: sound is theirs to choose
       v.focus({ preventScroll: true });
       return;
@@ -207,6 +208,7 @@
   function fallback(e) {
     const v = e.currentTarget; if (!v || v.dataset.lwVideo !== 'move' || S.move >= MOVES.length - 1) return;
     S.move += 1; const media = v.parentNode; media.innerHTML = player('move'); const n = media.querySelector('video'); n.addEventListener('error', fallback, true);
+    if (window.FF_SOUND_OFF) { n.muted = true; n.defaultMuted = true; }
     const p = n.play(); if (p && p.catch) p.catch(() => {});
   }
   function flip(root) {

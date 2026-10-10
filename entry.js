@@ -6,6 +6,8 @@
    and the gate lifts away into the hero's fly-in, which waits for it (hero-world.js and hero-motion.js call FFEntry.wait).
    On Home with motion the title's own letters play the tune as they land, so sound.js plays no second one (data-ffe-tune).
    - "Enter without sound": the same lift, with sound off for this session only (not stored; the pill can turn it back on).
+   - Sound kill switch (owner 2026-10-10, window.FF_SOUND_OFF from sound-switch.js): no sound wording and no "Enter without sound";
+     the one "Tap to enter" still lifts the gate into Home's cloud fly-through and letters, exactly as before.
    - Once per session (sessionStorage 'ff-entered', in try/catch; blocked storage: once per page load). ?nogate skips it.
    - The page renders underneath as always (crawlers and assistive tech get the content; the gate is an aria-modal dialog over it
      while it shows, the page behind is inert, focus stays in the gate, scroll is held).
@@ -176,6 +178,8 @@
 
   function build() {
     if (gate || skip) return;
+    // the sound kill switch (sound-switch.js): a silent site has one "Tap to enter" and no sound wording; the cloud fly-through is unchanged
+    const quietSite = !!W.FF_SOUND_OFF;
     shown = true;
     if (!still()) D.documentElement.dataset.ffeTune = 'opening';   // every first visit lands on Home's opening
     gate = D.createElement('div');
@@ -185,16 +189,16 @@
   <div class="ffe-card">
    <img class="ffe-logo" src="img/plush/hero/plush-logo-480.webp" srcset="img/plush/hero/plush-logo-480.webp 480w, img/plush/hero/plush-logo-960.webp 960w" sizes="(max-width:600px) 78vw, 420px" width="480" height="227" alt="Futures Friends" decoding="async" fetchpriority="high">
    <h2 id="ffe-h" class="ffe-h">Welcome to the Futures Friends world</h2>
-   <p id="ffe-p" class="ffe-p">Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello. Sound on, if you can: there is music, birdsong and four voices.</p>
+   <p id="ffe-p" class="ffe-p">${quietSite ? 'Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello.' : 'Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello. Sound on, if you can: there is music, birdsong and four voices.'}</p>
    <button type="button" class="ffe-go"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg><span>Tap to enter</span></button>
-   <button type="button" class="ffe-quiet" data-ffs-ignore>Enter without sound</button>
+   ${quietSite ? '' : '<button type="button" class="ffe-quiet" data-ffs-ignore>Enter without sound</button>'}
    <p class="ffe-who"><span>Run a center, home daycare, church or program?</span> <button type="button" class="ffe-centers">Enter for centers &amp; programs</button></p>
   </div>`;
     D.body.appendChild(gate);
     hold(true);
     const go = gate.querySelector('.ffe-go'), quiet = gate.querySelector('.ffe-quiet'), centers = gate.querySelector('.ffe-centers');
     go.addEventListener('click', () => enter(true));
-    quiet.addEventListener('click', () => enter(false));
+    if (quiet) quiet.addEventListener('click', () => enter(false));
     // owner 2026-10-07: the gate is also the audience choice. Families is the default (the big button); programs go to #centers.
     // The first visit always plays Home's opening first (owner hard requirement): the choice is held as W.FFEntry.afterGate and
     // opened by done() right after the opening's 'ff:first-visit-done' (one navigation, no timer of our own).

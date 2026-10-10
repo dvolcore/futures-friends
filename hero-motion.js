@@ -188,7 +188,7 @@
       say.style.setProperty('--sc', `var(--${k})`);
       say.innerHTML = `<span class="mh-saytab">${NAMES[k] || k}<span class="mh-saywave" aria-hidden="true"><i></i><i></i><i></i></span></span><p class="mh-sayline"></p>`
         + (last && t && t.ask ? `<div class="mh-sayask" role="group" aria-label="Who are you?">${t.ask.map(([aud, label, go]) => `<a class="mh-sayaskbtn" href="#${go}" data-aud="${aud}">${label} ${ICON('ArrowRight')}</a>`).join('')}</div>` : '')
-        + (voice === 'off' && line === 0 ? `<p class="mh-sayhint">Sound is off. Turn it on to hear ${NAMES[k] || k}.</p>` : '')
+        + (voice === 'off' && line === 0 && !window.FF_SOUND_OFF ? `<p class="mh-sayhint">Sound is off. Turn it on to hear ${NAMES[k] || k}.</p>` : '')
         + `<div class="mh-saynav">${FV() && FV().GO[k] ? `<a class="mh-saygo" href="#${FV().GO[k][0]}" data-reveal="${FV().GO[k][2]}">${FV().GO[k][1]} ${ICON('ArrowRight')}</a>` : ''}${last ? '' : `<button type="button" class="mh-saynext" aria-label="Next: ${NAMES[k] || k} keeps talking">${ICON('Play')}</button>`}<button type="button" class="mh-sayclose" aria-label="Close ${NAMES[k] || k}'s hello">${ICON('X')}</button></div>`;
       say.querySelector('.mh-sayline').textContent = L[line];
       if (status) status.textContent = `${NAMES[k] || k}: ${L[line]}`;

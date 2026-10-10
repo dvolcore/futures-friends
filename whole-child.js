@@ -253,7 +253,7 @@ V['whole-child'] = () => `<div class="wc">${heroHtml()}${dayHtml()}${friendsHtml
 // Move along with Bop: the FULL Elephant Stomp & Sway (owner 2026-10-07: the extended version everywhere, never the 39-second short).
 // It is the same video as the Elephant Stomp card (captions.js BOP_ACTS), played by the same shared player; it talks, so it never autoplays.
 const bopVideo = () => `<div class="wc-bopvid wc-rv" style="--c:var(--wc-bop)">${window.FFCaptions && window.FFCaptions.actPlayer ? window.FFCaptions.actPlayer('elephant-stomp', 'Move along with Bop: Elephant Stomp & Sway') : ''}
-   <p class="wc-bopvid-cap"><b>Move along with Bop</b><span>Elephant Stomp &amp; Sway, the full movement break &middot; ${vlen(VSEC['elephant-stomp'])} &middot; turn the sound on and move together. Story-world animation.</span></p></div>`;
+   <p class="wc-bopvid-cap"><b>Move along with Bop</b><span>Elephant Stomp &amp; Sway, the full movement break &middot; ${vlen(VSEC['elephant-stomp'])} &middot; ${typeof window !== 'undefined' && window.FF_SOUND_OFF ? '' : 'turn the sound on and '}move together. Story-world animation.</span></p></div>`;
 // (The Watch page's movement break moved into the full video shelf on #watch: family-library.js, gap fill 2026-10-07.)
 // The real length of each titled video on the cards (seconds, ffprobe of the act- videos, 2026-10-07 long versions); min = that length.
 const VSEC = { 'bop-bubble-chase': 39, 'elephant-stomp': 158, 'trunk-reach': 39, 'freeze-try-again': 69, 'animal-walks': 69, 'flamingo-balance': 69, 'clap-back': 69 };

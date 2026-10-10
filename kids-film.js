@@ -8,13 +8,16 @@
    Rules: the whole 16:9 frame is always shown (object-fit: contain over a blurred poster backing; the children are never cropped);
    product pictures are contained; the film starts muted and only plays sound after the visitor taps "Music on"; reduced motion or the
    site's motion switch = no autoplay (poster + play button); the film pauses while the tab is hidden, a dialog or the bag is open, or it
-   is off screen. The video is attached only when this route renders (none on any other page). Sends nothing, stores nothing. */
+   is off screen. Sound kill switch (window.FF_SOUND_OFF, sound-switch.js, 2026-10-10): no Music button, always muted, no credit line
+   (MUSIC stays defined so flipping the switch back restores both). The video is attached only when this route renders (none on any other page). Sends nothing, stores nothing. */
 (function () {
 'use strict';
 if (typeof V === 'undefined' || !window.FFCatalog || !window.FFCart) return;
 const W = window, D = W.document, C = W.FFCatalog, K = W.FFCart, E = K.E, imgTag = K.imgTag;
 const rooms = () => K.rooms();
 const FILM = 'video/kids-shop/wonder-store-film';
+// the sound kill switch (sound-switch.js, owner 2026-10-10): no Music button, the film always muted, no music credit line
+const SOUND_OFF = () => !!(typeof window !== 'undefined' && window.FF_SOUND_OFF);
 const MUSIC = { title: 'Who Likes to Party', by: 'Kevin MacLeod', src: 'https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200075', lic: 'https://creativecommons.org/licenses/by/4.0/' };
 
 /* The film clock (MOTION-HANDOFF.md): storytime 0-12.666667, adventure -16.333333, creative packs -20.625, rainbow mealtime -26.875 s.
@@ -55,7 +58,7 @@ function opening() {
     <div class="kf-film" data-kf-film>
       <video class="kf-video" data-kf-video muted loop playsinline preload="none" poster="${FILM}-poster.webp" width="1920" height="1080" aria-label="The Wonder Store film: children at storytime, on an outdoor adventure, coloring and sticking, and at a rainbow mealtime, in Futures Friends gear"></video>
       <button type="button" class="kf-bigplay" data-kf-big aria-label="Play the film">${I.play}</button>
-      <button type="button" class="kf-music" data-kf-music aria-pressed="false">${I.note}<span>Music off</span></button>
+      ${SOUND_OFF() ? '' : `<button type="button" class="kf-music" data-kf-music aria-pressed="false">${I.note}<span>Music off</span></button>`}
     </div>
     <div class="kf-board">
       <h1 id="kfH1" class="kf-eyebrow"><span class="kf-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>The Kids’ Shop</h1>
@@ -77,7 +80,7 @@ function opening() {
 <section class="kf-dock" aria-labelledby="kfDockH"><div class="wrap">
   <div class="kf-dock-in"><div class="kf-dock-h"><p class="kf-dock-k" data-kf-dockk>${E(c.kicker)}</p><h2 id="kfDockH">Shop the moment.</h2><button type="button" class="kf-dock-next" data-kf-next>Next chapter ${I.arrow}</button></div>
   <ul class="kf-chips" data-kf-chips aria-label="Products in this part of the film">${chipsHtml(c)}</ul></div>
-  <p class="kf-credit">Music: <a href="${MUSIC.src}" target="_blank" rel="noopener">“${E(MUSIC.title)}”</a> by ${E(MUSIC.by)} (incompetech.com), licensed under <a href="${MUSIC.lic}" target="_blank" rel="noopener license">CC BY 4.0</a>. Excerpted, normalized and faded.</p>
+  ${SOUND_OFF() ? '' : `<p class="kf-credit">Music: <a href="${MUSIC.src}" target="_blank" rel="noopener">“${E(MUSIC.title)}”</a> by ${E(MUSIC.by)} (incompetech.com), licensed under <a href="${MUSIC.lic}" target="_blank" rel="noopener license">CC BY 4.0</a>. Excerpted, normalized and faded.</p>`}
 </div></section>`;
 }
 
@@ -160,7 +163,7 @@ function togglePlay() {
   update();
 }
 function toggleMusic() {
-  if (!el) return; S.music = el.v.muted; el.v.muted = !S.music;
+  if (!el || SOUND_OFF()) return; S.music = el.v.muted; el.v.muted = !S.music;
   try { D.dispatchEvent(new CustomEvent('ff:duck')); } catch (_) { /* old browser */ }   // sound.js fades its nature beds while the film speaks
   paint();
 }
@@ -191,6 +194,7 @@ function init(root) {
   const sec = root && root.querySelector && root.querySelector('[data-kf]'); if (!sec) { el = null; return; }
   const v = sec.querySelector('[data-kf-video]'); if (!v) return;
   el = { root: sec, v, pending: S.t > 0 ? S.t : 0 };
+  if (SOUND_OFF()) S.music = false;
   v.muted = !S.music; v.defaultMuted = true;
   v.setAttribute('preload', 'metadata');
   v.innerHTML = `<source src="${pickSrc()}" type="video/mp4">`;

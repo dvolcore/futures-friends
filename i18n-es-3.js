@@ -149,6 +149,7 @@ window.FFi18n.add('es', {
   ": Move along with Bop: Elephant Stomp & Sway": ": Muévete con Bop: Pisotón y balanceo de elefante",
   "Move along with Bop": "Muévete con Bop",
   "Elephant Stomp & Sway, the full movement break · 2 min 38 sec · turn the sound on and move together. Story-world animation.": "Pisotón y balanceo de elefante, la pausa de movimiento completa · 2 min 38 seg · activa el sonido y muévanse juntos. Animación del mundo de los cuentos.",
+  "Elephant Stomp & Sway, the full movement break · 2 min 38 sec · move together. Story-world animation.": "Pisotón y balanceo de elefante, la pausa de movimiento completa · 2 min 38 seg · muévanse juntos. Animación del mundo de los cuentos.",
   "Bop's storybook": "El libro de cuentos de Bop",
   "Move with Bop, then peek at his book.": "Muévete con Bop y luego échale un vistazo a su libro.",
   "Read Clean Up, Team!": "Lee “¡A recoger, equipo!”",

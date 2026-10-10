@@ -13,6 +13,8 @@
    - The button (WCAG 2.2.2 pause, stop, hide) pauses or plays; once paused by the visitor a clip stays paused for the visit.
    - Phones (max-width 600 px) get the 4:5 intro; wider screens the 16:9 one; the source swaps if the width crosses.
    - If a clip cannot play, the friend's cut-out art comes back in its place.
+   - Sound kill switch (window.FF_SOUND_OFF, sound-switch.js, owner 2026-10-10): the intro always plays muted with its captions, no
+     "Tap for sound" button, and no tap gives it a voice.
    Sends nothing, stores nothing. */
 (function () {
   'use strict';
@@ -52,9 +54,9 @@
     // or anywhere on the page, except the sound pill and the felt pause button, which keep their own jobs) restarts it from the
     // beginning with its voice. A click, not pointerdown: a finger that starts a scroll is not a tap and wakes no sound on a phone.
     let snd = null;
-    const chip = () => { if (snd) { const show = !video.paused && !video.ended && video.muted && !!window.FFSound && window.FFSound.enabled(); if (snd.hidden === show) snd.hidden = !show; } };
+    const chip = () => { if (snd) { const show = !window.FF_SOUND_OFF && !video.paused && !video.ended && video.muted && !!window.FFSound && window.FFSound.enabled(); if (snd.hidden === show) snd.hidden = !show; } };
     const withVoice = () => {
-      if (!once || video.paused || video.ended || !video.muted || !window.FFSound || !window.FFSound.enabled()) return false;
+      if (window.FF_SOUND_OFF || !once || video.paused || video.ended || !video.muted || !window.FFSound || !window.FFSound.enabled()) return false;
       try { video.currentTime = 0; } catch (e) { /* not loaded yet */ }
       video.muted = false;
       const p = video.play();
@@ -62,7 +64,7 @@
       label(); return true;
     };
     // the intro's voice: only with sound on and sound already woken by the visitor (or this very press of the button)
-    const voiced = gesture => { const S = window.FFSound; return !!(S && S.enabled() && (gesture || (typeof S.unlocked === 'function' && S.unlocked()))); };
+    const voiced = gesture => { const S = window.FFSound; return !!(!window.FF_SOUND_OFF && S && S.enabled() && (gesture || (typeof S.unlocked === 'function' && S.unlocked()))); };
     const play = gesture => {
       load();
       if (once) video.muted = !voiced(gesture);

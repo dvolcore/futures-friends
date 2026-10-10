@@ -50,7 +50,10 @@ test('procedural only: no audio files, no network, small; index loads the pill a
 // ---------------------------------------------------------------- real browser
 const H = () => import('./a11y-harness.mjs');
 let h, srv, browser;
-test.before(async () => { h = await H(); srv = await h.startSite(); browser = await h.loadChromium().launch(); });
+// SOUND KILL SWITCH (owner 2026-10-10): the public site ships silent (sound-switch.js, window.FF_SOUND_OFF = true; see sound-off.test.js).
+// This suite checks the sound engine is intact for the day the owner flips it back: every context starts with FF_SOUND_OFF = false.
+const flipBack = b => { const nc = b.newContext.bind(b); b.newContext = async (...a) => { const c = await nc(...a); await c.addInitScript(() => { window.FF_SOUND_OFF = false; }); return c; }; return b; };
+test.before(async () => { h = await H(); srv = await h.startSite(); browser = flipBack(await h.loadChromium().launch()); });
 test.after(async () => { await browser.close(); await srv.close(); });
 const url = (r = 'home') => `${srv.base}?fresh=w8s-${Date.now()}#${r}`;
 

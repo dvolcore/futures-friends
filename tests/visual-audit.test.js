@@ -43,6 +43,9 @@ for (const [route, w] of ROUTES) {
 
 test('the floating dock (Sound, Nature, back-to-top) tucks to an edge tab over words and controls, comes back on a tap without acting, and stays out over the hero picture (390)', async () => {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', hasTouch: true, isMobile: true });
+  // the Sound/Nature pill exists only with sound on: the site ships silent (sound-switch.js kill switch, 2026-10-10), so the dock
+  // check flips the switch back to keep the pill's behaviour ready for the day sound returns
+  await ctx.addInitScript(() => { window.FF_SOUND_OFF = false; });
   const page = await ctx.newPage();
   await h.goto(page, srv.base, 'home', 1500);
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('ff-dock-tuck')), false, 'over the hero meadow the dock is out');

@@ -392,6 +392,7 @@
 
     // ------------------------------------------------------------ a story-world talking clip in the portrait slot (VIDEO-READY)
     function soundOK(){
+      if(W.FF_SOUND_OFF)return false;   // the sound kill switch (sound-switch.js): every guide clip plays muted
       const S=W.FFSound; if(!S||typeof S.enabled!=='function'||!S.enabled())return false;
       if(typeof S.unlocked==='function'&&S.unlocked())return true;
       // the visitor's own tap or key right now (e.g. the replay button) lets the browser play the voice even before sound.js has

@@ -548,8 +548,11 @@ for (const width of [1280, 390]) {
 // Wave 9 (owner-approved 2026-10-07): the talking intro plays ONCE. Muted with captions unless sound is on and the visitor has already
 // tapped the page (the AudioContext is awake), then with its voice; turning sound off mutes it; at the end the felt button becomes a
 // replay button, and the intro never restarts by itself. (playbackRate 16 runs the ~32 s clip to its end in about 2 s.)
-test('talking intro: with sound on and a tap first it plays with its voice, once; at the end the button replays it; sound off mutes it', async () => {
+// The public site ships silent (sound-switch.js kill switch, owner 2026-10-10; see sound-off.test.js): this test flips the switch back
+// (window.FF_SOUND_OFF = false) to keep the voiced intro ready for the day sound returns.
+test('talking intro (switch flipped back): with sound on and a tap first it plays with its voice, once; at the end the button replays it; sound off mutes it', async () => {
   const ctx = await ctxFor(1280, true);
+  await ctx.addInitScript(() => { window.FF_SOUND_OFF = false; });
   const page = await ctx.newPage(); const errors = errorsOf(page);
   await h.goto(page, site.base, 'home', 900);
   await page.mouse.click(5, 5); await page.waitForTimeout(300);   // a tap on the top bar's empty corner wakes sound (on by default)

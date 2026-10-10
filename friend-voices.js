@@ -11,6 +11,7 @@
    - Nothing autoplays: an Audio element is made on the friend's first tap (preload none) and plays only from that tap.
    - One voice at a time: a new hello, the card closing or the page changing stops the one before.
    - The site's sound switch (sound.js, FFSound.enabled()) is respected: with sound off nothing plays and play() says 'off'.
+   - The kill switch (window.FF_SOUND_OFF, sound-switch.js, owner 2026-10-10) also says 'off': no Audio element is ever made.
    - The card's "Watch ..." link is a real link to the friend's page; its data-reveal (deep-links.js) lands on the friend's video
      section there and focuses it: GO[k] = [route, label, reveal selector].
    Public: window.FFVoices = { LINES, GO, src(k, ext), play(k, onend) -> 'playing' | 'off' | 'none', stop(), speaking() -> k | null }. Sends nothing, stores nothing. */
@@ -37,7 +38,8 @@
   const cache = {};
   let cur = null, curK = null, done = null;
 
-  const soundOn = () => { const S = W.FFSound; try { return !(S && typeof S.enabled === 'function' && S.enabled() === false); } catch (_) { return true; } };
+  // the sound kill switch (sound-switch.js) first: a silent site says 'off' and makes no Audio element at all
+  const soundOn = () => { if (W.FF_SOUND_OFF) return false; const S = W.FFSound; try { return !(S && typeof S.enabled === 'function' && S.enabled() === false); } catch (_) { return true; } };
   const ext = a => { try { if (a.canPlayType && a.canPlayType('audio/webm; codecs="opus"')) return 'webm'; } catch (_) { /* fall through */ } return 'm4a'; };
 
   function stop() {

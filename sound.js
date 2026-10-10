@@ -20,7 +20,9 @@
      beat and climb a pentatonic tune (FUTURES then FRIENDS), so the title landing plays a little rising melody.
    Public: window.FFSound = {play(name, opts) -> true if it sounded, enabled(), nature(), ducked(), set(on, {session}), unlocked() -> true once the visitor's tap or key has
    woken the AudioContext (wave 9: the talking intro on Home plays with its voice only then), set(on), names, render(name,
-   offlineCtx, opts)} (frozen; render is the audition helper that draws any sound or bed into an OfflineAudioContext). */
+   offlineCtx, opts)} (frozen; render is the audition helper that draws any sound or bed into an OfflineAudioContext).
+   KILL SWITCH (owner 2026-10-10): with window.FF_SOUND_OFF (sound-switch.js) nothing here runs: no AudioContext, no pill, no listeners;
+   FFSound.enabled() is false, play()/set() do nothing and FFSound.off is true. Flip SOUND_OFF in sound-switch.js to bring it all back. */
 (function () {
   'use strict';
   if (typeof document === 'undefined') return;
@@ -246,7 +248,10 @@
   };
 
   // ---------------------------------------------------------------- live engine
-  let on = get(KEY) !== 'off', nature = get(NKEY) !== 'off', part = 'morning';
+  // the site's sound kill switch (sound-switch.js, owner 2026-10-10 "all sound everywhere" off): no context, no pill, no listeners,
+  // play() and set() do nothing. FFSound stays defined (enabled() false) so every caller reads "off". render() still works (audition).
+  const OFF = !!W.FF_SOUND_OFF;
+  let on = !OFF && get(KEY) !== 'off', nature = !OFF && get(NKEY) !== 'off', part = 'morning';
   let ac = null, G = null;
   const visible = () => D.visibilityState !== 'hidden';
   const live = () => !!(on && ac && ac.state === 'running' && visible());
@@ -394,6 +399,7 @@
     natBtn.querySelector('.ffs-st').textContent = nature ? 'on' : 'off';
   }
   function set(v, o) {
+    if (OFF) return false;
     on = !!v; if (!(o && o.session)) put(KEY, on ? 'on' : 'off');
     if (on && W.navigator && W.navigator.userActivation && W.navigator.userActivation.isActive) unlock();
     if (!on && ac) { ambient(); setTimeout(() => { if (!on && ac) ac.suspend().catch(() => {}); }, 700); }   // off: fade, then the graph sleeps
@@ -446,6 +452,11 @@
   }
 
   // ---------------------------------------------------------------- listeners
+  const graphs = new WeakMap();   // render()'s per-context graphs (defined here: the switch below returns early)
+  if (OFF) {
+    W.FFSound = Object.freeze({ play: () => false, enabled: () => false, nature: () => false, ducked: () => false, unlocked: () => false, set, names: NAMES, render, off: true });
+    return;
+  }
   const opt = { capture: true, passive: true };
   ['pointerdown', 'keydown', 'touchend', 'click'].forEach(e => D.addEventListener(e, unlock, opt));
   ['pointerdown', 'keydown', 'wheel'].forEach(e => D.addEventListener(e, dropHint, opt));
@@ -470,7 +481,6 @@
   });
 
   // ---------------------------------------------------------------- audition helper: draw a sound or a bed into an OfflineAudioContext
-  const graphs = new WeakMap();
   function render(name, c, o) {
     o = o || {};
     let g = graphs.get(c); if (!g) { g = graph(c); graphs.set(c, g); }

@@ -175,6 +175,9 @@ const T = {
     'Aprendizaje temprano para niños de 2 a 5 años, para centros de cuidado infantil, guarderías en casa y familias. Aquí viven Booker, Lumi, Zuri y Bop.',
   'Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello. Sound on, if you can: there is music, birdsong and four voices.':
     'Booker, Lumi, Zuri y Bop están en el prado y quieren saludarte. Si puedes, activa el sonido: hay música, cantos de pájaros y cuatro voces.',
+  // the gate with the sound kill switch on (sound-switch.js, owner 2026-10-10): no sound wording
+  'Booker, Lumi, Zuri and Bop are out in the meadow, and they would like to say hello.':
+    'Booker, Lumi, Zuri y Bop están en el prado y quieren saludarte.',
   'Each friend has a': 'Cada amigo tiene un',
   'job': 'trabajo',
   'in the room.': 'en el salón.',

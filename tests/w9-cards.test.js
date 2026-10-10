@@ -319,8 +319,10 @@ test('parents hug-bounce with their friend (squish); the town and cameo figures 
   await ctx.close();
 });
 
-test('talking clips: poster first, nothing loads far away, plays once in view (muted with sound off, voiced with it on), pause/replay labelled, captions drive the words on the card', async () => {
-  const ctx = await ctxFor(1280, true); const page = await ctx.newPage(); const errors = errorsOf(page);
+// The public site ships silent (sound-switch.js kill switch, owner 2026-10-10; see sound-off.test.js): this test flips the switch back
+// (window.FF_SOUND_OFF = false) so the voiced replay stays checked for the day sound returns; the silent default is checked after it.
+test('talking clips (switch flipped back): poster first, nothing loads far away, plays once in view (muted with sound off, voiced with it on), pause/replay labelled, captions drive the words on the card', async () => {
+  const ctx = await ctxFor(1280, true); await ctx.addInitScript(() => { window.FF_SOUND_OFF = false; }); const page = await ctx.newPage(); const errors = errorsOf(page);
   const asked = []; page.on('request', r => { if (/video\/cast\/.*\.(mp4|webm|vtt)/.test(r.url())) asked.push(r.url().split('/').pop()); });
   await h.goto(page, site.base, 'teacher-standard', 600);
   await page.evaluate(() => window.FFSound.set(false));
@@ -379,6 +381,19 @@ test('talking clips: poster first, nothing loads far away, plays once in view (m
   await rp.waitForTimeout(600);
   assert.equal(await rp.evaluate(s => !document.querySelector(s + ' video').paused, card), true, 'plays when the visitor asks');
   await rctx.close();
+});
+
+test('talking clips with the kill switch on (the shipped default): Ms. Fern plays muted even after "sound on" is asked for', async () => {
+  const ctx = await ctxFor(1280, true); const page = await ctx.newPage(); const errors = errorsOf(page);
+  await h.goto(page, site.base, 'teacher-standard', 600);
+  const card = '[data-ff-guide="fern"]';
+  await page.evaluate(s => document.querySelector(s).scrollIntoView({ block: 'center' }), card);
+  await page.waitForFunction(s => { const v = document.querySelector(s + ' video'); return v && v.currentTime > 1.2; }, card, { timeout: 9000 });
+  assert.equal(await page.evaluate(() => window.FFSound.set(true)), false, 'set() does nothing while the switch is on');
+  await page.click(`${card} .ff-vid-btn`); await page.click(`${card} .ff-vid-btn`); await page.waitForTimeout(300);
+  assert.deepEqual(await page.evaluate(s => { const v = document.querySelector(s + ' video'); return [v.paused, v.muted, window.FFSound.enabled(), window.FF_SOUND_FORCED]; }, card), [false, true, false, 0]);
+  assert.deepEqual(errors, []);
+  await ctx.close();
 });
 
 test("parents' silent loops: play muted while the card is on screen, pause off screen, a pause button holds them; the lead friend's cut-out stays; reduced motion = poster", async () => {

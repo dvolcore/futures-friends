@@ -7,7 +7,10 @@ const assert = require('node:assert/strict');
 
 const H = () => import('./a11y-harness.mjs');
 let h, site, browser;
-test.before(async () => { h = await H(); site = await h.startSite(); browser = await h.loadChromium().launch({ args: ['--autoplay-policy=user-gesture-required'] }); });
+// SOUND KILL SWITCH (owner 2026-10-10): the public site ships silent (sound-switch.js, window.FF_SOUND_OFF = true; see sound-off.test.js).
+// This suite checks the sound engine is intact for the day the owner flips it back: every context starts with FF_SOUND_OFF = false.
+const flipBack = b => { const nc = b.newContext.bind(b); b.newContext = async (...a) => { const c = await nc(...a); await c.addInitScript(() => { window.FF_SOUND_OFF = false; }); return c; }; return b; };
+test.before(async () => { h = await H(); site = await h.startSite(); browser = flipBack(await h.loadChromium().launch({ args: ['--autoplay-policy=user-gesture-required'] })); });
 test.after(async () => { await browser.close(); await site.close(); });
 
 const PHONE = { isMobile: true, hasTouch: true };

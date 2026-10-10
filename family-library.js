@@ -347,6 +347,7 @@ function setupVoice(e) {
   const btn = document.getElementById('flSpeak'), note = document.getElementById('flVoice'); if (!btn) return;
   voice = pickVoice();
   const onPage = R.page > 0 && curBook() && R.page <= curBook().spreads.length;
+  if (window.FF_SOUND_OFF) { btn.hidden = true; if (note) note.textContent = ''; return; }   // the sound kill switch (sound-switch.js): no read-aloud
   btn.hidden = !voice || !onPage;
   if (!voice && !voicesSettled && !voiceWait && window.speechSynthesis && !window.speechSynthesis.getVoices().length) voiceWait = setTimeout(() => { voicesSettled = true; setupVoice(); }, 1500);
   if (note) note.textContent = !window.speechSynthesis || (!voice && !voicesSettled) ? '' : (!voice ? 'Read to me needs a voice built into your device. None was found, so read it yourself: you are the best voice anyway.' : '');
@@ -356,7 +357,7 @@ if (typeof window !== 'undefined' && window.speechSynthesis && window.speechSynt
 }
 function stopSpeech() { try { if (R.speaking && window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) { /* nothing to stop */ } R.speaking = false; }
 function speak() {
-  const b = curBook(); if (!b || !voice || R.page < 1 || R.page > b.spreads.length) return;
+  const b = curBook(); if (window.FF_SOUND_OFF || !b || !voice || R.page < 1 || R.page > b.spreads.length) return;
   if (R.speaking) { stopSpeech(); mark(-1); return; }
   const text = b.spreads[R.page - 1].p, starts = [...document.querySelectorAll('#flStory .fl-w')].map(w => +w.dataset.at);
   const u = new SpeechSynthesisUtterance(text); u.voice = voice; u.lang = voice.lang; u.rate = .85;

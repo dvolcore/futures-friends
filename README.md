@@ -21,6 +21,24 @@ Accessibility (wave 3): `tests/a11y.test.js` (axe-core 4.11.1, WCAG 2.2 AA, 1280
 from `playwright-core` in the platform repo (`HUB_DIR`, default `/Volumes/FFCRM/app`). `node tools/a11y-audit.mjs` sweeps every route
 in `route-meta.js` at both sizes; `node tools/a11y-pixel-contrast.mjs` measures text on photos and gradients, which axe cannot.
 
+## Sound kill switch
+
+The public site ships **silent** (owner decision 2026-10-10: "all sound everywhere" off): no spoken audio, music, nature/birdsong
+sounds or effects anywhere. One value controls it, in `sound-switch.js` (loaded first in `<head>` on every page):
+
+    var SOUND_OFF = true;   // set to false to bring every sound back exactly as it was
+
+Nothing was deleted (audio files, voice lines, the Kids' Shop music credit text and the sound engine are all still here). With the
+switch on: no Sound/Nature pill and no AudioContext (`sound.js`); the first-visit gate is one "Tap to enter" with no sound wording
+(the cloud fly-through is unchanged, `entry.js`); the friends' hellos, the talking intro, the guide clips and every video play muted
+with captions (`friend-voices.js`, `home-video.js`, `supporting-cast.js`, `loop-widget.js`); no Music button or credit on the Kids'
+Shop film (`kids-film.js`); no "Read to me" in the storybooks (`family-library.js`); no "Turn sound on" prompts (`hero-motion.js`,
+`room-kit.js`, `whole-child.js`); the habit-card player already reads the flag (`habits.js`) and the investor page's clip loads the switch
+(`investor/Digital/index.html`). A safety net in `sound-switch.js` keeps any other `<video>`/`<audio>` muted (unmute snaps back,
+native mute/volume controls hidden) and counts what it catches in `window.FF_SOUND_FORCED`. After flipping the value, bump
+`sound-switch.js?v=` (index.html + `node tools/prerender.mjs`). Tests: `tests/sound-off.test.js` (the silent site); the engine suites
+(`w8-sound`, `w9-voices`, `w9-sound-intro`, `entry-gate`) run with the switch flipped back so the sound stays ready to return.
+
 ## Ownership
 
 - `data.js`, `extras.js`, and `views.js`: existing content, views, and routing.

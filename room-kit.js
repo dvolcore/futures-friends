@@ -312,7 +312,7 @@ function runCue(k) {
   timers.push(setTimeout(() => {
     on(2);
     const r = Vo && Vo.play ? Vo.play(k) : 'none';
-    if (msg && r === 'off') msg.innerHTML = 'Sound is off on this site. <button type="button" class="rl" data-rk-soundon>Turn sound on</button> to hear it.';
+    if (msg && r === 'off' && !W.FF_SOUND_OFF) msg.innerHTML = 'Sound is off on this site. <button type="button" class="rl" data-rk-soundon>Turn sound on</button> to hear it.';
     if (msg && r === 'none') msg.textContent = 'This browser could not play the voice line.';
   }, reduced ? 0 : 1000));
   timers.push(setTimeout(() => { on(3); const d = document.querySelector('[data-rk-demo]'); if (d) d.classList.add('is-walking'); }, reduced ? 0 : 2400));

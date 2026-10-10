@@ -36,6 +36,9 @@ for (const [w, h] of SIZES) {
   test(`controls stay clear of purchase and contact actions at ${w}`, async () => {
     const ctx = await browser.newContext({ viewport: { width: w, height: h } });
     await ctx.addInitScript(() => { try { sessionStorage.setItem('ff-entered', '1'); } catch (_) {} });
+    // the Sound pill exists only with sound on: the public site ships silent (sound-switch.js kill switch, 2026-10-10), so this
+    // placement check flips the switch back to keep the pill's position safe for the day sound returns
+    await ctx.addInitScript(() => { window.FF_SOUND_OFF = false; });
     const page = await ctx.newPage();
     await page.goto(`http://127.0.0.1:${PORT}/?nogate&nostamp`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2500);
