@@ -8,7 +8,7 @@ const vm = require('node:vm');
 const { site, read, text, ROOT } = require('./site-vm');
 
 const STORE_FILES = ['store-config.js', 'store-merch-data.js', 'store-catalog.js', 'store-cart.js', 'store-checkout.js', 'store-shop.js', 'store-product.js', 'store-order.js', 'kids-film.js', 'store-campaign.js'];
-function world(soundOff = true) {   // soundOff: the site's kill switch (sound-switch.js), on by default since 2026-10-10
+function world(soundOff = false) {   // soundOff: the site's kill switch (sound-switch.js), inactive by default (sound back on, owner 2026-10-10)
   const c = site();
   c.FF_SOUND_OFF = soundOff; if (c.window) c.window.FF_SOUND_OFF = soundOff;
   c.localStorage = { getItem: () => null, setItem() {}, removeItem() {} };
@@ -52,7 +52,7 @@ test('the four chapters follow the film clock and every chip is a real product p
   assert.equal((html.match(/class="kf-sc" href="#product\//g) || []).length, 4);
 });
 
-test('the video: web encodes only, muted loop playsinline, no source until the route opens; the sound kill switch hides Music and its credit', () => {
+test('the video: web encodes only, muted loop playsinline, no source until the route opens; Music and its credit show with sound on; the kill switch hides them', () => {
   const { c } = world(), html = c.render('kids-shop'), src = read('kids-film.js');
   const v = html.match(/<video[^>]*>/)[0];
   for (const a of ['muted', 'loop', 'playsinline', 'preload="none"', 'poster="video/kids-shop/wonder-store-film-poster.webp"']) assert.ok(v.includes(a), a);
@@ -62,15 +62,16 @@ test('the video: web encodes only, muted loop playsinline, no source until the r
     const s = fs.statSync(path.join(ROOT, 'video/kids-shop', f)).size;
     assert.ok(s < (f.includes('1080') ? 8 : f.includes('720') ? 4 : 0.3) * 1024 * 1024, f + ' ' + s);
   }
-  // kill switch on (the shipped default): no Music button, no music credit, the film stays muted
-  assert.match(read('sound-switch.js'), /^  var SOUND_OFF = true;$/m);
-  assert.doesNotMatch(html, /data-kf-music|kf-credit|incompetech/);
-  assert.doesNotMatch(text(html), /Music/);
+  // sound on (the shipped default since the owner's later 2026-10-10 decision): the Music button and the credit are back
+  assert.match(read('sound-switch.js'), /^  var SOUND_OFF = false;/m);
+  assert.match(html, /data-kf-music/);
+  assert.match(text(html), /Music: “Who Likes to Party” by Kevin MacLeod \(incompetech\.com\), licensed under CC BY 4\.0/);
+  // kill switch flipped on (kept, inactive): no Music button, no music credit, the film stays muted
+  const off = world(true).c.render('kids-shop');
+  assert.doesNotMatch(off, /data-kf-music|kf-credit|incompetech/);
+  assert.doesNotMatch(text(off), /Music/);
   assert.match(src, /toggleMusic\(\) \{\n  if \(!el \|\| SOUND_OFF\(\)\) return;/, 'the music toggle does nothing while the switch is on');
-  // switch flipped back: the Music button and the credit return unchanged
-  const back = world(false).c.render('kids-shop');
-  assert.match(back, /data-kf-music/);
-  assert.match(text(back), /Music: “Who Likes to Party” by Kevin MacLeod \(incompetech\.com\), licensed under CC BY 4\.0/);
+  const back = html;
   assert.match(back, /href="https:\/\/creativecommons\.org\/licenses\/by\/4\.0\/"/);
   assert.match(src, /'timeupdate', 'seeked'/, 'headlines follow the video clock');
   assert.match(src, /prefers-reduced-motion/); assert.match(src, /visibilitychange/); assert.match(src, /dialog\[open\]/);

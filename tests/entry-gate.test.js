@@ -6,9 +6,9 @@
 //  - the hero's opening (hero-world.js) and the cast (hero-motion.js) wait for it: nothing plays behind it, and after the tap the
 //    opening plays in view; the one tap (or Enter) wakes sound with Nature on;
 //  - "Enter without sound": sound off for the session only (nothing stored); once per session; ?nogate skips; reduced motion fades.
-//  - SOUND KILL SWITCH (owner 2026-10-10, sound-switch.js, window.FF_SOUND_OFF = true by default): the gate is ONE "Tap to enter" with
-//    no sound wording and no "Enter without sound"; the tap still lifts it into Home's cloud fly-through and nothing makes a sound.
-//    The sound-on gate is still checked with the switch flipped back (window.FF_SOUND_OFF = false before the page loads).
+//  - SOUND (owner 2026-10-10, later the same day): sound is back ON by default (sound-switch.js, SOUND_OFF = false) and the ambient
+//    Nature beds start OFF. The kill switch is still proven flipped on (window.FF_SOUND_OFF = true before the page loads): the gate is
+//    then ONE "Tap to enter" with no sound wording and no "Enter without sound", and nothing makes a sound.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -20,10 +20,10 @@ let h, site, browser;
 test.before(async () => { h = await H(); site = await h.startSite(); browser = await h.loadChromium({ gate: true }).launch(); });
 test.after(async () => { await browser.close(); await site.close(); });
 
-const ctxFor = async (width, motion = true, soundOn = false) => {
+const ctxFor = async (width, motion = true, killed = false) => {
   const ctx = await browser.newContext({ viewport: h.SIZES[width], reducedMotion: motion ? 'no-preference' : 'reduce', ...(width === 390 ? { isMobile: true, hasTouch: true } : {}) });
   await ctx.addInitScript(() => { window.__acs = 0; const N = window.AudioContext; if (N) window.AudioContext = class extends N { constructor(...a) { super(...a); window.__acs++; } }; });
-  if (soundOn) await ctx.addInitScript(() => { window.FF_SOUND_OFF = false; });   // the switch flipped back: the sound-on gate
+  if (killed) await ctx.addInitScript(() => { window.FF_SOUND_OFF = true; });   // the kill switch flipped on: the silent gate
   return ctx;
 };
 const errorsOf = page => { const e = []; page.on('pageerror', x => e.push(x.message)); return e; };
@@ -45,8 +45,8 @@ test('wiring: entry.js loads before the hero code and views (so the opening can 
 });
 
 for (const width of [1280, 390]) {
-  test(`first load (${width}px): the gate shows, labelled and modal, focus on Tap to enter, the page rendered underneath; the opening waits`, async () => {
-    const ctx = await ctxFor(width); const page = await ctx.newPage(); const errors = errorsOf(page);
+  test(`first load (${width}px, kill switch flipped on): the gate shows, labelled and modal, focus on Tap to enter, the page rendered underneath; the opening waits`, async () => {
+    const ctx = await ctxFor(width, true, true); const page = await ctx.newPage(); const errors = errorsOf(page);
     await page.goto(`${site.base}?fresh=${Date.now()}#home`); await page.waitForTimeout(1500);
     const f = await gateFacts(page);
     assert.deepEqual([f.role, f.modal, f.label, f.focus, f.open, f.view, f.inert], ['dialog', 'true', 'Welcome to the Futures Friends world', 'ffe-go', true, true, true]);
@@ -87,20 +87,20 @@ for (const width of [1280, 390]) {
   });
 }
 
-test('switch flipped back (FF_SOUND_OFF = false): the sound wording and "Enter without sound" return; Tap to enter wakes sound with Nature on', async () => {
-  const ctx = await ctxFor(1280, true, true); const page = await ctx.newPage(); const errors = errorsOf(page);
+test('shipped default (sound on): the sound wording and "Enter without sound" show; Tap to enter wakes sound, Nature stays off (owner 2026-10-10)', async () => {
+  const ctx = await ctxFor(1280); const page = await ctx.newPage(); const errors = errorsOf(page);
   await page.goto(`${site.base}?fresh=${Date.now()}#home`); await page.waitForTimeout(1200);
   assert.match(await page.$eval('.ffe-p', p => p.textContent), /Sound on, if you can: there is music, birdsong and four voices\./);
   assert.ok(await page.$('.ffe-quiet'));
   await page.click('.ffe-go');
   await page.waitForFunction(() => !document.querySelector('.ffe'), null, { timeout: 3000 });
-  assert.deepEqual(await page.evaluate(() => [window.FFSound.enabled(), window.FFSound.unlocked(), window.FFSound.nature(), !!document.querySelector('.ffs')]), [true, true, true, true]);
+  assert.deepEqual(await page.evaluate(() => [window.FFSound.enabled(), window.FFSound.unlocked(), window.FFSound.nature(), !!document.querySelector('.ffs')]), [true, true, false, true]);
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('switch flipped back: Enter without sound: sound off for this session only (nothing stored), the pill can turn it back on; ?nogate skips the gate', async () => {
-  const ctx = await ctxFor(1280, true, true); const page = await ctx.newPage(); const errors = errorsOf(page);
+test('shipped default: Enter without sound: sound off for this session only (nothing stored), the pill can turn it back on; ?nogate skips the gate', async () => {
+  const ctx = await ctxFor(1280); const page = await ctx.newPage(); const errors = errorsOf(page);
   await page.goto(`${site.base}?fresh=${Date.now()}#pricing`); await page.waitForTimeout(800);
   assert.ok(await page.$('.ffe'), 'shown on any first page load of the session, inner pages too');
   await page.click('.ffe-quiet');
@@ -113,8 +113,8 @@ test('switch flipped back: Enter without sound: sound off for this session only 
   await ctx.close();
 });
 
-test('reduced motion: a simple fade (no travel); the kill switch keeps sound asleep', async () => {
-  const ctx = await ctxFor(1280, false); const page = await ctx.newPage(); const errors = errorsOf(page);
+test('reduced motion: a simple fade (no travel); the kill switch (flipped on) keeps sound asleep', async () => {
+  const ctx = await ctxFor(1280, false, true); const page = await ctx.newPage(); const errors = errorsOf(page);
   await page.goto(`${site.base}?fresh=${Date.now()}#home`); await page.waitForTimeout(800);
   await page.click('.ffe-go');
   const t = await page.evaluate(() => { const g = document.querySelector('.ffe'); return g ? getComputedStyle(g).transform : 'gone'; });

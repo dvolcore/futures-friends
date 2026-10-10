@@ -255,7 +255,7 @@
       const parade = !g.phone && (() => { const p = root.querySelector('.hc-trail-live .hc-parade'); if (!p || !p.offsetParent) return false; const r = p.getBoundingClientRect(); return r.bottom > vh * 0.08 && r.top < vh * 0.92; })();
       // fixed controls stay clear too: back-to-top and the sound toggle (sound.js, bottom right)
       const yv = pos.y - s, fp = g.phone ? 0 : 16;
-      const fixedHit = [...document.querySelectorAll('.totop.on, .ffs')].some(b => { const r = b.getBoundingClientRect(); return r.width && !(box.r <= r.left - fp || box.l >= r.right + fp || yv <= r.top - fp || yv - g.H >= r.bottom + fp); });
+      const fixedHit = [...document.querySelectorAll('.totop.on, .ffs, .ffs button')].some(b => { const r = b.getBoundingClientRect(); return r.width && !(box.r <= r.left - fp || box.l >= r.right + fp || yv + 4 <= r.top - fp || yv - g.H >= r.bottom + fp); });   // his box reaches 4 px below his feet (box.b above)
       const hdr = document.querySelector('header.bar'), hb = hdr ? hdr.getBoundingClientRect().bottom : 0, under = g.phone ? pos.y - s < hb + 2 : pos.y - s - g.H < hb + 16;
       const before = s < T[0].s0 + 4;
       const on = !blocked && !parade && !fixedHit && !under && !before && !state.home;

@@ -66,8 +66,8 @@ test('index.html loads friend-voices.css and friend-voices.js (after hero-motion
 // ---------------------------------------------------------------- real browser
 const H = () => import('./a11y-harness.mjs');
 let h, srv, browser;
-// SOUND KILL SWITCH (owner 2026-10-10): the public site ships silent (sound-switch.js, window.FF_SOUND_OFF = true; see sound-off.test.js).
-// This suite checks the sound engine is intact for the day the owner flips it back: every context starts with FF_SOUND_OFF = false.
+// SOUND KILL SWITCH (owner 2026-10-10, later the same day: sound is back ON; sound-switch.js ships SOUND_OFF = false; see sound-off.test.js).
+// flipBack is now harmless: it pins FF_SOUND_OFF = false in every context, which is the shipped default, so this suite stays independent of the switch.
 const flipBack = b => { const nc = b.newContext.bind(b); b.newContext = async (...a) => { const c = await nc(...a); await c.addInitScript(() => { window.FF_SOUND_OFF = false; }); return c; }; return b; };
 test.before(async () => { h = await H(); srv = await h.startSite(); browser = flipBack(await h.loadChromium().launch()); });
 test.after(async () => { await browser.close(); await srv.close(); });

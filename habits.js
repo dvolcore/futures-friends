@@ -28,7 +28,7 @@
   // k: the lead friend; pose: plush-cast slug for the art; motion: bob | sway | hop | breathe | dance; ms: one step's time.
   // video: an existing site clip (video/<video>.mp4 + .en.vtt / .es.vtt + -poster.jpg). count: say the numbers 1..count on that step.
   const HABITS = [
-    { id: 'wash-hands', k: 'bop', pose: 'bop-waving', motion: 'bob', ms: 4500,
+    { id: 'wash-hands', k: 'bop', pose: 'bop-waving', motion: 'bob', ms: 4500, soon: true,   // owner 2026-10-10: a real handwashing video is being made
       where: ['By the sink', 'Junto al lavabo'],
       en: { name: 'Wash your hands', with: 'with Bop', done: 'Clean hands! You did it.',
         steps: ['Water on. Get your hands wet.', 'Soap! Make lots of bubbles.', { t: 'Scrub, scrub! Fronts, backs and between your fingers. Count with Bop!', count: 20 }, 'Rinse the bubbles away.', 'Dry your hands. All clean!'] },
@@ -140,7 +140,7 @@
     const T = h[lang], U = UI[lang], who = NAME[h.k];
     const steps = h.video ? [] : T.steps;
     const media = h.video
-      ? `<div class="hb-video"><video class="hb-vid" muted playsinline preload="none" poster="video/${h.video}-poster.jpg" aria-label="${esc(T.name + ' ' + T.with)}">
+      ? `<div class="hb-video"><video class="hb-vid" playsinline preload="none" poster="video/${h.video}-poster.jpg" aria-label="${esc(T.name + ' ' + T.with)}">
           <source src="video/${h.video}.mp4" type="video/mp4">
           <track kind="captions" srclang="en" label="English" src="video/${h.video}.en.vtt"${lang === 'en' ? ' default' : ''}>
           <track kind="captions" srclang="es" label="Español (borrador)" src="video/${h.video}.es.vtt"${lang === 'es' ? ' default' : ''}></video></div>`
@@ -158,6 +158,7 @@
       <button type="button" class="hb-again" data-hb-act="again">${esc(U.again)}</button></div>
   </div>
   <p class="hb-meta">${esc(h.video ? U.video : U.card)} · ${esc(U.secs(seconds(h)))} · ${esc(U.watchThen)}</p>
+  ${h.soon ? `<p class="hb-soon">${lang === 'es' ? 'Estamos haciendo un video de verdad de Bop lavándose las manos. Mientras tanto, sigue los pasos.' : 'A real video of Bop washing hands is being made. Until then, follow the steps.'}</p>` : ''}
   ${h.about ? `<p class="hb-about">${esc(h.about[lang === 'es' ? 1 : 0])}</p>` : ''}
   ${steps.length ? `<details class="hb-steps"><summary>${lang === 'es' ? 'Los pasos' : 'The steps'}</summary><ol>${steps.map(s => `<li>${esc(stepText(s))}</li>`).join('')}</ol></details>` : ''}
   ${U.draft ? `<p class="hb-draft">${esc(U.draft)}</p>` : ''}
@@ -190,7 +191,7 @@
       return `<a class="hb-tile" href="#habit/${h.id}" data-go="habit/${h.id}" style="--c:var(--${h.k});--s:var(--${h.k}-s)">
         <span class="hb-tile-art">${plushImg(h, 'hb-tile-img', '', false)}</span>
         <span class="hb-tile-bd"><b>${esc(T.name)}</b><span class="hb-tile-w">${esc(T.with)} · ${esc(h.where[lang === 'es' ? 1 : 0])}</span>
-        <span class="hb-tile-m">${esc(h.video ? P.video : P.card)} · ${esc(UI[lang].secs(seconds(h)))}</span><span class="hb-tile-go">${esc(P.tryIt)} <span aria-hidden="true">→</span></span></span></a>`;
+        <span class="hb-tile-m">${esc(h.soon ? (lang === 'es' ? 'Video en camino' : 'Video coming soon') : h.video ? P.video : P.card)} · ${esc(UI[lang].secs(seconds(h)))}</span><span class="hb-tile-go">${esc(P.tryIt)} <span aria-hidden="true">→</span></span></span></a>`;
     };
     return `<div class="hb-page" lang="${lang}" data-i18n-skip>
 <div class="phero"><div class="wrap"><div style="display:grid;gap:12px"><div class="eyebrow">${esc(P.eyebrow)}</div><h1 style="font-size:clamp(30px,4.4vw,48px)">${esc(P.title)}</h1><p class="lede">${esc(P.lede)}</p>
@@ -290,7 +291,8 @@ ${lang === 'es' ? `<p class="wrap hb-draft">${esc(UI.es.draft)}</p>` : ''}</div>
   function playVideo(r, h, lang) {
     const v = r.el.querySelector('video'); if (!v) return;
     try { for (const t of v.textTracks || []) t.mode = t.language === lang ? 'showing' : 'disabled'; } catch (_) { /* fine */ }
-    v.muted = true; v.defaultMuted = true; v.volume = 0;          // all sound off: muted, captions on, no controls (so no unmute)
+    const off = !!window.FF_SOUND_OFF;                            // owner 2026-10-10: sound back on; the kill switch still silences
+    v.muted = off; v.defaultMuted = off; v.volume = off ? 0 : 1;  // the tap that opened the card lets the clip play with its sound
     v.controls = false;
     v.onended = () => { if (alive(r)) finish(r, h, lang); };
     const p = v.play(); if (p && p.catch) p.catch(() => { /* muted play is allowed after the tap; if not, the poster stays */ });

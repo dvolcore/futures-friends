@@ -45,7 +45,8 @@ test('the card address: site + habit + ?l=es, nothing else; the player reads onl
   assert.doesNotMatch(src, /speechSynthesis|SpeechSynthesisUtterance|FFVoices/, 'no voice: captions only');
   assert.match(src, /const SOUND_ALLOWED = false;/, 'all sound off');
   assert.match(src, /W\.FF_SOUND_OFF/, 'the site-wide kill switch is respected');
-  assert.match(src, /v\.muted = true;/); assert.match(src, /v\.controls = false;/);
+  assert.match(src, /const off = !!window\.FF_SOUND_OFF;/); assert.match(src, /v\.muted = off;/); assert.match(src, /v\.volume = off \? 0 : 1;/, 'sound on (owner 2026-10-10); the kill switch still silences');
+  assert.match(src, /v\.controls = false;/);
   assert.doesNotMatch(src, /searchParams\.get\((?!'l')|URLSearchParams\([^)]*\)\.get\((?!'l')/, 'reads no other address parameter');
   // statistics: only the habit id and the language
   for (const m of src.matchAll(/ffTrack\(name, (\{[^}]*\})\)/g)) assert.equal(m[1], '{ habit: h.id, lang }');
@@ -163,7 +164,8 @@ test('a Spanish card (?l=es) opens in Spanish; a video habit shows its clip with
   assert.match(await page.textContent('.hb-title'), /Respirar con calma/);
   assert.equal(await page.getAttribute('.hb-vid source', 'src'), 'video/act-lumi-calm-breath.mp4');
   assert.equal(await page.getAttribute('.hb-vid track[default]', 'srclang'), 'es');
-  assert.equal(await page.$eval('.hb-vid', v => v.muted && !v.controls), true, 'muted, no controls (no unmute)');
+  await page.click('.hb-play'); await page.waitForTimeout(500);   // the tap lets the clip play with its sound (owner 2026-10-10)
+  assert.deepEqual(await page.$eval('.hb-vid', v => ({ muted: v.muted, volume: v.volume, controls: v.controls })), { muted: false, volume: 1, controls: false }, 'sound on after the tap, no native controls');
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'es');
   assert.deepEqual(errors, []);
   await ctx.close();

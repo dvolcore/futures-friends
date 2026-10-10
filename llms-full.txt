@@ -4969,6 +4969,7 @@ Visit the Kids’ Shop
 ## THE KIDS’ SHOP
 https://dvolcore.github.io/futures-friends/kids-shop
 
+Music off
 Home
 /
 Kids' Shop
@@ -4997,6 +4998,9 @@ The cozy hoodie
 Lumi hoodie
 The story bottle
 Booker Insulated Bottle
+
+Music: “Who Likes to Party” by Kevin MacLeod (incompetech.com), licensed under CC BY 4.0. Excerpted, normalized and faded.
+
 Shop by friend
 
 Pick a friend and see everything they are on.

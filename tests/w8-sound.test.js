@@ -6,7 +6,7 @@
 //  - sound is ON by default (owner 2026-10-06): one AudioContext at arrival plays as soon as the browser allows (phones: the first tap
 //    anywhere, which also plays a hello); turning it off is remembered and then nothing is created;
 //  - unknown names and junk events are ignored; per-sound rate limits (footsteps ~4 a second), letter-pops queue on a beat;
-//  - a hidden tab suspends audio and it resumes only when visible and on; nature beds are a second switch, ON by default with sound since 2026-10-07 (owner: "ALL the effects on"; keys -v2), and duck under any other voice;
+//  - a hidden tab suspends audio and it resumes only when visible and on; nature beds are a second switch, OFF by default (owner 2026-10-10: sound stays on, only the ambient beds start off; the nature key is -v3, so an old stored -v2 choice is ignored), and duck under any other voice;
 //  - the site's own events sound: .btn / [data-go] / link clicks -> tap, ff:audience -> chime, hashchange -> page-turn;
 //  - the felt pill: real toggle buttons with names and states, 44 px targets, a visible focus ring, axe clean, and clear of every
 //    other fixed or sticky piece of UI at 1280, 390 and 1600 px; the one-time hint never covers content.
@@ -50,8 +50,8 @@ test('procedural only: no audio files, no network, small; index loads the pill a
 // ---------------------------------------------------------------- real browser
 const H = () => import('./a11y-harness.mjs');
 let h, srv, browser;
-// SOUND KILL SWITCH (owner 2026-10-10): the public site ships silent (sound-switch.js, window.FF_SOUND_OFF = true; see sound-off.test.js).
-// This suite checks the sound engine is intact for the day the owner flips it back: every context starts with FF_SOUND_OFF = false.
+// SOUND KILL SWITCH (owner 2026-10-10, later the same day: sound is back ON; sound-switch.js ships SOUND_OFF = false; see sound-off.test.js).
+// flipBack is now harmless: it pins FF_SOUND_OFF = false in every context, which is the shipped default, so this suite stays independent of the switch.
 const flipBack = b => { const nc = b.newContext.bind(b); b.newContext = async (...a) => { const c = await nc(...a); await c.addInitScript(() => { window.FF_SOUND_OFF = false; }); return c; }; return b; };
 test.before(async () => { h = await H(); srv = await h.startSite(); browser = flipBack(await h.loadChromium().launch()); });
 test.after(async () => { await browser.close(); await srv.close(); });
@@ -79,7 +79,7 @@ async function page(width = 1280, opts = {}) {
 }
 const state = p => p.evaluate(() => ({ ac: window.__ac.length, st: window.__ac[0] ? window.__ac[0].state : null, src: window.__src, on: window.FFSound.enabled(),
   pressed: document.querySelector('.ffs-main').getAttribute('aria-pressed'), nat: document.querySelector('.ffs-nat').hidden ? null : document.querySelector('.ffs-nat').getAttribute('aria-pressed'),
-  stored: localStorage.getItem('ff-sound-v2'), storedNature: localStorage.getItem('ff-sound-nature-v2'), label: document.querySelector('.ffs-main').innerText.replace(/\s+/g, ' ').trim() }));
+  stored: localStorage.getItem('ff-sound-v2'), storedNature: localStorage.getItem('ff-sound-nature-v3'), label: document.querySelector('.ffs-main').innerText.replace(/\s+/g, ' ').trim() }));
 const tapEmpty = async p => { const at = await p.evaluate(() => { const hb = document.querySelector('header.bar').getBoundingClientRect(); return [Math.round(innerWidth * 0.62), Math.round(hb.bottom - 8)]; }); await p.mouse.click(at[0], at[1]); };
 const fire = (p, detail) => p.evaluate(d => document.dispatchEvent(new CustomEvent('ff:sfx', { detail: d })), detail);
 
@@ -127,7 +127,7 @@ test('the toggle turns sound on (one AudioContext, made inside the tap), remembe
   const { ctx, p, errors } = await page(1280);
   await p.click('.ffs-main'); await p.waitForTimeout(250);
   let s = await state(p);
-  assert.deepEqual([s.ac, s.st, s.on, s.pressed, s.nat, s.stored, s.label], [1, 'running', true, 'true', 'true', 'on', 'Sound on'], 'Nature comes on with sound (owner 2026-10-07)');
+  assert.deepEqual([s.ac, s.st, s.on, s.pressed, s.nat, s.stored, s.label], [1, 'running', true, 'true', 'false', 'on', 'Sound on'], 'Sound comes on; Nature stays off until the visitor turns it on (owner 2026-10-10)');
   assert.ok(s.src > 0, 'turning on gives a small confirmation sound');
   assert.equal(await p.evaluate(() => window.FFSound.play('chime')), true);
   // return visit: remembered as on, but the browser has no gesture yet, so nothing is created and nothing plays
@@ -214,7 +214,7 @@ test('rate limits: footsteps at most ~4 a second, repeats of one sound are space
 });
 
 test('a hidden tab suspends sound (and nature); it resumes only when visible and still on', async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on', 'ff-sound-nature-v2': 'on' } });
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on', 'ff-sound-nature-v3': 'on' } });
   await tapEmpty(p); await p.waitForTimeout(400);
   const vis = v => p.evaluate(v => { Object.defineProperty(document, 'visibilityState', { value: v, configurable: true }); document.dispatchEvent(new Event('visibilitychange')); }, v);
   await vis('hidden'); await p.waitForTimeout(150);
@@ -234,8 +234,8 @@ test('a hidden tab suspends sound (and nature); it resumes only when visible and
 });
 
 test('nature beds: a second switch, off once the visitor turns it off (remembered); follow ff:daypart', async () => {
-  // owner 2026-10-07: nature is ON by default with sound; a visitor who turned it off (under the new key) keeps it off
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'off', 'ff-sound-nature-v2': 'off' } });
+  // owner 2026-10-10: nature is OFF by default (key -v3); a visitor who turns it on can turn it off again and that is remembered
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'off', 'ff-sound-nature-v3': 'off' } });
   await p.click('.ffs-main'); await p.waitForTimeout(1500);
   const quiet = (await state(p)).src;
   await p.waitForTimeout(1500);
@@ -257,11 +257,12 @@ test('nature beds: a second switch, off once the visitor turns it off (remembere
   await ctx.close();
 });
 
-test('defaults (owner 2026-10-07, "ALL the effects on"): a fresh visitor has Sound and Nature on; an old stored "off" (pre -v2 keys) is ignored', async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'off', 'ff-sound-nature': 'off' } });
+test('defaults (owner 2026-10-10): a fresh visitor has Sound on and Nature off; old stored keys (pre -v2 sound, -v2 nature) are ignored', async () => {
+  // an old nature "on" under the retired -v2 key must not switch the beds on either
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound': 'off', 'ff-sound-nature': 'off', 'ff-sound-nature-v2': 'on' } });
   const s = await state(p);
-  assert.deepEqual([s.on, s.pressed, s.nat, s.stored, s.storedNature], [true, 'true', 'true', null, null]);
-  assert.equal(await p.evaluate(() => window.FFSound.nature()), true);
+  assert.deepEqual([s.on, s.pressed, s.nat, s.stored, s.storedNature], [true, 'true', 'false', null, null]);
+  assert.equal(await p.evaluate(() => window.FFSound.nature()), false);
   // "Enter without sound" (the entry gate) turns sound off for the session only: nothing is stored
   await p.evaluate(() => window.FFSound.set(false, { session: true }));
   assert.deepEqual([(await state(p)).on, (await state(p)).stored], [false, null]);
@@ -270,7 +271,7 @@ test('defaults (owner 2026-10-07, "ALL the effects on"): a fresh visitor has Sou
 });
 
 test('ducking: the nature beds fade out while a video plays with its sound (or a friend speaks) and come back after', async () => {
-  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on' } });
+  const { ctx, p, errors } = await page(1280, { stored: { 'ff-sound-v2': 'on', 'ff-sound-nature-v3': 'on' } });   // beds are off by default now: this visitor turned them on
   await tapEmpty(p); await p.waitForTimeout(400);
   const duck = () => p.evaluate(() => { const c = window.__ac[0]; return { ducked: window.FFSound.ducked(), nature: window.FFSound.nature(), st: c && c.state }; });
   assert.deepEqual(await duck(), { ducked: false, nature: true, st: 'running' });
@@ -359,8 +360,8 @@ for (const width of [1280, 390]) {
     const mine = async () => (await h.axe(p, { openDetails: false })).filter(v => v.nodes.some(n => /\.ffs|ffs-/.test(n.target)));   // the whole page, every impact
     assert.deepEqual(await mine(), []);
     await p.keyboard.press('Tab'); await p.focus('.ffs-main'); await p.keyboard.press('Enter'); await p.waitForTimeout(150);
-    assert.equal(await tree(), '- region "Sound settings":\n  - button "Nature sounds" [pressed]\n  - button "Sound" [pressed]', 'Enter toggles; Nature (on by default) comes before Sound in reading order, as on screen');
-    assert.equal(await p.getByRole('button', { name: 'Nature sounds', exact: true, pressed: true }).count(), 1);
+    assert.equal(await tree(), '- region "Sound settings":\n  - button "Nature sounds"\n  - button "Sound" [pressed]', 'Enter toggles Sound on; Nature (off by default) appears before Sound in reading order, as on screen, and is not pressed');
+    assert.equal(await p.getByRole('button', { name: 'Nature sounds', exact: true, pressed: false }).count(), 1);
     const ring = await p.evaluate(() => {
       const el = document.activeElement, cs = getComputedStyle(el);
       const rgb = c => (c.match(/\d+(\.\d+)?/g) || []).slice(0, 3).map(Number);
@@ -371,6 +372,8 @@ for (const width of [1280, 390]) {
     assert.equal(ring.cls, 'ffs-btn ffs-main');
     assert.ok(ring.fv && ring.style !== 'none' && ring.w >= 2, JSON.stringify(ring));
     assert.ok(ring.vsButton >= 3 && ring.vsWhite >= 3 && ring.halo, `ring contrast ${JSON.stringify(ring)}`);
+    await p.click('.ffs-nat'); await p.waitForTimeout(150);   // the visitor turns the beds on: the pressed state follows
+    assert.equal(await tree(), '- region "Sound settings":\n  - button "Nature sounds" [pressed]\n  - button "Sound" [pressed]');
     assert.deepEqual(await mine(), []);
     assert.deepEqual(errors, []);
     await ctx.close();

@@ -16,7 +16,7 @@
    A test or audition page may set window.FF_SOUND_OFF (true/false) before this file runs; that value wins. */
 (function () {
   'use strict';
-  var SOUND_OFF = true;
+  var SOUND_OFF = false;   // owner 2026-10-10 (later the same day): sound back ON; only the ambient Nature beds now start off (sound.js)
   if (typeof window === 'undefined') return;
   var W = window;
   if (typeof W.FF_SOUND_OFF !== 'boolean') W.FF_SOUND_OFF = SOUND_OFF;

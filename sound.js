@@ -7,7 +7,8 @@
      quiet day-part beds). Both choices are remembered (localStorage, in try/catch).
    - Owner 2026-10-07 ("the natural noises need to be automatically on as well ... for demonstration purposes I need ALL the effects
      on"): Nature is ON by default together with Sound, and both keys were bumped (-v2) so an old stored "off" no longer blocks the
-     demo; a visitor who turns either off now is remembered under the new key. The entry gate (entry.js) is the first tap that wakes
+     demo; a visitor who turns either off now is remembered under the new key. Owner 2026-10-10 (later): the ambient Nature beds start
+     OFF (key -v3; on only once the visitor turns them on); Sound itself stays on by default. The entry gate (entry.js) is the first tap that wakes
      both; "Enter without sound" turns sound off for that session only (set(false, {session: true}), not stored).
    - Ducking: the nature beds fade to almost nothing while anything else speaks: a video or audio element on the page playing with its sound,
      a friend's voice line (FFVoices) or the storybook's read-aloud (speechSynthesis); they fade back afterwards. Anyone can ask for a
@@ -27,7 +28,7 @@
   'use strict';
   if (typeof document === 'undefined') return;
   const W = window, D = document;
-  const KEY = 'ff-sound-v2', NKEY = 'ff-sound-nature-v2', HKEY = 'ff-sound-hint';
+  const KEY = 'ff-sound-v2', NKEY = 'ff-sound-nature-v3', HKEY = 'ff-sound-hint';   // nature -v3: owner 2026-10-10, ambient beds start OFF
   const MASTER = 1.0, AMB = 0.5;   // owner 2026-10-06: too quiet on a phone speaker; the limiter keeps peaks under -3 dBFS
   const get = k => { try { return W.localStorage.getItem(k); } catch (_) { return null; } };
   const put = (k, v) => { try { W.localStorage.setItem(k, v); } catch (_) { /* blocked storage: the choice lasts this visit */ } };
@@ -251,7 +252,7 @@
   // the site's sound kill switch (sound-switch.js, owner 2026-10-10 "all sound everywhere" off): no context, no pill, no listeners,
   // play() and set() do nothing. FFSound stays defined (enabled() false) so every caller reads "off". render() still works (audition).
   const OFF = !!W.FF_SOUND_OFF;
-  let on = !OFF && get(KEY) !== 'off', nature = !OFF && get(NKEY) !== 'off', part = 'morning';
+  let on = !OFF && get(KEY) !== 'off', nature = !OFF && get(NKEY) === 'on', part = 'morning';
   let ac = null, G = null;
   const visible = () => D.visibilityState !== 'hidden';
   const live = () => !!(on && ac && ac.state === 'running' && visible());

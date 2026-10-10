@@ -42,7 +42,7 @@ const homeFacts = page => page.evaluate(() => {
     downloads: links.filter(a => a.hasAttribute('download') || /\.(pdf|zip|docx?|csv)(\?|#|$)/i.test(a.getAttribute('href')) || /^printables\//.test(a.getAttribute('href'))).length,
     controls: v.querySelectorAll('a[href],button').length,
     links: v.querySelectorAll('a[href]').length,
-    buttons: [...v.querySelectorAll('button')].map(b => b.matches('.ffa-friend') ? 'friend' : b.matches('[role=tab].hc-picktab') ? 'tab' : b.matches('[data-brand-reveal]') ? 'reveal' : b.matches('.hc-vbtn[data-video-toggle]') ? 'video' : b.matches('.hc-vsound') ? 'sound' : b.matches('.ffa-kit-toggle [data-kit-show]') ? 'kit' : b.matches('.ff-endorse [data-advisor-profile]') ? 'endorse' : b.outerHTML.slice(0, 80)),
+    buttons: [...v.querySelectorAll('button')].map(b => b.matches('.ffa-friend') ? 'friend' : b.matches('[role=tab].hc-picktab') ? 'tab' : b.matches('[data-brand-reveal]') ? 'reveal' : b.matches('.hc-vbtn[data-video-toggle]') ? 'video' : b.matches('.hc-vsound') ? 'sound' : b.matches('.ffa-kit-toggle [data-kit-show]') ? 'kit' : b.matches('.ff-endorse [data-advisor-profile]') ? 'endorse' : b.matches('.fx-btn') ? 'expand' : b.outerHTML.slice(0, 80)),
     hello: [...v.querySelectorAll('.hc-intro .hc-hello')].map(f => ({ vis: vis(f), cap: (f.querySelector('figcaption b') || {}).textContent, video: !!f.querySelector('video[aria-label]') })),
     strip: v.querySelectorAll('#rt-strip,.rt-strip,.rt-ev').length,
     samples: v.querySelectorAll('[data-sample],.fj-sample,.rt-sample,.fj-shot,.fj-thumb').length,
@@ -90,6 +90,8 @@ for (const width of [1280, 390]) {
     // wave 9 (owner 2026-10-07): plus the welcome video's 'Tap for sound' button, shown only while it plays silently
     assert.ok(f.buttons.filter(b => b === 'kit').length <= KIT_BUTTONS, 'at most three concept toggles'); f.buttons = f.buttons.filter(b => b !== 'kit'); f.controls -= KIT_BUTTONS;
     assert.equal(f.buttons.filter(b => b === 'endorse').length, ENDORSE_BUTTONS, 'the endorsement band has its two statement buttons'); f.buttons = f.buttons.filter(b => b !== 'endorse'); f.controls -= ENDORSE_BUTTONS;
+    // owner 2026-10-10 ("none of the expand buttons work"): one Full screen button per video frame (video-expand.js), at most one per video toggle
+    const fx = f.buttons.filter(b => b === 'expand').length; assert.ok(fx >= 1 && fx <= VIDEO_BUTTONS, `one Full screen button per video: ${fx}`); f.buttons = f.buttons.filter(b => b !== 'expand'); f.controls -= fx;
     assert.ok(f.buttons.length <= BUTTONS + VIDEO_BUTTONS + 1 && f.buttons.filter(b => b !== 'video' && b !== 'sound').length <= BUTTONS && f.buttons.filter(b => b === 'video').length <= VIDEO_BUTTONS && f.buttons.filter(b => b === 'sound').length <= 1 && f.buttons.every(b => ['friend', 'tab', 'reveal', 'video', 'sound'].includes(b)), `buttons are only the friend toys, the logo reveal and the two animation pause buttons: ${f.buttons.join(', ')}`);
     assert.ok(f.controls <= BUDGET + BUTTONS + VIDEO_BUTTONS, `links and buttons in #view: ${f.controls} <= ${BUDGET + BUTTONS + VIDEO_BUTTONS}`);
     assert.ok(f.height <= HEIGHT[width], `page height ${f.height} <= ${HEIGHT[width]}`);

@@ -383,8 +383,8 @@ test('talking clips (switch flipped back): poster first, nothing loads far away,
   await rctx.close();
 });
 
-test('talking clips with the kill switch on (the shipped default): Ms. Fern plays muted even after "sound on" is asked for', async () => {
-  const ctx = await ctxFor(1280, true); const page = await ctx.newPage(); const errors = errorsOf(page);
+test('talking clips with the kill switch flipped on (sound ships ON since 2026-10-10): Ms. Fern plays muted even after "sound on" is asked for', async () => {
+  const ctx = await ctxFor(1280, true); await ctx.addInitScript(() => { window.FF_SOUND_OFF = true; }); const page = await ctx.newPage(); const errors = errorsOf(page);
   await h.goto(page, site.base, 'teacher-standard', 600);
   const card = '[data-ff-guide="fern"]';
   await page.evaluate(s => document.querySelector(s).scrollIntoView({ block: 'center' }), card);
