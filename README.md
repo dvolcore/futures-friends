@@ -181,6 +181,13 @@ public address in `intake-config.js`. Never put a secret in a file served to the
 `#jobs` lists the open positions from the CRM and `#job/<id>` shows one with an application form and resume upload (PDF or
 DOCX, up to 5 MB). Run `node --test tests/*.test.js` to check the client.
 
+Lead attribution and SMS consent (2026-10-10, hub/CRM.md C5): `intake.js` keeps first-touch `utm_*`, the referrer host, the landing
+path and `?ref=` in sessionStorage for the visit and sends `utmSource`, `utmMedium`, `utmCampaign`, `utmTerm`, `utmContent`,
+`referrer`, `landingPath`, `refCode` and `lang` ('es'|'en') with the contact, quote, partner, tour and enrollment posts. Every form
+with a phone number has a separate, unticked SMS box (`FFIntake.smsBox`); `smsConsent: true` is sent only when it is ticked.
+Futures at Home sign-ups send `lang`. Careers: no `JobPosting` JSON-LD until applications open; see
+`/Volumes/FFCRM/app/hub/ATS.md` (and the note above `jobsCache` in `intake.js`).
+
 ## Website statistics (optional, off until configured)
 
 `analytics.js` sends privacy-first counts to Futures Friends' own self-hosted, cookieless analytics server (Umami), configured

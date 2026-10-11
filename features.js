@@ -18,7 +18,7 @@ const fmtH = h => (Math.round(h*10)/10).toString().replace(/\.0$/, '');
 const mmss = s => `${Math.floor(s/60)}:${pad(Math.floor(s%60))}`;
 const demoNote = (extra='') => `<p class="ffx-demo"><span aria-hidden="true">\u25cf</span> Demo: requests stay on this device.${extra ? ' ' + extra : ''}</p>`;
 const SAY = (on, off) => (window.FFIntake && window.FFIntake.say ? window.FFIntake.say(on, off) : off);
-const FI = () => window.FFIntake || {enabled: () => false, soon: w => `<p class="small">Online ${w} are not available on this page right now. Please call <b>${FLC.phone}</b> or email <b>${FLC.email}</b>.</p>`, warm() {}, honeypot: () => ''};
+const FI = () => window.FFIntake || {enabled: () => false, soon: w => `<p class="small">Online ${w} are not available on this page right now. Please call <b>${FLC.phone}</b> or email <b>${FLC.email}</b>.</p>`, warm() {}, honeypot: () => '', smsBox: () => '', smsTicked: () => false};
 const colorOf = c => c === 'rainbow' ? 'linear-gradient(90deg,#D9483B,#E8761E,#C99A06,#2E9E57,#6A4FB8)' : (c === 'navy' ? 'var(--navy)' : (c === 'gold' ? 'var(--gold-deep)' : `var(--${c})`));
 const solidOf = c => c === 'rainbow' ? 'var(--bop)' : (c === 'navy' ? 'var(--booker)' : (c === 'gold' ? 'var(--gold-deep)' : `var(--${c})`));
 const MOD = (window.FF && window.FF.modules) || (typeof D !== 'undefined' ? D.modules : []) || [];
@@ -734,6 +734,7 @@ const tourHtml = () => { if (!FI().enabled()) return FI().soon('tour requests');
    <span class="ffx-lbl">3. Your details</span>
    <div class="ffx-row">${inp('tName', 'Parent or guardian name', 'text', 'autocomplete="name"')}${inp('tPhone', 'Phone', 'tel', 'autocomplete="tel" inputmode="tel" placeholder="(816) 555-0123"')}</div>
    <div class="ffx-row">${inp('tEmail', 'Email (optional, for a confirmation)', 'email', 'autocomplete="email"')}${sel('tAge', 'Child\'s age', ['2 years', '3 years', '4 years', '5 years'])}</div>
+   ${FI().smsBox('tSms')}
    ${FI().honeypot('ffiHpT')}
    <button class="btn gold" type="submit" style="justify-self:start">Request this tour</button>
    <p class="ffx-demo" style="font-size:12.5px">This is a request, not a booked tour. The center will call you to agree on a time.</p>
@@ -750,6 +751,7 @@ const appHtml = () => { if (!FI().enabled()) return FI().soon('applications'); s
   <fieldset data-ffx-step="2" hidden style="border:0;padding:0;margin:0;display:grid;gap:12px"><legend class="ffx-lbl" style="margin-bottom:10px">Step 2 of 3 \u00b7 Your family</legend>
    <div class="ffx-row">${inp('aParent', 'Parent or guardian name', 'text', 'autocomplete="name"')}${sel('aRel', 'Relationship to child', ['Parent', 'Guardian', 'Grandparent', 'Other family member'])}</div>
    <div class="ffx-row">${inp('aEmail', 'Email', 'email', 'autocomplete="email"')}${inp('aPhone', 'Phone', 'tel', 'autocomplete="tel"')}</div>
+   ${FI().smsBox('aSms')}
    ${sel('aHeard', 'How did you hear about us?', ['A friend or family member', 'Drove by the center', 'Search or map listing', 'Social media', 'Other'])}</fieldset>
   <fieldset data-ffx-step="3" hidden style="border:0;padding:0;margin:0;display:grid;gap:12px"><legend class="ffx-lbl" style="margin-bottom:10px">Step 3 of 3 \u00b7 Schedule and start date</legend>
    <div class="ffx-row">${sel('aSched', 'Schedule', ['Full time, Monday to Friday ($210 a week)'])}${inp('aStart', 'Preferred start date', 'date')}</div>
@@ -891,7 +893,7 @@ document.addEventListener('submit', e => { const f = e.target; if (!f || !f.id |
   if (f.id === 'ffxTourForm') { const tt = st.ffxTour || {}; const r = [setErr('ffxDate', tt.date ? '' : 'Pick a date.'), setErr('ffxTime', tt.time ? '' : 'Pick a time.'), need('tName', 'your name'), setErr('tPhone', okPhone(val('tPhone')) ? '' : 'Enter a 10-digit phone number.'), setErr('tEmail', !val('tEmail') || okEmail(val('tEmail')) ? '' : 'Check the email address.'), need('tAge', 'your child\'s age')];
     if (!r.every(Boolean)) { const b = f.querySelector('[aria-invalid="true"]'); if (b) b.focus(); else toast(tt.date ? 'Pick a time for your tour.' : 'Pick a date for your tour.'); return; }
     const when = shortDate(fromIso(tt.date)), tl = (TIMES.find(x => x[0] === tt.time) || [, tt.time])[1];
-    const data = {location: 'flc', date: tt.date, time: TIME24[tt.time], name: val('tName'), phone: val('tPhone'), childAge: val('tAge'), website: val('ffiHpT')}; if (val('tEmail')) data.email = val('tEmail');
+    const data = {location: 'flc', date: tt.date, time: TIME24[tt.time], name: val('tName'), phone: val('tPhone'), childAge: val('tAge'), website: val('ffiHpT')}; if (val('tEmail')) data.email = val('tEmail'); if (FI().smsTicked('tSms')) data.smsConsent = true;
     FI().clearMsg(f); FI().busy(f, true);
     FI().submit('tour', data).then(res => {
       if (!res.ok) return FI().showFailure(f, res, TOUR_FIELDS);
@@ -904,7 +906,7 @@ document.addEventListener('submit', e => { const f = e.target; if (!f || !f.id |
     if (!APP_STEPS[3]().every(Boolean)) { firstBad(f); return; }
     const first = val('aFirst'), notes = [val('aSched') && 'Schedule requested: ' + val('aSched'), val('aNotes')].filter(Boolean).join('\n');
     const data = {location: 'flc', name: val('aParent'), relationship: REL[val('aRel')], email: val('aEmail'), phone: val('aPhone'), childFirst: first, childAge: parseInt(val('aAge'), 10), program: PROG[val('aRoom')],
-      preferredStart: val('aStart'), payment: PAY[val('aPay')], heard: val('aHeard'), agree: true, website: val('ffiHpA')}; if (notes) data.message = notes;
+      preferredStart: val('aStart'), payment: PAY[val('aPay')], heard: val('aHeard'), agree: true, website: val('ffiHpA')}; if (notes) data.message = notes; if (FI().smsTicked('aSms')) data.smsConsent = true;
     FI().clearMsg(f); FI().busy(f, true);
     FI().submit('enrollment', data).then(res => {
       if (!res.ok) return FI().showFailure(f, res, APP_FIELDS);

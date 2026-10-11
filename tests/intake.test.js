@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const read = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
 
 // Loads intake.js against a scripted gateway. `routes` maps "METHOD /path" to a function(request) -> {status, body}.
-function load({ url = 'http://gw.test', routes = {} } = {}) {
+function load({ url = 'http://gw.test', routes = {}, globals = {}, doc = {}, win = {} } = {}) {
   const calls = [];
   const fetch = async (u, init = {}) => {
     const p = u.replace(url, '');
@@ -20,8 +20,9 @@ function load({ url = 'http://gw.test', routes = {} } = {}) {
   const context = vm.createContext({
     console, setTimeout, clearTimeout, AbortController, FormData, File, fetch, URLSearchParams,
     V: {}, KEYS: [], phero: () => '', card: () => '', PHONE: '(816) 988-5661', EMAIL: 'info@example.org',
-    window: { FF_INTAKE: url === null ? undefined : { url }, crypto: require('node:crypto').webcrypto },
-    document: { getElementById: () => null, createElement: () => ({}), head: { appendChild() {} }, addEventListener() {}, querySelector: () => null },
+    window: { FF_INTAKE: url === null ? undefined : { url }, crypto: require('node:crypto').webcrypto, ...win },
+    document: { getElementById: () => null, createElement: () => ({}), head: { appendChild() {} }, addEventListener() {}, querySelector: () => null, ...doc },
+    ...globals,
   });
   vm.runInContext(read('intake.js'), context, { filename: 'intake.js' });
   return { api: context.window.FFIntake, context, calls };
@@ -215,4 +216,36 @@ test('sign-up errors from the gateway are surfaced per field, and "subscribe not
   assert.equal(r.ok, false);
   assert.match(r.message, /nothing was saved/);
   assert.match(r.message, /\(816\) 988-5661/);
+});
+
+test('lead attribution: first-touch utm, referrer host, landing path, ref code and lang ride along; smsConsent only when ticked', async () => {
+  const store = {};
+  const globals = { URL, sessionStorage: { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = v; } },
+    location: { search: '?utm_source=Flyer&utm_medium=print&utm_campaign=fall&utm_term=t&utm_content=c&ref=KC-2026', pathname: '/futures-friends/tour', hostname: 'dvolcore.github.io' } };
+  const routes = { ...tokenRoute, 'POST /v1/inquiry': () => accepted };
+  const a = load({ routes, globals, doc: { referrer: 'https://www.google.com/search?q=private' }, win: { FFi18n: { lang: 'es' } } });
+  await a.api.submit('tour', { name: 'Jane', phone: '8165550100', smsConsent: true });
+  const sent = JSON.parse(a.calls.find(c => c.method === 'POST').body);
+  assert.deepEqual([sent.utmSource, sent.utmMedium, sent.utmCampaign, sent.utmTerm, sent.utmContent], ['Flyer', 'print', 'fall', 't', 'c']);
+  assert.deepEqual([sent.referrer, sent.landingPath, sent.refCode, sent.lang, sent.smsConsent], ['www.google.com', '/futures-friends/tour', 'KC-2026', 'es', true]);
+  assert.ok(!JSON.stringify(sent).includes('q=private'), 'no referrer path or query');
+  assert.ok(store['ff-attr'], 'kept in sessionStorage for the visit');
+  // a later page of the same visit (no utm in the URL) still sends the first-touch values; smsConsent absent unless ticked
+  const b = load({ routes, globals: { ...globals, location: { search: '', pathname: '/futures-friends/contact', hostname: 'dvolcore.github.io' } }, win: { FFi18n: { lang: 'en' } } });
+  await b.api.submit('contact', { name: 'Jane', email: 'j@d.co', message: 'hi', phone: '8165550100' });
+  const two = JSON.parse(b.calls.find(c => c.method === 'POST').body);
+  assert.equal(two.utmSource, 'Flyer'); assert.equal(two.landingPath, '/futures-friends/tour'); assert.equal(two.lang, 'en');
+  assert.ok(!('smsConsent' in two));
+  // subscribe forms are not given attribution
+  const c = load({ routes, globals });
+  await c.api.submit('subscribe', { topic: 'futures_at_home', email: 'j@d.co', lang: 'es' });
+  assert.ok(!('utmSource' in JSON.parse(c.calls.find(x => x.method === 'POST').body)));
+});
+
+test('the SMS consent box is separate, unchecked by default and never implied', () => {
+  const { api } = load();
+  const html = api.smsBox('xSms');
+  assert.match(html, /type="checkbox"/); assert.doesNotMatch(html, /checked/);
+  assert.match(html, /Message and data rates may apply; reply STOP to opt out/);
+  assert.equal(api.smsTicked('xSms'), false);
 });

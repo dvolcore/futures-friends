@@ -190,7 +190,7 @@ test('#at-home sign-up posts topic futures_at_home with the age band and consent
   for (let i = 0; i < 4; i++) await new Promise(r => setImmediate(r));
   assert.equal(prevented, true);
   const sent = JSON.parse(calls.find(x => x.method === 'POST').body);
-  assert.deepEqual(sent, { kind: 'subscribe', token: '1.abc', topic: 'futures_at_home', email: 'pat@example.org', firstName: 'Pat', ageBand: 'twos', consent: true });
+  assert.deepEqual(sent, { kind: 'subscribe', token: '1.abc', topic: 'futures_at_home', email: 'pat@example.org', firstName: 'Pat', ageBand: 'twos', consent: true, lang: 'en' });
   assert.match(card.innerHTML, /Check your email to confirm/);
   assert.match(card.innerHTML, /You are not signed up until you open the link/);
   assert.match(card.innerHTML, /FF-FAH1-2345/);

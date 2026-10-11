@@ -65,6 +65,7 @@ async function onSubmit(f) {
   if (!ok.every(Boolean)) { const bad = f.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
   const p = payload({ name: v('fhName'), email: v('fhEmail'), age, consent, website: v('fhHp') });
   Object.keys(p.data).forEach(k => { if (p.data[k] === '') delete p.data[k]; });
+  p.data.lang = window.FFi18n && window.FFi18n.lang === 'es' ? 'es' : 'en';
   I.busy(f, true);
   const r = await I.submit(p.kind, p.data);
   if (r.ok) { const card = $('fhCard'); card.innerHTML = pending({ ref: r.ref, email: p.data.email, emailConfirmation: r.emailConfirmation }); const o = $('ffiOk'); if (o) { o.focus({ preventScroll: true }); o.scrollIntoView({ block: 'nearest' }); } return; }

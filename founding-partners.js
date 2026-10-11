@@ -129,6 +129,7 @@ function formHtml() {
    <div class="ffx-row">${field('fpEmail', 'Email address', '<input class="i" id="fpEmail" name="email" type="email" autocomplete="email" aria-describedby="fpEmail-e">', true)}
    ${field('fpPhone', 'Phone', '<input class="i" id="fpPhone" name="phone" type="tel" autocomplete="tel" aria-describedby="fpPhone-e">', true)}</div>
    ${field('fpWorth', 'What would make this worth it for you?', '<textarea class="i" id="fpWorth" name="worth" maxlength="1500" aria-describedby="fpWorth-e"></textarea>', true)}
+   ${I.smsBox('fpSms')}
    ${I.honeypot('fpHp')}
    <button class="btn gold" type="submit">Send my application</button>
    <p class="ffi-note">${E(NOTE)} We use what you send only to answer your application. See our <a class="rl" href="#privacy">privacy policy</a>.</p>
@@ -169,6 +170,7 @@ async function onSubmit(f) {
   if (!ok.every(Boolean)) { const bad = f.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
   const p = payload({ org: v('fpOrg'), type: v('fpType'), city: v('fpCity'), state: v('fpState'), zip: v('fpZip'), kids: v('fpKids'), rooms: v('fpRooms'),
     name: v('fpName'), email: v('fpEmail'), phone: v('fpPhone'), worth: v('fpWorth'), website: v('fpHp') });
+  if (I.smsTicked('fpSms')) p.data.smsConsent = true;
   I.busy(f, true);
   const r = await I.submit(p.kind, p.data);
   if (r.ok) {

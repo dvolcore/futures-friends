@@ -9,6 +9,7 @@
 'use strict';
 if (!window.FFi18n) return;
 window.FFi18n.add('es', {
+  "Yes, you may text me about my request at this number. Message and data rates may apply; reply STOP to opt out. Optional: you do not need to agree to be contacted another way.": "Sí, pueden enviarme mensajes de texto sobre mi solicitud a este número. Pueden aplicarse tarifas de mensajes y datos; responde STOP para dejar de recibirlos. Es opcional: no necesitas aceptar para que te contactemos de otra manera.",
   "Free stories": "Cuentos gratis",
   "Shop": "Tienda",
   ", 0 items in your bag": ", 0 artículos en tu bolsa",

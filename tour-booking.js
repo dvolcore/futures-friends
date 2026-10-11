@@ -73,6 +73,7 @@ window.addEventListener('submit', async ev => {
   const slot = S.slots.find(s => s.id === S.picked);
   const data = {location:LOCATION, slot:S.picked, name:val('tName'), phone:val('tPhone'), childAge:val('tAge'), website:val('ffiHpT')};
   if (val('tEmail')) data.email = val('tEmail');
+  if ((el('tSms') || {}).checked) data.smsConsent = true;
   FI().clearMsg(f); FI().busy(f, true); S.busy = true;
   const res = await FI().submit('tour', data);
   S.busy = false;

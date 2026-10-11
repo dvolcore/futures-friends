@@ -58,6 +58,40 @@ input[type=file].i{padding:8px 10px}`;
   document.head.appendChild(css);
 }
 
+// ---------------------------------------------------------------- lead attribution (hub/CRM.md C5)
+// First-touch campaign attribution, captured from the landing URL on first arrival and kept in sessionStorage for the visit:
+// utm_* values, the referring host (host only), the landing path (no query) and a referral code (?ref=). It is sent with the tour,
+// enrollment, contact, quote and partner forms. Only marketing parameters are read; no personal data is ever put in a URL.
+// Blocked storage = this page load only (try/catch). The gateway validates every value and drops a bad one.
+const ATTR_KEY = 'ff-attr';
+const ATTR_KINDS = /^(contact|quote|partner|tour|enrollment)$/;
+const clip = (s, n) => String(s || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, n);
+function captureAttribution() {
+  let first = null;
+  try { first = JSON.parse(sessionStorage.getItem(ATTR_KEY) || 'null'); } catch (_) { first = null; }
+  if (first && typeof first === 'object') return first;
+  const a = {};
+  try {
+    const q = new URLSearchParams(location.search || '');
+    [['utm_source', 'utmSource'], ['utm_medium', 'utmMedium'], ['utm_campaign', 'utmCampaign'], ['utm_term', 'utmTerm'], ['utm_content', 'utmContent']]
+      .forEach(([k, out]) => { const v = clip(q.get(k), 100); if (v) a[out] = v; });
+    const code = clip(q.get('ref'), 24); if (/^[A-Za-z0-9-]{4,24}$/.test(code)) a.refCode = code;
+    const host = (document.referrer && new URL(document.referrer).hostname) || '';
+    if (host && host !== location.hostname) a.referrer = host;
+    const path = clip(location.pathname || '/', 300); a.landingPath = path.charAt(0) === '/' ? path : '/' + path;
+  } catch (_) { /* no location (tests) */ }
+  try { sessionStorage.setItem(ATTR_KEY, JSON.stringify(a)); } catch (_) { /* storage blocked: this page load only */ }
+  return a;
+}
+const attribution = captureAttribution();
+const siteLang = () => (window.FFi18n && window.FFi18n.lang === 'es' ? 'es' : 'en');
+
+// The separate, UNCHECKED-by-default SMS consent box (TCPA): shown on every form that collects a phone number, never implied by
+// giving a number, and sent as smsConsent:true only when ticked. Wording is a DRAFT in Spanish (i18n-es-site.js).
+const SMS_TEXT = 'Yes, you may text me about my request at this number. Message and data rates may apply; reply STOP to opt out. Optional: you do not need to agree to be contacted another way.';
+const smsBox = id => `<label class="ffi-check" for="${id}"><input type="checkbox" id="${id}" name="smsConsent"><span>${e(SMS_TEXT)}</span></label>`;
+const smsTicked = id => !!(el(id) && el(id).checked);
+
 // ---------------------------------------------------------------- network
 async function http(method, path, opts = {}) {
   const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
@@ -111,6 +145,7 @@ async function submit(kind, data) {
   if (!enabled()) return report(kind, unavailable);
   let t; try { t = await token(); } catch (_) { return report(kind, interpret({ network: true })); }
   const body = Object.assign({ kind, token: t }, data);
+  if (ATTR_KINDS.test(kind)) { Object.assign(body, attribution, { lang: siteLang() }); if (data.smsConsent !== true) delete body.smsConsent; }
   // Sent from the Spanish site: the request says so in its message (the gateway keeps no other free field), so the center can
   // answer in Spanish. Only when it fits the gateway's message limit (2000 contact/quote/partner, 500 tour/enrollment).
   if (window.FFi18n && window.FFi18n.lang === 'es' && /^(contact|quote|partner|tour|enrollment)$/.test(kind)) {
@@ -138,6 +173,9 @@ async function status(ref, mail) {
   return interpret(r);
 }
 
+// NOTE (careers): deliberately NO schema.org JobPosting JSON-LD on #jobs or #job/<id> yet. Applications are not open and the Hub is
+// not deployed, so posting markup for jobs nobody can apply to would mislead search engines and applicants. When the ATS goes live,
+// see /Volumes/FFCRM/app/hub/ATS.md (posting and apply flow) before adding JobPosting markup.
 let jobsCache = null;
 async function jobs(force) {
   if (!enabled()) return unavailable;
@@ -295,6 +333,7 @@ function contactHtml(mode, preset) {
    <label class="f" for="cZip">ZIP code<input class="i" id="cZip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" aria-describedby="cZip-e"><span class="ffx-err" id="cZip-e" aria-live="polite"></span></label></div>
    <label class="f" for="cEmail">Email address<input class="i" id="cEmail" name="email" type="email" autocomplete="email" aria-describedby="cEmail-e"><span class="ffx-err" id="cEmail-e" aria-live="polite"></span></label>
    <label class="f" for="cPhone">Phone (optional)<input class="i" id="cPhone" name="phone" type="tel" autocomplete="tel" aria-describedby="cPhone-e"><span class="ffx-err" id="cPhone-e" aria-live="polite"></span></label>
+   ${smsBox("cSms")}
    <label class="f" for="cMsg">Message<textarea class="i" id="cMsg" name="message" aria-describedby="cMsg-e">${e(order)}</textarea><span class="ffx-err" id="cMsg-e" aria-live="polite"></span></label>
    ${honeypot()}
    <button class="btn gold" type="submit">Send my request</button>
@@ -316,6 +355,7 @@ async function onContact(f) {
   const data = Object.assign({ name: val('cName'), email: val('cEmail'), phone: val('cPhone'), message: val('cMsg'), org: val('cOrg'), title: val('cTitle'),
     orgType: val('cType'), zip: val('cZip'), website: val('ffiHp') }, extra);
   if (val('cKids')) data.kids = val('cKids');
+  if (data.phone && smsTicked('cSms')) data.smsConsent = true;
   for (const k of Object.keys(data)) if (data[k] === '') delete data[k];
   busy(f, true);
   const r = await submit(kind, data);
@@ -460,6 +500,6 @@ document.addEventListener('click', ev => {
 document.addEventListener('toggle', ev => { const t = ev.target; if (t && t.matches && t.matches('[data-ffi-sum]') && t.open) sumRefresh(t); }, true);
 document.addEventListener('input', ev => { const t = ev.target; if (t && t.closest && t.hasAttribute && t.hasAttribute('data-ffi-sumf') && t.closest('[data-ffi-sum]')) sumRefresh(t.closest('[data-ffi-sum]')); if (t && t.getAttribute && t.getAttribute('aria-invalid') === 'true') setErr(t.id, ''); });
 
-window.FFIntake = { enabled, say, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
+window.FFIntake = { smsBox, smsTicked, enabled, say, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
   _t: { interpret, keyFor, orderText } };
 })();
