@@ -32,7 +32,7 @@ const shortD = s => { try { return api().shortDate(s); } catch (_) { return s; }
 const chipFor = st => ({draft:['','Draft'], submitted:['warn','Waiting for approval'], approved:['ok','Approved'], returned:['bad','Returned with a note']}[st] || ['','No plan yet']);
 const roleLabel = r => ({teacher:'Demo Teacher', director:'Demo Director', family:'Demo Family', academy:'Demo Academy staff', staff:'Demo Staff (hours only)'}[r] || 'Demo');
 const SAMPLE = '<span class="ffd-samp">Sample data</span>';
-const BADGE = '<span class="ffd-badge" role="note"><span aria-hidden="true">●</span> Demo · sample data, resets anytime</span>';
+const BADGE = '<span class="ffd-badge" role="note"><span aria-hidden="true">●</span> Interactive demo (sample data), resets anytime</span>';
 const say = m => { try { toast(m); } catch (_) {} };
 function rerender(focus){ render(); if (focus) { const el = document.querySelector(focus); if (el) try { el.focus({preventScroll:true}); } catch (_) {} } }
 const kidsOf = room => { const a = api(); return a ? a.roomKids(room) : []; };
@@ -70,7 +70,7 @@ function signinCard(who){
    <p class="small">Signed in as <b>${E(s.name)}</b> (${E(s.label)}) at ${E(DM.CENTER)}.</p>${centerChip()}
    <div class="ffd-row"><button class="btn gold" type="button" data-demo="home">Open my ${s.role === 'family' ? 'Family Portal' : s.role === 'academy' ? 'training' : s.role === 'staff' ? 'time clock' : s.role === 'director' ? 'Director Portal' : 'Teacher Portal'}</button><button class="btn soft" type="button" data-demo="signout">Sign out</button></div></div>`;
   const fam = who === 'Family';
-  return `<div class="card signin ffd-card" id="ffdSignin">${BADGE}<h2 class="h3">Try the Futures Hub demo</h2>
+  return `<div class="card signin ffd-card" id="ffdSignin">${BADGE}<h2 class="h3">Interactive demo (sample data)</h2>
    <p class="small">The live Futures Hub is not open to the public yet. This demo works the same way with made-up sample data for <b>${E(DM.CENTER)}</b>. It runs only in this browser: nothing you do is sent anywhere.</p>
    ${centerPick('ffdCenterSignin', 'Sign in to this demo center')}
    ${roleButtons(fam ? 'family' : 'teacher')}
@@ -132,7 +132,7 @@ try { if (sessionStorage.getItem('ff-demo-just-reset')) { sessionStorage.removeI
 // ---------------------------------------------------------------- the portal header and tabs
 function headerBits(c){
   const s = ses() || {};
-  return `<span class="ffd-badge ffd-dark" role="note"><span aria-hidden="true">●</span> Demo · sample data, resets anytime</span>
+  return `<span class="ffd-badge ffd-dark" role="note"><span aria-hidden="true">●</span> Interactive demo (sample data), resets anytime</span>
    ${centerChip(null, true)}
    <span class="small ffd-who" id="hubWho">Signed in as <b>${E(s.name || '')}</b> (${E(s.label || roleLabel(c.role))}) · ${E(DM.CENTER)}</span>
    <span class="ffd-acts">${c.role === 'family' ? '' : `<span class="ffd-switch">${centerPick('ffdCenterSwitch', 'Switch center')}</span><button type="button" class="btn soft ffd-mini" data-go="start-center">Start a new center</button>`}<button type="button" class="btn soft ffd-mini" data-go="account">Account</button><button type="button" class="btn soft ffd-mini" data-demo="reset">Reset demo</button><button type="button" class="btn soft ffd-mini" data-demo="signout">Sign out</button></span>`;

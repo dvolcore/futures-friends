@@ -157,7 +157,7 @@ for (const width of [390, 1280]) {
     await h.goto(page, srv.base, 'portal', 500);
     let t = await text(page);
     assert.match(t, /Sign in with a demo account to open the Teacher Portal/);
-    assert.match(t, /Demo · sample data, resets anytime/);
+    assert.match(t, /Interactive demo \(sample data\), resets anytime/);
     assert.match(t, /teacher@demo\.futuresfriends/);
     await shot(page, width, 'teacher-signin'); await axeClean(page, 'sign-in'); await noSideScroll(page, 'sign-in');
     await signIn(page, 'teacher');

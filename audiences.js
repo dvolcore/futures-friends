@@ -96,7 +96,7 @@
     ['signin-teacher', 'Teacher and director portal', 'The classroom day, check-in, plans, progress and reports.', 'zuri'],
     ['learn', 'Futures Friends Academy', 'Courses and training records for staff.', 'booker'],
     ['start-center', 'A center\'s own sign-in page', 'Create a demo center with its own name, colour and sign-in page.', 'bop']];
-  V['sign-in'] = () => hero('Sign in', 'Sign in to Futures Friends', 'Choose your portal. These are previews with demo accounts and sample data.', { chars: ['lumi', 'zuri'] })
+  V['sign-in'] = () => hero('Sign in', 'Sign in to Futures Friends', 'Families and staff sign in to the Futures Hub. The portals below are an interactive demo with sample data.', { chars: ['lumi', 'zuri'] })
     + sect('aud-sign-h', 'band-paper', `<h2 id="aud-sign-h" class="sr-only">Portals</h2><ul class="aud-cards aud-cards-sign">${PORT.filter(([r]) => has(r)).map(([r, h, p, k]) => card('#' + r, h, p, k)).join('')}</ul><p class="small aud-signnote">Trouble signing in? <a class="rl" href="#reset-password">Reset your password</a> or call <a class="rl" href="tel:+18169885661">${E(PHONE_)}</a>.</p>`);
 
   // ---------------------------------------------------------------- address aliases
