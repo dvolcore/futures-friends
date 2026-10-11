@@ -3,10 +3,6 @@
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const data = JSON.parse($('#planData').textContent);
-  const financials = data.financials;
-  const money = (n, cents = false) => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:cents?2:0,minimumFractionDigits:cents?2:0}).format(n);
-  const number = n => new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(n);
-  const loan = principal => financials.debt_scenarios.find(d => d.principal === +principal);
   let active = 'decision';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let motion = !reduced.matches;
@@ -49,6 +45,26 @@
   });
   $('#chapterSelect').addEventListener('change', e => {location.hash = e.target.value;});
 
+  /* Historical financing widgets remain in the narrative for traceability. The
+     current financial reconciliation is the authoritative underwriting path. */
+  function markHistoricalControls(){
+    $$('[data-loan],[data-ramp],[data-cash],[data-margin],[data-case],[data-partner]').forEach(control=>{
+      if ('disabled' in control) control.disabled=true;
+      control.setAttribute('aria-disabled','true');
+      control.title='Historical sensitivity retained for traceability. See the current financial update.';
+    });
+    $$('.interactive-panel').forEach(panel=>{
+      if(!panel.querySelector('[data-loan],[data-ramp],[data-cash],[data-margin],[data-case],[data-partner]')) return;
+      panel.classList.add('historical-disabled');
+      if(!panel.querySelector('.current-financial-link')){
+        const p=document.createElement('p');p.className='current-financial-link';
+        p.innerHTML='<strong>Current figures:</strong> <a href="financial-update.html">Open the October 2026 financial reconciliation ↗</a>';
+        panel.append(p);
+      }
+    });
+  }
+
+  /* Legacy calculators are intentionally not initialized. */
   function bars(id, items, maximum) {
     const host = document.getElementById(id);
     host.replaceChildren();
@@ -152,6 +168,7 @@
   });
   document.addEventListener('fullscreenchange',()=>{$('#fullscreenButton').textContent=document.fullscreenElement?'Exit full screen':'Full screen';});
 
+  /*
   function capital(principal) {
     document.dispatchEvent(new CustomEvent('ff-loan-change',{detail:{principal}}));
     const d=loan(principal);
@@ -200,6 +217,14 @@
   const growthAccounts=20.76430479762553;
   let accounts=growthAccounts;
   function partner(){
+    // This legacy panel is retained for traceability only. Do not present its old
+    // sensitivity math as current receipts or debt coverage.
+    $('#partnerNet').textContent='Not established';
+    $('#combinedCash').textContent='Not established';
+    $('#combinedCoverage').textContent='Unproven';
+    $('#partnerInsight').textContent='Historical sensitivity retained for traceability. No signed partner receipts have been supplied, so current cash contribution and debt coverage are not established.';
+    $('#partnerNote').textContent='No signed partner receipts supplied for this model. Use the current financial reconciliation for the 687-row cost model and 72-month stress test.';
+    return;
     const margin=+$('#margin').value,children=+$('#partnerChildren').value,principal=+$('#partnerLoan').value;
     const payment=loan(principal).amortizing_monthly_payment;
     const centerCash=children*840-23500;
@@ -218,6 +243,7 @@
   $('#growthPreset').addEventListener('click',()=>{accounts=growthAccounts;$('#partnerAccounts').value=accounts;$('#margin').value='0.6';$('#partnerChildren').value='34';$('#partnerLoan').value='240000';partner();});
   $('#noPartners').addEventListener('click',()=>{accounts=0;$('#partnerAccounts').value=0;partner();});
 
+  */
   const searchItems=$$('.source-section').map(s=>({id:s.id,chapter:s.closest('.chapter').id,title:s.querySelector('h2,h3')?.textContent||'Investment decision',text:s.textContent.replace(/\s+/g,' ').trim()}));
   function search(){
     const query=$('#searchInput').value.trim().toLocaleLowerCase();
@@ -238,10 +264,7 @@
   $('#searchInput').addEventListener('input',search);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#searchDialog').open){e.preventDefault();$('#searchDialog').close();}else if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!$('#searchDialog').open)$('#searchButton').click();}});
 
-  capital(240000);center();ramp('base');cash('base');partner();
-  let expected=0;
-  const growth=Array.from({length:24},(_,i)=>{const month=i+1;expected=expected*.98+(month>=4?(month<=8?2:1):0);return expected;});
-  lineChart('partnerGrowthChart',growth);
+  markHistoricalControls();
   syncMotion();followHash(false);
   window.addEventListener('load',paintMotion);
   window.addEventListener('beforeprint',()=>{document.body.classList.add('printing');});

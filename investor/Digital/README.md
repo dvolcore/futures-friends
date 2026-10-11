@@ -1,35 +1,32 @@
-# Futures Friends digital investor presentation
+# Futures Friends investor presentation
 
-Open index.html in a browser. Choose “Read the full business plan” for the complete digital reader in business-plan.html. Keep Digital beside the five PDFs so the links work. All images, video and controls are local; no external fonts or services are needed. Published for investor review through GitHub Pages. This address and its files are publicly accessible.
+Open `index.html` for the brand presentation, `financial-update.html` for the current financial reconciliation, and `business-plan.html` for the retained business narrative. All package files use relative links. External research links require internet access.
 
-## Presenting
+## Current financial basis — October 11, 2026
 
-The bright cream, blue and character-color design uses dimensional brand artwork, layered hero movement and a chapter rail on desktop. Merchandise, curriculum, family experience, partner support and financing each have their own section. On mobile, use the header links or scroll.
+The full-scope gross year-one model is $3,139,152.61, with a $2,616,874.61–$3,963,953.40 cost range. The proposed $1.5M loan leaves a gross $1,639,152.61 gap before verified receipts, available capital or scope changes. Debt costs and historical creator backpay are excluded. This is not an approved funding request.
 
-Choose Read, Move, Explore or Nourish to inspect program material. Move and Explore share the existing day-plan source; these are views of the offer, not four separate completed curriculum products. Choose backpacks, apparel, drinkware or books to view full product artwork. Artwork opens in a larger viewer. The family section includes an existing short character clip with English captions, a draft Spanish caption track awaiting educator review, and source classroom references.
+There are 687 itemized rows and 49 source records. The model combines published references, documented assumptions, and allowances requiring quotes; published rates still use assumed quantities where noted. The legacy debt tiers in `model/debt-schedule.csv` are historical sensitivities; the appended 72-month $1.5M schedule is illustrative only, with terms and draw schedule unagreed. The downloadable workbook, CSV and JSON are the October 11 package deliverables. The cost workbook records 49 source records (48 external and one management planning record) and 133 source-referenced lines; 554 remaining rows are allowances requiring records or quotes. The Higgsfield usage audit is included separately and distinguishes observed account activity from paid Futures Friends spend. These materials are not vendor quotes or audited accounts.
 
-Scroll through the financial charts: bars and the funding ring grow as they enter view and contract as they leave. Scrolling back reverses the movement. Motion off renders completed charts; the browser reduced-motion setting also removes movement. Present opens fullscreen on supported desktop browsers, and Escape exits. Controls and dialogs support keyboard use.
+The plan separates center operations, provider-platform services and content/products, then consolidates cash with shared expenses allocated once. One pilot location serves ages 2–5. Capacity, lease, enrollment and current staff require records. The base model includes a 12 × 7-minute season and a 50-device pilot.
 
-Choose the $140K, $240K or $500K loan to compare scheduled obligations. The repayment bridge and allocation are explicitly the recommended $240K case. Growth-test presets at 40% and 60% contribution, plus a 40-account expansion test, compare coverage; manual controls vary partner accounts and contribution margins. Reset returns to the original month-24 growth test. Select each funding category for its amount and purpose. Assumptions and expandable investor questions explain the model and unresolved diligence.
+A full-closing $1.5M loan at illustrative 12% would require 12 interest-only payments of $11,250 followed by 60 amortizing payments of $33,366.67: total $2,182,000.29. This illustrates finite principal and interest only. No equity, conversion or permanent ownership is offered. Terms, draw schedule and repayment capacity remain unagreed.
 
-The presentation header keeps Return to business plan and Restart presentation visible on desktop and phones. Return restores the last visited chapter or source section in the same browser tab. Restart exits presentation mode and returns to the opening. Escape also exits the presentation fallback.
+## Included documents
 
-## Full business plan
+- `01_Investor_Business_Plan.pdf`: current branded control document with the complete 44-page narrative preserved as a clearly marked historical reference.
+- `02_Series_Curriculum_Production_Bible.pdf`: current branded production and curriculum control document with the original 35-page Bible preserved as reference.
+- `03_Program_Operations_Evidence_Companion.pdf`: current branded operating and evidence control document with the original 117-page companion preserved as reference.
+- `04_Platform_One_Sheet.pdf`: current platform one-sheet.
+- `05_Investor_One_Sheet.pdf`: current investor one-page financial and investment overview.
+- `06_Financial_Reconciliation.pdf`: current financial reconciliation, assumptions, gates and research records, including the 72-month stress schedule and Higgsfield usage audit.
+- `costs/`: the exact itemized workbook, CSV and JSON.
+- `archive/`: preserved pre-update business plan and investor one-sheet.
 
-The new reader retains all 56 source sections and 14 tables from the 44-page business master, arranged in nine chapters. Use the chapter rail or phone selector, then Next chapter to continue. Search plan (Ctrl+K or Command+K) finds source sections and opens their chapter. Escape closes search. The logo returns to the opening presentation.
+The digital reader retains the original 56 sections and 14 tables. Its old finance scenarios are explicitly historical. The presentation hides the old financing widgets and displays the current reconciliation instead. Navigation, chapter completion and return-to-presentation controls remain available.
 
-The reading console shows the current chapter, section and chapter scroll position. Its nine numbered stops jump between chapters. Eight illustrated handoffs preview the next chapter; three section transitions link the market, delivery and cash-flow discussion. Layered light effects and reversible entrance movement adapt the command-center design to the bright Futures Friends palette. The last chapter ends with an explicit End of the business plan panel, closing-requirement and PDF links, a restart link and a return to the presentation. The ending also appears in print. Reaching the ending does not record or claim that every section was read.
+## Remaining underwriting work
 
-Interactive sections cover enrollment and collections, three loan alternatives, base and slower cash bridges, and recurring daycare/church partner contribution. Charts respond to controls and rise or fall on scroll. Motion off and reduced-motion settings show completed charts. The full PDF stays available in the header. Print includes all chapters. Financial diligence provides the original model inputs and CSV schedules for download.
+The 72-month forecast, 12-month budget and cash bridge are included. Replace assumptions with actual operating records, obtain scoped written quotes and validate formal financial statements before underwriting. Assign funded phases, reconcile segment economics, and retest debt service against slower demand and higher costs. Count liquidity reserves once. The remaining work is evidence, review and acceptance.
 
-The reader works from this folder offline. Official research links require internet access. Source fidelity checks, six responsive widths, financial scenario verification and rendered previews are recorded in Source_Files/Current_Review_Evidence/Digital_Business_Plan.
-
-## Basis
-
-Loan illustrations use 9% annual interest, 12 interest-only months and 60 amortizing payments. No equity or permanent ownership is offered. The $500K case requires separate underwriting. Repayment combines local center tuition and projected subscriptions from other daycares and churches. The expansion test is a sensitivity, not a forecast. Setup receipts and merchandise are excluded from recurring debt coverage.
-
-Paid contracts, licensed capacity, owner compensation, taxes, manufacturing and fulfillment, later marketing costs and portal operational acceptance remain diligence items. Existing artwork, decoded images and a playing video do not prove paid traction or production readiness. Classroom source photos have unverified installation dates. Training content does not establish accreditation.
-
-The final sweep also updates all five PDFs with current program status, financing caveats and repayment sensitivities. Original long-form Bible and merchandise catalog remain in the source archive.
-
-Current design captures, asset provenance and functional checks are in Source_Files/Current_Review_Evidence/Digital_Bright_Overhaul. Older reports document earlier editions. The editable rebuild script references the original authoring workspace; adapt its paths before using it elsewhere.
+Publication proves that the documents are accessible. It does not prove hosted platform readiness, privacy approval, current collections, signed customer demand or debt affordability.

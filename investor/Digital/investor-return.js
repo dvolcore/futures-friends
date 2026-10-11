@@ -4,11 +4,11 @@
   if (!host) return;
   const money = n => new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(n);
   const set = (key, value) => host.querySelectorAll(`[data-return="${key}"]`).forEach(el => {el.textContent = value;});
-  let principal = 240000;
+  let principal = 1500000;
   let schedule = [];
   let total = 0;
   function calculate(p) {
-    const rate = .09 / 12;
+    const rate = .12 / 12;
     const payment = p * rate / (1 - Math.pow(1 + rate, -60));
     let balance = p, received = 0, earned = 0, repaid = 0;
     const rows = [];
@@ -41,10 +41,12 @@
     schedule = result.rows; total = result.total;
     set('principal', money(principal));set('total', money(total));set('earned', money(result.earned));
     set('percent', `${(result.earned / principal * 100).toFixed(2)}%`);
-    set('io', money(principal * .09 / 12));set('payment', money(result.payment));
+    set('io', money(principal * .12 / 12));set('payment', money(result.payment));
     for (const key of ['io','payment']) {
-      const label = document.createElement('span');label.textContent = '/ month';
-      host.querySelector(`[data-return="${key}"]`).append(label);
+      const target = host.querySelector(`[data-return="${key}"]`);
+      target.querySelectorAll('.return-unit').forEach(node => node.remove());
+      const label = document.createElement('span');label.className='return-unit';label.textContent = ' / month';
+      target.append(label);
     }
     host.querySelectorAll('[data-return-loan]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.returnLoan) === principal)));
     const body = host.querySelector('[data-return="year-rows"]');body.replaceChildren();
@@ -59,20 +61,18 @@
       });
       body.append(tr);
     }
-    set('condition', `Proposed terms, not a signed loan or guaranteed return. Illustration assumes the full ${money(principal)} is funded at closing, payments at month-end and all 72 payments made on time. Paid partner collections and repayment capacity remain unverified. Staged advances, fees and early repayment require an agreed schedule and may change total interest. Figures use the unrounded model payment; displayed cents and the final payment must be reconciled in the signed note.${principal === 500000 ? ' The $500K option is a later expansion illustration, subject to a separate scale plan and underwriting.' : ''}`);
+    set('condition', `Proposed terms, not a signed loan or guaranteed return. Illustration assumes the full ${money(principal)} is funded at closing, payments at month-end and all 72 payments made on time. Paid partner collections and repayment capacity remain unverified. The current cash stress test fails debt coverage in every modeled case; this table shows contractual math only, not capacity to pay. Staged advances, fees and early repayment require an agreed schedule and may change total interest. Figures use the unrounded model payment; displayed cents and the final payment must be reconciled in the signed note.`);
     paintMonth();
   }
   host.querySelector('#return-month').addEventListener('input', paintMonth);
   host.querySelectorAll('[data-return-loan]').forEach(button => button.addEventListener('click', () => {
     const p = Number(button.dataset.returnLoan);
-    const existing = document.querySelector(`[data-loan="${p}"]`);
-    if (existing) existing.click(); else render(p);
+    render(p);
   }));
-  document.addEventListener('ff-loan-change', e => render(e.detail.principal));
   host.querySelector('[data-return-download]').addEventListener('click', () => {
     const lines = [
       'Futures Friends - Proposed investor repayment illustration',
-      `Principal USD,${principal}`, 'Nominal annual interest rate,9%',
+      `Principal USD,${principal}`, 'Nominal annual interest rate,12%',
       'Months 1-12 interest only; months 13-72 amortizing; full funding at closing; month-end payments',
       'Unrounded model values shown to 6 decimal places; displayed cents and final payment require reconciliation in signed note',
       'Staged draws; fees; early repayment; defaults may change actual receipts. No guaranteed return or ownership.',
