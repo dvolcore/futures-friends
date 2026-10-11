@@ -1,0 +1,30 @@
+# Website CI (N1, platform repo docs/ops/CI.md; install: tools/ci/README.md): every push and pull request runs the site's tests that need no browser and no local
+# services (tools/ci-tests.mjs). Nothing is built or deployed here and no secrets are used: publishing stays a separate, manual step.
+# The browser suites (axe accessibility, site e2e, the link map) run locally with Chromium: node --test tests/
+name: site tests
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    name: site tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: site tests (no browser)
+        run: node tools/ci-tests.mjs
