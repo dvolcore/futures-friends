@@ -240,6 +240,7 @@
       "CNT-093",
       "CNT-094",
       "CNT-095",
+      "CNT-HIGGS",
       "MKT-001",
       "MKT-002",
       "MKT-003",
@@ -1849,6 +1850,24 @@
       "low_total": 1200.0,
       "base_total": 1500.0,
       "high_total": 1875.0
+    },
+    {
+      "id": "CNT-HIGGS",
+      "facet": "Content production",
+      "item": "Higgsfield generation credits \u2014 season, QR clips and promos",
+      "unit": "season generation credit allowance (top-up packs)",
+      "qty": 1,
+      "low_rate": 10575,
+      "base_rate": 13865,
+      "high_rate": 20915,
+      "bucket": "one_time",
+      "source": "HIGGS",
+      "status": "Published rate \u00d7 assumed quantity",
+      "notes": "102 minutes total scope (84 season + 12 QR habit minutes + 6 promo minutes) \u00d7 60 \u00d7 12 credits/sec \u00d7 4 generated/finished-second assumption = 293,760 credits; ceil to 59 \u00d7 $235 5,000-credit packs = $13,865 base. Low 3\u00d7 yield = 45 packs/$10,575; high 6\u00d7 yield = 89 packs/$20,915. Consumer Ultra subscription credits and historical $565 invoices are excluded from future cash; vendor quote, approved yield, rights and final acceptance remain pending.",
+      "selected": true,
+      "low_total": 10575.0,
+      "base_total": 13865.0,
+      "high_total": 20915.0
     },
     {
       "id": "MKT-001",
@@ -12691,18 +12710,18 @@
       "facet": "Reserves",
       "item": "Delivery rework reserve",
       "unit": "project dollar",
-      "qty": 1045102.0,
-      "low_rate": 0.11657114807932624,
+      "qty": 1058967.0,
+      "low_rate": 0.11654281011589597,
       "base_rate": 0.15,
-      "high_rate": 0.2089179812114033,
+      "high_rate": 0.2091451858273204,
       "bucket": "reserve",
       "source": "ALLOW",
       "status": "Planning allowance; written quote needed",
       "notes": "15% selected one-time platform/content/marketing scope; contingency is funding cash, released only on approved change. Low/high are -20%/+25% rate sensitivity, not observed market range.",
       "selected": true,
-      "low_total": 121828.74,
-      "base_total": 156765.3,
-      "high_total": 218340.6
+      "low_total": 123414.99,
+      "base_total": 158845.05,
+      "high_total": 221477.85
     },
     {
       "id": "RES-003",
@@ -16339,6 +16358,13 @@
       "checked": "2026-10-10"
     },
     {
+      "id": "HIGGS",
+      "title": "Higgsfield observed UI pricing",
+      "url": "https://higgsfield.ai/",
+      "basis": "Observed UI audit: Consumer Ultra $375/month for 9,000 credits; 5,000-credit top-up $235/90 days ($0.047/credit); Seedance 2.5 1080p high with audio 12 credits/second. Scope arithmetic is a planning assumption; no approved yield, rights or finished-minute acceptance.",
+      "checked": "2026-10-10"
+    },
+    {
       "id": "DEV",
       "title": "Worthwhile rate card",
       "url": "https://www.worthwhile.com/rates",
@@ -16671,49 +16697,49 @@
   "summary": {
     "low": {
       "buckets": {
-        "one_time": 1041702.01,
+        "one_time": 1052277.01,
         "recurring": 1118444.09,
         "inventory": 21527.5,
         "refundable_deposit": 7200.0,
-        "reserve": 415839.76
+        "reserve": 417426.01
       },
-      "total": 2604713.36,
+      "total": 2616874.61,
       "monthly_recurring": 93203.67,
-      "before_reserves": 2188873.6
+      "before_reserves": 2199448.6
     },
     "base": {
       "buckets": {
-        "one_time": 1331255.33,
+        "one_time": 1345120.33,
         "recurring": 1266942.18,
         "inventory": 24509.5,
         "refundable_deposit": 9000.0,
-        "reserve": 491500.85
+        "reserve": 493580.6
       },
-      "total": 3123207.86,
+      "total": 3139152.61,
       "monthly_recurring": 105578.52,
-      "before_reserves": 2631707.01
+      "before_reserves": 2645572.01
     },
     "high": {
       "buckets": {
-        "one_time": 1812560.96,
+        "one_time": 1833475.96,
         "recurring": 1477610.07,
         "inventory": 28237.0,
         "refundable_deposit": 11250.0,
-        "reserve": 610243.12
+        "reserve": 613380.37
       },
-      "total": 3939901.15,
+      "total": 3963953.4,
       "monthly_recurring": 123134.17,
-      "before_reserves": 3329658.03
+      "before_reserves": 3350573.03
     }
   },
   "facets": {
-    "Content production": 525782.0,
+    "Content production": 539647.0,
     "Daycare operations": 300391.99,
     "Marketing and sales": 186770.0,
     "Merchandise": 12320.0,
     "Other business facets": 316097.27,
     "Platform completion": 441000.0,
-    "Reserves": 488500.85,
+    "Reserves": 490580.6,
     "Staff": 842640.08,
     "Taxes": 5865.19,
     "Technology": 3840.48

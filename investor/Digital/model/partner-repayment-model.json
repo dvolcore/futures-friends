@@ -1,7 +1,7 @@
 {
-  "status": "planning sensitivity; noncontractual and not underwritten",
+  "status": "planning sensitivity; noncontractual, uncontracted and not underwritten",
   "inputs": {
-    "opening_cash": "240000",
+    "opening_cash": "1500000",
     "prices": {
       "home": {
         "setup": "1495",
@@ -37,7 +37,7 @@
       "growth": 4
     },
     "noncenter_spend_first12": "115000",
-    "debt": "$240,000; 9%; 12 IO months at $1,800, then 60 months at $4,982.01"
+    "debt": "$1,500,000 proposed loan amount; 9%; 12 IO months at $11,250, then 60 months at $31,137.53; terms and draw schedule unagreed"
   },
   "weighted_site_monthly_gross": "197.0",
   "required_active_sites_for_1_25x_after_month12": {
@@ -215,5 +215,25 @@
       "month24_recurring_gross": "4090.57",
       "month24_recurring_net": "2454.34"
     }
-  }
+  },
+  "current_model": {
+    "loan_principal": 1500000,
+    "annual_rate": 0.09,
+    "interest_only_months": 12,
+    "interest_only_payment": 11250,
+    "amortization_months": 60,
+    "amortizing_payment": 31137.532839530806,
+    "source_forecast": "PHASED_MONTHLY_72M_FORECAST.json",
+    "gross_base_cost": 3139152.61,
+    "gross_gap_vs_loan": 1639152.61,
+    "revenue_status": "Illustrative unsecured stress scenarios; no signed partner receipts supplied",
+    "operating_case": "one pilot location, ages 2\u20135",
+    "cash_summary_minimum_extra_capital_required": {
+      "zero": 10481202.278743533,
+      "downside": 8888462.474093549,
+      "base": 7746281.686343543,
+      "upside": 6145147.719543553
+    }
+  },
+  "historical_legacy_scenarios_note": "The older 240K partner scenarios are retained for historical traceability only and are not current financing recommendations."
 }

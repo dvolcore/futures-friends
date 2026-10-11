@@ -2,10 +2,10 @@
   "current_financial_reconciliation": {
     "status": "proposed planning basis; not a funded commitment or offer",
     "proposed_facility": 1500000,
-    "base_first_year_gross": 3123207.86,
-    "gap_before_receipts_or_scope": 1623207.86,
-    "itemized_rows": 686,
-    "source_referenced_rows": 132,
+    "base_first_year_gross": 3139152.61,
+    "gap_before_receipts_or_scope": 1639152.61,
+    "itemized_rows": 687,
+    "source_referenced_rows": 133,
     "pilot_locations": 1,
     "age_range": "2-5",
     "equity_offered": false,
@@ -19,9 +19,19 @@
       "note": "Illustration only; not a quote, guarantee, commitment or securities offering."
     },
     "future_partner_revenue": "No signed partner receipts supplied for this model; excluded from proven receipts",
-    "planning_allowance_rows": 554
+    "planning_allowance_rows": 554,
+    "as_of": "2026-10-11",
+    "forecast_source": "PHASED_MONTHLY_72M_FORECAST.json",
+    "cash_stress_minimum_additional_capital": {
+      "zero": 10481202.2787,
+      "downside": 8888462.4741,
+      "base": 7746281.6863,
+      "upside": 6145147.7195
+    },
+    "note": "Current gross model and 72-month debt schedule are illustrative planning inputs; no receipts, contract, acceptance or repayment guarantee is established.",
+    "source_records": 49
   },
-  "as_of": "2026-10-08",
+  "as_of": "2026-10-11",
   "currency": "USD",
   "status": "historical operating and financing scenarios superseded by current_financial_reconciliation",
   "borrower_and_team": {
@@ -657,5 +667,6 @@
     "status": "Planning scenarios; no contracted income assumed as actual",
     "recurring": "monthly licenses and support",
     "other_receipts": "setup, training and merchandise require separate delivery and cost accounting"
-  }
+  },
+  "historical_as_of": "2026-10-08"
 }
