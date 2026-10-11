@@ -1,239 +1,51 @@
 {
   "status": "planning sensitivity; noncontractual, uncontracted and not underwritten",
-  "inputs": {
-    "opening_cash": "1500000",
-    "prices": {
-      "home": {
-        "setup": "1495",
-        "monthly": "89"
-      },
-      "starter": {
-        "setup": "2995",
-        "monthly": "229"
-      },
-      "complete": {
-        "setup": "5995",
-        "monthly": "349"
-      }
-    },
-    "mix": {
-      "home": "0.40",
-      "starter": "0.40",
-      "complete": "0.20"
-    },
-    "recurring_contribution_tests": [
-      "0.40",
-      "0.60"
-    ],
-    "setup_contribution_tests": [
-      "0.10",
-      "0.00"
-    ],
-    "churn": "2% monthly active subscriptions",
-    "b2b_overhead": "$500/month from each rollout launch; delayed starts month 7",
-    "launch_months": {
-      "measured": 4,
-      "delayed": 7,
-      "growth": 4
-    },
-    "noncenter_spend_first12": "115000",
-    "debt": "$1,500,000 proposed loan amount; 9%; 12 IO months at $11,250, then 60 months at $31,137.53; terms and draw schedule unagreed"
-  },
-  "weighted_site_monthly_gross": "197.0",
-  "required_active_sites_for_1_25x_after_month12": {
-    "base_34_40pct": 22,
-    "downside_24_40pct": 128,
-    "base_34_60pct": 15,
-    "downside_24_60pct": 86
-  },
-  "scenarios": {
-    "measured_40pct_10pct_setup": {
-      "month12_active_sites": "4.4310198934925056000000",
-      "month24_active_sites": "3.477095413625161585165669864",
-      "month12_base_net_after_debt": "3109.16",
-      "month12_downside_net_after_debt": "-5290.84",
-      "month24_base_net_after_debt": "-148.01",
-      "month24_downside_net_after_debt": "-8548.01",
-      "month12_base_ending_cash": "28468.45",
-      "month12_downside_ending_cash": "-29491.55",
-      "month24_base_ending_cash": "27087.62",
-      "month24_downside_ending_cash": "-131672.38",
-      "month24_recurring_gross": "684.99",
-      "month24_recurring_net": "274.00"
-    },
-    "measured_40pct_0pct_setup": {
-      "month12_active_sites": "4.4310198934925056000000",
-      "month24_active_sites": "3.477095413625161585165669864",
-      "month12_base_net_after_debt": "3109.16",
-      "month12_downside_net_after_debt": "-5290.84",
-      "month24_base_net_after_debt": "-148.01",
-      "month24_downside_net_after_debt": "-8548.01",
-      "month12_base_ending_cash": "26970.95",
-      "month12_downside_ending_cash": "-30989.05",
-      "month24_base_ending_cash": "25590.12",
-      "month24_downside_ending_cash": "-133169.88",
-      "month24_recurring_gross": "684.99",
-      "month24_recurring_net": "274.00"
-    },
-    "measured_60pct_10pct_setup": {
-      "month12_active_sites": "4.4310198934925056000000",
-      "month24_active_sites": "3.477095413625161585165669864",
-      "month12_base_net_after_debt": "3283.75",
-      "month12_downside_net_after_debt": "-5116.25",
-      "month24_base_net_after_debt": "-11.02",
-      "month24_downside_net_after_debt": "-8411.02",
-      "month12_base_ending_cash": "29763.92",
-      "month12_downside_ending_cash": "-28196.08",
-      "month24_base_ending_cash": "30224.74",
-      "month24_downside_ending_cash": "-128535.26",
-      "month24_recurring_gross": "684.99",
-      "month24_recurring_net": "410.99"
-    },
-    "measured_60pct_0pct_setup": {
-      "month12_active_sites": "4.4310198934925056000000",
-      "month24_active_sites": "3.477095413625161585165669864",
-      "month12_base_net_after_debt": "3283.75",
-      "month12_downside_net_after_debt": "-5116.25",
-      "month24_base_net_after_debt": "-11.02",
-      "month24_downside_net_after_debt": "-8411.02",
-      "month12_base_ending_cash": "28266.42",
-      "month12_downside_ending_cash": "-29693.58",
-      "month24_base_ending_cash": "28727.24",
-      "month24_downside_ending_cash": "-130032.76",
-      "month24_recurring_gross": "684.99",
-      "month24_recurring_net": "410.99"
-    },
-    "delayed_40pct_10pct_setup": {
-      "month12_active_sites": "4.7078809568000000000000",
-      "month24_active_sites": "3.694352920153551650636288732",
-      "month12_base_net_after_debt": "3130.98",
-      "month12_downside_net_after_debt": "-5269.02",
-      "month24_base_net_after_debt": "-130.89",
-      "month24_downside_net_after_debt": "-8530.89",
-      "month12_base_ending_cash": "28899.43",
-      "month12_downside_ending_cash": "-29060.57",
-      "month24_base_ending_cash": "27748.74",
-      "month24_downside_ending_cash": "-131011.26",
-      "month24_recurring_gross": "727.79",
-      "month24_recurring_net": "291.12"
-    },
-    "delayed_40pct_0pct_setup": {
-      "month12_active_sites": "4.7078809568000000000000",
-      "month24_active_sites": "3.694352920153551650636288732",
-      "month12_base_net_after_debt": "3130.98",
-      "month12_downside_net_after_debt": "-5269.02",
-      "month24_base_net_after_debt": "-130.89",
-      "month24_downside_net_after_debt": "-8530.89",
-      "month12_base_ending_cash": "27401.93",
-      "month12_downside_ending_cash": "-30558.07",
-      "month24_base_ending_cash": "26251.24",
-      "month24_downside_ending_cash": "-132508.76",
-      "month24_recurring_gross": "727.79",
-      "month24_recurring_net": "291.12"
-    },
-    "delayed_60pct_10pct_setup": {
-      "month12_active_sites": "4.7078809568000000000000",
-      "month24_active_sites": "3.694352920153551650636288732",
-      "month12_base_net_after_debt": "3316.47",
-      "month12_downside_net_after_debt": "-5083.53",
-      "month24_base_net_after_debt": "14.66",
-      "month24_downside_net_after_debt": "-8385.34",
-      "month12_base_ending_cash": "29660.40",
-      "month12_downside_ending_cash": "-28299.60",
-      "month24_base_ending_cash": "30466.43",
-      "month24_downside_ending_cash": "-128293.57",
-      "month24_recurring_gross": "727.79",
-      "month24_recurring_net": "436.67"
-    },
-    "delayed_60pct_0pct_setup": {
-      "month12_active_sites": "4.7078809568000000000000",
-      "month24_active_sites": "3.694352920153551650636288732",
-      "month12_base_net_after_debt": "3316.47",
-      "month12_downside_net_after_debt": "-5083.53",
-      "month24_base_net_after_debt": "14.66",
-      "month24_downside_net_after_debt": "-8385.34",
-      "month12_base_ending_cash": "28162.90",
-      "month12_downside_ending_cash": "-29797.10",
-      "month24_base_ending_cash": "28968.93",
-      "month24_downside_ending_cash": "-129791.07",
-      "month24_recurring_gross": "727.79",
-      "month24_recurring_net": "436.67"
-    },
-    "growth_40pct_10pct_setup": {
-      "month12_active_sites": "12.7436317869850112000000",
-      "month24_active_sites": "20.76430479762553143219929552",
-      "month12_base_net_after_debt": "4063.70",
-      "month12_downside_net_after_debt": "-4336.30",
-      "month24_base_net_after_debt": "1513.72",
-      "month24_downside_net_after_debt": "-6886.28",
-      "month12_base_ending_cash": "34527.29",
-      "month12_downside_ending_cash": "-23432.71",
-      "month24_base_ending_cash": "49367.75",
-      "month24_downside_ending_cash": "-109392.25",
-      "month24_recurring_gross": "4090.57",
-      "month24_recurring_net": "1636.23"
-    },
-    "growth_40pct_0pct_setup": {
-      "month12_active_sites": "12.7436317869850112000000",
-      "month24_active_sites": "20.76430479762553143219929552",
-      "month12_base_net_after_debt": "3764.20",
-      "month12_downside_net_after_debt": "-4635.80",
-      "month24_base_net_after_debt": "1214.22",
-      "month24_downside_net_after_debt": "-7185.78",
-      "month12_base_ending_cash": "30334.29",
-      "month12_downside_ending_cash": "-27625.71",
-      "month24_base_ending_cash": "41580.75",
-      "month24_downside_ending_cash": "-117179.25",
-      "month24_recurring_gross": "4090.57",
-      "month24_recurring_net": "1636.23"
-    },
-    "growth_60pct_10pct_setup": {
-      "month12_active_sites": "12.7436317869850112000000",
-      "month24_active_sites": "20.76430479762553143219929552",
-      "month12_base_net_after_debt": "4565.80",
-      "month12_downside_net_after_debt": "-3834.20",
-      "month24_base_net_after_debt": "2331.83",
-      "month24_downside_net_after_debt": "-6068.17",
-      "month12_base_ending_cash": "37504.43",
-      "month12_downside_ending_cash": "-20455.57",
-      "month24_base_ending_cash": "60500.18",
-      "month24_downside_ending_cash": "-98259.82",
-      "month24_recurring_gross": "4090.57",
-      "month24_recurring_net": "2454.34"
-    },
-    "growth_60pct_0pct_setup": {
-      "month12_active_sites": "12.7436317869850112000000",
-      "month24_active_sites": "20.76430479762553143219929552",
-      "month12_base_net_after_debt": "4266.30",
-      "month12_downside_net_after_debt": "-4133.70",
-      "month24_base_net_after_debt": "2032.33",
-      "month24_downside_net_after_debt": "-6367.67",
-      "month12_base_ending_cash": "33311.43",
-      "month12_downside_ending_cash": "-24648.57",
-      "month24_base_ending_cash": "52713.18",
-      "month24_downside_ending_cash": "-106046.82",
-      "month24_recurring_gross": "4090.57",
-      "month24_recurring_net": "2454.34"
-    }
-  },
+  "purpose": "Current financing proposal for investor review; the full facility case is a stress test and does not prescribe the first draw.",
   "current_model": {
-    "loan_principal": 1500000,
-    "annual_rate": 0.09,
-    "interest_only_months": 12,
-    "interest_only_payment": 11250,
-    "amortization_months": 60,
-    "amortizing_payment": 31137.532839530806,
-    "source_forecast": "PHASED_MONTHLY_72M_FORECAST.json",
-    "gross_base_cost": 3139152.61,
-    "gross_gap_vs_loan": 1639152.61,
-    "revenue_status": "Illustrative unsecured stress scenarios; no signed partner receipts supplied",
-    "operating_case": "one pilot location, ages 2\u20135",
-    "cash_summary_minimum_extra_capital_required": {
-      "zero": 10481202.278743533,
-      "downside": 8888462.474093549,
-      "base": 7746281.686343543,
-      "upside": 6145147.719543553
+    "facility_maximum": 1500000,
+    "first_draw": "TBD; approved quote-backed scope only",
+    "draw_window_months": "1–24 from closing; maturity does not reset",
+    "annual_rate": 0.12,
+    "rate_type": "fixed nominal annual rate on drawn balance only",
+    "undrawn_interest": 0,
+    "interest_only_months": 24,
+    "amortization_months": 84,
+    "maturity_month": 108,
+    "full_utilization_interest_only_payment": 15000,
+    "full_utilization_amortizing_payment": 26479.099195610725,
+    "hypothetical_500k_interest_only_payment": 5000,
+    "hypothetical_500k_amortizing_payment": 8826.366398536909,
+    "full_utilization_total_interest": 1084244.332431302,
+    "full_utilization_total_debt_service": 2584244.332431301,
+    "source_forecast": "PHASED_MONTHLY_108M_FORECAST.json",
+    "coverage_threshold": 1.25,
+    "coverage_passes_after_io": {
+      "zero": false,
+      "downside": false,
+      "base": false,
+      "upside": false
     }
   },
-  "historical_legacy_scenarios_note": "The older 240K partner scenarios are retained for historical traceability only and are not current financing recommendations."
+  "illustrations": [
+    {
+      "closing_draw": 500000,
+      "interest_only_payment_months_1_24": 5000,
+      "amortizing_payment_months_25_108": 8826.366398536909,
+      "note": "Hypothetical closing draw only; not a recommended first draw."
+    },
+    {
+      "closing_draw": 1500000,
+      "interest_only_payment_months_1_24": 15000,
+      "amortizing_payment_months_25_108": 26479.099195610725,
+      "note": "Full-utilization stress case only; staged draws would produce lower early payments."
+    }
+  ],
+  "protections": [
+    "Each draw requires written approval and an itemized quote-backed scope.",
+    "Interest is charged only on principal actually drawn; unused capacity has no interest.",
+    "The 24-month interest-only period runs from closing and cannot restart on later draws.",
+    "No automatic interest capitalization, balloon, equity, royalty or permanent ownership transfer is included.",
+    "Quarterly reporting, milestone evidence and a protected operating reserve are required."
+  ],
+  "disclosure": "This file is a planning proposal, not a lender quote, commitment, appraisal or repayment guarantee. Final documents require lender and counsel review."
 }

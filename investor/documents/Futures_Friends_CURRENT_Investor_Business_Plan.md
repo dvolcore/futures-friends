@@ -15,7 +15,7 @@ Futures Friends is a bilingual early-learning system for children ages 2–5. It
 
 The first operating case is one pilot location. The reusable offer is intended to support future daycares, home daycares, churches, pre-K partners, families, and employers after the pilot proves safety, delivery, retention, unit economics, and demand. Those future channels are opportunities, not contracted receipts.
 
-The proposed financing is a **$1,500,000 no-equity loan concept**. Principal, rate, points, draw schedule, collateral, covenants, repayment dates, and any revenue participation remain subject to an agreed instrument and counsel review. No permanent ownership is offered in this concept. No return is guaranteed.
+The proposed financing is a **$1,500,000 maximum staged no-equity facility**. The working structure is 12% fixed nominal interest on drawn principal only, a 24-month draw window and interest-only period, then 84 monthly amortizing payments ending in month 108. The first draw is TBD and must be supported by an approved, quote-backed phase. Principal, rate, points, collateral, covenants, reporting, repayment dates, and any fees remain subject to an agreed instrument and counsel review. No permanent ownership, conversion, perpetual royalty, or prepayment penalty is offered. No return is guaranteed.
 
 The current full-scope model reconciles to **$3,139,152.61 gross first-year cash requirement** in the base case. The difference versus the proposed loan is **$1,639,152.61 before receipts, scope changes, and financing costs**. This is a scope and staging problem to solve before closing, not a gap to hide in a headline.
 
@@ -134,7 +134,7 @@ The model uses one location, ages 2–5, a 40-child capacity planning case, recu
 
 ## 10. Debt stress and repayment discipline
 
-The illustrative debt schedule models **$1,500,000 at 12% annual interest**, 12 months interest-only at **$15,000 per month**, then 60 months at approximately **$33,366.67 per month**. This is a model, not an offer or promise. It assumes full funding at closing; staged advances require a fresh schedule. No points, fees, capitalized interest, penalty, collateral, personal guaranty, or revenue participation should be implied until written.
+The full-draw stress illustration models **$1,500,000 at 12% annual interest**, 24 months interest-only at **$15,000 per month**, then 84 months at approximately **$26,479.10 per month**. This is a model, not an offer or promise. It assumes full funding at closing only for stress testing; the proposed first draw is TBD and staged advances accrue interest only when drawn. No points, fees, capitalized interest, penalty, collateral, personal guaranty, or revenue participation should be implied until written.
 
 The base scenario uses year-one illustrative net receipts of **$370,784.80** and year-one operating cash before debt of **-$874,057.38**. Minimum ending available cash is **-$7,925,030.01**; downside is **-$9,067,210.80** and upside is **-$6,323,896.04**. The zero-receipt case has a $10,659,950.60 cash shortfall beyond the modeled $1.5M opening loan draw. These shortfalls are additional capital needs, not total opening capital. All current stress cases fail repayment coverage. The responsible conclusion is to stage draws, reduce scope, secure verified receipts, or identify additional capital before representing repayment as viable.
 
@@ -142,7 +142,7 @@ The investor should see this weakness because it defines the decision: fund a ga
 
 ## 11. Use of funds and staging logic
 
-The $1.5M concept should be allocated only after the gross model is reconciled into approved phases. A practical sequence is:
+The $1.5M maximum should be allocated only after the gross model is reconciled into approved phases. A practical sequence is:
 
 - **Readiness:** legal entity, license/capacity evidence, host agreement, insurance, privacy and safeguarding review, vendor quotes, bank records, and a 13-week cash forecast.
 - **Pilot completion:** one location, ages 2–5, staff preparation, approved content, room materials, parent onboarding, and real-device acceptance.
@@ -194,7 +194,7 @@ The first expansion decision should require a documented pilot review showing re
 Primary current sources are:
 
 - `investor/costs/Full_Cost_Model.json` — 687-row cost model and evidence types.
-- `forecast/PHASED_MONTHLY_72M_FORECAST.json` — 72-month stress forecast and debt illustration.
+- `forecast/PHASED_MONTHLY_108M_FORECAST.json` — 108-month stress forecast and debt illustration; the earlier 72-month file is historical.
 - `forecast/PHASED_MONTHLY_CASH.csv` and `forecast/PHASED_GROSS_SPEND_BY_ROW.csv` — cash and gross-spend detail.
 - [Operating-record audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md) — operating-record evidence boundary.
 - `critic-review.md` — underwriting and repayment challenge.
@@ -213,4 +213,4 @@ Before batch production, approve a seven-minute episode, two QR clips and one bi
 
 ## Why the proposed rate is 12%
 
-12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, amortizing payments need $41,708.34 in monthly cash before debt for 1.25x coverage. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.
+12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. In the full-draw stress case, the 84-month amortizing payment is approximately $26,479.10 and needs $33,098.88 in monthly cash before debt for 1.25x coverage. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, sensitivity and terms to agree.

@@ -2,7 +2,9 @@
 
 ## Proposed terms
 
-$1,500,000 facility; 12% fixed nominal annual interest; 12 interest-only months followed by 60 amortizing months. This is a negotiation starting point, not a quoted offer, a published market average, or a promise that financing is available. No equity, conversion, perpetual royalty or permanent ownership is offered. No points or fees are included in this illustration.
+$1,500,000 **maximum staged facility**; 12% fixed nominal annual interest on drawn principal only; drawings permitted during months 1-24; interest-only through month 24; then 84 monthly principal-and-interest payments ending in month 108. The first draw remains **TBD** and must be tied to an approved, quote-backed phase. A later draw does not reset the final maturity date. Undrawn availability does not accrue interest.
+
+This is a negotiation starting point, not a quoted offer, a published market average, or a promise that financing is available. No equity, conversion, perpetual royalty, permanent ownership, or prepayment penalty is offered. No automatic capitalization of unpaid interest is assumed. Any fees, collateral, guarantees, covenants, or default remedies require a written term sheet and counsel review.
 
 ## Evidence and judgment
 
@@ -18,18 +20,18 @@ A proposed 12% coupon recognizes higher risk than a guaranteed bank loan without
 
 ## Full-draw sensitivity — USD
 
-| Fixed annual rate | Months 1–12, monthly | Months 13–72, monthly | Total receipts | Interest earned | Monthly cash for 1.25x coverage after month 12 |
+| Fixed annual rate | Interest-only monthly | Months 25–108, monthly | Total receipts | Interest earned | Monthly cash for 1.25x coverage during amortization |
 | --- | --- | --- | --- | --- | --- |
-| 10% | $12,500.00 | $31,870.57 | $2,062,234.02 | $562,234.02 | $39,838.21 |
-| 12% proposed | $15,000.00 | $33,366.67 | $2,182,000.29 | $682,000.29 | $41,708.34 |
-| 14% | $17,500.00 | $34,902.38 | $2,304,142.58 | $804,142.58 | $43,627.97 |
+| 10% | $12,500.00 | $24,901.78 | $2,391,749.19 | $891,749.19 | $31,127.22 |
+| 12% proposed | $15,000.00 | $26,479.10 | $2,584,244.33 | $1,084,244.33 | $33,098.88 |
+| 14% | $17,500.00 | $28,110.02 | $2,781,241.46 | $1,281,241.46 | $35,137.52 |
 
-Calculations use full funding at closing, month-end payments, an unrounded amortization payment, and final payoff of remaining principal. Printed cents require reconciliation in the signed note. At 12%, interest equals 45.47% of original principal over six years; that is not an annual return. Fees would change effective financing cost. Compared with 9%, modeled total interest increases $178,748.32.
+Calculations use full funding at closing as a stress illustration, month-end payments, 24 interest-only months, 84 amortizing months, and an unrounded amortization payment. Printed cents require reconciliation in the signed note. The full-draw case is not the proposed first draw and does not establish an investor return. Fees would change effective financing cost.
 
 ## Funding and repayment gates
 
 All four current forecast scenarios fail repayment coverage. The 12% proposal does not fix that deficiency. $1.5M is also below the $3,139,152.61 first-year gross planning scope, before receipts; 554 cost rows remain allowances requiring records or quotes. The itemized operating-cost ledger is unchanged by this rate revision.
 
-Prefer separately approved draws tied to accepted milestones and documented costs. Charge interest only on drawn principal, with a fresh schedule for each agreed draw structure. Do not represent the full-draw illustration as the schedule for staged financing.
+Use separately approved draws tied to accepted milestones and documented costs. Protect a defined operating reserve and do not impose a cash sweep that prevents required operations. Require quarterly reporting on costs, receipts, runway, milestones, and covenant status. Do not represent the full-draw illustration as the schedule for staged financing.
 
 Before signing, agree collateral and lien priority, any guarantees, payment start, maturity, reporting, cash covenants, draw conditions, default remedies, prepayment rules, fees, rounding and final payment. Document the actual repayment source and the additional capital required. The current proposal leaves these terms unagreed; legal review is required for the executed documents.

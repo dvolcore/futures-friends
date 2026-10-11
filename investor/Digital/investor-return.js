@@ -9,12 +9,12 @@
   let total = 0;
   function calculate(p) {
     const rate = .12 / 12;
-    const payment = p * rate / (1 - Math.pow(1 + rate, -60));
+    const payment = p * rate / (1 - Math.pow(1 + rate, -84));
     let balance = p, received = 0, earned = 0, repaid = 0;
     const rows = [];
-    for (let month = 1; month <= 72; month++) {
+    for (let month = 1; month <= 108; month++) {
       const interest = balance * rate;
-      const paid = month <= 12 ? interest : month === 72 ? balance + interest : payment;
+      const paid = month <= 24 ? interest : month === 108 ? balance + interest : payment;
       const capital = paid - interest;
       balance = Math.max(0, balance - capital);
       received += paid; earned += interest; repaid += capital;
@@ -50,7 +50,7 @@
     }
     host.querySelectorAll('[data-return-loan]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.returnLoan) === principal)));
     const body = host.querySelector('[data-return="year-rows"]');body.replaceChildren();
-    for (let year = 1; year <= 6; year++) {
+    for (let year = 1; year <= 9; year++) {
       const rows = schedule.slice((year - 1) * 12, year * 12);
       const sum = key => rows.reduce((n, row) => n + row[key], 0);
       const tr = document.createElement('tr');
@@ -61,7 +61,7 @@
       });
       body.append(tr);
     }
-    set('condition', `Proposed terms, not a signed loan or guaranteed return. Illustration assumes the full ${money(principal)} is funded at closing, payments at month-end and all 72 payments made on time. Paid partner collections and repayment capacity remain unverified. The current cash stress test fails debt coverage in every modeled case; this table shows contractual math only, not capacity to pay. Staged advances, fees and early repayment require an agreed schedule and may change total interest. Figures use the unrounded model payment; displayed cents and the final payment must be reconciled in the signed note.`);
+    set('condition', `Proposed 12% rate, not a lender quote or market-average claim. First draw is TBD and quote-backed; $500,000 is a hypothetical comparison only. The maximum commitment is $1.5M, with draws restricted to months 1–24 and final maturity at month 108; later draws do not restart the term. Illustration assumes the full ${money(principal)} is funded at closing, payments at month-end and all 108 payments made on time. Paid partner collections and repayment capacity remain unverified. The current cash stress test fails debt coverage in every modeled case; this table shows contractual math only, not capacity to pay. Actual draw timing changes interest and payments. No interest on undrawn funds, no prepayment penalty, and no automatic capitalized interest or maturity balloon are proposed. Releases require a viable sources-and-uses plan, documented receipts and 1.25× debt coverage. The longer term lowers monthly payments but raises lifetime interest. Figures use the unrounded model payment; displayed cents and the final payment must be reconciled in the signed note.`);
     paintMonth();
   }
   host.querySelector('#return-month').addEventListener('input', paintMonth);
@@ -73,7 +73,7 @@
     const lines = [
       'Futures Friends - Proposed investor repayment illustration',
       `Principal USD,${principal}`, 'Nominal annual interest rate,12%',
-      'Months 1-12 interest only; months 13-72 amortizing; full funding at closing; month-end payments',
+      'Months 1-24 interest only; months 25-108 amortizing; full funding at closing; month-end payments',
       'Unrounded model values shown to 6 decimal places; displayed cents and final payment require reconciliation in signed note',
       'Staged draws; fees; early repayment; defaults may change actual receipts. No guaranteed return or ownership.',
       'Month,Payment USD,Principal returned USD,Interest USD,Principal outstanding USD,Cumulative received USD,Cumulative interest USD',

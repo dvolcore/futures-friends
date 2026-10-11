@@ -6,32 +6,28 @@
       "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
     },
     "01_Investor_Business_Plan.pdf": {
-      "bytes": 16799823,
-      "sha256": "506af98eceb07ddd5c080bc5d9d8ce2b7da4d5cc6ddcdd7268e5b7d59c3f25a5"
+      "bytes": 16800521,
+      "sha256": "35ed613d947ccc16e38bb5b7e4792f37e1eab715bf845ea13db87b9c176a6ec1"
     },
     "02_Series_Curriculum_Production_Bible.pdf": {
-      "bytes": 18735854,
-      "sha256": "66a2d7d7569962f44fa1a8ca17a483ed439e498ebd1f18d92ec751065d1df0fa"
+      "bytes": 18735855,
+      "sha256": "aa9dd343e20f5605a79e08fa2b7733cca116aaa0080c34c8078501f73432c4d7"
     },
     "03_Program_Operations_Evidence_Companion.pdf": {
-      "bytes": 73598487,
-      "sha256": "7a3c7858f8383305983bdf8e39a6f8dae19dd32a781870da3bcc4b38cb227616"
-    },
-    "04_Platform_One_Sheet.pdf": {
-      "bytes": 6609772,
-      "sha256": "d976667e8d61b2a46989258741c4d1d666af61e0b764edda279711c6ab5b67f0"
+      "bytes": 73598488,
+      "sha256": "f95dcd1fd0e989de631fc8f7d2a86100f97548120f6415a92bf155dd6adbffc4"
     },
     "05_Investor_One_Sheet.pdf": {
-      "bytes": 6609987,
-      "sha256": "a0e11d5c521c919d090aad9ad4ae26cb0f13286e7cfc24eefd32a9e3e21e4728"
+      "bytes": 6610191,
+      "sha256": "3d600785e9ea1318fe48ca828c1c7b39a3444971f96d5aa6f52d5ba953370f51"
     },
     "06_Financial_Reconciliation.pdf": {
-      "bytes": 6615646,
-      "sha256": "41b07023d1643f81b95b581f535587c31a9b5de43727b90a0f175b9a07fc4b1b"
+      "bytes": 6615797,
+      "sha256": "f2b1497474050bbfb82b1426cc6e96dd3efcb84afbd5e99c26df4f40bf4349d1"
     },
     "Digital/README.md": {
-      "bytes": 4075,
-      "sha256": "f9782e35932166d75acf4fb49fac229eb91d2a6a0f0553cce4812540ed60a9a0"
+      "bytes": 5090,
+      "sha256": "fda8281bf2a61e1b79349fa56233163c24f3c0e4044643419063e81e42043cb1"
     },
     "Digital/assets/backpack.webp": {
       "bytes": 432702,
@@ -138,80 +134,104 @@
       "sha256": "a6d99cd51dcd43e52628b55b4d945317007f7baf22b68128952ba0b486e12172"
     },
     "Digital/business-plan.css": {
-      "bytes": 29557,
-      "sha256": "91b86db428cadbb866e33eea3aef6c6738d9a047720727e0c7cf8b4226f2323b"
+      "bytes": 29775,
+      "sha256": "063559875185feec49c9ed8b4f8d4f886969cdd8e617e13849062c63673c6986"
     },
     "Digital/business-plan.html": {
-      "bytes": 171355,
-      "sha256": "e4b3b47a2d2f47a04da3c92c3f9dec0840b6de34c05439c5db0e647f2c0db886"
+      "bytes": 173218,
+      "sha256": "c95fc866b567586fc692e3232aa04f6df924c28668847667a0f8d079023e7043"
     },
     "Digital/business-plan.js": {
       "bytes": 21364,
       "sha256": "3f3b653bb7b28d79014cd27c168d054db7116bae1076beb00eb7d5e895b33192"
     },
+    "Digital/cost-explorer.css": {
+      "bytes": 8610,
+      "sha256": "96a07d9000fe42260b3eaeb21a777b1ad90c7d407caeb583f94170800b4343e4"
+    },
+    "Digital/cost-explorer.html": {
+      "bytes": 6589,
+      "sha256": "c6aef412dc8c30e8bb61106d9aeb73982e2bdf774eb5b7642f97b3d6e27290ea"
+    },
+    "Digital/cost-explorer.js": {
+      "bytes": 12355,
+      "sha256": "a566b0fd348c2e4d4f8333c561899117ce9989ebc32092eb5c9aaae3ffe8828b"
+    },
     "Digital/financial-update.html": {
-      "bytes": 14358,
-      "sha256": "6077db2e4ad098f30ef33428f7e43b1338483c20f3cc2cf6a426eb6d856dea3c"
+      "bytes": 14634,
+      "sha256": "9186c270c4c8ded9dd01de33abd85e6e8c474ee70b3b15e5d70337ade42de3fa"
     },
     "Digital/index.html": {
-      "bytes": 41831,
-      "sha256": "322b2f89308e46105e15f37dd8e04836375710504046efc08b13047b629954c4"
+      "bytes": 42032,
+      "sha256": "0408b8ca8eb7518f49a2b6539dcb05c49875960e1f65a6dd71fadde6f89e6a39"
     },
     "Digital/investor-return.css": {
       "bytes": 7272,
       "sha256": "45e6eb87f30bbd1b1b312989462572f5cdbc7278a769e85aef04cc289a0e6988"
     },
     "Digital/investor-return.js": {
-      "bytes": 5792,
-      "sha256": "89cf92e01a7d5643ff17bc1c22cacf754d637b8723803dc4e6b056c38cf38baf"
+      "bytes": 6265,
+      "sha256": "3ee8bbc26f88b35790126d87a40210ff1486020f5c796b4ce8361baf0136ef30"
+    },
+    "Digital/library-data.json": {
+      "bytes": 2403,
+      "sha256": "b00a45eda57078edaff5e532babeac965d8b31cab69084a3a0f21924c80602f5"
+    },
+    "Digital/library.css": {
+      "bytes": 4907,
+      "sha256": "311f23cadd65028106690a511227955ad4538f5d4bcfe3fd640be27ef53266d5"
+    },
+    "Digital/library.html": {
+      "bytes": 1930,
+      "sha256": "2af14ec0321bfee6150114641054d7fb28c96ba9140c5b6d674e0d90f7e7e45d"
+    },
+    "Digital/library.js": {
+      "bytes": 4938,
+      "sha256": "d1c7491d47a36b4328437ed3ffea4f9a8c5671beeadd73d2d158e18846ea6927"
     },
     "Digital/model/PHASED_GROSS_SPEND_BY_ROW.csv": {
       "bytes": 116171,
       "sha256": "d234265b64f721152eed3c73d5e58899579495fc113897abb2d8c59a6c81b59e"
     },
-    "Digital/model/PHASED_MONTHLY_72M_FORECAST.json": {
-      "bytes": 430551,
-      "sha256": "7889ec93c712232f6911cf5988ea7ea46d5a626c40b882bf2be9e911aeeab204"
+    "Digital/model/PHASED_MONTHLY_108M_CASH.csv": {
+      "bytes": 115690,
+      "sha256": "cbfbeb866cbdf3bc030a84ca01266ef948c4fd867b577c5fda312cb2df55a464"
     },
-    "Digital/model/PHASED_MONTHLY_72M_FORECAST.xlsx": {
-      "bytes": 41504,
-      "sha256": "21287dd22389d9e5b2eff77e1f10badfa101f5064f949c1c73ab44aa20e7ba51"
+    "Digital/model/PHASED_MONTHLY_108M_FORECAST.json": {
+      "bytes": 643508,
+      "sha256": "407abbcf284dec6556a6fe05b83267304aded7a7ec31faeefe64c35185a0b580"
     },
-    "Digital/model/PHASED_MONTHLY_CASH.csv": {
-      "bytes": 76592,
-      "sha256": "3184796df95e00d539e249a4ee1a2b3cf8b1545dc3a7609070878e29fa102f52"
+    "Digital/model/PHASED_MONTHLY_108M_FORECAST.xlsx": {
+      "bytes": 58620,
+      "sha256": "7b37c7bd8bd1e2a79d455bab7299d34b8374825256618df649ebdea7e7efa789"
+    },
+    "Digital/model/Staged_Financing_Proposal.json": {
+      "bytes": 2108,
+      "sha256": "35a2e794bd6e09e4553f1d7ff9bd4755b6f05db14321b3071e0304804ac09d87"
     },
     "Digital/model/business-designed.md": {
       "bytes": 86228,
       "sha256": "ee3e982ed8fce82f30d1cae70a27828cf26a066a085daf5f48865a6c223171b4"
     },
-    "Digital/model/debt-schedule.csv": {
-      "bytes": 17795,
-      "sha256": "7f9047fc2e3b5326d56e1be123a68bf01603a2d1fb4d63fd9640db6cc40e2e8a"
+    "Digital/model/cost-timing.json": {
+      "bytes": 148318,
+      "sha256": "ebc9638d87fc1d868f4fcaa3194d97568ba7ef197a5512db20afb28b28f567ae"
     },
     "Digital/model/financials.json": {
-      "bytes": 23141,
-      "sha256": "545f8bb9e5fef3d38b1ee58c6afbc305118d8454257cb1a4e2b587bb92f025f3"
+      "bytes": 23509,
+      "sha256": "0c4deeb5b99018587d680ba39c871693377498a1e8699708d3609cf93f02fdcb"
     },
     "Digital/model/partner-repayment-model.json": {
-      "bytes": 9852,
-      "sha256": "50c5d9e696f7a71f5f1528a033e1cd4ce1b7bc6d7b8cff44bd201eaab572fbc1"
-    },
-    "Digital/model/partner-repayment-monthly.csv": {
-      "bytes": 51612,
-      "sha256": "d9d4a08ac5dc86660fab1edab6a1a1c27f506ca6002872ae9e677a52a478b53d"
+      "bytes": 2390,
+      "sha256": "28563dd0b17c6028a5b50af5725f754682321747561f3f3589b7de6bed4338a9"
     },
     "README.md": {
-      "bytes": 7498,
-      "sha256": "2f76a6aba4b4f3631d2f55c5e61049e6e13227b72f10d91a58151a9bb7e790a7"
+      "bytes": 7990,
+      "sha256": "98e8a5c801523ee29a907aefa909472e974c4995f925dad20656b1182fe03b2c"
     },
     "archive/01_Investor_Business_Plan_pre_20261011.pdf": {
       "bytes": 4681260,
       "sha256": "cfa0fdbfe1fc25605c3a000789d01d7f337f9925625f822354d4d5d294ccf400"
-    },
-    "archive/05_Investor_One_Sheet_pre_20261011.pdf": {
-      "bytes": 2361141,
-      "sha256": "c0c695da360c8104d0cbbab0d49b0c833d88d8aa2b76765a217cd7a598ad6f1c"
     },
     "costs/Animation_Budget_Reconciliation.md": {
       "bytes": 3796,
@@ -238,16 +258,20 @@
       "sha256": "f334eaf9c6d8999a917c9f7a8eca2f39459ad9b49229da7ef307a16d416f1136"
     },
     "documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md": {
-      "bytes": 6857,
-      "sha256": "2091be3376f1c15e2391504daff4de89e19f476dfffe851ed2b8d6e1742d09e8"
+      "bytes": 7049,
+      "sha256": "53ef0ce9e6c4d4624afe93eb53dc17a6918756e3ad3b712f3cec9b9b25cf60ef"
     },
     "documents/Futures_Friends_CURRENT_Investor_Business_Plan.md": {
-      "bytes": 25141,
-      "sha256": "dc8c0d8974413f5451977512282076b09427097a7f0d0bb5eca67cbb606b5012"
+      "bytes": 25585,
+      "sha256": "24253d96e602a554f2577879d7f09fe72d9d590e1e6c1bc6c484110eec06d0d8"
     },
     "documents/Futures_Friends_CURRENT_Investor_Executive_One_Sheet.md": {
-      "bytes": 4460,
-      "sha256": "903fece0b14847839d30a1362fff89b59542397413172aa6e9c051ceeebbc70d"
+      "bytes": 5110,
+      "sha256": "5ba8d37658b421b9552622f6fe12ac0d3842c13efecbb1fe48ec968d3f092145"
+    },
+    "documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md": {
+      "bytes": 4472,
+      "sha256": "e989c3ffbaae03da4909d931c2f256bce812d8642d81f5d0cf483b6ab20c994f"
     },
     "documents/Futures_Friends_CURRENT_Master_Production_Bible.md": {
       "bytes": 17416,
@@ -257,23 +281,24 @@
       "bytes": 17795,
       "sha256": "3e0d22510a1aa1667a71fc10b19d497a39ae64feb3f412e3f7e936b7c2b486f3"
     },
-    "documents/Futures_Friends_CURRENT_Platform_and_Investor_One_Sheet.md": {
-      "bytes": 4378,
-      "sha256": "af55b53c163bb2bc74a59d22cc0d34c5b23335254ed704284835963d55cf0202"
-    },
     "index.html": {
       "bytes": 485,
       "sha256": "af04bc6f8b8597723be2349e767050fd5684757bdb0a6edcb605e45b8c6cf422"
-    },
-    "documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md": {
-      "bytes": 3954,
-      "sha256": "5a823f83bd5db864c94451754135083bb7434b2d258a6c65202f86001518155c"
     }
   },
   "revisions": {
     "2026-10-09": "Investor return timeline, monthly payment download, and investor one-sheet refreshed; master documents retained.",
     "2026-10-11": "Reconciled 687 cost rows and a 72-month stress forecast; audited authenticated Higgsfield usage and revised 102-minute media generation allowances; refreshed all six PDFs and current source documents. Business plan is 53 pages including the complete 44-page historical reference; Bible is 43 pages including 35 historical pages; operations companion is 125 pages including 117 historical pages. Historical financial claims are superseded; current debt service fails modeled coverage. Corrected digital navigation and motion runtime errors.",
-    "2026-10-11-loan-pricing": "Repriced the current $1.5M full-draw loan illustration to proposed 12% fixed annual interest; refreshed payment schedules, forecast, PDFs and source documents; added primary-source pricing rationale and 10%/12%/14% sensitivity. Historical 9% cases remain superseded. All four modeled scenarios still fail debt coverage."
+    "2026-10-11-loan-pricing": "Repriced the current $1.5M full-draw loan illustration to proposed 12% fixed annual interest; refreshed payment schedules, forecast, PDFs and source documents; added primary-source pricing rationale and 10%/12%/14% sensitivity. Historical 9% cases remain superseded. All four modeled scenarios still fail debt coverage.",
+    "2026-10-11-staged-financing": "Replaced immediate full-draw financing with a proposed maximum $1.5M staged commitment at 12% fixed interest on drawn principal only. First draw TBD; 24-month draw and interest-only period, followed by 84 amortizing months, final maturity month 108 with no term reset. Updated the 108-month forecast, calculator, five PDFs and current documents. Only 05_Investor_One_Sheet.pdf remains as the public one-sheet; obsolete one-sheets and 72-month schedules removed from active publication. Full-draw math is hypothetical, all four scenarios fail coverage, and cost records remain unchanged.",
+    "2026-10-11-digital-reading-room": "Added an inline reading room for nine current documents and a searchable explorer for all 687 cost rows, 49 source records, original calculations, twelve-month expense allocations and all four 108-month cash scenarios. Linked the presentation, business plan, financial update and current one-sheet to the digital views. Source prices, management allowances and unviable debt coverage remain explicitly distinguished."
   },
-  "current_financial_status": "Planning reconciliation; not a fully underwritten forecast or agreed financing offer."
+  "current_financial_status": "Planning reconciliation; not a fully underwritten forecast or agreed financing offer.",
+  "current_pdf_pages": {
+    "01_Investor_Business_Plan.pdf": 53,
+    "02_Series_Curriculum_Production_Bible.pdf": 43,
+    "03_Program_Operations_Evidence_Companion.pdf": 125,
+    "05_Investor_One_Sheet.pdf": 1,
+    "06_Financial_Reconciliation.pdf": 3
+  }
 }

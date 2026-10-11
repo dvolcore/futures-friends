@@ -1,0 +1,13 @@
+{
+  "documents": [
+    {"id":"business","title":"Investor Business Plan","kind":"Investor plan","source":"../documents/Futures_Friends_CURRENT_Investor_Business_Plan.md","pdf":"../01_Investor_Business_Plan.pdf","summary":"Mission, market, operating model, growth, financing and repayment assumptions."},
+    {"id":"bible","title":"Master Production Bible","kind":"Production","source":"../documents/Futures_Friends_CURRENT_Master_Production_Bible.md","pdf":"../02_Series_Curriculum_Production_Bible.pdf","summary":"Story world, characters, curriculum, episode system and brand continuity."},
+    {"id":"operations","title":"Operations Companion","kind":"Operations","source":"../documents/Futures_Friends_CURRENT_Operations_Companion.md","pdf":"../03_Program_Operations_Evidence_Companion.pdf","summary":"Delivery model, roles, controls, portals, evidence and operating requirements."},
+    {"id":"onesheet","title":"Investor Executive One-Sheet","kind":"Executive view","source":"../documents/Futures_Friends_CURRENT_Investor_Executive_One_Sheet.md","pdf":"../05_Investor_One_Sheet.pdf","summary":"The complete investment proposition at a glance."},
+    {"id":"loan","title":"Loan Pricing Rationale","kind":"Finance","source":"../documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md","pdf":null,"summary":"Proposed staged financing terms, guardrails and coverage limits."},
+    {"id":"reconciliation","title":"Forecast & Production Reconciliation","kind":"Finance","source":"../documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md","pdf":"../06_Financial_Reconciliation.pdf","summary":"How the operating cost model, production plan and financing case reconcile."},
+    {"id":"animation-audit","title":"Animation Budget Reconciliation","kind":"Evidence audit","source":"../costs/Animation_Budget_Reconciliation.md","pdf":null,"summary":"Observed generation usage and the season production sensitivity."},
+    {"id":"higgsfield-audit","title":"Higgsfield Actual Usage Audit","kind":"Evidence audit","source":"../costs/Higgsfield_Actual_Usage_Audit.md","pdf":null,"summary":"Account-level usage evidence and limits of attribution."},
+    {"id":"record-audit","title":"Operating Record Evidence Audit","kind":"Evidence audit","source":"../costs/Operating_Record_Evidence_Audit.md","pdf":null,"summary":"Evidence status, source coverage and unresolved planning inputs."}
+  ]
+}

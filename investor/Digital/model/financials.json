@@ -2,6 +2,9 @@
   "current_financial_reconciliation": {
     "status": "proposed planning basis; not a funded commitment or offer",
     "proposed_facility": 1500000,
+    "facility_maximum": 1500000,
+    "first_draw": "TBD; approved quote-backed scope only",
+    "draw_window_months": "1–24 from closing; maturity does not reset",
     "base_first_year_gross": 3139152.61,
     "gap_before_receipts_or_scope": 1639152.61,
     "itemized_rows": 687,
@@ -11,25 +14,28 @@
     "equity_offered": false,
     "repayment_illustration": {
       "annual_rate": 0.12,
-      "interest_only_months": 12,
+      "interest_only_months": 24,
       "interest_only_monthly": 15000,
-      "amortizing_months": 60,
-      "amortizing_monthly": 33366.67,
-      "illustrative_total_paid": 2182000.29,
-      "note": "12% fixed proposal for negotiation; not a market average, quote, guarantee or commitment. All current forecast cases fail repayment coverage.",
-      "illustrative_interest": 682000.29
+      "amortizing_months": 84,
+      "maturity_month": 108,
+      "amortizing_monthly": 26479.099195610725,
+      "illustrative_total_paid": 2584244.3324313015,
+      "note": "12% fixed nominal proposal on drawn balance only; not a lender quote, guarantee or commitment. Full-utilization stress case; all current forecast cases fail repayment coverage.",
+      "illustrative_interest": 1084244.332431302,
+      "hypothetical_500k_interest_only_monthly": 5000,
+      "hypothetical_500k_amortizing_monthly": 8826.366398536909
     },
     "future_partner_revenue": "No signed partner receipts supplied for this model; excluded from proven receipts",
     "planning_allowance_rows": 554,
     "as_of": "2026-10-11",
-    "forecast_source": "PHASED_MONTHLY_72M_FORECAST.json",
+  "forecast_source": "PHASED_MONTHLY_108M_FORECAST.json",
     "cash_stress_minimum_additional_capital": {
-      "zero": 10659950.600012861,
-      "downside": 9067210.79536287,
-      "base": 7925030.007612864,
-      "upside": 6323896.040812857
+    "zero": 15692697.82126677,
+    "downside": 13274582.103416767,
+    "base": 11539295.753666766,
+    "upside": 9106968.500466764
     },
-    "note": "Current gross model and 72-month debt schedule are illustrative planning inputs; no receipts, contract, acceptance or repayment guarantee is established.",
+  "note": "Current gross model and 108-month debt schedule are illustrative planning inputs; no receipts, contract, acceptance or repayment guarantee is established.",
     "source_records": 49,
     "loan_pricing_rationale": "../../documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md"
   },

@@ -11,9 +11,9 @@ The proposed $1,500,000 loan leaves a gross gap of **$1,639,152.61** before rece
 
 ## Forecast boundary
 
-The 72-month forecast assumes one location, ages 2–5, a 40-child planning case, recurring monthly costs, one-time costs phased, no automatic expansion, and 3% annual recurring inflation after year one. Revenue scenarios are illustrative and unsecured. No partner receipts are signed in the supplied evidence.
+The 108-month forecast assumes one location, ages 2–5, a 40-child planning case, recurring monthly costs, one-time costs phased, no automatic expansion, and 3% annual recurring inflation after year one. Revenue scenarios are illustrative and unsecured. No partner receipts are signed in the supplied evidence.
 
-The base scenario shows $370,784.80 year-one net receipts and -$874,057.38 year-one operating cash before debt. The $1.5M debt illustration uses 12% annual interest, 12 months interest-only at $15,000 per month, then approximately $33,366.67 per month for 60 months. Current stress cases fail repayment coverage; the model is a capital and scope warning, not a positive return forecast.
+The base scenario shows $370,784.80 year-one net receipts and -$874,057.38 year-one operating cash before debt. The full-draw stress illustration uses 12% nominal fixed interest on drawn principal, 24 months interest-only at $15,000 per month, then approximately $26,479.10 per month for 84 months, ending in month 108. The first draw remains TBD and must be quote-backed; later staged draws do not reset maturity. Current stress cases fail repayment coverage; the model is a capital and scope warning, not a positive return forecast.
 
 ## Production scope reconciliation
 
@@ -40,7 +40,7 @@ No production release should be called complete until scope, rights, approved sc
 
 ## Source map
 
-[Cost ledger](https://dvolcore.github.io/futures-friends/investor/costs/Full_Cost_Model.json) is the row-level source model. [PHASED_MONTHLY_72M_FORECAST.json](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_72M_FORECAST.json) is the current forecast. [PHASED_MONTHLY_CASH.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_CASH.csv) and [PHASED_GROSS_SPEND_BY_ROW.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_GROSS_SPEND_BY_ROW.csv) provide monthly and row-level reconciliation. [Operating-record audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md) records the absence of current primary evidence for license, capacity, enrollment, collections, payroll, rent, bank cash, reserves, debt, and permits. The current Production Bible and Operations Companion define canon, roles, curriculum, safeguards, and acceptance boundaries.
+[Cost ledger](https://dvolcore.github.io/futures-friends/investor/costs/Full_Cost_Model.json) is the row-level source model. [PHASED_MONTHLY_108M_FORECAST.json](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_108M_FORECAST.json) is the current forecast. [PHASED_MONTHLY_CASH.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_CASH.csv) and [PHASED_GROSS_SPEND_BY_ROW.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_GROSS_SPEND_BY_ROW.csv) provide monthly and row-level reconciliation. [Operating-record audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md) records the absence of current primary evidence for license, capacity, enrollment, collections, payroll, rent, bank cash, reserves, debt, and permits. The current Production Bible and Operations Companion define canon, roles, curriculum, safeguards, and acceptance boundaries.
 
 ## Higgsfield audit boundary
 
@@ -52,4 +52,4 @@ Before batch production, approve a seven-minute episode, two QR clips and one bi
 
 ## Why the proposed rate is 12%
 
-12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, amortizing payments need $41,708.34 in monthly cash before debt for 1.25x coverage. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.
+12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, the 84-month amortizing payment is approximately $26,479.10; 1.25x coverage requires $33,098.88 in monthly cash before debt. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.
