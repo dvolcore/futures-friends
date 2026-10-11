@@ -1,12 +1,12 @@
 # Futures Friends | Investor Executive One-Sheet
 ## A fuller plan. A costed path forward.
 
-**Current planning date:** 11 October 2026 · **Pilot:** one location, ages 2–5 · **Financing concept:** proposed $1.5M no-equity loan
+**Current planning date:** 11 October 2026 · **Pilot:** one location, ages 2–5 · **Financing concept:** proposed $1.5M maximum staged facility
 
 ### The decision
 Futures Friends connects a bilingual character world, early-learning curriculum, movement, nutrition, family participation, learning-zone merchandise, professional support, and a planned digital operating platform. The first proof is one pilot location. Expansion to other daycares, churches, home providers, schools, families, and employers is staged future opportunity, not contracted revenue.
 
-The proposed $1.5M is a loan concept. No permanent ownership, equity, conversion right, guaranteed return, or agreed repayment schedule is offered. Rate, points, draw timing, collateral, covenants, and remedies require an agreed instrument and counsel review.
+The proposed $1.5M is a maximum staged facility, not an automatic closing draw. The working structure is 12% nominal fixed interest on drawn principal only, draws during months 1–24, interest-only through month 24, then 84 monthly principal-and-interest payments ending in month 108. No permanent ownership, equity, conversion right, perpetual royalty, guaranteed return, or prepayment penalty is offered. The first draw must be tied to an approved, quote-backed phase; rate, points, collateral, covenants, reserves, and remedies require an agreed instrument and counsel review.
 
 ### What exists and what remains to prove
 The public site demonstrates the brand, character system, bilingual direction, family content, learning-zone concept, portal concepts, and commerce direction. It does not prove hosted multi-tenant operation, live billing, enrollment, data isolation, backups, security acceptance, or receipts.
@@ -25,7 +25,7 @@ The product is designed around director, teacher, parent, adult-mediated Kid Mod
 - **Higgsfield spend:** audited account evidence: $565 in Oct. 8 debits ($375 + $190), mixed projects; attribution to Futures Friends is not complete
 
 ### Repayment reality
-Illustrative debt case: $1.5M at 12%, 12 months interest-only at $15,000/month, then approximately $33,366.67/month for 60 months. This is a model, not an offer. Base year-one illustrative net receipts are $370,784.80 and operating cash before debt is -$874,057.38. Current zero, downside, base, and upside stress cases fail repayment coverage. The responsible path is staged funding, reduced and accepted scope, verified receipts, or additional capital before full-scope borrowing.
+Illustrative full-draw stress case only: $1.5M at 12%, $15,000/month interest-only through month 24, then approximately $26,479.10/month for months 25–108. Total modeled receipts over 108 months are approximately $2,584,244.33, including approximately $1,084,244.33 of interest. Undrawn availability carries no interest and a later draw does not reset final maturity. This is a model, not an offer. Base year-one illustrative net receipts are $370,784.80 and operating cash before debt is -$874,057.38; 1.25x coverage would require approximately $33,098.88/month during amortization. Current zero, downside, base, and upside stress cases fail repayment coverage. The responsible path is staged funding, reduced and accepted scope, verified receipts, or additional capital before full-scope borrowing.
 
 ### Why this can matter
 Booker learns. Lumi belongs. Zuri explores. Bop moves. The potential advantage is the combination of owned characters and curriculum, bilingual delivery, classroom-to-home continuity, physical learning zones, adult-mediated child safety, and support designed for small providers. The proof must come from paid pilots, renewal, participation, outcomes, margins, contracts, and operating records.

@@ -9,12 +9,11 @@ Futures Friends combines early-learning content, family support and an operating
 
 - [Investor executive one-sheet](documents/Futures_Friends_CURRENT_Investor_Executive_One_Sheet.md)
 - [Investor business plan](documents/Futures_Friends_CURRENT_Investor_Business_Plan.md)
-- [Platform and investor one-sheet](documents/Futures_Friends_CURRENT_Platform_and_Investor_One_Sheet.md)
 - [Operations companion](documents/Futures_Friends_CURRENT_Operations_Companion.md)
 - [Master production Bible](documents/Futures_Friends_CURRENT_Master_Production_Bible.md)
 - [Forecast and production reconciliation](documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md)
 
-The six Markdown files above are the current source copies prepared for the public evidence room. The six branded PDFs are finalized for review. The business plan, Bible and operations companion include current controls followed by complete, clearly marked historical source documents. The one-sheets and financial appendix use the current model.
+The five Markdown files above are the current source copies prepared for the public evidence room. The five current branded PDFs are finalized for review. The business plan, Bible and operations companion include current controls followed by complete, clearly marked historical source documents. The investor one-sheet and financial appendix use the current model.
 
 ## Current financial control facts
 
@@ -34,12 +33,12 @@ The model carries 48 external published or observed source references plus one e
 - [Full cost model](costs/Full_Cost_Model.json)
 - [Itemized costs](costs/Itemized_Costs.csv)
 - [Year-one itemized workbook](costs/Full_Year1_Itemized.xlsx)
-- [72-month forecast](Digital/model/PHASED_MONTHLY_72M_FORECAST.json)
+- [108-month forecast](Digital/model/PHASED_MONTHLY_108M_FORECAST.json)
 - [Forecast and production reconciliation](documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md)
 
-The current loan proposal uses **12% fixed nominal annual interest**: 12 interest-only months at **$15,000**, followed by 60 amortizing months at **$33,366.67**, assuming the full $1.5M is funded at closing. Scheduled total: **$2,182,000.29**, including **$682,000.29 interest**. These are proposed terms, not a lender quote or guaranteed return. All four forecast scenarios fail debt coverage; the rate does not establish repayment capacity. See the [loan pricing rationale and comparisons](documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md).
+The current loan proposal uses **12% fixed nominal annual interest**: 24 interest-only months at **$15,000**, followed by 84 amortizing months at **$26,479.10**, assuming a hypothetical full $1.5M closing draw. Scheduled total: **$2,584,244.33**, including **$1,084,244.33 interest**. Interest is modeled on drawn principal only; the first staged draw remains TBD pending an approved, quote-backed viable phase. These are proposed terms, not a lender quote or guaranteed return. All four forecast scenarios fail debt coverage; the rate does not establish repayment capacity. See the [loan pricing rationale and comparisons](documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md).
 
-The 72-month forecast is a linked planning file. Its scenarios are not a promise of revenue, enrollment, renewal or repayment. Funding language in the investor documents describes staged debt or other documented financing structures and does not grant permanent ownership.
+The 108-month forecast is a linked planning file. Its scenarios are not a promise of revenue, enrollment, renewal or repayment. Funding language in the investor documents describes staged debt and does not grant permanent ownership.
 
 ## Higgsfield and animation boundary
 
@@ -74,8 +73,7 @@ Each document distinguishes current published direction, draft work, archival ma
 - [01_Investor_Business_Plan.pdf](https://dvolcore.github.io/futures-friends/investor/01_Investor_Business_Plan.pdf)
 - [02_Series_Curriculum_Production_Bible.pdf](https://dvolcore.github.io/futures-friends/investor/02_Series_Curriculum_Production_Bible.pdf)
 - [03_Program_Operations_Evidence_Companion.pdf](https://dvolcore.github.io/futures-friends/investor/03_Program_Operations_Evidence_Companion.pdf)
-- [04_Platform_One_Sheet.pdf](https://dvolcore.github.io/futures-friends/investor/04_Platform_One_Sheet.pdf)
 - [05_Investor_One_Sheet.pdf](https://dvolcore.github.io/futures-friends/investor/05_Investor_One_Sheet.pdf)
 - [06_Financial_Reconciliation.pdf](https://dvolcore.github.io/futures-friends/investor/06_Financial_Reconciliation.pdf)
-- [72-month cash forecast workbook](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_72M_FORECAST.xlsx)
+- [108-month cash forecast workbook](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_108M_FORECAST.xlsx)
 - [Operating-record evidence audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md)
