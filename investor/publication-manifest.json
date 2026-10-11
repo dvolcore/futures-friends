@@ -1,9 +1,13 @@
 {
   "source_package": "Futures_Friends_Investor_Premium_2026-10-08",
   "files": {
+    ".gitattributes": {
+      "bytes": 13,
+      "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
+    },
     "01_Investor_Business_Plan.pdf": {
-      "bytes": 4681260,
-      "sha256": "cfa0fdbfe1fc25605c3a000789d01d7f337f9925625f822354d4d5d294ccf400"
+      "bytes": 7115913,
+      "sha256": "c8b3d124aafdbdb8642e7ec4215c2d5d79880980b8bd3a6b04eb92f9148f191e"
     },
     "02_Series_Curriculum_Production_Bible.pdf": {
       "bytes": 27609272,
@@ -18,12 +22,16 @@
       "sha256": "a5584463fde20b79b7b737dcdb11fc7cbfcd9f3ad6aa288500d8923b8f07b013"
     },
     "05_Investor_One_Sheet.pdf": {
-      "bytes": 2361141,
-      "sha256": "c0c695da360c8104d0cbbab0d49b0c833d88d8aa2b76765a217cd7a598ad6f1c"
+      "bytes": 2361789,
+      "sha256": "1ae1ac527c06a8d4b479cfe6a9f3100a79140d966c252ae91df2a450d91d28e6"
+    },
+    "06_Financial_Reconciliation.pdf": {
+      "bytes": 1185154,
+      "sha256": "d08adbbb4f04563ed03b2e12fec86fce86cd11ba9a014a2389d6c8b61c8a025d"
     },
     "Digital/README.md": {
-      "bytes": 5411,
-      "sha256": "60fc9eb7d284a385b55f680220773131a524b8634c98a15f409b0903e2afa04b"
+      "bytes": 3330,
+      "sha256": "8e1e9bd7738756d9c4d4f1eb32505680476a5de0ef7bbf8a37fa40ff762367d1"
     },
     "Digital/assets/backpack.webp": {
       "bytes": 432702,
@@ -134,16 +142,28 @@
       "sha256": "91b86db428cadbb866e33eea3aef6c6738d9a047720727e0c7cf8b4226f2323b"
     },
     "Digital/business-plan.html": {
-      "bytes": 168008,
-      "sha256": "5d17e69748c059136a0c561bc773c4cfe0d71c6eaed4f46bfebca1591ea84ee1"
+      "bytes": 171194,
+      "sha256": "eb1232a540e692000840213c5ff51077fb7a8813ba28cf17036abc6a2162aa51"
     },
     "Digital/business-plan.js": {
       "bytes": 20145,
       "sha256": "b3b042e1a54074d7765b2f015f3bc881e7dd71c83c17d199a32c1f8265ca7f84"
     },
+    "Digital/financial-update.html": {
+      "bytes": 10538,
+      "sha256": "7fa98d3589c5b81aa0babcc22587eea36c5252e3cabe5bff99bf25d8555b3302"
+    },
     "Digital/index.html": {
-      "bytes": 75092,
-      "sha256": "32af37b89196ad644f7858cbaeb099525ca5cede05a5a59380a48742856357bd"
+      "bytes": 79333,
+      "sha256": "dc3a001534b37d43a02ebd78544c988fc742605ceef9666fc8f5f82d35ed72dc"
+    },
+    "Digital/investor-return.css": {
+      "bytes": 7272,
+      "sha256": "45e6eb87f30bbd1b1b312989462572f5cdbc7278a769e85aef04cc289a0e6988"
+    },
+    "Digital/investor-return.js": {
+      "bytes": 5839,
+      "sha256": "094e8e405f2b985d268e8b9e7cbc853d0328fcc9aff83d55b35f659870383d70"
     },
     "Digital/model/business-designed.md": {
       "bytes": 86228,
@@ -154,8 +174,8 @@
       "sha256": "7449aadd89b499e685e1ecbc32090ab2245fa2ebb119c5231cb2d86d43ae53c3"
     },
     "Digital/model/financials.json": {
-      "bytes": 21536,
-      "sha256": "b6bf592398d4a16f7ae430a1eaba4788d0514f6bcccb9b4d3539eecd07de1f6b"
+      "bytes": 22427,
+      "sha256": "7b91389a288960d8a258d3c8905d08f2f4029d9e15db2d0ad8382a5dcf5880bb"
     },
     "Digital/model/partner-repayment-model.json": {
       "bytes": 8895,
@@ -166,27 +186,37 @@
       "sha256": "9f79d13e604debb8c73825ec47f7de4b2529eb16ef4b608af811d1a05429454a"
     },
     "README.md": {
-      "bytes": 925,
-      "sha256": "a1a1c7411890b433e2cc7c4568ff3062642fdd0156c2acc492b4564b4bdc652b"
+      "bytes": 1770,
+      "sha256": "615c1ccff1824a398c803ea5f95e83ccf71c2911e787cdf8e114f93527d720ea"
+    },
+    "archive/01_Investor_Business_Plan_pre_20261011.pdf": {
+      "bytes": 4681260,
+      "sha256": "cfa0fdbfe1fc25605c3a000789d01d7f337f9925625f822354d4d5d294ccf400"
+    },
+    "archive/05_Investor_One_Sheet_pre_20261011.pdf": {
+      "bytes": 2361141,
+      "sha256": "c0c695da360c8104d0cbbab0d49b0c833d88d8aa2b76765a217cd7a598ad6f1c"
+    },
+    "costs/Full_Cost_Model.json": {
+      "bytes": 582647,
+      "sha256": "8041fa4859aa722309cd6fefcc015ae874b57036ebec9e8d4ea798b01f9beb6f"
+    },
+    "costs/Full_Year1_Itemized.xlsx": {
+      "bytes": 506702,
+      "sha256": "50b35d37e6331f7468533c0184111ada080f4d5ebbfd2f7834d821064c7a9183"
+    },
+    "costs/Itemized_Costs.csv": {
+      "bytes": 205665,
+      "sha256": "fb1c705d8333791d489d7b3f11a617cfa315467614727a961d97ab86b47f75bf"
     },
     "index.html": {
       "bytes": 485,
       "sha256": "af04bc6f8b8597723be2349e767050fd5684757bdb0a6edcb605e45b8c6cf422"
-    },
-    ".gitattributes": {
-      "bytes": 13,
-      "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
-    },
-    "Digital/investor-return.css": {
-      "bytes": 7272,
-      "sha256": "45e6eb87f30bbd1b1b312989462572f5cdbc7278a769e85aef04cc289a0e6988"
-    },
-    "Digital/investor-return.js": {
-      "bytes": 5839,
-      "sha256": "094e8e405f2b985d268e8b9e7cbc853d0328fcc9aff83d55b35f659870383d70"
     }
   },
   "revisions": {
-    "2026-10-09": "Investor return timeline, monthly payment download, and investor one-sheet refreshed; master documents retained."
-  }
+    "2026-10-09": "Investor return timeline, monthly payment download, and investor one-sheet refreshed; master documents retained.",
+    "2026-10-11": "Connected the 686-line year-one cost model to the investor package; current financial reconciliation and one-sheet, 59-page business-plan PDF retaining 44 historical pages, superseded prior financing widgets, current funding-gap and illustrative debt disclosures. Production Bible and operations companion retained unchanged."
+  },
+  "current_financial_status": "Planning reconciliation; not a fully underwritten forecast or agreed financing offer."
 }

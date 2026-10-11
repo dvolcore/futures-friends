@@ -1,7 +1,29 @@
 {
+  "current_financial_reconciliation": {
+    "status": "proposed planning basis; not a funded commitment or offer",
+    "proposed_facility": 1500000,
+    "base_first_year_gross": 3123207.86,
+    "gap_before_receipts_or_scope": 1623207.86,
+    "itemized_rows": 686,
+    "source_referenced_rows": 132,
+    "pilot_locations": 1,
+    "age_range": "2-5",
+    "equity_offered": false,
+    "repayment_illustration": {
+      "annual_rate": 0.09,
+      "interest_only_months": 12,
+      "interest_only_monthly": 11250,
+      "amortizing_months": 60,
+      "amortizing_monthly": 31137.53,
+      "illustrative_total_paid": 2003251.97,
+      "note": "Illustration only; not a quote, guarantee, commitment or securities offering."
+    },
+    "future_partner_revenue": "No signed partner receipts supplied for this model; excluded from proven receipts",
+    "planning_allowance_rows": 554
+  },
   "as_of": "2026-10-08",
   "currency": "USD",
-  "status": "planning model; not audited; legacy operating inputs require owner verification",
+  "status": "historical operating and financing scenarios superseded by current_financial_reconciliation",
   "borrower_and_team": {
     "owner_named_in_legacy_package": "Robert McDaniel",
     "legal_borrower": "to verify",
