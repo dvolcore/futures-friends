@@ -221,7 +221,7 @@ First month: verify safe shift coverage, consent, activity records, billing, att
 
 Before a financing decision, obtain the actual age roster/room capacity/hours; existing staff and payroll; current signed tuition/discount policy; twelve months of bills and insurance; inventory/inspection findings; the purpose of $140,000 and lender closing/payment statement; engineering/clinical/production quotes; current tax treatment; and past creator fees/rights. No one can certify the present forecast as a profitable investment without those inputs.
 
-Each cost row identifies its formula, source and whether it is a published price, tax formula or quote-required allowance. Cents make arithmetic reproducible; they do not imply receipt-level accuracy. No food reimbursement, grant, store profit or partner licensing receipt is assumed. Read the digital cost register, CSV and monthly cash table for the complete audit trail. The production bible and operations companion preserve brand and delivery scope; their expansion budgets are historical references.
+Each cost row identifies its formula, source and whether it is a published price, tax formula or quote-required allowance. Cents make arithmetic reproducible; they do not imply receipt-level accuracy. No food reimbursement, grant, store profit or partner licensing receipt is assumed. Read the digital cost register, CSV and monthly cash table for the complete audit trail. The production bible and operations companion preserve brand and delivery scope; their future creative and expansion concepts remain outside pilot financing.
 """
 (ROOT/'documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md').write_text(body)
 one=f"""# Futures Friends | 40-child pilot — investor one-sheet

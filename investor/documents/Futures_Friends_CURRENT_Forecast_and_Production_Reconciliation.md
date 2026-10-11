@@ -1,55 +1,103 @@
-# Futures Friends | Forecast and Production Reconciliation
-## Current control document | 11 October 2026
+# Futures Friends — current 40-child pilot business and funding plan
 
-This document reconciles the current cost model, forecast, and production scope for investor review. It is a control narrative, not a promise of funding, operating performance, or investor return.
+Prepared October 11, 2026. One owned Independence, Missouri location, ages 2–5, twelve months of operations and a first-month checkpoint. This replaces the expanded $3,139,152.61 case and the discarded $700,000 refinance assumption. National rollout belongs to Phase 2.
 
-## Reconciled planning numbers
+## What the pilot proves
+Futures Friends connects Booker, Lumi, Zuri and Bop to early literacy, movement, nutrition, belonging and family routines. Reuse the existing website, CRM, ATS, store, characters and learning materials. Complete parent/child access, curriculum records, approved character reminders and the operating controls needed for one center. Measure safe delivery, parent use, retention and actual cash margin before expanding.
 
-The source model contains 687 rows. The base gross first-year requirement is **$3,139,152.61**, comprised of $1,345,120.33 one-time, $1,266,942.18 recurring, $24,509.50 inventory, $9,000 refundable deposit, and $493,580.60 reserve. Base monthly recurring spend is $105,578.52. The low and high cases are $2,616,874.61 and $3,963,953.40.
+## The funding calculation
+| Item | Amount |
+|---|---:|
+| Annual recurring operating cost | $477,066.02 |
+| One-time completion and launch | $146,964.00 |
+| First-year spend before contingency | $624,030.02 |
+| First-year spend including contingency | $646,074.62 |
+| Contingency: 15% of one-time spend | $22,044.60 |
+| Working capital floor: one operating month | $39,755.50 |
+| Owner-specified funding enabling refinance | $140,000.00 |
+| Peak pilot cash deficit after modeled tuition | $222,049.42 |
+| Funding estimate before mortgage and financing | **$423,849.52** |
 
-The proposed $1,500,000 loan leaves a gross gap of **$1,639,152.61** before receipts, financing costs, or scope decisions. Reserves and deposits are cash requirements, not automatically expenses. The post-substitution base year-one operating spend is $1,244,842.18.
+The estimate adds $140,000 + peak cumulative deficit + contingency + cash floor. One-time costs are already included in the cash deficit. Working capital and contingency are cash provisions, not additional vendor expenses. The $140,000 is the owner's stated funding need to enable refinancing; it is not a verified payoff balance. The new building payment, points, lender terms, guarantees and any unpaid creator invoice remain unknown. Zero-tuition stress funding is $825,830.12, before those missing costs.
 
-## Forecast boundary
+**This cost estimate is not an affordable loan recommendation.** At the historical tuition baseline, ongoing operations are negative even before building and investor payments. Borrowing to hide that loss would repeat the original problem.
 
-The 108-month forecast assumes one location, ages 2–5, a 40-child planning case, recurring monthly costs, one-time costs phased, no automatic expansion, and 3% annual recurring inflation after year one. Revenue scenarios are illustrative and unsecured. No partner receipts are signed in the supplied evidence.
+## Two full-time adults and individual part-time shifts
+| Person | Paid hours/year | Rate/hour | Annual wages |
+|---|---:|---:|---:|
+| Full-time director | 2,080 | $24.00 | $49,920.00 |
+| Full-time teacher 1 | 2,080 | $20.00 | $41,600.00 |
+| Part-time teacher 2 — 7am–noon | 1,300 | $20.00 | $26,000.00 |
+| Part-time teacher 3 — 7am–noon | 1,300 | $20.00 | $26,000.00 |
+| Part-time teacher 4 — noon–5pm | 1,300 | $20.00 | $26,000.00 |
+| Part-time teacher 5 — noon–5pm | 1,300 | $20.00 | $26,000.00 |
+| Part-time teacher 6 — 3pm–5pm | 520 | $20.00 | $10,400.00 |
+| Part-time teacher 7 — 3pm–5pm | 520 | $20.00 | $10,400.00 |
+| Part-time break/admin floater | 1,040 | $20.00 | $20,800.00 |
+| Part-time food worker | 1,040 | $19.00 | $19,760.00 |
+| Substitute 1 | 320 | $20.00 | $6,400.00 |
+| Substitute 2 | 320 | $20.00 | $6,400.00 |
 
-The base scenario shows $370,784.80 year-one net receipts and -$874,057.38 year-one operating cash before debt. The full-draw stress illustration uses 12% nominal fixed interest on drawn principal, 24 months interest-only at $15,000 per month, then approximately $26,479.10 per month for 84 months, ending in month 108. The first draw remains TBD and must be quote-backed; later staged draws do not reset maturity. Current stress cases fail repayment coverage; the model is a capital and scope warning, not a positive return forecast.
+Total wages: $269,680. Two full-time people, six part-time classroom teachers, one part-time relief floater, one part-time food worker and two individually costed substitutes. This is a total planning roster, not an order to hire twelve new people. Twelve names do not mean twelve adults supervising at once.
 
-## Production scope reconciliation
+7am–noon: director, teacher 1, teachers 2 and 3. Noon–3pm: director, teacher 1, teachers 4 and 5. 3pm–5pm: teachers 4, 5, 6 and 7. Four adults stay on the floor. The floater provides four hours/day: two hours for director administration and two hours for four half-hour breaks, one replacement at a time. Paid hours use 52 weeks; 250 service days leave ten weekday paid closure/training days. Actual holidays, break duration, overtime and relief needs must be checked against the real roster.
 
-The forward assumption is 12 fully animated episodes at approximately 7 minutes each, with promos and short habit/special clips. This is a future scope assumption. Historical six-minute and 13-episode references remain preserved in the source archive and are not current delivery commitments.
+This four-adult pattern is conditional. Two groups of twenty preschoolers aged 3–5 can fit the applicable ratios, subject to licensed room capacity and the rule for five-year-olds. Twos require 1:8 with maximum group size 16; mixed-age grouping can require more adults. Eight twos plus two groups of sixteen older children would require five floor adults. We do not assert that every 40-child age mix fits four adults. Confirm child ages and approved rooms before accepting enrollment. If another floor adult is needed across a ten-hour day, allow at least 2,500 additional service hours at $20/hour ($50,000 wages), plus relief, taxes and insurance; it is not in the four-adult base. The qualified director counts only when actually in the classroom; the food worker does not count while preparing food. [Missouri rules](https://www.sos.mo.gov/CMSImages/AdRules/csr/current/5csr/5c25-500.pdf).
 
-The current content facet totals **$539,647**, including **$122,640** in episode production labor for 84 finished minutes and **$13,865** in generation credits for the 102-minute package. QR and promo labor, voices, music, bilingual adaptation, captions, editing, rights, review, storage and delivery require row-level confirmation so separately budgeted services are not counted twice. The earlier $842,000 and $994,000 production envelopes are superseded, non-additive references.
+Each person's Social Security, Medicare, Missouri unemployment, FUTA and workers compensation is separate in the register. Optional medical contribution and retirement allowances apply only to the two full-time adults. Missouri new-employer planning rate: 2.376% on each person's first $9,000; conditional FUTA: 0.6% on the first $7,000. Actual entity status and rate letter govern. No blanket unemployment reserve is added. [Missouri](https://labor.mo.gov/des/employers/tax-rates), [IRS](https://www.irs.gov/publications/p15). Teacher offers at $20/hour are chosen planning offers, not market averages; the KC preschool median benchmark is $17.98. [Local wage evidence](https://www.onetonline.org/link/localwages/25-2011.00?st=MO).
 
-## Evidence labels
+## Revenue, year two and repayment
+The historical v4.3 draft lists $210/week, converted at 52/12 to **$910/month**. This is not a verified current signed price. The draft's 20% sibling discount may reduce realized receipts further. Do not substitute the old unconfirmed $1,100 assumption for an approved price. At 40 children and 96% cash collection, annual receipts are $419,328.00. First-year enrollment ramps 30, 34, 36, 38, then 40 for eight months; this is illustrative, not contracted demand.
 
-Every material number must carry one of these labels:
+Ongoing annual expenses remain $477,066.02 in year two before inflation and building payments. Operating cash is **-$57,738.02** before mortgage, investor debt and profit tax. At forty occupied places, break-even realized tuition is **$1,036.37/child/month**, before building/debt, with food and processing fees recalculated as enrollment changes. A positive repayment plan requires more than reaching this operating break-even. At the same costs, forty places are the modeled ceiling, not an invitation to enroll beyond licensed capacity. A profitable enrollment count cannot be claimed when even forty children lose money.
 
-- **Paid actual:** supported by invoice, receipt, payroll, or bank record.
-- **Written quote:** vendor scope, date, tax basis, and validity period attached.
-- **Published reference price:** public price captured with URL and access date; quantity and scope still require confirmation.
-- **Local wage benchmark or comparable:** market reference, not a committed hire or lease.
-- **Planning allowance:** internal estimate used to reserve capital; not a quote.
-- **Decision pending:** owner, counsel, regulator, or vendor confirmation required.
+Monthly debt capacity = max(0, annual receipts − ongoing expenses − annual building payments) / 1.25 / 12. The 1.25 coverage hurdle is a planning screen, not a lender commitment. When the building payment is unknown, affordable loan capacity is unknown. The digital calculator shows loan payments and whether cash covers them; it does not deduct loan payments from gross revenue and call that profit. No permanent equity is offered. Rate, term, amortization, collateral and guarantees require an actual lender offer. A long term reduces payments but increases total interest; a balloon does not solve repayment without a documented exit.
 
-The 133 source-referenced lines are not all quotes. The remaining 554 lines are allowances requiring actual records, quotes, or documented assumptions. Cents-level totals show arithmetic precision, not market certainty.
+The current lean model still needs a verified economic reset: signed sustainable tuition, documented existing-cost offsets, narrower paid build milestones, or committed non-debt funding. Existing tuition revenue must cover recurring operations after the first funded year. Unsigned merchandise, church/daycare licensing, grants or national expansion are excluded from debt underwriting. They remain Phase 2 opportunities, evaluated on their own unit economics.
 
-## Acceptance gates
+## Every priced category
+| Category | First-year allocation |
+|---|---:|
+| Staff wages | $269,680.00 |
+| Employer taxes | $23,569.84 |
+| Staff insurance | $5,393.60 |
+| Staff benefits | $9,945.60 |
+| Staff readiness | $4,620.00 |
+| Administration | $11,400.00 |
+| Food and nutrition | $37,688.00 |
+| Building operations | $32,720.00 |
+| Insurance | $12,700.00 |
+| Cleaning and consumables | $4,548.00 |
+| Safety and equipment | $4,220.00 |
+| Classroom materials | $2,904.00 |
+| Classroom and office consumables | $3,199.74 |
+| Platform completion | $57,000.00 |
+| Platform assurance | $24,000.00 |
+| Platform support | $10,800.00 |
+| Hosting and software | $4,052.20 |
+| Pilot devices | $2,580.00 |
+| Payments | $5,919.04 |
+| Curriculum and clinical review | $38,600.00 |
+| Pilot content production | $25,740.00 |
+| Pilot content support | $14,400.00 |
+| Local marketing | $11,400.00 |
+| Store pilot | $550.00 |
+| Refinance transaction | $6,400.00 |
 
-No production release should be called complete until scope, rights, approved scripts, character continuity, animation test, voice/music permissions, captions, Spanish review, child-development review, delivery files, and acceptance owner are recorded. No platform release should be called operational until hosted auth, role isolation, persistence, billing, backups/restores, security/privacy review, accessibility, performance, and real-device testing are recorded.
+## Completion, curriculum and production
+Platform completion is 380 estimated hours at $150/hour: $57,000, contingent on reusing working code. Inventory/deployment 20h; family/child consent and authentication 40h; CRM/ATS/store integration 25h; curriculum records and parent digest 60h; finite messages/QR 20h; bilingual review 25h; role/private-file security 65h; backup/restore/monitoring 40h; accessibility/iPad verification 35h; acceptance/training/launch 50h. These are scope allowances, not contractor quotes or the replacement value of past work. Six maintenance hours/month is a lean support allowance; escalation must be quoted.
 
-## Source map
+Acceptance requires persistent child records, role isolation, private uploads, consent records, billing without duplicate charges, educator and native-Spanish approval, independent manual security testing and retest, successful offsite restore, real iPad/browser checks and a named support owner. Public pages and merged code alone do not establish readiness. Human-approved finite character messages support routines; no open-ended child chatbot or medical advice is assumed. State approval/accreditation must not be claimed without evidence.
 
-[Cost ledger](https://dvolcore.github.io/futures-friends/investor/costs/Full_Cost_Model.json) is the row-level source model. [PHASED_MONTHLY_108M_FORECAST.json](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_108M_FORECAST.json) is the current forecast. [PHASED_MONTHLY_CASH.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_CASH.csv) and [PHASED_GROSS_SPEND_BY_ROW.csv](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_GROSS_SPEND_BY_ROW.csv) provide monthly and row-level reconciliation. [Operating-record audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md) records the absence of current primary evidence for license, capacity, enrollment, collections, payroll, rent, bank cash, reserves, debt, and permits. The current Production Bible and Operations Companion define canon, roles, curriculum, safeguards, and acceptance boundaries.
+Curriculum mapping, teacher coaching, ongoing educator support, RN routine consultation and dietitian menu review are separately costed. Pilot content reuses the approved characters. The $3,000 generation allowance is a spend cap for a finite pilot library, not twelve seven-minute episodes. Price accepted-minute yield including rejected generations before funding a season. Scripts, education review, editing, captions, sound, licensing and creative lead fees remain separate.
 
-## Higgsfield audit boundary
+Marketing is $6,000 local media + $1,800 management + $2,400 launch photography + $1,200 materials = $11,400 year one. Test tour-to-enrollment conversion and retention before raising spend. There is no national sales payroll, bulk tablet rental inventory or full-season production in this pilot.
 
-The account audit found two Oct. 8 debits totaling $565 ($375 + $190). The account includes mixed projects, so the amount is not presented as all Futures Friends spend. Ultra is 9,000 credits per month for $375 through Nov. 8. A seven-day audit recorded 11 generations, 1,164 credits, and 97 generated seconds; the displayed charge was $46.56 at $0.04 per credit. A three-month view recorded 55,188.75 credits and $2,207.55 displayed across mixed projects. A current 5,000-credit pack is $235 and expires after 90 days (about $0.047/credit). These are account observations, not a finished-season quote. The CNT-HIGGS planning estimate covers 102 finished minutes (84 season + 12 QR + 6 promo), at 12 credits/second with 3x/4x/6x retry planning assumptions; yield is not measured. Rounded 5,000-credit pack scenarios are 45 / 59 / 89 packs, costing $10,575 / $13,865 / $20,915. The scenarios exclude historical $565 and subscription double counting and have no overlap with the $122,640 human-labor allowance.
+Ralph's forward delivery ($12,000) and ongoing creative oversight ($14,400/year) are explicit. Existing platform/characters/CRM/ATS/video replacement value is not automatically a cash invoice. Reconcile prior scope, deliverables, payments, rights and outstanding fees before adding past compensation. Do not assume past work is free because its amount is unresolved.
 
-## Current production-finance control note
+## Release gates and missing evidence
+First month: verify safe shift coverage, consent, activity records, billing, attendance and support response. Month three: compare actual collections, retention and acquisition costs against the model. Months six and twelve: expand only after positive ongoing cash economics and dependable delivery. Release engineering cash against accepted milestones.
 
-Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning allowances.
+Before a financing decision, obtain the actual age roster/room capacity/hours; existing staff and payroll; current signed tuition/discount policy; twelve months of bills and insurance; inventory/inspection findings; the purpose of $140,000 and lender closing/payment statement; engineering/clinical/production quotes; current tax treatment; and past creator fees/rights. No one can certify the present forecast as a profitable investment without those inputs.
 
-## Why the proposed rate is 12%
-
-12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, the 84-month amortizing payment is approximately $26,479.10; 1.25x coverage requires $33,098.88 in monthly cash before debt. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.
+Each cost row identifies its formula, source and whether it is a published price, tax formula or quote-required allowance. Cents make arithmetic reproducible; they do not imply receipt-level accuracy. No food reimbursement, grant, store profit or partner licensing receipt is assumed. Read the digital cost register, CSV and monthly cash table for the complete audit trail. The production bible and operations companion preserve brand and delivery scope; their future creative and expansion concepts remain outside pilot financing.

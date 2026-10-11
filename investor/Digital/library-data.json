@@ -7,7 +7,8 @@
       "source": "../documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md",
       "pdf": "../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
       "summary": "Active one-location, one-year pilot model for 40 children. Open assumptions and debt-affordability gates are shown explicitly.",
-      "view": "pilot-plan.html"
+      "view": "pilot-plan.html",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
     },
     {
       "id": "pilot-one-sheet",
@@ -16,7 +17,8 @@
       "source": "../documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md",
       "pdf": "../Futures_Friends_CURRENT_Pilot_One_Sheet.pdf",
       "summary": "Active pilot scope, operating logic, funding purpose and next-stage path in one digital page.",
-      "view": "pilot-one-sheet.html"
+      "view": "pilot-one-sheet.html",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
     },
     {
       "id": "pilot-costs",
@@ -26,15 +28,8 @@
       "pdf": null,
       "summary": "Line-item pilot costs and evidence fields. Values remain tied to the current generator and source status.",
       "view": "pilot-plan.html#budget",
-      "format": "csv"
-    },
-    {
-      "id": "business",
-      "title": "Investor Business Plan (historical reference)",
-      "kind": "Historical / superseded",
-      "source": "../documents/Futures_Friends_CURRENT_Investor_Business_Plan.md",
-      "pdf": "../01_Investor_Business_Plan.pdf",
-      "summary": "Retained narrative and research reference. Its former financing scenarios are not the active pilot request."
+      "format": "csv",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
     },
     {
       "id": "bible",
@@ -42,7 +37,8 @@
       "kind": "Production",
       "source": "../documents/Futures_Friends_CURRENT_Master_Production_Bible.md",
       "pdf": "../02_Series_Curriculum_Production_Bible.pdf",
-      "summary": "Story world, characters, curriculum, episode system and brand continuity."
+      "summary": "Story world, characters, curriculum, episode system and brand continuity.",
+      "scopeNote": "Creative and operating reference. Future program scope is retained for continuity; national expansion and the full animated season are excluded from pilot financing."
     },
     {
       "id": "operations",
@@ -50,31 +46,8 @@
       "kind": "Operations",
       "source": "../documents/Futures_Friends_CURRENT_Operations_Companion.md",
       "pdf": "../03_Program_Operations_Evidence_Companion.pdf",
-      "summary": "Delivery model, roles, controls, portals, evidence and operating requirements."
-    },
-    {
-      "id": "onesheet",
-      "title": "Investor Executive One-Sheet (historical reference)",
-      "kind": "Historical / superseded",
-      "source": "../documents/Futures_Friends_CURRENT_Investor_Executive_One_Sheet.md",
-      "pdf": "../05_Investor_One_Sheet.pdf",
-      "summary": "Retained prior executive view. Open the current pilot one-sheet for the current cost estimate."
-    },
-    {
-      "id": "loan",
-      "title": "Loan Pricing Rationale (historical reference)",
-      "kind": "Historical / superseded",
-      "source": "../documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md",
-      "pdf": null,
-      "summary": "Retained prior financing analysis. It is not an active loan offer or repayment approval."
-    },
-    {
-      "id": "reconciliation",
-      "title": "Forecast & Production Reconciliation (historical reference)",
-      "kind": "Historical / superseded",
-      "source": "../documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md",
-      "pdf": "../06_Financial_Reconciliation.pdf",
-      "summary": "Retained prior full-scope reconciliation. The current pilot model supersedes its active funding path."
+      "summary": "Delivery model, roles, controls, portals, evidence and operating requirements.",
+      "scopeNote": "Creative and operating reference. Future program scope is retained for continuity; national expansion and the full animated season are excluded from pilot financing."
     },
     {
       "id": "animation-audit",
@@ -82,7 +55,8 @@
       "kind": "Evidence audit",
       "source": "../costs/Animation_Budget_Reconciliation.md",
       "pdf": null,
-      "summary": "Observed generation usage and the season production sensitivity."
+      "summary": "Observed generation usage and the season production sensitivity.",
+      "scopeNote": "Evidence reference, not a supplier quote. Account usage does not establish an episode price; season production is outside the pilot budget."
     },
     {
       "id": "higgsfield-audit",
@@ -90,7 +64,8 @@
       "kind": "Evidence audit",
       "source": "../costs/Higgsfield_Actual_Usage_Audit.md",
       "pdf": null,
-      "summary": "Account-level usage evidence and limits of attribution."
+      "summary": "Account-level usage evidence and limits of attribution.",
+      "scopeNote": "Evidence reference, not a supplier quote. Account usage does not establish an episode price; season production is outside the pilot budget."
     },
     {
       "id": "record-audit",
@@ -98,7 +73,8 @@
       "kind": "Evidence audit",
       "source": "../costs/Operating_Record_Evidence_Audit.md",
       "pdf": null,
-      "summary": "Evidence status, source coverage and unresolved planning inputs."
+      "summary": "Evidence status, source coverage and unresolved planning inputs.",
+      "scopeNote": "Evidence reference. Missing operating records and supplier quotes remain open; these estimates are not audited financial statements."
     }
   ]
 }

@@ -26,6 +26,6 @@ Published prices, owner inputs and allowances are distinct. No supplier quotatio
 
 Pilot scope includes completion of the existing website, CRM, ATS, store, family/child permissions and activity records; finite approved character messages; curriculum, clinical review, bilingual materials, backups, security and local enrollment marketing. Eight classroom devices are modeled, with a ten-device management minimum. National sales, franchise tooling, bulk family tablets and the full 12-episode season are Phase 2 and excluded from current pilot financing.
 
-The reading room preserves previous business-plan, production-Bible, operating-companion and financial-reconciliation documents as historical references. Their former loan requests, national forecasts, one-sheets and 108-month debt schedules do not control the pilot. Existing curriculum and creative material remains relevant, subject to review.
+Superseded financial views have been retired. Legacy page and PDF links now resolve to the current pilot. Production and operating references retain creative depth, with future scope explicitly outside pilot financing.
 
 Publication verifies accessibility of package files, not operational hosting, privacy clearance, signed enrollment, current collections or repayment capacity. Obtain actual operating records, written quotes, lender terms and professional review before funding.
