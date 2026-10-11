@@ -10,7 +10,7 @@ There are 687 itemized rows and 49 source records. The model combines published 
 
 The plan separates center operations, provider-platform services and content/products, then consolidates cash with shared expenses allocated once. One pilot location serves ages 2–5. Capacity, lease, enrollment and current staff require records. The base model includes a 12 × 7-minute season and a 50-device pilot.
 
-A full-closing $1.5M loan at illustrative 9% would require 12 interest-only payments of $11,250 followed by 60 amortizing payments of $31,137.53: total $2,003,251.97. This illustrates finite principal and interest only. No equity, conversion or permanent ownership is offered. Terms, draw schedule and repayment capacity remain unagreed.
+A full-closing $1.5M loan at illustrative 12% would require 12 interest-only payments of $11,250 followed by 60 amortizing payments of $33,366.67: total $2,182,000.29. This illustrates finite principal and interest only. No equity, conversion or permanent ownership is offered. Terms, draw schedule and repayment capacity remain unagreed.
 
 ## Included documents
 

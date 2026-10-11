@@ -25,7 +25,7 @@ The product is designed around director, teacher, parent, adult-mediated Kid Mod
 - **Higgsfield spend:** audited account evidence: $565 in Oct. 8 debits ($375 + $190), mixed projects; attribution to Futures Friends is not complete
 
 ### Repayment reality
-Illustrative debt case: $1.5M at 9%, 12 months interest-only at $11,250/month, then approximately $31,137.53/month for 60 months. This is a model, not an offer. Base year-one illustrative net receipts are $370,784.80 and operating cash before debt is -$874,057.38. Current zero, downside, base, and upside stress cases fail repayment coverage. The responsible path is staged funding, reduced and accepted scope, verified receipts, or additional capital before full-scope borrowing.
+Illustrative debt case: $1.5M at 12%, 12 months interest-only at $15,000/month, then approximately $33,366.67/month for 60 months. This is a model, not an offer. Base year-one illustrative net receipts are $370,784.80 and operating cash before debt is -$874,057.38. Current zero, downside, base, and upside stress cases fail repayment coverage. The responsible path is staged funding, reduced and accepted scope, verified receipts, or additional capital before full-scope borrowing.
 
 ### Why this can matter
 Booker learns. Lumi belongs. Zuri explores. Bop moves. The potential advantage is the combination of owned characters and curriculum, bilingual delivery, classroom-to-home continuity, physical learning zones, adult-mediated child safety, and support designed for small providers. The proof must come from paid pilots, renewal, participation, outcomes, margins, contracts, and operating records.

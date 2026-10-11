@@ -13,7 +13,7 @@ The proposed $1,500,000 loan leaves a gross gap of **$1,639,152.61** before rece
 
 The 72-month forecast assumes one location, ages 2–5, a 40-child planning case, recurring monthly costs, one-time costs phased, no automatic expansion, and 3% annual recurring inflation after year one. Revenue scenarios are illustrative and unsecured. No partner receipts are signed in the supplied evidence.
 
-The base scenario shows $370,784.80 year-one net receipts and -$874,057.38 year-one operating cash before debt. The $1.5M debt illustration uses 9% annual interest, 12 months interest-only at $11,250 per month, then approximately $31,137.53 per month for 60 months. Current stress cases fail repayment coverage; the model is a capital and scope warning, not a positive return forecast.
+The base scenario shows $370,784.80 year-one net receipts and -$874,057.38 year-one operating cash before debt. The $1.5M debt illustration uses 12% annual interest, 12 months interest-only at $15,000 per month, then approximately $33,366.67 per month for 60 months. Current stress cases fail repayment coverage; the model is a capital and scope warning, not a positive return forecast.
 
 ## Production scope reconciliation
 
@@ -49,3 +49,7 @@ The account audit found two Oct. 8 debits totaling $565 ($375 + $190). The accou
 ## Current production-finance control note
 
 Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning allowances.
+
+## Why the proposed rate is 12%
+
+12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, amortizing payments need $41,708.34 in monthly cash before debt for 1.25x coverage. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.

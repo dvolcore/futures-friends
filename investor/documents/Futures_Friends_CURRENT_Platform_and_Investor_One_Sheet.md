@@ -28,7 +28,7 @@ One pilot location, ages 2–5. Expansion to other daycares, churches, home dayc
 - Higgsfield audit: **$565 in Oct. 8 account debits ($375 + $190), mixed-project account evidence; not all Futures Friends**; no season-cost claim
 
 ### Repayment reality
-The illustrative schedule models 9% interest-only for 12 months at $11,250/month, then approximately $31,137.53/month for 60 months. Receipts are unsecured stress inputs. Base year-one net receipts are $370,784.80 and operating cash before debt is -$874,057.38. Current stress cases do not demonstrate repayment coverage. Funding must be staged against evidence, acceptance, and verified demand.
+The illustrative schedule models 12% interest-only for 12 months at $15,000/month, then approximately $33,366.67/month for 60 months. Receipts are unsecured stress inputs. Base year-one net receipts are $370,784.80 and operating cash before debt is -$874,057.38. Current stress cases do not demonstrate repayment coverage. Funding must be staged against evidence, acceptance, and verified demand.
 
 ### Why it can win
 Owned characters and curriculum; bilingual family reach; physical learning zones connected to digital content; adult-mediated child safety; a platform that can serve centers, churches, and families; and multiple future revenue paths across subscriptions, implementation, training, curriculum, tablets, kits, merchandise, and licensing.

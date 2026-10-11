@@ -37,6 +37,8 @@ The model carries 48 external published or observed source references plus one e
 - [72-month forecast](Digital/model/PHASED_MONTHLY_72M_FORECAST.json)
 - [Forecast and production reconciliation](documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md)
 
+The current loan proposal uses **12% fixed nominal annual interest**: 12 interest-only months at **$15,000**, followed by 60 amortizing months at **$33,366.67**, assuming the full $1.5M is funded at closing. Scheduled total: **$2,182,000.29**, including **$682,000.29 interest**. These are proposed terms, not a lender quote or guaranteed return. All four forecast scenarios fail debt coverage; the rate does not establish repayment capacity. See the [loan pricing rationale and comparisons](documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md).
+
 The 72-month forecast is a linked planning file. Its scenarios are not a promise of revenue, enrollment, renewal or repayment. Funding language in the investor documents describes staged debt or other documented financing structures and does not grant permanent ownership.
 
 ## Higgsfield and animation boundary

@@ -10,26 +10,28 @@
     "age_range": "2-5",
     "equity_offered": false,
     "repayment_illustration": {
-      "annual_rate": 0.09,
+      "annual_rate": 0.12,
       "interest_only_months": 12,
-      "interest_only_monthly": 11250,
+      "interest_only_monthly": 15000,
       "amortizing_months": 60,
-      "amortizing_monthly": 31137.53,
-      "illustrative_total_paid": 2003251.97,
-      "note": "Illustration only; not a quote, guarantee, commitment or securities offering."
+      "amortizing_monthly": 33366.67,
+      "illustrative_total_paid": 2182000.29,
+      "note": "12% fixed proposal for negotiation; not a market average, quote, guarantee or commitment. All current forecast cases fail repayment coverage.",
+      "illustrative_interest": 682000.29
     },
     "future_partner_revenue": "No signed partner receipts supplied for this model; excluded from proven receipts",
     "planning_allowance_rows": 554,
     "as_of": "2026-10-11",
     "forecast_source": "PHASED_MONTHLY_72M_FORECAST.json",
     "cash_stress_minimum_additional_capital": {
-      "zero": 10481202.2787,
-      "downside": 8888462.4741,
-      "base": 7746281.6863,
-      "upside": 6145147.7195
+      "zero": 10659950.600012861,
+      "downside": 9067210.79536287,
+      "base": 7925030.007612864,
+      "upside": 6323896.040812857
     },
     "note": "Current gross model and 72-month debt schedule are illustrative planning inputs; no receipts, contract, acceptance or repayment guarantee is established.",
-    "source_records": 49
+    "source_records": 49,
+    "loan_pricing_rationale": "../../documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md"
   },
   "as_of": "2026-10-11",
   "currency": "USD",

@@ -134,9 +134,9 @@ The model uses one location, ages 2–5, a 40-child capacity planning case, recu
 
 ## 10. Debt stress and repayment discipline
 
-The illustrative debt schedule models **$1,500,000 at 9% annual interest**, 12 months interest-only at **$11,250 per month**, then 60 months at approximately **$31,137.53 per month**. This is a model, not an offer or promise. It assumes full funding at closing; staged advances require a fresh schedule. No points, fees, capitalized interest, penalty, collateral, personal guaranty, or revenue participation should be implied until written.
+The illustrative debt schedule models **$1,500,000 at 12% annual interest**, 12 months interest-only at **$15,000 per month**, then 60 months at approximately **$33,366.67 per month**. This is a model, not an offer or promise. It assumes full funding at closing; staged advances require a fresh schedule. No points, fees, capitalized interest, penalty, collateral, personal guaranty, or revenue participation should be implied until written.
 
-The base scenario uses year-one illustrative net receipts of **$370,784.80** and year-one operating cash before debt of **-$874,057.38**. Minimum ending available cash is **-$7,746,281.69**; downside is **-$8,888,462.47** and upside is **-$6,145,147.72**. The zero-receipt case has a $10,481,202.28 cash shortfall beyond the modeled $1.5M opening loan draw. These shortfalls are additional capital needs, not total opening capital. All current stress cases fail repayment coverage. The responsible conclusion is to stage draws, reduce scope, secure verified receipts, or identify additional capital before representing repayment as viable.
+The base scenario uses year-one illustrative net receipts of **$370,784.80** and year-one operating cash before debt of **-$874,057.38**. Minimum ending available cash is **-$7,925,030.01**; downside is **-$9,067,210.80** and upside is **-$6,323,896.04**. The zero-receipt case has a $10,659,950.60 cash shortfall beyond the modeled $1.5M opening loan draw. These shortfalls are additional capital needs, not total opening capital. All current stress cases fail repayment coverage. The responsible conclusion is to stage draws, reduce scope, secure verified receipts, or identify additional capital before representing repayment as viable.
 
 The investor should see this weakness because it defines the decision: fund a gated proof phase with a revised draw and cash plan, or do not close the full-scope facility until the model is underwritten. No return is guaranteed.
 
@@ -210,3 +210,7 @@ The account audit found two Oct. 8 debits totaling $565 ($375 + $190). The accou
 ## Current production-finance control note
 
 Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning allowances.
+
+## Why the proposed rate is 12%
+
+12% fixed annual interest is a negotiation starting point, not a lender quote or market-average claim. Current prime is 7%; government-guaranteed and specialist lending benchmarks differ in borrower risk and security. At the proposed rate, amortizing payments need $41,708.34 in monthly cash before debt for 1.25x coverage. All four current forecasts fail coverage. See Futures_Friends_CURRENT_Loan_Pricing_Rationale.md for primary sources, 10%/12%/14% sensitivity and terms to agree.
