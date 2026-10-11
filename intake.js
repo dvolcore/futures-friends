@@ -173,11 +173,69 @@ async function status(ref, mail) {
   return interpret(r);
 }
 
-// NOTE (careers): deliberately NO schema.org JobPosting JSON-LD on #jobs or #job/<id> yet. Applications are not open and the Hub is
-// not deployed, so posting markup for jobs nobody can apply to would mislead search engines and applicants. When the ATS goes live,
-// see /Volumes/FFCRM/app/hub/ATS.md (posting and apply flow) before adding JobPosting markup.
+// Careers (owner decision 2026-10-11: the Hub is the system of record). Two sources, never mixed with markup that is not real:
+//   * window.FF_HUB_URL set (hub-config.js, at go-live): the published openings come from the Hub's public careers feed
+//     (<hub>/careers/jobs.json, hub/ATS.md "Careers feeds") and each opening's schema.org JobPosting JSON-LD (<hub>/careers/<slug>/<id>.jsonld)
+//     is embedded in the page (<script type="application/ld+json" data-ff-jobposting>), one per open job. An application goes to the
+//     intake gateway with the opening's center (slug), which files it in that center's Hub hiring desk with the resume.
+//   * FF_HUB_URL empty (today): the gateway's list when it is hosted, else "applications open soon". NO JobPosting markup at all, so
+//     search engines and applicants never see postings nobody can apply to.
+const hubBase = () => { const u = String(window.FF_HUB_URL || '').trim().replace(/\/+$/, ''); return /^https:\/\/[^\s"'<>]+$/.test(u) ? u : ''; };
+const HUB_ID = /^([a-z0-9-]{3,40})--([0-9a-f]{16})$/;
+const EMPLOYMENT = { full_time: 'Full time', part_time: 'Part time', substitute: 'Substitute', seasonal: 'Seasonal', temporary: 'Temporary' };
+const ROLES = { lead_teacher: 'Lead teacher', assistant_teacher: 'Assistant teacher', floater: 'Floater', substitute: 'Substitute', director: 'Director',
+  assistant_director: 'Assistant director', cook: 'Cook', driver: 'Driver', admin: 'Office', other: 'Other' };
+const money = v => '$' + (Number(v) % 1 ? Number(v).toFixed(2) : String(Number(v)));
+function hubPay(j) {
+  if (j.pay_min == null && j.pay_max == null) return '';
+  const unit = j.pay_unit === 'hour' ? 'per hour' : j.pay_unit === 'year' ? 'per year' : '';
+  return (j.pay_min != null && j.pay_max != null && Number(j.pay_min) !== Number(j.pay_max) ? money(j.pay_min) + ' - ' + money(j.pay_max) : money(j.pay_min != null ? j.pay_min : j.pay_max)) + (unit ? ' ' + unit : '');
+}
+// one Hub opening -> the shape the cards and the job page draw (the Spanish text when the site is in Spanish)
+function fromHub(j) {
+  const es = !!(window.FFi18n && window.FFi18n.lang === 'es'), c = j.center || {};
+  return { id: c.slug + '--' + j.id, hubId: j.id, center: c.slug, source: 'hub', title: (es && j.title_es) || j.title,
+    location: { name: c.name, city: c.city, state: c.state }, role: ROLES[j.role] || '', employmentType: EMPLOYMENT[j.employment_type] || '',
+    payRange: hubPay(j), description: (es && j.description_es) || j.description || '', requirements: (es && j.requirements_es) || j.requirements || '',
+    postedDate: j.posted_on || '', closeDate: j.closes_on || '', jsonld: j.jsonld_url || ('/careers/' + c.slug + '/' + j.id + '.jsonld') };
+}
+async function hubFetch(path, ms = 15000) {
+  const ctl = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), ms) : null;
+  try { const r = await fetch(hubBase() + path, { credentials: 'omit', cache: 'no-store', signal: ctl ? ctl.signal : undefined }); return r.ok ? await r.json() : null; }
+  catch (_) { return null; } finally { if (timer) clearTimeout(timer); }
+}
+// JobPosting JSON-LD: only real, open Hub postings; removed whenever the page shows anything else
+function clearJobLd() { if (document.querySelectorAll) document.querySelectorAll('script[data-ff-jobposting]').forEach(x => x.remove()); }
+async function setJobLd(list) {
+  clearJobLd();
+  if (!hubBase() || !list.length) return;
+  const lang = window.FFi18n && window.FFi18n.lang === 'es' ? '?lang=es' : '';
+  const docs = await Promise.all(list.map(j => hubFetch(j.jsonld + lang)));
+  if (!['jobs', 'job'].includes(typeof view !== 'undefined' ? view : '')) return;      // the visitor left the careers pages meanwhile
+  clearJobLd();
+  docs.forEach((d, i) => {
+    if (!d || d['@type'] !== 'JobPosting') return;
+    const s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-ff-jobposting', list[i].id);
+    s.textContent = JSON.stringify(d).replace(/</g, '\\u003c');
+    document.head.appendChild(s);
+  });
+}
+if (typeof render === 'function' && !window.__ffJobLdWrap) {           // leaving the careers pages removes the postings
+  window.__ffJobLdWrap = true;
+  const orig = render;
+  window.render = function () { if (typeof view === 'undefined' || !['jobs', 'job'].includes(view)) clearJobLd(); return orig.apply(this, arguments); };
+}
+
 let jobsCache = null;
 async function jobs(force) {
+  if (hubBase()) {
+    if (!force && jobsCache && Date.now() - jobsCache.at < 60000) return jobsCache.value;
+    const r = await hubFetch('/careers/jobs.json');
+    if (!r || !Array.isArray(r.jobs)) return { ok: false, network: true, message: 'We could not load the open positions right now.' };
+    jobsCache = { at: Date.now(), value: { ok: true, hub: true, jobs: r.jobs.map(fromHub) } };
+    return jobsCache.value;
+  }
   if (!enabled()) return unavailable;
   if (!force && jobsCache && Date.now() - jobsCache.at < 60000) return jobsCache.value;
   const r = await http('GET', '/v1/jobs');
@@ -190,6 +248,7 @@ async function job(id) {
   if (!all.ok) return all;
   const hit = all.jobs.find(j => j.id === id);
   if (hit) return { ok: true, job: hit };
+  if (all.hub || HUB_ID.test(id || '')) return { ok: false, closed: true };
   const r = await http('GET', '/v1/jobs/' + encodeURIComponent(id));
   if (r.status === 200 && r.body && r.body.job) return { ok: true, job: r.body.job };
   if (r.status === 404) return { ok: false, closed: true };
@@ -380,19 +439,23 @@ function jobCard(j, i) {
 
 async function loadJobs(force) {
   const box = el('ffiJobs'); if (!box) return;
-  if (!enabled()) { box.innerHTML = soon('job applications'); return; }
+  if (!hubBase() && !enabled()) { clearJobLd(); box.innerHTML = soon('job applications'); return; }
   const r = await jobs(force);
   if (!el('ffiJobs')) return;          // the visitor left this page while loading
   if (!r.ok) { box.innerHTML = `<div class="ffi-soon" role="alert"><b>We could not load the open positions.</b><p class="small" style="margin:0">${e(r.message || '')} Nothing is wrong with your connection if this keeps happening: please call us at ${e(phone())}.</p><div class="acts"><button class="btn gold" data-ffi-reload>Try again</button><a class="btn soft" href="${telHref()}">Call ${e(phone())}</a></div></div>`; return; }
   box.innerHTML = r.jobs.length
     ? `<p class="small muted" style="margin:0 0 12px">${r.jobs.length} open position${r.jobs.length === 1 ? '' : 's'}</p><div class="ffi-jobs">${r.jobs.map(jobCard).join('')}</div>`
     : `<div class="card"><h3>No positions are open right now</h3><p class="small" style="margin:0">We hire throughout the year. Call ${e(phone())} or email ${e(email())} to tell us about yourself, and check back here soon.</p></div>`;
+  if (r.hub) setJobLd(r.jobs); else clearJobLd();
 }
 
 V.jobs = () => {
+  // the Hub's own apply link (jobs.html?job=<id>&loc=<slug>) opens that opening's page
+  try { const q = new URLSearchParams(location.search), jid = q.get('job'), loc = q.get('loc');
+    if (jid && loc && HUB_ID.test(loc + '--' + jid)) { setTimeout(() => go('job', loc + '--' + jid), 0); } } catch (_) { /* no query */ }
   setTimeout(() => loadJobs(), 0);
   return phero('Careers', 'Teach with Futures Friends', 'Teachers, cooks and directors for Futures Friends centers. Openings appear here as they come up.' + say(' Applying takes about five minutes and asks for your resume.', ' Online applications are not switched on yet, so call or email with your resume.'), { chars: KEYS }) + `
-<section class="band-paper"><div class="wrap"><div id="ffiJobs" aria-live="polite">${enabled() ? loading('open positions') : soon('job applications')}</div></div></section>
+<section class="band-paper"><div class="wrap"><div id="ffiJobs" aria-live="polite">${enabled() || hubBase() ? loading('open positions') : soon('job applications')}</div></div></section>
 <section><div class="wrap"><div class="grid g3">
  ${card('What we look for', 'Warm, steady adults who like young children. A CDA or CPR/First Aid helps and is not required for every role; tell us what you have.', 'Teachers', 'booker')}
  ${card('Background screening', 'Every person who works with children is screened through the Missouri Family Care Safety Registry. We tell you before we ask.', 'Safety first', 'zuri')}
@@ -414,7 +477,7 @@ function jobDetail(j) {
 function applyHtml(j) {
   setTimeout(warm, 0);
   return `<div class="card" id="ffiApplyCard"><div class="eyebrow">Apply</div><h3>Apply for ${e(j.title)}</h3>
-  <form class="ffi-form" id="ffiApply" data-job="${e(j.id)}" data-title="${e(j.title)}" novalidate>
+  <form class="ffi-form" id="ffiApply" data-job="${e(j.hubId || j.id)}" data-center="${e(j.center || '')}" data-title="${e(j.title)}" novalidate>
    <label class="f" for="aName">Full name<input class="i" id="aName" name="name" autocomplete="name" aria-describedby="aName-e"><span class="ffx-err" id="aName-e" aria-live="polite"></span></label>
    <div class="ffx-row"><label class="f" for="aEmail">Email<input class="i" id="aEmail" name="email" type="email" autocomplete="email" aria-describedby="aEmail-e"><span class="ffx-err" id="aEmail-e" aria-live="polite"></span></label>
    <label class="f" for="aPhone">Phone<input class="i" id="aPhone" name="phone" type="tel" autocomplete="tel" aria-describedby="aPhone-e"><span class="ffx-err" id="aPhone-e" aria-live="polite"></span></label></div>
@@ -433,10 +496,11 @@ function applyHtml(j) {
 async function loadJob() {
   const box = el('ffiJob'); if (!box) return;
   const id = typeof arg !== 'undefined' ? arg : null;
-  if (!enabled()) { box.innerHTML = soon('job applications'); return; }
+  if (!hubBase() && !enabled()) { clearJobLd(); box.innerHTML = soon('job applications'); return; }
   const r = await job(id);
   if (!el('ffiJob')) return;
   if (!r.ok) {
+    clearJobLd();
     box.innerHTML = r.closed
       ? `<div class="ffi-soon" role="note"><b>This opening is closed or does not exist.</b><p class="small" style="margin:0">Positions close when they are filled. Have a look at what is open now.</p><div class="acts"><button class="btn gold" data-go="jobs">See open positions</button></div></div>`
       : `<div class="ffi-soon" role="alert"><b>We could not load this opening.</b><p class="small" style="margin:0">${e(r.message || '')} Please try again or call us at ${e(phone())}.</p><div class="acts"><button class="btn gold" data-ffi-reload>Try again</button></div></div>`;
@@ -445,7 +509,9 @@ async function loadJob() {
   const j = r.job, h1 = document.querySelector('.phero h1'), crumb = document.querySelector('.phero .crumbs');
   if (h1) h1.textContent = j.title;
   if (crumb) crumb.innerHTML = '<button data-go="jobs">Careers</button> / ' + e(j.title);
-  box.innerHTML = `<div class="grid g2" style="align-items:start">${jobDetail(j)}${applyHtml(j)}</div>`;
+  // a Hub opening is listed even before the gateway is hosted; applying online needs the gateway
+  box.innerHTML = `<div class="grid g2" style="align-items:start">${jobDetail(j)}${enabled() ? applyHtml(j) : soon('job applications')}</div>`;
+  if (j.source === 'hub') setJobLd([j]); else clearJobLd();
 }
 V.job = () => {
   setTimeout(() => loadJob(), 0);
@@ -463,7 +529,9 @@ async function onApply(f) {
     setErr('aConsent', el('aConsent').checked ? '' : 'Please check the box to continue.')];
   if (!checks.every(Boolean)) { const bad = f.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
   const fd = new FormData();
-  fd.set('jobId', f.dataset.job); fd.set('name', val('aName')); fd.set('email', val('aEmail')); fd.set('phone', val('aPhone'));
+  fd.set('jobId', f.dataset.job); if (f.dataset.center) fd.set('center', f.dataset.center);
+  if (window.FFi18n && window.FFi18n.lang === 'es') fd.set('lang', 'es');
+  fd.set('name', val('aName')); fd.set('email', val('aEmail')); fd.set('phone', val('aPhone'));
   fd.set('yearsExperience', val('aYears')); fd.set('availability', val('aAvail')); fd.set('consent', 'on'); fd.set('website', val('ffiHp'));
   if (el('aCda').checked) fd.set('hasCda', 'on');
   if (el('aCpr').checked) fd.set('hasCpr', 'on');
@@ -500,6 +568,6 @@ document.addEventListener('click', ev => {
 document.addEventListener('toggle', ev => { const t = ev.target; if (t && t.matches && t.matches('[data-ffi-sum]') && t.open) sumRefresh(t); }, true);
 document.addEventListener('input', ev => { const t = ev.target; if (t && t.closest && t.hasAttribute && t.hasAttribute('data-ffi-sumf') && t.closest('[data-ffi-sum]')) sumRefresh(t.closest('[data-ffi-sum]')); if (t && t.getAttribute && t.getAttribute('aria-invalid') === 'true') setErr(t.id, ''); });
 
-window.FFIntake = { smsBox, smsTicked, enabled, say, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
+window.FFIntake = { hubBase, fromHub, clearJobLd, loadJob, smsBox, smsTicked, enabled, say, base, warm, submit, apply, status, jobs, job, soon, subjectFor, mailtoFor, receipt, showReceipt, honeypot, setErr, busy, showFailure, clearMsg, contactHtml, loadJobs, okEmail, okPhone, fmtDate,
   _t: { interpret, keyFor, orderText } };
 })();

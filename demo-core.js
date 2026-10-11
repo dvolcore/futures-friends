@@ -250,7 +250,7 @@ function seedOps(db, today){
       db.punches[key] = {staff:sid, date:d, in:at(d, 6 + (i % 2), 45 + (i * 5) % 15), out:at(d, 15 + (i % 2), (i * 13 + n * 7) % 60)}; }
     if (s.onDuty && s.clockIn) { const key = `p_${sid}_${today}`; if (!db.punches[key]) db.punches[key] = {staff:sid, date:today, in:s.clockIn, out:null}; }
   });
-  // care alerts the families reported (every staff member of the center sees them; no medical records behind them)
+  // care alerts the families reported (every staff member of the center sees them; the plans behind them are in the child's encrypted Hub record)
   if (db.kids.p3 && db.kids.p3.alert == null) db.kids.p3.alert = 'Tree nut allergy: plan at the front desk';
   if (db.kids.t2 && db.kids.t2.alert == null) db.kids.t2.alert = 'Asthma: inhaler plan at the front desk';
   // Futures Friends HQ support access: off unless the owner approves it, time-limited, every step logged; never the money

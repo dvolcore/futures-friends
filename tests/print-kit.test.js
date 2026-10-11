@@ -77,7 +77,10 @@ test('the enrollment checklist is one per child and records no health details', 
   const t = pdfText(PRINT_KIT.find(k => k.id === 'enrollment-checklist'));
   assert.ok(t.includes(compact('one checklist per child').toUpperCase()));
   assert.ok(t.includes(compact('No health details on this page.')));
-  assert.ok(t.includes(compact('never entered in the Futures Hub')));
+  // owner decision 2026-10-11: the Hub may keep them (with parental consent, encrypted); the checklist itself still never does
+  assert.ok(t.includes(compact('never written on this checklist')));
+  assert.ok(t.includes(compact('in the child\'s encrypted Futures Hub record')));
+  assert.ok(!t.includes(compact('never entered in the Futures Hub')));
 });
 
 test('E04: the library sheet replaces the Imagination Library sign-up with sourced facts and dates', () => {

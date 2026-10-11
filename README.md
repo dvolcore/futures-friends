@@ -178,8 +178,12 @@ says "Online requests open soon" with the phone number and email instead of pret
 `intake-config.local.js` (git-ignored, loaded only on localhost / 127.0.0.1). When the gateway is hosted over HTTPS, set its
 public address in `intake-config.js`. Never put a secret in a file served to the browser.
 
-`#jobs` lists the open positions from the CRM and `#job/<id>` shows one with an application form and resume upload (PDF or
-DOCX, up to 5 MB). Run `node --test tests/*.test.js` to check the client.
+`#jobs` lists the open positions and `#job/<id>` shows one with an application form and resume upload (PDF or DOCX, up to 5 MB).
+System of record (owner decision 2026-10-11): with `window.FF_HUB_URL` set (hub-config.js, at go-live) the openings come from the
+Futures Hub's public feed (`<hub>/careers/jobs.json`) and each one's schema.org JobPosting JSON-LD (`<hub>/careers/<slug>/<id>.jsonld`)
+is embedded in the page; the application carries the opening's center, so the gateway files it in that center's Hub hiring desk.
+While `FF_HUB_URL` is empty the page keeps "applications open soon" (or the gateway's list) and carries NO JobPosting markup
+(`tests/careers-hub.test.js`). Run `node --test tests/*.test.js` to check the client.
 
 Lead attribution and SMS consent (2026-10-10, hub/CRM.md C5): `intake.js` keeps first-touch `utm_*`, the referrer host, the landing
 path and `?ref=` in sessionStorage for the visit and sends `utmSource`, `utmMedium`, `utmCampaign`, `utmTerm`, `utmContent`,

@@ -865,8 +865,8 @@ V.c = () => {
 // ---------------------------------------------------------------- the Procare workflow (owner 2026-10-07): enrollment link -> parent form ->
 // director places the child in a room with live capacity -> billing (tuition, autopay, invoices, receipts) -> parent statements (year-end
 // tax / FSA, subsidy attendance) -> staff time clock with "Hours only" access -> per-employee permissions. Demo only: nothing is sent,
-// no payment is processed, no card or bank details exist. Medical records stay OUT: the form takes emergency contacts, a parent-reported
-// alert flag and a "health documents on file at the center" promise; the documents themselves stay on paper at the center.
+// no payment is processed, no card or bank details exist. This demo form takes emergency contacts, a parent-reported alert flag and a
+// "health documents on file" promise; in the real Hub the documents are uploaded with the enrollment packet (encrypted, with consent).
 const PG = {sent:{}, receipt:null, stmt:null, week:0};
 const money = n => '$' + Number(n || 0).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 const sortedRooms = () => Object.entries(DM.all('rooms')).sort((x, y) => (x[1].order || 9) - (y[1].order || 9));
@@ -940,7 +940,7 @@ V['enroll-link'] = () => {
    <fieldset class="ffd-fs"><legend>Allergy or other alert for staff</legend>
     <label class="ffd-opt"><input type="radio" name="pgEfAlert" value="no" checked> No alert</label><label class="ffd-opt"><input type="radio" name="pgEfAlert" value="yes"> Yes, staff should know</label>
     <label class="f" for="pgEfAlertText">Short alert for staff (if yes)<input class="i" id="pgEfAlertText" autocomplete="off" maxlength="80" placeholder="e.g. Peanut allergy: plan at the front desk"></label>
-    <p class="mini">This is a short flag so staff look for the plan on file. The center does not keep medical records in this app: the doctor's forms, immunization record and any care plan stay on paper at the center.</p></fieldset>
+    <p class="mini">This is a short flag so staff look for the plan on file. In the Futures Hub, the doctor's forms, immunization record and any care plan are uploaded with the enrollment packet and kept encrypted, with your consent, for your family and authorized staff only. This demo stores nothing.</p></fieldset>
    <label class="ffd-opt"><input type="checkbox" id="pgEfDocs"> I will bring my child's health and immunization forms to the center before the first day.</label>
    <label class="ffd-opt"><input type="checkbox" id="pgEfOk"> I have read the center's family handbook and policies (demo).</label>
    <button class="btn gold" type="submit">Send to the center</button><p class="note" id="pgEfMsg" role="alert" aria-live="polite"></p></form>`);

@@ -124,7 +124,10 @@ test('What’s due: every bucket, each item with its source citation, names esca
   assert.match(tx, /5 days late/); assert.match(tx, /Due today/);
   assert.match(h, /Tia &lt;Teacher&gt;/); assert.doesNotMatch(h, /<Teacher>|undefined|NaN|\[object Object\]/);
   assert.match(h, /Needs confirmation/);
-  assert.match(tx, /The Futures Hub stores no child health information/);
+  // owner decision 2026-10-11: the Hub keeps health records with parental consent (enrollment packet); the old "stores no child health
+  // information" promise must not come back
+  assert.match(tx, /in the Futures Hub \(uploaded with the enrollment packet, with parental consent, encrypted\) or in your center/);
+  assert.doesNotMatch(tx, /stores no child health information/);
   assert.match(tx, /Who can be left alone with children/); assert.match(tx, /Missing: Cleared background check before working/);
   assert.match(h, /data-dd="drill" data-type="fire"/);
   assert.match(h, /data-dd="inc-step" data-id="i1" data-step="state">Mark reported to the state/);

@@ -10,8 +10,9 @@
      and "Classroom access" (20261010500000_staff_clearance): who has classroom authority, who is training only and why, holds.
    Every rule (who may read or write what, the due dates, the ratio tables, the citations) lives in Postgres
    (hub migration 20261009200000_director_compliance and hub/content/compliance/director-rules.json); this file only draws and calls.
-   Child health records are not kept in the Hub (owner decision B11/X56): the rules that require them are listed as
-   "kept in your own records". Loaded after portal.js. */
+   Owner decision 2026-10-11 (one platform hosts everything) replaced B11/X56: child health and special-education records are
+   kept in the Hub with parental consent (the enrollment packet); the rules that require them are listed as "kept in the child's
+   file" (the Hub record or the center's own files). Loaded after portal.js. */
 (function(){
 'use strict';
 if (typeof V === 'undefined' || !V.portal) return;
@@ -115,7 +116,7 @@ function dueView(c){
    ${excView()}
    ${S.filter ? `<p class="small">Showing: ${E(label(BUCKETS, S.filter))}. <button class="rl" type="button" data-dd="filter" data-b="">Show everything</button></p>` : ''}
    ${BUCKETS.map(([k, l]) => { const items = shown.filter(x => x.bucket === k); if (!items.length) return '';
-     return `<section class="dd-sec" aria-label="${E(l)}"><h3>${E(l)} <span class="chip">${items.length}</span></h3>${k === 'own_records' ? '<p class="small muted">The Futures Hub stores no child health information. These records stay in your center’s own files.</p>' : ''}
+     return `<section class="dd-sec" aria-label="${E(l)}"><h3>${E(l)} <span class="chip">${items.length}</span></h3>${k === 'own_records' ? '<p class="small muted">Keep these in the child’s file: in the Futures Hub (uploaded with the enrollment packet, with parental consent, encrypted) or in your center’s own files.</p>' : ''}
       <ul class="dd-list">${items.map(it => itemHtml(it, idx(it))).join('')}</ul></section>`; }).join('')}
    ${S.due.length ? '' : '<p class="small">Nothing is due in the next 90 days.</p>'}
    ${eligHtml()}${accessView()}</div>`;

@@ -23,7 +23,7 @@ test('claims that were not true or not verifiable stay out of the site copy', ()
     [/Boost readiness/i, 'I05: outcome promise'],
     [/Missouri-approved|CDA-aligned|IACET/i, 'C05: nothing is approved'],
     [/Clock hours are designed to count/, 'C05'],
-    [/IEP and IFSP goal tracking|Enter each child.s goals|Track IEP and IFSP goals/, 'G06: the Hub does not store IEP/IFSP goals'],
+    [/IEP and IFSP goal tracking|Enter each child.s goals|Track IEP and IFSP goals/, 'G06: no goal-tracking promise on the public site (the Hub keeps IEP/IFSP records with consent; goal tooling is not advertised)'],
     [/Healthy meals kids actually eat|Healthy bodies|makes the learning stick/, 'I05: outcome or health labels'],
     [/Official certificates are issued in the Futures Hub/, 'C05'],
     [/paused new Imagination Library sign-ups/, 'G11: unverified dated status']
@@ -50,11 +50,19 @@ test('canon 2026-10-04: weekly plans use LEARN and MOVE, never the old READ/PLAY
   assert.doesNotMatch(read('views.js'), /Family App on iPhone and Android/, 'the Hub is a web app, not an app-store app');
 });
 
-test('G06: the Hub copy says what it does not store', () => {
-  const v = read('views.js');
-  assert.match(v, /does not store IEP or IFSP goals/);
-  assert.match(v, /It does not store health or allergy records, or IEP and IFSP goals/);
-  assert.doesNotMatch(v, /milestones and goals the family has shared/);
+// Owner decision 2026-10-11 ("one platform that hosts everything"): the Hub now stores children's care, health and special-education
+// (IEP / IFSP) records with parental consent. The old "does not store" promises are false and must never come back; the copy says what
+// is stored, on what condition (consent), how (encrypted) and who sees it (the family and authorized staff only).
+test('G06: the Hub copy says truthfully how it keeps health and special-education records', () => {
+  const v = read('views.js') + read('i18n-es-site.js') + read('llms-full.txt') + read('support.html') + read('child-privacy.html') + read('include.html');
+  assert.doesNotMatch(v, /does not store (IEP|health)|It does not store health or allergy records|No IEP, IFSP or health records|no medical records in the Hub|stores no child health information|never entered in the Futures Hub/);
+  assert.doesNotMatch(v, /no guarda (metas|expedientes) del IEP|Sin expedientes del IEP/);
+  const views = read('views.js');
+  const plain = views.replace(/\\'/g, "'");       // views.js keeps the copy in single-quoted strings (child\'s)
+  assert.match(plain, /With parental consent, the Futures Hub keeps each child's care, health and special-education \(IEP and IFSP\) records securely, encrypted and visible only to the child's family and the center's authorized staff\./);
+  assert.match(plain, /With parental consent it also keeps the child's care, health, allergy and special-education records/);
+  assert.match(read('child-privacy.html'), /encrypted and visible only to the child's family and the center's authorized staff/, 'the prerendered privacy page says it too');
+  assert.doesNotMatch(views, /milestones and goals the family has shared/);
 });
 
 function routesDefined() {
