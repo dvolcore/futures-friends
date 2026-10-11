@@ -35,3 +35,6 @@ body{isolation:isolate}.light-stage{position:fixed;inset:0;overflow:hidden;point
 
 /* Let the reading-position title remain complete on narrow screens. */
 @media(max-width:620px){.reading-identity small{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}}
+
+/* Keep all digital navigation reachable on phones. */
+@media(max-width:600px){.plan-header{flex-wrap:wrap}.plan-header .header-actions{width:100%;margin-left:0;flex-wrap:wrap;justify-content:flex-start;min-width:0}}

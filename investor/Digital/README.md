@@ -29,3 +29,12 @@ The digital reader retains the original 56 sections and 14 tables. Its old finan
 The 108-month forecast and 24-month interest-only cash bridge are included. Replace assumptions with actual operating records, obtain scoped written quotes and validate formal financial statements before underwriting. Assign funded phases, reconcile segment economics, and retest debt service against slower demand and higher costs. Count liquidity reserves once. The remaining work is evidence, review and acceptance.
 
 Publication proves that the documents are accessible. It does not prove hosted platform readiness, privacy approval, current collections, signed customer demand or debt affordability.
+
+## Browser-first investor delivery
+
+- [Presentation](index.html)
+- [All 687 itemized charges, calculations, sources and cash timing](cost-explorer.html#budget)
+- [108-month forecast, four scenarios and 13-week cash](cost-explorer.html#forecast)
+- [Reading room: all nine current sources and complete embedded PDFs](library.html)
+
+The investor can review every model row and every current source document in the browser. Original workbook, CSV, JSON and PDF copies remain secondary options. Digital presentation does not change model values or evidence status.

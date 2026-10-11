@@ -77,3 +77,12 @@ Each document distinguishes current published direction, draft work, archival ma
 - [06_Financial_Reconciliation.pdf](https://dvolcore.github.io/futures-friends/investor/06_Financial_Reconciliation.pdf)
 - [108-month cash forecast workbook](https://dvolcore.github.io/futures-friends/investor/Digital/model/PHASED_MONTHLY_108M_FORECAST.xlsx)
 - [Operating-record evidence audit](https://dvolcore.github.io/futures-friends/investor/costs/Operating_Record_Evidence_Audit.md)
+
+## Browser-first investor delivery
+
+- [Presentation](Digital/index.html)
+- [All 687 itemized charges, calculations, sources and cash timing](Digital/cost-explorer.html#budget)
+- [108-month forecast, four scenarios and 13-week cash](Digital/cost-explorer.html#forecast)
+- [Reading room: all nine current sources and complete embedded PDFs](Digital/library.html)
+
+The investor can review every model row and every current source document in the browser. Original workbook, CSV, JSON and PDF copies remain secondary options. Digital presentation does not change model values or evidence status.
