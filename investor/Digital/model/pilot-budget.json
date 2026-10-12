@@ -2,7 +2,7 @@
   "meta": {
     "title": "Futures Friends | 40-child 12-month pilot",
     "prepared": "2026-10-11",
-    "version": "pilot-40-v3",
+    "version": "pilot-40-v4",
     "status": "Conditional planning estimate; ongoing economics do not yet support borrowing",
     "scope": "One owned location, ages 2\u20135; first-month checkpoint; national expansion deferred.",
     "line_count": 311
@@ -27,7 +27,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Qualified director counts only while assigned to the room; 2 hours/day administrative relief covered by floater."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Qualified director counts only while assigned to the room; 2 hours/day administrative relief covered by floater.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P002",
@@ -40,7 +42,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P003",
@@ -53,7 +57,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P004",
@@ -66,7 +72,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P005",
@@ -79,7 +87,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P006",
@@ -92,7 +102,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P007",
@@ -105,7 +117,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Optional employer contribution allowance, not an insurance quote."
+      "notes": "Optional employer contribution allowance, not an insurance quote.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P008",
@@ -118,7 +132,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Optional 3% policy; eligibility and plan terms unresolved."
+      "notes": "Optional 3% policy; eligibility and plan terms unresolved.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P009",
@@ -131,7 +147,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P010",
@@ -144,7 +162,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P011",
@@ -157,7 +177,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P012",
@@ -170,7 +192,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P013",
@@ -183,7 +207,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P014",
@@ -196,7 +222,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P015",
@@ -209,7 +237,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Optional employer contribution allowance, not an insurance quote."
+      "notes": "Optional employer contribution allowance, not an insurance quote.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P016",
@@ -222,7 +252,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Optional 3% policy; eligibility and plan terms unresolved."
+      "notes": "Optional 3% policy; eligibility and plan terms unresolved.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P017",
@@ -235,7 +267,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P018",
@@ -248,7 +282,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P019",
@@ -261,7 +297,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P020",
@@ -274,7 +312,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P021",
@@ -287,7 +327,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P022",
@@ -300,7 +342,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P023",
@@ -313,7 +357,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P024",
@@ -326,7 +372,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P025",
@@ -339,7 +387,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P026",
@@ -352,7 +402,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P027",
@@ -365,7 +417,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P028",
@@ -378,7 +432,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P029",
@@ -391,7 +447,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P030",
@@ -404,7 +462,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P031",
@@ -417,7 +477,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P032",
@@ -430,7 +492,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P033",
@@ -443,7 +507,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P034",
@@ -456,7 +522,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P035",
@@ -469,7 +537,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P036",
@@ -482,7 +552,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P037",
@@ -495,7 +567,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P038",
@@ -508,7 +582,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P039",
@@ -521,7 +597,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P040",
@@ -534,7 +612,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P041",
@@ -547,7 +627,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P042",
@@ -560,7 +642,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P043",
@@ -573,7 +657,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P044",
@@ -586,7 +672,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P045",
@@ -599,7 +687,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P046",
@@ -612,7 +702,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P047",
@@ -625,7 +717,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P048",
@@ -638,7 +732,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P049",
@@ -651,7 +747,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P050",
@@ -664,7 +762,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P051",
@@ -677,7 +777,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P052",
@@ -690,7 +792,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P053",
@@ -703,7 +807,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P054",
@@ -716,7 +822,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P055",
@@ -729,7 +837,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P056",
@@ -742,7 +852,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P057",
@@ -755,7 +867,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P058",
@@ -768,7 +882,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P059",
@@ -781,7 +897,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Food preparation cannot count as classroom supervision."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Food preparation cannot count as classroom supervision.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P060",
@@ -794,7 +912,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P061",
@@ -807,7 +927,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P062",
@@ -820,7 +942,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P063",
@@ -833,7 +957,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P064",
@@ -846,7 +972,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P065",
@@ -859,7 +987,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P066",
@@ -872,7 +1002,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P067",
@@ -885,7 +1017,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P068",
@@ -898,7 +1032,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P069",
@@ -911,7 +1047,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P070",
@@ -924,7 +1062,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P071",
@@ -937,7 +1077,9 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates."
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P072",
@@ -950,7 +1092,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P073",
@@ -963,7 +1107,9 @@
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P074",
@@ -976,7 +1122,9 @@
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve."
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P075",
@@ -989,7 +1137,9 @@
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm."
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P076",
@@ -1002,7 +1152,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required."
+      "notes": "2% unquoted classification allowance; broker quote required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P077",
@@ -1015,7 +1167,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P078",
@@ -1028,7 +1182,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P079",
@@ -1041,7 +1197,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P080",
@@ -1054,7 +1212,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P081",
@@ -1067,7 +1227,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P082",
@@ -1080,7 +1242,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P083",
@@ -1093,7 +1257,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P084",
@@ -1106,7 +1272,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P085",
@@ -1119,7 +1287,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P086",
@@ -1132,7 +1302,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P087",
@@ -1145,7 +1317,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P088",
@@ -1158,7 +1332,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P089",
@@ -1171,7 +1347,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P090",
@@ -1184,7 +1362,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P091",
@@ -1197,7 +1377,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P092",
@@ -1210,7 +1392,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P093",
@@ -1223,7 +1407,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P094",
@@ -1236,7 +1422,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P095",
@@ -1249,7 +1437,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P096",
@@ -1262,7 +1452,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P097",
@@ -1275,7 +1467,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P098",
@@ -1288,7 +1482,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P099",
@@ -1301,7 +1497,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P100",
@@ -1314,7 +1512,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P101",
@@ -1327,7 +1527,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P102",
@@ -1340,7 +1542,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P103",
@@ -1353,7 +1557,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P104",
@@ -1366,7 +1572,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P105",
@@ -1379,7 +1587,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P106",
@@ -1392,7 +1602,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P107",
@@ -1405,7 +1617,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P108",
@@ -1418,7 +1632,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P109",
@@ -1431,7 +1647,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P110",
@@ -1444,7 +1662,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P111",
@@ -1457,7 +1677,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P112",
@@ -1470,7 +1692,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P113",
@@ -1483,7 +1707,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P114",
@@ -1496,7 +1722,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P115",
@@ -1509,7 +1737,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P116",
@@ -1522,7 +1752,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P117",
@@ -1535,7 +1767,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P118",
@@ -1548,7 +1782,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P119",
@@ -1561,7 +1797,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P120",
@@ -1574,7 +1812,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P121",
@@ -1587,7 +1827,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P122",
@@ -1600,7 +1842,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P123",
@@ -1613,7 +1857,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P124",
@@ -1626,7 +1872,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P125",
@@ -1639,7 +1887,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P126",
@@ -1652,7 +1902,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P127",
@@ -1665,7 +1917,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P128",
@@ -1678,7 +1932,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P129",
@@ -1691,7 +1947,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P130",
@@ -1704,7 +1962,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P131",
@@ -1717,7 +1977,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P132",
@@ -1730,7 +1992,9 @@
       "bucket": "one_time",
       "basis": "FCSR published fee; does not cover all required checks",
       "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted."
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P133",
@@ -1743,7 +2007,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements."
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P134",
@@ -1756,7 +2022,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P135",
@@ -1769,7 +2037,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider."
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P136",
@@ -1782,7 +2052,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P137",
@@ -1795,7 +2067,9 @@
       "bucket": "recurring",
       "basis": "Published Plus plan price; taxes separate",
       "url": "https://gusto.com/product/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P138",
@@ -1808,7 +2082,9 @@
       "bucket": "recurring",
       "basis": "Published Plus plan price; taxes separate",
       "url": "https://gusto.com/product/pricing",
-      "notes": "12 individually listed adults; adjust to actual billed roster."
+      "notes": "12 individually listed adults; adjust to actual billed roster.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P139",
@@ -1821,7 +2097,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P140",
@@ -1834,7 +2112,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P141",
@@ -1847,7 +2127,9 @@
       "bucket": "recurring",
       "basis": "List-price planning subscription; no promotional discount",
       "url": "https://quickbooks.intuit.com/online/",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P142",
@@ -1860,7 +2142,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P143",
@@ -1873,7 +2157,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P144",
@@ -1886,7 +2172,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P145",
@@ -1899,7 +2187,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P146",
@@ -1912,7 +2202,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "City gross-receipts calculation and entity exemption unresolved."
+      "notes": "City gross-receipts calculation and entity exemption unresolved.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P147",
@@ -1925,7 +2217,9 @@
       "bucket": "recurring",
       "basis": "Published city childcare permit category, applicability confirm",
       "url": "https://www.independencemo.gov/government/city-departments/health/health-inspection-division/childcare-providers-permitting",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P148",
@@ -1938,7 +2232,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Risk class/exemption must be confirmed; do not pay twice if included in existing license."
+      "notes": "Risk class/exemption must be confirmed; do not pay twice if included in existing license.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P149",
@@ -1951,7 +2247,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P150",
@@ -1964,7 +2262,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P151",
@@ -1977,7 +2277,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P152",
@@ -1990,7 +2292,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P153",
@@ -2003,7 +2307,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P154",
@@ -2016,7 +2322,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P155",
@@ -2029,7 +2337,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P156",
@@ -2042,7 +2352,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P157",
@@ -2055,7 +2367,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P158",
@@ -2068,7 +2382,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P159",
@@ -2081,7 +2397,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed."
+      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P160",
@@ -2094,7 +2412,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P161",
@@ -2107,7 +2427,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P162",
@@ -2120,7 +2442,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P163",
@@ -2133,7 +2457,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P164",
@@ -2146,7 +2472,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P165",
@@ -2159,7 +2487,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P166",
@@ -2172,7 +2502,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P167",
@@ -2185,7 +2517,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P168",
@@ -2198,7 +2532,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P169",
@@ -2211,7 +2547,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P170",
@@ -2224,7 +2562,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P171",
@@ -2237,7 +2577,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P172",
@@ -2250,7 +2592,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P173",
@@ -2263,7 +2607,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P174",
@@ -2276,7 +2622,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included."
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P175",
@@ -2289,7 +2637,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P176",
@@ -2302,7 +2652,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P177",
@@ -2315,7 +2667,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P178",
@@ -2328,7 +2682,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P179",
@@ -2341,7 +2697,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P180",
@@ -2354,7 +2712,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P181",
@@ -2367,7 +2727,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P182",
@@ -2380,7 +2742,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P183",
@@ -2393,7 +2757,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed."
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P184",
@@ -2406,7 +2772,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages."
+      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P185",
@@ -2419,7 +2787,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages."
+      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P186",
@@ -2432,7 +2802,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages."
+      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P187",
@@ -2445,7 +2817,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages."
+      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P188",
@@ -2458,7 +2832,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages."
+      "notes": "Broker must confirm policy structure, exclusions and no overlap among coverages.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P189",
@@ -2471,7 +2847,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P190",
@@ -2484,7 +2862,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P191",
@@ -2497,7 +2877,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P192",
@@ -2510,7 +2892,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P193",
@@ -2523,7 +2907,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P194",
@@ -2536,7 +2922,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P195",
@@ -2549,7 +2937,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P196",
@@ -2562,7 +2952,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P197",
@@ -2575,7 +2967,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P198",
@@ -2588,7 +2982,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P199",
@@ -2601,7 +2997,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P200",
@@ -2614,7 +3012,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P201",
@@ -2627,7 +3027,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P202",
@@ -2640,7 +3042,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P203",
@@ -2653,7 +3057,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P204",
@@ -2666,7 +3072,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P205",
@@ -2679,7 +3087,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P206",
@@ -2692,7 +3102,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Buy only after existing inventory inspection; conditional replacement allowance."
+      "notes": "Buy only after existing inventory inspection; conditional replacement allowance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P207",
@@ -2705,7 +3117,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P208",
@@ -2718,7 +3132,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P209",
@@ -2731,7 +3147,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P210",
@@ -2744,7 +3162,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P211",
@@ -2757,7 +3177,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P212",
@@ -2770,7 +3192,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P213",
@@ -2783,7 +3207,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P214",
@@ -2796,7 +3222,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P215",
@@ -2809,7 +3237,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P216",
@@ -2822,7 +3252,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P217",
@@ -2835,7 +3267,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "No classroom child facial recognition or home-device camera use planned."
+      "notes": "No classroom child facial recognition or home-device camera use planned.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P218",
@@ -2848,7 +3282,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P219",
@@ -2861,7 +3297,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P220",
@@ -2874,7 +3312,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P221",
@@ -2887,7 +3327,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P222",
@@ -2900,7 +3342,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P223",
@@ -2913,7 +3357,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P224",
@@ -2926,7 +3372,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P225",
@@ -2939,7 +3387,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases."
+      "notes": "Conditional replenishment; inventory audit can remove unneeded purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P226",
@@ -2952,7 +3402,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P227",
@@ -2965,7 +3417,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P228",
@@ -2978,7 +3432,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P229",
@@ -2991,7 +3447,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P230",
@@ -3004,7 +3462,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P231",
@@ -3017,7 +3477,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P232",
@@ -3030,7 +3492,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P233",
@@ -3043,7 +3507,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P234",
@@ -3056,7 +3522,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P235",
@@ -3069,7 +3537,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P236",
@@ -3082,7 +3552,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P237",
@@ -3095,7 +3567,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P238",
@@ -3108,7 +3582,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P239",
@@ -3121,7 +3597,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P240",
@@ -3134,7 +3612,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P241",
@@ -3147,7 +3627,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P242",
@@ -3160,7 +3642,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P243",
@@ -3173,7 +3657,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P244",
@@ -3186,7 +3672,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P245",
@@ -3199,7 +3687,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P246",
@@ -3212,7 +3702,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P247",
@@ -3225,7 +3717,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P248",
@@ -3238,7 +3732,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P249",
@@ -3251,7 +3747,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy."
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P250",
@@ -3264,7 +3762,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Confirm the existing work is reusable before committing the completion price.",
+      "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
     },
     {
       "id": "P251",
@@ -3277,7 +3777,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Give parents secure access to their own family and preserve consent evidence.",
+      "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
     },
     {
       "id": "P252",
@@ -3290,7 +3792,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Connect the existing CRM, ATS and store to the pilot workflows.",
+      "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
     },
     {
       "id": "P253",
@@ -3303,7 +3807,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Make approved learning activities teachable and save the work children complete.",
+      "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
     },
     {
       "id": "P254",
@@ -3316,7 +3822,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Deliver short character-led routines safely at home and in the classroom.",
+      "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
     },
     {
       "id": "P255",
@@ -3329,7 +3837,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Let families complete essential workflows in English or Spanish.",
+      "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
     },
     {
       "id": "P256",
@@ -3342,7 +3852,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Protect child records and files behind server-enforced access rules.",
+      "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
     },
     {
       "id": "P257",
@@ -3355,7 +3867,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Keep a recoverable copy and respond when something fails.",
+      "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
     },
     {
       "id": "P258",
@@ -3368,7 +3882,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Make the pilot usable on the devices families actually use.",
+      "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
     },
     {
       "id": "P259",
@@ -3381,7 +3897,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included."
+      "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+      "purpose": "Prove the complete pilot works before inviting real families.",
+      "deliverable": "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
     },
     {
       "id": "P260",
@@ -3394,7 +3912,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Planning allowance; multi-role child-data scope and retest must be quoted. Not an automated scan."
+      "notes": "Planning allowance; multi-role child-data scope and retest must be quoted. Not an automated scan.",
+      "purpose": "Obtain independent security evidence.",
+      "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
     },
     {
       "id": "P261",
@@ -3407,7 +3927,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "COPPA applicability/consent, family home use, vendors and records review; counsel opinion not included as a compliance certification."
+      "notes": "COPPA applicability/consent, family home use, vendors and records review; counsel opinion not included as a compliance certification.",
+      "purpose": "Review child privacy and home-use obligations with qualified counsel.",
+      "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
     },
     {
       "id": "P262",
@@ -3420,7 +3942,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "Keep privacy and security procedures current through the pilot.",
+      "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
     },
     {
       "id": "P263",
@@ -3433,7 +3957,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Six hours/month after completion, separate from build acceptance. Extra features require separate authorization."
+      "notes": "Six hours/month after completion, separate from build acceptance. Extra features require separate authorization.",
+      "purpose": "Provide a named person for routine fixes and operating support.",
+      "deliverable": "72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage."
     },
     {
       "id": "P264",
@@ -3446,7 +3972,9 @@
       "bucket": "recurring",
       "basis": "Chosen hosting configuration allowance, not a fixed product quote",
       "url": "https://www.digitalocean.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "Production server needed for the pilot service.",
+      "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P265",
@@ -3459,7 +3987,9 @@
       "bucket": "recurring",
       "basis": "Chosen hosting configuration allowance, not a fixed product quote",
       "url": "https://www.digitalocean.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "Staging server needed for the pilot service.",
+      "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P266",
@@ -3472,7 +4002,9 @@
       "bucket": "recurring",
       "basis": "Chosen hosting configuration allowance, not a fixed product quote",
       "url": "https://www.digitalocean.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "Object storage needed for the pilot service.",
+      "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P267",
@@ -3485,7 +4017,9 @@
       "bucket": "recurring",
       "basis": "Published daily backup percentage applied to compute allowance",
       "url": "https://docs.digitalocean.com/products/backups/details/pricing/",
-      "notes": ""
+      "notes": "",
+      "purpose": "Daily server backup needed for the pilot service.",
+      "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P268",
@@ -3498,7 +4032,9 @@
       "bucket": "recurring",
       "basis": "Published Pro starting price; usage overages separate",
       "url": "https://supabase.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "Managed database/authentication needed for the pilot service.",
+      "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P269",
@@ -3511,7 +4047,9 @@
       "bucket": "recurring",
       "basis": "Published subscription price; check selected plan at purchase",
       "url": "https://resend.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "Transactional email needed for the pilot service.",
+      "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P270",
@@ -3524,7 +4062,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Offsite recovery storage needed for the pilot service.",
+      "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P271",
@@ -3537,7 +4077,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Monitoring needed for the pilot service.",
+      "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P272",
@@ -3550,7 +4092,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Domain needed for the pilot service.",
+      "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P273",
@@ -3563,7 +4107,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Staff password manager needed for the pilot service.",
+      "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P274",
@@ -3576,7 +4122,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Help desk needed for the pilot service.",
+      "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P275",
@@ -3589,7 +4137,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "SMS needed for the pilot service.",
+      "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P276",
@@ -3602,7 +4152,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "CDN/security needed for the pilot service.",
+      "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P277",
@@ -3615,7 +4167,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "Usage overage allowance needed for the pilot service.",
+      "deliverable": "Usage overage allowance configured and verified; usage, renewal and account ownership recorded."
     },
     {
       "id": "P278",
@@ -3628,7 +4182,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P279",
@@ -3641,7 +4197,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P280",
@@ -3654,7 +4212,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P281",
@@ -3667,7 +4227,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot."
+      "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P282",
@@ -3680,7 +4242,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Assumes ten-device minimum; quote exact plan and kiosk support for selected devices."
+      "notes": "Assumes ten-device minimum; quote exact plan and kiosk support for selected devices.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P283",
@@ -3693,7 +4257,9 @@
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
-      "notes": "Expected paid monthly transactions; fees vary with tuition and occupancy."
+      "notes": "Expected paid monthly transactions; fees vary with tuition and occupancy.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P284",
@@ -3706,7 +4272,9 @@
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P285",
@@ -3719,7 +4287,9 @@
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
-      "notes": "Confirm whether existing billing avoids this fee; separate from processing."
+      "notes": "Confirm whether existing billing avoids this fee; separate from processing.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P286",
@@ -3732,7 +4302,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P287",
@@ -3745,7 +4317,9 @@
       "bucket": "one_time",
       "basis": "Published individual consultant benchmark; engagement not quoted",
       "url": "https://www.drjenmata.com/services-pricing",
-      "notes": "Specific benchmark, not industry-wide average; child development approval required."
+      "notes": "Specific benchmark, not industry-wide average; child development approval required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P288",
@@ -3758,7 +4332,9 @@
       "bucket": "one_time",
       "basis": "Published individual consultant benchmark; engagement not quoted",
       "url": "https://www.drjenmata.com/services-pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P289",
@@ -3771,7 +4347,9 @@
       "bucket": "recurring",
       "basis": "Published individual consultant benchmark; engagement not quoted",
       "url": "https://www.drjenmata.com/services-pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P290",
@@ -3784,7 +4362,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P291",
@@ -3797,7 +4377,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Clinical consultant allowance; does not replace medical diagnosis or dietitian expertise."
+      "notes": "Clinical consultant allowance; does not replace medical diagnosis or dietitian expertise.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P292",
@@ -3810,7 +4392,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P293",
@@ -3823,7 +4407,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P294",
@@ -3836,7 +4422,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P295",
@@ -3849,7 +4437,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Proposed forward creative fee, not repayment of past work; covers pilot clips/design reuse. Scope and rights agreement required."
+      "notes": "Proposed forward creative fee, not repayment of past work; covers pilot clips/design reuse. Scope and rights agreement required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P296",
@@ -3862,7 +4452,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P297",
@@ -3875,7 +4467,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P298",
@@ -3888,7 +4482,9 @@
       "bucket": "one_time",
       "basis": "Published individual consultant benchmark; engagement not quoted",
       "url": "https://www.drjenmata.com/services-pricing",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P299",
@@ -3901,7 +4497,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Unattributed planning cap; does NOT promise twelve 7-minute episodes. Test accepted-minute yield before committing scope or credit purchases."
+      "notes": "Unattributed planning cap; does NOT promise twelve 7-minute episodes. Test accepted-minute yield before committing scope or credit purchases.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P300",
@@ -3914,7 +4512,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P301",
@@ -3927,7 +4527,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Subscription basket quote needed; do not duplicate tools included in vendor fees."
+      "notes": "Subscription basket quote needed; do not duplicate tools included in vendor fees.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P302",
@@ -3940,7 +4542,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "12 hours/month forward support, separate from build labor; actual schedule and deliverables must be agreed. Past services excluded pending reconciliation."
+      "notes": "12 hours/month forward support, separate from build labor; actual schedule and deliverables must be agreed. Past services excluded pending reconciliation.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P303",
@@ -3953,7 +4557,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Tested channel budget cap, not proven cost per enrollment. Pause/reallocate on conversion evidence."
+      "notes": "Tested channel budget cap, not proven cost per enrollment. Pause/reallocate on conversion evidence.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P304",
@@ -3966,7 +4572,9 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "1.5 hours/month; distinct from creative production. No national sales team."
+      "notes": "1.5 hours/month; distinct from creative production. No national sales team.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P305",
@@ -3979,7 +4587,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Use existing artwork; consent-backed real photos only. Quote scope."
+      "notes": "Use existing artwork; consent-backed real photos only. Quote scope.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P306",
@@ -3992,7 +4602,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P307",
@@ -4005,7 +4617,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "No warehouse, bulk stock or unsigned merchandise income. Fulfillment paid from sales; unit margin validated before accepting orders."
+      "notes": "No warehouse, bulk stock or unsigned merchandise income. Fulfillment paid from sales; unit margin validated before accepting orders.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P308",
@@ -4018,7 +4632,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P309",
@@ -4031,7 +4647,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Lender quote needed; owner $140,000 is separate proceeds requirement, not verified debt balance."
+      "notes": "Lender quote needed; owner $140,000 is separate proceeds requirement, not verified debt balance.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P310",
@@ -4044,7 +4662,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Origination points, taxes, payoff penalties and legal fees may be additional; unknown lender statement required."
+      "notes": "Origination points, taxes, payoff penalties and legal fees may be additional; unknown lender statement required.",
+      "purpose": "",
+      "deliverable": ""
     },
     {
       "id": "P311",
@@ -4057,7 +4677,9 @@
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": ""
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
     }
   ],
   "cash": [
@@ -4233,6 +4855,462 @@
     ]
   },
   "sources_checked": "2026-10-11 primary tax, wage and vendor references; allowances require written quotes",
+  "platform": {
+    "completion": 57000.0,
+    "assurance_one_time": 20400.0,
+    "one_time": 77400.0,
+    "recurring": 18452.2,
+    "hosting": 4052.2,
+    "first_year": 95852.2,
+    "monthly": 1537.68,
+    "contingency_included": 11610.0,
+    "build_rows": [
+      {
+        "id": "P250",
+        "category": "Platform completion",
+        "item": "Existing-build inventory and deployment acceptance",
+        "unit": "engineering hours",
+        "quantity": 20.0,
+        "rate": 150.0,
+        "annual": 3000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Confirm the existing work is reusable before committing the completion price.",
+        "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
+      },
+      {
+        "id": "P251",
+        "category": "Platform completion",
+        "item": "Family/child authentication and guardian consent",
+        "unit": "engineering hours",
+        "quantity": 40.0,
+        "rate": 150.0,
+        "annual": 6000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Give parents secure access to their own family and preserve consent evidence.",
+        "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
+      },
+      {
+        "id": "P252",
+        "category": "Platform completion",
+        "item": "Existing CRM ATS store integration",
+        "unit": "engineering hours",
+        "quantity": 25.0,
+        "rate": 150.0,
+        "annual": 3750.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Connect the existing CRM, ATS and store to the pilot workflows.",
+        "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
+      },
+      {
+        "id": "P253",
+        "category": "Platform completion",
+        "item": "Curriculum work records and parent progress digest",
+        "unit": "engineering hours",
+        "quantity": 60.0,
+        "rate": 150.0,
+        "annual": 9000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Make approved learning activities teachable and save the work children complete.",
+        "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
+      },
+      {
+        "id": "P254",
+        "category": "Platform completion",
+        "item": "Finite character messages and QR routines",
+        "unit": "engineering hours",
+        "quantity": 20.0,
+        "rate": 150.0,
+        "annual": 3000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Deliver short character-led routines safely at home and in the classroom.",
+        "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
+      },
+      {
+        "id": "P255",
+        "category": "Platform completion",
+        "item": "Bilingual product review and fixes",
+        "unit": "engineering hours",
+        "quantity": 25.0,
+        "rate": 150.0,
+        "annual": 3750.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Let families complete essential workflows in English or Spanish.",
+        "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
+      },
+      {
+        "id": "P256",
+        "category": "Platform completion",
+        "item": "Role security private files and consent audit",
+        "unit": "engineering hours",
+        "quantity": 65.0,
+        "rate": 150.0,
+        "annual": 9750.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Protect child records and files behind server-enforced access rules.",
+        "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
+      },
+      {
+        "id": "P257",
+        "category": "Platform completion",
+        "item": "Backup restore monitoring deployment controls",
+        "unit": "engineering hours",
+        "quantity": 40.0,
+        "rate": 150.0,
+        "annual": 6000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Keep a recoverable copy and respond when something fails.",
+        "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
+      },
+      {
+        "id": "P258",
+        "category": "Platform completion",
+        "item": "Accessibility iPad and browser verification",
+        "unit": "engineering hours",
+        "quantity": 35.0,
+        "rate": 150.0,
+        "annual": 5250.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Make the pilot usable on the devices families actually use.",
+        "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
+      },
+      {
+        "id": "P259",
+        "category": "Platform completion",
+        "item": "UAT staff training onboarding and launch",
+        "unit": "engineering hours",
+        "quantity": 50.0,
+        "rate": 150.0,
+        "annual": 7500.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
+        "purpose": "Prove the complete pilot works before inviting real families.",
+        "deliverable": "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
+      }
+    ],
+    "service_rows": [
+      {
+        "id": "P260",
+        "category": "Platform assurance",
+        "item": "Independent manual web/API penetration test with retest",
+        "unit": "engagement",
+        "quantity": 1.0,
+        "rate": 12000.0,
+        "annual": 12000.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Planning allowance; multi-role child-data scope and retest must be quoted. Not an automated scan.",
+        "purpose": "Obtain independent security evidence.",
+        "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
+      },
+      {
+        "id": "P261",
+        "category": "Platform assurance",
+        "item": "Privacy counsel consent contracts and retention review",
+        "unit": "legal hours",
+        "quantity": 24.0,
+        "rate": 350.0,
+        "annual": 8400.0,
+        "bucket": "one_time",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "COPPA applicability/consent, family home use, vendors and records review; counsel opinion not included as a compliance certification.",
+        "purpose": "Review child privacy and home-use obligations with qualified counsel.",
+        "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
+      },
+      {
+        "id": "P262",
+        "category": "Platform assurance",
+        "item": "Security/privacy maintenance review",
+        "unit": "hours",
+        "quantity": 24.0,
+        "rate": 150.0,
+        "annual": 3600.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "",
+        "purpose": "Keep privacy and security procedures current through the pilot.",
+        "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
+      },
+      {
+        "id": "P263",
+        "category": "Platform support",
+        "item": "Technical maintenance and support",
+        "unit": "hours",
+        "quantity": 72.0,
+        "rate": 150.0,
+        "annual": 10800.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Six hours/month after completion, separate from build acceptance. Extra features require separate authorization.",
+        "purpose": "Provide a named person for routine fixes and operating support.",
+        "deliverable": "72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage."
+      }
+    ],
+    "hosting_rows": [
+      {
+        "id": "P264",
+        "category": "Hosting and software",
+        "item": "DigitalOcean production compute",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 48.0,
+        "annual": 576.0,
+        "bucket": "recurring",
+        "basis": "Chosen hosting configuration allowance, not a fixed product quote",
+        "url": "https://www.digitalocean.com/pricing",
+        "notes": "",
+        "purpose": "Production server needed for the pilot service.",
+        "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P265",
+        "category": "Hosting and software",
+        "item": "DigitalOcean staging compute",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 24.0,
+        "annual": 288.0,
+        "bucket": "recurring",
+        "basis": "Chosen hosting configuration allowance, not a fixed product quote",
+        "url": "https://www.digitalocean.com/pricing",
+        "notes": "",
+        "purpose": "Staging server needed for the pilot service.",
+        "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P266",
+        "category": "Hosting and software",
+        "item": "Object storage",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 5.0,
+        "annual": 60.0,
+        "bucket": "recurring",
+        "basis": "Chosen hosting configuration allowance, not a fixed product quote",
+        "url": "https://www.digitalocean.com/pricing",
+        "notes": "",
+        "purpose": "Object storage needed for the pilot service.",
+        "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P267",
+        "category": "Hosting and software",
+        "item": "Daily compute backup",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 21.6,
+        "annual": 259.2,
+        "bucket": "recurring",
+        "basis": "Published daily backup percentage applied to compute allowance",
+        "url": "https://docs.digitalocean.com/products/backups/details/pricing/",
+        "notes": "",
+        "purpose": "Daily server backup needed for the pilot service.",
+        "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P268",
+        "category": "Hosting and software",
+        "item": "Supabase Pro",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 25.0,
+        "annual": 300.0,
+        "bucket": "recurring",
+        "basis": "Published Pro starting price; usage overages separate",
+        "url": "https://supabase.com/pricing",
+        "notes": "",
+        "purpose": "Managed database/authentication needed for the pilot service.",
+        "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P269",
+        "category": "Hosting and software",
+        "item": "Transactional email",
+        "unit": "months",
+        "quantity": 12.0,
+        "rate": 20.0,
+        "annual": 240.0,
+        "bucket": "recurring",
+        "basis": "Published subscription price; check selected plan at purchase",
+        "url": "https://resend.com/pricing",
+        "notes": "",
+        "purpose": "Transactional email needed for the pilot service.",
+        "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P270",
+        "category": "Hosting and software",
+        "item": "Independent encrypted backup storage",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 10.0,
+        "annual": 120.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Offsite recovery storage needed for the pilot service.",
+        "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P271",
+        "category": "Hosting and software",
+        "item": "Uptime monitoring",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 12.0,
+        "annual": 144.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Monitoring needed for the pilot service.",
+        "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P272",
+        "category": "Hosting and software",
+        "item": "Domain renewal",
+        "unit": "months / seats / units",
+        "quantity": 1.0,
+        "rate": 25.0,
+        "annual": 25.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Domain needed for the pilot service.",
+        "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P273",
+        "category": "Hosting and software",
+        "item": "Password manager",
+        "unit": "months / seats / units",
+        "quantity": 60.0,
+        "rate": 8.0,
+        "annual": 480.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Staff password manager needed for the pilot service.",
+        "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P274",
+        "category": "Hosting and software",
+        "item": "Help desk subscription allowance",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 30.0,
+        "annual": 360.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Help desk needed for the pilot service.",
+        "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P275",
+        "category": "Hosting and software",
+        "item": "SMS and registration allowance",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 25.0,
+        "annual": 300.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "SMS needed for the pilot service.",
+        "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P276",
+        "category": "Hosting and software",
+        "item": "CDN/security plan allowance",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 25.0,
+        "annual": 300.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "CDN/security needed for the pilot service.",
+        "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
+      },
+      {
+        "id": "P277",
+        "category": "Hosting and software",
+        "item": "Cloud usage overage allowance",
+        "unit": "months / seats / units",
+        "quantity": 12.0,
+        "rate": 50.0,
+        "annual": 600.0,
+        "bucket": "recurring",
+        "basis": "Planning allowance \u2014 written quote or invoice required",
+        "url": "",
+        "notes": "Allowance; no family-device rental business or mass manufacturing in this pilot.",
+        "purpose": "Usage overage allowance needed for the pilot service.",
+        "deliverable": "Usage overage allowance configured and verified; usage, renewal and account ownership recorded."
+      }
+    ],
+    "gates": [
+      "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment.",
+      "Invites, login, password reset, family linking and parent consent; another family cannot be accessed.",
+      "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products.",
+      "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest.",
+      "Parent-approved finite character messages and QR routines; no open-ended child AI conversation.",
+      "Critical journeys and content reviewed in both languages; native-language sign-off required.",
+      "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts.",
+      "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner.",
+      "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices.",
+      "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
+    ],
+    "readiness": "Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.",
+    "separate_costs": {
+      "curriculum_clinical": 38600,
+      "pilot_content": 25740,
+      "creative_oversight": 14400,
+      "devices": 2580
+    },
+    "rate_basis": "$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable."
+  },
   "sensitivity": [
     {
       "children": 30,

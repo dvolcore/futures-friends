@@ -7,6 +7,7 @@ Booker, Lumi, Zuri and Bop connect curriculum, movement, nutrition and family ro
 |---|---|
 | Staffing | Two full-time adults, six short-shift teachers, a break/admin floater, food worker and two substitutes. Four floor adults throughout the assumed ten-hour day; age/room grouping must be approved. Wages $269,680. |
 | Annual operating cost | $477,066.02 recurring; continues in year two, before inflation and building payments. |
+| Platform delivery | $95,852.20 Year 1: $57,000.00 completion + $20,400.00 one-time assurance + $18,452.20 annual services. Code audit, fixed-scope quote and working acceptance required. |
 | Completion and launch | $146,964.00 one-time. Includes $57,000 platform completion, curriculum/clinical review, finite content and security. Local marketing totals $11,400 year one. |
 | Reserves | $22,044.60 contingency (15% of one-time spend) and $39,755.50 one-month working capital. No blanket unemployment reserve. |
 | Building | $140,000 owner funding requirement enabling refinance; payoff, terms and new payment unverified. $700,000 placeholder removed. |

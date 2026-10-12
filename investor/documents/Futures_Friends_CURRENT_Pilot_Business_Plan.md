@@ -101,3 +101,57 @@ First month: verify safe shift coverage, consent, activity records, billing, att
 Before a financing decision, obtain the actual age roster/room capacity/hours; existing staff and payroll; current signed tuition/discount policy; twelve months of bills and insurance; inventory/inspection findings; the purpose of $140,000 and lender closing/payment statement; engineering/clinical/production quotes; current tax treatment; and past creator fees/rights. No one can certify the present forecast as a profitable investment without those inputs.
 
 Each cost row identifies its formula, source and whether it is a published price, tax formula or quote-required allowance. Cents make arithmetic reproducible; they do not imply receipt-level accuracy. No food reimbursement, grant, store profit or partner licensing receipt is assumed. Read the digital cost register, CSV and monthly cash table for the complete audit trail. The production bible and operations companion preserve brand and delivery scope; their future creative and expansion concepts remain outside pilot financing.
+
+## Platform delivery: what the allowance buys
+
+Year-1 platform allowance: $95,852.20. One-time completion and assurance: $77,400.00. Annual recurring service: $18,452.20, averaging $1,537.68/month. $11,610.00 of platform contingency is already included in the overall contingency; do not add it twice.
+
+$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable.
+
+| ID | Item | Calculation | Amount | Timing | Why essential / delivery evidence |
+|---|---|---|---:|---|---|
+| P250 | Existing-build inventory and deployment acceptance | 20 engineering hours × $150.00 | $3,000.00 | one time | Confirm the existing work is reusable before committing the completion price. Code and dependency audit, written remaining-work scope, reproducible staging and production deployment. |
+| P251 | Family/child authentication and guardian consent | 40 engineering hours × $150.00 | $6,000.00 | one time | Give parents secure access to their own family and preserve consent evidence. Invites, login, password reset, family linking and parent consent; another family cannot be accessed. |
+| P252 | Existing CRM ATS store integration | 25 engineering hours × $150.00 | $3,750.00 | one time | Connect the existing CRM, ATS and store to the pilot workflows. Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products. |
+| P253 | Curriculum work records and parent progress digest | 60 engineering hours × $150.00 | $9,000.00 | one time | Make approved learning activities teachable and save the work children complete. Educator-approved activities, persistent learning records, teacher review and a parent weekly digest. |
+| P254 | Finite character messages and QR routines | 20 engineering hours × $150.00 | $3,000.00 | one time | Deliver short character-led routines safely at home and in the classroom. Parent-approved finite character messages and QR routines; no open-ended child AI conversation. |
+| P255 | Bilingual product review and fixes | 25 engineering hours × $150.00 | $3,750.00 | one time | Let families complete essential workflows in English or Spanish. Critical journeys and content reviewed in both languages; native-language sign-off required. |
+| P256 | Role security private files and consent audit | 65 engineering hours × $150.00 | $9,750.00 | one time | Protect child records and files behind server-enforced access rules. Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts. |
+| P257 | Backup restore monitoring deployment controls | 40 engineering hours × $150.00 | $6,000.00 | one time | Keep a recoverable copy and respond when something fails. Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner. |
+| P258 | Accessibility iPad and browser verification | 35 engineering hours × $150.00 | $5,250.00 | one time | Make the pilot usable on the devices families actually use. Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices. |
+| P259 | UAT staff training onboarding and launch | 50 engineering hours × $150.00 | $7,500.00 | one time | Prove the complete pilot works before inviting real families. 40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint. |
+| P260 | Independent manual web/API penetration test with retest | 1 engagement × $12,000.00 | $12,000.00 | one time | Obtain independent security evidence. Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch. |
+| P261 | Privacy counsel consent contracts and retention review | 24 legal hours × $350.00 | $8,400.00 | one time | Review child privacy and home-use obligations with qualified counsel. Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established. |
+| P262 | Security/privacy maintenance review | 24 hours × $150.00 | $3,600.00 | recurring | Keep privacy and security procedures current through the pilot. 24 hours/year, averaging two hours/month; documented review and update log. |
+| P263 | Technical maintenance and support | 72 hours × $150.00 | $10,800.00 | recurring | Provide a named person for routine fixes and operating support. 72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage. |
+| P264 | DigitalOcean production compute | 12 months × $48.00 | $576.00 | recurring | Production server needed for the pilot service. Production server configured and verified; usage, renewal and account ownership recorded. |
+| P265 | DigitalOcean staging compute | 12 months × $24.00 | $288.00 | recurring | Staging server needed for the pilot service. Staging server configured and verified; usage, renewal and account ownership recorded. |
+| P266 | Object storage | 12 months × $5.00 | $60.00 | recurring | Object storage needed for the pilot service. Object storage configured and verified; usage, renewal and account ownership recorded. |
+| P267 | Daily compute backup | 12 months × $21.60 | $259.20 | recurring | Daily server backup needed for the pilot service. Daily server backup configured and verified; usage, renewal and account ownership recorded. |
+| P268 | Supabase Pro | 12 months × $25.00 | $300.00 | recurring | Managed database/authentication needed for the pilot service. Managed database/authentication configured and verified; usage, renewal and account ownership recorded. |
+| P269 | Transactional email | 12 months × $20.00 | $240.00 | recurring | Transactional email needed for the pilot service. Transactional email configured and verified; usage, renewal and account ownership recorded. |
+| P270 | Independent encrypted backup storage | 12 months / seats / units × $10.00 | $120.00 | recurring | Offsite recovery storage needed for the pilot service. Offsite recovery storage configured and verified; usage, renewal and account ownership recorded. |
+| P271 | Uptime monitoring | 12 months / seats / units × $12.00 | $144.00 | recurring | Monitoring needed for the pilot service. Monitoring configured and verified; usage, renewal and account ownership recorded. |
+| P272 | Domain renewal | 1 months / seats / units × $25.00 | $25.00 | recurring | Domain needed for the pilot service. Domain configured and verified; usage, renewal and account ownership recorded. |
+| P273 | Password manager | 60 months / seats / units × $8.00 | $480.00 | recurring | Staff password manager needed for the pilot service. Staff password manager configured and verified; usage, renewal and account ownership recorded. |
+| P274 | Help desk subscription allowance | 12 months / seats / units × $30.00 | $360.00 | recurring | Help desk needed for the pilot service. Help desk configured and verified; usage, renewal and account ownership recorded. |
+| P275 | SMS and registration allowance | 12 months / seats / units × $25.00 | $300.00 | recurring | SMS needed for the pilot service. SMS configured and verified; usage, renewal and account ownership recorded. |
+| P276 | CDN/security plan allowance | 12 months / seats / units × $25.00 | $300.00 | recurring | CDN/security needed for the pilot service. CDN/security configured and verified; usage, renewal and account ownership recorded. |
+| P277 | Cloud usage overage allowance | 12 months / seats / units × $50.00 | $600.00 | recurring | Usage overage allowance needed for the pilot service. Usage overage allowance configured and verified; usage, renewal and account ownership recorded. |
+
+Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.
+
+Launch acceptance requires:
+
+- Code and dependency audit, written remaining-work scope, reproducible staging and production deployment.
+- Invites, login, password reset, family linking and parent consent; another family cannot be accessed.
+- Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products.
+- Educator-approved activities, persistent learning records, teacher review and a parent weekly digest.
+- Parent-approved finite character messages and QR routines; no open-ended child AI conversation.
+- Critical journeys and content reviewed in both languages; native-language sign-off required.
+- Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts.
+- Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner.
+- Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices.
+- 40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint.
+
+Curriculum/clinical review ($38,600), finite pilot content ($25,740), annual creative oversight ($14,400) and devices ($2,580) are separately included in the overall budget. A full animated season, national rollout and open-ended child AI are excluded. Six monthly support hours are lean; incidents and larger changes may require additional quoted work. Ongoing tuition must cover recurring costs and debt after Year 1; this platform allowance does not resolve the current operating deficit.
