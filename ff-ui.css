@@ -60,3 +60,10 @@ html{-webkit-tap-highlight-color:transparent}
 
 /* ============================================================== 5. Landscape notch clearance (HIG #15) */
 .bar .wrap{padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}
+
+/* ============================================================== 6. Finger-sized targets on touch screens (HIG #5): the footer site map
+   and the small pill controls that were 40 px tall reach 44 px where the pointer is a finger. Desktop keeps its tighter layout. */
+@media (pointer:coarse){
+  .ffw-fcol a,.ffe-s-link,.fl-seg button,.mh-saygo,.mh-sayaskbtn,.rp-seg label,.rp-checks label,.rk-toggle button,.fr-btabs button,.ffw-back,.ffd-kidacts .btn{min-height:44px}
+  .sp-qv{min-width:44px;min-height:44px}
+}
