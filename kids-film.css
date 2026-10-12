@@ -4,7 +4,7 @@
 .kf,.sp .kf{padding:0;margin:0}
 .kf{--kf-blue:12,57,125;--kf-op:.68;--kf-accent:#b8ddff;--kf-bw:clamp(340px,33%,480px);position:relative;isolation:isolate;overflow:hidden;background:#16396a;color:#fff}
 .kf-back{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(22,61,116,.66),rgba(20,44,87,.2)),url("video/kids-shop/wonder-store-film-poster.jpg") center/cover no-repeat;background-image:linear-gradient(90deg,rgba(22,61,116,.66),rgba(20,44,87,.2)),image-set(url("video/kids-shop/wonder-store-film-poster.webp") type("image/webp"),url("video/kids-shop/wonder-store-film-poster.jpg") type("image/jpeg"));filter:blur(24px)}
-.kf-stage{display:grid;grid-template-columns:var(--kf-bw) minmax(0,1fr);min-height:clamp(500px,40vw,660px)}
+.kf-stage{display:grid;grid-template-columns:var(--kf-bw) minmax(0,1fr);min-height:clamp(500px,40vw,660px);touch-action:pan-y pinch-zoom}   /* sideways swipes change chapter (kids-film.js); vertical scroll and pinch-zoom stay the browser's */
 .kf-film{position:relative;min-width:0;grid-column:2;grid-row:1;display:grid;place-items:center}
 .kf-video{display:block;width:100%;height:100%;max-height:100%;object-fit:contain;background:transparent;position:absolute;inset:0}
 .kf-board{grid-column:1;grid-row:1;position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(12px,1.6vw,18px);padding:clamp(24px,2.8vw,40px) clamp(22px,2.6vw,40px) clamp(18px,2vw,26px);isolation:isolate}

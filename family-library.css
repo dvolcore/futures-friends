@@ -211,7 +211,7 @@
 .fl-vidcap{display:grid;gap:4px;font-size:14px}
 .fl-vidcap b{font-family:var(--display);font-size:18px;line-height:1.2}
 .fl-vid-big .fl-vidcap b{font-size:clamp(20px,2.4vw,26px)}
-.fl-vidlink{font-weight:700;justify-self:start}
+.fl-vidlink{font-weight:700;justify-self:start;display:inline-flex;align-items:center;min-height:44px}   /* HIG #5: a 44 pt finger target */
 .fl-vid-act .wc-actvid figcaption{display:none}
 .fl-planned li{border-color:color-mix(in srgb,var(--c,var(--line)) 45%,var(--line))}
 .fl-noscreen{margin-top:18px}
@@ -255,7 +255,7 @@
 .fl-badges li.on{background:var(--gold);border:2px solid var(--gold-deep);color:#0A2B38}
 .fl-certpick{display:grid;gap:12px;margin-bottom:16px}
 .fl-namefield{display:grid;gap:6px;font-size:14px;font-weight:600;max-width:340px}
-.fl-namefield input{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+.fl-namefield input{font:inherit;font-size:max(16px,1em);font-weight:400;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
 .fl-cert{max-width:760px;aspect-ratio:11/8.5;background:#FFFDF7;color:#14313D;border-radius:18px;padding:16px;box-shadow:0 18px 40px rgba(10,43,56,.16);margin-bottom:14px}
 .fl-cert-in{height:100%;border:3px dashed var(--c);border-radius:12px;display:grid;justify-items:center;align-content:center;text-align:center;gap:4px;padding:16px;position:relative}
 .fl-cert-logo{width:140px;height:auto}
@@ -325,3 +325,6 @@
 .fl-guide>div{background:var(--paper,#fff);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:14px;padding:12px 14px}
 .fl-guide dt{font-weight:700;margin:0 0 4px}
 .fl-guide dd{margin:0;line-height:1.5}
+
+/* HIG audit #5: "Read the transcript" rows (captions.js) are a 44 pt finger target; the disclosure triangle stays (display unchanged) */
+.ffcap-tr>summary{box-sizing:border-box;min-height:44px;padding-block:11px;padding-block:max(0px,calc((44px - 1lh) / 2))}

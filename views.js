@@ -726,7 +726,48 @@ V.accessibility = () => legal('Accessibility',[['Our goal','We aim to meet WCAG 
 // ---------------------------------------------------------------- router + events
 let _lastView=null;
 function render(){ const vw=$('#view'); if(vw.removeAttribute) vw.removeAttribute('data-prerender'); vw.innerHTML = (V[view]||V.home)(); document.querySelectorAll('[data-nav]').forEach(b=>b.setAttribute('aria-current', b.dataset.go===view?'page':'false')); const same=_lastView===view+'|'+arg; _lastView=view+'|'+arg; try{ window.FFmotion && window.FFmotion(view, same); }catch(e){ console.warn(e); } }
-function go(v, a){ if(!V[v]) v='home'; view=v; arg=a||null; if((v==='portal'||v==='family-portal') && window.FFPortal) window.FFPortal.subscribeKd(); render(); window.scrollTo(0,0); try{ const h='#'+v+(arg?'/'+arg:''); history.replaceState(null,'',(window.FF_PRERENDER && window.FF_PRERENDER!==h.slice(1) ? window.FF_ROOT_PATH+location.search : '')+h); }catch(_){} }
+// Back and Forward put you back where you were (HIG audit #3). Every history entry gets a key (history.state.ffK); scrolling
+// records the position against the current entry in memory (no replaceState per scroll: Safari caps it), and the position is also
+// written into history.state before we leave an entry ourselves. A new page starts at the top; Back/Forward (premium.js sets
+// FFNav.viaHistory) restores the saved position after the render, then once more after late images settle. The browser's own
+// restoration is off so the two never fight.
+const FFScroll = (()=>{ const W=window, H=W.history||{replaceState(){},pushState(){},back(){}}, pos=new Map(), on=(t,f,o)=>{ if(W.addEventListener) W.addEventListener(t,f,o); }; let cur=null, curHash=null, timers=[], n=0;
+ try{ if('scrollRestoration' in H) H.scrollRestoration='manual'; }catch(_){}
+ const locked=()=>document.body && document.body.style.position==='fixed' || document.documentElement.classList.contains('sp-lock');
+ const st=()=>{ const s=H.state; return s && typeof s==='object' ? s : {}; };
+ function save(){ if(locked()||cur==null) return; pos.set(cur, W.scrollY); try{ H.replaceState(Object.assign({}, st(), {ffY:W.scrollY}), ''); }catch(_){} }
+ function manual(){ try{ if('scrollRestoration' in H) H.scrollRestoration='manual'; }catch(_){} }   // per history entry, so set on each
+ function adopt(){ manual(); let k=st().ffK; if(!k){ k=Date.now().toString(36)+'-'+(++n); try{ H.replaceState(Object.assign({}, st(), {ffK:k}), ''); }catch(_){} } cur=k; curHash=location.hash; }
+ function cancel(){ timers.forEach(clearTimeout); timers=[]; }
+ function to(y){ cancel(); if(!y){ W.scrollTo(0,0); return; } const set=()=>{ if(Math.abs(W.scrollY-y)>2) W.scrollTo(0,y); };
+  set(); requestAnimationFrame(set); timers=[setTimeout(set,120), setTimeout(set,320)]; }
+ function target(){ const back=!!(W.FFNav && W.FFNav.viaHistory); if(!back) return 0; const s=st(); const y=pos.has(s.ffK)?pos.get(s.ffK):s.ffY; return typeof y==='number' && y>0 ? y : 0; }
+ on('scroll', ()=>{ if(cur!=null && location.hash===curHash && !locked()) pos.set(cur, W.scrollY); }, {passive:true});
+ ['wheel','touchstart','keydown','pointerdown'].forEach(t=>on(t, cancel, {passive:true, capture:true}));   // the visitor scrolls: stop restoring
+ on('pagehide', save); on('load', manual); on('pageshow', manual);   // the browser resets it while the page loads
+ return { save, adopt, to, target, pos, manual };
+})();
+// Back closes the open panel instead of leaving the page (HIG audit #8). One helper for the menu, search, Display preferences and
+// the Shop quick view: opening a panel adds a history entry {ffOverlay:key}; Back (popstate) closes the top panel and stops there;
+// closing it by its x, Escape or the dimmed area steps back over that entry only when it is still on top. A route change while a
+// panel is open reuses the entry (premium.js consume()), so no dead entry is left behind.
+const FFOverlay = (()=>{ const W=window, H=W.history||{replaceState(){},pushState(){},back(){}}, stack=[]; let ignore=0, ignoreT=0;
+ const top=()=>{ const s=H.state; return s && s.ffOverlay || null; };
+ function opened(key, close){ if(stack.some(e=>e.key===key)) return; FFScroll.save(); const y=W.scrollY;
+  try{ const t=top(); if(t && !stack.some(e=>e.key===t)) H.replaceState(Object.assign({}, H.state, {ffOverlay:key}), ''); else H.pushState({ffOverlay:key, ffK:(H.state&&H.state.ffK)||null, ffY:y}, ''); FFScroll.manual(); }catch(_){}
+  stack.push({key, close}); }
+ function closed(key, o){ const i=stack.findIndex(e=>e.key===key); if(i<0) return; stack.splice(i,1); if(o && o.keep) return;
+  setTimeout(()=>{ if(top()===key && !stack.some(e=>e.key===key)){ ignore++; clearTimeout(ignoreT); ignoreT=setTimeout(()=>{ ignore=0; }, 1500); H.back(); } }, 0); }
+ function consume(){ if(!top()) return false; stack.length=0; return true; }
+ if(W.addEventListener) W.addEventListener('popstate', e=>{
+  if(ignore){ ignore--; e.stopImmediatePropagation(); return; }                  // our own step back over a closed panel's entry
+  if(stack.length){ const t=stack.pop(); e.stopImmediatePropagation(); try{ t.close(); }catch(err){ console.warn(err); } return; }
+  if(e.state && e.state.ffOverlay) e.stopImmediatePropagation();                // Forward onto a closed panel's entry: same page, nothing to do
+ }, true);
+ return { opened, closed, consume, isOpen:key=>stack.some(e=>e.key===key) };
+})();
+window.FFScroll=FFScroll; window.FFOverlay=FFOverlay;
+function go(v, a){ if(!V[v]) v='home'; view=v; arg=a||null; if((v==='portal'||v==='family-portal') && window.FFPortal) window.FFPortal.subscribeKd(); const y=FFScroll.target(); render(); FFScroll.to(y); try{ const h='#'+v+(arg?'/'+arg:''); history.replaceState(history.state,'',(window.FF_PRERENDER && window.FF_PRERENDER!==h.slice(1) ? window.FF_ROOT_PATH+location.search : '')+h); }catch(_){} FFScroll.adopt(); }
 function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2400); }
 function openRecipe(code){ const r=R[code]; if(!r) return;
  $('#dlgBody').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><div><div class="eyebrow">Level ${r.level} · ${LEVELS[r.level]} · ${r.code}</div><h3 id="dlgTitle" style="font-size:26px">${esc(r.name)}</h3></div><button class="btn soft" id="dlgClose">Close</button></div>

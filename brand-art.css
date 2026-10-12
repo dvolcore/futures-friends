@@ -147,8 +147,9 @@ div.ffi-soon[role="alert"]::after{background-image:image-set(url(img/plush/chara
 .ffa-kit[data-kit-view="real"] .ffa-kit-label{display:none}
 .ffa-kit-label{position:absolute;z-index:2;top:10px;left:10px;padding:4px 10px;border-radius:999px;background:rgba(10,43,56,.88);color:#fff;font:600 12px/1.2 var(--display);letter-spacing:.03em;border:1.5px dashed rgba(255,255,255,.55);pointer-events:none}
 .ffa-kit-toggle{position:absolute;z-index:2;right:10px;bottom:10px;display:inline-flex;padding:3px;gap:2px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 4px 14px rgba(4,18,26,.22)}
-.ffa-kit-toggle button{appearance:none;border:0;background:transparent;color:#233c50;font:600 12px/1 var(--display);padding:7px 10px;border-radius:999px;cursor:pointer;min-height:30px;white-space:nowrap}
-@media (max-width:900px){.ffa-kit-label{top:6px;left:6px;font-size:11px;padding:3px 8px}.ffa-kit-toggle{right:6px;bottom:6px;padding:2px}.ffa-kit-toggle button{font-size:11px;padding:6px 8px;min-height:28px}}
+.ffa-kit-toggle button{appearance:none;border:0;background:transparent;color:#233c50;font:600 12px/1 var(--display);padding:7px 10px;border-radius:999px;cursor:pointer;min-height:36px;white-space:nowrap;position:relative}
+.ffa-kit-toggle button::before{content:"";position:absolute;inset:-4px}   /* HIG #5: 36 drawn + a 44 pt finger target (it sits on the photo) */
+@media (max-width:900px){.ffa-kit-label{top:6px;left:6px;font-size:11px;padding:3px 8px}.ffa-kit-toggle{right:6px;bottom:6px;padding:2px}.ffa-kit-toggle button{font-size:11px;padding:6px 8px;min-height:36px}}
 .ffa-kit-toggle button[aria-pressed="true"]{background:#1F2A55;color:#fff}
 .ffa-kit-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .ffa-photo .ffa-kit-note{font-size:12.5px}

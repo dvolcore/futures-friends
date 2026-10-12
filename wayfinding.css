@@ -63,7 +63,7 @@ dialog.ffw-menu::backdrop{background:var(--ffw-navy)}
 .ffw-menu section{padding:0}
 .ffw-m{position:relative;height:100%;display:flex;flex-direction:column;isolation:isolate}
 .ffw-m::after{content:"";position:absolute;inset:10px;border:2px dashed rgba(231,169,40,.42);border-radius:22px;pointer-events:none;z-index:2}
-.ffw-m-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,4vw,48px) 6px;position:relative;z-index:3}
+.ffw-m-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,4vw,48px) 6px;padding-inline:max(clamp(20px,4vw,48px),env(safe-area-inset-left,0px)) max(clamp(20px,4vw,48px),env(safe-area-inset-right,0px));position:relative;z-index:3}
 .ffw-m-home{display:block;line-height:0;border-radius:10px}
 .ffw-m-home img{width:130px;height:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
 .ffw-m-close{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:16px;border:0;background:var(--ffw-gold);color:var(--ffw-navy);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.28)}
@@ -121,7 +121,7 @@ dialog.ffw-menu::backdrop{background:var(--ffw-navy)}
 @media (min-width:901px) and (max-height:760px){.ffw-m-link{font-size:clamp(20px,1.9vw,26px)}.ffw-m-grid{gap:14px 40px}}
 /* phones and small tablets: thumb-built. Big links in the lower half, 48 px rows, the person to call pinned at the bottom */
 @media (max-width:900px){
-  .ffw-m-top{padding:16px 20px 14px}
+  .ffw-m-top{padding:16px 20px 14px;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}   /* landscape iPhone: the close button clears the notch (HIG #15) */
   .ffw-m-scroll{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 32px);mask-image:linear-gradient(to bottom,transparent 0,#000 32px)}
   .ffw-m-home img{width:100px}
   .ffw-m-pal-corner{display:none}
@@ -144,13 +144,17 @@ dialog.ffw-menu::backdrop{background:var(--ffw-navy)}
 }
 /* open in under 300 ms: the felt rises, the links follow, the squiggle draws itself */
 @media (prefers-reduced-motion:no-preference){
-  html:not([data-motion="off"]) .ffw-menu[open]{animation:ffw-m-in .22s var(--ffw-ease) both}
+  /* HIG #9: transitions, not keyframes, so a close the visitor interrupts (Menu tapped again) reverses from where it is.
+     The dialog is already closed while it fades (wayfinding.js), so the fade never blocks a tap on the page or on Menu. */
+  html:not([data-motion="off"]) .ffw-menu{transition:opacity var(--ff-dur-2) var(--ff-ease-out),transform var(--ff-dur-2) var(--ff-ease-out),overlay var(--ff-dur-2) allow-discrete,display var(--ff-dur-2) allow-discrete}
+  html:not([data-motion="off"]) .ffw-menu:not([open]){opacity:0;transform:translateY(-8px)}
+  @starting-style{html:not([data-motion="off"]) .ffw-menu[open]{opacity:0;transform:translateY(-10px) scale(.99)}}
+  html:not([data-motion="off"]) .ffw-menu.ffw-m-instant{transition:none}
+  html:not([data-motion="off"]) .ffw-menu.ffw-m-again[open] .ffw-m-group li,html:not([data-motion="off"]) .ffw-menu.ffw-m-again[open] .ffw-sq path{animation:none;stroke-dashoffset:0}
   html:not([data-motion="off"]) .ffw-menu[open] .ffw-m-group li{animation:ffw-m-rise .2s var(--ffw-ease) both;animation-delay:calc(30ms + var(--i,0) * 14ms)}
   html:not([data-motion="off"]) .ffw-menu[open] .ffw-sq path{stroke-dashoffset:1;animation:ffw-draw .26s .04s var(--ffw-ease) forwards}
-  html:not([data-motion="off"]) .ffw-menu.is-closing{animation:ffw-m-out .14s ease-in both}
 }
-@keyframes ffw-m-in{from{opacity:0;transform:translateY(-10px) scale(.99)}to{opacity:1;transform:none}}
-@keyframes ffw-m-out{to{opacity:0;transform:translateY(-8px)}}
+.ffw-menu:not([open]){pointer-events:none}
 @keyframes ffw-m-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes ffw-draw{to{stroke-dashoffset:0}}
 html.ffw-locked{scrollbar-gutter:stable}
@@ -202,7 +206,8 @@ dialog.ffw-pal::backdrop{background:rgba(6,24,32,.55)}
 /* ---------------------------------------------------------------- breadcrumbs and the back chip */
 .ffw-crumbs{font-size:13.5px;line-height:1.4;margin:0 0 4px}
 .ffw-crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
-.ffw-crumbs a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:500;display:inline-flex;align-items:center;min-height:24px}
+.ffw-crumbs a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:500;display:inline-flex;align-items:center;min-height:24px;position:relative}
+.ffw-crumbs a::after{content:"";position:absolute;inset:-10px -4px}   /* a 44 pt finger target without making the trail taller (HIG #5) */
 .ffw-crumbs a:hover{text-decoration-thickness:2px;text-decoration-color:var(--ffw-gold)}
 .ffw-crumbs [aria-current]{font-weight:700}
 .ffw-cs{opacity:.6}
@@ -363,3 +368,30 @@ header.bar{view-transition-name:ffw-header}
    in a column flex box, so on a cold load it shrink-wraps to its content until fonts and images settle, then jumps to full width
    (measured 0.035 at 1280 px, 0.011 at 390 px). Giving it its full width up front removes the jump; max-width still centres it. */
 .px-homehero.ffa-homehero>.wrap{width:100%}
+
+/* ---------------------------------------------------------------- HIG audit 2026-10-12: finger-sized header and settings
+   #4 Every header control answers a 44 x 44 pt finger. Where the row is too tight at 360 px to draw them that big, the drawn
+   button keeps its size and an invisible hit area (centred, never smaller than the button) takes the tap. */
+header.bar .px-iconbtn,header.bar .sp-cartbtn,header.bar .ff-lang-mini{position:relative}
+header.bar .px-iconbtn::before,header.bar .sp-cartbtn::before,header.bar .ff-lang-mini::before{content:"";position:absolute;inset:min(0px,calc(50% - 22px))}
+.px-utility .ffw-audbtn,.px-utility .ffw-signin{position:relative}
+.px-utility .ffw-audbtn::after,.px-utility .ffw-signin::after{content:"";position:absolute;left:0;right:0;top:min(0px,calc(50% - 22px));bottom:min(0px,calc(50% - 22px))}
+.px-utilinks a{position:relative}
+.px-utilinks a::after{content:"";position:absolute;left:0;right:0;top:min(0px,calc(50% - 22px));bottom:min(0px,calc(50% - 22px))}
+/* #10 the language button answers at once: pressed while the Spanish words are on their way */
+header.bar [data-ff-lang].is-switching{opacity:.6;cursor:progress}
+/* #13 Display preferences: a 44 pt close button. #17 "Decorative motion" is a switch (51 x 31), and the whole row is the target. */
+.px-settings .px-dialoghead .px-iconbtn{width:44px;height:44px;margin:-6px -8px -6px 0}
+.px-settings .px-toggle{min-height:44px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.px-settings .px-toggle input[role="switch"]{appearance:none;-webkit-appearance:none;flex:0 0 auto;position:relative;width:51px;height:31px;margin:0;border-radius:999px;background:#C9D3D0;cursor:pointer;transition:background-color var(--ff-dur-2) var(--ff-ease-out)}
+.px-settings .px-toggle input[role="switch"]::before{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.22);transition:transform var(--ff-dur-2) var(--ff-ease-out)}
+.px-settings .px-toggle input[role="switch"]:checked{background:#23814b}
+.px-settings .px-toggle input[role="switch"]:checked::before{transform:translateX(20px)}
+.px-settings .px-toggle input[role="switch"]:focus-visible{outline:3px solid #1F2A55;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.px-settings .px-toggle input[role="switch"],.px-settings .px-toggle input[role="switch"]::before{transition:none}}
+html[data-motion="off"] .px-settings .px-toggle input[role="switch"],html[data-motion="off"] .px-settings .px-toggle input[role="switch"]::before{transition:none}
+@media (forced-colors:active){.px-settings .px-toggle input[role="switch"]{border:1px solid CanvasText}.px-settings .px-toggle input[role="switch"]::before{background:CanvasText}}
+/* #5 small in-page targets drawn by files without their own sheet in this pass: the home status line's "Plan a visit"
+   (home-calm.js) and "Reset the demo log" (features.js) */
+.hc-status-link{min-height:44px}
+button.rl[data-ffx-clearlog]{display:inline-flex;align-items:center;min-height:44px}

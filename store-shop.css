@@ -144,7 +144,7 @@ a.sp-link{color:var(--booker)}
 /* filter tools */
 .sp-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:12px 14px;align-items:end;margin-bottom:6px}
 .sp-sel{display:grid;gap:5px;font-size:12.5px;font-weight:600;color:var(--muted)}
-.sp-sel select{appearance:none;-webkit-appearance:none;width:100%;min-height:46px;padding:0 38px 0 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234F616A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font:500 14.5px var(--body);transition:border-color 160ms ease}
+.sp-sel select{appearance:none;-webkit-appearance:none;width:100%;min-height:46px;padding:0 38px 0 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234F616A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font:500 16px var(--body);transition:border-color 160ms ease}
 .sp-sel select:hover{border-color:var(--ink)}
 .sp-clear{align-self:center;padding:10px 4px}
 .sp-count-line{font-size:13.5px;color:var(--muted);margin:14px 0 14px;min-height:20px}
