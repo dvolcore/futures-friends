@@ -102,3 +102,10 @@ of 850 KB for everything below the fold (tests/w8-page.test.js), and a second re
 2D camera every frame. The GPU cost would be fine (about 1.5 ms per friend per frame); the bytes are not. Loading only on a tap at a
 station would keep the budget, but the station friends are drawn small inside a moving, scroll-scrubbed canvas, so a 3D swap there
 adds little a visitor would see. The 3D viewer lives on #friends instead; Home and its budget test are unchanged.
+
+**Bop, free fix pass (2026-10-12, after review of the dance).** `models/friends/bop.glb` and `bop.usdz` re-exported from a repaired rig
+(`/Volumes/FFCRM/ff3d_work/batch/bop_rig_v3.blend`; scripts `pipe/bop_repaint.py` and `pipe/bop_forehead_geo.py`; the previous files are in
+`batch/backup_2026-10-12_prerepaint/`): the backpack's side panels carry the official right side view (yellow piping and the star pocket),
+camera-projected, and its mirror on the left side, replacing the leftover maze smear; the bar between the brows was a hole in Meshy's surface
+(seen through to the inside of the head), now filled, and the faint vertical seam from the tuft is painted out. Same 40k triangles, 8 clips,
+0.96 MB; the USDZ passes `usdchecker --arkit`. The fur map keeps no fur on the paw and toe pads.
