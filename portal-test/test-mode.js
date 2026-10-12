@@ -10,8 +10,13 @@
 (function () {
   'use strict';
   var W = window, D = document;
-  var m = location.pathname.match(/^(.*?\/portal-test)(?:\/|$)/);
-  var BASE = m ? m[1] : '';
+  // this copy's folder (the static <base> the build writes), the shared root (portal-test/) and which copy serves which role
+  var baseEl = D.querySelector('base');
+  var BASE = (baseEl ? new URL(baseEl.href).pathname : location.pathname.replace(/[^/]*$/, '')).replace(/\/$/, '');
+  var rm = BASE.match(/^(.*?\/portal-test)(\/.*)?$/);
+  var ROOT = rm ? rm[1] : BASE, SUB = rm && rm[2] ? rm[2] : '';
+  var COPY = { family: '', teacher: '/staff', director: '/staff' };
+  var START = { family: '/home', teacher: '/home?room=threes', director: '/home' };
   var ORIGIN = location.origin;
   var SB_PATH = BASE + '/sb';
   var SB = ORIGIN + SB_PATH;
@@ -40,10 +45,21 @@
   var q = new URLSearchParams(location.search), back = q.get('p');   // a deep link that came through the site's 404.html
   if (back && back.charAt(0) === '/' && back.charAt(1) !== '/') history.replaceState(null, '', toReal(back));
   else if (strip(location.pathname) === '/' || strip(location.pathname) === '') history.replaceState(null, '', BASE + SIGNIN + '/' + location.hash);
+  var goCopy = null;   // set after a sign-in whose role another copy serves: the next navigation goes there instead
   ['pushState', 'replaceState'].forEach(function (fn) {
     var orig = history[fn];
-    history[fn] = function (s, t, u) { return orig.call(this, s, t, u == null ? u : toReal(u)); };
+    history[fn] = function (s, t, u) {
+      if (goCopy && typeof u === 'string' && /\/c\/[a-z0-9-]+\/./.test(u)) { var g = goCopy; goCopy = null; location.assign(g); return; }
+      return orig.call(this, s, t, u == null ? u : toReal(u));
+    };
   });
+  // a session of a role this copy does not serve (e.g. a teacher opening the parents' copy): open the same page in the right copy
+  (function () {
+    var r = null;
+    try { var se = JSON.parse(localStorage.getItem('ff-hub-web-auth') || 'null'); r = se && se.user && se.user.app_metadata && se.user.app_metadata.ft_role; } catch (e) { r = null; }
+    var path = strip(location.pathname);
+    if (r && COPY[r] !== undefined && COPY[r] !== SUB && !/^\/c\/[a-z0-9-]+\/?$/.test(path)) location.replace(ROOT + COPY[r] + path + location.search + location.hash);
+  })();
   W.FFTest = { base: BASE, sbUrl: SB, pathname: function () { return strip(location.pathname); } };
   function fixLink(a) {
     var h = a.getAttribute('href');
@@ -65,14 +81,17 @@
 
   // ---- the recording -------------------------------------------------------------------------------------------------------------
   var realFetch = W.fetch.bind(W);
-  var FIX = { entries: [], silent: [] }, BY = {}, LOGINS = [];
+  var FIX = { entries: [], silent: [] }, BY = {}, LOGINS = [], USERS = {};
+  // who each role signs in as (no credentials in the test copy: any sign-in, or one tap, enters)
+  var PERSONA = { family: 'pat@example.com', teacher: 'tess@example.com', director: 'director@example.com' };
   var ready = Promise.all([
     realFetch(BASE + '/fixtures.json').then(function (r) { return r.json(); }).then(function (f) {
       FIX = f;
       f.entries.forEach(function (e) { if (!BY[e.k]) BY[e.k] = e; });
       f.silent.forEach(function (n) { QUIET[n] = 1; });
     }),
-    realFetch(BASE + '/logins.json').then(function (r) { return r.ok ? r.json() : []; }).then(function (l) { LOGINS = l; }, function () { LOGINS = []; }),
+    realFetch(ROOT + '/logins.json').then(function (r) { return r.ok ? r.json() : []; }).then(function (l) { LOGINS = l; }, function () { LOGINS = []; }),
+    realFetch(ROOT + '/roles.json').then(function (r) { return r.ok ? r.json() : {}; }).then(function (u) { USERS = u || {}; }, function () { USERS = {}; }),
   ]).catch(function (e) { console.warn('[test copy] the recording did not load', e); });
 
   var TS = /\d{4}-\d\d-\d\dT\d\d:\d\d(?::\d\d(?:\.\d+)?)?(?:Z|[+-]\d\d:?\d\d)?/g;
@@ -93,6 +112,10 @@
     return out.sort(function (a, b) { return a[0] + a[1] < b[0] + b[1] ? -1 : 1; }).map(function (p) { return p[0] + '=' + p[1]; }).join('&').replace(TS, '<ts>');
   }
   function keyOf(method, path, search, body) { return method + ' ' + path + '?' + normQuery(search) + ' ' + normBody(body); }
+  var PENDING = null;   // the role picked on the sign-in page (one-tap, ?role=)
+  var ROLE = null;   // the signed-in tester's role (from the session); before sign-in: this copy's first role
+  function roleNow() { return ROLE || (FIX.roles && FIX.roles[0]) || 'family'; }
+  function hit(k) { return BY[roleNow() + ' ' + k] || BY[k]; }
   // The same request with other dates (another month on the calendar...): the first recorded answer for the same thing about the same
   // child / report / item, else nothing.
   var ID = /^(p_)?(kid|child|center|report|ticket|id|invoice|c|slug|p_slug|room|lang)$/;
@@ -107,13 +130,13 @@
     if (!NEAR) {
       NEAR = {};
       FIX.entries.forEach(function (e) {
-        var mm = e.k.match(/^(\S+) ([^?]*)\?(\S*) ?(.*)$/);
+        var mm = e.k.match(/^(?:(family|teacher|director) )?(\S+) ([^?]*)\?(\S*) ?(.*)$/);
         if (!mm) return;
-        var id = mm[1] + ' ' + idOf(mm[2], mm[3], mm[4]);
+        var id = (mm[1] || 'family') + ' ' + mm[2] + ' ' + idOf(mm[3], mm[4], mm[5]);
         if (!NEAR[id]) NEAR[id] = e;
       });
     }
-    return NEAR[method + ' ' + idOf(path, search, body)] || null;
+    return NEAR[roleNow() + ' ' + method + ' ' + idOf(path, search, body)] || null;
   }
 
   function json(body, status, extra) {
@@ -143,15 +166,25 @@
       return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
     });
   }
+  function roleOf(email) {
+    var l = LOGINS.filter(function (x) { return x.email === email; })[0];
+    if (l && l.role) return l.role;
+    for (var r in PERSONA) if (PERSONA[r] === email) return r;
+    return 'family';
+  }
   function userFor(email) {
-    return { id: FIX.userId, aud: 'authenticated', role: 'authenticated', email: email, email_confirmed_at: '2026-10-01T12:00:00Z',
-      phone: '', app_metadata: { provider: 'email', providers: ['email'] }, user_metadata: { full_name: FIX.fullName || 'TEST Parent Pat' },
-      identities: [], factors: [], created_at: '2026-10-01T12:00:00Z', updated_at: '2026-10-12T12:00:00Z', is_anonymous: false };
+    var role = roleOf(email), u = USERS[role] || (FIX.users && (FIX.users[role] || FIX.users.family)) || {};
+    var director = role === 'director';
+    return { id: u.id || FIX.userId, aud: 'authenticated', role: 'authenticated', email: email, email_confirmed_at: '2026-10-01T12:00:00Z',
+      phone: '', app_metadata: { provider: 'email', providers: ['email'], ft_role: role }, user_metadata: { full_name: u.fullName || FIX.fullName || 'TEST Parent Pat' },
+      identities: [], factors: director ? [{ id: 'portal-test-totp', factor_type: 'totp', status: 'verified', friendly_name: 'Test version (skipped)', created_at: '2026-10-01T12:00:00Z', updated_at: '2026-10-01T12:00:00Z' }] : [], created_at: '2026-10-01T12:00:00Z', updated_at: '2026-10-12T12:00:00Z', is_anonymous: false };
   }
   function sessionFor(email) {
-    var now = Math.floor(Date.now() / 1000), life = 7 * 86400, user = userFor(email);
+    var now = Math.floor(Date.now() / 1000), life = 7 * 86400, user = userFor(email), role = roleOf(email);
+    // directors sign in with two steps in the real Hub; the test version skips the second step (the banner says so)
+    var aal = role === 'director' ? 'aal2' : 'aal1', amr = role === 'director' ? [{ method: 'totp', timestamp: now }, { method: 'password', timestamp: now }] : [{ method: 'password', timestamp: now }];
     var jwt = b64u(JSON.stringify({ alg: 'none', typ: 'JWT' })) + '.' + b64u(JSON.stringify({ sub: user.id, email: email, role: 'authenticated',
-      aud: 'authenticated', aal: 'aal1', amr: [{ method: 'password', timestamp: now }], session_id: 'portal-test', iat: now, exp: now + life,
+      aud: 'authenticated', aal: aal, amr: amr, session_id: 'portal-test', iat: now, exp: now + life,
       is_anonymous: false })) + '.portal-test';
     return { access_token: jwt, token_type: 'bearer', expires_in: life, expires_at: now + life, refresh_token: 'pt.' + b64u(email), user: user };
   }
@@ -166,14 +199,18 @@
     if (p === '/token') {
       var grant = new URLSearchParams(search).get('grant_type');
       if (grant === 'password') {
-        var email = String(b.email || '').trim().toLowerCase();
-        var l = LOGINS.filter(function (x) { return x.email === email; })[0];
-        if (!l) return Promise.resolve(json(BAD_LOGIN, 400));
-        return sha256(l.salt + ':' + String(b.password || '')).then(function (h) { return h === l.hash ? json(sessionFor(email)) : json(BAD_LOGIN, 400); });
+        // no credentials in the test copy: whatever is typed (or nothing) enters; a known TEST login keeps its role
+        var typed = String(b.email || '').trim().toLowerCase();
+        var known = LOGINS.filter(function (x) { return x.email === typed; })[0];
+        var r0 = (known && known.role) || PENDING || 'family';
+        var email = known ? typed : PERSONA[r0];
+        ROLE = r0;
+        if (COPY[ROLE] !== SUB) goCopy = ROOT + COPY[ROLE] + '/c/' + SLUG + START[ROLE];
+        return Promise.resolve(json(sessionFor(email)));
       }
       if (grant === 'refresh_token') {
         var em = null; try { em = unb64u(String(b.refresh_token || '').replace(/^pt\./, '')); } catch (e) { /* bad */ }
-        if (em && LOGINS.some(function (x) { return x.email === em; })) return Promise.resolve(json(sessionFor(em)));
+        if (em) return Promise.resolve(json(sessionFor(em)));
         return Promise.resolve(json({ error: 'invalid_grant', error_description: 'Refresh Token Not Found', code: 'refresh_token_not_found' }, 400));
       }
       return Promise.resolve(json({ error: 'unsupported_grant_type', msg: 'Not in the test version' }, 400));
@@ -192,12 +229,14 @@
 
   // ---- the hub (REST, RPC, storage) and the front-end server's /api/ --------------------------------------------------------------
   function hub(method, path, search, body, init, req) {
+    var who = emailFromBearer(init, req);
+    if (who) ROLE = roleOf(who);
     if (path.indexOf('/auth/v1/') === 0) return auth(method, path, search, body, init, req);
     if (path.indexOf('/realtime/') === 0 || path.indexOf('/functions/') === 0) return Promise.resolve(json({}));
     var rpc = path.match(/^\/rest\/v1\/rpc\/([a-z0-9_]+)$/);
     if (rpc && rpc[1] === 'my_preferred_language') return Promise.resolve(json(JSON.stringify(lang())));
-    var hit = BY[keyOf(method, path, search, body)];
-    if (hit) return Promise.resolve(fromEntry(hit));
+    var found = hit(keyOf(method, path, search, body));
+    if (found) return Promise.resolve(fromEntry(found));
     var accept = header(init, req, 'Accept');
     var one = /vnd\.pgrst\.object/.test(accept);
     if (rpc) {
@@ -228,8 +267,8 @@
     return Promise.resolve(json(one ? 'null' : '[]', 200, { 'Content-Range': '*/0' }));
   }
   function api(method, path, search) {
-    var hit = BY[keyOf(method, path, search, '')];
-    if (hit) return Promise.resolve(fromEntry(hit));
+    var found = hit(keyOf(method, path, search, ''));
+    if (found) return Promise.resolve(fromEntry(found));
     if (method !== 'GET') { saved(); return Promise.resolve(json({ ok: true })); }
     console.warn('[test copy] not in the recording, answered empty:', method, path + search);
     return Promise.resolve(json({}));
@@ -287,74 +326,128 @@
     try { navigator.serviceWorker.register = function () { return Promise.reject(new Error('Notifications are off in the test version.')); }; } catch (e) { /* read-only */ }
   }
 
-  // ---- the banner, the "nothing is saved" note, sign-in links off ------------------------------------------------------------------
+  // ---- the visible parts: one-tap entry per role, "View as" switcher, "Coming soon" panels -------------------------------------------
+  // Owner 2026-10-12: no credentials, no "test" labels. Writes do nothing, silently. The pages stay out of search (noindex, robots).
   var TXT = {
-    en: { banner: 'Test version · fake demo family · nothing is saved', fb: 'Send feedback', fbText: 'Tell the person who sent you this link what worked and what got in your way. A screenshot helps.', close: 'Close',
-      saved: 'This is a test version: nothing is saved.', links: 'Sign-in links are off in the test version. Use the email and password you were given.',
-      reset: 'Password resets are off in the test version. Use the email and password you were given.', label: 'Test version notice' },
-    es: { banner: 'Versión de prueba · familia de demostración ficticia · no se guarda nada', fb: 'Enviar comentarios', fbText: 'Cuéntale a la persona que te envió este enlace qué funcionó y qué te estorbó. Una captura de pantalla ayuda.', close: 'Cerrar',
-      saved: 'Esta es una versión de prueba: no se guarda nada.', links: 'Los enlaces para entrar están desactivados en la versión de prueba. Usa el correo y la contraseña que te dieron.',
-      reset: 'Restablecer la contraseña está desactivado en la versión de prueba. Usa el correo y la contraseña que te dieron.', label: 'Aviso de versión de prueba' },
+    en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
+      dirSub: 'Center dashboard', viewAs: 'View as', website: 'Back to the website', soonH: 'Coming soon', soonP: 'This part of the Futures Hub is on its way.',
+      back: 'Back to the dashboard' },
+    es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', famSub: 'Panel para familias', teaSub: 'Panel del salón',
+      dirSub: 'Panel del centro', viewAs: 'Ver como', website: 'Volver al sitio web', soonH: 'Próximamente', soonP: 'Esta parte de Futures Hub está en camino.',
+      back: 'Volver al panel' },
   };
   var tx = function (k) { return TXT[es() ? 'es' : 'en'][k]; };
-  var CSS = '#ftBanner{position:fixed;left:50%;transform:translateX(-50%);top:max(6px,env(safe-area-inset-top));z-index:2147483000;display:flex;align-items:center;gap:8px;'
-    + 'max-width:calc(100vw - 16px);box-sizing:border-box;padding:4px 6px 4px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 12px/1.3 Poppins,system-ui,sans-serif;'
-    + 'box-shadow:0 2px 10px rgba(10,43,56,.25);pointer-events:auto}#ftBanner .ft-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}'
-    + '#ftBanner button{flex:none;min-height:32px;min-width:44px;padding:4px 10px;border:0;border-radius:999px;background:#E7A928;color:#0A2B38;font:inherit;cursor:pointer}'
-    + '#ftBanner button:focus-visible,#ftNote button:focus-visible{outline:3px solid #fff;outline-offset:2px}'
-    + '#ftNote{position:fixed;left:50%;transform:translateX(-50%);top:calc(max(6px,env(safe-area-inset-top)) + 44px);z-index:2147483000;width:min(420px,calc(100vw - 24px));box-sizing:border-box;'
-    + 'padding:12px 14px;border-radius:14px;background:#fff;color:#0A2B38;font:400 14px/1.45 Poppins,system-ui,sans-serif;box-shadow:0 8px 28px rgba(10,43,56,.25);border:2px solid #E7A928}'
-    + '#ftNote[hidden]{display:none}#ftNote p{margin:0 0 8px}#ftNote button{min-height:44px;padding:6px 14px;border:0;border-radius:10px;background:#0A2B38;color:#fff;font:600 14px Poppins,system-ui,sans-serif;cursor:pointer}'
-    + '#ftToast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 92px);z-index:2147483001;max-width:calc(100vw - 32px);box-sizing:border-box;'
-    + 'padding:12px 16px;border-radius:12px;background:#0A2B38;color:#fff;font:600 14px/1.4 Poppins,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:opacity .25s}'
-    + '#ftToast[hidden]{display:none}@media (prefers-reduced-motion:reduce){#ftToast{transition:none}}'
-    + 'body{padding-top:calc(var(--ft-banner,0px))}';
-  var toastTimer = null, lastToast = 0;
+  var SITE = ROOT.replace(/\/portal-test$/, '') + '/';
   function el(id) { return D.getElementById(id); }
-  function saved() {
-    if (Date.now() - lastToast < 1500) return;
-    lastToast = Date.now();
-    var t = el('ftToast'); if (!t) return;
-    t.textContent = tx('saved'); t.lang = es() ? 'es' : 'en'; t.hidden = false;
-    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 4200);
-  }
+  function saved() { /* writes do nothing in the test copy, silently */ }
+  W.FFTest.saved = saved;
   function note(text, target) {
     var box = target || el('signinMsg');
     if (box) { box.className = (box.className || '').replace(/\b(bad|ok)\b/g, '') + ' msg'; box.textContent = text; box.hidden = false; }
-    var live = el('live'); if (live) { live.textContent = ''; setTimeout(function () { live.textContent = text; }, 30); }
   }
-  W.FFTest.saved = saved;
-  function paint() {
-    var b = el('ftBanner'); if (!b) return;
-    var l = es() ? 'es' : 'en';
-    if (b.getAttribute('data-lang') === l) return;
-    b.setAttribute('data-lang', l); b.lang = l; b.setAttribute('aria-label', tx('label'));
-    b.querySelector('.ft-t').textContent = tx('banner');
-    b.querySelector('button').textContent = tx('fb');
-    var n = el('ftNote'); n.lang = l; n.querySelector('p').textContent = tx('fbText'); n.querySelector('button').textContent = tx('close');
+  // enter a role: the session is written where the app keeps it, then that role's dashboard opens (in the copy that serves it)
+  function enter(role) {
+    return ready.then(function () {
+      ROLE = role;
+      try { localStorage.setItem('ff-hub-web-auth', JSON.stringify(sessionFor(PERSONA[role]))); } catch (e) { /* private mode: the sign-in form still works */ }
+      location.assign(ROOT + COPY[role] + '/c/' + SLUG + START[role]);
+    });
   }
+  W.FFTest.enter = enter;
+  var q0 = new URLSearchParams(location.search), wantEnter = q0.get('enter'), wantRole = q0.get('role');
+  if (wantRole === 'parent') wantRole = 'family';
+  if (COPY[wantRole] !== undefined) PENDING = wantRole;
+  if (wantEnter === 'parent') wantEnter = 'family';
+  if (COPY[wantEnter] !== undefined) { enter(wantEnter); }
+
+  var CSS = '#ftRoles{margin:0 0 14px}#ftRoles h2{margin:0 0 8px;font:600 15px/1.3 Fredoka,Poppins,system-ui,sans-serif;color:#0A2B38}'
+    + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}'
+    + '#ftRoles button{min-height:64px;padding:8px 6px;border:2px solid #0A2B38;border-radius:14px;background:#fff;color:#0A2B38;cursor:pointer;font:600 16px/1.15 Poppins,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}'
+    + '#ftRoles button small{font:400 11px/1.2 Poppins,system-ui,sans-serif;color:#33505C}'
+    + '#ftRoles button[aria-pressed=true]{background:#0A2B38;color:#fff}#ftRoles button[aria-pressed=true] small{color:#E8F0F2}'
+    + '#ftRoles button:focus-visible,.ft-switch summary:focus-visible,.ft-switch a:focus-visible{outline:3px solid #E7A928;outline-offset:2px}'
+    + '.ft-switch{position:relative;display:inline-block}.ft-switch summary{list-style:none;cursor:pointer;min-height:36px;display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font:600 13px Poppins,system-ui,sans-serif}'
+    + '.ft-switch summary::-webkit-details-marker{display:none}.ft-switch[open] .ft-menu{display:flex}'
+    + '.ft-menu{display:none;position:absolute;right:0;top:calc(100% + 6px);z-index:2147483000;flex-direction:column;min-width:200px;padding:6px;border-radius:12px;background:#fff;box-shadow:0 10px 30px rgba(10,43,56,.25)}'
+    + '.ft-menu a{display:flex;align-items:center;min-height:44px;padding:6px 12px;border-radius:8px;color:#0A2B38;text-decoration:none;font:500 14px Poppins,system-ui,sans-serif}'
+    + '.ft-menu a[aria-current=true]{font-weight:700;background:#F3EBDA}.ft-menu hr{border:0;border-top:1px solid #E5DCC8;margin:4px 0}'
+    + '#ftSoon{max-width:560px;margin:48px auto;padding:28px 22px;border-radius:20px;background:#fff;box-shadow:0 8px 28px rgba(10,43,56,.12);text-align:center;color:#0A2B38}'
+    + '#ftSoon h1{margin:0 0 8px;font:600 28px/1.2 Fredoka,Poppins,system-ui,sans-serif}#ftSoon p{margin:0 0 18px}'
+    + '#ftSoon a{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border-radius:12px;background:#0A2B38;color:#fff;text-decoration:none;font:600 15px Poppins,system-ui,sans-serif}'
+    + '#fdDemoPill,.fd-demo-pill,[data-demo-pill]{display:none!important}';
+
+  function rolesBox() {
+    var form = el('signinForm');
+    if (!form || el('ftRoles')) return;
+    var h = D.createElement('section'); h.id = 'ftRoles'; h.setAttribute('aria-labelledby', 'ftRolesH');
+    h.innerHTML = '<h2 id="ftRolesH"></h2><div class="ft-row"></div>';
+    h.querySelector('h2').textContent = tx('choose');
+    [['family', 'famSub'], ['teacher', 'teaSub'], ['director', 'dirSub']].forEach(function (x) {
+      var bt = D.createElement('button'); bt.type = 'button'; bt.setAttribute('data-ft-role', x[0]);
+      bt.setAttribute('aria-pressed', String(PENDING === x[0]));
+      bt.innerHTML = '<span></span><small></small>';
+      bt.querySelector('span').textContent = tx(x[0]); bt.querySelector('small').textContent = tx(x[1]);
+      bt.onclick = function () { enter(x[0]); };
+      h.querySelector('.ft-row').appendChild(bt);
+    });
+    form.parentNode.insertBefore(h, form);
+  }
+  function switcher() {
+    var nav = el('topNav'), out = el('signOut');
+    if (!nav || !out || el('ftSwitch')) return;
+    var d = D.createElement('details'); d.className = 'ft-switch'; d.id = 'ftSwitch';
+    d.innerHTML = '<summary></summary><div class="ft-menu"></div>';
+    d.querySelector('summary').textContent = tx('viewAs');
+    var menu = d.querySelector('.ft-menu');
+    ['family', 'teacher', 'director'].forEach(function (r) {
+      var a = D.createElement('a'); a.href = ROOT + COPY[r] + '/c/' + SLUG + START[r]; a.textContent = tx(r); a.setAttribute('data-ft-role', r);
+      if (r === roleNow()) a.setAttribute('aria-current', 'true');
+      a.onclick = function (e) { e.preventDefault(); enter(r); };
+      menu.appendChild(a);
+    });
+    menu.appendChild(D.createElement('hr'));
+    var w = D.createElement('a'); w.href = SITE; w.textContent = tx('website'); w.id = 'ftWebsite'; menu.appendChild(w);
+    nav.insertBefore(d, out);
+    D.addEventListener('click', function (e) { if (!d.contains(e.target)) d.open = false; });
+  }
+  // parts not built yet (the Kids' corner) and any page the copy does not have: a friendly "Coming soon", never a dead end
+  function soon(path) {
+    var m = el('main'); if (!m) return;
+    var home = ROOT + COPY[roleNow()] + '/c/' + SLUG + START[roleNow()];
+    m.innerHTML = '<section id="ftSoon" aria-labelledby="ftSoonH"><h1 id="ftSoonH"></h1><p></p><a></a></section>';
+    m.querySelector('h1').textContent = tx('soonH'); m.querySelector('p').textContent = tx('soonP');
+    var a = m.querySelector('a'); a.href = home; a.textContent = tx('back');
+    if (path) history.pushState(null, '', path);
+    D.title = tx('soonH') + ' · Futures Hub';
+  }
+  W.FFTest.soon = soon;
+  function notFoundToSoon() {
+    var m = el('main'); if (!m || el('ftSoon')) return;
+    var h = m.querySelector('h1');
+    if (h && /^(Page not found|No se encontró la página)$/.test(h.textContent.trim())) soon(null);
+  }
+
   function mount() {
     var st = D.createElement('style'); st.textContent = CSS; D.head.appendChild(st);
-    var b = D.createElement('aside'); b.id = 'ftBanner'; b.setAttribute('translate', 'no');
-    b.innerHTML = '<span class="ft-t"></span><button type="button" aria-expanded="false" aria-controls="ftNote"></button>';
-    var n = D.createElement('div'); n.id = 'ftNote'; n.hidden = true; n.setAttribute('role', 'note');
-    n.innerHTML = '<p></p><button type="button"></button>';
-    var t = D.createElement('div'); t.id = 'ftToast'; t.hidden = true; t.setAttribute('role', 'status'); t.setAttribute('translate', 'no');
-    D.body.appendChild(b); D.body.appendChild(n); D.body.appendChild(t);
-    var fb = b.querySelector('button');
-    fb.onclick = function () { n.hidden = !n.hidden; fb.setAttribute('aria-expanded', String(!n.hidden)); if (!n.hidden) n.querySelector('button').focus(); };
-    n.querySelector('button').onclick = function () { n.hidden = true; fb.setAttribute('aria-expanded', 'false'); fb.focus(); };
-    paint();
-    var sp = function () { D.documentElement.style.setProperty('--ft-banner', (b.offsetHeight + 10) + 'px'); };
-    sp(); W.addEventListener('resize', sp);
-    new MutationObserver(paint).observe(D.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    // sign-in links and password resets: explain instead of "sending"
+    rolesBox(); switcher();
+    new MutationObserver(function () { rolesBox(); switcher(); notFoundToSoon(); }).observe(D.body, { childList: true, subtree: true });
+    // the sign-in form: no credentials needed. Whatever is typed (or nothing) enters, as the role picked (default Family)
+    D.addEventListener('submit', function (e) {
+      if (!e.target || e.target.id !== 'signinForm') return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      var typed = (el('email') && el('email').value || '').trim().toLowerCase();
+      var known = LOGINS.filter(function (x) { return x.email === typed; })[0];
+      enter((known && known.role) || PENDING || 'family');
+    }, true);
     D.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && /\/c\/[a-z0-9-]+\/kids(?:[?#]|$)/.test(a.getAttribute('href') || '') && !KIDS_BUILT) { e.preventDefault(); e.stopImmediatePropagation(); soon(a.getAttribute('href')); return; }
       var x = e.target.closest && e.target.closest('#magic, #forgot, #googleSignin');
       if (!x) return;
       e.preventDefault(); e.stopImmediatePropagation();
-      note(tx(x.id === 'forgot' ? 'reset' : 'links'));
+      enter(PENDING || 'family');
     }, true);
   }
+  var KIDS_BUILT = false;   // the Kids' corner (branch kids-corner) joins the copy once recorded; until then its links show "Coming soon"
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', mount); else mount();
 })();

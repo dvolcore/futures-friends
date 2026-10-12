@@ -18,13 +18,16 @@ function load(hubUrl) {
   return ctx;
 }
 
-test('until go-live: every sign-in page says the Hub opens soon, before the demo, with no link', () => {
+// Owner 2026-10-12: until go-live there is no "opens soon": every card offers Family / Teacher / Director login into the Futures Hub preview
+// (portal-test/, fake demo data, no credentials), before the demo.
+test('until go-live: every sign-in card offers Family, Teacher and Director login (the preview), before the demo', () => {
   const { V } = load('');
   for (const k of ['signin-family', 'signin-teacher', 'sign-in']) {
     const h = V[k]();
-    assert.match(h, /id="hubLink" data-hub-open="soon"/, k);
-    assert.match(h, /Your center’s Hub opens soon/, k);
-    assert.doesNotMatch(h, /hubLinkGo/, k);
+    assert.match(h, /id="hubLink" data-hub-open="preview"/, k);
+    assert.doesNotMatch(h, /hubLinkGo|opens soon/, k);
+    for (const [id, role, label] of [['hubPreviewGo', 'family', 'Family'], ['hubPreviewTeacher', 'teacher', 'Teacher'], ['hubPreviewDirector', 'director', 'Director']])
+      assert.match(h, new RegExp(`id="${id}" href="portal-test/c/test-family-demo-center/\\?enter=${role}">${label} login<`), `${k} ${role}`);
   }
   const fam = V['signin-family']();
   assert.ok(fam.indexOf('id="hubLink"') < fam.indexOf('id="demo"'), 'the Hub card comes before the demo');
@@ -47,27 +50,24 @@ test('wiring: HUB_URL is empty until go-live, hub-link.js loads after the demo a
   assert.doesNotMatch(idx, /Portal \(preview\)/, 'footer links say sign-in, not a portal preview');
 });
 
-// Owner 2026-10-12: "when you click on parent login it will go straight into it". Until go-live the header "Sign in" and every Family
-// sign-in link open the Family portal preview (portal-test/, the Futures Hub TEST copy: tests/portal-test.test.js) directly; the cards
-// offer it too, with the "opens soon" text for staff. At go-live (FF_HUB_URL set) all of it goes back to the real Hub on its own.
-test('until go-live: the cards offer the Family portal preview (fake demo family), staff still read "opens soon"', () => {
-  const { V, window } = load('');
+// Owner 2026-10-12: the website's sign-in links go STRAIGHT into the preview's dashboards until go-live; at go-live they are left alone
+// (the cards link to the Hub) and "Director login" opens the Hub's sign-in.
+const fakeLink = (href) => ({ href, attrs: {}, getAttribute(k) { return k === 'href' ? this.href : this.attrs[k]; }, setAttribute(k, v) { if (k === 'href') this.href = v; else this.attrs[k] = v; } });
+test('until go-live: Family, Teacher and Director sign-in links open that dashboard of the preview directly', () => {
+  const { window } = load('');
   assert.equal(window.FFHubLink.preview, 'portal-test/c/test-family-demo-center/');
-  for (const k of ['signin-family', 'signin-teacher', 'sign-in']) {
-    const h = V[k]();
-    assert.match(h, /id="hubPreviewGo" href="portal-test\/c\/test-family-demo-center\/">Family portal preview</, k);
-    assert.match(h, /fake demo family: nothing you do there is saved/, k);
-    assert.match(h, /When your center opens on the Futures Hub/, k);
+  for (const [href, role] of [['#signin-family', 'family'], ['#signin-teacher', 'teacher'], ['#signin-director', 'director']]) {
+    const a = fakeLink(href);
+    window.FFHubLink.wire({ querySelectorAll: () => [a], matches: () => false });
+    assert.equal(a.href, `portal-test/c/test-family-demo-center/?enter=${role}`, href);
   }
-  assert.match(V['signin-teacher'](), /<b>Teachers and directors:<\/b> When your center opens/);
+  assert.match(read('index.html'), /<a href="#signin-teacher">Teacher sign-in<\/a><\/li><li><a href="#signin-director">Director login<\/a>/, 'the footer has a Director login next to Teacher sign-in');
 });
-test('at go-live: no preview anywhere, and the sign-in links are left alone', () => {
+test('at go-live: no preview anywhere; sign-in links stay; Director login opens the Hub', () => {
   const { V, window } = load('https://hub.example.test');
-  for (const k of ['signin-family', 'signin-teacher', 'sign-in']) assert.doesNotMatch(V[k](), /hubPreviewGo|portal-test/, k);
-  const a = { href: '#signin-family', getAttribute() { return this.href; }, setAttribute(k, v) { if (k === 'href') this.href = v; } };
-  window.FFHubLink.wire({ querySelectorAll: () => [a], matches: () => false });
-  assert.equal(a.href, '#signin-family', 'go-live: the link keeps its route (the card links to the Hub)');
-  const b = { href: '#signin-family', getAttribute() { return this.href; }, setAttribute(k, v) { if (k === 'href') this.href = v; } };
-  load('').window.FFHubLink.wire({ querySelectorAll: () => [b], matches: () => false });
-  assert.equal(b.href, 'portal-test/c/test-family-demo-center/', 'until go-live: straight to the preview');
+  for (const k of ['signin-family', 'signin-teacher', 'sign-in']) assert.doesNotMatch(V[k](), /hubPreview|portal-test/, k);
+  const a = fakeLink('#signin-family'), d = fakeLink('#signin-director');
+  window.FFHubLink.wire({ querySelectorAll: () => [a, d], matches: () => false });
+  assert.equal(a.href, '#signin-family');
+  assert.equal(d.href, 'https://hub.example.test/');
 });
