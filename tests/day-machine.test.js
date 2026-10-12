@@ -376,3 +376,24 @@ test('phone (390 px): the friend and card buttons fit the stage and the draw-on 
   assert.deepEqual(errors, []);
   await ctx.close();
 });
+
+// coordinator review 2026-10-12 ("cropped character ears are sloppy"): at every camera stop, on desktop and on a phone, each friend's
+// drawn cut-out is either wholly inside the stage (ears, tufts and hat) or wholly outside it; never half-cut. Mid-glide crops are fine.
+for (const width of [1280, 390]) {
+  test(`every camera stop (${width}px): each friend is fully in the frame or fully out of it`, async () => {
+    const { ctx, page, errors } = await open(width);
+    const stops = await page.evaluate(() => window.FFDayMachine.STOP_U);
+    const bad = [];
+    for (const [n, u] of stops.entries()) {
+      await scrollU(page, u); await page.waitForTimeout(1500);
+      const s = await state(page);
+      for (const [k, r] of Object.entries(s.friends)) {
+        const inside = r.l >= 0 && r.t >= 0 && r.r <= s.W && r.b <= s.H, outside = r.r <= 0 || r.l >= s.W || r.b <= 0 || r.t >= s.H;
+        if (!inside && !outside) bad.push(`stop ${n + 1} (u ${u}): ${k} ${JSON.stringify(Object.fromEntries(Object.entries(r).map(([a, b]) => [a, Math.round(b)])))} in ${s.W}x${s.H}`);
+      }
+    }
+    assert.deepEqual(bad, [], 'half-cut friends at a camera stop');
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  });
+}

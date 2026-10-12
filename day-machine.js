@@ -15,8 +15,8 @@
      1. draw-on: as the board comes in, each station's line art draws itself like a pen sketch (a stroke reveal along every edge,
         in the order a day travels), then its soft fills fade in; scroll-linked, so scrolling back undraws it;
      2. kinetic captions: each caption arrives letter by letter (hand-rolled split; the text node content stays the exact string);
-     3. the friends react: a real button over each friend (the canvas stays aria-hidden) makes them hop or wave (squash and stretch
-        of the cut-out image only, never redrawn) with a burst of their colour; on a desktop pointer they lean very slightly toward
+     3. the friends react: a real button over each friend (the canvas stays aria-hidden) makes them hop or wave (a uniform pop
+        and lift, or a rotation; the cut-out is never stretched or redrawn) with a burst of their colour; on a desktop pointer they lean very slightly toward
         it;
      4. moment cards open: a real button over each card on the belt flips a "Sample" card open with what it says (generic only);
      5. sound cues: belt clunk, stamp, phone chime and the home card "pop" are requests to sound.js (`ff:sfx`), which synthesizes
@@ -137,9 +137,10 @@
   // in the order a day travels; u below 0 is the approach and the pinned wide shot (scroll-linked: scrolling back undraws).
   const GROUPS = ['st0', 'st1', 'st2', 'st3', 'belt', 'desk', 'rail', 'phone', 'home'];
   const REV_A = -2.6, REV_STEP = 0.23;
-  function reveal(u) {
-    const o = {};
-    GROUPS.forEach((g, j) => { const a = REV_A + j * REV_STEP; o[g] = { l: ease(seg(u, a, a + 0.5)), f: ease(seg(u, a + 0.38, a + 0.74)) }; });
+  // phones (portrait) open close on Booker's station, so there the sketch runs later, once the stage has pinned on that close-up
+  function reveal(u, late) {
+    const o = {}, A = late ? -1.62 : REV_A, St = late ? 0.12 : REV_STEP, Ln = late ? 0.38 : 0.5, F0 = late ? 0.28 : 0.38, F1 = late ? 0.52 : 0.74;
+    GROUPS.forEach((g, j) => { const a = A + j * St; o[g] = { l: ease(seg(u, a, a + Ln)), f: ease(seg(u, a + F0, a + F1)) }; });
     return o;
   }
   // time-of-day light along the story clock (home-day.js parts: morning at the friends, afternoon at the tablet and report, sunset/dusk at home)
@@ -154,7 +155,7 @@
   // ---------------------------------------------------------------- the story as a function of u (the camera stop clock)
   const CARD_ON = i => 0.95 + i;                   // a card is logged at its station as the camera arrives
   const BELT_V = 122;                              // belt speed, world units per stop
-  function story(u) {
+  function story(u, late) {
     const cards = FRIENDS.map((f, i) => {
       const t0 = CARD_ON(i), x0 = SX(i) + 100;
       const pop = seg(u, t0 - 0.35, t0 - 0.05), hop = seg(u, t0, t0 + 0.3);
@@ -190,7 +191,7 @@
     const hc = seg(u, 7.92, 8.66);
     const home = u < 7.86 ? null : { x: lerp(RET.x1 - 24, RET.x0 + 4, ease(hc)), a: 1 - seg(u, 8.66, 8.76), s: back(seg(u, 7.86, 7.98)) };
     const glow = seg(u, 8.66, 8.86);
-    return { cards, tablet, env, badge, tap, report, home, glow, rev: reveal(u), light: lightAt(u), stamp: cards.reduce((m, c) => (c && c.y > 140 && Math.abs(c.x - STAMP_X) < 12 ? Math.max(m, 1 - Math.abs(c.x - STAMP_X) / 12) : m), 0) };
+    return { cards, tablet, env, badge, tap, report, home, glow, rev: reveal(u, late), light: lightAt(u), stamp: cards.reduce((m, c) => (c && c.y > 140 && Math.abs(c.x - STAMP_X) < 12 ? Math.max(m, 1 - Math.abs(c.x - STAMP_X) / 12) : m), 0) };
   }
   // the still picture: every part of the loop visible at once
   function stillStory() {
@@ -267,22 +268,22 @@
   }
   const ready = im => im && im.complete && im.naturalWidth > 0;
 
-  // a friend's reaction to a tap: squash and stretch of the cut-out (uniform art, transformed only), as a function of time since the tap
+  // a friend's reaction to a tap (coordinator review 2026-10-12: "character art is never stretched"): a uniform-scale pop with a
+  // lift, or a wave that only rotates about the feet; the cut-out is never squashed, stretched or redrawn
   function reaction(r, t) {
     const o = { sx: 1, sy: 1, dy: 0, rot: 0, on: false };
     if (!r) return o;
     const q = t - r.t0;
     if (q < 0 || q > 0.95) return o;
     o.on = true;
-    if (r.kind === 'hop') {
-      if (q < 0.1) { const k = ease(q / 0.1); o.sx = 1 + 0.1 * k; o.sy = 1 - 0.1 * k; }                                  // crouch
-      else if (q < 0.52) { const k = (q - 0.1) / 0.42; o.dy = Math.sin(Math.PI * k) * 24; const s = Math.max(0, 1 - k * 1.6); o.sx = 1 - 0.07 * s; o.sy = 1 + 0.1 * s; }   // stretch up and fall
-      else if (q < 0.64) { const k = Math.sin(Math.PI * (q - 0.52) / 0.12); o.sx = 1 + 0.09 * k; o.sy = 1 - 0.09 * k; }   // land
-      else { const k = (q - 0.64) / 0.31; const w = Math.sin(k * Math.PI * 2) * (1 - k) * 0.04; o.sx = 1 - w; o.sy = 1 + w; }   // settle
-    } else {                                                                                                          // wave: a happy wiggle about the feet
-      const k = q / 0.95, d = 1 - k;
+    if (r.kind === 'hop') {                                                                                          // a uniform pop and a lift: never stretched
+      const k = q / 0.95;
+      o.dy = Math.sin(Math.PI * Math.min(1, q / 0.55)) * 24;
+      const pop = Math.sin(Math.PI * Math.min(1, q / 0.3)) * 0.06 * (1 - k);
+      o.sx = o.sy = 1 + pop;
+    } else {                                                                                                          // wave: a happy wiggle about the feet (rotation only)
+      const d = 1 - q / 0.95;
       o.rot = Math.sin(q * 17) * 0.11 * d;
-      o.sy = 1 + Math.abs(Math.sin(q * 8.5)) * 0.05 * d; o.sx = 1 - (o.sy - 1) * 0.6;
     }
     return o;
   }
@@ -772,7 +773,7 @@
 
     // ---------------------------------------------------------------- one frame
     function frame(cam, W, H, dpr, u, t, still) {
-      const s = still ? stillStory() : story(u);
+      const s = still ? stillStory() : story(u, W / H < 0.8);
       S = Math.min(W / cam.w, H / cam.h); DPR = dpr; glows = [];
       LW = 1.15 / S * (W < 560 ? 1.05 : 1);
       for (const k in rects) delete rects[k];
@@ -821,15 +822,53 @@
   }
   // portrait stages (phones): each stop is re-framed to fill the tall stage (motion audit 2026-10-12: much of the stage sat empty).
   // [w, h, dx, dy]: the scene width that must show, the height that must show (the scale is the smaller fit), and a nudge of the
-  // focus. Stations zoom in on the friend (the whole cut-out always shows: ears, arms and feet), the phone and the home come closer.
-  const PORTRAIT = [null, [196, 300, 0, -8], [196, 300, 0, -8], [196, 300, 0, -8], [196, 300, 0, -8], [210, 290, 0, 0], [240, 330, -34, 44], [196, 290, -10, 12], [250, 320, -62, -2], null];
-  function fitStop(st, W, H, i) {
+  // focus. The whole machine is far wider than a phone is tall, so the phone opens close on Booker's station (where the sketch
+  // draws itself in) and ends close on the home with the tagline, instead of a tiny wide shot (coordinator review 2026-10-12).
+  const PORTRAIT = [[214, 310, 0, 22], [186, 280, 0, 28], [186, 280, 0, 28], [186, 280, 0, 28], [186, 280, 0, 28], [210, 290, 0, 0], [240, 330, -34, 44], [196, 290, -10, 12], [230, 300, -62, 30], [236, 300, -88, 40]];
+  const PORTRAIT_FOCUS = [STOPS[1], null, null, null, null, null, null, null, null, STOPS[8]];
+  function baseStop(st, W, H, i) {
     const portrait = W / H < 0.8;
     if (!portrait) return st;
-    if (st === WIDE) return { x: st.x - 18, y: st.y + 4, w: st.w * 1.02, h: st.h };   // the wide shot keeps every friend, tighter at the far edges
     const p = i != null && PORTRAIT[i];
-    if (!p) return { x: st.x, y: st.y, w: st.w * 0.76, h: st.h * 0.76 };
-    return { x: st.x + p[2], y: st.y + p[3], w: p[0], h: p[1] };
+    if (!p) return st === WIDE ? { x: st.x - 18, y: st.y + 4, w: st.w * 1.02, h: st.h } : { x: st.x, y: st.y, w: st.w * 0.76, h: st.h * 0.76 };
+    const f = PORTRAIT_FOCUS[i] || st;
+    return { x: f.x + p[2], y: f.y + p[3], w: p[0], h: p[1] };
+  }
+  // where each friend's cut-out stands (scene units), from the art's own proportions once it has loaded
+  function friendBoxes() {
+    return FRIENDS.map((f, j) => {
+      const im = IMGS[f.k], ar = ready(im) ? im.naturalWidth / im.naturalHeight : 0.85, w = 112 * ar;
+      const ax = (SX(j) + 40 - 46) * C, ay = (SX(j) + 40 + 46) / 2 - 6;
+      return { l: ax - w / 2, r: ax + w / 2, t: ay - 112 + 4 - 3, b: ay + 4 };
+    });
+  }
+  // At a camera stop every friend is either wholly in the frame (ears, tufts and hat) or wholly out of it, never half-cut
+  // (coordinator review 2026-10-12). The stop's framing is nudged (a little zoom and shift, the smallest that works) until that holds.
+  const SUBJECT = [null, 0, 1, 2, 3, null, null, null, null, null];
+  const fitMemo = new Map();
+  function fitStop(st, W, H, i) {
+    const base = baseStop(st, W, H, i);
+    if (i == null) return base;
+    const boxes = friendBoxes(), key = `${i}|${W}x${H}|${boxes.map(b => Math.round(b.r - b.l)).join()}`;
+    if (fitMemo.has(key)) return fitMemo.get(key);
+    const S0 = Math.min(W / base.w, H / base.h), hw0 = W / 2 / S0, hh0 = H / 2 / S0, m = 5;
+    const subj = SUBJECT[i] != null ? boxes[SUBJECT[i]] : { l: base.x - hw0 * 0.3, r: base.x + hw0 * 0.3, t: base.y - hh0 * 0.3, b: base.y + hh0 * 0.3 };
+    let best = null, cost = Infinity;
+    for (let k = 0.8; k <= 2.4; k += 0.04) {
+      const hw = hw0 * k, hh = hh0 * k;
+      for (let sx = -0.45; sx <= 0.451; sx += 0.05) for (let sy = -0.45; sy <= 0.451; sy += 0.05) {
+        const c = Math.abs(Math.log(k)) * 3 + Math.abs(sx) + Math.abs(sy);
+        if (c >= cost) continue;
+        const cx = base.x + sx * hw0, cy = base.y + sy * hh0, L = cx - hw, R = cx + hw, Tp = cy - hh, B = cy + hh;
+        if (subj.l < L + m || subj.r > R - m || subj.t < Tp + m || subj.b > B - m) continue;
+        if (!boxes.every(b => (b.l >= L + m && b.r <= R - m && b.t >= Tp + m && b.b <= B - m) || b.r <= L || b.l >= R || b.b <= Tp || b.t >= B)) continue;
+        best = { x: cx, y: cy, w: base.w * k, h: base.h * k }; cost = c;
+      }
+    }
+    const out = best || base;
+    if (fitMemo.size > 200) fitMemo.clear();
+    fitMemo.set(key, out);
+    return out;
   }
 
   // ---------------------------------------------------------------- the kinetic caption: letters rise into place, word by word
@@ -1003,7 +1042,7 @@
     const draw = now => {
       if (!R) return;
       const t = clock();   // one clock for frames and taps (a tap's reaction starts at the moment of the tap)
-      const s = motion ? R.frame(camAt(u, W, H), W, H, dpr, u, t, false) : R.frame(fitStop(WIDE, W, H), W, H, dpr, 0, 0, true);
+      const s = motion ? R.frame(camAt(u, W, H), W, H, dpr, u, t, false) : R.frame(baseStop(WIDE, W, H), W, H, dpr, 0, 0, true);
       state.frames++; state.u = u; state.W = W; state.H = H; state.friends = R.rects; state.rev = s.rev;
       setLight(s.light);
       place();
