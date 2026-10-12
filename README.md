@@ -129,6 +129,19 @@ native mute/volume controls hidden) and counts what it catches in `window.FF_SOU
   `#for-centers`, and the Home and Curriculum entry bands). Copy rules are in the owner spec (`docs/WHOLE_CHILD_SPEC.md` in the
   CRM repo): evidence-informed routines, never medical claims. Forms use `window.FFIntake` and show "open soon" when the gateway is unset.
 
+## Meet the friends in 3D (#friends, 2026-10-12)
+
+`friends-3d.js` / `friends-3d.css` add the band under the four friend cards on #friends; `ff-3d.js` is the engine (an ES module; the
+same file ships in the Futures Hub's `hub/web/`, keep the two identical). three.js **r170** is vendored in `vendor/three-0.170.0/`
+(`three.module.min.js`, `GLTFLoader.js`, `BufferGeometryUtils.js`, `RoomEnvironment.js`, `meshopt_decoder.module.js`, MIT licence;
+the addons' `from 'three'` imports are rewritten to the relative file, nothing else changed). No CDN. The engine and three.js are
+loaded only by a lazy `import()` when the stage comes within a screen (data saver: on the "Show in 3D" tap), never on Home.
+Models: `models/friends/<friend>.glb` (web GLB, meshopt + WebP, 8 clips), `<friend>.usdz` (AR Quick Look, gentle wave),
+`<friend>-fur.png` (the shell-fur length map), copied unchanged from the 3D batch of 2026-10-12. The site plays Idle_Breathe,
+Wave_Gentle, Hop, Happy_Jump and Joyful_Dance; never Big_Wave_Hello (it stretches the sleeve). Fur by GPU tier and frame-time
+sampling, with the visitor's "Soft fur" switch; reduced motion or the Decorative motion switch give a still friend. Spanish in
+`i18n-es-10.js` (draft). Tests: `tests/friends-3d.test.js`. Numbers and the Home decision: TECH_NOTES.md, "3D friends".
+
 ## Important Limits
 
 The Academy is a local preview. Saved lessons, plans, and self-recorded progress

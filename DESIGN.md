@@ -25,6 +25,7 @@ A pop-up storybook. Every page opens like a felt pop-up book: a real room behind
 - No identical card grids as the default layout; use the shelf, the stage, the pinned story and the path tiles instead.
 - One orchestrated motion moment per page (on Home, wave 7: one continuous shot, the camera flies down out of a cloud bank into the plush meadow, the plush logo flies in through the clouds and lands in its cloud nest, then the friends arrive, Booker last to center stage; any input fast-forwards it); other motion answers what the visitor does (hover, focus, tap, tilt, scroll). All of it is built on ff-motion.js.
 - Home's world has real depth (hero-world.css/js): flat felt planes at their own depth, the camera slides around the cast's plane so the friends never slide; never a tilted or stretched plane, never WebGL.
+- The one WebGL surface (owner 2026-10-12) is "Meet the friends in 3D" on #friends (friends-3d.js, ff-3d.js, three.js r170 vendored): the batch's finished 3D friends, loaded lazily near the viewport, never on Home. Home keeps its 2D cut-outs (numbers in TECH_NOTES.md).
 - Everything still reads with motion turned off (reduced-motion users get the open book, already open).
 - Every AI image of a room or product carries a concept label; the real center appears only in real photos.
 - Story-world surfaces are felt (plush-textures.css); real-world content stays on plain paper. Characters stand on a felt-grass strip.
