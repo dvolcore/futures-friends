@@ -44,7 +44,7 @@
 .ffr-gf{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .ffr-food{all:unset;box-sizing:border-box;cursor:pointer;display:grid;justify-items:center;gap:2px;padding:6px 4px 5px;border-radius:12px;background:var(--paper2);border:1px solid transparent;text-align:center;font-size:12px;line-height:1.15;color:var(--ink);transition:transform .25s cubic-bezier(.34,1.56,.64,1),opacity .3s,background .2s;-webkit-tap-highlight-color:transparent}
 .ffr-food img{width:48px;height:48px;display:block}
-.ffr-food:hover{transform:translateY(-3px) rotate(-3deg);background:color-mix(in srgb,var(--b) 14%,var(--paper2))}
+@media (hover:hover) and (pointer:fine){.ffr-food:hover{transform:translateY(-3px) rotate(-3deg);background:color-mix(in srgb,var(--b) 14%,var(--paper2))}}
 .ffr-food:active{transform:scale(.94)}
 .ffr-food:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .ffr-food[disabled]{cursor:default;opacity:.32;transform:none;filter:grayscale(.5)}
@@ -61,7 +61,7 @@
 }
 @media (prefers-reduced-motion: reduce){
  .ffr-bg .fil,.ffr-food,.ffr-gl i,.ffr-grp{transition:none}
- .ffr-food:hover{transform:none}
+ .ffr-food:hover,.ffr-food:active{transform:none}
 }
 
 `;

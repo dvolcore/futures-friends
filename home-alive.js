@@ -157,16 +157,8 @@
   // and its hit area never move. A press gives a small squish (CSS).
   function magnets(root, sc, motion) {
     if (!motion || !M().fine()) return;
-    const btns = Array.from(root.querySelectorAll('.mh-hero .px-primary, .hc-btn-gold'));
-    btns.forEach(b => {
-      let lab = b.querySelector(':scope > .ffm-label');
-      if (!lab) { lab = b.ownerDocument.createElement('span'); lab.className = 'ffm-label'; while (b.firstChild) lab.appendChild(b.firstChild); b.appendChild(lab); }
-      let id = 0, dx = 0, dy = 0;
-      const put = () => { id = 0; lab.style.setProperty('transform', `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`); };
-      sc.listen(b, 'pointermove', e => { if (e.pointerType !== 'mouse') return; const r = b.getBoundingClientRect(); dx = Math.max(-6, Math.min(6, (e.clientX - r.left - r.width / 2) / r.width * 12)); dy = Math.max(-4, Math.min(4, (e.clientY - r.top - r.height / 2) / r.height * 8)); if (!id) id = requestAnimationFrame(put); });
-      sc.listen(b, 'pointerleave', () => { dx = 0; dy = 0; if (!id) id = requestAnimationFrame(put); });
-      sc.add(() => { if (id) cancelAnimationFrame(id); lab.style.removeProperty('transform'); });
-    });
+    // the shared Magnet (ff-motion.js FFMotion.magnet): one main call-to-action per screen
+    Array.from(root.querySelectorAll('.mh-hero .px-primary, .hc-btn-gold')).forEach(b => M().magnet(b, sc, { max: 6 }));
   }
 
   function proof(root, sc, motion) {

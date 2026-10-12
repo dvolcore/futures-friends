@@ -1,0 +1,65 @@
+/* Futures Friends signature moments (motion audit 2026-10-12, SIG1 to SIG4); behaviour and notes in ff-signatures.js.
+   Every rule here hangs off a class that ff-signatures.js adds only while motion is allowed (reduced motion and the Decorative motion
+   switch turn it off), and is also gated on the same two conditions here, so with motion off every page is exactly as before.
+   Only transform, translate, rotate, scale and opacity move. Character art is never redrawn, recoloured, skewed or filtered. */
+
+@media (prefers-reduced-motion:no-preference){
+  /* SIG1 Bounce Cards (#for-families): held invisible below the fold until the grid comes into view, then settle (JS) */
+  :root:not([data-motion=off]) .ffsig-bounce>.ffsig-pre{opacity:0;transform:translateY(-20px)}
+  @media (hover:hover) and (pointer:fine){
+    :root:not([data-motion=off]) .ffsig-bounce.is-settled>.fj-act,
+    :root:not([data-motion=off]) .ffsig-bounce.is-settled>.fj-center{transition:translate var(--ff-dur-2) var(--ff-ease-out),box-shadow var(--ff-dur-2) var(--ff-ease-out)}
+    :root:not([data-motion=off]) .ffsig-bounce.is-settled>.fj-act:hover,
+    :root:not([data-motion=off]) .ffsig-bounce.is-settled>.fj-center:hover{translate:0 -4px;box-shadow:0 14px 30px -18px rgba(10,43,56,.45)}
+  }
+
+  /* SIG2 Tilted Card + Glare Hover (#friends): the cover link tilts (JS writes the transform), a soft shine sweeps over it */
+  :root:not([data-motion=off]) a.cover-art.ffsig-tilt{position:relative;transform-style:flat;transition:transform var(--ff-dur-2) var(--ff-ease-out),scale var(--ff-dur-1) var(--ff-ease-out);will-change:transform}
+  :root:not([data-motion=off]) a.cover-art.ffsig-tilt.is-tilting{transition:transform 90ms linear,scale var(--ff-dur-1) var(--ff-ease-out)}
+  :root:not([data-motion=off]) .ffsig-tilt>.ffsig-glare{position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+    background:linear-gradient(-45deg,transparent 40%,rgba(255,255,255,.34) 50%,transparent 60%) no-repeat;background-size:260% 260%;background-position:110% 110%;opacity:0;
+    transition:background-position 0s,opacity var(--ff-dur-2) var(--ff-ease-out)}
+  @media (hover:hover) and (pointer:fine){
+    :root:not([data-motion=off]) .ffsig-tilt.is-tilting>.ffsig-glare{opacity:1;background-position:-10% -10%;transition:background-position 700ms var(--ff-ease-out),opacity var(--ff-dur-2) var(--ff-ease-out)}
+  }
+  @media (hover:none){
+    :root:not([data-motion=off]) a.cover-art.ffsig-tilt:active{scale:.98}
+  }
+
+  /* SIG3 Spotlight Card (#watch): the glow sits behind the thumbnail and the text (isolated card, z-index -1) */
+  :root:not([data-motion=off]) .ffx-mcard.ffsig-spot{isolation:isolate}
+  :root:not([data-motion=off]) .ffx-mcard.ffsig-spot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;opacity:0;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 30%,transparent),transparent 72%);
+    transition:opacity var(--ff-dur-2) var(--ff-ease-out)}
+  @media (hover:hover) and (pointer:fine){
+    :root:not([data-motion=off]) .ffx-mcard.ffsig-spot:hover::before{opacity:1}
+  }
+  :root:not([data-motion=off]) .ffx-mcard.ffsig-spot:has(:focus-visible)::before{opacity:1;--mx:50%;--my:50%}
+
+  /* SIG4 Card Swap (#store hero): equal cards stacked diagonally; JS writes each card's slot (--ffsig-x/y/r/s/z) */
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile{display:block;inset:auto;left:8%;top:18%;width:56%;aspect-ratio:4/5;
+    translate:var(--ffsig-x,0) var(--ffsig-y,0);rotate:var(--ffsig-r,0deg);scale:var(--ffsig-s,1);z-index:var(--ffsig-z,1);
+    transition:translate 650ms var(--ff-ease-inout),rotate 650ms var(--ff-ease-inout),scale 650ms var(--ff-ease-inout),opacity 300ms var(--ff-ease-out),box-shadow var(--ff-dur-2)}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile.is-dropping{translate:var(--ffsig-x,0) calc(var(--ffsig-y,0%) + 14%);rotate:-4deg;opacity:.85;
+    transition:translate 300ms var(--ff-ease-inout),rotate 300ms var(--ff-ease-inout),opacity 300ms var(--ff-ease-out)}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack .h3-float{animation:none}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack .h3-pic .sp-img{object-fit:contain}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile .h3-cap{display:grid;opacity:0;visibility:hidden;transition:opacity var(--ff-dur-2) var(--ff-ease-out),visibility 0s var(--ff-dur-2)}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile[data-ffsig-front] .h3-cap{opacity:1;visibility:visible;transition:opacity var(--ff-dur-2) var(--ff-ease-out) var(--ff-dur-2),visibility 0s}
+  :root:not([data-motion=off]) .h3-stage.ffsig-stack>.ffsig-pause{position:absolute;right:0;bottom:2%;z-index:30;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;
+    border-radius:999px;border:1.5px solid rgba(251,246,236,.55);background:rgba(10,43,56,.88);color:#FBF6EC;font:600 13px/1.2 var(--body);cursor:pointer}
+  :root:not([data-motion=off]) .h3-stage.ffsig-stack>.ffsig-pause:hover{border-color:#FBF6EC;background:#0C3342}
+  :root:not([data-motion=off]) .h3-stage.ffsig-stack>.ffsig-pause:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  :root:not([data-motion=off]) .ffsig-pi{display:inline-flex}
+}
+/* motion off after the stack was built (a route render normally removes it first): never leave a stray control */
+@media (prefers-reduced-motion:reduce){.ffsig-pause{display:none!important}}
+:root[data-motion=off] .ffsig-pause{display:none!important}
+
+@media print{
+  .ffsig-bounce>*{opacity:1!important;transform:none!important;translate:none!important}
+  a.cover-art.ffsig-tilt{transform:none!important;scale:none!important}
+  .ffsig-glare,.ffsig-pause{display:none!important}
+  .ffx-mcard.ffsig-spot::before{display:none!important}
+  .h3-stage.ffsig-stack>.h3-tile{transition:none!important}
+}

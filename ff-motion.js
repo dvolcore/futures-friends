@@ -14,6 +14,13 @@
      1 = its bottom passes the top), only while on screen, at most once per frame.
    - scope.enter(els, cb, {threshold}): cb(el) once, when each el first comes into view.
    - FFMotion.count(el, to, ms): counts the text of el up to `to` (tabular numerals in CSS); exact final value always written.
+   Motion audit 2026-10-12:
+   - FFMotion.ease / FFMotion.dur: the shared tokens of ff-tokens.css (CSS strings and milliseconds) for Web Animations;
+     FFMotion.gsapEase: the same three curves for GSAP. gsap.defaults() is set from them when GSAP is on the page.
+   - FFMotion.magnet(btn, sc, {max}): React Bits "Magnet", the main call-to-action only: on a desktop fine pointer the label drifts
+     up to `max` px (default 6) toward the pointer; the button and its hit area never move.
+   - FFMotion.spark(target, opts): React Bits "Click Spark" for real wins only (an item added to the bag, a form request sent): eight
+     short felt-coloured strokes burst from the point and fade (about 450 ms). Nothing when motion is off.
    Pure at load (no DOM work), sends nothing, stores nothing. Character art only ever moves, rotates or scales uniformly. */
 (function () {
   'use strict';
@@ -139,5 +146,52 @@
     raf(step);
   }
 
-  window.FFMotion = Object.freeze({ allowed, fine, scope, count });
+  // ---- shared tokens (mirror of ff-tokens.css)
+  const ease = Object.freeze({ out: 'cubic-bezier(.22,1,.36,1)', spring: 'cubic-bezier(.34,1.56,.64,1)', inout: 'cubic-bezier(.65,0,.35,1)', drawer: 'cubic-bezier(.32,.72,0,1)' });
+  const dur = Object.freeze({ 1: 160, 2: 260, 3: 450, 4: 800, press: 160, ui: 260, enter: 450, signature: 800, stagger: 60 });
+  const gsapEase = Object.freeze({ out: 'power3.out', spring: 'back.out(1.4)', inout: 'power2.inOut' });
+  try { if (window.gsap && window.gsap.defaults) window.gsap.defaults({ ease: gsapEase.out, duration: dur.enter / 1000 }); } catch (e) { /* GSAP absent */ }
+
+  // ---- Magnet (main call-to-action only): the label moves, never the button or its hit area
+  function magnet(btn, sc, o = {}) {
+    if (!btn || !sc || !allowed() || !fine()) return null;
+    const max = o.max == null ? 6 : o.max;
+    let lab = btn.querySelector(':scope > .ffm-label');
+    if (!lab) { lab = btn.ownerDocument.createElement('span'); lab.className = 'ffm-label'; while (btn.firstChild) lab.appendChild(btn.firstChild); btn.appendChild(lab); }
+    let id = 0, dx = 0, dy = 0;
+    const put = () => { id = 0; lab.style.setProperty('transform', `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`); };
+    sc.listen(btn, 'pointermove', e => { if (e.pointerType !== 'mouse') return; const r = btn.getBoundingClientRect(); dx = Math.max(-max, Math.min(max, (e.clientX - r.left - r.width / 2) / r.width * max * 2)); dy = Math.max(-max * 2 / 3, Math.min(max * 2 / 3, (e.clientY - r.top - r.height / 2) / r.height * max * 4 / 3)); if (!id) id = raf(put); });
+    sc.listen(btn, 'pointerleave', () => { dx = 0; dy = 0; if (!id) id = raf(put); });
+    sc.add(() => { if (id) caf(id); lab.style.removeProperty('transform'); });
+    btn.dataset.ffMagnet = 'on';
+    sc.add(() => { delete btn.dataset.ffMagnet; });
+    return lab;
+  }
+
+  // ---- Click Spark (real wins only). target: an element (its centre) or {x, y} in viewport px.
+  const SPARK = ['#2F6FC0', '#D9488B', '#2E9E57', '#8236AE', '#E7A928'];   // Booker blue, Lumi pink, Zuri green, Bop PURPLE, gold
+  function spark(target, o = {}) {
+    if (!allowed() || typeof document === 'undefined' || !document.body) return null;
+    let x, y;
+    if (target && typeof target.getBoundingClientRect === 'function') { const r = target.getBoundingClientRect(); if (!r.width && !r.height) return null; x = r.left + r.width / 2; y = r.top + r.height / 2; }
+    else if (target && isFinite(target.x) && isFinite(target.y)) { x = target.x; y = target.y; }
+    else return null;
+    const n = o.count || 8, colors = o.colors || SPARK, len = o.size || 12, rad = o.radius || 26;
+    const host = document.createElement('span');
+    host.className = 'ff-spark';
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:0;height:0;pointer-events:none;z-index:80`;
+    for (let i = 0; i < n; i++) {
+      const a = i / n * Math.PI * 2, s = document.createElement('i');
+      s.style.cssText = `position:absolute;left:-1.5px;top:${-len / 2}px;width:3px;height:${len}px;border-radius:2px;background:${colors[i % colors.length]};transform-origin:50% 50%`;
+      host.appendChild(s);
+      const deg = a * 180 / Math.PI + 90, dx = Math.cos(a) * rad, dy = Math.sin(a) * rad;
+      if (typeof s.animate === 'function') s.animate([{ transform: `translate(0,0) rotate(${deg}deg) scale(1)`, opacity: 1 }, { transform: `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) rotate(${deg}deg) scale(.35)`, opacity: 0 }], { duration: dur.enter, easing: ease.out, fill: 'forwards' });
+    }
+    document.body.appendChild(host);
+    setTimeout(() => host.remove(), dur.enter + 80);
+    return host;
+  }
+
+  window.FFMotion = Object.freeze({ allowed, fine, scope, count, ease, dur, gsapEase, magnet, spark });
 })();

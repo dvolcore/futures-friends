@@ -459,6 +459,7 @@
     haze.className = 'mh-veilsky';
     veil.appendChild(haze);
     // [file, x %, y %, width vw (phones: x1.55), outward direction x, y]
+    const passes = [];   // [element, its pass through the lens]
     const BANK = [[1, 22, 30, 62, -1, -.5], [2, 78, 26, 58, 1, -.6], [2, 30, 72, 66, -1, .7], [1, 74, 74, 70, 1, .6], [1, 50, 44, 74, .1, -1], [2, 50, 86, 64, -.1, 1], [1, 6, 58, 50, -1, .1], [2, 96, 52, 50, 1, -.1]];
     const clouds = BANK.map(([n, x, y, w, ox, oy], i) => {
       const im = doc.createElement('img');
@@ -471,14 +472,19 @@
       veil.appendChild(im);
       const far = 70 + (i % 3) * 18;
       // a slow push through the bank first (the camera is inside the cloud), then the clouds rush out past the lens
-      held(im, [
+      passes.push([im, held(im, [
         { transform: 'translate(0, 0) scale(1)', opacity: 1, easing: 'cubic-bezier(.45,0,.55,1)' },
         { transform: `translate(${ox * far * .06}vw, ${oy * far * .05}vh) scale(1.14)`, opacity: 1, offset: .38, easing: 'cubic-bezier(.4,0,.8,.5)' },
         { transform: `translate(${ox * far}vw, ${oy * far * .7}vh) scale(2.7)`, opacity: 0 }
-      ], { duration: 1600 + (i % 4) * 110, delay: (i % 4) * 50, easing: 'linear', fill: 'both' });
+      ], { duration: 1600 + (i % 4) * 110, delay: (i % 4) * 50, easing: 'linear', fill: 'both' })]);
       return im;
     });
-    held(haze, [{ opacity: 1 }, { opacity: .82, offset: .45 }, { opacity: 0 }], { duration: 1150, easing: 'cubic-bezier(.3,0,.4,1)', fill: 'both' });
+    passes.push([haze, held(haze, [{ opacity: 1 }, { opacity: .82, offset: .45 }, { opacity: 0 }], { duration: 1150, easing: 'cubic-bezier(.3,0,.4,1)', fill: 'both' })]);
+    // SYS5 (motion audit, lighter fly-through): a cloud (or the haze) that has finished its pass is fully transparent; it leaves the
+    // compositor at once (display none) instead of staying a big invisible layer until the opening ends, and the bank's plane goes
+    // when the last of them has passed. Nothing on screen changes.
+    let gone = 0;
+    passes.forEach(([el, a]) => { if (a) a.addEventListener('finish', () => { el.style.display = 'none'; if (++gone === passes.length) veil.style.display = 'none'; }); });
     nearCam.appendChild(veil); // in front of the lens: it does not come down with the world
     // the plush logo: from deep in the sky, small and out of focus, out through the clouds; grows past full size, lands on its nest
     // with a fluffy squash, wobbles, and settles (the logo is the brand mark, not character art: it may squash like a cushion)
@@ -487,11 +493,11 @@
       { transform: 'translateY(64px) scale(.14) rotate(-9deg)', filter: 'blur(6px)', opacity: 0 },
       { transform: 'translateY(52px) scale(.2) rotate(-7deg)', filter: 'blur(5px)', opacity: 1, offset: .1 },
       { transform: 'translateY(6px) scale(.72) rotate(4deg)', filter: 'blur(1.4px)', opacity: 1, offset: .5 },
-      { transform: 'translateY(-16px) scale(1.08) rotate(-2deg)', filter: 'blur(0px)', opacity: 1, offset: .72 },
-      { transform: 'translateY(5px) scale(1.09, .88) rotate(0deg)', filter: 'blur(0px)', opacity: 1, offset: .81 },
-      { transform: 'translateY(-6px) scale(.96, 1.05) rotate(1.6deg)', filter: 'blur(0px)', opacity: 1, offset: .89 },
-      { transform: 'translateY(1px) scale(1.01, .99) rotate(-.8deg)', filter: 'blur(0px)', opacity: 1, offset: .95 },
-      { transform: 'translateY(0px) scale(1) rotate(0deg)', filter: 'blur(0px)', opacity: 1 }
+      { transform: 'translateY(-16px) scale(1.08) rotate(-2deg)', filter: 'none', opacity: 1, offset: .72 },
+      { transform: 'translateY(5px) scale(1.09, .88) rotate(0deg)', filter: 'none', opacity: 1, offset: .81 },
+      { transform: 'translateY(-6px) scale(.96, 1.05) rotate(1.6deg)', filter: 'none', opacity: 1, offset: .89 },
+      { transform: 'translateY(1px) scale(1.01, .99) rotate(-.8deg)', filter: 'none', opacity: 1, offset: .95 },
+      { transform: 'translateY(0px) scale(1) rotate(0deg)', filter: 'none', opacity: 1 }
     ], { duration: LOGO_MS, delay: LOGO_AT, easing: 'cubic-bezier(.3,.1,.3,1)' });
     // its nest pops in under it as it lands
     puffs.forEach((p, i) => held(p, [{ transform: 'translateY(18px) scale(.4)', opacity: 0 }, { transform: 'translateY(-4px) scale(1.08)', opacity: 1, offset: .6 }, { transform: 'translateY(0px) scale(1)', opacity: 1 }],
@@ -518,11 +524,11 @@
           { transform: `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${r0}deg) scale(${s0})`, filter: `blur(${row === 0 ? 3 : 7}px)`, opacity: 0, easing: 'cubic-bezier(.35,.1,.6,.6)' },
           { transform: `translate(${(dx * .82).toFixed(1)}px, ${(dy * .8).toFixed(1)}px) rotate(${r0 * .85}deg) scale(${(s0 + (1 - s0) * .12).toFixed(3)})`, filter: `blur(${row === 0 ? 2.4 : 5}px)`, opacity: 1, offset: .12, easing: 'cubic-bezier(.3,.2,.5,1)' },
           { transform: `translate(${(dx * .32).toFixed(1)}px, ${(dy * .3 + bend * L * .3).toFixed(1)}px) rotate(${(r0 * .35).toFixed(1)}deg) scale(${(s0 + (1 - s0) * .72).toFixed(3)})`, filter: 'blur(.6px)', opacity: 1, offset: .45, easing: 'cubic-bezier(.4,0,.7,.5)' },
-          { transform: 'translate(0px, 3px) rotate(0deg) scale(1.17, .82)', filter: 'blur(0px)', opacity: 1, offset: LAND, easing: 'cubic-bezier(.2,.6,.4,1)' },
-          { transform: 'translate(0px, -4px) rotate(1.6deg) scale(.93, 1.08)', filter: 'blur(0px)', opacity: 1, offset: .82 },
-          { transform: 'translate(0px, 0px) rotate(-1.1deg) scale(1.03, .98)', filter: 'blur(0px)', opacity: 1, offset: .91 },
-          { transform: 'translate(0px, 0px) rotate(.4deg) scale(1, 1)', filter: 'blur(0px)', opacity: 1, offset: .96 },
-          { transform: 'none', filter: 'blur(0px)', opacity: 1 }];
+          { transform: 'translate(0px, 3px) rotate(0deg) scale(1.17, .82)', filter: 'none', opacity: 1, offset: LAND, easing: 'cubic-bezier(.2,.6,.4,1)' },
+          { transform: 'translate(0px, -4px) rotate(1.6deg) scale(.93, 1.08)', filter: 'none', opacity: 1, offset: .82 },
+          { transform: 'translate(0px, 0px) rotate(-1.1deg) scale(1.03, .98)', filter: 'none', opacity: 1, offset: .91 },
+          { transform: 'translate(0px, 0px) rotate(.4deg) scale(1, 1)', filter: 'none', opacity: 1, offset: .96 },
+          { transform: 'none', filter: 'none', opacity: 1 }];
       }
       held(f, frames, { duration: ms, delay: at, easing: 'linear' });
       cues.push([at + (row === 2 ? ms * .3 : ms * LAND), () => {

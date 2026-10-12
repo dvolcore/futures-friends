@@ -11,9 +11,9 @@
 .ks-dot{width:14px;height:14px;border-radius:50%;background:var(--zf);flex:none}
 .ks-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:12px 16px;border-radius:16px;background:#fff;color:#14313D}
 .ks-price b{flex-basis:100%;font:700 13px/1.2 var(--display);color:#5A4300;letter-spacing:.02em}
-.ks-price span{font-size:14px}
+.ks-price span{font-size:.875rem}
 .ks-price em{font:700 clamp(22px,2.6vw,28px)/1 var(--display);font-style:normal;color:#10243F;margin-right:4px}
-.ks-soon{margin:0;font-size:13.5px;color:#CFDEE8;max-width:52ch}
+.ks-soon{margin:0;font-size:.8438rem;color:#CFDEE8;max-width:52ch}
 .ks-soon b{color:#fff}
 .ks-cta{display:flex;flex-wrap:wrap;gap:10px}
 .ks-gallery{min-width:0;display:grid;gap:10px}
@@ -26,23 +26,23 @@
 .ks-fig .ffa-kit-stage img{width:100%;height:100%;object-fit:contain;display:block}   /* nothing cropped: a portrait room sits in the frame whole */
 .ks-fig .ffa-kit-stage{background:#0B1B30}
 .ks-fig picture{display:block;height:100%}
-.ks-fig .ffa-kit-label{top:12px;left:12px;font-size:13px;padding:5px 12px}
-.ks-fig figcaption{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;padding:10px 16px;color:#E4EEF4;font-size:13px}
+.ks-fig .ffa-kit-label{top:12px;left:12px;font-size:.8125rem;padding:5px 12px}
+.ks-fig figcaption{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;padding:10px 16px;color:#E4EEF4;font-size:.8125rem}
 .ks-fig figcaption b{color:#fff;font:700 15px/1.2 var(--display)}
 .ks-ctl{display:flex;align-items:center;justify-content:center;gap:14px}
 .ks-count{font:600 13px/1 var(--display);color:#E4EEF4;min-width:9ch;text-align:center}
 .ks-nav{appearance:none;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.6);background:rgba(255,255,255,.1);color:#fff;font:400 26px/1 var(--display);cursor:pointer;display:grid;place-items:center;padding:0 0 3px}
-.ks-nav:hover{background:rgba(255,255,255,.22)}
+@media (hover:hover) and (pointer:fine){.ks-nav:hover{background:rgba(255,255,255,.22)}}
 .ks-nav:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .ks-pkgs{list-style:none;margin:clamp(20px,3vw,34px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .ks-pkgs li{display:grid;gap:5px;padding:14px 16px;border-radius:16px;background:#fff;color:#14313D;border-top:5px solid var(--c)}
 .ks-pkgs b{font:700 16px/1.2 var(--display);color:#10243F}
-.ks-pk-price{font-weight:600;font-size:14px;color:#5A4300}
-.ks-pk-in{font-size:13.5px;line-height:1.4}
+.ks-pk-price{font-weight:600;font-size:.875rem;color:#5A4300}
+.ks-pk-in{font-size:.8438rem;line-height:1.4}
 /* compact: same component, less height */
 .ks-compact{padding-block:clamp(22px,3vw,40px)}
 .ks-compact h2{font-size:clamp(24px,3vw,34px)}
-.ks-compact .ks-pitch{font-size:15px}
+.ks-compact .ks-pitch{font-size:.9375rem}
 .ks-compact .ks-fig .ffa-kit-stage{aspect-ratio:16/10}
 @media (max-width:820px){
  .ks-grid{grid-template-columns:minmax(0,1fr)}
@@ -54,6 +54,6 @@
  .ks-cta .btn{flex:1 1 auto;text-align:center}
 }
 @media (prefers-reduced-motion:reduce){.ks-track{scroll-behavior:auto}}
-.ks-fig figcaption span{color:#D5E2EA;font-size:13px}
+.ks-fig figcaption span{color:#D5E2EA;font-size:.8125rem}
 
 .ks .ffa-photo figcaption .ffa-kit-caption{color:#fff;font-weight:600}

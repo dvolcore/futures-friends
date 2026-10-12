@@ -190,6 +190,36 @@ function onTick() {
   spPaint(); update();
 }
 
+// A sideways swipe on the film changes chapter, as the ‹ › buttons do (HIG audit #18). The stage keeps vertical scrolling for the
+// browser (touch-action:pan-y in kids-film.css); past ~10 px sideways the words follow the finger, and on release a swipe past
+// 56 px (or a flick) moves to the next or previous chapter, otherwise the words settle back. With reduced motion or Decorative
+// motion off the words do not move; the chapter still changes.
+function swipe(stage) {
+  if (!stage || !W.PointerEvent || stage.dataset.kfSwipe) return;
+  stage.dataset.kfSwipe = '1';
+  const still = () => reduced() || D.documentElement.dataset.motion === 'off';
+  let s = null, swallow = 0;
+  const words = () => stage.querySelector('[data-kf-content]');
+  const place = (dx, ease) => { const w = words(); if (!w) return; w.style.transition = ease ? 'transform var(--ff-dur-2) var(--ff-ease-out)' : 'none'; w.style.transform = dx ? `translateX(${dx}px)` : ''; };
+  stage.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' || !e.isPrimary) return; s = { x: e.clientX, y: e.clientY, id: e.pointerId, on: false, dx: 0, t: performance.now(), lx: e.clientX, lt: performance.now(), v: 0 }; });
+  stage.addEventListener('pointermove', e => {
+    if (!s || e.pointerId !== s.id) return;
+    const dx = e.clientX - s.x, dy = e.clientY - s.y, now = performance.now();
+    if (!s.on) { if (Math.abs(dx) < 10 || Math.abs(dx) < Math.abs(dy)) return; s.on = true; s.x0 = e.clientX; try { stage.setPointerCapture(e.pointerId); } catch (_) { /* old browsers */ } }
+    if (now > s.lt) s.v = (e.clientX - s.lx) / (now - s.lt);
+    s.lx = e.clientX; s.lt = now; s.dx = e.clientX - s.x0;
+    if (!still()) place(s.dx, false);
+  });
+  const end = e => {
+    if (!s || e.pointerId !== s.id) return; const g = s; s = null; if (!g.on) return;
+    const v = performance.now() - g.lt > 120 ? 0 : g.v, total = g.lx - g.x;
+    swallow = Date.now() + 400;                                                    // the lifted finger is not also a tap on a button
+    if (e.type !== 'pointercancel' && (Math.abs(total) > 56 || Math.abs(v) > 0.35)) { place(0, false); seekChapter((Math.abs(total) > 56 ? total : v) < 0 ? 1 : -1); }
+    else place(0, !still());
+  };
+  stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+  stage.addEventListener('click', e => { if (Date.now() < swallow) { e.preventDefault(); e.stopPropagation(); } }, true);
+}
 function init(root) {
   const sec = root && root.querySelector && root.querySelector('[data-kf]'); if (!sec) { el = null; return; }
   const v = sec.querySelector('[data-kf-video]'); if (!v) return;
@@ -211,6 +241,7 @@ function init(root) {
     else if (t.closest('[data-kf-play],[data-kf-big]')) togglePlay();
     else if (t.closest('[data-kf-music]')) toggleMusic();
   });
+  swipe(sec.querySelector('.kf-stage'));
   const dock = sec.parentNode && sec.parentNode.querySelector('.kf-dock');
   if (dock) dock.addEventListener('click', e => { if (e.target.closest && e.target.closest('[data-kf-next]')) seekChapter(1); });
   if (typeof IntersectionObserver === 'function') { const io = new IntersectionObserver(en => { if (el !== own) { io.disconnect(); return; } S.seen = en[en.length - 1].isIntersecting; update(); }, { threshold: 0.15 }); io.observe(sec); }

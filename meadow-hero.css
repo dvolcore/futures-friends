@@ -33,7 +33,7 @@
 .mh-hero .px-heroactions{margin-top:8px;justify-content:center;flex-wrap:wrap}
 .mh-hero .px-heroactions .px-primary{background:#F5C553;color:#14313D;box-shadow:0 6px 0 -2px #C9971F}
 .mh-hero .px-heroactions .px-secondary{background:#fff;color:#0A2B38;border-color:#0A2B38}
-.mh-hero .px-heroactions .px-secondary:hover{background:#EEF6FF}
+@media (hover:hover) and (pointer:fine){.mh-hero .px-heroactions .px-secondary:hover{background:#EEF6FF}}
 /* ---- wave 8: the card is Apple-style liquid glass where the browser can blur what is behind it (the world shows through, blurred and
    brighter; a white rim; a soft specular light that follows the pointer or the phone's tilt, .mh-spec from hero-world.js; in Chromium
    an SVG lens bends the backdrop at the edges, .mh-refract). The tint keeps every line of the card at 7:1 or more over any part of the
@@ -47,6 +47,12 @@
     .mh-hero.mh-refract .mh-card{-webkit-backdrop-filter:url(#mh-lens) blur(10px) saturate(160%) brightness(1.08);backdrop-filter:url(#mh-lens) blur(10px) saturate(160%) brightness(1.08)}
     /* low-power devices (hero-world.js .mh-lite): no live blur behind the card */
     .mh-hero.mh-lite .mh-card{-webkit-backdrop-filter:none;backdrop-filter:none;background-color:rgba(255,251,244,.94)}
+    /* SYS5 (motion audit 2026-10-12, Home performance): while the opening plays (hero-world.js data-opening held / playing) the camera
+       moves behind the card on every frame, so the card is not live glass yet: no blur and no lens, a solid pane of the colour the
+       glass shows at rest over this sky (measured about #F4F6E6 at 1440 and 390). When the camera lands (done) the blur comes on
+       under the still-solid tint and the tint thins to the glass in .6 s; after a skip (any input) it swaps at once. */
+    .mh-hero[data-opening=held] .mh-card,.mh-hero[data-opening=playing] .mh-card{-webkit-backdrop-filter:none;backdrop-filter:none;background-color:#F4F6E6}
+    .mh-hero[data-opening=done] .mh-card{transition:background-color .6s cubic-bezier(.4,0,.2,1)}
     .mh-spec{position:absolute;z-index:-1;left:-40%;top:-120%;width:180%;height:340%;pointer-events:none;display:block;
       background:radial-gradient(closest-side,rgba(255,255,255,.62),rgba(255,255,255,.18) 42%,rgba(255,255,255,0) 70%);
       translate:var(--gx,-18%) var(--gy,0%)}
@@ -91,7 +97,7 @@
 .mh-sayline{margin:0;font:500 16px/1.45 var(--body);color:#14313D}
 .mh-sayask{display:flex;flex-wrap:wrap;gap:6px}
 .mh-sayaskbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 13.5px/1.1 var(--body);text-decoration:none}
-.mh-sayaskbtn:hover{background:#174B45}
+@media (hover:hover) and (pointer:fine){.mh-sayaskbtn:hover{background:#174B45}}
 .mh-sayaskbtn .px-icon{width:14px;height:14px}
 .mh-saynav{display:flex;justify-content:flex-end;gap:6px}
 .mh-saynext,.mh-sayclose{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid #0A2B38;background:#fff;color:#0A2B38;cursor:pointer;padding:0}

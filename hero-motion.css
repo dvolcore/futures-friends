@@ -31,13 +31,13 @@
   :root:not([data-motion=off]) .ffm-live .ffa-hop>.ffm-pose{transition:opacity .12s ease-out}
   :root:not([data-motion=off]) .ffm-live .ffa-fig.ffm-posing .ffa-hop>.ffa-cut{transition:opacity 0s .12s}
   /* Friends who notice you: up to 4 degrees toward the pointer or the friend being pointed at (desktop) */
-  :root:not([data-motion=off]) .ffm-live .ffa-friend{transition:rotate .6s cubic-bezier(.2,.7,.2,1)}
+  :root:not([data-motion=off]) .ffm-live .ffa-friend{transition:rotate .6s var(--ff-ease-out)}
 
   /* Labels answer the pointer */
-  :root:not([data-motion=off]) .ffm-live .ffa-pill{transition:box-shadow .25s ease}
+  :root:not([data-motion=off]) .ffm-live .ffa-pill{transition:box-shadow var(--ff-dur-2) ease}
   /* Audience doors: the friend on the card leans in when the card is pointed at or focused */
-  :root:not([data-motion=off]) .fj-doorart img{transition:translate .35s cubic-bezier(.34,1.56,.64,1),rotate .35s cubic-bezier(.34,1.56,.64,1)}
-  :root:not([data-motion=off]) .fj-door:hover .fj-doorart img,:root:not([data-motion=off]) .fj-door:focus-within .fj-doorart img{translate:0 -6px;rotate:-6deg}
+  :root:not([data-motion=off]) .fj-doorart img{transition:translate .35s var(--ff-ease-spring),rotate .35s var(--ff-ease-spring)}
+  :root:not([data-motion=off]) .fj-door:focus-within .fj-doorart img{translate:0 -6px;rotate:-6deg}@media (hover:hover) and (pointer:fine){:root:not([data-motion=off]) .fj-door:hover .fj-doorart img{translate:0 -6px;rotate:-6deg}}
 }
 @keyframes ffm-sway{0%,100%{rotate:0deg;translate:0 0}30%{rotate:-1.2deg;translate:0 -1.5%}60%{rotate:1deg;translate:0 0}80%{rotate:.4deg;translate:0 -.8%}}
 

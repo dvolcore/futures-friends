@@ -278,7 +278,7 @@ const FFH_CSS = `
 .ffhm-frame{position:relative;aspect-ratio:3/2;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--paper2);box-shadow:0 18px 40px rgba(10,43,56,.14);isolation:isolate}
 .ffhm-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;border:0;border-radius:0;will-change:transform}
 .ffhm-spot{position:absolute;z-index:2;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 7px;border-radius:999px;border:2px solid #fff;background:var(--c);color:#fff;font:600 13px/1.1 var(--display);cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.28);transition:opacity .3s,transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
-.ffhm-spot:hover{transform:translate(-50%,-50%) scale(1.08)}
+@media (hover:hover) and (pointer:fine){.ffhm-spot:hover{transform:translate(-50%,-50%) scale(1.08)}}
 .ffhm-spot i{width:12px;height:12px;border-radius:50%;background:#fff;position:relative;flex:none}
 @media (prefers-reduced-motion: no-preference){.ffhm-spot i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #fff;animation:ffmPulse 2.2s ease-out infinite}}
 @keyframes ffmPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(2);opacity:0}}
@@ -357,114 +357,12 @@ let ffmSkip = false;
   document.addEventListener('keydown', e => { if (e.key !== 'Escape' || !e.target.closest) return; const sec = e.target.closest('.ffhm'); if (sec && sec.dataset.z) ffmSet(sec, ''); });
 })();
 
-// ---- H, I, K choreography (runs after every render via the motion.js hook contract)
-let ffhMM = null, ffhExtra = [];
-function ffhCleanup(){ if (ffhMM) { try { ffhMM.revert(); } catch (e) {} ffhMM = null; } ffhExtra.forEach(f => { try { f(); } catch (e) {} }); ffhExtra = []; }
+// Home's "Meet in 3D" buttons show only when a 3D model exists. (The old pinned rooms / learning-loop ride / family-phone
+// choreography that lived here was removed 2026-10-12: premium.js + home-calm.js replaced that Home, so its targets never render.)
 window.FFhooks = window.FFhooks || [];
-window.FFhooks.push(function(v, root, ok){
-  ffhCleanup();
+window.FFhooks.push(function(v, root){
   if (v !== 'home' || !root) return;
   root.querySelectorAll('[data-ff3d]').forEach(b => { b.hidden = !(window.FF_GLB && window.FF_GLB[b.dataset.ff3d]); });
-  const G = window.gsap, STg = window.ScrollTrigger;
-  if (!ok || !G || !STg) return;
-  const plug = [STg, window.SplitText, window.DrawSVGPlugin, window.MotionPathPlugin, window.Draggable].filter(Boolean);
-  G.registerPlugin(...plug);
-  const bar = document.querySelector('header.bar'), hh = bar ? Math.round(bar.getBoundingClientRect().height) : 66;
-  ['#ff-rooms', '#ff-loop'].forEach(s => { const el = root.querySelector(s); if (el) el.style.setProperty('--ffh', hh + 'px'); });
-  const rs = root.querySelector('#ff-rooms:not([data-interactive])'), L = root.querySelector('#ff-loop:not([data-interactive])'), K = root.querySelector('#ff-family');
-
-  // K: family notifications drop in as a stack, one time
-  if (K) {
-    const ns = K.querySelectorAll('.ffhk-n');
-    G.set(ns, { y: -70, scale: .9, opacity: 0 });
-    G.set(K.querySelector('.ffhk-clock'), { opacity: 0, y: -12 });
-    STg.create({ trigger: K.querySelector('.ffhk-phone'), start: 'top 78%', once: true, onEnter: () => {
-      G.to(K.querySelector('.ffhk-clock'), { opacity: 1, y: 0, duration: .6, ease: 'back.out(1.6)' });
-      G.to(ns, { y: 0, scale: 1, opacity: 1, duration: .8, ease: 'back.out(1.6)', stagger: .2, delay: .2 });
-    } });
-  }
-
-  // floating motifs bob gently everywhere
-  if (rs) rs.querySelectorAll('.ffhr-motif i').forEach((m, i) => { const tw = G.to(m, { y: i % 2 ? 12 : -12, rotation: i % 2 ? 8 : -8, duration: 2.4 + (i % 3) * .5, ease: 'sine.inOut', yoyo: true, repeat: -1 }); ffhExtra.push(() => tw.kill()); });
-
-  ffhMM = G.matchMedia();
-  ffhMM.add({ desk: '(min-width: 820px)', mob: '(max-width: 819.98px)' }, ctx => {
-    const desk = ctx.conditions.desk, undo = [];
-    // ---------- H: rooms
-    if (rs) {
-      const pin = rs.querySelector('.ffhr-pin'), track = rs.querySelector('.ffhr-track'), rooms = [...rs.querySelectorAll('.ffhr-room')], dots = [...rs.querySelectorAll('.ffhr-dots i')];
-      const splits = rooms.map(r => window.SplitText ? new SplitText(r.querySelector('.ffhr-value'), { type: 'chars', charsClass: 'ffhr-ch' }) : null);
-      undo.push(() => splits.forEach(s => s && s.revert()));
-      const letters = (r, i, st) => { const s = splits[i]; if (!s) return; G.from(s.chars, { yPercent: 55, scale: .35, transformOrigin: '50% 100%', rotation: j => (j % 2 ? 14 : -14), opacity: 0, duration: .8, ease: 'back.out(2.2)', stagger: .045, scrollTrigger: st }); };
-      if (desk) {
-        rs.classList.add('is-h'); undo.push(() => rs.classList.remove('is-h'));
-        const dist = () => Math.max(0, track.scrollWidth - pin.clientWidth);
-        let cur = -1; const setDot = n => { if (n === cur) return; cur = n; dots.forEach((d, j) => d.classList.toggle('on', j === n)); };
-        setDot(0);
-        const hz = G.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: pin, pin: true, start: () => `top top+=${hh}`, end: () => '+=' + dist(), scrub: .8, invalidateOnRefresh: true, refreshPriority: 2, anticipatePin: 1, onUpdate: s => setDot(Math.round(s.progress * (rooms.length - 1))) } });
-        rooms.forEach((r, i) => {
-          const sc = { trigger: r, containerAnimation: hz, start: 'left right', end: 'right left', scrub: true };
-          G.fromTo(r.querySelector('.ffhr-shape'), { x: -120, rotation: -10 }, { x: 120, rotation: 10, ease: 'none', scrollTrigger: sc });
-          G.fromTo(r.querySelector('.ffhr-cut'), { x: 70 }, { x: -70, ease: 'none', scrollTrigger: { ...sc } });
-          G.fromTo(r.querySelector('.ffhr-motif'), { x: 240 }, { x: -240, ease: 'none', scrollTrigger: { ...sc } });
-          G.fromTo(r.querySelector('.ffhr-copy'), { x: 60 }, { x: -60, ease: 'none', scrollTrigger: { ...sc } });
-          if (i === 0) letters(r, i, { trigger: pin, start: 'top 70%', toggleActions: 'play none none none' });
-          else letters(r, i, { trigger: r, containerAnimation: hz, start: 'left 62%', toggleActions: 'play none none reverse' });
-        });
-      } else {
-        rooms.forEach((r, i) => {
-          const st = r.querySelector('.ffhr-stage'), cut = r.querySelector('.ffhr-cut');
-          G.from(st, { x: i % 2 ? 70 : -70, rotation: i % 2 ? 5 : -5, opacity: 0, duration: .9, ease: 'back.out(1.5)', scrollTrigger: { trigger: r, start: 'top 82%', once: true } });
-          letters(r, i, { trigger: r.querySelector('.ffhr-value'), start: 'top 88%', once: true });
-          if (window.Draggable) {
-            const d = Draggable.create(cut, { type: 'x', bounds: { minX: -90, maxX: 90 }, edgeResistance: .6,
-              onDrag() { G.set(this.target, { rotation: this.x / 9 }); },
-              onRelease() { G.to(this.target, { x: 0, rotation: 0, duration: 1, ease: 'elastic.out(1,.4)' }); } })[0];
-            undo.push(() => { d.kill(); G.set(cut, { clearProps: 'transform' }); });
-          }
-        });
-      }
-    }
-    // ---------- I: learning loop
-    if (L) {
-      L.classList.add('is-anim'); undo.push(() => L.classList.remove('is-anim'));
-      const steps = [...L.querySelectorAll('.ffhl-step')], nodes = [...L.querySelectorAll('.ffhl-node')], labs = [...L.querySelectorAll('.ffhl-lab')];
-      const cb = L.querySelector('.ffhl-center b'), cs = L.querySelector('.ffhl-center span'), C0 = [cb.textContent, cs.textContent];
-      let lit = -2, done = false;
-      const light = (n, fin) => {
-        if (n === lit && fin === done) return;
-        steps.forEach((s, i) => s.classList.toggle('on', i <= n));
-        nodes.forEach((g, i) => { const on = i <= n; if (on && !g.classList.contains('on')) G.fromTo(g.querySelector('circle'), { scale: .6 }, { scale: 1, duration: .6, ease: 'back.out(3)', transformOrigin: '50% 50%' }); g.classList.toggle('on', on); });
-        labs.forEach((t, i) => t.classList.toggle('on', i <= n));
-        if (desk) {
-          if (fin) { cb.textContent = 'And again tomorrow'; cs.textContent = 'Every day loops back to a new story.'; L.style.setProperty('--cc', 'var(--gold)'); }
-          else if (n < 0) { cb.textContent = C0[0]; cs.textContent = C0[1]; L.style.setProperty('--cc', '#fff'); }
-          else if (n !== lit || done) { cb.textContent = FFH_LOOP[n][0]; cs.textContent = FFH_LOOP[n][1]; L.style.setProperty('--cc', `var(--${FFH_LOOP[n][2]})`); G.fromTo([cb, cs], { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .06, overwrite: true }); }
-          if (fin && !done) G.fromTo(nodes[0].querySelector('circle'), { scale: 1 }, { scale: 1.3, duration: .35, yoyo: true, repeat: 1, ease: 'sine.inOut', transformOrigin: '50% 50%' });
-        }
-        lit = n; done = fin;
-      };
-      undo.push(() => { steps.concat(nodes, labs).forEach(e => e.classList.remove('on')); cb.textContent = C0[0]; cs.textContent = C0[1]; L.style.removeProperty('--cc'); });
-      if (desk) {
-        const path = L.querySelector('#ffhl-path'), bop = L.querySelector('.ffhl-bop');
-        light(-1, false);
-        const tl = G.timeline({ defaults: { ease: 'none' },
-          scrollTrigger: { trigger: L.querySelector('.ffhl-pin'), pin: true, start: () => `top top+=${hh}`, end: '+=1300', scrub: .8, refreshPriority: 1, anticipatePin: 1 },
-          onUpdate() { const q = Math.min(1, this.time()); light(q < .01 ? -1 : Math.min(5, Math.floor(q * 6 + .03)), q > .995); } });
-        if (window.DrawSVGPlugin) tl.fromTo(path, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1 }, 0);
-        if (window.MotionPathPlugin) tl.to(bop, { motionPath: { path, align: path, alignOrigin: [.5, .5] }, duration: 1 }, 0);
-        tl.to({}, { duration: .06 });
-      } else {
-        const list = L.querySelector('.ffhl-list'), fill = L.querySelector('.ffhl-rail .ln i'), bimg = L.querySelector('.ffhl-rail img');
-        light(-1, false);
-        const travel = () => Math.max(0, list.offsetHeight - bimg.offsetHeight);
-        const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: list, start: 'top 70%', end: 'bottom 45%', scrub: .6, invalidateOnRefresh: true },
-          onUpdate() { const y = G.getProperty(bimg, 'y') + bimg.offsetHeight * .6; let n = -1; steps.forEach((s, i) => { if (s.offsetTop + s.offsetHeight * .35 <= y) n = i; }); light(n, false); } });
-        tl.fromTo(fill, { scaleY: 0 }, { scaleY: 1 }, 0).fromTo(bimg, { y: 0 }, { y: travel }, 0);
-      }
-    }
-    return () => undo.forEach(f => { try { f(); } catch (e) {} });
-  });
 });
 
 // ---------------------------------------------------------------- IMPACT
@@ -828,7 +726,48 @@ V.accessibility = () => legal('Accessibility',[['Our goal','We aim to meet WCAG 
 // ---------------------------------------------------------------- router + events
 let _lastView=null;
 function render(){ const vw=$('#view'); if(vw.removeAttribute) vw.removeAttribute('data-prerender'); vw.innerHTML = (V[view]||V.home)(); document.querySelectorAll('[data-nav]').forEach(b=>b.setAttribute('aria-current', b.dataset.go===view?'page':'false')); const same=_lastView===view+'|'+arg; _lastView=view+'|'+arg; try{ window.FFmotion && window.FFmotion(view, same); }catch(e){ console.warn(e); } }
-function go(v, a){ if(!V[v]) v='home'; view=v; arg=a||null; if((v==='portal'||v==='family-portal') && window.FFPortal) window.FFPortal.subscribeKd(); render(); window.scrollTo(0,0); try{ const h='#'+v+(arg?'/'+arg:''); history.replaceState(null,'',(window.FF_PRERENDER && window.FF_PRERENDER!==h.slice(1) ? window.FF_ROOT_PATH+location.search : '')+h); }catch(_){} }
+// Back and Forward put you back where you were (HIG audit #3). Every history entry gets a key (history.state.ffK); scrolling
+// records the position against the current entry in memory (no replaceState per scroll: Safari caps it), and the position is also
+// written into history.state before we leave an entry ourselves. A new page starts at the top; Back/Forward (premium.js sets
+// FFNav.viaHistory) restores the saved position after the render, then once more after late images settle. The browser's own
+// restoration is off so the two never fight.
+const FFScroll = (()=>{ const W=window, H=W.history||{replaceState(){},pushState(){},back(){}}, pos=new Map(), on=(t,f,o)=>{ if(W.addEventListener) W.addEventListener(t,f,o); }; let cur=null, curHash=null, timers=[], n=0;
+ try{ if('scrollRestoration' in H) H.scrollRestoration='manual'; }catch(_){}
+ const locked=()=>document.body && document.body.style.position==='fixed' || document.documentElement.classList.contains('sp-lock');
+ const st=()=>{ const s=H.state; return s && typeof s==='object' ? s : {}; };
+ function save(){ if(locked()||cur==null) return; pos.set(cur, W.scrollY); try{ H.replaceState(Object.assign({}, st(), {ffY:W.scrollY}), ''); }catch(_){} }
+ function manual(){ try{ if('scrollRestoration' in H) H.scrollRestoration='manual'; }catch(_){} }   // per history entry, so set on each
+ function adopt(){ manual(); let k=st().ffK; if(!k){ k=Date.now().toString(36)+'-'+(++n); try{ H.replaceState(Object.assign({}, st(), {ffK:k}), ''); }catch(_){} } cur=k; curHash=location.hash; }
+ function cancel(){ timers.forEach(clearTimeout); timers=[]; }
+ function to(y){ cancel(); if(!y){ W.scrollTo(0,0); return; } const set=()=>{ if(Math.abs(W.scrollY-y)>2) W.scrollTo(0,y); };
+  set(); requestAnimationFrame(set); timers=[setTimeout(set,120), setTimeout(set,320)]; }
+ function target(){ const back=!!(W.FFNav && W.FFNav.viaHistory); if(!back) return 0; const s=st(); const y=pos.has(s.ffK)?pos.get(s.ffK):s.ffY; return typeof y==='number' && y>0 ? y : 0; }
+ on('scroll', ()=>{ if(cur!=null && location.hash===curHash && !locked()) pos.set(cur, W.scrollY); }, {passive:true});
+ ['wheel','touchstart','keydown','pointerdown'].forEach(t=>on(t, cancel, {passive:true, capture:true}));   // the visitor scrolls: stop restoring
+ on('pagehide', save); on('load', manual); on('pageshow', manual);   // the browser resets it while the page loads
+ return { save, adopt, to, target, pos, manual };
+})();
+// Back closes the open panel instead of leaving the page (HIG audit #8). One helper for the menu, search, Display preferences and
+// the Shop quick view: opening a panel adds a history entry {ffOverlay:key}; Back (popstate) closes the top panel and stops there;
+// closing it by its x, Escape or the dimmed area steps back over that entry only when it is still on top. A route change while a
+// panel is open reuses the entry (premium.js consume()), so no dead entry is left behind.
+const FFOverlay = (()=>{ const W=window, H=W.history||{replaceState(){},pushState(){},back(){}}, stack=[]; let ignore=0, ignoreT=0;
+ const top=()=>{ const s=H.state; return s && s.ffOverlay || null; };
+ function opened(key, close){ if(stack.some(e=>e.key===key)) return; FFScroll.save(); const y=W.scrollY;
+  try{ const t=top(); if(t && !stack.some(e=>e.key===t)) H.replaceState(Object.assign({}, H.state, {ffOverlay:key}), ''); else H.pushState({ffOverlay:key, ffK:(H.state&&H.state.ffK)||null, ffY:y}, ''); FFScroll.manual(); }catch(_){}
+  stack.push({key, close}); }
+ function closed(key, o){ const i=stack.findIndex(e=>e.key===key); if(i<0) return; stack.splice(i,1); if(o && o.keep) return;
+  setTimeout(()=>{ if(top()===key && !stack.some(e=>e.key===key)){ ignore++; clearTimeout(ignoreT); ignoreT=setTimeout(()=>{ ignore=0; }, 1500); H.back(); } }, 0); }
+ function consume(){ if(!top()) return false; stack.length=0; return true; }
+ if(W.addEventListener) W.addEventListener('popstate', e=>{
+  if(ignore){ ignore--; e.stopImmediatePropagation(); return; }                  // our own step back over a closed panel's entry
+  if(stack.length){ const t=stack.pop(); e.stopImmediatePropagation(); try{ t.close(); }catch(err){ console.warn(err); } return; }
+  if(e.state && e.state.ffOverlay) e.stopImmediatePropagation();                // Forward onto a closed panel's entry: same page, nothing to do
+ }, true);
+ return { opened, closed, consume, isOpen:key=>stack.some(e=>e.key===key) };
+})();
+window.FFScroll=FFScroll; window.FFOverlay=FFOverlay;
+function go(v, a){ if(!V[v]) v='home'; view=v; arg=a||null; if((v==='portal'||v==='family-portal') && window.FFPortal) window.FFPortal.subscribeKd(); const y=FFScroll.target(); render(); FFScroll.to(y); try{ const h='#'+v+(arg?'/'+arg:''); history.replaceState(history.state,'',(window.FF_PRERENDER && window.FF_PRERENDER!==h.slice(1) ? window.FF_ROOT_PATH+location.search : '')+h); }catch(_){} FFScroll.adopt(); }
 function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2400); }
 function openRecipe(code){ const r=R[code]; if(!r) return;
  $('#dlgBody').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><div><div class="eyebrow">Level ${r.level} · ${LEVELS[r.level]} · ${r.code}</div><h3 id="dlgTitle" style="font-size:26px">${esc(r.name)}</h3></div><button class="btn soft" id="dlgClose">Close</button></div>
