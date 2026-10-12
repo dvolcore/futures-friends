@@ -1126,10 +1126,37 @@ function watchMotion(root, ok){ const G = window.gsap; const tv = root.querySele
     .from(bop, {scale:.55, rotation:-12, opacity:0, transformOrigin:'50% 100%', duration:.7, ease:'back.out(2)'}, '-=.35')   // grows up from its feet: never slides down over the captions note while it fades in
     .to(bop, {y:-6, rotation:2, duration:2.2, ease:'sine.inOut', yoyo:true, repeat:-1}); }
 
+// Flip, Inertia and MorphSVG are used only here (Watch: Flip + Inertia; Academy: all three), so they load only when one of these two
+// routes opens with motion on (motion audit 2026-10-12, like extras.js does for the physics engine). A deep link straight to either
+// route works the same: the first render waits for them (at most a moment), and with motion off nothing is loaded at all.
+const PLUGINS = { Flip: 'vendor/Flip.min.js', InertiaPlugin: 'vendor/InertiaPlugin.min.js', MorphSVGPlugin: 'vendor/MorphSVGPlugin.min.js' };
+const plugP = {};
+function plugin(name){
+  if (window[name]) return Promise.resolve(true);
+  if (!plugP[name]) plugP[name] = new Promise(res => { const s = document.createElement('script'); s.src = PLUGINS[name]; s.async = true; s.onload = () => res(!!window[name]); s.onerror = () => { delete plugP[name]; res(false); }; document.head.appendChild(s); });
+  return plugP[name];
+}
+const routePlugins = view => (view === 'academy' ? ['Flip', 'InertiaPlugin', 'MorphSVGPlugin'] : ['Flip', 'InertiaPlugin']);
+let hookRun = 0;
+window.FFX_PLUGINS = { load: plugin, routePlugins };
+
 window.FFhooks = window.FFhooks || [];
 window.FFhooks.push((view, root, ok) => {
   CLEAN.forEach(f => { try { f(); } catch(_) {} }); CLEAN = [];
+  const run0 = ++hookRun;
   if (view !== 'academy' && view !== 'watch') return;
+  const G0 = window.gsap;
+  if (ok && G0 && window.ScrollTrigger) {
+    const need = routePlugins(view).filter(n => !window[n]);
+    if (need.length) {
+      // the route renders at once; its motion starts as soon as the plugins are in (a newer render cancels this one)
+      Promise.all(need.map(plugin)).then(() => { if (run0 === hookRun && root.isConnected) motionHook(view, root, ok); });
+      return;
+    }
+  }
+  motionHook(view, root, ok);
+});
+function motionHook(view, root, ok){
   const G = window.gsap; ok = !!(ok && G && window.ScrollTrigger); MOK = ok;
   document.documentElement.style.setProperty('--ffx-hdr', hdr() + 'px');
   if (ok) G.registerPlugin(...[window.ScrollTrigger, window.DrawSVGPlugin, window.MotionPathPlugin, window.MorphSVGPlugin, window.Flip, window.InertiaPlugin].filter(Boolean));
@@ -1139,7 +1166,7 @@ window.FFhooks.push((view, root, ok) => {
   if (ok) CLEAN.push(() => mm.revert());
   const run = () => { initRails(root, ok, mm); if (view === 'academy') academyMotion(root, ok, mm); else watchMotion(root, ok); };
   if (ok) { const ctx = G.context(run); CLEAN.push(() => ctx.revert()); } else run();
-});
+}
 
 window.FFX = {load, save, episodes:EPISODES, tracks:TRACKS, academy:{state:ACAD, percent:modPct, stats:trackStat, totalHours:TOTAL_H}, weekMinutes:room => weekMin(WLOG(), room || 'Threes Room')};
 })();
