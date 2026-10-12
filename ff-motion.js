@@ -186,7 +186,7 @@
       s.style.cssText = `position:absolute;left:-1.5px;top:${-len / 2}px;width:3px;height:${len}px;border-radius:2px;background:${colors[i % colors.length]};transform-origin:50% 50%`;
       host.appendChild(s);
       const deg = a * 180 / Math.PI + 90, dx = Math.cos(a) * rad, dy = Math.sin(a) * rad;
-      if (typeof s.animate === 'function') s.animate([{ transform: `translate(0,0) rotate(${deg}deg) scaleY(1)`, opacity: 1 }, { transform: `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) rotate(${deg}deg) scaleY(.2)`, opacity: 0 }], { duration: dur.enter, easing: ease.out, fill: 'forwards' });
+      if (typeof s.animate === 'function') s.animate([{ transform: `translate(0,0) rotate(${deg}deg) scale(1)`, opacity: 1 }, { transform: `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) rotate(${deg}deg) scale(.35)`, opacity: 0 }], { duration: dur.enter, easing: ease.out, fill: 'forwards' });
     }
     document.body.appendChild(host);
     setTimeout(() => host.remove(), dur.enter + 80);

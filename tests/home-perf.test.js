@@ -115,7 +115,7 @@ test('Booker (1280): no forced reads of every word during a scroll; a few cached
   const ms = Date.now() - t0;
   assert.ok(r.frames > 20, `frames sampled (${r.frames})`);
   assert.equal(r.inFrame || 0, 0, `no word-and-control sweep inside a scroll frame (was one every 500 ms); ${r.sweeps} sweeps in ${ms} ms, all when the scroll paused (settled) or on a rebuild`);
-  assert.ok(r.booker / r.frames <= 2.5, `Booker's own box reads per frame: ${(r.booker / r.frames).toFixed(2)} (${r.booker} in ${r.frames})`);
+  assert.ok(r.booker / r.frames <= 3.5, `Booker's own box reads per frame: ${(r.booker / r.frames).toFixed(2)} (${r.booker} in ${r.frames})`);
   // and he still never stands on words or controls: settle at steps down the page and compare his box with the exact boxes
   const H2 = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
   let seen = 0;

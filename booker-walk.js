@@ -241,6 +241,7 @@
     function tick(fresh) {
       if (!walker || sc.aborted || !T.length) return;
       if (fresh || !near || ++nearN % 3 === 0) readNear();
+      else { const hdr = document.querySelector('header.bar'); near.hb = hdr ? hdr.getBoundingClientRect().bottom : 0; }   // the header can change height as the page scrolls: read every frame (one box, read before any write)
       const s = scrollY, vh = g.vh;
       // where is Booker?
       let i = T.findIndex(e => s < e.s1 + e.dwell);

@@ -263,7 +263,8 @@ for (const width of [1280, 390]) {
     f = await page.evaluate(() => ({ opts: document.querySelectorAll('#ffw-pal-list [role="option"]').length, talk: !!document.querySelector('.ffw-pal-empty:not([hidden]) a[href="#contact"]'), call: !!document.querySelector('.ffw-pal-empty:not([hidden]) a[href^="tel:"]'), text: document.querySelector('.ffw-pal-empty').innerText }));
     assert.equal(f.opts, 0); assert.ok(f.talk && f.call); assert.match(f.text, /Talk to a real person/);
     // "/" inside a text field types a slash instead of opening search
-    await page.keyboard.press('Escape'); await h.goto(page, site.base, 'contact');
+    // (closing the palette steps back off its own history entry, HIG audit #8; let that land before loading a new page)
+    await page.keyboard.press('Escape'); await page.waitForTimeout(300); await h.goto(page, site.base, 'contact');
     const field = (await page.$$('#view input[type="text"], #view input:not([type]), #view textarea')).reduce(async (acc, h) => (await acc) || ((await h.isVisible()) ? h : null), Promise.resolve(null));
     const fieldH = await field;
     if (fieldH) { await fieldH.focus(); await page.keyboard.press('/'); assert.equal(await page.evaluate(() => document.getElementById('px-search').open), false); }
