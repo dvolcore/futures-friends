@@ -3,6 +3,22 @@
   const money = value => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
   const wholeMoney = value => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
   const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  const explorer = document.getElementById('workspace');
+  document.querySelector('.explore-button').addEventListener('click', () => { explorer.open = true; });
+  const revealNumber = id => {
+    const el = document.getElementById(id);
+    const text = el.textContent;
+    el.setAttribute('aria-label', text);
+    el.classList.add('number-reveal');
+    el.replaceChildren(...Array.from(text, (digit, index) => {
+      const span = document.createElement('span');
+      span.className = 'num-digit';
+      span.setAttribute('aria-hidden', 'true');
+      span.style.setProperty('--digit-delay', `${index * 35}ms`);
+      span.textContent = digit;
+      return span;
+    }));
+  };
   const observed = document.querySelectorAll('.cash-panel');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } }), {threshold:.18});
@@ -202,6 +218,7 @@
       document.querySelector('.bar-tuition').style.setProperty('--height', (assumptions.tuition / max * 100) + '%');
       document.querySelector('.bar-break-even').style.setProperty('--height', (metrics.breakeven_tuition / max * 100) + '%');
       initializeExplorer(data);
+      ['funding', 'refinance', 'capacity', 'pilotDuration', 'platformYear'].forEach(revealNumber);
       document.documentElement.dataset.modelVersion = meta.version;
     })
     .catch(() => { document.getElementById('dataError').hidden = false; });
