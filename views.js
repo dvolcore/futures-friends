@@ -278,7 +278,7 @@ const FFH_CSS = `
 .ffhm-frame{position:relative;aspect-ratio:3/2;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--paper2);box-shadow:0 18px 40px rgba(10,43,56,.14);isolation:isolate}
 .ffhm-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;border:0;border-radius:0;will-change:transform}
 .ffhm-spot{position:absolute;z-index:2;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 7px;border-radius:999px;border:2px solid #fff;background:var(--c);color:#fff;font:600 13px/1.1 var(--display);cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.28);transition:opacity .3s,transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
-.ffhm-spot:hover{transform:translate(-50%,-50%) scale(1.08)}
+@media (hover:hover) and (pointer:fine){.ffhm-spot:hover{transform:translate(-50%,-50%) scale(1.08)}}
 .ffhm-spot i{width:12px;height:12px;border-radius:50%;background:#fff;position:relative;flex:none}
 @media (prefers-reduced-motion: no-preference){.ffhm-spot i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #fff;animation:ffmPulse 2.2s ease-out infinite}}
 @keyframes ffmPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(2);opacity:0}}
