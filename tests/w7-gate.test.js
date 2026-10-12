@@ -58,7 +58,7 @@ test('index.html loads no curriculum data; the gate loads before the views that 
   }
   const robots = read('robots.txt');
   assert.match(robots, /^User-agent: \*$/m);
-  assert.doesNotMatch(robots, /^Disallow: \S/m, 'no Disallow line advertises where curriculum used to be');
+  assert.deepEqual(robots.match(/^Disallow: \S.*$/gm), ['Disallow: /futures-friends/portal-test/'], 'no Disallow line advertises where curriculum used to be (only the Futures Hub test copy is kept from crawlers)');
 });
 
 test('no public source file names or loads a curriculum file or a Unit 1 day address', () => {

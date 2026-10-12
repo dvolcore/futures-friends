@@ -1,0 +1,30 @@
+/* Health records (hub/HEALTH_RECORDS.md, web/health.js). 44 px touch targets; the MAR is built for a classroom tablet. */
+.h-view .h-form{display:grid;gap:10px;margin-top:10px}
+.h-view .h-form .msg:empty{display:none}
+.h-view details > summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}
+.h-view .h-checks{display:flex;flex-wrap:wrap;gap:4px 14px}
+.h-view .check{min-height:44px;display:flex;align-items:center;gap:8px}
+.h-view .h-items li,.h-view .h-kids li,.h-view ul.plain li{padding:6px 0;border-bottom:1px solid var(--line)}
+.h-view ul.plain{list-style:none;margin:0;padding:0}
+.h-view .h-plan,.h-view .h-med{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+.h-view .h-plan.ended{opacity:.7}
+.h-view .h-plan h4,.h-view .h-med h4{margin:0 0 6px}
+.h-view .h-steps{background:var(--bad-bg);color:var(--ink);border-radius:8px;padding:8px 10px;display:block;margin:6px 0}
+.h-view .h-doc{white-space:pre-wrap;font-family:inherit;background:#F7F9FA;border:1px solid var(--line);border-radius:8px;padding:12px;max-height:340px;overflow:auto}
+.h-view .btn{min-height:44px}
+.h-view .btn.small{min-height:44px}
+.h-view .h-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:10px 0}
+.h-view .h-tile{border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column}
+.h-view .h-tile b{font-size:1.5rem}
+.h-view .h-tile.bad{border-color:var(--bad);background:var(--bad-bg)}
+.h-view .h-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+.h-view .h-row .i{width:auto;min-width:0;flex:0 1 auto}
+.h-view .h-row input[name="er"]{flex:1 1 200px}
+.h-view .h-board-plan{display:flex;flex-direction:column;gap:4px;margin:6px 0 0}
+.h-mar .h-mar-med h3{margin-top:0}
+.h-mar .h-slot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
+.h-mar .h-slot-time{font-weight:700;font-size:1.2rem;min-width:4.5em}
+.h-mar .h-outs{display:flex;flex-wrap:wrap;gap:8px}
+.h-mar .h-out{min-height:56px;min-width:96px;font-size:1.05rem}
+.h-mar .h-day{max-width:220px}
+@media (max-width:600px){.h-mar .h-out{flex:1 1 40%}}

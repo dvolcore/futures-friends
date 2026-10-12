@@ -1,0 +1,67 @@
+/* Classroom accommodations (accommodations.js, accommodations-kid.js; hub/ACCOMMODATIONS.md). No inline styles (CSP). In Kid Mode the
+   classes sit on #kidMode and change only how things look and pace, never what is scored. */
+
+/* ---- Kid Mode: larger targets ---- */
+.km.acc-large .km-btn{min-height:88px;font-size:1.6rem;padding:16px 32px}
+.km.acc-large .km-grown{min-height:56px;font-size:1rem;padding:14px 18px}
+.km.acc-large .km-tile{min-height:270px}
+.km.acc-large .km-tile img{width:150px;height:150px}
+.km.acc-large .km-kid{min-height:220px}
+.km.acc-large .km-cap{min-height:56px;font-size:1.1rem}
+.km.acc-large .sc-btn{min-width:112px;min-height:112px}
+.km.acc-large .sc-pic{width:128px;height:128px}
+.km.acc-large .sc-choices .sc-pic{width:150px;height:150px}
+.km.acc-large .sc-options .sc-num{min-width:128px;min-height:128px;font-size:2.6rem}
+@media (max-width:520px){.km.acc-large .km-tiles{grid-template-columns:1fr}.km.acc-large .sc-choices .sc-pic{width:132px;height:132px}.km.acc-large .km-tile{min-height:220px}}
+
+/* ---- high contrast ---- */
+body.kidmode:has(.km.acc-contrast){background:#fff}
+.km.acc-contrast{color:#000}
+.km.acc-contrast .km-tile,.km.acc-contrast .km-panel,.km.acc-contrast .km-kid,.km.acc-contrast .km-friend,.km.acc-contrast .sc-pic,.km.acc-contrast .sc-btn{background:#fff;border:3px solid #000;box-shadow:none;color:#000}
+.km.acc-contrast .km-btn,.km.acc-contrast .km-grown{background:#fff;border:3px solid #000;color:#000}
+.km.acc-contrast .km-btn-go{background:#000;border-color:#000;color:#fff}
+.km.acc-contrast .km-tile-kind,.km.acc-contrast .km-sub,.km.acc-contrast .sc-count,.km.acc-contrast .km-note{color:#000}
+.km.acc-contrast .sc-btn.sel,.km.acc-contrast .sc-btn.on,.km.acc-contrast .sc-btn.placed{background:#FFE14D;border-color:#000}
+.km.acc-contrast :focus-visible{outline:4px solid #000;outline-offset:3px}
+
+/* ---- reduced motion: no animation even if the device allows it ---- */
+.km.acc-motion *,.km.acc-motion *::before,.km.acc-motion *::after{animation:none !important;transition:none !important}
+
+/* ---- hand: main buttons on the child's side ---- */
+.km.acc-left .km-row,.km.acc-left .sc-actions,.km.acc-left .km-go{justify-content:flex-start}
+.km.acc-left .km-top{flex-direction:row-reverse}
+.km.acc-right .km-row,.km.acc-right .sc-actions,.km.acc-right .km-go{justify-content:flex-end}
+
+/* ---- simplified screens: fewer things at once ---- */
+.km.acc-simple .km-caps,.km.acc-simple .km-msgs,.km.acc-simple .km-extra,.km.acc-simple .km-build{display:none !important}
+
+/* ---- read-aloud note for the grown-up, one step at a time, break prompts ---- */
+.acc-readaloud{font:600 1rem/1.4 var(--body);background:#fff;border:2px dashed var(--navy);border-radius:14px;padding:10px 14px;margin:0 0 12px}
+.acc-onestep li[hidden]{display:none}
+.acc-onestep{font-size:1.25rem}
+.acc-stepof{font:600 1rem var(--body);margin:6px 0}
+.acc-next{margin:6px auto 0}
+.acc-break{position:fixed;inset:0;background:rgba(10,43,56,.55);display:grid;place-items:center;padding:16px;z-index:60}
+.acc-break-card{background:#fff;border-radius:24px;padding:24px;max-width:480px;width:100%;text-align:center}
+.acc-break-b{font:400 1.15rem/1.5 var(--body)}
+
+/* ---- adult pages (/c/<slug>/adapt) ---- */
+.ac-page .ac-kids{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ac-kid{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:10px;min-width:0}
+.ac-kid-name{font-weight:600}
+.ac-chips{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.ac-form{display:grid;gap:10px}
+.ac-checks{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border:0;padding:0;margin:0}
+.ac-checks legend{font-weight:600;margin-bottom:6px}
+.ac-check{display:flex;gap:8px;align-items:flex-start;min-height:44px;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.ac-check input{width:22px;height:22px;flex:none;margin-top:2px}
+.ac-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.ac-req,.ac-note{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;min-width:0;overflow-wrap:anywhere}
+.ac-guide{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0;background:#fff}
+.ac-guide summary{font-weight:600;min-height:44px;display:flex;align-items:center;cursor:pointer}
+.ac-guide ul{margin:6px 0 4px;padding-left:20px}
+.ac-res{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ac-res li{border:1px solid var(--line);border-radius:10px;padding:8px 10px;overflow-wrap:anywhere}
+.ac-plain{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.ac-plain li{display:flex;gap:8px;align-items:flex-start}
+.ac-plain li::before{content:"✓";color:var(--ok);font-weight:700}
