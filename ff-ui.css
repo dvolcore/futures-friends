@@ -1,0 +1,62 @@
+/* Futures Friends: the shared feel layer (motion audit 2026-10-12 SYS1, SYS2, SYS4, QW4; Apple HIG audit 2026-10-12 #1, #11, #15, #16).
+   Loaded after every other stylesheet. Tokens come from ff-tokens.css. Movement only under
+   (prefers-reduced-motion:no-preference) and without html[data-motion=off]; hover looks only for devices that really hover. */
+
+/* ============================================================== 1. Press: every control answers the finger on pointer-down
+   (ff-buttons.js adds .is-pressed on pointerdown, so touch gets it at once; :active covers the rest). The browser's own grey/blue tap
+   flash is replaced by these designed states, so the two ship together. Opacity and scale only: no art is redrawn. */
+html{-webkit-tap-highlight-color:transparent}
+:where(a[href],button,[role=button],[role=tab],[role=switch],summary,label[for],[data-go],select){touch-action:manipulation}
+:where(a[href],button,[role=button],[role=tab],[role=switch],[role=menuitem],summary,label[for],[data-go]):not(.btn,.px-btn,.hc-btn,.ffe-go,.ffs-btn,.totop):is(:active,.is-pressed){opacity:.72}
+/* cards and tiles sink a little instead of fading (scale, not transform, so it never fights a component's own transform) */
+:where(.hb-tile,.fl-door,.fl-band,.ffw-next-link,.ffw-m-link,.ff-footfriend,.hc-star,.st-strip-link,a.card,button.card,[data-go].card,.sp-card,.hc-door,.fj-act,.h3-tile,.ffx-mcard):is(:active,.is-pressed){opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) :where(.hb-tile,.fl-door,.fl-band,.ffw-next-link,.ffw-m-link,.ff-footfriend,.hc-star,.st-strip-link,a.card,button.card,[data-go].card,.sp-card,.h3-tile):is(:active,.is-pressed){scale:.98;transition:scale var(--ff-dur-1) var(--ff-ease-out)}
+}
+:root[data-motion=off] :where(.hb-tile,.fl-door,.fl-band,.ffw-next-link,.ffw-m-link,.ff-footfriend,.hc-star,.st-strip-link,a.card,button.card,[data-go].card,.sp-card,.h3-tile):is(:active,.is-pressed){filter:brightness(.95)}
+@media (prefers-reduced-motion:reduce){:where(.hb-tile,.fl-door,.fl-band,.ffw-next-link,.ffw-m-link,.ff-footfriend,.hc-star,.st-strip-link,a.card,button.card,[data-go].card,.sp-card,.h3-tile):is(:active,.is-pressed){filter:brightness(.95)}}
+/* a long press on a control selects its words or opens the link preview: not on buttons and cards (never on body text) */
+:where(button,[role=button],[role=tab],[role=switch],.btn,.px-btn,.hc-btn,.ffs-btn,.totop,summary){-webkit-user-select:none;user-select:none}
+:where(.hb-tile,.fl-door,.fl-band,.ffw-m-link,.sp-card,.h3-tile,.hc-door){-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+/* ============================================================== 2. Buttons: one system (.btn, .px-btn, .hc-btn)
+   Hover (mouse/trackpad only): rises 2 px with a soft shadow; outline buttons fill 8% with their own colour. Keyboard focus gets the
+   same lift. Press: squishes to .96 at once (spring token). Motion off: no lift, no squish; press darkens a touch instead. */
+.btn,.px-btn,.hc-btn{-webkit-tap-highlight-color:transparent;transition:translate var(--ff-dur-1) var(--ff-ease-out),scale var(--ff-dur-1) var(--ff-ease-spring),transform var(--ff-dur-2) var(--ff-ease-spring),box-shadow var(--ff-dur-2) var(--ff-ease-out),background-color var(--ff-dur-2) var(--ff-ease-out),border-color var(--ff-dur-2) var(--ff-ease-out),color var(--ff-dur-2) var(--ff-ease-out),filter var(--ff-dur-1) var(--ff-ease-out)}
+.btn:is(:active,.is-pressed),.px-btn:is(:active,.is-pressed),.hc-btn:is(:active,.is-pressed){filter:brightness(.93)}
+@media (hover:hover) and (pointer:fine){
+  .btn.ghost:hover,.btn.soft:hover,.btn:not(.gold,.navy,.danger,.ghost,.soft):hover,.px-btn.px-secondary:hover,.hc-btn-quiet:hover,.hc-btn-line:hover,.btn.sp-btn-glass:hover{background-color:color-mix(in srgb,currentColor 8%,transparent)}
+  .btn.soft:hover{background-color:color-mix(in srgb,var(--ink) 6%,var(--paper))}
+  .btn.navy:hover{background-color:color-mix(in srgb,var(--navy) 88%,#fff)}
+}
+@media (prefers-reduced-motion:no-preference){
+  @media (hover:hover) and (pointer:fine){
+    :root:not([data-motion=off]) :is(.btn,.px-btn,.hc-btn):hover{translate:0 -2px;box-shadow:0 10px 22px -12px rgba(10,43,56,.45)}
+    :root:not([data-motion=off]) .btn.gold:hover,:root:not([data-motion=off]) .hc-btn-gold:hover,:root:not([data-motion=off]) .px-btn.px-primary:hover{box-shadow:0 12px 26px -10px rgba(231,169,40,.6)}
+  }
+  :root:not([data-motion=off]) :is(.btn,.px-btn,.hc-btn):focus-visible{translate:0 -2px}
+  :root:not([data-motion=off]) :is(.btn,.px-btn,.hc-btn):is(:active,.is-pressed){translate:0 0;scale:.96;filter:none;transition-duration:80ms}
+}
+/* Magnet (main call-to-action only; FFMotion.magnet moves the label, never the hit area) */
+.ffm-label{display:inline-flex;align-items:center;gap:inherit;transition:transform var(--ff-dur-2) var(--ff-ease-out)}
+
+/* ============================================================== 3. Entrance reveal (ff-reveal.js): hidden only with JS + motion on */
+@media (prefers-reduced-motion:no-preference){
+  :root.ffr-on:not([data-motion=off]) [data-ffr=wait]{opacity:0;translate:0 var(--ff-rise)}
+  :root.ffr-on:not([data-motion=off]) [data-ffr=in]{transition:opacity var(--ff-dur-3) var(--ff-ease-out) var(--ffr-d,0ms),translate var(--ff-dur-3) var(--ff-ease-out) var(--ffr-d,0ms)}
+}
+
+/* ============================================================== 4. Heading rise + gold stitch (ff-reveal.js, GSAP SplitText words) */
+.ffh-key{position:relative}
+.ffh-key::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.12em;min-height:3px;border-radius:2px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,var(--gold,#E7A928) 0 .42em,transparent .42em .66em);clip-path:inset(0 100% 0 0);
+  transition:clip-path .7s var(--ff-ease-inout) .1s}
+.is-stitched .ffh-key::after{clip-path:inset(0 0 0 0)}
+@media print{
+  [data-ffr]{opacity:1!important;translate:none!important}
+  .ffh-w{opacity:1!important;transform:none!important}
+  .ffh-key::after{clip-path:none!important}
+}
+
+/* ============================================================== 5. Landscape notch clearance (HIG #15) */
+.bar .wrap{padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}

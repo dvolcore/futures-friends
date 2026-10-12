@@ -1,0 +1,22 @@
+/* Futures Friends motion tokens (motion audit 2026-10-12, SYS3): ONE set of easings and durations for the whole site. Loaded first,
+   so every stylesheet can use them; ff-motion.js mirrors them for script (FFMotion.ease, FFMotion.dur, FFMotion.gsapEase) and sets
+   gsap.defaults from them. Calm by design (families with children aged 2 to 5): short distances, 160 to 800 ms.
+   --ff-ease-out     entrances, hovers, anything arriving or answering a pointer
+   --ff-ease-spring  friends hopping and button presses only (a small overshoot)
+   --ff-ease-inout   things that travel from one place to another (a sheet, a slide, a tab)
+   --ff-ease-drawer  iOS sheet / drawer follow-through (drags, swipe-to-dismiss)
+   --ff-dur-1 160ms  press and hover        --ff-dur-2 260ms  small UI (menus, toggles, tabs)
+   --ff-dur-3 450ms  entrances              --ff-dur-4 800ms  signature moments only
+   The reveal distance (--ff-rise) and the stagger step (--ff-stagger) are shared by the entrance reveal and the heading rise. */
+:root{
+  --ff-ease-out:cubic-bezier(.22,1,.36,1);
+  --ff-ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --ff-ease-inout:cubic-bezier(.65,0,.35,1);
+  --ff-ease-drawer:cubic-bezier(.32,.72,0,1);
+  --ff-dur-1:160ms;
+  --ff-dur-2:260ms;
+  --ff-dur-3:450ms;
+  --ff-dur-4:800ms;
+  --ff-rise:16px;
+  --ff-stagger:60ms;
+}

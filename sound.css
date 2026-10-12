@@ -50,13 +50,28 @@
 @keyframes ffs-in{from{opacity:0;transform:translateX(8px)}}
 @keyframes ffs-wave{from{opacity:0}}
 @media print{.ffs{display:none!important}}
-/* Tucked dock (motion.js FFdock, visual audit 2026-10-07): when words or a control lie under the floating buttons they slide right to a
-   14px tab at the screen edge, so nothing floats on top of text; a tap on the tab brings them back for a few seconds. */
-.ffs-btn{transition:translate .22s cubic-bezier(.2,.8,.2,1),opacity .22s}
-.totop{transition:opacity .3s,transform .3s,translate .22s cubic-bezier(.2,.8,.2,1)}
-.ff-dock-tuck .ffs-btn,.ff-dock-tuck .totop.on{translate:calc(100% + max(18px,env(safe-area-inset-right)) - 14px) 0;opacity:.9}
-.ff-dock-tuck .ffs-btn::after{display:none}
+/* Tucked dock (motion.js FFdock, visual audit 2026-10-07): when words or a control lie under the floating buttons they slide right to
+   the screen edge, so nothing floats on top of text; a tap on the tab brings them back for a few seconds. */
+.ffs-btn{transition:translate var(--ff-dur-2) var(--ff-ease-out),opacity var(--ff-dur-2) var(--ff-ease-out),border-radius var(--ff-dur-2) var(--ff-ease-out)}
+.totop{transition:opacity .3s,transform .3s,translate var(--ff-dur-2) var(--ff-ease-out)}
 .ff-dock-tuck .ffs-hint{display:none}
+/* The tab (motion audit 2026-10-12 QW4 + HIG #11, #15): Sound, Nature and back to top tuck to a deliberate tab
+   When words or a control lie under them they tuck to the screen edge (motion.js FFdock, owner decision 2026-10-07). The 16 px that
+   stays on screen is now a small felt tab: rounded on the inside edge, a gold running stitch and a little arrow pointing back in,
+   instead of a half-circle cut off by the screen. Each tab has an invisible 44 px hit area (HIG #11); a tap brings the dock back.
+   back-to-top: a real 44 px target and clear of a landscape notch (HIG #15). */
+.totop{width:48px!important;height:48px!important;right:max(18px,env(safe-area-inset-right))!important}
+.ff-dock-tuck .ffs-btn,.ff-dock-tuck .totop.on{translate:calc(100% + max(18px,env(safe-area-inset-right)) - 16px) 0;opacity:1;border-radius:14px 0 0 14px!important;
+  box-shadow:-3px 4px 10px rgba(10,43,56,.16)!important;background-repeat:no-repeat!important;background-size:7px 11px,1.5px calc(100% - 12px)!important;background-position:4px 50%,13px 50%!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M6 1.5 2 6l4 4.5' fill='none' stroke='%2314313D' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),repeating-linear-gradient(180deg,rgba(176,122,0,.65) 0 4px,transparent 4px 7px)!important}
+.ff-dock-tuck .totop.on{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M6 1.5 2 6l4 4.5' fill='none' stroke='%23E7A928' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),repeating-linear-gradient(180deg,rgba(231,169,40,.75) 0 4px,transparent 4px 7px)!important}
+.ff-dock-tuck .ffs-btn>*,.ff-dock-tuck .totop.on>*{opacity:0}
+.ff-dock-tuck .ffs-btn::after{display:none}
+/* the invisible 44 px hit area of each tab (it adds nothing to the picture) */
+.ff-dock-tuck .ffs-btn::before,.ff-dock-tuck .totop.on::before{content:"";position:absolute;top:0;bottom:0;left:-28px;width:44px}
+.totop{position:fixed}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .ffs-btn>*,:root:not([data-motion=off]) .totop>*{transition:opacity var(--ff-dur-2) var(--ff-ease-out)}}
+
 @media (prefers-reduced-motion:reduce){.ffs-btn,.totop{transition:none}}
 :root[data-motion=off] .ffs-btn,:root[data-motion=off] .totop{transition:none}
 
