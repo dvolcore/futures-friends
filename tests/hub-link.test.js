@@ -46,3 +46,28 @@ test('wiring: HUB_URL is empty until go-live, hub-link.js loads after the demo a
   assert.match(read('demo-portal.js'), /Interactive demo \(sample data\)/);
   assert.doesNotMatch(idx, /Portal \(preview\)/, 'footer links say sign-in, not a portal preview');
 });
+
+// Owner 2026-10-12: "when you click on parent login it will go straight into it". Until go-live the header "Sign in" and every Family
+// sign-in link open the Family portal preview (portal-test/, the Futures Hub TEST copy: tests/portal-test.test.js) directly; the cards
+// offer it too, with the "opens soon" text for staff. At go-live (FF_HUB_URL set) all of it goes back to the real Hub on its own.
+test('until go-live: the cards offer the Family portal preview (fake demo family), staff still read "opens soon"', () => {
+  const { V, window } = load('');
+  assert.equal(window.FFHubLink.preview, 'portal-test/c/test-family-demo-center/');
+  for (const k of ['signin-family', 'signin-teacher', 'sign-in']) {
+    const h = V[k]();
+    assert.match(h, /id="hubPreviewGo" href="portal-test\/c\/test-family-demo-center\/">Family portal preview</, k);
+    assert.match(h, /fake demo family: nothing you do there is saved/, k);
+    assert.match(h, /When your center opens on the Futures Hub/, k);
+  }
+  assert.match(V['signin-teacher'](), /<b>Teachers and directors:<\/b> When your center opens/);
+});
+test('at go-live: no preview anywhere, and the sign-in links are left alone', () => {
+  const { V, window } = load('https://hub.example.test');
+  for (const k of ['signin-family', 'signin-teacher', 'sign-in']) assert.doesNotMatch(V[k](), /hubPreviewGo|portal-test/, k);
+  const a = { href: '#signin-family', getAttribute() { return this.href; }, setAttribute(k, v) { if (k === 'href') this.href = v; } };
+  window.FFHubLink.wire({ querySelectorAll: () => [a], matches: () => false });
+  assert.equal(a.href, '#signin-family', 'go-live: the link keeps its route (the card links to the Hub)');
+  const b = { href: '#signin-family', getAttribute() { return this.href; }, setAttribute(k, v) { if (k === 'href') this.href = v; } };
+  load('').window.FFHubLink.wire({ querySelectorAll: () => [b], matches: () => false });
+  assert.equal(b.href, 'portal-test/c/test-family-demo-center/', 'until go-live: straight to the preview');
+});

@@ -1,0 +1,167 @@
+/* Kid Mode and the work views (kid-mode.js). Sound is off everywhere (owner decision): pictures, captions, motion. Big friendly targets (at least 64px in Kid Mode), calm colours, motion only when the
+   device allows it. No inline styles (CSP): every colour is a class. */
+body.kidmode .top,body.kidmode .skip,body.kidmode .ff-support,body.kidmode footer{display:none !important}
+body.kidmode{background:#FFF8EA}
+.km{min-height:100vh;padding:16px 16px 40px;max-width:1180px;margin:0 auto;font-family:var(--display);color:var(--navy);position:relative;overflow-x:hidden}
+.km-loading{padding:80px 0;text-align:center;font-size:1.4rem}
+.km-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;min-width:0}
+.km-title{font-size:clamp(1.6rem,5vw,2.6rem);margin:0;flex:1;min-width:0}
+.km-hello{flex:1;margin:0;font-size:clamp(1.05rem,3.2vw,1.5rem);font-weight:500;min-width:0}
+.km-sub{font-family:var(--body);color:var(--muted);margin:0 0 16px}
+.km-grown{flex:none;font:600 .82rem/1 var(--body);color:var(--muted);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:10px 14px;min-height:40px;cursor:pointer;text-decoration:none}
+.km-grown-big{font-size:1rem;padding:14px 22px;margin-top:20px}
+.km-note{font-family:var(--body);font-size:.9rem;color:var(--muted);background:#fff;border-radius:12px;padding:8px 10px;margin:8px 0 0}
+
+/* avatar: friend art on a colour disc with an optional badge */
+.km-av{position:relative;display:inline-grid;place-items:center;width:120px;height:120px;border-radius:50%;flex:none;border:5px solid #fff;box-shadow:0 4px 14px rgba(10,43,56,.12)}
+.km-av img{width:86%;height:86%;object-fit:contain}
+.km-av-s{width:64px;height:64px;border-width:3px}
+.km-av-m{width:96px;height:96px}
+.km-av-l{width:150px;height:150px}
+.km-av-xl{width:220px;height:220px}
+.km-badge{position:absolute;right:-4px;bottom:-4px;width:38%;height:38%;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.km-badge svg{width:70%;height:70%}
+.km-b-star svg{fill:#E7A928}.km-b-heart svg{fill:#E0526B}.km-b-flower svg{fill:#C77DDB}.km-b-flower .km-flower-mid{fill:#F6C344}.km-b-rocket svg{fill:#2E7FB8}
+.km-c-sky{background:#CFE8F7}.km-c-sun{background:#FCE3A2}.km-c-leaf{background:#CDEBC6}.km-c-berry{background:#F5C9D8}.km-c-coral{background:#FBD0C0}.km-c-purple{background:#E2D2F4}
+
+/* who's playing */
+.km-who{list-style:none;padding:0;margin:0;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.km-kid{width:100%;display:grid;justify-items:center;gap:8px;background:#fff;border:3px solid transparent;border-radius:24px;padding:16px 8px;cursor:pointer;font:600 1.5rem/1.1 var(--display);color:var(--navy);min-height:180px}
+.km-kid:hover,.km-kid:focus-visible{border-color:var(--gold)}
+.km-kid[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.km-kid-label{font-size:clamp(1.3rem,4vw,1.8rem)}
+
+/* pick a friend */
+.km-friends{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:12px 0}
+@media (max-width:620px){.km-friends{grid-template-columns:repeat(2,1fr)}}
+.km-friend{display:grid;justify-items:center;gap:4px;background:#fff;border:4px solid transparent;border-radius:24px;padding:12px 6px;cursor:pointer;font:600 1.4rem var(--display);color:var(--navy);min-height:150px}
+.km-friend img{width:100%;max-width:160px;aspect-ratio:1;object-fit:contain}
+.km-friend.on{border-color:var(--gold);background:#FFF1CC}
+/* friends first, then the story world's kids (smaller tiles, still far above 44px); a kid with no approved art shows a styled initial */
+.km-group{margin:4px 0 0}
+.km-group-h{font:600 1.2rem var(--display);margin:10px 0 0}
+.km-friends-kids .km-friend{min-height:120px;font-size:1.2rem}
+.km-friends-kids .km-friend img,.km-friends-kids .km-friend .km-initial{max-width:110px}
+@media (max-width:620px){.km-friends-kids{grid-template-columns:repeat(3,1fr);gap:10px}.km-friends-kids .km-friend{min-height:104px;padding:8px 4px;font-size:1.05rem}}
+.km-initial{display:grid;place-items:center;width:100%;aspect-ratio:1;border-radius:50%;color:#fff;font:700 3rem/1 var(--display);box-shadow:inset 0 -6px 0 rgba(0,0,0,.12)}
+.km-av .km-initial{width:78%;font-size:2.6rem}
+.km-av-s .km-initial{font-size:1.4rem}.km-av-l .km-initial{font-size:3.4rem}.km-av-xl .km-initial{font-size:5rem}
+.km-i-rory{background:#1F6F78}.km-i-nova{background:#6E57A8}.km-i-teo{background:#A8323A}
+.km-opts[hidden]{display:none}
+.km-build{background:#fff;border-radius:20px;padding:12px 16px;margin:10px 0}
+.km-build summary{font-size:1.25rem;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.km-build-body{display:grid;gap:12px;padding-top:8px}
+.km-preview{display:flex;justify-content:center}
+.km-opts{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.km-opts legend{font-size:1.05rem;margin-bottom:6px}
+.km-opt{position:relative;display:grid;place-items:center;width:64px;height:64px;border-radius:18px;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.12);cursor:pointer;background:#F4EFE4}
+.km-opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.km-opt:has(input:checked){border-color:var(--navy)}
+.km-opt:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:2px}
+.km-opt img{width:52px;height:52px;object-fit:contain}
+.km-opt svg{width:36px;height:36px}
+.km-opt-badge svg{fill:var(--navy)}
+.km-swatch{width:44px;height:44px;border-radius:50%;display:block}
+.km-go{display:flex;justify-content:center;margin-top:12px}
+
+/* buttons */
+.km-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:64px;padding:12px 26px;border-radius:999px;border:3px solid var(--navy);background:#fff;color:var(--navy);font:600 1.3rem var(--display);cursor:pointer}
+.km-btn svg{width:28px;height:28px;fill:currentColor}
+.km-btn.soft{border-color:var(--line)}
+.km-btn-go{background:var(--gold);border-color:var(--gold);font-size:1.6rem;min-width:220px}
+.km-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:12px}
+
+
+/* activity tiles */
+.km-tiles{list-style:none;padding:0;margin:0;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+@media (max-width:520px){.km-tiles{grid-template-columns:1fr 1fr;gap:10px}.km-tile{min-height:170px;padding:12px 6px 14px;border-radius:20px}.km-tile img{width:84px;height:84px}.km-tile-title{font-size:1.05rem}.km-tile-kind{font-size:.68rem}.km-who{grid-template-columns:1fr 1fr}}
+.km-tile{position:relative;width:100%;display:grid;justify-items:center;gap:6px;border:0;border-radius:26px;padding:16px 12px 18px;cursor:pointer;color:var(--navy);text-align:center;min-height:220px;box-shadow:0 4px 14px rgba(10,43,56,.08)}
+.km-tile img{width:120px;height:120px;object-fit:contain}
+.km-move{background:#DDF0FA}.km-card{background:#FFF0D2}
+.km-tile-kind{font:600 .8rem var(--body);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.km-tile-title{font:600 1.3rem/1.2 var(--display)}
+.km-tile.done{outline:4px solid #8CCB7E}
+.km-done{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:4px;background:#fff;border-radius:999px;padding:4px 10px 4px 4px;font:600 .85rem var(--body);color:var(--ok)}
+.km-done .km-sticker{width:34px;height:34px;border-radius:50%;background:#FFF1CC}
+
+/* activity view */
+.km-panel{background:#fff;border-radius:28px;padding:20px;text-align:center;box-shadow:0 4px 14px rgba(10,43,56,.08)}
+.km-friend-big{width:min(280px,60vw);height:auto;aspect-ratio:1;object-fit:contain}
+.km-h{font-size:clamp(1.5rem,4vw,2.2rem)}
+.km-say{font-size:clamp(1.2rem,3.4vw,1.7rem);line-height:1.35;max-width:36ch;margin:8px auto}
+.km-steps{text-align:left;max-width:52ch;margin:10px auto;font:400 1.02rem/1.5 var(--body)}
+.km-yay .km-sticker-big{width:min(300px,64vw);aspect-ratio:1;object-fit:contain;background:#FFF1CC;border-radius:50%}
+.km-cheer{font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:600}
+@media (prefers-reduced-motion:no-preference){
+  .km-bounce{animation:km-bounce 1.6s ease-in-out infinite}
+  .km-yay .km-sticker-big{animation:km-pop .6s ease-out}
+}
+@keyframes km-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes km-pop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* grown-up gate */
+.km-gate{position:fixed;inset:0;background:rgba(10,43,56,.55);display:grid;place-items:center;padding:16px;z-index:50}
+.km-gate-card{background:#fff;border-radius:22px;padding:22px;max-width:420px;width:100%;text-align:center;font-family:var(--body)}
+.km-gate-t{font-size:1.1rem;color:var(--navy);font-weight:600}
+.km-hold{position:relative;overflow:hidden;width:100%;min-height:64px;border-radius:999px;border:2px solid var(--navy);background:#fff;font:600 1.1rem var(--body);color:var(--navy);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+.km-hold-fill{position:absolute;inset:0 auto 0 0;width:0;background:#FCE3A2}
+.km-hold-t{position:relative}
+.km-sum{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.km-sum .btn{min-width:64px;font-size:1.2rem}
+
+/* guide messages (character-msgs) */
+.km-msgs-h{font-size:1.2rem;margin:0}
+.km-msg-cards{display:flex;flex-wrap:wrap;gap:10px}
+.km-msgstage{margin-top:12px}
+.km-msgs{display:grid;gap:10px;margin:0 0 16px}
+.km-msg{display:flex;align-items:center;gap:12px;background:#fff;border-radius:22px;padding:10px 14px}
+.km-bubble{flex:1;margin:0;font-size:1.15rem}
+
+/* ---- adult views ---- */
+.km-work .km-fam-head{display:flex;gap:16px;align-items:flex-start}
+@media (max-width:560px){.km-work .km-fam-head{flex-direction:column}}
+.km-list,.km-timeline{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.km-item,.km-entry{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:10px;min-width:0}
+.km-item.done{background:var(--ok-bg)}
+.km-item-body{flex:1;min-width:0;display:grid;gap:2px}
+.km-item-img{width:48px;height:48px;object-fit:contain;flex:none}
+.km-entry > div{min-width:0}
+.km-wk{margin:14px 0 8px;font-family:var(--display);color:var(--navy)}
+.km-stamp{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;background:#FFF1CC;border-radius:999px;padding:2px 10px 2px 2px}
+.km-stamp img{width:24px;height:24px}
+.km-photo{display:block;max-width:220px;width:100%;border-radius:10px;margin-top:6px}
+.km-grid-head{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.km-controls{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.km-weekform{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.km-weekform .f{min-width:90px}
+.km-scroll{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+.km-table{border-collapse:separate;border-spacing:4px;min-width:640px;width:100%}
+.km-table th{font-size:.82rem;font-weight:600;text-align:center;vertical-align:bottom;color:var(--navy)}
+.km-table thead th img{display:block;width:36px;height:36px;object-fit:contain;margin:0 auto}
+.km-table thead th span{display:block}
+.km-table tbody th{text-align:left;white-space:nowrap;position:sticky;left:0;background:var(--paper);z-index:1;padding-right:8px}
+.km-cell{display:grid;place-items:center;width:100%;min-width:60px;min-height:52px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font:600 .9rem var(--body);cursor:pointer;color:var(--navy)}
+.km-cell.done{background:var(--ok-bg);border-color:#9fd1b3;color:var(--ok)}
+.km-cell.empty{cursor:default;color:#b7ab95}
+.km-cell.mark{color:var(--muted);border-style:dashed}
+.km-tick{font-size:1.1rem}
+.km-lvl{color:var(--navy)}
+
+/* N7: no connection, no Kid Mode (the calm pause screen) and the paired device page (kid-device.js) */
+.km-pause .km-title{flex:none;margin:12px 0 4px}
+.kd .kd-form{display:grid;gap:12px;margin-top:12px}
+.kd .kd-form input{font:600 1.6rem/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;min-height:64px;width:100%;max-width:340px}
+.kd .kd-big{min-height:64px;font-size:1.15rem;padding:12px 26px}
+.kd .kd-lang{margin:18px 0 0}
+.kdv-code{font:700 clamp(2rem,9vw,3.2rem)/1 var(--body);letter-spacing:.14em;color:var(--navy);margin:8px 0}
+.kdv-qr{width:180px;max-width:60vw;margin:8px 0}
+.kdv-qr svg{width:100%;height:auto;display:block}
+.kdv-list{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.kdv-item{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.kdv-item-body{flex:1;min-width:0;display:grid;gap:2px}
+.kdv-kids{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:0}
+.kdv-kids label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer}
+.kdv-pairbox{border:2px dashed var(--line);border-radius:14px;padding:14px;margin-top:12px}
+.kdv-card{border:2px solid var(--navy);border-radius:16px;padding:16px;margin-top:12px;display:grid;gap:6px;justify-items:start;background:#fff}
+@media print{body:has(.kdv-card) *{visibility:hidden}body:has(.kdv-card) .kdv-card,body:has(.kdv-card) .kdv-card *{visibility:visible}.kdv-card{position:absolute;left:0;top:0;border-width:3px}.kdv-card .no-print{display:none}}   /* only the page that shows a device card (every other page prints as before) */
+.kdv-hit{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold)}

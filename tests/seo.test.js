@@ -25,7 +25,7 @@ test('the sitemap lists every public page once, with absolute addresses on the c
   for (const k of ['kids-shop', 'enroll', 'centers', 'friends', 'store', 'membership', 'product-plush-bop', 'shop-kits']) assert.ok(locs.includes(`${ORIGIN}/${k}`), k);
   assert.match(read('robots.txt'), new RegExp(`^Sitemap: ${ORIGIN.replace(/[./]/g, '\\$&')}/sitemap\\.xml$`, 'm'));
   assert.match(read('robots.txt'), /^User-agent: \*$/m);
-  assert.doesNotMatch(read('robots.txt'), /^Disallow: \S/m);
+  assert.deepEqual(read('robots.txt').match(/^Disallow: \S.*$/gm), [`Disallow: ${new URL(ORIGIN + '/').pathname}portal-test/`], 'only the Futures Hub test copy (tests/portal-test.test.js)');
 });
 
 test('every sitemap address has a committed page with a unique title, description and canonical, and a real h1', () => {
