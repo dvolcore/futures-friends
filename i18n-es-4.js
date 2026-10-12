@@ -14,6 +14,7 @@ window.FFi18n.add('es', {
   "Staff": "Personal",
   "Visit our center": "Visita nuestro centro",
   "Teacher Portal": "Portal para maestros",
+  "Director Portal": "Portal de dirección",
   "preview": "vista previa",
   "Family Portal": "Portal para familias",
   "Whole Child": "Desarrollo integral",

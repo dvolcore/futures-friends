@@ -1,0 +1,338 @@
+/* The staff dashboards v2 (staff-v2-ui.js; hub/STAFF_DASHBOARDS.md "Dashboards v2"): the teacher's classroom cockpit and the director's
+   command centre, on the shared shell (ff-shell.css). Loaded after ff-shell.css. No inline styles (CSP): JS only sets custom properties. */
+
+/* ---- loading skeleton --------------------------------------------------------------------------------------------- */
+.ffs-loading .ffs-stage{gap:12px}
+.ffs-sk{border-radius:24px;background:linear-gradient(90deg,#F2ECDF 0%,#FBF7EF 50%,#F2ECDF 100%);background-size:200% 100%}
+.ffs-sk-hero{height:11rem}
+.ffs-sk-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ffs-sk-kpi{height:8rem}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .ffs-sk{animation:sv2-sk 1.4s linear infinite}}
+@keyframes sv2-sk{to{background-position:-200% 0}}
+
+/* ---- the cockpit grid ------------------------------------------------------------------------------------------- */
+.sv2-cockpit{gap:12px}
+.sv2-row3{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);min-width:0}
+.sv2-h4{margin:4px 0 6px;font:600 .9rem/1.2 var(--display);color:var(--navy)}
+.sv2-stats{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px;font-size:.84rem;color:var(--muted)}
+.sv2-stats b{font:800 1.25rem/1 var(--display);color:var(--navy);margin-right:3px;font-variant-numeric:tabular-nums}
+.sv2-ringrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.sv2-ringrow .ffs-glring{width:8rem;height:8rem}
+.sv2-money{font-size:1.75rem}
+
+/* hero extras */
+.sv2-rooms{display:flex;gap:6px;flex-wrap:wrap}
+.sv2-roomchip{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.85);color:var(--navy);font-weight:600;font-size:.86rem;text-decoration:none;box-shadow:inset 0 0 0 1.5px rgba(10,43,56,.12)}
+.sv2-roomchip[aria-current="page"]{background:var(--navy);color:#fff;box-shadow:0 6px 14px -8px rgba(10,43,56,.7)}
+.sv2-glance{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.sv2-gl{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:4px 14px 4px 4px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--navy);text-decoration:none;box-shadow:0 8px 20px -14px rgba(10,43,56,.55)}
+.sv2-gl .ffs-glring{width:40px;height:40px}
+.sv2-gl > span{display:grid;line-height:1.15}
+.sv2-gl b{font-size:.84rem}
+.sv2-gl span span{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sv2-gl-bad{box-shadow:inset 0 0 0 2px rgba(194,65,12,.45),0 8px 20px -14px rgba(10,43,56,.55)}
+
+/* ---- teacher: quick log ---------------------------------------------------------------------------------------- */
+.sv2-quick{display:grid;gap:8px;align-content:start;background:linear-gradient(160deg,#FFFDF6,#FFF6E0)}
+.sv2-qkids{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+.sv2-qkids .ffs-av{width:2.25rem;height:2.25rem}
+.sv2-more{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:50%;background:#F1ECE1;font:700 .74rem/1 var(--body);color:var(--navy)}
+.sv2-qkinds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.sv2-qk{display:grid;justify-items:center;gap:4px;min-height:64px;padding:8px 4px;border-radius:16px;background:#fff;color:var(--navy);text-decoration:none;font-size:.8rem;box-shadow:inset 0 0 0 1px rgba(10,43,56,.08),0 6px 14px -12px rgba(10,43,56,.5);transition:transform .15s var(--ease-out)}
+.sv2-qk:active,.sv2-qk.is-pressed{transform:scale(.95)}
+.sv2-qk .ffs-dot{width:2.4rem;height:2.4rem}
+.sv2-qform{display:grid;gap:12px}
+.sv2-qfs{border:0;margin:0;padding:0;display:grid;gap:6px}
+.sv2-qfs legend{font:600 .9rem/1.2 var(--display);color:var(--navy);padding:0;margin-bottom:6px}
+.sv2-qsel{display:flex;flex-wrap:wrap;gap:6px}
+.sv2-qkid{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;min-height:72px;padding:6px 4px;border:0;border-radius:16px;background:#fff;color:var(--navy);font:600 .74rem/1.1 var(--body);cursor:pointer;
+  box-shadow:inset 0 0 0 1.5px rgba(10,43,56,.12);transition:transform .12s var(--ease-out),box-shadow .15s}
+.sv2-qkid[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--bop),0 0 14px rgba(130,54,174,.35);background:var(--bop-tint)}
+.sv2-qkid:active,.sv2-qkid.is-pressed{transform:scale(.94)}
+.sv2-qtabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border-radius:16px;background:rgba(10,43,56,.06)}
+.sv2-qtab{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:52px;border:0;border-radius:12px;background:transparent;color:var(--navy);font:600 .78rem/1.1 var(--body);cursor:pointer}
+.sv2-qtab[aria-checked="true"]{background:#fff;box-shadow:0 2px 8px -3px rgba(10,43,56,.35)}
+.sv2-qopts{display:grid;gap:10px}
+.sv2-qrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sv2-ql{flex:1 1 100%;font-size:.78rem;font-weight:600;color:var(--muted)}
+.sv2-qopt{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:#fff;color:var(--navy);font:600 .84rem/1 var(--body);cursor:pointer;box-shadow:inset 0 0 0 1.5px rgba(10,43,56,.14)}
+.sv2-qopt img{border-radius:50%;object-fit:cover;object-position:50% 15%}
+.sv2-qopt[aria-checked="true"]{background:var(--navy);color:#fff;box-shadow:0 6px 14px -8px rgba(10,43,56,.7)}
+.sv2-qgo{width:100%;min-height:52px;font-size:1rem}
+.sv2-qgo[disabled]{opacity:.6}
+
+/* ---- teacher: plan, roster ------------------------------------------------------------------------------------- */
+.sv2-lesson{margin:0 0 6px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:.88rem}
+.sv2-blocks{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:b}
+.sv2-blocks li{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:2px 2px 2px 10px;border-radius:12px;background:#FBF8F1}
+.sv2-blocks li.is-done .sv2-bt b{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(10,43,56,.3)}
+.sv2-bt{display:grid;min-width:0}
+.sv2-bt b{font-size:.84rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sv2-bt span{font-size:.7rem;color:var(--muted)}
+.sv2-done{min-height:44px;padding:0 12px;font-size:.78rem;border-radius:12px;flex:none}
+.sv2-blocks-ro li{background:none;padding-left:0}
+.sv2-kids{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr));gap:6px}
+.sv2-kids-mini{grid-template-columns:repeat(auto-fill,minmax(7.4rem,1fr))}
+.sv2-kid-a{position:relative;display:flex;align-items:center;gap:8px;min-height:52px;padding:4px 8px 4px 4px;border-radius:16px;background:#fff;color:var(--navy);text-decoration:none;box-shadow:inset 0 0 0 1px rgba(10,43,56,.07)}
+a.sv2-kid-a{transition:transform .15s var(--ease-out)}
+a.sv2-kid-a:active,a.sv2-kid-a.is-pressed{transform:scale(.97)}
+.sv2-kid-t{display:grid;min-width:0;line-height:1.15}
+.sv2-kid-t b{font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sv2-kid-t span{font-size:.7rem;color:var(--muted)}
+.sv2-kids-mini .ffs-av{width:2.2rem;height:2.2rem}
+.st-out .sv2-kid-a,.st-gone .sv2-kid-a,.st-absent .sv2-kid-a{opacity:.62}
+.st-here .sv2-kid-a .ffs-av{box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(46,158,87,.55)}
+.sv2-flag{position:absolute;top:2px;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#fff}
+.sv2-flag .ffs-ico{width:.72rem;height:.72rem;stroke-width:2.6}
+.sv2-flag-allergy{left:30px;background:#C2410C;box-shadow:0 0 8px rgba(194,65,12,.6)}
+.sv2-flag-med{left:2px;background:var(--lumi)}
+.is-resting .ffs-av{box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(217,72,139,.5)}
+.sv2-evening{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:8px 10px;border-radius:14px;background:var(--bop-tint);font-size:.8rem;color:var(--navy)}
+.sv2-evening .ffs-ico{color:var(--bop)}
+.sv2-carebars{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sv2-carebars li{display:grid;grid-template-columns:6rem minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:center;font-size:.84rem}
+.sv2-carebars i{font-style:normal;color:var(--muted);font-size:.76rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sv2-dr-kid{display:grid;justify-items:center;gap:6px}
+.sv2-dr-kid .ffs-av{width:6rem;height:6rem;box-shadow:0 0 0 4px #fff,0 10px 24px -12px rgba(10,43,56,.5)}
+.sv2-drdots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sv2-drdots li{display:grid;padding:10px 12px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px rgba(10,43,56,.08)}
+.sv2-drdots b{font-size:.74rem;color:var(--muted);font-weight:600}
+.sv2-drdots span{font-weight:600;color:var(--navy)}
+.sv2-dr-hero{display:flex;align-items:center;gap:16px}
+.sv2-dr-hero .ffs-glring{width:8.5rem;height:8.5rem;flex:none}
+.sv2-clock .clock-card,.sv2-clock .card{margin:0;box-shadow:none;border:0;padding:0;background:none}
+
+/* ---- director: the living infographics ------------------------------------------------------------------------- */
+.sv2-figs{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.sv2-fig{display:grid;align-content:start;gap:4px;padding:12px 14px}
+.sv2-fig .ffs-ch{margin-bottom:0}
+.sv2-fig .ffs-sub{font-size:.74rem}
+.sv2-fig .ffs-tgl{min-height:32px;margin-top:-4px}
+/* ratio board */
+.sv2-board{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.sv2-br-a{display:grid;grid-template-columns:5.6rem minmax(0,1fr) 3.2rem 6.4rem;align-items:center;gap:8px;min-height:44px;padding:2px 6px;border-radius:12px;color:var(--navy);text-decoration:none;font-size:.8rem}
+@media (hover:hover) and (pointer:fine){.sv2-br-a:hover{background:#F6F2E8}}
+.sv2-br-a b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sv2-br-n{font:800 1rem/1 var(--display);font-variant-numeric:tabular-nums;text-align:right}
+.sv2-br-n small{font-size:.72rem;color:var(--muted)}
+.sv2-br-t{display:flex;align-items:center;gap:2px;font-size:.72rem;color:var(--muted);white-space:nowrap}
+.sv2-tch{display:inline-block;width:7px;height:12px;border-radius:4px 4px 2px 2px;background:var(--lumi);box-shadow:0 0 6px rgba(217,72,139,.55)}
+.sv2-br-bad .sv2-tch{background:#C2410C}
+/* funnel */
+.sv2-funnel{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.sv2-fn-a{display:grid;grid-template-columns:5.8rem minmax(0,1fr) 1.8rem;align-items:center;gap:8px;min-height:24px;color:var(--navy);text-decoration:none;font-size:.74rem}
+a.sv2-fn-a{min-height:28px}
+.sv2-fn-l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sv2-fn-bar{display:flex;justify-content:center;height:14px}
+.sv2-fn-fill{display:block;height:100%;width:var(--w,0%);border-radius:6px;background:linear-gradient(90deg,#B56CF0,#8236AE);box-shadow:0 0 10px rgba(130,54,174,.45);transition:width 1s var(--ease-out)}
+.sv2-funnel li:nth-child(n+5) .sv2-fn-fill{background:linear-gradient(90deg,#5BD889,#1F9D52);box-shadow:0 0 10px rgba(31,157,82,.45)}
+.sv2-fn-a b{font:800 .9rem/1 var(--display);text-align:right;font-variant-numeric:tabular-nums}
+.sv2-funnel-sm{margin:8px 0}
+/* heat calendar */
+.sv2-heat{display:grid;gap:4px}
+.sv2-heat-h,.sv2-heat-g{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.sv2-heat-h span{text-align:center;font:600 .66rem/1 var(--body);color:var(--muted)}
+.sv2-hc{display:grid;place-items:center;min-height:22px;border-radius:7px;font:600 .68rem/1 var(--body);color:var(--navy);background:#F1ECE1}
+.sv2-hc-pad{background:none}
+.sv2-hc-ahead{background:rgba(255,255,255,.6);color:var(--muted);box-shadow:inset 0 0 0 1px rgba(10,43,56,.08)}
+.sv2-hc-closed{background:repeating-linear-gradient(45deg,#E6E1D6 0 4px,#F6F3EC 4px 8px);color:var(--muted)}
+.sv2-lv1{background:#D6F0DF} .sv2-lv2{background:#A8E0BC} .sv2-lv3{background:#5CC183;color:#fff} .sv2-lv4{background:#1F9D52;color:#fff;box-shadow:0 0 8px rgba(31,157,82,.45)}
+.sv2-hc-today{box-shadow:inset 0 0 0 2.5px var(--navy)}
+.sv2-heat-avg{margin:2px 0 0;font-size:.74rem;color:var(--muted)}
+.sv2-heat-avg b{font:800 1.05rem/1 var(--display)}
+/* cash */
+.sv2-cash{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:8px;align-items:center}
+.sv2-cash-svg{width:100%;height:auto;overflow:visible}
+.sv2-cb{fill:#E3EAEE;stroke:var(--navy);stroke-width:1}
+.sv2-cc{fill:var(--gold);filter:drop-shadow(0 0 5px rgba(231,169,40,.55))}
+.sv2-ct{font-size:8px;font-weight:600;fill:var(--muted)}
+.sv2-cash-k{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:.72rem;color:var(--muted)}
+.sv2-cash-k li{display:grid;padding-left:12px;position:relative}
+.sv2-cash-k li::before{content:"";position:absolute;left:0;top:4px;width:8px;height:8px;border-radius:2px}
+.sv2-cash-k .k-b::before{background:#E3EAEE;box-shadow:inset 0 0 0 1px var(--navy)} .sv2-cash-k .k-c::before{background:var(--gold)} .sv2-cash-k .k-o::before{background:var(--lumi)}
+.sv2-cash-k b{font:800 .98rem/1.1 var(--display);color:var(--navy);font-variant-numeric:tabular-nums}
+/* staffing curve */
+.sv2-staff-svg{width:100%;height:auto;overflow:visible}
+.sv2-grid{stroke:rgba(10,43,56,.08);stroke-width:1}
+.sv2-need-a{fill:rgba(217,72,139,.12)}
+.sv2-need{fill:none;stroke:var(--lumi);stroke-width:2.5;filter:drop-shadow(0 0 4px rgba(217,72,139,.5))}
+.sv2-on{fill:none;stroke:var(--booker);stroke-width:2.5;stroke-dasharray:none;filter:drop-shadow(0 0 4px rgba(11,94,215,.45))}
+.sv2-now{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:3 3}
+.sv2-legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.7rem;font-weight:600;color:var(--muted)}
+.sv2-legend li{display:inline-flex;align-items:center;gap:5px}
+.sv2-legend li::before{content:"";width:12px;height:3px;border-radius:2px;background:var(--k)}
+.lg-need{--k:var(--lumi)} .lg-on{--k:var(--booker)} .lg-short{--k:#C2410C;color:#8F2A24}
+/* compliance countdown */
+.sv2-cd{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.sv2-cd li{display:grid;justify-items:center;gap:4px;text-align:center;min-width:0}
+.sv2-cd-ring{position:relative;display:grid;place-items:center;width:4.4rem;height:4.4rem}
+.sv2-cd-ring .ffs-glring{position:absolute;inset:0;width:100%;height:100%}
+.sv2-cd-ring b{position:relative;font:800 1.15rem/1 var(--display);color:var(--navy);font-variant-numeric:tabular-nums}
+.sv2-cd-over .sv2-cd-ring b{color:#8F2A24}
+.sv2-cd-t{font-size:.66rem;line-height:1.2;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* slim pillars on the director's overview */
+.ffs-pillars-slim .ffs-pillar{min-height:4.4rem;padding-top:4px}
+.ffs-pillars-slim .ffs-pillar img{height:4.6rem}
+.ffs-pillars-slim .ffs-pl-sub{display:none}
+/* lists */
+.sv2-place{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--navy);color:#fff;font:700 .84rem/1 var(--display);flex:none}
+.sv2-pages{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}
+.sv2-pagelist{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.sv2-pagelist a{display:flex;align-items:center;min-height:44px;padding:0 10px;border-radius:12px;color:var(--booker-ink);font-weight:600;font-size:.88rem;text-decoration:none}
+@media (hover:hover) and (pointer:fine){.sv2-pagelist a:hover{background:#F6F2E8}}
+
+/* ---- the director's command look: the hero's deep navy glass ----------------------------------------------------- */
+.sv2-hero-dir{min-height:10.5rem}
+.sv2-hero-dir .ffs-hello{font-size:clamp(1.6rem,3vw,2.3rem)}
+
+/* ---- tablet --------------------------------------------------------------------------------------------------- */
+@media (min-width:768px){
+  .sv2-row3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sv2-figs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* ---- desktop: one screen at 1440 ---------------------------------------------------------------------------------- */
+@media (min-width:1024px){
+  .sv2-row3{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr)}
+  .ffs-teacher .ffs-hero{min-height:10.5rem}
+}
+@media (min-width:1280px){
+  .sv2-figs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sv2-dir .ffs-kpi{padding:10px 14px}
+  .sv2-dir .ffs-kpi .ffs-glring{width:4.6rem;height:4.6rem}
+  .sv2-dir .ffs-big{font-size:1.85rem}
+  .sv2-dir .ffs-hero{min-height:9.5rem}
+  .sv2-dir .ffs-hero-in{padding:12px 22px}
+  .sv2-dir .ffs-band{padding-top:6px;padding-bottom:6px}
+  .ffs-teacher .sv2-cockpit .ffs-kpi .ffs-glring{width:4.8rem;height:4.8rem}
+}
+@media (max-width:767px){
+  .sv2-qkinds{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .sv2-cash{grid-template-columns:minmax(0,1fr)}
+  .sv2-cd{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sv2-br-a{grid-template-columns:4.6rem minmax(0,1fr) 2.8rem;row-gap:0}
+  .sv2-br-t{grid-column:2/-1}
+  .sv2-glance{display:none}
+  .sv2-carebars li{grid-template-columns:4.5rem minmax(0,1fr)}
+  .sv2-carebars i{grid-column:1/-1}
+}
+
+/* ---- one screen at 1440: the teacher's cockpit compacts (hero row on one line, the roster as a tile grid) ------------------ */
+.ffs-teacher .ffs-hero-in{max-width:64rem}
+.sv2-kids-mini{grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr));gap:4px}
+.sv2-kids-mini .sv2-kid-a{flex-direction:column;justify-content:center;gap:2px;min-height:64px;padding:6px 2px;text-align:center}
+.sv2-kids-mini .sv2-kid-t span{display:none}
+.sv2-kids-mini .sv2-kid-t b{font-size:.72rem}
+.sv2-kids-mini .sv2-flag-allergy{left:auto;right:8px}
+.sv2-kids-mini .sv2-flag-med{left:8px}
+.sv2-evening{text-decoration:none;min-height:44px}
+.sv2-plan-more{min-height:36px;justify-self:start}
+@media (min-width:1280px){
+  .ffs-teacher .ffs-hero{min-height:9rem}
+  .ffs-teacher .ffs-hero-in{padding:12px 22px;gap:2px}
+  .ffs-teacher .ffs-hello{font-size:2.15rem}
+  .ffs-teacher .ffs-hero-friend{height:170px}
+  .ffs-teacher .ffs-band{padding-top:6px;padding-bottom:6px}
+  .ffs-teacher .ffs-kpi{padding:10px 14px}
+  .ffs-teacher .ffs-big{font-size:1.85rem}
+  .ffs-teacher .sv2-row3 > .ffs-card{padding:10px 14px}
+  .sv2-kids-mini .sv2-kid-a{min-height:56px;padding:4px 2px}
+  .sv2-kids-mini .ffs-av{width:2rem;height:2rem}
+  .sv2-blocks li{min-height:48px}
+  .ffs-teacher .ffs-pillar{min-height:5.6rem}
+  .ffs-teacher .ffs-pillar img{height:5.6rem}
+}
+.sv2-lesson .sv2-plan-more{margin-left:auto}
+
+/* ---- the funnel standing up (columns) -------------------------------------------------------------------------- */
+.sv2-cols{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;align-items:end}
+.sv2-col-a{display:grid;grid-template-rows:auto 5.2rem auto;justify-items:center;gap:3px;min-height:44px;padding:2px 0;border-radius:10px;color:var(--navy);text-decoration:none}
+@media (hover:hover) and (pointer:fine){.sv2-col-a:hover{background:#F6F2E8}}
+.sv2-col-a b{font:800 .92rem/1 var(--display);font-variant-numeric:tabular-nums}
+.sv2-col{display:flex;align-items:flex-end;width:70%;max-width:26px;height:100%;border-radius:8px;background:rgba(10,43,56,.05)}
+.sv2-col-fill{display:block;width:100%;height:var(--h,0%);border-radius:8px;background:linear-gradient(180deg,#B56CF0,#8236AE);box-shadow:0 0 10px rgba(130,54,174,.45);transform-origin:bottom}
+.sv2-cols li:nth-child(n+5) .sv2-col-fill{background:linear-gradient(180deg,#5BD889,#1F9D52);box-shadow:0 0 10px rgba(31,157,82,.45)}
+.sv2-col-l{font-size:.6rem;line-height:1.1;text-align:center;color:var(--muted);max-width:100%;overflow-wrap:anywhere;min-height:2.2em}
+/* the ratio board as room tiles */
+.sv2-board-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sv2-board-2 .sv2-br-a{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name n" "bar bar" "t t";row-gap:3px;padding:6px 8px;background:#FBF8F1}
+.sv2-board-2 .sv2-br-a b{grid-area:name} .sv2-board-2 .sv2-br-n{grid-area:n} .sv2-board-2 .sv2-br-bar{grid-area:bar} .sv2-board-2 .sv2-br-t{grid-area:t}
+.sv2-board-2 .sv2-br-bad .sv2-br-a,.sv2-board-2 .sv2-br-a:is(.sv2-br-bad *){box-shadow:inset 0 0 0 2px rgba(194,65,12,.4)}
+
+/* ---- the director's overview on one screen at 1440: the command centre packs tight ------------------------------- */
+@media (min-width:1280px){
+  .sv2-dir .ffs-hero{min-height:8rem}
+  .sv2-dir .ffs-hero-in{max-width:none;padding:10px 260px 10px 22px;gap:2px}
+  .sv2-dir .ffs-hello{font-size:1.9rem}
+  .sv2-dir .ffs-date{margin-bottom:4px;font-size:1rem}
+  .sv2-dir .ffs-hero-friend{height:150px}
+  .sv2-dir .ffs-herorow{flex-wrap:nowrap}
+  .sv2-dir .sv2-glance{flex-wrap:nowrap}
+  .sv2-dir .ffs-attn{padding:5px 6px}
+  .sv2-dir .ffs-kpi{gap:2px;padding:8px 14px}
+  .sv2-dir .ffs-kpi .ffs-glring{width:4rem;height:4rem}
+  .sv2-dir .ffs-big{font-size:1.7rem}
+  .sv2-dir .sv2-money{font-size:1.5rem}
+  .sv2-dir .ffs-kpi-foot{position:absolute;right:12px;top:12px}
+  .sv2-dir .sv2-fig{position:relative;padding:8px 12px 6px}
+  .sv2-dir .sv2-fig > .ffs-sub{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .sv2-dir .sv2-fig .ffs-ch{margin-bottom:2px}
+  .sv2-dir .sv2-fig .ffs-ch h3{font-size:.95rem}
+  .sv2-dir .sv2-figlbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .sv2-dir .sv2-figlink{width:44px;justify-content:center;padding:0}
+  .sv2-dir .sv2-fig .ffs-tgl{position:absolute;top:0;right:48px;font-size:.72rem}
+  .sv2-dir .sv2-fig .ffs-fig{gap:0}
+  .sv2-dir .sv2-col-a{grid-template-rows:auto 4.6rem auto}
+  .sv2-dir .sv2-hc{min-height:19px}
+  .sv2-dir .sv2-heat{gap:3px} .sv2-dir .sv2-heat-g{gap:3px}
+  .sv2-dir .ffs-pillars-slim .ffs-pillar{min-height:3.1rem}
+  .sv2-dir .ffs-pillars-slim .ffs-pillar img{height:3.9rem}
+}
+@media (min-width:1280px){
+  .sv2-dir .sv2-fig .ffs-ch{min-height:40px;padding-right:150px}
+  .sv2-dir .sv2-fig .ffs-ch .sv2-figlink{position:absolute;top:2px;right:6px}
+  .sv2-dir .sv2-fig .ffs-tgl{top:2px;right:52px}
+  .sv2-dir .sv2-cash-svg{max-height:92px}
+  .sv2-dir .sv2-staff-svg{max-height:104px}
+  .sv2-dir .sv2-hc{min-height:18px;font-size:.62rem}
+  .sv2-dir .sv2-board-2 .sv2-br-a{padding:4px 8px}
+  .sv2-dir .ffs-band-h h2{font-size:1rem}
+}
+@media (min-width:1280px){
+  .sv2-dir .sv2-heat-avg{display:none}
+  .sv2-dir .sv2-cash{grid-template-columns:minmax(0,1fr)}
+  .sv2-dir .sv2-cash-k{grid-template-columns:repeat(3,minmax(0,1fr));order:-1}
+  .sv2-dir .sv2-cash-svg{max-height:84px}
+  .sv2-dir .ffs-hero{min-height:7.5rem}
+  .sv2-dir .ffs-hero-in{padding-top:8px;padding-bottom:8px}
+  .sv2-dir .ffs-band{padding-top:4px;padding-bottom:4px}
+  .sv2-dir .ffs-attn{padding:4px 6px}
+  .sv2-dir a.ffs-attn-go{min-height:44px}
+}
+.sv2-avg-chip{margin-left:6px}
+@media (max-width:767px){
+  .ffs-hero .sv2-rooms{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1 1 100%}
+  .ffs-hero .sv2-rooms::-webkit-scrollbar{display:none}
+  .sv2-roomchip{flex:none}
+  .ffs-kpi-body{flex-direction:column;align-items:flex-start;gap:6px}
+  .ffs-kpi .ffs-glring{width:4.4rem;height:4.4rem}
+  .ffs-big{font-size:1.7rem}
+  .sv2-glance{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1 1 100%}
+  .sv2-gl{flex:none}
+}
+
+/* ---- compliance countdown as rows: a small glowing ring, the full title, "12 days overdue · Sep 30" (owner: no truncation) -- */
+.sv2-cd{grid-template-columns:minmax(0,1fr);gap:4px}
+.sv2-cd li{display:flex;align-items:center;gap:8px;justify-items:start;text-align:left}
+.sv2-cd .ffs-glring{width:2.4rem;height:2.4rem;flex:none}
+.sv2-cd-t{display:grid;gap:0;font-size:.74rem;line-height:1.2;color:var(--navy);-webkit-line-clamp:unset;overflow:visible}
+.sv2-cd-t b{font-weight:600}
+.sv2-cd-when{font-size:.72rem;font-weight:700;color:var(--zuri-ink)}
+.sv2-cd-over .sv2-cd-when{color:#B42318}
+.sv2-cd-soon .sv2-cd-when{color:var(--gold-deep)}
+/* the staff KPI's badge */
+.sv2-badge{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:999px;font:700 .72rem/1.2 var(--body);vertical-align:middle;text-shadow:none}
+.sv2-badge-ok{background:var(--zuri-tint);color:var(--zuri-ink);box-shadow:0 0 10px rgba(46,158,87,.4)}
+.sv2-badge-bad{background:#FBE9E7;color:#8F2A24;box-shadow:0 0 10px rgba(194,65,12,.4)}
+/* the heat calendar glows like the rest */
+.sv2-lv3{box-shadow:0 0 6px rgba(46,158,87,.35)}
+@media (min-width:1280px){ .ffs-director{padding-bottom:0} .sv2-dir{gap:10px} .sv2-dir .sv2-figs{gap:10px} }

@@ -1,0 +1,65 @@
+/* Special education: the support-plan page, caseload, the quick goal screen (special-education.js, hub/SPECIAL_EDUCATION.md).
+   No inline styles (strict CSP): the chart's colours live here. Print: one plan summary or one progress report (named page sp). */
+.sp-page{display:grid;gap:16px;min-width:0}
+.sp-page .card + .card{margin-top:0}
+.sp-sec h4{margin:.8em 0 .3em;font-size:1rem;color:var(--navy)}
+.sp-sec h4.sp-h5{margin:.6em 0 .2em;font-size:.92rem}
+.sp-dl{display:grid;grid-template-columns:1fr;gap:6px 16px;margin:0 0 12px}
+@media (min-width:600px){.sp-dl{grid-template-columns:1fr 1fr}}
+.sp-kv{display:grid;gap:2px;min-width:0}
+.sp-kv dt{font-weight:600;font-size:.86rem;color:var(--muted)} .sp-kv dd{margin:0;overflow-wrap:anywhere}
+.sp-pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.sp-goal{border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px;background:#fff;min-width:0}
+.sp-goal-h{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.sp-goal-t{margin:0 0 6px}
+.sp-obj{margin:0 0 8px;padding-left:1.3em}
+.sp-goal-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin-top:8px}
+.sp-inline{max-width:240px}
+.sp-record,.sp-repform,.sp-stepsform,.sp-qform{margin-top:10px}
+.row.three{display:grid;gap:12px}
+@media (min-width:700px){.row.three{grid-template-columns:repeat(3,1fr)}}
+.sp-checks{display:grid;gap:6px}
+@media (min-width:600px){.sp-checks{grid-template-columns:1fr 1fr}}
+.sp-steplist{max-height:320px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px}
+.sp-check{display:flex;gap:8px;align-items:flex-start;min-height:44px;padding:6px 0}
+.sp-check input{width:22px;height:22px;flex:0 0 auto;margin-top:2px}
+.sp-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.sp-table th,.sp-table td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.sp-chart{display:block;width:100%;max-width:520px;height:auto;margin:8px 0}
+.sp-c-axis{stroke:#9AA7AD;stroke-width:1}
+.sp-c-target{stroke:var(--gold-deep);stroke-width:1.5;stroke-dasharray:5 4}
+.sp-c-line{fill:none;stroke:var(--navy);stroke-width:2.5;stroke-linejoin:round}
+.sp-c-dot{fill:var(--navy)}
+.sp-c-lbl{font:11px var(--body);fill:var(--muted)}
+.sp-meetings li{align-items:flex-start}
+.sp-opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.sp-mnotes{width:100%}
+.sp-report{border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 12px;background:#fff}
+.sp-rep-brand{display:flex;gap:10px;align-items:center;border-bottom:3px solid var(--gold);padding-bottom:8px;margin-bottom:10px}
+.sp-rep-brand .cp-mark{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--gold);color:var(--navy);font-weight:700}
+.sp-rep-goal{border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+.sp-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 12px}
+@media (min-width:700px){.sp-counts{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sp-count{display:grid;gap:2px;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;min-width:0}
+.sp-count b{font:600 1.5rem/1.1 var(--display);color:var(--navy)}
+.sp-entry-goals{display:grid;gap:10px}
+.sp-goal-btn{display:grid;gap:4px;text-align:left;width:100%;min-height:64px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:#fff;
+  font:500 1rem/1.35 var(--body);color:var(--ink);cursor:pointer}
+.sp-goal-btn[aria-expanded="true"]{border-color:var(--navy)}
+.sp-big{min-height:56px;font-size:1.1rem}
+.sp-yn{display:flex;gap:16px}
+.sp-yn .sp-check span{font-size:1.4rem}
+.sp-confgoals{border:1px dashed var(--line);border-radius:12px;padding:10px}
+.sp-confprog{border-top:2px solid var(--line);margin-top:10px;padding-top:8px}
+li.urgent a{color:var(--bad);font-weight:600}
+@media print{
+  @page sp{margin:14mm}
+  body.sp-print-mode{background:#fff}
+  body.sp-print-mode *{visibility:hidden}
+  body.sp-print-mode .sp-printing,body.sp-print-mode .sp-printing *{visibility:visible}
+  body.sp-print-mode .sp-printing{position:absolute;left:0;top:0;width:100%;border:none;margin:0;padding:0;page:sp}
+  body.sp-print-mode .sp-printing .no-print,body.sp-print-mode .sp-printing details:not([open]),body.sp-print-mode .sp-printing [hidden]{display:none !important}
+  body.sp-print-mode .sp-printing .card{box-shadow:none;border:none;padding:0 0 10px}
+  .sp-goal,.sp-rep-goal{page-break-inside:avoid}
+  .sp-rep-brand,.sp-rep-brand .cp-mark{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

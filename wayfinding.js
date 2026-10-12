@@ -156,7 +156,8 @@
     centers: [['book-demo', 'Book a demo'], ['membership', 'Monthly Membership'], ['founding-partners', 'Founding Partners'], ['brand-kit', 'Partner brand kit'], ['options', 'Program options'], ['for-prek', 'Pre-K and Head Start'], ['for-employers', 'Employer child care'], ['curriculum', 'Curriculum'], ['readiness', 'School readiness'], ['unit-1', 'Unit 1 at a glance'], ['teacher-standard', 'Teacher Standard'], ['academy', 'Training Academy'], ['train-your-staff', 'Train your staff'], ['room-planner', 'Room planner'], ['shop-programs', 'Classroom kits'], ['hub', 'Futures Hub'], ['start-center', 'Start your center'], ['funding', 'Funding help'], ['impact', 'Impact'], ['why', 'Why Futures Friends'], ['support', 'Support and FAQ'], ['contact', 'Contact']]
   };
   const MORE = MORE_BY[DEFAULT_AUD];
-  const PORTALS = [['signin-family', 'Family Portal'], ['signin-teacher', 'Teacher Portal'], ['sign-in', 'All sign-ins']];
+  // signin-director: the "Director login" (hub-link.js sends it to the Futures Hub preview's director dashboard, or the Hub at go-live)
+  const PORTALS = [['signin-family', 'Family Portal'], ['signin-teacher', 'Teacher Portal'], ['signin-director', 'Director Portal'], ['sign-in', 'All sign-ins']];
   // The context card: the honest next step for each audience (first one that is not the page you are on). Families: the pilot
   // center and the free library. Centers: a membership conversation first (review 2026-10-07), never "visit our center".
   const NEXT = {
@@ -284,7 +285,7 @@
     const groups = menu.querySelector('.ffw-m-groups'), side = menu.querySelector('.ffw-m-side');
     groups.innerHTML = groupHTML(audience, GROUPS[audience], AUD[audience].heading, 'is-active');   // only the chosen side's pages
     const r = route();
-    side.innerHTML = `<section class="ffw-m-portals" aria-labelledby="ffw-mp-h"><h2 class="ffw-m-sh" id="ffw-mp-h">Sign in</h2><div class="ffw-m-pills">${PORTALS.filter(([x]) => has(x)).map(([x, n]) => `<a class="ffw-m-pill" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${LOCK}<span>${E(n)}</span><small>preview</small></a>`).join('')}</div></section>
+    side.innerHTML = `<section class="ffw-m-portals" aria-labelledby="ffw-mp-h"><h2 class="ffw-m-sh" id="ffw-mp-h">Sign in</h2><div class="ffw-m-pills">${PORTALS.filter(([x]) => has(x) || x === 'signin-director').map(([x, n]) => `<a class="ffw-m-pill" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${LOCK}<span>${E(n)}</span><small>preview</small></a>`).join('')}</div></section>
       <section class="ffw-m-more" aria-labelledby="ffw-mm-h"><h2 class="ffw-m-sh" id="ffw-mm-h">More from Futures Friends</h2><ul>${MORE_BY[audience].filter(([x]) => has(x)).map(([x, n]) => `<li><a class="ffw-m-small" href="#${x}"${x === r ? ' aria-current="page"' : ''}>${E(n)}</a></li>`).join('')}<li><button type="button" class="ffw-m-small ffw-m-search" data-ffw-search>${ic('Search')}Search the site</button></li></ul></section>`;
     const pal = audience ? AUD[audience].wave : 'bop-waving';
     menu.querySelectorAll('.ffw-m-pal').forEach(el => { if (el.dataset.slug !== pal) { el.dataset.slug = pal; el.innerHTML = plush(pal, el.classList.contains('ffw-m-pal-top') ? 72 : 190, 'ffw-m-palimg') + (el.classList.contains('ffw-m-pal-corner') ? '<span class="tx-ground"></span>' : ''); } });

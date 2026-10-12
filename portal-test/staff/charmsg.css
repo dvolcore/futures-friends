@@ -1,0 +1,63 @@
+/* Character messages (charmsg.js, charmsg-player.js). Friend inks from the website (styles: --booker-ink etc.). No inline styles (CSP). */
+.cm-f-booker{--friend:#23589F;--friend-bg:#EAF1FB}
+.cm-f-lumi{--friend:#B02F6C;--friend-bg:#FCEBF3}
+.cm-f-zuri{--friend:#1B7541;--friend-bg:#E8F5EE}
+.cm-f-bop{--friend:#6B2A8E;--friend-bg:#F3EAF8}
+
+.cm-intro{display:flex;gap:18px;align-items:center;margin-bottom:16px}
+.cm-friends{display:flex;gap:2px;flex:0 0 auto}
+.cm-friends img{width:54px;height:auto}
+@media (max-width:640px){.cm-intro{flex-direction:column;align-items:flex-start}}
+
+.cm-kid-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.cm-kid h3{margin-top:18px}
+.cm-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cm-list > li{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;min-width:0}
+.cm-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.cm-preview{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.cm-preview img{flex:0 0 auto;width:48px;height:64px;object-fit:contain;background:var(--friend-bg);border-radius:10px;padding:4px}
+.cm-preview > div{min-width:0}
+.cm-script{margin:.4em 0 0;font-size:1.02rem;color:var(--ink);border-left:4px solid var(--friend,var(--line));padding-left:10px;overflow-wrap:anywhere}
+.cm-pre,.cm-hist{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.cm-pre summary,.cm-hist summary{cursor:pointer;min-height:32px}
+.cm-pre .choices{margin-top:8px}
+@media (min-width:700px){.cm-pre .choices.two{grid-template-columns:1fr 1fr}}
+.cm-history{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
+
+.cm-pick{border:0;padding:0;margin:4px 0 0}
+.cm-faces{display:grid;gap:8px;grid-template-columns:repeat(4,minmax(0,1fr));max-width:440px}
+.cm-face{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid var(--line);border-radius:14px;padding:6px 8px 4px;cursor:pointer;
+  background:var(--friend-bg);min-width:0;font-weight:600;color:var(--friend);font-size:.86rem}
+.cm-face img{height:60px;width:56px;object-fit:contain}
+.cm-face input{position:absolute;opacity:0;pointer-events:none}
+.cm-face:has(input:checked){border-color:var(--friend);box-shadow:0 0 0 2px var(--friend)}
+.cm-face:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:2px}
+
+/* the child's player: big, calm, few words */
+.cm-player{max-width:1040px;margin:0 auto;padding:16px 16px 56px}
+.cm-player-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.cm-player-head h1{margin:0}
+.cm-player .cm-pick{margin-bottom:16px}
+.cm-player .cm-face{font-size:1rem}
+.cm-player .cm-face img{height:76px;width:66px}
+.cm-cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.cm-card{display:flex;flex-direction:column;align-items:center;gap:8px;border:3px solid var(--friend);background:var(--friend-bg);border-radius:22px;
+  padding:16px 12px;cursor:pointer;font:600 1.15rem/1.25 var(--display);color:var(--navy);min-height:220px;text-align:center}
+.cm-card img{height:140px;width:110px;object-fit:contain}
+.cm-card:hover{transform:translateY(-2px)}
+.cm-card-f{font:600 .9rem/1 var(--body);color:var(--friend)}
+.cm-empty{text-align:center;padding:24px;color:var(--muted)}
+.cm-empty img{width:140px;height:auto;opacity:.9}
+
+.cm-stage{display:grid;gap:16px;align-items:center;background:var(--friend-bg);border:3px solid var(--friend);border-radius:26px;padding:20px}
+@media (min-width:760px){.cm-stage{grid-template-columns:minmax(200px,300px) 1fr}}
+.cm-stage-art{width:100%;max-width:300px;height:auto;margin:0 auto}
+@media (max-width:759px){.cm-stage-art{max-width:130px}}
+.cm-bubble{background:#fff;border-radius:22px;padding:20px;min-width:0}
+.cm-from{font:600 1rem/1.2 var(--body);color:var(--friend);margin-bottom:.4em}
+.cm-words{font:500 clamp(1.4rem,3.6vw,2.1rem)/1.35 var(--display);color:var(--navy);overflow-wrap:anywhere}
+.cm-note{font-size:.86rem;color:var(--muted);margin:.3em 0 0}
+.cm-note:empty{display:none}
+.cm-overlay{position:fixed;inset:0;background:rgba(10,43,56,.55);display:grid;place-items:center;padding:16px;z-index:20;overflow:auto}
+.cm-overlay > .cm-stage{max-width:900px;width:100%}
+@media (prefers-reduced-motion:reduce){.cm-card:hover{transform:none}}
