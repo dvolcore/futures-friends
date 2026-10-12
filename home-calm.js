@@ -239,7 +239,7 @@
   }
 
   // The release status line ("Ordering opens soon", linking to #pricing) is for programs: it now opens the #centers landing.
-  const body = () => intro() + doors() + status(true) + friends() + day() + proof(true) + trust() + close();
+  const body = () => intro() + doors() + status(true) + friends() + day() + (window.FFDayMachine ? window.FFDayMachine.section() : '') + proof(true) + trust() + close();   // day-machine.js: How a Futures Friends day travels
 
   // ---------------------------------------------------------------- moved off Home, onto the page for its audience
   // "Meet the Futures Friends Academy": the training catalog is for teachers, so it now closes #teacher-standard.

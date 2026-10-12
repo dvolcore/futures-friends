@@ -382,7 +382,7 @@ for (const width of [1280, 390]) {
       skies: [...document.querySelectorAll('[data-day]')].filter(e => e.matches('section')).map(e => { const cs = getComputedStyle(e); return cs.backgroundImage !== 'none' || !/rgba\(0, 0, 0, 0\)|transparent/.test(cs.backgroundColor); }),
       plates: [...document.querySelectorAll('.hd-plate.is-in')].length,
       night: !!document.querySelector('.ff-footscene .hd-night'),
-      height: document.documentElement.scrollHeight
+      height: document.documentElement.scrollHeight - (document.querySelector('.dm') ? document.querySelector('.dm').offsetHeight : 0)
     }));
     assert.equal(s.stage, false); assert.equal(s.live, false); assert.equal(s.walker, false);
     assert.ok(s.trail >= 12, 'the trail is simply there');
@@ -392,7 +392,9 @@ for (const width of [1280, 390]) {
     assert.ok(s.night, 'the footer is night');
     const moving = await ctxFor(width, true); const p2 = await moving.newPage();
     await h.goto(p2, site.base, 'home', 700);
-    const h2 = await p2.evaluate(() => document.documentElement.scrollHeight);
+    // 2026-10-12 owner ("How a Futures Friends day travels", day-machine.js): that one section is scroll-scrubbed, so with motion it
+    // is a tall sticky track and without motion a still picture; it is left out of the comparison, every other section must match.
+    const h2 = await p2.evaluate(() => document.documentElement.scrollHeight - (document.querySelector('.dm') ? document.querySelector('.dm').offsetHeight : 0));
     assert.ok(Math.abs(h2 - s.height) <= 2, `same layout with and without motion (${s.height} vs ${h2})`);
     assert.deepEqual(errors, []);
     await still.close(); await moving.close();
@@ -470,7 +472,9 @@ test('budgets: no layout shift on cold loads (CLS < 0.01) and the rest of Home o
   const vkb = [...got.entries()].filter(([id]) => clip(urlOf.get(id) || '')).reduce((a, [, b]) => a + b, 0) / 1024;
   // 2026-10-08 owner: the "Trusted by professionals" band under the Home hero (two ~12 KB portraits, ~11 KB script and style) lengthens the phone page
   // by ~1,330 px, which brings the picked friend's loop poster (89 KB) inside the swept range: 542 -> ~620 KB, so 600 -> 700.
-  assert.ok(kb <= 700, `below the fold on a phone (art, scripts, posters): ${kb.toFixed(0)} KB ${JSON.stringify(all.filter(([u]) => !clip(u)).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([u, b]) => [u.replace(/^.*?\/\/[^/]+\//, ''), Math.round(b / 1024)]))}`);
+  // 2026-10-12 owner: "How a Futures Friends day travels" (day-machine.js) draws the four friends' cut-outs on a phone at 440 px
+  // (~133 KB together, loaded only when the section comes near), so 700 -> 850.
+  assert.ok(kb <= 850, `below the fold on a phone (art, scripts, posters): ${kb.toFixed(0)} KB ${JSON.stringify(all.filter(([u]) => !clip(u)).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([u, b]) => [u.replace(/^.*?\/\/[^/]+\//, ''), Math.round(b / 1024)]))}`);
   assert.ok(vkb <= 2000, `story-world clips streamed on a full scroll of a phone: ${vkb.toFixed(0)} KB`);
   await ctx.close();
 });

@@ -1,0 +1,43 @@
+/* How a Futures Friends day travels (day-machine.js): a sticky, scroll-scrubbed isometric scene while motion is allowed
+   ([data-dm=live]); a still, complete illustration plus the steps as a list otherwise ([data-dm=still], also the default before
+   the script runs). Tokens only, so light and dark both work. */
+.dm{position:relative;padding-block:clamp(64px,7vw,96px) clamp(40px,5vw,64px);background:linear-gradient(to bottom,color-mix(in srgb,var(--cream) 0%,transparent),var(--cream) 56px,var(--cream) calc(100% - 56px),color-mix(in srgb,var(--cream) 0%,transparent))}
+.dm-head{margin-bottom:clamp(20px,2.6vw,32px)}
+.dm-head h2{font-size:clamp(28px,3.3vw,42px);letter-spacing:-.01em;color:var(--ink)}
+.dm-head p{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--muted);max-width:64ch}
+
+.dm-stage{position:relative}
+.dm-board{position:relative;max-width:1240px;margin-inline:auto;border-radius:clamp(18px,2.4vw,28px);overflow:hidden;background:var(--cream);border:1px solid var(--line);box-shadow:0 30px 60px -36px rgba(10,43,56,.38),0 2px 6px rgba(10,43,56,.05);isolation:isolate}
+.dm-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dm-grain{position:absolute;inset:0;pointer-events:none;background-size:160px 160px;mix-blend-mode:multiply;opacity:.7}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .dm-grain{mix-blend-mode:screen;opacity:.25}}
+:root[data-theme=dark] .dm-grain{mix-blend-mode:screen;opacity:.25}
+
+/* the caption: monospace, bottom-left corner (the floating Sound controls own the bottom-right) */
+.dm-cap{position:absolute;left:clamp(12px,1.8vw,22px);bottom:clamp(12px,1.8vw,20px);z-index:2;display:flex;align-items:baseline;gap:10px;margin:0;max-width:calc(100% - 84px);padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 86%,transparent);color:var(--ink);font:500 13px/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;box-shadow:0 6px 16px -10px rgba(10,43,56,.4)}
+.dm-capn{color:var(--muted);font-variant-numeric:tabular-nums}
+.dm-capt{display:inline-block;min-width:0;overflow-wrap:anywhere}
+.dm-dots{position:absolute;top:clamp(12px,1.8vw,20px);right:clamp(12px,1.8vw,20px);z-index:2;display:flex;gap:6px}
+.dm-dots i{width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--ink) 18%,transparent);transition:background-color .3s,scale .3s}
+.dm-dots i.on{background:var(--ink);scale:1.35}
+
+/* live: a tall track, the stage sticks under the header while the camera travels */
+.dm[data-dm=live] .dm-track{height:calc(var(--dm-n,10) * 52svh + 100svh)}
+.dm[data-dm=live] .dm-stage{position:sticky;top:calc(var(--ffw-head,122px) + 12px);height:calc(100svh - var(--ffw-head,122px) - 24px)}
+.dm[data-dm=live] .dm-board{height:100%}
+.dm[data-dm=live] .dm-steps{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* still (reduced motion / motion switch off): one composed picture of the whole loop, then the steps */
+.dm[data-dm=still] .dm-board{aspect-ratio:16/10}
+.dm[data-dm=still] .dm-cap,.dm[data-dm=still] .dm-dots{display:none}
+.dm-steps{list-style:none;margin:clamp(20px,2.6vw,32px) auto 0;padding:0;max-width:1240px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.dm-steps li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:15px;line-height:1.55;color:var(--ink)}
+.dm-stepn{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));border:1.5px solid var(--c);font:600 13px/1 var(--display);color:var(--ink)}
+@media (max-width:900px){.dm-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){
+  .dm[data-dm=still] .dm-board{aspect-ratio:1/1}
+  .dm-steps{grid-template-columns:1fr}
+  .dm-cap{font-size:12px;gap:8px;padding:7px 10px;max-width:calc(100% - 76px)}
+  .dm-dots{gap:5px}.dm-dots i{width:5px;height:5px}
+}
+@media (prefers-reduced-motion:reduce){.dm-dots i{transition:none}}
