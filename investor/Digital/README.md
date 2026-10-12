@@ -1,40 +1,31 @@
 # Futures Friends investor presentation
 
-Open `index.html` for the brand presentation, `financial-update.html` for the current financial reconciliation, and `business-plan.html` for the retained business narrative. All package files use relative links. External research links require internet access.
+Open `index.html` for the presentation, `pilot-plan.html` for the active model, and `pilot-one-sheet.html` for the investor summary. All package links are relative; research links need internet access.
 
 ## Current financial basis — October 11, 2026
 
-The full-scope gross year-one model is $3,139,152.61, with a $2,616,874.61–$3,963,953.40 cost range. The proposed facility is capped at $1.5M and leaves a gross $1,639,152.61 gap before verified receipts, available capital or scope changes. Debt costs and historical creator backpay are excluded. This is not an approved funding request.
+One owned Independence, Missouri location, 40 children ages 2–5, twelve operating months, and a first-month operational checkpoint. Two full-time adults plus individually listed part-time shifts, relief, food and substitute roles replace the national staffing case. Four adults on the floor is conditional on approved preschool grouping; a two-year-old cohort can require a fifth post. Confirm the actual age mix, license, rooms and schedule before accepting this roster.
 
-There are 687 itemized rows and 49 source records. The model combines published references, documented assumptions, and allowances requiring quotes; published rates still use assumed quantities where noted. The legacy debt tiers retained in the reader are historical sensitivities; the current 108-month schedule is illustrative only. The proposed facility is staged, interest applies only to drawn principal, and the first draw remains TBD pending an approved, quote-backed viable phase. The downloadable workbook, CSV and JSON are the October 11 package deliverables. The cost workbook records 49 source records (48 external and one management planning record) and 133 source-referenced lines; 554 remaining rows are allowances requiring records or quotes. The Higgsfield usage audit is included separately and distinguishes observed account activity from paid Futures Friends spend. These materials are not vendor quotes or audited accounts.
+The historical $910 monthly tuition and 96% collections are unverified planning inputs. They produce a negative annual operating margin before the building payment or debt. The package does not represent this case as profitable. The cost estimate is not an approved loan ask. The owner specifies $140,000 to enable refinancing; the new building payment, lender terms and closing costs still require documents.
 
-The plan separates center operations, provider-platform services and content/products, then consolidates cash with shared expenses allocated once. One pilot location serves ages 2–5. Capacity, lease, enrollment and current staff require records. The base model includes a 12 × 7-minute season and a 50-device pilot.
+Debt capacity uses cash after continuing operating costs and the building payment. Missing building-payment information blocks the affordability conclusion; it is not treated as zero. The calculator shows cash after entered debt and warns when the payment exceeds the modeled limit. Rates and terms are illustrative, not an offer.
 
-A hypothetical full $1.5M closing draw at illustrative 12% nominal annual interest would require 24 interest-only payments of $15,000 followed by 84 amortizing payments of $26,479.10: total scheduled repayment $2,584,244.33, including $1,084,244.33 interest. Final maturity is month 108 from closing; later draws do not restart maturity. Actual interest is calculated on drawn principal only; undrawn capacity carries no modeled commitment interest. No equity, conversion, permanent ownership, prepayment penalty or perpetual royalty is offered. The first draw, terms and repayment capacity remain subject to underwriting and signed documents.
+## Active sources
 
-## Included documents
+- `../costs/pilot-budget.json` and `model/pilot-budget.json`: identical model records.
+- `../costs/Pilot_40_Children_Itemized.csv`: 311 individually priced planning lines, evidence links and quote requirements.
+- `../costs/Pilot_40_Children_Monthly_Cash.csv`: staged operating/setup cash forecast.
+- `../documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md`: current narrative.
+- `../documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md`: current summary.
+- `../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf`: current branded pilot business plan.
+- `../Futures_Friends_CURRENT_Pilot_One_Sheet.pdf`: current one-page PDF.
 
-- `01_Investor_Business_Plan.pdf`: current branded control document with the complete 44-page narrative preserved as a clearly marked historical reference.
-- `02_Series_Curriculum_Production_Bible.pdf`: current branded production and curriculum control document with the original 35-page Bible preserved as reference.
-- `03_Program_Operations_Evidence_Companion.pdf`: current branded operating and evidence control document with the original 117-page companion preserved as reference.
-- `05_Investor_One_Sheet.pdf`: current investor one-page financial and investment overview.
-- `06_Financial_Reconciliation.pdf`: current financial reconciliation, assumptions, gates and research records, including the 108-month stress schedule and Higgsfield usage audit.
-- `costs/`: the exact itemized workbook, CSV and JSON.
-- `archive/`: preserved pre-update business plan. Obsolete one-sheets have been removed from this public package and retained privately for records.
+Published prices, owner inputs and allowances are distinct. No supplier quotation or audited financial statement is implied. Building payments, refinance points, historical creator fees and other open evidence remain unresolved rather than silently priced at zero.
 
-The digital reader retains the original 56 sections and 14 tables. Its old finance scenarios are explicitly historical. The presentation hides the old financing widgets and displays the current reconciliation instead. Navigation, chapter completion and return-to-presentation controls remain available.
+## Scope and historical references
 
-## Remaining underwriting work
+Pilot scope includes completion of the existing website, CRM, ATS, store, family/child permissions and activity records; finite approved character messages; curriculum, clinical review, bilingual materials, backups, security and local enrollment marketing. Eight classroom devices are modeled, with a ten-device management minimum. National sales, franchise tooling, bulk family tablets and the full 12-episode season are Phase 2 and excluded from current pilot financing.
 
-The 108-month forecast and 24-month interest-only cash bridge are included. Replace assumptions with actual operating records, obtain scoped written quotes and validate formal financial statements before underwriting. Assign funded phases, reconcile segment economics, and retest debt service against slower demand and higher costs. Count liquidity reserves once. The remaining work is evidence, review and acceptance.
+Superseded financial views have been retired. Legacy page and PDF links now resolve to the current pilot. Production and operating references retain creative depth, with future scope explicitly outside pilot financing.
 
-Publication proves that the documents are accessible. It does not prove hosted platform readiness, privacy approval, current collections, signed customer demand or debt affordability.
-
-## Browser-first investor delivery
-
-- [Presentation](index.html)
-- [All 687 itemized charges, calculations, sources and cash timing](cost-explorer.html#budget)
-- [108-month forecast, four scenarios and 13-week cash](cost-explorer.html#forecast)
-- [Reading room: all nine current sources and complete embedded PDFs](library.html)
-
-The investor can review every model row and every current source document in the browser. Original workbook, CSV, JSON and PDF copies remain secondary options. Digital presentation does not change model values or evidence status.
+Publication verifies accessibility of package files, not operational hosting, privacy clearance, signed enrollment, current collections or repayment capacity. Obtain actual operating records, written quotes, lender terms and professional review before funding.

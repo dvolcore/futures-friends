@@ -1,41 +1,20 @@
-# Futures Friends | Investor Executive One-Sheet
-## A fuller plan. A costed path forward.
+# Futures Friends | 40-child pilot — investor one-sheet
+One owned center in Independence, Missouri • Ages 2–5 • Twelve months • October 11, 2026
 
-**Current planning date:** 11 October 2026 · **Pilot:** one location, ages 2–5 · **Financing concept:** proposed $1.5M maximum staged facility
+Booker, Lumi, Zuri and Bop connect curriculum, movement, nutrition and family routines. The pilot proves the experience in one real center before licensing it elsewhere. Existing website, CRM, ATS, store and artwork are reused; working parent/child access, learning records, consent, billing and recovery controls must pass acceptance.
 
-### The decision
-Futures Friends connects a bilingual character world, early-learning curriculum, movement, nutrition, family participation, learning-zone merchandise, professional support, and a planned digital operating platform. The first proof is one pilot location. Expansion to other daycares, churches, home providers, schools, families, and employers is staged future opportunity, not contracted revenue.
+| Investor question | Direct answer |
+|---|---|
+| Staffing | Two full-time adults, six short-shift teachers, a break/admin floater, food worker and two substitutes. Four floor adults throughout the assumed ten-hour day; age/room grouping must be approved. Wages $269,680. |
+| Annual operating cost | $477,066.02 recurring; continues in year two, before inflation and building payments. |
+| Completion and launch | $146,964.00 one-time. Includes $57,000 platform completion, curriculum/clinical review, finite content and security. Local marketing totals $11,400 year one. |
+| Reserves | $22,044.60 contingency (15% of one-time spend) and $39,755.50 one-month working capital. No blanket unemployment reserve. |
+| Building | $140,000 owner funding requirement enabling refinance; payoff, terms and new payment unverified. $700,000 placeholder removed. |
+| Cash need | $423,849.52 estimate = $140,000 + $222,049.42 peak pilot deficit + contingency + cash floor. Excludes unresolved mortgage/debt and past creator fees. Not a final loan ask. |
+| Receipts | Historical $210/week ≈ $910/month; 96% collection. Forty full-year places collect $419,328.00 before discounts; current signed tuition unverified. |
+| Repayment reality | Full-enrollment operating cash -$57,738.02 before building/debt. Break-even realized tuition $1,036.37/month before those payments. Current case does not support borrowing; costs/tuition/funding must change. |
+| Investor terms | No permanent equity. Payment capacity follows cash after operations and building payment, with a 1.25 coverage screen. Terms/collateral/guarantees require an offer. |
+| Control | Accepted build milestones; consent/role/billing tests; security retest; offsite restore; educator/Spanish approval. Reviews at months 1, 3, 6 and 12. |
+| Deferred | National operations, full animated season, bulk family tablets and unsigned licensing income. |
 
-The proposed $1.5M is a maximum staged facility, not an automatic closing draw. The working structure is 12% nominal fixed interest on drawn principal only, draws during months 1–24, interest-only through month 24, then 84 monthly principal-and-interest payments ending in month 108. No permanent ownership, equity, conversion right, perpetual royalty, guaranteed return, or prepayment penalty is offered. The first draw must be tied to an approved, quote-backed phase; rate, points, collateral, covenants, reserves, and remedies require an agreed instrument and counsel review.
-
-### What exists and what remains to prove
-The public site demonstrates the brand, character system, bilingual direction, family content, learning-zone concept, portal concepts, and commerce direction. It does not prove hosted multi-tenant operation, live billing, enrollment, data isolation, backups, security acceptance, or receipts.
-
-The product is designed around director, teacher, parent, adult-mediated Kid Mode, support, and partner roles. Children receive finite, adult-approved character messages and activities; unrestricted child-facing AI is not part of the offer.
-
-### Current model
-
-- **Base gross year-one requirement:** $3,139,152.61
-- **Low / base / high:** $2,616,874.61 / $3,139,152.61 / $3,963,953.40
-- **Gross gap versus proposed loan:** $1,639,152.61 before receipts, scope changes, and financing costs
-- **687 cost rows:** 133 source-referenced lines and 554 planning allowances
-- **Content facet:** $539,647
-- **Animation labor allowance:** $122,640 for 84 minutes (12 × approximately 7 minutes), excluding audited but mixed-project Higgsfield account observations and other production costs
-- **Historical $842,000 / $994,000 envelopes:** superseded reference only; excluded from authoritative totals
-- **Higgsfield spend:** audited account evidence: $565 in Oct. 8 debits ($375 + $190), mixed projects; attribution to Futures Friends is not complete
-
-### Repayment reality
-Illustrative full-draw stress case only: $1.5M at 12%, $15,000/month interest-only through month 24, then approximately $26,479.10/month for months 25–108. Total modeled receipts over 108 months are approximately $2,584,244.33, including approximately $1,084,244.33 of interest. Undrawn availability carries no interest and a later draw does not reset final maturity. This is a model, not an offer. Base year-one illustrative net receipts are $370,784.80 and operating cash before debt is -$874,057.38; 1.25x coverage would require approximately $33,098.88/month during amortization. Current zero, downside, base, and upside stress cases fail repayment coverage. The responsible path is staged funding, reduced and accepted scope, verified receipts, or additional capital before full-scope borrowing.
-
-### Why this can matter
-Booker learns. Lumi belongs. Zuri explores. Bop moves. The potential advantage is the combination of owned characters and curriculum, bilingual delivery, classroom-to-home continuity, physical learning zones, adult-mediated child safety, and support designed for small providers. The proof must come from paid pilots, renewal, participation, outcomes, margins, contracts, and operating records.
-
-### Investor diligence before a draw
-Confirm the legal borrower and IP owner; license or exemption position; capacity; host agreement; insurance; roster and attendance; tuition collections; payroll; bank and debt records; vendor quotes; rights chain; privacy and safeguarding review; hosted role flows; backups/restores; content approvals; real-device tests; and signed partner demand.
-
-### Funding frame
-Release by evidence: readiness and legal records → one pilot and approved content → hosted platform acceptance → measured retention and unit economics → signed expansion demand. The detailed Business Plan, Production Bible, Operations Companion, current cost workbook, forecast, and historical reference PDFs provide the diligence trail.
-
-## Current production-finance control note
-
-Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning allowances.
+Before agreement: verify child ages, staffing/hours, tuition and discounts, operating bills, building/lender statement, bids, insurance, tax status and creator compensation/rights. Each price and evidence basis is inspectable in the digital cost register. A pilot reduces execution risk; it does not eliminate the need for positive recurring economics.

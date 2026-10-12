@@ -12,7 +12,7 @@ Futures Friends is a character-led early-learning program for children ages **2�
 
 The promise is simple: **Learn. Move. Explore. Belong.** A short story starts a week of play, conversation, observation, movement, nourishment, and take-home connection. Adults remain responsible for the relationship and the safety of the child. Technology supports the adult-mediated experience; it does not replace care or open-endedly converse with children.
 
-The proposed financing is a **$1.5M no-equity loan concept** whose terms, draw schedule, interest, security, and repayment protections remain subject to written agreement. The current gross year-one cost model is **$3,139,152.61**, leaving a **$1,639,152.61 gross gap before receipts, scope changes, or financing costs**. These figures describe a planning model, not a signed budget or lender offer.
+The current planning case is a one-location, 40-child, 12-month pilot. The itemized model contains 311 individually priced lines: $477,066.02 recurring cost, $146,964 one-time cost, and $22,044.60 contingency, for a $646,074.62 gross year-one requirement including contingency. A separate $140,000 owner-stated refinance-enabling need is shown separately. The $423,849.52 figure is a planning cash estimate before financing, not an approved or financeable loan ask. Under the stated timing assumptions, the model shows a $222,049.42 peak deficit and a $39,755.50 cash floor. Building debt payment, creator invoice and supplier quotes remain unresolved. The model does not claim profitability: at the current $910 tuition and 96% collection assumption, year-two annual margin is negative $57,738.02 before building payment or debt, and operating break-even is $1,036.37 tuition before building/debt.
 
 ## 2. Canon and brand rules
 
@@ -67,7 +67,7 @@ The current slate is thirteen short episodes. Episode 101 is the active working 
 
 The older **Wobbly Welcome Tower** title is superseded and must not appear as the active Episode One title.
 
-**Forward production assumption for the investor plan:** a future first season of **12 fully animated episodes at approximately 7 minutes each**, plus launch promos and short habit/special clips. This is a proposed production scope, not completed media or a funded delivery commitment. The source archive also contains an approximately six-minute development target and an older 13-episode slate; those remain historical working references until the owner approves one dated production schedule and budget. The related **$122,640 figure is a provisional labor allowance for 84 minutes (12 × 7), separate from the audited but mixed-project Higgsfield account observations and other production costs**. The older **$842,000 content/production envelope** (or $994,000 with prior contingency) is superseded, non-authoritative reference material. The authoritative budget is the 687-row ledger and its $539,647 content facet. The $122,640 line covers 84 episode minutes only; it does not itself cover QR/promos, voice, music, bilingual adaptation, captions, editing, rights, review, storage or delivery.
+**Forward production boundary:** the national 12-episode / seven-minute season, related bulk tablet rollout, national marketing and partner expansion are Phase 2. The current pilot includes a finite $3,000 generation cap for pilot assets; it is not a quote to produce a complete season. The Higgsfield account audit records observed mixed-project activity and must remain separate from the pilot allowance. A future season budget requires an approved schedule, vendor quotes, rights, voice, bilingual adaptation, captions, editing, review, storage and delivery.
 
 ## 4. Curriculum architecture
 
@@ -140,7 +140,7 @@ The same canon can support classroom kits, branded carpets and posters, books, c
 
 ## 10. Budget linkage and operating gates
 
-The current gross model is linked to the itemized workbook and JSON model rather than hidden inside this narrative. It contains 687 lines: 133 source-referenced lines and 554 planning allowances. Every allowance needs a record, written quote, or documented assumption before it becomes a committed purchase. Vendor prices are not the same as quotes; quotes are not the same as paid invoices.
+The current gross model is linked to `investor/costs/pilot-budget.json`, the 311-line itemized CSV, and the current workbook rather than hidden inside this narrative. Every line carries an item, quantity, rate, formula, bucket, evidence basis and source URL where one exists. Published references, supplier quotes and planning allowances remain distinct; a price with cents is not proof of a quote or payment.
 
 Budget release gates are: scope approval; vendor quote or written assumption; owner and quantity; purchase approval; delivery/acceptance; invoice and payment record; asset or service handoff; and operating owner sign-off. Root finance work should fill cash timing, draws, receipts, payroll taxes, debt service, and contingency separately. Financing costs are excluded from the current gross total unless the model says otherwise.
 
@@ -155,8 +155,8 @@ The founder/creative owner owns canon, mission, commercial priorities, and final
 - The site’s older four-session timing and the production target must be reconciled in a dated decision.
 - Spanish content and many curriculum units remain draft or review status.
 - Future partner, merchandise, tablet, and licensing receipts are uncontracted.
-- The $1.5M loan is proposed and unagreed; no equity is offered in this plan.
-- The gross model exceeds the proposed loan before receipts/scope changes; this is a funding and sequencing issue for the lender conversation.
+- The pilot package does not propose a fixed loan amount or promise repayment. The $423,849.52 figure is a planning cash estimate before financing; any financing must be sized after verified pricing, capacity, payroll, building terms and a positive recurring cash plan. No equity is offered in this plan.
+- At the stated tuition and collection assumptions, the pilot has negative year-two operating margin before building payment or debt; pricing, scope, staffing and demand require a documented reset before lender terms are negotiated.
 
 The next release is ready only when each open decision has an owner, evidence requirement, date, and signed acceptance record.
 
@@ -168,7 +168,7 @@ The next release is ready only when each open decision has an owner, evidence re
 | Character canon, episode engine, production gates | [Complete current Bible and historical reference](https://dvolcore.github.io/futures-friends/investor/02_Series_Curriculum_Production_Bible.pdf) | Working/current labels preserved |
 | Education, meals, movement, training | [Operations companion](https://dvolcore.github.io/futures-friends/investor/03_Program_Operations_Evidence_Companion.pdf) | Drafts require review and local compliance |
 | Current claims and contradictions | [Current business plan and evidence controls](https://dvolcore.github.io/futures-friends/investor/01_Investor_Business_Plan.pdf) | Conflicts remain explicit |
-| Cost and financing | `investor/costs/Full_Cost_Model.json`, `Full_Year1_Itemized.xlsx`, `Itemized_Costs.csv` | Allowances are not quotes; financing costs excluded unless modeled |
+| Cost and financing | `investor/costs/pilot-budget.json`, `Pilot_40_Children_Itemized.csv` | 40-child pilot register; allowances are not quotes; financing costs excluded unless modeled |
 | Historical PDFs | Original 35-page Bible and 117-page operations companion | Reference only; not silently current |
 
 ## Current production-finance control note

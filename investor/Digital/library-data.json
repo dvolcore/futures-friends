@@ -1,13 +1,80 @@
 {
   "documents": [
-    {"id":"business","title":"Investor Business Plan","kind":"Investor plan","source":"../documents/Futures_Friends_CURRENT_Investor_Business_Plan.md","pdf":"../01_Investor_Business_Plan.pdf","summary":"Mission, market, operating model, growth, financing and repayment assumptions."},
-    {"id":"bible","title":"Master Production Bible","kind":"Production","source":"../documents/Futures_Friends_CURRENT_Master_Production_Bible.md","pdf":"../02_Series_Curriculum_Production_Bible.pdf","summary":"Story world, characters, curriculum, episode system and brand continuity."},
-    {"id":"operations","title":"Operations Companion","kind":"Operations","source":"../documents/Futures_Friends_CURRENT_Operations_Companion.md","pdf":"../03_Program_Operations_Evidence_Companion.pdf","summary":"Delivery model, roles, controls, portals, evidence and operating requirements."},
-    {"id":"onesheet","title":"Investor Executive One-Sheet","kind":"Executive view","source":"../documents/Futures_Friends_CURRENT_Investor_Executive_One_Sheet.md","pdf":"../05_Investor_One_Sheet.pdf","summary":"The complete investment proposition at a glance."},
-    {"id":"loan","title":"Loan Pricing Rationale","kind":"Finance","source":"../documents/Futures_Friends_CURRENT_Loan_Pricing_Rationale.md","pdf":null,"summary":"Proposed staged financing terms, guardrails and coverage limits."},
-    {"id":"reconciliation","title":"Forecast & Production Reconciliation","kind":"Finance","source":"../documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md","pdf":"../06_Financial_Reconciliation.pdf","summary":"How the operating cost model, production plan and financing case reconcile."},
-    {"id":"animation-audit","title":"Animation Budget Reconciliation","kind":"Evidence audit","source":"../costs/Animation_Budget_Reconciliation.md","pdf":null,"summary":"Observed generation usage and the season production sensitivity."},
-    {"id":"higgsfield-audit","title":"Higgsfield Actual Usage Audit","kind":"Evidence audit","source":"../costs/Higgsfield_Actual_Usage_Audit.md","pdf":null,"summary":"Account-level usage evidence and limits of attribution."},
-    {"id":"record-audit","title":"Operating Record Evidence Audit","kind":"Evidence audit","source":"../costs/Operating_Record_Evidence_Audit.md","pdf":null,"summary":"Evidence status, source coverage and unresolved planning inputs."}
+    {
+      "id": "pilot-plan",
+      "title": "Current 40-Child Pilot Business Plan",
+      "kind": "Current pilot",
+      "source": "../documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md",
+      "pdf": "../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
+      "summary": "Active one-location, one-year pilot model for 40 children. Open assumptions and debt-affordability gates are shown explicitly.",
+      "view": "pilot-plan.html",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+    },
+    {
+      "id": "pilot-one-sheet",
+      "title": "Current Pilot Investor One-Sheet",
+      "kind": "Current pilot",
+      "source": "../documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md",
+      "pdf": "../Futures_Friends_CURRENT_Pilot_One_Sheet.pdf",
+      "summary": "Active pilot scope, operating logic, funding purpose and next-stage path in one digital page.",
+      "view": "pilot-one-sheet.html",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+    },
+    {
+      "id": "pilot-costs",
+      "title": "Current Pilot Itemized Cost Register",
+      "kind": "Current pilot",
+      "source": "../costs/Pilot_40_Children_Itemized.csv",
+      "pdf": null,
+      "summary": "Line-item pilot costs and evidence fields. Values remain tied to the current generator and source status.",
+      "view": "pilot-plan.html#budget",
+      "format": "csv",
+      "scopeNote": "Current 40-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+    },
+    {
+      "id": "bible",
+      "title": "Master Production Bible",
+      "kind": "Production",
+      "source": "../documents/Futures_Friends_CURRENT_Master_Production_Bible.md",
+      "pdf": "../02_Series_Curriculum_Production_Bible.pdf",
+      "summary": "Story world, characters, curriculum, episode system and brand continuity.",
+      "scopeNote": "Creative and operating reference. Future program scope is retained for continuity; national expansion and the full animated season are excluded from pilot financing."
+    },
+    {
+      "id": "operations",
+      "title": "Operations Companion",
+      "kind": "Operations",
+      "source": "../documents/Futures_Friends_CURRENT_Operations_Companion.md",
+      "pdf": "../03_Program_Operations_Evidence_Companion.pdf",
+      "summary": "Delivery model, roles, controls, portals, evidence and operating requirements.",
+      "scopeNote": "Creative and operating reference. Future program scope is retained for continuity; national expansion and the full animated season are excluded from pilot financing."
+    },
+    {
+      "id": "animation-audit",
+      "title": "Animation Budget Reconciliation",
+      "kind": "Evidence audit",
+      "source": "../costs/Animation_Budget_Reconciliation.md",
+      "pdf": null,
+      "summary": "Observed generation usage and the season production sensitivity.",
+      "scopeNote": "Evidence reference, not a supplier quote. Account usage does not establish an episode price; season production is outside the pilot budget."
+    },
+    {
+      "id": "higgsfield-audit",
+      "title": "Higgsfield Actual Usage Audit",
+      "kind": "Evidence audit",
+      "source": "../costs/Higgsfield_Actual_Usage_Audit.md",
+      "pdf": null,
+      "summary": "Account-level usage evidence and limits of attribution.",
+      "scopeNote": "Evidence reference, not a supplier quote. Account usage does not establish an episode price; season production is outside the pilot budget."
+    },
+    {
+      "id": "record-audit",
+      "title": "Operating Record Evidence Audit",
+      "kind": "Evidence audit",
+      "source": "../costs/Operating_Record_Evidence_Audit.md",
+      "pdf": null,
+      "summary": "Evidence status, source coverage and unresolved planning inputs.",
+      "scopeNote": "Evidence reference. Missing operating records and supplier quotes remain open; these estimates are not audited financial statements."
+    }
   ]
 }
