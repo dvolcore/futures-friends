@@ -66,3 +66,37 @@ This is the real cost of more layers and live glass on a machine without a GPU. 
 ### Still open, outside this lane
 
 The phone cast cut-outs are fetched at 960 px (Bop 141 KB, Zuri 118 KB, Lumi 94 KB). The cause is that `brand-art.js` / `plush-cast.js` set `sizes` from the 300 px design height, not the 138 px phone height. Fixing it would save about 250 KB on phones. It is a coordinator item; those files are not this lane's.
+
+# 3D friends (owner 2026-10-12)
+
+"Meet the friends in 3D" on #friends (`friends-3d.js`, engine `ff-3d.js`, three.js r170 vendored in `vendor/three-0.170.0/`). Measured
+2026-10-12 in headless Chromium from the platform repo, "GPU" = M4 Max through ANGLE/Metal, "SwiftShader" = software rendering.
+GPU ms = a synchronous benchmark (each frame forced to finish with `readPixels`), the friend's idle loop, 120 frames.
+
+| Profile | Tier picked | Canvas (device px) | GPU ms/frame: no fur / 8 shells / 16 shells | JS per frame | rAF median / p95 |
+|---|---|---|---|---|---|
+| Desktop 1280, DPR 2, GPU | high: 16 shells, DPR 2 | 1166 x 1032 | 1.58 / 1.78 / 2.06 | 0.2 ms | 8.3 / 9.9 ms (120 Hz) |
+| Phone 390, DPR 3, iPhone UA, GPU | mid: 8 shells, DPR 1.5 | 522 x 522 | 1.39 / 1.53 / 2.19 | 0.16 ms | 8.3 / 9.7 ms |
+| Same, 4x CPU | mid | 522 x 522 | 1.79 / 2.66 / 3.20 | 0.64 ms | 8.3 / 10.0 ms |
+| Desktop 1280, SwiftShader | low: no fur, DPR 1 | | 16.3 (no fur) | 0.2 ms | 16.7 / 33.8 ms |
+| Phone 390, SwiftShader | low | | 10.5 (no fur) | 0.12 ms | 8.4 / 17.8 ms |
+
+All four friends on the GPU at 1280 (DPR 1): no fur 1.04 to 1.27 ms, 16 shells 2.05 to 2.25 ms (the batch measured 2 to 4.7 ms while
+Blender was rendering). Long tasks while the first friend loads: one of 50 ms on the GPU phone profile; 150, 53, 85 and 58 ms at 4x CPU
+(module parse, meshopt decode, shader compile); up to 589 ms under SwiftShader (software shader compile).
+
+**Bytes on the first 3D view** (decoded): three.js 675 KB + GLTFLoader 108 + BufferGeometryUtils 31 + meshopt decoder 24 +
+RoomEnvironment 4 + engine 23 = 865 KB of JavaScript (217 KB gzip, as GitHub Pages serves it), the friend's GLB 943 KB, and on a
+fur tier the fur map 204 KB: 2,012 KB (1,808 KB on the low tier). Each further friend picked: its GLB (0.8 to 0.97 MB) and fur map.
+
+**Phones.** Real phones are untested (owner decision D4). They get the mid tier (8 shells, DPR cap 1.5); data saver, <= 2 GB memory,
+software rendering and older mobile GPUs (Mali-4xx/T, Adreno 2xx to 5xx, PowerVR) get plain PBR at DPR 1. On any device the engine
+samples 60 frame intervals after a 20-frame warm-up: a median above 22 ms halves the shells, then turns fur off, then drops the DPR to 1.
+The "Soft fur" button overrides it either way. On data saver nothing loads until "Show in 3D" is tapped.
+
+**Home's "How a Futures Friends day travels" (day-machine.js): kept 2D.** Swapping a station's cut-out for its 3D friend would mean
+at least 1.8 MB (engine + three.js + one GLB; 4.6 MB for all four stations) fetched while scrolling Home, against the phone budget
+of 850 KB for everything below the fold (tests/w8-page.test.js), and a second render loop (WebGL) tracking the machine's scroll-scrubbed
+2D camera every frame. The GPU cost would be fine (about 1.5 ms per friend per frame); the bytes are not. Loading only on a tap at a
+station would keep the budget, but the station friends are drawn small inside a moving, scroll-scrubbed canvas, so a 3D swap there
+adds little a visitor would see. The 3D viewer lives on #friends instead; Home and its budget test are unchanged.
