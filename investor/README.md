@@ -15,7 +15,7 @@ The active scope is one owned Independence, Missouri location, 40 children ages 
 
 ## Financial basis
 
-Model version pilot-40-v3: annual recurring costs $477,066.02; one-time setup $146,964.00; setup contingency $22,044.60; gross first-year spend $646,074.62. The owner-stated $140,000 refinance-enabling need is separate. The estimated pre-financing cash need is $423,849.52, assuming the stated enrollment ramp, receipts and cash floor. This is not an approved or demonstrated financeable loan ask.
+Model version pilot-40-v4: annual recurring costs $477,066.02; one-time setup $146,964.00; setup contingency $22,044.60; gross first-year spend $646,074.62. The owner-stated $140,000 refinance-enabling need is separate. The estimated pre-financing cash need is $423,849.52, assuming the stated enrollment ramp, receipts and cash floor. This is not an approved or demonstrated financeable loan ask.
 
 The $910 monthly tuition baseline at 40 children and 96% collections generates $419,328 annually and an operating shortfall of $57,738.02 before building payments or debt. Break-even tuition is $1,036.37 before building payments and debt. Borrowed operating cash is not repayment revenue. The building payment, actual lender terms and prior creator invoice remain unknown.
 
