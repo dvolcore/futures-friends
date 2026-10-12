@@ -26,8 +26,8 @@
 .sp-hero2.has-fun .sp-float{border:3px solid #fff}
 .sp-hero2.has-fun .sp-vid,.sp-hero2.has-fun .sp-float{translate:0 calc((var(--sy) - .5)*-34px)}
 .sp-hero2.has-fun .sp-hero2-copy{translate:0 calc((var(--sy) - .5)*22px)}
-.sp-hero2.has-fun .btn.gold{box-shadow:0 6px 0 #B77F12,0 14px 26px -8px rgba(0,0,0,.45);transition:transform var(--ff-dur-2) var(--sf-spring),box-shadow var(--ff-dur-2)}
-@media (hover:hover) and (pointer:fine){.sp-hero2.has-fun .btn.gold:hover{transform:translateY(-3px) rotate(-1deg)}}.sp-hero2.has-fun .btn.gold:active{transform:translateY(4px);box-shadow:0 2px 0 #B77F12}
+.sp-hero2.has-fun .btn.gold{box-shadow:0 6px 0 #B77F12,0 14px 26px -8px rgba(0,0,0,.45)}
+.sp-hero2.has-fun .btn.gold:active{box-shadow:0 2px 0 #B77F12}
 
 /* ---------------------------------------------------------------- felt ticker */
 .sf-ticker{overflow:hidden;padding-block:14px;border-block:3px dashed rgba(255,255,255,.7);box-shadow:inset 0 0 0 2px rgba(10,43,90,.06)}

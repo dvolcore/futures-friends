@@ -100,7 +100,6 @@
   :root:not([data-motion=off]) .hc-stitch-wait .hc-key::after{clip-path:inset(0 100% 0 0)}
   :root:not([data-motion=off]) .hc-stitch-wait.is-stitched .hc-key::after{clip-path:inset(0 0 0 0);transition:clip-path .7s var(--ff-dur-2) var(--ff-ease-inout)}
   :root:not([data-motion=off]) .ffm-label{transition:transform .35s var(--ff-ease-out)}
-  :root:not([data-motion=off]) .mh-hero .px-primary:active,:root:not([data-motion=off]) .hc-btn-gold:active{transform:scale(.97)}
   :root:not([data-motion=off]) .hc-kinetic.is-kinetic [data-k]{transition:opacity var(--ff-dur-2) linear}
   :root:not([data-motion=off]) .hc-picktab{transition:background-color var(--ff-dur-2),border-color var(--ff-dur-2),box-shadow var(--ff-dur-2)}
   :root:not([data-motion=off]) .hc-picktab:active{scale:.965}
