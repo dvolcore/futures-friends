@@ -146,6 +146,7 @@ At the end of the day the moments are bundled into one daily report.
 The report arrives on the family’s phone, and tapping the notification opens that exact report.
 5
 It ends with one 10-minute activity to try together at home tonight.
+
 What we have built so far
 
 Counted from our own library, and every one is free to open with your child.
@@ -1158,6 +1159,21 @@ Impact and research
 Why the early years matter and what we will measure.
 Why Futures Friends
 Teacher-led and hands-on, not video-first.
+How a center’s day gets recorded
+
+Every check a classroom logs travels one way: onto the director’s “What’s due”, into one record ready for licensing, and back as the next thing on the calendar.
+
+1
+Each classroom logs the checks a licensed center keeps: ratios, nap checks, drills and daily health checks.
+2
+Every check is time-stamped on the classroom tablet as it happens.
+3
+The director’s “What’s due” shows what is done today and what is coming up.
+4
+The day’s checks are filed into one record, ready when licensing asks for it.
+5
+The next drill goes on the calendar, so tomorrow starts the loop again.
+
 What we have built so far
 
 Counted from our own library, and every one is open to look at. Draft means no reviewer has approved it yet.

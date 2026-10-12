@@ -11,7 +11,7 @@ const vm = require('node:vm');
 const ROOT = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const H = () => import('./a11y-harness.mjs');
-const NAMES = ['whoosh', 'cloud-puff', 'letter-pop', 'logo-land', 'hop', 'land', 'chime', 'sparkle', 'wink', 'squish', 'rain', 'tap', 'page-turn', 'card-flip', 'badge', 'footstep', 'wave', 'firefly', 'night-chime'];
+const NAMES = ['whoosh', 'cloud-puff', 'letter-pop', 'logo-land', 'hop', 'land', 'chime', 'sparkle', 'wink', 'squish', 'rain', 'tap', 'page-turn', 'card-flip', 'badge', 'footstep', 'wave', 'firefly', 'night-chime', 'clunk', 'stamp', 'pop'];
 const LOOP = JSON.parse(read('views.js').match(/const FFH_LOOP = (\[[\s\S]*?\]\]);/)[1].replace(/'/g, '"'));
 const SWEEP = [['whole-child', 'ol.wc-steps'], ['for-centers', 'ul.wc-six'], ['for-families', 'section.band-paper .grid.g3'], ['teacher-standard', 'ul.ts-ask'], ['pricing', 'ul.pz-nofees']];
 

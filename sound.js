@@ -193,10 +193,24 @@
       tone(G, { t, f: hz(96) * 1.004, a: 0.06, d: 0.7, g: 0.065 * g, pan: x, wet: 0.6 });
       tone(G, { t: t + 0.08, f: hz(103), a: 0.04, d: 0.4, g: 0.02 * g, pan: x, wet: 0.6 });
     },
-    'night-chime': (G, t, x, g) => [88, 84, 79].forEach((m, k) => pluck(G, t + k * 0.28, hz(m), 0.13 * g, x, 0.5))
+    'night-chime': (G, t, x, g) => [88, 84, 79].forEach((m, k) => pluck(G, t + k * 0.28, hz(m), 0.13 * g, x, 0.5)),
+    // the day machine (day-machine.js, 2026-10-12): a card lands on the felt belt, the stamp checks it, the home card arrives
+    clunk: (G, t, x, g) => {                                             // a soft wooden knock, low and short
+      tone(G, { t, f: 150, f2: 82, a: 0.003, d: 0.12, g: 0.3 * g, pan: x, lp: 900 });
+      hiss(G, { t, f: 900, f2: 280, a: 0.002, d: 0.06, g: 0.1 * g, pan: x });
+    },
+    stamp: (G, t, x, g) => {                                             // a rubber stamp: a padded thump, then a tiny bright tick
+      hiss(G, { t, f: 620, f2: 190, a: 0.002, d: 0.09, g: 0.3 * g, pan: x });
+      tone(G, { t, f: 190, f2: 92, a: 0.002, d: 0.1, g: 0.28 * g, pan: x, lp: 1200 });
+      tone(G, { t: t + 0.07, type: 'triangle', f: hz(76), a: 0.004, d: 0.16, g: 0.07 * g, pan: x, lp: 2400 });
+    },
+    pop: (G, t, x, g) => {                                               // a card pops up: a quick rising bubble
+      tone(G, { t, f: 420, f2: 900, glide: 0.05, a: 0.003, d: 0.12, g: 0.22 * g, pan: x, lp: 3000, wet: 0.15 });
+      hiss(G, { t, f: 2400, a: 0.001, d: 0.03, g: 0.05 * g, pan: x });
+    }
   });
   const NAMES = Object.freeze(Object.keys(SFX));
-  const GAP = { footstep: 240, tap: 60, 'page-turn': 250, whoosh: 150, 'cloud-puff': 90, rain: 1600, chime: 200, badge: 250, 'logo-land': 800, 'night-chime': 900, 'card-flip': 120, wave: 300, firefly: 120, sparkle: 100 };
+  const GAP = { footstep: 240, tap: 60, 'page-turn': 250, whoosh: 150, 'cloud-puff': 90, rain: 1600, chime: 200, badge: 250, 'logo-land': 800, 'night-chime': 900, 'card-flip': 120, wave: 300, firefly: 120, sparkle: 100, clunk: 120, stamp: 200, pop: 150 };
 
   // ---------------------------------------------------------------- nature beds by day part: bed(P, t) -> stop(t); ev(P, s, until)
   const breeze = (P, t, level, lp) => {
