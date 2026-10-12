@@ -88,7 +88,7 @@
 
   const css = '.fx-btn{position:absolute;top:10px;right:10px;z-index:5;width:44px;height:44px;border-radius:50%;border:0;display:grid;place-items:center;'
     + 'background:rgba(10,43,56,.72);color:#fff;cursor:pointer;box-shadow:0 6px 16px rgba(10,43,56,.35);transition:transform .15s,background .15s}'
-    + '.fx-btn:hover{background:rgba(10,43,56,.92);transform:scale(1.06)}.fx-btn:focus-visible{outline:3px solid #E7A928;outline-offset:2px}'
+    + '@media (hover:hover) and (pointer:fine){.fx-btn:hover{background:rgba(10,43,56,.92);transform:scale(1.06)}}.fx-btn:is(:active,.is-pressed){background:rgba(10,43,56,.92);transform:scale(.94)}.fx-btn:focus-visible{outline:3px solid #E7A928;outline-offset:2px}'
     + '.fx-dialog{width:min(96vw,1400px);max-height:94vh;padding:0;border:0;border-radius:16px;background:#000;overflow:hidden}'
     + '.fx-dialog::backdrop{background:rgba(5,15,20,.86)}.fx-big{display:block;width:100%;max-height:calc(94vh - 56px);background:#000;object-fit:contain}'
     + '.fx-close{display:block;margin:0 auto;min-height:44px;padding:0 22px;border:0;background:#E7A928;color:#0A2B38;font:700 16px/1 inherit;border-radius:0 0 12px 12px;cursor:pointer}'
