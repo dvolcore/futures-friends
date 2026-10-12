@@ -266,8 +266,10 @@ function robotsTxt() {
   return `# Futures Friends public site. The full curriculum (day plans, packets, printables, unit data) is not published here
 # (IP lockdown, owner decision 2026-10-07): licensed centers receive it privately. Nothing on this site needs hiding from crawlers.
 # Search engines and AI answer engines (Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Applebot) are welcome.
+# The Futures Hub TEST copy (portal-test/: fake demo family, shared by direct link only) is not for search engines.
 User-agent: *
 Allow: /
+Disallow: ${BASE_PATH}portal-test/
 
 Sitemap: ${abs('sitemap.xml')}
 `;
@@ -356,7 +358,8 @@ function notFoundHtml() {
 <section id="nf-es" lang="es"><h2>No encontramos esa página</h2><p>Es posible que la página se haya movido o que el enlace tenga un error. Prueba una de estas.</p>
 <ul>${linksEs.map(l => `<li><a href="${l[1]}">${E(l[0])}</a></li>`).join('')}</ul>
 <p>¿Sigues sin encontrarla? Llama al <a href="tel:+18169885661">(816) 988-5661</a> y una persona real te ayudará.</p><p class="draft">Español (borrador): traducción pendiente de revisión.</p></section></main>
-<script>/* an address with a trailing slash (/kids-shop/) is the same page without it */(function(){var p=location.pathname;if(/\\/$/.test(p)&&p.length>${BASE_PATH.length}){var q=p.replace(/\\/+$/,'');location.replace(q+location.search+location.hash);}})();
+<script>/* the Futures Hub test copy (portal-test/) routes in the browser: its deep links go to its own page */(function(){var m=location.pathname.match(/^(.*?\\/portal-test)(\\/.*)$/);if(m){window.FFPT=1;location.replace(m[1]+'/?p='+encodeURIComponent(m[2]+location.search)+location.hash);}})();
+/* an address with a trailing slash (/kids-shop/) is the same page without it */(function(){var p=location.pathname;if(!window.FFPT&&/\\/$/.test(p)&&p.length>${BASE_PATH.length}){var q=p.replace(/\\/+$/,'');location.replace(q+location.search+location.hash);}})();
 /* Spanish first for a visitor who chose Spanish */(function(){var l=null;try{l=localStorage.getItem('ff-lang')}catch(e){}if(/[?&]lang=es\\b/.test(location.search))l='es';if(l!=='es')return;var m=document.querySelector('main'),es=document.getElementById('nf-es'),en=document.getElementById('nf-en');if(m&&es&&en){m.insertBefore(es,en);var h=es.querySelector('h2'),h1=document.createElement('h1');h1.innerHTML=h.innerHTML;h.parentNode.replaceChild(h1,h);var e=en.querySelector('h1'),h2=document.createElement('h2');h2.innerHTML=e.innerHTML;e.parentNode.replaceChild(h2,e);}document.documentElement.lang='es';document.title='Página no encontrada | Futures Friends';})();</script>
 </body></html>
 `;

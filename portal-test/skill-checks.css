@@ -1,0 +1,86 @@
+/* Skill checks in Kid Mode (skill-checks-kid.js) and the Grades pages (grades.js). No inline styles (CSP): every colour and size is a
+   class. Kid Mode targets are at least 64px; adult controls at least 44px. No red, no "wrong" mark anywhere a child looks. */
+
+/* ---- Kid Mode: the check cards on the home screen ---- */
+.sc-home{margin:0 0 16px}
+.sc-cards{list-style:none;padding:0;margin:0;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.sc-card{background:#FFF1CC;border:3px solid var(--gold)}
+.sc-count{font:500 .95rem var(--body);color:var(--muted)}
+
+/* ---- the play stage ---- */
+.sc-caption{font-size:clamp(1.05rem,3vw,1.4rem)}
+.sc-stage{display:grid;gap:18px;justify-items:center;padding:18px 12px}
+.sc-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:100%}
+.sc-pic{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:22px;background:#fff;position:relative;flex:none}
+.sc-btn{min-width:64px;min-height:64px;border:4px solid var(--line);cursor:pointer;padding:6px;color:var(--navy);font:600 1.3rem var(--display);background:#fff;touch-action:manipulation}
+.sc-btn:hover,.sc-btn:focus-visible{border-color:var(--gold)}
+.sc-btn.sel{border-color:var(--navy);background:#FFF1CC}
+.sc-btn.on,.sc-btn.placed{border-color:#9fd1b3;background:#EAF7EE}
+.sc-btn:disabled{opacity:.5;cursor:default}
+.sc-pic-img{width:88%;height:88%;object-fit:contain}
+.sc-show .sc-pic{width:72px;height:72px;background:#FFF8EA}
+.sc-q{font:700 2.2rem var(--display);color:var(--muted);border:3px dashed var(--line)}
+.sc-choices .sc-pic{width:120px;height:120px}
+.sc-badge{display:grid;place-items:center;width:72%;height:72%}
+.sc-badge svg{width:100%;height:100%}
+
+/* plain geometry and colour (no illustration) */
+.sc-shape{display:block}
+.sc-sz-s{width:34%;height:34%}.sc-sz-m{width:56%;height:56%}.sc-sz-l{width:80%;height:80%}
+.sc-circle{border-radius:50%}
+.sc-square{border-radius:6px}
+.sc-triangle{clip-path:polygon(50% 4%,96% 94%,4% 94%)}
+.sc-swatch{display:block;width:70%;height:70%;border-radius:16px;background:var(--line)}
+.sc-col-sky{background:#3B8FD0}.sc-col-sun{background:#F2B705}.sc-col-leaf{background:#4CA85A}.sc-col-berry{background:#C9467A}.sc-col-coral{background:#EF7B57}.sc-col-purple{background:#8C5CC8}
+
+/* count and tap */
+.sc-countme.on::after{content:"";position:absolute;inset:6px;border-radius:16px;box-shadow:inset 0 0 0 4px #4CA85A}
+.sc-options .sc-num{display:grid;justify-items:center;gap:6px;min-width:96px;min-height:96px;border-radius:22px;font-size:2rem}
+.sc-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;max-width:80px}
+.sc-dots i{display:block;width:10px;height:10px;border-radius:50%;background:var(--navy)}
+
+/* match pairs: each pair gets the same calm ring colour */
+.sc-match{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:480px}
+.sc-col{display:grid;gap:14px;justify-items:center}
+.sc-pair-0{border-color:#3B8FD0;background:#E3F1FB}.sc-pair-1{border-color:#8C5CC8;background:#F0E8FA}.sc-pair-2{border-color:#4CA85A;background:#EAF7EE}
+
+/* sort into two groups */
+.sc-bin{display:grid;justify-items:center;gap:8px;min-width:150px;min-height:150px;border-radius:26px;border-style:dashed}
+.sc-binlist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:44px}
+.sc-mini{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#FFF8EA}
+.sc-cards-row .sc-btn.placed{visibility:hidden}
+
+/* put in order */
+.sc-tag{position:absolute;top:-10px;left:-10px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 1.1rem var(--display)}
+.sc-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* cheers: the guide celebrates; "try again" is the same calm panel (no red, no X, no sound) */
+.sc-cheer .km-av-xl{margin:0 auto}
+.sc-again,.sc-onward{background:#FFF8EA}
+@media (prefers-reduced-motion:no-preference){.sc-yay .km-av-xl{animation:sc-bob .9s ease-in-out 2}}
+@keyframes sc-bob{50%{transform:translateY(-10px)}}
+@media (max-width:480px){.sc-pic{width:80px;height:80px}.sc-choices .sc-pic{width:96px;height:96px}.sc-show .sc-pic{width:56px;height:56px}.sc-bin{min-width:130px}}
+
+/* ---- Grades (adults) ---- */
+.sc-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.sc-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.sc-controls .f{min-width:140px;flex:1}
+.sc-table th span{display:block;max-width:140px;white-space:normal;font-weight:600}
+.sc-cell{display:grid;place-items:center;gap:2px;width:100%;min-width:72px;min-height:56px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font:600 .95rem var(--body);color:var(--navy);cursor:pointer}
+.sc-cell.empty{cursor:default;color:var(--muted);border-style:dashed}
+.sc-flag{color:#8a5a00}
+.sc-obs .choices{display:grid;gap:6px}
+.sc-obsform,.sc-override,.sc-composer{display:grid;gap:8px;width:100%}
+.sc-bank{margin:10px 0}
+.sc-bank summary,.sc-item,.btn,.choice{min-height:44px}
+.sc-unit{border:1px solid var(--line);border-radius:12px;margin:8px 0;padding:8px}
+.sc-item{display:flex;gap:8px;align-items:flex-start}
+.sc-answers{display:grid;gap:10px;padding-left:20px}
+.sc-reptable{width:100%;border-collapse:collapse;margin:8px 0}
+.sc-reptable th,.sc-reptable td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.sc-reptable .i{min-height:44px}
+.sc-lvl{font-weight:600}
+.sc-lvl-emerging{background:#FFF1CC}.sc-lvl-developing{background:#E3F1FB}.sc-lvl-secure{background:#EAF7EE}
+.sc-lvlw{display:block;margin-top:4px}
+.sc-report{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+@media (max-width:560px){.sc-reptable thead{display:none}.sc-reptable tr{display:grid;border-bottom:1px solid var(--line);padding:6px 0}.sc-reptable td{border:0;padding:4px 0}}

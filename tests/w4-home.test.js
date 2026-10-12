@@ -173,11 +173,16 @@ for (const width of [1280, 390]) {
     await h.goto(page, site.base, 'curriculum', 300);
     await page.click('#ff-loop [data-loop-step="3"]');
     assert.equal((await page.textContent('#ff-loop .ffhl-center b')).trim(), 'Move');
-    // the portals stay one tap away: "Sign in" in the utility bar opens the portal chooser (audience split)
+    // the portals stay one tap away. Owner 2026-10-12 ("when you click on parent login it will go straight into it"): until go-live
+    // (FF_HUB_URL empty, hub-link.js) "Sign in" in the utility bar and the Family Portal link open the Family portal preview (the
+    // Futures Hub TEST copy, portal-test/) directly; the Teacher Portal link still opens its page. At go-live they are the routes again
+    // (tests/hub-link.test.js, tests/portal-test.test.js check both modes).
+    const PREVIEW = 'portal-test/c/test-family-demo-center/';
     await h.goto(page, site.base, 'home', 300);
-    assert.equal(await page.locator('.px-utility a[href="#sign-in"]').count(), 1);
+    assert.equal(await page.locator(`.px-utility a.ffw-signin[href="${PREVIEW}"]`).count(), 1);
     await h.goto(page, site.base, 'sign-in', 300);
-    for (const r of ['#signin-family', '#signin-teacher']) assert.equal(await page.locator(`#view a[href="${r}"]`).count(), 1, r);
+    assert.equal(await page.locator('#view a[href="#signin-teacher"]').count(), 1, '#signin-teacher');
+    assert.ok(await page.locator(`#view a[href="${PREVIEW}"]`).count() >= 1, 'the Family Portal goes straight to the preview');
     assert.deepEqual(errors, [], 'no page errors');
     await ctx.close();
   });
