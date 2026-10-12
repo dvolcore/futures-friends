@@ -132,7 +132,8 @@ for (const width of [1280, 390]) {
     await h.goto(page, site.base, 'home');
     assert.equal(await page.evaluate(() => document.documentElement.dataset.audience), 'families', 'families by default');
     assert.deepEqual(await page.$$eval('.px-main a', as => as.map(a => a.getAttribute('href'))), ['#friends', '#family-videos', '#at-home', '#enroll'], 'the families nav');
-    assert.equal(await page.locator('.px-utility a.ffw-signin[href="#sign-in"]').count(), 1, 'Sign in sits beside the two audiences');
+    // Owner 2026-10-12: until the Hub goes live, "Sign in" goes straight into the family dashboard of the Futures Hub preview (hub-link.js)
+    assert.equal(await page.locator('.px-utility a.ffw-signin[href="portal-test/c/test-family-demo-center/?enter=family"]').count(), 1, 'Sign in sits beside the two audiences');
     await page.click('.px-utility .ffw-audbtn[data-audience="centers"]');
     await page.waitForTimeout(400);
     let f = await page.evaluate(() => ({ hash: location.hash, aud: document.documentElement.dataset.audience, pressed: [...document.querySelectorAll('.px-utility .ffw-audbtn')].map(b => b.getAttribute('aria-pressed')), main: [...document.querySelectorAll('.px-main a')].map(a => a.getAttribute('href')), cols: [...document.querySelectorAll('.ffw-sitemap > .ffw-fcol')].filter(c => getComputedStyle(c).display !== 'none').map(c => c.dataset.aud), live: document.getElementById('ff-announce').textContent, stored: localStorage.getItem('ff-audience') }));
@@ -198,7 +199,8 @@ for (const width of [1280, 390]) {
     });
     assert.ok(f.full, 'covers the whole screen'); assert.equal(f.aud, 2, 'two audience buttons on top');
     assert.equal(f.cur, '#pricing'); assert.ok(f.squiggle, 'a gold squiggle through the current page');
-    assert.deepEqual(f.pills, ['#signin-family:true:true', '#signin-teacher:true:true', '#sign-in:true:true'], 'portals are separate lock "preview" pills');
+    // Owner 2026-10-12: the Family and Teacher pills open those dashboards of the Futures Hub preview directly (hub-link.js, until go-live)
+    assert.deepEqual(f.pills, ['portal-test/c/test-family-demo-center/?enter=family:true:true', 'portal-test/c/test-family-demo-center/?enter=teacher:true:true', '#sign-in:true:true'], 'portals are separate lock "preview" pills');
     assert.ok(f.phone && f.talkBottom === 0 && f.talkH >= 48, '"Talk to a real person" and the phone are pinned at the bottom, 48 px+');
     assert.ok(f.rows.every(r => r >= 48), `48 px rows: ${f.rows}`);
     assert.equal(f.body, 'fixed', 'scroll lock that holds on iOS (body fixed)');
