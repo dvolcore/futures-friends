@@ -108,7 +108,7 @@
 .sp-friend:active{transform:scale(.98)}
 .sp-friend:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .sp-rowsec{padding-block:clamp(26px,4vw,52px) 0}
-.sp-row{list-style:none;margin:0;padding:6px max(20px,calc((100vw - 1180px)/2)) 22px;display:flex;gap:clamp(12px,1.6vw,20px);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;scroll-padding-inline:max(20px,calc((100vw - 1180px)/2));overscroll-behavior-x:contain}
+.sp-row{list-style:none;margin:0;padding:6px max(20px,calc((100vw - 1180px)/2)) 22px;display:flex;gap:clamp(12px,1.6vw,20px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:thin;scroll-padding-inline:max(20px,calc((100vw - 1180px)/2));overscroll-behavior-x:contain}
 .sp-row>.sp-cardwrap{flex:0 0 clamp(200px,24vw,290px);scroll-snap-align:start}
 .sp-row:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
 .sp-edit{position:relative;isolation:isolate;overflow:hidden;color:#fff;min-height:clamp(420px,56vh,620px);display:grid;align-items:center;margin-top:clamp(30px,4vw,56px)}
