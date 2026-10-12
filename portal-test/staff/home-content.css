@@ -1,0 +1,57 @@
+/* Content review (/hq/content, content-review.js), Kid Mode's day ending (kid-mode-endings.js) and Futures at Home (home-school.js).
+   Classes only: the CSP has no 'unsafe-inline'. */
+.msg.warn{background:var(--warn-bg);color:var(--warn)}
+.cr-counts{display:flex;flex-wrap:wrap;gap:6px}
+.cr-counts .chip{text-decoration:none}
+.cr-filters{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.cr-filters .f{min-width:150px;flex:1 1 150px;margin:0}
+.cr-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:16px;margin-top:16px}
+.cr-body .card + .card{margin-top:0}
+.cr-items{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+.cr-item{display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:10px;text-decoration:none;color:var(--ink);border:1px solid transparent}
+.cr-item:hover,.cr-item.on{border-color:var(--line);background:var(--cream)}
+.cr-t{font-weight:600;overflow-wrap:anywhere}
+.cr-item .chip{align-self:flex-start}
+.cr-sha{font-size:.8rem}
+.cr-steps{display:flex;flex-wrap:wrap;gap:4px;list-style:none;padding:0;margin:8px 0}
+.cr-steps li{font-size:.75rem;padding:3px 8px;border-radius:999px;background:#EEF1F2}
+.cr-steps li.done{background:var(--ok-bg);color:var(--ok)}
+.cr-steps li.now{background:#FCEBC3;color:var(--gold-deep);font-weight:700}
+.cr-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.cr-diff{margin:0}
+.cr-row{display:grid;grid-template-columns:minmax(90px,160px) minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.cr-row dt{font-weight:600;font-size:.85rem;overflow-wrap:anywhere}
+.cr-row dd{margin:0;overflow-wrap:anywhere}
+.cr-row.cr-same dd{color:var(--muted)}
+.cr-diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none}
+.cr-diff del{background:var(--bad-bg);color:var(--bad)}
+.cr-sbs{width:100%;border-collapse:collapse;table-layout:fixed}
+.cr-sbs th,.cr-sbs td{border-top:1px solid var(--line);padding:6px;vertical-align:top;text-align:left;overflow-wrap:anywhere;font-size:.9rem}
+.cr-events{padding-left:1.2em}
+.cr-events li{margin-bottom:6px}
+@media (max-width:760px){.cr-body{grid-template-columns:1fr}.cr-row{grid-template-columns:1fr}.cr-sbs th[scope=row]{width:25%}}
+
+.km-ending-card{background:var(--paper);border-radius:var(--radius);padding:14px 18px;margin:12px auto;max-width:560px;text-align:left}
+
+.hs-tabs{margin-top:8px}
+.hs-steps{list-style:none;padding:0}
+.hs-steps li{padding:6px 0 6px 28px;position:relative}
+.hs-steps li::before{content:'';position:absolute;left:0;top:10px;width:16px;height:16px;border-radius:50%;border:2px solid var(--line)}
+.hs-steps li.done::before{background:var(--ok);border-color:var(--ok)}
+.hs-daynav{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hs-daynav h3{margin:0}
+.hs-act{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.hs-levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.hs-levels dt{font-weight:700} .hs-levels dd{margin:0;font-size:.9rem}
+.hs-obs{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.hs-lv{border:0;padding:0;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:12px}
+.hs-plans{list-style:none;padding:0}
+.hs-plan{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.hs-receipt{border-top:1px solid var(--line);padding-top:8px}
+.hs-report{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.hs-report.on{outline:3px solid var(--gold);outline-offset:6px;border-radius:6px}
+@media print{
+  body.hs-print-mode .top,body.hs-print-mode .tabs,body.hs-print-mode .hs-head,body.hs-print-mode button,body.hs-print-mode footer{display:none !important}
+  body.hs-print-mode .hs-report:not(.hs-printing),body.hs-print-mode #hsMake,body.hs-print-mode #hsMakeMsg{display:none !important}
+  body.hs-print-mode .card{box-shadow:none;border:0}
+}

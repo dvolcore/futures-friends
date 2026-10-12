@@ -1,0 +1,33 @@
+/* Arrivals, kiosk and the classroom / director desks (arrivals.js, care-desk.js; N2 "one app", hub/PORTAL_RETIREMENT.md). */
+.arr-overlay{position:fixed;inset:0;z-index:50;background:rgba(10,43,56,.55);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px}
+.arr-flow,.arr-kiosk{background:var(--paper);border-radius:var(--radius);padding:20px;width:min(760px,100%);box-shadow:var(--shadow);display:grid;gap:12px}
+.arr-kiosk{width:min(1100px,100%)}
+body.arr-noscroll{overflow:hidden}
+.arr-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:10px}
+.arr-tile{display:grid;gap:4px;text-align:left;min-height:64px;padding:12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}
+.arr-tile:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.arr-tile.here{border-color:var(--ok)} .arr-tile.gone{opacity:.7}
+.arr-tile span{font-size:.85rem;color:var(--muted)}
+.arr-pad{width:100%;max-width:600px;height:auto;aspect-ratio:3/1;border:1.5px dashed var(--navy);border-radius:12px;background:#fff;touch-action:none}
+.arr-pin{max-width:12ch;letter-spacing:.2em}
+.arr-code-n{font-size:2rem;font-weight:700;letter-spacing:.15em;color:var(--navy)}
+.arr-kids .who{display:grid;gap:2px}
+.arr-st.here{color:var(--ok);font-weight:600} .arr-st.gone{color:var(--muted)}
+.arr-pick{display:inline-flex;gap:8px;align-items:center;min-height:44px}
+.arr-pick input{width:22px;height:22px}
+.arr-move{align-items:flex-end}
+.arr-tw{overflow-x:auto;max-width:100%}
+.arr-table{border-collapse:collapse;width:100%;font-size:.9rem}
+.arr-table th,.arr-table td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;min-width:70px}
+.cd-list .who > span{display:block}
+#arrOverlay .btn[aria-pressed="true"],form[data-rec] .btn[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media print{   /* only the pages that show the arrivals paper or the binder: a bare body * hid every other printout (family statements, plans) */
+  body:has(#arrPaper,#complianceBinder) *{visibility:hidden}
+  #arrPaper,#arrPaper *,#binderBody,#binderBody *,#complianceBinder,#complianceBinder *{visibility:visible}
+  #arrPaper,#complianceBinder{position:absolute;left:0;top:0;width:100%}
+  #arrPaper .cta-row,#complianceBinder .cta-row{display:none}
+}
+.smw-total{font-size:1.1rem;margin:4px 0}
+.smw-total b{font-size:1.6rem;color:var(--navy)}
+.oe-list{border-left:5px solid var(--gold)}
+#ratioResult{margin-top:8px}

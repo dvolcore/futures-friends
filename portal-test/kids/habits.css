@@ -1,0 +1,49 @@
+/* Habit cards (habits-ui.js, habits-core.js): the controls, the on-screen sheet and the printed sheet.
+   Every size on a card is in container units of its page (cqw), so the preview is the print scaled down; the print fills the paper. */
+.hc-wrap{display:grid;gap:16px}
+.hc-controls .choices.three{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.hc-pick-all{display:flex;gap:8px;margin:-4px 0 6px}
+.hc-checks{display:grid;gap:6px 14px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.hc-check{display:flex;gap:8px;align-items:center;min-height:36px}
+.hc-check input{width:20px;height:20px;accent-color:var(--navy)}
+.hc-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.hc-preview{display:grid;gap:18px;min-width:0}
+.hc-sheet{display:grid;gap:18px;min-width:0}
+.hc-page{container-type:inline-size;background:#fff;box-shadow:0 6px 24px rgba(10,43,56,.14);border-radius:6px;padding:2.5%;width:100%;max-width:820px;justify-self:center}
+.hc-grid{display:grid;grid-template-columns:1fr 1fr}
+.hc{--c:#8236AE;--s:#F3EAFB;display:grid;grid-template-rows:auto 1fr auto auto;aspect-ratio:3.8/3.36;outline:1px dashed #9aa6ad;outline-offset:-0.5px;padding:2.2cqw 2.4cqw 1.6cqw;gap:1cqw;background:#fff;color:#14313D;overflow:hidden;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+.hc-a4 .hc{aspect-ratio:95/91}
+.hc-booker{--c:#2F6FC0;--s:#E7EFFA}.hc-lumi{--c:#D9488B;--s:#FBE8F1}.hc-zuri{--c:#2E9E57;--s:#E6F4EB}.hc-bop{--c:#8236AE;--s:#F3EAFB}
+.hc-band{background:var(--c);color:#fff;border-radius:2cqw;padding:1.3cqw 2cqw;display:grid;gap:.2cqw}
+.hc-name{font-family:Fredoka,Poppins,system-ui,sans-serif;font-weight:600;font-size:4.3cqw;line-height:1.05}
+.hc-name.hc-long{font-size:3.5cqw}
+.hc-alt{font-size:2.3cqw;opacity:.92}
+.hc-body{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw;align-items:center;min-height:0}
+.hc-pic{display:grid;justify-items:center;align-content:end;gap:.4cqw;background:var(--s);border-radius:2cqw;height:100%;padding:1cqw .6cqw .6cqw;min-height:0;overflow:hidden}
+.hc-art{height:15cqw;width:auto;max-width:100%;object-fit:contain}
+.hc-noart{display:grid;place-items:center;width:14cqw;height:14cqw;border-radius:50%;background:var(--c);color:#fff;font:600 7cqw/1 Fredoka,sans-serif}
+.hc-with{font-weight:600;font-size:2.2cqw;color:var(--c)}
+.hc-qr{display:grid;justify-items:center;gap:.4cqw}
+.hc-qr .qr{width:15.5cqw;height:15.5cqw;display:block}
+.hc-scan{font-family:Fredoka,Poppins,sans-serif;font-weight:600;font-size:2.6cqw;color:var(--c)}
+.hc-foot{display:flex;justify-content:space-between;align-items:center;gap:1cqw}
+.hc-where{font-size:2.1cqw;font-weight:600}
+.hc-mark{height:3.6cqw;width:auto}
+.hc-mark-t{font-size:2cqw;font-weight:600}
+.hc-note{margin:0;font-size:1.55cqw;color:#4F616A;line-height:1.25}
+@page hc-letter{size:letter;margin:0.45in}
+@page hc-a4{size:A4;margin:10mm}
+@media print{
+  body:has(#hcSheet){background:#fff}
+  body:has(#hcSheet) > *:not(main){display:none !important}
+  body:has(#hcSheet) main > *:not(#centerSpace){display:none !important}
+  body:has(#hcSheet) #centerSpace > *:not(.hc-wrap){display:none !important}
+  body:has(#hcSheet) .hc-wrap > *:not(.hc-preview){display:none !important}
+  body:has(#hcSheet) main,body:has(#hcSheet) #centerSpace,body:has(#hcSheet) .hc-wrap,body:has(#hcSheet) .hc-preview{display:block;padding:0;margin:0;max-width:none;width:auto;box-shadow:none}
+  .hc-sheet{display:block}
+  .hc-letter .hc-page{page:hc-letter;width:7.6in}
+  .hc-a4 .hc-page{page:hc-a4;width:190mm}
+  .hc-page{box-shadow:none;border-radius:0;padding:0;max-width:none;break-after:page}
+  .hc-page:last-child{break-after:auto}
+}

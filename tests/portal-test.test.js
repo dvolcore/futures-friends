@@ -21,17 +21,17 @@ const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
 const FILES = walk(PT).map((f) => path.relative(ROOT, f).split(path.sep).join('/'));
 const TEXT = FILES.filter((f) => /\.(js|css|html|json|txt)$/.test(f));
-const COPIES = ['portal-test', 'portal-test/staff'].filter((d) => fs.existsSync(path.join(ROOT, d, 'fixtures.json')));
+const COPIES = ['portal-test', 'portal-test/staff', 'portal-test/kids'].filter((d) => fs.existsSync(path.join(ROOT, d, 'fixtures.json')));
 const FIXES = COPIES.map((d) => JSON.parse(read(`${d}/fixtures.json`)));
 const FIX = FIXES[0];
 
 // ------------------------------------------------------------------------------------------------------------------- static
 test('the test copy is hidden from search and from the site navigation', () => {
-  assert.deepEqual(COPIES, ['portal-test', 'portal-test/staff'], 'the parents\' copy and the staff copy');
-  for (const f of ['portal-test/index.html', `portal-test/c/${SLUG}/index.html`, 'portal-test/staff/index.html', `portal-test/staff/c/${SLUG}/index.html`]) {
+  assert.deepEqual(COPIES, ['portal-test', 'portal-test/staff', 'portal-test/kids'], 'the parents\', the staff and the Kids\' corner copies');
+  for (const f of ['portal-test/index.html', `portal-test/c/${SLUG}/index.html`, 'portal-test/staff/index.html', `portal-test/staff/c/${SLUG}/index.html`, `portal-test/kids/c/${SLUG}/kids/index.html`]) {
     const h = read(f);
     assert.match(h, /<meta name="robots" content="noindex, nofollow">/, f);
-    assert.match(h, /<base href="\/futures-friends\/portal-test\/(staff\/)?">/, f);
+    assert.match(h, /<base href="\/futures-friends\/portal-test\/((staff|kids)\/)?">/, f);
     assert.ok(h.indexOf('test-mode.js') < h.indexOf('app.js') && h.indexOf('clock.js') < h.indexOf('test-mode.js'), `${f}: the adapter loads before the app`);
   }
   assert.match(read('robots.txt'), /^Disallow: \/futures-friends\/portal-test\/$/m);
@@ -40,7 +40,7 @@ test('the test copy is hidden from search and from the site navigation', () => {
   // no page, menu or sitemap lists it otherwise.
   const linking = fs.readdirSync(ROOT).filter((f) => /\.(html|js)$/.test(f) && !['404.html', 'hub-link.js'].includes(f)).filter((f) => /portal-test/.test(read(f).replace(/<a (?:data-hub-preview="[a-z]*" )?href="portal-test\/c\/test-family-demo-center\/(?:\?(?:role|enter)=[a-z]+)?"(?: data-hub-preview="[a-z]*")?>/g, '')));
   assert.deepEqual(linking, [], 'only hub-link.js (and the links it rewrote, data-hub-preview, in prerendered pages) points at the test copy');
-  assert.match(read('404.html'), /portal-test.*location\.replace\(m\[1\]\+'\/\?p='/, '404.html sends the copy\'s deep links to its page');
+  assert.match(read('404.html'), /portal-test.*location\.replace\(n>3\?m\[1\]\+'\/c\/test-family-demo-center\/':m\[1\]\+'\/\?p='/, '404.html sends the copy\'s deep links to its page, with a loop guard');
 });
 
 test('no secrets, keys, tokens or local addresses; logins are salted hashes only', () => {
@@ -121,7 +121,8 @@ let harness = null;
 try { harness = require('node:module').createRequire(path.join(process.env.HUB_DIR || '/Volumes/FFCRM/app', 'hub/package.json'))('playwright-core'); } catch (_) { harness = null; }
 const AXE = fs.readFileSync(path.join(ROOT, 'tests/fixtures/axe-core/axe.min.js'), 'utf8');
 // axe findings the REAL front-ends have with the rich demo data too (checked against hub/web; reported to the platform). The copy adds none.
-const KNOWN_AXE = [/^scrollable-region-focusable: /, /^color-contrast: (li:nth-child\(\d\) > \.fd-pk-a\.fd-person-av\[aria-hidden="true"\]( \| )?)+$/];
+const KNOWN_AXE = [/^scrollable-region-focusable: /, /^color-contrast: (li:nth-child\(\d\) > \.fd-pk-a\.fd-person-av\[aria-hidden="true"\]( \| )?)+$/,
+  /^color-contrast: \.sv2-hc-today$/];   // staff-v2.css: the attendance heatmap's "today" cell (white on #5cc183), reported to the staff dashboards
 const ROLES = {
   family: { dash: '#fdKpis', tiles: '#fdKpis a[data-drawer], #fdKpis .fd-kpi', copy: '' },
   teacher: { dash: '#sv2Kpis', tiles: '#sv2Kpis .ffs-kpi', copy: 'staff/' },
@@ -158,7 +159,8 @@ for (const [role, R] of Object.entries(ROLES)) {
           const alert = document.querySelector('#main .msg.bad[role=alert]');
           const miss = document.querySelector('#deepMiss');
           const h1 = document.querySelector('#main h1');
-          return alert ? `error: ${alert.textContent}` : (h1 && /^(Page not found|No se encontró la página)$/.test(h1.textContent.trim()) ? 'not found'
+          // the full curriculum and library are for licensed centers: the preview shows that panel on those pages (never an error)
+        return alert ? `error: ${alert.textContent}` : (h1 && /^(Page not found|No se encontró la página)$/.test(h1.textContent.trim()) ? 'not found'
             : (miss && /not available|no longer/.test(miss.textContent) ? `miss: ${miss.textContent}` : null));
         });
         assert.equal(bad, null, where);
@@ -223,17 +225,37 @@ for (const [role, R] of Object.entries(ROLES)) {
         await page.waitForURL(/\/portal-test\/c\/test-family-demo-center\/grades\/?\?kid=demo-mia$/);
         await page.waitForLoadState('networkidle');
         await okPage('deep link');
-        // the Kids' corner: a friendly "Coming soon" panel with the way back
+        // the Kids' corner (its own copy, portal-test/kids/): the handoff, every door, a video from the website's files, the exit gate
         await page.goto(home); await page.waitForSelector(R.dash);
-        const kc = await page.$('a[href*="/kids"]');
-        if (kc && await kc.isVisible()) { await kc.click(); await page.waitForSelector('#ftSoon'); assert.match(await page.textContent('#ftSoon'), /Coming soon[\s\S]*Back to the dashboard/); }
+        await page.evaluate(() => { document.querySelector('a[href*="/kids"]').click(); });
+        await page.waitForSelector('#kcStart', { timeout: 30000 });
+        assert.match(page.url(), /\/portal-test\/kids\/c\/test-family-demo-center\/kids\?kid=/);
+        await page.click('#kcStart'); await page.waitForSelector('#kcDoors');
+        for (const door of await page.$$eval('[data-door]', (e) => e.map((x) => x.getAttribute('data-door')))) {
+          await page.click(`[data-door="${door}"]`); await page.waitForSelector('#kcBack'); await page.waitForTimeout(300);
+          await okPage(`kids' corner ${door}`);
+          if (door === 'read') assert.match(await page.textContent('#main'), /Booker Tries Again/);
+          if (door === 'watch') {
+            await page.click('#kcVideos [data-video]'); await page.waitForSelector('video');
+            assert.match(await page.$eval('video', (v) => v.currentSrc || v.src), /\/futures-friends\/video\/[\w.-]+\.mp4$/);
+            await page.click('#kcBack');
+          }
+          await page.click('#kcBack'); await page.waitForSelector('#kcDoors');
+        }
+        assert.ok(await page.$('#kmGate'), 'the grown-ups exit gate');
       }
 
+      // the way back to the website: the logo and a link in the rail or the More sheet (every role)
+      await page.goto(home); await page.waitForSelector(R.dash);
+      assert.match(await page.getAttribute('header .brand', 'href'), /^https?:\/\/[^/]+\/futures-friends\/$/, 'the logo opens the website');
+      if (width >= 1024) await page.waitForSelector('.ft-site', { state: 'attached', timeout: 5000 }).catch(async (e) => {
+        throw new Error(`no website link in the rail: ${page.url()} | ${await page.evaluate(() => [...document.querySelectorAll('nav')].map((n) => n.className).join(',') + ' mounted:' + !!document.getElementById('ftSwitch') + ' lang:' + document.documentElement.lang)}`);
+      });   // the rail (phones: the More sheet)
       // the role switcher ("View as") and the way back to the website
       await page.goto(home); await page.waitForSelector(R.dash);
       await page.click('#ftSwitch summary');
       assert.match(await page.textContent('#ftSwitch .ft-menu'), /Family[\s\S]*Teacher[\s\S]*Director[\s\S]*Back to the website/);
-      assert.equal(await page.getAttribute('#ftWebsite', 'href'), '/futures-friends/');
+      assert.match(await page.getAttribute('#ftWebsite', 'href'), /^https?:\/\/[^/]+\/futures-friends\/$/);
       const other = role === 'family' ? 'teacher' : 'family';
       await page.click(`#ftSwitch [data-ft-role="${other}"]`);
       await page.waitForSelector(ROLES[other].dash, { timeout: 30000 });
@@ -263,7 +285,7 @@ for (const [role, R] of Object.entries(ROLES)) {
 // Owner 2026-10-12 ("when you click on parent login it will go straight into it"): until go-live the header "Sign in" and the Family
 // sign-in links of the website open this copy's sign-in page in the same tab (hub-link.js); at go-live (FF_HUB_URL set) they go back to
 // the site's sign-in routes and the Hub. Home itself and the first-visit gate are unchanged (tests/first-visit, tests/entry-gate).
-test('the website: header "Sign in" and Family sign-in go straight to the test portal until go-live; back to the Hub routes at go-live', { skip: !harness && 'playwright-core not found (HUB_DIR)', timeout: 180000 }, async (t) => {
+test('the website: the Sign in / Portals menu opens every portal (and each logo returns home) until go-live; back to the Hub routes at go-live', { skip: !harness && 'playwright-core not found (HUB_DIR)', timeout: 180000 }, async (t) => {
   const server = await startPages();
   const ORIGIN = `http://127.0.0.1:${server.address().port}`;
   const browser = await harness.chromium.launch();
@@ -283,14 +305,29 @@ test('the website: header "Sign in" and Family sign-in go straight to the test p
       assert.ok(links.every(([k]) => k), 'every sign-in link is wired');
     }
     assert.ok(!/portal-test/.test(page.url()), 'Home stays Home');
+    if (!live) {
+      // the "Sign in / Portals" menu: every portal, one tap (FFHubLink.menu is the one list to extend, e.g. an Investor portal)
+      for (const [id, dash, copy] of [['family', '#fdKpis', ''], ['teacher', '#sv2Kpis', 'staff/'], ['director', '#sv2Kpis', 'staff/'], ['kids', '#kcStart', 'kids/']]) {
+        await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
+        await page.evaluate(() => document.querySelector('a.ffw-signin').click());
+        await page.waitForSelector('#ffPortals:not([hidden])');
+        assert.deepEqual(await page.$$eval('#ffPortals a', (as) => as.map((a) => a.dataset.portal)), ['family', 'teacher', 'director', 'kids']);
+        await page.click(`#ffPortals a[data-portal="${id}"]`);
+        await page.waitForSelector(dash, { timeout: 30000 });
+        assert.match(page.url(), new RegExp(`/portal-test/${copy}c/test-family-demo-center/${id === 'kids' ? 'kids' : 'home'}`), id);
+        // and back: the logo opens the website home
+        if (id !== 'kids') { await page.click('header .brand'); await page.waitForURL(/\/futures-friends\/(\?.*)?$/); }
+      }
+      await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
+    }
     await page.evaluate(() => document.querySelector('a.ffw-signin').click());
     if (live) {
       await page.waitForFunction(() => location.hash === '#sign-in');
       assert.match(await page.textContent('#hubLink'), /Sign in to the Futures Hub/);
       assert.equal(await page.$('#hubPreviewGo'), null);
     } else {
-      await page.waitForSelector('#fdKpis', { timeout: 30000 });
-      assert.match(page.url(), /\/futures-friends\/portal-test\/c\/test-family-demo-center\/home/, 'straight into the family dashboard');
+      await page.waitForSelector('#ffPortals:not([hidden])');   // the menu again; Escape closes it
+      await page.keyboard.press('Escape'); assert.equal(await page.$('#ffPortals:not([hidden])'), null);
     }
     await ctx.close();
   }

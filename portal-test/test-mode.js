@@ -15,7 +15,23 @@
   var BASE = (baseEl ? new URL(baseEl.href).pathname : location.pathname.replace(/[^/]*$/, '')).replace(/\/$/, '');
   var rm = BASE.match(/^(.*?\/portal-test)(\/.*)?$/);
   var ROOT = rm ? rm[1] : BASE, SUB = rm && rm[2] ? rm[2] : '';
+  var SITE = ROOT.replace(/\/portal-test$/, '') + '/';   // the website's folder (the Kids' corner videos are its files)
+  // every redirect between copies goes through hop(): more than 4 in 10 seconds can only be a loop, so it stops at the sign-in page
+  function hop(url) {
+    var n = 0, now = Date.now();
+    try { var h = JSON.parse(sessionStorage.getItem('ft-hops') || '{}'); n = now - (h.t || 0) < 10000 ? (h.n || 0) + 1 : 1; sessionStorage.setItem('ft-hops', JSON.stringify({ n: n, t: now })); } catch (e) { n = 1; }
+    if (n > 4) { try { sessionStorage.removeItem('ft-hops'); } catch (e) { /* fine */ } url = ROOT + '/c/' + SLUG + '/'; if (location.pathname === url) return; }
+    LEAVING = true;
+    location.replace(url);
+  }
+  var LEAVING = false;   // a page that is going to another copy: the visible parts are not mounted
   var COPY = { family: '', teacher: '/staff', director: '/staff' };
+  // pages a separate copy serves whatever the role (the Kids' corner is recorded from its own front-end)
+  var PATH_COPY = [[/^\/c\/[a-z0-9-]+\/kids\/?$/, '/kids']];
+  function copyFor(role, path) {
+    for (var i = 0; i < PATH_COPY.length; i++) if (PATH_COPY[i][0].test(path)) return PATH_COPY[i][1];
+    return COPY[role] !== undefined ? COPY[role] : '';
+  }
   var START = { family: '/home', teacher: '/home?room=threes', director: '/home' };
   var ORIGIN = location.origin;
   var SB_PATH = BASE + '/sb';
@@ -24,7 +40,7 @@
   var SIGNIN = '/c/' + SLUG;
   // keep equal to WRITE / isWriteRpc in build-portal-test.mjs
   var WRITE = /(^|_)(set|save|mark|unmark|send|create|delete|ack|acknowledge|submit|reply|give|withdraw|remove|decide|record|add|begin|finish|comment|cancel|book|respond|done|start|end|pick|subscribe|unsubscribe|upload|request|approve|revoke|claim|forget|close|accept|release|play|beat|join|enroll|sign|update|edit|void|punch|assign|invite|reopen|lock|attach|preapprove|verify|answer|hello|call|pair|write|dismiss|transfer|apply|activate|propose|choose|override|score|observe|log|report|portfolio|act|open|export|generate)(_|$)/;
-  var READ_OK = { kid_work_portfolio: 1, notification_open: 1, child_document_open: 1, family_data_export: 1, child_transfer_statement: 1 };
+  var READ_OK = { kid_work_portfolio: 1, notification_open: 1, child_document_open: 1, family_data_export: 1, child_transfer_statement: 1, daily_report_room_preview: 1, crm_tours_to_mark: 1 };
   function isWriteRpc(n) { return WRITE.test(n) && !READ_OK[n] && !/_(list|get|for_family|for_child|view|board|status|overview|options|summary)$/.test(n); }
   var QUIET = { set_my_preferred_language: 1, app_error_report: 1, notifications_mark_read: 1, push_subscribe: 1, push_unsubscribe: 1 };
   var lang = function () { try { return localStorage.getItem('ff-hub-lang') === 'es' ? 'es' : 'en'; } catch (e) { return 'en'; } };
@@ -43,22 +59,35 @@
     return BASE + u;
   }
   var q = new URLSearchParams(location.search), back = q.get('p');   // a deep link that came through the site's 404.html
-  if (back && back.charAt(0) === '/' && back.charAt(1) !== '/') history.replaceState(null, '', toReal(back));
+  var subOf = back && back.match(/^\/(staff|kids)(\/.*)$/);
+  if (subOf && '/' + subOf[1] !== SUB) hop(ROOT + '/' + subOf[1] + '/?p=' + encodeURIComponent(subOf[2]) + location.hash);   // another copy's page
+  else if (back && back.charAt(0) === '/' && back.charAt(1) !== '/') history.replaceState(null, '', toReal(subOf ? subOf[2] : back));
   else if (strip(location.pathname) === '/' || strip(location.pathname) === '') history.replaceState(null, '', BASE + SIGNIN + '/' + location.hash);
   var goCopy = null;   // set after a sign-in whose role another copy serves: the next navigation goes there instead
   ['pushState', 'replaceState'].forEach(function (fn) {
     var orig = history[fn];
     history[fn] = function (s, t, u) {
       if (goCopy && typeof u === 'string' && /\/c\/[a-z0-9-]+\/./.test(u)) { var g = goCopy; goCopy = null; location.assign(g); return; }
+      // a page another copy serves (another role's dashboard, the Kids' corner): open it there
+      if (typeof u === 'string' && u.charAt(0) === '/') {
+        var v = u.indexOf(BASE + '/') === 0 ? u.slice(BASE.length) : u;   // the app's own path, with or without this copy's folder
+        if (/^\/c\/[a-z0-9-]+\/./.test(v)) {
+          var want = copyFor(sessionRole() || 'family', v.split(/[?#]/)[0]);
+          if (want !== SUB) { location.assign(ROOT + want + v); return; }
+        }
+      }
       return orig.call(this, s, t, u == null ? u : toReal(u));
     };
   });
   // a session of a role this copy does not serve (e.g. a teacher opening the parents' copy): open the same page in the right copy
+  function sessionRole() {
+    try { var se = JSON.parse(localStorage.getItem('ff-hub-web-auth') || 'null'); return (se && se.user && se.user.app_metadata && se.user.app_metadata.ft_role) || null; } catch (e) { return null; }
+  }
   (function () {
-    var r = null;
-    try { var se = JSON.parse(localStorage.getItem('ff-hub-web-auth') || 'null'); r = se && se.user && se.user.app_metadata && se.user.app_metadata.ft_role; } catch (e) { r = null; }
-    var path = strip(location.pathname);
-    if (r && COPY[r] !== undefined && COPY[r] !== SUB && !/^\/c\/[a-z0-9-]+\/?$/.test(path)) location.replace(ROOT + COPY[r] + path + location.search + location.hash);
+    var r = sessionRole(), path = strip(location.pathname);
+    if (/^\/c\/[a-z0-9-]+\/?$/.test(path)) return;   // the sign-in page: any copy
+    var want = copyFor(r || 'family', path.replace(/\/$/, ''));
+    if ((r || want) && want !== SUB) hop(ROOT + want + path + location.search + location.hash);
   })();
   W.FFTest = { base: BASE, sbUrl: SB, pathname: function () { return strip(location.pathname); } };
   function fixLink(a) {
@@ -119,13 +148,13 @@
   // The same request with other dates (another month on the calendar...): the first recorded answer for the same thing about the same
   // child / report / item, else nothing.
   var ID = /^(p_)?(kid|child|center|report|ticket|id|invoice|c|slug|p_slug|room|lang)$/;
-  function idOf(path, search, body) {
+  function idOf(path, search, body, drop) {
     var o = {};
-    try { var b = JSON.parse(body || '{}'); Object.keys(b).forEach(function (k) { if (ID.test(k)) o[k] = b[k]; }); } catch (e) { /* no body */ }
-    new URLSearchParams(search).forEach(function (v, k) { if (/^(kid|id|center_id|child)$/.test(k)) o[k] = v; });
+    try { var b = JSON.parse(body || '{}'); Object.keys(b).forEach(function (k) { if (ID.test(k) && !(drop && drop.test(k))) o[k] = b[k]; }); } catch (e) { /* no body */ }
+    new URLSearchParams(search).forEach(function (v, k) { if (/^(kid|id|center_id|child|room)$/.test(k) && !(drop && drop.test(k))) o[k] = v; });
     return path + ' ' + JSON.stringify(canon(o));
   }
-  var NEAR = null;
+  var NEAR = null, LOOSE = {};
   function near(method, path, search, body) {
     if (!NEAR) {
       NEAR = {};
@@ -134,9 +163,20 @@
         if (!mm) return;
         var id = (mm[1] || 'family') + ' ' + mm[2] + ' ' + idOf(mm[3], mm[4], mm[5]);
         if (!NEAR[id]) NEAR[id] = e;
+        [/^(p_)?room$/, /^(p_)?(room|kid|child)$/, /^(p_)?(room|kid|child|id|report|ticket|invoice|lang)$/].forEach(function (drop) {
+          var t = LOOSE[drop.source] || (LOOSE[drop.source] = {}), lk = (mm[1] || 'family') + ' ' + mm[2] + ' ' + idOf(mm[3], mm[4], mm[5], drop);
+          if (!t[lk]) t[lk] = e;
+        });
       });
     }
-    return NEAR[roleNow() + ' ' + method + ' ' + idOf(path, search, body)] || null;
+    // the same thing about the same item; else the same thing with the room, then the child, left out (another room's answer beats a dead end)
+    var exact = NEAR[roleNow() + ' ' + method + ' ' + idOf(path, search, body)];
+    if (exact) return exact;
+    for (var drop of [/^(p_)?room$/, /^(p_)?(room|kid|child)$/, /^(p_)?(room|kid|child|id|report|ticket|invoice|lang)$/]) {
+      var k = roleNow() + ' ' + method + ' ' + idOf(path, search, body, drop);
+      if (LOOSE[drop.source] && LOOSE[drop.source][k]) return LOOSE[drop.source][k];
+    }
+    return null;
   }
 
   function json(body, status, extra) {
@@ -147,7 +187,7 @@
   function fromEntry(e) {
     var h = { 'Content-Type': e.ct || 'application/json' };
     if (e.cr) h['Content-Range'] = e.cr;
-    var b = String(e.b).split('__SB__').join(SB);
+    var b = String(e.b).split('__SB__').join(SB).split('__SITE__').join(SITE);
     return new Response(e.s === 204 || e.s === 304 ? null : b, { status: e.s === 304 ? 200 : e.s, headers: h });
   }
   function header(init, req, name) {
@@ -240,8 +280,9 @@
     var accept = header(init, req, 'Accept');
     var one = /vnd\.pgrst\.object/.test(accept);
     if (rpc) {
-      if (QUIET[rpc[1]]) return Promise.resolve(json('null'));
-      if (isWriteRpc(rpc[1])) { saved(); return Promise.resolve(json('null')); }
+      // a write: "done", as an empty object (pages read fields like .ended / .ok from it; null would break them)
+      if (QUIET[rpc[1]]) return Promise.resolve(json('{}'));
+      if (isWriteRpc(rpc[1])) { saved(); return Promise.resolve(json('{}')); }
     } else if (path.indexOf('/rest/v1/') === 0 && method !== 'GET' && method !== 'HEAD') {
       saved();
       var prefer = header(init, req, 'Prefer');
@@ -262,12 +303,14 @@
     var close = near(method, path, search, body);
     if (close) return Promise.resolve(fromEntry(close));
     console.warn('[test copy] not in the recording, answered empty:', method, path + search);
-    if (rpc) return Promise.resolve(json('null'));
+    if (rpc) return Promise.resolve(json('[]'));   // an empty list: safer for the pages than null
     if (method === 'HEAD') return Promise.resolve(new Response(null, { status: 200, headers: { 'Content-Range': '*/0' } }));
     return Promise.resolve(json(one ? 'null' : '[]', 200, { 'Content-Range': '*/0' }));
   }
-  function api(method, path, search) {
-    var found = hit(keyOf(method, path, search, ''));
+  var PRIVATE_AT = null;   // this page asked for the private curriculum / library (never in the copy)
+  function api(method, path, search, body) {
+    if (/^\/api\/(curriculum|library)\//.test(path) && !/^\/api\/library\/kids-(shelf|open)$/.test(path)) PRIVATE_AT = location.pathname;
+    var found = hit(keyOf(method, path, search, body || ''));
     if (found) return Promise.resolve(fromEntry(found));
     if (method !== 'GET') { saved(); return Promise.resolve(json({ ok: true })); }
     console.warn('[test copy] not in the recording, answered empty:', method, path + search);
@@ -289,7 +332,7 @@
       if (method === 'GET' && /^\/storage\/v1\/object\/(sign|public|authenticated)\//.test(path)) return realFetch(ORIGIN + url.pathname);
       return ready.then(function () { return bodyOf(input, init); }).then(function (b) { return hub(method, path, url.search, b, init, req); });
     }
-    if (url.origin === ORIGIN && url.pathname.indexOf('/api/') === 0) return ready.then(function () { return api(method, url.pathname, url.search); });
+    if (url.origin === ORIGIN && url.pathname.indexOf('/api/') === 0) return ready.then(function () { return bodyOf(input, init); }).then(function (b) { return api(method, url.pathname, url.search, b); });
     if (url.origin === ORIGIN && url.pathname.indexOf(BASE + '/') !== 0) return realFetch(ORIGIN + toReal(url.pathname + url.search), init);
     if (url.origin !== ORIGIN) {
       console.warn('[test copy] a request to another site was not sent:', url.origin);
@@ -331,13 +374,12 @@
   var TXT = {
     en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
       dirSub: 'Center dashboard', viewAs: 'View as', website: 'Back to the website', soonH: 'Coming soon', soonP: 'This part of the Futures Hub is on its way.',
-      back: 'Back to the dashboard' },
+      back: 'Back to the dashboard', site: 'Futures Friends website', privH: 'For licensed centers', privP: 'The curriculum and the library open for licensed centers.' },
     es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', famSub: 'Panel para familias', teaSub: 'Panel del salón',
       dirSub: 'Panel del centro', viewAs: 'Ver como', website: 'Volver al sitio web', soonH: 'Próximamente', soonP: 'Esta parte de Futures Hub está en camino.',
-      back: 'Volver al panel' },
+      back: 'Volver al panel', site: 'Sitio web de Futures Friends', privH: 'Para centros con licencia', privP: 'El currículo y la biblioteca se abren para los centros con licencia.' },
   };
   var tx = function (k) { return TXT[es() ? 'es' : 'en'][k]; };
-  var SITE = ROOT.replace(/\/portal-test$/, '') + '/';
   function el(id) { return D.getElementById(id); }
   function saved() { /* writes do nothing in the test copy, silently */ }
   W.FFTest.saved = saved;
@@ -346,11 +388,14 @@
     if (box) { box.className = (box.className || '').replace(/\b(bad|ok)\b/g, '') + ' msg'; box.textContent = text; box.hidden = false; }
   }
   // enter a role: the session is written where the app keeps it, then that role's dashboard opens (in the copy that serves it)
+  // (kids: the Kids' corner, as the family, at its grown-up handoff screen)
   function enter(role) {
+    var kids = role === 'kids'; if (kids) role = 'family';
     return ready.then(function () {
       ROLE = role;
       try { localStorage.setItem('ff-hub-web-auth', JSON.stringify(sessionFor(PERSONA[role]))); } catch (e) { /* private mode: the sign-in form still works */ }
-      location.assign(ROOT + COPY[role] + '/c/' + SLUG + START[role]);
+      var path = '/c/' + SLUG + (kids ? '/kids' : '/home');
+      location.assign(ROOT + copyFor(role, path) + path + (kids ? '?kid=demo-mia' : START[role].replace(/^\/home/, '')));
     });
   }
   W.FFTest.enter = enter;
@@ -358,7 +403,7 @@
   if (wantRole === 'parent') wantRole = 'family';
   if (COPY[wantRole] !== undefined) PENDING = wantRole;
   if (wantEnter === 'parent') wantEnter = 'family';
-  if (COPY[wantEnter] !== undefined) { enter(wantEnter); }
+  if (COPY[wantEnter] !== undefined || wantEnter === 'kids') { enter(wantEnter); }
 
   var CSS = '#ftRoles{margin:0 0 14px}#ftRoles h2{margin:0 0 8px;font:600 15px/1.3 Fredoka,Poppins,system-ui,sans-serif;color:#0A2B38}'
     + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}'
@@ -374,7 +419,9 @@
     + '#ftSoon{max-width:560px;margin:48px auto;padding:28px 22px;border-radius:20px;background:#fff;box-shadow:0 8px 28px rgba(10,43,56,.12);text-align:center;color:#0A2B38}'
     + '#ftSoon h1{margin:0 0 8px;font:600 28px/1.2 Fredoka,Poppins,system-ui,sans-serif}#ftSoon p{margin:0 0 18px}'
     + '#ftSoon a{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border-radius:12px;background:#0A2B38;color:#fff;text-decoration:none;font:600 15px Poppins,system-ui,sans-serif}'
-    + '#fdDemoPill,.fd-demo-pill,[data-demo-pill]{display:none!important}';
+    + '.ft-site{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;margin-top:6px;border-radius:12px;color:inherit;font:600 14px Poppins,system-ui,sans-serif;text-decoration:underline;text-underline-offset:3px}'
+    + '.ft-site:focus-visible{outline:3px solid #E7A928;outline-offset:2px}'
+    + '#fdDemoPill,.fd2-demo,.ffs-demo,.fd-demo-pill,[data-demo-pill]{display:none!important}';
 
   function rolesBox() {
     var form = el('signinForm');
@@ -406,16 +453,16 @@
       menu.appendChild(a);
     });
     menu.appendChild(D.createElement('hr'));
-    var w = D.createElement('a'); w.href = SITE; w.textContent = tx('website'); w.id = 'ftWebsite'; menu.appendChild(w);
+    var w = D.createElement('a'); w.href = ORIGIN + SITE; w.textContent = tx('website'); w.id = 'ftWebsite'; menu.appendChild(w);   // absolute: outside the app's paths
     nav.insertBefore(d, out);
     D.addEventListener('click', function (e) { if (!d.contains(e.target)) d.open = false; });
   }
   // parts not built yet (the Kids' corner) and any page the copy does not have: a friendly "Coming soon", never a dead end
-  function soon(path) {
+  function soon(path, kind) {
     var m = el('main'); if (!m) return;
     var home = ROOT + COPY[roleNow()] + '/c/' + SLUG + START[roleNow()];
     m.innerHTML = '<section id="ftSoon" aria-labelledby="ftSoonH"><h1 id="ftSoonH"></h1><p></p><a></a></section>';
-    m.querySelector('h1').textContent = tx('soonH'); m.querySelector('p').textContent = tx('soonP');
+    m.querySelector('h1').textContent = tx(kind === 'private' ? 'privH' : 'soonH'); m.querySelector('p').textContent = tx(kind === 'private' ? 'privP' : 'soonP');
     var a = m.querySelector('a'); a.href = home; a.textContent = tx('back');
     if (path) history.pushState(null, '', path);
     D.title = tx('soonH') + ' · Futures Hub';
@@ -424,13 +471,28 @@
   function notFoundToSoon() {
     var m = el('main'); if (!m || el('ftSoon')) return;
     var h = m.querySelector('h1');
-    if (h && /^(Page not found|No se encontró la página)$/.test(h.textContent.trim())) soon(null);
+    if (h && /^(Page not found|No se encontró la página)$/.test(h.textContent.trim())) return soon(null);
+    // a page that needs the full curriculum or the library (licensed centers only; never in this preview) and could not show it
+    if (PRIVATE_AT === location.pathname && m.querySelector('.msg.bad[role=alert]')) soon(null, 'private');
   }
 
+  // the way back to the website from anywhere: the logo, the dashboards' rail and the phones' "More" sheet (every role)
+  function websiteLinks() {
+    var brand = D.querySelector('header .brand');
+    if (brand && brand.getAttribute('href') !== ORIGIN + SITE) { brand.setAttribute('href', ORIGIN + SITE); brand.setAttribute('aria-label', tx('site')); }
+    var lists = D.querySelectorAll('.fd2-railnav, .ffs-railnav, .fd2-morelist, .ffs-morelist');
+    for (var i = 0; i < lists.length; i++) {
+      var l = lists[i];
+      if (l.querySelector('.ft-site')) continue;
+      var a = D.createElement('a'); a.className = 'ft-site'; a.href = ORIGIN + SITE; a.textContent = tx('site');
+      if (/^(UL|OL)$/.test(l.tagName)) { var li = D.createElement('li'); li.appendChild(a); l.appendChild(li); } else l.appendChild(a);
+    }
+  }
   function mount() {
+    if (LEAVING || !D.body) return;
     var st = D.createElement('style'); st.textContent = CSS; D.head.appendChild(st);
-    rolesBox(); switcher();
-    new MutationObserver(function () { rolesBox(); switcher(); notFoundToSoon(); }).observe(D.body, { childList: true, subtree: true });
+    rolesBox(); switcher(); websiteLinks();
+    new MutationObserver(function () { rolesBox(); switcher(); notFoundToSoon(); websiteLinks(); }).observe(D.body, { childList: true, subtree: true });
     // the sign-in form: no credentials needed. Whatever is typed (or nothing) enters, as the role picked (default Family)
     D.addEventListener('submit', function (e) {
       if (!e.target || e.target.id !== 'signinForm') return;
@@ -440,14 +502,12 @@
       enter((known && known.role) || PENDING || 'family');
     }, true);
     D.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href]');
-      if (a && /\/c\/[a-z0-9-]+\/kids(?:[?#]|$)/.test(a.getAttribute('href') || '') && !KIDS_BUILT) { e.preventDefault(); e.stopImmediatePropagation(); soon(a.getAttribute('href')); return; }
       var x = e.target.closest && e.target.closest('#magic, #forgot, #googleSignin');
       if (!x) return;
       e.preventDefault(); e.stopImmediatePropagation();
       enter(PENDING || 'family');
     }, true);
   }
-  var KIDS_BUILT = false;   // the Kids' corner (branch kids-corner) joins the copy once recorded; until then its links show "Coming soon"
+  // the Kids' corner is its own copy (kids/); without it its links land on the "Coming soon" panel (the page is not found there)
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', mount); else mount();
 })();

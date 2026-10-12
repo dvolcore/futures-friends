@@ -1,0 +1,22 @@
+/* Licensing page (licensing.js): state rules, training hours, inspector packet, CACFP, subsidy. No inline styles (CSP). */
+.lic-tabs{margin:0 0 14px}
+.lic-form{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:0 0 12px}
+.lic-form .f{flex:1 1 160px}
+.lic-rate{max-width:110px}
+.lic-sec{margin:18px 0 0}
+.lic-sec-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.lic-sec-head h3{margin:0}
+.lic-prod{margin:14px 0 0}
+.lic-cat td{word-break:break-word}
+/* Print the inspector packet only (licensing.js sets body.lic-print-mode) */
+@media print{
+  @page{margin:12mm}
+  body.lic-print-mode{background:#fff}
+  body.lic-print-mode *{visibility:hidden}
+  body.lic-print-mode #licPacket,body.lic-print-mode #licPacket *{visibility:visible}
+  body.lic-print-mode #licPacket{position:absolute;left:0;top:0;width:100%}
+  body.lic-print-mode #licPacket .no-print{display:none !important}
+  body.lic-print-mode table.t{display:table;font-size:.8rem}
+  .lic-sec{page-break-inside:auto}
+  .lic-sec tr{page-break-inside:avoid}
+}

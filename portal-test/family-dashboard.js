@@ -153,7 +153,7 @@ const W = {
       entry: (k, t) => `${k} at ${t}`, incidentH: 'Incident report', dayH: (d) => d, plateH: (d) => `The plate on ${d}`, feelH: (d) => `Feeling on ${d}`, areaH: (a) => a,
       shareOf: (p) => `${p}% of the plate`, attendanceNone: 'No attendance yet this month.', updatedLive: 'New', more: 'More', moreNums: 'More numbers', moreNumsH: (f) => `More about ${f}`, viewAll: 'View all', checkedPill: (t) => `Checked in at ${t}`, pickedPill: (t) => `Picked up at ${t}`,
       notInPill: 'Not checked in yet', clockOpen: 'Open the day clock', learnTogether: 'Learning together', atHome: 'At home', activities: 'activities', reportNone: 'No progress report yet', reportNew: 'Progress report', reportOpen: 'Read it',
-      tuitionNone: 'Nothing due', dates: 'Tuition and dates', bringNote: (d) => `${d}, please bring`, demo: 'Demo preview', kidsCorner: "Kids' corner", prevDay: 'The day before', nextDay: 'The next day', backToday: 'Back to today', logged: (t) => `Logged at ${t}`, loggedRange: (a, b) => `${a} to ${b}`, teacherObs: 'teacher observation', asOf: 'so far this month', kAttendance: 'Attendance', kMeals: 'Meals today', schoolDays: 'school days this month', portion: 'reported portion eaten', today: 'Today', usual: 'Usual',
+      tuitionNone: 'Nothing due', dates: 'Tuition and dates', bringNote: (d) => `${d}, please bring`, demo: 'Demo preview', showHide: 'Show or hide this card', kidsCorner: "Kids' corner", prevDay: 'The day before', nextDay: 'The next day', backToday: 'Back to today', logged: (t) => `Logged at ${t}`, loggedRange: (a, b) => `${a} to ${b}`, teacherObs: 'teacher observation', asOf: 'so far this month', kAttendance: 'Attendance', kMeals: 'Meals today', schoolDays: 'school days this month', portion: 'reported portion eaten', today: 'Today', usual: 'Usual',
       observed: 'latest teacher observation', learnHome: 'Learning & home', homeActs: 'home activities this week', kidMode: 'Kid Mode', choose: 'Choose an activity', viewCal: 'View calendar',
       viewWhole: 'View whole day', attention: 'Needs your attention',
       short: { incident: () => 'incident report', video: (fr) => `${fr} video`, charmsg: (fr) => `message from ${fr}`, consent: () => 'consent to review', help: () => 'your question was answered',
@@ -237,7 +237,7 @@ const W = {
       entry: (k, t) => `${k} a las ${t}`, incidentH: 'Reporte de incidente', dayH: (d) => d, plateH: (d) => `El plato del ${d}`, feelH: (d) => `Cómo se sintió el ${d}`, areaH: (a) => a,
       shareOf: (p) => `${p}% del plato`, attendanceNone: 'Todavía no hay asistencia este mes.', updatedLive: 'Nuevo', more: 'Más', moreNums: 'Más números', moreNumsH: (f) => `Más sobre ${f}`, viewAll: 'Ver todo', checkedPill: (t) => `Llegó a las ${t}`, pickedPill: (t) => `Lo recogieron a las ${t}`,
       notInPill: 'Todavía no registra llegada', clockOpen: 'Abrir el reloj del día', learnTogether: 'Aprender juntos', atHome: 'En casa', activities: 'actividades', reportNone: 'Todavía no hay informe de progreso', reportNew: 'Informe de progreso', reportOpen: 'Leerlo',
-      tuitionNone: 'Nada pendiente', dates: 'Colegiatura y fechas', bringNote: (d) => `${d}, por favor traiga`, demo: 'Vista de demostración', kidsCorner: 'Rincón de los niños', prevDay: 'El día anterior', nextDay: 'El día siguiente', backToday: 'Volver a hoy', logged: (t) => `Registrado a las ${t}`, loggedRange: (a, b) => `de ${a} a ${b}`, teacherObs: 'observación de la maestra', asOf: 'en lo que va del mes', kAttendance: 'Asistencia', kMeals: 'Comidas de hoy', schoolDays: 'días de clase este mes', portion: 'de la porción, según lo registrado', today: 'Hoy', usual: 'Normal',
+      tuitionNone: 'Nada pendiente', dates: 'Colegiatura y fechas', bringNote: (d) => `${d}, por favor traiga`, demo: 'Vista de demostración', showHide: 'Mostrar u ocultar esta tarjeta', kidsCorner: 'Rincón de los niños', prevDay: 'El día anterior', nextDay: 'El día siguiente', backToday: 'Volver a hoy', logged: (t) => `Registrado a las ${t}`, loggedRange: (a, b) => `de ${a} a ${b}`, teacherObs: 'observación de la maestra', asOf: 'en lo que va del mes', kAttendance: 'Asistencia', kMeals: 'Comidas de hoy', schoolDays: 'días de clase este mes', portion: 'de la porción, según lo registrado', today: 'Hoy', usual: 'Normal',
       observed: 'lo último que observó la maestra', learnHome: 'Aprendizaje y casa', homeActs: 'actividades para casa esta semana', kidMode: 'Modo Niños', choose: 'Elegir una actividad', viewCal: 'Ver el calendario',
       viewWhole: 'Ver todo el día', attention: 'Necesita su atención',
       short: { incident: () => 'reporte de incidente', video: (fr) => `video de ${fr}`, charmsg: (fr) => `mensaje de ${fr}`, consent: () => 'consentimiento por revisar', help: () => 'respondieron su pregunta',
@@ -729,11 +729,11 @@ function todayHtml(esc, L, lang, slug, d, ticker = true) {
   return `<section class="card fd-card fd-today fd2-ticker" id="fdToday" aria-labelledby="fdTodayH" data-a>
     <div class="fd2-cardhead"><div class="fd-today-title"><h2 id="fdTodayH">${icon('calendar')}${esc(L.day(cur.first || ''))}</h2>
       <p class="fd-status fd-st-${att.tone}"><span class="fd-dot" aria-hidden="true"></span>${esc(att.text)} <span class="fd-updated" id="fdUpdated">${esc(agoText(t.updated_at, lang))}</span></p></div>
-      <a class="fd2-link fd2-link-pill" id="fdFullDay" href="${esc(dashLink(slug, 'day', { kid: d.child }))}" data-nav>${esc(L.v2.viewWhole)} ${icon('arrow')}</a></div>
-    ${incidents}
+      <a class="fd2-link fd2-link-pill" id="fdFullDay" href="${esc(dashLink(slug, 'day', { kid: d.child }))}" data-nav>${esc(L.v2.viewWhole)} ${icon('arrow')}</a>${collapseBtn(esc, L, 'fdTodayBody', true)}</div>
+    <div class="fd2-cbody" id="fdTodayBody">${incidents}
     ${shown.length ? `<ol class="fd-entries" id="fdEntries" aria-live="polite">${shown.map(entry).join('')}</ol>` : `<p class="fd-empty">${esc(L.emptyDay(cur.first || ''))}</p>`}
     <p class="fd2-dayfoot">${t.published ? `<a class="fd-ready" href="${esc(dashLink(slug, 'day', { kid: d.child, date: d.date }))}" data-nav id="fdReportReady">${esc(L.reportReady)}</a>` : `<span class="small muted">${esc(L.reportAt(t.send_time || 'about 5:30 pm'))}</span>`}
-      <a class="fd2-link" href="${esc(viewHref('today', 'day'))}" data-view="today" data-tab="day" id="fdDayView">${esc(tl.length > shown.length ? L.more(tl.length - shown.length) : L.v2.clockOpen)}</a></p>
+      <a class="fd2-link" href="${esc(viewHref('today', 'day'))}" data-view="today" data-tab="day" id="fdDayView">${esc(tl.length > shown.length ? L.more(tl.length - shown.length) : L.v2.clockOpen)}</a></p></div>
   </section>`;
 }
 
@@ -980,13 +980,19 @@ function bigKpisHtml(esc, L, lang, slug, d, view) {
       : `<span class="fd2-kpi-num"><span class="fd-dim">${esc(L.nothingYet)}</span></span>`) : off('kpiFeel', K.feel));
   return `<section class="fd-kpis fd2-kpis" id="fdKpis" aria-labelledby="fdKpiH" data-a><h2 id="fdKpiH" class="fd-sec-h">${esc(L.glance(((d.kids || []).find((k) => k.id === d.child) || {}).first || ''))}</h2><div class="fd-kpi-grid">${out.join('')}</div></section>`;
 }
+// phones: a card can fold to its heading (the day card starts open, Learning & home folded) so Overview stays about two screens
+const phoneNow = () => typeof matchMedia === 'function' && matchMedia('(max-width: 767px)').matches;
+function collapseBtn(esc, L, body, open) {
+  const isOpen = open || !phoneNow();
+  return `<button class="fd2-collapse" type="button" aria-expanded="${isOpen}" aria-controls="${body}" data-collapse="${body}"><span class="sr-only">${esc(L.v2.showHide)}</span>${icon('arrow')}</button>`;
+}
 // learning & home: this week's home activities (glowing ring), new work, Kid Mode minutes, the report, "Choose an activity"
 function learnHomeHtml(esc, L, lang, slug, d, x, cur) {
   const l = d.learning || {}, V2 = L.v2, h = homeKpi(l), st = x.stats || null, r = l.report;
   const lt = st?.learning_time || l.time_learning || null, km = lt ? Math.round(((lt.home_sec || 0) + (lt.center_sec || 0)) / 60) : null;
   return `<section class="card fd-card fd2-learnhome" id="fdLearnHome" aria-labelledby="fdLhH" data-a><div class="fd2-cardhead"><h2 id="fdLhH" class="fd2-h">${icon('book')} ${esc(V2.learnHome)}</h2>
-      <button class="fd2-link" type="button" id="fdMoreNumsBtn" data-drawer="numbers" aria-haspopup="dialog">${esc(V2.moreNums)} ${icon('arrow')}</button></div>
-    <div class="fd2-lh">
+      ${st || d.messages || x.calendar || d.upcoming?.tuition ? `<button class="fd2-link" type="button" id="fdMoreNumsBtn" data-drawer="numbers" aria-haspopup="dialog">${esc(V2.moreNums)} ${icon('arrow')}</button>` : ''}${collapseBtn(esc, L, 'fdLhBody', false)}</div>
+    <div class="fd2-cbody" id="fdLhBody"${phoneNow() ? ' hidden' : ''}><div class="fd2-lh">
       <a class="fd2-lh-ring" href="${esc(viewHref('learning', 'week'))}" data-view="learning" data-tab="week" aria-label="${esc(h ? L.kSub.homeDone(h.done, h.total) : L.noHome)}">${glowRingSvg(h ? h.done / h.total : 0, { tone: 'bop', size: 132, stroke: 12 })}
         <span class="fd2-lh-in"><span class="fd2-big fd2-gl-bop">${h ? `${count(h.done)}<small> / ${h.total}</small>` : '—'}</span><span>${esc(V2.homeActs)}</span></span></a>
       <div class="fd2-lh-side">
@@ -994,7 +1000,7 @@ function learnHomeHtml(esc, L, lang, slug, d, x, cur) {
         <a class="fd2-mini" href="${esc(dashLink(slug, 'kid'))}" data-nav id="fdKidMinutes"><span class="fd-ico fd-t-gold">${icon('kid')}</span><span><span>${esc(V2.kidMode)}</span><b>${km == null ? '—' : esc(minutesText(km, lang))}</b></span></a>
         <a class="fd2-mini fd2-mini-wide" href="${esc(viewHref('learning', 'reports'))}" data-view="learning" data-tab="reports">${r ? `${esc(V2.reportNew)} · ${esc(dayText(r.to, lang, { month: 'short', day: 'numeric' }))}` : esc(V2.reportNone)}</a>
         <a class="btn fd2-btn-bop" id="fdChooseActivity" href="${esc(dashLink(slug, 'learn', { kid: cur.id }))}" data-nav>${esc(V2.choose)} ${icon('arrow')}</a>
-      </div></div></section>`;
+      </div></div></div></section>`;
 }
 // tuition and the next date on the center calendar
 function nextHtml(esc, L, lang, slug, d, x) {
@@ -1261,6 +1267,9 @@ function bindShell(ctx) {
     if (t) { e.preventDefault(); showView(state.ui.view, t.dataset.tab, { history: 'replace' }); return; }
     const k = e.target.closest('a[data-kid]');
     if (k) { e.preventDefault(); if (k.getAttribute('aria-current') !== 'page') switchChild(k.dataset.kid); return; }
+    const cb = e.target.closest('[data-collapse]');
+    if (cb) { const body = document.getElementById(cb.dataset.collapse); const open = cb.getAttribute('aria-expanded') !== 'true';
+      cb.setAttribute('aria-expanded', String(open)); if (body) { body.hidden = !open; if (open && motionOn()) body.animate([{ opacity: 0, transform: 'translate3d(0,-6px,0)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: EASE }); } return; }
     const dn = e.target.closest('[data-day-step]');
     if (dn) { e.preventDefault(); if (dn.dataset.dayStep === '99') { state.ui.date = null; writeUrl('push'); loadDay(null).then(rebuildDay); } else changeDay(Number(dn.dataset.dayStep)); return; }
     const more = e.target.closest('#fdMoreBtn');

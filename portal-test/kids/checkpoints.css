@@ -1,0 +1,57 @@
+/* Checkpoints and conference reports (web/checkpoints.js, hub/CHECKPOINTS.md). Screen + print (Print / Save as PDF). */
+.cp-seasons a{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px}
+.cp-seasons .mini{font-weight:400}
+.cp-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.cp-controls .f{min-width:200px;flex:1}
+.cp-check caption,.cp-steps caption{text-align:left;font-family:var(--display);font-weight:600;color:var(--navy);padding:8px 0 4px}
+.cp-check th[scope=row]{font-weight:500;min-width:220px}
+.cp-check td{vertical-align:top;min-width:96px}
+.cp-check .cp-level{min-width:150px}
+.cp-check .cp-note{margin-top:4px;min-width:150px}
+.cp-elof{display:block;margin-top:2px}
+.cp-lvl{white-space:nowrap}
+.cp-lvl-emerging{background:#EEF3F5;color:var(--navy)}
+.cp-lvl-developing{background:#FCEBC3;color:var(--gold-deep)}
+.cp-lvl-secure{background:#E3F2E7;color:#245C35}
+.cp-lvl-not_observed{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.cp-num{display:block;color:var(--muted)}
+.cp-composer textarea{width:100%}
+.cp-alt{margin:-4px 0 10px}
+.cp-alt summary{cursor:pointer;color:var(--navy)}
+.cp-slotform .row{gap:12px}
+.cp-booked{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+.cp-report{border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;background:var(--paper)}
+.cp-brand{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--gold);padding-bottom:10px;margin-bottom:12px}
+.cp-brand > div{flex:1;display:flex;flex-direction:column}
+.cp-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--navy);color:var(--gold);font-family:var(--display);font-weight:700}
+.cp-word{font-family:var(--display);font-size:1.2rem;color:var(--navy)}
+.cp-friends{width:56px;height:56px;object-fit:contain}
+.cp-title{margin-top:4px}
+.cp-sec{margin:12px 0}
+.cp-sec h4{margin:0 0 4px;color:var(--navy)}
+.cp-steps{width:100%;border-collapse:collapse;margin:6px 0 10px}
+.cp-steps th,.cp-steps td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.cp-steps th[scope=row]{font-weight:400}
+.cp-ideas li,.cp-goals li{margin-bottom:6px}
+.cp-ideas .small{display:block}
+.cp-disclaimer{border-top:1px solid var(--line);padding-top:8px;margin-top:12px}
+.fd-conf .btn{margin-top:4px}
+@media (max-width:560px){
+  .cp-steps th[scope=row]{min-width:0}
+  .cp-report{padding:12px}
+  .cp-friends{display:none}
+}
+/* Print one report (checkpoints.js sets body.cp-print-mode and .cp-printing on the report) */
+@media print{
+  @page cp{margin:14mm}   /* a NAMED page: a bare @page changed every other printout's margins (the habit cards printed on 5 pages, not 3) */
+  body.cp-print-mode{background:#fff}
+  body.cp-print-mode *{visibility:hidden}
+  body.cp-print-mode .cp-printing,body.cp-print-mode .cp-printing *{visibility:visible}
+  body.cp-print-mode .cp-printing{position:absolute;left:0;top:0;width:100%;border:none;margin:0;padding:0;page:cp}
+  body.cp-print-mode .cp-printing .no-print,body.cp-print-mode .cp-printing .i18n-flip-btn,body.cp-print-mode .cp-printing [hidden]{display:none !important}
+  .cp-steps{page-break-inside:auto}
+  .cp-steps tr{page-break-inside:avoid}
+  .cp-lvl{border:1px solid #999}
+  .cp-brand{border-bottom-color:#E7A928;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cp-mark{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

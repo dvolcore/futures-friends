@@ -1,0 +1,6 @@
+/* Self-hosted Fredoka and Poppins (Google Fonts, SIL Open Font License 1.1; licences in this folder), copied from the website's fonts/.
+   Latin subset only. No request leaves this origin. */
+@font-face{font-family:'Fredoka';font-style:normal;font-weight:500 700;font-display:swap;src:url(fredoka-latin.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(poppins-400-latin.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(poppins-500-latin.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(poppins-600-latin.woff2) format('woff2')}

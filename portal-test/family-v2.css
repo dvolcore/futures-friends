@@ -519,3 +519,98 @@ a.fd2-chip-go .fd-ico-svg{width:.9rem;height:.9rem}
   .fd2 .fd2-kpi{padding:10px}
   .fd2 .fd2-hero .fd-kids{flex:1 1 100%}
 }
+/* phones: fold a card to its heading */
+.fd2-collapse{display:none;place-items:center;flex:none;width:44px;height:44px;border:0;border-radius:50%;background:rgba(10,43,56,.06);color:var(--navy);cursor:pointer}
+.fd2-collapse .fd-ico-svg{width:1.1rem;height:1.1rem;transform:rotate(90deg);transition:transform .25s var(--ease-out)}
+.fd2-collapse[aria-expanded="false"] .fd-ico-svg{transform:rotate(0deg)}
+@media (max-width:767px){.fd2-collapse{display:grid}.fd2-cardhead{align-items:center}}
+@media (min-width:768px){.fd2-cbody[hidden]{display:block !important}}
+@media (prefers-reduced-motion:reduce){.fd2-collapse .fd-ico-svg{transition:none}}
+/* phones: about two screens for Overview */
+@media (max-width:767px){
+  .fd2 .fd2-hero .fd-hero-in{padding:12px 14px 14px;gap:2px}
+  .fd2 .fd2-hero .fd-hello{font-size:1.6rem}
+  .fd2-date{font-size:.95rem;margin-bottom:4px}
+  .fd2 .fd2-hero .fd-kid{min-height:52px;padding:3px 26px 3px 3px}
+  .fd2 .fd2-hero .km-av.fd-av{width:40px;height:40px}
+  .fd2-pill-in{min-height:44px;padding:4px 14px 4px 6px}
+  .fd2-kpi .fv-glring{width:3.6rem;height:3.6rem}
+  .fd2-feelface{width:3.6rem;height:3.6rem}
+  .fd2-big{font-size:1.45rem}
+  .fd2-big small{font-size:1rem}
+  .fd2 .fd2-kpi{gap:4px}
+  .fd2-kpi .fd-kpi-sub,.fd2-logged{font-size:.72rem}
+  .fd2-ticker .fd-entry:nth-child(n+4){display:none}
+  .fd2-ticker .fd-incident{font-size:.8rem}
+  .fd2-ticker .fd-status{font-size:.78rem}
+  .fd2-dayfoot .small{display:none}
+  .fd2-pillar{min-height:5rem;padding:6px 10px 0 2px}
+  .fd2-pillar img{height:5rem}
+  .fd2-pl-sub{display:none}
+  .fd2-pillar b{font-size:.95rem}
+  .fd2-next{gap:4px}
+  .fd2-viewcal{min-height:44px}
+}
+/* tablets 768–1023: the hero art sits right (no crop of the friend), row 2 side by side */
+@media (min-width:768px) and (max-width:1023px){
+  .fd2-cockpit{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fd2-cockpit > .fd2-hero,.fd2-cockpit > .fd2-attnwrap,.fd2-cockpit > .fd-kpis{grid-column:1/-1}
+  .fd2-kpis .fd-kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fd2 .fd2-kpi .fd2-kpi-body{flex-direction:column;align-items:flex-start;gap:6px}
+  .fd2-kpi .fv-glring{width:4rem;height:4rem}
+  .fd2-feelface{width:4rem;height:4rem}
+  .fd2-big{font-size:1.6rem}
+  .fd2-hero-bg{object-position:72% 45%}
+  .fd2 .fd2-hero::after{background:linear-gradient(90deg,rgba(255,253,248,.95) 0%,rgba(255,253,248,.85) 48%,rgba(255,253,248,.2) 74%,rgba(255,253,248,0) 88%)}
+  .fd2 .fd2-hero .fd-hero-friend{height:170px;right:1%;bottom:-4px}
+  .fd2 .fd2-hero .fd-hero-in{max-width:min(36rem,72%)}
+  .fd2-demo{position:static;justify-self:start}
+  .fd2-hero-sun{right:6%;top:-10px;width:64px}
+  .fd2-cockpit > .fd2-ticker,.fd2-cockpit > .fd2-learnhome,.fd2-cockpit > .fd2-next{max-height:20rem;overflow:auto}
+  .fd2-lh{grid-template-columns:1fr}
+  .fd2-lh-ring{justify-self:center;width:6.5rem;height:6.5rem}
+  .fd2-pillars{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:768px){.fd2-rail{grid-template-columns:minmax(0,1fr)}.fd2 .fd-actions{grid-template-columns:minmax(0,1fr)}.fd2-railnav,.fd2-viewtabs{min-width:0;width:100%}}
+@media (max-width:767px){
+  .fd2-dayfoot{display:none}
+  .fd2 .fd2-kpi .fd2-kpi-body{flex-direction:row;align-items:center;gap:8px}
+  .fd2-kpi .fv-glring,.fd2-feelface{width:3rem;height:3rem}
+  .fd2-kpi .fd-kpi-label{font-size:.82rem}
+  .fd2-rest .fd2-tvu{grid-template-columns:auto minmax(2rem,1fr) auto;font-size:.7rem}
+  .fd2-dots{max-width:7rem}
+  .fd2-next .fd2-hr,.fd2-viewcal{display:none}
+  .fd2-pillars{display:flex;overflow-x:auto;gap:8px;scroll-snap-type:x proximity;scrollbar-width:none}
+  .fd2-pillars::-webkit-scrollbar{display:none}
+  .fd2-pillar{flex:0 0 46%;scroll-snap-align:start;min-height:4.5rem}
+  .fd2-pillar img{height:4.5rem}
+  .fd2-chip{padding:6px}
+  a.fd2-chip-go{min-height:44px}
+  .fd2-band{gap:8px;padding:8px}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .fd2 .fd2-hero{min-height:0}
+  .fd2 .fd2-hero .fd-hero-in{padding:14px 18px}
+  .fd2 .fd2-hero .fd-hello{font-size:2rem}
+  .fd2-pillars{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fd2-pillar{flex-direction:column;align-items:center;min-height:0;padding:8px 6px 0}
+  .fd2-pl-t{justify-items:center;text-align:center}
+  .fd2-pl-sub{display:none}
+  .fd2-pillar img{height:4.5rem;order:2}
+  .fd2-cockpit > .fd2-pillars{grid-column:1/-1}
+  .fd2-cockpit > .fd2-next{grid-column:1/-1}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .fd2-cockpit > .fd2-next,.fd2-cockpit > .fd2-pillars{grid-column:auto}
+  .fd2-pillars{grid-template-columns:repeat(2,minmax(0,1fr));align-content:start}
+  .fd2-pillar{flex-direction:row;align-items:flex-end;padding:6px 8px 0 2px}
+  .fd2-pillar img{height:4rem;order:0}
+  .fd2-pl-t{justify-items:end;text-align:right}
+  .fd2 .fd2-hero .fd-hero-friend{height:150px}
+  .fd2-date{margin-bottom:4px}
+  .fd2 .fd2-hero .fd-kid{min-height:52px}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .fd2-cockpit{align-items:start}
+  .fd2-cockpit > .fd2-ticker,.fd2-cockpit > .fd2-learnhome{max-height:16rem}
+}

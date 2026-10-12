@@ -1,0 +1,322 @@
+{
+ "source": "website Story Time (family-library-data.js, family-library-es-books.js, img/books)",
+ "built": "2026-10-12",
+ "books": {
+  "b-booker": {
+   "slug": "booker-tries-again",
+   "rev": "2026-10-07",
+   "title_en": "Booker Tries Again",
+   "title_es": "Booker lo intenta otra vez",
+   "cover": "img/books/booker-tries-again/cover-640.webp",
+   "pages": [
+    {
+     "img": "img/books/booker-tries-again/p01-640.webp",
+     "en": "This is Booker. Booker loves books. Big books, small books, and books with flaps that go flip!",
+     "es": "Este es Booker. A Booker le encantan los libros. ¡Libros grandes, libros chiquitos y libros con solapas que hacen flip!"
+    },
+    {
+     "img": "img/books/booker-tries-again/p02-640.webp",
+     "en": "One morning, Booker found a new book with a bright red kite on the cover. “I want to try reading this one!” he said.",
+     "es": "Una mañana, Booker encontró un libro nuevo con una cometa roja y brillante en la portada. “¡Quiero intentar leer este!”, dijo."
+    },
+    {
+     "img": "img/books/booker-tries-again/p03-640.webp",
+     "en": "Booker opened the book. There was one big word on the page. He looked at it. “I wonder what that says.”",
+     "es": "Booker abrió el libro. En la página había una palabra grande. Booker la miró. “¿Qué dirá ahí?”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p04-640.webp",
+     "en": "“Cat!” guessed Booker. Then he looked again. The word began with k, not c. His ears drooped. “I don’t know this word yet.”",
+     "es": "“¡Cat!”, adivinó Booker. Luego volvió a mirar. La palabra empezaba con k, no con c. Booker agachó las orejas. “Todavía no sé esta palabra.”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p05-640.webp",
+     "en": "Lumi sat close. “New things can feel hard,” she said. “We can practice together.” Booker took a breath. “Big breath. Brave heart. I can try again!”",
+     "es": "Lumi se sentó cerquita. “Las cosas nuevas pueden sentirse difíciles”, dijo. “Podemos practicar juntos.” Booker respiró. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p06-640.webp",
+     "en": "Booker looked at the picture. A red kite flew in the sky. “I know what a kite is,” he said. “Now let’s look at the letters.”",
+     "es": "Booker miró el dibujo. Una cometa roja volaba en el cielo. “Yo sé lo que es una cometa”, dijo. “Ahora miremos las letras.”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p07-640.webp",
+     "en": "“K makes the /k/ sound,” said Lumi. “And in this word, the quiet e helps i say its name.” Booker looked at all four letters: k-i-t-e.",
+     "es": "“La K hace el sonido /k/”, dijo Lumi. “Y en esta palabra, la e callada ayuda a la i a decir su nombre.” Booker miró las cuatro letras: k-i-t-e."
+    },
+    {
+     "img": "img/books/booker-tries-again/p08-640.webp",
+     "en": "Together they tried the sounds: /k/ … /ī/ … /t/. Then they joined them: “Kite!” The e was quiet. Booker grinned. “I read the word!”",
+     "es": "Juntos probaron los sonidos: /k/ … /ī/ … /t/. Luego los unieron: “¡Kite!” La e se quedó callada. Booker sonrió de oreja a oreja. “¡Leí la palabra!”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p09-640.webp",
+     "en": "“KITE!” cheered Booker. Zuri and Bop came over. “You kept trying!” said Lumi. “And you asked for help.”",
+     "es": "“¡KITE!”, celebró Booker. Zuri y Bop se acercaron. “¡Seguiste intentando!”, dijo Lumi. “Y pediste ayuda.”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p10-640.webp",
+     "en": "Booker turned the page. Four words! Lumi helped with the ones he did not know. Together they read, “Up goes the kite!” Up went Booker’s smile.",
+     "es": "Booker pasó la página. ¡Cuatro palabras! Lumi lo ayudó con las que no sabía. Juntos leyeron: “Up goes the kite!” (“¡Arriba va la cometa!”). Y arriba subió la sonrisa de Booker."
+    },
+    {
+     "img": "img/books/booker-tries-again/p11-640.webp",
+     "en": "The next page had another new word. Booker paused. “Will you help me with this one?” he asked. “Big breath. Brave heart. I can try again!”",
+     "es": "En la página siguiente había otra palabra nueva. Booker hizo una pausa. “¿Me ayudas con esta?”, preguntó. “Respiro grande. Corazón valiente. ¡Puedo intentarlo otra vez!”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p12-640.webp",
+     "en": "Booker and Lumi read to their friends. Some words Booker knew. Some they practiced together. Page by page, the story came alive.",
+     "es": "Booker y Lumi les leyeron a sus amigos. Algunas palabras Booker las sabía. Otras las practicaron juntos. Página por página, el cuento cobró vida."
+    },
+    {
+     "img": "img/books/booker-tries-again/p13-640.webp",
+     "en": "By the door, Booker’s little sister held a book. “I can’t read yet,” she said. “That’s okay,” said Booker. “We can enjoy a book together.”",
+     "es": "Junto a la puerta, la hermanita de Booker tenía un libro. “Yo todavía no sé leer”, dijo ella. “Está bien”, dijo Booker. “Podemos disfrutar un libro juntos.”"
+    },
+    {
+     "img": "img/books/booker-tries-again/p14-640.webp",
+     "en": "They sat side by side. They talked about the pictures and listened as Lumi read. “Big breath. Brave heart,” said Booker. “We can learn together!”",
+     "es": "Se sentaron lado a lado. Hablaron de los dibujos y escucharon mientras Lumi leía. “Respiro grande. Corazón valiente”, dijo Booker. “¡Podemos aprender juntos!”"
+    }
+   ]
+  },
+  "b-lumi": {
+   "slug": "big-feelings-brighter-days",
+   "rev": "2026-10-07",
+   "title_en": "Lumi’s Big Feelings, Brighter Days",
+   "title_es": "Sentimientos grandes de Lumi, días más brillantes",
+   "cover": "img/books/big-feelings-brighter-days/cover-640.webp",
+   "pages": [
+    {
+     "img": "img/books/big-feelings-brighter-days/p01-640.webp",
+     "en": "This is Lumi. Lumi has long ears for listening and big eyes for looking. She likes to notice how her friends might feel.",
+     "es": "Esta es Lumi. Lumi tiene orejas largas para escuchar y ojos grandes para mirar. A Lumi le gusta notar cómo podrían sentirse sus amigos."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p02-640.webp",
+     "en": "Today the friends played Parade in the Clubhouse yard. Booker banged the drum. Bop stomped. Zuri waved a leaf flag. “March, march, march!”",
+     "es": "Hoy los amigos jugaban al Desfile en el patio de la Casa Club. Booker tocaba el tambor. Bop pisaba fuerte. Zuri agitaba una bandera de hoja. “¡Marcha, marcha, marcha!”"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p03-640.webp",
+     "en": "By the fence stood Pip, the new little hedgehog. Pip was not marching or singing. Lumi wondered if Pip wanted company.",
+     "es": "Junto a la cerca estaba Pip, el pequeño erizo nuevo. Pip no marchaba ni cantaba. Lumi se preguntó si Pip quería compañía."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p04-640.webp",
+     "en": "Lumi looked with her eyes. Pip’s head was down. Pip’s paws were tucked in tight. She listened with her ears. Pip gave a tiny sigh.",
+     "es": "Lumi miró con sus ojos. Pip tenía la cabeza abajo. Pip tenía las patas bien recogidas. Lumi escuchó con sus orejas. Pip soltó un suspiro chiquitito."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p05-640.webp",
+     "en": "“Pip might feel lonely,” Lumi thought. “Or shy. I can ask.” Look. Listen. Lend a hand.",
+     "es": "“Tal vez Pip se siente sin compañía”, pensó Lumi. “O le da timidez. Puedo preguntar.” Mira. Escucha. Echa una mano."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p06-640.webp",
+     "en": "Lumi wanted to help, but her tummy felt wobbly. What if Pip said no? “I can ask kindly,” she told herself. “Pip gets to choose.”",
+     "es": "Lumi quería ayudar, pero sentía la pancita temblorosa. ¿Y si Pip decía que no? “Puedo preguntar con amabilidad”, se dijo. “Pip puede decidir.”"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p07-640.webp",
+     "en": "First, Lumi visited the Calm Corner. She sat on a soft pink cushion and put one paw on her tummy. She took her time.",
+     "es": "Primero, Lumi fue al Rincón de calma. Se sentó en un cojín rosado y suavecito y puso una pata en la pancita. Se tomó su tiempo."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p08-640.webp",
+     "en": "“Smell the flower,” Lumi whispered, breathing in gently. “Blow the pretend candle,” she said, breathing out slowly. In … and out.",
+     "es": "“Huele la flor”, susurró Lumi, tomando aire con suavidad. “Sopla la vela de mentiritas”, dijo, soltando el aire despacio. Adentro… y afuera."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p09-640.webp",
+     "en": "Lumi still felt a little nervous. But she felt ready to try. Look. Listen. Lend a hand. Off she hopped!",
+     "es": "Lumi todavía se sentía un poquito nerviosa. Pero se sentía lista para intentarlo. Mira. Escucha. Echa una mano. ¡Y allá fue, saltando!"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p10-640.webp",
+     "en": "“Hi, Pip. Would you like some company?” asked Lumi. Pip nodded. “I want to play, but I don’t know the Parade game.”",
+     "es": "“Hola, Pip. ¿Quieres compañía?”, preguntó Lumi. Pip dijo que sí con la cabeza. “Quiero jugar, pero no sé jugar al Desfile.”"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p11-640.webp",
+     "en": "“Would you like me to show you?” asked Lumi. “Maybe,” said Pip. “My tummy feels wobbly.” “Mine did, too,” said Lumi. “We can take our time.”",
+     "es": "“¿Quieres que te enseñe?”, preguntó Lumi. “Tal vez”, dijo Pip. “Siento la pancita temblorosa.” “Yo también la sentía así”, dijo Lumi. “Podemos tomarnos nuestro tiempo.”"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p12-640.webp",
+     "en": "“Want to try a slow breath with me?” asked Lumi. Pip nodded. In … and out. They sat together. “I’d like to try marching now,” said Pip.",
+     "es": "“¿Quieres probar una respiración lenta conmigo?”, preguntó Lumi. Pip dijo que sí con la cabeza. Adentro… y afuera. Se sentaron juntos. “Ahora me gustaría intentar marchar”, dijo Pip."
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p13-640.webp",
+     "en": "Lumi showed Pip the first steps. Pip marched beside her. Booker drummed. Bop made room. Zuri waved the flag. March, march, march!",
+     "es": "Lumi le enseñó a Pip los primeros pasos. Pip marchó a su lado. Booker tocó el tambor. Bop hizo lugar. Zuri agitó la bandera. ¡Marcha, marcha, marcha!"
+    },
+    {
+     "img": "img/books/big-feelings-brighter-days/p14-640.webp",
+     "en": "Pip smiled. “I’m glad you asked me.” Lumi smiled, too. Look. Listen. Lend a hand. A kind invitation can brighten someone’s day!",
+     "es": "Pip sonrió. “Me alegra que me hayas preguntado.” Lumi también sonrió. Mira. Escucha. Echa una mano. ¡Una invitación amable puede iluminar el día de alguien!"
+    }
+   ]
+  },
+  "b-zuri": {
+   "slug": "what-happens-if-we-try",
+   "rev": "2026-10-07",
+   "title_en": "Zuri: What Happens If We Try?",
+   "title_es": "Zuri: ¿Qué pasa si lo intentamos?",
+   "cover": "img/books/what-happens-if-we-try/cover-640.webp",
+   "pages": [
+    {
+     "img": "img/books/what-happens-if-we-try/p01-640.webp",
+     "en": "This is Zuri. Zuri has a hat for sunny days, a compass for finding the way, and a head full of questions.",
+     "es": "Esta es Zuri. Zuri tiene un sombrero para los días de sol, una brújula para encontrar el camino y una cabeza llena de preguntas."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p02-640.webp",
+     "en": "It was a hot, sunny morning at the Clubhouse. Bop carried a bowl of ice for cool water. Clink, clink, clink!",
+     "es": "Era una mañana calurosa y soleada en la Casa Club. Bop llevaba un tazón de hielo para tener agua fresquita. ¡Clin, clin, clin!"
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p03-640.webp",
+     "en": "Plink! One ice cube jumped out of the bowl. It slid across the sunny porch and stopped by the steps.",
+     "es": "¡Plinc! Un cubito de hielo saltó del tazón. Se deslizó por el porche soleado y se detuvo junto a los escalones."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p04-640.webp",
+     "en": "Later, Zuri looked for it. The ice cube was gone! A little puddle shone by the steps. “Where did the ice go?” she asked.",
+     "es": "Más tarde, Zuri fue a buscarlo. ¡El cubito de hielo ya no estaba! Un charquito brillaba junto a los escalones. “¿Adónde se fue el hielo?”, preguntó."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p05-640.webp",
+     "en": "“Maybe the sun gobbled it up!” said Booker. “Maybe it ran away!” said Bop. “Maybe it got warm and melted,” said Lumi.",
+     "es": "“¡A lo mejor el sol se lo comió!”, dijo Booker. “¡A lo mejor se escapó!”, dijo Bop. “A lo mejor se calentó y se derritió”, dijo Lumi."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p06-640.webp",
+     "en": "Zuri wondered. “How could we find out?” The friends gathered three ice cubes about the same size. “I wonder, I wonder … what happens if we try?”",
+     "es": "Zuri se quedó pensando. “¿Cómo podríamos descubrirlo?” Los amigos juntaron tres cubitos de hielo más o menos del mismo tamaño. “Me pregunto, me pregunto... ¿qué pasa si lo intentamos?”"
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p07-640.webp",
+     "en": "Zuri put one cube by the sunny window and one in the shady corner. “We’ll try a third in my warm paw,” she said. “Let’s watch them together.”",
+     "es": "Zuri puso un cubito junto a la ventana soleada y otro en el rincón con sombra. “Vamos a probar un tercero en mi pata calientita”, dijo. “Observémoslos juntos.”"
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p08-640.webp",
+     "en": "“Which do you think will melt fastest?” asked Zuri. Each friend made a guess. “Now we’ll watch what happens,” she said.",
+     "es": "“¿Cuál creen que se va a derretir más rápido?”, preguntó Zuri. Cada amigo adivinó. “Ahora vamos a observar qué pasa”, dijo."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p09-640.webp",
+     "en": "Zuri held the third cube briefly over a bowl. “Brrr!” Drip … drip … drip. “Look! It’s getting smaller. There’s water on my paw!”",
+     "es": "Zuri sostuvo el tercer cubito un ratito sobre un tazón. “¡Brrr!” Plic… plic… plic. “¡Miren! Se está haciendo más chiquito. ¡Tengo agua en la pata!”"
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p10-640.webp",
+     "en": "The sunny-window cube was getting smaller, too. The shady cube had changed less. They looked closely. “Different places can warm ice differently,” said Zuri.",
+     "es": "El cubito de la ventana soleada también se estaba haciendo más chiquito. El cubito de la sombra había cambiado menos. Miraron con atención. “En lugares distintos, el hielo se puede calentar de forma distinta”, dijo Zuri."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p11-640.webp",
+     "en": "“When ice gets warm enough, it melts into water,” said Zuri. “So the ice didn’t run away!” laughed Bop. “It changed!”",
+     "es": "“Cuando el hielo se calienta lo suficiente, se derrite y se vuelve agua”, dijo Zuri. “¡Entonces el hielo no se escapó!”, se rio Bop. “¡Cambió!”"
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p12-640.webp",
+     "en": "“Can water turn back into ice?” asked Zuri. “I wonder, I wonder … what happens if we try?” Nana Hoot helped put a cup of water in the freezer.",
+     "es": "“¿El agua puede volver a ser hielo?”, preguntó Zuri. “Me pregunto, me pregunto... ¿qué pasa si lo intentamos?” Nana Hoot la ayudó a poner un vaso de agua en el congelador."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p13-640.webp",
+     "en": "The next morning, they checked the cup. Hard, cold ice! “The freezer made the water cold enough to freeze,” said Nana Hoot. “It’s ice again!” cheered Zuri.",
+     "es": "A la mañana siguiente, revisaron el vaso. ¡Hielo duro y frío! “El congelador enfrió el agua lo suficiente para que se congelara”, dijo Nana Hoot. “¡Es hielo otra vez!”, celebró Zuri."
+    },
+    {
+     "img": "img/books/what-happens-if-we-try/p14-640.webp",
+     "en": "“Ice can melt. Water can freeze. And questions help us learn!” said Zuri. Then she smiled. “Tomorrow, I wonder … what happens if we freeze blueberries?”",
+     "es": "“El hielo se puede derretir. El agua se puede congelar. ¡Y las preguntas nos ayudan a aprender!”, dijo Zuri. Luego sonrió. “Mañana me pregunto… ¿qué pasa si congelamos arándanos?”"
+    }
+   ]
+  },
+  "b-bop": {
+   "slug": "clean-up-team",
+   "rev": "2026-10-07",
+   "title_en": "Bop’s Clean-Up Team",
+   "title_es": "El equipo de limpieza de Bop",
+   "cover": "img/books/clean-up-team/cover-640.webp",
+   "pages": [
+    {
+     "img": "img/books/clean-up-team/p01-640.webp",
+     "en": "This is Bop. Bop is big. Bop is strong. Bop loves to move. And Bop LOVES to play!",
+     "es": "Este es Bop. Bop es grande. Bop es fuerte. A Bop le encanta moverse. ¡Y a Bop le ENCANTA jugar!"
+    },
+    {
+     "img": "img/books/clean-up-team/p02-640.webp",
+     "en": "Bop built a block tower as tall as a tree. He zoomed the cars. Zoom, zoom! Then he painted a big orange sun.",
+     "es": "Bop construyó una torre de bloques tan alta como un árbol. Hizo correr los carritos. ¡Brum, brum! Luego pintó un gran sol anaranjado."
+    },
+    {
+     "img": "img/books/clean-up-team/p03-640.webp",
+     "en": "Bop played and played. Blocks here. Cars there. Books, brushes, and dress-up hats everywhere!",
+     "es": "Bop jugó y jugó. Bloques por aquí. Carritos por allá. ¡Libros, pinceles y sombreros de disfraz por todas partes!"
+    },
+    {
+     "img": "img/books/clean-up-team/p04-640.webp",
+     "en": "Ding-a-ling! Nana Hoot rang the clean-up chime. “Clean-up time, friends!” Bop looked around. Oh, my. What a big, big mess.",
+     "es": "¡Tilín, tilín! Nana Hoot tocó la campanita de recoger. “¡Hora de recoger, amigos!” Bop miró a su alrededor. Ay, ay, ay. Qué desorden tan, tan grande."
+    },
+    {
+     "img": "img/books/clean-up-team/p05-640.webp",
+     "en": "“It’s too big!” said Bop. His ears drooped. His trunk drooped. He sat with a sad flop. “Where do I start?”",
+     "es": "“¡Es demasiado grande!”, dijo Bop. Bajó las orejas. Bajó la trompa. Se sentó con un ¡plof! triste. “¿Por dónde empiezo?”"
+    },
+    {
+     "img": "img/books/clean-up-team/p06-640.webp",
+     "en": "Then Bop had an idea. “I can start with one thing.” He picked up one block. One small start!",
+     "es": "Entonces Bop tuvo una idea. “Puedo empezar con una cosa.” Levantó un bloque. ¡Un pequeño comienzo!"
+    },
+    {
+     "img": "img/books/clean-up-team/p07-640.webp",
+     "en": "Every toy had a home. The block bin had a block picture. Bop sang, “Pick it up, put it back. Stomp, stomp! Clap, clap!” Clunk, clunk, clunk!",
+     "es": "Cada juguete tenía su casa. La caja de los bloques tenía el dibujo de un bloque. Bop cantó: “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!” ¡Clonc, clonc, clonc!"
+    },
+    {
+     "img": "img/books/clean-up-team/p08-640.webp",
+     "en": "Next came the books. The shelf had a book picture. “Books go home on the shelf,” sang Bop. “One at a time. I can try!”",
+     "es": "Después siguieron los libros. El estante tenía el dibujo de un libro. “Los libros van a su casa en el estante”, cantó Bop. “Uno a la vez. ¡Puedo intentarlo!”"
+    },
+    {
+     "img": "img/books/clean-up-team/p09-640.webp",
+     "en": "Whoops! The books slid down. Flop, flop, flop! Bop tried again, one book at a time. Pick it up, put it back.",
+     "es": "¡Uy! Los libros se resbalaron. ¡Plof, plof, plof! Bop lo intentó otra vez, un libro a la vez. Recógelo, guárdalo."
+    },
+    {
+     "img": "img/books/clean-up-team/p10-640.webp",
+     "en": "The cars went vroom into the basket. The hats went on their hooks. “Pick it up, put it back. Stomp, stomp! Clap, clap!”",
+     "es": "Los carritos entraron a la canasta: ¡brum! Los sombreros se colgaron en sus ganchos. “Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas!”"
+    },
+    {
+     "img": "img/books/clean-up-team/p11-640.webp",
+     "en": "Bop carried the brushes to the sink. Splish, splash! Then he washed his paws with soap and water, and the tip of his trunk, too.",
+     "es": "Bop llevó los pinceles al lavabo. ¡Chap, chap! Luego se lavó las patas con agua y jabón, y también la puntita de la trompa."
+    },
+    {
+     "img": "img/books/clean-up-team/p12-640.webp",
+     "en": "Zuri had a mountain of puzzle pieces. “Would you like a hand?” asked Bop. “I have a trunk!” Zuri smiled. “Yes, please!”",
+     "es": "Zuri tenía una montaña de piezas de rompecabezas. “¿Quieres una mano?”, preguntó Bop. “¡Yo tengo una trompa!” Zuri sonrió. “¡Sí, por favor!”"
+    },
+    {
+     "img": "img/books/clean-up-team/p13-640.webp",
+     "en": "Booker, Lumi, Zuri, and Bop tidied together. Pick it up, put it back. Stomp, stomp! Clap, clap! The clean-up team was on the job.",
+     "es": "Booker, Lumi, Zuri y Bop ordenaron juntos. Recógelo, guárdalo. ¡Pum, pum! ¡Plas, plas! El equipo de limpieza estaba manos a la obra."
+    },
+    {
+     "img": "img/books/clean-up-team/p14-640.webp",
+     "en": "Bop looked around. Every toy was home. “I started with one toy,” he said. “We finished together!” Small steps. Helping friends. A job well done!",
+     "es": "Bop miró a su alrededor. Cada juguete estaba en su casa. “Empecé con un juguete”, dijo. “¡Terminamos juntos!” Pasos pequeños. Amigos que ayudan. ¡Un trabajo bien hecho!"
+    }
+   ]
+  }
+ }
+}
