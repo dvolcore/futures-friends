@@ -113,6 +113,11 @@
 @media (prefers-reduced-motion:no-preference){
   /* the camera drifts by itself, slowly (a 24 s loop), on every device: each plane by its depth's share */
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-plane{animation:mh-orbit 24s ease-in-out infinite}
+  /* SYS5 (motion audit 2026-10-12, lighter fly-through): while the opening is held behind the gate or plays, the camera is craning
+     down and its idle drift waits (the 24 s loop holds wherever it is and goes on from there when the camera lands, so nothing
+     jumps; its phase at the tap was never fixed anyway, it starts when Home renders). Measured: the fly-through's typical frame
+     41 -> 34 ms in headless Chromium (1440). */
+  :root:not([data-motion=off]) .mh-hero.mh-alive[data-opening=held] .mh-plane,:root:not([data-motion=off]) .mh-hero.mh-alive[data-opening=playing] .mh-plane{animation-play-state:paused}
   /* clouds cross the sky at their depth's speed and wrap round; each bobs gently */
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-drift{animation:mh-wrap var(--cs,120s) linear var(--cdl,0s) infinite}
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-cloud{animation:mh-bob 9s ease-in-out infinite alternate}
@@ -130,7 +135,7 @@
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt>i>b{animation:mh-ptsway var(--sw,3.4s) ease-in-out var(--dl,0s) infinite alternate}
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt[data-kind=spark]>i>b{animation:mh-twinkle var(--sw,2.4s) ease-in-out var(--dl,0s) infinite alternate}
   /* the breeze: a push from a finger or the pointer settles back like a spring */
-  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bz,:root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt{transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+  :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bz,:root:not([data-motion=off]) .mh-hero.mh-alive .mh-pt{transition:transform 1.6s var(--ff-ease-out)}
   /* wave 8: the light shafts breathe and slowly turn against each other; the bloom pulses */
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-shafts{animation:mh-shaft 11s ease-in-out infinite alternate}
   :root:not([data-motion=off]) .mh-hero.mh-alive .mh-bloom{animation:mh-bloom 7s ease-in-out infinite alternate}

@@ -19,7 +19,7 @@
 .hc-prooflist::after,.hc-close .hc-closegrid::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background:radial-gradient(clamp(180px,26vw,340px) circle at var(--gx,22%) var(--gy,-10%),var(--g-spec),rgba(255,255,255,0) 70%),
     linear-gradient(180deg,rgba(255,255,255,.34) 0,rgba(255,255,255,0) 38%);
-  mix-blend-mode:soft-light;opacity:.9;transition:opacity .4s}
+  mix-blend-mode:soft-light;opacity:.9;transition:opacity var(--ff-dur-3)}
 /* the refracting rim (Chromium only, see home-day.js): the backdrop is displaced inside a 10px ring, not behind the text */
 .ffg-refract .hc-prooflist::before,.ffg-refract .hc-close .hc-closegrid::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;padding:11px;
   -webkit-backdrop-filter:url(#ffg-refract) blur(1.5px) saturate(1.5);backdrop-filter:url(#ffg-refract) blur(1.5px) saturate(1.5);
@@ -83,7 +83,7 @@
 
 /* Sticky header turns to frosted glass on scroll (header-glass.js toggles .is-glass). Text stays the header's dark ink on a 74% white
    pane, so contrast holds over any section; the green utility row stays solid (its small light labels need it for contrast). */
-@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
   header.bar{transition:background-color .35s ease,box-shadow .35s ease}
   header.bar.is-glass{background:rgba(255,255,255,.74);-webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);
     box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(10,43,56,.12)}

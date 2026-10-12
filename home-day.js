@@ -199,15 +199,20 @@
   }
   function jsScroll(st, getT, sc) {
     const els = {}; Object.keys(PROPS).forEach(n => { els[n] = st.querySelector(PROPS[n][0]); });
+    // SYS5 (motion audit 2026-10-12): a value is written only when it actually changes, rounded to a step the eye cannot see
+    // (opacity in 1/250, the sun in half pixels), so a scroll frame that moves nothing writes nothing (most of the page: every
+    // track is flat between its sections)
+    const last = {};
+    const put = (n, e, prop, val) => { if (last[n] === val) return; last[n] = val; e.style[prop] = val; };
     const apply = q => {
       const T = getT();
       Object.keys(T).forEach(n => {
         const e = els[n]; if (!e) return;
         const v = lerpTrack(T[n], q);
         if (n === 'sunT') {
-          const half = sunSize() / 2;
-          e.style.transform = `translate3d(${(v[0] * innerWidth / 100 - half).toFixed(1)}px, ${(v[1] * innerHeight / 100 - half).toFixed(1)}px, 0)`;
-        } else e.style.opacity = (+v).toFixed(3);
+          const half = sunSize() / 2, r = x => (Math.round(x * 2) / 2).toFixed(1);
+          put(n, e, 'transform', `translate3d(${r(v[0] * innerWidth / 100 - half)}px, ${r(v[1] * innerHeight / 100 - half)}px, 0)`);
+        } else put(n, e, 'opacity', (Math.round(v * 250) / 250).toFixed(3));
       });
     };
     const q = () => { const m = document.documentElement.scrollHeight - innerHeight; return m > 0 ? Math.max(0, Math.min(1, scrollY / m)) : 0; };

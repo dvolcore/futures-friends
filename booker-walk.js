@@ -171,7 +171,7 @@
     let layer = null, segs = [], T = [], g = null, walker = null, state = { dist: 0, steps: 0, lastX: null, lean: 0, waved: {}, home: false, pose: 'walk' };
     // phones: the exact boxes of words and controls (no extra clearance: the margin is too narrow for it); wide screens: 16 px / 4 px
     const obstacles = () => (window.FFHomeDay && window.FFHomeDay.obstacles ? window.FFHomeDay.obstacles(g && g.phone ? 0 : 1) : []);
-    let obs = [], obsAt = 0, Sx = [], lastScroll = -1, lastMove = 0;
+    let obs = [], Sx = [], lastScroll = -1, lastMove = 0;
     const draw = (s, f) => {
       f = clamp(f, 0, 1);
       if (s.f === f) return; s.f = f;
@@ -198,7 +198,7 @@
       segs = S.map(seg => Object.assign(svgSeg(layer, seg, g), { seg }));
       segs.forEach(s => { if (MP && MP.getRawPath) { try { s.raw = MP.getRawPath(s.band); MP.cacheRawPathMeasurements(s.raw); } catch (e) { s.raw = null; } } });
       T = timeline(S, g);
-      obs = obstacles(); obsAt = performance.now();
+      obs = obstacles();
       layer.dataset.segments = String(segs.length);
       if (!motion) { segs.forEach(s => draw(s, 1)); return; }
       segs.forEach(s => draw(s, 0));
@@ -218,16 +218,30 @@
         body.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-34%)', offset: .4, easing: 'cubic-bezier(.2,.8,.4,1)' }, { transform: 'translateY(0)', offset: .8 }, { transform: 'translateY(-6%)', offset: .9 }, { transform: 'translateY(0)' }], { duration: 560 });
         if (window.FFHomeDay && window.FFHomeDay.badge) window.FFHomeDay.badge(walker, 'booker');
       });
-      tick();
+      tick(true);
     }
 
     const setPose = p => { if (state.pose === p || !walker) return; state.pose = p; walker.classList.toggle('is-waving', p === 'wave'); };
-    function tick() {
+    // SYS5 (motion audit 2026-10-12): the page is read before anything is written, so a frame never forces a layout. The words and
+    // controls (FFHomeDay.obstacles) are in page coordinates, so they stay true while the page scrolls: they are re-read when the
+    // scroll settles, on resize and when the page changes size (the ResizeObserver rebuild), not during a scroll. The few boxes
+    // that do move against the page (the parade's band, the fixed back-to-top and sound buttons, the sticky header) are re-read
+    // every third frame and when the scroll settles.
+    let near = null, nearN = 0;
+    const readNear = () => {
+      const p = !g.phone && root.querySelector('.hc-trail-live .hc-parade');
+      const pr = p && p.offsetParent ? p.getBoundingClientRect() : null;
+      const hdr = document.querySelector('header.bar');
+      near = {
+        parade: pr && { top: pr.top + scrollY, bottom: pr.bottom + scrollY },
+        fixed: [...document.querySelectorAll('.totop.on, .ffs, .ffs button')].map(b => b.getBoundingClientRect()).filter(r => r.width).map(r => ({ left: r.left, right: r.right, top: r.top, bottom: r.bottom })),
+        hb: hdr ? hdr.getBoundingClientRect().bottom : 0
+      };
+    };
+    function tick(fresh) {
       if (!walker || sc.aborted || !T.length) return;
+      if (fresh || !near || ++nearN % 3 === 0) readNear();
       const s = scrollY, vh = g.vh;
-      // draw: everything up to a quarter screen ahead of Booker
-      const lead = s + vh * 0.25;
-      T.forEach((e, i) => draw(segs[i], (lead - e.s0) / (e.s1 - e.s0)));
       // where is Booker?
       let i = T.findIndex(e => s < e.s1 + e.dwell);
       if (i < 0) i = T.length - 1;
@@ -245,22 +259,24 @@
       let wx = pos.x;
       if (g.phone) { const edge = Math.min(pos.x, g.vw - pos.x), tuck = clamp(1 - (edge - 14) / 26, 0, 1), home = pos.x < g.vw / 2 ? g.W / 2 - 11 : g.vw - g.W / 2 + 11; wx = pos.x + (home - pos.x) * tuck; }
       const ph = state.dist / 22 * Math.PI, bob = -Math.abs(Math.sin(ph)) * (g.phone ? 2.5 : 3.5), rock = Math.sin(ph) * 2.2;
+      // visible only where nothing is under him (16 px clear of tap targets), never over the hero, never beside the parade
+      const box = { l: wx - g.W / 2, r: wx + g.W / 2, t: pos.y - g.H, b: pos.y + 4 };
+      const blocked = obs.some(o => !(box.r <= o.l || box.l >= o.r || box.b <= o.t || box.t >= o.b));
+      const parade = !!near.parade && near.parade.bottom - s > vh * 0.08 && near.parade.top - s < vh * 0.92;
+      // fixed controls stay clear too: back-to-top and the sound toggle (sound.js, bottom right)
+      const yv = pos.y - s, fp = g.phone ? 0 : 16;
+      const fixedHit = near.fixed.some(r => !(box.r <= r.left - fp || box.l >= r.right + fp || yv + 4 <= r.top - fp || yv - g.H >= r.bottom + fp));   // his box reaches 4 px below his feet (box.b above)
+      const hb = near.hb, under = g.phone ? pos.y - s < hb + 2 : pos.y - s - g.H < hb + 16;
+      const before = s < T[0].s0 + 4;
+      const on = !blocked && !parade && !fixedHit && !under && !before && !state.home;
+      // writes, after every read: the trail drawn up to a quarter screen ahead of Booker, then Booker himself
+      const lead = s + vh * 0.25;
+      T.forEach((e2, j) => draw(segs[j], (lead - e2.s0) / (e2.s1 - e2.s0)));
       walker.style.transform = `translate3d(${(wx - g.W / 2).toFixed(1)}px, ${(pos.y - g.H + 3).toFixed(1)}px, 0)`;
       walker.style.setProperty('--bob', `${bob.toFixed(2)}px`);
       walker.style.setProperty('--rock', `${(rock + state.lean).toFixed(2)}deg`);
-      // visible only where nothing is under him (16 px clear of tap targets), never over the hero, never beside the parade
-      const box = { l: wx - g.W / 2, r: wx + g.W / 2, t: pos.y - g.H, b: pos.y + 4 };
-      if (performance.now() - obsAt > 500) { obs = obstacles(); obsAt = performance.now(); }   // the page moves under him (photos, fonts, opened transcripts): never trust an old map
-      const blocked = obs.some(o => !(box.r <= o.l || box.l >= o.r || box.b <= o.t || box.t >= o.b));
-      const parade = !g.phone && (() => { const p = root.querySelector('.hc-trail-live .hc-parade'); if (!p || !p.offsetParent) return false; const r = p.getBoundingClientRect(); return r.bottom > vh * 0.08 && r.top < vh * 0.92; })();
-      // fixed controls stay clear too: back-to-top and the sound toggle (sound.js, bottom right)
-      const yv = pos.y - s, fp = g.phone ? 0 : 16;
-      const fixedHit = [...document.querySelectorAll('.totop.on, .ffs, .ffs button')].some(b => { const r = b.getBoundingClientRect(); return r.width && !(box.r <= r.left - fp || box.l >= r.right + fp || yv + 4 <= r.top - fp || yv - g.H >= r.bottom + fp); });   // his box reaches 4 px below his feet (box.b above)
-      const hdr = document.querySelector('header.bar'), hb = hdr ? hdr.getBoundingClientRect().bottom : 0, under = g.phone ? pos.y - s < hb + 2 : pos.y - s - g.H < hb + 16;
-      const before = s < T[0].s0 + 4;
-      const on = !blocked && !parade && !fixedHit && !under && !before && !state.home;
-      walker.classList.toggle('is-on', on);
-      walker.dataset.seg = String(i);
+      if (on !== walker.classList.contains('is-on')) walker.classList.toggle('is-on', on);
+      if (walker.dataset.seg !== String(i)) walker.dataset.seg = String(i);
       // footsteps (only while seen and walking)
       const steps = Math.floor(state.dist / 44);
       if (steps !== state.steps) { if (on && moved > 0.5) sfx('footstep', pos.x / g.vw * 2 - 1, 0.18); state.steps = steps; }
@@ -283,12 +299,16 @@
 
     // one rAF loop that runs while the page is moving (and a moment after), so he is placed every frame of a scroll or a momentum
     // fling, on the same frame the page paints, not only on the frames a scroll event happens to arrive (iOS delivers few of them)
-    let id = 0;
+    let id = 0, settle = 0;
+    // the scroll has settled: re-read the words and controls (after this frame has painted, so the layout is already clean) and
+    // place him once more on the fresh map
+    const settled = () => { settle = 0; if (sc.aborted || !walker) return; obs = obstacles(); tick(true); };
     const frame = () => {
       id = 0; tick();
       const now = performance.now();
       if (scrollY !== lastScroll) { lastScroll = scrollY; lastMove = now; }
       if (now - lastMove < 160 && !sc.aborted) id = requestAnimationFrame(frame);
+      else if (!settle && !sc.aborted) settle = setTimeout(settled, 0);
     };
     function queue() { lastMove = performance.now(); if (!id) id = requestAnimationFrame(frame); }
     sc.add(() => { if (id) cancelAnimationFrame(id); if (layer) layer.remove(); });
@@ -308,7 +328,7 @@
     sc.listen(window, 'resize', viewportChanged);
     if (window.visualViewport) { sc.listen(window.visualViewport, 'resize', viewportChanged); sc.listen(window.visualViewport, 'scroll', () => queue(), { passive: true }); }
     if (typeof ResizeObserver === 'function') { const ro = new ResizeObserver(rebuild); ro.observe(root); sc.add(() => ro.disconnect()); }
-    sc.add(() => clearTimeout(bid));
+    sc.add(() => { clearTimeout(bid); clearTimeout(settle); });
     // lazy: the trail is built once the page has settled (idle), never in the first frame
     const start = () => { if (!sc.aborted && !layer) build(); };
     // (never during the hero's opening: wait for it to finish, then for an idle moment)
