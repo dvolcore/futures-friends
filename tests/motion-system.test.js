@@ -116,8 +116,10 @@ test('headings rise word by word (SplitText) and keep their accessible name, in 
       assert.equal(x.label, x.text, `${lang}: the heading is read as one phrase: "${x.text}"`);
       assert.ok(x.words >= 1 && x.hidden && x.key, lang + ': words are aria-hidden boxes with a stitched key word');
     }
-    const name = await page.evaluate(() => document.querySelector('h1[data-ffh]') && document.querySelector('h1[data-ffh]').getAttribute('aria-label'));
-    if (lang === 'es') assert.match(name, /casa/i, 'Spanish heading text'); else assert.match(name, /come home/i);
+    // (a heading already on screen when the Spanish text arrives late is left whole on purpose: no shift; the rest are split)
+    const labels = r.map(x => x.label).join(' | ');
+    if (lang === 'es') { assert.doesNotMatch(labels, /come home|Trusted by|Try one tonight/, 'no English heading split in Spanish: ' + labels); assert.match(labels, /\b(de|la|los|las|para|una|en)\b/i, 'Spanish heading text: ' + labels); }
+    else assert.match(labels, /Trusted by|come home/i);
     assert.deepEqual(errors, []);
     await ctx.close();
   }

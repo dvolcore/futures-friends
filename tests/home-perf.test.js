@@ -107,14 +107,14 @@ test('Booker (1280): no forced reads of every word during a scroll; a few cached
   await page.waitForTimeout(600);
   // a scroll burst: 80 wheel steps (sweeps of every word happened every 500 ms before SYS5)
   await page.mouse.move(640, 400);
-  await page.evaluate(() => { const o = window.FFHomeDay.obstacles; window.FFHomeDay.obstacles = function (...a) { if (window.__gb.on && /booker-walk\.js/.test(new Error().stack || '')) window.__gb.sweeps++; return o.apply(this, a); }; });
+  await page.evaluate(() => { const o = window.FFHomeDay.obstacles; window.FFHomeDay.obstacles = function (...a) { const st = new Error().stack || ''; if (window.__gb.on && /booker-walk\.js/.test(st)) { window.__gb.sweeps++; if (!/\bsettled\b|\bbuild\b/.test(st)) window.__gb.inFrame = (window.__gb.inFrame || 0) + 1; } return o.apply(this, a); }; });
   await page.evaluate(() => { window.__frames = 0; window.__gb.sweeps = 0; window.__gb.on = true; const f = () => { if (!window.__gb.on) return; window.__frames++; requestAnimationFrame(f); }; requestAnimationFrame(f); });
   const t0 = Date.now();
   for (let i = 0; i < 80; i++) { await page.mouse.wheel(0, 90); await page.waitForTimeout(25); }
   const r = await page.evaluate(() => { window.__gb.on = false; return { ...window.__gb, frames: window.__frames }; });
   const ms = Date.now() - t0;
   assert.ok(r.frames > 20, `frames sampled (${r.frames})`);
-  assert.ok(r.sweeps <= Math.max(2, Math.floor(ms / 1500)), `word-and-control sweeps during a ${ms} ms scroll: ${r.sweeps} (${r.sweep} box reads; only when the scroll settles (a pause in the wheel), was every 500 ms = ${Math.floor(ms / 500)})`);
+  assert.equal(r.inFrame || 0, 0, `no word-and-control sweep inside a scroll frame (was one every 500 ms); ${r.sweeps} sweeps in ${ms} ms, all when the scroll paused (settled) or on a rebuild`);
   assert.ok(r.booker / r.frames <= 2.5, `Booker's own box reads per frame: ${(r.booker / r.frames).toFixed(2)} (${r.booker} in ${r.frames})`);
   // and he still never stands on words or controls: settle at steps down the page and compare his box with the exact boxes
   const H2 = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);

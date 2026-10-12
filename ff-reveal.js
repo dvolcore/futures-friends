@@ -30,6 +30,8 @@
   const routeArg = () => { try { return (location.hash || '').replace(/^#/, '').split('/')[1] || ''; } catch (e) { return ''; } };
   const wants = view => !SKIP.has(view) && !(view === 'story-time' && routeArg()) && !(view === 'habit' && routeArg());
   const OFF = '[data-ff-reveal="off"], [data-signature], [data-h3], .phero, dialog, [hidden]';
+  // components with their own entrance (the cast's guide cards hop in and write their line on): never revealed on top of that
+  const OWN = '[data-ff-guide], .ff-guide, .ff-town, video, iframe';
   const GRID = /(^|\s)(grid|g2|g3|g4|g5|[\w-]*-grid|grid-[\w-]*|[\w-]*grid)(\s|$)/;
   const MAX = 90;
   let live = null;
@@ -55,6 +57,7 @@
     const vh = innerHeight || 800;
     const list = blocks(root).filter(el => {
       if (el.matches('h1, h2') || el.querySelector('h1[data-ffh], h2[data-ffh]')) return false;   // headings rise word by word instead
+      if (el.matches(OWN) || el.querySelector(OWN)) return false;
       const r = el.getBoundingClientRect();
       if (!r.width || !r.height || r.top < vh) return false;                                      // on screen (or not drawn): never hidden
       const cs = getComputedStyle(el);
