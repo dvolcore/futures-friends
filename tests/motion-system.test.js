@@ -219,3 +219,27 @@ test('Watch and Academy load Flip/Inertia(/MorphSVG) on demand; a deep link stra
   assert.deepEqual(errors, []);
   await ctx.close();
 });
+
+test('Click Spark only on real wins (add to bag, a sent form), never on an ordinary click, and never with motion off', async () => {
+  for (const motion of [true, false]) {
+    const { ctx, page } = await open({ motion });
+    await h.goto(page, srv.base, 'product/rug-friends-circle', 1800);
+    const r = await page.evaluate(async () => {
+      let seen = 0; const mo = new MutationObserver(rs => rs.forEach(x => x.addedNodes.forEach(n => { if (n.classList && n.classList.contains('ff-spark')) seen++; }))); mo.observe(document.body, { childList: true });
+      const plain = [...document.querySelectorAll('#view a[href], #view button')].find(b => !b.matches('[data-sp-padd]') && b.getBoundingClientRect().width && /^#/.test(b.getAttribute('href') || '') === false);
+      if (plain) plain.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      await new Promise(r => setTimeout(r, 50)); const afterPlain = seen;
+      document.querySelector('[data-sp-padd]').click();
+      await new Promise(r => setTimeout(r, 50)); const afterAdd = seen;
+      document.querySelector('#view .btn').focus();
+      document.dispatchEvent(new CustomEvent('ff:intake', { detail: { kind: 'contact', outcome: 'network' } }));
+      await new Promise(r => setTimeout(r, 50)); const afterFail = seen;
+      document.dispatchEvent(new CustomEvent('ff:intake', { detail: { kind: 'contact', outcome: 'ok' } }));
+      await new Promise(r => setTimeout(r, 50));
+      return { afterPlain, afterAdd, afterFail, afterOk: seen };
+    });
+    if (motion) assert.deepEqual(r, { afterPlain: 0, afterAdd: 1, afterFail: 1, afterOk: 2 });
+    else assert.deepEqual(r, { afterPlain: 0, afterAdd: 0, afterFail: 0, afterOk: 0 });
+    await ctx.close();
+  }
+});
