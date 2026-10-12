@@ -3,7 +3,7 @@
    name tab, so speaking never changes the card's size. Moving rules sit behind BOTH motion switches. */
 /* in the card's button row, before the next and close buttons (the card keeps its wave-6 height) */
 .mh-saygo{display:inline-flex;align-items:center;gap:6px;margin-right:auto;min-height:40px;padding:7px 12px;border-radius:999px;background:#0A2B38;color:#fff;font:600 14px/1.15 var(--body);text-decoration:none}
-.mh-saygo:hover{background:#174B45}
+@media (hover:hover) and (pointer:fine){.mh-saygo:hover{background:#174B45}}
 .mh-saygo:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
 .mh-saygo .px-icon{width:14px;height:14px;flex:none}
 .mh-sayhint{margin:0;font:500 13.5px/1.35 var(--body);color:#4A5A61}

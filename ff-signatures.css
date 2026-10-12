@@ -39,13 +39,13 @@
   /* SIG4 Card Swap (#store hero): equal cards stacked diagonally; JS writes each card's slot (--ffsig-x/y/r/s/z) */
   :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile{display:block;inset:auto;left:8%;top:18%;width:56%;aspect-ratio:4/5;
     translate:var(--ffsig-x,0) var(--ffsig-y,0);rotate:var(--ffsig-r,0deg);scale:var(--ffsig-s,1);z-index:var(--ffsig-z,1);
-    transition:translate 650ms var(--ff-ease-inout),rotate 650ms var(--ff-ease-inout),scale 650ms var(--ff-ease-inout),opacity 300ms var(--ff-ease-out),box-shadow .25s}
+    transition:translate 650ms var(--ff-ease-inout),rotate 650ms var(--ff-ease-inout),scale 650ms var(--ff-ease-inout),opacity 300ms var(--ff-ease-out),box-shadow var(--ff-dur-2)}
   :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile.is-dropping{translate:var(--ffsig-x,0) calc(var(--ffsig-y,0%) + 14%);rotate:-4deg;opacity:.85;
     transition:translate 300ms var(--ff-ease-inout),rotate 300ms var(--ff-ease-inout),opacity 300ms var(--ff-ease-out)}
   :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack .h3-float{animation:none}
   :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack .h3-pic .sp-img{object-fit:contain}
   :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile .h3-cap{display:grid;opacity:0;visibility:hidden;transition:opacity var(--ff-dur-2) var(--ff-ease-out),visibility 0s var(--ff-dur-2)}
-  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile[data-ffsig-front] .h3-cap{opacity:1;visibility:visible;transition:opacity var(--ff-dur-2) var(--ff-ease-out) .25s,visibility 0s}
+  :root:not([data-motion=off]) .h3 .h3-stage.ffsig-stack>.h3-tile[data-ffsig-front] .h3-cap{opacity:1;visibility:visible;transition:opacity var(--ff-dur-2) var(--ff-ease-out) var(--ff-dur-2),visibility 0s}
   :root:not([data-motion=off]) .h3-stage.ffsig-stack>.ffsig-pause{position:absolute;right:0;bottom:2%;z-index:30;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;
     border-radius:999px;border:1.5px solid rgba(251,246,236,.55);background:rgba(10,43,56,.88);color:#FBF6EC;font:600 13px/1.2 var(--body);cursor:pointer}
   :root:not([data-motion=off]) .h3-stage.ffsig-stack>.ffsig-pause:hover{border-color:#FBF6EC;background:#0C3342}

@@ -36,7 +36,7 @@
 /* screen-reader-only text (the class was used in three places and defined in none) */
 .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* an h2 that keeps the size of the h3 cards around it (heading outline fixed without moving the design) */
-h2.h3{font-size:20px}
+h2.h3{font-size:1.25rem}
 /* a scrolling table that is a keyboard stop needs a visible focus ring */
 .tw[data-ff-scroll]:focus-visible{outline:3px solid #2F6FC0;outline-offset:2px}
 
@@ -55,8 +55,8 @@ body>footer,.band-navy,.phero,.hero,.cta,.lms-hero,.fl-hero,.ffx-tv,.px-utility,
 :where(a,button,input,select,textarea,summary,video,audio,[tabindex],[role="button"]):focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px}
 
 /* Found by tools/a11y-pixel-contrast.mjs (text on photos, gradients and pseudo-elements, which axe reports as "incomplete") */
-.px-academyband .ff-brand-trigger{color:var(--px-green,#174B45);font-size:14px;font-weight:600}   /* white text on a white band: the button was invisible */
-.px-academyband .ff-brand-trigger:hover{color:var(--px-ink,#193B38)}
+.px-academyband .ff-brand-trigger{color:var(--px-green,#174B45);font-size:.875rem;font-weight:600}   @media (hover:hover) and (pointer:fine){/* white text on a white band: the button was invisible */
+.px-academyband .ff-brand-trigger:hover{color:var(--px-ink,#193B38)}}
 .cover{background:var(--ci,var(--c))}                                                               /* white title on the friend's deep shade */
 .fl-cover-n{background:rgba(10,43,56,.82);padding:2px 8px;border-radius:999px;right:8px}           /* "Book 2" sat on the pale artwork */
 :root .ffx-pillar .ic{color:color-mix(in srgb,var(--c) var(--ci-mix),#000)}
