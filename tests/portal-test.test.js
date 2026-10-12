@@ -182,6 +182,8 @@ for (const [role, R] of Object.entries(ROLES)) {
       await page.waitForSelector(R.dash, { timeout: 30000 });
       assert.match(page.url(), new RegExp(`/portal-test/${R.copy}c/${SLUG}/home`), `${role} lands on the ${R.copy || 'parents\''} copy`);
       await okPage(`${role} dashboard`);
+      // each role is greeted as itself (the director is Dana, never the parent Pat)
+      if (role === 'director') await page.waitForFunction(() => /Dana/.test(document.querySelector('#main').innerText) && !/Good (morning|afternoon|evening), Pat/.test(document.querySelector('#main').innerText), null, { timeout: 8000 });
       if (width === 1440) assert.deepEqual(await axeRun(), [], `axe on the ${role} dashboard`);
       const home = page.url();
 
