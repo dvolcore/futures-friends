@@ -65,7 +65,7 @@
   box-shadow:-3px 4px 10px rgba(10,43,56,.16)!important;background-repeat:no-repeat!important;background-size:7px 11px,1.5px calc(100% - 12px)!important;background-position:4px 50%,13px 50%!important;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M6 1.5 2 6l4 4.5' fill='none' stroke='%2314313D' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),repeating-linear-gradient(180deg,rgba(176,122,0,.65) 0 4px,transparent 4px 7px)!important}
 .ff-dock-tuck .totop.on{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M6 1.5 2 6l4 4.5' fill='none' stroke='%23E7A928' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),repeating-linear-gradient(180deg,rgba(231,169,40,.75) 0 4px,transparent 4px 7px)!important}
-.ff-dock-tuck .ffs-btn>*,.ff-dock-tuck .totop.on>*{opacity:0}
+.ff-dock-tuck .ffs-btn>*,.ff-dock-tuck .totop.on>*{opacity:0!important}
 .ff-dock-tuck .ffs-btn::after{display:none}
 /* the invisible 44 px hit area of each tab (it adds nothing to the picture) */
 .ff-dock-tuck .ffs-btn::before,.ff-dock-tuck .totop.on::before{content:"";position:absolute;top:0;bottom:0;left:-28px;width:44px}
