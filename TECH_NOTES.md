@@ -72,6 +72,8 @@ The phone cast cut-outs are fetched at 960 px (Bop 141 KB, Zuri 118 KB, Lumi 94 
 "Meet the friends in 3D" on #friends (`friends-3d.js`, engine `ff-3d.js`, three.js r170 vendored in `vendor/three-0.170.0/`). Measured
 2026-10-12 in headless Chromium from the platform repo, "GPU" = M4 Max through ANGLE/Metal, "SwiftShader" = software rendering.
 GPU ms = a synchronous benchmark (each frame forced to finish with `readPixels`), the friend's idle loop, 120 frames.
+The machine was heavily loaded by other jobs while these were taken (load average about 30 to 41 around 16:45 to 16:55, 2026-10-12), so
+the numbers are pessimistic; an idle Mac should do at least as well.
 
 | Profile | Tier picked | Canvas (device px) | GPU ms/frame: no fur / 8 shells / 16 shells | JS per frame | rAF median / p95 |
 |---|---|---|---|---|---|
