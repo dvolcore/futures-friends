@@ -9,13 +9,13 @@
 .hc-head p,.hc-doorshead p{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--muted)}
 
 /* buttons: one shape across the page */
-.hc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 20px;border-radius:999px;border:1.5px solid transparent;background:var(--ink);color:var(--paper);font:600 15px/1.2 var(--body);text-decoration:none;transition:background-color .2s,color .2s,border-color .2s,translate .2s;cursor:pointer}
-.hc-btn .px-icon{width:16px;height:16px;flex:none;transition:translate .2s}
-.hc-btn:hover .px-icon{translate:3px 0}
+.hc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 20px;border-radius:999px;border:1.5px solid transparent;background:var(--ink);color:var(--paper);font:600 15px/1.2 var(--body);text-decoration:none;transition:background-color var(--ff-dur-2),color var(--ff-dur-2),border-color var(--ff-dur-2),translate var(--ff-dur-2);cursor:pointer}
+.hc-btn .px-icon{width:16px;height:16px;flex:none;transition:translate var(--ff-dur-2)}
+@media (hover:hover) and (pointer:fine){.hc-btn:hover .px-icon{translate:3px 0}}
 .hc-btn-quiet{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
-.hc-btn-quiet:hover{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 5%,transparent)}
+@media (hover:hover) and (pointer:fine){.hc-btn-quiet:hover{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 5%,transparent)}}
 .hc-more{display:inline-flex;align-items:center;gap:8px;margin-top:clamp(24px,3vw,36px);font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:color-mix(in srgb,var(--ink) 35%,transparent)}
-.hc-more:hover{text-decoration-color:currentColor}
+@media (hover:hover) and (pointer:fine){.hc-more:hover{text-decoration-color:currentColor}}
 .hc-more .px-icon{width:16px;height:16px}
 
 /* ---- the shelf: three doors rising out of the hero */
@@ -28,11 +28,11 @@
 .hc-doorcut{height:100%;width:auto;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 10px 12px rgba(10,43,56,.22))}
 .hc-door h3{font-size:clamp(22px,2vw,26px);color:var(--ink)}
 .hc-door h3::after{content:"";display:block;width:36px;height:4px;border-radius:2px;background:var(--c);margin-top:10px}
-.hc-door p{color:var(--muted);font-size:15.5px;line-height:1.6;max-width:38ch;margin-bottom:8px}
+.hc-door p{color:var(--muted);font-size:.9688rem;line-height:1.6;max-width:38ch;margin-bottom:8px}
 .hc-door .hc-btn{margin-top:auto}
-@media (hover:hover){.hc-door .hc-doorcut{transition:translate .4s cubic-bezier(.22,1,.36,1),rotate .4s cubic-bezier(.22,1,.36,1)}
+@media (hover:hover){.hc-door .hc-doorcut{transition:translate var(--ff-dur-3) var(--ff-ease-out),rotate var(--ff-dur-3) var(--ff-ease-out)}
  .hc-door:hover .hc-doorcut,.hc-door:focus-within .hc-doorcut{translate:0 -6px;rotate:-3deg}}
-.hc-aside{margin-top:22px;font-size:15px;color:var(--muted)}
+.hc-aside{margin-top:22px;font-size:.9375rem;color:var(--muted)}
 .hc-aside a{color:var(--ink);font-weight:600;text-underline-offset:4px}
 
 /* The hero kept 150px of bottom room for doors that used to overlap it; the shelf now starts below the hero, so give the room back. */
@@ -40,7 +40,7 @@
 
 /* ---- the one quiet status line, from the release manifest */
 .hc-status{padding-bottom:clamp(8px,2vw,16px)}
-.hc-status-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.hc-status-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.9062rem;color:var(--muted)}
 .hc-status-row p{display:flex;flex-wrap:wrap;gap:6px 0}
 .hc-status-item{display:inline-flex;align-items:center;gap:8px}
 .hc-status-item+.hc-status-item{margin-left:18px;padding-left:18px;border-left:1px solid var(--line)}
@@ -55,8 +55,8 @@
 .hc-friendlist h3{font-size:clamp(24px,2.2vw,30px);color:var(--ink)}
 .hc-pills{display:flex;flex-wrap:wrap;gap:6px}
 .hc-pills span{font:600 11.5px/1 var(--display);letter-spacing:.08em;padding:6px 9px;border-radius:999px;background:color-mix(in srgb,var(--c) 14%,var(--paper));color:var(--ink)}
-.hc-role{font-weight:600;color:var(--ink);font-size:15px}
-.hc-friendlist li>p:last-child{color:var(--muted);font-size:15px;line-height:1.6}
+.hc-role{font-weight:600;color:var(--ink);font-size:.9375rem}
+.hc-friendlist li>p:last-child{color:var(--muted);font-size:.9375rem;line-height:1.6}
 
 /* ---- how a day works: one line of six steps */
 .hc-day{padding-block:var(--hc-pad)}
@@ -65,41 +65,41 @@
 .hc-steps li{position:relative;display:grid;align-content:start;gap:6px;min-width:0}
 .hc-num{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--cream);border:2.5px solid var(--c);color:var(--ink);font:600 19px/1 var(--display);font-variant-numeric:tabular-nums;margin-bottom:10px;position:relative}
 .hc-steps b{font:600 19px/1.2 var(--display);color:var(--ink)}
-.hc-steps li>span:last-child{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.hc-steps li>span:last-child{font-size:.9062rem;line-height:1.5;color:var(--muted)}
 
 /* ---- trust: our Teacher Standard in brief, and the pilot center with its placeholder frames */
 .hc-trust{padding-block:var(--hc-pad);background:var(--paper)}
 .hc-trustgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,40px) clamp(36px,6vw,88px);align-items:start}
 .hc-trust h2{font-size:clamp(26px,2.8vw,36px)}
 .ts-home-compact,.hc-trust-place{display:grid;gap:16px;justify-items:start}
-.ts-home-compact>p:not(.ts-home-flag),.hc-trust-place>p{color:var(--muted);font-size:16px;line-height:1.65;max-width:58ch}
+.ts-home-compact>p:not(.ts-home-flag),.hc-trust-place>p{color:var(--muted);font-size:1rem;line-height:1.65;max-width:58ch}
 .ts-home-compact .ts-home-points{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:0;width:100%;grid-template-columns:1fr}
 .ts-home-compact .ts-home-points li{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(0,1.6fr);gap:4px 18px;padding:14px 0;border-top:1px solid var(--line);background:none;border-radius:0}
 .ts-home-compact .ts-home-points li:last-child{border-bottom:1px solid var(--line)}
 .ts-home-compact .ts-home-points b{font:600 17px/1.3 var(--display);color:var(--ink)}
-.ts-home-compact .ts-home-points span{font-size:15px;color:var(--muted)}
-.ts-home-compact .ts-home-flag{font-size:14px;color:var(--ink);background:color-mix(in srgb,var(--gold) 16%,var(--paper));padding:10px 14px;border-radius:10px;border:0}
+.ts-home-compact .ts-home-points span{font-size:.9375rem;color:var(--muted)}
+.ts-home-compact .ts-home-flag{font-size:.875rem;color:var(--ink);background:color-mix(in srgb,var(--gold) 16%,var(--paper));padding:10px 14px;border-radius:10px;border:0}
 .hc-real{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,2fr);gap:18px clamp(24px,4vw,56px);align-items:start;padding-top:clamp(28px,3.5vw,40px);border-top:1px solid var(--line)}
 .hc-real h3{font-size:clamp(20px,1.8vw,23px);color:var(--ink);margin-bottom:8px}
-.hc-realnote{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:60ch}
+.hc-realnote{font-size:.9062rem;line-height:1.55;color:var(--muted);max-width:60ch}
 .hc-realnote b{color:var(--ink)}
 .hc-slots.ffa-slots{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0}
 .hc-slots .ffa-slot-frame{aspect-ratio:4/3}
-.hc-slots .ffa-slot figcaption{font-size:13px}
-.hc-slots .ffa-slot figcaption b{font-size:13.5px}
+.hc-slots .ffa-slot figcaption{font-size:.8125rem}
+.hc-slots .ffa-slot figcaption b{font-size:.8438rem}
 
 /* ---- one closing call to action */
 .hc-close{--focus-ring:#F5C553;padding-block:clamp(52px,6.5vw,88px);background:var(--navy);color:var(--on-dark)}
 .hc-closegrid{display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:24px 48px;align-items:center}
 .hc-close h2{color:#fff}
-.hc-close p{color:#CFDEE3;font-size:17px;max-width:52ch;margin-top:10px}
+.hc-close p{color:#CFDEE3;font-size:1.0625rem;max-width:52ch;margin-top:10px}
 .hc-closeacts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hc-btn-gold{background:#F5C553;color:#0A2B38}
-.hc-btn-gold:hover{background:#FFD772}
+@media (hover:hover) and (pointer:fine){.hc-btn-gold:hover{background:#FFD772}}
 .hc-btn-line{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
-.hc-btn-line:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+@media (hover:hover) and (pointer:fine){.hc-btn-line:hover{border-color:#fff;background:rgba(255,255,255,.08)}}
 .hc-reveal{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 4px;border:0;background:none;color:#fff;font:600 15px/1.2 var(--body);text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.45);cursor:pointer}
-.hc-reveal:hover{text-decoration-color:#fff}
+@media (hover:hover) and (pointer:fine){.hc-reveal:hover{text-decoration-color:#fff}}
 .hc-reveal .px-icon{width:16px;height:16px}
 
 /* ---- the Academy band now closes #teacher-standard */
@@ -135,7 +135,7 @@
 }
 @media (max-width:480px){
  .hc-friendlist{gap:28px 18px}
- .hc-friendlist li>p:last-child,.hc-role{font-size:14px}
+ .hc-friendlist li>p:last-child,.hc-role{font-size:.875rem}
  .hc-door{padding:22px 18px}
  .hc-door h3,.hc-door p{padding-right:76px}
  .hc-doorart{height:88px;right:10px}
@@ -148,18 +148,18 @@
 /* ---- wave 8: story-world animation (home-calm.js VIDEOS, behaviour home-video.js). A felt-stitched frame of a fixed ratio, so
    nothing moves when the poster or the clip arrives; the clip fades in over its own first frame. */
 .hc-video{margin:0;display:grid;gap:8px;min-width:0}
-.hc-video figcaption{font-size:13px;color:var(--muted)}
+.hc-video figcaption{font-size:.8125rem;color:var(--muted)}
 .hc-video figcaption b{font:600 13.5px/1.3 var(--display);color:var(--ink)}
 .hc-vframe{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/3;background:#9FD0EE;
   box-shadow:0 14px 28px -20px rgba(10,43,56,.55),inset 0 0 0 1px rgba(255,255,255,.4);isolation:isolate}
 .hc-vposter,.hc-vposter img,.hc-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0% 50%;display:block;border:0;border-radius:0;max-width:none}
 .hc-vposter{z-index:0}
-.hc-v{z-index:1;opacity:0;transition:opacity .45s cubic-bezier(.16,1,.3,1);background:transparent}
+.hc-v{z-index:1;opacity:0;transition:opacity var(--ff-dur-3) var(--ff-ease-out);background:transparent}
 .hc-vframe.is-playing .hc-v{opacity:1}
 .hc-vframe::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;outline:2px dashed rgba(255,255,255,.75);outline-offset:-7px}
 .hc-vbtn{position:absolute;right:10px;bottom:10px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;cursor:pointer;color:#fff;
-  background:rgba(10,43,56,.78);box-shadow:0 6px 14px -6px rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(255,255,255,.35);outline:1.5px dashed rgba(255,255,255,.6);outline-offset:-5px;transition:background-color .2s,scale .16s}
-.hc-vbtn:hover{background:#0A2B38}
+  background:rgba(10,43,56,.78);box-shadow:0 6px 14px -6px rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(255,255,255,.35);outline:1.5px dashed rgba(255,255,255,.6);outline-offset:-5px;transition:background-color var(--ff-dur-2),scale var(--ff-dur-1)}
+@media (hover:hover) and (pointer:fine){.hc-vbtn:hover{background:#0A2B38}}
 .hc-vbtn:active{scale:.95}
 .hc-vbtn:focus-visible{outline:3px solid #F5C553;outline-offset:2px}
 .hc-vbtn svg{width:20px;height:20px}
@@ -179,12 +179,12 @@
 .hc-pickart:not(.has-video) .hc-pickvideo{display:none}
 /* wave 9: the talking intro (VIDEOS.intro). Its captions stay readable in the small story frame and keep the bottom of it, so its felt
    button sits top-right; when the intro has ended the button shows a replay arrow. */
-.hc-hello .hc-v::cue{font-size:12px;line-height:1.3;color:#fff;background:rgba(10,43,56,.85)}
-@media (max-width:600px){.hc-hello .hc-v::cue{font-size:15px}}
+.hc-hello .hc-v::cue{font-size:.75rem;line-height:1.3;color:#fff;background:rgba(10,43,56,.85)}
+@media (max-width:600px){.hc-hello .hc-v::cue{font-size:.9375rem}}
 .hc-hello .hc-vbtn{top:10px;bottom:auto}
 .hc-vbtn .hc-vreplay,.hc-vbtn[data-state=ended] .hc-vplay{display:none}
 .hc-vbtn[data-state=ended] .hc-vreplay{display:block}
-.hc-hello .ffcap-tr{font-size:13px;margin-top:4px}
+.hc-hello .ffcap-tr{font-size:.8125rem;margin-top:4px}
 @media (prefers-reduced-motion:reduce){.hc-v{transition:none}}
 @media print{.hc-v,.hc-vbtn{display:none}}
 
@@ -210,7 +210,7 @@
 .hc-introhead{text-align:center;display:grid;justify-items:center;gap:10px;max-width:60ch}
 .hc-introhead h2{font-size:clamp(30px,4vw,50px);letter-spacing:-.01em;color:var(--ink);line-height:1.1}
 .hc-introhead p{font-size:clamp(15px,1.4vw,17px);line-height:1.6;color:var(--ink)}
-.hc-introtag{display:inline-block;padding:5px 12px;border-radius:999px;background:#0A2B38;color:#fff!important;font-size:12.5px!important;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.3!important}
+.hc-introtag{display:inline-block;padding:5px 12px;border-radius:999px;background:#0A2B38;color:#fff!important;font-size:.7812rem!important;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.3!important}
 .hc-introfig{width:min(100%,calc((100svh - 130px) * 16 / 9));margin:0 auto;gap:12px}
 .hc-introvideo.hc-vframe{aspect-ratio:16/9;border-radius:clamp(18px,2.4vw,30px);box-shadow:0 0 0 clamp(6px,.9vw,11px) #FBF6EC,0 0 0 calc(clamp(6px,.9vw,11px) + 2px) rgba(176,122,0,.35),0 34px 70px -28px rgba(10,43,56,.6)}
 .hc-introvideo .hc-vposter img,.hc-introvideo .hc-v{object-position:50% 50%}
@@ -219,25 +219,25 @@
 .hc-introvideo .hc-vbtn{top:16px;right:16px;bottom:auto;width:52px;height:52px}
 .hc-introvideo .hc-vbtn svg{width:24px;height:24px}
 .hc-introvideo .hc-vbtn:not([data-state=playing]){top:50%;right:50%;width:clamp(76px,9vw,104px);height:clamp(76px,9vw,104px);translate:50% -50%;background:rgba(245,197,83,.96);color:#0A2B38;outline-color:rgba(10,43,56,.4);box-shadow:0 14px 34px -10px rgba(10,43,56,.6)}
-.hc-introvideo .hc-vbtn:not([data-state=playing]):hover{background:#F8CF66}
+@media (hover:hover) and (pointer:fine){.hc-introvideo .hc-vbtn:not([data-state=playing]):hover{background:#F8CF66}}
 .hc-introvideo .hc-vbtn:not([data-state=playing]) svg{width:42%;height:42%}
 .hc-introvideo .hc-vbtn:not([data-state=playing]):focus-visible{outline:3px solid #0A2B38;outline-offset:3px}
 .hc-introfig figcaption{text-align:center;display:grid;justify-items:center;gap:4px;padding-top:clamp(8px,1vw,14px)}
-.hc-introfig figcaption>b{font-size:14.5px;color:var(--ink)}
-.hc-introfig .ffcap-tr{font-size:14px;max-width:70ch;text-align:left}
+.hc-introfig figcaption>b{font-size:.9062rem;color:var(--ink)}
+.hc-introfig .ffcap-tr{font-size:.875rem;max-width:70ch;text-align:left}
 .hc-stars{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin:0}
-.hc-starslabel{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:4px}
-.hc-star{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:4px 16px 4px 6px;border-radius:999px;background:#FBF6EC;color:#14313D;font-weight:700;font-size:15px;text-decoration:none;border:2px solid var(--c);box-shadow:0 6px 14px -8px rgba(10,43,56,.45)}
-.hc-star:hover{background:#fff;text-decoration:underline;text-underline-offset:3px}
+.hc-starslabel{font-weight:700;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:4px}
+.hc-star{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:4px 16px 4px 6px;border-radius:999px;background:#FBF6EC;color:#14313D;font-weight:700;font-size:.9375rem;text-decoration:none;border:2px solid var(--c);box-shadow:0 6px 14px -8px rgba(10,43,56,.45)}
+@media (hover:hover) and (pointer:fine){.hc-star:hover{background:#fff;text-decoration:underline;text-underline-offset:3px}}
 .hc-star:focus-visible{outline:3px solid #0A2B38;outline-offset:2px}
 .hc-star .hc-starcut{height:40px;width:auto;object-fit:contain}
 @media (max-width:600px){
   .hc-introfig{width:calc(100vw - 32px);max-width:none;margin-inline:calc(50% - 50vw + 16px)}
   .hc-introvideo.hc-vframe{aspect-ratio:4/5;box-shadow:0 0 0 6px #FBF6EC,0 0 0 8px rgba(176,122,0,.35),0 24px 48px -22px rgba(10,43,56,.6)}
   .hc-introvideo .hc-vbtn{top:12px;right:12px;width:48px;height:48px}
-  .hc-star{padding-right:12px;font-size:14px}
+  .hc-star{padding-right:12px;font-size:.875rem}
 }
-@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .hc-introvideo .hc-vbtn{transition:background-color .2s,scale .16s}}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .hc-introvideo .hc-vbtn{transition:background-color var(--ff-dur-2),scale var(--ff-dur-1)}}
 /* the photo row, on its own now: a heading over three equal photos (one column on phones) */
 .hc-real{grid-template-columns:1fr}
 .hc-slots.ffa-slots{grid-template-columns:repeat(3,minmax(0,1fr))}

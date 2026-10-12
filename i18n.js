@@ -16,7 +16,8 @@
    - Every public page has Spanish (2026-10-10, owner: "so that somebody who is bilingual does not miss out"); tools/i18n-audit.mjs
      lists any English left per route and tests/i18n-site.test.js keeps it that way. A browser that prefers Spanish gets a one-line
      offer to switch until a language is chosen. The tab title and meta description follow the language (head()).
-   Public: window.FFi18n = { lang, set(lang), toggle(), t(en), add(lang, table, patterns), apply(root), family(route), on(fn) }.
+   Public: window.FFi18n = { lang, set(lang), toggle(), t(en), add(lang, table, patterns), apply(root), family(route), on(fn),
+   ready() (a Promise: resolves once the Spanish pack is loaded and applied while Spanish is on; at once in English) }.
    Fires 'ff:lang' on document with {lang, previous}. */
 (function () {
   'use strict';
@@ -238,9 +239,35 @@
     D.documentElement.setAttribute('lang', lang);
     D.documentElement.dataset.lang = lang;
   }
+  // Switching keeps your place (HIG audit #10): the element at the top of the screen and its distance from the top are noted before
+  // the words change, and put back after the swap (again once the Spanish pack has arrived and on the next frames, since the new
+  // words reflow the page). The route re-renders, so the anchor is a landmark that both languages share: an element with an id, or
+  // the nth section / heading / figure / picture / video of #view (text-only elements can differ between the two languages).
+  const MARKS = '[id],section,h1,h2,h3,figure,img,video,li';
+  function keepPlace() {
+    if (!D || !D.getElementById || !W.scrollY) return () => {};
+    const view = D.getElementById('view'); if (!view || !view.querySelectorAll) return () => {};
+    const hb = D.querySelector('header.bar'), line = Math.max(0, hb ? hb.getBoundingClientRect().bottom : 0);
+    const key = el => el.id ? '#' + el.id : el.tagName + ':' + [...view.querySelectorAll(el.tagName)].indexOf(el);
+    const find = k => { const v = D.getElementById('view'); if (!v) return null; if (k[0] === '#') return D.getElementById(k.slice(1)); const [t, i] = k.split(':'); return v.querySelectorAll(t)[+i] || null; };
+    let below = null, above = null;
+    for (const el of view.querySelectorAll(MARKS)) {
+      const r = el.getBoundingClientRect(); if (!r.height) continue;
+      if (r.top >= line - 1) { if (r.top < W.innerHeight && (!below || r.top < below.top)) below = { el, top: r.top }; }
+      else if (r.bottom > line && (!above || r.top > above.top)) above = { el, top: r.top };
+    }
+    const a = below || above; if (!a) return () => {};
+    const k = key(a.el), off = a.top;
+    return () => { const el = find(k); if (!el) return; const d = el.getBoundingClientRect().top - off; if (Math.abs(d) > 1) W.scrollBy(0, d); };
+  }
+  // The Spanish pack is fetched before it is needed: on the first hover, focus or press of a language button, and at idle time
+  // when this browser prefers Spanish (never on Save-Data). English-only visitors still never download it.
+  const saveData = () => { try { const c = W.navigator && W.navigator.connection; return !!(c && c.saveData); } catch (_) { return false; } };
+  function warm() { if (lang === 'en' && !saveData()) loadPack(); }
   function set(l, o = {}) {
     l = LANGS.includes(l) ? l : 'en';
     if (l === lang && !o.force) { syncButtons(); return lang; }
+    const place = keepPlace();
     const previous = lang;
     lang = l; store.set(l); reflect();
     if (l === 'es') loadPack();
@@ -251,6 +278,14 @@
     try { D.dispatchEvent(new CustomEvent('ff:lang', { detail: { lang, previous } })); } catch (_) { /* old browsers */ }
     try { if (typeof W.render === 'function' && D && D.getElementById('view')) W.render(); } catch (e) { console.warn(e); }
     if (D && D.body) { apply(D.body); note(); syncButtons(); head(); }
+    // the new words reflow the page for a moment (late renders, pictures): hold the place a little longer, unless the visitor scrolls
+    let held = true; const hold = () => { if (held) place(); };
+    const stop = () => { held = false; ['wheel', 'touchstart', 'keydown'].forEach(t => W.removeEventListener && W.removeEventListener(t, stop, true)); };
+    if (W.addEventListener) ['wheel', 'touchstart', 'keydown'].forEach(t => W.addEventListener(t, stop, true));
+    const settle = () => { hold(); if (W.requestAnimationFrame) W.requestAnimationFrame(hold); [120, 300, 700].forEach(ms => setTimeout(hold, ms)); };
+    const busy = () => { if (D && D.querySelectorAll) D.querySelectorAll('[data-ff-lang].is-switching').forEach(b => b.classList.remove('is-switching')); };
+    settle(); setTimeout(stop, 2500);
+    if (lang === 'es' && pack) pack.then(() => { settle(); busy(); }); else busy();
     if (W.FFA11y && W.FFA11y.announce) W.FFA11y.announce(lang === 'es' ? 'Sitio en español (traducción en borrador).' : 'Site in English.');
     return lang;
   }
@@ -259,12 +294,18 @@
       const b = e.target && e.target.closest && e.target.closest('[data-ff-lang]'); if (!b) return;
       e.preventDefault(); const to = b.getAttribute('data-ff-lang-to') || other(); store.set(to); set(to, { source: 'button' }); note();
     });
+    // the pressed / switching look shows the moment the finger lands, before the words change
+    const intent = e => { const b = e.target && e.target.closest && e.target.closest('[data-ff-lang]'); if (!b) return; warm(); if (e.type === 'pointerdown') { b.classList.add('is-switching'); setTimeout(() => b.classList.remove('is-switching'), 4000); } };
+    D.addEventListener('pointerdown', intent, { passive: true });
+    D.addEventListener('pointerover', intent, { passive: true });
+    D.addEventListener('focusin', intent);
     D.addEventListener('click', e => {
       const b = e.target && e.target.closest && e.target.closest('[data-ff-lang-offer-no]'); if (!b) return;
       try { if (W.localStorage) W.localStorage.setItem(OFFER, 'no'); } catch (_) { /* blocked storage: the offer shows again next page */ }
       note();
     });
     if (lang === 'es') loadPack();
+    else if (prefersEs()) (W.requestIdleCallback || (fn => setTimeout(fn, 3000)))(warm, { timeout: 8000 });
     const boot = () => { reflect(); mountButtons(); watch(); if (lang === 'es') apply(D.body); note(); head(); mountGate(D.body); };
     if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', boot); else boot();
     if (W.addEventListener) W.addEventListener('hashchange', () => setTimeout(() => { note(); head(); }, 0));
@@ -274,6 +315,8 @@
     get lang() { return lang; },
     LANGS: LANGS.slice(),
     set, toggle: () => set(other()), t, add, apply, family, lookup, loadPack,
+    // resolves once the words on screen are final: at once in English, after the site-wide pack has loaded and applied in Spanish
+    ready: () => (lang === 'es' ? Promise.resolve(loadPack()).then(() => undefined) : Promise.resolve()),
     on: fn => { if (typeof fn === 'function') listeners.push(fn); return () => { const i = listeners.indexOf(fn); if (i > -1) listeners.splice(i, 1); }; },
     _norm: norm, _tables: tables, _patterns: patterns, FAMILY
   });

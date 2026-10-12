@@ -38,8 +38,15 @@
 
   const settingsDialog = document.createElement('dialog');
   settingsDialog.className='px-dialog px-settings';settingsDialog.id='px-settings';settingsDialog.setAttribute('aria-labelledby','px-settings-title');
-  settingsDialog.innerHTML=`<div class="px-dialoghead"><h2 id="px-settings-title">Display preferences</h2><button type="button" class="px-iconbtn" data-px="close" aria-label="Close preferences">${icon('X')}</button></div><label class="px-toggle"><span>${icon('Waves')} Decorative motion</span><input type="checkbox" id="px-motion" ${preferences.motion2===false?'':'checked'}></label><p class="px-muted">Your device's reduced-motion preference always takes priority.</p>`;
+  settingsDialog.innerHTML=`<div class="px-dialoghead"><h2 id="px-settings-title">Display preferences</h2><button type="button" class="px-iconbtn" data-px="close" aria-label="Close preferences">${icon('X')}</button></div><label class="px-toggle"><span>${icon('Waves')} Decorative motion</span><input type="checkbox" role="switch" aria-checked="${preferences.motion2===false?'false':'true'}" id="px-motion" ${preferences.motion2===false?'':'checked'}></label><p class="px-muted">Your device's reduced-motion preference always takes priority.</p>`;
   document.body.appendChild(settingsDialog);
+  // HIG audit: Display preferences is modal like the menu. The page behind stays still (#7), Back closes it (#8), and a tap on the
+  // dimmed page outside the card closes it (#13). The open/close bookkeeping lives in views.js (FFOverlay) and wayfinding.js (lock).
+  let settingsRoute=null;
+  const routeKey=()=>location.hash||'#home';
+  function openSettings(){if(settingsDialog.open)return;settingsRoute=routeKey();window.FFOverlay&&window.FFOverlay.opened('settings',()=>settingsDialog.close());window.FFWay&&window.FFWay.lockScroll();settingsDialog.showModal();}
+  settingsDialog.addEventListener('close',()=>{window.FFOverlay&&window.FFOverlay.closed('settings');window.FFWay&&window.FFWay.unlockScroll(routeKey()===settingsRoute);});
+  settingsDialog.addEventListener('click',e=>{if(e.target!==settingsDialog)return;const r=settingsDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)settingsDialog.close();});
   const pages=[['home','Futures Friends'],['curriculum','Curriculum by age'],['whole-child','The Whole-Child Day: learning, meals, movement, Quiet Time'],['bop-at-home','Bop at Home: free family movement, Move Your Body Grow Your Mind'],['at-home','Futures at Home: free family library'],['story-time','Story Time: read-along storybooks'],['activities','Things to do at home by age'],['printables','Printables for families'],['see-how','See how: picture guides'],['my-week','My Week: weekly plan, sticker chart, certificates'],['for-centers','For Child Care Centers: what a licensed center gets'],['teacher-standard','Our Teacher Standard: training, background checks and mastery'],['train-your-staff','Train your staff with us'],['readiness','School Readiness'],['friends','Booker Lumi Zuri Bop and storybooks'],['watch','Watch episodes'],['rainbow','Eat the Rainbow recipes'],['academy','Training Academy'],['options','Program Options'],['pricing','Pricing'],['hub','Futures Hub'],['enroll','Visit our pilot center: Futures Learning Center, Independence, Missouri'],['jobs','Careers and open positions'],['job','Job opening'],['contact','Contact and support']];
   window.FFSearchPages=pages;
 
@@ -88,7 +95,7 @@
     const t=e.target,map={'px-track':'track','px-status':'status','px-sort':'sort'};
     if(map[t.id]){ui[map[t.id]]=t.value;ui.limit=12;rerender(t.id);}
     if(t.id==='px-plantrack'||t.id==='px-goal'){learningPlan[t.id==='px-plantrack'?'track':'hours']=t.id==='px-goal'?+t.value:t.value;persist('ff-learning-plan',learningPlan);rerender(t.id);}
-    if(t.id==='px-motion'){preferences.motion2=t.checked;persist('ff-display-preferences',preferences);document.documentElement.dataset.motion=t.checked?'on':'off';render();}
+    if(t.id==='px-motion'){preferences.motion2=t.checked;t.setAttribute('aria-checked',String(t.checked));persist('ff-display-preferences',preferences);document.documentElement.dataset.motion=t.checked?'on':'off';render();}
   });
   document.addEventListener('click',e=>{
     const t=e.target.closest('button,a');if(!t)return;
@@ -98,7 +105,7 @@
     if(t.dataset.trackbrowse){ui.tab='library';ui.track=t.dataset.trackbrowse;ui.query='';ui.status='';ui.limit=12;rerender();}
     switch(t.dataset.px){
       case 'search':if(window.FFWay)window.FFWay.palette.open(t);break;
-      case 'settings':settingsDialog.showModal();break;
+      case 'settings':openSettings();break;
       case 'close':t.closest('dialog').close();break;
       case 'browse':ui.tab='library';ui.query='';ui.track='';ui.status='';ui.limit=12;rerender();break;
       case 'reset':ui.query='';ui.track='';ui.status='';ui.limit=12;rerender('px-coursequery');break;
@@ -115,7 +122,9 @@
     const old=location.hash||'#home';
     const target=href(V[v]?v:'home',a);
     const fromHistory=navigatingHistory;navigatingHistory=false;
-    if(!fromHistory&&old!==target)history.pushState(null,'',target);
+    // HIG #3/#8: remember where this page was scrolled before leaving it; a page opened from a panel (menu, search, quick view)
+    // takes over that panel's history entry instead of leaving a dead one behind it.
+    if(!fromHistory&&old!==target){window.FFScroll&&window.FFScroll.save();if(window.FFOverlay&&window.FFOverlay.consume())history.replaceState(null,'',target);else history.pushState(null,'',target);window.FFScroll&&window.FFScroll.manual();}
     const result=realGo(v,a);
     document.querySelectorAll('.px-main a').forEach(el=>{if(el.getAttribute('href')==='#'+v)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
     document.querySelectorAll('[data-ff-pending]').forEach(el=>{el.hidden=typeof V[el.dataset.ffPending]!=='function';});

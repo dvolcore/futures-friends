@@ -437,7 +437,7 @@ function css2(){ if(document.getElementById('ff-portal2-css')) return; const s=d
 .p2-b .an{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--gold)}
 .p2-qrs{display:flex;flex-wrap:wrap;gap:6px}
 .p2-qr{all:unset;cursor:pointer;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper2)}
-.p2-qr:hover{border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.p2-qr:hover{border-color:var(--gold)}}
 .p2-row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
 .p2-row>label.f{flex:1 1 160px;min-width:0}
 .p2-file{font-size:13px;max-width:100%}

@@ -275,13 +275,73 @@ function openQV(pid, from) {
   QV = { pid, opts: C.defaultOpts(p), qty: 1, i: 0 };
   if (!qvDlg) {
     qvDlg = document.createElement('dialog'); qvDlg.className = 'sp-qvdlg'; qvDlg.setAttribute('aria-labelledby', 'spQvH');
-    qvDlg.innerHTML = `<button type="button" class="sp-x sp-qv-x" data-sp-qvclose aria-label="Close quick view">${ico('x')}</button><div data-sp-qvbody></div>`;
-    document.body.appendChild(qvDlg);
-    qvDlg.addEventListener('click', e => { if (e.target === qvDlg) qvDlg.close(); });
-    qvDlg.addEventListener('close', () => { document.documentElement.classList.remove('sp-lock'); const f = qvDlg._from; if (f && document.contains(f) && f.getClientRects().length) f.focus({ preventScroll: true }); });
+    qvDlg.innerHTML = `<div class="sp-qv-grab" data-sp-qvgrab aria-hidden="true"></div><button type="button" class="sp-x sp-qv-x" data-sp-qvclose aria-label="Close quick view">${ico('x')}</button><div data-sp-qvbody></div>`;
+    document.body.appendChild(qvDlg); qvSheetWire(qvDlg);
+    qvDlg.addEventListener('click', e => { if (e.target === qvDlg && !qvDlg._dragged) qvDlg.close(); qvDlg._dragged = false; });
+    qvDlg.addEventListener('close', () => { if (W.FFOverlay) W.FFOverlay.closed('qv'); qvSheetReset(); document.documentElement.classList.remove('sp-lock'); const f = qvDlg._from; if (f && document.contains(f) && f.getClientRects().length) f.focus({ preventScroll: true }); });
   }
   qvDlg._from = from; qvDlg.querySelector('[data-sp-qvbody]').innerHTML = qvBody(p);
-  document.documentElement.classList.add('sp-lock'); qvDlg.showModal();
+  if (W.FFOverlay) W.FFOverlay.opened('qv', () => qvDlg.close());   // Back closes the quick view and stays on the Shop (HIG #8)
+  qvDlg.style.transition = ''; document.documentElement.classList.add('sp-lock'); qvDlg.showModal();
+}
+// Phones: the quick view is a bottom sheet, so it moves like one (HIG #12). Drag the grabber, or the sheet itself while its content is
+// scrolled to the top, and it follows the finger 1:1; let go past 120 px or with a flick (> 0.11 px/ms) and it slides away, otherwise
+// it settles back on the drawer curve. Reduced motion / Decorative motion off: it fades out instead, and snaps back without a spring.
+const QV_SHEET = '(max-width:760px)', QV_DISMISS = 120, QV_FLICK = 0.11;
+const qvMoving = () => !reduced() && document.documentElement.dataset.motion !== 'off';
+let qvDrag = null;
+function qvSheetReset() { if (!qvDlg) return; qvDrag = null; qvDlg.classList.remove('is-dragging'); qvDlg.style.transform = qvDlg.style.opacity = ''; qvDlg.style.transition = qvDlg._swiped ? 'none' : ''; qvDlg._swiped = false; }
+function qvDragStart(y) { qvDrag = { y0: y, dy: 0, ly: y, lt: performance.now(), v: 0 }; qvDlg.classList.add('is-dragging'); qvDlg.style.transition = 'none'; }
+function qvDragMove(y) {
+  const d = qvDrag, now = performance.now(); if (!d) return;
+  if (now > d.lt) d.v = (y - d.ly) / (now - d.lt);
+  d.ly = y; d.lt = now; d.dy = Math.max(0, y - d.y0);
+  qvDlg.style.transform = d.dy ? `translateY(${d.dy}px)` : '';
+}
+function qvDragEnd() {
+  const d = qvDrag; if (!d) return; qvDrag = null; qvDlg.classList.remove('is-dragging');
+  const v = performance.now() - d.lt > 120 ? 0 : d.v;                                   // a finger that stopped before lifting is not a flick
+  if (d.dy > 4) qvDlg._dragged = true;
+  if (d.dy > QV_DISMISS || (v > QV_FLICK && d.dy > 10)) {
+    const done = () => { if (qvDlg.open) { qvDlg._swiped = true; qvDlg.style.transition = 'none'; qvDlg.close(); } };   // already off screen: no exit fade back
+    if (qvMoving()) { qvDlg.style.transition = 'transform var(--ff-dur-2) var(--ff-ease-drawer)'; qvDlg.style.transform = 'translateY(100%)'; }
+    else { qvDlg.style.transition = 'opacity var(--ff-dur-1) linear'; qvDlg.style.opacity = '0'; }
+    setTimeout(done, qvMoving() ? 260 : 160);
+  } else if (qvMoving()) {
+    qvDlg.style.transition = 'transform var(--ff-dur-3) var(--ff-ease-drawer)'; qvDlg.style.transform = '';
+    setTimeout(() => { if (!qvDrag && qvDlg) qvDlg.style.transition = ''; }, 460);
+  } else { qvDlg.style.transition = ''; qvDlg.style.transform = ''; }
+}
+const qvSheet = () => qvDlg && qvDlg.open && W.matchMedia && W.matchMedia(QV_SHEET).matches;
+function qvSheetWire(dlg) {
+// the grabber: any pointer (touch-action:none on it alone)
+dlg.addEventListener('pointerdown', e => {
+  const g = e.target && e.target.closest && e.target.closest('[data-sp-qvgrab]'); if (!g || !qvSheet() || (e.button && e.button !== 0)) return;
+  e.preventDefault(); try { g.setPointerCapture(e.pointerId); } catch (_) { /* old browsers */ }
+  qvDragStart(e.clientY);
+  const mv = ev => qvDragMove(ev.clientY), up = () => { g.removeEventListener('pointermove', mv); g.removeEventListener('pointerup', up); g.removeEventListener('pointercancel', up); qvDragEnd(); };
+  g.addEventListener('pointermove', mv); g.addEventListener('pointerup', up); g.addEventListener('pointercancel', up);
+});
+// the sheet itself: a downward drag while its content is at the top (an upward drag still scrolls it)
+let qvTouch = null;
+dlg.addEventListener('touchstart', e => {
+  if (!qvSheet() || e.touches.length !== 1 || !qvDlg.contains(e.target) || e.target.closest('[data-sp-qvgrab]')) { qvTouch = null; return; }
+  const t = e.touches[0]; qvTouch = { x: t.clientX, y: t.clientY, top: qvDlg.scrollTop <= 0 };
+}, { passive: true });
+dlg.addEventListener('touchmove', e => {
+  if (!qvTouch) return; const t = e.touches[0];
+  if (!qvDrag) {
+    const dy = t.clientY - qvTouch.y, dx = t.clientX - qvTouch.x;
+    if (!qvTouch.top || qvDlg.scrollTop > 0 || dy < -6 || Math.abs(dx) > Math.abs(dy)) { if (Math.abs(dy) > 6 || Math.abs(dx) > 6) qvTouch = null; return; }
+    if (dy < 10) return;
+    qvDragStart(t.clientY);
+  }
+  if (e.cancelable) e.preventDefault();
+  qvDragMove(t.clientY);
+}, { passive: false });
+const qvTouchEnd = () => { if (qvTouch && qvDrag) qvDragEnd(); qvTouch = null; };
+dlg.addEventListener('touchend', qvTouchEnd, { passive: true });
+dlg.addEventListener('touchcancel', qvTouchEnd, { passive: true });
 }
 const qvRepaint = () => { const p = C.product(QV.pid); if (!p || !qvDlg) return; const ae = document.activeElement, key = ae && ae.getAttribute && (ae.getAttribute('data-sp-qvth') !== null ? '[data-sp-qvth="' + ae.getAttribute('data-sp-qvth') + '"]' : ae.getAttribute('data-sp-qvq') !== null ? '[data-sp-qvq="' + ae.getAttribute('data-sp-qvq') + '"]' : ''); qvDlg.querySelector('[data-sp-qvbody]').innerHTML = qvBody(p); if (key) { const n = qvDlg.querySelector(key + ':not([disabled])'); if (n) n.focus({ preventScroll: true }); } };
 

@@ -61,7 +61,7 @@ if (!document.getElementById('ff-features-css')) {
 .ffx-chaps{display:grid;gap:8px;margin:0;padding:0;list-style:none}
 .ffx-chaps button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper)}
 .band-paper .ffx-chaps button{background:var(--cream)}
-.ffx-chaps button:hover{border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.ffx-chaps button:hover{border-color:var(--gold)}}
 .ffx-chaps button[aria-current="true"]{border-color:var(--gold);box-shadow:inset 4px 0 0 var(--gold)}
 .ffx-chaps .t{font-family:var(--display);font-weight:600;font-size:13px;background:var(--navy);color:#fff;border-radius:8px;padding:3px 8px;font-variant-numeric:tabular-nums}
 .ffx-chaps b{display:block;font-size:14px}.ffx-chaps small{display:block;font-size:12.5px;color:var(--muted)}
@@ -109,7 +109,7 @@ if (!document.getElementById('ff-features-css')) {
 .band-paper .ffx-q{background:var(--cream)}
 .ffx-q legend{font-weight:600;padding:0 6px;font-size:15px}
 .ffx-q label{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:10px;border:1px solid var(--line);cursor:pointer;font-size:14px;background:var(--paper)}
-.ffx-q label:hover{border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.ffx-q label:hover{border-color:var(--gold)}}
 .ffx-q input{margin-top:4px;accent-color:var(--navy)}
 .ffx-q label.right{border-color:var(--ok);box-shadow:inset 3px 0 0 var(--ok)}
 .ffx-q label.wrong{border-color:var(--bad);box-shadow:inset 3px 0 0 var(--bad)}
@@ -148,7 +148,7 @@ if (!document.getElementById('ff-features-css')) {
 .band-paper .ffx-slot{background:var(--cream)}
 .ffx-slot b{font-family:var(--display);font-size:18px;font-weight:600;line-height:1.2}
 .ffx-slot small{font-size:11.5px;color:var(--muted)}
-.ffx-slot:hover{border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.ffx-slot:hover{border-color:var(--gold)}}
 .ffx-slot[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
 .ffx-slot[aria-pressed="true"] small{color:#C6D7DD}
 .ffx-times{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -282,14 +282,14 @@ input.i[aria-invalid="true"],select.i[aria-invalid="true"]{border-color:var(--ba
 .ffx-rails{display:grid}
 .ffx-track{transition:opacity .35s}
 .ffx-track.is-dim{opacity:.5}
-.ffx-track.is-dim:hover,.ffx-track.is-dim:focus-within{opacity:1}
+.ffx-track.is-dim:focus-within{opacity:1}@media (hover:hover) and (pointer:fine){.ffx-track.is-dim:hover{opacity:1}}
 .ffx-track.is-pick>header{border-bottom-color:var(--gold)}
 .ffx-track>header .who{order:5;flex-basis:100%;margin-top:-6px}
 .ffx-track>header .ffx-rnav{margin-left:auto}
 .ffx-rnav{display:flex;gap:6px}
 .ffx-rnav button{all:unset;box-sizing:border-box;cursor:pointer;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:18px;line-height:1}
 .band-paper .ffx-rnav button{background:var(--cream)}
-.ffx-rnav button:hover{border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.ffx-rnav button:hover{border-color:var(--gold)}}
 .ffx-rnav button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .ffx-rnav button:disabled{opacity:.35;cursor:default}
 .ffx-rbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
@@ -320,7 +320,7 @@ input.i[aria-invalid="true"],select.i[aria-invalid="true"]{border-color:var(--ba
 .ffx-thumb .ok{position:absolute;left:12px;top:36px;z-index:2;font-size:11.5px;font-weight:600;background:var(--ok);color:var(--on-dark);padding:2px 9px;border-radius:999px}
 .ffx-thumb .play{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:var(--gold);z-index:3;opacity:0;transform:scale(.7);transition:opacity .25s,transform .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 18px color-mix(in srgb,var(--navy) 35%,transparent)}
 .ffx-thumb .play::before{content:"";position:absolute;left:19px;top:15px;width:16px;height:18px;background:var(--navy);clip-path:polygon(0 0,100% 50%,0 100%)}
-.ffx-thumb:hover .play,.ffx-thumb.is-prev .play{opacity:1;transform:none}
+.ffx-thumb.is-prev .play{opacity:1;transform:none}@media (hover:hover) and (pointer:fine){.ffx-thumb:hover .play{opacity:1;transform:none}}
 .ffx-thumb video.pv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;opacity:0;transition:opacity .3s}
 .ffx-mbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
 .ffx-mbody>*{flex:none}
@@ -1126,10 +1126,37 @@ function watchMotion(root, ok){ const G = window.gsap; const tv = root.querySele
     .from(bop, {scale:.55, rotation:-12, opacity:0, transformOrigin:'50% 100%', duration:.7, ease:'back.out(2)'}, '-=.35')   // grows up from its feet: never slides down over the captions note while it fades in
     .to(bop, {y:-6, rotation:2, duration:2.2, ease:'sine.inOut', yoyo:true, repeat:-1}); }
 
+// Flip, Inertia and MorphSVG are used only here (Watch: Flip + Inertia; Academy: all three), so they load only when one of these two
+// routes opens with motion on (motion audit 2026-10-12, like extras.js does for the physics engine). A deep link straight to either
+// route works the same: the first render waits for them (at most a moment), and with motion off nothing is loaded at all.
+const PLUGINS = { Flip: 'vendor/Flip.min.js', InertiaPlugin: 'vendor/InertiaPlugin.min.js', MorphSVGPlugin: 'vendor/MorphSVGPlugin.min.js' };
+const plugP = {};
+function plugin(name){
+  if (window[name]) return Promise.resolve(true);
+  if (!plugP[name]) plugP[name] = new Promise(res => { const s = document.createElement('script'); s.src = PLUGINS[name]; s.async = true; s.onload = () => res(!!window[name]); s.onerror = () => { delete plugP[name]; res(false); }; document.head.appendChild(s); });
+  return plugP[name];
+}
+const routePlugins = view => (view === 'academy' ? ['Flip', 'InertiaPlugin', 'MorphSVGPlugin'] : ['Flip', 'InertiaPlugin']);
+let hookRun = 0;
+window.FFX_PLUGINS = { load: plugin, routePlugins };
+
 window.FFhooks = window.FFhooks || [];
 window.FFhooks.push((view, root, ok) => {
   CLEAN.forEach(f => { try { f(); } catch(_) {} }); CLEAN = [];
+  const run0 = ++hookRun;
   if (view !== 'academy' && view !== 'watch') return;
+  const G0 = window.gsap;
+  if (ok && G0 && window.ScrollTrigger) {
+    const need = routePlugins(view).filter(n => !window[n]);
+    if (need.length) {
+      // the route renders at once; its motion starts as soon as the plugins are in (a newer render cancels this one)
+      Promise.all(need.map(plugin)).then(() => { if (run0 === hookRun && root.isConnected) motionHook(view, root, ok); });
+      return;
+    }
+  }
+  motionHook(view, root, ok);
+});
+function motionHook(view, root, ok){
   const G = window.gsap; ok = !!(ok && G && window.ScrollTrigger); MOK = ok;
   document.documentElement.style.setProperty('--ffx-hdr', hdr() + 'px');
   if (ok) G.registerPlugin(...[window.ScrollTrigger, window.DrawSVGPlugin, window.MotionPathPlugin, window.MorphSVGPlugin, window.Flip, window.InertiaPlugin].filter(Boolean));
@@ -1139,7 +1166,7 @@ window.FFhooks.push((view, root, ok) => {
   if (ok) CLEAN.push(() => mm.revert());
   const run = () => { initRails(root, ok, mm); if (view === 'academy') academyMotion(root, ok, mm); else watchMotion(root, ok); };
   if (ok) { const ctx = G.context(run); CLEAN.push(() => ctx.revert()); } else run();
-});
+}
 
 window.FFX = {load, save, episodes:EPISODES, tracks:TRACKS, academy:{state:ACAD, percent:modPct, stats:trackStat, totalHours:TOTAL_H}, weekMinutes:room => weekMin(WLOG(), room || 'Threes Room')};
 })();

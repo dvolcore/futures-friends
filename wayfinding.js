@@ -302,33 +302,39 @@
     root.classList.remove('ffw-locked');
     if (restore !== false) W.scrollTo(0, lockY);
   }
+  // Back closes the menu or search instead of leaving the page (HIG #8): views.js FFOverlay adds and removes their history entry.
+  const OV = () => W.FFOverlay || { opened() {}, closed() {} };
+  // HIG #9: the menu closes at once as far as the page is concerned (no longer modal, page unlocked) while CSS fades it out
+  // (wayfinding.css: transitions with allow-discrete, pointer-events off while it fades). So a tap on Menu during that fade lands on
+  // the Menu button and reopens it, and the transition reverses from where it is instead of finishing the close first.
+  let fading = 0;
   function openMenu(trigger) {
     if (menu.open) return;
+    const again = !!fading; clearTimeout(fading); fading = 0;
     lastTrigger = trigger || doc.activeElement;
     pal && pal.open && pal.close();
-    renderMenuBody();
+    menu.classList.remove('ffw-m-instant');
+    menu.classList.toggle('ffw-m-again', again);                        // reopened mid-fade: no second rise of the links
+    if (!again) renderMenuBody();
+    OV().opened('menu', () => closeMenu());
     lockScroll();
-    menu.classList.remove('is-closing');
     menu.showModal();
     const b = menuBtn(); if (b) b.setAttribute('aria-expanded', 'true');
     menu.querySelector('.ffw-m-close').focus();
-    // phones: the big links sit at the bottom of the scroll area (thumb zone); start there
     // phones list the audience question and main links first, then More and Sign in, so the menu opens at the top
-    const sc = menu.querySelector('.ffw-m-scroll'); if (sc) sc.scrollTop = 0;
+    const sc = menu.querySelector('.ffw-m-scroll'); if (sc && !again) sc.scrollTop = 0;
   }
   const NARROW_MENU = W.matchMedia ? W.matchMedia('(max-width: 900px)') : { matches: false };
-  let closing = 0;
   function closeMenu(o = {}) {
     if (!menu.open) return;
-    const finish = () => {
-      clearTimeout(closing); closing = 0;
-      menu.classList.remove('is-closing');
-      if (menu.open) menu.close();
-      unlockScroll(o.restore);
-      const b = menuBtn(); if (b) b.setAttribute('aria-expanded', 'false');
-      if (o.returnFocus !== false && lastTrigger && lastTrigger.isConnected) lastTrigger.focus({ preventScroll: true });
-    };
-    if (moving() && o.animate !== false) { menu.classList.add('is-closing'); closing = setTimeout(finish, 140); } else finish();
+    OV().closed('menu', { keep: o.keepHistory });
+    const anim = moving() && o.animate !== false;
+    menu.classList.toggle('ffw-m-instant', !anim);
+    clearTimeout(fading); fading = anim ? setTimeout(() => { fading = 0; }, 260) : 0;   // 260 ms = --ff-dur-2 (wayfinding.css)
+    menu.close();
+    unlockScroll(o.restore);
+    const b = menuBtn(); if (b) b.setAttribute('aria-expanded', 'false');
+    if (o.returnFocus !== false && lastTrigger && lastTrigger.isConnected) lastTrigger.focus({ preventScroll: true });
   }
   menu.addEventListener('cancel', e => { e.preventDefault(); closeMenu(); });
   // Focus trap: Tab and Shift+Tab cycle inside the menu (a native modal alone lets focus reach the browser's own toolbar).
@@ -345,7 +351,7 @@
   menu.addEventListener('keydown', e => trap(menu, e));
   menu.addEventListener('click', e => {
     if (e.target.closest('[data-ffw-close]')) { closeMenu(); return; }
-    if (e.target.closest('[data-ffw-search]')) { closeMenu({ returnFocus: false }); setTimeout(() => palette.open(menuBtn()), moving() ? 150 : 0); }
+    if (e.target.closest('[data-ffw-search]')) { closeMenu({ returnFocus: false, keepHistory: true }); setTimeout(() => palette.open(menuBtn()), moving() ? 150 : 0); }
   });
   // Warm the corner friend before the first open (hover or focus on the Menu button), so the picture is there when the menu is.
   const warm = new Set();
@@ -496,13 +502,16 @@
     if (r === route() && !item.lesson) { e.preventDefault(); pal.close(); afterUpdate(runReveal); }
   }, true);
   pal.addEventListener('keydown', e => trap(pal, e));
+  // Search is modal: the page behind stays still (HIG #7), and Back closes it (HIG #8).
+  let palRoute = null;
+  pal.addEventListener('close', () => { OV().closed('search'); unlockScroll(keyOf(route(), curArg()) === palRoute); });
   pal.addEventListener('close', () => { if (!pal.contains(doc.activeElement) && (doc.activeElement === doc.body || !doc.activeElement) && palTrigger && palTrigger.isConnected) palTrigger.focus({ preventScroll: true }); });
   let palTrigger = null;
   const palette = {
     open(trigger) {
       palTrigger = trigger || doc.activeElement;
-      if (menu.open) closeMenu({ returnFocus: false, animate: false });
-      if (!pal.open) pal.showModal();
+      if (menu.open) closeMenu({ returnFocus: false, animate: false, keepHistory: true });
+      if (!pal.open) { palRoute = keyOf(route(), curArg()); OV().opened('search', () => palette.close()); lockScroll(); pal.showModal(); }
       input.value = ''; renderResults(); input.focus();
     },
     close() { if (pal.open) pal.close(); },
@@ -774,6 +783,9 @@
     const wrapped = function (v, a) {
       const user = wantTurn || !!(W.FFNav && W.FFNav.viaHistory);       // Back/Forward is the visitor's own navigation too
       wantTurn = false;
+      // a page opened from a panel (search result, quick view link) takes over the panel's history entry: settle that now, before
+      // the page turn defers the render, so the panel's own close never steps Back over the new page (views.js FFOverlay)
+      if (!(W.FFNav && W.FFNav.viaHistory) && W.FFOverlay) W.FFOverlay.consume();
       // A turn is waiting for its frame: the newest request replaces the queued one (a double click renders once, and a second
       // link clicked within that frame wins instead of being undone by the first).
       if (pending) { pending.self = this; pending.args = arguments; pending.user = pending.user || user; return; }
@@ -850,5 +862,5 @@
   (W.requestIdleCallback || (fn => setTimeout(fn, 2500)))(() => ['booker', 'lumi', 'zuri', 'bop'].forEach(prefetch));
   reduceMQ.addEventListener && reduceMQ.addEventListener('change', () => { if (menu.open) renderMenuBody(); });
 
-  W.FFWay = Object.freeze({ AUD, PAGES, MAIN, NEUTRAL, GROUPS, MORE, MORE_BY, PORTALS, DEFAULT_AUD, audOfRoute, NEXT, TALK, palette, openMenu, closeMenu, menu: () => menu, crumbs: crumbsHTML, chainOf, detailName, backTarget, history: () => hist.slice(), index: () => (INDEX || (INDEX = buildIndex())) });
+  W.FFWay = Object.freeze({ lockScroll, unlockScroll, AUD, PAGES, MAIN, NEUTRAL, GROUPS, MORE, MORE_BY, PORTALS, DEFAULT_AUD, audOfRoute, NEXT, TALK, palette, openMenu, closeMenu, menu: () => menu, crumbs: crumbsHTML, chainOf, detailName, backTarget, history: () => hist.slice(), index: () => (INDEX || (INDEX = buildIndex())) });
 })();

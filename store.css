@@ -13,18 +13,18 @@
 .fs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:16px}
 .fs-item,.fs-corner{background:var(--cream);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;min-width:0}
 .fs-body{padding:14px 16px 16px;display:grid;gap:8px;align-content:start;min-width:0}
-.fs-body h3{font-size:18px;overflow-wrap:anywhere}
+.fs-body h3{font-size:1.125rem;overflow-wrap:anywhere}
 .fs-body ul{margin:0;padding-left:18px;display:grid;gap:2px}
 .fs-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
 .fs-tile{position:relative;aspect-ratio:4/3;background:var(--s);display:grid;place-items:center;border-bottom:4px solid var(--c);overflow:hidden}
 .fs-tile img{height:72%;width:auto;opacity:.92}
-.fs-tile span{position:absolute;left:10px;right:10px;bottom:10px;text-align:center;font-size:12px;font-weight:600;background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px}
-.fs-price{font-weight:700;font-size:16px}
-.fs-price small{font-weight:500;font-size:12px;color:var(--muted)}
-.fs-qty{display:flex;align-items:center;gap:8px;font-size:13px}
+.fs-tile span{position:absolute;left:10px;right:10px;bottom:10px;text-align:center;font-size:.75rem;font-weight:600;background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px}
+.fs-price{font-weight:700;font-size:1rem}
+.fs-price small{font-weight:500;font-size:.75rem;color:var(--muted)}
+.fs-qty{display:flex;align-items:center;gap:8px;font-size:.8125rem}
 .fs-qty .i,.fs-qin{width:76px;padding:6px 8px}
 .fs-panel{position:sticky;top:144px}   /* clears the 128px sticky header (visual audit 2026-10-07: the panel top slid under it) */
-.fs-lines{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.fs-lines{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.875rem}
 .fs-lines li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
 .fs-lines li span{overflow-wrap:anywhere;min-width:0}
 .fs-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
@@ -46,9 +46,9 @@
 /* visual audit 2026-10-07: on a phone the catalog tables were ~20px wider than their box, so the Retail price and the Qty box were cut off
    at the right edge and "First to open" wrapped to three lines. Tighter cells and smaller chips make the five columns fit. */
 @media (max-width:560px){
-  .fs-supplies .tw table{font-size:13px}
+  .fs-supplies .tw table{font-size:.8125rem}
   .fs-supplies .tw th,.fs-supplies .tw td{padding:8px 5px}
   .fs-supplies .tw td{white-space:normal}
-  .fs-supplies .tw .chip{font-size:11px;padding:2px 7px;line-height:1.25;text-align:center;border-radius:10px}
+  .fs-supplies .tw .chip{font-size:.6875rem;padding:2px 7px;line-height:1.25;text-align:center;border-radius:10px}
   .fs-supplies .fs-qin{width:46px;padding:6px 4px}
 }

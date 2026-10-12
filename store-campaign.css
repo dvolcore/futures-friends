@@ -48,5 +48,5 @@
   .cp-strip-2 .cp-fig{width:calc(50% - 6px)}
   .cp-home-row{grid-template-columns:1fr}
   .cp-home{grid-template-columns:minmax(0,40%) minmax(0,1fr);align-items:center;gap:12px}
-  .cp-home figcaption b{font-size:18px}
+  .cp-home figcaption b{font-size:1.125rem}
 }
