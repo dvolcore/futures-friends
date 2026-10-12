@@ -19,7 +19,7 @@ const zlib = require('node:zlib');
 const ROOT = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const CONTRACT = ['whoosh', 'cloud-puff', 'letter-pop', 'logo-land', 'hop', 'land', 'chime', 'sparkle', 'wink', 'squish', 'rain', 'tap',
-  'page-turn', 'card-flip', 'badge', 'footstep', 'wave', 'firefly', 'night-chime'];
+  'page-turn', 'card-flip', 'badge', 'footstep', 'wave', 'firefly', 'night-chime', 'clunk', 'stamp', 'pop'];
 
 test('procedural only: no audio files, no network, small; index loads the pill after wayfinding and before analytics', () => {
   const js = read('sound.js'), css = read('sound.css');

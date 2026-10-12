@@ -1,6 +1,7 @@
 /* Spanish phrase table (DRAFT, pending review by the center's Spanish teacher), part 9: "How a Futures Friends day travels" on Home
-   (day-machine.js, 2026-10-12): the heading, the steps, the camera captions and the few words drawn on the scene. Keys = the English
-   exactly as on the page (whitespace collapsed). Used by i18n.js. */
+   (day-machine.js, 2026-10-12): the heading, the steps, the camera captions and the few words drawn on the scene; the tier-1 buttons,
+   sample cards and announcements; and the director variant on #centers. Keys = the English exactly as on the page (whitespace
+   collapsed). Used by i18n.js. */
 (function () {
 'use strict';
 if (!window.FFi18n) return;
@@ -27,6 +28,45 @@ window.FFi18n.add('es', {
   'Daily report': 'Informe del día',
   'tap to open': 'toca para abrir',
   'today · 5:30 pm': 'hoy · 5:30 p. m.',
-  'Try at home · 10 min': 'En casa · 10 min'
+  'Try at home · 10 min': 'En casa · 10 min',
+  // tier 1: the friend and card buttons, the sample cards that open, what a tap announces
+  'say hello': 'saludar',
+  'hops hello': 'salta para saludar',
+  'waves hello': 'saluda con la mano',
+  'Sample card': 'Tarjeta de ejemplo',
+  'Sample': 'Ejemplo',
+  'story with Booker': 'cuento con Booker',
+  'nap 1h 10m': 'siesta 1 h 10 min',
+  'lunch: most of it': 'almuerzo: casi todo',
+  'skill check ✓': 'habilidad revisada ✓',
+  'logged by the teacher': 'anotado por el equipo docente',
+  // the director variant (#centers): the same machine, a center's day of checks
+  'How a center’s day gets recorded': 'Cómo queda registrado el día de un centro',
+  'Every check a classroom logs travels one way: onto the director’s “What’s due”, into one record ready for licensing, and back as the next thing on the calendar.': 'Cada revisión que anota un salón hace el mismo viaje: llega a los “Pendientes” de la dirección, entra en un solo registro listo para licencias y vuelve como lo próximo en el calendario.',
+  'Each classroom logs the checks a licensed center keeps: ratios, nap checks, drills and daily health checks.': 'Cada salón anota las revisiones que lleva un centro con licencia: proporciones, revisiones de siesta, simulacros y revisiones de salud diarias.',
+  'Every check is time-stamped on the classroom tablet as it happens.': 'Cada revisión queda con su hora en la tableta del salón en el momento en que ocurre.',
+  'The director’s “What’s due” shows what is done today and what is coming up.': 'Los “Pendientes” de la dirección muestran lo que ya se hizo hoy y lo que viene.',
+  'The day’s checks are filed into one record, ready when licensing asks for it.': 'Las revisiones del día se archivan en un solo registro, listo cuando licencias lo pida.',
+  'The next drill goes on the calendar, so tomorrow starts the loop again.': 'El próximo simulacro va al calendario, y mañana el ciclo empieza otra vez.',
+  '4 rooms · 1 center': '4 salones · 1 centro',
+  'room 1 · ratio checked': 'salón 1 · proporción revisada',
+  'room 2 · nap checks logged': 'salón 2 · revisiones de siesta anotadas',
+  'room 3 · fire drill logged': 'salón 3 · simulacro de incendio anotado',
+  'room 4 · health check': 'salón 4 · revisión de salud',
+  'every check time-stamped': 'cada revisión con su hora',
+  'the director’s what’s due': 'los pendientes de la dirección',
+  'record ready for licensing': 'registro listo para licencias',
+  'next drill on the calendar': 'el próximo simulacro en el calendario',
+  'ratio checked ✓': 'proporción revisada ✓',
+  'nap checks logged': 'revisiones de siesta anotadas',
+  'fire drill · 2 min': 'simulacro de incendio · 2 min',
+  'health check ✓': 'revisión de salud ✓',
+  'time-stamped in the room': 'con su hora, en el salón',
+  'what’s due': 'pendientes',
+  'Director': 'Dirección',
+  'What’s due': 'Pendientes',
+  'Licensing record': 'Registro para licencias',
+  'ready · today': 'listo · hoy',
+  'Next drill · calendar': 'Próximo simulacro · calendario'
 });
 })();

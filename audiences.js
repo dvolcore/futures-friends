@@ -63,6 +63,7 @@
     + sect('aud-rooms-h', '', `${lead('aud-rooms-h', 'Your rooms', 'Set up the learning zones', '')}${tiles(ROOMS)}`)
     + sect('aud-team-h', 'band-paper', `${lead('aud-team-h', 'Your teachers', 'Curriculum and training', 'Full lesson plans are for member programs; the summaries are open to read.')}${tiles(TEAM)}`)
     + sect('aud-run-h', '', `${lead('aud-run-h', 'Your program', 'Run it, fund it, compare it', '')}${tiles(RUN)}`)
+    + (W.FFDayMachine ? W.FFDayMachine.section('director') : '')   // day-machine.js: the director variant of "How a day travels"
     + (W.FFHomeCalm && W.FFHomeCalm.proof ? W.FFHomeCalm.proof() : '')
     + sect('aud-fam-h', 'band-paper aud-famlink', `<div class="aud-famgrid"><div>${art('lumi-heart-hands', 150, 'aud-famcut')}</div><div><span class="eyebrow">What your families get</span><h2 id="aud-fam-h">See what families experience</h2><p>Your families get the friends, read-along books, short videos, activities from things at home and the Family Portal. No sales, nothing to buy.</p><a class="btn navy" href="#home" data-ffa-aud="families">See the family side ${icon('ArrowRight')}</a></div></div>`)
     + `<section class="hc-close aud-close" aria-labelledby="aud-close-h"><div class="wrap hc-closegrid"><div><h2 id="aud-close-h">Talk to a real person</h2><p>Book a demo or discuss your program: thirty minutes on your rooms, ages and enrollment, a walk through the Futures Hub and an honest answer on what is ready today.</p></div>
