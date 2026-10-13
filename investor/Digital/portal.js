@@ -249,7 +249,8 @@
     const { funding, totals, platform, assumptions, metrics, cash } = m;
     const parts = [['Peak pilot cash deficit', money(funding.peak_deficit)], ['Refinance-enabling allocation', whole(totals.refinance)], ['Cash floor', money(funding.cash_floor)], ['Contingency', money(totals.contingency)], ['Preliminary funding need', money(funding.request_before_financing)]];
     const kpiRow = D.createElement('div'); kpiRow.className = 'inv-kpi-tools';
-    if (!$('.inv-kpi-tools')) { $('#kpis').after(kpiRow); tableToggle(kpiRow, 'kpiTable', 'The four parts of the funding estimate', ['Item', 'Amount'], parts); }
+    // v2270: the command header keeps a slot for it ([data-kpi-tools]); otherwise it follows the KPI cards
+    if (!$('.inv-kpi-tools')) { const slot = $('[data-kpi-tools]'); if (slot) slot.append(kpiRow); else $('#kpis').after(kpiRow); tableToggle(kpiRow, 'kpiTable', 'The four parts of the funding estimate', ['Item', 'Amount'], parts); }
     tableToggle($('.platform .cost-caption'), 'platformTable', 'Platform costs, year one', ['Item', 'Amount'],
       [['Platform completion', whole(platform.completion)], ['Security testing & counsel', whole(platform.assurance_one_time)], ['Annual support & hosting', money(platform.recurring)], ['Platform year one', money(platform.first_year)]], 'after');
     tableToggle($('.comparison .chart-unit'), 'cashCompareTable', 'Tuition and operating break-even, per child per month', ['Item', 'Amount'],

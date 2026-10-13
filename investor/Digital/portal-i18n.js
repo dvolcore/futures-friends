@@ -8,6 +8,23 @@
 (function () {
   'use strict';
   const ES = {
+    // Overview command center (2026-10-13, v2270)
+    "Key figures": "Cifras clave",
+    "Itemized cost lines": "Partidas de costo detalladas",
+    "Estimate": "Estimación",
+    "Ramp-up": "Aumento",
+    "By month": "Por mes",
+    "Owner-stated": "Indicado por la dueña",
+    "Scenario simulator": "Simulador de escenarios",
+    "Move the sliders; the published plan stays unchanged.": "Mueva los controles; el plan publicado no cambia.",
+    "Live": "En vivo",
+    "From the monthly cash forecast.": "Según el pronóstico de caja mensual.",
+    "Published forecast": "Pronóstico publicado",
+    "Your scenario": "Su escenario",
+    "Dashboard panels": "Paneles del tablero",
+    "Costs": "Costos",
+    "Repayment": "Pago",
+    "Pilot": "Piloto",
     // Overview dashboard (2026-10-13): every studio module on the Overview
     "The four parts of the funding estimate.": "Las cuatro partes de la estimación de financiamiento.",
     "See the full breakdown": "Ver el desglose completo",

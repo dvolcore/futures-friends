@@ -1,178 +1,434 @@
-/* Futures Friends Investor studio: the Overview as one full dashboard (owner 2026-10-13: "I need this information back in there and
-   then I need it to be an animated motion interactive"). Every studio module in compact form under the hero, the KPI cards and the
-   terms: funding donut | scenario, platform costs | repayment, the pilot year, what the pilot includes, the documents.
-   Loaded after studio.css; its own .ovd-* names (the deep-dive views keep theirs). Motion is transform / opacity only and plays once
-   per card on scroll-in (studio.js), never with Reduce Motion, the site's motion switch, "Pause motion" or ?reveal=off. No loops. */
-.ovd{display:flex;flex-direction:column;gap:22px;margin-top:10px}
-.ovd-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:stretch}
-.ovd-card{display:flex;flex-direction:column;gap:18px;padding:26px 26px 22px;cursor:pointer;transition:transform .35s var(--ff-ease-out),box-shadow .35s var(--ff-ease-out),border-color .35s}
-.ovd-card::before{content:'';position:absolute;inset:0 0 auto;height:4px;border-radius:var(--r) var(--r) 0 0;background:var(--tone,var(--booker));opacity:.8}
-.ovd-funding{--tone:var(--teal)}.ovd-scen{--tone:var(--bop)}.ovd-platform{--tone:var(--booker)}.ovd-repay{--tone:var(--gold)}.ovd-year{--tone:var(--zuri)}.ovd-includes{--tone:var(--lumi)}.ovd-docs{--tone:var(--navy);cursor:default}
+/* Futures Friends Investor studio: the Overview as a COMMAND CENTER (owner 2026-10-13, v2270: "it needs to have more of a dashboard
+   feel ... more like the command center"). The QEP CEO spine's structure in the Futures Friends palette: a dark command header (live
+   status, the tagline, the Pending terms board, a ticker of the key figures, the hero scene slot), a compact KPI strip, and a dense
+   grid whose centerpiece is the scenario simulator wired to the pilot-year chart (dark), with light panels around it. Desktop
+   1440 x 900: header, KPIs, centerpiece, funding and repayment all above the fold. Phones: a sticky KPI ticker, the centerpiece
+   first, then the panels in a swipeable dock with a segmented control.
+   Loaded after studio.css; its own .cc-* / .ovd-* names (the deep-dive views keep theirs). Ambient loops (motion on only): the
+   scene's drift and light sweep, the status dot, the ticker. Everything else plays once. Reduce Motion, the site's motion switch,
+   "Pause motion" and ?reveal=off: static and final. */
+.view-overview{--cc-deep:#061f29;--cc-navy:#0a2b38;--cc-teal:#0f4a52;--cc-line:rgba(255,255,255,.12);--cc-text:#fff;--cc-dim:#b9ccd4;--cc-faint:#8fa9b3;
+  --cc-pos:#5fe0a0;--cc-neg:#ff8a9c;--cc-gold:#f4c24f;--cc-r:18px}
+.cc{display:flex;flex-direction:column;gap:10px}
+.view-overview .chip{display:inline-flex;align-items:center;gap:6px;min-height:22px;padding:2px 9px;border-radius:999px;font:800 10.5px/1.2 'DM Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.chip-gold{background:#fdf1d6;color:#7a5306}.chip-green{background:#e3f4e9;color:#17562f}.chip-purple{background:#f1e6f8;color:#5d2380}.chip-blue{background:#e6efff;color:#173f9a}
+.chip-warn{background:#fbe9ee;color:#7a1d33}
+
+/* ---- the command header ------------------------------------------------------------------------------------------------- */
+.cc-band{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr) auto;grid-template-areas:"id terms scene" "ticker ticker scene";gap:12px 16px;
+  padding:16px 14px 0 22px;border-radius:22px;color:var(--cc-text);overflow:hidden;isolation:isolate;
+  background:radial-gradient(520px 260px at 78% 30%,rgba(24,184,155,.22),transparent 70%),radial-gradient(420px 220px at 8% 0%,rgba(130,54,174,.28),transparent 70%),linear-gradient(120deg,var(--cc-deep),var(--cc-navy) 45%,var(--cc-teal));
+  box-shadow:0 24px 50px -30px rgba(6,31,41,.9)}
+.cc-band::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(90deg,#000,transparent 75%)}
+.cc-id{grid-area:id;min-width:0}
+.cc-status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:12px;color:var(--cc-dim)}
+.cc-live{width:9px;height:9px;border-radius:50%;background:var(--cc-pos);box-shadow:0 0 0 3px rgba(95,224,160,.22),0 0 12px rgba(95,224,160,.8)}
+.cc-eyebrow{font:800 11px/1 'DM Sans',sans-serif;letter-spacing:.18em;color:var(--cc-gold)}
+.view-overview .model-date{display:inline;margin:0;font-size:12px;font-weight:600;color:var(--cc-dim);white-space:nowrap}
+.cc-band h1{margin-top:4px;font-size:clamp(22px,1.85vw,28px);font-weight:800;letter-spacing:-.035em;line-height:1.05;color:#fff}
+.cc-band h1 span{display:inline-block;background:linear-gradient(100deg,#8fb6ff 10%,#d3a6f2 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cc-scope{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;margin-top:5px}
+.cc-scope .hero-scope{font-size:13px;font-weight:700;color:#fff}
+.cc-scope .hero-mission{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--cc-gold)}
+
+/* the Pending terms: a status board */
+.cc-band .terms{grid-area:terms;align-self:start;margin-top:4px;display:grid;gap:6px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--cc-line);font-size:12.5px}
+.cc-band .terms .terms-head{display:flex;align-items:center;gap:8px;font-weight:700;color:#fff}
+.cc-band .status-dot{width:8px;height:8px;background:var(--cc-gold);box-shadow:0 0 0 3px rgba(244,194,79,.22)}
+.cc-band .terms dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;margin:0}
+.cc-band .terms dl div{display:flex;align-items:center;gap:6px;min-width:0}
+.cc-band .terms dt{font-size:9px;font-weight:700;letter-spacing:.06em;white-space:nowrap;text-transform:uppercase;color:var(--cc-faint)}
+.cc-band .terms dd{margin:0;padding:2px 9px;border-radius:999px;background:rgba(244,194,79,.16);border:1px solid rgba(244,194,79,.45);color:#ffe2a0;font-size:11px;line-height:1.3;font-weight:800}
+.cc-band .terms .terms-equity dd{background:rgba(95,224,160,.14);border-color:rgba(95,224,160,.45);color:#b8f5d4}
+
+/* the ticker: the key figures, running (motion on), static and scrollable otherwise */
+.cc-ticker{grid-area:ticker;display:flex;align-items:center;gap:8px;min-width:0;margin:0 0 0 -22px;padding:0 6px 0 22px;border-radius:0 12px 0 0;border-top:1px solid var(--cc-line);background:rgba(0,0,0,.18)}
+.cc-tick-viewport{flex:1;min-width:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 94%,transparent)}
+.cc-tick-belt{display:flex;width:max-content}
+.cc-tick-track{display:flex;list-style:none;margin:0;padding:0}
+.cc-tick-track li{display:flex;align-items:baseline;gap:8px;padding:9px 16px 9px 0;margin-right:18px;border-right:1px solid var(--cc-line);white-space:nowrap;font-size:12px;color:var(--cc-dim);transition:color .25s}
+.cc-tick-track b{font:800 13.5px/1 Manrope,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.cc-tick-track li.linked{color:#fff}.cc-tick-track li.linked b{color:var(--cc-gold)}
+.cc-kpi-tools{margin:-5px 0}
+.cc-kpi-tools .inv-kpi-tools{margin:0;position:relative}
+.cc-kpi-tools .as-table{min-height:44px;color:#d6e6ff;font-size:12px;white-space:nowrap}
+.cc-kpi-tools .inv-table-wrap{position:absolute;right:0;bottom:calc(100% + 6px);z-index:20;width:min(420px,80vw);padding:10px;border-radius:14px;background:#fff;color:var(--navy);box-shadow:0 24px 50px -20px rgba(6,31,41,.8)}
+
+/* the hero scene slot: the art contained (never cropped) over a blurred copy of itself; the stage drifts; a light sweeps */
+.cc-scene{grid-area:scene;position:relative;align-self:stretch;width:clamp(240px,22vw,320px);min-height:132px;margin:0 0 14px;border-radius:16px;overflow:hidden;isolation:isolate;
+  background:radial-gradient(circle at 50% 70%,rgba(255,255,255,.16),transparent 70%),rgba(255,255,255,.05);border:1px solid var(--cc-line);box-shadow:inset 0 0 40px rgba(0,0,0,.25)}
+.cc-scene::before{content:'';position:absolute;inset:-12%;z-index:-1;background:var(--scene) center/cover no-repeat;filter:blur(22px) saturate(1.3);opacity:.45}
+.cc-scene::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.22) 50%,transparent 62%);transform:translateX(-120%)}
+.cc-scene-stage{position:absolute;inset:0;margin:auto;width:94%;height:94%;transform-origin:50% 60%}
+.cc-scene-stage img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.cc-screen{position:absolute;z-index:1;overflow:hidden;border-radius:3px;background:linear-gradient(160deg,rgba(6,31,41,.88),rgba(15,74,82,.8));box-shadow:0 0 0 1px rgba(143,182,255,.35),0 0 14px rgba(95,224,160,.25)}
+.cc-screen svg{display:block;width:100%;height:100%}
+.cc-screen .zero{stroke:rgba(255,255,255,.35);stroke-width:.6}
+.cc-screen rect.neg{fill:rgba(255,138,156,.75)}.cc-screen rect.pos{fill:rgba(95,224,160,.8)}
+.cc-screen .cum{fill:none;stroke:#8fb6ff;stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
+/* ---- the KPI strip: compact tiles, ring + figure + sparkline + status chip ---------------------------------------------- */
+.view-overview .metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.view-overview .metric{display:grid;grid-template-columns:30px minmax(0,1fr) auto 54px;grid-template-areas:"label label chip chip" "icon value value spark" "meta meta meta meta";align-items:center;gap:5px 10px;
+  padding:10px 14px 9px;border-radius:16px;background:#fff;border:1px solid rgba(10,43,56,.1);box-shadow:0 10px 24px -20px rgba(10,43,56,.6)}
+.view-overview .metric::before{height:3px;border-radius:16px 16px 0 0}
+.view-overview .metric .metric-icon{grid-area:icon;width:30px;height:30px;margin:0;border-radius:10px}
+.view-overview .metric .metric-icon>svg{width:18px;height:18px}
+.view-overview #kpis .metric-icon .inv-ring{inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px)}
+.view-overview .metric-label{grid-area:label;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.metric-meta{grid-area:meta;display:flex;align-items:flex-start;gap:8px;min-width:0;padding-right:16px}
+.view-overview .metric-chip{grid-area:chip;justify-self:end;font-size:9px;padding:1px 7px;min-height:18px}
+.view-overview .metric strong{grid-area:value;font-size:clamp(18px,1.5vw,22px);line-height:1.05;letter-spacing:-.03em}
+.view-overview .metric p{font-size:11px;line-height:1.3;min-width:0}
+.metric-spark{grid-area:spark;width:54px;height:28px;overflow:visible}
+.metric-spark .sp-area{fill:rgba(47,111,228,.14)}.metric-spark .sp-line{fill:none;stroke:var(--booker);stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0}
+.metric-spark .sp-bar{fill:#58b97f}.metric-spark .sp-seg{fill:#dcc6ec}.metric-spark .sp-check{fill:var(--bop)}
+.metric-spark .sp-part{fill:#e5e9ee}.metric-spark .sp-lit{fill:var(--gold)}
+.view-overview .metric-go{position:absolute;inset:0;z-index:1;margin:0;padding:0;min-height:44px;border-radius:16px}
+.view-overview .metric-go::after{display:none}
+.view-overview .metric-go-text{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.view-overview .metric-go-arrow{position:absolute;right:12px;bottom:9px;font-weight:800;color:var(--navy);transition:transform .25s var(--ff-ease-out)}
+.view-overview .metric.linked{border-color:color-mix(in srgb,var(--tone) 60%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--tone) 22%,transparent),0 10px 24px -20px rgba(10,43,56,.6)}
+@media (hover:hover) and (pointer:fine){.view-overview .metric:hover .metric-go-arrow{transform:translateX(4px)}}
+
+/* the overview sits a little higher in the frame: the whole command center fits a 900 px screen */
+:root[data-view=overview] .studio-frame{padding-top:12px}
+
+/* ---- the grid: the centerpiece and the panels around it ---------------------------------------------------------------- */
+.ovd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.18fr);grid-template-areas:"center center funding" "center center repay" "platform includes includes" "docs docs docs";gap:12px;align-items:stretch}
+.ovd-center{grid-area:center}
+.ovd-dock{display:contents}
+.ovd-tabs{display:none}
+.ovd-funding{grid-area:funding}.ovd-repay{grid-area:repay}.ovd-platform{grid-area:platform}.ovd-includes{grid-area:includes}.ovd-docs{grid-area:docs}
+.ovd-card{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:var(--cc-r);cursor:pointer;-webkit-backdrop-filter:none;backdrop-filter:none;
+  background:#fff;border:1px solid rgba(10,43,56,.1);box-shadow:0 12px 28px -24px rgba(10,43,56,.7);transition:transform .3s var(--ff-ease-out),box-shadow .3s var(--ff-ease-out),border-color .3s}
+.ovd-card::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--tone,var(--booker))}
+.ovd-funding{--tone:var(--teal)}.ovd-platform{--tone:var(--booker)}.ovd-repay{--tone:var(--gold)}.ovd-includes{--tone:var(--zuri)}.ovd-docs{--tone:var(--navy);cursor:default}
 @media (hover:hover) and (pointer:fine){
-  .ovd-card:hover{transform:translateY(-4px);box-shadow:0 30px 54px -30px rgba(10,43,56,.55),0 2px 6px -2px rgba(10,43,56,.08);border-color:rgba(10,43,56,.16)}
-  .ovd-card:hover .ovd-go span{transform:translateX(4px)}
+  .ovd-dock .ovd-card:hover{transform:translateY(-2px);border-color:rgba(10,43,56,.22);box-shadow:0 18px 34px -24px rgba(10,43,56,.75)}
 }
-.ovd-card:focus-within{box-shadow:0 0 0 3px var(--inv-focus,#2f6fe4),var(--shadow)}
-.ovd-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 18px;flex-wrap:wrap}
-.ovd-head .panel-title{margin:0;min-width:0;flex:1 1 280px}
-.ovd-head .panel-title p{max-width:52ch}
-.ovd-go{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(10,43,56,.05);color:var(--navy)!important;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;transition:background-color .2s}
+.ovd-card:focus-within{box-shadow:0 0 0 3px var(--inv-focus,#2f6fe4),0 12px 28px -24px rgba(10,43,56,.7)}
+.ovd-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px 12px}
+.ovd-head .panel-title{display:flex;align-items:flex-start;gap:10px;margin:0;min-width:0;flex:1 1 auto}
+.ovd-head .panel-title .icon{flex:none;width:30px;height:30px;border-radius:10px}
+.ovd-head .panel-title .icon svg{width:17px;height:17px}
+.ovd-head h3{font-size:14px;font-weight:800;letter-spacing:-.01em;line-height:1.2;color:var(--navy)}
+.ovd-head .panel-title p{margin-top:1px;font-size:12px;line-height:1.35;color:var(--muted)}
+.ovd-go{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(10,43,56,.06);color:var(--navy)!important;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;transition:background-color .2s}
 .ovd-go span{display:inline-block;transition:transform .25s var(--ff-ease-out)}
-@media (hover:hover) and (pointer:fine){.ovd-go:hover{background:rgba(10,43,56,.1)}}
-.ovd-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:auto}
-.ovd-actions .reset-button{margin-top:0}
-.ovd-kicker{display:block;font:800 15px/1.3 Manrope,sans-serif;color:var(--navy)}
+.ovd-go-icon{flex:none;width:44px;padding:0;font-size:16px}
+@media (hover:hover) and (pointer:fine){.ovd-go:hover{background:rgba(10,43,56,.12)}.ovd-go:hover span{transform:translateX(3px)}}
+.ovd-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto}
+.ovd-kicker{display:block;font:800 10.5px/1.2 'DM Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.ovd-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:700;font-size:13px;color:#0b4fcf!important;text-decoration:none}
+.ovd-link span{transition:transform .25s var(--ff-ease-out)}
+@media (hover:hover) and (pointer:fine){.ovd-link:hover span{transform:translateX(3px)}}
 
-/* bars that fill (platform rows, tuition vs break-even): scaleX to the model's share; empty until the card has risen in */
-.ovd-track{grid-column:1/-1;height:12px;border-radius:999px;background:rgba(10,43,56,.06);overflow:hidden}
-.ovd-track i{display:block;height:100%;width:100%;border-radius:999px;transform-origin:0 50%;transform:scaleX(var(--s,1));background:linear-gradient(90deg,var(--booker),#6f9cff)}
-.ovd-track i.be{background:linear-gradient(90deg,var(--bop),#b98ae0)}
-.ovd-track i.pu{background:linear-gradient(90deg,#8236ae,#c08be0)}
-.ovd-track i.gr{background:linear-gradient(90deg,#22874a,#5cc58a)}
-.ovd-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:4px 12px}
-.ovd-bar span{font-size:14px;font-weight:600;color:var(--muted)}
-.ovd-bar b{font:800 18px/1.2 Manrope,sans-serif;color:var(--navy);white-space:nowrap}
-.ovd-bar-lg b{font-size:24px;letter-spacing:-.02em}
+/* ---- the centerpiece: the scenario simulator + the pilot year (dark) ---------------------------------------------------- */
+.ovd-center{position:relative;display:grid;grid-template-columns:minmax(272px,.62fr) minmax(0,1.38fr);border-radius:22px;overflow:hidden;color:#fff;
+  background:radial-gradient(600px 300px at 72% 0%,rgba(61,107,255,.2),transparent 70%),radial-gradient(400px 300px at 0% 100%,rgba(130,54,174,.25),transparent 70%),linear-gradient(160deg,var(--cc-deep),var(--cc-navy) 60%,#0c3a47);
+  box-shadow:0 30px 60px -34px rgba(6,31,41,.95),inset 0 0 0 1px rgba(255,255,255,.06)}
+.ovd-center .ovd-card{gap:8px;background:transparent;border:0;box-shadow:none;border-radius:0;padding:14px 16px;color:#fff}
+.ovd-center .ovd-card::before{display:none}
+.ovd-center .ovd-scen{border-right:1px solid var(--cc-line);background:rgba(255,255,255,.03)}
+.ovd-center .ovd-card:focus-within{box-shadow:inset 0 0 0 3px #8fb6ff}
+.ovd-center h3{color:#fff;font-size:16px}
+.ovd-center .panel-title .icon{display:none}
+.ovd-margin-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ovd-margin-head .chip{min-height:20px;font-size:9.5px;padding:1px 8px}
+.ovd-center .ovd-head .panel-title p{color:var(--cc-dim)}
+.ovd-center .icon.purple{background:rgba(185,138,224,.2);color:#d3a6f2}.ovd-center .icon.green{background:rgba(95,224,160,.16);color:var(--cc-pos)}
+.ovd-center .ovd-go{background:rgba(255,255,255,.1);color:#fff!important}
+@media (hover:hover) and (pointer:fine){.ovd-center .ovd-go:hover{background:rgba(255,255,255,.18)}}
+.ovd-center .chip{flex:none;border:1px solid var(--cc-line);background:rgba(255,255,255,.08);color:var(--cc-dim)}
+.chip-live i{width:7px;height:7px;border-radius:50%;background:var(--cc-pos);box-shadow:0 0 8px var(--cc-pos)}
+.ovd-center .chip-scen{background:rgba(244,194,79,.18);border-color:rgba(244,194,79,.5);color:#ffe2a0}
+.ovd-sliders{display:grid;gap:0}
+.ovd-center .slider{display:grid;gap:0}
+.ovd-center .slider label{font-size:12px;font-weight:600;color:var(--cc-dim);line-height:1.1}
+.ovd-center .slider output{font-size:17px;color:#fff}
+.ovd-center .slider input{accent-color:#5fe0a0;min-height:44px;height:44px;margin:-6px 0 -4px}
+.ovd-margin{display:grid;gap:1px;padding:8px 12px;border-radius:14px;background:rgba(255,138,156,.1);border:1px solid rgba(255,138,156,.3);transition:background-color .35s,border-color .35s}
+.ovd-margin .ovd-kicker{color:#ffc2cc}
+.ovd-margin strong{font-size:clamp(26px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1.05;color:var(--cc-neg);white-space:nowrap;transition:color .3s,text-shadow .4s;text-shadow:0 0 18px rgba(255,138,156,.35)}
+.ovd-margin strong.counting{text-shadow:0 0 12px rgba(255,138,156,.8)}
+.ovd-margin small{min-height:2.6em;font-size:11.5px;line-height:1.3;color:#ffc2cc}
+.ovd-margin.positive{background:rgba(95,224,160,.1);border-color:rgba(95,224,160,.35)}
+.ovd-margin.positive strong{color:var(--cc-pos);text-shadow:0 0 18px rgba(95,224,160,.35)}
+.ovd-margin.positive .ovd-kicker,.ovd-margin.positive small{color:#b8f5d4}
+.ovd-gauge-row{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;gap:12px}
+.ovd-gauge{display:block;width:100%;height:auto;overflow:visible}
+.ovd-gauge .g-track,.ovd-gauge .g-fill,.ovd-gauge .g-gap{fill:none;stroke-width:16;stroke-linecap:butt}
+.ovd-gauge .g-track{stroke:rgba(255,255,255,.1)}
+.ovd-gauge .g-fill{stroke:#8fb6ff;stroke-dasharray:0 1}
+.ovd-gauge .g-gap{stroke:var(--cc-neg);stroke-dasharray:0 0 0 1;opacity:.9}
+.ovd-gauge.g-ok .g-fill{stroke:var(--cc-pos)}.ovd-gauge.g-ok .g-gap{stroke:rgba(95,224,160,.35)}
+.ovd-gauge .g-tick{stroke:var(--cc-gold);stroke-width:4;stroke-linecap:round;transform-box:view-box;transform-origin:100px 100px;filter:drop-shadow(0 0 4px rgba(244,194,79,.8))}
+.ovd-gauge .g-needle{transform-box:view-box;transform-origin:100px 100px;transform:rotate(-90deg)}
+.ovd-gauge .g-needle line{stroke:#fff;stroke-width:4;stroke-linecap:round}
+.ovd-gauge .g-needle circle{fill:#fff;stroke:var(--cc-navy);stroke-width:3}
+.ovd-be{display:grid;gap:4px;margin:0}
+.ovd-be div{display:grid;gap:0}
+.ovd-be dt{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cc-faint)}
+.ovd-be dd{margin:0;font:800 18px/1.1 Manrope,sans-serif;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ovd-be .be-be dd{color:var(--cc-gold)}
+.ovd-scen .ovd-actions{gap:6px}
+.ovd-center .reset-button{width:100%}
+.ovd-center .reset-button{min-height:44px;margin:0;padding:0 12px;border-radius:999px;border:1px solid var(--cc-line);background:rgba(255,255,255,.06);color:#fff;font-size:12.5px;font-weight:700}
+@media (hover:hover) and (pointer:fine){.ovd-center .reset-button:hover{background:rgba(255,255,255,.14)}}
+.ovd-center .ovd-scen .ovd-go{padding:0 12px;font-size:12.5px}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]):not(.motion-paused) .ovd-gauge .g-needle{transition:transform .9s cubic-bezier(.34,1.4,.64,1)}
+  :root:not([data-motion=off]):not(.motion-paused) .ovd-gauge .g-tick{transition:transform .6s var(--ff-ease-out)}
+  :root:not([data-motion=off]):not(.motion-paused) .ovd-gauge .g-fill,:root:not([data-motion=off]):not(.motion-paused) .ovd-gauge .g-gap{transition:stroke-dasharray .9s var(--ff-ease-out)}
+}
 
-/* ---- Where the funding goes (compact donut; the Funding view's geometry) ---- */
-.ovd-donut-grid{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);gap:18px 26px;align-items:center}
-.ovd-donut-wrap{position:relative;width:100%;max-width:250px;aspect-ratio:1;margin:6px auto}
-.ovd-donut{display:block;width:100%;height:100%;overflow:visible}
-.ovd-ring-track{fill:none;stroke:rgba(10,43,56,.06);stroke-width:46}
-.ovd-donut .slice{transform:translate(var(--dx,0),var(--dy,0));transition:transform .4s var(--ff-ease-spring),opacity .3s;cursor:pointer}
-.ovd-donut .arc{fill:none;stroke-width:46;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--glow) 60%,transparent));transition:stroke-width .3s var(--ff-ease-out)}
-.ovd-donut .slice.on .arc{stroke-width:54;filter:drop-shadow(0 0 4px var(--glow)) drop-shadow(0 6px 14px color-mix(in srgb,var(--glow) 55%,transparent))}
-.ovd-donut .slice.dim{opacity:.42}
-.ovd-donut-center{position:absolute;inset:22%;display:grid;place-content:center;gap:2px;text-align:center;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle at 50% 40%,#fff 0,#fff 55%,rgba(255,255,255,.65) 100%);box-shadow:inset 0 0 0 1px rgba(10,43,56,.06),0 14px 30px -18px rgba(10,43,56,.5)}
-.ovd-donut-center strong{font-size:clamp(16px,1.35vw,21px);font-weight:800;letter-spacing:-.03em;color:var(--navy);white-space:nowrap}
-.ovd-donut-center span{font-size:11.5px;font-weight:600;line-height:1.25;color:var(--muted);padding:0 6px}
-.ovd-donut-side{min-width:0}
-.ovd-donut-side .donut-hint{margin-bottom:8px}
-.ovd-legend{gap:8px}
-.ovd-legend button{min-height:56px;padding:8px 14px}
-.ovd-donut-side .donut-detail{min-height:3.2em;margin-top:10px;font-size:13.5px}
-.ovd-funding .donut-tip{min-width:0;white-space:nowrap}
-
-/* ---- Try a scenario ---- */
-.ovd-scen-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 26px;align-items:start}
-.ovd-sliders{display:grid;gap:12px}
-.ovd-sliders .slider label{font-size:14px}
-.ovd-sliders .slider output{font-size:20px}
-.ovd-scen-out{display:grid;gap:12px}
-.ovd-margin{display:grid;gap:2px;padding:14px 16px;border-radius:18px;background:#fbe9ee;transition:background-color .35s}
-.ovd-margin strong{font-size:clamp(26px,2.2vw,34px);font-weight:800;letter-spacing:-.035em;line-height:1.05;color:#9b1c33;white-space:nowrap;transition:color .3s,text-shadow .4s}
-.ovd-margin strong.counting{text-shadow:0 0 8px rgba(130,54,174,.35)}
-.ovd-margin span{font-size:14px;font-weight:700;color:#7a1d33}
-.ovd-margin small{font-size:12.5px;color:#7a1d33}
-.ovd-margin.positive{background:#e3f4e9}
-.ovd-margin.positive strong{color:#17703d}
-.ovd-margin.positive span,.ovd-margin.positive small{color:#17562f}
-
-/* ---- What the platform costs ---- */
-.ovd-rows{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.ovd-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:6px 12px;padding:10px 0 12px;border-bottom:1px solid var(--line)}
-.ovd-rows li:last-child{border-bottom:0}
-.ovd-rows span{font-weight:600;font-size:15px;color:var(--navy)}
-.ovd-rows b{font:800 19px/1.2 Manrope,sans-serif;color:var(--navy);white-space:nowrap}
-.ovd-total{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;padding:16px 20px;border-radius:18px;background:linear-gradient(120deg,#e6efff,#f1e6f8)}
-.ovd-total strong{font-size:clamp(28px,2.4vw,36px);font-weight:800;letter-spacing:-.03em;color:var(--navy);white-space:nowrap}
-.ovd-total span{font-weight:700;color:var(--muted)}
-.ovd-caption{font-size:14px;color:var(--muted);margin-top:-6px}
-.ovd-caption b{color:var(--navy)}
-
-/* ---- Can the pilot carry repayment? ---- */
-.ovd-compare{display:grid;gap:14px}
-.ovd-gap{margin:0}
-.ovd-repay .enrollment,.ovd-repay .readiness{margin-top:0}
-.ovd-repay .readiness{margin-top:-6px}
-
-/* ---- Explore the pilot year (the Pilot year view's chart, compact) ---- */
-.ovd-year .series-toggles{margin-left:auto}
+/* the pilot-year chart, on dark */
+.ovd-year-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.ovd-center .series-toggles{display:flex;flex-wrap:wrap;gap:6px}
+.ovd-center .series-toggles button{min-height:44px;padding:0 10px;gap:6px;font-size:12px;border-color:var(--cc-line);background:rgba(255,255,255,.06);color:#fff}
+.ovd-center .series-toggles button[aria-pressed=false]{opacity:.5}
+.ovd-chart{flex:1;min-height:0}
+@media (min-width:1181px){.ovd-chart{position:relative;min-height:180px}.ovd-chart svg#ovChart{position:absolute;inset:0;width:100%;height:100%}}
 .ovd-chart svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.ovd-cursor{stroke:var(--bop);stroke-width:2;stroke-dasharray:4 5}
-.ovd-dot-rec{fill:#fff;stroke:var(--teal);stroke-width:4}
-.ovd-dot-spend{fill:#fff;stroke:var(--blue);stroke-width:4}
+#ovChart .chart-grid-line{stroke:rgba(255,255,255,.08)}
+#ovChart .chart-zero{stroke:rgba(255,255,255,.45)}
+#ovChart .chart-grid-label,#ovChart .chart-month{fill:var(--cc-dim);font-size:12px}
+#ovChart .receipt-area{fill:rgba(24,184,155,.16)}
+#ovChart .receipt-line{stroke:#2fe0bf;stroke-width:3.5;filter:drop-shadow(0 0 6px rgba(47,224,191,.6))}
+#ovChart .spending-line{stroke:#6f9cff;stroke-width:3.5;filter:drop-shadow(0 0 6px rgba(111,156,255,.55))}
+#ovChart .gap-bar{fill:rgba(255,107,134,.5)}
+#ovChart .gap-bar.pos{fill:rgba(95,224,160,.55);transform-origin:50% 100%}
+#ovChart .gap-bar.on{fill:#ff6b86}#ovChart .gap-bar.pos.on{fill:var(--cc-pos)}
+#ovChart .ghost-line{fill:none;stroke:rgba(255,255,255,.4);stroke-width:1.5;stroke-dasharray:5 5;opacity:0;transition:opacity .3s}
+#ovChart.scenario .ghost-line{opacity:1}
+.ovd-cursor{stroke:#d3a6f2;stroke-width:2;stroke-dasharray:4 5}
+.ovd-dot-rec{fill:var(--cc-navy);stroke:#2fe0bf;stroke-width:3.5}
+.ovd-dot-spend{fill:var(--cc-navy);stroke:#6f9cff;stroke-width:3.5}
 @media (prefers-reduced-motion:no-preference){
   :root:not([data-motion=off]):not(.motion-paused) #ovChart .ovd-cursor{transition:x1 .45s var(--ff-ease-out),x2 .45s var(--ff-ease-out)}
-  :root:not([data-motion=off]):not(.motion-paused) #ovChart .ovd-dot-rec,:root:not([data-motion=off]):not(.motion-paused) #ovChart .ovd-dot-spend{transition:cx .45s var(--ff-ease-out),cy .45s var(--ff-ease-out)}
 }
 #ovChart [data-part=rec],#ovChart [data-part=area],#ovChart [data-part=recDot],#ovChart [data-part=spend],#ovChart [data-part=spendDot],#ovChart [data-part=bars]{transition:opacity .3s var(--ff-ease-out)}
-#ovChart.hide-revenue [data-part=rec],#ovChart.hide-revenue [data-part=area],#ovChart.hide-revenue [data-part=recDot]{opacity:0}
-#ovChart.hide-expenses [data-part=spend],#ovChart.hide-expenses [data-part=spendDot]{opacity:0}
+#ovChart.hide-revenue [data-part=rec],#ovChart.hide-revenue [data-part=area],#ovChart.hide-revenue [data-part=recDot],#ovChart.hide-revenue [data-part=recGhost]{opacity:0}
+#ovChart.hide-expenses [data-part=spend],#ovChart.hide-expenses [data-part=spendDot],#ovChart.hide-expenses [data-part=spendGhost]{opacity:0}
 #ovChart.hide-gap [data-part=bars]{opacity:0}
-.ovd-year-foot{display:grid;gap:14px}
-.ovd-year-foot .scrub-row{margin-top:0}
-#ovScrub{grid-area:range;width:100%;min-height:44px;accent-color:var(--bop);cursor:pointer}
-.ovd-readout{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:0}
-.ovd-readout>div{display:grid;gap:4px;align-content:start;padding:12px 14px;border-radius:16px;background:rgba(10,43,56,.035);transition:opacity .25s}
-.ovd-readout dt{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--muted)}
-.ovd-readout dd{margin:0;font:800 17px/1.2 Manrope,sans-serif;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
-.ovd-readout .ro-month dd{color:var(--muted);font-size:14px}
-.ovd-readout .ro-month dd b{font-size:24px;color:var(--bop)}
-.ovd-readout .ro-gap dd{color:#a3203a}
-.ovd-readout .ro-total{background:#fbe9ee}
-.ovd-readout .ro-total dt,.ovd-readout .ro-total dd{color:#7a1d33}
-.ovd-readout>div.muted{opacity:.45}
-.ovd-year .ovd-actions{justify-content:flex-end}
+.ovd-center .scrub-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"play range label";align-items:center;gap:10px;margin:0}
+.ovd-center .play-button{min-height:44px;padding:0 14px 0 10px;font-size:12.5px;background:#8236ae;box-shadow:0 8px 20px -10px rgba(130,54,174,.9)}
+.ovd-center .play-button svg{width:18px;height:18px}
+.ovd-center .play-button{width:44px;padding:0;justify-content:center;border-radius:50%}
+.ovd-center .play-button span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ovd-center .scrub-label{display:flex;flex-direction:column;align-items:flex-end;gap:0;font-size:10.5px;color:var(--cc-faint);text-transform:uppercase;letter-spacing:.06em}
+.ovd-center .scrub-label b{font-size:14px;color:#fff;letter-spacing:0;text-transform:none}
+#ovScrub{grid-area:range;width:100%;min-height:44px;margin:0;accent-color:#d3a6f2;cursor:pointer}
+.ovd-readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
+.ovd-readout>div{display:grid;gap:1px;align-content:start;padding:5px 9px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);transition:opacity .25s,border-color .25s}
+.ovd-readout dt{display:flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cc-faint);line-height:1.2}
+.ovd-readout dd{margin:0;font:800 14px/1.2 Manrope,sans-serif;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ovd-readout .ro-month dd{color:var(--cc-dim);font-size:12px}
+.ovd-readout .ro-month dd b{font-size:18px;color:#d3a6f2}
+.ovd-readout .ro-gap dd{color:var(--cc-neg)}
+.ovd-readout .ro-gap dd.pos{color:var(--cc-pos)}
+.ovd-readout .ro-total{background:rgba(255,138,156,.12);border-color:rgba(255,138,156,.3)}
+.ovd-readout .ro-total dd{color:#ffc2cc}
+.ovd-readout .ro-total.linked{border-color:var(--cc-gold);box-shadow:0 0 0 2px rgba(244,194,79,.35)}
+.ovd-readout>div.muted{opacity:.4}
+.ovd-readout .sw{width:8px;height:8px}
 
-/* ---- What the pilot includes ---- */
-.ovd-includes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px 30px;align-items:center}
-.ovd-inc-copy{display:flex;flex-direction:column;gap:18px;min-width:0}
-.ovd-inc-copy .panel-title{margin:0}
-.ovd-features{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.ovd-features li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(10,43,56,.035);font-weight:700;font-size:15px;line-height:1.25;transition:transform .3s var(--ff-ease-spring),background-color .3s}
-@media (hover:hover) and (pointer:fine){.ovd-features li:hover{transform:translateY(-2px);background:#fff}}
+/* ---- Where the funding goes (compact donut + legend) ---- */
+.ovd-donut-grid{display:grid;grid-template-columns:minmax(100px,108px) minmax(0,1fr);gap:10px;align-items:center}
+.ovd-donut-wrap{position:relative;width:100%;aspect-ratio:1}
+.ovd-donut-wrap>svg{position:relative}
+.ovd-donut{display:block;width:100%;height:100%;overflow:visible}
+.ovd-ring-track{fill:none;stroke:rgba(10,43,56,.07);stroke-width:46}
+.ovd-donut .slice{transform:translate(var(--dx,0),var(--dy,0));transition:transform .4s var(--ff-ease-spring),opacity .3s;cursor:pointer}
+.ovd-donut .arc{fill:none;stroke-width:46;transition:stroke-width .3s var(--ff-ease-out)}
+.ovd-donut .slice.on .arc{stroke-width:56;filter:drop-shadow(0 4px 10px color-mix(in srgb,var(--glow) 55%,transparent))}
+.ovd-donut .slice.dim{opacity:.38}
+.ovd-donut-wrap{display:grid;place-items:center}
+.ovd-donut-wrap>svg,.ovd-donut-center{grid-area:1/1}
+.ovd-donut-center{display:grid;place-content:center;gap:0;width:66%;aspect-ratio:1;text-align:center;border-radius:50%;pointer-events:none;background:#fff;box-shadow:inset 0 0 0 1px rgba(10,43,56,.06);transition:box-shadow .3s}
+.ovd-donut-center strong{font-size:10.5px;font-weight:800;letter-spacing:-.02em;color:var(--navy);white-space:nowrap}
+.ovd-donut-center span{display:none;font-size:7.5px;padding:0 4px;font-weight:700;line-height:1.2;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.ovd-donut-center.linked{box-shadow:inset 0 0 0 2px var(--gold)}
+.ovd-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}
+.ovd-legend button{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name name" "val share";align-content:start;align-items:center;gap:1px 6px;width:100%;height:100%;min-height:44px;padding:5px 8px;border-radius:12px;font-size:12px}
+.ovd-legend .sw{display:none}
+.ovd-legend button{border-left:4px solid var(--c,#ccc)!important}
+.ovd-legend .lg-name{grid-area:name;font-size:10px;font-weight:700;color:var(--muted);line-height:1.15}
+.ovd-legend .lg-val{grid-area:val;font:800 12px/1.2 Manrope,sans-serif;letter-spacing:-.02em;color:var(--navy);white-space:nowrap}
+.ovd-legend .lg-share{grid-area:share;justify-self:end;font-size:9px!important;padding:0 3px;background:none!important}
+.ovd-funding .donut-hint,.ovd-funding .donut-detail{margin:0;min-height:0;font-size:12px;line-height:1.4;color:var(--muted)}
+.ovd-funding .donut-detail:empty{display:none}
+.ovd-funding .donut-tip{min-width:0;white-space:nowrap;font-size:12px;padding:8px 12px}
+
+/* ---- Can the pilot carry repayment? (gauge) ---- */
+.ovd-repay .ovd-gauge .g-track{stroke:rgba(10,43,56,.08)}
+.ovd-repay .ovd-gauge .g-fill{stroke:var(--booker)}
+.ovd-repay .ovd-gauge .g-gap{stroke:var(--lumi)}
+.ovd-repay .ovd-gauge .g-tick{stroke:#c58a1c;filter:none}
+.ovd-repay .ovd-gauge .g-needle line{stroke:var(--navy)}
+.ovd-repay .ovd-gauge .g-needle circle{fill:var(--navy);stroke:#fff}
+.ovd-compare{display:grid;grid-template-columns:100px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;gap:2px 12px}
+.ovd-compare>.ovd-gauge{grid-row:1/span 2}
+.ovd-compare>.chart-unit{grid-column:2}
+.ovd-compare-vals{display:grid;gap:3px}
+.ovd-compare-vals .chart-unit,.ovd-compare-vals .chip{grid-column:1/-1}
+.ovd-bar{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ovd-bar span{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;line-height:1.2;color:var(--muted)}
+.ovd-bar b{font:800 16px/1.2 Manrope,sans-serif;color:var(--navy);white-space:nowrap}
+.ovd-compare .chart-unit{margin:0;font-size:10px;line-height:1.3;color:var(--muted)}
+.ovd-compare .enrollment{margin:0;font-size:inherit;font-weight:700;color:#7a1d33}
+.ovd-gap{display:flex;align-items:center;gap:4px 12px;margin:0;padding:3px 12px;border-radius:12px;background:#fbe9ee}
+.ovd-gap strong{font-size:20px;font-weight:800;letter-spacing:-.03em;color:#9b1c33;white-space:nowrap}
+.ovd-gap>span{font-size:11px;font-weight:700;line-height:1.2;color:#7a1d33}
+.ovd-gap small{font-size:11px;font-weight:600}
+.ovd-compare-vals .chip{justify-self:start;margin-top:2px}
+.ovd-repay .readiness{margin:0;min-height:44px;font-size:12px;line-height:1.3;padding:4px 12px}
+
+/* ---- What the platform costs ---- */
+.ovd-rows{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ovd-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:3px 10px}
+.ovd-rows span{font-weight:600;font-size:12.5px;color:var(--navy)}
+.ovd-rows b{font:800 14px/1.2 Manrope,sans-serif;color:var(--navy);white-space:nowrap}
+.ovd-track{grid-column:1/-1;height:7px;border-radius:999px;background:rgba(10,43,56,.07);overflow:hidden}
+.ovd-track i{display:block;height:100%;width:100%;border-radius:999px;transform-origin:0 50%;transform:scaleX(var(--s,1));background:linear-gradient(90deg,var(--booker),#6f9cff)}
+.ovd-track i.pu{background:linear-gradient(90deg,#8236ae,#c08be0)}
+.ovd-track i.gr{background:linear-gradient(90deg,#22874a,#5cc58a)}
+.ovd-total{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 12px;border-radius:12px;background:linear-gradient(120deg,#e6efff,#f1e6f8)}
+.ovd-total span{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ovd-total strong{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--navy);white-space:nowrap}
+.ovd-caption{font-size:12px;color:var(--muted);margin:0}
+.ovd-caption b{color:var(--navy)}
+
+/* ---- What the pilot includes (checklist) ---- */
+.ovd-inc-body{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;align-items:start}
+.ovd-features{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.ovd-features li{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:12px;background:rgba(10,43,56,.04);font-weight:700;font-size:12px;line-height:1.2}
+.ovd-features .feature-icon{flex:none;width:28px;height:28px;border-radius:9px}
+.ovd-features .feature-icon svg{width:15px;height:15px}
 .ovd-art{margin:0;min-width:0}
-.ovd-art img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 18px 36px -24px rgba(10,43,56,.6);transition:transform .6s var(--ff-ease-out)}
-@media (hover:hover) and (pointer:fine){.ovd-includes:hover .ovd-art img{transform:scale(1.02) rotate(-.4deg)}}
-.ovd-art figcaption{margin-top:8px;font-size:13px;color:var(--muted);font-weight:600}
+.ovd-art img{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 10px 20px -14px rgba(10,43,56,.6)}
+.ovd-art figcaption{margin-top:4px;font-size:10.5px;line-height:1.3;color:var(--muted);font-weight:600}
+.ovd-includes .explore-button{min-height:44px;font-size:13px;padding:0 16px}
 
-/* ---- Everything behind the plan ---- */
-.ovd-doc-strip{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.ovd-doc{display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:14px;min-height:88px;padding:12px 14px 12px 12px;border-radius:18px;background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--navy)!important;text-decoration:none;
-  transition:transform .3s var(--ff-ease-out),box-shadow .3s var(--ff-ease-out),border-color .3s}
-.ovd-doc img{width:56px;height:56px;object-fit:contain}
-.ovd-doc-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:16px}
-.ovd-doc-icon svg{width:26px;height:26px}
-.ovd-doc-text{display:grid;gap:1px;min-width:0}
-.ovd-doc-text strong{font-size:15px;font-weight:800}
-.ovd-doc-text span{font-size:13px;color:var(--muted);line-height:1.35}
-.ovd-doc-text small{font-size:12px;color:var(--muted)}
-.ovd-doc-go{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#e6efff;color:#0b3fb0;font-weight:800;transition:transform .25s var(--ff-ease-out)}
-@media (hover:hover) and (pointer:fine){.ovd-doc:hover{transform:translateY(-3px);box-shadow:0 18px 30px -22px rgba(10,43,56,.6);border-color:rgba(10,43,56,.2)}.ovd-doc:hover .ovd-doc-go{transform:translateX(3px)}}
+/* ---- the documents dock: a launcher ---- */
+.ovd-docs .ovd-all{min-height:44px;padding:0 14px;font-size:12.5px}
+.ovd-doc-strip{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.ovd-doc{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:8px;min-height:52px;padding:6px 8px;border-radius:12px;background:rgba(10,43,56,.035);border:1px solid transparent;color:var(--navy)!important;text-decoration:none;
+  transition:transform .25s var(--ff-ease-out),background-color .25s,border-color .25s}
+.ovd-doc img{width:30px;height:30px;object-fit:contain}
+.ovd-doc-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:9px}
+.ovd-doc-icon svg{width:16px;height:16px}
+.ovd-doc-text{display:grid;gap:0;min-width:0}
+.ovd-doc-text strong{font-size:12.5px;font-weight:800;line-height:1.2}
+.ovd-doc-text span{font-size:11px;color:var(--muted);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ovd-doc-text small{font-size:10.5px;color:var(--muted)}
+@media (hover:hover) and (pointer:fine){.ovd-doc:hover{transform:translateY(-2px);background:#fff;border-color:rgba(10,43,56,.16)}}
 
-/* ---- the scroll-in entrance (motion on; studio.js adds .ovd-armed and, per card, .ovd-in) ---- */
+/* ---- motion: the console boots (panels rise one after another), the scene drifts, the light sweeps, the status breathes, the
+   ticker runs. Motion on only; studio.js adds .ovd-armed and, per panel, .ovd-in with its --ovd-delay. ---- */
 .ovd-armed:not([data-motion=off]):not(.motion-paused) .ovd-card:not(.ovd-in){opacity:0}
 .ovd-armed:not([data-motion=off]):not(.motion-paused) .ovd-card:not(.ovd-in) .ovd-track i{transform:scaleX(0)}
 @media (prefers-reduced-motion:no-preference){
+  .ovd-armed:not([data-motion=off]):not(.motion-paused) .ovd-card.ovd-in{animation:ovdRise .6s cubic-bezier(.22,1,.36,1) var(--ovd-delay,0ms) backwards}
   .ovd-armed:not([data-motion=off]):not(.motion-paused) .ovd-track i{transition:transform 1.1s cubic-bezier(.22,1,.36,1) .25s}
-  .ovd-armed:not([data-motion=off]):not(.motion-paused) .ovd-scen .ovd-track i{transition-delay:0s;transition-duration:.45s}
+  :root:not([data-motion=off]):not(.motion-paused) .cc-live{animation:ccBreath 2.4s ease-in-out infinite}
+  :root:not([data-motion=off]):not(.motion-paused) .cc-scene-stage{animation:ccDrift 26s ease-in-out infinite alternate}
+  :root:not([data-motion=off]):not(.motion-paused) .cc-scene::after{animation:ccSweep 9s cubic-bezier(.4,0,.2,1) 1.5s infinite}
+  :root:not([data-motion=off]):not(.motion-paused) .cc-tick-belt{animation:ccTicker 60s linear infinite}
+  :root:not([data-motion=off]):not(.motion-paused) .cc-ticker:hover .cc-tick-belt,:root:not([data-motion=off]):not(.motion-paused) .cc-ticker:focus-within .cc-tick-belt{animation-play-state:paused}
+  :root:not([data-motion=off]):not(.motion-paused) .metric-spark .sp-bar{transition:opacity .3s}
 }
+@keyframes ovdRise{from{opacity:0;transform:translate3d(0,14px,0) scale(.985)}to{opacity:1;transform:none}}
+@keyframes ccBreath{0%,100%{box-shadow:0 0 0 3px rgba(95,224,160,.22),0 0 10px rgba(95,224,160,.7)}50%{box-shadow:0 0 0 7px rgba(95,224,160,0),0 0 16px rgba(95,224,160,1)}}
+@keyframes ccDrift{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.045) translate3d(-1.2%,-1%,0)}}
+@keyframes ccSweep{0%{transform:translateX(-120%)}35%,100%{transform:translateX(120%)}}
+@keyframes ccTicker{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+/* motion off: the ticker is a plain scrollable strip; the copy is not needed */
+:root[data-motion=off] .cc-tick-viewport,:root.motion-paused .cc-tick-viewport{overflow-x:auto;mask-image:none}
+:root[data-motion=off] .cc-tick-clone,:root.motion-paused .cc-tick-clone{display:none}
+@media (prefers-reduced-motion:reduce){.cc-tick-viewport{overflow-x:auto;mask-image:none}.cc-tick-clone{display:none}}
 .ovd-card .inv-counting{text-shadow:0 0 8px rgba(24,184,155,.5),0 0 20px rgba(61,107,255,.3)}
+.ovd-center .inv-counting{text-shadow:0 0 10px rgba(143,182,255,.8)}
 
 /* ---- widths ---- */
-@media (min-width:1600px){.ovd-doc-strip{grid-template-columns:repeat(6,minmax(0,1fr))}.ovd-doc{grid-template-columns:1fr;justify-items:start;align-content:start}.ovd-doc-go{display:none}}
-@media (max-width:1280px){
-  .ovd-row{grid-template-columns:minmax(0,1fr)}
-  .ovd-readout{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1199px) and (min-width:768px){
+  .ovd{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"center center" "funding repay" "platform includes" "docs docs"}
+  .ovd-doc-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-@media (max-width:1023px){.ovd-doc-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ovd-includes{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1180px) and (min-width:768px){
+  .view-overview .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cc-band{grid-template-columns:minmax(0,1fr);grid-template-areas:"id" "scene" "terms" "ticker"}
+  .cc-scene{width:auto;margin:0}
+}
+@media (max-width:900px) and (min-width:768px){
+  .ovd-center{grid-template-columns:minmax(0,1fr)}
+  .ovd-center .ovd-scen{border-right:0;border-bottom:1px solid var(--cc-line)}
+}
+
+/* ---- phones: sticky KPI ticker, the centerpiece first, the panels in a swipeable dock ------------------------------------ */
 @media (max-width:767px){
-  .ovd{gap:16px}
-  .ovd-card{padding:20px 16px 18px;gap:16px}
-  .ovd-head .panel-title{flex-basis:100%}
-  .ovd-donut-grid,.ovd-scen-grid{grid-template-columns:minmax(0,1fr)}
-  .ovd-donut-wrap{max-width:230px}
-  .ovd-year .series-toggles{margin-left:0}
-  .ovd-readout{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ovd-readout .ro-total{grid-column:1/-1}
-  .ovd-features{grid-template-columns:minmax(0,1fr)}
-  .ovd-doc-strip{grid-template-columns:minmax(0,1fr)}
-  .ovd-margin strong{font-size:28px}
+  .cc{gap:12px}
+  .cc-band{grid-template-columns:minmax(0,1fr) 42%;grid-template-areas:"id scene" "terms terms";gap:10px 12px;padding:14px 14px 12px;border-radius:20px}
+  .cc-band h1{font-size:20px}
+  .cc-status{gap:4px 8px;font-size:11px}
+  .view-overview .model-date{flex-basis:100%;font-size:11px}
+  .cc-scope{gap:2px 10px}
+  .cc-scope .hero-scope{font-size:12.5px}.cc-scope .hero-mission{font-size:11.5px}
+  .cc-scene{width:auto;min-height:0;aspect-ratio:16/11;margin:0;align-self:center}
+  .cc-band .terms{flex-wrap:nowrap;overflow-x:auto;gap:8px 12px;padding:8px 10px;scrollbar-width:none}
+  .cc-band .terms .terms-head{flex:none;font-size:12px}
+  .cc-band .terms dl{flex-wrap:nowrap}
+  .cc-band .terms dl div{flex:none}
+  .cc-ticker{margin:0 -14px -12px;padding:0 14px;justify-content:flex-end;border-radius:0 0 20px 20px;grid-column:1/-1}
+  .cc-tick-viewport{display:none}
+  .cc-band{grid-template-areas:"id scene" "terms terms" "ticker ticker"}
+  /* the KPI strip: a sticky ticker under the top bar, swipeable */
+  .view-overview .metrics{position:sticky;top:var(--cc-sticky,var(--top));z-index:30;display:flex;gap:8px;margin:0 -14px;padding:8px 14px 8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;
+    background:rgba(251,246,236,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+  .view-overview .metrics::-webkit-scrollbar,.cc-band .terms::-webkit-scrollbar{display:none}
+  .view-overview .metric{flex:0 0 auto;min-width:156px;grid-template-columns:30px auto;grid-template-areas:"icon label" "icon value";gap:0 8px;padding:8px 26px 8px 10px;border-radius:14px;scroll-snap-align:start}
+  .view-overview .metric .metric-icon{position:relative;left:auto;top:auto;width:30px;height:30px;border-radius:10px}
+  .view-overview .metric .metric-icon>svg{width:15px;height:15px}
+  .view-overview #kpis .metric-icon .inv-ring{inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px)}
+  .view-overview .metric-label{font-size:9.5px}
+  .view-overview .metric strong{font-size:17px;padding:0}
+  .view-overview .metric-meta,.view-overview .metric-chip,.view-overview .metric-spark{display:none}
+  .view-overview .metric-go-arrow{right:9px;bottom:auto;top:50%;transform:translateY(-50%);font-size:13px}
+  .ovd{display:flex;flex-direction:column;gap:12px}
+  .ovd-center{grid-template-columns:minmax(0,1fr);border-radius:20px}
+  .ovd-center .ovd-card{padding:14px}
+  .ovd-center .ovd-scen{border-right:0;border-bottom:1px solid var(--cc-line)}
+  .ovd-scen .ovd-sliders{grid-template-columns:minmax(0,1fr)}
+  .ovd-margin strong{font-size:30px}
+  .ovd-gauge-row{grid-template-columns:120px minmax(0,1fr)}
+  .ovd-year-tools{justify-content:flex-start}
+  .ovd-center .series-toggles{width:100%}
+  .ovd-center .series-toggles button{flex:1 1 auto;justify-content:center;padding:0 6px;font-size:11.5px;white-space:nowrap}
+  .ovd-center .scrub-row{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"play label" "range range";row-gap:2px}
+  .ovd-readout{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ovd-readout dd{font-size:13px}
+  /* the dock: one panel at a time, swipe or tap the segmented control */
+  .ovd-tabs{display:flex;gap:4px;padding:4px;border-radius:16px;background:#fff;border:1px solid rgba(10,43,56,.1);box-shadow:0 10px 24px -20px rgba(10,43,56,.6)}
+  .ovd-tabs button{flex:1 1 auto;min-width:0;min-height:44px;padding:0 3px;border:0;border-radius:12px;background:none;color:var(--navy);font-weight:700;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ovd-tabs button[aria-pressed=true]{background:var(--navy);color:#fff}
+  .ovd-dock{position:relative;display:flex;align-items:flex-start;gap:10px;margin:0 -14px;padding:2px 14px 10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 14px;overscroll-behavior-x:contain;scrollbar-width:none}
+  .ovd-dock::-webkit-scrollbar{display:none}
+  .ovd-dock>.ovd-card{flex:0 0 calc(100% - 28px);scroll-snap-align:start;scroll-snap-stop:always}
+  .ovd-donut-grid{grid-template-columns:minmax(0,1fr)}
+  .ovd-donut-wrap{width:150px;justify-self:center}
+  .ovd-donut-center strong{font-size:13px}.ovd-donut-center span{font-size:8px}
+  .ovd-legend .lg-val{font-size:14px}.ovd-legend .lg-name{font-size:11px}
+  .ovd-year .ovd-head{flex-wrap:wrap}.ovd-year .ovd-head .panel-title{flex-basis:calc(100% - 56px)}.ovd-year .chip-plan{order:3}
+  .ovd-doc-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ovd-inc-body{grid-template-columns:minmax(0,1fr)}
+  .ovd-art{max-width:200px}
+  .ovd-compare{grid-template-columns:110px minmax(0,1fr)}
 }
-/* room for the figures: the legend's values never touch their share; the scenario sits in the middle of its card */
-.ovd-legend .lg-val{font-size:18px}
-.ovd-legend button{column-gap:10px}
-.ovd-scen-grid{flex:1;align-items:center}
-.ovd-sliders{gap:18px}
+@media (max-width:767px) and (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]):not(.motion-paused) .ovd-tabs button{transition:background-color .25s,color .25s}
+}
+/* a narrow funding panel (laptops): each legend figure gets its own line, the share sits beside the name */
+.ovd-funding{container-type:inline-size}
+@container (max-width:380px){.ovd-legend button{grid-template-areas:"name name" "val val" "share share"}.ovd-legend .lg-share{justify-self:start;padding:0}}
