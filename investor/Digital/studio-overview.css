@@ -947,3 +947,6 @@
 }
 /* a tile's chart waits for its turn in the reveal, then grows in with the count */
 #kpis .kpi.inv-zero .kpi-chart{opacity:0}
+/* tile 06: a bigger ring */
+#kpis #kpiPlatChart{height:calc(4.2*var(--u));min-height:52px}
+@media (max-width:767px){#kpis #kpiPlatChart{height:56px}}

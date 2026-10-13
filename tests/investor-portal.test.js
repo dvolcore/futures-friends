@@ -4,7 +4,7 @@
 //    pages from publication-manifest.json, previews (PDF frame, CSV table, text), downloads, and ?doc=<id> deep-links;
 //  - NUMBER INTEGRITY: every figure on the overview and the pilot plan ("cost explorer") equals the figures recorded before the portal
 //    work (tests/fixtures/investor-numbers.json, release-platform 4de0101); figures the portal adds (tables) come from the model only;
-//  - the Hub reveal: one KPI card at a time (1.4 s sweep, 700 ms gap), skippable, final values under Reduce Motion / ?reveal=off;
+//  - the Hub reveal: one KPI card at a time (v2276: 0.7 s sweep, 350 ms gap), skippable, final values under Reduce Motion / ?reveal=off;
 //  - English / Español with identical figures; axe (WCAG 2.2 AA); 390 px with no sideways scroll; logo and link home; Pending stays Pending.
 // Investor studio (owner 2026-10-12, "more motion graphics, more space"): six full-screen views behind a rail (a tab bar on phones), each
 // deep-linkable; every figure the overview shows comes from the model (tests/fixtures/investor-numbers.json). The ONE intended
@@ -193,7 +193,7 @@ test('number integrity after the reveal plays (motion on): the counted figures e
   const { ctx, pg, errors } = await page(1440, { motion: true });
   await pg.goto(`${site.base}${OVERVIEW}`);
   await model(pg);
-  // visit every view through the rail and let each entrance play out (cards: 250 + (n - 1) x 700 + 1400 ms)
+  // visit every view through the rail and let each entrance play out (cards: 250 + (n - 1) x 350 + 700 ms)
   for (const v of VIEWS) {
     await goView(pg, v);
     await pg.waitForFunction((v) => document.documentElement.dataset.view === v && [...document.querySelectorAll(`[data-studio-view="${v}"] [data-reveal-unit]`)].every((u) => u.classList.contains('inv-landed')) && !window.FFInvReveal.running(), v, { timeout: 20000 });
@@ -209,14 +209,15 @@ test('the reveal: one KPI card at a time (Hub timings), a mid-reveal frame is co
   const { ctx, pg } = await page(1440, { motion: true });
   await pg.goto(`${site.base}${OVERVIEW}`);
   await model(pg);
-  assert.deepEqual(await pg.evaluate(() => window.FFInvReveal.timings), { duration: 1400, gap: 700, bloom: 650, ease: 'cubic-bezier(.22,1,.36,1)' });
+  assert.deepEqual(await pg.evaluate(() => window.FFInvReveal.timings), { duration: 700, gap: 350, bloom: 650, ease: 'cubic-bezier(.22,1,.36,1)' });
   await pg.waitForFunction(() => document.querySelectorAll('#kpis [data-reveal-unit].inv-play').length >= 1, null, { timeout: 5000 });
   const mid = await pg.evaluate(() => [...document.querySelectorAll('#kpis [data-reveal-unit]')].map((u) => u.className.match(/inv-(zero|play|landed)/)?.[1]));
   assert.ok(mid.includes('zero'), `cards wait their turn: ${mid}`);
   assert.ok(!mid.every((s) => s === 'play'), 'never all at once');
   await pg.waitForFunction(() => document.querySelector('#kpis [data-reveal-unit]').dataset.revealed && document.querySelectorAll('#kpis [data-reveal-unit]')[1].dataset.revealed, null, { timeout: 5000 });
   const starts = await pg.evaluate(() => [...document.querySelectorAll('#kpis [data-reveal-unit]')].slice(0, 2).map((u) => Number(u.dataset.revealed)));
-  assert.ok(starts[1] - starts[0] >= 600 && starts[1] - starts[0] <= 900, `about 700 ms between cards (${starts[1] - starts[0]})`);
+  assert.ok(starts[1] - starts[0] >= 280 && starts[1] - starts[0] <= 550, `about 350 ms between cards (${starts[1] - starts[0]})`);
+  // the whole row of six is alive in about 2.5 s: the last card starts by 250 + 5 x 350 ms and lands 700 ms later
   assert.equal(await pg.isVisible('#revealSkip'), true, 'a visible way to skip');
   await pg.keyboard.press('Shift');
   await pg.waitForFunction(() => [...document.querySelectorAll('#kpis [data-reveal-unit]')].every((u) => u.classList.contains('inv-landed')), null, { timeout: 2000 });
@@ -1011,6 +1012,9 @@ test('KPI tiles: six animated charts bound to the model, distinct colours, glass
   const mid = await pg.evaluate(() => ({ growing: [...document.querySelectorAll('#kpis .kpi.inv-play .kpi-chart *')].filter((e) => e.getAnimations().length).length, waiting: [...document.querySelectorAll('#kpis .kpi.inv-zero .kpi-chart')].filter((c) => getComputedStyle(c).opacity === '0').length, zero: document.querySelectorAll('#kpis .kpi.inv-zero').length }));
   assert.ok(mid.growing >= 1, `a chart grows in with its tile (${mid.growing})`);
   assert.equal(mid.waiting, mid.zero, 'the tiles still waiting keep their charts hidden');
+  const t0 = Date.now();
+  await pg.waitForFunction(() => [...document.querySelectorAll('#kpis .kpi')].every((k) => k.classList.contains('inv-landed')), null, { timeout: 6000 });
+  assert.ok(Date.now() - t0 <= 3200, `the whole row is alive in about 2.5 s (${Date.now() - t0} ms after the first tile)`);
   await pg.waitForFunction(() => document.getElementById('kpis').classList.contains('tiles-live'), null, { timeout: 15000 });
   const c1 = await pg.evaluate(() => getComputedStyle(document.getElementById('kpis')).getPropertyValue('--clk'));
   await pg.waitForTimeout(400);

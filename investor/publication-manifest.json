@@ -294,8 +294,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 53996,
-      "sha256": "d22ae5a0ff61693eba6110614cc99e981d76d6419d85e7dcb522419da58bab30"
+      "bytes": 54002,
+      "sha256": "932cb8829319b57f310ec583673dcb5351290d1c99b709f09eb22fce3dfc8bb3"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -364,13 +364,13 @@
     },
     {
       "path": "investor/Digital/portal.js",
-      "bytes": 46359,
-      "sha256": "d18387802e731452c813b6eac593f58dac6f45af9fa985f7f735a36e89b5d5c4"
+      "bytes": 46448,
+      "sha256": "3e5d0b8310779d5013dceaa4d44d721e7d0862f655cb271cb4eda37aaa73ffdc"
     },
     {
       "path": "investor/Digital/studio-overview.css",
-      "bytes": 88753,
-      "sha256": "acbc6fac1e888038c58b4cacf979cf44e6e243ed04755de3ba27947485d414bb"
+      "bytes": 88904,
+      "sha256": "453e261810900b9eac658fada9c6218a25baa6a218a9599df34020812031f655"
     },
     {
       "path": "investor/Digital/studio.css",

@@ -24,7 +24,8 @@
   const D = document, R = D.documentElement, $ = (s, r = D) => r.querySelector(s), $$ = (s, r = D) => [...r.querySelectorAll(s)];
   const I = window.FFInvI18n || { t: (s) => s, set: (el, s) => { el.textContent = s; }, setAttr: (el, n, s) => el.setAttribute(n, s), lang: () => 'en', onChange() {} };
   const t = I.t;
-  const REVEAL = { duration: 1400, gap: 700, bloom: 650, ease: 'cubic-bezier(.22,1,.36,1)' };
+  // v2276 (owner: the whole row alive in about 2.5 s): 350 ms between cards, 700 ms each
+  const REVEAL = { duration: 700, gap: 350, bloom: 650, ease: 'cubic-bezier(.22,1,.36,1)' };
   const params = new URLSearchParams(location.search);
   const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   const motionOn = () => !reduced() && R.dataset.motion !== 'off' && !R.classList.contains('motion-paused');
