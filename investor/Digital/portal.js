@@ -38,7 +38,7 @@
   let model = null;
 
   // ---------------------------------------------------------------- number formats: the count-up writes in the final text's own format
-  // "$423,849.52", "−$57,738.02", "$57,000", "40": prefix, sign, grouping and decimals are read from the final text itself.
+  // "$317,451.41", "−$66,112.16", "$57,000", "38": prefix, sign, grouping and decimals are read from the final text itself.
   function shape(text) {
     const m = /^([−-]?)(\$?)([\d,]+)(?:\.(\d+))?$/.exec(text.trim());
     if (!m) return null;
@@ -286,12 +286,12 @@
   // ---------------------------------------------------------------- documents drawer
   const DOCS = [
     { id: 'plan-pdf', g: 'Start here', f: '../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf', k: 'pdf', view: 'pilot-plan.html',
-      en: ['Pilot business plan', 'The 40-child pilot, staffing, costs, cash and delivery commitments.'], es: ['Plan de negocios del piloto', 'El piloto de 40 niños: personal, costos, caja y compromisos de entrega.'] },
+      en: ['Pilot business plan', 'The 38-child pilot, staffing, costs, cash and delivery commitments.'], es: ['Plan de negocios del piloto', 'El piloto de 38 niños: personal, costos, caja y compromisos de entrega.'] },
     { id: 'one-sheet-pdf', g: 'Start here', f: '../Futures_Friends_CURRENT_Pilot_One_Sheet.pdf', k: 'pdf', view: 'pilot-one-sheet.html',
       en: ['Investor one-sheet', 'The core figures, boundaries and open decisions on one page.'], es: ['Resumen de una página', 'Las cifras clave, los límites y las decisiones pendientes en una página.'] },
-    { id: 'costs-csv', g: 'Costs and cash', f: '../costs/Pilot_40_Children_Itemized.csv', k: 'csv', view: 'pilot-plan.html#budget',
+    { id: 'costs-csv', g: 'Costs and cash', f: '../costs/Pilot_38_Children_Itemized.csv', k: 'csv', view: 'pilot-plan.html#budget',
       en: ['Every cost (itemized)', 'Each planned line with quantity, rate, purpose and evidence.'], es: ['Cada costo (detallado)', 'Cada partida planeada con cantidad, tarifa, propósito y evidencia.'] },
-    { id: 'cash-csv', g: 'Costs and cash', f: '../costs/Pilot_40_Children_Monthly_Cash.csv', k: 'csv', view: 'pilot-plan.html#cash',
+    { id: 'cash-csv', g: 'Costs and cash', f: '../costs/Pilot_38_Children_Monthly_Cash.csv', k: 'csv', view: 'pilot-plan.html#cash',
       en: ['Monthly cash forecast', 'Enrollment ramp, receipts, spending and the cumulative gap, month by month.'], es: ['Pronóstico de caja mensual', 'Aumento de inscripción, ingresos, gastos y déficit acumulado, mes a mes.'] },
     { id: 'bible-pdf', g: 'Reference', f: '../02_Series_Curriculum_Production_Bible.pdf', k: 'pdf', view: 'library.html#bible',
       en: ['Production bible', 'Characters, story world and wider curriculum direction. Future scope is outside pilot financing.'], es: ['Biblia de producción', 'Personajes, mundo de la historia y dirección general del currículo. El alcance futuro queda fuera del financiamiento del piloto.'] },

@@ -4,19 +4,19 @@ Open `index.html` first. The branded overview connects the funding breakdown, pi
 
 The overview reads the current pilot model, flags failed data loads, and supports reduced motion. The suited character artwork and curriculum image are presentation concepts, not evidence of an installed classroom or approved curriculum. Loan terms and monthly repayment remain pending; the overview does not invent an investor return or conceal the operating deficit.
 
-## Current financial basis — October 11, 2026
+## Current financial basis — October 11, 2026 (staffing and tuition updated October 13, 2026)
 
-One owned Independence, Missouri location, 40 children ages 2–5, twelve operating months, and a first-month operational checkpoint. Two full-time adults plus individually listed part-time shifts, relief, food and substitute roles replace the national staffing case. Four adults on the floor is conditional on approved preschool grouping; a two-year-old cohort can require a fifth post. Confirm the actual age mix, license, rooms and schedule before accepting this roster.
+One owned Independence, Missouri location, 38 children ages 2–5 in all-day care, twelve operating months, and a first-month operational checkpoint. Four full-time caregivers and a part-time floater, all at $16/hour; the owner serves as director, unpaid; no food worker, no paid substitutes. Four caregivers on the floor in two groups of no more than 20 holds only with no more than four 2-year-olds per group (5 CSR 25-500.112). Confirm the actual age mix, license, rooms and schedule before accepting this roster.
 
-The historical $910 monthly tuition and 96% collections are unverified planning inputs. They produce a negative annual operating margin before the building payment or debt. The package does not represent this case as profitable. The cost estimate is not an approved loan ask. The owner specifies $140,000 to enable refinancing; the new building payment, lender terms and closing costs still require documents.
+The owner-confirmed, locked-in $210/week ($910/month) tuition and 96% collections produce a positive annual operating margin of $68,343.54 before the building payment or debt, with the owner as unpaid director; that is not proof of loan affordability. The cost estimate is not an approved loan ask. The owner specifies $140,000 to enable refinancing; the new building payment, lender terms and closing costs still require documents.
 
 Debt capacity uses cash after continuing operating costs and the building payment. Missing building-payment information blocks the affordability conclusion; it is not treated as zero. The calculator shows cash after entered debt and warns when the payment exceeds the modeled limit. Rates and terms are illustrative, not an offer.
 
 ## Active sources
 
 - `../costs/pilot-budget.json` and `model/pilot-budget.json`: identical model records.
-- `../costs/Pilot_40_Children_Itemized.csv`: 311 individually priced planning lines, evidence links and quote requirements.
-- `../costs/Pilot_40_Children_Monthly_Cash.csv`: staged operating/setup cash forecast.
+- `../costs/Pilot_38_Children_Itemized.csv`: 241 individually priced planning lines, evidence links and quote requirements.
+- `../costs/Pilot_38_Children_Monthly_Cash.csv`: staged operating/setup cash forecast.
 - `../documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md`: current narrative.
 - `../documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md`: current summary.
 - `../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf`: current branded pilot business plan.

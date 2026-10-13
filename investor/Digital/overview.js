@@ -64,7 +64,7 @@
     .then(data => {
       const {funding, totals, platform, assumptions, metrics, meta} = data;
       const amounts = [funding.request_before_financing,totals.refinance,platform.first_year,platform.completion,platform.assurance_one_time,platform.recurring,platform.one_time,platform.monthly,assumptions.tuition,metrics.breakeven_tuition,metrics.year2_margin,funding.peak_deficit,totals.contingency,funding.cash_floor];
-      if (!amounts.every(Number.isFinite) || meta.version !== 'pilot-40-v4') throw new Error('Unrecognized financial model');
+      if (!amounts.every(Number.isFinite) || !['pilot-40-v4', 'pilot-38-v5'].includes(meta.version)) throw new Error('Unrecognized financial model');
       const sum = totals.refinance + funding.peak_deficit + totals.contingency + funding.cash_floor;
       if (Math.abs(sum - funding.request_before_financing) > .02 || Math.abs(platform.completion + platform.assurance_one_time + platform.recurring - platform.first_year) > .02) throw new Error('Financial model does not reconcile');
       const rowGroups = [
@@ -80,7 +80,7 @@
         if (row.month !== index + 1 || ![row.children,row.receipts,row.recurring,row.one_time,row.net,row.cumulative].every(Number.isFinite) || row.children < 0 || row.children > 40 || row.recurring < 0 || row.one_time < 0 || row.receipts < 0 || Math.abs(row.receipts - row.recurring - row.one_time - row.net) > .02 || Math.abs(previous + row.net - row.cumulative) > .02) throw new Error('Cash forecast does not reconcile');
         previous = row.cumulative;
       });
-      if (Math.abs(Math.min(...data.cash.map(row => row.cumulative)) + funding.peak_deficit) > .02 || Math.abs(assumptions.tuition * 40 * assumptions.collection * 12 - totals.recurring - metrics.year2_margin) > .02) throw new Error('Explorer totals do not reconcile');
+      if (Math.abs(Math.min(...data.cash.map(row => row.cumulative)) + funding.peak_deficit) > .02 || Math.abs(assumptions.tuition * (assumptions.capacity || 40) * assumptions.collection * 12 - totals.recurring - metrics.year2_margin) > .02) throw new Error('Explorer totals do not reconcile');
       set('funding', money(funding.request_before_financing));
       set('refinance', wholeMoney(totals.refinance));
       set('platformYear', money(platform.first_year));

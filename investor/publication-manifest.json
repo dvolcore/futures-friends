@@ -1,16 +1,16 @@
 {
-  "source_package": "Futures_Friends_Current_40_Child_Pilot_2026-10-11",
-  "prepared": "2026-10-12",
-  "model_version": "pilot-40-v4",
+  "source_package": "Futures_Friends_Current_38_Child_Pilot_2026-10-13",
+  "prepared": "2026-10-13",
+  "model_version": "pilot-38-v5",
   "scope": "One owned location, ages 2\u20135; first-month checkpoint; national expansion deferred.",
-  "status": "Conditional planning estimate; ongoing economics do not yet support borrowing",
-  "line_count": 311,
+  "status": "Conditional planning estimate; positive operating margin before building payments and debt at the planning assumptions; owner-director unpaid",
+  "line_count": 241,
   "totals": {
-    "recurring": 477066.02,
-    "one_time": 146964.0,
-    "contingency": 22044.6,
-    "gross_before_contingency": 624030.02,
-    "gross_first_year": 646074.62,
+    "recurring": 330018.06,
+    "one_time": 145554.0,
+    "contingency": 21833.1,
+    "gross_before_contingency": 475572.06,
+    "gross_first_year": 497405.16,
     "refinance": 140000
   },
   "entrypoints": {
@@ -32,8 +32,8 @@
   },
   "limits": [
     "The pre-financing cash estimate is not an approved affordable loan ask.",
-    "At the historical $910 monthly tuition baseline, Year 2 operations lose $57,738.02 before building and investor debt.",
-    "Building payment, licensed room and age distribution, actual payroll and supplier quotes remain unverified.",
+    "At the locked-in $210/week ($910/month) tuition and 38 children, Year 2 operations show an operating margin of $68,343.54 before building and investor debt, with the owner as unpaid director.",
+    "Building payment, licensed room and age distribution (no more than four 2-year-olds per group), actual payroll and supplier quotes remain unverified.",
     "National expansion, a full animated season and bulk tablets are outside pilot financing."
   ],
   "files": [
@@ -74,8 +74,8 @@
     },
     {
       "path": "investor/Digital/README.md",
-      "bytes": 4763,
-      "sha256": "0d0001e1416b890ee6f3cead3ce3bea90e98645eda102d6eb7929266cdaecfed"
+      "bytes": 4877,
+      "sha256": "31a19a7c50f82d964e795bb5a325e5220d19a9f97d2992f5b0313d56fde047ad"
     },
     {
       "path": "investor/Digital/assets/backpack.webp",
@@ -280,27 +280,27 @@
     {
       "path": "investor/Digital/business-plan.html",
       "bytes": 915,
-      "sha256": "b13e93b9497edb334431965c20c8208612e08c0bb3a042b74a843352cb044c5a"
+      "sha256": "2b4cdac6801dc6259b6a1043dca6c673165302cb062ec306f70d1ac65ea610d4"
     },
     {
       "path": "investor/Digital/cost-explorer.html",
       "bytes": 877,
-      "sha256": "ae9aa547aee83e757be19fd717e68ff96b2f169646339a26580932bc6e4a4152"
+      "sha256": "da7875416e8a97f53974fa4715312f5b63b6a3d9ee1554e45e51c1fe56e08776"
     },
     {
       "path": "investor/Digital/financial-update.html",
       "bytes": 814,
-      "sha256": "8d4d8d909e8d992d0a60e88831feb57a903c246c88004f841b792cac035bfd79"
+      "sha256": "89d912df325636a0371083a199f39b4ad2b8b645f79fd32185d31d38253aa035"
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 52771,
-      "sha256": "5eec9a75c36297f3971142d52693e98b88a16e72db4b3c91e44a6f4182d7a23c"
+      "bytes": 53064,
+      "sha256": "61828f7f7cb8a357a717ca105cdbaa54e672b20d54d695bbbd77f133e82a930f"
     },
     {
       "path": "investor/Digital/library-data.json",
       "bytes": 4178,
-      "sha256": "19ed92994bae289ec88eacaea0222d2cbae42eb201724deb19ba272c75ad17b7"
+      "sha256": "ee102263f8e782776a785715689649491f99a21bdad4c8264157b3e7bc94970c"
     },
     {
       "path": "investor/Digital/library.css",
@@ -310,7 +310,7 @@
     {
       "path": "investor/Digital/library.html",
       "bytes": 2508,
-      "sha256": "ddc8bcccb673c101d80df3354065af928cc883ecae428fe534a0fb4982a948e3"
+      "sha256": "3a1aaac4be31f07bc9ca5bb034c3099bde81fb462d6ae10814f5272cbf8a963c"
     },
     {
       "path": "investor/Digital/library.js",
@@ -319,8 +319,8 @@
     },
     {
       "path": "investor/Digital/model/pilot-budget.json",
-      "bytes": 183836,
-      "sha256": "66c94eaa1c9f3331e5ff5f4c11f67c307de6d6213423c6b67393a1594ca07775"
+      "bytes": 151890,
+      "sha256": "a09a1dda7139696d59dcde793bea50676a2b3d546a003db8cb5b5a2946c3cbad"
     },
     {
       "path": "investor/Digital/overview.css",
@@ -329,13 +329,13 @@
     },
     {
       "path": "investor/Digital/overview.js",
-      "bytes": 9228,
-      "sha256": "3d4d899ea1ce70ff35247b651d896e132a5238ecfd7b632d82b5d03ae26a5134"
+      "bytes": 9278,
+      "sha256": "4a54fd73fc2ca1c8d8d213e77807d64ad7dc4edccb2b1d3121edc9dde500464a"
     },
     {
       "path": "investor/Digital/pilot-one-sheet.html",
-      "bytes": 7271,
-      "sha256": "090fa994d264b10169fdf733bae595b552be30169e6d58b119dd400576311029"
+      "bytes": 7348,
+      "sha256": "b23bfeb3ebb5fda4ca25a656c6ecde90beaba4fe30479e277e4257594eb185f7"
     },
     {
       "path": "investor/Digital/pilot-plan.css",
@@ -344,8 +344,8 @@
     },
     {
       "path": "investor/Digital/pilot-plan.html",
-      "bytes": 13456,
-      "sha256": "f99597a9875da35b13149a8c0b6ea3a021ae07b9101ebacf7b1e8f43469f42a8"
+      "bytes": 13522,
+      "sha256": "3d8e2d52a0e7a5e57cb026ab781fb3a8c00c367e4f177cc1943527f2f54c440e"
     },
     {
       "path": "investor/Digital/pilot-plan.js",
@@ -354,8 +354,8 @@
     },
     {
       "path": "investor/Digital/portal-i18n.js",
-      "bytes": 36929,
-      "sha256": "72d17934d8d65885b9dba180ea11b239fab60b413c32c33ff2d16161bfec0053"
+      "bytes": 38164,
+      "sha256": "d557d000da4521d0875e11b3495edadfe976454bea907850f72709ebe11005a4"
     },
     {
       "path": "investor/Digital/portal.css",
@@ -365,12 +365,12 @@
     {
       "path": "investor/Digital/portal.js",
       "bytes": 46359,
-      "sha256": "ca7f985676ab76630b139468a347e297f9a82dbe5b6a10cfef9afb6965db67d3"
+      "sha256": "b71ef4523f168459308b5c4116c21d2ecf1024e0d40fb4511c577f3e40798ba7"
     },
     {
       "path": "investor/Digital/studio-overview.css",
-      "bytes": 73972,
-      "sha256": "bbefebbd51e2316c500155d486df3153aa16817fbe2b073448701db27444dbdc"
+      "bytes": 74582,
+      "sha256": "eacee57c57bf2f287af5ec34e989bbe425e86c00988c801a21bb46e2b9a20b8b"
     },
     {
       "path": "investor/Digital/studio.css",
@@ -379,8 +379,8 @@
     },
     {
       "path": "investor/Digital/studio.js",
-      "bytes": 64894,
-      "sha256": "365779afac1f4ba650605005361261efe8b96b73d8a0ca28986d259218c2f0f4"
+      "bytes": 65373,
+      "sha256": "1821efe106318356380f94dd6e9f2ac8b76a055fd8dd582b57358277d719b4b9"
     },
     {
       "path": "investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
@@ -396,8 +396,8 @@
     },
     {
       "path": "investor/README.md",
-      "bytes": 2225,
-      "sha256": "5dedb34d9a7d2477a31ab6a40164ea3e02f0289d235494b38ec27b799e24e17c"
+      "bytes": 2472,
+      "sha256": "54bf17af459974755a1de0e2366860cfcfbe0c61554f1dd58d72099068f18ed7"
     },
     {
       "path": "investor/costs/Animation_Budget_Reconciliation.md",
@@ -415,19 +415,19 @@
       "sha256": "f334eaf9c6d8999a917c9f7a8eca2f39459ad9b49229da7ef307a16d416f1136"
     },
     {
-      "path": "investor/costs/Pilot_40_Children_Itemized.csv",
-      "bytes": 76038,
-      "sha256": "1804ba9d69a5678c1cde43e2511767320dd67b7162c2f53aa573afc384fa1031"
+      "path": "investor/costs/Pilot_38_Children_Itemized.csv",
+      "bytes": 60696,
+      "sha256": "8108a177aff84ae7056fe170d994d8652bff1809b23cbb32e5fe6802b2436920"
     },
     {
-      "path": "investor/costs/Pilot_40_Children_Monthly_Cash.csv",
-      "bytes": 619,
-      "sha256": "65c132e443eadecae97180e496b94addc563bcf69ab1e780ce332581b920d0bf"
+      "path": "investor/costs/Pilot_38_Children_Monthly_Cash.csv",
+      "bytes": 622,
+      "sha256": "4f9d6ebdf166c5663c31e768864123c39bfb6bac8256fa08bef3e304e417f342"
     },
     {
       "path": "investor/costs/pilot-budget.json",
-      "bytes": 183836,
-      "sha256": "66c94eaa1c9f3331e5ff5f4c11f67c307de6d6213423c6b67393a1594ca07775"
+      "bytes": 151890,
+      "sha256": "a09a1dda7139696d59dcde793bea50676a2b3d546a003db8cb5b5a2946c3cbad"
     },
     {
       "path": "investor/documents/Futures_Friends_CURRENT_Forecast_and_Production_Reconciliation.md",
@@ -461,13 +461,13 @@
     },
     {
       "path": "investor/documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md",
-      "bytes": 21740,
-      "sha256": "6fd391d50146a87d4631fba9db2d04eaaabce05ef1643b668f027ebbdb84f832"
+      "bytes": 20993,
+      "sha256": "3f559d446fa964b43163db60f2f4577fe1aca2a5381a24e6a6348ceccf39a9e5"
     },
     {
       "path": "investor/documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md",
-      "bytes": 2933,
-      "sha256": "002c78812c202f611cbcc65eaf7f87db546e7d18a36298db5e46565f47671810"
+      "bytes": 3240,
+      "sha256": "2413eb5ca14221cd58a0225a3be8c05d5ec948ec7555737b5839a560010073ed"
     },
     {
       "path": "investor/index.html",
@@ -476,8 +476,8 @@
     },
     {
       "path": "investor/tools/build_pilot_budget.py",
-      "bytes": 44485,
-      "sha256": "7097ef35ca09a60aeac7b36267ffd916ba0804d4861b9b5c1dacca607178b422"
+      "bytes": 48199,
+      "sha256": "1f4ce87a1c26ae9ae9f2bf82c8d4c36726fc52e5e577b0285b24c1589ac7ff6a"
     },
     {
       "path": "investor/tools/build_pilot_pdfs.py",

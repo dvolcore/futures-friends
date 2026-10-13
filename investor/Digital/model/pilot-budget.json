@@ -1,44 +1,44 @@
 {
   "meta": {
-    "title": "Futures Friends | 40-child 12-month pilot",
-    "prepared": "2026-10-11",
-    "version": "pilot-40-v4",
-    "status": "Conditional planning estimate; ongoing economics do not yet support borrowing",
+    "title": "Futures Friends | 38-child 12-month pilot",
+    "prepared": "2026-10-13",
+    "version": "pilot-38-v5",
+    "status": "Conditional planning estimate; positive operating margin before building payments and debt at the planning assumptions; owner-director unpaid",
     "scope": "One owned location, ages 2\u20135; first-month checkpoint; national expansion deferred.",
-    "line_count": 311
+    "line_count": 241
   },
   "totals": {
-    "recurring": 477066.02,
-    "one_time": 146964.0,
-    "contingency": 22044.6,
-    "gross_before_contingency": 624030.02,
-    "gross_first_year": 646074.62,
+    "recurring": 330018.06,
+    "one_time": 145554.0,
+    "contingency": 21833.1,
+    "gross_before_contingency": 475572.06,
+    "gross_first_year": 497405.16,
     "refinance": 140000
   },
   "lines": [
     {
       "id": "P001",
       "category": "Staff wages",
-      "item": "Full-time director",
+      "item": "Owner-director (unpaid)",
       "unit": "paid hours",
       "quantity": 2080.0,
-      "rate": 24.0,
-      "annual": 49920.0,
+      "rate": 0.0,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Qualified director counts only while assigned to the room; 2 hours/day administrative relief covered by floater.",
+      "notes": "Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P002",
       "category": "Employer taxes",
-      "item": "Full-time director \u2014 Social Security",
+      "item": "Owner-director (unpaid) \u2014 Social Security",
       "unit": "taxable wages",
-      "quantity": 49920.0,
+      "quantity": 0.0,
       "rate": 0.062,
-      "annual": 3095.04,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
@@ -49,11 +49,11 @@
     {
       "id": "P003",
       "category": "Employer taxes",
-      "item": "Full-time director \u2014 Medicare",
+      "item": "Owner-director (unpaid) \u2014 Medicare",
       "unit": "taxable wages",
-      "quantity": 49920.0,
+      "quantity": 0.0,
       "rate": 0.0145,
-      "annual": 723.84,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "Statutory employer tax",
       "url": "https://www.irs.gov/taxtopics/tc751",
@@ -64,11 +64,11 @@
     {
       "id": "P004",
       "category": "Employer taxes",
-      "item": "Full-time director \u2014 Missouri unemployment",
+      "item": "Owner-director (unpaid) \u2014 Missouri unemployment",
       "unit": "taxable wage base",
-      "quantity": 9000.0,
+      "quantity": 0.0,
       "rate": 0.02376,
-      "annual": 213.84,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "MO new-employer planning tax; replace with actual rate letter",
       "url": "https://labor.mo.gov/des/employers/tax-rates",
@@ -79,11 +79,11 @@
     {
       "id": "P005",
       "category": "Employer taxes",
-      "item": "Full-time director \u2014 FUTA",
+      "item": "Owner-director (unpaid) \u2014 FUTA",
       "unit": "taxable wage base",
-      "quantity": 7000.0,
+      "quantity": 0.0,
       "rate": 0.006,
-      "annual": 42.0,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
       "url": "https://www.irs.gov/publications/p15",
@@ -94,11 +94,11 @@
     {
       "id": "P006",
       "category": "Staff insurance",
-      "item": "Full-time director \u2014 workers compensation",
+      "item": "Owner-director (unpaid) \u2014 workers compensation",
       "unit": "covered wages",
-      "quantity": 49920.0,
+      "quantity": 0.0,
       "rate": 0.02,
-      "annual": 998.4,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
@@ -108,98 +108,68 @@
     },
     {
       "id": "P007",
-      "category": "Staff benefits",
-      "item": "Full-time director \u2014 employer medical contribution",
-      "unit": "months",
-      "quantity": 12.0,
-      "rate": 300.0,
-      "annual": 3600.0,
+      "category": "Staff wages",
+      "item": "Full-time caregiver 1",
+      "unit": "paid hours",
+      "quantity": 2080.0,
+      "rate": 16.0,
+      "annual": 33280.0,
       "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Optional employer contribution allowance, not an insurance quote.",
+      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
+      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00. Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112). Meals prepared by staff; food costs retained. No paid substitutes \u2014 the floater covers absences, leaving breaks uncovered on those days.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P008",
-      "category": "Staff benefits",
-      "item": "Full-time director \u2014 retirement contribution",
-      "unit": "eligible wages",
-      "quantity": 49920.0,
-      "rate": 0.03,
-      "annual": 1497.6,
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 1 \u2014 Social Security",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.062,
+      "annual": 2063.36,
       "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Optional 3% policy; eligibility and plan terms unresolved.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P009",
-      "category": "Staff wages",
-      "item": "Full-time teacher 1",
-      "unit": "paid hours",
-      "quantity": 2080.0,
-      "rate": 20.0,
-      "annual": 41600.0,
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 1 \u2014 Medicare",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.0145,
+      "annual": 482.56,
       "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P010",
       "category": "Employer taxes",
-      "item": "Full-time teacher 1 \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 41600.0,
-      "rate": 0.062,
-      "annual": 2579.2,
+      "item": "Full-time caregiver 1 \u2014 Missouri unemployment",
+      "unit": "taxable wage base",
+      "quantity": 9000.0,
+      "rate": 0.02376,
+      "annual": 213.84,
       "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
+      "basis": "MO new-employer planning tax; replace with actual rate letter",
+      "url": "https://labor.mo.gov/des/employers/tax-rates",
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P011",
       "category": "Employer taxes",
-      "item": "Full-time teacher 1 \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 41600.0,
-      "rate": 0.0145,
-      "annual": 603.2,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P012",
-      "category": "Employer taxes",
-      "item": "Full-time teacher 1 \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P013",
-      "category": "Employer taxes",
-      "item": "Full-time teacher 1 \u2014 FUTA",
+      "item": "Full-time caregiver 1 \u2014 FUTA",
       "unit": "taxable wage base",
       "quantity": 7000.0,
       "rate": 0.006,
@@ -212,13 +182,13 @@
       "deliverable": ""
     },
     {
-      "id": "P014",
+      "id": "P012",
       "category": "Staff insurance",
-      "item": "Full-time teacher 1 \u2014 workers compensation",
+      "item": "Full-time caregiver 1 \u2014 workers compensation",
       "unit": "covered wages",
-      "quantity": 41600.0,
+      "quantity": 33280.0,
       "rate": 0.02,
-      "annual": 832.0,
+      "annual": 665.6,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
@@ -227,99 +197,159 @@
       "deliverable": ""
     },
     {
-      "id": "P015",
-      "category": "Staff benefits",
-      "item": "Full-time teacher 1 \u2014 employer medical contribution",
-      "unit": "months",
-      "quantity": 12.0,
-      "rate": 300.0,
-      "annual": 3600.0,
+      "id": "P013",
+      "category": "Staff wages",
+      "item": "Full-time caregiver 2",
+      "unit": "paid hours",
+      "quantity": 2080.0,
+      "rate": 16.0,
+      "annual": 33280.0,
       "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Optional employer contribution allowance, not an insurance quote.",
+      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
+      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00. Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112). Meals prepared by staff; food costs retained. No paid substitutes \u2014 the floater covers absences, leaving breaks uncovered on those days.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P014",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 2 \u2014 Social Security",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.062,
+      "annual": 2063.36,
+      "bucket": "recurring",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P015",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 2 \u2014 Medicare",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.0145,
+      "annual": 482.56,
+      "bucket": "recurring",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P016",
-      "category": "Staff benefits",
-      "item": "Full-time teacher 1 \u2014 retirement contribution",
-      "unit": "eligible wages",
-      "quantity": 41600.0,
-      "rate": 0.03,
-      "annual": 1248.0,
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 2 \u2014 Missouri unemployment",
+      "unit": "taxable wage base",
+      "quantity": 9000.0,
+      "rate": 0.02376,
+      "annual": 213.84,
       "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Optional 3% policy; eligibility and plan terms unresolved.",
+      "basis": "MO new-employer planning tax; replace with actual rate letter",
+      "url": "https://labor.mo.gov/des/employers/tax-rates",
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P017",
-      "category": "Staff wages",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon",
-      "unit": "paid hours",
-      "quantity": 1300.0,
-      "rate": 20.0,
-      "annual": 26000.0,
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 2 \u2014 FUTA",
+      "unit": "taxable wage base",
+      "quantity": 7000.0,
+      "rate": 0.006,
+      "annual": 42.0,
       "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
+      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
+      "url": "https://www.irs.gov/publications/p15",
+      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P018",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.062,
-      "annual": 1612.0,
+      "category": "Staff insurance",
+      "item": "Full-time caregiver 2 \u2014 workers compensation",
+      "unit": "covered wages",
+      "quantity": 33280.0,
+      "rate": 0.02,
+      "annual": 665.6,
       "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "2% unquoted classification allowance; broker quote required.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P019",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.0145,
-      "annual": 377.0,
+      "category": "Staff wages",
+      "item": "Full-time caregiver 3",
+      "unit": "paid hours",
+      "quantity": 2080.0,
+      "rate": 16.0,
+      "annual": 33280.0,
       "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
+      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
+      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00. Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112). Meals prepared by staff; food costs retained. No paid substitutes \u2014 the floater covers absences, leaving breaks uncovered on those days.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P020",
       "category": "Employer taxes",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
+      "item": "Full-time caregiver 3 \u2014 Social Security",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.062,
+      "annual": 2063.36,
       "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P021",
       "category": "Employer taxes",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 FUTA",
+      "item": "Full-time caregiver 3 \u2014 Medicare",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.0145,
+      "annual": 482.56,
+      "bucket": "recurring",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P022",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 3 \u2014 Missouri unemployment",
+      "unit": "taxable wage base",
+      "quantity": 9000.0,
+      "rate": 0.02376,
+      "annual": 213.84,
+      "bucket": "recurring",
+      "basis": "MO new-employer planning tax; replace with actual rate letter",
+      "url": "https://labor.mo.gov/des/employers/tax-rates",
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P023",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 3 \u2014 FUTA",
       "unit": "taxable wage base",
       "quantity": 7000.0,
       "rate": 0.006,
@@ -332,13 +362,13 @@
       "deliverable": ""
     },
     {
-      "id": "P022",
+      "id": "P024",
       "category": "Staff insurance",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 workers compensation",
+      "item": "Full-time caregiver 3 \u2014 workers compensation",
       "unit": "covered wages",
-      "quantity": 26000.0,
+      "quantity": 33280.0,
       "rate": 0.02,
-      "annual": 520.0,
+      "annual": 665.6,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
@@ -347,69 +377,69 @@
       "deliverable": ""
     },
     {
-      "id": "P023",
+      "id": "P025",
       "category": "Staff wages",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon",
+      "item": "Full-time caregiver 4",
       "unit": "paid hours",
-      "quantity": 1300.0,
-      "rate": 20.0,
-      "annual": 26000.0,
+      "quantity": 2080.0,
+      "rate": 16.0,
+      "annual": 33280.0,
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P024",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.062,
-      "annual": 1612.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P025",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.0145,
-      "annual": 377.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00. Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112). Meals prepared by staff; food costs retained. No paid substitutes \u2014 the floater covers absences, leaving breaks uncovered on those days.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P026",
       "category": "Employer taxes",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
+      "item": "Full-time caregiver 4 \u2014 Social Security",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.062,
+      "annual": 2063.36,
       "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P027",
       "category": "Employer taxes",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 FUTA",
+      "item": "Full-time caregiver 4 \u2014 Medicare",
+      "unit": "taxable wages",
+      "quantity": 33280.0,
+      "rate": 0.0145,
+      "annual": 482.56,
+      "bucket": "recurring",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P028",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 4 \u2014 Missouri unemployment",
+      "unit": "taxable wage base",
+      "quantity": 9000.0,
+      "rate": 0.02376,
+      "annual": 213.84,
+      "bucket": "recurring",
+      "basis": "MO new-employer planning tax; replace with actual rate letter",
+      "url": "https://labor.mo.gov/des/employers/tax-rates",
+      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P029",
+      "category": "Employer taxes",
+      "item": "Full-time caregiver 4 \u2014 FUTA",
       "unit": "taxable wage base",
       "quantity": 7000.0,
       "rate": 0.006,
@@ -422,13 +452,13 @@
       "deliverable": ""
     },
     {
-      "id": "P028",
+      "id": "P030",
       "category": "Staff insurance",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 workers compensation",
+      "item": "Full-time caregiver 4 \u2014 workers compensation",
       "unit": "covered wages",
-      "quantity": 26000.0,
+      "quantity": 33280.0,
       "rate": 0.02,
-      "annual": 520.0,
+      "annual": 665.6,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
@@ -437,412 +467,52 @@
       "deliverable": ""
     },
     {
-      "id": "P029",
+      "id": "P031",
       "category": "Staff wages",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm",
+      "item": "Part-time break/admin floater",
       "unit": "paid hours",
-      "quantity": 1300.0,
-      "rate": 20.0,
-      "annual": 26000.0,
+      "quantity": 1040.0,
+      "rate": 16.0,
+      "annual": 16640.0,
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P030",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.062,
-      "annual": 1612.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P031",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.0145,
-      "annual": 377.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
+      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P032",
       "category": "Employer taxes",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
+      "item": "Part-time break/admin floater \u2014 Social Security",
+      "unit": "taxable wages",
+      "quantity": 16640.0,
+      "rate": 0.062,
+      "annual": 1031.68,
       "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P033",
       "category": "Employer taxes",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 7000.0,
-      "rate": 0.006,
-      "annual": 42.0,
+      "item": "Part-time break/admin floater \u2014 Medicare",
+      "unit": "taxable wages",
+      "quantity": 16640.0,
+      "rate": 0.0145,
+      "annual": 241.28,
       "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
+      "basis": "Statutory employer tax",
+      "url": "https://www.irs.gov/taxtopics/tc751",
+      "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P034",
-      "category": "Staff insurance",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 26000.0,
-      "rate": 0.02,
-      "annual": 520.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P035",
-      "category": "Staff wages",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm",
-      "unit": "paid hours",
-      "quantity": 1300.0,
-      "rate": 20.0,
-      "annual": 26000.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P036",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.062,
-      "annual": 1612.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P037",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 26000.0,
-      "rate": 0.0145,
-      "annual": 377.0,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P038",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P039",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 7000.0,
-      "rate": 0.006,
-      "annual": 42.0,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P040",
-      "category": "Staff insurance",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 26000.0,
-      "rate": 0.02,
-      "annual": 520.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P041",
-      "category": "Staff wages",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm",
-      "unit": "paid hours",
-      "quantity": 520.0,
-      "rate": 20.0,
-      "annual": 10400.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P042",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 10400.0,
-      "rate": 0.062,
-      "annual": 644.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P043",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 10400.0,
-      "rate": 0.0145,
-      "annual": 150.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P044",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P045",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 7000.0,
-      "rate": 0.006,
-      "annual": 42.0,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P046",
-      "category": "Staff insurance",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 10400.0,
-      "rate": 0.02,
-      "annual": 208.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P047",
-      "category": "Staff wages",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm",
-      "unit": "paid hours",
-      "quantity": 520.0,
-      "rate": 20.0,
-      "annual": 10400.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P048",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 10400.0,
-      "rate": 0.062,
-      "annual": 644.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P049",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 10400.0,
-      "rate": 0.0145,
-      "annual": 150.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P050",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P051",
-      "category": "Employer taxes",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 7000.0,
-      "rate": 0.006,
-      "annual": 42.0,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P052",
-      "category": "Staff insurance",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 10400.0,
-      "rate": 0.02,
-      "annual": 208.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P053",
-      "category": "Staff wages",
-      "item": "Part-time break/admin floater",
-      "unit": "paid hours",
-      "quantity": 1040.0,
-      "rate": 20.0,
-      "annual": 20800.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P054",
-      "category": "Employer taxes",
-      "item": "Part-time break/admin floater \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 20800.0,
-      "rate": 0.062,
-      "annual": 1289.6,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P055",
-      "category": "Employer taxes",
-      "item": "Part-time break/admin floater \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 20800.0,
-      "rate": 0.0145,
-      "annual": 301.6,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P056",
       "category": "Employer taxes",
       "item": "Part-time break/admin floater \u2014 Missouri unemployment",
       "unit": "taxable wage base",
@@ -857,7 +527,7 @@
       "deliverable": ""
     },
     {
-      "id": "P057",
+      "id": "P035",
       "category": "Employer taxes",
       "item": "Part-time break/admin floater \u2014 FUTA",
       "unit": "taxable wage base",
@@ -872,13 +542,13 @@
       "deliverable": ""
     },
     {
-      "id": "P058",
+      "id": "P036",
       "category": "Staff insurance",
       "item": "Part-time break/admin floater \u2014 workers compensation",
       "unit": "covered wages",
-      "quantity": 20800.0,
+      "quantity": 16640.0,
       "rate": 0.02,
-      "annual": 416.0,
+      "annual": 332.8,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
@@ -887,877 +557,382 @@
       "deliverable": ""
     },
     {
-      "id": "P059",
-      "category": "Staff wages",
-      "item": "Part-time food worker",
-      "unit": "paid hours",
-      "quantity": 1040.0,
-      "rate": 19.0,
-      "annual": 19760.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates. Food preparation cannot count as classroom supervision.",
+      "id": "P037",
+      "category": "Staff readiness",
+      "item": "Owner-director (unpaid) \u2014 FCSR registration",
+      "unit": "registration",
+      "quantity": 1.0,
+      "rate": 16.57,
+      "annual": 16.57,
+      "bucket": "one_time",
+      "basis": "FCSR published fee; does not cover all required checks",
+      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
+      "notes": "Reuse valid existing checks where permitted.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P060",
-      "category": "Employer taxes",
-      "item": "Part-time food worker \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 19760.0,
-      "rate": 0.062,
-      "annual": 1225.12,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
+      "id": "P038",
+      "category": "Staff readiness",
+      "item": "Owner-director (unpaid) \u2014 other background checks",
+      "unit": "check allocation",
+      "quantity": 1.0,
+      "rate": 58.43,
+      "annual": 58.43,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P039",
+      "category": "Staff readiness",
+      "item": "Owner-director (unpaid) \u2014 CPR/first aid",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 85.0,
+      "annual": 85.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
       "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P061",
-      "category": "Employer taxes",
-      "item": "Part-time food worker \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 19760.0,
-      "rate": 0.0145,
-      "annual": 286.52,
+      "id": "P040",
+      "category": "Staff readiness",
+      "item": "Owner-director (unpaid) \u2014 annual training",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 150.0,
+      "annual": 150.0,
       "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P041",
+      "category": "Staff readiness",
+      "item": "Owner-director (unpaid) \u2014 uniform",
+      "unit": "shirts",
+      "quantity": 3.0,
+      "rate": 25.0,
+      "annual": 75.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P042",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 1 \u2014 FCSR registration",
+      "unit": "registration",
+      "quantity": 1.0,
+      "rate": 16.57,
+      "annual": 16.57,
+      "bucket": "one_time",
+      "basis": "FCSR published fee; does not cover all required checks",
+      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P043",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 1 \u2014 other background checks",
+      "unit": "check allocation",
+      "quantity": 1.0,
+      "rate": 58.43,
+      "annual": 58.43,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P044",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 1 \u2014 CPR/first aid",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 85.0,
+      "annual": 85.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P045",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 1 \u2014 annual training",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 150.0,
+      "annual": 150.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P046",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 1 \u2014 uniform",
+      "unit": "shirts",
+      "quantity": 3.0,
+      "rate": 25.0,
+      "annual": 75.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P047",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 2 \u2014 FCSR registration",
+      "unit": "registration",
+      "quantity": 1.0,
+      "rate": 16.57,
+      "annual": 16.57,
+      "bucket": "one_time",
+      "basis": "FCSR published fee; does not cover all required checks",
+      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P048",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 2 \u2014 other background checks",
+      "unit": "check allocation",
+      "quantity": 1.0,
+      "rate": 58.43,
+      "annual": 58.43,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P049",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 2 \u2014 CPR/first aid",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 85.0,
+      "annual": 85.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P050",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 2 \u2014 annual training",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 150.0,
+      "annual": 150.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P051",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 2 \u2014 uniform",
+      "unit": "shirts",
+      "quantity": 3.0,
+      "rate": 25.0,
+      "annual": 75.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P052",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 3 \u2014 FCSR registration",
+      "unit": "registration",
+      "quantity": 1.0,
+      "rate": 16.57,
+      "annual": 16.57,
+      "bucket": "one_time",
+      "basis": "FCSR published fee; does not cover all required checks",
+      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P053",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 3 \u2014 other background checks",
+      "unit": "check allocation",
+      "quantity": 1.0,
+      "rate": 58.43,
+      "annual": 58.43,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P054",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 3 \u2014 CPR/first aid",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 85.0,
+      "annual": 85.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P055",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 3 \u2014 annual training",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 150.0,
+      "annual": 150.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P056",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 3 \u2014 uniform",
+      "unit": "shirts",
+      "quantity": 3.0,
+      "rate": 25.0,
+      "annual": 75.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P057",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 4 \u2014 FCSR registration",
+      "unit": "registration",
+      "quantity": 1.0,
+      "rate": 16.57,
+      "annual": 16.57,
+      "bucket": "one_time",
+      "basis": "FCSR published fee; does not cover all required checks",
+      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
+      "notes": "Reuse valid existing checks where permitted.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P058",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 4 \u2014 other background checks",
+      "unit": "check allocation",
+      "quantity": 1.0,
+      "rate": 58.43,
+      "annual": 58.43,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P059",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 4 \u2014 CPR/first aid",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 85.0,
+      "annual": 85.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P060",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 4 \u2014 annual training",
+      "unit": "seat",
+      "quantity": 1.0,
+      "rate": 150.0,
+      "annual": 150.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Paid training time included in wages; confirm approved provider.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P061",
+      "category": "Staff readiness",
+      "item": "Full-time caregiver 4 \u2014 uniform",
+      "unit": "shirts",
+      "quantity": 3.0,
+      "rate": 25.0,
+      "annual": 75.0,
+      "bucket": "one_time",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
       "notes": "",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P062",
-      "category": "Employer taxes",
-      "item": "Part-time food worker \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 9000.0,
-      "rate": 0.02376,
-      "annual": 213.84,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P063",
-      "category": "Employer taxes",
-      "item": "Part-time food worker \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 7000.0,
-      "rate": 0.006,
-      "annual": 42.0,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P064",
-      "category": "Staff insurance",
-      "item": "Part-time food worker \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 19760.0,
-      "rate": 0.02,
-      "annual": 395.2,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P065",
-      "category": "Staff wages",
-      "item": "Substitute 1",
-      "unit": "paid hours",
-      "quantity": 320.0,
-      "rate": 20.0,
-      "annual": 6400.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P066",
-      "category": "Employer taxes",
-      "item": "Substitute 1 \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 6400.0,
-      "rate": 0.062,
-      "annual": 396.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P067",
-      "category": "Employer taxes",
-      "item": "Substitute 1 \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 6400.0,
-      "rate": 0.0145,
-      "annual": 92.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P068",
-      "category": "Employer taxes",
-      "item": "Substitute 1 \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 6400.0,
-      "rate": 0.02376,
-      "annual": 152.06,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P069",
-      "category": "Employer taxes",
-      "item": "Substitute 1 \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 6400.0,
-      "rate": 0.006,
-      "annual": 38.4,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P070",
-      "category": "Staff insurance",
-      "item": "Substitute 1 \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 6400.0,
-      "rate": 0.02,
-      "annual": 128.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P071",
-      "category": "Staff wages",
-      "item": "Substitute 2",
-      "unit": "paid hours",
-      "quantity": 320.0,
-      "rate": 20.0,
-      "annual": 6400.0,
-      "bucket": "recurring",
-      "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
-      "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P072",
-      "category": "Employer taxes",
-      "item": "Substitute 2 \u2014 Social Security",
-      "unit": "taxable wages",
-      "quantity": 6400.0,
-      "rate": 0.062,
-      "annual": 396.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P073",
-      "category": "Employer taxes",
-      "item": "Substitute 2 \u2014 Medicare",
-      "unit": "taxable wages",
-      "quantity": 6400.0,
-      "rate": 0.0145,
-      "annual": 92.8,
-      "bucket": "recurring",
-      "basis": "Statutory employer tax",
-      "url": "https://www.irs.gov/taxtopics/tc751",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P074",
-      "category": "Employer taxes",
-      "item": "Substitute 2 \u2014 Missouri unemployment",
-      "unit": "taxable wage base",
-      "quantity": 6400.0,
-      "rate": 0.02376,
-      "annual": 152.06,
-      "bucket": "recurring",
-      "basis": "MO new-employer planning tax; replace with actual rate letter",
-      "url": "https://labor.mo.gov/des/employers/tax-rates",
-      "notes": "Actual experience rate/entity treatment controls. No separate unemployment reserve.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P075",
-      "category": "Employer taxes",
-      "item": "Substitute 2 \u2014 FUTA",
-      "unit": "taxable wage base",
-      "quantity": 6400.0,
-      "rate": 0.006,
-      "annual": 38.4,
-      "bucket": "recurring",
-      "basis": "Conditional full-credit FUTA rate; entity eligibility unresolved",
-      "url": "https://www.irs.gov/publications/p15",
-      "notes": "Conditional full-credit taxable-employer assumption; accountant must confirm.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P076",
-      "category": "Staff insurance",
-      "item": "Substitute 2 \u2014 workers compensation",
-      "unit": "covered wages",
-      "quantity": 6400.0,
-      "rate": 0.02,
-      "annual": 128.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "2% unquoted classification allowance; broker quote required.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P077",
-      "category": "Staff readiness",
-      "item": "Full-time director \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P078",
-      "category": "Staff readiness",
-      "item": "Full-time director \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P079",
-      "category": "Staff readiness",
-      "item": "Full-time director \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P080",
-      "category": "Staff readiness",
-      "item": "Full-time director \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P081",
-      "category": "Staff readiness",
-      "item": "Full-time director \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P082",
-      "category": "Staff readiness",
-      "item": "Full-time teacher 1 \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P083",
-      "category": "Staff readiness",
-      "item": "Full-time teacher 1 \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P084",
-      "category": "Staff readiness",
-      "item": "Full-time teacher 1 \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P085",
-      "category": "Staff readiness",
-      "item": "Full-time teacher 1 \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P086",
-      "category": "Staff readiness",
-      "item": "Full-time teacher 1 \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P087",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P088",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P089",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P090",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P091",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 2 \u2014 7am\u2013noon \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P092",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P093",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P094",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P095",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P096",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 3 \u2014 7am\u2013noon \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P097",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P098",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P099",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P100",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P101",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 4 \u2014 noon\u20135pm \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P102",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P103",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P104",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P105",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P106",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 5 \u2014 noon\u20135pm \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P107",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P108",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P109",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P110",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P111",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 6 \u2014 3pm\u20135pm \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P112",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P113",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P114",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P115",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P116",
-      "category": "Staff readiness",
-      "item": "Part-time teacher 7 \u2014 3pm\u20135pm \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P117",
       "category": "Staff readiness",
       "item": "Part-time break/admin floater \u2014 FCSR registration",
       "unit": "registration",
@@ -1772,7 +947,7 @@
       "deliverable": ""
     },
     {
-      "id": "P118",
+      "id": "P063",
       "category": "Staff readiness",
       "item": "Part-time break/admin floater \u2014 other background checks",
       "unit": "check allocation",
@@ -1787,7 +962,7 @@
       "deliverable": ""
     },
     {
-      "id": "P119",
+      "id": "P064",
       "category": "Staff readiness",
       "item": "Part-time break/admin floater \u2014 CPR/first aid",
       "unit": "seat",
@@ -1802,7 +977,7 @@
       "deliverable": ""
     },
     {
-      "id": "P120",
+      "id": "P065",
       "category": "Staff readiness",
       "item": "Part-time break/admin floater \u2014 annual training",
       "unit": "seat",
@@ -1817,7 +992,7 @@
       "deliverable": ""
     },
     {
-      "id": "P121",
+      "id": "P066",
       "category": "Staff readiness",
       "item": "Part-time break/admin floater \u2014 uniform",
       "unit": "shirts",
@@ -1832,232 +1007,7 @@
       "deliverable": ""
     },
     {
-      "id": "P122",
-      "category": "Staff readiness",
-      "item": "Part-time food worker \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P123",
-      "category": "Staff readiness",
-      "item": "Part-time food worker \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P124",
-      "category": "Staff readiness",
-      "item": "Part-time food worker \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P125",
-      "category": "Staff readiness",
-      "item": "Part-time food worker \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P126",
-      "category": "Staff readiness",
-      "item": "Part-time food worker \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P127",
-      "category": "Staff readiness",
-      "item": "Substitute 1 \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P128",
-      "category": "Staff readiness",
-      "item": "Substitute 1 \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P129",
-      "category": "Staff readiness",
-      "item": "Substitute 1 \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P130",
-      "category": "Staff readiness",
-      "item": "Substitute 1 \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P131",
-      "category": "Staff readiness",
-      "item": "Substitute 1 \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P132",
-      "category": "Staff readiness",
-      "item": "Substitute 2 \u2014 FCSR registration",
-      "unit": "registration",
-      "quantity": 1.0,
-      "rate": 16.57,
-      "annual": 16.57,
-      "bucket": "one_time",
-      "basis": "FCSR published fee; does not cover all required checks",
-      "url": "https://health.mo.gov/providers/family-care-safety-registry/how-register-family-care-safety-registry",
-      "notes": "Reuse valid existing checks where permitted.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P133",
-      "category": "Staff readiness",
-      "item": "Substitute 2 \u2014 other background checks",
-      "unit": "check allocation",
-      "quantity": 1.0,
-      "rate": 58.43,
-      "annual": 58.43,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Unquoted fingerprint/registry balance; verify requirements.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P134",
-      "category": "Staff readiness",
-      "item": "Substitute 2 \u2014 CPR/first aid",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 85.0,
-      "annual": 85.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P135",
-      "category": "Staff readiness",
-      "item": "Substitute 2 \u2014 annual training",
-      "unit": "seat",
-      "quantity": 1.0,
-      "rate": 150.0,
-      "annual": 150.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Paid training time included in wages; confirm approved provider.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P136",
-      "category": "Staff readiness",
-      "item": "Substitute 2 \u2014 uniform",
-      "unit": "shirts",
-      "quantity": 3.0,
-      "rate": 25.0,
-      "annual": 75.0,
-      "bucket": "one_time",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P137",
+      "id": "P067",
       "category": "Administration",
       "item": "Payroll Plus base",
       "unit": "months",
@@ -2072,22 +1022,22 @@
       "deliverable": ""
     },
     {
-      "id": "P138",
+      "id": "P068",
       "category": "Administration",
       "item": "Payroll Plus employee fee",
       "unit": "person-months",
-      "quantity": 144.0,
+      "quantity": 60.0,
       "rate": 12.0,
-      "annual": 1728.0,
+      "annual": 720.0,
       "bucket": "recurring",
       "basis": "Published Plus plan price; taxes separate",
       "url": "https://gusto.com/product/pricing",
-      "notes": "12 individually listed adults; adjust to actual billed roster.",
+      "notes": "5 paid adults (the unpaid owner-director is not on payroll); adjust to actual billed roster.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P139",
+      "id": "P069",
       "category": "Administration",
       "item": "Bookkeeping service",
       "unit": "months",
@@ -2102,7 +1052,7 @@
       "deliverable": ""
     },
     {
-      "id": "P140",
+      "id": "P070",
       "category": "Administration",
       "item": "Tax preparation",
       "unit": "filing",
@@ -2117,7 +1067,7 @@
       "deliverable": ""
     },
     {
-      "id": "P141",
+      "id": "P071",
       "category": "Administration",
       "item": "QuickBooks subscription",
       "unit": "months",
@@ -2132,7 +1082,7 @@
       "deliverable": ""
     },
     {
-      "id": "P142",
+      "id": "P072",
       "category": "Administration",
       "item": "Operating bank fees",
       "unit": "months",
@@ -2147,7 +1097,7 @@
       "deliverable": ""
     },
     {
-      "id": "P143",
+      "id": "P073",
       "category": "Administration",
       "item": "Business phone",
       "unit": "months",
@@ -2162,7 +1112,7 @@
       "deliverable": ""
     },
     {
-      "id": "P144",
+      "id": "P074",
       "category": "Administration",
       "item": "Postage",
       "unit": "pieces",
@@ -2177,7 +1127,7 @@
       "deliverable": ""
     },
     {
-      "id": "P145",
+      "id": "P075",
       "category": "Administration",
       "item": "Notary",
       "unit": "documents",
@@ -2192,7 +1142,7 @@
       "deliverable": ""
     },
     {
-      "id": "P146",
+      "id": "P076",
       "category": "Administration",
       "item": "Annual business license allowance",
       "unit": "renewal",
@@ -2207,7 +1157,7 @@
       "deliverable": ""
     },
     {
-      "id": "P147",
+      "id": "P077",
       "category": "Administration",
       "item": "City childcare permit",
       "unit": "year",
@@ -2222,7 +1172,7 @@
       "deliverable": ""
     },
     {
-      "id": "P148",
+      "id": "P078",
       "category": "Administration",
       "item": "Food permit allowance",
       "unit": "year",
@@ -2237,7 +1187,7 @@
       "deliverable": ""
     },
     {
-      "id": "P149",
+      "id": "P079",
       "category": "Administration",
       "item": "Food manager training allowance",
       "unit": "seat",
@@ -2252,7 +1202,7 @@
       "deliverable": ""
     },
     {
-      "id": "P150",
+      "id": "P080",
       "category": "Administration",
       "item": "Food handler permit allowance",
       "unit": "seats",
@@ -2267,142 +1217,142 @@
       "deliverable": ""
     },
     {
-      "id": "P151",
+      "id": "P081",
       "category": "Food and nutrition",
       "item": "Milk",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.5,
-      "annual": 5000.0,
+      "annual": 4750.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P152",
+      "id": "P082",
       "category": "Food and nutrition",
       "item": "Fruit",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.6,
-      "annual": 6000.0,
+      "annual": 5700.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P153",
+      "id": "P083",
       "category": "Food and nutrition",
       "item": "Vegetables",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.5,
-      "annual": 5000.0,
+      "annual": 4750.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P154",
+      "id": "P084",
       "category": "Food and nutrition",
       "item": "Protein",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.9,
-      "annual": 9000.0,
+      "annual": 8550.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P155",
+      "id": "P085",
       "category": "Food and nutrition",
       "item": "Grains",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.45,
-      "annual": 4500.0,
+      "annual": 4275.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P156",
+      "id": "P086",
       "category": "Food and nutrition",
       "item": "Allergy substitutes",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.15,
-      "annual": 1500.0,
+      "annual": 1425.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P157",
+      "id": "P087",
       "category": "Food and nutrition",
       "item": "Special diets",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.1,
-      "annual": 1000.0,
+      "annual": 950.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P158",
+      "id": "P088",
       "category": "Food and nutrition",
       "item": "Food disposables",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.15,
-      "annual": 1500.0,
+      "annual": 1425.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P159",
+      "id": "P089",
       "category": "Food and nutrition",
       "item": "Food waste allowance",
       "unit": "child service-days",
-      "quantity": 10000.0,
+      "quantity": 9500.0,
       "rate": 0.16,
-      "annual": 1600.0,
+      "annual": 1520.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "40 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P160",
+      "id": "P090",
       "category": "Food and nutrition",
       "item": "Food storage supplies",
       "unit": "units / service visits",
@@ -2417,7 +1367,7 @@
       "deliverable": ""
     },
     {
-      "id": "P161",
+      "id": "P091",
       "category": "Food and nutrition",
       "item": "Kitchen service",
       "unit": "units / service visits",
@@ -2432,7 +1382,7 @@
       "deliverable": ""
     },
     {
-      "id": "P162",
+      "id": "P092",
       "category": "Food and nutrition",
       "item": "Refrigerator service",
       "unit": "units / service visits",
@@ -2447,7 +1397,7 @@
       "deliverable": ""
     },
     {
-      "id": "P163",
+      "id": "P093",
       "category": "Food and nutrition",
       "item": "Freezer service",
       "unit": "units / service visits",
@@ -2462,7 +1412,7 @@
       "deliverable": ""
     },
     {
-      "id": "P164",
+      "id": "P094",
       "category": "Food and nutrition",
       "item": "Dishwashing supplies",
       "unit": "units / service visits",
@@ -2477,7 +1427,7 @@
       "deliverable": ""
     },
     {
-      "id": "P165",
+      "id": "P095",
       "category": "Food and nutrition",
       "item": "Kitchen gloves",
       "unit": "units / service visits",
@@ -2492,7 +1442,7 @@
       "deliverable": ""
     },
     {
-      "id": "P166",
+      "id": "P096",
       "category": "Food and nutrition",
       "item": "Aprons",
       "unit": "units / service visits",
@@ -2507,7 +1457,7 @@
       "deliverable": ""
     },
     {
-      "id": "P167",
+      "id": "P097",
       "category": "Building operations",
       "item": "Electricity",
       "unit": "months",
@@ -2522,7 +1472,7 @@
       "deliverable": ""
     },
     {
-      "id": "P168",
+      "id": "P098",
       "category": "Building operations",
       "item": "Natural gas",
       "unit": "months",
@@ -2537,7 +1487,7 @@
       "deliverable": ""
     },
     {
-      "id": "P169",
+      "id": "P099",
       "category": "Building operations",
       "item": "Water/sewer",
       "unit": "months",
@@ -2552,7 +1502,7 @@
       "deliverable": ""
     },
     {
-      "id": "P170",
+      "id": "P100",
       "category": "Building operations",
       "item": "Internet",
       "unit": "months",
@@ -2567,7 +1517,7 @@
       "deliverable": ""
     },
     {
-      "id": "P171",
+      "id": "P101",
       "category": "Building operations",
       "item": "Staff mobile connectivity",
       "unit": "months",
@@ -2582,7 +1532,7 @@
       "deliverable": ""
     },
     {
-      "id": "P172",
+      "id": "P102",
       "category": "Building operations",
       "item": "Waste collection",
       "unit": "months",
@@ -2597,7 +1547,7 @@
       "deliverable": ""
     },
     {
-      "id": "P173",
+      "id": "P103",
       "category": "Building operations",
       "item": "Pest service",
       "unit": "months",
@@ -2612,7 +1562,7 @@
       "deliverable": ""
     },
     {
-      "id": "P174",
+      "id": "P104",
       "category": "Building operations",
       "item": "Alarm monitoring",
       "unit": "months",
@@ -2627,7 +1577,7 @@
       "deliverable": ""
     },
     {
-      "id": "P175",
+      "id": "P105",
       "category": "Building operations",
       "item": "HVAC service",
       "unit": "visits / annual allowance",
@@ -2642,7 +1592,7 @@
       "deliverable": ""
     },
     {
-      "id": "P176",
+      "id": "P106",
       "category": "Building operations",
       "item": "Plumbing maintenance",
       "unit": "visits / annual allowance",
@@ -2657,7 +1607,7 @@
       "deliverable": ""
     },
     {
-      "id": "P177",
+      "id": "P107",
       "category": "Building operations",
       "item": "Electrical maintenance",
       "unit": "visits / annual allowance",
@@ -2672,7 +1622,7 @@
       "deliverable": ""
     },
     {
-      "id": "P178",
+      "id": "P108",
       "category": "Building operations",
       "item": "Snow service",
       "unit": "visits / annual allowance",
@@ -2687,7 +1637,7 @@
       "deliverable": ""
     },
     {
-      "id": "P179",
+      "id": "P109",
       "category": "Building operations",
       "item": "Lawn service",
       "unit": "visits / annual allowance",
@@ -2702,7 +1652,7 @@
       "deliverable": ""
     },
     {
-      "id": "P180",
+      "id": "P110",
       "category": "Building operations",
       "item": "Parking repairs",
       "unit": "visits / annual allowance",
@@ -2717,7 +1667,7 @@
       "deliverable": ""
     },
     {
-      "id": "P181",
+      "id": "P111",
       "category": "Building operations",
       "item": "Deep cleaning",
       "unit": "visits / annual allowance",
@@ -2732,7 +1682,7 @@
       "deliverable": ""
     },
     {
-      "id": "P182",
+      "id": "P112",
       "category": "Building operations",
       "item": "Property taxes",
       "unit": "visits / annual allowance",
@@ -2747,7 +1697,7 @@
       "deliverable": ""
     },
     {
-      "id": "P183",
+      "id": "P113",
       "category": "Building operations",
       "item": "Building repair allocation",
       "unit": "visits / annual allowance",
@@ -2762,7 +1712,7 @@
       "deliverable": ""
     },
     {
-      "id": "P184",
+      "id": "P114",
       "category": "Insurance",
       "item": "General liability / abuse coverage allowance",
       "unit": "annual policy",
@@ -2777,7 +1727,7 @@
       "deliverable": ""
     },
     {
-      "id": "P185",
+      "id": "P115",
       "category": "Insurance",
       "item": "Property insurance allowance",
       "unit": "annual policy",
@@ -2792,7 +1742,7 @@
       "deliverable": ""
     },
     {
-      "id": "P186",
+      "id": "P116",
       "category": "Insurance",
       "item": "Umbrella liability allowance",
       "unit": "annual policy",
@@ -2807,7 +1757,7 @@
       "deliverable": ""
     },
     {
-      "id": "P187",
+      "id": "P117",
       "category": "Insurance",
       "item": "Business interruption allowance",
       "unit": "annual policy",
@@ -2822,7 +1772,7 @@
       "deliverable": ""
     },
     {
-      "id": "P188",
+      "id": "P118",
       "category": "Insurance",
       "item": "Cyber / technology professional liability allowance",
       "unit": "annual policy",
@@ -2837,7 +1787,7 @@
       "deliverable": ""
     },
     {
-      "id": "P189",
+      "id": "P119",
       "category": "Cleaning and consumables",
       "item": "Sanitizer",
       "unit": "packs / service-months",
@@ -2852,7 +1802,7 @@
       "deliverable": ""
     },
     {
-      "id": "P190",
+      "id": "P120",
       "category": "Cleaning and consumables",
       "item": "Paper towels",
       "unit": "packs / service-months",
@@ -2867,7 +1817,7 @@
       "deliverable": ""
     },
     {
-      "id": "P191",
+      "id": "P121",
       "category": "Cleaning and consumables",
       "item": "Toilet paper",
       "unit": "packs / service-months",
@@ -2882,7 +1832,7 @@
       "deliverable": ""
     },
     {
-      "id": "P192",
+      "id": "P122",
       "category": "Cleaning and consumables",
       "item": "Hand soap",
       "unit": "packs / service-months",
@@ -2897,7 +1847,7 @@
       "deliverable": ""
     },
     {
-      "id": "P193",
+      "id": "P123",
       "category": "Cleaning and consumables",
       "item": "Laundry",
       "unit": "packs / service-months",
@@ -2912,7 +1862,7 @@
       "deliverable": ""
     },
     {
-      "id": "P194",
+      "id": "P124",
       "category": "Cleaning and consumables",
       "item": "Tissues",
       "unit": "packs / service-months",
@@ -2927,7 +1877,7 @@
       "deliverable": ""
     },
     {
-      "id": "P195",
+      "id": "P125",
       "category": "Cleaning and consumables",
       "item": "Cleaning wipes",
       "unit": "packs / service-months",
@@ -2942,7 +1892,7 @@
       "deliverable": ""
     },
     {
-      "id": "P196",
+      "id": "P126",
       "category": "Cleaning and consumables",
       "item": "Trash bags",
       "unit": "packs / service-months",
@@ -2957,7 +1907,7 @@
       "deliverable": ""
     },
     {
-      "id": "P197",
+      "id": "P127",
       "category": "Cleaning and consumables",
       "item": "Gloves/PPE",
       "unit": "packs / service-months",
@@ -2972,7 +1922,7 @@
       "deliverable": ""
     },
     {
-      "id": "P198",
+      "id": "P128",
       "category": "Safety and equipment",
       "item": "Mops",
       "unit": "units",
@@ -2987,7 +1937,7 @@
       "deliverable": ""
     },
     {
-      "id": "P199",
+      "id": "P129",
       "category": "Safety and equipment",
       "item": "Buckets",
       "unit": "units",
@@ -3002,7 +1952,7 @@
       "deliverable": ""
     },
     {
-      "id": "P200",
+      "id": "P130",
       "category": "Safety and equipment",
       "item": "Brooms",
       "unit": "units",
@@ -3017,7 +1967,7 @@
       "deliverable": ""
     },
     {
-      "id": "P201",
+      "id": "P131",
       "category": "Safety and equipment",
       "item": "Vacuum",
       "unit": "units",
@@ -3032,7 +1982,7 @@
       "deliverable": ""
     },
     {
-      "id": "P202",
+      "id": "P132",
       "category": "Safety and equipment",
       "item": "First aid kits",
       "unit": "units",
@@ -3047,7 +1997,7 @@
       "deliverable": ""
     },
     {
-      "id": "P203",
+      "id": "P133",
       "category": "Safety and equipment",
       "item": "CO detectors",
       "unit": "units",
@@ -3062,7 +2012,7 @@
       "deliverable": ""
     },
     {
-      "id": "P204",
+      "id": "P134",
       "category": "Safety and equipment",
       "item": "Smoke detectors",
       "unit": "units",
@@ -3077,7 +2027,7 @@
       "deliverable": ""
     },
     {
-      "id": "P205",
+      "id": "P135",
       "category": "Safety and equipment",
       "item": "Emergency lights",
       "unit": "units",
@@ -3092,7 +2042,7 @@
       "deliverable": ""
     },
     {
-      "id": "P206",
+      "id": "P136",
       "category": "Safety and equipment",
       "item": "Medication lockboxes",
       "unit": "units",
@@ -3107,7 +2057,7 @@
       "deliverable": ""
     },
     {
-      "id": "P207",
+      "id": "P137",
       "category": "Safety and equipment",
       "item": "First aid refills",
       "unit": "units / inspections",
@@ -3122,7 +2072,7 @@
       "deliverable": ""
     },
     {
-      "id": "P208",
+      "id": "P138",
       "category": "Safety and equipment",
       "item": "Extinguisher service",
       "unit": "units / inspections",
@@ -3137,7 +2087,7 @@
       "deliverable": ""
     },
     {
-      "id": "P209",
+      "id": "P139",
       "category": "Safety and equipment",
       "item": "Incident forms",
       "unit": "units / inspections",
@@ -3152,7 +2102,7 @@
       "deliverable": ""
     },
     {
-      "id": "P210",
+      "id": "P140",
       "category": "Safety and equipment",
       "item": "Safety drill materials",
       "unit": "units / inspections",
@@ -3167,7 +2117,7 @@
       "deliverable": ""
     },
     {
-      "id": "P211",
+      "id": "P141",
       "category": "Safety and equipment",
       "item": "Visitor log supplies",
       "unit": "units / inspections",
@@ -3182,7 +2132,7 @@
       "deliverable": ""
     },
     {
-      "id": "P212",
+      "id": "P142",
       "category": "Safety and equipment",
       "item": "Sharps disposal",
       "unit": "units / inspections",
@@ -3197,7 +2147,7 @@
       "deliverable": ""
     },
     {
-      "id": "P213",
+      "id": "P143",
       "category": "Safety and equipment",
       "item": "Water inspection",
       "unit": "units / inspections",
@@ -3212,7 +2162,7 @@
       "deliverable": ""
     },
     {
-      "id": "P214",
+      "id": "P144",
       "category": "Safety and equipment",
       "item": "Indoor air check",
       "unit": "units / inspections",
@@ -3227,7 +2177,7 @@
       "deliverable": ""
     },
     {
-      "id": "P215",
+      "id": "P145",
       "category": "Safety and equipment",
       "item": "Playground inspection",
       "unit": "units / inspections",
@@ -3242,7 +2192,7 @@
       "deliverable": ""
     },
     {
-      "id": "P216",
+      "id": "P146",
       "category": "Safety and equipment",
       "item": "Access-control repair allowance",
       "unit": "allowance",
@@ -3257,7 +2207,7 @@
       "deliverable": ""
     },
     {
-      "id": "P217",
+      "id": "P147",
       "category": "Safety and equipment",
       "item": "Camera system repair allowance",
       "unit": "allowance",
@@ -3272,7 +2222,7 @@
       "deliverable": ""
     },
     {
-      "id": "P218",
+      "id": "P148",
       "category": "Classroom materials",
       "item": "Chair replacements",
       "unit": "units",
@@ -3287,7 +2237,7 @@
       "deliverable": ""
     },
     {
-      "id": "P219",
+      "id": "P149",
       "category": "Classroom materials",
       "item": "Nap mat replacements",
       "unit": "units",
@@ -3302,7 +2252,7 @@
       "deliverable": ""
     },
     {
-      "id": "P220",
+      "id": "P150",
       "category": "Classroom materials",
       "item": "Storage bin replacements",
       "unit": "units",
@@ -3317,7 +2267,7 @@
       "deliverable": ""
     },
     {
-      "id": "P221",
+      "id": "P151",
       "category": "Classroom materials",
       "item": "Books",
       "unit": "units",
@@ -3332,7 +2282,7 @@
       "deliverable": ""
     },
     {
-      "id": "P222",
+      "id": "P152",
       "category": "Classroom materials",
       "item": "Manipulatives",
       "unit": "units",
@@ -3347,7 +2297,7 @@
       "deliverable": ""
     },
     {
-      "id": "P223",
+      "id": "P153",
       "category": "Classroom materials",
       "item": "Puzzles",
       "unit": "units",
@@ -3362,7 +2312,7 @@
       "deliverable": ""
     },
     {
-      "id": "P224",
+      "id": "P154",
       "category": "Classroom materials",
       "item": "Music instruments",
       "unit": "units",
@@ -3377,7 +2327,7 @@
       "deliverable": ""
     },
     {
-      "id": "P225",
+      "id": "P155",
       "category": "Classroom materials",
       "item": "Science materials",
       "unit": "units",
@@ -3392,7 +2342,7 @@
       "deliverable": ""
     },
     {
-      "id": "P226",
+      "id": "P156",
       "category": "Classroom and office consumables",
       "item": "Pencils classroom pack",
       "unit": "packs / units",
@@ -3407,7 +2357,7 @@
       "deliverable": ""
     },
     {
-      "id": "P227",
+      "id": "P157",
       "category": "Classroom and office consumables",
       "item": "Crayon classroom pack",
       "unit": "packs / units",
@@ -3422,7 +2372,7 @@
       "deliverable": ""
     },
     {
-      "id": "P228",
+      "id": "P158",
       "category": "Classroom and office consumables",
       "item": "Marker classroom pack",
       "unit": "packs / units",
@@ -3437,7 +2387,7 @@
       "deliverable": ""
     },
     {
-      "id": "P229",
+      "id": "P159",
       "category": "Classroom and office consumables",
       "item": "Construction paper",
       "unit": "packs / units",
@@ -3452,7 +2402,7 @@
       "deliverable": ""
     },
     {
-      "id": "P230",
+      "id": "P160",
       "category": "Classroom and office consumables",
       "item": "Glue packs",
       "unit": "packs / units",
@@ -3467,7 +2417,7 @@
       "deliverable": ""
     },
     {
-      "id": "P231",
+      "id": "P161",
       "category": "Classroom and office consumables",
       "item": "Scissors",
       "unit": "packs / units",
@@ -3482,7 +2432,7 @@
       "deliverable": ""
     },
     {
-      "id": "P232",
+      "id": "P162",
       "category": "Classroom and office consumables",
       "item": "Paint",
       "unit": "packs / units",
@@ -3497,7 +2447,7 @@
       "deliverable": ""
     },
     {
-      "id": "P233",
+      "id": "P163",
       "category": "Classroom and office consumables",
       "item": "Play dough",
       "unit": "packs / units",
@@ -3512,7 +2462,7 @@
       "deliverable": ""
     },
     {
-      "id": "P234",
+      "id": "P164",
       "category": "Classroom and office consumables",
       "item": "Printer paper",
       "unit": "packs / units",
@@ -3527,7 +2477,7 @@
       "deliverable": ""
     },
     {
-      "id": "P235",
+      "id": "P165",
       "category": "Classroom and office consumables",
       "item": "Laminating pouches",
       "unit": "packs / units",
@@ -3542,7 +2492,7 @@
       "deliverable": ""
     },
     {
-      "id": "P236",
+      "id": "P166",
       "category": "Classroom and office consumables",
       "item": "Labels",
       "unit": "packs / units",
@@ -3557,7 +2507,7 @@
       "deliverable": ""
     },
     {
-      "id": "P237",
+      "id": "P167",
       "category": "Classroom and office consumables",
       "item": "Whiteboard supplies",
       "unit": "packs / units",
@@ -3572,7 +2522,7 @@
       "deliverable": ""
     },
     {
-      "id": "P238",
+      "id": "P168",
       "category": "Classroom and office consumables",
       "item": "Sensory supplies",
       "unit": "packs / units",
@@ -3587,7 +2537,7 @@
       "deliverable": ""
     },
     {
-      "id": "P239",
+      "id": "P169",
       "category": "Classroom and office consumables",
       "item": "Pens",
       "unit": "packs / units",
@@ -3602,7 +2552,7 @@
       "deliverable": ""
     },
     {
-      "id": "P240",
+      "id": "P170",
       "category": "Classroom and office consumables",
       "item": "Eraser packs",
       "unit": "packs / units",
@@ -3617,7 +2567,7 @@
       "deliverable": ""
     },
     {
-      "id": "P241",
+      "id": "P171",
       "category": "Classroom and office consumables",
       "item": "Sharpeners",
       "unit": "packs / units",
@@ -3632,7 +2582,7 @@
       "deliverable": ""
     },
     {
-      "id": "P242",
+      "id": "P172",
       "category": "Classroom and office consumables",
       "item": "Tape packs",
       "unit": "packs / units",
@@ -3647,7 +2597,7 @@
       "deliverable": ""
     },
     {
-      "id": "P243",
+      "id": "P173",
       "category": "Classroom and office consumables",
       "item": "Staplers",
       "unit": "packs / units",
@@ -3662,7 +2612,7 @@
       "deliverable": ""
     },
     {
-      "id": "P244",
+      "id": "P174",
       "category": "Classroom and office consumables",
       "item": "Staples",
       "unit": "packs / units",
@@ -3677,7 +2627,7 @@
       "deliverable": ""
     },
     {
-      "id": "P245",
+      "id": "P175",
       "category": "Classroom and office consumables",
       "item": "Clips",
       "unit": "packs / units",
@@ -3692,7 +2642,7 @@
       "deliverable": ""
     },
     {
-      "id": "P246",
+      "id": "P176",
       "category": "Classroom and office consumables",
       "item": "Binders",
       "unit": "packs / units",
@@ -3707,7 +2657,7 @@
       "deliverable": ""
     },
     {
-      "id": "P247",
+      "id": "P177",
       "category": "Classroom and office consumables",
       "item": "Dividers",
       "unit": "packs / units",
@@ -3722,7 +2672,7 @@
       "deliverable": ""
     },
     {
-      "id": "P248",
+      "id": "P178",
       "category": "Classroom and office consumables",
       "item": "Folders",
       "unit": "packs / units",
@@ -3737,7 +2687,7 @@
       "deliverable": ""
     },
     {
-      "id": "P249",
+      "id": "P179",
       "category": "Classroom and office consumables",
       "item": "Printing ink",
       "unit": "packs / units",
@@ -3752,7 +2702,7 @@
       "deliverable": ""
     },
     {
-      "id": "P250",
+      "id": "P180",
       "category": "Platform completion",
       "item": "Existing-build inventory and deployment acceptance",
       "unit": "engineering hours",
@@ -3767,7 +2717,7 @@
       "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
     },
     {
-      "id": "P251",
+      "id": "P181",
       "category": "Platform completion",
       "item": "Family/child authentication and guardian consent",
       "unit": "engineering hours",
@@ -3782,7 +2732,7 @@
       "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
     },
     {
-      "id": "P252",
+      "id": "P182",
       "category": "Platform completion",
       "item": "Existing CRM ATS store integration",
       "unit": "engineering hours",
@@ -3797,7 +2747,7 @@
       "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
     },
     {
-      "id": "P253",
+      "id": "P183",
       "category": "Platform completion",
       "item": "Curriculum work records and parent progress digest",
       "unit": "engineering hours",
@@ -3812,7 +2762,7 @@
       "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
     },
     {
-      "id": "P254",
+      "id": "P184",
       "category": "Platform completion",
       "item": "Finite character messages and QR routines",
       "unit": "engineering hours",
@@ -3827,7 +2777,7 @@
       "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
     },
     {
-      "id": "P255",
+      "id": "P185",
       "category": "Platform completion",
       "item": "Bilingual product review and fixes",
       "unit": "engineering hours",
@@ -3842,7 +2792,7 @@
       "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
     },
     {
-      "id": "P256",
+      "id": "P186",
       "category": "Platform completion",
       "item": "Role security private files and consent audit",
       "unit": "engineering hours",
@@ -3857,7 +2807,7 @@
       "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
     },
     {
-      "id": "P257",
+      "id": "P187",
       "category": "Platform completion",
       "item": "Backup restore monitoring deployment controls",
       "unit": "engineering hours",
@@ -3872,7 +2822,7 @@
       "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
     },
     {
-      "id": "P258",
+      "id": "P188",
       "category": "Platform completion",
       "item": "Accessibility iPad and browser verification",
       "unit": "engineering hours",
@@ -3887,7 +2837,7 @@
       "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
     },
     {
-      "id": "P259",
+      "id": "P189",
       "category": "Platform completion",
       "item": "UAT staff training onboarding and launch",
       "unit": "engineering hours",
@@ -3902,7 +2852,7 @@
       "deliverable": "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
     },
     {
-      "id": "P260",
+      "id": "P190",
       "category": "Platform assurance",
       "item": "Independent manual web/API penetration test with retest",
       "unit": "engagement",
@@ -3917,7 +2867,7 @@
       "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
     },
     {
-      "id": "P261",
+      "id": "P191",
       "category": "Platform assurance",
       "item": "Privacy counsel consent contracts and retention review",
       "unit": "legal hours",
@@ -3932,7 +2882,7 @@
       "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
     },
     {
-      "id": "P262",
+      "id": "P192",
       "category": "Platform assurance",
       "item": "Security/privacy maintenance review",
       "unit": "hours",
@@ -3947,7 +2897,7 @@
       "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
     },
     {
-      "id": "P263",
+      "id": "P193",
       "category": "Platform support",
       "item": "Technical maintenance and support",
       "unit": "hours",
@@ -3962,7 +2912,7 @@
       "deliverable": "72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage."
     },
     {
-      "id": "P264",
+      "id": "P194",
       "category": "Hosting and software",
       "item": "DigitalOcean production compute",
       "unit": "months",
@@ -3977,7 +2927,7 @@
       "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P265",
+      "id": "P195",
       "category": "Hosting and software",
       "item": "DigitalOcean staging compute",
       "unit": "months",
@@ -3992,7 +2942,7 @@
       "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P266",
+      "id": "P196",
       "category": "Hosting and software",
       "item": "Object storage",
       "unit": "months",
@@ -4007,7 +2957,7 @@
       "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P267",
+      "id": "P197",
       "category": "Hosting and software",
       "item": "Daily compute backup",
       "unit": "months",
@@ -4022,7 +2972,7 @@
       "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P268",
+      "id": "P198",
       "category": "Hosting and software",
       "item": "Supabase Pro",
       "unit": "months",
@@ -4037,7 +2987,7 @@
       "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P269",
+      "id": "P199",
       "category": "Hosting and software",
       "item": "Transactional email",
       "unit": "months",
@@ -4052,7 +3002,7 @@
       "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P270",
+      "id": "P200",
       "category": "Hosting and software",
       "item": "Independent encrypted backup storage",
       "unit": "months / seats / units",
@@ -4067,7 +3017,7 @@
       "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P271",
+      "id": "P201",
       "category": "Hosting and software",
       "item": "Uptime monitoring",
       "unit": "months / seats / units",
@@ -4082,7 +3032,7 @@
       "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P272",
+      "id": "P202",
       "category": "Hosting and software",
       "item": "Domain renewal",
       "unit": "months / seats / units",
@@ -4097,7 +3047,7 @@
       "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P273",
+      "id": "P203",
       "category": "Hosting and software",
       "item": "Password manager",
       "unit": "months / seats / units",
@@ -4112,7 +3062,7 @@
       "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P274",
+      "id": "P204",
       "category": "Hosting and software",
       "item": "Help desk subscription allowance",
       "unit": "months / seats / units",
@@ -4127,7 +3077,7 @@
       "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P275",
+      "id": "P205",
       "category": "Hosting and software",
       "item": "SMS and registration allowance",
       "unit": "months / seats / units",
@@ -4142,7 +3092,7 @@
       "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P276",
+      "id": "P206",
       "category": "Hosting and software",
       "item": "CDN/security plan allowance",
       "unit": "months / seats / units",
@@ -4157,7 +3107,7 @@
       "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P277",
+      "id": "P207",
       "category": "Hosting and software",
       "item": "Cloud usage overage allowance",
       "unit": "months / seats / units",
@@ -4172,7 +3122,7 @@
       "deliverable": "Usage overage allowance configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P278",
+      "id": "P208",
       "category": "Pilot devices",
       "item": "School-owned tablets",
       "unit": "months / seats / units",
@@ -4187,7 +3137,7 @@
       "deliverable": ""
     },
     {
-      "id": "P279",
+      "id": "P209",
       "category": "Pilot devices",
       "item": "Tablet protective cases",
       "unit": "months / seats / units",
@@ -4202,7 +3152,7 @@
       "deliverable": ""
     },
     {
-      "id": "P280",
+      "id": "P210",
       "category": "Pilot devices",
       "item": "Charging station",
       "unit": "months / seats / units",
@@ -4217,7 +3167,7 @@
       "deliverable": ""
     },
     {
-      "id": "P281",
+      "id": "P211",
       "category": "Pilot devices",
       "item": "Device enrollment/setup",
       "unit": "months / seats / units",
@@ -4232,7 +3182,7 @@
       "deliverable": ""
     },
     {
-      "id": "P282",
+      "id": "P212",
       "category": "Pilot devices",
       "item": "Device management allowance",
       "unit": "device-months",
@@ -4247,13 +3197,13 @@
       "deliverable": ""
     },
     {
-      "id": "P283",
+      "id": "P213",
       "category": "Payments",
       "item": "ACH processing \u2014 95% collections",
       "unit": "transactions",
-      "quantity": 437.76,
+      "quantity": 415.872,
       "rate": 5.0,
-      "annual": 2188.8,
+      "annual": 2079.36,
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
@@ -4262,13 +3212,13 @@
       "deliverable": ""
     },
     {
-      "id": "P284",
+      "id": "P214",
       "category": "Payments",
       "item": "Card processing \u2014 5% collections",
       "unit": "transactions",
-      "quantity": 23.04,
+      "quantity": 21.888,
       "rate": 26.69,
-      "annual": 614.94,
+      "annual": 584.19,
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
@@ -4277,13 +3227,13 @@
       "deliverable": ""
     },
     {
-      "id": "P285",
+      "id": "P215",
       "category": "Payments",
       "item": "Recurring billing fee",
       "unit": "collected dollars",
-      "quantity": 419328.0,
+      "quantity": 398361.6,
       "rate": 0.007,
-      "annual": 2935.3,
+      "annual": 2788.53,
       "bucket": "recurring",
       "basis": "Published payment processing schedule",
       "url": "https://stripe.com/pricing",
@@ -4292,7 +3242,7 @@
       "deliverable": ""
     },
     {
-      "id": "P286",
+      "id": "P216",
       "category": "Payments",
       "item": "Refund/chargeback fee allowance",
       "unit": "events",
@@ -4307,7 +3257,7 @@
       "deliverable": ""
     },
     {
-      "id": "P287",
+      "id": "P217",
       "category": "Curriculum and clinical review",
       "item": "Initial curriculum completion / mapping",
       "unit": "educator hours",
@@ -4322,7 +3272,7 @@
       "deliverable": ""
     },
     {
-      "id": "P288",
+      "id": "P218",
       "category": "Curriculum and clinical review",
       "item": "Staff curriculum implementation coaching",
       "unit": "educator hours",
@@ -4337,7 +3287,7 @@
       "deliverable": ""
     },
     {
-      "id": "P289",
+      "id": "P219",
       "category": "Curriculum and clinical review",
       "item": "Ongoing curriculum support",
       "unit": "educator hours",
@@ -4352,7 +3302,7 @@
       "deliverable": ""
     },
     {
-      "id": "P290",
+      "id": "P220",
       "category": "Curriculum and clinical review",
       "item": "RN initial health/routine review",
       "unit": "hours",
@@ -4367,7 +3317,7 @@
       "deliverable": ""
     },
     {
-      "id": "P291",
+      "id": "P221",
       "category": "Curriculum and clinical review",
       "item": "RN recurring consultation",
       "unit": "hours",
@@ -4382,7 +3332,7 @@
       "deliverable": ""
     },
     {
-      "id": "P292",
+      "id": "P222",
       "category": "Curriculum and clinical review",
       "item": "Registered dietitian menu review",
       "unit": "hours",
@@ -4397,7 +3347,7 @@
       "deliverable": ""
     },
     {
-      "id": "P293",
+      "id": "P223",
       "category": "Curriculum and clinical review",
       "item": "Native Spanish curriculum review",
       "unit": "hours",
@@ -4412,7 +3362,7 @@
       "deliverable": ""
     },
     {
-      "id": "P294",
+      "id": "P224",
       "category": "Curriculum and clinical review",
       "item": "Native Spanish update review",
       "unit": "hours",
@@ -4427,7 +3377,7 @@
       "deliverable": ""
     },
     {
-      "id": "P295",
+      "id": "P225",
       "category": "Pilot content production",
       "item": "Ralph / creative production lead \u2014 finite pilot asset delivery",
       "unit": "hours",
@@ -4442,7 +3392,7 @@
       "deliverable": ""
     },
     {
-      "id": "P296",
+      "id": "P226",
       "category": "Pilot content production",
       "item": "Pilot scriptwriting and storyboards",
       "unit": "hours",
@@ -4457,7 +3407,7 @@
       "deliverable": ""
     },
     {
-      "id": "P297",
+      "id": "P227",
       "category": "Pilot content production",
       "item": "Editing sound captions and exports",
       "unit": "hours",
@@ -4472,7 +3422,7 @@
       "deliverable": ""
     },
     {
-      "id": "P298",
+      "id": "P228",
       "category": "Pilot content production",
       "item": "Education review of scripts",
       "unit": "hours",
@@ -4487,7 +3437,7 @@
       "deliverable": ""
     },
     {
-      "id": "P299",
+      "id": "P229",
       "category": "Pilot content production",
       "item": "Generation credits pilot spend cap",
       "unit": "allowance",
@@ -4502,7 +3452,7 @@
       "deliverable": ""
     },
     {
-      "id": "P300",
+      "id": "P230",
       "category": "Pilot content production",
       "item": "Voice/music licensing allowance",
       "unit": "allowance",
@@ -4517,7 +3467,7 @@
       "deliverable": ""
     },
     {
-      "id": "P301",
+      "id": "P231",
       "category": "Pilot content production",
       "item": "Creative software allowance",
       "unit": "months",
@@ -4532,7 +3482,7 @@
       "deliverable": ""
     },
     {
-      "id": "P302",
+      "id": "P232",
       "category": "Pilot content support",
       "item": "Ralph / creative lead \u2014 pilot oversight and updates",
       "unit": "hours",
@@ -4547,7 +3497,7 @@
       "deliverable": ""
     },
     {
-      "id": "P303",
+      "id": "P233",
       "category": "Local marketing",
       "item": "Paid local advertising",
       "unit": "months",
@@ -4562,7 +3512,7 @@
       "deliverable": ""
     },
     {
-      "id": "P304",
+      "id": "P234",
       "category": "Local marketing",
       "item": "Campaign management and analytics",
       "unit": "hours",
@@ -4577,7 +3527,7 @@
       "deliverable": ""
     },
     {
-      "id": "P305",
+      "id": "P235",
       "category": "Local marketing",
       "item": "Launch photography / approved brand asset refresh",
       "unit": "engagement",
@@ -4592,7 +3542,7 @@
       "deliverable": ""
     },
     {
-      "id": "P306",
+      "id": "P236",
       "category": "Local marketing",
       "item": "Tour materials and local signage",
       "unit": "allowance",
@@ -4607,7 +3557,7 @@
       "deliverable": ""
     },
     {
-      "id": "P307",
+      "id": "P237",
       "category": "Store pilot",
       "item": "Made-to-order sample merchandise",
       "unit": "sample units",
@@ -4622,7 +3572,7 @@
       "deliverable": ""
     },
     {
-      "id": "P308",
+      "id": "P238",
       "category": "Store pilot",
       "item": "Store fulfillment test shipments",
       "unit": "test shipments",
@@ -4637,7 +3587,7 @@
       "deliverable": ""
     },
     {
-      "id": "P309",
+      "id": "P239",
       "category": "Refinance transaction",
       "item": "Appraisal allowance",
       "unit": "engagement",
@@ -4652,7 +3602,7 @@
       "deliverable": ""
     },
     {
-      "id": "P310",
+      "id": "P240",
       "category": "Refinance transaction",
       "item": "Title recording and lender closing allowance",
       "unit": "allowance",
@@ -4667,7 +3617,7 @@
       "deliverable": ""
     },
     {
-      "id": "P311",
+      "id": "P241",
       "category": "Refinance transaction",
       "item": "Refinance counsel allowance",
       "unit": "hours",
@@ -4687,114 +3637,117 @@
       "month": 1,
       "children": 30,
       "receipts": 26208.0,
-      "recurring": 38904.69,
-      "one_time": 66133.8,
-      "net": -78830.49,
-      "cumulative": -78830.49
+      "recurring": 26820.86,
+      "one_time": 65499.3,
+      "net": -66112.16,
+      "cumulative": -66112.16
     },
     {
       "month": 2,
       "children": 34,
       "receipts": 29702.4,
-      "recurring": 39245.01,
-      "one_time": 36741.0,
-      "net": -46283.61,
-      "cumulative": -125114.1
+      "recurring": 27161.18,
+      "one_time": 36388.5,
+      "net": -33847.28,
+      "cumulative": -99959.44
     },
     {
       "month": 3,
       "children": 36,
       "receipts": 31449.6,
-      "recurring": 39415.18,
-      "one_time": 22044.6,
-      "net": -30010.18,
-      "cumulative": -155124.28
+      "recurring": 27331.34,
+      "one_time": 21833.1,
+      "net": -17714.84,
+      "cumulative": -117674.28
     },
     {
       "month": 4,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 39585.34,
-      "one_time": 14696.4,
-      "net": -21084.94,
-      "cumulative": -176209.22
+      "recurring": 27501.51,
+      "one_time": 14555.4,
+      "net": -8860.11,
+      "cumulative": -126534.39
     },
     {
       "month": 5,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
-      "one_time": 7348.2,
-      "net": -12159.7,
-      "cumulative": -188368.92
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
+      "one_time": 7277.7,
+      "net": -1582.41,
+      "cumulative": -128116.8
     },
     {
       "month": 6,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -193180.42
+      "net": 5695.29,
+      "cumulative": -122421.51
     },
     {
       "month": 7,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -197991.92
+      "net": 5695.29,
+      "cumulative": -116726.22
     },
     {
       "month": 8,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -202803.42
+      "net": 5695.29,
+      "cumulative": -111030.93
     },
     {
       "month": 9,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -207614.92
+      "net": 5695.29,
+      "cumulative": -105335.64
     },
     {
       "month": 10,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -212426.42
+      "net": 5695.29,
+      "cumulative": -99640.35
     },
     {
       "month": 11,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -217237.92
+      "net": 5695.29,
+      "cumulative": -93945.06
     },
     {
       "month": 12,
-      "children": 40,
-      "receipts": 34944.0,
-      "recurring": 39755.5,
+      "children": 38,
+      "receipts": 33196.8,
+      "recurring": 27501.51,
       "one_time": 0.0,
-      "net": -4811.5,
-      "cumulative": -222049.42
+      "net": 5695.29,
+      "cumulative": -88249.77
     }
   ],
   "assumptions": {
     "tuition": 910,
-    "tuition_basis": "Historical v4.3 draft: $210/week converted using 52/12; current signed schedule unverified; sibling discounts can lower realized revenue",
+    "tuition_basis": "Owner-confirmed 2026-10-13: locked-in rate of $210/week per child (session enrollment), converted using 52/12 = $910/month; assumes 52 billed weeks; no tuition increases assumed; sibling discounts would lower realized revenue.",
+    "tuition_weekly": 210,
+    "ages": "2\u20135",
+    "capacity": 38,
     "collection": 0.96,
     "mortgage_payment": null,
     "mortgage_status": "UNKNOWN \u2014 excluded, not free",
@@ -4803,54 +3756,59 @@
       34,
       36,
       38,
-      40,
-      40,
-      40,
-      40,
-      40,
-      40,
-      40,
-      40
+      38,
+      38,
+      38,
+      38,
+      38,
+      38,
+      38,
+      38
     ],
     "service_days": 250,
     "open_hours": 10,
     "past_creator_fees": "Excluded pending signed deliverables, payments and rights reconciliation"
   },
   "funding": {
-    "peak_deficit": 222049.42,
-    "cash_floor": 39755.5,
-    "request_before_financing": 423849.52,
-    "zero_receipts_before_financing": 825830.12,
-    "financing_status": "Cost estimate, not a financeable loan request. Negative ongoing margin; mortgage, debt, lender fees and past creator invoice unresolved."
+    "peak_deficit": 128116.8,
+    "cash_floor": 27501.51,
+    "request_before_financing": 317451.41,
+    "zero_receipts_before_financing": 664906.67,
+    "financing_status": "Cost estimate, not a financeable loan request. Positive ongoing operating margin before building payments and debt, with the owner as unpaid director; mortgage, debt, lender fees and past creator invoice unresolved."
   },
   "metrics": {
-    "year2_margin": -57738.02,
-    "breakeven_tuition": 1036.37,
-    "full_enrollment_receipts": 419328.0
+    "year2_margin": 68343.54,
+    "breakeven_tuition": 752.55,
+    "full_enrollment_receipts": 398361.6
   },
   "recurring_components": {
-    "fixed_annual": 436226.98,
+    "fixed_annual": 291220.98,
     "variable_per_child_day": 3.51,
     "service_days": 250,
-    "payment_annual": 5739.04
+    "payment_annual": 5452.08
   },
   "staffing": {
-    "full_time": 2,
-    "people": 12,
-    "wages": 269680,
-    "coverage": "Four simultaneous floor adults 7am\u20135pm, conditional age/room grouping; floater separately replaces admin and break coverage; food worker excluded.",
+    "full_time": 4,
+    "people": 6,
+    "paid_people": 5,
+    "wages": 149760.0,
+    "floor_caregivers": 4,
+    "groups": 2,
+    "max_group": 20,
+    "children": 38,
+    "ages": "2\u20135",
+    "director": "Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
+    "ratio_note": "Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112).",
+    "ratio_basis": "5 CSR 25-500.112: mixed ages 2+ with \u22644 two-year-olds per group 1:10, max group 20; >4 two-year-olds 1:8, max 16",
+    "coverage": "All-day care for 38 children: four full-time caregivers on the floor in two groups of \u226420; a part-time floater covers breaks and lunch relief; no food worker (meals prepared by staff; food costs retained); no paid substitutes (the floater covers absences, leaving breaks uncovered on those days); the owner is the unpaid director.",
     "schedule": [
       {
-        "time": "7am\u2013noon",
-        "people": "Director + teacher 1 + teachers 2 and 3"
+        "time": "7am\u20135pm",
+        "people": "Four full-time caregivers in two groups of \u226420"
       },
       {
-        "time": "noon\u20133pm",
-        "people": "Director + teacher 1 + teachers 4 and 5"
-      },
-      {
-        "time": "3pm\u20135pm",
-        "people": "Teachers 4, 5, 6 and 7"
+        "time": "Breaks and lunch",
+        "people": "Part-time floater (relief)"
       }
     ]
   },
@@ -4866,7 +3824,7 @@
     "contingency_included": 11610.0,
     "build_rows": [
       {
-        "id": "P250",
+        "id": "P180",
         "category": "Platform completion",
         "item": "Existing-build inventory and deployment acceptance",
         "unit": "engineering hours",
@@ -4881,7 +3839,7 @@
         "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
       },
       {
-        "id": "P251",
+        "id": "P181",
         "category": "Platform completion",
         "item": "Family/child authentication and guardian consent",
         "unit": "engineering hours",
@@ -4896,7 +3854,7 @@
         "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
       },
       {
-        "id": "P252",
+        "id": "P182",
         "category": "Platform completion",
         "item": "Existing CRM ATS store integration",
         "unit": "engineering hours",
@@ -4911,7 +3869,7 @@
         "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
       },
       {
-        "id": "P253",
+        "id": "P183",
         "category": "Platform completion",
         "item": "Curriculum work records and parent progress digest",
         "unit": "engineering hours",
@@ -4926,7 +3884,7 @@
         "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
       },
       {
-        "id": "P254",
+        "id": "P184",
         "category": "Platform completion",
         "item": "Finite character messages and QR routines",
         "unit": "engineering hours",
@@ -4941,7 +3899,7 @@
         "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
       },
       {
-        "id": "P255",
+        "id": "P185",
         "category": "Platform completion",
         "item": "Bilingual product review and fixes",
         "unit": "engineering hours",
@@ -4956,7 +3914,7 @@
         "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
       },
       {
-        "id": "P256",
+        "id": "P186",
         "category": "Platform completion",
         "item": "Role security private files and consent audit",
         "unit": "engineering hours",
@@ -4971,7 +3929,7 @@
         "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
       },
       {
-        "id": "P257",
+        "id": "P187",
         "category": "Platform completion",
         "item": "Backup restore monitoring deployment controls",
         "unit": "engineering hours",
@@ -4986,7 +3944,7 @@
         "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
       },
       {
-        "id": "P258",
+        "id": "P188",
         "category": "Platform completion",
         "item": "Accessibility iPad and browser verification",
         "unit": "engineering hours",
@@ -5001,7 +3959,7 @@
         "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
       },
       {
-        "id": "P259",
+        "id": "P189",
         "category": "Platform completion",
         "item": "UAT staff training onboarding and launch",
         "unit": "engineering hours",
@@ -5018,7 +3976,7 @@
     ],
     "service_rows": [
       {
-        "id": "P260",
+        "id": "P190",
         "category": "Platform assurance",
         "item": "Independent manual web/API penetration test with retest",
         "unit": "engagement",
@@ -5033,7 +3991,7 @@
         "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
       },
       {
-        "id": "P261",
+        "id": "P191",
         "category": "Platform assurance",
         "item": "Privacy counsel consent contracts and retention review",
         "unit": "legal hours",
@@ -5048,7 +4006,7 @@
         "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
       },
       {
-        "id": "P262",
+        "id": "P192",
         "category": "Platform assurance",
         "item": "Security/privacy maintenance review",
         "unit": "hours",
@@ -5063,7 +4021,7 @@
         "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
       },
       {
-        "id": "P263",
+        "id": "P193",
         "category": "Platform support",
         "item": "Technical maintenance and support",
         "unit": "hours",
@@ -5080,7 +4038,7 @@
     ],
     "hosting_rows": [
       {
-        "id": "P264",
+        "id": "P194",
         "category": "Hosting and software",
         "item": "DigitalOcean production compute",
         "unit": "months",
@@ -5095,7 +4053,7 @@
         "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P265",
+        "id": "P195",
         "category": "Hosting and software",
         "item": "DigitalOcean staging compute",
         "unit": "months",
@@ -5110,7 +4068,7 @@
         "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P266",
+        "id": "P196",
         "category": "Hosting and software",
         "item": "Object storage",
         "unit": "months",
@@ -5125,7 +4083,7 @@
         "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P267",
+        "id": "P197",
         "category": "Hosting and software",
         "item": "Daily compute backup",
         "unit": "months",
@@ -5140,7 +4098,7 @@
         "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P268",
+        "id": "P198",
         "category": "Hosting and software",
         "item": "Supabase Pro",
         "unit": "months",
@@ -5155,7 +4113,7 @@
         "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P269",
+        "id": "P199",
         "category": "Hosting and software",
         "item": "Transactional email",
         "unit": "months",
@@ -5170,7 +4128,7 @@
         "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P270",
+        "id": "P200",
         "category": "Hosting and software",
         "item": "Independent encrypted backup storage",
         "unit": "months / seats / units",
@@ -5185,7 +4143,7 @@
         "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P271",
+        "id": "P201",
         "category": "Hosting and software",
         "item": "Uptime monitoring",
         "unit": "months / seats / units",
@@ -5200,7 +4158,7 @@
         "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P272",
+        "id": "P202",
         "category": "Hosting and software",
         "item": "Domain renewal",
         "unit": "months / seats / units",
@@ -5215,7 +4173,7 @@
         "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P273",
+        "id": "P203",
         "category": "Hosting and software",
         "item": "Password manager",
         "unit": "months / seats / units",
@@ -5230,7 +4188,7 @@
         "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P274",
+        "id": "P204",
         "category": "Hosting and software",
         "item": "Help desk subscription allowance",
         "unit": "months / seats / units",
@@ -5245,7 +4203,7 @@
         "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P275",
+        "id": "P205",
         "category": "Hosting and software",
         "item": "SMS and registration allowance",
         "unit": "months / seats / units",
@@ -5260,7 +4218,7 @@
         "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P276",
+        "id": "P206",
         "category": "Hosting and software",
         "item": "CDN/security plan allowance",
         "unit": "months / seats / units",
@@ -5275,7 +4233,7 @@
         "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P277",
+        "id": "P207",
         "category": "Hosting and software",
         "item": "Cloud usage overage allowance",
         "unit": "months / seats / units",
@@ -5311,89 +4269,93 @@
     },
     "rate_basis": "$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable."
   },
+  "reference": {
+    "market_director_all_in": 60240.72,
+    "basis": "Not in the budget: the v4 full-time director line family (2,080 h \u00d7 $24, statutory taxes, workers compensation, $300/month medical, 3% retirement, annual training), shown so a paid director can be tested in the Profit lab."
+  },
   "sensitivity": [
     {
       "children": 30,
       "tuition": 910,
       "receipts": 314496.0,
-      "annual_operating_margin": -152360.26,
+      "annual_operating_margin": -7354.26,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 35,
+      "children": 34,
       "tuition": 910,
-      "receipts": 366912.0,
-      "annual_operating_margin": -105049.13,
+      "receipts": 356428.8,
+      "annual_operating_margin": 30494.64,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 40,
+      "children": 38,
       "tuition": 910,
-      "receipts": 419328.0,
-      "annual_operating_margin": -57738.01,
+      "receipts": 398361.6,
+      "annual_operating_margin": 68343.54,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1250,
       "receipts": 432000.0,
-      "annual_operating_margin": -35849.16,
+      "annual_operating_margin": 109156.84,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 35,
+      "children": 34,
       "tuition": 1250,
-      "receipts": 504000.0,
-      "annual_operating_margin": 30880.47,
+      "receipts": 489600.0,
+      "annual_operating_margin": 162540.54,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 40,
+      "children": 38,
       "tuition": 1250,
-      "receipts": 576000.0,
-      "annual_operating_margin": 97610.11,
+      "receipts": 547200.0,
+      "annual_operating_margin": 215924.25,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1300,
       "receipts": 449280.0,
-      "annual_operating_margin": -18715.18,
+      "annual_operating_margin": 126290.82,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 35,
+      "children": 34,
       "tuition": 1300,
-      "receipts": 524160.0,
-      "annual_operating_margin": 50870.12,
+      "receipts": 509184.0,
+      "annual_operating_margin": 181959.06,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 40,
+      "children": 38,
       "tuition": 1300,
-      "receipts": 599040.0,
-      "annual_operating_margin": 120455.42,
+      "receipts": 569088.0,
+      "annual_operating_margin": 237627.3,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1400,
       "receipts": 483840.0,
-      "annual_operating_margin": 15552.79,
+      "annual_operating_margin": 160558.79,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 35,
+      "children": 34,
       "tuition": 1400,
-      "receipts": 564480.0,
-      "annual_operating_margin": 90849.42,
+      "receipts": 548352.0,
+      "annual_operating_margin": 220796.09,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
-      "children": 40,
+      "children": 38,
       "tuition": 1400,
-      "receipts": 645120.0,
-      "annual_operating_margin": 166146.04,
+      "receipts": 612864.0,
+      "annual_operating_margin": 281033.39,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     }
   ]

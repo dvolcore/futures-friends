@@ -28,20 +28,27 @@ sources={
 def add(cat,item,unit,qty,rate,bucket='recurring',src='allow',notes='',purpose='',deliverable=''):
  basis,url=sources[src]
  lines.append(dict(id=f'P{len(lines)+1:03}',category=cat,item=item,unit=unit,quantity=float(D(qty)),rate=float(D(rate)),annual=float(M(D(qty)*D(rate))),bucket=bucket,basis=basis,url=url,notes=notes,purpose=purpose,deliverable=deliverable))
-# Two full-time adults; individual short shifts maintain four simultaneous floor adults.
-staff=[('Full-time director',2080,24),('Full-time teacher 1',2080,20),('Part-time teacher 2 — 7am–noon',1300,20),('Part-time teacher 3 — 7am–noon',1300,20),('Part-time teacher 4 — noon–5pm',1300,20),('Part-time teacher 5 — noon–5pm',1300,20),('Part-time teacher 6 — 3pm–5pm',520,20),('Part-time teacher 7 — 3pm–5pm',520,20),('Part-time break/admin floater',1040,20),('Part-time food worker',1040,19),('Substitute 1',320,20),('Substitute 2',320,20)]
+# v5 (owner-confirmed 2026-10-13): all-day care, ages 2–5, full enrollment 38. Four full-time caregivers and one part-time floater per day;
+# the owner serves as director, unpaid ($0 wages); no food worker (meals prepared by staff; food costs retained); no paid substitutes.
+# The v4 roster is archived in costs/archive/.
+CAP=38
+staff=[('Owner-director (unpaid)',2080,0),('Full-time caregiver 1',2080,16),('Full-time caregiver 2',2080,16),('Full-time caregiver 3',2080,16),('Full-time caregiver 4',2080,16),('Part-time break/admin floater',1040,16)]
+WAGE_NOTE=' All staff $16/hr (owner-confirmed 2026-10-13); above Missouri 2026 minimum wage $15.00.'
+BENEFITS=False   # no employer medical or retirement contribution in v5
+RATIO_NOTE='Ages 2–5 · 38 children all day · 4 caregivers on the floor in two groups of ≤20 (Missouri 1:10, ≤4 two-year-olds per group; 5 CSR 25-500.112).'
 for name,hours,rate in staff:
  wage=M(D(hours)*D(rate))
  note='Total planning roster, not all new hires. 52 paid weeks include closure/training allowance; actual roster and hours must replace estimates.'
- if 'director' in name:note+=' Qualified director counts only while assigned to the room; 2 hours/day administrative relief covered by floater.'
- if 'food' in name:note+=' Food preparation cannot count as classroom supervision.'
+ if 'director' in name:note='Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).'
+ if 'director' not in name:note+=WAGE_NOTE
+ if 'caregiver' in name:note+=' '+RATIO_NOTE+' Meals prepared by staff; food costs retained. No paid substitutes — the floater covers absences, leaving breaks uncovered on those days.'
  add('Staff wages',name,'paid hours',hours,rate,src='wage',notes=note)
  add('Employer taxes',name+' — Social Security','taxable wages',wage,'.062',src='fica')
  add('Employer taxes',name+' — Medicare','taxable wages',wage,'.0145',src='fica')
  add('Employer taxes',name+' — Missouri unemployment','taxable wage base',min(wage,D(9000)),'.02376',src='suta',notes='Actual experience rate/entity treatment controls. No separate unemployment reserve.')
  add('Employer taxes',name+' — FUTA','taxable wage base',min(wage,D(7000)),'.006',src='futa',notes='Conditional full-credit taxable-employer assumption; accountant must confirm.')
  add('Staff insurance',name+' — workers compensation','covered wages',wage,'.02',notes='2% unquoted classification allowance; broker quote required.')
- if name.startswith('Full-time'):
+ if BENEFITS and name.startswith('Full-time'):
   add('Staff benefits',name+' — employer medical contribution','months',12,300,notes='Optional employer contribution allowance, not an insurance quote.')
   add('Staff benefits',name+' — retirement contribution','eligible wages',wage,'.03',notes='Optional 3% policy; eligibility and plan terms unresolved.')
 for name,_,_ in staff:
@@ -51,7 +58,7 @@ for name,_,_ in staff:
  add('Staff readiness',name+' — annual training','seat',1,150,notes='Paid training time included in wages; confirm approved provider.')
  add('Staff readiness',name+' — uniform','shirts',3,25,'one_time')
 add('Administration','Payroll Plus base','months',12,80,src='gusto')
-add('Administration','Payroll Plus employee fee','person-months',144,12,src='gusto',notes='12 individually listed adults; adjust to actual billed roster.')
+add('Administration','Payroll Plus employee fee','person-months',sum(1 for _,h,r in staff if r)*12,12,src='gusto',notes=f'{sum(1 for _,h,r in staff if r)} paid adults (the unpaid owner-director is not on payroll); adjust to actual billed roster.')
 add('Administration','Bookkeeping service','months',12,300)
 add('Administration','Tax preparation','filing',1,2500)
 add('Administration','QuickBooks subscription','months',12,38,src='qb')
@@ -64,9 +71,9 @@ add('Administration','City childcare permit','year',1,250,src='permit')
 add('Administration','Food permit allowance','year',1,600,notes='Risk class/exemption must be confirmed; do not pay twice if included in existing license.')
 add('Administration','Food manager training allowance','seat',1,30,'one_time')
 add('Administration','Food handler permit allowance','seats',2,25,'one_time')
-# 40 children, 250 meal-service days. Quoted menus may alter individual quantities.
+# 38 children, 250 meal-service days. Quoted menus may alter individual quantities.
 for item,rate in [('Milk', '.50'),('Fruit','.60'),('Vegetables','.50'),('Protein','.90'),('Grains','.45'),('Allergy substitutes','.15'),('Special diets','.10'),('Food disposables','.15'),('Food waste allowance','.16')]:
- add('Food and nutrition',item,'child service-days',10000,rate,notes='40 × 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.')
+ add('Food and nutrition',item,'child service-days',CAP*250,rate,notes=f'{CAP} × 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.')
 for item,qty,rate in [('Food storage supplies',24,15),('Kitchen service',2,300),('Refrigerator service',2,200),('Freezer service',2,200),('Dishwashing supplies',12,35),('Kitchen gloves',24,12),('Aprons',6,20)]:add('Food and nutrition',item,'units / service visits',qty,rate)
 for item,rate in [('Electricity',600),('Natural gas',175),('Water/sewer',175),('Internet',120),('Staff mobile connectivity',80),('Waste collection',125),('Pest service',75),('Alarm monitoring',40)]:add('Building operations',item,'months',12,rate,notes='Existing bill required; owned facility, no rental deposit or lease rent included.')
 for item,qty,rate in [('HVAC service',4,250),('Plumbing maintenance',4,200),('Electrical maintenance',2,250),('Snow service',8,150),('Lawn service',24,60),('Parking repairs',1,500),('Deep cleaning',4,400),('Property taxes',1,6000),('Building repair allocation',1,3000)]:add('Building operations',item,'visits / annual allowance',qty,rate,notes='Property tax bill, maintenance history and scope required; no major renovation assumed.')
@@ -92,10 +99,10 @@ TUITION=D(910); COLLECTION=D('.96')
 def payment_fees(children,tuition=TUITION,collection=COLLECTION):
  transactions=D(children)*12*collection
  return M(transactions*(D('.95')*min(tuition*D('.008'),D(5))+D('.05')*(tuition*D('.029')+D('.30')))+transactions*tuition*D('.007'))
-transactions=D(40)*12*COLLECTION
+transactions=D(CAP)*12*COLLECTION
 add('Payments','ACH processing — 95% collections','transactions',transactions*D('.95'),min(TUITION*D('.008'),D(5)),src='stripe',notes='Expected paid monthly transactions; fees vary with tuition and occupancy.')
 add('Payments','Card processing — 5% collections','transactions',transactions*D('.05'),TUITION*D('.029')+D('.30'),src='stripe')
-add('Payments','Recurring billing fee','collected dollars',D(40)*12*TUITION*COLLECTION,'.007',src='stripe',notes='Confirm whether existing billing avoids this fee; separate from processing.')
+add('Payments','Recurring billing fee','collected dollars',D(CAP)*12*TUITION*COLLECTION,'.007',src='stripe',notes='Confirm whether existing billing avoids this fee; separate from processing.')
 add('Payments','Refund/chargeback fee allowance','events',12,15)
 add('Curriculum and clinical review','Initial curriculum completion / mapping','educator hours',120,125,'one_time','edu','Specific benchmark, not industry-wide average; child development approval required.')
 add('Curriculum and clinical review','Staff curriculum implementation coaching','educator hours',24,125,'one_time','edu')
@@ -125,49 +132,60 @@ add('Refinance transaction','Refinance counsel allowance','hours',4,350,'one_tim
 
 # Each platform allowance carries a purpose and a testable deliverable.
 platform_annotations=[('Confirm the existing work is reusable before committing the completion price.', 'Code and dependency audit, written remaining-work scope, reproducible staging and production deployment.'), ('Give parents secure access to their own family and preserve consent evidence.', 'Invites, login, password reset, family linking and parent consent; another family cannot be accessed.'), ('Connect the existing CRM, ATS and store to the pilot workflows.', 'Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products.'), ('Make approved learning activities teachable and save the work children complete.', 'Educator-approved activities, persistent learning records, teacher review and a parent weekly digest.'), ('Deliver short character-led routines safely at home and in the classroom.', 'Parent-approved finite character messages and QR routines; no open-ended child AI conversation.'), ('Let families complete essential workflows in English or Spanish.', 'Critical journeys and content reviewed in both languages; native-language sign-off required.'), ('Protect child records and files behind server-enforced access rules.', 'Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts.'), ('Keep a recoverable copy and respond when something fails.', 'Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner.'), ('Make the pilot usable on the devices families actually use.', 'Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices.'), ('Prove the complete pilot works before inviting real families.', '40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint.'), ('Obtain independent security evidence.', 'Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch.'), ('Review child privacy and home-use obligations with qualified counsel.', 'Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established.'), ('Keep privacy and security procedures current through the pilot.', '24 hours/year, averaging two hours/month; documented review and update log.'), ('Provide a named person for routine fixes and operating support.', '72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage.'), ('Production server needed for the pilot service.', 'Production server configured and verified; usage, renewal and account ownership recorded.'), ('Staging server needed for the pilot service.', 'Staging server configured and verified; usage, renewal and account ownership recorded.'), ('Object storage needed for the pilot service.', 'Object storage configured and verified; usage, renewal and account ownership recorded.'), ('Daily server backup needed for the pilot service.', 'Daily server backup configured and verified; usage, renewal and account ownership recorded.'), ('Managed database/authentication needed for the pilot service.', 'Managed database/authentication configured and verified; usage, renewal and account ownership recorded.'), ('Transactional email needed for the pilot service.', 'Transactional email configured and verified; usage, renewal and account ownership recorded.'), ('Offsite recovery storage needed for the pilot service.', 'Offsite recovery storage configured and verified; usage, renewal and account ownership recorded.'), ('Monitoring needed for the pilot service.', 'Monitoring configured and verified; usage, renewal and account ownership recorded.'), ('Domain needed for the pilot service.', 'Domain configured and verified; usage, renewal and account ownership recorded.'), ('Staff password manager needed for the pilot service.', 'Staff password manager configured and verified; usage, renewal and account ownership recorded.'), ('Help desk needed for the pilot service.', 'Help desk configured and verified; usage, renewal and account ownership recorded.'), ('SMS needed for the pilot service.', 'SMS configured and verified; usage, renewal and account ownership recorded.'), ('CDN/security needed for the pilot service.', 'CDN/security configured and verified; usage, renewal and account ownership recorded.'), ('Usage overage allowance needed for the pilot service.', 'Usage overage allowance configured and verified; usage, renewal and account ownership recorded.')]
-for number, (purpose, deliverable) in enumerate(platform_annotations, 250):
+PS=next(i for i,x in enumerate(lines) if x['category']=='Platform completion')+1   # the first platform line (P250 in v4)
+for number, (purpose, deliverable) in enumerate(platform_annotations, PS):
  row=lines[number-1]
  assert row["id"] == f"P{number:03}"
  row.update(purpose=purpose, deliverable=deliverable)
 
+_n=len(lines); _w=M(D(2080)*D(24))
+add('Staff wages','Full-time director','paid hours',2080,24,src='wage')
+add('Employer taxes','Full-time director — Social Security','taxable wages',_w,'.062',src='fica'); add('Employer taxes','Full-time director — Medicare','taxable wages',_w,'.0145',src='fica')
+add('Employer taxes','Full-time director — Missouri unemployment','taxable wage base',min(_w,D(9000)),'.02376',src='suta'); add('Employer taxes','Full-time director — FUTA','taxable wage base',min(_w,D(7000)),'.006',src='futa')
+add('Staff insurance','Full-time director — workers compensation','covered wages',_w,'.02'); add('Staff benefits','Full-time director — employer medical contribution','months',12,300)
+add('Staff benefits','Full-time director — retirement contribution','eligible wages',_w,'.03'); add('Staff readiness','Full-time director — annual training','seat',1,150)
+MARKET_DIRECTOR=M(sum(D(x['annual']) for x in lines[_n:])); del lines[_n:]
 rec=M(sum(D(x['annual']) for x in lines if x['bucket']=='recurring')); once=M(sum(D(x['annual']) for x in lines if x['bucket']=='one_time'))
 # Contingency applies to unquoted completion/launch risk, not another payroll tax.
 cont=M(once*D('.15')); floor=M(rec/12); refi=D(140000)
 pay=M(sum(D(x['annual']) for x in lines if x['category']=='Payments' and 'Refund' not in x['item']))
-food=D('3.51')*40*250; fixed=M(rec-food-pay)
+food=D('3.51')*CAP*250; fixed=M(rec-food-pay)
 oneweights=[D('.45'),D('.25'),D('.15'),D('.10'),D('.05')]+[D(0)]*7
-children=[30,34,36,38]+[40]*8
+children=[min(c,CAP) for c in [30,34,36,38]+[40]*8]
 cash=[]; cumulative=D(0); remaining=once
 for i,c in enumerate(children):
  operating=M(fixed/12+D(c)*250*D('3.51')/12+payment_fees(c)/12)
  o=M(once*oneweights[i]) if i<11 else remaining;remaining-=o
  receipts=M(D(c)*TUITION*COLLECTION); net=M(receipts-operating-o);cumulative+=net
  cash.append(dict(month=i+1,children=c,receipts=float(receipts),recurring=float(operating),one_time=float(o),net=float(net),cumulative=float(M(cumulative))))
-peak=M(max([D(0)]+[-D(c['cumulative']) for c in cash])); revenue=M(D(40)*TUITION*12*COLLECTION);margin=M(revenue-rec)
-def annual_margin(t,c=40):return M(D(c)*D(t)*12*COLLECTION-fixed-D(c)*250*D('3.51')-payment_fees(c,D(t)))
+peak=M(max([D(0)]+[-D(c['cumulative']) for c in cash])); revenue=M(D(CAP)*TUITION*12*COLLECTION);margin=M(revenue-rec)
+def annual_margin(t,c=CAP):return M(D(c)*D(t)*12*COLLECTION-fixed-D(c)*250*D('3.51')-payment_fees(c,D(t)))
 lo=D(0);hi=D(5000)
 for _ in range(60):
  mid=(lo+hi)/2
  if annual_margin(mid)<0:lo=mid
  else:hi=mid
 break_even=M(hi)
-model=dict(meta=dict(title='Futures Friends | 40-child 12-month pilot',prepared='2026-10-11',version='pilot-40-v4',status='Conditional planning estimate; ongoing economics do not yet support borrowing',scope='One owned location, ages 2–5; first-month checkpoint; national expansion deferred.',line_count=len(lines)),totals=dict(recurring=float(rec),one_time=float(once),contingency=float(cont),gross_before_contingency=float(rec+once),gross_first_year=float(rec+once+cont),refinance=140000),lines=lines,cash=cash,assumptions=dict(tuition=910,tuition_basis='Historical v4.3 draft: $210/week converted using 52/12; current signed schedule unverified; sibling discounts can lower realized revenue',collection=.96,mortgage_payment=None,mortgage_status='UNKNOWN — excluded, not free',cash_ramp=children,service_days=250,open_hours=10,past_creator_fees='Excluded pending signed deliverables, payments and rights reconciliation'),funding=dict(peak_deficit=float(peak),cash_floor=float(floor),request_before_financing=float(M(refi+peak+cont+floor)),zero_receipts_before_financing=float(M(refi+rec+once+cont+floor)),financing_status='Cost estimate, not a financeable loan request. Negative ongoing margin; mortgage, debt, lender fees and past creator invoice unresolved.'),metrics=dict(year2_margin=float(margin),breakeven_tuition=float(break_even),full_enrollment_receipts=float(revenue)),recurring_components=dict(fixed_annual=float(fixed),variable_per_child_day=3.51,service_days=250,payment_annual=float(pay)),staffing=dict(full_time=2,people=12,wages=269680,coverage='Four simultaneous floor adults 7am–5pm, conditional age/room grouping; floater separately replaces admin and break coverage; food worker excluded.',schedule=[dict(time='7am–noon',people='Director + teacher 1 + teachers 2 and 3'),dict(time='noon–3pm',people='Director + teacher 1 + teachers 4 and 5'),dict(time='3pm–5pm',people='Teachers 4, 5, 6 and 7')]),sources_checked='2026-10-11 primary tax, wage and vendor references; allowances require written quotes')
+WAGES=M(sum(D(h)*D(r) for _,h,r in staff))
+model=dict(meta=dict(title='Futures Friends | 38-child 12-month pilot',prepared='2026-10-13',version='pilot-38-v5',status=('Conditional planning estimate; positive operating margin before building payments and debt at the planning assumptions; owner-director unpaid' if margin>0 else 'Conditional planning estimate; ongoing economics do not yet support borrowing; owner-director unpaid'),scope='One owned location, ages 2–5; first-month checkpoint; national expansion deferred.',line_count=len(lines)),totals=dict(recurring=float(rec),one_time=float(once),contingency=float(cont),gross_before_contingency=float(rec+once),gross_first_year=float(rec+once+cont),refinance=140000),lines=lines,cash=cash,assumptions=dict(tuition=910,tuition_basis='Owner-confirmed 2026-10-13: locked-in rate of $210/week per child (session enrollment), converted using 52/12 = $910/month; assumes 52 billed weeks; no tuition increases assumed; sibling discounts would lower realized revenue.',tuition_weekly=210,ages='2–5',capacity=CAP,collection=.96,mortgage_payment=None,mortgage_status='UNKNOWN — excluded, not free',cash_ramp=children,service_days=250,open_hours=10,past_creator_fees='Excluded pending signed deliverables, payments and rights reconciliation'),funding=dict(peak_deficit=float(peak),cash_floor=float(floor),request_before_financing=float(M(refi+peak+cont+floor)),zero_receipts_before_financing=float(M(refi+rec+once+cont+floor)),financing_status=('Cost estimate, not a financeable loan request. Positive ongoing operating margin before building payments and debt, with the owner as unpaid director; mortgage, debt, lender fees and past creator invoice unresolved.' if margin>0 else 'Cost estimate, not a financeable loan request. Negative ongoing margin; mortgage, debt, lender fees and past creator invoice unresolved.')),metrics=dict(year2_margin=float(margin),breakeven_tuition=float(break_even),full_enrollment_receipts=float(revenue)),recurring_components=dict(fixed_annual=float(fixed),variable_per_child_day=3.51,service_days=250,payment_annual=float(pay)),staffing=dict(full_time=4,people=len(staff),paid_people=sum(1 for _,h,r in staff if r),wages=float(WAGES),floor_caregivers=4,groups=2,max_group=20,children=CAP,ages='2–5',director='Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).',ratio_note=RATIO_NOTE,ratio_basis='5 CSR 25-500.112: mixed ages 2+ with ≤4 two-year-olds per group 1:10, max group 20; >4 two-year-olds 1:8, max 16',coverage='All-day care for 38 children: four full-time caregivers on the floor in two groups of ≤20; a part-time floater covers breaks and lunch relief; no food worker (meals prepared by staff; food costs retained); no paid substitutes (the floater covers absences, leaving breaks uncovered on those days); the owner is the unpaid director.',schedule=[dict(time='7am–5pm',people='Four full-time caregivers in two groups of ≤20'),dict(time='Breaks and lunch',people='Part-time floater (relief)')]),sources_checked='2026-10-11 primary tax, wage and vendor references; allowances require written quotes')
 
 def platform_sum(start,end,bucket=None):
  return M(sum(D(x['annual']) for x in lines[start-1:end] if bucket is None or x['bucket']==bucket))
-model['platform']=dict(completion=float(platform_sum(250,259)),assurance_one_time=float(platform_sum(260,263,'one_time')),one_time=float(platform_sum(250,277,'one_time')),recurring=float(platform_sum(250,277,'recurring')),hosting=float(platform_sum(264,277)),first_year=float(platform_sum(250,277)),monthly=float(M(platform_sum(250,277,'recurring')/12)),contingency_included=float(M(platform_sum(250,277,'one_time')*D('.15'))),build_rows=lines[249:259],service_rows=lines[259:263],hosting_rows=lines[263:277],gates=[x[1] for x in platform_annotations[:10]],readiness='Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.',separate_costs=dict(curriculum_clinical=38600,pilot_content=25740,creative_oversight=14400,devices=2580),rate_basis='$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable.')
+o=PS-250
+model['platform']=dict(completion=float(platform_sum(250+o,259+o)),assurance_one_time=float(platform_sum(260+o,263+o,'one_time')),one_time=float(platform_sum(250+o,277+o,'one_time')),recurring=float(platform_sum(250+o,277+o,'recurring')),hosting=float(platform_sum(264+o,277+o)),first_year=float(platform_sum(250+o,277+o)),monthly=float(M(platform_sum(250+o,277+o,'recurring')/12)),contingency_included=float(M(platform_sum(250+o,277+o,'one_time')*D('.15'))),build_rows=lines[249+o:259+o],service_rows=lines[259+o:263+o],hosting_rows=lines[263+o:277+o],gates=[x[1] for x in platform_annotations[:10]],readiness='Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.',separate_costs=dict(curriculum_clinical=38600,pilot_content=25740,creative_oversight=14400,devices=2580),rate_basis='$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable.')
 
-model['sensitivity']=[dict(children=c,tuition=t,receipts=float(M(D(c)*D(t)*12*COLLECTION)),annual_operating_margin=float(annual_margin(t,c)),basis='Illustrative price test, not verified market tuition; building and debt excluded') for t in [910,1250,1300,1400] for c in [30,35,40]]
+model['reference']=dict(market_director_all_in=float(MARKET_DIRECTOR),basis='Not in the budget: the v4 full-time director line family (2,080 h × $24, statutory taxes, workers compensation, $300/month medical, 3% retirement, annual training), shown so a paid director can be tested in the Profit lab.')
+model['sensitivity']=[dict(children=c,tuition=t,receipts=float(M(D(c)*D(t)*12*COLLECTION)),annual_operating_margin=float(annual_margin(t,c)),basis='Illustrative price test, not verified market tuition; building and debt excluded') for t in [910,1250,1300,1400] for c in [30,34,CAP]]
 for path in ['costs/pilot-budget.json','Digital/model/pilot-budget.json']:(ROOT/path).write_text(json.dumps(model,indent=2)+'\n')
-for filename,data in [('Pilot_40_Children_Itemized.csv',lines),('Pilot_40_Children_Monthly_Cash.csv',cash)]:
+for filename,data in [('Pilot_38_Children_Itemized.csv',lines),('Pilot_38_Children_Monthly_Cash.csv',cash)]:
  with (ROOT/'costs'/filename).open('w',newline='') as f:
   w=csv.DictWriter(f,fieldnames=list(data[0]),lineterminator="\n");w.writeheader();w.writerows(data)
 fmt=lambda v:('-' if D(v)<0 else '')+f'${abs(D(v)):,.2f}'
 category={}
 for l in lines:category[l['category']]=M(category.get(l['category'],0)+D(l['annual']))
-body=f"""# Futures Friends — current 40-child pilot business and funding plan
+body=f"""# Futures Friends — current 38-child pilot business and funding plan
 
-Prepared October 11, 2026. One owned Independence, Missouri location, ages 2–5, twelve months of operations and a first-month checkpoint. This replaces the expanded $3,139,152.61 case and the discarded $700,000 refinance assumption. National rollout belongs to Phase 2.
+Prepared October 11, 2026; staffing and tuition updated October 13, 2026 (owner-confirmed). One owned Independence, Missouri location, ages 2–5, all-day care for 38 children, twelve months of operations and a first-month checkpoint. This replaces the expanded $3,139,152.61 case and the discarded $700,000 refinance assumption. National rollout belongs to Phase 2.
 
 ## What the pilot proves
 Futures Friends connects Booker, Lumi, Zuri and Bop to early literacy, movement, nutrition, belonging and family routines. Reuse the existing website, CRM, ATS, store, characters and learning materials. Complete parent/child access, curriculum records, approved character reminders and the operating controls needed for one center. Measure safe delivery, parent use, retention and actual cash margin before expanding.
@@ -187,26 +205,26 @@ Futures Friends connects Booker, Lumi, Zuri and Bop to early literacy, movement,
 
 The estimate adds $140,000 + peak cumulative deficit + contingency + cash floor. One-time costs are already included in the cash deficit. Working capital and contingency are cash provisions, not additional vendor expenses. The $140,000 is the owner's stated funding need to enable refinancing; it is not a verified payoff balance. The new building payment, points, lender terms, guarantees and any unpaid creator invoice remain unknown. Zero-tuition stress funding is {fmt(model['funding']['zero_receipts_before_financing'])}, before those missing costs.
 
-**This cost estimate is not an affordable loan recommendation.** At the historical tuition baseline, ongoing operations are negative even before building and investor payments. Borrowing to hide that loss would repeat the original problem.
+**This cost estimate is not an affordable loan recommendation.** {'At the owner-confirmed tuition, ongoing operations show a positive operating margin of '+fmt(margin)+' before building and investor payments, with the owner serving as unpaid director; the building payment and debt terms are unknown, so loan affordability is not established.' if margin>0 else 'At the owner-confirmed tuition, ongoing operations are negative even before building and investor payments. Borrowing to hide that loss would repeat the original problem.'}
 
-## Two full-time adults and individual part-time shifts
+## Four full-time caregivers, a floater, and the owner as unpaid director
 """
 body+='| Person | Paid hours/year | Rate/hour | Annual wages |\n|---|---:|---:|---:|\n'
 body+=''.join(f'| {name} | {h:,} | {fmt(r)} | {fmt(D(h)*D(r))} |\n' for name,h,r in staff)
-body+="""
-Total wages: $269,680. Two full-time people, six part-time classroom teachers, one part-time relief floater, one part-time food worker and two individually costed substitutes. This is a total planning roster, not an order to hire twelve new people. Twelve names do not mean twelve adults supervising at once.
+body+=f"""
+Total wages: {fmt(WAGES)}. Four full-time caregivers and one part-time relief floater, all at $16/hour (owner-confirmed October 13, 2026; above the Missouri 2026 minimum wage of $15.00), with no employer health benefit. The owner serves as director, unpaid; a market director salary (about {fmt(MARKET_DIRECTOR)} all-in) is excluded. There is no food worker (meals are prepared by staff; food costs are retained) and no paid substitutes.
 
-7am–noon: director, teacher 1, teachers 2 and 3. Noon–3pm: director, teacher 1, teachers 4 and 5. 3pm–5pm: teachers 4, 5, 6 and 7. Four adults stay on the floor. The floater provides four hours/day: two hours for director administration and two hours for four half-hour breaks, one replacement at a time. Paid hours use 52 weeks; 250 service days leave ten weekday paid closure/training days. Actual holidays, break duration, overtime and relief needs must be checked against the real roster.
+All-day care, 7am–5pm, for 38 children ages 2–5: four caregivers on the floor in two groups of no more than twenty. The floater covers breaks and lunch relief; on days the floater covers an absence, breaks are uncovered. Paid hours use 52 weeks; 250 service days leave ten weekday paid closure/training days. Actual holidays, break duration, overtime and relief needs must be checked against the real roster.
 
-This four-adult pattern is conditional. Two groups of twenty preschoolers aged 3–5 can fit the applicable ratios, subject to licensed room capacity and the rule for five-year-olds. Twos require 1:8 with maximum group size 16; mixed-age grouping can require more adults. Eight twos plus two groups of sixteen older children would require five floor adults. We do not assert that every 40-child age mix fits four adults. Confirm child ages and approved rooms before accepting enrollment. If another floor adult is needed across a ten-hour day, allow at least 2,500 additional service hours at $20/hour ($50,000 wages), plus relief, taxes and insurance; it is not in the four-adult base. The qualified director counts only when actually in the classroom; the food worker does not count while preparing food. [Missouri rules](https://www.sos.mo.gov/CMSImages/AdRules/csr/current/5csr/5c25-500.pdf).
+This four-caregiver pattern is conditional. Missouri allows 1:10 with a maximum group of 20 for mixed ages 2 and up only if a group has no more than four 2-year-olds (5 CSR 25-500.112); otherwise 1:8 with a maximum group of 16 applies and more adults are needed. A qualified director must be on duty 40 hours a week (5 CSR 25-500.102(2)); the owner fills that role unpaid. Confirm child ages and approved rooms before accepting enrollment. [Missouri rules](https://www.sos.mo.gov/CMSImages/AdRules/csr/current/5csr/5c25-500.pdf).
 
-Each person's Social Security, Medicare, Missouri unemployment, FUTA and workers compensation is separate in the register. Optional medical contribution and retirement allowances apply only to the two full-time adults. Missouri new-employer planning rate: 2.376% on each person's first $9,000; conditional FUTA: 0.6% on the first $7,000. Actual entity status and rate letter govern. No blanket unemployment reserve is added. [Missouri](https://labor.mo.gov/des/employers/tax-rates), [IRS](https://www.irs.gov/publications/p15). Teacher offers at $20/hour are chosen planning offers, not market averages; the KC preschool median benchmark is $17.98. [Local wage evidence](https://www.onetonline.org/link/localwages/25-2011.00?st=MO).
+Each person's Social Security, Medicare, Missouri unemployment, FUTA and workers compensation is separate in the register. No employer medical or retirement contribution is included. Missouri new-employer planning rate: 2.376% on each person's first $9,000; conditional FUTA: 0.6% on the first $7,000. Actual entity status and rate letter govern. No blanket unemployment reserve is added. [Missouri](https://labor.mo.gov/des/employers/tax-rates), [IRS](https://www.irs.gov/publications/p15). The $16/hour rate is the owner-confirmed pay for every role; the KC preschool median benchmark is $17.98. [Local wage evidence](https://www.onetonline.org/link/localwages/25-2011.00?st=MO).
 """
 body+=f"""
 ## Revenue, year two and repayment
-The historical v4.3 draft lists $210/week, converted at 52/12 to **$910/month**. This is not a verified current signed price. The draft's 20% sibling discount may reduce realized receipts further. Do not substitute the old unconfirmed $1,100 assumption for an approved price. At 40 children and 96% cash collection, annual receipts are {fmt(revenue)}. First-year enrollment ramps 30, 34, 36, 38, then 40 for eight months; this is illustrative, not contracted demand.
+The owner confirmed on October 13, 2026 a locked-in rate of **$210/week per child**, converted at 52/12 to **$910/month** (52 billed weeks; no tuition increases assumed). Sibling discounts would reduce realized receipts. At 38 children and 96% cash collection, annual receipts are {fmt(revenue)}. First-year enrollment ramps 30, 34, 36, then 38 from month four; this is illustrative, not contracted demand.
 
-Ongoing annual expenses remain {fmt(rec)} in year two before inflation and building payments. Operating cash is **{fmt(margin)}** before mortgage, investor debt and profit tax. At forty occupied places, break-even realized tuition is **{fmt(break_even)}/child/month**, before building/debt, with food and processing fees recalculated as enrollment changes. A positive repayment plan requires more than reaching this operating break-even. At the same costs, forty places are the modeled ceiling, not an invitation to enroll beyond licensed capacity. A profitable enrollment count cannot be claimed when even forty children lose money.
+Ongoing annual expenses remain {fmt(rec)} in year two before inflation and building payments. Operating cash is **{fmt(margin)}** before mortgage, investor debt and profit tax. At 38 occupied places, break-even realized tuition is **{fmt(break_even)}/child/month**, before building/debt, with food and processing fees recalculated as enrollment changes. A positive repayment plan requires more than reaching this operating break-even. At the same costs, 38 places are the modeled ceiling, not an invitation to enroll beyond licensed capacity.{'' if margin>0 else ' A profitable enrollment count cannot be claimed when even full enrollment loses money.'}
 
 Monthly debt capacity = max(0, annual receipts − ongoing expenses − annual building payments) / 1.25 / 12. The 1.25 coverage hurdle is a planning screen, not a lender commitment. When the building payment is unknown, affordable loan capacity is unknown. The digital calculator shows loan payments and whether cash covers them; it does not deduct loan payments from gross revenue and call that profit. No permanent equity is offered. Rate, term, amortization, collateral and guarantees require an actual lender offer. A long term reduces payments but increases total interest; a balloon does not solve repayment without a documented exit.
 
@@ -240,27 +258,27 @@ body += "\n## Platform delivery: what the allowance buys\n\n"
 platform=model['platform']
 body += f"Year-1 platform allowance: {fmt(platform['first_year'])}. One-time completion and assurance: {fmt(platform['one_time'])}. Annual recurring service: {fmt(platform['recurring'])}, averaging {fmt(platform['monthly'])}/month. {fmt(platform['contingency_included'])} of platform contingency is already included in the overall contingency; do not add it twice.\n\n{platform['rate_basis']}\n\n"
 body += "| ID | Item | Calculation | Amount | Timing | Why essential / delivery evidence |\n|---|---|---|---:|---|---|\n"
-for row in lines[249:277]:
+for row in lines[PS-1:PS+27]:
  body += f"| {row['id']} | {row['item']} | {row['quantity']:g} {row['unit']} × {fmt(row['rate'])} | {fmt(row['annual'])} | {row['bucket'].replace('_',' ')} | {row['purpose']} {row['deliverable']} |\n"
 body += "\n"+platform['readiness']+"\n\nLaunch acceptance requires:\n\n"+"\n".join('- '+g for g in platform['gates'])
 body += "\n\nCurriculum/clinical review ($38,600), finite pilot content ($25,740), annual creative oversight ($14,400) and devices ($2,580) are separately included in the overall budget. A full animated season, national rollout and open-ended child AI are excluded. Six monthly support hours are lean; incidents and larger changes may require additional quoted work. Ongoing tuition must cover recurring costs and debt after Year 1; this platform allowance does not resolve the current operating deficit.\n"
 (ROOT/'documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md').write_text(body)
-one=f"""# Futures Friends | 40-child pilot — investor one-sheet
-One owned center in Independence, Missouri • Ages 2–5 • Twelve months • October 11, 2026
+one=f"""# Futures Friends | 38-child pilot — investor one-sheet
+One owned center in Independence, Missouri • Ages 2–5 • 38 children, all-day care • Twelve months • October 11, 2026 (staffing and tuition updated October 13)
 
 Booker, Lumi, Zuri and Bop connect curriculum, movement, nutrition and family routines. The pilot proves the experience in one real center before licensing it elsewhere. Existing website, CRM, ATS, store and artwork are reused; working parent/child access, learning records, consent, billing and recovery controls must pass acceptance.
 
 | Investor question | Direct answer |
 |---|---|
-| Staffing | Two full-time adults, six short-shift teachers, a break/admin floater, food worker and two substitutes. Four floor adults throughout the assumed ten-hour day; age/room grouping must be approved. Wages $269,680. |
+| Staffing | Four full-time caregivers and a part-time relief floater, all at $16/hour, no employer health benefit; the owner serves as director, unpaid (market director ~{fmt(MARKET_DIRECTOR)} all-in excluded). Four caregivers on the floor in two groups of ≤20, valid with no more than four 2-year-olds per group. No food worker, no paid substitutes. Wages {fmt(WAGES)}. |
 | Annual operating cost | {fmt(rec)} recurring; continues in year two, before inflation and building payments. |
 | Platform delivery | {fmt(platform["first_year"])} Year 1: {fmt(platform["completion"])} completion + {fmt(platform["assurance_one_time"])} one-time assurance + {fmt(platform["recurring"])} annual services. Code audit, fixed-scope quote and working acceptance required. |
 | Completion and launch | {fmt(once)} one-time. Includes $57,000 platform completion, curriculum/clinical review, finite content and security. Local marketing totals $11,400 year one. |
 | Reserves | {fmt(cont)} contingency (15% of one-time spend) and {fmt(floor)} one-month working capital. No blanket unemployment reserve. |
 | Building | $140,000 owner funding requirement enabling refinance; payoff, terms and new payment unverified. $700,000 placeholder removed. |
 | Cash need | {fmt(model['funding']['request_before_financing'])} estimate = $140,000 + {fmt(peak)} peak pilot deficit + contingency + cash floor. Excludes unresolved mortgage/debt and past creator fees. Not a final loan ask. |
-| Receipts | Historical $210/week ≈ $910/month; 96% collection. Forty full-year places collect {fmt(revenue)} before discounts; current signed tuition unverified. |
-| Repayment reality | Full-enrollment operating cash {fmt(margin)} before building/debt. Break-even realized tuition {fmt(break_even)}/month before those payments. Current case does not support borrowing; costs/tuition/funding must change. |
+| Receipts | Owner-confirmed locked-in $210/week per child ($910/month via 52/12); 96% collection. Thirty-eight full-year places collect {fmt(revenue)} before discounts. |
+| Repayment reality | Full-enrollment operating cash {fmt(margin)} before building/debt, with the owner as unpaid director. Break-even realized tuition {fmt(break_even)}/month before those payments. {'Positive before building payments and debt; the building payment and lender terms are unknown, so borrowing capacity is not established.' if margin>0 else 'Current case does not support borrowing; costs/tuition/funding must change.'} |
 | Investor terms | No permanent equity. Payment capacity follows cash after operations and building payment, with a 1.25 coverage screen. Terms/collateral/guarantees require an offer. |
 | Control | Accepted build milestones; consent/role/billing tests; security retest; offsite restore; educator/Spanish approval. Reviews at months 1, 3, 6 and 12. |
 | Deferred | National operations, full animated season, bulk family tablets and unsigned licensing income. |

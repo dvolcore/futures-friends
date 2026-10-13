@@ -809,3 +809,11 @@
 .lab-grid{align-items:start}
 .lab-figs-2{margin-top:calc(.9*var(--u))}
 .wf-hint{margin:calc(.6*var(--u)) 0 0;font-size:clamp(10.5px,calc(.82*var(--u)),13px);color:#e4f0c4;opacity:.9}
+/* v2274: the staffing condition under which two adults per session holds */
+.cap-strip{grid-template-columns:minmax(0,1fr)}
+.strip-staff{grid-row:2;display:flex;align-items:center;gap:8px;margin:0;padding:0 calc(1.4*var(--u));font:600 clamp(11px,calc(.86*var(--u)),13.5px)/1.3 'DM Sans',sans-serif;color:#fffaf0}
+.strip-staff-dot{flex:none;width:8px;height:8px;border-radius:50%;background:#e8c83b;box-shadow:0 0 8px #e8c83b}
+@media (max-width:767px){.strip-staff{padding:0 4px;font-size:13px}}
+
+.lever-cost .lever-amt{color:#ffb3bf}
+:root[data-view=overview] .studio-foot{margin-top:16px;padding-bottom:4px}

@@ -8,7 +8,14 @@
 (function () {
   'use strict';
   const ES = {
-    // v2273 Profit lab
+    "/week": "/semana", "/month": "/mes", ". Before building payments and debt.": ". Antes de pagos del edificio y deuda.",
+    // v2274: model v5 (38 children all day, four caregivers, owner-director unpaid)
+    "Ages 2–5 · 38 children all day · 4 caregivers on the floor in two groups of ≤20 (Missouri 1:10, ≤4 two-year-olds per group)": "Edades 2–5 · 38 niños todo el día · 4 cuidadoras en el aula en dos grupos de ≤20 (Missouri 1:10, ≤4 niños de 2 años por grupo)",
+    "Operating margin at $210/week": "Margen operativo con $210/semana", ". Before building payments and debt; director unpaid.": ". Antes de pagos del edificio y deuda; dirección sin sueldo.",
+    "Pay a director (market salary)": "Pagar una dirección (salario de mercado)", "A paid director (market salary)": "Una dirección pagada (salario de mercado)",
+    "One location. 38 children. One year.": "Una sede. 38 niños. Un año.",
+    "Operating margin at today’s tuition": "Margen operativo con la colegiatura actual", "/child/month. Before building payments and debt.": "/niño/mes. Antes de pagos del edificio y deuda.",
+    "Cash-positive months": "Meses con caja positiva", "From Month": "Desde el mes", "Annual operating margin": "Margen operativo anual",
     "Profit lab": "Laboratorio de rentabilidad", "Move a slider or switch on a lever to see each step.": "Mueva un control o active una palanca para ver cada paso.", "Move the levers to explore a scenario. The published plan stays unchanged.": "Mueva las palancas para explorar un escenario. El plan publicado no cambia.",
     "Reset to the plan": "Volver al plan", "Assumptions": "Supuestos", "Children enrolled": "Niños inscritos", "Collections": "Cobranza", "Cost levers": "Palancas de costo",
     "Futures Friends carries its program costs (not the center)": "Futures Friends asume los costos de su programa (no el centro)",
@@ -61,7 +68,7 @@
     "Characters, stories & curriculum": "Personajes, historias y currículo", "Sources and product previews": "Fuentes y vistas previas de productos",
     "Loan terms not yet agreed": "Términos del préstamo aún sin acordar",
     "Scenario — not a forecast": "Escenario — no es un pronóstico",
-    "Steady-state year: 12 months at your selected enrollment. Uses the model’s method: food and payment-processing fees move with enrollment, tuition and collections; the other recurring costs stay at the model’s 40-child base. Excludes startup costs, building payments and debt; a positive margin does not establish loan affordability.": "Año en régimen estable: 12 meses con la inscripción que elija. Usa el método del modelo: la comida y las comisiones por procesar pagos cambian con la inscripción, la colegiatura y la cobranza; los demás costos recurrentes se mantienen en la base de 40 niños del modelo. Excluye costos iniciales, pagos del edificio y deuda; un margen positivo no demuestra capacidad de pago de un préstamo.",
+    "Steady-state year: 12 months at your selected enrollment. Uses the model’s method: food and payment-processing fees move with enrollment, tuition and collections; the other recurring costs stay at the model’s 38-child base. Excludes startup costs, building payments and debt; a positive margin does not establish loan affordability.": "Año en régimen estable: 12 meses con la inscripción que elija. Usa el método del modelo: la comida y las comisiones por procesar pagos cambian con la inscripción, la colegiatura y la cobranza; los demás costos recurrentes se mantienen en la base de 38 niños del modelo. Excluye costos iniciales, pagos del edificio y deuda; un margen positivo no demuestra capacidad de pago de un préstamo.",
     "Supporting records, operations and the broader product line.": "Registros de apoyo, operaciones y la línea amplia de productos.",
     "See the platform costs.": "Ver los costos de la plataforma.",
     // Overview command center (2026-10-13, v2270)
@@ -150,7 +157,7 @@
     'Learn. Move. Explore. Belong.': 'Aprende. Muévete. Explora. Pertenece.',
     'Explore scenarios': 'Explorar escenarios', 'Pause motion': 'Pausar movimiento', 'Resume motion': 'Reanudar movimiento', 'Reduced motion on': 'Movimiento reducido activado',
     'Show all numbers now': 'Mostrar todas las cifras ya',
-    'Current financial data could not load. Figures below are the October 11 planning snapshot; verify the': 'No se pudieron cargar los datos financieros actuales. Las cifras son la versión de planificación del 11 de octubre; verifique el',
+    'Current financial data could not load. Figures below are the October 13 planning snapshot; verify the': 'No se pudieron cargar los datos financieros actuales. Las cifras son la versión de planificación del 13 de octubre; verifique el',
     'full pilot model': 'modelo piloto completo', 'before relying on them.': 'antes de usarlas.',
     'Preliminary funding need': 'Necesidad preliminar de financiamiento',
     'Before financing costs · estimate, not an approved loan': 'Antes de costos de financiamiento · estimación, no un préstamo aprobado',
@@ -193,7 +200,7 @@
     'Curriculum preview · in development ↗': 'Vista previa del currículo · en desarrollo ↗',
     'Parent-approved finite messages · approved activities · tested access and restore.': 'Mensajes limitados aprobados por los padres · actividades aprobadas · acceso y restauración probados.',
     'Everything behind the plan': 'Todo lo que respalda el plan', 'Key documents for a deeper look.': 'Documentos clave para ver más a fondo.', 'All documents': 'Todos los documentos',
-    'Business plan': 'Plan de negocios', 'The 40-child pilot, staffing, costs and delivery commitments.': 'El piloto de 40 niños, el personal, los costos y los compromisos de entrega.', 'Read the plan ↗': 'Leer el plan ↗',
+    'Business plan': 'Plan de negocios', 'The 38-child pilot, staffing, costs and delivery commitments.': 'El piloto de 38 niños, el personal, los costos y los compromisos de entrega.', 'Read the plan ↗': 'Leer el plan ↗',
     'Investor one-sheet': 'Resumen de una página', 'The core figures, boundaries and open decisions on one page.': 'Las cifras clave, los límites y las decisiones pendientes en una página.', 'See the brief ↗': 'Ver el resumen ↗',
     'Search each line. See quantity, rate, purpose and evidence.': 'Busque cada partida. Vea cantidad, tarifa, propósito y evidencia.', 'Inspect the financials ↗': 'Revisar las finanzas ↗',
     'Monthly cash': 'Caja mensual', 'Enrollment ramp, receipts, spending and the funding gap.': 'Aumento de inscripción, ingresos, gastos y el déficit de financiamiento.', 'Follow the cash ↗': 'Seguir la caja ↗',

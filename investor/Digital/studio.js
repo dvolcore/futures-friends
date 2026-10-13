@@ -6,10 +6,10 @@
    - Each view's entrance plays once per visit (portal.js FFInvReveal.enter: cards count up one at a time; here the donut draws slice
      by slice, the pilot-year chart draws, both on inv:entrance) and lands at once on a tap, key, wheel or touch-scroll (inv:land).
    - Every figure comes from the verified model (../costs/pilot-budget.json, checked by overview.js) or the published monthly cash
-     file (../costs/Pilot_40_Children_Monthly_Cash.csv, checked here against the model row by row). No illustrative shapes.
+     file (../costs/Pilot_38_Children_Monthly_Cash.csv, checked here against the model row by row). No illustrative shapes.
    - Scenarios use the MODEL's method (investor/tools/build_pilot_budget.py annual_margin / break-even): food and payment-processing fees
      move with enrollment, tuition and collections, anchored to the model's recurring total, so at the planning assumptions the
-     explorer shows exactly the published -$57,738.02 margin and the $1,036.37 break-even (it used to hold fees constant: $1,035.30).
+     explorer shows exactly the published margin and break-even (metrics.year2_margin, metrics.breakeven_tuition).
    - v2269 (owner 2026-10-13, "I need this information back in there ... animated motion interactive"): the Overview is the whole
      dashboard again: the donut and the pilot-year chart are factories (makeDonut / makeYear) drawn twice, on their view and in compact
      form on the Overview, with the same model figures; see "Overview" below. The other views stay as the deep dives.
@@ -201,7 +201,7 @@
 
   // ================================================================ Pilot year: the 12 months from the published monthly cash file
   // the published monthly cash file, fetched once for every chart that draws it
-  const cashCsv = fetch('../costs/Pilot_40_Children_Monthly_Cash.csv', { cache: 'no-store' }).then((r) => (r.ok ? r.text() : Promise.reject(new Error(String(r.status))))).then((text) => {
+  const cashCsv = fetch('../costs/Pilot_38_Children_Monthly_Cash.csv', { cache: 'no-store' }).then((r) => (r.ok ? r.text() : Promise.reject(new Error(String(r.status))))).then((text) => {
     const [head, ...lines] = text.trim().split(/\r?\n/);
     const keys = head.split(',').map((k) => k.trim());
     return lines.map((l) => { const c = l.split(','), o = {}; keys.forEach((k, i) => { o[k] = Number(c[i]); }); return o; });
@@ -423,7 +423,8 @@
       const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
       const variable = (n) => n * rc.service_days * rc.variable_per_child_day;
       // anchored to the model's recurring total (which carries the line-item cent rounding), so the planning case is exact
-      const base = m.totals.recurring - variable(40) - fees(40, a.tuition, a.collection);
+      const CAP = a.capacity || 40;   // full enrollment (v5: 38)
+      const base = m.totals.recurring - variable(CAP) - fees(CAP, a.tuition, a.collection);
       const cost = (n, tt, c) => base + variable(n) + fees(n, tt, c);
       const margin = (n, tt, c) => n * tt * 12 * c - cost(n, tt, c);
       const breakEven = (n, c) => { let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (margin(n, mid, c) < 0) lo = mid; else hi = mid; } return Math.round(hi * 100) / 100; };
@@ -451,8 +452,8 @@
       calc = method(m);
       for (const el of [tu, ch, co]) { el.disabled = false; el.addEventListener('input', update); }
       reset.disabled = false;
-      reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = 40; co.value = Math.round(m.assumptions.collection * 100); update(); });
-      tu.value = m.assumptions.tuition; ch.value = 40; co.value = Math.round(m.assumptions.collection * 100);
+      reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 40; co.value = Math.round(m.assumptions.collection * 100); update(); });
+      tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 40; co.value = Math.round(m.assumptions.collection * 100);
       table();
       counter.reset(); update();
       sr.textContent = out.textContent;
@@ -518,7 +519,6 @@
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
       out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
-    const PROFIT_TUITION = 1250;   // the owner's "path to profit" price scenario (pilot-budget.json sensitivity row: 40 children at $1,250)
 
     // ---- the hero (v2272, owner: "you could've just used a full image all the way across the top"). ONE constant picks the art:
     // data-scene on #ccScene (index.html). The picture runs full bleed across the top of the page, from the sidebar to the window's
@@ -585,10 +585,12 @@
       text('kpiFullMonth', String(fullAt)); text('kpiFullKids', String(full)); text('kpiRampFrom', String(cash[0].children)); text('kpiRampTo', String(full));
       const ramp = $('#kpiRamp path');
       if (ramp) { const lo = Math.min(...cash.map((r) => r.children)), y = (c) => 27 - (c - lo) / ((full - lo) || 1) * 23; ramp.setAttribute('d', cash.map((r, i) => `${i ? 'H' : 'M0,'}${i ? (i * 10).toFixed(1) : y(r.children).toFixed(1)}${i ? ` V${y(r.children).toFixed(1)}` : ''}`).join(' ') + ' H120'); ramp.setAttribute('pathLength', '1'); }
-      // the price scenario the owner chose: full enrollment at $1,250 tuition (the model's sensitivity table; not verified market tuition)
-      const test = (m.sensitivity || []).find((r) => r.children === full && r.tuition === PROFIT_TUITION);
-      if (test) { text('kpiProfit', whole(Math.round(test.annual_operating_margin))); text('kpiProfitTuition', whole(test.tuition)); }
+      // v2274 (model v5): the operating margin at today's tuition, before building payments and debt
+      text('kpiProfitSign', metrics.year2_margin >= 0 ? '+' : '−'); text('kpiProfit', whole(Math.round(Math.abs(metrics.year2_margin))));
       text('kpiTodayTuition', whole(assumptions.tuition));
+      // the owner-confirmed weekly price (2026-10-13): $210/week, $910/month via 52/12
+      const weekly = assumptions.tuition_weekly || Math.round(assumptions.tuition * 12 / 52);
+      text('kpiTodayWeek', whole(weekly)); text('kpiRevWeek', whole(weekly));
       const spark = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; };
       const maxRec = Math.max(...cash.map((r) => r.receipts));
       const recPts = cash.map((r, i) => `${(i * 120 / 11).toFixed(1)},${(28 - r.receipts / maxRec * 24).toFixed(1)}`);
@@ -596,7 +598,11 @@
       const maxGap = Math.max(...cash.map((r) => Math.abs(r.net)));
       spark('kpiGapSpark', cash.map((r, i) => { const hh = Math.max(1.5, Math.abs(r.net) / maxGap * 26); return `<rect x="${(i * 10).toFixed(1)}" y="${(29 - hh).toFixed(1)}" width="7" height="${hh.toFixed(1)}" rx="1.5" style="--i:${i}"/>`; }).join(''));
       const g1 = Math.abs(cash[0].net), g12 = Math.abs(cash[cash.length - 1].net);
-      text('kpiShrink', String(Math.round((g1 - g12) / g1 * 100))); text('kpiGapFirst', signed(money(cash[0].net))); text('kpiGapLast', signed(money(cash[cash.length - 1].net)));
+      const posAt = cash.find((r) => r.net > 0);
+      if (posAt) text('kpiPosMonth', String(posAt.month));
+      void g12;
+      const plus = (v) => (v > 0 ? '+' : '') + signed(money(v));
+      text('kpiGapFirst', plus(cash[0].net)); text('kpiGapLast', plus(cash[cash.length - 1].net));
       text('kpiGapM1', String(cash[0].month)); text('kpiGapM12', String(cash[cash.length - 1].month));
       text('capacity', String(Math.max(...cash.map((r) => r.children)))); text('pilotDuration', String(cash.length)); text('collections', Math.round(assumptions.collection * 100) + '%');
       ready = true;
@@ -647,11 +653,12 @@
   })();
 
   // ================================================================ Profit lab (v2273, owner: "I don't see any graphics, widgets, charts, sliders")
-  // A scenario explorer on the Overview: tuition, children and collections sliders and three cost levers, with live outputs. Every number
+  // A scenario explorer on the Overview: tuition, children and collections sliders and two cost levers, with live outputs. Every number
   // is the model's: the margin and break-even use the model's method (scen.method(): food and payment fees move with enrollment, tuition
-  // and collections, so the defaults give exactly -$57,738.02 and $1,036.37, and 40 children at $1,250 gives the sensitivity table's
-  // +$97,610.11); the levers' amounts are summed from the itemized budget (../costs/Pilot_40_Children_Itemized.csv), the year-1 deficit
-  // replays the published monthly cash rows at your assumptions (planning assumptions = the published $222,049.42 peak deficit).
+  // and collections, so the defaults give exactly metrics.year2_margin and metrics.breakeven_tuition, and every sensitivity row to the
+  // cent); the levers' amounts are summed from the itemized budget (../costs/Pilot_38_Children_Itemized.csv), the year-1 deficit replays
+  // the published monthly cash rows at your assumptions (planning assumptions = the published peak deficit). v2274 (model v5): the
+  // owner is the unpaid director; a 'Pay a director' lever adds the market director's all-in cost (model.reference).
   // Charts: the margin waterfall, a break-even gauge, the enrollment ramp and where each operating dollar goes; they grow in on scroll-in
   // with motion on and are static otherwise. Nothing is stored; Reset returns to the plan.
   const lab = (() => {
@@ -671,7 +678,7 @@
       if (cell || row.length) { row.push(cell); out.push(row); }
       const [head, ...rows] = out; return rows.filter((r) => r.length === head.length).map((r) => Object.fromEntries(head.map((k, i) => [k, r[i]])));
     };
-    const itemized = fetch('../costs/Pilot_40_Children_Itemized.csv', { cache: 'no-store' }).then((r) => (r.ok ? r.text() : Promise.reject())).then(parseCsv).catch(() => null);
+    const itemized = fetch('../costs/Pilot_38_Children_Itemized.csv', { cache: 'no-store' }).then((r) => (r.ok ? r.text() : Promise.reject())).then(parseCsv).catch(() => null);
     // the cost levers and the cost groups, by the budget's own categories and lines
     const FF_PROGRAM = ['Pilot content support', 'Curriculum and clinical review', 'Platform support', 'Platform assurance', 'Hosting and software', 'Pilot content production', 'Pilot devices'];
     const GROUPS = [
@@ -687,7 +694,6 @@
       const ads = rec.find((r) => /^Paid local advertising$/i.test(r.item));
       return {
         ff: sum((r) => FF_PROGRAM.includes(r.category)),
-        teacher: sum((r) => /^Part-time teacher 7\b/.test(r.item)),
         // the paid local advertising line cut back to $1,500 a year once the centre is full
         ads: ads ? cents(Number(ads.annual) - 1500) : 0
       };
@@ -746,7 +752,7 @@
       gauge.set(tt, be);
       const m0 = m.metrics.year2_margin, rowsW = [{ name: 'Today’s plan', v: m0, total: true }];
       if (Math.abs(base - m0) >= 0.005) rowsW.push({ name: 'Your tuition, children and collections', v: cents(base - m0) });
-      for (const b of levers) if (b.checked && amounts[b.dataset.lever]) rowsW.push({ name: { ff: 'Program costs carried by Futures Friends', teacher: 'One fewer afternoon teacher', ads: 'Paid ads cut back' }[b.dataset.lever], v: amounts[b.dataset.lever] });
+      for (const b of levers) if (b.checked && amounts[b.dataset.lever]) rowsW.push({ name: { ff: 'Program costs carried by Futures Friends', ads: 'Paid ads cut back', director: 'A paid director (market salary)' }[b.dataset.lever], v: amounts[b.dataset.lever] });
       rowsW.push({ name: 'Your scenario', v: cents(margin), total: true });
       waterfall(rowsW);
       reset.disabled = false;
@@ -775,7 +781,10 @@
     async function build(model) {
       m = model; calc = scen.method();
       const rows = await itemized;
-      if (rows) { amounts = levers0(rows); text('labLeverFF', money(amounts.ff)); text('labLeverTeacher', money(amounts.teacher)); text('labLeverAds', whole(amounts.ads)); }
+      if (rows) { amounts = levers0(rows); text('labLeverFF', money(amounts.ff)); text('labLeverAds', whole(amounts.ads)); }
+      // v5: the owner is the unpaid director; this lever adds a market director (the model's reference line family, all-in) as a cost
+      const dir = m.reference?.market_director_all_in;
+      if (dir) { amounts.director = -dir; text('labLeverDirector', signed(money(-dir))); }
       for (const el of [tu, ch, co, ...levers]) { el.disabled = false; el.addEventListener('input', () => update(true)); el.addEventListener('change', () => update(true)); }
       reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = Math.max(...m.cash.map((r) => r.children)); co.value = Math.round(m.assumptions.collection * 100); levers.forEach((b) => { b.checked = false; }); update(true); });
       tu.value = m.assumptions.tuition; ch.value = Math.max(...m.cash.map((r) => r.children)); co.value = Math.round(m.assumptions.collection * 100);
