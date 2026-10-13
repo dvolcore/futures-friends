@@ -523,7 +523,12 @@ test('studio: scenarios use the model\'s method: the model\'s break-even and mar
   assert.ok(Math.abs(base - rc.fixed_annual) < 0.05, 'the anchor is the model\'s fixed cost base');
   // v2276: the generator's annual_margin, cent for cent: fixed_annual + food + fees rounded half-up, margin rounded half-up
   const r2 = (v) => (v < 0 ? -1 : 1) * Math.round(Math.abs(v) * 100 + 1e-6) / 100;
-  const margin = (n, tt, c) => r2(n * tt * 12 * c - rc.fixed_annual - food(n) - r2(fees(n, tt, c)));
+  // v2281: hire as enrolled: caregivers on payroll follow the children (staffing.hiring_rule), at the model's all-in cost each
+  const carers = (n) => (MODEL.staffing.hiring_rule.find((x) => n <= x.up_to_children) || MODEL.staffing.hiring_rule.at(-1)).caregivers;
+  const staffAdj = (n) => (carers(n) - carers(CAP)) * MODEL.staffing.caregiver_annual_all_in;
+  const margin = (n, tt, c) => r2(n * tt * 12 * c - rc.fixed_annual - staffAdj(n) - food(n) - r2(fees(n, tt, c)));
+  assert.equal(carers(30), 3); assert.equal(carers(34), 4); assert.equal(carers(CAP), 4);
+  for (const row of MODEL.sensitivity) assert.equal(margin(row.children, row.tuition, a.collection), row.annual_operating_margin, `sensitivity ${row.children} children at $${row.tuition} uses ${carers(row.children)} caregivers`);
   const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
   await setRange('#scenarioTuition', 1100); await setRange('#scenarioChildren', 30); await setRange('#scenarioCollection', 90);
   await pg.waitForTimeout(500);
@@ -928,6 +933,11 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
     await setRange('#labTuition', r.tuition); await setRange('#labChildren', r.children); await pg.waitForTimeout(450);
     assert.equal(await pg.textContent('#labMargin'), money2(r.annual_operating_margin), `${r.children} children at $${r.tuition}`);
   }
+  // v2281: at 30 children the lab's margin is the model's 30-child row, with three caregivers (hire as enrolled), not four
+  await setRange('#labTuition', 910); await setRange('#labChildren', 30); await pg.waitForTimeout(450);
+  const row30 = sensitivity.find((r) => r.children === 30 && r.tuition === 910);
+  assert.equal(await pg.textContent('#labMargin'), money2(row30.annual_operating_margin));
+  assert.equal(MODEL.staffing.hiring_rule.find((x) => 30 <= x.up_to_children).caregivers, 3);
   // v2276: the cumulative-positive month follows the scenario (the model's method: twelve months, then month 12 repeated)
   const cumPos = async () => (await pg.$eval('#labCumPosMonth', (e) => e.hidden) ? (await pg.textContent('#labCumPosNone')) : Number(await pg.textContent('#labCumPos')));
   await setRange('#labTuition', 910); await setRange('#labChildren', 30); await pg.waitForTimeout(450);
@@ -1127,19 +1137,23 @@ test('the gold theme (one attribute away): #ddae57 page, espresso rail, page-lev
 // else is lined up"): the KPI row on one grid; the round arrow never sits on any text
 test('KPI row: no text under the arrow; labels, figures, charts and arrows share their lines across the six tiles', async (t) => {
   if (skip) return t.skip(skip);
-  for (const [W, H, mob] of [[1280, 853], [1440, 900], [1920, 1080], [390, 844, true]]) {
+  for (const lang of ['en', 'es']) for (const [W, H, mob] of [[1280, 853], [1440, 900], [1920, 1080], [390, 844, true]]) {
     const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce', isMobile: !!mob, hasTouch: !!mob }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
-    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off&lang=${lang}`); await model(pg); await pg.waitForTimeout(500);
     const r = await pg.evaluate(() => [...document.querySelectorAll('#kpis .kpi')].map((k) => {
       const box = (e) => { const b = e.getBoundingClientRect(); return { l: b.left, r: b.right, t: b.top, b: b.bottom }; };
       const go = box(k.querySelector('.kpi-go')), texts = [];
       const w = document.createTreeWalker(k, NodeFilter.SHOW_TEXT);
       for (let n = w.nextNode(); n; n = w.nextNode()) { if (!n.nodeValue.trim() || n.parentElement.closest('.kpi-go, .sr, svg')) continue; const rg = document.createRange(); rg.selectNodeContents(n); for (const b of rg.getClientRects()) texts.push({ l: b.left, r: b.right, t: b.top, b: b.bottom, s: n.nodeValue.trim().slice(0, 20) }); }
       const hit = texts.filter((x) => x.l < go.r - 0.5 && x.r > go.l + 0.5 && x.t < go.b - 0.5 && x.b > go.t + 0.5).map((x) => x.s);
-      return { hit, tile: box(k), chart: box(k.querySelector('.kpi-chart')), fig: box(k.querySelector('.kpi-v')), go, icon: box(k.querySelector('.kpi-icon')) };
+      // v2281 (re-audit): the corner badge too
+      const ic = box(k.querySelector('.kpi-icon'));
+      const under = texts.filter((x) => x.l < ic.r - 0.5 && x.r > ic.l + 0.5 && x.t < ic.b - 0.5 && x.b > ic.t + 0.5).map((x) => x.s);
+      return { hit, under, tile: box(k), chart: box(k.querySelector('.kpi-chart')), fig: box(k.querySelector('.kpi-v')), go, icon: box(k.querySelector('.kpi-icon')) };
     }));
     assert.equal(r.length, 6);
     for (const [i, x] of r.entries()) assert.deepEqual(x.hit, [], `${W}: tile ${i + 1}: no text under the arrow`);
+    for (const [i, x] of r.entries()) assert.deepEqual(x.under, [], `${W} ${lang}: tile ${i + 1}: no text under the badge`);
     const spread = (f) => Math.max(...r.map(f)) - Math.min(...r.map(f));
     // relative to each tile's top (phones scroll the row sideways, so every tile is measured from its own top)
     assert.ok(spread((x) => x.fig.t - x.tile.t) <= 2, `${W}: figures on one line`);
@@ -1153,3 +1167,24 @@ test('KPI row: no text under the arrow; labels, figures, charts and arrows share
     await ctx.close();
   }
 });
+
+// v2281 (re-audit): ?lang=es leaves no English sentence on the investor pages (model source text and documents are marked lang="en")
+test('Spanish: no English sentence left on the overview, pilot plan, one-sheet and source room', async (t) => {
+  if (skip) return t.skip(skip);
+  for (const pageName of ['index.html?reveal=off&lang=es', 'pilot-plan.html?lang=es', 'pilot-one-sheet.html?lang=es', 'library.html?lang=es']) {
+    const { ctx, pg, errors } = await page(1440);
+    await pg.goto(`${site.base}investor/Digital/${pageName}`); await pg.waitForTimeout(1800);
+    const left = await pg.evaluate(() => {
+      const EN = /\b(the|and|children|with|month|before|for|from|staff|caregivers|tuition|per|years?|costs?|line items?|showing|enter)\b/i, out = [];
+      const skipEl = (e) => !e || e.closest('script, style, [data-i18n-skip], .lang-switch, [hidden], [lang="en"]');
+      const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) { const s = n.nodeValue.trim(); if (s.length > 3 && EN.test(s) && !skipEl(n.parentElement)) out.push(s.slice(0, 80)); }
+      for (const e of document.querySelectorAll('[aria-label], [title], [alt]')) { if (skipEl(e)) continue; for (const a of ['aria-label', 'title', 'alt']) { const s = e.getAttribute(a); if (s && EN.test(s)) out.push(`${a}: ${s.slice(0, 80)}`); } }
+      return out;
+    });
+    assert.deepEqual(left, [], `${pageName}: English left in Spanish`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+

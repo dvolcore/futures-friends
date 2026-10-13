@@ -1098,8 +1098,13 @@
   #kpis.kpis-6 .kpi-go{width:44px;height:44px;right:8px;bottom:8px;padding:8px}
 }
 /* narrower desktops: a label may need a third line (e.g. "Operating margin at $210/week"); every tile keeps the same label height */
-@media (min-width:768px) and (max-width:1365px){#kpis.kpis-6 .kpi-label{min-height:calc(3 * 1.2em)}}
+@media (min-width:768px) and (max-width:1679px){#kpis.kpis-6 .kpi-label{min-height:calc(3 * 1.2em)}}
 
 /* the badges float only while the shared clock runs; at rest they sit exactly in line */
 #kpis.tiles-live.kpis-6 .kpi-icon{translate:0 calc(sin(var(--clk,0) * 6.2832 * 2 + var(--ph,0)) * 2px)}
 @media (min-width:1024px){.view-overview .panel.ovd-card.ovd-docs{padding-left:calc(1.6*var(--u));padding-right:calc(1.6*var(--u))}}
+/* v2281 (re-audit): the corner badge never sits on words: the label and the headline keep the badge's column free; studio.js
+   shrinks a headline that would still overflow (long Spanish figures) */
+#kpis.kpis-6 .kpi{--badge-room:calc(48px + .6*var(--u) + 6px)}
+#kpis.kpis-6 .kpi .kpi-label,#kpis.kpis-6 .kpi .kpi-v{padding-right:var(--badge-room);box-sizing:border-box;max-width:100%}
+#kpis.kpis-6 .kpi .kpi-v{overflow:hidden}

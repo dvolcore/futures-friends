@@ -219,7 +219,8 @@ for i,c in enumerate(children):
  receipts=M(D(c)*TUITION*COLLECTION); net=M(receipts-operating-o);cumulative+=net
  cash.append(dict(month=i+1,children=c,receipts=float(receipts),recurring=float(operating),one_time=float(o),net=float(net),cumulative=float(M(cumulative))))
 peak=M(max([D(0)]+[-D(c['cumulative']) for c in cash])); revenue=M(D(CAP)*TUITION*12*COLLECTION);margin=M(revenue-rec)
-def annual_margin(t,c=CAP):return M(D(c)*D(t)*12*COLLECTION-fixed-food_capped(c)-payment_fees(c,D(t)))
+def staff_adj(c):return (caregivers_for(c)-CG_FULL)*CG_ANNUAL   # v5.2 hire-as-enrolled: fewer caregivers below full enrollment
+def annual_margin(t,c=CAP):return M(D(c)*D(t)*12*COLLECTION-fixed-staff_adj(c)-food_capped(c)-payment_fees(c,D(t)))
 lo=D(0);hi=D(5000)
 for _ in range(60):
  mid=(lo+hi)/2

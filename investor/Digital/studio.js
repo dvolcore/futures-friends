@@ -410,6 +410,22 @@
     };
   }
 
+  // v2281 (re-audit): a KPI headline that would run under the corner badge shrinks to fit its column (any width, any language)
+  const fitKpis = () => {
+    for (const v of $$('#kpis .kpi .kpi-v')) {
+      v.style.fontSize = ''; v.style.lineHeight = '';
+      const cs = getComputedStyle(v), lh = cs.lineHeight;
+      let size = parseFloat(cs.fontSize), guard = 0;
+      // the line keeps its height, so a shrunk headline never moves the chart below it
+      while (v.scrollWidth > v.clientWidth + 0.5 && size > 12 && guard++ < 40) { size -= 0.5; v.style.fontSize = size + 'px'; v.style.lineHeight = lh; }
+    }
+  };
+  let fitRaf = 0; const fitSoon = () => { cancelAnimationFrame(fitRaf); fitRaf = requestAnimationFrame(fitKpis); };
+  if ($('#kpis')) {
+    new MutationObserver(fitSoon).observe($('#kpis'), { subtree: true, childList: true, characterData: true });
+    addEventListener('resize', fitSoon); I.onChange(fitSoon); fitSoon();
+  }
+
   // ================================================================ Scenarios: the model's method, live
   const scen = (() => {
     const tu = $('#scenarioTuition'), ch = $('#scenarioChildren'), co = $('#scenarioCollection'), reset = $('#scenarioReset');
@@ -429,10 +445,14 @@
       const r2 = (v) => (v < 0 ? -1 : 1) * Math.round(Math.abs(v) * 100 + 1e-6) / 100;
       const CAP = a.capacity || 38;   // full enrollment
       const base = rc.fixed_annual != null ? rc.fixed_annual : m.totals.recurring - variable(CAP) - fees(CAP, a.tuition, a.collection);
-      const cost = (n, tt, c) => base + variable(n) + r2(fees(n, tt, c));
+      // hire as enrolled (staffing.hiring_rule): below full enrollment fewer caregivers are on payroll, at the model's all-in cost each
+      const st = m.staffing || {}, rule = st.hiring_rule || [];
+      const carers = (n) => { const hit = rule.find((x) => n <= x.up_to_children) || rule[rule.length - 1]; return hit ? hit.caregivers : 0; };
+      const staffAdj = (n) => (rule.length && st.caregiver_annual_all_in ? (carers(n) - carers(CAP)) * st.caregiver_annual_all_in : 0);
+      const cost = (n, tt, c) => base + staffAdj(n) + variable(n) + r2(fees(n, tt, c));
       const margin = (n, tt, c) => r2(n * tt * 12 * c - cost(n, tt, c));
       const breakEven = (n, c) => { let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (margin(n, mid, c) < 0) lo = mid; else hi = mid; } return Math.round(hi * 100) / 100; };
-      return { base, margin, breakEven, cost, variable, fees, revenue: (n, tt, c) => n * tt * 12 * c, assumptions: a };
+      return { base, margin, breakEven, cost, variable, fees, staffAdj, revenue: (n, tt, c) => n * tt * 12 * c, assumptions: a };
     }
     function update() {
       if (!calc) return;
@@ -588,7 +608,8 @@
     // ---- the six tile charts (v2276). viewBox 120 x 34 unless noted; every shape is a model figure.
     function tileCharts(m) {
       const { funding, totals, platform, cash, metrics } = m;
-      const put = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; return el; };
+      // v2281: chart values are the model's amounts to the cent (no floating-point tails in data-v)
+      const put = (id, html) => { const el = $(`#${id}`); if (el) { el.innerHTML = html; for (const n of $$('[data-v]', el)) { const v = Number(n.dataset.v); if (Number.isFinite(v)) n.dataset.v = String(Math.round(v * 100) / 100); } } return el; };
       const f1 = (v) => v.toFixed(1);
       // 01 the funding ask: its four parts, one stacked bar filling in part by part, a scan line passing over it
       const parts = [['deficit', funding.peak_deficit], ['refinance', totals.refinance], ['floor', funding.cash_floor], ['contingency', totals.contingency]];
@@ -868,7 +889,8 @@
       el.innerHTML = `<line x1="${L}" x2="${W}" y1="${B}" y2="${B}" class="rp-axis"/>` + r.map((v, i) => { const h = v / top * (B - 14); return `<g class="rp-col" data-i="${i}" tabindex="0" role="img" aria-label="Month ${i + 1}, ${v} children"><rect class="rp-bar" x="${(L + i * step + 4).toFixed(1)}" y="${(B - h).toFixed(1)}" width="${(step - 8).toFixed(1)}" height="${h.toFixed(1)}" rx="4" style="--i:${i}"/><text x="${(L + i * step + step / 2).toFixed(1)}" y="${B + 16}" class="rp-month" text-anchor="middle">${i + 1}</text><text x="${(L + i * step + step / 2).toFixed(1)}" y="${(B - h - 5).toFixed(1)}" class="rp-val" text-anchor="middle">${v}</text></g>`; }).join('');
       const show = (g) => { const i = Number(g.dataset.i), b = g.querySelector('rect').getBoundingClientRect(), w = el.parentElement.getBoundingClientRect(); I.set(tip, `Month ${i + 1}: ${r[i]} children`); tip.hidden = false; tip.style.left = `${(b.left - w.left + b.width / 2).toFixed(0)}px`; tip.style.top = `${(b.top - w.top - 8).toFixed(0)}px`; };
       for (const g of $$('.rp-col', el)) { g.addEventListener('pointerenter', () => show(g)); g.addEventListener('focus', () => show(g)); g.addEventListener('pointerleave', () => { tip.hidden = true; }); g.addEventListener('blur', () => { tip.hidden = true; }); }
-      I.onChange(() => { for (const g of $$('.rp-col', el)) I.setAttr(g, 'aria-label', `Month ${Number(g.dataset.i) + 1}, ${r[Number(g.dataset.i)]} children`); });
+      const labelCols = () => { for (const g of $$('.rp-col', el)) I.setAttr(g, 'aria-label', `Month ${Number(g.dataset.i) + 1}, ${r[Number(g.dataset.i)]} children`); };
+      labelCols(); I.onChange(labelCols);   // v2281: Spanish from the first draw, not only after a switch
     }
     // ---- where each operating dollar goes: the recurring budget by group, one stacked bar, a key with amounts and shares
     function dollar(rows) {
