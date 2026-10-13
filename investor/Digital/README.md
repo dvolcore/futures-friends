@@ -31,3 +31,7 @@ Pilot scope includes completion of the existing website, CRM, ATS, store, family
 Superseded financial views have been retired. Legacy page and PDF links now resolve to the current pilot. Production and operating references retain creative depth, with future scope explicitly outside pilot financing.
 
 Publication verifies accessibility of package files, not operational hosting, privacy clearance, signed enrollment, current collections or repayment capacity. Obtain actual operating records, written quotes, lender terms and professional review before funding.
+
+## Investor portal layer (October 12, 2026)
+
+`portal.js`, `portal.css` and `portal-i18n.js` sit on top of the overview without changing a figure: the Futures Hub one-card-at-a-time count-up with neon rings and bars (skippable; final values under Reduce Motion, the site's Decorative motion switch, "Pause motion" and `?reveal=off`), "Show as table" on every chart, the documents drawer (`?doc=<id>`, sizes and pages from `../publication-manifest.json`), English / Español (draft Spanish; English governs) and a link home. The site's Sign in / Portals menu opens this page (`hub-link.js`). After any change under `investor/`, run `python3 investor/tools/refresh_manifest.py`. Tests: `tests/investor-portal.test.js` (figures compared with `tests/fixtures/investor-numbers.json`, recorded before the portal work).

@@ -77,7 +77,8 @@
     { id: 'teacher', label: 'Teacher portal', label_es: 'Portal para maestros', sub: 'The classroom dashboard', sub_es: 'El panel del salón', href: `${PREVIEW}?enter=teacher`, ink: 'var(--booker-ink, #23589F)', art: 'teacher', alt: 'Ms. June' },
     { id: 'director', label: 'Director portal', label_es: 'Portal de dirección', sub: 'The center dashboard', sub_es: 'El panel del centro', href: `${PREVIEW}?enter=director`, ink: 'var(--bop-ink, #6B2A8E)', art: 'director', alt: 'Principal Hazel' },
     { id: 'kids', label: 'Kids\u2019 corner', label_es: 'Rincón de los niños', sub: 'The child space, after a grown-up hands over', sub_es: 'El espacio del niño, después de que un adulto lo entrega', href: `${PREVIEW}?enter=kids`, ink: 'var(--lumi-ink, #B02F6C)', art: 'kids', alt: 'Booker, Lumi, Zuri and Bop' },
-    // { id: 'investor', label: 'Investor portal', label_es: '…', sub: '…', sub_es: '…', href: 'investor/…', ink: '#0A2B38', art: 'investor', alt: '…' },
+    // the investor package (investor/Digital/): one tap, no credential, like the test portals; it is shared for review, not signed in to
+    { id: 'investor', label: 'Investor portal', label_es: 'Portal para inversionistas', sub: 'The pilot plan, costs and documents', sub_es: 'El plan piloto, los costos y los documentos', href: 'investor/Digital/', ink: '#0A2B38', art: 'investor', alt: 'Bop, Lumi, Booker and Zuri in suits' },
     //   (art: img/portals/portal-<art>.webp and @2x, the official character cutouts composed, never redrawn)
   ];
   const MENU_CSS = '#ffPortals{position:fixed;z-index:2147482000;width:min(340px,calc(100vw - 24px));padding:8px;border-radius:16px;background:#fff;color:#0A2B38;box-shadow:0 14px 40px rgba(10,43,56,.28)}'
