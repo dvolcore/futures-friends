@@ -323,13 +323,21 @@ test('the website: the Sign in / Portals menu opens every portal (and each logo 
         await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
         await page.evaluate(() => document.querySelector('a.ffw-signin').click());
         await page.waitForSelector('#ffPortals:not([hidden])');
-        assert.deepEqual(await page.$$eval('#ffPortals a', (as) => as.map((a) => a.dataset.portal)), ['family', 'teacher', 'director', 'kids']);
+        assert.deepEqual(await page.$$eval('#ffPortals a', (as) => as.map((a) => a.dataset.portal)), ['family', 'teacher', 'director', 'kids', 'investor']);
         await page.click(`#ffPortals a[data-portal="${id}"]`);
         await page.waitForSelector(dash, { timeout: 30000 });
         assert.match(page.url(), new RegExp(`/portal-test/${copy}c/test-family-demo-center/${id === 'kids' ? 'kids' : 'home'}`), id);
         // and back: the logo opens the website home
         if (id !== 'kids') { await page.click('header .brand'); await page.waitForURL(/\/futures-friends\/(\?.*)?$/); }
       }
+      // the Investor portal (investor/Digital/): one tap, no credential; its logo returns home too
+      await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
+      await page.evaluate(() => document.querySelector('a.ffw-signin').click());
+      await page.waitForSelector('#ffPortals:not([hidden])');
+      await page.click('#ffPortals a[data-portal="investor"]');
+      await page.waitForSelector('#kpis', { timeout: 30000 });
+      assert.match(page.url(), /\/futures-friends\/investor\/Digital\/(index\.html)?$/, 'investor');
+      await page.click('header .brand'); await page.waitForURL(/\/futures-friends\/(\?.*)?$/);
       await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
     }
     await page.evaluate(() => document.querySelector('a.ffw-signin').click());

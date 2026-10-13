@@ -44,20 +44,20 @@
     },
     {
       "path": "investor/01_Investor_Business_Plan.pdf",
-      "bytes": 6089279,
-      "sha256": "ef0faf7f3967c9da80df2d305d60d0477a357fbdd3986e4f981354ee4ec4d513",
+      "bytes": 347121,
+      "sha256": "e433105e3ca9fd45ad1df3b787ec7ccf25d7b1e4cbe81e7f13c81f66c6c8a2fe",
       "pages": 9
     },
     {
       "path": "investor/02_Series_Curriculum_Production_Bible.pdf",
-      "bytes": 13136480,
-      "sha256": "20bc1f35ef519e2b41c263c931b286d6605ced1f7bdd4946d50ceb5560bb253f",
+      "bytes": 4551796,
+      "sha256": "416de654c6c5d6ce064c8f798ced66098a1cbeca8307dbd33cb3903d61f4b8f7",
       "pages": 43
     },
     {
       "path": "investor/03_Program_Operations_Evidence_Companion.pdf",
-      "bytes": 67860934,
-      "sha256": "5017c365516cf2237d9b9d1b46bcec79eccfe9f512440c0d69a1b3832ad5ba7f",
+      "bytes": 10248972,
+      "sha256": "d170eececea68362e79969b51bcffd5ddfed4307bb3e9ca3b88046effbfb58a1",
       "pages": 125
     },
     {
@@ -68,14 +68,14 @@
     },
     {
       "path": "investor/06_Financial_Reconciliation.pdf",
-      "bytes": 6089279,
-      "sha256": "ef0faf7f3967c9da80df2d305d60d0477a357fbdd3986e4f981354ee4ec4d513",
+      "bytes": 347121,
+      "sha256": "badbdadc654cdfd7d24c787a9c81573ca3c3105dc985f88570079190e3480991",
       "pages": 9
     },
     {
       "path": "investor/Digital/README.md",
-      "bytes": 3950,
-      "sha256": "2dcd9d336b55963235530f38838d761d12a382788dad93fb59c3409bcad442ba"
+      "bytes": 4763,
+      "sha256": "0d0001e1416b890ee6f3cead3ce3bea90e98645eda102d6eb7929266cdaecfed"
     },
     {
       "path": "investor/Digital/assets/backpack.webp",
@@ -128,6 +128,11 @@
       "sha256": "7799565ba84b977e982cb25a398d729998161816e10ecde35bb193e22e726b12"
     },
     {
+      "path": "investor/Digital/assets/curriculum-concept.webp",
+      "bytes": 355904,
+      "sha256": "8088ed76b2f81f658662050f524b205593d2c0ba47662ae81aa48d6232d0a2d2"
+    },
+    {
       "path": "investor/Digital/assets/day-plan.webp",
       "bytes": 49426,
       "sha256": "4c8cd4fbf034e2fd261f5e934033ab6fb38c25ade6193aca785f827ec867f8f9"
@@ -151,6 +156,11 @@
       "path": "investor/Digital/assets/flc-shield.png",
       "bytes": 138430,
       "sha256": "77e3d4673c84496bab546ad88187ca7d25945a83cfee25fdbd7fcf0f0fe58fff"
+    },
+    {
+      "path": "investor/Digital/assets/investor-friends.webp",
+      "bytes": 527098,
+      "sha256": "3d1ccacbe4c31956dd16f928489e474d410f548afcda31439a9debaa9b83392a"
     },
     {
       "path": "investor/Digital/assets/keyart.webp",
@@ -224,8 +234,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 12254,
-      "sha256": "d15cc82028a06a7d1e5a5c227ef4da590a908faf13bc846765f3210d902c9f76"
+      "bytes": 24475,
+      "sha256": "62870d7e5f20e96bb2b77a1a08919accd897374a3e97340545e8cc36ca59b0f0"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -239,8 +249,8 @@
     },
     {
       "path": "investor/Digital/library.html",
-      "bytes": 2467,
-      "sha256": "e0fbc1ef907eb1a6f5c54feb1f07bb0a4284a4ab97a8b5566c30ee7d32b29bda"
+      "bytes": 2508,
+      "sha256": "ddc8bcccb673c101d80df3354065af928cc883ecae428fe534a0fb4982a948e3"
     },
     {
       "path": "investor/Digital/library.js",
@@ -253,9 +263,19 @@
       "sha256": "66c94eaa1c9f3331e5ff5f4c11f67c307de6d6213423c6b67393a1594ca07775"
     },
     {
+      "path": "investor/Digital/overview.css",
+      "bytes": 42992,
+      "sha256": "df7beb5d053c4b47c03481b804e0f3cd29faa3b25d38479eb8eee54bbc002ed8"
+    },
+    {
+      "path": "investor/Digital/overview.js",
+      "bytes": 16984,
+      "sha256": "72b448909e1d868568437da6f548eed7736cb924d51815340f3a3689f486e662"
+    },
+    {
       "path": "investor/Digital/pilot-one-sheet.html",
-      "bytes": 7230,
-      "sha256": "5fa3688ce8c344dea53d816bf176b71235e8053b321a22b073a1c30c76340b26"
+      "bytes": 7271,
+      "sha256": "090fa994d264b10169fdf733bae595b552be30169e6d58b119dd400576311029"
     },
     {
       "path": "investor/Digital/pilot-plan.css",
@@ -264,8 +284,8 @@
     },
     {
       "path": "investor/Digital/pilot-plan.html",
-      "bytes": 13415,
-      "sha256": "8d2a562af69ed086858e03512e7c75b0391f2f316e29ed366c22ac6d328a2272"
+      "bytes": 13456,
+      "sha256": "f99597a9875da35b13149a8c0b6ea3a021ae07b9101ebacf7b1e8f43469f42a8"
     },
     {
       "path": "investor/Digital/pilot-plan.js",
@@ -273,10 +293,25 @@
       "sha256": "1a4c816620b177e60bc5d4cbd466f79a8fcb7183ca061c0e7a4f343255b7af4e"
     },
     {
+      "path": "investor/Digital/portal-i18n.js",
+      "bytes": 23552,
+      "sha256": "e7633cb55ae3ed723b15d593936c3959a7f1b4d33142995ce5d86a8ca2624656"
+    },
+    {
+      "path": "investor/Digital/portal.css",
+      "bytes": 18984,
+      "sha256": "c82c1f9497946fa874c85992eacd2324a21071c8a8b700746430a6fc744cb789"
+    },
+    {
+      "path": "investor/Digital/portal.js",
+      "bytes": 40949,
+      "sha256": "814c108d034d23bb7fc1ed8f0455bc3e83703144ba7b6decaf55961a581776d5"
+    },
+    {
       "path": "investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
-      "bytes": 6096640,
-      "sha256": "8e3d20164f639c10fd92f105cbf004acc9bd3c1141a33487a44d47224d462ff9",
-      "pages": 9
+      "bytes": 352517,
+      "sha256": "e0f552ad34ce8432ac7deb63c07fd9a16d342fd5344ecc300c793ea3b85c893a",
+      "pages": 11
     },
     {
       "path": "investor/Futures_Friends_CURRENT_Pilot_One_Sheet.pdf",
@@ -375,24 +410,9 @@
       "sha256": "9884624d7f25b55f46eb8bcced9241e4b71ced7d26d65adb20b4bf8d16ebe80b"
     },
     {
-      "path": "investor/Digital/overview.css",
-      "bytes": 17767,
-      "sha256": "be6e9d96dc120af3cf24f5271c98ed90d297f00a395270f0698a0f7472b98249"
-    },
-    {
-      "path": "investor/Digital/overview.js",
-      "bytes": 3552,
-      "sha256": "0cb52021afa4fffdf281e5cac515c4c6f5d26f2f3f7a1e7ad2003eae0e19895c"
-    },
-    {
-      "path": "investor/Digital/assets/investor-friends.webp",
-      "bytes": 527098,
-      "sha256": "3d1ccacbe4c31956dd16f928489e474d410f548afcda31439a9debaa9b83392a"
-    },
-    {
-      "path": "investor/Digital/assets/curriculum-concept.webp",
-      "bytes": 355904,
-      "sha256": "8088ed76b2f81f658662050f524b205593d2c0ba47662ae81aa48d6232d0a2d2"
+      "path": "investor/tools/refresh_manifest.py",
+      "bytes": 1620,
+      "sha256": "6c293c1683b7d78dd28f200dc67b0da7f38901ec6eb2bcd416877889f7bb8bf0"
     }
   ]
 }
