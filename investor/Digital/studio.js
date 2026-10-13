@@ -417,11 +417,13 @@
     let calc = null, srTimer = 0;
     const counter = makeCounter(out);
     // the model (build_pilot_budget.py): payment fees per collected tuition payment = 95% ACH at 0.8% capped at $5, 5% card at
-    // 2.9% + $0.30, plus 0.7% recurring billing; food and supplies at $3.51 per child per service day; everything else fixed.
+    // 2.9% + $0.30, plus 0.7% recurring billing; food at the per-child-day model, capped at the owner's food allowance (v5.1:
+    // recurring_components.food_cap_annual, $2,000/month); everything else fixed.
     function method(m) {
       const rc = m.recurring_components, a = m.assumptions;
       const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
-      const variable = (n) => n * rc.service_days * rc.variable_per_child_day;
+      const variable = (n) => (rc.food_cap_annual == null ? n * rc.service_days * rc.variable_per_child_day
+        : Math.min(rc.food_fixed_annual + n * rc.service_days * rc.variable_per_child_day, rc.food_cap_annual));
       // anchored to the model's recurring total (which carries the line-item cent rounding), so the planning case is exact
       const CAP = a.capacity || 40;   // full enrollment (v5: 38)
       const base = m.totals.recurring - variable(CAP) - fees(CAP, a.tuition, a.collection);
@@ -749,6 +751,9 @@
       I.set($('#labStatus'), margin >= 0 ? 'Operating surplus · building payments & debt excluded' : 'Operating shortfall · building payments & debt excluded');
       text('labBreakEven', money(be)); text('labTuitionNow', whole(tt)); text('labDeficit', money(deficit));
       I.set($('#labPayback'), margin > 0 ? `${(deficit / margin).toFixed(1)} years` : 'Not reached');
+      // v2275: the plan's payback timing and the one-time vs recurring split, straight from the model (not scenario-dependent)
+      if (m.metrics.cumulative_cash_positive_month) text('labCumPos', String(m.metrics.cumulative_cash_positive_month));
+      text('labOneTime', money(m.totals.one_time)); text('labRecurring', money(m.totals.recurring));
       gauge.set(tt, be);
       const m0 = m.metrics.year2_margin, rowsW = [{ name: 'Today’s plan', v: m0, total: true }];
       if (Math.abs(base - m0) >= 0.005) rowsW.push({ name: 'Your tuition, children and collections', v: cents(base - m0) });

@@ -1,6 +1,6 @@
-# Animation and content budget reconciliation — 11 October 2026
+# Animation and content budget reconciliation — updated 13 October 2026
 
-Historical expansion evidence only. The active 40-child pilot has **311 cost lines**, **$646,074.62** in gross first-year costs and a **$3,000 finite generation cap**. The full season is outside pilot financing.
+Historical expansion evidence only. The active 38-child pilot (model pilot-38-v5.1) has **241 cost lines**, **$449,944.47** in gross first-year costs and a **$3,000 finite generation cap**. The full season is outside pilot financing.
 
 The superseded expansion content ledger was **$539,647**, including **$122,640** of provisional human animation labor for 84 episode minutes and the **$13,865** Higgsfield generation-credit allowance. Neither line alone buys a finished season. The prior detailed content total of $525,782 excluded the new credit row.
 

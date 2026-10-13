@@ -3,24 +3,26 @@
 Audit date: 2026-10-11  
 Scope: local Downloads project records, investor/business-plan records, and relevant Desktop files. This is a read-only evidence review. Forecasts, proposed rates, targets, and owner-confirmation prompts are not treated as actual operating records.
 
+> **Current model (13 October 2026):** this audit reviews the records that existed on 11 October. The capacities, staffing scenarios and payroll figures it quotes from older proposals (40, 41 and 50 children; Option A/B staffing) are historical evidence, not the plan. The current model is pilot-38-v5.1: 38 children ages 2–5 in all-day care, the owner as unpaid director, 4 full-time caregivers and a part-time floater at $16/hour, owner-confirmed locked-in tuition of $210/week ($910/month), and a year-two operating margin of $112,354.23 before building payments and debt. The older proposals cited below were moved to `99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/` in the project folder. The audit's finding stands: no primary operating record (license, roster, payroll, ledger, bank, debt) has been supplied.
+
 ## Executive finding
 
 The reviewed package does not contain a current primary record proving licensed capacity, enrollment, attendance, tuition collections, staffing/payroll, rent, cash, reserves, or debt. The package itself says those records must be supplied before sending. The only enrollment figure found is an explicitly old snapshot of three children; it must not be reported as current. The operating cost model therefore remains a scenario/allowance model, not a statement of present operations.
 
 ## Evidence that records are absent or unresolved
 
-* `FUTURES_FRIENDS_PROJECT/01_Investor/Futures_Learning_Center_Investor_Package/README.txt`, lines 27–32, has a “BEFORE SENDING — MUST CONFIRM” checklist requiring: DESE license/application and licensed capacity; host church, written agreement and rent; LLC/EIN/ownership; director/teacher pay, hours and credentials; cash on hand, money invested, debt and September actuals. This is a direct package-level admission that those operating records were not yet in the data room.
+* `FUTURES_FRIENDS_PROJECT/99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/01_Investor/Futures_Learning_Center_Investor_Package/README.txt`, lines 27–32, has a “BEFORE SENDING — MUST CONFIRM” checklist requiring: DESE license/application and licensed capacity; host church, written agreement and rent; LLC/EIN/ownership; director/teacher pay, hours and credentials; cash on hand, money invested, debt and September actuals. This is a direct package-level admission that those operating records were not yet in the data room.
 * The same README, lines 5 and 15, says the proposal contains `[CONFIRM]` tags awaiting real numbers. It describes a business-plan workbook, not a ledger or operating system of record.
 * `Futures_Friends_Investor_Meeting_2026-10-08/01_Investor_Business_Plan.pdf`, pp. 4–5 (“Current facts and what still needs proof” / “Center cash model”), says the legacy files have unresolved placeholders for church name, entity, payroll and costs; identifies the license, host agreement, insurance, current enrollment/attendance, bank statements, tuition collection, payroll schedule and 13-week cash forecast as still needed. It explicitly says the older $210 weekly tuition and $70-per-child monthly food number are planning inputs.
-* `FUTURES_FRIENDS_PROJECT/01_Investor/INVESTOR_READINESS_2026-10-07.md`, lines 35–39 and 76–88, records no paying users outside the program, no hosted users and no traffic data, and tells the owner to bring today’s real enrollment and license numbers. This is readiness commentary, not operating evidence.
-* `FUTURES_FRIENDS_PROJECT/01_Investor/v4.3_draft/BUILT_VS_PLANNED.md`, line 67, says there is no family tuition billing or subsidy and Stripe is test-only until an EIN and bank account are in place. That conflicts with any claim that current collections or deposits have been verified.
+* `FUTURES_FRIENDS_PROJECT/99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/01_Investor/INVESTOR_READINESS_2026-10-07.md`, lines 35–39 and 76–88, records no paying users outside the program, no hosted users and no traffic data, and tells the owner to bring today’s real enrollment and license numbers. This is readiness commentary, not operating evidence.
+* `FUTURES_FRIENDS_PROJECT/99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/01_Investor/v4.3_draft/BUILT_VS_PLANNED.md`, line 67, says there is no family tuition billing or subsidy and Stripe is test-only until an EIN and bank account are in place. That conflicts with any claim that current collections or deposits have been verified.
 * A narrow filename search of the Desktop review folder found Futures-related screenshots/renders and `FuturesFriends-Evaluation-2026-10-04.md`, but no license, lease, roster, payroll, bank, tuition-ledger, cash-reserve or debt-record file. Visuals and evaluation notes are not primary operating records.
 
 ## What the records actually support
 
 ### Claimed business details (not independently evidenced)
 
-`FUTURES_FRIENDS_PROJECT/01_Investor/v4.3_draft/INVESTOR_PROPOSAL_v4.3_DRAFT.md` states the proposed location as 3625 S Blue Ridge Blvd, Independence, MO 64052 (line 68), ages 2–5 (lines 32 and 72), and tuition of $210/week (about $910/month) (line 73). Each surrounding section requests owner confirmation or a host agreement. These are proposal claims/published-rate claims, not proof of a current license, operating hours, enrollment or cash receipts.
+`FUTURES_FRIENDS_PROJECT/99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/01_Investor/v4.3_draft/INVESTOR_PROPOSAL_v4.3_DRAFT.md` states the proposed location as 3625 S Blue Ridge Blvd, Independence, MO 64052 (line 68), ages 2–5 (lines 32 and 72), and tuition of $210/week (about $910/month) (line 73). Each surrounding section requests owner confirmation or a host agreement. These are proposal claims/published-rate claims, not proof of a current license, operating hours, enrollment or cash receipts.
 
 ### Historical or forecast figures
 

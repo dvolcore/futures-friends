@@ -38,7 +38,7 @@
   let model = null;
 
   // ---------------------------------------------------------------- number formats: the count-up writes in the final text's own format
-  // "$317,451.41", "−$66,112.16", "$57,000", "38": prefix, sign, grouping and decimals are read from the final text itself.
+  // "$298,563.27", "−$62,341.26", "$57,000", "38": prefix, sign, grouping and decimals are read from the final text itself.
   function shape(text) {
     const m = /^([−-]?)(\$?)([\d,]+)(?:\.(\d+))?$/.exec(text.trim());
     if (!m) return null;

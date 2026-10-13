@@ -1,7 +1,7 @@
 # Futures Friends
 ## Current Operations, Platform & Partner Companion
 
-**Status:** Current working operations master | **Prepared:** 11 October 2026  
+**Status:** Current working operations master | **Prepared:** <!-- model:prepared -->13 October 2026 (model pilot-38-v5.1)<!-- /model:prepared -->  
 **Scope:** one pilot location, children ages 2–5, bilingual family-learning program, adult-mediated digital platform, and staged partner expansion.
 
 > This is an operating design and acceptance plan. It does not claim that every service is hosted, approved, accredited, staffed, or production-tested today.
@@ -87,7 +87,7 @@ Movement includes Turtle Tempo, Sun Stretch, Heart Hands, transitions, outdoor p
 
 ## 7. Tablet and merchandise operations
 
-The 50-device tablet pilot is a planning assumption. A candidate device would be locked to Kid Mode, remotely managed, paired by adult QR flow, branded with approved characters, and remotely wipeable. The program needs device inventory, repair, loss, rental/sale terms, consent, privacy notices, support scripts, and return procedures.
+<!-- model:tablets -->The pilot models 8 school-owned classroom tablets with a 10-device management minimum; a family tablet program is a Phase 2 planning assumption.<!-- /model:tablets --> A candidate device would be locked to Kid Mode, remotely managed, paired by adult QR flow, branded with approved characters, and remotely wipeable. The program needs device inventory, repair, loss, rental/sale terms, consent, privacy notices, support scripts, and return procedures.
 
 Merchandise includes branded learning-zone carpets, posters, cards, books, apparel, cases, and future plush. Every product requires approved art, trademark review, supplier sample, safety documentation, costed landed price, inventory owner, fulfillment plan, and return/support process. A concept image is not a sellable product.
 
@@ -123,11 +123,13 @@ Approved finite character messages may cover handwashing, cleanup, kindness, ask
 
 ## 11. Financial linkage and procurement controls
 
-The current gross model is linked to `investor/costs/pilot-budget.json`, the 311-line itemized CSV and the current workbook. Every line carries an item, quantity, rate, formula, bucket, evidence basis and source URL where one exists. Published references, supplier quotes and planning allowances remain distinct; a price with cents is not proof of a quote or payment. Each line must carry category, purpose, quantity, unit price, tax/shipping treatment, source or assumption, owner, timing, vendor/quote status, and acceptance evidence.
+The current gross model is linked to `investor/costs/pilot-budget.json`, <!-- model:lines -->the 234-line itemized CSV<!-- /model:lines --> and the current workbook. Every line carries an item, quantity, rate, formula, bucket, evidence basis and source URL where one exists. Published references, supplier quotes and planning allowances remain distinct; a price with cents is not proof of a quote or payment. Each line must carry category, purpose, quantity, unit price, tax/shipping treatment, source or assumption, owner, timing, vendor/quote status, and acceptance evidence.
 
 Before purchase: approve scope, validate quantity, obtain a quote or document the assumption, confirm delivery and acceptance criteria, assign budget owner, and record the invoice/payment. After delivery: inspect, record serial/license/asset data, attach acceptance evidence, and update forecast.
 
-The pilot package does not propose a fixed loan amount or promise repayment. The current planning case is a one-location, 40-child, 12-month pilot: $477,066.02 recurring cost, $146,964 one-time cost, $22,044.60 contingency, and $646,074.62 gross year-one requirement including contingency. The separate $140,000 owner-stated refinance-enabling need and the $423,849.52 planning cash estimate before financing are not approved or financeable loan amounts. The model shows a $222,049.42 peak deficit and a $39,755.50 cash floor. At $910 tuition and 96% collections, year-two annual margin is negative $57,738.02 before building payment or debt; operating break-even is $1,036.37 tuition before building/debt. No equity is offered; any debt terms require verified operating evidence and a written lender offer.
+<!-- model:finance -->
+The pilot package does not propose a fixed loan amount or promise repayment. The current planning case is a one-location, 38-child, 12-month pilot (model pilot-38-v5.1): $286,007.37 recurring cost, $142,554.00 one-time cost, $21,383.10 contingency, and $449,944.47 gross year-one requirement including contingency. The separate $140,000 owner-stated refinance-enabling need and the $295,254.96 planning cash estimate before financing are not approved or financeable loan amounts. The model shows a $110,037.91 peak deficit and a $23,833.95 cash floor. The owner serves as director, unpaid; 4 full-time caregivers and 1 part-time floater are paid $16/hour, with 4 caregivers on the floor in 2 groups of no more than 20. Any additional classroom coverage beyond the four caregivers and floater is provided by the owner-director and a head of administration at no added payroll cost (owner, 2026-10-13). Anyone counted in ratio keeps Missouri records on file: background check, medical/TB report, orientation, 12 annual training hours (5 CSR 25-500.102, .122). Owner-set budgets: food and nutrition is capped at $2,000.00/month, with menus still meeting the Missouri meal pattern; toiletries and cleaning stay within $300.00/month ($3,110.18/year with paper towels halved); classroom and office consumables are halved to $1,599.87/year; utilities (electricity, gas, water/sewer) are locked at $1,500.00/month; tax preparation is $1,000.00/year; curriculum mapping is $7,500.00 one-time, and native Spanish review is $1,500.00 one-time, with no recurring curriculum or Spanish review fee; RN consultation is $2,000.00/year; administration is cut to $5,872.00/year (part-time bookkeeper); building upkeep is handled in-house (lawn, HVAC service, electrical, parking and staff mobile removed; snow halved). At the locked-in $210/week ($910/month) tuition and 96% collection, year-two operating margin is $112,354.23 before building payment or debt, and operating break-even is $651.16 tuition per child per month. The building payment and lender terms are unknown, so no loan affordability or profit after debt is claimed. Net cash turns positive in month 5; cumulative pilot cash turns positive in month 17 at the month-12 rate, before building payments and debt. No equity is offered; any debt terms require verified operating evidence and a written lender offer.
+<!-- /model:finance -->
 
 ## 12. Staffing and accountability
 

@@ -7,9 +7,9 @@
 //  - the Hub reveal: one KPI card at a time (1.4 s sweep, 700 ms gap), skippable, final values under Reduce Motion / ?reveal=off;
 //  - English / Español with identical figures; axe (WCAG 2.2 AA); 390 px with no sideways scroll; logo and link home; Pending stays Pending.
 // Investor studio (owner 2026-10-12, "more motion graphics, more space"): six full-screen views behind a rail (a tab bar on phones), each
-// deep-linkable; every figure the v2262 overview showed is still on the page (tests/fixtures/investor-numbers-v2262.json). The ONE intended
+// deep-linkable; every figure the overview shows comes from the model (tests/fixtures/investor-numbers.json). The ONE intended
 // change: the scenario explorer's break-even now uses the model's method (fees move with tuition), so at the planning assumptions it shows
-// the model's $1,036.37 instead of $1,035.30 (fees held constant).
+// the model's own break-even instead of a fees-held-constant one.
 // Headless Chromium from the platform repo (HUB_DIR). Run with --test-concurrency=1 on a loaded machine.
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -23,7 +23,6 @@ const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const MODEL = JSON.parse(read('investor/costs/pilot-budget.json'));
 const MANIFEST = JSON.parse(read('investor/publication-manifest.json'));
 const BASE = JSON.parse(read('tests/fixtures/investor-numbers.json'));
-const V2262 = JSON.parse(read('tests/fixtures/investor-numbers-v2262.json')).overview;
 // the one figure the Investor studio retires on purpose: the explorer's old fees-held-constant break-even
 const RETIRED = [];   // v2274 (model v5): the baseline was re-recorded on the new model; nothing on the page is retired against it
 const SHARE = (v) => (v / MODEL.funding.request_before_financing * 100).toFixed(1) + '%';
@@ -516,9 +515,12 @@ test('studio: scenarios use the model\'s method: the model\'s break-even and mar
   // an independent restatement of the model (investor/tools/build_pilot_budget.py): fees per collected payment, food per child-day
   const rc = MODEL.recurring_components, a = MODEL.assumptions;
   const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
-  const base = MODEL.totals.recurring - CAP * rc.service_days * rc.variable_per_child_day - fees(CAP, a.tuition, a.collection);
+  // v5.1: food follows the per-child-day model up to the owner's cap (recurring_components.food_cap_annual, $2,000/month)
+  const food = (n) => Math.min(rc.food_fixed_annual + n * rc.service_days * rc.variable_per_child_day, rc.food_cap_annual);
+  assert.equal(rc.food_cap_annual, 24000);
+  const base = MODEL.totals.recurring - food(CAP) - fees(CAP, a.tuition, a.collection);
   assert.ok(Math.abs(base - rc.fixed_annual) < 0.05, 'the anchor is the model\'s fixed cost base');
-  const margin = (n, tt, c) => n * tt * 12 * c - base - n * rc.service_days * rc.variable_per_child_day - fees(n, tt, c);
+  const margin = (n, tt, c) => n * tt * 12 * c - base - food(n) - fees(n, tt, c);
   const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
   await setRange('#scenarioTuition', 1100); await setRange('#scenarioChildren', 30); await setRange('#scenarioCollection', 90);
   await pg.waitForTimeout(500);
@@ -643,7 +645,7 @@ test('overview: every figure is the model\'s (KPI tiles, basis strip, capital do
   // the KPI tiles
   // v2272 (owner: "key information at a first glance"): six tiles, each computed here from pilot-budget.json
   assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent.replace(/\s+/g, ' ').trim())), KPI_TEXT());
-  assert.deepEqual(KPI_TEXT(), ['$317,451.41', '$398,362 /yr', 'Month 4', '+$68,344 /yr', 'From Month 6', '$95,852.20']);
+  assert.deepEqual(KPI_TEXT(), ['$295,254.96', '$398,362 /yr', 'Month 4', '+$112,354 /yr', `From Month ${MODEL.cash.find((r) => r.net > 0).month}`, '$95,852.20']);
   assert.deepEqual(await txt(['kpiGapFirst']), [money2(MODEL.cash[0].net)]);
   assert.deepEqual(await txt(['kpiGapLast']), ['+' + money2(MODEL.cash[11].net)]);
   assert.deepEqual(await txt([ 'kpiRampFrom', 'kpiRampTo', 'kpiRevTuition', 'kpiRevColl']), [String(MODEL.cash[0].children), String(CAP), whole(assumptions.tuition), '96%']);
@@ -677,7 +679,7 @@ test('overview: every figure is the model\'s (KPI tiles, basis strip, capital do
   const snap = () => txt(['ovMonthLabel', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet']);
   const row = (m) => { const [, children, receipts, recurring, oneTime, net] = CSV[m - 1]; return [`Month ${String(m).padStart(2, '0')} snapshot`, String(children), money2(receipts), money2(recurring + oneTime), money2(net)]; };
   assert.deepEqual(await snap(), row(1));
-  assert.deepEqual(await snap(), ['Month 01 snapshot', '30', '$26,208.00', '$92,320.16', '−$66,112.16']);
+  assert.deepEqual(await snap(), ['Month 01 snapshot', '30', '$26,208.00', '$87,887.60', '−$61,679.60']);
   await pg.focus('#ovChart'); await pg.keyboard.press('End');
   assert.deepEqual(await snap(), row(12));
   for (let i = 0; i < 5; i++) await pg.keyboard.press('ArrowLeft');
@@ -888,7 +890,7 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
   // the levers' amounts are the itemized budget's lines
   const whole = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
   assert.deepEqual(await txt(['labLeverFF', 'labLeverAds']), [money2(LAB.ff), whole(LAB.ads)]);
-  assert.deepEqual([LAB.ff, LAB.ads], [48512.2, 4500]);
+  assert.deepEqual([LAB.ff, LAB.ads], [22312.2, 4500]);
   // v5: no afternoon-teacher lever; the owner is the unpaid director, and a lever adds a market director's all-in cost
   assert.equal(await pg.$$eval('[data-lever]', (l) => l.map((x) => x.dataset.lever).join()), 'ff,director,ads');
   assert.equal(MODEL.reference.market_director_all_in, 60240.72);
@@ -896,7 +898,7 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
   await pg.click('.lever:has([data-lever="director"])'); await pg.waitForTimeout(450);
   assert.equal(await pg.textContent('#labMargin'), money2(Math.round((metrics.year2_margin - 60240.72) * 100) / 100), 'a paid director comes off the margin');
   await pg.click('.lever:has([data-lever="director"])'); await pg.waitForTimeout(450);
-  // the model's price row: 40 children at $1,250 and 96% collections -> its annual operating margin, to the cent (±1¢)
+  // the model's price row: full enrollment at $1,250 and 96% collections -> its annual operating margin, to the cent (±1¢)
   const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
   await setRange('#labTuition', 1250); await pg.waitForTimeout(500);
   const row = sensitivity.find((r) => r.children === CAP && r.tuition === 1250);
@@ -961,7 +963,7 @@ test('model v5: the generator reproduces the archived v4 (where the archive exis
     assert.equal(JSON.parse(fs.readFileSync(A('pilot-budget_v4_2026-10-11.json'), 'utf8')).funding.request_before_financing, 423849.52);
   } else t.diagnostic('v4 archive not present here: the reproduction check is skipped');
   const { funding: f, totals: tt, staffing: s, assumptions: a, cash } = MODEL;
-  assert.equal(MODEL.meta.version, 'pilot-38-v5');
+  assert.equal(MODEL.meta.version, 'pilot-38-v5.1');
   assert.ok(Math.abs(f.peak_deficit + tt.refinance + f.cash_floor + tt.contingency - f.request_before_financing) < 0.005);
   assert.ok(Math.abs(tt.recurring / 12 - f.cash_floor) < 0.006 && Math.abs(tt.one_time * 0.15 - tt.contingency) < 0.006);
   // 38 children all day, ages 2–5; Missouri 1:10, max group 20 (≤4 two-year-olds per group) -> ceil(38 / 10) = 4 caregivers on the floor

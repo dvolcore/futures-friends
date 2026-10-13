@@ -2,17 +2,17 @@
   "meta": {
     "title": "Futures Friends | 38-child 12-month pilot",
     "prepared": "2026-10-13",
-    "version": "pilot-38-v5",
+    "version": "pilot-38-v5.1",
     "status": "Conditional planning estimate; positive operating margin before building payments and debt at the planning assumptions; owner-director unpaid",
     "scope": "One owned location, ages 2\u20135; first-month checkpoint; national expansion deferred.",
-    "line_count": 241
+    "line_count": 234
   },
   "totals": {
-    "recurring": 330018.06,
-    "one_time": 145554.0,
-    "contingency": 21833.1,
-    "gross_before_contingency": 475572.06,
-    "gross_first_year": 497405.16,
+    "recurring": 286007.37,
+    "one_time": 142554.0,
+    "contingency": 21383.1,
+    "gross_before_contingency": 428561.37,
+    "gross_first_year": 449944.47,
     "refinance": 140000
   },
   "lines": [
@@ -1012,12 +1012,12 @@
       "item": "Payroll Plus base",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 80.0,
-      "annual": 960.0,
+      "rate": 40.0,
+      "annual": 480.0,
       "bucket": "recurring",
       "basis": "Published Plus plan price; taxes separate",
       "url": "https://gusto.com/product/pricing",
-      "notes": "",
+      "notes": "Owner cut 2026-10-13: bookkeeping in-house via the Hub; admin halved.",
       "purpose": "",
       "deliverable": ""
     },
@@ -1027,12 +1027,12 @@
       "item": "Payroll Plus employee fee",
       "unit": "person-months",
       "quantity": 60.0,
-      "rate": 12.0,
-      "annual": 720.0,
+      "rate": 6.0,
+      "annual": 360.0,
       "bucket": "recurring",
       "basis": "Published Plus plan price; taxes separate",
       "url": "https://gusto.com/product/pricing",
-      "notes": "5 paid adults (the unpaid owner-director is not on payroll); adjust to actual billed roster.",
+      "notes": "5 paid adults (the unpaid owner-director is not on payroll); adjust to actual billed roster. Owner cut 2026-10-13: bookkeeping in-house via the Hub; admin halved.",
       "purpose": "",
       "deliverable": ""
     },
@@ -1042,12 +1042,12 @@
       "item": "Bookkeeping service",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 300.0,
-      "annual": 3600.0,
+      "rate": 150.0,
+      "annual": 1800.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner 2026-10-13: part-time bookkeeper, half the original allowance.",
       "purpose": "",
       "deliverable": ""
     },
@@ -1057,12 +1057,12 @@
       "item": "Tax preparation",
       "unit": "filing",
       "quantity": 1.0,
-      "rate": 2500.0,
-      "annual": 2500.0,
+      "rate": 1000.0,
+      "annual": 1000.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set tax preparation budget: $1,000/year (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1087,12 +1087,12 @@
       "item": "Operating bank fees",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 25.0,
-      "annual": 300.0,
+      "rate": 0.0,
+      "annual": 0.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "No-fee business account. Owner cut 2026-10-13: bookkeeping in-house via the Hub; admin halved.",
       "purpose": "",
       "deliverable": ""
     },
@@ -1222,12 +1222,12 @@
       "item": "Milk",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.5,
-      "annual": 4750.0,
+      "rate": 0.333955,
+      "annual": 3172.57,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1237,12 +1237,12 @@
       "item": "Fruit",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.6,
-      "annual": 5700.0,
+      "rate": 0.400746,
+      "annual": 3807.09,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1252,12 +1252,12 @@
       "item": "Vegetables",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.5,
-      "annual": 4750.0,
+      "rate": 0.333955,
+      "annual": 3172.57,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1267,12 +1267,12 @@
       "item": "Protein",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.9,
-      "annual": 8550.0,
+      "rate": 0.60112,
+      "annual": 5710.64,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1282,12 +1282,12 @@
       "item": "Grains",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.45,
-      "annual": 4275.0,
+      "rate": 0.300559,
+      "annual": 2855.31,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1297,12 +1297,12 @@
       "item": "Allergy substitutes",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.15,
-      "annual": 1425.0,
+      "rate": 0.100186,
+      "annual": 951.77,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1312,12 +1312,12 @@
       "item": "Special diets",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.1,
-      "annual": 950.0,
+      "rate": 0.066791,
+      "annual": 634.51,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1327,12 +1327,12 @@
       "item": "Food disposables",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.15,
-      "annual": 1425.0,
+      "rate": 0.100186,
+      "annual": 951.77,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1342,12 +1342,12 @@
       "item": "Food waste allowance",
       "unit": "child service-days",
       "quantity": 9500.0,
-      "rate": 0.16,
-      "annual": 1520.0,
+      "rate": 0.106865,
+      "annual": 1015.22,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed.",
+      "notes": "38 \u00d7 250 days; per-category purchasing allowance, not a supplier quote. No food-program reimbursement assumed. Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1357,12 +1357,12 @@
       "item": "Food storage supplies",
       "unit": "units / service visits",
       "quantity": 24.0,
-      "rate": 15.0,
-      "annual": 360.0,
+      "rate": 10.01875,
+      "annual": 240.45,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1372,12 +1372,12 @@
       "item": "Kitchen service",
       "unit": "units / service visits",
       "quantity": 2.0,
-      "rate": 300.0,
-      "annual": 600.0,
+      "rate": 200.375,
+      "annual": 400.75,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1387,12 +1387,12 @@
       "item": "Refrigerator service",
       "unit": "units / service visits",
       "quantity": 2.0,
-      "rate": 200.0,
-      "annual": 400.0,
+      "rate": 133.58,
+      "annual": 267.16,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1402,12 +1402,12 @@
       "item": "Freezer service",
       "unit": "units / service visits",
       "quantity": 2.0,
-      "rate": 200.0,
-      "annual": 400.0,
+      "rate": 133.58,
+      "annual": 267.16,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1417,12 +1417,12 @@
       "item": "Dishwashing supplies",
       "unit": "units / service visits",
       "quantity": 12.0,
-      "rate": 35.0,
-      "annual": 420.0,
+      "rate": 23.376667,
+      "annual": 280.52,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1432,12 +1432,12 @@
       "item": "Kitchen gloves",
       "unit": "units / service visits",
       "quantity": 24.0,
-      "rate": 12.0,
-      "annual": 288.0,
+      "rate": 8.015,
+      "annual": 192.36,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1447,12 +1447,12 @@
       "item": "Aprons",
       "unit": "units / service visits",
       "quantity": 6.0,
-      "rate": 20.0,
-      "annual": 120.0,
+      "rate": 13.358333,
+      "annual": 80.15,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set food allowance cap: $2,000/month (2026-10-13). Must still meet Missouri meal pattern (5 CSR 25-500.202: breakfast or AM snack, lunch, PM snack; milk with each meal; \u22644 h between).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1462,12 +1462,12 @@
       "item": "Electricity",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 600.0,
-      "annual": 7200.0,
+      "rate": 947.37,
+      "annual": 11368.44,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included. Owner-locked utilities: electricity, gas and water/sewer total $1,500/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1477,12 +1477,12 @@
       "item": "Natural gas",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 175.0,
-      "annual": 2100.0,
+      "rate": 276.32,
+      "annual": 3315.84,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included. Owner-locked utilities: electricity, gas and water/sewer total $1,500/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1492,12 +1492,12 @@
       "item": "Water/sewer",
       "unit": "months",
       "quantity": 12.0,
-      "rate": 175.0,
-      "annual": 2100.0,
+      "rate": 276.31,
+      "annual": 3315.72,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
+      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included. Owner-locked utilities: electricity, gas and water/sewer total $1,500/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
@@ -1519,21 +1519,6 @@
     {
       "id": "P101",
       "category": "Building operations",
-      "item": "Staff mobile connectivity",
-      "unit": "months",
-      "quantity": 12.0,
-      "rate": 80.0,
-      "annual": 960.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Existing bill required; owned facility, no rental deposit or lease rent included.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P102",
-      "category": "Building operations",
       "item": "Waste collection",
       "unit": "months",
       "quantity": 12.0,
@@ -1547,7 +1532,7 @@
       "deliverable": ""
     },
     {
-      "id": "P103",
+      "id": "P102",
       "category": "Building operations",
       "item": "Pest service",
       "unit": "months",
@@ -1562,7 +1547,7 @@
       "deliverable": ""
     },
     {
-      "id": "P104",
+      "id": "P103",
       "category": "Building operations",
       "item": "Alarm monitoring",
       "unit": "months",
@@ -1577,22 +1562,7 @@
       "deliverable": ""
     },
     {
-      "id": "P105",
-      "category": "Building operations",
-      "item": "HVAC service",
-      "unit": "visits / annual allowance",
-      "quantity": 4.0,
-      "rate": 250.0,
-      "annual": 1000.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P106",
+      "id": "P104",
       "category": "Building operations",
       "item": "Plumbing maintenance",
       "unit": "visits / annual allowance",
@@ -1607,67 +1577,22 @@
       "deliverable": ""
     },
     {
-      "id": "P107",
-      "category": "Building operations",
-      "item": "Electrical maintenance",
-      "unit": "visits / annual allowance",
-      "quantity": 2.0,
-      "rate": 250.0,
-      "annual": 500.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P108",
+      "id": "P105",
       "category": "Building operations",
       "item": "Snow service",
       "unit": "visits / annual allowance",
-      "quantity": 8.0,
+      "quantity": 4.0,
       "rate": 150.0,
-      "annual": 1200.0,
+      "annual": 600.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
+      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed. Halved: Owner 2026-10-13: handled in-house.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P109",
-      "category": "Building operations",
-      "item": "Lawn service",
-      "unit": "visits / annual allowance",
-      "quantity": 24.0,
-      "rate": 60.0,
-      "annual": 1440.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P110",
-      "category": "Building operations",
-      "item": "Parking repairs",
-      "unit": "visits / annual allowance",
-      "quantity": 1.0,
-      "rate": 500.0,
-      "annual": 500.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Property tax bill, maintenance history and scope required; no major renovation assumed.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P111",
+      "id": "P106",
       "category": "Building operations",
       "item": "Deep cleaning",
       "unit": "visits / annual allowance",
@@ -1682,7 +1607,7 @@
       "deliverable": ""
     },
     {
-      "id": "P112",
+      "id": "P107",
       "category": "Building operations",
       "item": "Property taxes",
       "unit": "visits / annual allowance",
@@ -1697,7 +1622,7 @@
       "deliverable": ""
     },
     {
-      "id": "P113",
+      "id": "P108",
       "category": "Building operations",
       "item": "Building repair allocation",
       "unit": "visits / annual allowance",
@@ -1712,7 +1637,7 @@
       "deliverable": ""
     },
     {
-      "id": "P114",
+      "id": "P109",
       "category": "Insurance",
       "item": "General liability / abuse coverage allowance",
       "unit": "annual policy",
@@ -1727,7 +1652,7 @@
       "deliverable": ""
     },
     {
-      "id": "P115",
+      "id": "P110",
       "category": "Insurance",
       "item": "Property insurance allowance",
       "unit": "annual policy",
@@ -1742,7 +1667,7 @@
       "deliverable": ""
     },
     {
-      "id": "P116",
+      "id": "P111",
       "category": "Insurance",
       "item": "Umbrella liability allowance",
       "unit": "annual policy",
@@ -1757,7 +1682,7 @@
       "deliverable": ""
     },
     {
-      "id": "P117",
+      "id": "P112",
       "category": "Insurance",
       "item": "Business interruption allowance",
       "unit": "annual policy",
@@ -1772,7 +1697,7 @@
       "deliverable": ""
     },
     {
-      "id": "P118",
+      "id": "P113",
       "category": "Insurance",
       "item": "Cyber / technology professional liability allowance",
       "unit": "annual policy",
@@ -1787,142 +1712,142 @@
       "deliverable": ""
     },
     {
-      "id": "P119",
+      "id": "P114",
       "category": "Cleaning and consumables",
       "item": "Sanitizer",
       "unit": "packs / service-months",
       "quantity": 12.0,
-      "rate": 30.0,
-      "annual": 360.0,
+      "rate": 23.746667,
+      "annual": 284.96,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P115",
+      "category": "Cleaning and consumables",
+      "item": "Paper towels",
+      "unit": "packs / service-months",
+      "quantity": 48.0,
+      "rate": 17.5,
+      "annual": 840.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P116",
+      "category": "Cleaning and consumables",
+      "item": "Toilet paper",
+      "unit": "packs / service-months",
+      "quantity": 24.0,
+      "rate": 23.747083,
+      "annual": 569.93,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P117",
+      "category": "Cleaning and consumables",
+      "item": "Hand soap",
+      "unit": "packs / service-months",
+      "quantity": 24.0,
+      "rate": 14.247917,
+      "annual": 341.95,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P118",
+      "category": "Cleaning and consumables",
+      "item": "Laundry",
+      "unit": "packs / service-months",
+      "quantity": 12.0,
+      "rate": 39.5775,
+      "annual": 474.93,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P119",
+      "category": "Cleaning and consumables",
+      "item": "Tissues",
+      "unit": "packs / service-months",
+      "quantity": 48.0,
+      "rate": 1.583125,
+      "annual": 75.99,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P120",
       "category": "Cleaning and consumables",
-      "item": "Paper towels",
+      "item": "Cleaning wipes",
       "unit": "packs / service-months",
-      "quantity": 48.0,
-      "rate": 35.0,
-      "annual": 1680.0,
+      "quantity": 60.0,
+      "rate": 3.166167,
+      "annual": 189.97,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P121",
       "category": "Cleaning and consumables",
-      "item": "Toilet paper",
+      "item": "Trash bags",
       "unit": "packs / service-months",
-      "quantity": 24.0,
-      "rate": 30.0,
-      "annual": 720.0,
+      "quantity": 12.0,
+      "rate": 11.873333,
+      "annual": 142.48,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P122",
       "category": "Cleaning and consumables",
-      "item": "Hand soap",
+      "item": "Gloves/PPE",
       "unit": "packs / service-months",
-      "quantity": 24.0,
-      "rate": 18.0,
-      "annual": 432.0,
+      "quantity": 12.0,
+      "rate": 15.830833,
+      "annual": 189.97,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set toiletries & cleaning budget: $300/month (2026-10-13).",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P123",
-      "category": "Cleaning and consumables",
-      "item": "Laundry",
-      "unit": "packs / service-months",
-      "quantity": 12.0,
-      "rate": 50.0,
-      "annual": 600.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P124",
-      "category": "Cleaning and consumables",
-      "item": "Tissues",
-      "unit": "packs / service-months",
-      "quantity": 48.0,
-      "rate": 2.0,
-      "annual": 96.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P125",
-      "category": "Cleaning and consumables",
-      "item": "Cleaning wipes",
-      "unit": "packs / service-months",
-      "quantity": 60.0,
-      "rate": 4.0,
-      "annual": 240.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P126",
-      "category": "Cleaning and consumables",
-      "item": "Trash bags",
-      "unit": "packs / service-months",
-      "quantity": 12.0,
-      "rate": 15.0,
-      "annual": 180.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P127",
-      "category": "Cleaning and consumables",
-      "item": "Gloves/PPE",
-      "unit": "packs / service-months",
-      "quantity": 12.0,
-      "rate": 20.0,
-      "annual": 240.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P128",
       "category": "Safety and equipment",
       "item": "Mops",
       "unit": "units",
@@ -1937,7 +1862,7 @@
       "deliverable": ""
     },
     {
-      "id": "P129",
+      "id": "P124",
       "category": "Safety and equipment",
       "item": "Buckets",
       "unit": "units",
@@ -1952,7 +1877,7 @@
       "deliverable": ""
     },
     {
-      "id": "P130",
+      "id": "P125",
       "category": "Safety and equipment",
       "item": "Brooms",
       "unit": "units",
@@ -1967,7 +1892,7 @@
       "deliverable": ""
     },
     {
-      "id": "P131",
+      "id": "P126",
       "category": "Safety and equipment",
       "item": "Vacuum",
       "unit": "units",
@@ -1982,7 +1907,7 @@
       "deliverable": ""
     },
     {
-      "id": "P132",
+      "id": "P127",
       "category": "Safety and equipment",
       "item": "First aid kits",
       "unit": "units",
@@ -1997,7 +1922,7 @@
       "deliverable": ""
     },
     {
-      "id": "P133",
+      "id": "P128",
       "category": "Safety and equipment",
       "item": "CO detectors",
       "unit": "units",
@@ -2012,7 +1937,7 @@
       "deliverable": ""
     },
     {
-      "id": "P134",
+      "id": "P129",
       "category": "Safety and equipment",
       "item": "Smoke detectors",
       "unit": "units",
@@ -2027,7 +1952,7 @@
       "deliverable": ""
     },
     {
-      "id": "P135",
+      "id": "P130",
       "category": "Safety and equipment",
       "item": "Emergency lights",
       "unit": "units",
@@ -2042,7 +1967,7 @@
       "deliverable": ""
     },
     {
-      "id": "P136",
+      "id": "P131",
       "category": "Safety and equipment",
       "item": "Medication lockboxes",
       "unit": "units",
@@ -2057,7 +1982,7 @@
       "deliverable": ""
     },
     {
-      "id": "P137",
+      "id": "P132",
       "category": "Safety and equipment",
       "item": "First aid refills",
       "unit": "units / inspections",
@@ -2072,7 +1997,7 @@
       "deliverable": ""
     },
     {
-      "id": "P138",
+      "id": "P133",
       "category": "Safety and equipment",
       "item": "Extinguisher service",
       "unit": "units / inspections",
@@ -2087,7 +2012,7 @@
       "deliverable": ""
     },
     {
-      "id": "P139",
+      "id": "P134",
       "category": "Safety and equipment",
       "item": "Incident forms",
       "unit": "units / inspections",
@@ -2102,7 +2027,7 @@
       "deliverable": ""
     },
     {
-      "id": "P140",
+      "id": "P135",
       "category": "Safety and equipment",
       "item": "Safety drill materials",
       "unit": "units / inspections",
@@ -2117,7 +2042,7 @@
       "deliverable": ""
     },
     {
-      "id": "P141",
+      "id": "P136",
       "category": "Safety and equipment",
       "item": "Visitor log supplies",
       "unit": "units / inspections",
@@ -2132,7 +2057,7 @@
       "deliverable": ""
     },
     {
-      "id": "P142",
+      "id": "P137",
       "category": "Safety and equipment",
       "item": "Sharps disposal",
       "unit": "units / inspections",
@@ -2147,7 +2072,7 @@
       "deliverable": ""
     },
     {
-      "id": "P143",
+      "id": "P138",
       "category": "Safety and equipment",
       "item": "Water inspection",
       "unit": "units / inspections",
@@ -2162,7 +2087,7 @@
       "deliverable": ""
     },
     {
-      "id": "P144",
+      "id": "P139",
       "category": "Safety and equipment",
       "item": "Indoor air check",
       "unit": "units / inspections",
@@ -2177,7 +2102,7 @@
       "deliverable": ""
     },
     {
-      "id": "P145",
+      "id": "P140",
       "category": "Safety and equipment",
       "item": "Playground inspection",
       "unit": "units / inspections",
@@ -2192,7 +2117,7 @@
       "deliverable": ""
     },
     {
-      "id": "P146",
+      "id": "P141",
       "category": "Safety and equipment",
       "item": "Access-control repair allowance",
       "unit": "allowance",
@@ -2207,7 +2132,7 @@
       "deliverable": ""
     },
     {
-      "id": "P147",
+      "id": "P142",
       "category": "Safety and equipment",
       "item": "Camera system repair allowance",
       "unit": "allowance",
@@ -2222,7 +2147,7 @@
       "deliverable": ""
     },
     {
-      "id": "P148",
+      "id": "P143",
       "category": "Classroom materials",
       "item": "Chair replacements",
       "unit": "units",
@@ -2237,7 +2162,7 @@
       "deliverable": ""
     },
     {
-      "id": "P149",
+      "id": "P144",
       "category": "Classroom materials",
       "item": "Nap mat replacements",
       "unit": "units",
@@ -2252,7 +2177,7 @@
       "deliverable": ""
     },
     {
-      "id": "P150",
+      "id": "P145",
       "category": "Classroom materials",
       "item": "Storage bin replacements",
       "unit": "units",
@@ -2267,7 +2192,7 @@
       "deliverable": ""
     },
     {
-      "id": "P151",
+      "id": "P146",
       "category": "Classroom materials",
       "item": "Books",
       "unit": "units",
@@ -2282,7 +2207,7 @@
       "deliverable": ""
     },
     {
-      "id": "P152",
+      "id": "P147",
       "category": "Classroom materials",
       "item": "Manipulatives",
       "unit": "units",
@@ -2297,7 +2222,7 @@
       "deliverable": ""
     },
     {
-      "id": "P153",
+      "id": "P148",
       "category": "Classroom materials",
       "item": "Puzzles",
       "unit": "units",
@@ -2312,7 +2237,7 @@
       "deliverable": ""
     },
     {
-      "id": "P154",
+      "id": "P149",
       "category": "Classroom materials",
       "item": "Music instruments",
       "unit": "units",
@@ -2327,7 +2252,7 @@
       "deliverable": ""
     },
     {
-      "id": "P155",
+      "id": "P150",
       "category": "Classroom materials",
       "item": "Science materials",
       "unit": "units",
@@ -2342,99 +2267,189 @@
       "deliverable": ""
     },
     {
-      "id": "P156",
+      "id": "P151",
       "category": "Classroom and office consumables",
       "item": "Pencils classroom pack",
       "unit": "packs / units",
       "quantity": 2.0,
-      "rate": 39.99,
-      "annual": 79.98,
+      "rate": 19.995,
+      "annual": 39.99,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P152",
+      "category": "Classroom and office consumables",
+      "item": "Crayon classroom pack",
+      "unit": "packs / units",
+      "quantity": 2.0,
+      "rate": 44.995,
+      "annual": 89.99,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P153",
+      "category": "Classroom and office consumables",
+      "item": "Marker classroom pack",
+      "unit": "packs / units",
+      "quantity": 2.0,
+      "rate": 64.995,
+      "annual": 129.99,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P154",
+      "category": "Classroom and office consumables",
+      "item": "Construction paper",
+      "unit": "packs / units",
+      "quantity": 12.0,
+      "rate": 7.5,
+      "annual": 90.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P155",
+      "category": "Classroom and office consumables",
+      "item": "Glue packs",
+      "unit": "packs / units",
+      "quantity": 6.0,
+      "rate": 9.995,
+      "annual": 59.97,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P156",
+      "category": "Classroom and office consumables",
+      "item": "Scissors",
+      "unit": "packs / units",
+      "quantity": 44.0,
+      "rate": 1.5,
+      "annual": 66.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P157",
       "category": "Classroom and office consumables",
-      "item": "Crayon classroom pack",
+      "item": "Paint",
       "unit": "packs / units",
-      "quantity": 2.0,
-      "rate": 89.99,
-      "annual": 179.98,
+      "quantity": 12.0,
+      "rate": 12.5,
+      "annual": 150.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P158",
       "category": "Classroom and office consumables",
-      "item": "Marker classroom pack",
+      "item": "Play dough",
       "unit": "packs / units",
-      "quantity": 2.0,
-      "rate": 129.99,
-      "annual": 259.98,
+      "quantity": 24.0,
+      "rate": 6.0,
+      "annual": 144.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P159",
       "category": "Classroom and office consumables",
-      "item": "Construction paper",
+      "item": "Printer paper",
       "unit": "packs / units",
       "quantity": 12.0,
-      "rate": 15.0,
-      "annual": 180.0,
+      "rate": 4.0,
+      "annual": 48.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P160",
       "category": "Classroom and office consumables",
-      "item": "Glue packs",
+      "item": "Laminating pouches",
       "unit": "packs / units",
-      "quantity": 6.0,
-      "rate": 19.99,
-      "annual": 119.94,
+      "quantity": 4.0,
+      "rate": 15.0,
+      "annual": 60.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P161",
       "category": "Classroom and office consumables",
-      "item": "Scissors",
+      "item": "Labels",
       "unit": "packs / units",
-      "quantity": 44.0,
-      "rate": 3.0,
-      "annual": 132.0,
+      "quantity": 12.0,
+      "rate": 5.0,
+      "annual": 60.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P162",
       "category": "Classroom and office consumables",
-      "item": "Paint",
+      "item": "Whiteboard supplies",
+      "unit": "packs / units",
+      "quantity": 12.0,
+      "rate": 5.0,
+      "annual": 60.0,
+      "bucket": "recurring",
+      "basis": "Planning allowance \u2014 written quote or invoice required",
+      "url": "",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
+      "purpose": "",
+      "deliverable": ""
+    },
+    {
+      "id": "P163",
+      "category": "Classroom and office consumables",
+      "item": "Sensory supplies",
       "unit": "packs / units",
       "quantity": 12.0,
       "rate": 25.0,
@@ -2442,267 +2457,177 @@
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P163",
-      "category": "Classroom and office consumables",
-      "item": "Play dough",
-      "unit": "packs / units",
-      "quantity": 24.0,
-      "rate": 12.0,
-      "annual": 288.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P164",
       "category": "Classroom and office consumables",
-      "item": "Printer paper",
+      "item": "Pens",
       "unit": "packs / units",
-      "quantity": 12.0,
-      "rate": 8.0,
-      "annual": 96.0,
+      "quantity": 3.0,
+      "rate": 4.0,
+      "annual": 12.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P165",
       "category": "Classroom and office consumables",
-      "item": "Laminating pouches",
+      "item": "Eraser packs",
       "unit": "packs / units",
-      "quantity": 4.0,
-      "rate": 30.0,
-      "annual": 120.0,
+      "quantity": 2.0,
+      "rate": 3.0,
+      "annual": 6.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P166",
       "category": "Classroom and office consumables",
-      "item": "Labels",
+      "item": "Sharpeners",
       "unit": "packs / units",
-      "quantity": 12.0,
-      "rate": 10.0,
-      "annual": 120.0,
+      "quantity": 4.0,
+      "rate": 6.0,
+      "annual": 24.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P167",
       "category": "Classroom and office consumables",
-      "item": "Whiteboard supplies",
+      "item": "Tape packs",
       "unit": "packs / units",
-      "quantity": 12.0,
-      "rate": 10.0,
-      "annual": 120.0,
+      "quantity": 2.0,
+      "rate": 14.995,
+      "annual": 29.99,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P168",
       "category": "Classroom and office consumables",
-      "item": "Sensory supplies",
+      "item": "Staplers",
       "unit": "packs / units",
-      "quantity": 12.0,
-      "rate": 50.0,
-      "annual": 600.0,
+      "quantity": 2.0,
+      "rate": 7.5,
+      "annual": 15.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P169",
       "category": "Classroom and office consumables",
-      "item": "Pens",
+      "item": "Staples",
       "unit": "packs / units",
-      "quantity": 3.0,
-      "rate": 8.0,
-      "annual": 24.0,
+      "quantity": 4.0,
+      "rate": 2.0,
+      "annual": 8.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P170",
       "category": "Classroom and office consumables",
-      "item": "Eraser packs",
+      "item": "Clips",
       "unit": "packs / units",
-      "quantity": 2.0,
-      "rate": 6.0,
-      "annual": 12.0,
+      "quantity": 4.0,
+      "rate": 1.5,
+      "annual": 6.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P171",
       "category": "Classroom and office consumables",
-      "item": "Sharpeners",
+      "item": "Binders",
       "unit": "packs / units",
-      "quantity": 4.0,
-      "rate": 12.0,
-      "annual": 48.0,
+      "quantity": 20.0,
+      "rate": 2.5,
+      "annual": 50.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P172",
       "category": "Classroom and office consumables",
-      "item": "Tape packs",
+      "item": "Dividers",
       "unit": "packs / units",
-      "quantity": 2.0,
-      "rate": 29.99,
-      "annual": 59.98,
+      "quantity": 20.0,
+      "rate": 1.5,
+      "annual": 30.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P173",
       "category": "Classroom and office consumables",
-      "item": "Staplers",
+      "item": "Folders",
       "unit": "packs / units",
-      "quantity": 2.0,
-      "rate": 15.0,
-      "annual": 30.0,
+      "quantity": 100.0,
+      "rate": 0.25,
+      "annual": 25.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P174",
       "category": "Classroom and office consumables",
-      "item": "Staples",
+      "item": "Printing ink",
       "unit": "packs / units",
-      "quantity": 4.0,
-      "rate": 4.0,
-      "annual": 16.0,
+      "quantity": 12.0,
+      "rate": 7.995,
+      "annual": 95.94,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
+      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy. Owner cut 2026-10-13: halved via bulk purchasing, existing inventory, no duplicate orders.",
       "purpose": "",
       "deliverable": ""
     },
     {
       "id": "P175",
-      "category": "Classroom and office consumables",
-      "item": "Clips",
-      "unit": "packs / units",
-      "quantity": 4.0,
-      "rate": 3.0,
-      "annual": 12.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P176",
-      "category": "Classroom and office consumables",
-      "item": "Binders",
-      "unit": "packs / units",
-      "quantity": 20.0,
-      "rate": 5.0,
-      "annual": 100.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P177",
-      "category": "Classroom and office consumables",
-      "item": "Dividers",
-      "unit": "packs / units",
-      "quantity": 20.0,
-      "rate": 3.0,
-      "annual": 60.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P178",
-      "category": "Classroom and office consumables",
-      "item": "Folders",
-      "unit": "packs / units",
-      "quantity": 100.0,
-      "rate": 0.5,
-      "annual": 50.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P179",
-      "category": "Classroom and office consumables",
-      "item": "Printing ink",
-      "unit": "packs / units",
-      "quantity": 12.0,
-      "rate": 15.99,
-      "annual": 191.88,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "Quantity and SKU planning allowance; written school-supply basket required. Cents show arithmetic, not quote accuracy.",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P180",
       "category": "Platform completion",
       "item": "Existing-build inventory and deployment acceptance",
       "unit": "engineering hours",
@@ -2717,7 +2642,7 @@
       "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
     },
     {
-      "id": "P181",
+      "id": "P176",
       "category": "Platform completion",
       "item": "Family/child authentication and guardian consent",
       "unit": "engineering hours",
@@ -2732,7 +2657,7 @@
       "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
     },
     {
-      "id": "P182",
+      "id": "P177",
       "category": "Platform completion",
       "item": "Existing CRM ATS store integration",
       "unit": "engineering hours",
@@ -2747,7 +2672,7 @@
       "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
     },
     {
-      "id": "P183",
+      "id": "P178",
       "category": "Platform completion",
       "item": "Curriculum work records and parent progress digest",
       "unit": "engineering hours",
@@ -2762,7 +2687,7 @@
       "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
     },
     {
-      "id": "P184",
+      "id": "P179",
       "category": "Platform completion",
       "item": "Finite character messages and QR routines",
       "unit": "engineering hours",
@@ -2777,7 +2702,7 @@
       "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
     },
     {
-      "id": "P185",
+      "id": "P180",
       "category": "Platform completion",
       "item": "Bilingual product review and fixes",
       "unit": "engineering hours",
@@ -2792,7 +2717,7 @@
       "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
     },
     {
-      "id": "P186",
+      "id": "P181",
       "category": "Platform completion",
       "item": "Role security private files and consent audit",
       "unit": "engineering hours",
@@ -2807,7 +2732,7 @@
       "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
     },
     {
-      "id": "P187",
+      "id": "P182",
       "category": "Platform completion",
       "item": "Backup restore monitoring deployment controls",
       "unit": "engineering hours",
@@ -2822,7 +2747,7 @@
       "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
     },
     {
-      "id": "P188",
+      "id": "P183",
       "category": "Platform completion",
       "item": "Accessibility iPad and browser verification",
       "unit": "engineering hours",
@@ -2837,7 +2762,7 @@
       "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
     },
     {
-      "id": "P189",
+      "id": "P184",
       "category": "Platform completion",
       "item": "UAT staff training onboarding and launch",
       "unit": "engineering hours",
@@ -2849,10 +2774,10 @@
       "url": "",
       "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
       "purpose": "Prove the complete pilot works before inviting real families.",
-      "deliverable": "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
+      "deliverable": "38 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
     },
     {
-      "id": "P190",
+      "id": "P185",
       "category": "Platform assurance",
       "item": "Independent manual web/API penetration test with retest",
       "unit": "engagement",
@@ -2867,7 +2792,7 @@
       "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
     },
     {
-      "id": "P191",
+      "id": "P186",
       "category": "Platform assurance",
       "item": "Privacy counsel consent contracts and retention review",
       "unit": "legal hours",
@@ -2882,7 +2807,7 @@
       "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
     },
     {
-      "id": "P192",
+      "id": "P187",
       "category": "Platform assurance",
       "item": "Security/privacy maintenance review",
       "unit": "hours",
@@ -2897,7 +2822,7 @@
       "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
     },
     {
-      "id": "P193",
+      "id": "P188",
       "category": "Platform support",
       "item": "Technical maintenance and support",
       "unit": "hours",
@@ -2912,7 +2837,7 @@
       "deliverable": "72 hours/year, averaging six hours/month; written response targets. Extra work requires a separate quote, not 24/7 coverage."
     },
     {
-      "id": "P194",
+      "id": "P189",
       "category": "Hosting and software",
       "item": "DigitalOcean production compute",
       "unit": "months",
@@ -2927,7 +2852,7 @@
       "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P195",
+      "id": "P190",
       "category": "Hosting and software",
       "item": "DigitalOcean staging compute",
       "unit": "months",
@@ -2942,7 +2867,7 @@
       "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P196",
+      "id": "P191",
       "category": "Hosting and software",
       "item": "Object storage",
       "unit": "months",
@@ -2957,7 +2882,7 @@
       "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P197",
+      "id": "P192",
       "category": "Hosting and software",
       "item": "Daily compute backup",
       "unit": "months",
@@ -2972,7 +2897,7 @@
       "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P198",
+      "id": "P193",
       "category": "Hosting and software",
       "item": "Supabase Pro",
       "unit": "months",
@@ -2987,7 +2912,7 @@
       "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P199",
+      "id": "P194",
       "category": "Hosting and software",
       "item": "Transactional email",
       "unit": "months",
@@ -3002,7 +2927,7 @@
       "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P200",
+      "id": "P195",
       "category": "Hosting and software",
       "item": "Independent encrypted backup storage",
       "unit": "months / seats / units",
@@ -3017,7 +2942,7 @@
       "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P201",
+      "id": "P196",
       "category": "Hosting and software",
       "item": "Uptime monitoring",
       "unit": "months / seats / units",
@@ -3032,7 +2957,7 @@
       "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P202",
+      "id": "P197",
       "category": "Hosting and software",
       "item": "Domain renewal",
       "unit": "months / seats / units",
@@ -3047,7 +2972,7 @@
       "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P203",
+      "id": "P198",
       "category": "Hosting and software",
       "item": "Password manager",
       "unit": "months / seats / units",
@@ -3062,7 +2987,7 @@
       "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P204",
+      "id": "P199",
       "category": "Hosting and software",
       "item": "Help desk subscription allowance",
       "unit": "months / seats / units",
@@ -3077,7 +3002,7 @@
       "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P205",
+      "id": "P200",
       "category": "Hosting and software",
       "item": "SMS and registration allowance",
       "unit": "months / seats / units",
@@ -3092,7 +3017,7 @@
       "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P206",
+      "id": "P201",
       "category": "Hosting and software",
       "item": "CDN/security plan allowance",
       "unit": "months / seats / units",
@@ -3107,7 +3032,7 @@
       "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P207",
+      "id": "P202",
       "category": "Hosting and software",
       "item": "Cloud usage overage allowance",
       "unit": "months / seats / units",
@@ -3122,7 +3047,7 @@
       "deliverable": "Usage overage allowance configured and verified; usage, renewal and account ownership recorded."
     },
     {
-      "id": "P208",
+      "id": "P203",
       "category": "Pilot devices",
       "item": "School-owned tablets",
       "unit": "months / seats / units",
@@ -3137,7 +3062,7 @@
       "deliverable": ""
     },
     {
-      "id": "P209",
+      "id": "P204",
       "category": "Pilot devices",
       "item": "Tablet protective cases",
       "unit": "months / seats / units",
@@ -3152,7 +3077,7 @@
       "deliverable": ""
     },
     {
-      "id": "P210",
+      "id": "P205",
       "category": "Pilot devices",
       "item": "Charging station",
       "unit": "months / seats / units",
@@ -3167,7 +3092,7 @@
       "deliverable": ""
     },
     {
-      "id": "P211",
+      "id": "P206",
       "category": "Pilot devices",
       "item": "Device enrollment/setup",
       "unit": "months / seats / units",
@@ -3182,7 +3107,7 @@
       "deliverable": ""
     },
     {
-      "id": "P212",
+      "id": "P207",
       "category": "Pilot devices",
       "item": "Device management allowance",
       "unit": "device-months",
@@ -3197,7 +3122,7 @@
       "deliverable": ""
     },
     {
-      "id": "P213",
+      "id": "P208",
       "category": "Payments",
       "item": "ACH processing \u2014 95% collections",
       "unit": "transactions",
@@ -3212,7 +3137,7 @@
       "deliverable": ""
     },
     {
-      "id": "P214",
+      "id": "P209",
       "category": "Payments",
       "item": "Card processing \u2014 5% collections",
       "unit": "transactions",
@@ -3227,7 +3152,7 @@
       "deliverable": ""
     },
     {
-      "id": "P215",
+      "id": "P210",
       "category": "Payments",
       "item": "Recurring billing fee",
       "unit": "collected dollars",
@@ -3242,7 +3167,7 @@
       "deliverable": ""
     },
     {
-      "id": "P216",
+      "id": "P211",
       "category": "Payments",
       "item": "Refund/chargeback fee allowance",
       "unit": "events",
@@ -3257,22 +3182,22 @@
       "deliverable": ""
     },
     {
-      "id": "P217",
+      "id": "P212",
       "category": "Curriculum and clinical review",
       "item": "Initial curriculum completion / mapping",
       "unit": "educator hours",
-      "quantity": 120.0,
+      "quantity": 60.0,
       "rate": 125.0,
-      "annual": 15000.0,
+      "annual": 7500.0,
       "bucket": "one_time",
       "basis": "Published individual consultant benchmark; engagement not quoted",
       "url": "https://www.drjenmata.com/services-pricing",
-      "notes": "Specific benchmark, not industry-wide average; child development approval required.",
+      "notes": "Owner-set 2026-10-13: one-time $7,500; no recurring curriculum fee. Specific benchmark, not industry-wide average; child development approval required.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P218",
+      "id": "P213",
       "category": "Curriculum and clinical review",
       "item": "Staff curriculum implementation coaching",
       "unit": "educator hours",
@@ -3287,22 +3212,7 @@
       "deliverable": ""
     },
     {
-      "id": "P219",
-      "category": "Curriculum and clinical review",
-      "item": "Ongoing curriculum support",
-      "unit": "educator hours",
-      "quantity": 48.0,
-      "rate": 125.0,
-      "annual": 6000.0,
-      "bucket": "recurring",
-      "basis": "Published individual consultant benchmark; engagement not quoted",
-      "url": "https://www.drjenmata.com/services-pricing",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P220",
+      "id": "P214",
       "category": "Curriculum and clinical review",
       "item": "RN initial health/routine review",
       "unit": "hours",
@@ -3317,22 +3227,22 @@
       "deliverable": ""
     },
     {
-      "id": "P221",
+      "id": "P215",
       "category": "Curriculum and clinical review",
       "item": "RN recurring consultation",
       "unit": "hours",
-      "quantity": 48.0,
+      "quantity": 16.0,
       "rate": 125.0,
-      "annual": 6000.0,
+      "annual": 2000.0,
       "bucket": "recurring",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "Clinical consultant allowance; does not replace medical diagnosis or dietitian expertise.",
+      "notes": "Owner-set 2026-10-13: RN consultation $2,000/year. Clinical consultant allowance; does not replace medical diagnosis or dietitian expertise.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P222",
+      "id": "P216",
       "category": "Curriculum and clinical review",
       "item": "Registered dietitian menu review",
       "unit": "hours",
@@ -3347,37 +3257,22 @@
       "deliverable": ""
     },
     {
-      "id": "P223",
+      "id": "P217",
       "category": "Curriculum and clinical review",
       "item": "Native Spanish curriculum review",
       "unit": "hours",
-      "quantity": 40.0,
+      "quantity": 20.0,
       "rate": 75.0,
-      "annual": 3000.0,
+      "annual": 1500.0,
       "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "",
+      "notes": "Owner-set 2026-10-13: one-time $1,500; no recurring Spanish review.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P224",
-      "category": "Curriculum and clinical review",
-      "item": "Native Spanish update review",
-      "unit": "hours",
-      "quantity": 24.0,
-      "rate": 75.0,
-      "annual": 1800.0,
-      "bucket": "recurring",
-      "basis": "Planning allowance \u2014 written quote or invoice required",
-      "url": "",
-      "notes": "",
-      "purpose": "",
-      "deliverable": ""
-    },
-    {
-      "id": "P225",
+      "id": "P218",
       "category": "Pilot content production",
       "item": "Ralph / creative production lead \u2014 finite pilot asset delivery",
       "unit": "hours",
@@ -3392,7 +3287,7 @@
       "deliverable": ""
     },
     {
-      "id": "P226",
+      "id": "P219",
       "category": "Pilot content production",
       "item": "Pilot scriptwriting and storyboards",
       "unit": "hours",
@@ -3407,7 +3302,7 @@
       "deliverable": ""
     },
     {
-      "id": "P227",
+      "id": "P220",
       "category": "Pilot content production",
       "item": "Editing sound captions and exports",
       "unit": "hours",
@@ -3422,7 +3317,7 @@
       "deliverable": ""
     },
     {
-      "id": "P228",
+      "id": "P221",
       "category": "Pilot content production",
       "item": "Education review of scripts",
       "unit": "hours",
@@ -3437,7 +3332,7 @@
       "deliverable": ""
     },
     {
-      "id": "P229",
+      "id": "P222",
       "category": "Pilot content production",
       "item": "Generation credits pilot spend cap",
       "unit": "allowance",
@@ -3452,7 +3347,7 @@
       "deliverable": ""
     },
     {
-      "id": "P230",
+      "id": "P223",
       "category": "Pilot content production",
       "item": "Voice/music licensing allowance",
       "unit": "allowance",
@@ -3467,7 +3362,7 @@
       "deliverable": ""
     },
     {
-      "id": "P231",
+      "id": "P224",
       "category": "Pilot content production",
       "item": "Creative software allowance",
       "unit": "months",
@@ -3482,22 +3377,22 @@
       "deliverable": ""
     },
     {
-      "id": "P232",
+      "id": "P225",
       "category": "Pilot content support",
-      "item": "Ralph / creative lead \u2014 pilot oversight and updates",
+      "item": "Ralph / creative lead \u2014 pilot-year oversight and updates",
       "unit": "hours",
-      "quantity": 144.0,
+      "quantity": 60.0,
       "rate": 100.0,
-      "annual": 14400.0,
-      "bucket": "recurring",
+      "annual": 6000.0,
+      "bucket": "one_time",
       "basis": "Planning allowance \u2014 written quote or invoice required",
       "url": "",
-      "notes": "12 hours/month forward support, separate from build labor; actual schedule and deliverables must be agreed. Past services excluded pending reconciliation.",
+      "notes": "Owner-set 2026-10-13: one-time $6,000 for the pilot year; smaller release calendar with defined paid deliverables; not ongoing. Past services excluded pending reconciliation.",
       "purpose": "",
       "deliverable": ""
     },
     {
-      "id": "P233",
+      "id": "P226",
       "category": "Local marketing",
       "item": "Paid local advertising",
       "unit": "months",
@@ -3512,7 +3407,7 @@
       "deliverable": ""
     },
     {
-      "id": "P234",
+      "id": "P227",
       "category": "Local marketing",
       "item": "Campaign management and analytics",
       "unit": "hours",
@@ -3527,7 +3422,7 @@
       "deliverable": ""
     },
     {
-      "id": "P235",
+      "id": "P228",
       "category": "Local marketing",
       "item": "Launch photography / approved brand asset refresh",
       "unit": "engagement",
@@ -3542,7 +3437,7 @@
       "deliverable": ""
     },
     {
-      "id": "P236",
+      "id": "P229",
       "category": "Local marketing",
       "item": "Tour materials and local signage",
       "unit": "allowance",
@@ -3557,7 +3452,7 @@
       "deliverable": ""
     },
     {
-      "id": "P237",
+      "id": "P230",
       "category": "Store pilot",
       "item": "Made-to-order sample merchandise",
       "unit": "sample units",
@@ -3572,7 +3467,7 @@
       "deliverable": ""
     },
     {
-      "id": "P238",
+      "id": "P231",
       "category": "Store pilot",
       "item": "Store fulfillment test shipments",
       "unit": "test shipments",
@@ -3587,7 +3482,7 @@
       "deliverable": ""
     },
     {
-      "id": "P239",
+      "id": "P232",
       "category": "Refinance transaction",
       "item": "Appraisal allowance",
       "unit": "engagement",
@@ -3602,7 +3497,7 @@
       "deliverable": ""
     },
     {
-      "id": "P240",
+      "id": "P233",
       "category": "Refinance transaction",
       "item": "Title recording and lender closing allowance",
       "unit": "allowance",
@@ -3617,7 +3512,7 @@
       "deliverable": ""
     },
     {
-      "id": "P241",
+      "id": "P234",
       "category": "Refinance transaction",
       "item": "Refinance counsel allowance",
       "unit": "hours",
@@ -3637,109 +3532,109 @@
       "month": 1,
       "children": 30,
       "receipts": 26208.0,
-      "recurring": 26820.86,
-      "one_time": 65499.3,
-      "net": -66112.16,
-      "cumulative": -66112.16
+      "recurring": 23738.3,
+      "one_time": 64149.3,
+      "net": -61679.6,
+      "cumulative": -61679.6
     },
     {
       "month": 2,
       "children": 34,
       "receipts": 29702.4,
-      "recurring": 27161.18,
-      "one_time": 36388.5,
-      "net": -33847.28,
-      "cumulative": -99959.44
+      "recurring": 23786.12,
+      "one_time": 35638.5,
+      "net": -29722.22,
+      "cumulative": -91401.82
     },
     {
       "month": 3,
       "children": 36,
       "receipts": 31449.6,
-      "recurring": 27331.34,
-      "one_time": 21833.1,
-      "net": -17714.84,
-      "cumulative": -117674.28
+      "recurring": 23810.04,
+      "one_time": 21383.1,
+      "net": -13743.54,
+      "cumulative": -105145.36
     },
     {
       "month": 4,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
-      "one_time": 14555.4,
-      "net": -8860.11,
-      "cumulative": -126534.39
+      "recurring": 23833.95,
+      "one_time": 14255.4,
+      "net": -4892.55,
+      "cumulative": -110037.91
     },
     {
       "month": 5,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
-      "one_time": 7277.7,
-      "net": -1582.41,
-      "cumulative": -128116.8
+      "recurring": 23833.95,
+      "one_time": 7127.7,
+      "net": 2235.15,
+      "cumulative": -107802.76
     },
     {
       "month": 6,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -122421.51
+      "net": 9362.85,
+      "cumulative": -98439.91
     },
     {
       "month": 7,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -116726.22
+      "net": 9362.85,
+      "cumulative": -89077.06
     },
     {
       "month": 8,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -111030.93
+      "net": 9362.85,
+      "cumulative": -79714.21
     },
     {
       "month": 9,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -105335.64
+      "net": 9362.85,
+      "cumulative": -70351.36
     },
     {
       "month": 10,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -99640.35
+      "net": 9362.85,
+      "cumulative": -60988.51
     },
     {
       "month": 11,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -93945.06
+      "net": 9362.85,
+      "cumulative": -51625.66
     },
     {
       "month": 12,
       "children": 38,
       "receipts": 33196.8,
-      "recurring": 27501.51,
+      "recurring": 23833.95,
       "one_time": 0.0,
-      "net": 5695.29,
-      "cumulative": -88249.77
+      "net": 9362.85,
+      "cumulative": -42262.81
     }
   ],
   "assumptions": {
@@ -3770,20 +3665,30 @@
     "past_creator_fees": "Excluded pending signed deliverables, payments and rights reconciliation"
   },
   "funding": {
-    "peak_deficit": 128116.8,
-    "cash_floor": 27501.51,
-    "request_before_financing": 317451.41,
-    "zero_receipts_before_financing": 664906.67,
+    "peak_deficit": 110037.91,
+    "cash_floor": 23833.95,
+    "request_before_financing": 295254.96,
+    "zero_receipts_before_financing": 613778.42,
     "financing_status": "Cost estimate, not a financeable loan request. Positive ongoing operating margin before building payments and debt, with the owner as unpaid director; mortgage, debt, lender fees and past creator invoice unresolved."
   },
   "metrics": {
-    "year2_margin": 68343.54,
-    "breakeven_tuition": 752.55,
-    "full_enrollment_receipts": 398361.6
+    "year2_margin": 112354.23,
+    "breakeven_tuition": 651.16,
+    "full_enrollment_receipts": 398361.6,
+    "first_cash_positive_month": 5,
+    "cumulative_cash_positive_month": 17,
+    "cumulative_basis": "Month in which cumulative pilot cash turns positive: the published 12-month schedule, then month 12 net repeated (full enrollment, no further one-time costs); before building payments and debt."
   },
   "recurring_components": {
-    "fixed_annual": 291220.98,
+    "fixed_annual": 256555.29,
     "variable_per_child_day": 3.51,
+    "food_fixed_annual": 2588.0,
+    "food_cap_annual": 24000.0,
+    "food_cap_monthly": 2000.0,
+    "cleaning_budget_monthly": 300.0,
+    "cleaning_annual": 3110.18,
+    "classroom_consumables_annual": 1599.87,
+    "utilities_annual": 18000.0,
     "service_days": 250,
     "payment_annual": 5452.08
   },
@@ -3799,6 +3704,7 @@
     "ages": "2\u20135",
     "director": "Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
     "ratio_note": "Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112).",
+    "additional_coverage": "Any additional classroom coverage beyond the four caregivers and floater is provided by the owner-director and a head of administration at no added payroll cost (owner, 2026-10-13). Anyone counted in ratio keeps Missouri records on file: background check, medical/TB report, orientation, 12 annual training hours (5 CSR 25-500.102, .122).",
     "ratio_basis": "5 CSR 25-500.112: mixed ages 2+ with \u22644 two-year-olds per group 1:10, max group 20; >4 two-year-olds 1:8, max 16",
     "coverage": "All-day care for 38 children: four full-time caregivers on the floor in two groups of \u226420; a part-time floater covers breaks and lunch relief; no food worker (meals prepared by staff; food costs retained); no paid substitutes (the floater covers absences, leaving breaks uncovered on those days); the owner is the unpaid director.",
     "schedule": [
@@ -3824,7 +3730,7 @@
     "contingency_included": 11610.0,
     "build_rows": [
       {
-        "id": "P180",
+        "id": "P175",
         "category": "Platform completion",
         "item": "Existing-build inventory and deployment acceptance",
         "unit": "engineering hours",
@@ -3839,7 +3745,7 @@
         "deliverable": "Code and dependency audit, written remaining-work scope, reproducible staging and production deployment."
       },
       {
-        "id": "P181",
+        "id": "P176",
         "category": "Platform completion",
         "item": "Family/child authentication and guardian consent",
         "unit": "engineering hours",
@@ -3854,7 +3760,7 @@
         "deliverable": "Invites, login, password reset, family linking and parent consent; another family cannot be accessed."
       },
       {
-        "id": "P182",
+        "id": "P177",
         "category": "Platform completion",
         "item": "Existing CRM ATS store integration",
         "unit": "engineering hours",
@@ -3869,7 +3775,7 @@
         "deliverable": "Existing applicant/customer records and store checkout tested end to end; this is integration, not three new products."
       },
       {
-        "id": "P183",
+        "id": "P178",
         "category": "Platform completion",
         "item": "Curriculum work records and parent progress digest",
         "unit": "engineering hours",
@@ -3884,7 +3790,7 @@
         "deliverable": "Educator-approved activities, persistent learning records, teacher review and a parent weekly digest."
       },
       {
-        "id": "P184",
+        "id": "P179",
         "category": "Platform completion",
         "item": "Finite character messages and QR routines",
         "unit": "engineering hours",
@@ -3899,7 +3805,7 @@
         "deliverable": "Parent-approved finite character messages and QR routines; no open-ended child AI conversation."
       },
       {
-        "id": "P185",
+        "id": "P180",
         "category": "Platform completion",
         "item": "Bilingual product review and fixes",
         "unit": "engineering hours",
@@ -3914,7 +3820,7 @@
         "deliverable": "Critical journeys and content reviewed in both languages; native-language sign-off required."
       },
       {
-        "id": "P186",
+        "id": "P181",
         "category": "Platform completion",
         "item": "Role security private files and consent audit",
         "unit": "engineering hours",
@@ -3929,7 +3835,7 @@
         "deliverable": "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts."
       },
       {
-        "id": "P187",
+        "id": "P182",
         "category": "Platform completion",
         "item": "Backup restore monitoring deployment controls",
         "unit": "engineering hours",
@@ -3944,7 +3850,7 @@
         "deliverable": "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner."
       },
       {
-        "id": "P188",
+        "id": "P183",
         "category": "Platform completion",
         "item": "Accessibility iPad and browser verification",
         "unit": "engineering hours",
@@ -3959,7 +3865,7 @@
         "deliverable": "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices."
       },
       {
-        "id": "P189",
+        "id": "P184",
         "category": "Platform completion",
         "item": "UAT staff training onboarding and launch",
         "unit": "engineering hours",
@@ -3971,12 +3877,12 @@
         "url": "",
         "notes": "Incremental scope estimate, no vendor quote. Reuse current software; acceptance backlog and fixed-scope bids required. 380 hours total; scope must be confirmed by inspecting reusable code; inventory gate included.",
         "purpose": "Prove the complete pilot works before inviting real families.",
-        "deliverable": "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
+        "deliverable": "38 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
       }
     ],
     "service_rows": [
       {
-        "id": "P190",
+        "id": "P185",
         "category": "Platform assurance",
         "item": "Independent manual web/API penetration test with retest",
         "unit": "engagement",
@@ -3991,7 +3897,7 @@
         "deliverable": "Manual multi-role application/API penetration test and retest; no unresolved Critical or High findings at launch."
       },
       {
-        "id": "P191",
+        "id": "P186",
         "category": "Platform assurance",
         "item": "Privacy counsel consent contracts and retention review",
         "unit": "legal hours",
@@ -4006,7 +3912,7 @@
         "deliverable": "Consent, retention, vendor data agreements and home-use notices reviewed; legal approval is not yet established."
       },
       {
-        "id": "P192",
+        "id": "P187",
         "category": "Platform assurance",
         "item": "Security/privacy maintenance review",
         "unit": "hours",
@@ -4021,7 +3927,7 @@
         "deliverable": "24 hours/year, averaging two hours/month; documented review and update log."
       },
       {
-        "id": "P193",
+        "id": "P188",
         "category": "Platform support",
         "item": "Technical maintenance and support",
         "unit": "hours",
@@ -4038,7 +3944,7 @@
     ],
     "hosting_rows": [
       {
-        "id": "P194",
+        "id": "P189",
         "category": "Hosting and software",
         "item": "DigitalOcean production compute",
         "unit": "months",
@@ -4053,7 +3959,7 @@
         "deliverable": "Production server configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P195",
+        "id": "P190",
         "category": "Hosting and software",
         "item": "DigitalOcean staging compute",
         "unit": "months",
@@ -4068,7 +3974,7 @@
         "deliverable": "Staging server configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P196",
+        "id": "P191",
         "category": "Hosting and software",
         "item": "Object storage",
         "unit": "months",
@@ -4083,7 +3989,7 @@
         "deliverable": "Object storage configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P197",
+        "id": "P192",
         "category": "Hosting and software",
         "item": "Daily compute backup",
         "unit": "months",
@@ -4098,7 +4004,7 @@
         "deliverable": "Daily server backup configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P198",
+        "id": "P193",
         "category": "Hosting and software",
         "item": "Supabase Pro",
         "unit": "months",
@@ -4113,7 +4019,7 @@
         "deliverable": "Managed database/authentication configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P199",
+        "id": "P194",
         "category": "Hosting and software",
         "item": "Transactional email",
         "unit": "months",
@@ -4128,7 +4034,7 @@
         "deliverable": "Transactional email configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P200",
+        "id": "P195",
         "category": "Hosting and software",
         "item": "Independent encrypted backup storage",
         "unit": "months / seats / units",
@@ -4143,7 +4049,7 @@
         "deliverable": "Offsite recovery storage configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P201",
+        "id": "P196",
         "category": "Hosting and software",
         "item": "Uptime monitoring",
         "unit": "months / seats / units",
@@ -4158,7 +4064,7 @@
         "deliverable": "Monitoring configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P202",
+        "id": "P197",
         "category": "Hosting and software",
         "item": "Domain renewal",
         "unit": "months / seats / units",
@@ -4173,7 +4079,7 @@
         "deliverable": "Domain configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P203",
+        "id": "P198",
         "category": "Hosting and software",
         "item": "Password manager",
         "unit": "months / seats / units",
@@ -4188,7 +4094,7 @@
         "deliverable": "Staff password manager configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P204",
+        "id": "P199",
         "category": "Hosting and software",
         "item": "Help desk subscription allowance",
         "unit": "months / seats / units",
@@ -4203,7 +4109,7 @@
         "deliverable": "Help desk configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P205",
+        "id": "P200",
         "category": "Hosting and software",
         "item": "SMS and registration allowance",
         "unit": "months / seats / units",
@@ -4218,7 +4124,7 @@
         "deliverable": "SMS configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P206",
+        "id": "P201",
         "category": "Hosting and software",
         "item": "CDN/security plan allowance",
         "unit": "months / seats / units",
@@ -4233,7 +4139,7 @@
         "deliverable": "CDN/security configured and verified; usage, renewal and account ownership recorded."
       },
       {
-        "id": "P207",
+        "id": "P202",
         "category": "Hosting and software",
         "item": "Cloud usage overage allowance",
         "unit": "months / seats / units",
@@ -4258,14 +4164,14 @@
       "Staff MFA, role and family isolation, private uploads and audit events tested with separate accounts.",
       "Offsite backups, demonstrated restore, monitoring, rollback and a named incident owner.",
       "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices.",
-      "40 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
+      "38 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
     ],
     "readiness": "Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.",
     "separate_costs": {
-      "curriculum_clinical": 38600,
-      "pilot_content": 25740,
-      "creative_oversight": 14400,
-      "devices": 2580
+      "curriculum_clinical": 17800.0,
+      "pilot_content": 25740.0,
+      "creative_oversight": 6000.0,
+      "devices": 2580.0
     },
     "rate_basis": "$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable."
   },
@@ -4278,84 +4184,84 @@
       "children": 30,
       "tuition": 910,
       "receipts": 314496.0,
-      "annual_operating_margin": -7354.26,
+      "annual_operating_margin": 29636.43,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 34,
       "tuition": 910,
       "receipts": 356428.8,
-      "annual_operating_margin": 30494.64,
+      "annual_operating_margin": 70995.33,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 38,
       "tuition": 910,
       "receipts": 398361.6,
-      "annual_operating_margin": 68343.54,
+      "annual_operating_margin": 112354.23,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1250,
       "receipts": 432000.0,
-      "annual_operating_margin": 109156.84,
+      "annual_operating_margin": 146147.53,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 34,
       "tuition": 1250,
       "receipts": 489600.0,
-      "annual_operating_margin": 162540.54,
+      "annual_operating_margin": 203041.23,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 38,
       "tuition": 1250,
       "receipts": 547200.0,
-      "annual_operating_margin": 215924.25,
+      "annual_operating_margin": 259934.94,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1300,
       "receipts": 449280.0,
-      "annual_operating_margin": 126290.82,
+      "annual_operating_margin": 163281.51,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 34,
       "tuition": 1300,
       "receipts": 509184.0,
-      "annual_operating_margin": 181959.06,
+      "annual_operating_margin": 222459.75,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 38,
       "tuition": 1300,
       "receipts": 569088.0,
-      "annual_operating_margin": 237627.3,
+      "annual_operating_margin": 281637.99,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 30,
       "tuition": 1400,
       "receipts": 483840.0,
-      "annual_operating_margin": 160558.79,
+      "annual_operating_margin": 197549.48,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 34,
       "tuition": 1400,
       "receipts": 548352.0,
-      "annual_operating_margin": 220796.09,
+      "annual_operating_margin": 261296.78,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     },
     {
       "children": 38,
       "tuition": 1400,
       "receipts": 612864.0,
-      "annual_operating_margin": 281033.39,
+      "annual_operating_margin": 325044.08,
       "basis": "Illustrative price test, not verified market tuition; building and debt excluded"
     }
   ]
