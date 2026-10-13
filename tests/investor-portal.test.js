@@ -801,9 +801,19 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
     // nothing in a panel is cut off by its fixed height
     const clipped = await pg.$$eval('.ovd-funding .cap-legend button, .ovd-year .cap-snap dl', (els) => els.filter((e) => { const p = e.closest('.ovd-card').getBoundingClientRect(), b = e.getBoundingClientRect(); return b.bottom > p.bottom + 0.5; }).length);
     assert.equal(clipped, 0, 'every legend row and the month snapshot sit inside their panels');
-    // v2276 (owner: "let's try this blue for the background"): data-theme="royal" around #3550d4, the picture's palette on the tiles
-    assert.equal(await pg.getAttribute('html', 'data-theme'), 'royal');
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(53, 80, 212\)/);
+    // v2278 (owner: "make the background this color"): data-theme="gold" around #ddae57, an espresso rail, the picture's palette on the tiles
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'gold');
+    assert.equal(await pg.getAttribute('html', 'data-rail'), 'espresso');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(221, 174, 87\)/);
+    // text that sits directly on the gold passes WCAG AA (4.5:1 against #ddae57)
+    const contrast = await pg.evaluate(() => {
+      const lum = (c) => { const [r, g, b] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+      const bg = lum('rgb(221, 174, 87)'), ratio = (c) => { const l = lum(c); return (Math.max(l, bg) + 0.05) / (Math.min(l, bg) + 0.05); };
+      return [...document.querySelectorAll('.strip-staff, .cap-foot span, .studio-foot > span, .studio-foot small, .studio-foot a')].filter((e) => e.offsetParent && e.textContent.trim()).map((e) => [e.textContent.trim().slice(0, 30), +ratio(getComputedStyle(e).color).toFixed(2)]);
+    });
+    assert.ok(contrast.length >= 4 && contrast.every(([, r]) => r >= 4.5), `page-level text on the gold is AA: ${JSON.stringify(contrast)}`);
+    // the six tiles stand apart from the gold page (no tile is gold any more)
+    assert.ok(await pg.$$eval('#kpis .kpi', (k) => k.every((x) => !/221, 174, 87|229, 152, 68/.test(getComputedStyle(x).backgroundImage))), 'no tile is gold on gold');
     assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, 'a colour per tile');
     assert.ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 0, 'no sideways scroll');
     assert.deepEqual(errors, []);
