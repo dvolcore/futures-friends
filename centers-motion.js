@@ -52,6 +52,16 @@
     'classroom-reverse-angle': 'Plush-world classroom seen from the other side: green door with a round window, felt sun and tree wall art, shelves, small tables and a round rug.',
     'activity-rug': 'Plush-world classroom: a round green rug with a stitched yellow border, small tables and chairs, cubbies with backpacks and a leaf-canopy reading nook by the window.'
   };
+  // the same descriptions in Spanish (draft, pending teacher review); the alt is written in the page language at render time
+  const ENV_ALT_ES = {
+    'school-arrival-entrance': 'Entrada de la escuela en el mundo de peluche: un gran letrero de fieltro sobre puertas dobles de madera, jardineras con flores y un camino curvo.',
+    'school-exterior-wide': 'La escuela del mundo de peluche vista desde la reja: un edificio largo con techos de fieltro rojo, una reja con corazón y jardineras con flores bajo un cielo azul.',
+    'hall-reception': 'Recepción del mundo de peluche: un mostrador de bienvenida con hojas de fieltro, un sofá y una banca verdes, puertas en arco y una alfombra ovalada que lleva a la entrada.',
+    'classroom-empty-master': 'Salón del mundo de peluche: alfombra redonda, banca de lectura, estantes de arte, mesitas y un rincón con techo de hojas junto a una ventana soleada.',
+    'classroom-reverse-angle': 'Salón del mundo de peluche visto desde el otro lado: puerta verde con ventana redonda, sol y árbol de fieltro en la pared, estantes, mesitas y una alfombra redonda.',
+    'activity-rug': 'Salón del mundo de peluche: una alfombra verde redonda con borde amarillo cosido, mesitas y sillas, casilleros con mochilas y un rincón de lectura con techo de hojas junto a la ventana.'
+  };
+  const es = () => !!(W.FFi18n && W.FFi18n.lang === 'es');
   const FOUR = [['booker', 37], ['lumi', 53], ['zuri', 69], ['bop', 86]];
   const STAGES = {
     centers: { env: 'school-arrival-entrance', lead: ['principal-hazel', 16], cast: FOUR },
@@ -65,7 +75,8 @@
 
   function envImg(e, said) {
     const b = `img/plush/environments/${e}`;
-    return `<img class="cm-room" src="${b}-1600.webp" srcset="${b}-800.webp 800w, ${b}-1600.webp 1600w" sizes="100vw" alt="${E((ENV_ALT[e] || '') + (said ? ' ' + said : ''))}" width="1600" height="900" fetchpriority="high" decoding="async">`;
+    const base = (es() ? ENV_ALT_ES : ENV_ALT)[e] || '';
+    return `<img class="cm-room" src="${b}-1600.webp" srcset="${b}-800.webp 800w, ${b}-1600.webp 1600w" sizes="100vw" alt="${E(base + (said ? ' ' + said : ''))}" data-i18n-skip" width="1600" height="900" fetchpriority="high" decoding="async">`;
   }
   // the hero's world, full bleed behind the card: the room, a felt sun or cloud, a lamp glow (cozy), and the honesty chip
   function world(route) {
@@ -73,7 +84,7 @@
     if (!s || !P) return null;
     const all = [s.lead].concat(s.cast).filter(c => P.has(c[0])).map(c => c.slice());
     const names = all.map(c => P.name(c[0]));
-    const said = names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] + ' are in front.' : '';
+    const said = names.length > 1 ? names.slice(0, -1).join(', ') + (es() ? ' y ' : ' and ') + names[names.length - 1] + (es() ? ' están al frente.' : ' are in front.') : '';
     const bg = `<div class="cm-world" style="--pos:${s.pos || 'center 62%'}">${envImg(s.env, said)}<span class="cm-veil" aria-hidden="true"></span>${s.sun ? '<img class="cm-sun" src="img/plush/hero/felt-sun-320.webp" alt="" aria-hidden="true" width="320" height="320" decoding="async">' : ''}${s.sky ? '<img class="cm-cloud" src="img/plush/hero/felt-cloud-2-480.webp" alt="" aria-hidden="true" width="480" height="300" decoding="async" loading="lazy">' : ''}${s.cozy ? '<span class="cm-lamp" aria-hidden="true"></span>' : ''}</div>`;
     // positions from the cut-outs' own widths (% of the cast box, whose shape is fixed at 1.1:1 in CSS): everyone fits inside the box,
     // the grown-up a step apart, the friends close together (overlapping a little only when the box is crowded)
