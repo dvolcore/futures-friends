@@ -8,6 +8,24 @@
 (function () {
   'use strict';
   const ES = {
+    // Overview dashboard (2026-10-13): every studio module on the Overview
+    "The four parts of the funding estimate.": "Las cuatro partes de la estimación de financiamiento.",
+    "See the full breakdown": "Ver el desglose completo",
+    "Open the scenarios": "Abrir los escenarios",
+    "Tuition vs. operating break-even": "Colegiatura frente al punto de equilibrio operativo",
+    "See inside the pilot": "Ver dentro del piloto",
+    "Open the repayment model": "Abrir el modelo de pago",
+    "Explore the pilot year": "Explore el año piloto",
+    "Open the pilot year": "Abrir el año piloto",
+    "Futures Friends curriculum preview: learning binder, activity sheet and character materials": "Vista previa del currículo de Futures Friends: carpeta de aprendizaje, hoja de actividades y materiales de los personajes",
+    "Key documents for a deeper look.": "Documentos clave para ver más a fondo.",
+    "One-sheet": "Resumen de una página",
+    "The full pilot plan": "El plan piloto completo",
+    "The core figures on one page": "Las cifras clave en una página",
+    "Each planned line, itemized": "Cada partida planeada, en detalle",
+    "Receipts and spending, month by month": "Ingresos y gastos, mes a mes",
+    "Characters and story world": "Personajes y mundo de la historia",
+    "Records, operations and products": "Registros, operaciones y productos",
     // Investor studio (2026-10-12)
     "Futures Friends | Investor studio": "Futures Friends | Estudio para inversionistas",
     "Skip to the investor studio": "Ir al estudio para inversionistas",

@@ -532,3 +532,174 @@ test('studio on a phone: the rail is a bottom tab bar of six 44 px tabs; views s
   assert.deepEqual(errors, []);
   await ctx.close();
 });
+
+// ------------------------------------------------------------------ Overview dashboard (v2269, owner 2026-10-13: "I need this information back in
+// there and then I need it to be an animated motion interactive"): every studio module in compact form on the Overview, each figure from the
+// model (or the published monthly cash file), each card opening its deep dive; counts / draws / fills on scroll-in, never with motion off.
+const OV_SLOGANS = /kinder,? brighter tomorrow|A kinder|Invest in early|brighter tomorrows|Children today|Kind hearts\. Kind words|stronger tomorrow|Small lessons|Big hearts|world of possibility/i;
+const overviewSection = () => { const h = read(OVERVIEW); const a = h.indexOf('data-studio-view="overview"'); return h.slice(a, h.indexOf('<section class="studio-view', a + 10)); };
+
+test('overview dashboard: every module in order; no slogans, no demo / concept / illustrative labels; EN + ES for its text', () => {
+  const sec = overviewSection();
+  const order = ['id="kpis"', 'class="terms"', 'ovd-funding', 'ovd-scen', 'ovd-platform', 'ovd-repay', 'ovd-year', 'ovd-includes', 'ovd-docs'].map((k) => sec.indexOf(k));
+  assert.ok(order.every((i) => i > 0), `all modules are on the Overview: ${order}`);
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'hero, KPIs, terms, funding | scenario, platform | repayment, pilot year, includes, documents');
+  for (const src of [read(OVERVIEW), read('investor/Digital/portal-i18n.js'), read('investor/Digital/studio.js'), read('investor/Digital/studio-overview.css')]) assert.doesNotMatch(src, OV_SLOGANS);
+  // visible words of the Overview (attributes that are spoken included; file names left out)
+  const words = sec.replace(/\s(src|href|class|id|data-[\w-]+|style|width|height|viewBox|d|fill|stroke[\w-]*|loading)="[^"]*"/g, '').replace(/<[^>]+>/g, ' ');
+  assert.doesNotMatch(words, /\b(demo|concept|illustrative|test)\b/i);
+  // the four included items, as on Inside the pilot (no new claims)
+  assert.doesNotMatch(sec, /Social-emotional|Safe (&amp;|&|and) supportive/i);
+  // every new English line has its Spanish
+  const ctx = { window: {}, document: { documentElement: { lang: 'es', dataset: {} }, readyState: 'complete', querySelectorAll: () => [], title: '' }, localStorage: { getItem: () => 'es', setItem() {} }, location: { search: '' }, NodeFilter: { SHOW_TEXT: 4 } };
+  ctx.document.createTreeWalker = () => ({ nextNode: () => null }); ctx.document.body = { querySelectorAll: () => [] }; ctx.window.window = ctx.window;
+  vm.createContext(ctx); vm.runInContext(`var window = this.window, document = this.document, localStorage = this.localStorage, location = this.location, NodeFilter = this.NodeFilter; ${read('investor/Digital/portal-i18n.js')}`, ctx);
+  const I = ctx.window.FFInvI18n;
+  const ovd = sec.slice(sec.indexOf('<div class="ovd"'));
+  const texts = [...ovd.replace(/<small data-inv-docs[^>]*><\/small>/g, '').matchAll(/>([^<>]*[A-Za-z][^<>]*)</g)].map((m) => m[1].replace(/&amp;/g, '&').trim()).filter((x) => x && !/^[−$\d.,%\s/·]+$/.test(x));
+  const attrs = [...ovd.matchAll(/\s(?:aria-label|alt)="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, '&'));
+  const missing = [...new Set([...texts, ...attrs])].filter((x) => I.t(x) === x);
+  assert.deepEqual(missing, [], 'Spanish for every Overview line');
+});
+
+test('overview dashboard: every figure is the model\'s (donut, scenario, platform, repayment, pilot year); the scenario follows the model method', async (t) => {
+  if (skip) return t.skip(skip);
+  const { ctx, pg, errors } = await page(1440);
+  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`);
+  await model(pg);
+  const { funding, totals, platform, assumptions, metrics } = MODEL, total = funding.request_before_financing;
+  const whole = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
+  const txt = (ids) => pg.evaluate((ids) => ids.map((id) => document.getElementById(id).textContent), ids);
+  // funding: the four model allocations, their shares, the ring geometry of the Funding view
+  assert.equal(await pg.textContent('#ovDonutTotal'), money2(total));
+  assert.deepEqual(await pg.$$eval('#ovLegend button', (b) => b.map((x) => [x.dataset.ovSlice, x.querySelector('.lg-val').textContent, x.querySelector('.lg-share').textContent])),
+    [['deficit', money2(funding.peak_deficit), '52.4%'], ['refinance', whole(totals.refinance), '33.0%'], ['floor', money2(funding.cash_floor), '9.4%'], ['contingency', money2(totals.contingency), '5.2%']]);
+  assert.equal(whole(totals.refinance), '$140,000', 'refinance is the model\'s $140,000');
+  const arcs = await pg.$$eval('#ovArcs .arc', (a) => a.map((x) => Number(x.getAttribute('stroke-dasharray').split(' ')[0])));
+  const C = 2 * Math.PI * 118;
+  [funding.peak_deficit, totals.refinance, funding.cash_floor, totals.contingency].forEach((v, i) => assert.ok(Math.abs(arcs[i] - (v / total * C - 3)) < 0.02, `slice ${i}`));
+  // platform and repayment
+  assert.deepEqual(await txt(['ovPlatformBuild', 'ovPlatformAssurance', 'ovPlatformRecurring', 'ovPlatformYear', 'ovPlatformOnce', 'ovPlatformMonthly']),
+    [whole(platform.completion), whole(platform.assurance_one_time), money2(platform.recurring), money2(platform.first_year), whole(platform.one_time), money2(platform.monthly)]);
+  assert.deepEqual(await txt(['ovTuition0', 'ovBreakEven0', 'ovGap']), [whole(assumptions.tuition), money2(metrics.breakeven_tuition), money2(metrics.year2_margin)]);
+  assert.deepEqual(await txt(['ovTuition0', 'ovBreakEven0', 'ovGap']), ['$910', '$1,036.37', '−$57,738.02']);
+  // the scenario: the planning case is the model's; a moved slider follows the model method (independent restatement), Reset returns
+  assert.deepEqual(await txt(['ovScenTuition', 'ovScenBreakEven', 'ovMargin']), ['$910', '$1,036.37', '−$57,738.02']);
+  const rc = MODEL.recurring_components, a = MODEL.assumptions;
+  const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
+  const base = MODEL.totals.recurring - 40 * rc.service_days * rc.variable_per_child_day - fees(40, a.tuition, a.collection);
+  const margin = (n, tt, c) => n * tt * 12 * c - base - n * rc.service_days * rc.variable_per_child_day - fees(n, tt, c);
+  const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
+  await setRange('#ovTuition', 1250); await setRange('#ovChildren', 36); await setRange('#ovCollection', 92);
+  await pg.waitForTimeout(450);
+  let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (margin(36, mid, 0.92) < 0) lo = mid; else hi = mid; }
+  assert.deepEqual(await txt(['ovScenTuition', 'ovScenBreakEven', 'ovMargin', 'ovMarginSr']), ['$1,250', money2(Math.round(hi * 100) / 100), money2(margin(36, 1250, 0.92)), money2(margin(36, 1250, 0.92))]);
+  await pg.click('#ovReset'); await pg.waitForTimeout(450);
+  assert.deepEqual(await txt(['ovScenBreakEven', 'ovMargin']), ['$1,036.37', '−$57,738.02']);
+  // the pilot year: the published monthly cash file; the scrubber and the readout agree
+  await pg.waitForFunction(() => document.getElementById('ovChart').dataset.source);
+  assert.equal(await pg.getAttribute('#ovChart', 'data-source'), 'csv');
+  assert.equal(await pg.$$eval('#ovChart .gap-bar', (b) => b.length), 12);
+  await setRange('#ovScrub', 7);
+  const [, children, receipts, recurring, oneTime, net, cumulative] = CSV[6];
+  assert.deepEqual(await txt(['ovMonth', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet', 'ovDeficit']), ['07', String(children), money2(receipts), money2(recurring + oneTime), money2(net), money2(-cumulative)]);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('overview dashboard: every card opens its deep dive (its link and a tap on the card); documents open in the drawer; curriculum preview', async (t) => {
+  if (skip) return t.skip(skip);
+  const { ctx, pg, errors } = await page(1440);
+  for (const [card, view] of [['ovd-funding', 'funding'], ['ovd-scen', 'scenarios'], ['ovd-platform', 'inside'], ['ovd-repay', 'scenarios'], ['ovd-year', 'pilot'], ['ovd-includes', 'inside']]) {
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
+    assert.ok(await pg.$(`.${card} a, .${card} button`), `${card} has a link of its own`);
+    await pg.click(`.${card} .panel-title p`);   // the card itself, not one of its controls
+    await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view, { timeout: 4000 });
+  }
+  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
+  for (const [k, view] of [['ovd-funding', 'funding'], ['ovd-scen', 'scenarios'], ['ovd-year', 'pilot']]) {
+    await pg.click(`.${k} .ovd-go[data-view-link]`); await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
+    await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'overview');
+  }
+  // the documents strip: six tiles straight to their document in the drawer, with size and pages from the manifest
+  const tiles = await pg.$$eval('.ovd-doc', (a) => a.map((x) => ({ id: x.dataset.doc, meta: x.querySelector('[data-doc-meta]').textContent })));
+  assert.deepEqual(tiles.map((x) => x.id), ['plan-pdf', 'one-sheet-pdf', 'costs-csv', 'cash-csv', 'bible-pdf', 'operations-pdf']);
+  for (const tl of tiles) assert.match(tl.meta, /(KB|MB)$/, `${tl.id} shows its size`);
+  await pg.click('.ovd-doc[data-doc="cash-csv"]');
+  await pg.waitForSelector('#invDocs[open] .inv-preview[data-doc="cash-csv"] table.inv-csv tbody tr');
+  assert.equal(await pg.$$eval('#invDocs .inv-csv tbody tr', (r) => r.length), 12);
+  await pg.keyboard.press('Escape'); await pg.waitForFunction(() => !document.getElementById('invDocs').open);
+  await pg.click('.ovd-all'); await pg.waitForSelector('#invDocs[open] .inv-doc');
+  await pg.keyboard.press('Escape'); await pg.waitForFunction(() => !document.getElementById('invDocs').open);
+  // what the pilot includes: the same four items; the published curriculum art; focus returns to the Overview's button
+  assert.deepEqual(await pg.$$eval('.ovd-features li', (l) => l.map((x) => x.innerText.replace(/\s+/g, ' ').trim())), ['Parent & child sign-in', 'Curriculum & learning records', 'Family communication', 'Secure hosting & support']);
+  assert.equal(await pg.getAttribute('.ovd-art img', 'src'), 'assets/curriculum-concept.webp');
+  await pg.click('.ovd-includes [data-curriculum-open]');
+  assert.equal(await pg.evaluate(() => document.getElementById('curriculumPreview').open), true);
+  await pg.keyboard.press('Escape');
+  assert.equal(await pg.evaluate(() => document.activeElement.matches('.ovd-includes [data-curriculum-open]')), true, 'focus returns to the opener');
+  // the donut: legend and ring are linked, with the tooltip inside the card
+  await pg.click('#ovLegend [data-ov-slice="refinance"]');
+  assert.equal(await pg.getAttribute('#ovLegend [data-ov-slice="refinance"]', 'aria-pressed'), 'true');
+  assert.match(await pg.textContent('#ovDonutTip'), /\$140,000 · 33\.0%/);
+  assert.equal(await pg.evaluate(() => document.querySelector('#ovArcs .slice[data-slice="refinance"]').classList.contains('on')), true);
+  const inside = await pg.evaluate(() => { const c = document.querySelector('.ovd-funding').getBoundingClientRect(), t = document.getElementById('ovDonutTip').getBoundingClientRect(); return t.left >= c.left && t.right <= c.right && t.top >= c.top && t.bottom <= c.bottom; });
+  assert.equal(inside, true, 'the tooltip stays inside the card');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('overview dashboard motion: cards rise and count on scroll-in and land on the exact model text; the chart draws then walks the year; reduced motion = all there, final', async (t) => {
+  if (skip) return t.skip(skip);
+  const { ctx, pg, errors } = await page(1440, { motion: true });
+  await pg.goto(`${site.base}${OVERVIEW}`);
+  await model(pg);
+  await pg.waitForFunction(() => !window.FFInvReveal.running(), null, { timeout: 10000 });
+  const finals = await pg.$$eval('#ovd [data-ov-count]', (n) => n.map((x) => x.textContent));
+  assert.equal(await pg.evaluate(() => document.querySelector('.ovd-docs').classList.contains('ovd-in')), false, 'a card below the fold waits');
+  await pg.evaluate(() => document.querySelector('.ovd-funding').scrollIntoView({ block: 'start' }));
+  await pg.waitForFunction(() => document.querySelector('#ovDonutTotal').classList.contains('inv-counting'), null, { timeout: 3000 });
+  const mid = await pg.evaluate(() => ({ total: document.getElementById('ovDonutTotal').textContent, arcs: [...document.querySelectorAll('#ovArcs .arc')].filter((a) => a.getAnimations().length).length }));
+  assert.notEqual(mid.total, '$423,849.52', 'the total is counting');
+  assert.ok(mid.arcs >= 1, 'the ring draws');
+  await pg.waitForFunction(() => !document.querySelector('#ovd .inv-counting'), null, { timeout: 5000 });
+  await pg.evaluate(() => document.querySelector('.ovd-year').scrollIntoView({ block: 'start' }));
+  await pg.waitForFunction(() => document.getElementById('ovPlay').getAttribute('aria-pressed') === 'true', null, { timeout: 6000 });
+  await pg.waitForFunction(() => document.getElementById('ovScrub').value === '12' && document.getElementById('ovPlay').getAttribute('aria-pressed') === 'false', null, { timeout: 15000 });
+  assert.equal(await pg.textContent('#ovDeficit'), money2(-CSV[11][6]), 'the walk ends on the peak deficit');
+  await pg.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+  await pg.waitForTimeout(2200);
+  assert.deepEqual(await pg.$$eval('#ovd [data-ov-count]', (n) => n.map((x) => x.textContent)), finals, 'every count ends on the exact model text');
+  assert.equal(await pg.evaluate(() => [...document.querySelectorAll('.ovd-card')].every((c) => c.classList.contains('ovd-in'))), true);
+  const loops = await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length);
+  assert.ok(loops <= 4, `ambient loops: ${loops}`);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+  // reduced motion: nothing waits, nothing counts, nothing runs; every card is there with its final figures
+  const r = await page(1440);
+  await r.pg.goto(`${site.base}${OVERVIEW}`); await model(r.pg); await r.pg.waitForTimeout(200);
+  await r.pg.evaluate(() => document.querySelector('.ovd-docs').scrollIntoView());
+  await r.pg.waitForTimeout(300);
+  const s = await r.pg.evaluate(() => ({ armed: document.documentElement.classList.contains('ovd-armed'), hidden: [...document.querySelectorAll('.ovd-card')].filter((c) => getComputedStyle(c).opacity !== '1').length, counting: document.querySelectorAll('#ovd .inv-counting').length, anims: document.getAnimations().filter((a) => a.playState === 'running' && a.effect?.getComputedTiming().iterations !== Infinity).length, total: document.getElementById('ovDonutTotal').textContent, scrub: document.getElementById('ovScrub').value }));
+  assert.deepEqual(s, { armed: false, hidden: 0, counting: 0, anims: 0, total: '$423,849.52', scrub: '1' });
+  await r.ctx.close();
+});
+
+test('overview dashboard in Spanish: the cards are translated, the figures identical', async (t) => {
+  if (skip) return t.skip(skip);
+  const { ctx, pg } = await page(1440);
+  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
+  const grab = () => pg.evaluate(() => {
+    const out = [], w = document.createTreeWalker(document.getElementById('ovd'), NodeFilter.SHOW_TEXT);
+    for (let n = w.nextNode(); n; n = w.nextNode()) if (!n.parentElement.closest('[data-inv-docs], svg') && /[A-Za-z]{3,}/.test(n.nodeValue)) out.push(n.nodeValue.trim());
+    return out;
+  });
+  const en = await grab(), figs = await n.extract(pg);
+  await pg.click('[data-lang="es"]');
+  const es = await grab();
+  const same = en.filter((x, i) => x === es[i] && !/^(Futures Friends|PDF|CSV)$/.test(x));
+  assert.deepEqual(same, [], 'no English left on the Overview cards');
+  assert.deepEqual(await n.extract(pg), figs, 'identical figures');
+  assert.equal(await pg.textContent('#ovd .ovd-funding h3'), 'A dónde va el financiamiento');
+  await ctx.close();
+});

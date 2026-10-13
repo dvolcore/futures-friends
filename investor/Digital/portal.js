@@ -208,7 +208,27 @@
     emit('inv:land', { all: true });
   }
   $('#revealSkip')?.addEventListener('click', showAll);
-  window.FFInvReveal = Object.freeze({ timings: REVEAL, skip: showAll, running: () => !!run, enter, played: () => [...played] });
+  // count(nodes): a scroll-in count for figures outside the per-view reveal (the Overview's dashboard cards, studio.js). Each figure
+  // counts from zero in its own format over REVEAL.duration and ends on the exact text it held (the model text); returns end(),
+  // which lands them at once. The caller counts only with motion on.
+  function count(nodes, dur = REVEAL.duration) {
+    const list = nodes.map((n) => ({ n, final: n.textContent.trim() })).map((x) => ({ ...x, s: shape(x.final) })).filter((x) => x.s);
+    let done = false;
+    const end = () => { if (done) return; done = true; for (const { n, final } of list) { n.textContent = final; n.classList.remove('inv-counting'); n.style.removeProperty('min-width'); } };
+    if (!list.length) return end;
+    for (const { n, s } of list) { n.style.minWidth = `${Math.ceil(n.getBoundingClientRect().width)}px`; n.classList.add('inv-counting'); n.textContent = fmt(0, s); }
+    const t0 = performance.now();
+    const tick = (now) => {
+      if (done) return;
+      const p = Math.min(1, (now - t0) / dur), e = easeOut(p);
+      if (p >= 1) { end(); return; }
+      for (const { n, s } of list) n.textContent = fmt(Math.round(s.value * e * 10 ** s.dec) / 10 ** s.dec, s);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    return end;
+  }
+  window.FFInvReveal = Object.freeze({ timings: REVEAL, skip: showAll, running: () => !!run, enter, count, played: () => [...played] });
 
   // ---------------------------------------------------------------- "Show as table" for every chart
   function tableToggle(host, id, caption, head, rows, where = 'append') {

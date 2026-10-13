@@ -117,11 +117,13 @@ body.studio{margin:0;min-height:100vh;background:var(--cream);color:var(--ink);f
 .orbit-two{width:min(520px,110%);aspect-ratio:1;transform:translate(-50%,-50%);border-color:rgba(130,54,174,.12)}
 .orbit-two::before{background:var(--bop);box-shadow:0 0 14px var(--bop)}
 @media (prefers-reduced-motion:no-preference){
-  :root:not([data-motion=off]):not(.motion-paused) .hero-world .friends{animation:studioFloat 9s ease-in-out infinite}
+  :root:not([data-motion=off]):not(.motion-paused) .hero-world .friends{animation:studioFloat 7s ease-in-out infinite}
   :root:not([data-motion=off]):not(.motion-paused) .orbit-one{animation:studioOrbit 40s linear infinite}
   :root:not([data-motion=off]):not(.motion-paused) .orbit-two{animation:studioOrbit 60s linear infinite reverse}
 }
-@keyframes studioFloat{50%{transform:translate3d(0,-8px,0)}}
+/* the friends' idle (one loop): a slow breath and sway of the whole official cutout, never cropped (v2269) */
+.hero-world .friends{transform-origin:50% 100%}
+@keyframes studioFloat{0%,100%{transform:none}30%{transform:translate3d(0,-7px,0) rotate(-.45deg) scale(1.006)}55%{transform:translate3d(0,-10px,0) scale(1.012,1.004)}80%{transform:translate3d(0,-4px,0) rotate(.4deg)}}
 @keyframes studioOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
 
 .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}

@@ -5,9 +5,9 @@
 <title>Futures Friends | Investor studio</title>
 <meta name="description" content="One location, 40 children, one year. Explore the Futures Friends pilot, every cost, cash forecast and supporting documents.">
 <meta name="theme-color" content="#fbf6ec">
-<link rel="stylesheet" href="../../ff-tokens.css?v=inv1"><link rel="stylesheet" href="portal.css?v=studio1"><link rel="stylesheet" href="studio.css?v=studio1">
+<link rel="stylesheet" href="../../ff-tokens.css?v=inv1"><link rel="stylesheet" href="portal.css?v=studio1"><link rel="stylesheet" href="studio.css?v=studio2"><link rel="stylesheet" href="studio-overview.css?v=ov1">
 <script>(function(){var R=document.documentElement,q=location.search,off=false;try{var p=JSON.parse(localStorage.getItem('ff-display-preferences')||'{}');off=p&&p.motion2===false}catch(e){}if(off)R.dataset.motion='off';var l=(/[?&]lang=(es|en)/.exec(q)||[])[1];try{l=l||localStorage.getItem('ff-lang')}catch(e){}if(l==='es')R.lang='es';var V=['overview','funding','pilot','scenarios','inside','documents'],v=(/[?&]view=([a-z]+)/.exec(q)||[])[1]||location.hash.slice(1);R.dataset.view=V.indexOf(v)>-1?v:'overview';if(!off&&!/[?&]reveal=off/.test(q)&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))R.classList.add('inv-reveal');setTimeout(function(){R.classList.remove('inv-reveal')},6000)})();</script>
-<script src="../../ff-motion.js?v=inv1" defer></script><script src="portal-i18n.js?v=studio1" defer></script><script src="overview.js?v=studio1" defer></script><script src="studio.js?v=studio1" defer></script><script src="portal.js?v=studio1" defer></script>
+<script src="../../ff-motion.js?v=inv1" defer></script><script src="portal-i18n.js?v=studio2" defer></script><script src="overview.js?v=studio1" defer></script><script src="studio.js?v=studio2" defer></script><script src="portal.js?v=studio2" defer></script>
 </head>
 <body id="top" class="studio">
 <div class="atmosphere" aria-hidden="true"><div class="aurora aurora-one"></div><div class="aurora aurora-two"></div><div class="aurora aurora-three"></div></div>
@@ -34,6 +34,96 @@
 <article class="metric metric-gold" data-reveal-unit><span class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8M5 10v11h14V10M10 21v-7h4v7"/></svg></span><span class="metric-label">Building refinance</span><strong id="refinance" data-count>$140,000</strong><p>Owner-stated amount · included in the funding estimate</p><a class="metric-go" href="?view=funding&amp;slice=refinance" data-view-link="funding" data-slice="refinance">See it in the funding mix <span aria-hidden="true">→</span></a></article>
 </section>
 <section class="terms" aria-label="Proposed financing status"><div><span class="status-dot"></span><b>Loan terms require agreement</b></div><dl><div><dt>Interest</dt><dd>Pending</dd></div><div><dt>Monthly repayment</dt><dd>Pending</dd></div><div><dt>Term</dt><dd>Pending</dd></div><div><dt>Ownership</dt><dd>No equity proposed</dd></div></dl></section>
+<div class="ovd" id="ovd">
+<div class="ovd-row">
+<article class="panel ovd-card ovd-funding" data-ov-card data-ov-go="funding" aria-labelledby="ovFundingTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9Z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15Z"/></svg></span><div><h3 id="ovFundingTitle">Where the funding goes</h3><p>The four parts of the funding estimate.</p></div></div></header>
+<div class="ovd-donut-grid">
+<div class="ovd-donut-wrap"><svg class="ovd-donut" id="ovArcs" viewBox="0 0 320 320" aria-hidden="true" focusable="false"><circle class="ovd-ring-track" cx="160" cy="160" r="118"/></svg><div class="ovd-donut-center"><strong id="ovDonutTotal" data-ov-count>$423,849.52</strong><span>Preliminary funding need</span></div><div class="donut-tip" id="ovDonutTip" aria-hidden="true" hidden></div></div>
+<div class="ovd-donut-side"><p class="donut-hint" id="ovDonutHint">Select a part to see what it covers.</p>
+<ul class="donut-legend ovd-legend" id="ovLegend" aria-label="The four parts of the funding estimate">
+<li><button type="button" data-ov-slice="deficit" aria-pressed="false"><i class="sw" style="--c:#18b89b"></i><span class="lg-name">Peak pilot cash deficit</span><b class="lg-val" data-ov-count>$222,049.42</b><small class="lg-share">52.4%</small></button></li>
+<li><button type="button" data-ov-slice="refinance" aria-pressed="false"><i class="sw" style="--c:#3d6bff"></i><span class="lg-name">Refinance-enabling allocation</span><b class="lg-val" data-ov-count>$140,000</b><small class="lg-share">33.0%</small></button></li>
+<li><button type="button" data-ov-slice="floor" aria-pressed="false"><i class="sw" style="--c:#c58a1c"></i><span class="lg-name">Cash floor</span><b class="lg-val" data-ov-count>$39,755.50</b><small class="lg-share">9.4%</small></button></li>
+<li><button type="button" data-ov-slice="contingency" aria-pressed="false"><i class="sw" style="--c:#8236AE"></i><span class="lg-name">Contingency</span><b class="lg-val" data-ov-count>$22,044.60</b><small class="lg-share">5.2%</small></button></li>
+</ul>
+<p class="donut-detail" id="ovDonutDetail" aria-live="polite"></p></div>
+</div>
+<div class="ovd-actions"><a class="ovd-go" href="?view=funding" data-view-link="funding">See the full breakdown <span aria-hidden="true">→</span></a></div>
+</article>
+<article class="panel ovd-card ovd-scen" data-ov-card data-ov-go="scenarios" aria-labelledby="ovScenTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon purple" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><div><h3 id="ovScenTitle">Try a scenario</h3><p>Move the sliders to see how operating capacity changes. The published plan stays unchanged.</p></div></div></header>
+<div class="ovd-scen-grid">
+<div class="ovd-sliders">
+<div class="slider"><label for="ovTuition">Monthly tuition <output id="ovTuitionOut" for="ovTuition" data-ov-count>$910</output></label><input id="ovTuition" type="range" min="600" max="1600" step="5" value="910" disabled></div>
+<div class="slider"><label for="ovChildren">Enrolled children <output id="ovChildrenOut" for="ovChildren">40</output></label><input id="ovChildren" type="range" min="20" max="40" step="1" value="40" disabled></div>
+<div class="slider"><label for="ovCollection">Collections <output id="ovCollectionOut" for="ovCollection">96%</output></label><input id="ovCollection" type="range" min="80" max="100" step="1" value="96" disabled></div>
+</div>
+<div class="ovd-scen-out">
+<span class="ovd-kicker">Tuition vs. operating break-even</span>
+<div class="ovd-bar"><span>Monthly tuition</span><b id="ovScenTuition" data-ov-count>$910</b><div class="ovd-track"><i id="ovScenTuitionBar" class="tu"></i></div></div>
+<div class="ovd-bar"><span>Break-even / child</span><b id="ovScenBreakEven" data-ov-count>$1,036.37</b><div class="ovd-track"><i id="ovScenBreakBar" class="be"></i></div></div>
+<div class="ovd-margin" id="ovMarginBox"><strong id="ovMargin" aria-hidden="true" data-ov-count>−$57,738.02</strong><span class="sr" id="ovMarginSr" aria-live="polite">−$57,738.02</span><span>Annual operating margin</span><small id="ovScenStatus">Before building payments &amp; debt</small></div>
+</div>
+</div>
+<div class="ovd-actions"><button class="reset-button" id="ovReset" type="button" disabled>Reset to planning assumptions ↺</button><a class="ovd-go" href="?view=scenarios" data-view-link="scenarios">Open the scenarios <span aria-hidden="true">→</span></a></div>
+</article>
+</div>
+<div class="ovd-row">
+<article class="panel ovd-card ovd-platform" data-ov-card data-ov-go="inside" aria-labelledby="ovPlatformTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 3-.7 3-2 1-3-.8-1.6 2.8 2.2 2.1v2.2l-2.2 2.1L3.3 18l3-.8 2 1L9 21h6l.7-2.8 2-1 3 .8 1.6-2.8-2.2-2.1v-2.2l2.2-2.1L20.7 6l-3 .8-2-1L15 3Z"/><circle cx="12" cy="12" r="3"/></svg></span><div><h3 id="ovPlatformTitle">What the platform costs</h3><p>Build once. Support yearly.</p></div></div></header>
+<ul class="ovd-rows">
+<li><span>Platform completion</span><b id="ovPlatformBuild" data-ov-count>$57,000</b><div class="ovd-track"><i id="ovPlatformBuildBar" class="tu"></i></div></li>
+<li><span>Security testing &amp; counsel</span><b id="ovPlatformAssurance" data-ov-count>$20,400</b><div class="ovd-track"><i id="ovPlatformAssuranceBar" class="pu"></i></div></li>
+<li><span>Annual support &amp; hosting</span><b id="ovPlatformRecurring" data-ov-count>$18,452.20</b><div class="ovd-track"><i id="ovPlatformRecurringBar" class="gr"></i></div></li>
+</ul>
+<div class="ovd-total"><strong id="ovPlatformYear" data-ov-count>$95,852.20</strong><span>Platform year one</span></div>
+<p class="ovd-caption"><b id="ovPlatformOnce" data-ov-count>$77,400</b> one time · <b id="ovPlatformMonthly" data-ov-count>$1,537.68</b> recurring monthly</p>
+<div class="ovd-actions"><a class="button" href="pilot-plan.html#platform">Inspect platform costs <span aria-hidden="true">→</span></a><a class="ovd-go" href="?view=inside" data-view-link="inside">See inside the pilot <span aria-hidden="true">→</span></a></div>
+</article>
+<article class="panel ovd-card ovd-repay" data-ov-card data-ov-go="scenarios" aria-labelledby="ovRepayTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 17v-6M12 17V7M17 17V4"/></svg></span><div><h3 id="ovRepayTitle">Can the pilot carry repayment?</h3><p>Tuition today vs. operating break-even.</p></div></div></header>
+<div class="ovd-compare" id="ovCompare">
+<div class="ovd-bar ovd-bar-lg"><span>Current tuition assumption</span><b id="ovTuition0" data-ov-count>$910</b><div class="ovd-track"><i id="ovTuition0Bar" class="tu"></i></div></div>
+<div class="ovd-bar ovd-bar-lg"><span>Operating break-even</span><b id="ovBreakEven0" data-ov-count>$1,036.37</b><div class="ovd-track"><i id="ovBreakEven0Bar" class="be"></i></div></div>
+<p class="chart-unit">Per child / month · building payments and debt excluded</p>
+</div>
+<div class="gap ovd-gap"><strong id="ovGap" data-ov-count>−$57,738.02</strong><span>Annual operating gap<br><small>Before building payments and debt</small></span></div>
+<p class="enrollment">40 enrolled · 96% collections</p>
+<a class="readiness" href="pilot-plan.html#repayment"><span aria-hidden="true">!</span>Pricing and costs must be resolved before debt terms. <b aria-hidden="true">↗</b></a>
+<div class="ovd-actions"><a class="ovd-go" href="pilot-plan.html#repayment">Open the repayment model <span aria-hidden="true">→</span></a></div>
+</article>
+</div>
+<article class="panel ovd-card ovd-year" data-ov-card data-ov-go="pilot" aria-labelledby="ovYearTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4M17 3v4M3 11h18M7 15h2M12 15h2M17 15h1M7 18h2M12 18h2"/></svg></span><div><h3 id="ovYearTitle">Explore the pilot year</h3><p>Enrollment ramp, receipts, spending and the funding gap, from the monthly cash forecast.</p></div></div>
+<div class="series-toggles" role="group" aria-label="Show on the chart"><button type="button" data-ov-series="revenue" aria-pressed="true"><i class="sw" style="--c:#18b89b"></i>Revenue</button><button type="button" data-ov-series="expenses" aria-pressed="true"><i class="sw" style="--c:#3d6bff"></i>Expenses</button><button type="button" data-ov-series="gap" aria-pressed="true"><i class="sw sw-gap" style="--c:#d6455d"></i>Operating gap</button></div></header>
+<div class="trajectory ovd-chart"><svg id="ovChart" viewBox="0 0 960 360" role="img" aria-label="Monthly receipts, spending and the operating gap during the 12-month pilot"><g data-part="grid"></g><g data-part="bars"></g><path data-part="area" class="receipt-area"/><path data-part="spend" class="spending-line"/><path data-part="rec" class="receipt-line"/><line data-part="cursor" class="ovd-cursor" y1="14" y2="350"/><circle data-part="recDot" class="ovd-dot-rec" r="7"/><circle data-part="spendDot" class="ovd-dot-spend" r="7"/><g data-part="hits"></g></svg></div>
+<div class="ovd-year-foot">
+<div class="scrub-row"><button type="button" class="play-button" id="ovPlay" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg><span>Play timeline</span></button><label class="scrub-label" for="ovScrub"><span>Explore the pilot month</span><b id="ovMonthLabel">Month 1</b></label><input id="ovScrub" type="range" min="1" max="12" value="1" disabled></div>
+<dl class="ovd-readout" aria-label="The selected month"><div class="ro-month"><dt>Month</dt><dd><b id="ovMonth">01</b> / 12</dd></div><div><dt>Children</dt><dd id="ovChildrenM">30</dd></div><div class="ro-rev"><dt><i class="sw" style="--c:#18b89b"></i>Revenue</dt><dd id="ovReceipts">$26,208.00</dd></div><div class="ro-exp"><dt><i class="sw" style="--c:#3d6bff"></i>Expenses</dt><dd id="ovSpending">$105,038.49</dd></div><div class="ro-gap"><dt><i class="sw sw-gap" style="--c:#d6455d"></i>Operating gap</dt><dd id="ovNet">−$78,830.49</dd></div><div class="ro-total"><dt>Cumulative pilot cash deficit</dt><dd id="ovDeficit">$78,830.49</dd></div></dl>
+</div>
+<div class="ovd-actions"><a class="ovd-go" href="?view=pilot" data-view-link="pilot">Open the pilot year <span aria-hidden="true">→</span></a></div>
+</article>
+<article class="panel ovd-card ovd-includes" data-ov-card data-ov-go="inside" aria-labelledby="ovIncludesTitle">
+<div class="ovd-inc-copy">
+<div class="panel-title"><span class="icon green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span><div><h3 id="ovIncludesTitle">What the pilot includes</h3><p>Planned pilot scope.</p></div></div>
+<ul class="ovd-features"><li><span class="feature-icon blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3M4 8a2 2 0 0 0 0 4M20 8a2 2 0 0 1 0 4"/></svg></span><span>Parent &amp; child<br>sign-in</span></li><li><span class="feature-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5C8 2 5 3 2 4v16c4-1 7-1 10 1 3-2 6-2 10-1V4c-3-1-6-2-10 1Zm0 0v16"/></svg></span><span>Curriculum &amp;<br>learning records</span></li><li><span class="feature-icon rose" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11a8 8 0 0 1-8 8H7l-5 3 2-6a8 8 0 1 1 17-5Z"/><path d="M7 10h10M7 14h6"/></svg></span><span>Family<br>communication</span></li><li><span class="feature-icon green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span><span>Secure hosting<br>&amp; support</span></li></ul>
+<div class="ovd-actions"><button type="button" class="explore-button" data-curriculum-open aria-haspopup="dialog">Preview curriculum <span aria-hidden="true">→</span></button><a class="ovd-go" href="?view=inside" data-view-link="inside">See inside the pilot <span aria-hidden="true">→</span></a></div>
+</div>
+<figure class="ovd-art"><img src="assets/curriculum-concept.webp" alt="Futures Friends curriculum preview: learning binder, activity sheet and character materials" width="1536" height="1024" loading="lazy"><figcaption>Curriculum preview · in development</figcaption></figure>
+</article>
+<section class="panel ovd-card ovd-docs" data-ov-card aria-labelledby="ovDocsTitle">
+<header class="ovd-head"><div class="panel-title"><span class="icon blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span><div><h3 id="ovDocsTitle">Everything behind the plan</h3><p>Key documents for a deeper look.</p></div></div><button type="button" class="ghost-button ovd-all" data-docs-open>All documents</button></header>
+<ul class="ovd-doc-strip">
+<li><a class="ovd-doc" data-doc="plan-pdf" href="pilot-plan.html"><img src="assets/binder.webp" alt="" width="1200" height="1157" loading="lazy"><span class="ovd-doc-text"><strong>Business plan</strong><span>The full pilot plan</span><small data-inv-docs data-doc-meta="plan-pdf"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+<li><a class="ovd-doc" data-doc="one-sheet-pdf" href="pilot-one-sheet.html"><span class="ovd-doc-icon gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2"/></svg></span><span class="ovd-doc-text"><strong>One-sheet</strong><span>The core figures on one page</span><small data-inv-docs data-doc-meta="one-sheet-pdf"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+<li><a class="ovd-doc" data-doc="costs-csv" href="pilot-plan.html#budget"><span class="ovd-doc-icon green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/></svg></span><span class="ovd-doc-text"><strong>Every cost</strong><span>Each planned line, itemized</span><small data-inv-docs data-doc-meta="costs-csv"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+<li><a class="ovd-doc" data-doc="cash-csv" href="pilot-plan.html#cash"><span class="ovd-doc-icon rose" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 17v-6M12 17V7M17 17V4"/></svg></span><span class="ovd-doc-text"><strong>Monthly cash forecast</strong><span>Receipts and spending, month by month</span><small data-inv-docs data-doc-meta="cash-csv"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+<li><a class="ovd-doc" data-doc="bible-pdf" href="library.html#bible"><img src="assets/booker.webp" alt="" width="692" height="960" loading="lazy"><span class="ovd-doc-text"><strong>Production bible</strong><span>Characters and story world</span><small data-inv-docs data-doc-meta="bible-pdf"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+<li><a class="ovd-doc" data-doc="operations-pdf" href="library.html#operations"><img src="assets/shirt.webp" alt="" width="1536" height="1024" loading="lazy"><span class="ovd-doc-text"><strong>Evidence &amp; merchandise</strong><span>Records, operations and products</span><small data-inv-docs data-doc-meta="operations-pdf"></small></span><span class="ovd-doc-go" aria-hidden="true">→</span></a></li>
+</ul>
+</section>
+</div>
 </section>
 
 <section class="studio-view view-funding" data-studio-view="funding" aria-labelledby="funding-title">
@@ -58,7 +148,7 @@
 <div class="view-head"><div><span class="eyebrow">12-MONTH PLANNING FORECAST</span><h2 id="pilot-title" tabindex="-1">The pilot year, month by month</h2><p>Enrollment ramp, receipts, spending and the funding gap, from the monthly cash forecast.</p></div><div class="series-toggles" role="group" aria-label="Show on the chart"><button type="button" data-series="revenue" aria-pressed="true"><i class="sw" style="--c:#18b89b"></i>Revenue</button><button type="button" data-series="expenses" aria-pressed="true"><i class="sw" style="--c:#3d6bff"></i>Expenses</button><button type="button" data-series="gap" aria-pressed="true"><i class="sw sw-gap" style="--c:#d6455d"></i>Operating gap</button></div></div>
 <div class="pilot-grid">
 <article class="panel year-panel" id="forecastView">
-<div class="trajectory"><svg id="cashChart" viewBox="0 0 960 350" role="img" aria-label="Monthly receipts, spending and the operating gap during the 12-month pilot"><g id="cashGrid"></g><g id="gapBars"></g><path id="receiptArea" class="receipt-area"/><path id="spendingPath" class="spending-line"/><path id="receiptPath" class="receipt-line"/><line id="cashCursor" y1="14" y2="350"/><circle id="receiptDot" r="7"/><circle id="spendingDot" r="7"/><g id="cashHitTargets"></g></svg></div>
+<div class="trajectory"><svg id="cashChart" viewBox="0 0 960 350" role="img" aria-label="Monthly receipts, spending and the operating gap during the 12-month pilot"><g id="cashGrid" data-part="grid"></g><g id="gapBars" data-part="bars"></g><path id="receiptArea" data-part="area" class="receipt-area"/><path id="spendingPath" data-part="spend" class="spending-line"/><path id="receiptPath" data-part="rec" class="receipt-line"/><line id="cashCursor" data-part="cursor" y1="14" y2="350"/><circle id="receiptDot" data-part="recDot" r="7"/><circle id="spendingDot" data-part="spendDot" r="7"/><g id="cashHitTargets" data-part="hits"></g></svg></div>
 <div class="scrub-row"><button type="button" class="play-button" id="playTimeline" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg><span>Play timeline</span></button><label class="scrub-label" for="monthScrubber"><span>Explore the pilot month</span><b id="monthLabel">Month 1</b></label><input id="monthScrubber" type="range" min="1" max="12" value="1" disabled></div>
 <p class="note">Spending includes recurring and one-time pilot costs. Refinance and cash floor are separate funding allocations. Building payments and financing costs remain excluded.</p>
 </article>
