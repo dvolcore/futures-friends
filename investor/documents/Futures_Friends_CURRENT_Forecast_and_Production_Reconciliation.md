@@ -88,7 +88,7 @@ Curriculum mapping (one-time; no recurring curriculum fee), teacher coaching, RN
 
 Marketing is $6,000 local media + $1,800 management + $2,400 launch photography + $1,200 materials = $11,400 year one. Test tour-to-enrollment conversion and retention before raising spend. There is no national sales payroll, bulk tablet rental inventory or full-season production in this pilot.
 
-Ralph's forward delivery ($12,000) and pilot-year creative oversight ({fmt(category_sum('Pilot content support'))}, one-time: a smaller release calendar with defined paid deliverables, not ongoing) are explicit. Existing platform/characters/CRM/ATS/video replacement value is not automatically a cash invoice. Reconcile prior scope, deliverables, payments, rights and outstanding fees before adding past compensation. Do not assume past work is free because its amount is unresolved.
+Ralph's forward delivery ($12,000) and pilot-year creative oversight ($6,000, one-time: a smaller release calendar with defined paid deliverables, not ongoing) are explicit. Existing platform/characters/CRM/ATS/video replacement value is not automatically a cash invoice. Reconcile prior scope, deliverables, payments, rights and outstanding fees before adding past compensation. Do not assume past work is free because its amount is unresolved.
 
 ## Release gates and missing evidence
 First month: verify safe shift coverage, consent, activity records, billing, attendance and support response. Month three: compare actual collections, retention and acquisition costs against the model. Months six and twelve: expand only after positive ongoing cash economics and dependable delivery. Release engineering cash against accepted milestones.
