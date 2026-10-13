@@ -528,4 +528,4 @@
 :root[data-theme=money][data-view=overview] .studio-foot{color:var(--cap-dim)}
 :root[data-theme=money][data-view=overview] .studio-foot a{color:#ffe08a}
 :root[data-theme=money] .view-overview .panel-title .icon{background:radial-gradient(circle at 35% 30%,#4c8dff,#2457c4)}
-@media (max-width:767px){:root[data-theme=money] .studio .studio-top .lang-switch button[aria-pressed=true]{background:#2c9a69}}
+@media (max-width:767px){:root[data-theme=money] .studio .studio-top .lang-switch button[aria-pressed=true]{background:#1e6e4a}}
