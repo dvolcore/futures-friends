@@ -1122,3 +1122,34 @@ test('the gold theme (one attribute away): #ddae57 page, espresso rail, page-lev
     await ctx.close();
   }
 });
+
+// ------------------------------------------------------------------ v2280 (owner: "one of the icons ... is covering the words" + "make sure everything
+// else is lined up"): the KPI row on one grid; the round arrow never sits on any text
+test('KPI row: no text under the arrow; labels, figures, charts and arrows share their lines across the six tiles', async (t) => {
+  if (skip) return t.skip(skip);
+  for (const [W, H, mob] of [[1280, 853], [1440, 900], [1920, 1080], [390, 844, true]]) {
+    const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce', isMobile: !!mob, hasTouch: !!mob }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
+    const r = await pg.evaluate(() => [...document.querySelectorAll('#kpis .kpi')].map((k) => {
+      const box = (e) => { const b = e.getBoundingClientRect(); return { l: b.left, r: b.right, t: b.top, b: b.bottom }; };
+      const go = box(k.querySelector('.kpi-go')), texts = [];
+      const w = document.createTreeWalker(k, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) { if (!n.nodeValue.trim() || n.parentElement.closest('.kpi-go, .sr, svg')) continue; const rg = document.createRange(); rg.selectNodeContents(n); for (const b of rg.getClientRects()) texts.push({ l: b.left, r: b.right, t: b.top, b: b.bottom, s: n.nodeValue.trim().slice(0, 20) }); }
+      const hit = texts.filter((x) => x.l < go.r - 0.5 && x.r > go.l + 0.5 && x.t < go.b - 0.5 && x.b > go.t + 0.5).map((x) => x.s);
+      return { hit, tile: box(k), chart: box(k.querySelector('.kpi-chart')), fig: box(k.querySelector('.kpi-v')), go, icon: box(k.querySelector('.kpi-icon')) };
+    }));
+    assert.equal(r.length, 6);
+    for (const [i, x] of r.entries()) assert.deepEqual(x.hit, [], `${W}: tile ${i + 1}: no text under the arrow`);
+    const spread = (f) => Math.max(...r.map(f)) - Math.min(...r.map(f));
+    // relative to each tile's top (phones scroll the row sideways, so every tile is measured from its own top)
+    assert.ok(spread((x) => x.fig.t - x.tile.t) <= 2, `${W}: figures on one line`);
+    assert.ok(spread((x) => x.chart.t - x.tile.t) <= 2, `${W}: charts on one line`);
+    assert.ok(spread((x) => x.chart.b - x.chart.t) <= 1, `${W}: charts one height`);
+    assert.ok(spread((x) => x.go.b - x.tile.t) <= 2, `${W}: arrows on one line`);
+    assert.ok(spread((x) => x.icon.t - x.tile.t) <= 1 && spread((x) => x.icon.r - x.icon.l) <= 1, `${W}: badges one size, one place`);
+    assert.ok(spread((x) => x.tile.b - x.tile.t) <= 1, `${W}: equal tile heights`);
+    if (!mob) assert.ok(spread((x) => x.tile.t) <= 1, `${W}: one row`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
