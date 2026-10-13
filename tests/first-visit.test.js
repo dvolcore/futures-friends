@@ -6,7 +6,7 @@
 //    STAYS on Home (owner: "it must start at the front page with the clouds"); a small note "You were sent to: <page>  Open" that
 //    never takes focus and hides itself after ~8 s; Open goes there (replaceState); Back leaves to where the visitor was before;
 //  - a first visit to Home: the fly-through plays and the visitor stays on Home (no note);
-//  - the centers path: the audience chosen at the gate opens after 'ff:first-visit-done';
+//  - the centers path (2026-10-12): "Enter for centers & programs" opens #centers directly, with no Families Home underneath;
 //  - a second load in the same session: no gate, the deep link renders directly; ?nogate renders directly;
 //  - reduced motion: the gate fades, Home shows still (no opening), and the chip still continues to the requested route.
 const test = require('node:test');
@@ -124,18 +124,19 @@ test('first visit to Home: the fly-through plays and the visitor stays on Home (
   await ctx.close();
 });
 
-test('the centers path: an audience chosen at the gate opens after the fly-through (ff:first-visit-done), even from a deep link', async () => {
+test('the centers path: "Enter for centers & programs" opens #centers straight away, even from a deep link: no Families Home, no fly-through', async () => {
   const ctx = await ctxFor(390); const page = await ctx.newPage(); const errors = errorsOf(page);
   await page.addInitScript(SPY);
-  await page.addInitScript(() => document.addEventListener('ff:first-visit-done', () => { window.__doneAt = location.hash; }));
+  await page.addInitScript(() => { window.__homeSeen = false; document.addEventListener('ff:first-visit-done', () => { window.__doneAt = location.hash; }); });
   await page.goto(`${site.base}?fresh=${Date.now()}#curriculum`);
-  await page.waitForSelector('.ffe-go');
-  const dest = await page.evaluate(() => (typeof V !== 'undefined' && V.centers ? 'centers' : 'for-centers'));   // #centers once the audience split lands
-  const btn = await page.$('.ffe-centers');
-  if (btn) await btn.click(); else { await page.evaluate(d => window.FFEntry.choose(d), dest); await page.click('.ffe-quiet'); }
-  await page.waitForFunction(() => window.__fv.opening.includes('playing'), null, { timeout: 4000 });
-  await page.waitForFunction(d => location.hash === '#' + d, dest, { timeout: 12000 });
-  assert.equal(await page.evaluate(() => window.__doneAt), '#home', 'the fly-through finished on Home first');
+  await page.waitForSelector('.ffe-centers');
+  // from the click on, the page under the gate must never be the Families Home
+  await page.evaluate(() => { const v = document.getElementById('view'); new MutationObserver(() => { if (!document.querySelector('.ffe') || document.querySelector('.ffe.ffe-out')) { if (v.querySelector('.mh-hero') || /^#home/.test(location.hash)) window.__homeSeen = true; } }).observe(v, { childList: true, subtree: true, attributes: true }); });
+  await page.click('.ffe-centers');
+  await page.waitForFunction(() => location.hash === '#centers', null, { timeout: 4000 });
+  await page.waitForFunction(() => !document.querySelector('.ffe'), null, { timeout: 4000 });
+  assert.deepEqual(await page.evaluate(() => [window.__doneAt, document.documentElement.dataset.audience, !!document.querySelector('#view .phero h1'), !!document.querySelector('#view .mh-hero'), window.__homeSeen]), ['#centers', 'centers', true, false, false]);
+  assert.ok(!(await page.evaluate(() => window.__fv.opening)).includes('playing'), 'Home\'s fly-through does not play on the centers path');
   assert.equal(await page.$('.ffe-next'), null, 'no note when the audience was chosen');
   assert.deepEqual(errors, []);
   await ctx.close();

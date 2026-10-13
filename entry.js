@@ -1,7 +1,7 @@
 /* Futures Friends: the entry gate (owner 2026-10-07: "Make it start with it ON — for demonstration purposes I need ALL the effects on").
    Browsers allow no sound before the visitor's first tap or key, so the first page load of a session opens on one felt-sky moment:
    the plush logo, "Welcome to the Futures Friends world" and one big "Tap to enter" button (Enter and Space work, it has focus), and a small "Enter for centers & programs" choice (the audience
-   split, 2026-10-07: it opens #centers on the business side; families, the default, take the big button).
+   split, 2026-10-07: it opens #centers on the business side, directly; families, the default, take the big button).
    That single tap is the gesture that wakes sound (sound.js listens for it): the title tune and the nature ambience start at once,
    and the gate lifts away into the hero's fly-in, which waits for it (hero-world.js and hero-motion.js call FFEntry.wait).
    On Home with motion the title's own letters play the tune as they land, so sound.js plays no second one (data-ffe-tune).
@@ -18,7 +18,8 @@
    the cast's entrance. The visitor STAYS on Home (owner, 2026-10-07: a link ending in #curriculum must start at the front page too).
    If they had opened a deep link, a small dismissible felt note "You were sent to: <page>  Open ->" (named from route-meta.js) shows
    at the bottom after the fly-in and hides itself after about 8 s (held while pointed at or focused); it never takes focus.
-   Exception: an audience chosen at the gate (FFEntry.choose(route), e.g. 'centers') is opened once the fly-through is over.
+   Exception: an audience chosen at the gate (FFEntry.choose(route)) is opened once the fly-through is over; the gate's own
+   "Enter for centers & programs" goes straight to #centers with no Home underneath (enterCenters, 2026-10-12).
    Reduced motion or the motion switch off: the gate fades, Home shows still, the note follows at once. Any input skips the opening as
    before. When the fly-through is over the document gets the event 'ff:first-visit-done' (detail {next: '#route' or null}).
    Public: window.FFEntry = {open() -> true while the gate shows, wait(fn) -> runs fn when the gate has been passed (now if it never
@@ -50,7 +51,7 @@
     else inertSet.splice(0).forEach(el => { el.inert = false; });
   }
 
-  function enter(withSound) {
+  function enter(withSound, stay) {
     if (!shown || !gate || gate.dataset.leaving) return;
     gate.dataset.leaving = '1';
     mark();
@@ -60,7 +61,7 @@
       else if (!S.enabled()) S.set(true);
     }
     hold(false);
-    const hop = hopHome();
+    const hop = stay ? false : hopHome();
     const g = gate;
     g.classList.add('ffe-out');
     const gone = () => { if (g.parentNode) g.parentNode.removeChild(g); delete D.documentElement.dataset.ffeTune; };
@@ -69,6 +70,22 @@
     release();
     focusH1();
     if (hop) watchFlight();
+    else if (stay) { try { D.dispatchEvent(new CustomEvent('ff:first-visit-done', { detail: { next: null } })); } catch (_) { /* old browser */ } }
+  }
+  // "Enter for centers & programs" (coordinator 2026-10-12: no flash of the Families Home): #centers is rendered under the gate first,
+  // in the centers audience, then the gate lifts straight onto it and the Centers hero plays its own entrance. Home's cloud
+  // fly-through stays the first visit for everyone who takes "Tap to enter".
+  function enterCenters() {
+    if (!shown || !gate || gate.dataset.leaving) return;
+    afterGate = null;
+    try { if (W.FFAudience && W.FFAudience.set) W.FFAudience.set('centers', { source: 'gate', announce: false }); } catch (_) { /* wayfinding absent */ }
+    delete D.documentElement.dataset.ffeTune;
+    if (typeof W.go === 'function' && known('centers')) {
+      try { history.replaceState(history.state, '', here('#centers')); } catch (_) { /* go() still routes */ }
+      try { W.scrollTo(0, 0); } catch (_) { /* fine */ }
+      try { W.go('centers'); } catch (e) { setTimeout(() => { throw e; }); }
+    }
+    enter(true, true);
   }
 
   // ---- the first visit: Home's fly-through first, then on to the page the visitor asked for
@@ -202,10 +219,7 @@
     // owner 2026-10-07: the gate is also the audience choice. Families is the default (the big button); programs go to #centers.
     // The first visit always plays Home's opening first (owner hard requirement): the choice is held as W.FFEntry.afterGate and
     // opened by done() right after the opening's 'ff:first-visit-done' (one navigation, no timer of our own).
-    centers.addEventListener('click', () => {
-      afterGate = 'centers';
-      enter(true);
-    });
+    centers.addEventListener('click', enterCenters);
     // focus stays in the gate: Tab and Shift+Tab cycle through its buttons (the last ones can be the English · Español choice that
     // i18n.js adds at the end of the card, so the list is read on each key press)
     gate.addEventListener('keydown', e => {

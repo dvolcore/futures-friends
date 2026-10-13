@@ -58,12 +58,13 @@
   V.centers = () => hero('For centers &amp; programs', 'Bring Futures Friends to your program',
     'For child care centers, home daycares, churches and pre-K partners: the four friends, a whole-child curriculum, learning-zone rooms, staff training and family tools in one membership.',
     { chars: ['booker', 'zuri', 'lumi', 'bop'], cta: `<a class="btn gold" href="#book-demo">Book a demo</a><a class="btn soft" href="#pricing">See pricing</a>` })
+    + (W.FFDayMachine ? W.FFDayMachine.section('director') : '')   // day-machine.js: the director variant of "How a day travels", early in the scroll (2026-10-12)
+    + (W.FFCentersMotion ? W.FFCentersMotion.showcase() : '')       // centers-motion.js: a peek at the director dashboard (sample data)
     + (W.FFHomeCalm && W.FFHomeCalm.status ? W.FFHomeCalm.status() : '')
     + sect('aud-prog-h', 'band-paper aud-programs', `${lead('aud-prog-h', 'Start where you are', 'Which program are you?', 'Pick your setting to see what you get, how it is sized and what it costs.')}<ul class="aud-cards">${PROGRAMS.filter(([r]) => has(r)).map(([r, h, p, k]) => card('#' + r, h, p, k)).join('')}</ul>`)
     + sect('aud-rooms-h', '', `${lead('aud-rooms-h', 'Your rooms', 'Set up the learning zones', '')}${tiles(ROOMS)}`)
     + sect('aud-team-h', 'band-paper', `${lead('aud-team-h', 'Your teachers', 'Curriculum and training', 'Full lesson plans are for member programs; the summaries are open to read.')}${tiles(TEAM)}`)
     + sect('aud-run-h', '', `${lead('aud-run-h', 'Your program', 'Run it, fund it, compare it', '')}${tiles(RUN)}`)
-    + (W.FFDayMachine ? W.FFDayMachine.section('director') : '')   // day-machine.js: the director variant of "How a day travels"
     + (W.FFHomeCalm && W.FFHomeCalm.proof ? W.FFHomeCalm.proof() : '')
     + sect('aud-fam-h', 'band-paper aud-famlink', `<div class="aud-famgrid"><div>${art('lumi-heart-hands', 150, 'aud-famcut')}</div><div><span class="eyebrow">What your families get</span><h2 id="aud-fam-h">See what families experience</h2><p>Your families get the friends, read-along books, short videos, activities from things at home and the Family Portal. No sales, nothing to buy.</p><a class="btn navy" href="#home" data-ffa-aud="families">See the family side ${icon('ArrowRight')}</a></div></div>`)
     + `<section class="hc-close aud-close" aria-labelledby="aud-close-h"><div class="wrap hc-closegrid"><div><h2 id="aud-close-h">Talk to a real person</h2><p>Book a demo or discuss your program: thirty minutes on your rooms, ages and enrollment, a walk through the Futures Hub and an honest answer on what is ready today.</p></div>

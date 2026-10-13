@@ -1,0 +1,141 @@
+/* Futures Friends: the Centers & Programs pages come alive (centers-motion.js). The still layout comes first and is complete on its own
+   (reduced motion, the Decorative motion switch, no JavaScript after the prerender, print); movement lives under
+   (prefers-reduced-motion:no-preference) and :root:not([data-motion=off]), keyed to classes the script adds only while motion is allowed.
+   Tokens from ff-tokens.css. Character art only moves, rotates or scales uniformly and is never filtered, recoloured or cropped. */
+
+/* ---------------------------------------------------------------- the living hero: a full-bleed felt world (like Home's meadow) */
+.phero.cm-hero{background:#CFE6F2;color:var(--ink,#14313D);padding-block:clamp(28px,4vw,48px) 0;min-height:clamp(500px,calc(100svh - 200px),740px);display:flex;align-items:stretch}
+.phero.cm-hero::before,.phero.cm-hero::after{display:none}
+.phero.cm-hero>.wrap{position:relative;z-index:2;flex:1;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:end;gap:clamp(16px,3vw,40px)}
+.cm-world{position:absolute;inset:-24px;z-index:0;overflow:hidden}
+.phero .cm-world .cm-room{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,center 62%);border:0;border-radius:0;animation:none;max-width:none}
+.cm-veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(10,43,56,.30),rgba(10,43,56,.06) 48%,transparent 70%),linear-gradient(180deg,transparent 70%,rgba(30,20,6,.16))}
+.phero .cm-world .cm-sun{position:absolute;width:clamp(90px,11vw,170px);height:auto;right:8%;top:8%;border:0;animation:none}
+.phero .cm-world .cm-cloud{position:absolute;width:clamp(120px,15vw,230px);height:auto;left:46%;top:4%;opacity:.95;border:0;animation:none}
+.cm-lamp{position:absolute;inset:0;pointer-events:none;background:radial-gradient(45% 50% at 72% 30%,rgba(255,214,140,.42),transparent 70%),linear-gradient(180deg,transparent 55%,rgba(255,190,110,.18))}
+/* the frosted card (Home's "Learn. Move. Explore. Belong." card): the words read on the world */
+.phero.cm-hero .cm-card{align-self:center;margin-bottom:clamp(28px,4vw,48px);padding:clamp(20px,2.6vw,34px);border-radius:26px;background:rgba(251,246,236,.86);
+  -webkit-backdrop-filter:blur(14px) saturate(160%) brightness(1.06);backdrop-filter:blur(14px) saturate(160%) brightness(1.06);
+  border:1.5px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 24px 50px -24px rgba(10,43,56,.55);color:var(--ink,#14313D)}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.phero.cm-hero .cm-card{background:rgba(251,246,236,.96)}}
+@media (prefers-reduced-transparency:reduce){.phero.cm-hero .cm-card{background:#FBF6EC;-webkit-backdrop-filter:none;backdrop-filter:none}}
+.phero.cm-hero .cm-card h1{color:var(--ink,#14313D)}
+.phero.cm-hero .cm-card .lede{color:#2E4A55}
+.phero.cm-hero .cm-card .eyebrow{color:#8A5A00}
+.phero.cm-hero .cm-card .crumbs{color:#3C5560}
+.phero.cm-hero .cm-card .crumbs button,.phero.cm-hero .cm-card .crumbs a{color:var(--ink,#14313D)}
+.phero.cm-hero .cm-card .btn.soft{background:#fff;border-color:rgba(20,49,61,.25)}
+/* the cast stands in the scene: a box on the floor line, each cut-out centred on --x and sized from its lineup scale */
+/* the right gutter keeps every cut-out clear of the fixed Nature / Sound dock (sound.css .ffs: 18 px from the edge, about 136 px wide) */
+.phero .art.cm-art{display:block;justify-self:stretch;align-self:end;position:relative;width:auto;height:auto;aspect-ratio:1.1;max-height:min(520px,calc(100svh - 250px));max-width:none;margin:0 max(0px,calc(170px - (100vw - min(100vw,1320px)) / 2)) 0 0}
+.cm-cast{position:absolute;inset:0;pointer-events:none}
+.cm-ch{position:absolute;bottom:7%;left:var(--x);height:var(--h);aspect-ratio:var(--ar);transform:translateX(-50%)}
+.cm-bob{display:block;width:100%;height:100%;transform-origin:50% 100%}
+.phero .art.cm-art .cm-ch img{display:block;width:100%;height:100%;max-width:none;object-fit:contain;transform-origin:50% 100%;border:0;border-radius:0;animation:none;filter:none}
+.cm-ch::before{content:"";position:absolute;left:10%;right:10%;bottom:-2.5%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,26,8,.38),transparent);z-index:-1}
+/* the honesty chip: one small caption, bottom corner */
+.cm-chip{position:absolute;z-index:3;left:clamp(10px,2vw,22px);bottom:10px;padding:4px 10px;border-radius:999px;background:rgba(10,43,56,.72);color:#FBF6EC;font:500 .6875rem/1.3 var(--body);letter-spacing:.01em;pointer-events:none}
+.cm-zonefr img,.cm-screen img{border:0!important;box-shadow:none}
+@media (max-width:980px){
+  .phero.cm-hero{min-height:0}
+  .phero.cm-hero>.wrap{grid-template-columns:1fr;align-items:stretch;gap:0}
+  .phero.cm-hero .cm-card{margin-bottom:0}
+  .phero .art.cm-art{max-height:none;max-width:560px;margin-right:72px}
+}
+@media (max-width:560px){.phero.cm-hero .cm-card{border-radius:20px}.cm-chip{font-size:.625rem;bottom:6px}}
+
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-hero.cm-live.is-landed .cm-bob{animation:cm-breathe 4.8s var(--ff-ease-inout) infinite alternate;animation-delay:calc(var(--i) * -.7s)}
+  :root:not([data-motion=off]) .cm-hero.cm-live .cm-cloud{animation:cm-drift 38s linear infinite alternate}
+  :root:not([data-motion=off]) .cm-hero.cm-live .cm-sun{animation:cm-spin 60s linear infinite}
+  :root:not([data-motion=off]) .cm-hero.cm-live :is(.cm-world,.cm-cast){transition:transform .6s var(--ff-ease-out)}
+  :root:not([data-motion=off]) .cm-hero.ffm-paused *{animation-play-state:paused!important}
+  @supports (animation-timeline:view()){
+    :root:not([data-motion=off]) .cm-hero.cm-live .cm-world{animation:cm-par linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  }
+}
+@keyframes cm-breathe{from{translate:0 0}to{translate:0 -4px}}
+@keyframes cm-drift{from{translate:-30% 0}to{translate:40% 0}}
+@keyframes cm-spin{to{rotate:360deg}}
+@keyframes cm-par{from{translate:0 0}to{translate:0 60px}}
+
+/* ---------------------------------------------------------------- learning zones: each room lights up with its friend */
+.cm-zones .cm-zone{position:relative;overflow:hidden;isolation:isolate;background:color-mix(in srgb,var(--c) 9%,#fff)}
+.cm-zonetop{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;min-height:92px;margin-bottom:2px}
+.cm-pillar{align-self:flex-start;font:700 .75rem/1 var(--display);letter-spacing:.08em;padding:6px 10px;border-radius:999px;background:var(--c);color:#fff}
+.cm-zonefr{display:block;height:88px;flex:0 0 auto}
+.cm-zonefr img{display:block;height:88px;width:auto;object-fit:contain;transform-origin:50% 100%}
+.cm-zones .cm-zone::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 80% at 85% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%)}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-walk .cm-zone{background:#fff;transition:background-color var(--ff-dur-4) var(--ff-ease-out),box-shadow var(--ff-dur-3) var(--ff-ease-out),translate var(--ff-dur-3) var(--ff-ease-out)}
+  :root:not([data-motion=off]) .cm-walk .cm-zone::after{opacity:0;transition:opacity var(--ff-dur-4) var(--ff-ease-out)}
+  :root:not([data-motion=off]) .cm-walk .cm-zone:not(.is-lit) .cm-zonefr img{opacity:0}
+  :root:not([data-motion=off]) .cm-walk .cm-zone:not(.is-lit) .cm-pillar{opacity:.35}
+  :root:not([data-motion=off]) .cm-walk .cm-zone.is-lit{background:color-mix(in srgb,var(--c) 9%,#fff);box-shadow:0 14px 30px -20px var(--c)}
+  :root:not([data-motion=off]) .cm-walk .cm-zone.is-lit::after{opacity:1}
+  :root:not([data-motion=off]) .cm-walk .cm-pillar{transition:opacity var(--ff-dur-3) var(--ff-ease-out)}
+  @media (hover:hover) and (pointer:fine){:root:not([data-motion=off]) .cm-walk .cm-zone.is-lit:hover{translate:0 -3px}}
+}
+
+/* ---------------------------------------------------------------- #pricing: the package cards turn in */
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-tiers>.cm-pre{opacity:0}
+  :root:not([data-motion=off]) .cm-tiers .pz-big .pz-amt{font-variant-numeric:tabular-nums;display:inline-block}
+}
+
+/* ---------------------------------------------------------------- #book-demo: the steps, stitched together */
+.cm-steps{position:relative;list-style:none;padding-left:0!important;counter-reset:cm}
+.cm-steps>li{position:relative;padding-left:52px;min-height:44px;counter-increment:cm}
+.cm-steps>li::before{content:counter(cm);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--gold,#E7A928);color:var(--ink,#14313D);font:700 1rem/1 var(--display);box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(231,169,40,.45)}
+.cm-steps>li:not(:last-child)::after{content:"";position:absolute;left:18px;top:42px;bottom:-10px;width:0;border-left:3px dashed var(--gold,#E7A928)}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-steps.cm-pre>li{opacity:0}
+  :root:not([data-motion=off]) .cm-steps.is-in>li{opacity:0;translate:0 var(--ff-rise);transition:opacity var(--ff-dur-3) var(--ff-ease-out),translate var(--ff-dur-3) var(--ff-ease-out)}
+  :root:not([data-motion=off]) .cm-steps.is-in>li::before{scale:.4;transition:scale var(--ff-dur-3) var(--ff-ease-spring)}
+  :root:not([data-motion=off]) .cm-steps.is-in>li:not(:last-child)::after{clip-path:inset(0 0 100% 0);transition:clip-path var(--ff-dur-4) var(--ff-ease-inout) .2s}
+  :root:not([data-motion=off]) .cm-steps.is-in>li.is-in{opacity:1;translate:0 0}
+  :root:not([data-motion=off]) .cm-steps.is-in>li.is-in::before{scale:1}
+  :root:not([data-motion=off]) .cm-steps.is-in>li.is-in:not(:last-child)::after{clip-path:inset(0 0 0 0)}
+}
+
+/* ---------------------------------------------------------------- "Trusted by professionals": cards rise, a gold stitch is drawn round each */
+.ffe-item.cm-stitch{position:relative}
+.ffe-item.cm-stitch::after{content:"";position:absolute;inset:6px;border-radius:inherit;border:2px dashed rgba(231,169,40,.85);pointer-events:none;clip-path:inset(0 100% 100% 0);transition:clip-path 1.1s var(--ff-ease-inout)}
+.ffe-item.cm-stitch.is-stitched::after{clip-path:inset(0 0 0 0)}
+@media (prefers-reduced-motion:no-preference){:root:not([data-motion=off]) .ffe-item.cm-rise{opacity:0}}
+
+/* ---------------------------------------------------------------- Learning Zones Kit band: chips pop in; Real room / With the kit wipes */
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .ks .ks-chips>li.cm-chip-pre{opacity:0}
+  :root:not([data-motion=off]) .ks .ffa-kit .ffa-kit-stage>.ffa-kit-real{opacity:1;transition:none}
+  :root:not([data-motion=off]) .ks .ffa-kit .ffa-kit-stage>.ffa-kit-concept{opacity:1;clip-path:inset(0 0 0 0);transition:clip-path 750ms var(--ff-ease-inout)}
+  :root:not([data-motion=off]) .ks .ffa-kit[data-kit-view="real"] .ffa-kit-stage>.ffa-kit-concept{clip-path:inset(0 0 0 100%)}
+}
+
+/* ---------------------------------------------------------------- #centers: a peek at the director dashboard */
+.cm-dash{padding-block:clamp(40px,6vw,80px)}
+.cm-dashgrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.cm-dashtxt{display:grid;gap:10px;align-content:center}
+.cm-dashtxt h2,.cm-dashtxt p{margin:0}
+.cm-dashtxt .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.cm-dashtxt .btn .px-icon{width:18px;height:18px}
+.cm-device{margin:0;border-radius:18px;background:#0A2B38;padding:10px 10px 12px;box-shadow:0 30px 60px -28px rgba(10,43,56,.6),0 0 0 3px rgba(231,169,40,.45)}
+.cm-devbar{display:flex;gap:6px;padding:2px 4px 9px}
+.cm-devbar i{width:10px;height:10px;border-radius:50%;background:#F5C553}
+.cm-devbar i:nth-child(2){background:#7FC59A}.cm-devbar i:nth-child(3){background:#E9879F}
+.cm-screen{position:relative;border-radius:10px;overflow:hidden;background:#FBF6EC;aspect-ratio:1200/750}
+.cm-screen img{display:block;width:100%;height:100%;object-fit:cover}
+.cm-spot{position:absolute;border-radius:14px;border:3px solid var(--gold,#E7A928);box-shadow:0 0 0 999px rgba(10,43,56,.28);opacity:0;pointer-events:none}
+@media (max-width:860px){.cm-dashgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-device.cm-pre{opacity:0;translate:0 28px;scale:.97}
+  :root:not([data-motion=off]) .cm-device.is-in{transition:opacity var(--ff-dur-4) var(--ff-ease-out),translate var(--ff-dur-4) var(--ff-ease-out),scale var(--ff-dur-4) var(--ff-ease-out)}
+  :root:not([data-motion=off]) .cm-spot{transition:opacity var(--ff-dur-3) var(--ff-ease-out),scale var(--ff-dur-3) var(--ff-ease-spring);scale:1.06}
+  :root:not([data-motion=off]) .cm-spot.is-on{opacity:1;scale:1}
+}
+
+@media print{
+  .cm-tiers>*,.cm-steps>li,.cm-device{opacity:1!important;translate:none!important;transform:none!important}
+  .cm-spot,.cm-cloud{display:none!important}
+  .ffe-item.cm-stitch::after{display:none}
+}
