@@ -267,6 +267,96 @@
     return Promise.resolve(json({}));
   }
 
+  // ---- connected roles (owner 2026-10-12): what a teacher logs is kept in THIS browser and shows on the family side --------------------
+  // care_entries_apply operations (meals by item, rest start / stop, feelings, activities, notes) are saved here and merged into the
+  // reads that show a child's day: family_child_today, the day in family_dashboard, and the teacher's care_room_today. Nothing leaves
+  // the browser; "Start over" (account menu) clears it.
+  var CHG_KEY = 'ff-preview-changes-v1', TZ = 'America/Chicago';
+  function changes() { try { return JSON.parse(localStorage.getItem(CHG_KEY) || '[]') || []; } catch (e) { return []; } }
+  function saveChanges(list) { try { localStorage.setItem(CHG_KEY, JSON.stringify(list.slice(-400))); } catch (e) { /* private mode: not kept */ } }
+  function recordCare(ops) {
+    var list = changes(), nowIso = new Date().toISOString();
+    (ops || []).forEach(function (o) {
+      if (!o || !o.kid) return;
+      if (o.op === 'end_nap') {
+        var n = list.filter(function (x) { return x.id === o.id; })[0];
+        if (n) n.end = o.at || nowIso; else list.push({ id: o.id, kid: o.kid, kind: 'nap_end', at: o.at || nowIso });
+      } else if (o.op === 'add' || !o.op) list.push({ id: o.id || ('pv-' + Date.now() + Math.random()), kid: o.kid, kind: o.kind, at: o.at || nowIso, data: o.data || {} });
+    });
+    saveChanges(list);
+  }
+  function clock(at) { try { return new Date(at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: TZ }); } catch (e) { return ''; } }
+  var W8 = {
+    en: { breakfast: 'Breakfast', lunch: 'Lunch', snack: 'Snack', am_snack: 'Morning snack', pm_snack: 'Afternoon snack', dinner: 'Dinner',
+      all: 'ate all', most: 'ate most', some: 'ate some', little: 'ate a little', none: 'did not eat', felt: 'Felt ', resting: 'Resting since ', rested: function (a, b, m) { return 'Rested ' + a + ' to ' + b + ' (' + m + ' min)'; } },
+    es: { breakfast: 'Desayuno', lunch: 'Almuerzo', snack: 'Merienda', am_snack: 'Merienda de la mañana', pm_snack: 'Merienda de la tarde', dinner: 'Cena',
+      all: 'comió todo', most: 'comió casi todo', some: 'comió algo', little: 'comió un poco', none: 'no comió', felt: 'Se sintió ', resting: 'Descansando desde ', rested: function (a, b, m) { return 'Descansó de ' + a + ' a ' + b + ' (' + m + ' min)'; } },
+  };
+  var FEEL_ES = { happy: 'feliz', calm: 'tranquilo', tired: 'cansado', sad: 'triste', curious: 'curioso', proud: 'orgulloso', silly: 'juguetón', mad: 'enojado', worried: 'preocupado', excited: 'emocionado' };
+  var AMT_ES = { all: 'todo', most: 'casi todo', some: 'algo', little: 'un poco', a_little: 'un poco', none: 'nada' };
+  function entryOf(c, lang) {
+    var L = W8[lang === 'es' ? 'es' : 'en'], d = c.data || {};
+    if (c.kind === 'meal') {
+      var head = L[d.meal] || (d.meal ? String(d.meal) : L.lunch);
+      var words = d.items && d.items.length
+        ? head + ': ' + d.items.map(function (i) { return i.name + ': ' + (lang === 'es' ? (AMT_ES[i.amount] || i.amount) : String(i.amount).replace('_', ' ')); }).join('; ')
+        : head + ': ' + (L[d.amount] || d.amount || '');
+      return { kind: 'meal', code: d.meal || null, words: words };
+    }
+    if (c.kind === 'mood') return { kind: 'mood', code: d.feeling || null, words: L.felt + (lang === 'es' ? (FEEL_ES[d.feeling] || d.feeling) : d.feeling) };
+    if (c.kind === 'nap') {
+      if (c.end) { var m = Math.max(1, Math.round((Date.parse(c.end) - Date.parse(c.at)) / 60000)); return { kind: 'nap', code: null, ended: true, words: L.rested(clock(c.at), clock(c.end), m) }; }
+      return { kind: 'nap', code: null, ended: false, words: L.resting + clock(c.at) };
+    }
+    if (c.kind === 'toilet') return { kind: 'toilet', code: d.what || null, words: lang === 'es' ? 'usó la bacinica' : 'used the potty' };
+    return { kind: c.kind || 'note', code: null, words: d.text || d.note || d.what || (lang === 'es' ? 'Nota de la maestra' : 'Note from the teacher') };
+  }
+  function mergeDay(day, kid, lang) {
+    if (!day || !Array.isArray(day.timeline)) return day;
+    var mine = changes().filter(function (c) {
+      var d = ''; try { d = new Date(c.at).toLocaleDateString('en-CA', { timeZone: TZ }); } catch (e) { d = ''; }
+      return c.kid === kid && (!day.date || day.date === d);   // only on the day it was logged
+    });
+    if (!mine.length) return day;
+    mine.forEach(function (c) {
+      if (c.kind === 'nap_end') {   // a rest the recording already had: it ends now
+        day.timeline.forEach(function (t) { if (t.id === c.id && !t.ended) { t.ended = true; var m = Math.max(1, Math.round((Date.parse(c.at) - Date.parse(t.at)) / 60000)); t.words = W8[lang === 'es' ? 'es' : 'en'].rested(t.time || clock(t.at), clock(c.at), m); } });
+        return;
+      }
+      var e = entryOf(c, lang);
+      day.timeline = day.timeline.filter(function (t) { return t.id !== c.id; });
+      day.timeline.push({ at: c.at, id: c.id, code: e.code, kind: e.kind, time: clock(c.at), ended: !!e.ended, words: e.words });
+    });
+    day.timeline.sort(function (a, b) { return Date.parse(a.at) - Date.parse(b.at); });
+    day.updated_at = new Date().toISOString();
+    return day;
+  }
+  function mergeRoom(room) {
+    if (!room || !Array.isArray(room.kids)) return room;
+    var all = changes();
+    room.kids.forEach(function (k) {
+      all.filter(function (c) { return c.kid === k.kid; }).forEach(function (c) {
+        if (c.kind === 'meal' && c.data && c.data.meal && (k.meals || []).indexOf(c.data.meal) < 0) (k.meals = k.meals || []).push(c.data.meal);
+        if (c.kind === 'mood' && c.data && c.data.feeling) k.feeling = c.data.feeling;
+        if (c.kind === 'nap') k.resting_since = c.end ? null : clock(c.at);
+        if (c.kind === 'nap_end') k.resting_since = null;
+      });
+    });
+    return room;
+  }
+  // a recorded read, with this browser's changes merged in (only the reads that show a child's day)
+  function withChanges(rpcName, reqBody, text) {
+    if (!changes().length || !/^(family_child_today|family_dashboard|care_room_today)$/.test(rpcName)) return text;
+    try {
+      var b = JSON.parse(reqBody || '{}'), j = JSON.parse(text);
+      if (rpcName === 'care_room_today') return JSON.stringify(mergeRoom(j));
+      if (rpcName === 'family_child_today') return JSON.stringify(mergeDay(j, b.p_kid, b.p_lang));
+      if (j && j.today) mergeDay(j.today, j.today.kid || b.p_child, b.p_lang);
+      return JSON.stringify(j);
+    } catch (e) { return text; }
+  }
+  W.FFTest.startOver = function () { try { localStorage.removeItem(CHG_KEY); } catch (e) { /* fine */ } location.reload(); };
+
   // ---- the hub (REST, RPC, storage) and the front-end server's /api/ --------------------------------------------------------------
   function hub(method, path, search, body, init, req) {
     var who = emailFromBearer(init, req);
@@ -275,7 +365,25 @@
     if (path.indexOf('/realtime/') === 0 || path.indexOf('/functions/') === 0) return Promise.resolve(json({}));
     var rpc = path.match(/^\/rest\/v1\/rpc\/([a-z0-9_]+)$/);
     if (rpc && rpc[1] === 'my_preferred_language') return Promise.resolve(json(JSON.stringify(lang())));
+    if (rpc && /^moment_share_(create|revoke)$/.test(rpc[1])) {   // share links need the live hub: a friendly note, never an error code
+      return Promise.resolve(json({ message: lang() === 'es' ? 'Los enlaces para compartir funcionan en el Futures Hub de su centro.' : 'Share links work in your center’s own Futures Hub.' }, 400));
+    }
+    if (rpc && rpc[1] === 'moment_react') {   // the heart toggles in this browser
+      var mr = {}; try { mr = JSON.parse(body || '{}'); } catch (e) { mr = {}; }
+      return Promise.resolve(json({ hearts: mr.p_on ? 1 : 0, my_heart: !!mr.p_on }));
+    }
+    if (rpc && rpc[1] === 'moment_begin') {   // Moments capture: "Sent" at once (nothing uploads); the family sees a line in the child's day
+      var mb = {}; try { mb = JSON.parse(body || '{}'); } catch (e) { mb = {}; }
+      recordCare((mb.p_kids || []).map(function (k) { return { op: 'add', id: 'pv-moment-' + (mb.p_id || Date.now()) + '-' + k, kid: k, kind: 'note', at: new Date().toISOString(), data: { text: (lang() === 'es' ? 'Nueva foto del salón' : 'New photo from the classroom') + (mb.p_kind === 'video' ? (lang() === 'es' ? ' (video)' : ' (video)') : '') } }; }));
+      return Promise.resolve(json({ status: 'shared', paths: {} }));
+    }
+    if (rpc && rpc[1] === 'care_entries_apply') {   // the teacher's log: kept in this browser, shown on the family side
+      var ops = []; try { ops = JSON.parse(body || '{}').p_ops || []; } catch (e) { ops = []; }
+      recordCare(ops);
+      return Promise.resolve(json(ops.map(function (o) { return { id: o.id, status: 'applied' }; })));
+    }
     var found = hit(keyOf(method, path, search, body));
+    if (found && rpc) found = Object.assign({}, found, { b: withChanges(rpc[1], body, found.b) });
     if (found) return Promise.resolve(fromEntry(found));
     var accept = header(init, req, 'Accept');
     var one = /vnd\.pgrst\.object/.test(accept);
@@ -372,12 +480,12 @@
   // ---- the visible parts: one-tap entry per role, "View as" switcher, "Coming soon" panels -------------------------------------------
   // Owner 2026-10-12: no credentials, no "test" labels. Writes do nothing, silently. The pages stay out of search (noindex, robots).
   var TXT = {
-    en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
-      dirSub: 'Center dashboard', viewAs: 'View as', website: 'Back to the website', soonH: 'Coming soon', soonP: 'This part of the Futures Hub is on its way.',
-      back: 'Back to the dashboard', site: 'Futures Friends website', privH: 'For licensed centers', privP: 'The curriculum and the library open for licensed centers.' },
-    es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', famSub: 'Panel para familias', teaSub: 'Panel del salón',
-      dirSub: 'Panel del centro', viewAs: 'Ver como', website: 'Volver al sitio web', soonH: 'Próximamente', soonP: 'Esta parte de Futures Hub está en camino.',
-      back: 'Volver al panel', site: 'Sitio web de Futures Friends', privH: 'Para centros con licencia', privP: 'El currículo y la biblioteca se abren para los centros con licencia.' },
+    en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', kids: 'Kids\u2019 corner', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
+      dirSub: 'Center dashboard', kidSub: 'The child space', viewAs: 'View as', website: 'Back to the website', soonH: 'Coming soon', soonP: 'This part of the Futures Hub is on its way.',
+      back: 'Back to the dashboard', site: 'Futures Friends website', startOver: 'Start over', privH: 'For licensed centers', privP: 'The curriculum and the library open for licensed centers.' },
+    es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', kids: 'Rincón de los niños', famSub: 'Panel para familias', teaSub: 'Panel del salón',
+      dirSub: 'Panel del centro', kidSub: 'El espacio del niño', viewAs: 'Ver como', website: 'Volver al sitio web', soonH: 'Próximamente', soonP: 'Esta parte de Futures Hub está en camino.',
+      back: 'Volver al panel', site: 'Sitio web de Futures Friends', startOver: 'Empezar de nuevo', privH: 'Para centros con licencia', privP: 'El currículo y la biblioteca se abren para los centros con licencia.' },
   };
   var tx = function (k) { return TXT[es() ? 'es' : 'en'][k]; };
   function el(id) { return D.getElementById(id); }
@@ -406,7 +514,8 @@
   if (COPY[wantEnter] !== undefined || wantEnter === 'kids') { enter(wantEnter); }
 
   var CSS = '#ftRoles{margin:0 0 14px}#ftRoles h2{margin:0 0 8px;font:600 15px/1.3 Fredoka,Poppins,system-ui,sans-serif;color:#0A2B38}'
-    + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}'
+    + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media (max-width:520px){#ftRoles .ft-row{grid-template-columns:repeat(2,1fr)}}'
+    + '#ftRoles button img{display:block;height:64px;width:auto;max-width:100%;object-fit:contain;margin:0 auto 4px}'
     + '#ftRoles button{min-height:64px;padding:8px 6px;border:2px solid #0A2B38;border-radius:14px;background:#fff;color:#0A2B38;cursor:pointer;font:600 16px/1.15 Poppins,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}'
     + '#ftRoles button small{font:400 11px/1.2 Poppins,system-ui,sans-serif;color:#33505C}'
     + '#ftRoles button[aria-pressed=true]{background:#0A2B38;color:#fff}#ftRoles button[aria-pressed=true] small{color:#E8F0F2}'
@@ -429,10 +538,12 @@
     var h = D.createElement('section'); h.id = 'ftRoles'; h.setAttribute('aria-labelledby', 'ftRolesH');
     h.innerHTML = '<h2 id="ftRolesH"></h2><div class="ft-row"></div>';
     h.querySelector('h2').textContent = tx('choose');
-    [['family', 'famSub'], ['teacher', 'teaSub'], ['director', 'dirSub']].forEach(function (x) {
+    // the official character cutouts, composed (img/portals on the website): Rose and Lumi, Ms. June, Principal Hazel, the four friends
+    [['family', 'famSub'], ['teacher', 'teaSub'], ['director', 'dirSub'], ['kids', 'kidSub']].forEach(function (x) {
       var bt = D.createElement('button'); bt.type = 'button'; bt.setAttribute('data-ft-role', x[0]);
       bt.setAttribute('aria-pressed', String(PENDING === x[0]));
-      bt.innerHTML = '<span></span><small></small>';
+      var art = ORIGIN + SITE + 'img/portals/portal-' + x[0];
+      bt.innerHTML = '<img alt="" src="' + art + '.webp" srcset="' + art + '.webp 1x, ' + art + '@2x.webp 2x" height="64"><span></span><small></small>';
       bt.querySelector('span').textContent = tx(x[0]); bt.querySelector('small').textContent = tx(x[1]);
       bt.onclick = function () { enter(x[0]); };
       h.querySelector('.ft-row').appendChild(bt);
@@ -453,6 +564,9 @@
       menu.appendChild(a);
     });
     menu.appendChild(D.createElement('hr'));
+    var so = D.createElement('a'); so.href = '#'; so.id = 'ftStartOver'; so.textContent = tx('startOver');
+    so.onclick = function (e) { e.preventDefault(); W.FFTest.startOver(); };
+    menu.appendChild(so);
     var w = D.createElement('a'); w.href = ORIGIN + SITE; w.textContent = tx('website'); w.id = 'ftWebsite'; menu.appendChild(w);   // absolute: outside the app's paths
     nav.insertBefore(d, out);
     D.addEventListener('click', function (e) { if (!d.contains(e.target)) d.open = false; });

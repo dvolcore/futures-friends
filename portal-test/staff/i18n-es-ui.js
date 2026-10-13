@@ -2702,6 +2702,7 @@ export default {
   "Daily 5": "5 diarios",
   "Daily adventure": "Aventura del día",
   "Daily rhythm": "Ritmo diario",
+  "Moments": "Momentos",
   "Daily rhythm · {0}": "Ritmo diario · {0}",
   "Damage to the facility that affects safety": "Daño a las instalaciones que afecta la seguridad",
   "Date and time": "Fecha y hora",

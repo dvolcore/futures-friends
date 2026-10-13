@@ -73,16 +73,17 @@
   // Until go-live the header "Sign in" opens this menu (its href stays the family dashboard for no-JS); a dropdown on desktop, a sheet
   // on phones. TO ADD A PORTAL (e.g. the Investor portal, built in another thread): add ONE entry to PORTAL_MENU below; nothing else.
   const PORTAL_MENU = [
-    { id: 'family', label: 'Family portal', label_es: 'Portal para familias', sub: 'The parent dashboard', sub_es: 'El panel para familias', href: `${PREVIEW}?enter=family`, ink: 'var(--zuri-ink, #1B7541)' },
-    { id: 'teacher', label: 'Teacher portal', label_es: 'Portal para maestros', sub: 'The classroom dashboard', sub_es: 'El panel del salón', href: `${PREVIEW}?enter=teacher`, ink: 'var(--booker-ink, #23589F)' },
-    { id: 'director', label: 'Director portal', label_es: 'Portal de dirección', sub: 'The center dashboard', sub_es: 'El panel del centro', href: `${PREVIEW}?enter=director`, ink: 'var(--bop-ink, #6B2A8E)' },
-    { id: 'kids', label: 'Kids\u2019 corner', label_es: 'Rincón de los niños', sub: 'The child space, after a grown-up hands over', sub_es: 'El espacio del niño, después de que un adulto lo entrega', href: `${PREVIEW}?enter=kids`, ink: 'var(--lumi-ink, #B02F6C)' },
-    // { id: 'investor', label: 'Investor portal', label_es: '…', sub: '…', sub_es: '…', href: 'investor/…', ink: '#0A2B38' },
+    { id: 'family', label: 'Family portal', label_es: 'Portal para familias', sub: 'The parent dashboard', sub_es: 'El panel para familias', href: `${PREVIEW}?enter=family`, ink: 'var(--zuri-ink, #1B7541)', art: 'family', alt: 'Rose and Lumi' },
+    { id: 'teacher', label: 'Teacher portal', label_es: 'Portal para maestros', sub: 'The classroom dashboard', sub_es: 'El panel del salón', href: `${PREVIEW}?enter=teacher`, ink: 'var(--booker-ink, #23589F)', art: 'teacher', alt: 'Ms. June' },
+    { id: 'director', label: 'Director portal', label_es: 'Portal de dirección', sub: 'The center dashboard', sub_es: 'El panel del centro', href: `${PREVIEW}?enter=director`, ink: 'var(--bop-ink, #6B2A8E)', art: 'director', alt: 'Principal Hazel' },
+    { id: 'kids', label: 'Kids\u2019 corner', label_es: 'Rincón de los niños', sub: 'The child space, after a grown-up hands over', sub_es: 'El espacio del niño, después de que un adulto lo entrega', href: `${PREVIEW}?enter=kids`, ink: 'var(--lumi-ink, #B02F6C)', art: 'kids', alt: 'Booker, Lumi, Zuri and Bop' },
+    // { id: 'investor', label: 'Investor portal', label_es: '…', sub: '…', sub_es: '…', href: 'investor/…', ink: '#0A2B38', art: 'investor', alt: '…' },
+    //   (art: img/portals/portal-<art>.webp and @2x, the official character cutouts composed, never redrawn)
   ];
   const MENU_CSS = '#ffPortals{position:fixed;z-index:2147482000;width:min(340px,calc(100vw - 24px));padding:8px;border-radius:16px;background:#fff;color:#0A2B38;box-shadow:0 14px 40px rgba(10,43,56,.28)}'
     + '#ffPortals[hidden]{display:none}#ffPortals h2{margin:6px 10px 8px;font:600 15px/1.3 Fredoka,Poppins,system-ui,sans-serif}'
-    + '#ffPortals a{display:flex;flex-direction:column;gap:2px;min-height:52px;justify-content:center;padding:8px 12px 8px 14px;margin:2px 0;border-radius:12px;border-left:5px solid var(--ink);color:#0A2B38;text-decoration:none;font:600 15px/1.25 Poppins,system-ui,sans-serif}'
-    + '#ffPortals a small{font:400 12.5px/1.3 Poppins,system-ui,sans-serif;color:#33505C}#ffPortals a:hover,#ffPortals a:focus-visible{background:#F6F0E2;outline:none;box-shadow:inset 0 0 0 2px var(--ink)}'
+    + '#ffPortals a{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;min-height:64px;padding:6px 10px 6px 14px;margin:2px 0;border-radius:12px;border-left:5px solid var(--ink);color:#0A2B38;text-decoration:none;font:600 15px/1.25 Poppins,system-ui,sans-serif}'
+    + '#ffPortals a small{grid-column:1;font:400 12.5px/1.3 Poppins,system-ui,sans-serif;color:#33505C}#ffPortals a img{grid-column:2;grid-row:1/3;height:56px;width:auto;max-width:120px;object-fit:contain}#ffPortals a:hover,#ffPortals a:focus-visible{background:#F6F0E2;outline:none;box-shadow:inset 0 0 0 2px var(--ink)}'
     + '#ffPortalsShade{position:fixed;inset:0;z-index:2147481999;background:rgba(10,43,56,.35)}#ffPortalsShade[hidden]{display:none}'
     + '@media (max-width:640px){#ffPortals{left:0!important;right:0!important;top:auto!important;bottom:0;width:auto;border-radius:20px 20px 0 0;padding:10px 12px calc(14px + env(safe-area-inset-bottom))}}'
     + '@media (prefers-reduced-motion:no-preference){#ffPortals{transition:opacity .16s ease}}';
@@ -104,7 +105,7 @@
     }
     const es = /^es/.test(doc.documentElement.lang || '');
     menuEl.lang = es ? 'es' : 'en'; menuEl.setAttribute('data-i18n-skip', '');
-    menuEl.innerHTML = `<h2 id="ffPortalsH">${es ? 'Entra a un portal' : 'Sign in to a portal'}</h2>${PORTAL_MENU.map((p) => `<a href="${E(p.href)}" data-portal="${E(p.id)}" style="--ink:${E(p.ink)}">${E(es && p.label_es || p.label)}<small>${E(es && p.sub_es || p.sub)}</small></a>`).join('')}`;
+    menuEl.innerHTML = `<h2 id="ffPortalsH">${es ? 'Entra a un portal' : 'Sign in to a portal'}</h2>${PORTAL_MENU.map((p) => `<a href="${E(p.href)}" data-portal="${E(p.id)}" style="--ink:${E(p.ink)}"><span>${E(es && p.label_es || p.label)}</span><small>${E(es && p.sub_es || p.sub)}</small>${p.art ? `<img src="img/portals/portal-${E(p.art)}.webp" srcset="img/portals/portal-${E(p.art)}.webp 1x, img/portals/portal-${E(p.art)}@2x.webp 2x" alt="${E(p.alt || '')}" height="56" loading="lazy">` : ''}</a>`).join('')}`;
     opener = a; a.setAttribute('aria-expanded', 'true'); a.setAttribute('aria-controls', 'ffPortals');
     const r = a.getBoundingClientRect();
     menuEl.style.top = `${Math.round(r.bottom + 8)}px`;

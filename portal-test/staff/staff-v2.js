@@ -17,23 +17,23 @@ import { dashLink } from './staff-dashboard.js';
 export const TEACHER_VIEWS = [
   { id: 'today', icon: 'sun', tabs: [] },
   { id: 'room', icon: 'room', tabs: ['roster', 'pickup', 'sub'] },
-  { id: 'learning', icon: 'learn', tabs: ['plan', 'checks', 'reports'] },
+  { id: 'learning', icon: 'learn', tabs: ['plan', 'week', 'unit', 'checks', 'reports'] },
   { id: 'care', icon: 'heart', tabs: ['log', 'meals', 'rest', 'health'] },
   { id: 'messages', icon: 'chat', tabs: ['families', 'announcements', 'todo'] },
   { id: 'calendar', icon: 'calendar', tabs: ['upcoming', 'absences'] },
-  { id: 'me', icon: 'badge', tabs: ['clock', 'training'] },
+  { id: 'me', icon: 'badge', tabs: ['clock', 'training', 'review'] },
 ];
 export const TEACHER_BAR = ['today', 'room', 'care', 'messages'];
 export const DIRECTOR_VIEWS = [
   { id: 'overview', icon: 'home', tabs: [] },
   { id: 'rooms', icon: 'room', tabs: ['board', 'staffing', 'attendance'] },
   { id: 'families', icon: 'people', tabs: ['pipeline', 'enrollment', 'waitlist', 'messages'] },
-  { id: 'staff', icon: 'badge', tabs: ['onduty', 'hiring', 'credentials'] },
+  { id: 'staff', icon: 'badge', tabs: ['onduty', 'schedule', 'hiring', 'credentials'] },   // schedule: director-ops (director-schedule.js)
   { id: 'billing', icon: 'tuition', tabs: ['month', 'overdue'] },
   { id: 'compliance', icon: 'shield', tabs: ['due', 'drills', 'records'] },
   { id: 'health', icon: 'heart', tabs: ['immunizations', 'meds', 'sped'] },
   { id: 'calendar', icon: 'calendar', tabs: ['upcoming', 'absences'] },
-  { id: 'content', icon: 'doc', tabs: ['waiting', 'network'] },
+  { id: 'content', icon: 'doc', tabs: ['review', 'waiting', 'network'] },   // review: director-ops (director-review.js)
   { id: 'settings', icon: 'gear', tabs: ['center', 'pages'] },
 ];
 export const DIRECTOR_BAR = ['overview', 'rooms', 'families', 'staff'];
@@ -45,13 +45,13 @@ export const SW = {
     overview: 'Overview', rooms: 'Rooms', families: 'Families', staff: 'Staff', billing: 'Billing', compliance: 'Compliance', health: 'Health & special ed', content: 'Content', settings: 'Settings' },
   short: { today: 'Today', room: 'Room', learning: 'Learning', care: 'Care', messages: 'Messages', calendar: 'Calendar', me: 'Me', more: 'More',
     overview: 'Overview', rooms: 'Rooms', families: 'Families', staff: 'Staff', billing: 'Billing', compliance: 'Compliance', health: 'Health', content: 'Content', settings: 'Settings' },
-  tabs: { roster: 'Roster', pickup: 'Pickup', sub: 'Substitute sheet', plan: "Today's plan", checks: 'Skill checks', reports: 'Progress reports', log: 'Quick log', meals: 'Meals',
+  tabs: { schedule: 'Schedule', review: 'Content review', week: 'This week', unit: 'The unit', roster: 'Roster', pickup: 'Pickup', sub: 'Substitute sheet', plan: "Today's plan", checks: 'Skill checks', reports: 'Progress reports', log: 'Quick log', meals: 'Meals',
     rest: 'Rest', health: 'Allergies & meds', families: 'Families', announcements: 'Announcements', todo: 'To do', upcoming: 'Coming up', absences: 'Absences', clock: 'Time clock', training: 'Training',
     board: 'Ratio board', staffing: 'Staffing', attendance: 'Attendance', pipeline: 'Pipeline', enrollment: 'Enrollment packets', waitlist: 'Waitlist', onduty: 'On duty', hiring: 'Hiring',
     credentials: 'Credentials & training', messages: 'Messages', month: 'This month', overdue: 'Past due', due: "What's due", drills: 'Drills & incidents', records: 'Inspector & CACFP',
     immunizations: 'Immunizations', meds: 'Medication', sped: 'Special education', waiting: 'Waiting at the center', network: 'Network content', center: 'Center', pages: 'All pages' },
   nav: 'Dashboard views', sub: (v) => `${v}: sections`, more: 'More', moreTitle: 'More views', close: 'Close', openFull: 'Open the full page',
-  showTable: 'Show as table', hideTable: 'Show as picture', nc: 'Not connected yet', couldNot: 'Could not load', demo: 'Demo preview',
+  showTable: 'Show as table', captureMoment: 'Capture a moment', openDetail: 'open the details', hideTable: 'Show as picture', nc: 'Not connected yet', couldNot: 'Could not load', demo: 'Demo preview',
   attention: 'Needs your attention', attentionN: (n) => `${n} ${n === 1 ? 'thing' : 'things'}`, allClear: 'All clear: nothing is waiting on you.',
   hello: { morning: 'Good morning', afternoon: 'Good afternoon', evening: 'Good evening' },
   actions: 'Quick actions', tagline: 'Learn. Move. Explore. Belong.',
@@ -62,7 +62,7 @@ export const SW = {
   kPresent: 'Present', kMeals: 'Meals logged', kNaps: 'Rest', kChecks: 'Skill checks', kPresentSub: (e) => `of ${e} enrolled`, kMealsSub: 'here, with a meal today',
   kNapsSub: (r) => (r ? `${r} resting now` : 'rested or resting'), kChecksSub: (o) => `children checked this week${o ? ` · ${o} skills to score` : ''}`,
   checksNone: 'None assigned this week', checksOff: 'Skill checks are off', fullScreen: 'Full screen',
-  quickLog: 'Quick log', quickLogSub: 'Tap the children, then what happened. One tap logs it for all of them.', logNow: 'Log for the selected', selectAll: 'Select everyone here', selected: (n) => `${n} selected`,
+  quickLog: 'Quick log', logShort: 'Log', quickLogSub: 'Tap the children, then what happened. One tap logs it for all of them.', logNow: 'Log for the selected', selectAll: 'Select everyone here', selected: (n) => `${n} selected`,
   kinds: { meal: 'Meal', nap: 'Rest', toilet: 'Potty', mood: 'Feeling' }, openToday: 'Open the full Today screen',
   plan: "Today's plan", planNone: 'No plan today.', planDone: (d, n) => `${d} of ${n} done`, openPlanning: 'Planning', markDone: 'Mark done', doneMark: 'Done',
   roster: 'The room', rosterSub: 'Friend avatars by default; a child\'s photo stays on their own page.', allergyFlag: 'Allergy', medFlag: 'Emergency medicine', photoOk: 'Photo consent on file', photoNo: 'No photo consent',
@@ -91,7 +91,7 @@ export const SW = {
   pilot: 'Content pilot', pilotOn: 'Drafts allowed at this center', pilotOff: 'Not in the content pilot',
   // attention items
   a: {
-    incident: (f) => `Incident report to finish${f ? `: ${f}` : ''}`, incidentSub: 'Family not marked as told yet', meds: (f, t) => `Medicine due: ${f}`, medsSub: (t, s) => `${t} · ${s === 'overdue' ? 'overdue' : 'due now'}`,
+    incident: (f) => `Incident report to finish${f ? `: ${f}` : ''}`, incidentSub: 'Family not marked as told yet', meds: (f) => `Medicine due: ${f}`, medsN: (f, n) => `${f}: ${n} doses of medicine`, medsSub: (t, s) => `${t} · ${s === 'overdue' ? 'overdue' : 'due now'}`,
     allergy: (f) => `Allergy: ${f}`, allergySub: 'Emergency medicine on file', pickup: (n) => `${n} ${n === 1 ? 'child' : 'children'} still to be picked up`, pickupSub: 'Check the pickup list at the door',
     message: (f) => `${f}'s family wrote`, observe: (f) => `Score by watching: ${f}`, flagged: (f) => `Automatic grade to look at: ${f}`, draft: (f) => `Progress report in draft: ${f}`,
     video: (f) => `Video waiting for a parent: ${f}`, upload: (f) => `${f}'s family shared from home`, training: (t) => `Training due: ${t}`,
@@ -100,7 +100,7 @@ export const SW = {
     trainingOver: (n) => `${n} required ${n === 1 ? 'training' : 'trainings'} overdue`, immun: (n) => `Immunizations: ${n} ${n === 1 ? 'child' : 'children'}`, immunSub: 'Records due or overdue',
     invoices: (n) => `${n} ${n === 1 ? 'invoice' : 'invoices'} past due`, leads: (n) => `${n} new ${n === 1 ? 'family' : 'families'} past the first-contact time`, tours: (n) => `${n} ${n === 1 ? 'tour' : 'tours'} in the next 7 days`,
     packets: (n) => `${n} enrollment ${n === 1 ? 'packet' : 'packets'} to review`, interviews: (n) => `${n} ${n === 1 ? 'interview' : 'interviews'} this week`,
-    due: (n) => `${n} licensing ${n === 1 ? 'item' : 'items'} overdue or due this week`, dueSub: "What's due, with the citation", content: (n) => `${n} ${n === 1 ? 'item waits' : 'items wait'} for review`, contentSub: 'Videos, friend messages, consents',
+    due: (n) => `${n} licensing ${n === 1 ? 'item' : 'items'} overdue or due this week`, dueSub: "What's due, with the citation", moments: (n) => `${n} ${n === 1 ? 'classroom moment waits' : 'classroom moments wait'} for your OK`, momentsSub: 'Photos and videos from the rooms, before families see them', content: (n) => `${n} ${n === 1 ? 'item waits' : 'items wait'} for review`, contentSub: 'Videos, friend messages, consents',
     go: { open: 'Open', review: 'Review', finish: 'Finish', give: 'Record dose', check: 'See plan', reply: 'Reply', score: 'Score', pickups: 'Pickups', staff: 'Staff', log: 'Log it' },
   },
   },
@@ -109,13 +109,13 @@ export const SW = {
     overview: 'Resumen', rooms: 'Salones', families: 'Familias', staff: 'Personal', billing: 'Pagos', compliance: 'Cumplimiento', health: 'Salud y educación especial', content: 'Contenido', settings: 'Ajustes' },
   short: { today: 'Hoy', room: 'Salón', learning: 'Aprender', care: 'Cuidado', messages: 'Mensajes', calendar: 'Calendario', me: 'Yo', more: 'Más',
     overview: 'Resumen', rooms: 'Salones', families: 'Familias', staff: 'Personal', billing: 'Pagos', compliance: 'Normas', health: 'Salud', content: 'Contenido', settings: 'Ajustes' },
-  tabs: { roster: 'Lista', pickup: 'Quién recoge', sub: 'Hoja para suplentes', plan: 'Plan de hoy', checks: 'Revisiones de habilidades', reports: 'Informes de progreso', log: 'Registro rápido', meals: 'Comidas',
+  tabs: { schedule: 'Horario', review: 'Revisión de contenido', week: 'Esta semana', unit: 'La unidad', roster: 'Lista', pickup: 'Quién recoge', sub: 'Hoja para suplentes', plan: 'Plan de hoy', checks: 'Revisiones de habilidades', reports: 'Informes de progreso', log: 'Registro rápido', meals: 'Comidas',
     rest: 'Descanso', health: 'Alergias y medicinas', families: 'Familias', announcements: 'Avisos', todo: 'Pendientes', upcoming: 'Próximamente', absences: 'Ausencias', clock: 'Reloj', training: 'Capacitación',
     board: 'Tablero de proporción', staffing: 'Personal', attendance: 'Asistencia', pipeline: 'Embudo', enrollment: 'Paquetes de inscripción', waitlist: 'Lista de espera', onduty: 'En turno', hiring: 'Contratación',
     credentials: 'Credenciales y capacitación', messages: 'Mensajes', month: 'Este mes', overdue: 'Vencidos', due: 'Pendientes', drills: 'Simulacros e incidentes', records: 'Inspector y CACFP',
     immunizations: 'Vacunas', meds: 'Medicinas', sped: 'Educación especial', waiting: 'En espera en el centro', network: 'Contenido de la red', center: 'Centro', pages: 'Todas las páginas' },
   nav: 'Vistas del tablero', sub: (v) => `${v}: secciones`, more: 'Más', moreTitle: 'Más vistas', close: 'Cerrar', openFull: 'Abrir la página completa',
-  showTable: 'Ver como tabla', hideTable: 'Ver como imagen', nc: 'Todavía no conectado', couldNot: 'No se pudo cargar', demo: 'Vista de demostración',
+  showTable: 'Ver como tabla', captureMoment: 'Capturar un momento', openDetail: 'abrir los detalles', hideTable: 'Ver como imagen', nc: 'Todavía no conectado', couldNot: 'No se pudo cargar', demo: 'Vista de demostración',
   attention: 'Necesita su atención', attentionN: (n) => `${n} ${n === 1 ? 'cosa' : 'cosas'}`, allClear: 'Todo al día: nada le espera.',
   hello: { morning: 'Buenos días', afternoon: 'Buenas tardes', evening: 'Buenas noches' },
   actions: 'Acciones rápidas', tagline: 'Aprender. Moverse. Explorar. Pertenecer.',
@@ -125,7 +125,7 @@ export const SW = {
   kPresent: 'Presentes', kMeals: 'Comidas registradas', kNaps: 'Descanso', kChecks: 'Revisiones', kPresentSub: (e) => `de ${e} inscritos`, kMealsSub: 'presentes, con una comida hoy',
   kNapsSub: (r) => (r ? `${r} descansando ahora` : 'descansaron o descansan'), kChecksSub: (o) => `niños revisados esta semana${o ? ` · ${o} por calificar` : ''}`,
   checksNone: 'Ninguna asignada esta semana', checksOff: 'Revisiones desactivadas', fullScreen: 'Pantalla completa',
-  quickLog: 'Registro rápido', quickLogSub: 'Toque a los niños y luego lo que pasó. Un toque lo registra para todos.', logNow: 'Registrar para los seleccionados', selectAll: 'Seleccionar a todos los presentes', selected: (n) => `${n} seleccionados`,
+  quickLog: 'Registro rápido', logShort: 'Registrar', quickLogSub: 'Toque a los niños y luego lo que pasó. Un toque lo registra para todos.', logNow: 'Registrar para los seleccionados', selectAll: 'Seleccionar a todos los presentes', selected: (n) => `${n} seleccionados`,
   kinds: { meal: 'Comida', nap: 'Descanso', toilet: 'Baño', mood: 'Emoción' }, openToday: 'Abrir la pantalla Hoy completa',
   plan: 'Plan de hoy', planNone: 'No hay plan hoy.', planDone: (d, n) => `${d} de ${n} hechas`, openPlanning: 'Planificación', markDone: 'Marcar hecha', doneMark: 'Hecha',
   roster: 'El salón', rosterSub: 'Avatares de los amigos por defecto; la foto del niño queda en su propia página.', allergyFlag: 'Alergia', medFlag: 'Medicina de emergencia', photoOk: 'Consentimiento de fotos', photoNo: 'Sin consentimiento de fotos',
@@ -152,7 +152,7 @@ export const SW = {
   contentNet: 'El contenido de la red (cuentos, canciones, lecciones) lo revisa el equipo de contenido de la oficina central. Su centro ve lo que espera a una familia o a usted.',
   pilot: 'Piloto de contenido', pilotOn: 'Borradores permitidos en este centro', pilotOff: 'No está en el piloto de contenido',
   a: {
-    incident: (f) => `Reporte de incidente por terminar${f ? `: ${f}` : ''}`, incidentSub: 'La familia todavía no está marcada como avisada', meds: (f) => `Medicina pendiente: ${f}`, medsSub: (t, s) => `${t} · ${s === 'overdue' ? 'atrasada' : 'ahora'}`,
+    incident: (f) => `Reporte de incidente por terminar${f ? `: ${f}` : ''}`, incidentSub: 'La familia todavía no está marcada como avisada', meds: (f) => `Medicina pendiente: ${f}`, medsN: (f, n) => `${f}: ${n} dosis de medicina`, medsSub: (t, s) => `${t} · ${s === 'overdue' ? 'atrasada' : 'ahora'}`,
     allergy: (f) => `Alergia: ${f}`, allergySub: 'Medicina de emergencia registrada', pickup: (n) => `${n} ${n === 1 ? 'niño' : 'niños'} por recoger`, pickupSub: 'Revise la lista en la puerta',
     message: (f) => `La familia de ${f} escribió`, observe: (f) => `Calificar observando: ${f}`, flagged: (f) => `Calificación automática por revisar: ${f}`, draft: (f) => `Informe en borrador: ${f}`,
     video: (f) => `Video esperando a la familia: ${f}`, upload: (f) => `La familia de ${f} compartió desde casa`, training: (t) => `Capacitación pendiente: ${t}`,
@@ -161,7 +161,7 @@ export const SW = {
     trainingOver: (n) => `${n} ${n === 1 ? 'capacitación obligatoria atrasada' : 'capacitaciones obligatorias atrasadas'}`, immun: (n) => `Vacunas: ${n} ${n === 1 ? 'niño' : 'niños'}`, immunSub: 'Registros pendientes o vencidos',
     invoices: (n) => `${n} ${n === 1 ? 'factura vencida' : 'facturas vencidas'}`, leads: (n) => `${n} ${n === 1 ? 'familia nueva' : 'familias nuevas'} sin primer contacto a tiempo`, tours: (n) => `${n} ${n === 1 ? 'visita' : 'visitas'} en los próximos 7 días`,
     packets: (n) => `${n} ${n === 1 ? 'paquete' : 'paquetes'} de inscripción por revisar`, interviews: (n) => `${n} ${n === 1 ? 'entrevista' : 'entrevistas'} esta semana`,
-    due: (n) => `${n} ${n === 1 ? 'asunto de licencia atrasado o de esta semana' : 'asuntos de licencia atrasados o de esta semana'}`, dueSub: 'Pendientes, con la cita legal', content: (n) => `${n} ${n === 1 ? 'cosa espera' : 'cosas esperan'} revisión`, contentSub: 'Videos, mensajes de los amigos, consentimientos',
+    due: (n) => `${n} ${n === 1 ? 'asunto de licencia atrasado o de esta semana' : 'asuntos de licencia atrasados o de esta semana'}`, dueSub: 'Pendientes, con la cita legal', moments: (n) => `${n} ${n === 1 ? 'momento del salón espera' : 'momentos del salón esperan'} su aprobación`, momentsSub: 'Fotos y videos de los salones, antes de que las familias los vean', content: (n) => `${n} ${n === 1 ? 'cosa espera' : 'cosas esperan'} revisión`, contentSub: 'Videos, mensajes de los amigos, consentimientos',
     go: { open: 'Abrir', review: 'Revisar', finish: 'Terminar', give: 'Registrar dosis', check: 'Ver plan', reply: 'Responder', score: 'Calificar', pickups: 'Recogidas', staff: 'Personal', log: 'Registrar' },
   },
   },
@@ -204,6 +204,8 @@ export function staffLink(kind, id, ctx = {}) {
   const base = `/c/${slug}`;
   const q = (o) => { const p = new URLSearchParams(Object.entries(o).filter(([, v]) => v != null && v !== '')); const s = p.toString(); return s ? `?${s}` : ''; };
   switch (kind) {
+    case 'curriculum-day': return may('curriculum') ? `${base}/curriculum${q({ day: id })}` : null;   // one day's full lesson, menu and move
+    case 'moments-approve': return `${base}/home${q({ view: 'content', tab: 'waiting', approve: id })}`;   // the director dashboard's approval queue (moments.js mountMomentApprovals)
     case 'lead': return may('crm') ? `${base}/crm${q({ lead: id })}` : null;
     case 'crm': return may('crm') ? `${base}/crm${q({ view: id })}` : null;
     case 'crm-stage': return may('crm') ? `${base}/crm${q({ stage: id })}` : null;
@@ -271,31 +273,63 @@ export function teacherModel(d, x = {}, now = Date.now()) {
     since: now,
   };
 }
+// morning at the top, evening at the bottom: every staff day list (messages, announcements, medicines, absences, closures,
+// clock-ins, incidents, meetings, the attention band within each urgency) reads oldest/earliest first (owner rule, 2026-10-12)
+export function clockKey(v) {
+  if (v == null || v === '') return Infinity;
+  if (typeof v === 'number') return Number.isFinite(v) ? v : Infinity;
+  const hm = /^(\d{1,2}):(\d{2})/.exec(String(v));
+  if (hm) return Number(hm[1]) * 60 + Number(hm[2]);
+  const t = Date.parse(String(v));
+  return Number.isNaN(t) ? Infinity : t;
+}
+export function byClock(list, pick) {
+  return (list || []).map((v, i) => [v, clockKey(pick(v)), i]).sort((a, b) => (a[1] === b[1] ? a[2] - b[2] : a[1] < b[1] ? -1 : 1)).map((z) => z[0]);
+}
+export function inClockOrder(list, pick) { const k = (list || []).map((v) => clockKey(pick(v))); return k.every((v, i) => !i || k[i - 1] <= v); }
+// the first dose time of a medicine (its earliest slot), for ordering the medicine lists
+export const firstSlot = (m) => (m?.slots || []).map((s) => clockKey(s.time)).reduce((a, b) => Math.min(a, b), Infinity);
+
+// the attention band: most urgent first; within one urgency, earliest in the day first (untimed items keep their order, after the timed ones)
+export function byUrgencyThenClock(items) {
+  const rank = { now: 0, soon: 1, later: 2 }, at = (v) => (Number.isFinite(v.at) ? v.at : Infinity);
+  return items.map((v, i) => [v, i]).sort((a, b) => rank[a[0].tone] - rank[b[0].tone] || (at(a[0]) === at(b[0]) ? a[1] - b[1] : at(a[0]) < at(b[0]) ? -1 : 1)).map((z) => z[0]);
+}
+// a moment as minutes since midnight ("14:30", an ISO time, epoch ms): one scale for the band
+export function dayMinutes(v) {
+  const k = clockKey(v); if (!Number.isFinite(k)) return Infinity;
+  if (typeof v === 'string' && /^\d{1,2}:\d{2}/.test(v)) return k;
+  const dt = new Date(k); return dt.getHours() * 60 + dt.getMinutes();
+}
 // children still here late in the day (after 4:30 pm at the center): the pickup reminder
 export function stillHere(d, centerMinutes) { return centerMinutes >= 16 * 60 + 30 ? (d?.kids || []).filter((k) => k.state === 'here').length : 0; }
 
 export function teacherAttention(d, x, ctx, lang = 'en', centerMinutes = 0) {
   const A = sw(lang).a, G = A.go, t = d?.todo || {}, out = [];
   const L = (kind, id, o = {}) => staffLink(kind, id, { ...ctx, ...o });
-  for (const i of t.incidents || []) out.push({ key: `inc:${i.id}`, tone: 'now', icon: 'incident', kid: i.kid, title: A.incident(i.first), sub: A.incidentSub, href: L('incident', i.id), go: G.finish });
-  for (const m of x?.mar?.meds || []) for (const s of m.slots || []) if (s.state === 'due' || s.state === 'overdue') {
-    out.push({ key: `med:${m.id}:${s.time}`, tone: s.state === 'overdue' ? 'now' : 'soon', icon: 'med', kid: m.kid, title: A.meds(m.first), sub: A.medsSub(s.time, s.state), href: L('mar', null, { room: d?.room }), go: G.give });
+  for (const i of t.incidents || []) out.push({ key: `inc:${i.id}`, at: dayMinutes(i.at || i.occurred_at || i.created_at), tone: 'now', icon: 'incident', kid: i.kid, title: A.incident(i.first), sub: A.incidentSub, href: L('incident', i.id), go: G.finish });
+  // one chip per medicine, however many doses are due or overdue ("Omar: 2 doses" with their times)
+  for (const m of x?.mar?.meds || []) {
+    const due = (m.slots || []).filter((s) => s.state === 'due' || s.state === 'overdue');
+    if (!due.length) continue;
+    const times = due.map((s) => { const t = /^(\d{1,2}):(\d{2})/.exec(String(s.time || '')); return t ? hhmmText(Number(t[1]) * 60 + Number(t[2]), lang) : s.time; }).join(', ');
+    const over = due.some((s) => s.state === 'overdue');
+    out.push({ key: `med:${m.id}`, at: Math.min(...due.map((s) => clockKey(s.time))), tone: over ? 'now' : 'soon', icon: 'med', kid: m.kid, title: due.length > 1 ? A.medsN(m.first, due.length) : A.meds(m.first), sub: A.medsSub(times, over ? 'overdue' : 'due'), href: L('mar', null, { room: d?.room }), go: G.give });
   }
   const hereIds = new Set((d?.kids || []).filter((k) => k.state === 'here').map((k) => k.kid));
   for (const a of x?.alerts || []) if (hereIds.has(a.kid) && a.emergency_med && a.top_severity === 'life_threatening') {
     out.push({ key: `alg:${a.kid}`, tone: 'soon', icon: 'alert', kid: a.kid, title: A.allergy(a.first), sub: A.allergySub, href: L('child', a.kid), go: G.check });
   }
   const late = stillHere(d, centerMinutes);
-  if (late) out.push({ key: 'pickup', tone: centerMinutes >= 17 * 60 + 30 ? 'now' : 'soon', icon: 'pickup', title: A.pickup(late), sub: A.pickupSub, href: L('pickup', null, { room: d?.room }), go: G.pickups });
-  for (const m of t.messages || []) out.push({ key: `msg:${m.id}`, tone: 'soon', icon: 'chat', kid: m.kid, title: A.message(m.first), sub: m.text || '', href: L('message', m.id, { kid: m.kid }), go: G.reply });
+  if (late) out.push({ key: 'pickup', at: 16 * 60 + 30, tone: centerMinutes >= 17 * 60 + 30 ? 'now' : 'soon', icon: 'pickup', title: A.pickup(late), sub: A.pickupSub, href: L('pickup', null, { room: d?.room }), go: G.pickups });
+  for (const m of t.messages || []) out.push({ key: `msg:${m.id}`, at: dayMinutes(m.at), tone: 'soon', icon: 'chat', kid: m.kid, title: A.message(m.first), sub: m.text || '', href: L('message', m.id, { kid: m.kid }), go: G.reply });
   for (const o of t.observe || []) out.push({ key: `obs:${o.assignment}:${o.kid}:${o.item}`, tone: 'soon', icon: 'star', kid: o.kid, title: A.observe(o.first), sub: o.title || '', href: L('observe', `${o.assignment}:${o.kid}:${o.item}`, { room: d?.room }), go: G.score });
   for (const f of t.flagged || []) out.push({ key: `flag:${f.id}`, tone: 'soon', icon: 'star', kid: f.kid, title: A.flagged(f.first), sub: '', href: L('flagged', f.id, { room: d?.room }), go: G.review });
   for (const p of t.drafts || []) out.push({ key: `draft:${p.id}`, tone: 'later', icon: 'report', kid: p.kid, title: A.draft(p.first), sub: `${p.from} – ${p.to}`, href: L('draft', p.id, { room: d?.room, kid: p.kid, extra: { from: p.from, to: p.to } }), go: G.open });
   for (const v of t.videos || []) out.push({ key: `vid:${v.id}`, tone: 'later', icon: 'video', kid: v.kid, title: A.video(v.first), sub: '', href: L('video', v.id), go: G.open });
   for (const u of t.uploads || []) out.push({ key: `up:${u.id}`, tone: 'later', icon: 'heart', kid: u.kid, title: A.upload(u.first), sub: '', href: L('upload', u.id, { room: d?.room }), go: G.reply });
   for (const s of x?.sped?.items || []) if (s.overdue || s.kind === 'meeting') out.push({ key: `sped:${s.kind}:${s.plan}`, tone: s.overdue ? 'soon' : 'later', icon: 'doc', kid: s.kid, title: `${s.first}: ${s.kind.replace(/_/g, ' ')}`, sub: s.on || s.at || '', href: L('sped-plan', s.plan, { kid: s.kid }), go: G.open });
-  const rank = { now: 0, soon: 1, later: 2 };
-  return out.sort((a, b) => rank[a.tone] - rank[b.tone]);
+  return byUrgencyThenClock(out);
 }
 
 // ---- director ------------------------------------------------------------------------------------------------------------
@@ -436,9 +470,10 @@ export function directorAttention(src, ctx, lang = 'en') {
   if (lic) out.push({ key: 'due', tone: due.some((i) => i.kind !== 'incident' && i.bucket === 'overdue') ? 'now' : 'soon', icon: 'shield', title: A.due(lic), sub: A.dueSub, href: L('compliance'), go: G.review });
   const f = src.family || {};
   const content = (num(f.videos_pending) || 0) + (num(f.messages_pending) || 0) + (num(f.consents_pending) || 0);
+  const mo = num(src.moments?.pending?.length);
+  if (mo) out.push({ key: 'moments', tone: 'soon', icon: 'camera', title: A.moments(mo), sub: A.momentsSub, href: L('moments-approve', mo === 1 ? src.moments.pending[0].id : null), go: G.review });
   if (content) out.push({ key: 'content', tone: 'later', icon: 'video', title: A.content(content), sub: A.contentSub, href: L('videos'), go: G.review });
-  const rank = { now: 0, soon: 1, later: 2 };
-  return out.sort((a, b) => rank[a.tone] - rank[b.tone]);
+  return byUrgencyThenClock(out);
 }
 
 // every staff page that existed before v2, per role, grouped: the inventory (the "All pages" tab and the docs; nothing is lost)
@@ -457,3 +492,91 @@ export function pagesFor(tabs) {
   if (rest.length) groups.push({ group: 'center', pages: rest });
   return groups;
 }
+
+// ---- the teacher's Game plan (hub/TEACHER_DAY.md): ten steps in the order of the day ---------------------------------------------
+// Default times (minutes after midnight, the center's clock). A center's own schedule is not connected yet: the page says so.
+export const DAY_STEPS = [
+  { id: 'open', from: 6 * 60 + 45, to: 7 * 60 + 30, icon: 'home', tone: 'navy' },
+  { id: 'arrive', from: 7 * 60 + 30, to: 8 * 60 + 30, icon: 'pickup', tone: 'booker' },
+  { id: 'breakfast', from: 8 * 60 + 30, to: 9 * 60, icon: 'meal', tone: 'zuri', meal: 'breakfast' },
+  { id: 'lessons', from: 9 * 60, to: 10 * 60 + 30, icon: 'book', tone: 'booker' },
+  { id: 'outside', from: 10 * 60 + 30, to: 11 * 60 + 30, icon: 'sun', tone: 'bop' },
+  { id: 'lunch', from: 11 * 60 + 30, to: 12 * 60 + 15, icon: 'meal', tone: 'zuri', meal: 'lunch' },
+  { id: 'rest', from: 12 * 60 + 30, to: 14 * 60 + 30, icon: 'nap', tone: 'lumi' },
+  { id: 'afternoon', from: 14 * 60 + 30, to: 16 * 60, icon: 'star', tone: 'gold', meal: 'snack' },
+  { id: 'pickup', from: 16 * 60, to: 17 * 60 + 30, icon: 'pickup', tone: 'booker' },
+  { id: 'close', from: 17 * 60 + 30, to: 18 * 60, icon: 'check', tone: 'navy' },
+];
+// which curriculum block types belong to which step (the curriculum's own order is kept inside a step)
+export const BLOCK_STEP = { circle: 'lessons', 'picture-talk': 'lessons', 'friends-live': 'lessons', activity: 'lessons', zones: 'lessons', story: 'afternoon',
+  outside: 'outside', move: 'outside', meal: 'lunch', family: 'afternoon', goodbye: 'pickup' };
+// now / next for a time of day: the step holding the time, else the next one to come (before the day: step 1; after: the last)
+export function stepNow(min) {
+  if (min == null) return { now: 0, next: 1 };
+  let i = DAY_STEPS.findIndex((s) => min >= s.from && min < s.to);
+  if (i < 0) { const n = DAY_STEPS.findIndex((s) => min < s.from); i = n < 0 ? DAY_STEPS.length - 1 : n; }
+  return { now: i, next: i + 1 < DAY_STEPS.length ? i + 1 : null };
+}
+export function stepState(i, cur) { return i < cur.now ? 'done' : i === cur.now ? 'now' : i === cur.next ? 'next' : 'later'; }
+export function blocksFor(stepId, blocks) { return (blocks || []).filter((b) => (BLOCK_STEP[b.type] || (b.type ? 'lessons' : 'lessons')) === stepId); }
+export function hhmmText(min, lang = 'en') { return hhmmFmt(min, lang); }
+const hhmmFmt = (min, lang = 'en') => new Intl.DateTimeFormat(lang === 'es' ? 'es-US' : 'en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(new Date(Date.UTC(2000, 0, 1, Math.floor(min / 60), min % 60)));
+
+// allergy checks: a child's active allergy / diet alerts against the names of the items served (a reminder, never a decision)
+export const ALLERGEN_WORDS = {
+  dairy: ['milk', 'cheese', 'yogurt', 'yoghurt', 'butter', 'cream', 'dairy'], peanut: ['peanut'], 'tree nut': ['almond', 'walnut', 'cashew', 'pecan', 'pistachio', 'hazelnut', 'tree nut'],
+  egg: ['egg'], wheat: ['wheat', 'bread', 'pasta', 'tortilla', 'cracker', 'muffin', 'pancake', 'bagel', 'roll'], gluten: ['wheat', 'bread', 'pasta', 'cracker', 'muffin', 'pancake', 'bagel', 'barley', 'rye'],
+  fish: ['fish', 'salmon', 'tuna', 'cod', 'tilapia'], shellfish: ['shrimp', 'crab', 'lobster', 'shellfish'], soy: ['soy', 'tofu', 'edamame'], sesame: ['sesame', 'tahini', 'hummus'],
+  pork: ['pork', 'ham', 'bacon', 'sausage'], vegetarian: ['chicken', 'beef', 'turkey', 'pork', 'ham', 'fish', 'meatball', 'sausage', 'bacon'],
+};
+export function allergenKeys(label) {
+  const t = String(label || '').toLowerCase();
+  const keys = Object.keys(ALLERGEN_WORDS).filter((k) => t.includes(k) || (k === 'dairy' && /\bmilk|lactose/.test(t)) || (k === 'tree nut' && /tree[- ]?nut|\bnuts?\b/.test(t)) || (k === 'vegetarian' && /vegetarian|vegan/.test(t)));
+  return keys;
+}
+// alerts: care_alert_board rows ({kid, alerts:[{type, label}]}); items: [{name}]. Returns Map(kid -> [{item, alert}])
+export function allergyChecks(alerts, items) {
+  const out = new Map();
+  for (const a of alerts || []) for (const al of a.alerts || []) {
+    if (!['allergy', 'diet'].includes(al.type)) continue;
+    const keys = allergenKeys(al.label);
+    for (const it of items || []) {
+      const name = String(it.name || '').toLowerCase();
+      if (keys.some((k) => ALLERGEN_WORDS[k].some((w) => name.includes(w)))) (out.get(a.kid) || out.set(a.kid, []).get(a.kid)).push({ item: it.name, alert: shortName(al.label) });
+    }
+  }
+  return out;
+}
+export const GP = {
+  en: { title: 'Game plan', now: 'Now', next: 'Next', done: 'Done', later: 'Later', defaultTimes: 'Default times: your center\'s own schedule is not connected yet.',
+    steps: { open: 'Open the room', arrive: 'Arrivals', breakfast: 'Breakfast', lessons: 'Circle and lessons', outside: 'Outside and movement', lunch: 'Lunch', rest: 'Rest', afternoon: 'Afternoon', pickup: 'Pickup', close: 'End of day' },
+    hints: { open: 'Clock in, check the room, read today\'s alerts', arrive: 'Check in at the door, health check, notes', breakfast: 'Serve and log what each child ate', lessons: "Today's curriculum, in order", outside: 'Outdoor play and the Bop moves', lunch: 'Serve and log what each child ate', rest: 'Rest start and stop', afternoon: 'Snack, story and the family activity', pickup: 'Who is still here, who may pick up', close: 'Reports, follow-ups, clock out' },
+    checklist: 'Room ready and safe', checks: ['Outlets covered, cords out of reach', 'Gates and doors latched', 'Cots or mats ready for rest', 'First-aid kit stocked', 'Outdoor area walked for hazards', 'Sign-in sheet and pickup list at the door'],
+    tabletOnly: 'Ticks are kept on this tablet for today (no checklist record yet).', todayAlerts: "Today's alerts", meds: 'Medicine times', absences: 'Absent today', custody: 'Custody and pickup alerts', ratioToday: 'Ratio for today',
+    expected: (n, e) => `${n} of ${e} expected`, prep: 'Prep for today', materials: 'Materials', supplies: 'Supplies for the day', noPlan: 'No curriculum day today.',
+    checkIn: 'Check in at the door', dropNotes: 'Notes from families', none: 'Nothing here.', menu: 'On the menu', logMeal: (m) => `Log ${m}`, noMenu: 'No menu for this room today.',
+    friendOfDay: 'Friend of the day', unit: (u, w) => `Unit ${u} · Week ${w}`, goal: 'Goal', steps2: 'How to run it', prompts: 'Say', watch: 'Watch for (Learning Steps)', family: 'Family connection',
+    outdoorGoal: 'Aim for 1 hour outside today (both states).', weather: 'Check the weather before going out (weather is not connected yet).', bopMoves: 'Bop moves',
+    restRule: 'A child who does not sleep rests 30 minutes to 1 hour, then quiet play.', resting: 'Resting', notResting: 'Not resting', startRest: 'Start rest', endRest: 'End rest', since: (t) => `since ${t}`,
+    stillHere: 'Still here', pickupList: 'May pick up', checkOut: 'Check out at the door', reportsSent: (p, t) => `Evening reports: ${p} of ${t} sent (about 5:30 pm)`,
+    followUps: 'Follow-ups', noteTomorrow: 'Note for tomorrow', noteHint: 'Kept on this tablet (no handoff record yet).', clockOut: 'Clock out', print: 'Print the day',
+    amounts: 'How much', askedMore: 'Asked for more', triedNew: 'Tried a new food', check: 'Check', saveMeal: 'Save for the selected children', allFor: 'All', perItem: 'Tap an amount for each item',
+    week: 'This week', unitView: 'The unit', openDay: 'Open', checkFor: (a) => `Check: ${a}`, noneOnFile: 'no one on file yet: ask the director',
+    rel: { parent: 'parent', grandparent: 'grandparent', family_friend: 'family friend', aunt_uncle: 'aunt or uncle', sibling: 'sibling', guardian: 'guardian', nanny: 'nanny', other: 'other' } },
+  es: { title: 'Plan del día', now: 'Ahora', next: 'Después', done: 'Hecho', later: 'Más tarde', defaultTimes: 'Horario predeterminado: el horario propio de su centro todavía no está conectado.',
+    steps: { open: 'Abrir el salón', arrive: 'Llegadas', breakfast: 'Desayuno', lessons: 'Círculo y lecciones', outside: 'Afuera y movimiento', lunch: 'Almuerzo', rest: 'Descanso', afternoon: 'Tarde', pickup: 'Salida', close: 'Fin del día' },
+    hints: { open: 'Marcar entrada, revisar el salón, leer las alertas de hoy', arrive: 'Registro en la puerta, revisión de salud, notas', breakfast: 'Servir y registrar lo que comió cada niño', lessons: 'El currículo de hoy, en orden', outside: 'Juego afuera y los movimientos de Bop', lunch: 'Servir y registrar lo que comió cada niño', rest: 'Inicio y fin del descanso', afternoon: 'Refrigerio, cuento y la actividad en familia', pickup: 'Quién sigue aquí, quién puede recoger', close: 'Informes, seguimientos, marcar salida' },
+    checklist: 'Salón listo y seguro', checks: ['Enchufes cubiertos, cables fuera de alcance', 'Rejas y puertas cerradas', 'Catres o colchonetas listos', 'Botiquín completo', 'Área de afuera revisada', 'Hoja de registro y lista de recogida en la puerta'],
+    tabletOnly: 'Las marcas se guardan en esta tableta por hoy (todavía no hay registro de la lista).', todayAlerts: 'Alertas de hoy', meds: 'Horarios de medicinas', absences: 'Ausentes hoy', custody: 'Alertas de custodia y recogida', ratioToday: 'Proporción de hoy',
+    expected: (n, e) => `${n} de ${e} esperados`, prep: 'Preparar para hoy', materials: 'Materiales', supplies: 'Materiales del día', noPlan: 'Hoy no hay día de currículo.',
+    checkIn: 'Registrar en la puerta', dropNotes: 'Notas de las familias', none: 'Nada aquí.', menu: 'En el menú', logMeal: (m) => `Registrar ${m}`, noMenu: 'No hay menú para este salón hoy.',
+    friendOfDay: 'Amigo del día', unit: (u, w) => `Unidad ${u} · Semana ${w}`, goal: 'Meta', steps2: 'Cómo hacerlo', prompts: 'Decir', watch: 'Observar (Pasos de aprendizaje)', family: 'Conexión con la familia',
+    outdoorGoal: 'Meta: 1 hora afuera hoy (en ambos estados).', weather: 'Revise el clima antes de salir (el clima todavía no está conectado).', bopMoves: 'Movimientos de Bop',
+    restRule: 'El niño que no duerme descansa de 30 minutos a 1 hora y luego juega en calma.', resting: 'Descansando', notResting: 'Sin descansar', startRest: 'Empezar descanso', endRest: 'Terminar descanso', since: (t) => `desde ${t}`,
+    stillHere: 'Siguen aquí', pickupList: 'Pueden recoger', checkOut: 'Registrar salida en la puerta', reportsSent: (p, t) => `Informes de la tarde: ${p} de ${t} enviados (hacia las 5:30 pm)`,
+    followUps: 'Seguimientos', noteTomorrow: 'Nota para mañana', noteHint: 'Se guarda en esta tableta (todavía no hay registro de entrega de turno).', clockOut: 'Marcar salida', print: 'Imprimir el día',
+    amounts: 'Cuánto', askedMore: 'Pidió más', triedNew: 'Probó algo nuevo', check: 'Revisar', saveMeal: 'Guardar para los seleccionados', allFor: 'Todos', perItem: 'Toque una cantidad para cada alimento',
+    week: 'Esta semana', unitView: 'La unidad', openDay: 'Abrir', checkFor: (a) => `Revisar: ${a}`, noneOnFile: 'nadie registrado todavía: pregunte a la directora',
+    rel: { parent: 'madre o padre', grandparent: 'abuela o abuelo', family_friend: 'amistad de la familia', aunt_uncle: 'tía o tío', sibling: 'hermana o hermano', guardian: 'tutor', nanny: 'niñera', other: 'otra persona' } },
+};
+export const gp = (lang) => GP[lang === 'es' ? 'es' : 'en'];

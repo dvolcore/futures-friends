@@ -183,7 +183,7 @@ a.ffs-kpi:active,.ffs-kpi.is-pressed{transform:scale(.985)}
 .ffs-gl-warn{--gh:rgba(255,158,107,.85);--gh2:rgba(194,65,12,.4);color:#C2410C}
 .ffs-glbar{display:block;height:10px;border-radius:999px;background:rgba(10,43,56,.07);overflow:visible;min-width:3rem}
 .ffs-gb-none{background:repeating-linear-gradient(90deg,rgba(10,43,56,.08) 0 6px,transparent 6px 10px)}
-.ffs-glbar-fill{display:block;height:100%;width:var(--w,0%);border-radius:999px;transition:width 1s var(--ease-out)}
+.ffs-glbar-fill{display:block;height:100%;width:var(--w,0%);border-radius:999px}
 .ffs-gb-lumi .ffs-glbar-fill{background:linear-gradient(90deg,#FF9CC6,#D9488B);box-shadow:0 0 10px rgba(217,72,139,.55)}
 .ffs-gb-booker .ffs-glbar-fill{background:linear-gradient(90deg,#8FB9F5,#0B5ED7);box-shadow:0 0 10px rgba(11,94,215,.45)}
 .ffs-gb-zuri .ffs-glbar-fill{background:linear-gradient(90deg,#8FE0AC,#1F9D52);box-shadow:0 0 10px rgba(31,157,82,.45)}
@@ -303,13 +303,15 @@ html.ffs-locked,html.ffs-locked body{overflow:hidden}
   .ffs-tabs{flex:0 1 auto}
 }
 /* ---- desktop: the full rail with words ------------------------------------------------------------------------------ */
-@media (min-width:1024px){
+@media (min-width:1280px){   /* the full rail with words from 1280 px; an iPad in landscape (1024) keeps the icon rail and the room for content */
   .ffs{grid-template-columns:13.5rem minmax(0,1fr);gap:20px}
   .ffs-rail{padding:12px 10px}
   .ffs-vt{flex-direction:row;justify-content:flex-start;gap:12px;min-height:44px;padding:6px 12px;font-size:.88rem;text-align:left}
   .ffs-badge{position:static;margin-left:auto}
   .ffs-rail .ffs-action{flex-direction:row;justify-content:flex-start;gap:10px;min-height:44px;padding:4px 8px;font-size:.82rem;text-align:left}
   .ffs-rail .ffs-a-long{display:block} .ffs-rail .ffs-a-short{display:none}
+}
+@media (min-width:1024px){
   .ffs-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
   .ffs-pillars{grid-template-columns:repeat(4,minmax(0,1fr))}
   .ffs-three{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -321,4 +323,26 @@ html.ffs-locked,html.ffs-locked body{overflow:hidden}
 
 /* the attention band scrolls sideways: its right edge fades, so a chip at the edge reads as "more", never as cut text */
 .ffs-chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent);padding-right:48px}
-@media (min-width:1024px){.ffs{grid-template-columns:14.5rem minmax(0,1fr)} .ffs-vt span:not(.ffs-badge){white-space:nowrap}}
+@media (min-width:1280px){.ffs{grid-template-columns:14.5rem minmax(0,1fr)} .ffs-vt span:not(.ffs-badge){white-space:nowrap}}
+
+/* ---- neon, much stronger (owner 2026-10-12): layered coloured halos, a bright core stroke, a pulsing comet tip, numbers that glow while
+   they count, and a bloom when a card lands. Bars grow by transform (scaleX) on reveal, never by width. ------------------------------- */
+.ffs-glring .ffs-gl-on{filter:drop-shadow(0 0 2px rgba(255,255,255,.7)) drop-shadow(0 0 6px var(--gh)) drop-shadow(0 0 14px var(--gh)) drop-shadow(0 0 28px var(--gh2))}
+.ffs-gl-core{stroke:rgba(255,255,255,.85);filter:drop-shadow(0 0 3px rgba(255,255,255,.9))}
+.ffs-glring .ffs-gl-tip{transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px var(--gh)) drop-shadow(0 0 22px var(--gh2))}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .ffs-glring .ffs-gl-tip{animation:ffs-comet 1.8s ease-in-out infinite}
+}
+@keyframes ffs-comet{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.ffs-glbar-fill,.sv2-fn-fill{transition:none;transform-origin:left center}
+.sv2-col-fill{transform-origin:bottom center}
+.ffs-counting{text-shadow:0 0 10px rgba(255,255,255,.9),0 0 22px var(--glow,rgba(231,169,40,.7)),0 0 40px var(--glow,rgba(231,169,40,.45))}
+.ffs-kpi:has(.ffs-gl-booker){--glow:rgba(59,139,255,.75)} .ffs-kpi:has(.ffs-gl-zuri){--glow:rgba(91,216,137,.8)} .ffs-kpi:has(.ffs-gl-lumi){--glow:rgba(255,126,182,.8)}
+.ffs-kpi:has(.ffs-gl-bop){--glow:rgba(181,108,240,.8)} .ffs-kpi:has(.ffs-gl-warn){--glow:rgba(255,158,107,.8)}
+.ffs-kpi,.sv2-fig{isolation:isolate}
+.ffs-bloom::before{content:"";position:absolute;inset:-6px;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;
+  background:radial-gradient(60% 70% at 30% 50%,var(--glow,rgba(231,169,40,.55)),transparent 70%);animation:ffs-bloom .65s ease-out 1 both}
+@keyframes ffs-bloom{0%{opacity:0;transform:scale(.96)}35%{opacity:.95;transform:scale(1.02)}100%{opacity:0;transform:scale(1.05)}}
+:root[data-motion=off] .ffs-bloom::before{animation:none;opacity:0}
+@media (prefers-reduced-motion:reduce){.ffs-bloom::before{animation:none;opacity:0}.ffs-glring .ffs-gl-tip{animation:none}}
+@media (min-width:768px) and (max-width:1279px){ .ffs{grid-template-columns:5.4rem minmax(0,1fr)} .ffs-vt span:not(.ffs-badge){overflow-wrap:normal;word-break:keep-all;font-size:.62rem} }

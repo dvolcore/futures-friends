@@ -26,7 +26,7 @@ export const SW = {
     short: { overview: 'Overview', today: 'Today', learning: 'Learning', care: 'Care', messages: 'Messages', calendar: 'Calendar', billing: 'Billing', family: 'Family', more: 'More' },
     tabs: {
       week: 'This week', skills: 'Skills', portfolio: 'Portfolio', reports: 'Reports',
-      day: 'The day', clock: 'Day clock', photos: 'Photos', waiting: 'Waiting for you', meals: 'Meals', rest: 'Rest', feelings: 'Feelings', health: 'Health',
+      day: 'The day', clock: 'Day clock', photos: 'Moments', waiting: 'Waiting for you', meals: 'Meals', rest: 'Rest', feelings: 'Feelings', health: 'Health',
       teachers: 'Teachers', friends: 'From the friends',
       next: 'Coming up', attendance: 'Attendance', bring: 'What to bring',
       balance: 'Balance', history: 'Invoices & payments',
@@ -40,7 +40,7 @@ export const SW = {
     short: { overview: 'Resumen', today: 'Hoy', learning: 'Aprender', care: 'Cuidado', messages: 'Mensajes', calendar: 'Calendario', billing: 'Pagos', family: 'Familia', more: 'Más' },
     tabs: {
       week: 'Esta semana', skills: 'Habilidades', portfolio: 'Portafolio', reports: 'Informes',
-      day: 'El día', clock: 'Reloj del día', photos: 'Fotos', waiting: 'Esperan su respuesta', meals: 'Comidas', rest: 'Descanso', feelings: 'Emociones', health: 'Salud',
+      day: 'El día', clock: 'Reloj del día', photos: 'Momentos', waiting: 'Esperan su respuesta', meals: 'Comidas', rest: 'Descanso', feelings: 'Emociones', health: 'Salud',
       teachers: 'Maestras', friends: 'De los amigos',
       next: 'Próximamente', attendance: 'Asistencia', bring: 'Qué traer',
       balance: 'Saldo', history: 'Facturas y pagos',

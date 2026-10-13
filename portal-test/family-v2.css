@@ -614,3 +614,86 @@ a.fd2-chip-go .fd-ico-svg{width:.9rem;height:.9rem}
   .fd2-cockpit{align-items:start}
   .fd2-cockpit > .fd2-ticker,.fd2-cockpit > .fd2-learnhome{max-height:16rem}
 }
+
+/* ======================================================================================================================
+   The reveal and the neon (owner 2026-10-12): every arc, bar and dot glows in its own hue with layered halos (about 4, 10 and 22 px),
+   a brighter thin core rides on the gradient, the comet tip pulses softly once landed; numbers glow while they count and settle to a
+   subtle glow. The glow sits behind strokes and text (drop-shadows and text-shadows), so the text keeps its contrast. */
+.fv-glring .fv-gl-on{filter:drop-shadow(0 0 2px var(--gh)) drop-shadow(0 0 5px var(--gh)) drop-shadow(0 0 11px var(--gh2))}
+.fv-glring .fv-gl-hi{stroke:rgba(255,255,255,.7);mix-blend-mode:screen}
+.fv-glring .fv-gl-tip{filter:drop-shadow(0 0 4px var(--gh)) drop-shadow(0 0 10px var(--gh)) drop-shadow(0 0 18px var(--gh2))}
+.fv-glbar-fill{transform-origin:0 50%}
+.fv-gb-lumi .fv-glbar-fill{box-shadow:0 0 4px rgba(255,126,182,.9),0 0 10px rgba(217,72,139,.55),0 0 22px rgba(217,72,139,.3)}
+.fv-gb-booker .fv-glbar-fill{box-shadow:0 0 4px rgba(59,139,255,.85),0 0 10px rgba(11,94,215,.5),0 0 22px rgba(11,94,215,.28)}
+.fd2-dots i.on{box-shadow:0 0 4px rgba(59,139,255,.95),0 0 10px rgba(11,94,215,.55)}
+.fd-bar-fill{transform-origin:50% 100%}
+/* the infographics share the glow */
+.fv-elapsed{filter:drop-shadow(0 0 3px rgba(246,190,70,.8)) drop-shadow(0 0 9px rgba(231,169,40,.45))}
+.fv-nap,.fv-rest{filter:drop-shadow(0 0 3px rgba(255,126,182,.9)) drop-shadow(0 0 8px rgba(217,72,139,.55)) drop-shadow(0 0 18px rgba(217,72,139,.3))}
+.fv-bead{filter:drop-shadow(0 0 3px currentColor)}
+.fv-seg-meal,.fv-seg-drink{color:#5BD889} .fv-seg-activity{color:#B56CF0} .fv-seg-toilet{color:#3B8BFF} .fv-seg-mood,.fv-seg-note{color:#FFD25E} .fv-seg-nap{color:#FF7EB6}
+.fv-hand circle{filter:drop-shadow(0 0 6px rgba(231,169,40,.9))}
+.fv-wedge{filter:drop-shadow(0 0 3px rgba(91,216,137,.7)) drop-shadow(0 0 9px rgba(31,157,82,.35))}
+.fv-pie-fill{filter:drop-shadow(0 0 3px rgba(91,216,137,.8)) drop-shadow(0 0 8px rgba(31,157,82,.4))}
+.fv-petal-secure{filter:drop-shadow(0 0 4px rgba(181,108,240,.75)) drop-shadow(0 0 10px rgba(130,54,174,.35))}
+.fv-hc-here{box-shadow:0 0 6px rgba(91,216,137,.85),0 0 16px rgba(46,158,87,.45)}
+.fv-plant.fv-grown .fv-bloom{filter:drop-shadow(0 0 4px currentColor)}
+.fv-pf-booker{color:#3B8BFF} .fv-pf-lumi{color:#FF7EB6} .fv-pf-zuri{color:#5BD889} .fv-pf-bop{color:#B56CF0}
+.fv-ring-fg{filter:drop-shadow(0 0 3px var(--gh,rgba(231,169,40,.8))) drop-shadow(0 0 10px var(--gh2,rgba(231,169,40,.4)))}
+.fv-ring-gold{--gh:rgba(255,210,94,.9);--gh2:rgba(231,169,40,.45)} .fv-ring-zuri{--gh:rgba(91,216,137,.85);--gh2:rgba(31,157,82,.4)}
+/* numbers: a coloured glow while counting, settling to a subtle one */
+.fd2-big{transition:text-shadow .9s var(--ease-out)}
+.fd2-big.fd2-counting.fd2-gl-booker{text-shadow:0 0 6px rgba(59,139,255,.75),0 0 18px rgba(11,94,215,.5)}
+.fd2-big.fd2-counting.fd2-gl-zuri{text-shadow:0 0 6px rgba(91,216,137,.8),0 0 18px rgba(31,157,82,.5)}
+.fd2-big.fd2-counting.fd2-gl-lumi{text-shadow:0 0 6px rgba(255,126,182,.8),0 0 18px rgba(217,72,139,.5)}
+.fd2-big.fd2-counting.fd2-gl-bop{text-shadow:0 0 6px rgba(181,108,240,.8),0 0 18px rgba(130,54,174,.5)}
+/* the comet tip pulses only once its arc has landed */
+.fv-glring .fv-gl-tip{animation:none}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .fd2-landed .fv-glring .fv-gl-tip{animation:fv-tip 3.2s ease-in-out infinite}
+  :root:not([data-motion=off]) .fd2-kpi::after{animation:none;display:none}
+  /* the landing bloom: a soft disc of the card's hue that swells and fades (opacity and transform only) */
+  .fd2-kpi,.fd2-lh-ring,.fv{position:relative}
+  :root:not([data-motion=off]) .fd2-bloom::before{content:"";display:block;position:absolute;left:50%;top:50%;width:70%;aspect-ratio:1;margin:-35% 0 0 -35%;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,color-mix(in srgb,var(--tone,#E7A928) 45%,transparent),transparent);opacity:0;transform:scale(.4);animation:fd2-bloom .65s cubic-bezier(.22,1,.36,1) 1 both;z-index:0}
+}
+.fd2 .fd2-kpi.fd2-bloom::before{height:auto;background:radial-gradient(closest-side,color-mix(in srgb,var(--tone) 45%,transparent),transparent)}
+@keyframes fd2-bloom{0%{opacity:0;transform:scale(.4)}35%{opacity:.9}100%{opacity:0;transform:scale(1.25)}}
+.fd2-kpi > *{position:relative;z-index:1}
+
+/* ---- the grown-up cast (ff-cast.js): the hero pair (the child's friend with its grown-up), Ms. June on the teacher actions, Mara on
+   pickup, Mr. Moss on meals, a grown-up in the empty states. Whole figures only: never cropped at the ears or the top, clear of headings. */
+.fd2-pair{position:absolute;z-index:2;right:2%;bottom:0;top:8px;display:flex;align-items:flex-end;gap:0;pointer-events:none}
+.fd2-pair img{display:block;height:auto;filter:drop-shadow(0 10px 12px rgba(10,43,56,.22))}
+.fd2-pair .fd2-parent{height:calc(100% - 4px);width:auto;max-height:15.5rem;margin-right:-18px}
+.fd2 .fd2-hero .fd2-pair .fd-hero-friend{position:static;height:72%;max-height:11.5rem;width:auto;right:auto;bottom:auto;top:auto}
+.fd2 .fd2-hero .fd-hero-in{max-width:min(46rem,calc(100% - 280px))}
+.fd2-who{background:#FFF8E8 !important;overflow:visible}
+.fd2-whoimg{height:2.6rem;width:auto;margin-top:-.5rem}
+.fd2-withwho{position:relative}
+.fd2-cardwho{position:absolute;right:12px;top:8px;height:5.5rem;width:auto;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(10,43,56,.18))}
+.fd2-withwho > h2{padding-right:4.5rem}
+.fd2-emptywho{display:flex;align-items:center;gap:12px;text-align:left}
+.fd2-emptyimg{height:4.5rem;width:auto;flex:none}
+@media (max-width:767px){
+  .fd2-pair{top:6px;right:0;height:9.5rem;bottom:auto}
+  .fd2-pair .fd2-parent{max-height:9.5rem;margin-right:-12px}
+  .fd2 .fd2-hero .fd2-pair .fd-hero-friend{height:6.6rem}
+  .fd2 .fd2-hero .fd-hello,.fd2-date{max-width:calc(100% - 128px)}
+  .fd2 .fd2-hero .fd-hero-in{max-width:none}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .fd2-pair .fd2-parent{max-height:11rem}
+  .fd2 .fd2-hero .fd2-pair .fd-hero-friend{max-height:8.5rem}
+  .fd2 .fd2-hero .fd-hero-in{max-width:calc(100% - 220px)}
+}
+/* the header: the parent's name with the child's pair (not the sign-in email) */
+body.fp-fam .top .who.fd2-who-link{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none}
+.fd2-who-pair{display:inline-flex;align-items:flex-end;height:38px}
+.fd2-who-adult{height:38px;width:auto}
+.fd2-who-kid{height:28px;width:auto;margin-left:-6px}
+/* every card, tile, chart and row answers a tap: a clear focus ring everywhere, a lift on hover (fine pointers only) */
+.fd2 :is(a, button, [role=button], [tabindex="0"]):focus-visible{outline:3px solid var(--booker);outline-offset:3px;border-radius:12px}
+.fd2-chip-soft{background:#fff !important;box-shadow:inset 0 0 0 1.5px rgba(46,158,87,.45) !important}
+.fd2-photo-a{display:block;color:inherit;text-decoration:none;border-radius:16px}
+@media (hover:hover) and (pointer:fine){.fd2 .fd2-kpi:hover,.fd2 .fd2-mini:hover,.fd2 .fd2-nx-a:hover,.fd2 .fd2-photo-a:hover{transform:translateY(-2px);box-shadow:0 14px 28px -16px rgba(10,43,56,.45)} .fd2 .fd2-lh-ring:hover .fv-glring{transform:scale(1.03)} .fd2-chip:hover{box-shadow:0 10px 22px -12px rgba(10,43,56,.5)}}

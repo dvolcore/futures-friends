@@ -16,7 +16,7 @@ const L = {
         pushNotReady: 'Notifications to devices are not set up on this hub yet.',
         ios: 'On iPhone or iPad: tap Share, then "Add to Home Screen", and open Futures Hub from the Home Screen to turn notifications on.',
         privacy: 'A device notification only says "New update from Futures Friends": no names, no photos. Open the hub to read it.',
-        kinds: { message: 'Messages', daily_report: 'Daily reports', progress_report: 'Progress reports', kid_video: 'Videos for your child',
+        kinds: { message: 'Messages', daily_report: 'Daily reports', progress_report: 'Progress reports', kid_video: 'Videos for your child', moment: 'Classroom photos and videos',
                  announcement: 'Announcements', incident: 'Incident reports', consent: 'Consent requests', billing: 'Billing', system: 'Other', hiring: 'Hiring', health: 'Health records' },
         dailyNote: 'The daily report email is set in Message settings.' },
   es: { bell: 'Avisos', unread: (n) => `${n} sin leer`, none: 'Nada nuevo todavía.', markAll: 'Marcar todo como leído', settings: 'Ajustes de avisos',
@@ -27,7 +27,7 @@ const L = {
         pushNotReady: 'Los avisos a dispositivos todavía no están configurados en este hub.',
         ios: 'En iPhone o iPad: toque Compartir, luego "Agregar a inicio", y abra Futures Hub desde la pantalla de inicio para activar los avisos.',
         privacy: 'Un aviso en el dispositivo solo dice "Nueva actualización de Futures Friends": sin nombres ni fotos. Abra el hub para leerlo.',
-        kinds: { message: 'Mensajes', daily_report: 'Reportes del día', progress_report: 'Reportes de progreso', kid_video: 'Videos para su niño',
+        kinds: { message: 'Mensajes', daily_report: 'Reportes del día', progress_report: 'Reportes de progreso', kid_video: 'Videos para su niño', moment: 'Fotos y videos del salón',
                  announcement: 'Anuncios', incident: 'Reportes de incidentes', consent: 'Solicitudes de consentimiento', billing: 'Facturación', system: 'Otros', hiring: 'Contratación', health: 'Registros de salud' },
         dailyNote: 'El correo del reporte del día se ajusta en Ajustes de mensajes.' },
 };

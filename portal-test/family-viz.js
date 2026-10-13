@@ -379,9 +379,9 @@ export function glowRingSvg(frac, { tone = 'booker', size = 120, stroke = 12, se
     if (v > 0) {
       const end = 360 * v - 0.01;
       body += `<path class="fv-gl-on" d="${v >= 0.999 ? `M${c} ${R2(c - r)}A${r} ${r} 0 1 1 ${R2(c - 0.01)} ${R2(c - r)}` : arcPath(c, c, r, 0, end)}" stroke="url(#${id})" stroke-width="${stroke}" data-len="${R2(C * v)}"/>
-        <path class="fv-gl-hi" d="${v >= 0.999 ? `M${c} ${R2(c - r + stroke / 4)}A${R2(r - stroke / 4)} ${R2(r - stroke / 4)} 0 1 1 ${R2(c - 0.01)} ${R2(c - r + stroke / 4)}` : arcPath(c, c, r - stroke / 4, 0, end)}" stroke-width="${R2(stroke / 5)}"/>`;
+        <path class="fv-gl-hi" d="${v >= 0.999 ? `M${c} ${R2(c - r)}A${r} ${r} 0 1 1 ${R2(c - 0.01)} ${R2(c - r)}` : arcPath(c, c, r, 0, end)}" stroke-width="${R2(stroke / 4)}" data-len="${R2(C * v)}"/>`;
       const [tx, ty] = polar(c, c, r, end);
-      body += `<circle class="fv-gl-tip" cx="${tx}" cy="${ty}" r="${R2(stroke / 2 + 1)}" fill="${c1}"/>`;
+      body += `<circle class="fv-gl-tip" cx="${tx}" cy="${ty}" r="${R2(stroke / 2 + 1)}" fill="${c1}" data-a="${R2(end)}" data-c="${c}"/>`;
     }
   }
   return `<svg class="fv-glring fv-gl-${tone}" viewBox="0 0 ${size} ${size}" aria-hidden="true" focusable="false">${defs}${body}${inner}</svg>`;

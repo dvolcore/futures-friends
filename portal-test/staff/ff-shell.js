@@ -16,6 +16,7 @@ export const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':
 
 // ---- icons (24 px stroke icons, the parent dashboard's set plus the staff ones) ---------------------------------------------------
 export const ICON = {
+  camera: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
   meal: '<path d="M7 3v8a2 2 0 0 0 2 2v8M7 3v5M10 3v5M17 3c-1.7 0-3 2-3 5s1 4 3 4v9"/>',
   nap: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   toilet: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
@@ -60,7 +61,8 @@ export const icon = (k, cls = 'ffs-ico') => `<svg class="${cls}" viewBox="0 0 24
 
 // ---- the four friends (official art, img/friends): pillars and default avatars ----------------------------------------------------
 export const FRIENDS = ['booker', 'lumi', 'zuri', 'bop'];
-export const FRIEND_NAME = { booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop' };
+export { FRIEND_NAME } from './ff-cast.js';
+import { FRIEND_NAME } from './ff-cast.js';
 // a child's default avatar: their chosen friend (kid_avatars) or a friend picked steadily from the child's id (never a photo: the
 // dashboards never show a child's face; photo consent is shown as a mark, the photo stays on the child's page)
 export function friendFor(id, chosen = null) {
@@ -68,6 +70,9 @@ export function friendFor(id, chosen = null) {
   let h = 0; for (const ch of String(id || '')) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   return FRIENDS[h % 4];
 }
+
+// ---- the grown-up cast: ONE table in ff-cast.js (shared with the family dashboard), so a rename or a swap is one edit there ---------
+export { CHARACTER, ROLE_CHARACTERS, roomCharacter, adultSrc, adultImg } from './ff-cast.js';
 
 // ---- neon glow rings and bars (owner 2026-10-12: "a definite neon glowing feel"; same drawing as family-viz.js glowRingSvg) --------
 const GRAD = { booker: ['#3B8BFF', '#0B5ED7'], zuri: ['#5BD889', '#1F9D52'], lumi: ['#FF7EB6', '#D9488B'], bop: ['#B56CF0', '#8236AE'], gold: ['#FFD25E', '#E7A928'], navy: ['#3A6E86', '#0A2B38'], warn: ['#FF9E6B', '#C2410C'] };
@@ -99,6 +104,7 @@ export function glowRingSvg(frac, { tone = 'booker', size = 120, stroke = 12, se
       const end = 360 * v - 0.01;
       const full = v >= 0.999;
       body += `<path class="ffs-gl-on" d="${full ? `M${c} ${R2(c - r)}A${r} ${r} 0 1 1 ${R2(c - 0.01)} ${R2(c - r)}` : arcPath(c, c, r, 0, end)}" stroke="url(#${id})" stroke-width="${stroke}" data-len="${R2(C * v)}"/>
+        <path class="ffs-gl-core" d="${full ? `M${c} ${R2(c - r)}A${r} ${r} 0 1 1 ${R2(c - 0.01)} ${R2(c - r)}` : arcPath(c, c, r, 0, end)}" stroke-width="${R2(stroke / 3.2)}" data-len="${R2(C * v)}"/>
         <path class="ffs-gl-hi" d="${full ? `M${c} ${R2(c - r + stroke / 4)}A${R2(r - stroke / 4)} ${R2(r - stroke / 4)} 0 1 1 ${R2(c - 0.01)} ${R2(c - r + stroke / 4)}` : arcPath(c, c, r - stroke / 4, 0, end)}" stroke-width="${R2(stroke / 5)}"/>`;
       const [tx, ty] = polar(c, c, r, end);
       body += `<circle class="ffs-gl-tip" cx="${tx}" cy="${ty}" r="${R2(stroke / 2 + 1)}" fill="${c1}"/>`;
@@ -111,6 +117,7 @@ export function glowBarHtml(frac, tone = 'booker') {
   return `<span class="ffs-glbar ffs-gb-${tone}${frac == null ? ' ffs-gb-none' : ''}" aria-hidden="true"><span class="ffs-glbar-fill" data-w="${v}"></span></span>`;
 }
 // a number that counts up (ffs-num); the markup already holds the final value (Reduce Motion shows it at once)
+export const moneyCountHtml = (cents, lang = 'en') => `<span class="ffs-num" data-count="${Math.round((Number(cents) || 0) / 100)}" data-prefix="$" data-fmt="n" data-locale="${lang === 'es' ? 'es-US' : 'en-US'}">$${Math.round((Number(cents) || 0) / 100).toLocaleString(lang === 'es' ? 'es-US' : 'en-US')}</span>`;
 export const countHtml = (n, suffix = '') => `<span class="ffs-num" data-count="${Number(n)}" data-suffix="${escHtml(suffix)}">${Number(n)}${escHtml(suffix)}</span>`;
 
 // ---- the text equivalent of every chart ---------------------------------------------------------------------------------------
@@ -166,6 +173,76 @@ export function arrowIndex(key, i, n, vertical = false) {
 }
 
 // ==================================================================================================================================
+// The first-load reveal (owner 2026-10-12): KPI rings, bars and numbers populate ONE CARD AT A TIME. Each card starts at zero: the arc
+// sweeps and its number counts up over REVEAL.duration, then a neon bloom; the next card starts REVEAL.gap later. A tap, a key, a wheel or a
+// scroll skips to the end at once. No replay on a room / child switch in the same page: the numbers and arcs move from the old values to
+// the new ones instead. Reduce Motion / the Still switch / ?reveal=off (tests, screenshots): nothing moves, the markup's final state shows.
+// Only transform, opacity and stroke-dashoffset are animated (the bloom is an ::after layer's opacity / transform; ff-shell.css).
+// Shared with the parent dashboard (family-v2-reveal uses the same timings): REVEAL is the one place the numbers live.
+export const REVEAL = { duration: 1400, gap: 700, bloom: 650, oldToNew: 700, ease: 'cubic-bezier(.22,1,.36,1)' };
+export const revealDisabled = (search = (typeof location === 'undefined' ? '' : location.search)) => /(?:^|[?&])reveal=off(?:&|$)/.test(search);
+const revealSeen = new Map();   // key -> Map(card id -> [numbers]) : what this page last showed (no replay, old -> new)
+const fmtNum = (v, el) => { const n = Math.round(v); const s = el.dataset.fmt === 'n' ? n.toLocaleString(el.dataset.locale || undefined) : String(n); return `${el.dataset.prefix || ''}${s}${el.dataset.suffix || ''}`; };
+export function countTo(el, from, to, ms, delay = 0, onEnd = null) {
+  const t0 = performance.now() + delay;
+  let raf = 0, stopped = false;
+  const done = () => { stopped = true; cancelAnimationFrame(raf); el.textContent = fmtNum(to, el); el.classList.remove('ffs-counting'); onEnd?.(); };
+  const step = (t) => {
+    if (stopped) return;
+    if (t < t0) { el.textContent = fmtNum(from, el); raf = requestAnimationFrame(step); return; }
+    el.classList.add('ffs-counting');
+    const p = Math.min(1, (t - t0) / ms);
+    el.textContent = fmtNum(from + (to - from) * (1 - (1 - p) ** 3), el);
+    if (p < 1 && document.visibilityState === 'visible') raf = requestAnimationFrame(step); else done();
+  };
+  el.textContent = fmtNum(from, el);
+  raf = requestAnimationFrame(step);
+  const fail = setTimeout(() => { if (!stopped) done(); }, delay + ms + 600);   // a hidden tab or a lost frame still lands on the real figure
+  return () => { clearTimeout(fail); if (!stopped) done(); };
+}
+// cards: the elements to reveal in order. key: one per dashboard (e.g. 'sv2:teacher'). Returns { skip }.
+export function revealSequence(cards, { key, motionOn = () => true, search } = {}) {
+  const list = [...cards].filter((c) => c.offsetParent !== null);
+  const values = new Map(list.map((c, i) => [c.id || `#${i}`, [...c.querySelectorAll('.ffs-num[data-count]')].map((n) => Number(n.dataset.count))]));
+  const prev = revealSeen.get(key);
+  revealSeen.set(key, values);
+  if (!motionOn() || revealDisabled(search)) return { skip() {} };
+  const anims = [], stops = [], timers = [];
+  const R = REVEAL, E = R.ease;
+  const run = (card, i, old) => {
+    const delay = old ? 0 : i * R.gap, dur = old ? R.oldToNew : R.duration;
+    if (!old) anims.push(card.animate([{ opacity: 0.35, transform: 'translate3d(0,10px,0) scale(.985)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay, easing: E, fill: 'backwards' }));
+    for (const p of card.querySelectorAll('[data-len]')) {
+      const len = Number(p.dataset.len); if (!len) continue;
+      p.style.strokeDasharray = `${len} ${len}`;
+      anims.push(p.animate([{ strokeDashoffset: old ? len * 0.5 : len }, { strokeDashoffset: 0 }], { duration: dur, delay, easing: E, fill: 'backwards' }));
+    }
+    for (const t of card.querySelectorAll('.ffs-gl-tip')) anims.push(t.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: delay + dur - 160, easing: 'linear', fill: 'backwards' }));
+    for (const b of card.querySelectorAll('.ffs-glbar-fill, .sv2-fn-fill')) anims.push(b.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: dur, delay, easing: E, fill: 'backwards' }));
+    for (const b of card.querySelectorAll('.sv2-col-fill')) anims.push(b.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: dur, delay, easing: E, fill: 'backwards' }));
+    card.querySelectorAll('.ffs-pop').forEach((b, j) => anims.push(b.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+      { duration: Math.min(520, dur), delay: delay + Math.min(j * (dur / 40), dur * 0.6), easing: E, fill: 'backwards' })));
+    const nums = [...card.querySelectorAll('.ffs-num[data-count]')];
+    nums.forEach((n, j) => stops.push(countTo(n, old ? (old[j] ?? 0) : 0, Number(n.dataset.count), dur, delay)));
+    if (!old) timers.push(setTimeout(() => { card.classList.remove('ffs-bloom'); void card.offsetWidth; card.classList.add('ffs-bloom'); }, delay + dur - 120));
+  };
+  list.forEach((c, i) => run(c, i, prev ? (prev.get(c.id || `#${i}`) || values.get(c.id || `#${i}`)) : null));
+  const skip = () => {
+    for (const a of anims) { try { a.finish(); } catch (_) { /* gone */ } }
+    for (const s of stops) s();
+    for (const t of timers) clearTimeout(t);
+    off();
+  };
+  const evs = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+  const onScroll = () => skip();
+  function off() { for (const e of evs) window.removeEventListener(e, skip, true); window.removeEventListener('scroll', onScroll); }
+  for (const e of evs) window.addEventListener(e, skip, { capture: true, passive: true });
+  setTimeout(() => window.addEventListener('scroll', onScroll, { passive: true }), 300);   // the page's own first scroll-to-top is not a skip
+  timers.push(setTimeout(off, (prev ? R.oldToNew : list.length * R.gap + R.duration) + R.bloom + 200));
+  return { skip };
+}
+
+// ==================================================================================================================================
 // The DOM controller. cfg:
 //   rootId          the dashboard root element's id (rendered by the role module with railHtml / tabbarHtml / viewsHtml below)
 //   views, words    the views ({id, icon, tabs}) and their words { views, short, tabs, nav, sub(view), more, moreTitle, close, openFull }
@@ -176,7 +253,7 @@ export function arrowIndex(key, i, n, vertical = false) {
 //   drawer(kind)    -> { title, html, href?, go? } | null (null: nothing to show; a link with data-drawer then follows its href)
 //   motionOn()      family-scene.js's switch (Reduce Motion and the Still switch)
 export function createShell(cfg) {
-  const { rootId, views, words: S, phoneBar, esc, live = () => {}, buildView, afterBuild = () => {}, onTab = () => {}, drawer: drawerBody, motionOn = () => true } = cfg;
+  const { rootId, views, words: S, phoneBar, esc, live = () => {}, buildView, afterBuild = () => {}, onTab = () => {}, drawer: drawerBody, motionOn = () => true, reveal = null } = cfg;
   const st = shellState(views);
   const moreViews = views.map((v) => v.id).filter((id) => !phoneBar.includes(id));
   const EASE = 'cubic-bezier(.22,1,.36,1)';
@@ -238,6 +315,9 @@ export function createShell(cfg) {
     built.add(id);
     syncPanels(sec);
     afterBuild(id, sec);
+    // the dashboard's own cards (cfg.reveal.cards) reveal one at a time on the first view; the rest rises in as usual
+    const cards = reveal ? [...sec.querySelectorAll(reveal.cards)] : [];
+    if (cards.length) { settle(sec); entrance(sec, 1, cards); revealSequence(cards, { key: reveal.key, motionOn }); return; }
     if (!first || motionOn()) entrance(sec); else settle(sec);
   }
   function syncPanels(sec) { for (const p of sec?.querySelectorAll(':scope .ffs-panel') || []) p.hidden = p.dataset.tab !== ui.tab; }
@@ -295,21 +375,22 @@ export function createShell(cfg) {
     for (const b of sec.querySelectorAll('[data-h]')) b.style.setProperty('--h', `${b.dataset.h}%`);
     for (const b of sec.querySelectorAll('[data-x]')) b.style.setProperty('--x', `${b.dataset.x}%`);
   }
-  function entrance(sec, scale = 1) {
+  function entrance(sec, scale = 1, skipCards = []) {
     if (!sec) return;
     settle(sec);
-    if (!motionOn()) return;
-    const items = [...sec.querySelectorAll('[data-a], .ffs-kpi, .ffs-panel:not([hidden]) > .ffs-card, .ffs-grid > .ffs-card')].filter((el) => el.offsetParent !== null).slice(0, 28);
+    if (!motionOn() || revealDisabled()) return;
+    const inCard = (el) => skipCards.some((c) => c === el || c.contains(el));
+    const items = [...sec.querySelectorAll('[data-a], .ffs-kpi, .ffs-panel:not([hidden]) > .ffs-card, .ffs-grid > .ffs-card')].filter((el) => el.offsetParent !== null && !inCard(el)).slice(0, 28);
     items.forEach((el, i) => el.animate([{ opacity: 0, transform: 'translate3d(0,14px,0) scale(.985)' }, { opacity: 1, transform: 'none' }],
       { duration: 520 * scale, delay: Math.min(i * 40, 420) * scale, easing: EASE, fill: 'backwards' }));
     for (const p of sec.querySelectorAll('[data-len]')) {
-      const len = Number(p.dataset.len); if (!len || !p.closest('svg')?.getBoundingClientRect().width) continue;
+      const len = Number(p.dataset.len); if (!len || inCard(p) || !p.closest('svg')?.getBoundingClientRect().width) continue;
       p.style.strokeDasharray = `${len} ${len}`;
       p.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 1100, delay: 250, easing: EASE, fill: 'backwards' });
     }
-    sec.querySelectorAll('.ffs-pop').forEach((b, i) => b.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+    [...sec.querySelectorAll('.ffs-pop')].filter((b) => !inCard(b)).forEach((b, i) => b.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
       { duration: 460, delay: 300 + Math.min(i * 22, 600), easing: EASE, fill: 'backwards' }));
-    for (const n of sec.querySelectorAll('.ffs-num[data-count]')) countUp(n, 0);
+    for (const n of sec.querySelectorAll('.ffs-num[data-count]')) if (!inCard(n)) countUp(n, 0);
   }
   function countUp(el, from = 0) {
     const to = Number(el.dataset.count), suffix = el.dataset.suffix || '';

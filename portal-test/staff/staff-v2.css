@@ -90,7 +90,7 @@ a.sv2-kid-a:active,a.sv2-kid-a.is-pressed{transform:scale(.97)}
 .sv2-evening{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:8px 10px;border-radius:14px;background:var(--bop-tint);font-size:.8rem;color:var(--navy)}
 .sv2-evening .ffs-ico{color:var(--bop)}
 .sv2-carebars{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.sv2-carebars li{display:grid;grid-template-columns:6rem minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:center;font-size:.84rem}
+.sv2-carebar-a{display:grid;grid-template-columns:6rem minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:center;font-size:.84rem}
 .sv2-carebars i{font-style:normal;color:var(--muted);font-size:.76rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sv2-dr-kid{display:grid;justify-items:center;gap:6px}
 .sv2-dr-kid .ffs-av{width:6rem;height:6rem;box-shadow:0 0 0 4px #fff,0 10px 24px -12px rgba(10,43,56,.5)}
@@ -124,7 +124,7 @@ a.sv2-kid-a:active,a.sv2-kid-a.is-pressed{transform:scale(.97)}
 a.sv2-fn-a{min-height:28px}
 .sv2-fn-l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sv2-fn-bar{display:flex;justify-content:center;height:14px}
-.sv2-fn-fill{display:block;height:100%;width:var(--w,0%);border-radius:6px;background:linear-gradient(90deg,#B56CF0,#8236AE);box-shadow:0 0 10px rgba(130,54,174,.45);transition:width 1s var(--ease-out)}
+.sv2-fn-fill{display:block;height:100%;width:var(--w,0%);border-radius:6px;background:linear-gradient(90deg,#B56CF0,#8236AE);box-shadow:0 0 10px rgba(130,54,174,.45)}
 .sv2-funnel li:nth-child(n+5) .sv2-fn-fill{background:linear-gradient(90deg,#5BD889,#1F9D52);box-shadow:0 0 10px rgba(31,157,82,.45)}
 .sv2-fn-a b{font:800 .9rem/1 var(--display);text-align:right;font-variant-numeric:tabular-nums}
 .sv2-funnel-sm{margin:8px 0}
@@ -136,7 +136,7 @@ a.sv2-fn-a{min-height:28px}
 .sv2-hc-pad{background:none}
 .sv2-hc-ahead{background:rgba(255,255,255,.6);color:var(--muted);box-shadow:inset 0 0 0 1px rgba(10,43,56,.08)}
 .sv2-hc-closed{background:repeating-linear-gradient(45deg,#E6E1D6 0 4px,#F6F3EC 4px 8px);color:var(--muted)}
-.sv2-lv1{background:#D6F0DF} .sv2-lv2{background:#A8E0BC} .sv2-lv3{background:#5CC183;color:#fff} .sv2-lv4{background:#1F9D52;color:#fff;box-shadow:0 0 8px rgba(31,157,82,.45)}
+.sv2-lv1{background:#D6F0DF} .sv2-lv2{background:#A8E0BC} .sv2-lv3{background:#5CC183;color:var(--navy)} .sv2-lv4{background:#17773F;color:#fff;box-shadow:0 0 8px rgba(31,157,82,.45)}
 .sv2-hc-today{box-shadow:inset 0 0 0 2.5px var(--navy)}
 .sv2-heat-avg{margin:2px 0 0;font-size:.74rem;color:var(--muted)}
 .sv2-heat-avg b{font:800 1.05rem/1 var(--display)}
@@ -212,7 +212,7 @@ a.sv2-fn-a{min-height:28px}
   .sv2-br-a{grid-template-columns:4.6rem minmax(0,1fr) 2.8rem;row-gap:0}
   .sv2-br-t{grid-column:2/-1}
   .sv2-glance{display:none}
-  .sv2-carebars li{grid-template-columns:4.5rem minmax(0,1fr)}
+  .sv2-carebar-a{grid-template-columns:4.5rem minmax(0,1fr)}
   .sv2-carebars i{grid-column:1/-1}
 }
 
@@ -336,3 +336,195 @@ a.sv2-fn-a{min-height:28px}
 /* the heat calendar glows like the rest */
 .sv2-lv3{box-shadow:0 0 6px rgba(46,158,87,.35)}
 @media (min-width:1280px){ .ffs-director{padding-bottom:0} .sv2-dir{gap:10px} .sv2-dir .sv2-figs{gap:10px} }
+
+/* ---- the grown-up cast (ff-shell.js ROLE_CHARACTERS): whole figures, never cropped at the ears or the top --------------------------- */
+.ffs-hero-adult{top:10px;bottom:2px;height:calc(100% - 12px);width:auto;max-width:24%;object-fit:contain;object-position:bottom right}
+.sv2-br-adult{width:auto;height:44px;flex:none}
+.sv2-board .sv2-br-a{grid-template-columns:auto 5rem minmax(0,1fr) 3.2rem 6.4rem}
+.sv2-board-2 .sv2-br-a{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"img name n" "img bar bar" "img t t"}
+.sv2-board-2 .sv2-br-adult{grid-area:img;align-self:end}
+.sv2-cast-card{padding-right:120px;min-height:12rem}
+.sv2-cast{position:absolute;right:14px;bottom:12px;height:9.5rem;width:auto;pointer-events:none}
+@media (max-width:767px){.sv2-cast-card{padding-right:16px}.sv2-cast{display:none}}
+.ffs-hero:has(.ffs-hero-adult) .ffs-demo{right:96px}
+
+/* ======================================================================================================================
+   The teacher's Game plan (hub/TEACHER_DAY.md): a time-ordered day; the open step shows what to do and the one-tap logging.
+   ====================================================================================================================== */
+.sv2-gp-main{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);align-items:start}
+.sv2-gp-tl{padding:12px}
+.sv2-tl{list-style:none;margin:0;padding:0;display:grid;gap:2px;position:relative}
+.sv2-tl::before{content:"";position:absolute;left:4.55rem;top:14px;bottom:14px;width:2px;background:rgba(10,43,56,.1)}
+.sv2-tl-a{position:relative;display:grid;grid-template-columns:3.6rem 2.2rem minmax(0,1fr) auto;align-items:center;gap:8px;min-height:52px;padding:4px 8px;border-radius:14px;color:var(--navy);text-decoration:none;transition:background-color .15s}
+@media (hover:hover) and (pointer:fine){.sv2-tl-a:hover{background:#F6F2E8}}
+.sv2-tl-a[aria-current="step"]{background:#fff;box-shadow:inset 0 0 0 2px rgba(130,54,174,.35),0 8px 18px -14px rgba(10,43,56,.5)}
+.sv2-tl-time{font:600 .74rem/1 var(--body);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.sv2-tl-dot{position:relative;z-index:1;display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--tint);color:var(--tone);box-shadow:0 0 0 3px #FFFDF8}
+.sv2-tl-dot .ffs-ico{width:1.05rem;height:1.05rem}
+.sv2-tl-t{display:grid;min-width:0;line-height:1.2}
+.sv2-tl-t b{font-size:.9rem}
+.sv2-tl-t span{font-size:.72rem;color:var(--muted)}
+.sv2-st-done .sv2-tl-t b{color:var(--muted)}
+.sv2-st-done .sv2-tl-dot{background:var(--zuri-tint);color:var(--zuri-ink)}
+.sv2-tl-badge{display:inline-block;padding:3px 9px;border-radius:999px;font:700 .68rem/1.2 var(--body);letter-spacing:.02em}
+.sv2-tl-now{background:linear-gradient(180deg,#9A4FD0,#7A2FA8);color:#fff;box-shadow:0 0 12px rgba(130,54,174,.55)}
+.sv2-tl-next{background:var(--gold-tint);color:var(--gold-deep)}
+.sv2-st-now .sv2-tl-dot{box-shadow:0 0 0 3px #FFFDF8,0 0 0 5px rgba(130,54,174,.4),0 0 16px rgba(130,54,174,.5)}
+.sv2-gp-step{padding:14px 16px;min-height:16rem}
+.sv2-sp-h{display:flex;align-items:flex-end;gap:12px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(10,43,56,.08)}
+.sv2-sp-cast{height:88px;width:auto;flex:none}
+.sv2-sp-when{margin:0;font:600 .78rem/1.3 var(--body);color:var(--muted)}
+.sv2-sp-title{margin:0;font:700 1.35rem/1.15 var(--display);color:var(--navy);outline:none}
+.sv2-sp-body{display:grid;gap:10px}
+.sv2-sp-grid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.sv2-checks{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.sv2-check{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:4px 10px;border:0;border-radius:12px;background:#FBF8F1;color:var(--navy);font:500 .86rem/1.25 var(--body);text-align:left;cursor:pointer}
+.sv2-check .ffs-ico{flex:none;width:1.4rem;height:1.4rem;padding:3px;border-radius:6px;box-shadow:inset 0 0 0 2px rgba(10,43,56,.25);color:transparent}
+.sv2-check[aria-pressed="true"] .ffs-ico{background:var(--zuri);color:#fff;box-shadow:0 0 10px rgba(46,158,87,.45)}
+.sv2-check[aria-pressed="true"] span{color:var(--muted)}
+.sv2-rule{display:flex;align-items:flex-start;gap:8px;margin:0;padding:10px 12px;border-radius:14px;background:var(--sky-tint,#EAF6FE);color:var(--navy);font-size:.86rem}
+.sv2-menu-t{margin:0 0 4px}
+.sv2-menu{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:4px}
+.sv2-menu li{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--navy)}
+.sv2-comp{width:10px;height:10px;border-radius:3px;background:#C9C1B2;flex:none}
+.sv2-comp-milk{background:#8FB9F5} .sv2-comp-grain{background:#E7A928} .sv2-comp-fruit{background:#D9488B} .sv2-comp-vegetable,.sv2-comp-veg{background:#2E9E57} .sv2-comp-meat,.sv2-comp-protein{background:#8236AE}
+.sv2-logmeal{width:100%}
+.sv2-lesson-f{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 15%;background:var(--booker-tint);flex:none}
+.sv2-lesson > span{display:grid;gap:3px}
+.sv2-cards{display:grid;gap:10px}
+.sv2-card{padding:10px 12px;border-radius:16px;background:#FFFDF8;box-shadow:inset 0 0 0 1px rgba(10,43,56,.08)}
+.sv2-card.is-done{opacity:.7}
+.sv2-card-h{display:flex;align-items:center;gap:10px}
+.sv2-card-h > div{display:grid;flex:1;min-width:0}
+.sv2-card-h b{font:700 .98rem/1.2 var(--display);color:var(--navy)}
+.sv2-card-h span{font-size:.72rem;color:var(--muted)}
+.sv2-card-f{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:50% 15%;background:var(--bop-tint);flex:none}
+.sv2-card p{margin:6px 0 0;font-size:.84rem;line-height:1.45;color:var(--ink)}
+.sv2-card details{margin-top:6px}
+.sv2-card summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--booker-ink)}
+.sv2-card-watch b,.sv2-card-mat b,.sv2-card-goal b,.sv2-card-say b,.sv2-card-fam b{color:var(--navy)}
+.sv2-rest{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.sv2-rest li{display:flex;align-items:center;gap:10px;min-height:52px;padding:4px 8px;border-radius:14px;background:#FBF8F1}
+.sv2-rest .ffs-row-t{flex:1}
+.sv2-restbtn{min-width:8.5rem}
+.sv2-note{display:grid;gap:4px}
+.sv2-note textarea{font:inherit;font-size:1rem;padding:10px;border-radius:12px;border:1.5px solid rgba(10,43,56,.18);background:#fff;resize:vertical}
+/* the meal logger */
+.sv2-mform{display:grid;gap:12px}
+.sv2-items{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.sv2-items li{display:grid;gap:6px;padding:8px 10px;border-radius:14px;background:#FBF8F1}
+.sv2-item-n{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.sv2-amts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.sv2-amt{min-height:44px;padding:0 4px;border:0;border-radius:12px;background:#fff;color:var(--navy);font:600 .76rem/1.1 var(--body);cursor:pointer;box-shadow:inset 0 0 0 1.5px rgba(10,43,56,.14)}
+.sv2-amt[aria-checked="true"]{background:var(--zuri);color:#fff;box-shadow:0 0 12px rgba(46,158,87,.5)}
+.sv2-check-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;background:#FBE9E7;color:#8F2A24;font:600 .72rem/1.3 var(--body)}
+.sv2-check-chip .ffs-ico{width:.85rem;height:.85rem}
+.sv2-qwarn{position:absolute;top:4px;right:6px;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#C2410C;color:#fff;font:800 .7rem/1 var(--body);font-style:normal}
+.sv2-qkid{position:relative}
+.sv2-flags{display:flex;flex-wrap:wrap;gap:6px}
+.sv2-flag2{min-height:44px;padding:0 14px;border:0;border-radius:999px;background:#fff;color:var(--navy);font:600 .84rem/1 var(--body);cursor:pointer;box-shadow:inset 0 0 0 1.5px rgba(10,43,56,.14)}
+.sv2-flag2[aria-pressed="true"]{background:var(--bop);color:#fff;box-shadow:0 0 12px rgba(130,54,174,.45)}
+/* the cockpit on the Game plan: a compact hero and small rings */
+.sv2-gp .ffs-kpi .ffs-glring{width:3.8rem;height:3.8rem}
+.sv2-gp .ffs-big{font-size:1.55rem}
+.sv2-gp .ffs-kpi{padding:8px 12px;gap:2px}
+.sv2-gp .ffs-kpi-label{font-size:.88rem}
+@media (min-width:1280px){ .sv2-sp-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+@media (min-width:1024px){
+  .sv2-gp-main{grid-template-columns:20rem minmax(0,1fr)}
+  .sv2-gp-tl{position:sticky;top:calc(var(--ffs-top,64px) + 10px)}
+  .sv2-gp-step{max-height:calc(100svh - var(--ffs-top,64px) - 24px);overflow:auto}
+  .ffs-teacher .sv2-gp .ffs-hero{min-height:7.6rem}
+  .ffs-teacher .sv2-gp .ffs-hello{font-size:1.8rem}
+}
+@media (max-width:767px){ .sv2-tl-a{grid-template-columns:3.2rem 2.2rem minmax(0,1fr) auto} .sv2-sp-cast{height:64px} .sv2-amts{grid-template-columns:repeat(3,minmax(0,1fr))} }
+/* the printable day: the plan and today's lesson cards only */
+@media print{
+  .top,.ffs-rail,.ffs-tabbar,.ffs-bar,.ffs-band,.ffs-kpis,.ffs-hero,.ffs-mobile-actions,.sv2-done,.draft-note,#sv2Print,.sv2-restbtn,.sv2-logmeal{display:none !important}
+  .ffs{display:block} .sv2-gp-main{display:block} .sv2-gp-step{max-height:none;overflow:visible} .ffs-card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+  .sv2-card details{display:block} .sv2-card details > *{display:block}
+}
+/* one screen at 1024 / 1440: hints only on the open, now and next steps; a slim KPI strip */
+@media (min-width:1024px){
+  .sv2-tl-a{min-height:44px;padding:2px 8px}
+  .sv2-tl-i:not(.sv2-st-now):not(.sv2-st-next) .sv2-tl-a:not([aria-current="step"]) .sv2-tl-t span{display:none}
+  .sv2-gp .ffs-kpis{gap:10px}
+  .sv2-gp .ffs-kpi{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"ring label" "ring body";column-gap:10px;align-items:center}
+  .sv2-gp .ffs-kpi-label{grid-area:label}
+  .sv2-gp .ffs-kpi-body{grid-area:body;display:contents}
+  .sv2-gp .ffs-kpi .ffs-glring{grid-area:ring;width:3.4rem;height:3.4rem}
+  .sv2-gp .ffs-kpi-num{grid-area:body;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .sv2-gp .ffs-kpi-sub{font-size:.74rem}
+  .sv2-gp .ffs-big{font-size:1.4rem}
+  .ffs-teacher .sv2-gp .ffs-hero{min-height:6.9rem}
+  .ffs-teacher .sv2-gp .ffs-hero-in{padding:8px 20px}
+  .ffs-teacher .sv2-gp .ffs-hello{font-size:1.65rem}
+  .ffs-teacher .sv2-gp .ffs-date{margin-bottom:2px;font-size:.95rem}
+  .ffs-teacher .sv2-gp .ffs-band{padding-top:4px;padding-bottom:4px}
+  .ffs-teacher .sv2-gp .ffs-attn{padding:4px 6px}
+  .sv2-gp .sv2-gp-tl .ffs-ch{margin-bottom:2px}
+}
+.sv2-lesson .ffs-chip{justify-self:start}
+@media (min-width:1024px){
+  .sv2-gp .ffs-kpi{padding:6px 12px;min-height:0}
+  .sv2-gp .ffs-kpi .ffs-glring{width:2.9rem;height:2.9rem}
+  .sv2-gp .ffs-kpi-sub{line-height:1.2}
+  .sv2-gp-tl,.sv2-gp-step{max-height:max(22rem,calc(100svh - 425px));overflow:auto;position:static}
+  .sv2-tl-a{min-height:44px}
+}
+.sv2-lesson{display:flex;align-items:center;gap:10px}
+.sv2-lesson > span{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.sv2-lesson > span b{flex:1 1 100%;font:700 1rem/1.25 var(--display);color:var(--navy)}
+.sv2-lesson .ffs-sub{flex:1 1 100%}
+/* phones: the open step first (what to do now), then the day's list, then the small rings */
+@media (max-width:767px){
+  .sv2-gp > .ffs-hero{order:0} .sv2-gp > .ffs-band{order:1} .sv2-gp > .sv2-gp-main{order:2} .sv2-gp > .ffs-kpis{order:3}
+  .sv2-gp-step{order:-1}
+  .sv2-gp .ffs-hero{min-height:0}
+  .sv2-gp .ffs-hero-adult{max-width:22%;opacity:.9}
+  .sv2-gp .ffs-hero-in{padding:12px 14px;padding-right:22%}
+  .sv2-gp .ffs-hello{font-size:1.5rem}
+  .ffs-hero .ffs-demo{top:auto;bottom:8px;right:8px;font-size:.66rem;padding:4px 10px}
+  .sv2-gp .ffs-kpi-body{flex-direction:row;align-items:center}
+  .sv2-gp .ffs-kpi .ffs-glring{width:3rem;height:3rem}
+  .sv2-gp .ffs-big{font-size:1.3rem}
+  .sv2-gp .ffs-kpi-sub{font-size:.72rem}
+}
+.sv2-mount:empty{display:none}
+.sv2-week{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.sv2-wday{padding:10px 12px;border-radius:16px;background:#FFFDF8;box-shadow:inset 0 0 0 1px rgba(10,43,56,.08)}
+.sv2-wday.is-today{box-shadow:inset 0 0 0 2px rgba(130,54,174,.45),0 0 14px rgba(130,54,174,.2)}
+.sv2-wday-t{display:flex;gap:8px;align-items:center;margin:0 0 6px}
+.sv2-wday-t img{border-radius:50%;object-fit:cover;object-position:50% 15%;background:var(--booker-tint);flex:none}
+.sv2-wblocks,.sv2-udays{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sv2-wblocks li{display:grid;font-size:.82rem}
+.sv2-wblocks span{font-size:.72rem;color:var(--muted)}
+.sv2-wgoal{font-size:.76rem !important;color:var(--ink) !important}
+.sv2-unit{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.sv2-udays li{display:flex;align-items:center;gap:6px;min-height:36px;font-size:.84rem}
+.sv2-udays li.is-today{font-weight:700}
+.sv2-udays img{border-radius:50%;object-fit:cover;object-position:50% 15%}
+.sv2-who{display:inline-flex !important;align-items:center;gap:8px;white-space:nowrap}
+@media (max-width:479px){.sv2-who span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+.sv2-who-img{height:34px;width:auto}
+
+/* every panel is a way in (owner rule, 2026-10-12): figures, rings, bars, kid rows, menus and plan days open a drawer or the full page,
+   with a visible hover and focus state (the focus ring is the shell's :focus-visible outline) */
+.sv2-figopen,.sv2-ringopen,.sv2-carebar-a,.sv2-rest-a,.sv2-menu-a,a.sv2-wday-t,.sv2-uday-a{color:inherit;text-decoration:none;border-radius:14px;cursor:pointer;transition:background-color .15s var(--ease-out),box-shadow .15s var(--ease-out),transform .15s var(--ease-out)}
+.sv2-figopen,.sv2-menu-a{display:block;margin:-4px;padding:4px}
+.sv2-ringopen{display:inline-flex;border-radius:50%}
+.sv2-carebar-a{padding:4px 6px;margin:0 -6px;font-size:.84rem;color:var(--navy)}
+.sv2-rest-a{display:flex;align-items:center;gap:10px;flex:1;min-width:0;padding:2px 4px}
+a.sv2-wday-t{padding:2px 4px;margin-left:-4px;margin-right:-4px}
+.sv2-uday-a{display:flex;align-items:center;gap:6px;flex:1;min-height:36px;padding:0 6px;margin:0 -6px}
+.sv2-figopen:active,.sv2-carebar-a:active,.sv2-rest-a:active,.sv2-menu-a:active,a.sv2-wday-t:active,.sv2-uday-a:active{transform:scale(.99)}
+.sv2-ringopen:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .sv2-figopen:hover,.sv2-carebar-a:hover,.sv2-rest-a:hover,.sv2-menu-a:hover,a.sv2-wday-t:hover,.sv2-uday-a:hover{background:#F6F2E8;box-shadow:0 0 0 1px rgba(23,48,92,.10)}
+  .sv2-ringopen:hover{box-shadow:0 0 0 4px rgba(124,77,255,.18)}
+  a.sv2-kid-a:hover{box-shadow:0 0 0 2px rgba(46,111,212,.35)}
+}
+@media (prefers-reduced-motion:reduce){.sv2-figopen,.sv2-ringopen,.sv2-carebar-a,.sv2-rest-a,.sv2-menu-a,a.sv2-wday-t,.sv2-uday-a{transition:none}.sv2-figopen:active,.sv2-ringopen:active,.sv2-carebar-a:active,.sv2-rest-a:active,.sv2-menu-a:active,a.sv2-wday-t:active,.sv2-uday-a:active{transform:none}}
+@media (hover:hover) and (pointer:fine){.sv2-gl:hover{background:rgba(255,255,255,.95);box-shadow:0 0 0 2px rgba(46,111,212,.35)}}
+.sv2-momentbtn{margin-left:auto;flex:none;align-self:center}
+@media (max-width:1279px){.sv2-momentbtn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.sv2-momentbtn{min-width:44px;justify-content:center}}

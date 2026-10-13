@@ -111,3 +111,13 @@ export function sparkPoints(values, w = 120, h = 32, pad = 3) {
   const step = n > 1 ? (w - pad * 2) / (n - 1) : 0;
   return values.map((v, i) => (v == null ? null : [+(pad + i * step).toFixed(1), +(h - pad - Math.max(0, Math.min(1, v)) * (h - pad * 2)).toFixed(1)]));
 }
+
+// Every time-ordered list on the family pages runs morning at the top to evening at the bottom (owner 2026-10-12): earliest first.
+// key: the ISO instant or date field ('at' for entries and messages, 'day' for school days). Rows without it keep their place at the end.
+export function inDayOrder(rows, key = 'at') {
+  return [...(rows || [])].map((r, i) => [r, i]).sort((a, b) => {
+    const x = a[0]?.[key], y = b[0]?.[key];
+    if (x && y) return String(x).localeCompare(String(y)) || a[1] - b[1];
+    return x ? -1 : y ? 1 : a[1] - b[1];
+  }).map(([r]) => r);
+}

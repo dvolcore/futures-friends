@@ -17,9 +17,10 @@ import { mountFamilyConferenceCard } from './checkpoints.js';   // conference ti
 import { absenceSummary } from './absence.js';   // the child's reported absences in "Coming up" (hub/ABSENCES.md)
 import { centerTz } from './center-time.js';
 import { applyMotion, dayPart, motionOn, sceneHtml } from './family-scene.js';
-import { attendanceKpi, calendarStrip, firstName, greeting, homeKpi, liveState, mealsKpi, minutesText, moodKpi, restKpi, skillsKpi, sparkPoints } from './family-kpi.js';
+import { attendanceKpi, calendarStrip, firstName, inDayOrder, greeting, homeKpi, liveState, mealsKpi, minutesText, moodKpi, restKpi, skillsKpi, sparkPoints } from './family-kpi.js';
 import { balanceModel, glowBarHtml, glowRingSvg, clockMinutes, clockSummary, clockSvg, clockTable, dayClockModel, flowerModel, flowerSvg, gardenModel, gardenSvg, localMinutes, minutesClock,
   monthModel, moonModel, moonSvg, pieSvg, plateModel, plateSvg, ringSvg, skyModel, tableHtml, vw, weekPlatesModel } from './family-viz.js';
+import { ROLE_CHARACTERS, adultImg, pairFor } from './ff-cast.js';   // the grown-up cast: one config shared with the staff dashboards
 import { MORE_VIEWS, PHONE_BAR, VIEWS, arrowIndex, neighbour, readState, stateSearch, stepDay, sw, viewOf } from './family-shell.js';
 
 const FRIEND_NAME = { booker: 'Booker', lumi: 'Lumi', zuri: 'Zuri', bop: 'Bop' };
@@ -153,7 +154,7 @@ const W = {
       entry: (k, t) => `${k} at ${t}`, incidentH: 'Incident report', dayH: (d) => d, plateH: (d) => `The plate on ${d}`, feelH: (d) => `Feeling on ${d}`, areaH: (a) => a,
       shareOf: (p) => `${p}% of the plate`, attendanceNone: 'No attendance yet this month.', updatedLive: 'New', more: 'More', moreNums: 'More numbers', moreNumsH: (f) => `More about ${f}`, viewAll: 'View all', checkedPill: (t) => `Checked in at ${t}`, pickedPill: (t) => `Picked up at ${t}`,
       notInPill: 'Not checked in yet', clockOpen: 'Open the day clock', learnTogether: 'Learning together', atHome: 'At home', activities: 'activities', reportNone: 'No progress report yet', reportNew: 'Progress report', reportOpen: 'Read it',
-      tuitionNone: 'Nothing due', dates: 'Tuition and dates', bringNote: (d) => `${d}, please bring`, demo: 'Demo preview', showHide: 'Show or hide this card', kidsCorner: "Kids' corner", prevDay: 'The day before', nextDay: 'The next day', backToday: 'Back to today', logged: (t) => `Logged at ${t}`, loggedRange: (a, b) => `${a} to ${b}`, teacherObs: 'teacher observation', asOf: 'so far this month', kAttendance: 'Attendance', kMeals: 'Meals today', schoolDays: 'school days this month', portion: 'reported portion eaten', today: 'Today', usual: 'Usual',
+      tuitionNone: 'Nothing due', dates: 'Tuition and dates', bringNote: (d) => `${d}, please bring`, demo: 'Demo preview', signedIn: 'Signed in as', showHide: 'Show or hide this card', kidsCorner: "Kids' corner", prevDay: 'The day before', nextDay: 'The next day', backToday: 'Back to today', logged: (t) => `Logged at ${t}`, loggedRange: (a, b) => `${a} to ${b}`, teacherObs: 'teacher observation', asOf: 'so far this month', kAttendance: 'Attendance', kMeals: 'Meals today', schoolDays: 'school days this month', portion: 'reported portion eaten', today: 'Today', usual: 'Usual',
       observed: 'latest teacher observation', learnHome: 'Learning & home', homeActs: 'home activities this week', kidMode: 'Kid Mode', choose: 'Choose an activity', viewCal: 'View calendar',
       viewWhole: 'View whole day', attention: 'Needs your attention',
       short: { incident: () => 'incident report', video: (fr) => `${fr} video`, charmsg: (fr) => `message from ${fr}`, consent: () => 'consent to review', help: () => 'your question was answered',
@@ -237,7 +238,7 @@ const W = {
       entry: (k, t) => `${k} a las ${t}`, incidentH: 'Reporte de incidente', dayH: (d) => d, plateH: (d) => `El plato del ${d}`, feelH: (d) => `Cómo se sintió el ${d}`, areaH: (a) => a,
       shareOf: (p) => `${p}% del plato`, attendanceNone: 'Todavía no hay asistencia este mes.', updatedLive: 'Nuevo', more: 'Más', moreNums: 'Más números', moreNumsH: (f) => `Más sobre ${f}`, viewAll: 'Ver todo', checkedPill: (t) => `Llegó a las ${t}`, pickedPill: (t) => `Lo recogieron a las ${t}`,
       notInPill: 'Todavía no registra llegada', clockOpen: 'Abrir el reloj del día', learnTogether: 'Aprender juntos', atHome: 'En casa', activities: 'actividades', reportNone: 'Todavía no hay informe de progreso', reportNew: 'Informe de progreso', reportOpen: 'Leerlo',
-      tuitionNone: 'Nada pendiente', dates: 'Colegiatura y fechas', bringNote: (d) => `${d}, por favor traiga`, demo: 'Vista de demostración', showHide: 'Mostrar u ocultar esta tarjeta', kidsCorner: 'Rincón de los niños', prevDay: 'El día anterior', nextDay: 'El día siguiente', backToday: 'Volver a hoy', logged: (t) => `Registrado a las ${t}`, loggedRange: (a, b) => `de ${a} a ${b}`, teacherObs: 'observación de la maestra', asOf: 'en lo que va del mes', kAttendance: 'Asistencia', kMeals: 'Comidas de hoy', schoolDays: 'días de clase este mes', portion: 'de la porción, según lo registrado', today: 'Hoy', usual: 'Normal',
+      tuitionNone: 'Nada pendiente', dates: 'Colegiatura y fechas', bringNote: (d) => `${d}, por favor traiga`, demo: 'Vista de demostración', signedIn: 'Sesión iniciada como', showHide: 'Mostrar u ocultar esta tarjeta', kidsCorner: 'Rincón de los niños', prevDay: 'El día anterior', nextDay: 'El día siguiente', backToday: 'Volver a hoy', logged: (t) => `Registrado a las ${t}`, loggedRange: (a, b) => `de ${a} a ${b}`, teacherObs: 'observación de la maestra', asOf: 'en lo que va del mes', kAttendance: 'Asistencia', kMeals: 'Comidas de hoy', schoolDays: 'días de clase este mes', portion: 'de la porción, según lo registrado', today: 'Hoy', usual: 'Normal',
       observed: 'lo último que observó la maestra', learnHome: 'Aprendizaje y casa', homeActs: 'actividades para casa esta semana', kidMode: 'Modo Niños', choose: 'Elegir una actividad', viewCal: 'Ver el calendario',
       viewWhole: 'Ver todo el día', attention: 'Necesita su atención',
       short: { incident: () => 'reporte de incidente', video: (fr) => `video de ${fr}`, charmsg: (fr) => `mensaje de ${fr}`, consent: () => 'consentimiento por revisar', help: () => 'respondieron su pregunta',
@@ -359,7 +360,7 @@ export async function viewFamilyDashboard(ctx) {
   const [x, sess] = await Promise.all([early && d.child === (want || kept) ? early : loadExtras(d.child), ctx.session?.().catch(() => null)]);
   if (mine !== loads || !document.getElementById('familyDash')) return;   // the person moved on while it loaded
   if (d.child) { try { localStorage.setItem(key, d.child); } catch (_) { /* */ } }
-  const view = { part, name: firstName(sess?.user?.user_metadata?.full_name), x, tz };
+  const view = { part, name: firstName(sess?.user?.user_metadata?.full_name), fullName: String(sess?.user?.user_metadata?.full_name || '').replace(/^TEST\s+/i, '').trim(), email: sess?.user?.email || '', x, tz };
   state = { ctx, d, view, ui: readState(location.search), built: new Set(), billing: null, health: null, path: FFTest.pathname(), mine, key, load, loadExtras };
   if (state.ui.date && state.ui.date < String(d.date).slice(0, 10)) await loadDay(state.ui.date); else state.ui.date = null;
   if (mine !== loads || !state) return;
@@ -448,16 +449,29 @@ function render(ctx, d, view) {
     <div class="fd2-tip" id="fdTip" role="tooltip" hidden></div>
   </div>`);
   state.built = new Set();
-  buildView(ui.view, true);
+  headerWho(ctx, cur, view);
+  buildView(ui.view, { quiet: !!view.quiet });
   bindShell(ctx);
   bindMotion(ctx);
   if (ui.drawer) openSheet(ui.drawer, null, { fromUrl: true });
 }
 
+// the header's account link: the parent's name with the child's pair (the friend's grown-up and the friend), never the sign-in email
+// (owner 2026-10-12). The email stays the link's title and is shown in Family & settings; the next page's header (app.js) resets it.
+function headerWho(ctx, cur, view) {
+  const a = document.getElementById('accountLink'); if (!a) return;
+  const name = view.fullName && !view.fullName.includes('@') ? view.fullName : (view.name || '');
+  if (!name) return;
+  const pr = pairFor(guideFriend(cur.guide) || 'bop');
+  a.title = view.email || '';
+  a.classList.add('fd2-who-link');
+  a.innerHTML = `<span class="fd2-who-pair" aria-hidden="true">${adultImg(pr.parent, { cls: 'fd2-who-adult', w: 16, h: 38 })}<img class="fd2-who-kid" src="img/scene/cut-${ctx.esc(pr.friend)}-440.webp" alt="" width="22" height="29"></span><span>${ctx.esc(name)}</span>`;
+}
+
 // ---- the rail (desktop and tablet): the views, then the quick actions; phones: the quick actions as a row on Today ---------------
 function railHtml(esc, L, slug, cur, d, ui) {
   const S2 = sw(L === W.es ? 'es' : 'en');
-  const a = (id, href, ic, label, short, cls = '') => `<a class="fd-action ${cls}" id="${id}" href="${esc(href)}" data-nav><span class="fd-ico">${icon(ic)}</span><span class="fd-a-long">${esc(label)}</span><span class="fd-a-short">${esc(short)}</span></a>`;
+  const a = (id, href, ic, label, short, cls = '', who = null) => `<a class="fd-action ${cls}" id="${id}" href="${esc(href)}" data-nav><span class="fd-ico${who ? ' fd2-who' : ''}">${who ? adultImg(who, { cls: 'fd2-whoimg', w: 40, h: 96 }) : icon(ic)}</span><span class="fd-a-long">${esc(label)}</span><span class="fd-a-short">${esc(short)}</span></a>`;
   const waiting = (d.attention || []).length;
   return `<aside class="fd-rail fd2-rail" aria-label="${esc(S2.nav)}">
     <nav class="fd2-railnav" aria-label="${esc(S2.nav)}"><div class="fd2-viewtabs" id="fdViewTabs" role="tablist" aria-orientation="vertical" aria-label="${esc(S2.nav)}">
@@ -466,8 +480,8 @@ function railHtml(esc, L, slug, cur, d, ui) {
         ${icon(v.icon)}<span>${esc(S2.views[v.id])}</span>${v.id === 'messages' && waiting ? `<span class="fd2-badge" aria-label="${esc(L.attentionN(waiting))}">${waiting}</span>` : ''}</a>`).join('')}
     </div></nav>
     <nav class="fd-actions" id="fdActions" aria-label="${esc(L.actions)}">
-      ${a('qaMessage', dashLink(slug, 'thread', { kid: cur.id }), 'chat', L.qaMessage, L.short.message)}
-      ${a('qaAbsence', dashLink(slug, 'absence', { kid: cur.id }), 'calendar', L.qaAbsence, L.short.absence)}
+      ${a('qaMessage', dashLink(slug, 'thread', { kid: cur.id }), 'chat', L.qaMessage, L.short.message, '', ROLE_CHARACTERS.teacherActions)}
+      ${a('qaAbsence', dashLink(slug, 'absence', { kid: cur.id }), 'calendar', L.qaAbsence, L.short.absence, '', ROLE_CHARACTERS.teacherActions)}
       ${a('qaShare', dashLink(slug, 'share', { kid: cur.id }), 'share', L.qaShare, L.short.share)}
       ${a('openKidMode', dashLink(slug, 'kid'), 'kid', L.qaKid, L.short.kid, 'fd-action-gold')}
       ${a('fdKidsCorner', `/c/${encodeURIComponent(slug)}/kids?kid=${encodeURIComponent(cur.id)}`, 'star', L.v2.kidsCorner, L.v2.kidsCorner)}
@@ -557,13 +571,14 @@ function viewPanels(id) {
         <div class="fd2-attnwrap">${attentionBandHtml(esc, L, lang, slug, d, x)}</div>
         ${bigKpisHtml(esc, L, lang, slug, d, view)}
         ${todayHtml(esc, L, lang, slug, d, true)}
+        <section class="card fd-card" id="fdMomentsTile" aria-labelledby="moTileH"></section>
         ${learnHomeHtml(esc, L, lang, slug, d, x, cur)}
         ${nextHtml(esc, L, lang, slug, d, x)}
         ${pillarsHtml(esc, L, slug)}
       </div>`;
     case 'today': return panel('day', `<div class="fd2-two">${dayListHtml(esc, L, lang, slug, d)}<section class="card fd-card fd2-clockcard" id="fdClockCard" aria-labelledby="fdClockCardH"><h2 id="fdClockCardH">${icon('clock')} ${esc(L.v2.clockH(cur.first || ''))}</h2>${clockFigHtml(320, 'fdClockFigDay')}${clockKeyHtml(esc, L, clockModelNow())}</section></div>`)
       + panel('clock', `<section class="card fd-card fd2-clockcard fd2-clockbig" aria-labelledby="fdClockBigH"><h2 id="fdClockBigH">${icon('clock')} ${esc(L.v2.clockH(cur.first || ''))}</h2>${clockFigHtml(420, 'fdClockFigBig')}${clockKeyHtml(esc, L, clockModelNow())}</section>`)
-      + panel('photos', photosHtml(esc, L, lang, d, cur, x));
+      + panel('photos', `<section class="card fd-card" id="fdMoments" aria-labelledby="moFeedH"></section>${(x.photos || []).length ? photosHtml(esc, L, lang, d, cur, x) : ''}`);   // classroom moments (moments.js, hub/MOMENTS.md)
     case 'learning': return panel('week', weekHtml(esc, L, lang, slug, d, cur)) + panel('skills', skillsHtml(esc, L, lang, slug, d, x, cur))
       + panel('portfolio', portfolioHtml(esc, L, lang, slug, d, cur)) + panel('reports', reportHtml(esc, L, lang, slug, d, cur));
     case 'care': return panel('meals', mealsViewHtml(esc, L, lang, slug, d, x)) + panel('rest', restViewHtml(esc, L, lang, d, x)) + panel('feelings', feelViewHtml(esc, L, lang, d, x))
@@ -583,7 +598,7 @@ function viewPanels(id) {
   }
 }
 // build (or rebuild) a view's panels into its section, then everything that view needs once it is in the page
-function buildView(id, first = false) {
+function buildView(id, opts = {}) {
   const sec = document.getElementById(`fdv-${id}`);
   if (!sec || !state) return;
   sec.innerHTML = viewPanels(id);
@@ -593,6 +608,12 @@ function buildView(id, first = false) {
   for (const b of sec.querySelectorAll('[data-w]')) b.style.setProperty('--w', `${b.dataset.w}%`);
   if (id === 'overview') mountFamilyConferenceCard({ c: ctx.c, rpc: ctx.rpc, esc: ctx.esc, lang: ctx.lang, kid: d.child }).catch(() => {});   // conference times (checkpoints.js)
   if (id === 'today') signPhotos(ctx);
+  // classroom moments (moments.js, hub/MOMENTS.md): the feed on Today > Moments (opens ?moment=), the tile on the overview
+  if (id === 'today' || id === 'overview') {
+    const mctx = { c: ctx.c, client: ctx.client, rpc: ctx.rpc, lang: ctx.lang, live: ctx.live, friendly: ctx.friendly, kid: d.child };
+    import('./moments.js').then((m) => (id === 'today' ? m.mountMomentsFeed(document.getElementById('fdMoments'), mctx) : m.mountMomentsTile(document.getElementById('fdMomentsTile'), mctx)))
+      .catch(() => { document.getElementById(id === 'today' ? 'fdMoments' : 'fdMomentsTile')?.remove(); });
+  }
   if (id === 'care') loadHealth();
   if (id === 'learning') signPhotos(ctx);
   if (id === 'billing') loadBilling();
@@ -604,8 +625,7 @@ function buildView(id, first = false) {
       { c: ctx.c, rpc: ctx.rpc, esc: ctx.esc, lang: ctx.lang, live: ctx.live, friendly: ctx.friendly, kids: (d.kids || []).map((k) => ({ id: k.id, first: k.first })), current: cur.id }))
       .catch(() => { document.getElementById('kidDevices')?.remove(); });
   }
-  if (!first || motionOn()) entrance(sec);
-  else settle(sec);
+  revealOrSettle(sec, id, opts);
 }
 
 // ---- the KPI band: the child's numbers, each derived (family-kpi.js), each opening where it comes from ---------------------------
@@ -715,8 +735,8 @@ function todayHtml(esc, L, lang, slug, d, ticker = true) {
   const cur = (d.kids || []).find((k) => k.id === d.child) || {};
   const t = d.today || {};
   const att = attendanceText(t.attendance, lang);
-  const tl = [...(t.timeline || [])].reverse();          // newest first
-  const shown = tl.slice(0, 4);
+  const tl = inDayOrder(t.timeline);          // morning at the top, evening at the bottom (owner 2026-10-12)
+  const shown = tl.slice(-4);                 // the latest four, still in day order
   const meals = state?.view?.x?.stats?.meals_today || [];
   const S = L.sh;
   const itemsOf = (e) => { if (e.kind !== 'meal') return ''; const m = meals.find((x) => x.time === e.time); if (!m || !(m.items || []).length) return '';
@@ -731,7 +751,7 @@ function todayHtml(esc, L, lang, slug, d, ticker = true) {
       <p class="fd-status fd-st-${att.tone}"><span class="fd-dot" aria-hidden="true"></span>${esc(att.text)} <span class="fd-updated" id="fdUpdated">${esc(agoText(t.updated_at, lang))}</span></p></div>
       <a class="fd2-link fd2-link-pill" id="fdFullDay" href="${esc(dashLink(slug, 'day', { kid: d.child }))}" data-nav>${esc(L.v2.viewWhole)} ${icon('arrow')}</a>${collapseBtn(esc, L, 'fdTodayBody', true)}</div>
     <div class="fd2-cbody" id="fdTodayBody">${incidents}
-    ${shown.length ? `<ol class="fd-entries" id="fdEntries" aria-live="polite">${shown.map(entry).join('')}</ol>` : `<p class="fd-empty">${esc(L.emptyDay(cur.first || ''))}</p>`}
+    ${shown.length ? `<ol class="fd-entries" id="fdEntries" aria-live="polite">${shown.map(entry).join('')}</ol>` : `<p class="fd-empty fd2-emptywho">${adultImg(ROLE_CHARACTERS.teacherActions, { cls: 'fd2-emptyimg', w: 48, h: 115 })}<span>${esc(L.emptyDay(cur.first || ''))}</span></p>`}
     <p class="fd2-dayfoot">${t.published ? `<a class="fd-ready" href="${esc(dashLink(slug, 'day', { kid: d.child, date: d.date }))}" data-nav id="fdReportReady">${esc(L.reportReady)}</a>` : `<span class="small muted">${esc(L.reportAt(t.send_time || 'about 5:30 pm'))}</span>`}
       <a class="fd2-link" href="${esc(viewHref('today', 'day'))}" data-view="today" data-tab="day" id="fdDayView">${esc(tl.length > shown.length ? L.more(tl.length - shown.length) : L.v2.clockOpen)}</a></p></div>
   </section>`;
@@ -757,18 +777,18 @@ function photosHtml(esc, L, lang, d, cur, x) {
   const ph = x.photos;
   if (ph == null) return `<section class="card fd-card fd-photos" id="fdPhotos" aria-labelledby="fdPhH"><h2 id="fdPhH">${icon('photo')} ${esc(L.photos)}</h2><span class="chip">${esc(L.notConnected)}</span></section>`;
   return `<section class="card fd-card fd-photos" id="fdPhotos" aria-labelledby="fdPhH"><h2 id="fdPhH">${icon('photo')} ${esc(L.photos)}</h2>
-    ${ph.length ? `<ul class="fd-photo-strip">${ph.map((p) => `<li><figure><img class="fd-photo fd-photo-day" data-path="${esc(p.path)}" alt="${esc(p.caption || L.photos)}" width="320" height="240" loading="lazy">
-      ${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ''}</figure></li>`).join('')}</ul>`
+    ${ph.length ? `<ul class="fd-photo-strip">${inDayOrder(ph).map((p) => `<li><a class="fd2-photo-a" href="${esc(dashLink(state?.ctx?.c?.slug || '', 'day', { kid: d.child }))}" data-nav><figure><img class="fd-photo fd-photo-day" data-path="${esc(p.path)}" alt="${esc(p.caption || L.photos)}" width="320" height="240" loading="lazy">
+      ${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ''}</figure></a></li>`).join('')}</ul>`
       : `<p class="small muted">${esc(ok ? L.noPhotos(cur.first || '') : L.photosConsent)}</p>`}</section>`;
 }
 function pickupHtml(esc, L, slug, cur, x) {
   const pk = x.pickup;
   if (pk == null) return `<section class="card fd-card fd-pickup" id="fdPickup" aria-labelledby="fdPkH"><h2 id="fdPkH">${icon('pickup')} ${esc(L.pickup)}</h2><span class="chip">${esc(L.notConnected)}</span></section>`;
   const people = pk.people || [], passes = pk.passes_today || [];
-  return `<section class="card fd-card fd-pickup" id="fdPickup" aria-labelledby="fdPkH"><h2 id="fdPkH">${icon('pickup')} ${esc(L.pickup)}</h2>
+  return `<section class="card fd-card fd-pickup fd2-withwho" id="fdPickup" aria-labelledby="fdPkH">${adultImg(ROLE_CHARACTERS.pickup, { cls: 'fd2-cardwho', w: 70, h: 168 })}<h2 id="fdPkH">${icon('pickup')} ${esc(L.pickup)}</h2>
     ${people.length ? `<ul class="fd-people">${people.map((p) => `<li><span class="fd-person-av fd-pk-${p.kind === 'guardian' ? 'g' : 'a'}" aria-hidden="true">${esc(initialsOf(p.name))}</span>
       <span><b>${esc(shortName(p.name))}</b>${p.is_me ? ` <span class="chip gold">${esc(L.pickupYou)}</span>` : ''}<span class="small muted">${esc(p.relationship_label || '')}</span></span></li>`).join('')}</ul>`
-      : `<p class="small muted">${esc(L.pickupNone)}</p>`}
+      : `<p class="small muted fd2-emptywho">${adultImg('rowan', { cls: 'fd2-emptyimg', w: 48, h: 115 })}<span>${esc(L.pickupNone)}</span></p>`}
     ${passes.length ? `<p class="fd-pass">${esc(L.pickupPass)}: ${passes.map((p) => esc(shortName(p.name))).join(', ')}</p>` : ''}
     <a class="btn link fd-cardlink" id="fdPickupLink" href="${esc(dashLink(slug, 'pickup', { kid: cur.id }))}" data-nav>${esc(L.pickupOpen)}</a></section>`;
 }
@@ -790,10 +810,10 @@ function messagesHtml(esc, L, lang, slug, d) {
   if (!m) return `<section class="card fd-card" id="fdMessages" aria-labelledby="fdMsgH">${head}<p class="muted">${esc(L.couldNot)}</p></section>`;
   const fmt = (iso) => new Intl.DateTimeFormat(lang === 'es' ? 'es-US' : 'en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: centerTz() }).format(new Date(iso));
   return `<section class="card fd-card fd-messages" id="fdMessages" aria-labelledby="fdMsgH">${head}
-    ${(m.items || []).length ? `<ul class="fd-msgs">${m.items.map((x) => `<li><a class="fd-msg${x.mine ? ' fd-mine' : ''}${x.unread ? ' fd-unread' : ''}" href="${esc(dashLink(slug, 'chat', { kid: d.child, id: x.id }))}" data-nav data-id="${esc(x.id)}">
+    ${(m.items || []).length ? `<ul class="fd-msgs">${inDayOrder(m.items).map((x) => `<li><a class="fd-msg${x.mine ? ' fd-mine' : ''}${x.unread ? ' fd-unread' : ''}" href="${esc(dashLink(slug, 'chat', { kid: d.child, id: x.id }))}" data-nav data-id="${esc(x.id)}">
         <span class="fd-msg-meta"><b>${esc(x.mine ? L.you : L.teacher)}</b> · ${esc(fmt(x.at))}${x.unread ? ` <span class="chip gold">${esc(L.newChip)}</span>` : ''}</span>
         <span class="fd-msg-text">${esc(x.text || (x.files ? L.attached : ''))}</span></a></li>`).join('')}</ul>` : `<p class="small muted">${esc(L.noMessages(cur.first || ''))}</p>`}
-    ${(m.announcements || []).length ? `<h3>${esc(L.announcements)}</h3><ul class="fd-anns">${m.announcements.map((a) => `<li><a href="${esc(dashLink(slug, 'announcement', { id: a.id }))}" data-nav data-id="${esc(a.id)}">
+    ${(m.announcements || []).length ? `<h3>${esc(L.announcements)}</h3><ul class="fd-anns">${inDayOrder(m.announcements).map((a) => `<li><a href="${esc(dashLink(slug, 'announcement', { id: a.id }))}" data-nav data-id="${esc(a.id)}">
         <span class="fd-ico fd-t-gold">${icon('announcement')}</span><span><b>${esc(a.title)}</b><span class="small muted">${esc(dayText(a.at, lang))}</span></span>${a.unread ? `<span class="chip gold">${esc(L.newChip)}</span>` : ''}</a></li>`).join('')}</ul>` : ''}
     <a class="btn navy fd-primary" href="${esc(dashLink(slug, 'thread', { kid: d.child }))}" data-nav id="fdThread">${esc(L.openThread(cur.first || ''))}</a></section>`;
 }
@@ -885,6 +905,7 @@ function moreHtml(esc, L, slug, kids, cur) {
       ${tile('familyHabitsLink', `/c/${slug}/habits`, L.habits)}
       ${tile('familyBillingLink', `/c/${slug}/billing-family`, L.billingAll)}
     </div>
+    ${state?.view?.email ? `<p class="small muted fd2-signedin" id="fdSignedIn">${esc(L.v2.signedIn)} <span>${esc(state.view.email)}</span></p>` : ''}
     <form id="langForm" class="fd-lang" novalidate><fieldset class="f"><legend>${esc(lang === 'es' ? 'Idioma de estas páginas y de los correos' : 'Language for these pages and emails')}</legend>
       <div class="choices two">${opt('en', 'English')}${opt('es', 'Español')}</div></fieldset><p class="small msg" id="langMsg" role="status"></p></form>
   </section><div class="card" id="familyShares" hidden></div>`;
@@ -919,7 +940,8 @@ function heroHtml(esc, L, lang, slug, d, cur, view) {
   return `<section class="fd-hero fd2-hero" id="familyWelcome" aria-labelledby="fdWelcomeH" data-a>
     <img class="fd2-hero-bg" src="img/scene/school-exterior-800.webp" srcset="img/scene/school-exterior-800.webp 800w, img/scene/school-exterior-1600.webp 1600w" sizes="(min-width:1024px) 70vw, 100vw" alt="" aria-hidden="true" decoding="async">
     <img class="fd2-hero-sun" src="img/scene/felt-sun-320.webp" alt="" aria-hidden="true" decoding="async">
-    <img class="fd-hero-friend fd-hf-${esc(friend)}" src="img/scene/cut-${esc(friend)}-440.webp" alt="" aria-hidden="true" decoding="async">
+    <div class="fd2-pair" id="fdPair" data-parent="${esc(pairFor(friend).parent)}" data-friend="${esc(friend)}">${adultImg(pairFor(friend).parent, { cls: 'fd2-parent', lang, size: 960, w: 200, h: 480 })}
+      <img class="fd-hero-friend fd-hf-${esc(friend)}" src="img/scene/cut-${esc(friend)}-440.webp" alt="${esc(FRIEND_NAME[friend] || '')}" decoding="async"></div>
     <div class="fd-hero-in">
       ${isDemo(state.ctx.c) ? `<p class="fd2-demo" id="fdDemoPill">${esc(L.v2.demo)}</p>` : ''}
       <h2 id="fdWelcomeH" class="fd-hello">${esc(greeting(view.part, view.name, lang))}</h2>
@@ -943,7 +965,8 @@ function attentionBandHtml(esc, L, lang, slug, d, x) {
   const bring = (x.bring || []).find((b) => String(b.day).slice(0, 10) > today);
   const bringChip = bring ? (() => { const t = new Date(`${today}T12:00:00Z`); t.setUTCDate(t.getUTCDate() + 1);
     const label = String(bring.day).slice(0, 10) === t.toISOString().slice(0, 10) ? L.tomorrow : cap(dayText(bring.day, lang, { weekday: 'long' }));
-    return `<li class="fd2-chip fd2-chip-info" id="fdBringNote"><span class="fd-ico fd-t-zuri">${icon('bag')}</span><span class="fd2-chip-t"><b>${esc(V2.bringNote(label))}</b><span${bring.draft_es ? ' lang="en"' : ''}>${esc(bring.text)}</span></span></li>`; })() : '';
+    return `<li class="fd2-chip fd2-chip-info" id="fdBringNote"><span class="fd-ico fd-t-zuri">${icon('bag')}</span><span class="fd2-chip-t"><b>${esc(V2.bringNote(label))}</b><span${bring.draft_es ? ' lang="en"' : ''}>${esc(bring.text)}</span></span>
+      <a class="fd2-chip-go fd2-chip-soft" href="${esc(viewHref('calendar', 'bring'))}" data-view="calendar" data-tab="bring">${esc(V2.act.open)} ${icon('arrow')}</a></li>`; })() : '';
   return `<section class="fd2-band" id="fdAttention" aria-labelledby="fdAttnH" data-a><div class="fd2-band-h"><span class="fd2-band-ico" aria-hidden="true">!</span>
     <h2 id="fdAttnH">${esc(V2.attention)}${items.length ? ` <span class="fd-count">${esc(L.attentionN(items.length))}</span>` : ''}</h2></div>
     <ul class="fd2-chips" data-noswipe>${items.length ? items.map(chip).join('') : `<li class="fd2-chip fd2-chip-info"><img src="img/friends/bop-waving-480.webp" alt="" width="40" height="40" loading="lazy"><span class="fd2-chip-t"><b>${esc(L.allClear)}</b></span></li>`}${bringChip}</ul></section>`;
@@ -957,7 +980,7 @@ function bigKpisHtml(esc, L, lang, slug, d, view) {
   const out = [];
   // when each figure was recorded (owner: "every figure states when it was recorded"): the latest entry of its kind today
   const tl = d.today?.timeline || [];
-  const lastOf = (k) => [...tl].reverse().find((e) => e.kind === k);
+  const lastOf = (k) => tl.findLast((e) => e.kind === k);
   const logged = (t) => (t ? `<span class="fd2-logged">${esc(t)}</span>` : '');
   const meal = lastOf('meal'), nap = lastOf('nap'), mood = lastOf('mood');
   const napRange = nap ? (/(\d{1,2}:\d{2}\s?[AP]M)\s+(?:to|a)\s+(\d{1,2}:\d{2}\s?[AP]M)/i.exec(nap.words) || null) : null;
@@ -1010,7 +1033,7 @@ function nextHtml(esc, L, lang, slug, d, x) {
   const tuition = tu ? `<div class="fd-tuition fd2-tu" id="fdTuition"><span class="fd-ico fd-t-${tu.status === 'past_due' ? 'gold' : 'navy'}">${icon('tuition')}</span><span><b>${esc(money(tu.due_cents, lang))}</b>
       <span>${esc(L.kSub.due(dayText(tu.due_date, lang)))}${tu.status === 'past_due' ? ` · ${esc(L.pastDue)}` : ''}</span></span>
     <a class="btn soft small fd-tuition-go" href="${esc(dashLink(slug, 'billing', { id: tu.invoice_id }))}" data-nav id="fdTuitionLink">${esc(L.billingQ)}</a></div>`
-    : `<p class="fd2-nx"><span class="fd-ico fd-t-zuri">${icon('consent')}</span><b>${esc(V2.tuitionNone)}</b></p>`;
+    : `<a class="fd2-nx fd2-nx-a" href="${esc(viewHref('billing', 'balance'))}" data-view="billing" data-tab="balance" id="fdTuitionNone"><span class="fd-ico fd-t-zuri">${icon('consent')}</span><b>${esc(V2.tuitionNone)}</b></a>`;
   const event = ev ? `<a class="fd2-nx fd2-nx-a" href="${esc(dashLink(slug, 'calendar', { date: String(ev.day).slice(0, 10) }))}" data-nav id="fdNextEvent"><span class="fd-ico fd-t-bop">${icon('calendar')}</span>
     <span><b>${esc(cap(dayText(ev.day, lang, { month: 'long', day: 'numeric' })))}</b><span>${esc(lang === 'es' ? (ev.label_es || ev.label) : ev.label)}${ev.status === 'early' ? ` · ${esc(L.early)}` : ''}</span></span></a>` : '';
   return `<section class="card fd-card fd2-next" id="fdNext" aria-labelledby="fdNextH" data-a><h2 id="fdNextH" class="fd2-h">${icon('tuition')} ${esc(L.tuition)}</h2>${tuition}<hr class="fd2-hr">${event}
@@ -1061,12 +1084,12 @@ function paintClockHand() {
 // ---- care: the whole day as a list, meals (plates), rest (moon), feelings (sky), health --------------------------------------------
 function dayListHtml(esc, L, lang, slug, d) {
   const t = d.today || {};
-  const tl = [...(t.timeline || [])].reverse();
+  const tl = inDayOrder(t.timeline);   // morning to evening
   const cur = (d.kids || []).find((k) => k.id === d.child) || {};
   return `<section class="card fd-card fd2-daylist" id="fdDayList" aria-labelledby="fdDayListH"><h2 id="fdDayListH">${icon('sun')} ${esc(L.day(cur.first || ''))}</h2>
     ${tl.length ? `<ol class="fd-entries fd2-entries">${tl.map((e) => `<li class="fd-entry fd-e-${esc(e.kind)}"><span class="fd-entry-time">${esc(e.time)}</span>${entryArt(esc, e)}
       <button class="fd-entry-body fd2-entrybtn" type="button" data-drawer="entry:${esc(e.id)}"><span class="fd-entry-words">${esc(cap(e.words))}</span></button></li>`).join('')}</ol>`
-      : `<p class="fd-empty">${esc(L.emptyDay(cur.first || ''))}</p>`}
+      : `<p class="fd-empty fd2-emptywho">${adultImg(ROLE_CHARACTERS.teacherActions, { cls: 'fd2-emptyimg', w: 48, h: 115 })}<span>${esc(L.emptyDay(cur.first || ''))}</span></p>`}
     <a class="btn navy fd-primary" href="${esc(dashLink(slug, 'day', { kid: d.child }))}" data-nav id="fdFullDay2">${esc(L.fullDay(cur.first || ''))}</a></section>`;
 }
 const entryArt = (esc, e) => (e.kind === 'mood' && FEEL_ART[e.code] ? `<img class="fd-feel" src="img/friends/${esc(FEEL_ART[e.code])}-480.webp" alt="" width="40" height="40" loading="lazy">` : `<span class="fd-ico fd-t-${KIND_TONE[e.kind] || 'navy'}">${icon(e.kind)}</span>`);
@@ -1087,8 +1110,8 @@ function mealsViewHtml(esc, L, lang, slug, d, x) {
   const week = wk.length ? figureHtml(esc, lang, 'fdWeekPlates', `<ol class="fd2-pies">${wk.map((p) => `<li><button class="fd2-pie" type="button" data-drawer="plate:${esc(p.day)}" data-tip="${esc(`${cap(dayText(p.day, lang, { weekday: 'long' }))}: ${p.share == null ? V.nothing : L.v2.shareOf(Math.round(p.share * 100))}`)}" aria-label="${esc(`${cap(dayText(p.day, lang, { weekday: 'long', month: 'short', day: 'numeric' }))}: ${p.share == null ? V.nothing : L.v2.shareOf(Math.round(p.share * 100))}`)}">${pieSvg(p.share)}<span>${esc(dayText(p.day, lang, { weekday: 'short' }))}</span></button></li>`).join('')}</ol>`,
     V.weekPlatesSum(wk.map((p) => `${dayText(p.day, lang, { weekday: 'short' })} ${p.share == null ? V.nothing : `${Math.round(p.share * 100)}%`}`).join(', ')),
     { head: [V.day, V.amount], rows: wk.map((p) => [cap(dayText(p.day, lang)), p.share == null ? V.nothing : `${Math.round(p.share * 100)}%`]) }) : '';
-  return `<div class="fd2-two"><section class="card fd-card fd2-plates" id="fdPlates" aria-labelledby="fdPlatesH"><h2 id="fdPlatesH">${icon('meal')} ${esc(L.v2.plates)}</h2>
-      ${meals.length ? `<div class="fd2-plategrid">${meals.map(plateFig).join('')}</div>` : `<p class="muted">${esc(V.noMeals)}</p>`}</section>
+  return `<div class="fd2-two"><section class="card fd-card fd2-plates fd2-withwho" id="fdPlates" aria-labelledby="fdPlatesH">${adultImg(ROLE_CHARACTERS.meals, { cls: 'fd2-cardwho', w: 70, h: 168 })}<h2 id="fdPlatesH">${icon('meal')} ${esc(L.v2.plates)}</h2>
+      ${meals.length ? `<div class="fd2-plategrid">${meals.map(plateFig).join('')}</div>` : `<p class="muted fd2-emptywho">${adultImg(ROLE_CHARACTERS.meals, { cls: 'fd2-emptyimg', w: 48, h: 115 })}<span>${esc(V.noMeals)}</span></p>`}</section>
     <div class="fd2-stack"><section class="card fd-card" id="fdWeekPlatesCard" aria-labelledby="fdWpH"><h2 id="fdWpH">${esc(L.v2.weekPlates)}</h2>${week || `<p class="muted">${esc(L.notConnected)}</p>`}</section>
     ${menuHtml(esc, L, lang, d, x)}</div></div>`;
 }
@@ -1098,7 +1121,7 @@ function restViewHtml(esc, L, lang, d, x) {
   if (!M) return `<section class="card fd-card" id="fdMoon"><h2>${icon('moon')} ${esc(L.v2.moon)}</h2><span class="chip">${esc(L.notConnected)}</span></section>`;
   const tt = M.today == null ? L.nothingYet : minutesText(M.today, lang), ut = M.usual == null ? '' : minutesText(M.usual, lang);
   return `<section class="card fd-card fd2-moon" id="fdMoon" aria-labelledby="fdMoonH"><h2 id="fdMoonH">${icon('moon')} ${esc(V.rest)}</h2>
-    ${figureHtml(esc, lang, 'fdMoonFig', moonSvg(M, { esc, lang, todayText: tt, usualText: ut }), V.restSum(tt, ut ? V.usual(ut) : ''), { head: [V.day, V.minutes], rows: [...M.days].reverse().map((r) => [cap(dayText(r.day, lang, { weekday: 'long', month: 'short', day: 'numeric' })), r.min == null ? V.nothing : minutesText(r.min, lang)]) })}
+    ${figureHtml(esc, lang, 'fdMoonFig', moonSvg(M, { esc, lang, todayText: tt, usualText: ut }), V.restSum(tt, ut ? V.usual(ut) : ''), { head: [V.day, V.minutes], rows: inDayOrder(M.days, 'day').map((r) => [cap(dayText(r.day, lang, { weekday: 'long', month: 'short', day: 'numeric' })), r.min == null ? V.nothing : minutesText(r.min, lang)]) })}
     ${ut ? `<p class="fd2-note">${esc(V.usual(ut))}</p>` : ''}
     <ol class="fd2-restdays">${M.days.map((r) => `<li><span class="fd2-rd-bar" data-h="${r.min == null ? 0 : Math.round(Math.min(1, r.min / M.scale) * 100)}"></span><i>${esc(dayText(r.day, lang, { weekday: 'narrow' }))}</i></li>`).join('')}</ol></section>`;
 }
@@ -1230,7 +1253,7 @@ async function loadBilling() {
         <a href="${esc(dashLink(slug, 'billing', { id: e.kind === 'invoice' ? e.id : e.invoice }))}" data-nav class="fv-tl-a" data-id="${esc(e.id)}"><span class="fv-tl-dot" aria-hidden="true"></span>
         <b>${esc(e.kind === 'invoice' ? V.invoice(e.no || '') : V.payment)}</b><span>${esc(cap(dayText(e.day, lang)))} · ${esc(money(e.cents, lang))}${e.status ? ` · ${esc(V.status[e.status] || e.status)}` : ''}</span></a></li>`).join('')}</ol>`,
       V.timelineSum(M.events.filter((e) => e.kind === 'invoice').length, M.events.filter((e) => e.kind === 'payment').length), null)
-      : `<p class="muted">${esc(B.none)}</p>`}`;
+      : `<p class="muted fd2-emptywho">${adultImg(ROLE_CHARACTERS.parents[0], { cls: 'fd2-emptyimg', w: 48, h: 115 })}<span>${esc(B.none)}</span></p>`}`;
   if (motionOn()) { entrance(bal); entrance(pay); } else { settle(bal); settle(pay); }
 }
 
@@ -1315,7 +1338,7 @@ function showView(id, tab, { history: mode = 'push' } = {}) {
     const out = document.getElementById(`fdv-${prev}`), inn = document.getElementById(`fdv-${v.id}`);
     const dir = VIEWS.findIndex((x) => x.id === v.id) > VIEWS.findIndex((x) => x.id === prev) ? 1 : -1;
     for (const el of [out, inn]) el?.getAnimations().forEach((a) => a.cancel());
-    if (!state.built.has(v.id)) buildView(v.id); else { syncPanels(inn); if (motionOn()) entrance(inn, 0.5); }
+    if (!state.built.has(v.id)) buildView(v.id); else { syncPanels(inn); revealOrSettle(inn, v.id, {}); }
     if (motionOn() && out) {
       inn.hidden = false;
       out.classList.add('fd2-leaving');
@@ -1333,7 +1356,7 @@ function showView(id, tab, { history: mode = 'push' } = {}) {
     const inn = document.getElementById(`fdv-${v.id}`);
     syncPanels(inn);
     const p = inn.querySelector(`.fd2-panel[data-tab="${t}"]`);
-    if (p && motionOn()) entrance(p, 0.6);
+    if (p) revealOrSettle(p, `${v.id}:${t}`, {});
     if (v.id === 'care' && t === 'health') loadHealth();
   }
 }
@@ -1348,13 +1371,14 @@ function placePill(animate) {
 }
 
 // entrance choreography: everything marked data-a in the view rises in, staggered; arcs draw in; numbers count up
-function entrance(sec, scale = 1) {
+function entrance(sec, scale = 1, cardsOnly = false) {
   if (!sec) return;
   settle(sec, true);
   if (!motionOn()) return;
   const items = [...sec.querySelectorAll('[data-a], .fd-kpi, .fd2-panel:not([hidden]) > .card, .fd2-panel:not([hidden]) > .fd2-two > *')].filter((el) => el.offsetParent !== null).slice(0, 24);
   items.forEach((el, i) => el.animate([{ opacity: 0, transform: 'translate3d(0,14px,0) scale(.985)' }, { opacity: 1, transform: 'none' }],
     { duration: 520 * scale, delay: Math.min(i * 45, 420) * scale, easing: EASE, fill: 'backwards' }));
+  if (cardsOnly) return;   // the reveal fills the arcs and the numbers one card at a time
   for (const p of sec.querySelectorAll('[data-len]')) {
     if (p.offsetParent === null && !p.closest('svg')?.getBoundingClientRect().width) continue;
     const len = Number(p.dataset.len); if (!len) continue;
@@ -1394,8 +1418,12 @@ async function switchChild(kid) {
   const ui = { ...state.ui, drawer: null };
   state.ui = ui;
   if (ui.date) await loadDay(ui.date);   // a past day stays the same day for the other child
+  state.view.quiet = true;
   try { render(ctx, n, state.view); }
   catch (e) { location.assign(`${FFTest.pathname()}?${q}`); return; }   // never a broken page: the full load of that child instead
+  finally { if (state) state.view.quiet = false; }
+  // the hero's pair changes with the child (the child's friend and that friend's grown-up): they step in
+  if (motionOn()) document.querySelectorAll('#fdPair img').forEach((im, i) => im.animate([{ opacity: 0, transform: 'translate3d(0,18px,0) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 520, delay: i * 110, easing: REVEAL.ease, fill: 'backwards' }));
   if (motionOn()) for (const el of document.querySelectorAll('#familyDash .fd-num[data-count]')) { const id = el.closest('[id]')?.id; if (before.has(id)) countUp(el, before.get(id)); }
   ctx.live?.(words(ctx.lang).day((n.kids || []).find((k) => k.id === n.child)?.first || ''));
 }
@@ -1454,6 +1482,119 @@ function bindSwipeViews(root) {
   }, { passive: true });
 }
 
+// ---- the reveal (owner 2026-10-12: "start from nothing, show the number, start to go up ... a nice energy neon glow ... one at a time so
+// there's time for the person to see it and register"; the command center's count-up). The first time a view (or a tab) is shown in
+// this page session its cards start empty and fill ONE AT A TIME: the arc or bar sweeps 0 -> value over 1.4 s with an ease-out, the
+// number counts up in step, the attendance dots light one by one, and a short neon bloom marks the landing; the next card starts about
+// 700 ms after the one before started (the four KPI cards in about 3.5 s). Below the fold a card waits until it scrolls into view. Any tap, key or scroll completes
+// everything at once. Never replayed on a child switch (the numbers move from the old child's to the new one's) or after a drawer.
+// Reduce Motion, the Still scene switch and ?reveal=off (screenshots, tests): the final values, glow included, with no sweep.
+// Only transform, opacity and stroke-dashoffset move.
+const REVEALED = new Set();
+// the shared timings (staff dashboards, ff-shell.js REVEAL on staff-v2): 1.4 s per card, the next card 700 ms after the one before, one easing
+const REVEAL = { duration: 1400, gap: 700, bloom: 650, ease: 'cubic-bezier(.22,1,.36,1)' };
+const SWEEP = REVEAL.duration, STEP = REVEAL.gap, OUT = REVEAL.ease;
+const revealOff = () => !motionOn() || new URLSearchParams(location.search).get('reveal') === 'off';
+let revealRun = null;
+function revealOrSettle(sec, key, opts = {}) {
+  if (!sec) return;
+  settle(sec);
+  const fresh = !REVEALED.has(key);
+  REVEALED.add(key);
+  if (opts.quiet || !fresh || revealOff()) { landAll(sec); return; }
+  const units = revealUnits(sec);
+  if (!units.length) { entrance(sec); return; }
+  entrance(sec, 0.7, true);
+  startReveal(units);
+}
+function revealUnits(sec) {
+  const kpis = [...sec.querySelectorAll('#fdKpis .fd2-kpi:not(.fd-kpi-off)')];
+  const rest = [...sec.querySelectorAll('.fv, .fd2-lh-ring, .fd-kpi:not(.fd2-kpi)')].filter((el) => el.offsetParent !== null && !el.closest('#fdKpis') && !el.parentElement.closest('.fv, .fd2-lh-ring'));
+  return [...kpis, ...rest].filter((u) => u.querySelector('[data-len], .fd-num[data-count], .fd2-dots i, .fv-glbar-fill, .fv-bead, .fv-wedge, .fv-hc, .fv-plant, .fv-petal, .fv-sky-d, .fd2-feelface'));
+}
+// the empty state: every arc at 0, every number 0, dots and bars off
+function zero(u) {
+  for (const p of u.querySelectorAll('[data-len]')) { const len = Number(p.dataset.len); if (!len || p.closest('.fv-petal-skip')) continue;
+    if (p.classList.contains('fv-petal')) { p.style.transform = 'scale(0)'; continue; }
+    if (p.classList.contains('fv-ring-fg')) { p.dataset.end = p.getAttribute('stroke-dashoffset'); p.style.strokeDashoffset = String(len); continue; }
+    p.style.strokeDasharray = `${len} ${len}`; p.style.strokeDashoffset = String(len); }
+  for (const n of u.querySelectorAll('.fd-num[data-count]')) n.textContent = `0${n.dataset.suffix || ''}`;
+  for (const el of u.querySelectorAll('.fd2-dots i.on, .fv-gl-tip, .fv-bead, .fv-inc-mark, .fv-wedge, .fv-sparkle, .fv-pie-fill, .fv-hc, .fv-plant.fv-grown, .fv-sky-d, .fd2-feelface, .fd2-word')) el.style.opacity = '0';
+  for (const b of u.querySelectorAll('.fv-glbar-fill, .fd-bar-fill')) b.style.transform = b.classList.contains('fd-bar-fill') ? 'scaleY(0)' : 'scaleX(0)';
+  u.classList.add('fd2-unrevealed');
+}
+// the final state at once (skip, reduced motion, a repeat visit)
+function land(u) {
+  for (const a of u.getAnimations({ subtree: true })) if (a.effect?.getComputedTiming?.().iterations !== Infinity) a.finish();
+  for (const p of u.querySelectorAll('[data-len]')) { p.style.removeProperty('transform'); if (p.classList.contains('fv-ring-fg')) p.style.strokeDashoffset = p.dataset.end ?? p.getAttribute('stroke-dashoffset'); else if (p.style.strokeDasharray) p.style.strokeDashoffset = '0'; }
+  for (const n of u.querySelectorAll('.fd-num[data-count]')) { n.textContent = `${n.dataset.count}${n.dataset.suffix || ''}`; n.closest('.fd2-big')?.classList.remove('fd2-counting'); }
+  for (const el of u.querySelectorAll('[style*="opacity"]')) el.style.removeProperty('opacity');
+  for (const b of u.querySelectorAll('.fv-glbar-fill, .fd-bar-fill')) b.style.removeProperty('transform');
+  u.classList.remove('fd2-unrevealed'); u.classList.add('fd2-landed');
+  u.dataset.revealed = u.dataset.revealed || 'landed';
+}
+function landAll(sec) { for (const u of sec.querySelectorAll('.fd2-unrevealed')) land(u); for (const u of sec.querySelectorAll('.fd2-kpi, .fv, .fd2-lh-ring')) u.classList.add('fd2-landed'); }
+function play(u) {
+  if (!u.classList.contains('fd2-unrevealed')) return;
+  u.dataset.revealed = String(Math.round(performance.now()));
+  u.classList.remove('fd2-unrevealed'); u.classList.add('fd2-revealing');
+  const arcs = [...u.querySelectorAll('[data-len]')];
+  const segs = arcs.filter((p) => p.classList.contains('fv-gl-on') && !p.classList.contains('fv-gl-hi'));
+  const segmented = segs.length > 1;
+  arcs.forEach((p) => {
+    const len = Number(p.dataset.len); if (!len) return;
+    if (p.classList.contains('fv-petal')) { p.animate([{ transform: 'scale(0)' }, { transform: 'scale(1)' }], { duration: SWEEP * 0.7, delay: Math.random() * SWEEP * 0.3, easing: OUT, fill: 'forwards' }).onfinish = () => p.style.removeProperty('transform'); return; }
+    const end = p.classList.contains('fv-ring-fg') ? Number(p.dataset.end) : 0;
+    const i = segmented ? segs.indexOf(p) : -1;
+    const opts = i >= 0 ? { duration: SWEEP / segs.length * 1.6, delay: (SWEEP / segs.length) * i, easing: 'ease-out', fill: 'forwards' } : { duration: SWEEP, easing: OUT, fill: 'forwards' };
+    const a = p.animate([{ strokeDashoffset: len }, { strokeDashoffset: end }], opts);
+    a.onfinish = () => { p.style.strokeDashoffset = String(end); a.cancel(); };
+  });
+  // the comet tip rides the arc to its place
+  for (const tip of u.querySelectorAll('.fv-gl-tip')) {
+    const c = tip.dataset.c, ang = Number(tip.dataset.a || 0);
+    tip.style.transformOrigin = `${c}px ${c}px`; tip.style.transformBox = 'view-box';
+    const a = tip.animate([{ opacity: 1, transform: `rotate(${-ang}deg)` }, { opacity: 1, transform: 'rotate(0deg)' }], { duration: SWEEP, easing: OUT, fill: 'forwards' });
+    a.onfinish = () => { tip.style.removeProperty('opacity'); a.cancel(); };
+  }
+  const dots = [...u.querySelectorAll('.fd2-dots i.on')];
+  dots.forEach((d, i) => { const a = d.animate([{ opacity: 0, transform: 'scale(.3)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 320, delay: (SWEEP / Math.max(dots.length, 1)) * i, easing: OUT, fill: 'forwards' }); a.onfinish = () => { d.style.removeProperty('opacity'); a.cancel(); }; });
+  const pops = [...u.querySelectorAll('.fd2-feelface, .fd2-word, .fv-bead, .fv-inc-mark, .fv-wedge, .fv-sparkle, .fv-pie-fill, .fv-hc, .fv-plant.fv-grown, .fv-sky-d')];
+  pops.forEach((el, i) => { const a = el.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, delay: Math.min(i * (SWEEP / Math.max(pops.length, 1)), SWEEP), easing: OUT, fill: 'forwards' }); a.onfinish = () => { el.style.removeProperty('opacity'); a.cancel(); }; });
+  for (const b of u.querySelectorAll('.fv-glbar-fill, .fd-bar-fill')) { const y = b.classList.contains('fd-bar-fill');
+    const a = b.animate([{ transform: y ? 'scaleY(0)' : 'scaleX(0)' }, { transform: 'none' }], { duration: SWEEP, easing: OUT, fill: 'forwards' }); a.onfinish = () => { b.style.removeProperty('transform'); a.cancel(); }; }
+  for (const n of u.querySelectorAll('.fd-num[data-count]')) { n.closest('.fd2-big')?.classList.add('fd2-counting'); countUp(n, 0, SWEEP); }
+  setTimeout(() => { if (!document.body.contains(u)) return; u.classList.remove('fd2-revealing'); u.classList.add('fd2-landed', 'fd2-bloom');
+    for (const n of u.querySelectorAll('.fd2-counting')) n.classList.remove('fd2-counting');
+    setTimeout(() => u.classList.remove('fd2-bloom'), REVEAL.bloom + 200); }, SWEEP - 120);
+}
+function startReveal(units) {
+  stopReveal(true);
+  units.forEach(zero);
+  const run = { timers: [], io: null, units, done: false };
+  revealRun = run;
+  const vis = (u) => { const r = u.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+  const later = [];
+  let slot = 0;
+  for (const u of units) { if (vis(u)) { run.timers.push(setTimeout(() => play(u), 250 + STEP * slot)); slot += 1; } else later.push(u); }
+  if (later.length && typeof IntersectionObserver === 'function') {
+    run.io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { run.io.unobserve(e.target); setTimeout(() => play(e.target), 150); } }, { threshold: 0.35 });
+    later.forEach((u) => run.io.observe(u));
+  } else later.forEach((u) => run.timers.push(setTimeout(() => play(u), 250 + STEP * slot++)));
+  // skip: any tap, key or scroll completes it all at once
+  const skip = () => stopReveal(false);
+  run.skip = skip;
+  for (const ev of ['pointerdown', 'keydown', 'wheel', 'touchmove']) window.addEventListener(ev, skip, { once: true, passive: true, capture: true });
+  run.timers.push(setTimeout(() => { run.done = true; }, 250 + STEP * Math.max(slot, 1) + SWEEP + 1000));
+}
+function stopReveal(silent) {
+  const run = revealRun; if (!run) return;
+  revealRun = null;
+  run.timers.forEach(clearTimeout); run.io?.disconnect();
+  for (const ev of ['pointerdown', 'keydown', 'wheel', 'touchmove']) window.removeEventListener(ev, run.skip, { capture: true });
+  if (!silent) for (const u of run.units) if (document.body.contains(u)) land(u);
+}
+
 // Motion: press feedback, the drawer for KPI tiles, the depth planes. The entrance choreography is entrance() (per view, when shown).
 // With Reduce Motion or the Still scene switch nothing moves and every final value is already on screen (the HTML holds it).
 function bindMotion(ctx) {
@@ -1478,10 +1619,10 @@ function bindMotion(ctx) {
     window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up); } });
 }
 // a count-up that settles on the real figure (never stops at zero: a hidden tab or a missed frame shows the final value)
-function countUp(el, from = 0) {
+function countUp(el, from = 0, ms = 900) {
   const to = Number(el.dataset.count), suffix = el.dataset.suffix || '';
   if (!Number.isFinite(to) || to === from) { el.textContent = `${to}${suffix}`; return; }
-  const t0 = performance.now(), ms = 900;
+  const t0 = performance.now();
   const settleN = () => { el.textContent = `${to}${suffix}`; };
   const fail = setTimeout(settleN, ms + 400);
   const step = (t) => { const p = Math.min(1, (t - t0) / ms); el.textContent = `${Math.round(from + (to - from) * (1 - (1 - p) ** 3))}${suffix}`; if (p < 1 && document.visibilityState === 'visible') requestAnimationFrame(step); else { clearTimeout(fail); settleN(); } };
@@ -1661,7 +1802,7 @@ function sheetBody(kind, ctx, d, view) {
       return { title: kind === 'kpiHere' ? `${K.here}: ${f}` : `${K.month}: ${f}`, href: kind === 'kpiHere' ? dashLink(slug, 'day', { kid: d.child }) : dashLink(slug, 'child', { kid: d.child }),
         go: kind === 'kpiHere' ? S.goDay(f) : S.goRecord(f),
         html: `${kind === 'kpiMonth' && a ? `<div class="fd-sh-hero">${ring(a.pct ?? 0, 'booker')}<p><b>${a.present}/${a.school}</b> ${esc(L.kSub.days(a.present, a.school))}</p></div>` : ''}
-          <h3>${esc(kind === 'kpiHere' ? S.last7 : S.month(mname))}</h3>${daysList([...(kind === 'kpiHere' ? st.days.slice(-7) : month)].reverse())}` };
+          <h3>${esc(kind === 'kpiHere' ? S.last7 : S.month(mname))}</h3>${daysList(inDayOrder(kind === 'kpiHere' ? st.days.slice(-7) : month, 'day'))}` };
     }
     case 'kpiAte': {
       const meals = st?.meals_today || [];
@@ -1677,12 +1818,12 @@ function sheetBody(kind, ctx, d, view) {
       const r = restKpi(st); if (!r) return null;
       return { title: `${K.rest}: ${f}`, href: dashLink(slug, 'day', { kid: d.child }), go: S.goDay(f),
         html: `<div class="fd-k-lumi">${bars(r.series, lang, 'lumi', Math.max(120, ...r.series.map((x) => x.value || 0)))}</div>
-          <ol class="fd-sh-list">${[...r.series].reverse().map((x) => `<li><b>${esc(cap(dayText(x.day, lang, { weekday: 'long' })))}</b><span>${esc(x.value == null ? L.nothingYet : minutesText(x.value, lang))}</span></li>`).join('')}</ol>` };
+          <ol class="fd-sh-list">${inDayOrder(r.series, 'day').map((x) => `<li><b>${esc(cap(dayText(x.day, lang, { weekday: 'long' })))}</b><span>${esc(x.value == null ? L.nothingYet : minutesText(x.value, lang))}</span></li>`).join('')}</ol>` };
     }
     case 'kpiFeel': {
       const md = moodKpi(st, String(d.date).slice(0, 10));
       return { title: `${S.week}: ${f}`, href: dashLink(slug, 'day', { kid: d.child }), go: S.goDay(f),
-        html: md.days.length ? `<ol class="fd-sh-feels">${[...md.days].reverse().map((x) => `<li><img src="img/friends/${esc(FEEL_ART[x.feeling] || 'lumi')}-480.webp" alt="" width="64" height="64" loading="lazy">
+        html: md.days.length ? `<ol class="fd-sh-feels">${inDayOrder(md.days, 'day').map((x) => `<li><img src="img/friends/${esc(FEEL_ART[x.feeling] || 'lumi')}-480.webp" alt="" width="64" height="64" loading="lazy">
           <span><b>${esc((FEEL[lang] || FEEL.en)[x.feeling] || x.feeling)}</b><span class="small muted">${esc(cap(dayText(x.day, lang, { weekday: 'long', month: 'short', day: 'numeric' })))}</span></span></li>`).join('')}</ol>` : `<p class="muted">${esc(S.none)}</p>` };
     }
     case 'kpiSkills': {
@@ -1736,6 +1877,7 @@ function itemBody(kind, ctx, d, view) {
   const longDay = (iso) => cap(dayText(iso, lang, { weekday: 'long', month: 'long', day: 'numeric' }));
   if (type === 'entry') {
     const e = (d.today?.timeline || []).find((x) => x.id === id); if (!e) return null;
+    if (e.kind === 'photo' && e.link) return { title: cap(e.words), href: e.link, go: lang === 'es' ? 'Abrir el momento' : 'Open the moment', html: `<div class="fd2-dr-art">${entryArt(esc, e)}</div><p class="fd2-dr-words">${esc(cap(e.words))}</p>` };   // a classroom moment (moments.js)
     let art = `<div class="fd2-dr-art">${entryArt(esc, e)}</div>`;
     if (e.kind === 'meal') {
       const meal = (st?.meals_today || []).find((x) => x.time === e.time || x.meal === e.code);

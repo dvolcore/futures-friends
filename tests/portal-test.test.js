@@ -80,9 +80,18 @@ test('curriculum: only a small sample of skill wording, no activity steps or les
   }
   for (const e of FIXES.flatMap((F) => F.entries)) {
     assert.doesNotMatch(e.b, /"steps(_es)?":\s*\[\s*"/, `${e.k}: activity steps`);
-    assert.doesNotMatch(e.k, /menu180|curriculum|library\/catalog/, `${e.k}: curriculum or catalogue data`);
+    assert.doesNotMatch(e.k, /menu180|library\/catalog|\/api\/curriculum\/(?!sequence\b|plan\/)/, `${e.k}: curriculum or catalogue data`);
   }
   assert.ok(!FILES.some((f) => /curriculum-indicators|unit\d+-(data|prep|family)|menu-?180|library-catalog/.test(f)));
+  // ONE sample curriculum day: one plan with cards, every other plan a "For licensed centers" stub, the sequence names one day only
+  const all = FIXES.flatMap((F) => F.entries);
+  const plans = all.filter((e) => / \/api\/curriculum\/plan\//.test(e.k)).map((e) => ({ ...JSON.parse(e.b), day: e.k.match(/\/plan\/([^?\s]+)/)[1] }));
+  assert.ok(new Set(plans.filter((p) => (p.blocks || []).length).map((p) => p.day)).size <= 1, 'at most one curriculum day with its cards (in English and Spanish)');
+  for (const p of plans.filter((x) => !(x.blocks || []).length)) assert.equal(p.title, 'For licensed centers');
+  for (const e of all.filter((x) => / \/api\/curriculum\/sequence/.test(x.k))) {
+    const named = JSON.parse(e.b).days.filter((d) => d.theme !== 'For licensed centers');
+    assert.ok(named.length <= 1, `the sequence names ${named.length} days`);
+  }
 });
 
 test('fake data only: the demo center, the felt-art "photos", no real addresses', () => {
@@ -92,7 +101,8 @@ test('fake data only: the demo center, the felt-art "photos", no real addresses'
   const emails = new Set(FIXES.flatMap((F) => F.entries).flatMap((e) => e.b.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/g) || []));
   for (const m of emails) assert.match(m, /futuresfriends-test\.app$|\.local$|example\.(com|org)$|\.test$/, m);
   const photos = FILES.filter((f) => f.startsWith('portal-test/sb/'));
-  for (const f of photos) assert.match(f, /\/demo-[\w-]+\.png$/, f);
+  // the demo children's felt-art photos, and the classroom moments made by seed-moments-demo.mjs (felt art only, fixed d0d0e000-… ids)
+  for (const f of photos) assert.match(f, /\/demo-[\w-]+\.png$|\/classroom-moments\/[\w-]+\/d0d0e000-0000-4000-8000-\d{12}\/[\w-]+\.(?:jpg|png|webp|mp4)$/, f);
 });
 
 // ------------------------------------------------------------------------------------------------------------------- browser
