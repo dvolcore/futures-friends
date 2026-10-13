@@ -2,23 +2,12 @@
 (() => {
   const money = value => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
   const wholeMoney = value => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
-  const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  const I = window.FFInvI18n;
+  // text that follows English / Español (portal-i18n.js); figures pass through it unchanged
+  const set = (id, text) => { const el = document.getElementById(id); if (!el) return; if (I) I.set(el, text); else el.textContent = text; };
+  const label = (el, name, text) => { if (I) I.setAttr(el, name, text); else el.setAttribute(name, text); };
   const explorer = document.getElementById('workspace');
   document.querySelector('.explore-button').addEventListener('click', () => { explorer.open = true; });
-  const revealNumber = id => {
-    const el = document.getElementById(id);
-    const text = el.textContent;
-    el.setAttribute('aria-label', text);
-    el.classList.add('number-reveal');
-    el.replaceChildren(...Array.from(text, (digit, index) => {
-      const span = document.createElement('span');
-      span.className = 'num-digit';
-      span.setAttribute('aria-hidden', 'true');
-      span.style.setProperty('--digit-delay', `${index * 35}ms`);
-      span.textContent = digit;
-      return span;
-    }));
-  };
   const observed = document.querySelectorAll('.cash-panel');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } }), {threshold:.18});
@@ -39,7 +28,7 @@
     set('phaseText', description);
     const link = document.getElementById('phaseLink');
     link.setAttribute('href', href);
-    link.textContent = label;
+    if (I) I.set(link, label); else link.textContent = label;
   }));
   const renderRows = (id, rows) => {
     const list = document.getElementById(id);
@@ -57,12 +46,14 @@
   };
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const motionButton = document.getElementById('motionToggle');
-  let manualPause = false;
+  let manualPause = document.documentElement.dataset.motion === 'off';   // the site's Decorative motion switch (ff-display-preferences)
   const updateMotion = () => {
     const paused = manualPause || motionPreference.matches;
     document.documentElement.classList.toggle('motion-paused', paused);
     motionButton.setAttribute('aria-pressed', String(paused));
-    motionButton.textContent = motionPreference.matches ? 'Reduced motion on' : paused ? 'Resume motion' : 'Pause motion';
+    const text = motionPreference.matches ? 'Reduced motion on' : paused ? 'Resume motion' : 'Pause motion';
+    if (I) I.set(motionButton, text); else motionButton.textContent = text;
+    document.dispatchEvent(new CustomEvent('inv:motion', { detail: { paused } }));
     motionButton.disabled = motionPreference.matches;
   };
   motionButton.addEventListener('click', () => { manualPause = !manualPause; updateMotion(); });
@@ -139,7 +130,7 @@
     const scrubber = document.getElementById('monthScrubber');
     const selectMonth = month => {
       const index = month - 1, row = cash[index];
-      scrubber.value = month;scrubber.setAttribute('aria-valuetext', `Month ${month}, ${row.children} children, cumulative cash deficit ${money(Math.abs(row.cumulative))}`);
+      scrubber.value = month;label(scrubber, 'aria-valuetext', `Month ${month}, ${row.children} children, cumulative cash deficit ${money(Math.abs(row.cumulative))}`);
       set('cashMonth',String(month).padStart(2,'0'));set('monthLabel','Month ' + month);
       set('cashDeficit',money(Math.abs(row.cumulative)));set('cashChildren',String(row.children));
       set('cashReceipts',money(row.receipts));set('cashSpending',money(spending[index]));set('cashNet',money(row.net).replace('-','−'));
@@ -213,13 +204,14 @@
       const date = new Date(meta.prepared + 'T12:00:00');
       set('modelDate', 'Planning model · ' + date.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}));
       const chart = document.querySelector('.comparison');
-      chart.setAttribute('aria-label', `Draft monthly tuition ${money(assumptions.tuition)}; operating break-even ${money(metrics.breakeven_tuition)} before building payments and debt`);
+      label(chart, 'aria-label', `Draft monthly tuition ${money(assumptions.tuition)}; operating break-even ${money(metrics.breakeven_tuition)} before building payments and debt`);
       const max = Math.max(assumptions.tuition, metrics.breakeven_tuition) / .9;
       document.querySelector('.bar-tuition').style.setProperty('--height', (assumptions.tuition / max * 100) + '%');
       document.querySelector('.bar-break-even').style.setProperty('--height', (metrics.breakeven_tuition / max * 100) + '%');
       initializeExplorer(data);
-      ['funding', 'refinance', 'capacity', 'pilotDuration', 'platformYear'].forEach(revealNumber);
       document.documentElement.dataset.modelVersion = meta.version;
+      // portal.js: the reveal, the tables and the documents drawer start from the same verified model
+      document.dispatchEvent(new CustomEvent('inv:model', { detail: data }));
     })
-    .catch(() => { document.getElementById('dataError').hidden = false; });
+    .catch(() => { document.getElementById('dataError').hidden = false; document.dispatchEvent(new CustomEvent('inv:model-error')); });
 })();
