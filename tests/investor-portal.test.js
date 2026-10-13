@@ -777,11 +777,17 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
     const r = await pg.evaluate(() => Object.fromEntries(['.studio-top', '.studio-rail', '.cap-hero', '.cap-head', '#kpis', '.cap-strip', '.ovd-funding', '.ovd-year', '#profitLab', '.ovd-docs', '.cap-foot', '.studio-top .brand', '.studio-top .lang-switch', '.rail-tag'].map((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [s, { t: Math.round(b.top + scrollY), b: Math.round(b.bottom + scrollY), l: Math.round(b.left), r: Math.round(b.right), w: Math.round(b.width), h: Math.round(b.height) }]; })));
     // the rail: a green column on the left, logo on top, the views, then English | Español and the tagline at the bottom
-    assert.ok(r['.studio-top'].l === 0 && r['.studio-top'].w >= 120 && r['.studio-top'].w <= 160 && r['.studio-top'].h === H, JSON.stringify(r['.studio-top']));
+    assert.ok(r['.studio-top'].l === 0 && r['.studio-top'].w >= 120 && r['.studio-top'].w <= 160, JSON.stringify(r['.studio-top']));
     assert.ok(r['.studio-top .brand'].t < r['.studio-rail'].t && r['.studio-rail'].b < r['.studio-top .lang-switch'].t && r['.studio-top .lang-switch'].b <= r['.rail-tag'].t, 'logo, views, language, tagline');
     // the hero: from the rail's edge to the window's edge, from the very top; the title over it
     const hero = r['.cap-hero'];
-    assert.ok(hero.t === 0 && Math.abs(hero.l - r['.studio-top'].r) <= 1 && hero.r === W, `full bleed: ${JSON.stringify(hero)}`);
+    // v2279 (owner: "that purple doesn't even need to exist ... the banner can be stretched out"): the picture from x = 0 to the window's edge,
+    // the rail transparent on top of it (no colour, no image, no border, no shadow)
+    assert.ok(hero.t === 0 && hero.l === 0 && hero.r === W, `full bleed from x = 0: ${JSON.stringify(hero)}`);
+    assert.equal(await pg.$eval('#ccSceneImg', (i) => Math.round(i.getBoundingClientRect().left)), 0, 'the banner image starts at x = 0');
+    const railStyle = await pg.$eval('.studio-top', (e) => { const s = getComputedStyle(e); return [s.backgroundColor, s.backgroundImage, s.borderRightWidth, s.boxShadow]; });
+    assert.deepEqual(railStyle, ['rgba(0, 0, 0, 0)', 'none', '0px', 'none'], 'the rail has no panel');
+    assert.ok(r['.cap-head'].l >= r['.studio-top'].r, 'the title starts right of the rail');
     assert.ok(r['.cap-head'].t >= hero.t && r['.cap-head'].b <= hero.b && r['.cap-head'].l > hero.l, 'the title over the picture');
     for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - r['#kpis'].l) <= 2 && Math.abs(r[s].r - r['#kpis'].r) <= 2, `${s} spans the content width`);
     assert.ok(r['#kpis'].t >= hero.b - 30, 'the tiles start below the picture (at most a touch of the floor under the fade)');
@@ -801,19 +807,19 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
     // nothing in a panel is cut off by its fixed height
     const clipped = await pg.$$eval('.ovd-funding .cap-legend button, .ovd-year .cap-snap dl', (els) => els.filter((e) => { const p = e.closest('.ovd-card').getBoundingClientRect(), b = e.getBoundingClientRect(); return b.bottom > p.bottom + 0.5; }).length);
     assert.equal(clipped, 0, 'every legend row and the month snapshot sit inside their panels');
-    // v2278 (owner: "make the background this color"): data-theme="gold" around #ddae57, an espresso rail, the picture's palette on the tiles
-    assert.equal(await pg.getAttribute('html', 'data-theme'), 'gold');
-    assert.equal(await pg.getAttribute('html', 'data-rail'), 'espresso');
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(221, 174, 87\)/);
-    // text that sits directly on the gold passes WCAG AA (4.5:1 against #ddae57)
-    const contrast = await pg.evaluate(() => {
+    // v2279 (owner picked "A Sunrise"): data-theme="blend-sunrise" by default, the navy rail with a gold active pill
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'blend-sunrise');
+    assert.equal(await pg.getAttribute('html', 'data-rail'), 'navy');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(47, 125, 110\)/);
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundImage), /42, 64, 184[\s\S]*47, 125, 110[\s\S]*221, 174, 87/, 'blue -> teal-green -> gold');
+    assert.match(await pg.$eval('.rail-pill', (p) => getComputedStyle(p).backgroundImage), /232, 193, 114|201, 149, 54/, 'a gold active pill');
+    // page-level text sits on its own deep band and passes AA against it, wherever the sunrise runs
+    const bands = await pg.evaluate(() => {
       const lum = (c) => { const [r, g, b] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-      const bg = lum('rgb(221, 174, 87)'), ratio = (c) => { const l = lum(c); return (Math.max(l, bg) + 0.05) / (Math.min(l, bg) + 0.05); };
-      return [...document.querySelectorAll('.strip-staff, .cap-foot span, .studio-foot > span, .studio-foot small, .studio-foot a')].filter((e) => e.offsetParent && e.textContent.trim()).map((e) => [e.textContent.trim().slice(0, 30), +ratio(getComputedStyle(e).color).toFixed(2)]);
+      const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+      return [...document.querySelectorAll('.strip-staff, .cap-foot, .studio-foot')].filter((e) => e.offsetParent).flatMap((e) => { const bg = getComputedStyle(e).backgroundColor; return [e, ...e.querySelectorAll('span, a, small, b')].filter((x) => x.textContent.trim() && !x.closest('[aria-hidden="true"]')).map((x) => [x.textContent.trim().slice(0, 24), bg, +ratio(getComputedStyle(x).color, bg).toFixed(2)]); });
     });
-    assert.ok(contrast.length >= 4 && contrast.every(([, r]) => r >= 4.5), `page-level text on the gold is AA: ${JSON.stringify(contrast)}`);
-    // the six tiles stand apart from the gold page (no tile is gold any more)
-    assert.ok(await pg.$$eval('#kpis .kpi', (k) => k.every((x) => !/221, 174, 87|229, 152, 68/.test(getComputedStyle(x).backgroundImage))), 'no tile is gold on gold');
+    assert.ok(bands.length >= 6 && bands.every(([, bg, r]) => !/rgba\(0, 0, 0, 0\)/.test(bg) && r >= 4.5), `page-level text AA on its band: ${JSON.stringify(bands)}`);
     assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, 'a colour per tile');
     assert.ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 0, 'no sideways scroll');
     assert.deepEqual(errors, []);
@@ -1072,7 +1078,7 @@ test('blend themes: sunrise and aurora keep page-level text AA at sample points,
   const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
   for (const theme of ['blend-sunrise', 'blend-aurora']) for (const motion of [false, true]) {
     const { ctx, pg, errors } = await page(1440, { motion });
-    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-theme="gold"', `data-theme="${theme}"`) })));
+    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+"/, `data-theme="${theme}"`) })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
     assert.equal(await pg.getAttribute('html', 'data-theme'), theme);
     // every page-level line sits on an opaque deep band; its text against that band is AA, whatever the gradient does around it
@@ -1088,6 +1094,30 @@ test('blend themes: sunrise and aurora keep page-level text AA at sample points,
       if (motion) { assert.equal(aur.length, 2, 'two aurora layers drift'); assert.ok(aur.every((a) => a.d >= 20000), `a slow drift (≥20 s): ${JSON.stringify(aur)}`); assert.ok(await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length) <= 4, 'ambient loops within the limit'); }
       else assert.deepEqual(aur, [], 'reduced motion: the aurora is static');
     }
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+
+test('the gold theme (one attribute away): #ddae57 page, espresso rail, page-level text AA on the gold, no tile gold on gold', async (t) => {
+  if (skip) return t.skip(skip);
+  for (const [W, H] of [[1280, 853], [1440, 900]]) {
+    const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce' }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
+    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+" data-rail="[a-z]+"/, 'data-theme="gold" data-rail="espresso"') })));
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(400);
+    // v2278 (owner: "make the background this color"): data-theme="gold" around #ddae57, an espresso rail, the picture's palette on the tiles
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'gold');
+    assert.equal(await pg.getAttribute('html', 'data-rail'), 'espresso');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(221, 174, 87\)/);
+    // text that sits directly on the gold passes WCAG AA (4.5:1 against #ddae57)
+    const contrast = await pg.evaluate(() => {
+      const lum = (c) => { const [r, g, b] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+      const bg = lum('rgb(221, 174, 87)'), ratio = (c) => { const l = lum(c); return (Math.max(l, bg) + 0.05) / (Math.min(l, bg) + 0.05); };
+      return [...document.querySelectorAll('.strip-staff, .cap-foot span, .studio-foot > span, .studio-foot small, .studio-foot a')].filter((e) => e.offsetParent && e.textContent.trim()).map((e) => [e.textContent.trim().slice(0, 30), +ratio(getComputedStyle(e).color).toFixed(2)]);
+    });
+    assert.ok(contrast.length >= 4 && contrast.every(([, r]) => r >= 4.5), `page-level text on the gold is AA: ${JSON.stringify(contrast)}`);
+    // the six tiles stand apart from the gold page (no tile is gold any more)
+    assert.ok(await pg.$$eval('#kpis .kpi', (k) => k.every((x) => !/221, 174, 87|229, 152, 68/.test(getComputedStyle(x).backgroundImage))), 'no tile is gold on gold');
     assert.deepEqual(errors, []);
     await ctx.close();
   }

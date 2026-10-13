@@ -550,6 +550,11 @@
       let nat = Number(img.getAttribute('width')) / Number(img.getAttribute('height')), last = '';
       // the hero's height: the picture from its top down to the scene's 'show' line (cast-2: the table's front edge), so every
       // head and the front row's bodies are whole; the title sits over the ceiling, above the highest head.
+      // v2279 (owner: no rail panel, the picture full width, the assets on top): the rail's links start just under the picture, so no
+      // word ever sits on a character, and glide up to the top as the page scrolls (one rAF per scroll)
+      let rt = 0;
+      function railTop() { cancelAnimationFrame(rt); rt = requestAnimationFrame(() => { const h = parseFloat(R.style.getPropertyValue('--hero-px')) || 0; R.style.setProperty('--rail-top', `${Math.max(14, Math.round(h + 14 - scrollY))}px`); }); }
+      addEventListener('scroll', railTop, { passive: true });
       const frame = () => {
         const footF = Math.min(1, (cfg.show || cfg.band[1]) + AIR), W = hero.clientWidth;
         fig.style.setProperty('--nat', String(nat));
@@ -564,6 +569,7 @@
         if (key === last) return;
         last = key;
         hero.style.setProperty('--hero-h', `${H}px`);
+        R.style.setProperty('--hero-px', `${H}px`); railTop();
         hero.style.setProperty('--img-top', `${push}px`);
         hero.dataset.push = String(push);
       };
