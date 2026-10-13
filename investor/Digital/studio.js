@@ -515,7 +515,8 @@
     const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), onSelect: (k) => { if (ready) hl(k); },
       colors: ({ navy: { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' }, money: { deficit: '#5cecff', refinance: '#6f8dff', floor: '#ffb340', contingency: '#d6a1ff' },
         // scene (default): the picture's colours: screen cyan, suit blue, lamp orange, purple-flower lilac
-        scene: { deficit: '#0bd9dc', refinance: '#4d5ef2', floor: '#eba347', contingency: '#a685d4' } })[R.dataset.theme] || undefined });
+        scene: { deficit: '#0bd9dc', refinance: '#4d5ef2', floor: '#eba347', contingency: '#a685d4' },
+        royal: { deficit: '#0bd9dc', refinance: '#7b8cff', floor: '#eba347', contingency: '#c48cff' } })[R.dataset.theme] || undefined });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
       height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.27, 12 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
@@ -575,6 +576,69 @@
       return { cfg, frame };
     })();
 
+    // ---- the six tile charts (v2276). viewBox 120 x 34 unless noted; every shape is a model figure.
+    function tileCharts(m) {
+      const { funding, totals, platform, cash, metrics } = m;
+      const put = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; return el; };
+      const f1 = (v) => v.toFixed(1);
+      // 01 the funding ask: its four parts, one stacked bar filling in part by part, a scan line passing over it
+      const parts = [['deficit', funding.peak_deficit], ['refinance', totals.refinance], ['floor', funding.cash_floor], ['contingency', totals.contingency]];
+      const total = funding.request_before_financing;
+      let x = 0;
+      put('kpiFundChart', `<rect class="tc-track" x="0" y="11" width="120" height="13" rx="6.5"/>` + parts.map(([k, v], i) => { const w = v / total * 120, r = `<rect class="tc-seg tc-${k}" data-v="${v}" x="${f1(x)}" y="11" width="${f1(Math.max(0.8, w - 1))}" height="13" rx="3" style="--i:${i}"/>`; x += w; return r; }).join('') + `<rect class="tc-scan" x="0" y="8" width="6" height="19" rx="3"/>`);
+      // 02 revenue: the twelve months' receipts as rising bars; one bar at a time lights up (the clock)
+      const maxRec = Math.max(...cash.map((r) => r.receipts));
+      put('kpiRevSpark', cash.map((r, i) => { const h = r.receipts / maxRec * 30; return `<rect class="tc-bar" data-v="${r.receipts}" x="${f1(i * 10 + 1)}" y="${f1(33 - h)}" width="8" height="${f1(h)}" rx="2" style="--i:${i}"/>`; }).join(''));
+      // 03 full enrollment: the ramp as a step line (30 -> 34 -> 36 -> 38 ...), a dot travelling along it, a child popping at each step up
+      const kids = cash.map((r) => r.children), lo = Math.min(...kids), hi = Math.max(...kids), ky = (c) => 29 - (c - lo) / ((hi - lo) || 1) * 23;
+      const d = kids.map((c, i) => `${i ? 'H' : 'M0,'}${i ? f1(i * 10) : f1(ky(c))}${i ? ` V${f1(ky(c))}` : ''}`).join(' ') + ' H120';
+      const pops = kids.map((c, i) => (i === 0 || c > kids[i - 1] ? `<circle class="tc-kid" data-v="${c}" cx="${f1(i * 10 + (i ? 0 : 3))}" cy="${f1(ky(c) - 4.5)}" r="2.6" style="--i:${i}"/>` : '')).join('');
+      put('kpiRamp', `<path class="tc-step" d="${d}" pathLength="1"/>${pops}<circle class="tc-dot" cx="0" cy="${f1(ky(kids[0]))}" r="3.2"/>`);
+      // 04 the operating margin: each month's operating result (receipts - recurring) rising to the full-enrollment month, x 12 = the tile
+      const op = cash.map((r) => r.receipts - r.recurring), opLo = Math.min(0, ...op), opHi = Math.max(...op), oy = (v) => 31 - (v - opLo) / ((opHi - opLo) || 1) * 27;
+      const pts = op.map((v, i) => `${f1(i * 120 / 11)},${f1(oy(v))}`);
+      put('kpiMarginChart', `<line class="tc-zero" x1="0" x2="120" y1="${f1(oy(0))}" y2="${f1(oy(0))}"/><path class="tc-area" d="M0,${f1(oy(opLo))} L${pts.join(' L')} L120,${f1(oy(opLo))} Z"/><path class="tc-line" d="M${pts.join(' L')}" pathLength="1"/><circle class="tc-end" data-v="${op[op.length - 1]}" cx="120" cy="${f1(oy(op[op.length - 1]))}" r="3.4"/>`);
+      // 05 cash-positive months: each month's net cash, red below the zero line and green above, growing out of the line; a marker at
+      // the first cash-positive month
+      // a square-root scale on both sides of the zero line (sign and order kept) so the months above zero stay visible next to month 1
+      const nets = cash.map((r) => r.net), rt = (v) => Math.sqrt(Math.abs(v)), up = Math.max(0, ...nets.map((v) => (v > 0 ? rt(v) : 0))), dn = Math.max(0, ...nets.map((v) => (v < 0 ? rt(v) : 0)));
+      const zy = Math.min(30, Math.max(4, 2 + 30 * up / ((up + dn) || 1))), sc = (v) => (v > 0 ? rt(v) / (up || 1) * (zy - 2) : rt(v) / (dn || 1) * (32 - zy));
+      const first = cash.findIndex((r) => r.net > 0);
+      put('kpiGapSpark', `<line class="tc-zero" x1="0" x2="120" y1="${f1(zy)}" y2="${f1(zy)}"/>` + (first >= 0 ? `<line class="tc-mark" x1="${f1(first * 10 + 5)}" x2="${f1(first * 10 + 5)}" y1="0" y2="34"/>` : '') + nets.map((v, i) => { const h = Math.max(1.2, Math.abs(sc(v))); return `<rect class="tc-net ${v > 0 ? 'up' : 'down'}" data-v="${v}" x="${f1(i * 10 + 1.5)}" y="${f1(v > 0 ? zy - h : zy)}" width="7" height="${f1(h)}" rx="1.5" style="--i:${i}"/>`; }).join(''));
+      // 06 platform, year one: the ring of its parts (completion, assurance, support, hosting), drawn segment by segment
+      const support = Math.round((platform.recurring - platform.hosting) * 100) / 100;
+      const ring = [['build', platform.completion], ['assure', platform.assurance_one_time], ['support', support], ['host', platform.hosting]];
+      const C = 2 * Math.PI * 12; let at = 0;
+      const el6 = put('kpiPlatChart', `<circle class="tc-ring-track" cx="17" cy="17" r="12"/>` + ring.map(([k, v], i) => { const len = v / platform.first_year * C, a = `<circle class="tc-arc tc-${k}" data-v="${v}" cx="17" cy="17" r="12" stroke-dasharray="${(len - 0.8).toFixed(2)} ${C.toFixed(2)}" transform="rotate(${(-90 + at / C * 360).toFixed(2)} 17 17)" style="--i:${i};--len:${(len - 0.8).toFixed(2)}"/>`; at += len; return a; }).join('') + `<circle class="tc-ring-spin" cx="17" cy="17" r="15.5"/>` + ring.map(([k, v], i) => `<rect class="tc-leg tc-${k}" x="40" y="${f1(3 + i * 7.6)}" width="${f1(4 + v / platform.completion * 74)}" height="5" rx="2.5" style="--i:${i}"/>`).join(''));
+      if (el6) el6.setAttribute('preserveAspectRatio', 'xMinYMid meet');
+      void metrics;
+    }
+    // ---- one clock for every tile's ambient motion (no CSS loops: the page keeps its few ambient animations). ~30 fps while the tiles
+    // are on screen, the tab is visible and motion is on; stopped (and left at its final drawing) by Reduce Motion, the motion switch,
+    // Pause motion and ?reveal=off.
+    const tileMotion = (() => {
+      const host = $('#kpis'); if (!host) return { start() {} };
+      let raf = 0, on = false, visible = true, last = 0, t0 = 0, bar = -1;
+      const allowed = () => motionOn() && params().get('reveal') !== 'off';
+      function frame(now) {
+        raf = requestAnimationFrame(frame);
+        if (now - last < 33) return; last = now;
+        const t = ((now - t0) / 6000) % 1;
+        host.style.setProperty('--clk', t.toFixed(4));
+        const scan = $('#kpiFundChart .tc-scan'); if (scan) scan.setAttribute('x', (t * 126 - 6).toFixed(1));
+        const bars = $$('#kpiRevSpark .tc-bar'), b = Math.floor(t * 12) % 12;
+        if (b !== bar && bars.length) { bars.forEach((r, i) => r.classList.toggle('lit', i === b)); bar = b; }
+        const path = $('#kpiRamp .tc-step'), dot = $('#kpiRamp .tc-dot');
+        if (path && dot && path.getTotalLength) { const L = path.getTotalLength(), p = path.getPointAtLength(L * t); dot.setAttribute('cx', p.x.toFixed(1)); dot.setAttribute('cy', p.y.toFixed(1)); }
+      }
+      function run() { if (raf || !on || !visible || document.hidden || !allowed()) return; t0 = performance.now(); raf = requestAnimationFrame(frame); host.classList.add('tiles-live'); }
+      function stop() { cancelAnimationFrame(raf); raf = 0; host.classList.remove('tiles-live'); }
+      if (typeof IntersectionObserver === 'function') new IntersectionObserver((es) => { visible = es.some((e) => e.isIntersecting); if (visible) run(); else stop(); }).observe(host);
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : run()));
+      D.addEventListener('inv:motion', (e) => { if (e.detail?.paused) stop(); else run(); });
+      return { start() { on = true; run(); }, stop };
+    })();
+
     function build(m) {
       mdl = m;
       const { totals, platform, assumptions, metrics, cash } = m;
@@ -585,20 +649,16 @@
       const full = Math.max(...cash.map((r) => r.children)), fullAt = cash.findIndex((r) => r.children === full) + 1;
       text('kpiRevenue', whole(metrics.full_enrollment_receipts)); text('kpiRevKids', String(full)); text('kpiRevTuition', whole(assumptions.tuition)); text('kpiRevColl', Math.round(assumptions.collection * 100) + '%');
       text('kpiFullMonth', String(fullAt)); text('kpiFullKids', String(full)); text('kpiRampFrom', String(cash[0].children)); text('kpiRampTo', String(full));
-      const ramp = $('#kpiRamp path');
-      if (ramp) { const lo = Math.min(...cash.map((r) => r.children)), y = (c) => 27 - (c - lo) / ((full - lo) || 1) * 23; ramp.setAttribute('d', cash.map((r, i) => `${i ? 'H' : 'M0,'}${i ? (i * 10).toFixed(1) : y(r.children).toFixed(1)}${i ? ` V${y(r.children).toFixed(1)}` : ''}`).join(' ') + ' H120'); ramp.setAttribute('pathLength', '1'); }
       // v2274 (model v5): the operating margin at today's tuition, before building payments and debt
       text('kpiProfitSign', metrics.year2_margin >= 0 ? '+' : '−'); text('kpiProfit', whole(Math.round(Math.abs(metrics.year2_margin))));
       text('kpiTodayTuition', whole(assumptions.tuition));
       // the owner-confirmed weekly price (2026-10-13): $210/week, $910/month via 52/12
       const weekly = assumptions.tuition_weekly || Math.round(assumptions.tuition * 12 / 52);
       text('kpiTodayWeek', whole(weekly)); text('kpiRevWeek', whole(weekly));
-      const spark = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; };
-      const maxRec = Math.max(...cash.map((r) => r.receipts));
-      const recPts = cash.map((r, i) => `${(i * 120 / 11).toFixed(1)},${(28 - r.receipts / maxRec * 24).toFixed(1)}`);
-      spark('kpiRevSpark', `<path class="sp-fill" d="M0,30 L${recPts.join(' L')} L120,30 Z"/><path d="M${recPts.join(' L')}" pathLength="1"/>`);
-      const maxGap = Math.max(...cash.map((r) => Math.abs(r.net)));
-      spark('kpiGapSpark', cash.map((r, i) => { const hh = Math.max(1.5, Math.abs(r.net) / maxGap * 26); return `<rect x="${(i * 10).toFixed(1)}" y="${(29 - hh).toFixed(1)}" width="7" height="${hh.toFixed(1)}" rx="1.5" style="--i:${i}"/>`; }).join(''));
+      // v2276 (owner: "these tabs need to be digital ... animated motion graphics ... make them different colors so we can see it go up"):
+      // an animated chart in every KPI tile, each drawn from the model (no invented numbers). They grow in as their tile counts up
+      // (CSS, .inv-play) and then breathe on one shared clock (tileMotion below): a scan, a moving highlight, a travelling dot.
+      tileCharts(m);
       const g1 = Math.abs(cash[0].net), g12 = Math.abs(cash[cash.length - 1].net);
       const posAt = cash.find((r) => r.net > 0);
       if (posAt) text('kpiPosMonth', String(posAt.month));
@@ -610,6 +670,9 @@
       ready = true;
       hl(null);
       seen.forEach(play);
+      // the tiles' ambient motion starts once the reveal has landed them (or at once when there is no reveal)
+      const go = () => tileMotion.start();
+      if (window.FFInvReveal?.running()) { const w = setInterval(() => { if (!window.FFInvReveal.running()) { clearInterval(w); go(); } }, 300); } else go();
     }
     // a panel on screen: it rises (CSS, .ovd-in); once the model is in, its figures count and its picture draws
     function play(card) {

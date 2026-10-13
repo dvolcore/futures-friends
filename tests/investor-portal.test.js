@@ -798,9 +798,9 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
     // nothing in a panel is cut off by its fixed height
     const clipped = await pg.$$eval('.ovd-funding .cap-legend button, .ovd-year .cap-snap dl', (els) => els.filter((e) => { const p = e.closest('.ovd-card').getBoundingClientRect(), b = e.getBoundingClientRect(); return b.bottom > p.bottom + 0.5; }).length);
     assert.equal(clipped, 0, 'every legend row and the month snapshot sit inside their panels');
-    // the picture's palette (data-theme="scene": moss from the flowers' leaves), a different colour per tile
-    assert.equal(await pg.getAttribute('html', 'data-theme'), 'scene');
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(78, 94, 47\)/);
+    // v2276 (owner: "let's try this blue for the background"): data-theme="royal" around #3550d4, the picture's palette on the tiles
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'royal');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(53, 80, 212\)/);
     assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, 'a colour per tile');
     assert.ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 0, 'no sideways scroll');
     assert.deepEqual(errors, []);
@@ -980,4 +980,45 @@ test('model v5: the generator reproduces the archived v4 (where the archive exis
   assert.ok(!rows.some((r) => /^(Staff|Employer|Staff insurance|Staff readiness)/.test(r.category) && /food worker|Substitute|teacher/i.test(r.item)), 'no food worker, substitute or v4 teacher lines');
   assert.ok(!rows.some((r) => r.category === 'Staff benefits'), 'no employer health or retirement benefit');
   assert.equal(s.wages, 149760);
+});
+
+// ------------------------------------------------------------------ v2276 KPI tiles: digital, animated (owner: "these tabs need to be digital ... animated
+// motion graphics ... make them different colors so that we can see it go up"): an animated chart in every tile, each bound to the model
+test('KPI tiles: six animated charts bound to the model, distinct colours, glassy badges; they grow in with motion and are drawn final without it', async (t) => {
+  if (skip) return t.skip(skip);
+  const { funding, totals, cash, platform } = MODEL;
+  const near = (a, b) => Math.abs(Number(a) - b) < 0.01;
+  // reduced motion: every chart is there, drawn final, nothing runs, the shared clock is off
+  const r = await page(1440);
+  await r.pg.goto(`${site.base}${OVERVIEW}`); await model(r.pg); await r.pg.waitForTimeout(800);
+  const data = await r.pg.evaluate(() => Object.fromEntries([...document.querySelectorAll('#kpis .kpi-chart')].map((c) => [c.dataset.chart, [...c.querySelectorAll('[data-v]')].map((e) => [e.getAttribute('class'), e.dataset.v])])));
+  assert.deepEqual(Object.keys(data), ['fund', 'rev', 'ramp', 'margin', 'gap', 'plat'], 'one chart per tile, in tile order');
+  assert.ok([funding.peak_deficit, totals.refinance, funding.cash_floor, totals.contingency].every((v, i) => near(data.fund[i][1], v)), '01: the four parts of the funding ask');
+  assert.ok(data.rev.length === 12 && cash.every((m, i) => near(data.rev[i][1], m.receipts)), '02: the twelve months\' receipts');
+  assert.deepEqual(data.ramp.map((x) => Number(x[1])), [...new Set(MODEL.assumptions.cash_ramp)], '03: a child pops at each step of the ramp');
+  assert.ok(near(data.margin[0][1], cash[11].receipts - cash[11].recurring) && Math.abs((cash[11].receipts - cash[11].recurring) * 12 - MODEL.metrics.year2_margin) < 1, '04: the line ends on the monthly operating result (x 12 = the margin)');
+  assert.ok(data.gap.length === 12 && cash.every((m, i) => near(data.gap[i][1], m.net) && data.gap[i][0].includes(m.net > 0 ? 'up' : 'down')), '05: each month\'s net cash, red below zero and green above');
+  assert.ok(near(data.plat.reduce((a, x) => a + Number(x[1]), 0), platform.first_year), '06: the ring adds up to platform year one');
+  assert.equal(await r.pg.$$eval('#kpiGapSpark .tc-mark', (m) => m.length), 1, '05: a marker at the first cash-positive month');
+  const s = await r.pg.evaluate(() => ({ live: document.getElementById('kpis').classList.contains('tiles-live'), running: document.getAnimations().filter((a) => a.playState === 'running').length, hidden: [...document.querySelectorAll('#kpis .kpi-chart')].filter((c) => getComputedStyle(c).opacity !== '1').length,
+    badges: new Set([...document.querySelectorAll('#kpis .kpi-icon')].map((b) => getComputedStyle(b).backgroundImage)).size, size: Math.round(document.querySelector('#kpis .kpi-icon').getBoundingClientRect().width) }));
+  assert.deepEqual(s, { live: false, running: 0, hidden: 0, badges: 6, size: 48 });
+  await r.ctx.close();
+  // motion on: a tile's chart waits for its turn, grows in as it counts, then the shared clock runs (no new CSS loops)
+  const { ctx, pg, errors } = await page(1440, { motion: true });
+  await pg.goto(`${site.base}${OVERVIEW}`); await model(pg);
+  await pg.waitForFunction(() => document.querySelector('#kpis .kpi.inv-play'), null, { timeout: 6000 });
+  const mid = await pg.evaluate(() => ({ growing: [...document.querySelectorAll('#kpis .kpi.inv-play .kpi-chart *')].filter((e) => e.getAnimations().length).length, waiting: [...document.querySelectorAll('#kpis .kpi.inv-zero .kpi-chart')].filter((c) => getComputedStyle(c).opacity === '0').length, zero: document.querySelectorAll('#kpis .kpi.inv-zero').length }));
+  assert.ok(mid.growing >= 1, `a chart grows in with its tile (${mid.growing})`);
+  assert.equal(mid.waiting, mid.zero, 'the tiles still waiting keep their charts hidden');
+  await pg.waitForFunction(() => document.getElementById('kpis').classList.contains('tiles-live'), null, { timeout: 15000 });
+  const c1 = await pg.evaluate(() => getComputedStyle(document.getElementById('kpis')).getPropertyValue('--clk'));
+  await pg.waitForTimeout(400);
+  const c2 = await pg.evaluate(() => getComputedStyle(document.getElementById('kpis')).getPropertyValue('--clk'));
+  assert.notEqual(c1, c2, 'the shared clock moves the tiles\' ambient motion');
+  assert.ok(await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length) <= 4, 'ambient CSS loops stay within the limit');
+  await pg.click('#motionToggle'); await pg.waitForTimeout(200);
+  assert.equal(await pg.evaluate(() => document.getElementById('kpis').classList.contains('tiles-live')), false, 'Pause motion stops the clock');
+  assert.deepEqual(errors, []);
+  await ctx.close();
 });
