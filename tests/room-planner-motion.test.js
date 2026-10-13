@@ -56,7 +56,7 @@ test('wiring: linked once, right after the planner; gated on FFMotion.allowed; s
   assert.match(css, /:root:not\(\[data-motion=off\]\)/);
   assert.match(css, /@media print/);
   assert.doesNotMatch(js + css, /investor\/|portal-test\//);
-  // Bop is purple, never the retired orange
+  // Bop's zone colour (UI accent, carpet swatch) is purple #8236AE, never the retired orange; his art stays the official grey elephant
   assert.doesNotMatch(js + css, /#(E8761E|F5A566|A84908|9C4507|B5541A|FDEDE0|FCEEE2|FCE6D2)\b/i);
   assert.match(js, /bop: '#8236AE'/);
 });
