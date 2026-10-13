@@ -14,6 +14,10 @@
    4. Signature touches: the suited friends rise into the hero (the official cutout, whole, never cropped or redrawn), a stitch draws
       under the section headings, the documents deck fans in, the cash forecast draws itself when the explorer opens, and the main
       call to action is magnetic on a desktop mouse (FFMotion.magnet). Transform, opacity and stroke only.
+   5. Investor studio (owner 2026-10-12, "more space, more motion graphics"): the overview is now six full-screen views (studio.js). The
+      reveal is per view: a view's cards fill one at a time the first time it is shown (and its pictures draw: studio.js listens to
+      inv:entrance), a tap / key / wheel / touch-scroll lands that view, "Show all numbers now" lands every view. Figures are only
+      ever set to zero while their own view is on screen and counting.
    Sends nothing; stores only the language choice (portal-i18n.js). */
 (function () {
   'use strict';
@@ -106,10 +110,15 @@
     }
   }
 
-  // ---------------------------------------------------------------- the reveal
-  const UNIT_NUMS = { kpi: ['funding', 'capacity', 'pilotDuration', 'refinance'], platform: ['platformBuild', 'platformAssurance', 'platformRecurring', 'platformYear'], cash: ['draftTuition', 'breakEven', 'annualGap'] };
-  const nums = (u) => $$('#funding, #capacity, #pilotDuration, #refinance, #platformBuild, #platformAssurance, #platformRecurring, #platformYear, #draftTuition, #breakEven, #annualGap', u);
-  let run = null;
+  // ---------------------------------------------------------------- the reveal, one view at a time
+  const nums = (u) => $$('[data-count]', u);
+  const unitsIn = (v) => $$(`[data-studio-view="${v}"] [data-reveal-unit]`);
+  const units = () => $$('[data-reveal-unit]');
+  const viewsAll = () => $$('[data-studio-view]').map((x) => x.dataset.studioView);
+  const SKIPS = ['pointerdown', 'keydown', 'wheel', 'touchmove'];
+  const emit = (name, detail) => D.dispatchEvent(new CustomEvent(name, { detail }));
+  let run = null, curView = R.dataset.view || 'overview';
+  const played = new Set();
   function zero(u) {
     for (const n of nums(u)) {
       const cur = n.textContent.trim();
@@ -148,38 +157,58 @@
       setTimeout(() => u.classList.remove('inv-bloom'), REVEAL.bloom + 200);
     }, REVEAL.duration);
   }
-  function units() { return [...$$('#kpis [data-reveal-unit]'), ...$$('.dashboard [data-reveal-unit]')]; }
   function arm() {
     if (revealOff()) { R.classList.remove('inv-reveal'); return false; }
-    units().forEach(zero);
+    unitsIn(curView).forEach(zero);
     R.classList.add('inv-armed'); R.classList.remove('inv-reveal');
     return true;
   }
-  function start() {
-    const us = units();
-    const r = { timers: [], io: null, us };
-    run = r;
+  // enter(view): the view's entrance, once per visit of the page. Its cards fill one at a time (250 ms, then REVEAL.gap apart; a card
+  // below the fold on a phone waits until it scrolls in); studio.js and the waterfall / deck below draw their pictures on inv:entrance
+  // and may hold the entrance open a little longer (detail.hold(ms)) so a tap can still land them.
+  function enter(v) {
+    curView = v;
+    if (!model || played.has(v)) return;
+    played.add(v);
+    const us = unitsIn(v);
+    if (revealOff()) { us.forEach(land); emit('inv:entrance', { view: v, animate: false, hold() {} }); return; }
+    stop(false);
+    us.forEach(zero);
+    const r = run = { timers: [], us, view: v, io: null };
     const skipBtn = $('#revealSkip'); if (skipBtn) skipBtn.hidden = false;
-    const vis = (u) => { const b = u.getBoundingClientRect(); return b.bottom > 0 && b.top < innerHeight; };
-    let slot = 0; const later = [];
-    for (const u of us) { if (vis(u)) { r.timers.push(setTimeout(() => play(u), 250 + REVEAL.gap * slot)); slot++; } else later.push(u); }
-    if (later.length && typeof IntersectionObserver === 'function') {
-      r.io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { r.io.unobserve(e.target); r.timers.push(setTimeout(() => play(e.target), 150)); } }), { threshold: 0.35 });
-      later.forEach((u) => r.io.observe(u));
-    } else later.forEach((u) => r.timers.push(setTimeout(() => play(u), 250 + REVEAL.gap * slot++)));
-    for (const ev of ['pointerdown', 'keydown', 'wheel', 'touchmove']) addEventListener(ev, skip, { once: true, passive: true, capture: true });
-    r.timers.push(setTimeout(() => { if (skipBtn && us.every((u) => u.classList.contains('inv-landed') || !vis(u))) skipBtn.hidden = true; }, 250 + REVEAL.gap * Math.max(slot, 1) + REVEAL.duration + 400));
+    const vis = (u) => { const b = u.getBoundingClientRect(); return b.height > 0 && b.bottom > 0 && b.top < innerHeight; };
+    if (typeof IntersectionObserver === 'function') r.io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { r.io.unobserve(e.target); play(e.target); } }), { threshold: 0.35 });
+    us.forEach((u, i) => r.timers.push(setTimeout(() => { if (vis(u) || !r.io) play(u); else r.io.observe(u); }, 250 + REVEAL.gap * i)));
+    let span = us.length ? 250 + REVEAL.gap * (us.length - 1) + REVEAL.duration : 0;
+    emit('inv:entrance', { view: v, animate: true, hold: (ms) => { span = Math.max(span, ms); } });
+    // the tap / key that opened this view must not land it: listen from the next task on
+    r.timers.push(setTimeout(() => { if (run === r) for (const ev of SKIPS) addEventListener(ev, skip, { passive: true, capture: true }); }, 0));
+    r.timers.push(setTimeout(() => finish(r), span + 400));
   }
-  function skip() { stop(false); }
-  function stop(silent) {
-    const r = run; if (!r) { if (!silent) units().forEach((u) => { if (!u.classList.contains('inv-landed')) land(u); }); return; }
-    run = null;
-    r.timers.forEach(clearTimeout); r.io?.disconnect();
-    for (const ev of ['pointerdown', 'keydown', 'wheel', 'touchmove']) removeEventListener(ev, skip, { capture: true });
-    if (!silent) r.us.forEach(land);
+  function finish(r) {
+    if (run !== r) return;
+    if (r.us.some((u) => u.classList.contains('inv-zero'))) return;   // a card still waits below the fold: keep listening
+    run = null; r.io?.disconnect(); unlisten();
     const b = $('#revealSkip'); if (b) b.hidden = true;
   }
-  window.FFInvReveal = Object.freeze({ timings: REVEAL, skip: () => stop(false), running: () => !!run });
+  function unlisten() { for (const ev of SKIPS) removeEventListener(ev, skip, { capture: true }); }
+  function skip() { stop(false); }
+  function stop(silent) {
+    const r = run; if (!r) return;
+    run = null;
+    r.timers.forEach(clearTimeout); r.io?.disconnect(); unlisten();
+    if (!silent) { r.us.forEach(land); emit('inv:land', { view: r.view }); }
+    const b = $('#revealSkip'); if (b) b.hidden = true;
+  }
+  // "Show all numbers now": every view lands and stays landed (no later entrance re-counts a figure the reader has asked to see)
+  function showAll() {
+    stop(false);
+    units().forEach((u) => { if (!u.classList.contains('inv-landed')) land(u); });
+    viewsAll().forEach((v) => played.add(v));
+    emit('inv:land', { all: true });
+  }
+  $('#revealSkip')?.addEventListener('click', showAll);
+  window.FFInvReveal = Object.freeze({ timings: REVEAL, skip: showAll, running: () => !!run, enter, played: () => [...played] });
 
   // ---------------------------------------------------------------- "Show as table" for every chart
   function tableToggle(host, id, caption, head, rows, where = 'append') {
@@ -205,7 +234,7 @@
       [['Platform completion', whole(platform.completion)], ['Security testing & counsel', whole(platform.assurance_one_time)], ['Annual support & hosting', money(platform.recurring)], ['Platform year one', money(platform.first_year)]], 'after');
     tableToggle($('.comparison .chart-unit'), 'cashCompareTable', 'Tuition and operating break-even, per child per month', ['Item', 'Amount'],
       [['Current tuition assumption', whole(assumptions.tuition)], ['Operating break-even', money(metrics.breakeven_tuition)], ['Annual operating gap', signed(money(metrics.year2_margin))]], 'after');
-    tableToggle($('.capital-panel .allocation-controls'), 'capitalTable', 'The four parts of the funding estimate', ['Item', 'Amount'], parts, 'after');
+    tableToggle($('.donut-side .donut-legend'), 'capitalTable', 'The four parts of the funding estimate', ['Item', 'Amount'], parts, 'after');
     const spend = (r) => r.recurring + r.one_time;
     tableToggle($('#forecastView .trajectory'), 'cashTable', 'Monthly cash forecast', ['Month', 'Children', 'Receipts', 'Spending', 'Net', 'Cumulative'],
       cash.map((r) => [String(r.month), String(r.children), money(r.receipts), money(spend(r)), signed(money(r.net)), signed(money(r.cumulative))]), 'after');
@@ -223,10 +252,8 @@
     rows.push(`<div class="inv-fall-row inv-fall-total"><span data-en="Preliminary funding need">${esc(t('Preliminary funding need'))}</span><div class="inv-fall-track"><i style="--l:0%;--w:100%;--c:#071969;--i:4"></i></div></div>`);
     const w = D.createElement('div'); w.className = 'inv-fall'; w.setAttribute('aria-hidden', 'true'); w.innerHTML = rows.join('');
     $('.funding-parts', host)?.after(w);
-    if (!motionOn()) { w.classList.add('inv-fall-in'); return; }
-    const det = $('.funding-detail');
-    const go = () => onEnter([w], () => w.classList.add('inv-fall-in'), 0.4);
-    if (det && !det.open) det.addEventListener('toggle', () => { if (det.open) go(); }, { once: true }); else go();
+    // drawn at once unless the Funding view's entrance plays it (inv:entrance below)
+    if (!(motionOn() && !revealOff() && !played.has('funding'))) w.classList.add('inv-fall-in');
   }
   // ---------------------------------------------------------------- parallax hero (menu #15): desktop mouse only; the friends and the
   // the friends drift a few px with the pointer (the orbit rings keep their own spin) (FFMotion.layers: transform only, one frame at a time, off with every motion switch)
@@ -408,6 +435,27 @@
   }
   window.FFInvDocs = Object.freeze({ open: openDrawer, close: closeDrawer, list: DOCS.map((d) => ({ id: d.id, file: d.f, kind: d.k })) });
 
+  // the Documents view: the drawer's content as a full view. The six main files are the deck (index.html, official art); their kind,
+  // pages and size come from the manifest like the drawer's; every other file is listed below by group, with Preview and Download.
+  const info = (d, m) => [d.k.toUpperCase(), m.pages ? t(`${m.pages} page${m.pages === 1 ? '' : 's'}`) : (d.id === 'costs-csv' && model ? t(`${model.meta.line_count} lines`) : (d.id === 'cash-csv' && model ? t(`${model.cash.length} months`) : '')), m.bytes ? size(m.bytes) : ''].filter(Boolean).join(' · ');
+  async function docsView() {
+    const more = $('#docsMore'); if (!more) return;
+    await loadManifest();
+    for (const el of $$('[data-doc-meta]')) { const d = DOCS.find((x) => x.id === el.dataset.docMeta), m = d && meta(d); el.textContent = m ? info(d, m) : ''; }
+    const deck = new Set($$('[data-doc-meta]').map((el) => el.dataset.docMeta));
+    more.innerHTML = GROUPS.map((g) => {
+      const ds = DOCS.filter((d) => d.g === g && !deck.has(d.id) && meta(d));
+      if (!ds.length) return '';
+      return `<section class="docs-group"><h3>${esc(t(g))}</h3><ul>${ds.map((d) => {
+        const [title, desc] = words(d);
+        const pv = d.k === 'pdf' && !pdfInline()
+          ? `<a class="inv-btn" href="${esc(d.f)}" target="_blank" rel="noopener">${esc(t('Preview'))}<span class="sr"> ${esc(title)}</span></a>`
+          : `<a class="inv-btn" href="${esc(d.view || d.f)}" data-doc="${d.id}">${esc(t('Preview'))}<span class="sr"> ${esc(title)}</span></a>`;
+        return `<li class="docs-row"><span class="inv-doc-icon" aria-hidden="true">${ICON[d.k]}</span><div class="inv-doc-text"><strong>${esc(title)}</strong><span>${esc(desc)}</span><small>${esc(info(d, meta(d)))}</small></div><div class="inv-doc-actions">${pv}<a class="inv-btn inv-btn-ghost" href="${esc(d.f)}" download="${esc(fname(d))}">${esc(t('Download'))}<span class="sr"> ${esc(title)}</span></a></div></li>`;
+      }).join('')}</ul></section>`;
+    }).join('') + (I.lang() === 'es' ? `<p class="inv-docs-note">${esc(t('Documents are in English.'))}</p>` : '');
+  }
+
   // ---------------------------------------------------------------- signature touches (all off when motion is off)
   function hero() {
     const w = $('.hero-world'); if (!w || !motionOn()) return;
@@ -419,23 +467,32 @@
     els.forEach((el) => io.observe(el));
   }
   function stitches() {
-    const hs = $$('.panel-title h2, .section-heading h2, .phase-heading h2');
+    const hs = $$('.view-head h2, .panel-title h3, .phase-heading h3, .panel-h');
     hs.forEach((h) => h.classList.add('inv-stitch'));
     if (!motionOn()) { hs.forEach((h) => h.classList.add('inv-stitched')); return; }
     onEnter(hs, (h) => h.classList.add('inv-stitched'), 0.6);
   }
-  function deck() {
-    const routes = $$('.routes .route'); if (!routes.length || !motionOn()) return;
-    onEnter([$('.routes')], () => routes.forEach((r, i) => r.animate([{ opacity: 0, transform: `translate3d(0,22px,0) rotate(${i % 2 ? 3 : -3}deg)` }, { opacity: 1, transform: 'none' }], { duration: 520, delay: i * 60, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' })), 0.2);
-  }
-  function explorerDraw() {
-    const det = $('#workspace'); if (!det) return;
-    det.addEventListener('toggle', () => {
-      if (!det.open || !motionOn()) return;
-      const chart = $('#cashChart'); if (chart) { chart.classList.remove('chart-enter'); void chart.getBoundingClientRect(); chart.classList.add('chart-enter'); }
-      $$('#allocationArcs .allocation-arc').forEach((a, i) => a.animate([{ opacity: 0 }, { opacity: a.style.opacity || 1 }], { duration: 450, delay: i * 120, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' }));
-    });
-  }
+  // the Funding view's waterfall and the Documents view's deck play with their view's entrance; a tap lands them
+  D.addEventListener('inv:entrance', (e) => {
+    const { view, animate } = e.detail;
+    if (view === 'funding') {
+      const w = $('.inv-fall'); if (!w) return;
+      if (!animate) { w.classList.add('inv-fall-in'); return; }
+      w.classList.remove('inv-fall-in'); void w.offsetWidth;
+      e.detail.hold(400 + 700 + 4 * 420);
+      setTimeout(() => w.classList.add('inv-fall-in'), 400);
+    }
+    if (view === 'documents' && animate) {
+      const routes = $$('.routes .route');
+      routes.forEach((r, i) => r.animate([{ opacity: 0, transform: `translate3d(0,26px,0) rotate(${i % 2 ? 4 : -4}deg) scale(.96)` }, { opacity: 1, transform: 'none' }], { duration: 620, delay: 120 + i * 70, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' }));
+      e.detail.hold(120 + routes.length * 70 + 620);
+    }
+  });
+  D.addEventListener('inv:land', (e) => {
+    const { view, all } = e.detail;
+    if (all || view === 'funding') $('.inv-fall')?.classList.add('inv-fall-in', 'inv-fall-now');
+    if (all || view === 'documents') $$('.routes .route').forEach((r) => r.getAnimations().forEach((a) => a.finish()));
+  });
   function magnet() {
     const M = window.FFMotion, btn = $('.platform .button');
     if (!M || !btn || !M.allowed() || !motionOn()) return;
@@ -454,18 +511,19 @@
   D.addEventListener('inv:model', (e) => {
     model = e.detail;
     buildRings(model); buildBars(model); buildTables(model); buildWaterfall(model);
-    if (armed && !revealOff()) { units().forEach(zero); start(); }
-    else { units().forEach(land); R.classList.add('inv-final'); }
+    if (!(armed && !revealOff())) { units().forEach(land); R.classList.add('inv-final'); }
+    const v = curView; played.delete(v); enter(v);
     if (drawer && drawer.open && !current) list();
+    docsView();
   });
-  D.addEventListener('inv:model-error', () => { stop(false); units().forEach(land); R.classList.remove('inv-armed'); });
+  D.addEventListener('inv:model-error', () => { stop(false); units().forEach(land); R.classList.remove('inv-armed'); docsView(); });
   D.addEventListener('inv:motion', (e) => { if (e.detail && e.detail.paused) stop(false); });
   // Spanish is a draft: say so while it is on; the model's line-item names stay English (as in the cost register), marked for screen readers
   const esNote = () => { const e = $('.es-note'); if (e) e.hidden = I.lang() !== 'es'; };
   $$('#buildRows, #assuranceRows, #recurringRows').forEach((l) => l.setAttribute('lang', 'en'));
   esNote();
-  I.onChange(() => { esNote(); if (drawer && drawer.open) { I.apply(drawer); if (current) preview(current.id); else list(); } });
-  hero(); stitches(); deck(); explorerDraw(); magnet(); parallax();
+  I.onChange(() => { esNote(); docsView(); if (drawer && drawer.open) { I.apply(drawer); if (current) preview(current.id); else list(); } });
+  hero(); stitches(); magnet(); parallax();
   if (motionOn()) $('.hero-mission')?.classList.add('inv-shine');   // menu #20: one light pass over the tagline
   const want = params.get('doc');
   if (want) openDrawer(want);

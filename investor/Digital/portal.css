@@ -22,15 +22,10 @@
 .hero-actions .explore-button,.motion-toggle,.reveal-skip{min-height:44px}
 .reveal-skip{border:1px solid #b5d9ff;background:#fff;color:#0645bf;border-radius:999px;padding:0 14px;font-size:12px;font-weight:600}
 .reveal-skip[hidden]{display:none}
-.hero-actions{flex-wrap:wrap}
-.model-date{position:static;margin-top:8px}
-/* the friends stand whole inside the hero (never cut by the frame or hidden behind the cards) */
-.hero{min-height:280px}
-.hero-world{top:0;bottom:0;height:auto;width:min(460px,36%);overflow:visible}
-.hero-world .friends{position:absolute;inset:10px 0 6px 0;width:100%;height:calc(100% - 16px);object-fit:contain;object-position:right bottom}
+/* the hero, the cards and every view's layout: studio.css (Investor studio) */
 
 /* ---- the reveal: before the model lands, the counted figures hold their place but show nothing (no flash of the final value) -- */
-html.inv-reveal :is(#funding,#capacity,#pilotDuration,#refinance,#platformBuild,#platformAssurance,#platformRecurring,#platformYear,#draftTuition,#breakEven,#annualGap){color:transparent!important}
+html.inv-reveal [data-count]{color:transparent!important}
 .inv-num{display:inline-block;font-variant-numeric:tabular-nums;text-align:left}
 .metric strong .inv-num{text-align:left}
 .inv-counting{text-shadow:0 0 6px rgba(59,139,255,.75),0 0 18px rgba(11,94,215,.45)}
@@ -161,30 +156,6 @@ dialog.inv-docs::backdrop{background:rgba(7,25,105,.38)}
   .inv-doc-actions{grid-column:1/-1}
   .inv-pdf{height:60vh}
 }
-@media (max-width:540px){
-  .lang-switch button{min-height:44px;padding:0 12px;font-size:13px}
-  .hero{min-height:0;flex-direction:column;align-items:stretch}
-  .hero-copy{padding:18px 0 4px}
-  .hero-world{position:relative;width:100%;height:auto;aspect-ratio:1586/992;right:auto;bottom:auto;margin:4px 0 0}
-  .hero-world .friends{position:absolute;inset:0;width:100%;height:100%;right:auto;top:0;object-fit:contain}
-  .model-date{position:static;max-width:none;margin-top:10px;font-size:12px}
-  .explore-button{font-size:13px;padding:0 14px}
-  .motion-toggle{font-size:12px}
-  .metrics{grid-template-columns:1fr}
-  .metric{min-height:0;padding:14px 14px 14px 84px}
-  .metric-icon{width:50px;height:50px;left:16px;top:22px}
-  .metric-label{font-size:13px;min-height:0}
-  .metric strong{font-size:30px}
-  .metric strong small{font-size:17px}
-  .metric p,.metric a{font-size:12px}
-  .terms{font-size:12px}
-  .route h3{font-size:13px}.route p,.route-cta{font-size:12px}
-  .routes{grid-template-columns:1fr}
-  .section-heading .all-docs{margin:8px 0 0}
-  footer,footer small{font-size:12px}
-  .cost-row summary{font-size:13px}
-  .chart-unit,.enrollment,.note,.panel-title p,.cost-caption,.bar-group span,.gap small,.feature-list li,.phase-content,.phase,.funding-parts span,.chart-axis,.chart-legend,.cash-readout span,.tag,.eyebrow,.workspace-hint,.chart-header>div>span:last-child,.analysis-panel .note,.scenario-intro p,.phase-heading>span,.funding-detail>summary,.funding-detail>summary span:last-child,.explorer-drawer>summary>span:last-child,.curriculum-art span{font-size:12px}
-}
 /* ---- the funding waterfall --------------------------------------------------------------------------------------------------- */
 .inv-fall{display:grid;gap:8px;margin:4px 0 14px}
 .inv-fall-row{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:12px;align-items:center;font-size:13px;color:#123a96}
@@ -201,13 +172,5 @@ dialog.inv-docs::backdrop{background:rgba(7,25,105,.38)}
 @keyframes invShine{from{background-position:100% 0}to{background-position:0 0}}
 /* ---- calmer background (menu #17): the aurora, grid and star drift stop; the friends' gentle float and the orbits stay ------------ */
 .aurora,.depth-grid,.star-field{animation:none!important}
-.metric a,.assumptions>summary,.assumptions a,.text-link,.phase-content a,footer>a,.readiness{min-height:44px;display:inline-flex;align-items:center}
-.allocation-controls button,.view-tabs button,.platform .button,.phase{min-height:44px}
-.brand-label{min-height:44px;display:inline-flex;align-items:center}
-.scenario-inputs input[type=range],#monthScrubber{min-height:44px}
-.cost-detail p,.cost-detail li,.cost-detail li span,.cost-detail li b,.note,.gap span,.readiness,.assumptions summary,.assumptions p,.assumptions a,.section-heading>span,.ring-center small,.allocation-selected span,.allocation-selected p,.allocation-controls button,.text-link,.view-tabs button,.funding-parts span,.funding-detail>summary span,footer a{font-size:12px!important}
-
-/* the readable floor (Apple HIG audit #14): notes, eyebrows and chart labels never under 12 px, at any width */
-:is(.note,.text-link,.eyebrow,.chart-kicker,.chart-kicker b,.chart-axis span,.scrub-label span,.scrub-label b,.funding-content p,.metric p,.metric a,.route p,.route-cta,.terms,footer,footer small,.chart-unit,.enrollment,.gap small,.bar-group span,.panel-title p,.cost-caption,.phase,.phase-content,.tag,.workspace-hint,.chart-legend,.cash-readout span,.ring-center small,.curriculum-art span,.feature-list li,.explorer-drawer>summary>span,.funding-detail>summary,.funding-detail>summary span,.funding-parts span,.motion-toggle,.model-date){font-size:12px!important}
-.explore-button{font-size:13px!important}
+/* 44 px targets and the 12 px readable floor (Apple HIG audit): studio.css sizes every control and text style at or above them */
 @media print{.inv-kpi-tools,.as-table,.lang-switch,.reveal-skip{display:none}}
