@@ -1063,3 +1063,32 @@ test('generated investor documents carry no template placeholders', () => {
     assert.doesNotMatch(text, /\{[a-z_]+\(|fmt\(|category_sum\(/, `${f} has an unrendered placeholder`);
   }
 });
+
+// ------------------------------------------------------------------ v2279 blend themes (owner: "a blend of the three colors"): candidates beside the
+// gold default; page-level text on its own deep band passes AA at every point of the blend; the aurora drifts slowly and stops for reduced motion
+test('blend themes: sunrise and aurora keep page-level text AA at sample points, tiles distinct, gold trim; the aurora is static under reduced motion', async (t) => {
+  if (skip) return t.skip(skip);
+  const lum = (c) => { const [r, g, b] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  for (const theme of ['blend-sunrise', 'blend-aurora']) for (const motion of [false, true]) {
+    const { ctx, pg, errors } = await page(1440, { motion });
+    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-theme="gold"', `data-theme="${theme}"`) })));
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
+    assert.equal(await pg.getAttribute('html', 'data-theme'), theme);
+    // every page-level line sits on an opaque deep band; its text against that band is AA, whatever the gradient does around it
+    const lines = await pg.$$eval('.strip-staff, .cap-foot, .studio-foot', (els) => els.filter((e) => e.offsetParent).map((e) => ({ bg: getComputedStyle(e).backgroundColor, colors: [e, ...e.querySelectorAll('span, a, small, b')].filter((x) => x.textContent.trim() && !x.closest('[aria-hidden="true"]')).map((x) => getComputedStyle(x).color) })));
+    assert.equal(lines.length, 3, `${theme}: three page-level lines`);
+    for (const l of lines) { assert.ok(!/rgba\(0, 0, 0, 0\)/.test(l.bg), `${theme}: a band behind page-level text`); for (const c of l.colors) assert.ok(ratio(c, l.bg) >= 4.5, `${theme}: ${c} on ${l.bg} = ${ratio(c, l.bg).toFixed(2)}`); }
+    // the six tiles keep six colours and a gold hairline; the rail's active item is gold
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, `${theme}: a colour per tile`);
+    assert.match(await pg.$eval('#kpis .kpi', (k) => getComputedStyle(k).boxShadow), /rgba\(232, 200, 59/);
+    assert.match(await pg.$eval('.rail-pill', (p) => getComputedStyle(p).backgroundImage), /232, 193, 114|201, 149, 54/);
+    if (theme === 'blend-aurora') {
+      const aur = await pg.evaluate(() => document.getAnimations().filter((a) => /aurora/.test(a.animationName || '')).map((a) => ({ name: a.animationName, d: a.effect.getComputedTiming().duration, state: a.playState })));
+      if (motion) { assert.equal(aur.length, 2, 'two aurora layers drift'); assert.ok(aur.every((a) => a.d >= 20000), `a slow drift (≥20 s): ${JSON.stringify(aur)}`); assert.ok(await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length) <= 4, 'ambient loops within the limit'); }
+      else assert.deepEqual(aur, [], 'reduced motion: the aurora is static');
+    }
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});

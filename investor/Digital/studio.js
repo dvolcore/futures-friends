@@ -519,7 +519,7 @@
         // scene (default): the picture's colours: screen cyan, suit blue, lamp orange, purple-flower lilac
         scene: { deficit: '#0bd9dc', refinance: '#4d5ef2', floor: '#eba347', contingency: '#a685d4' },
         royal: { deficit: '#0bd9dc', refinance: '#7b8cff', floor: '#eba347', contingency: '#c48cff' },
-        gold: { deficit: '#0bd9dc', refinance: '#7b8cff', floor: '#eba347', contingency: '#c48cff' } })[R.dataset.theme] || undefined });
+        gold: { deficit: '#0bd9dc', refinance: '#7b8cff', floor: '#eba347', contingency: '#c48cff' } })[R.dataset.theme] || (/^blend-/.test(R.dataset.theme) ? { deficit: '#0bd9dc', refinance: '#7b8cff', floor: '#eba347', contingency: '#c48cff' } : undefined) });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
       height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.27, 12 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,

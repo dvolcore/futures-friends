@@ -545,97 +545,97 @@
      cream        #e9d2b0                          - the walls and the papers (the month snapshot, the documents dock)
      navies       #404361 #29397d #011d4e          - the chairs and the screen's frame (the strip, the cash-flow lab, text on light)
    Flip back with one attribute: data-theme="money" (v2272 money green) or "navy" (v2271). */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]){
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]){
   --cap-bg:#637533;--cap-bg-2:#4e5e2f;--cap-rail:#3a461b;--cap-line:rgba(233,210,176,.4);
   --cap-text:#fffaf0;--cap-muted:#f6eedd;--cap-dim:#efe3c8;
   --hero-bg:#2c3614;--rail-edge:#3a461b;--page-foot:#55672f;
   --sc-blue:#0257d1;--sc-blue-2:#4d5ef2;--sc-cyan:#0bd9dc;--sc-cyan-2:#24b8f8;--sc-sky:#87c2e9;--sc-red:#de4758;--sc-rose:#9a3a66;
   --sc-orange:#e59844;--sc-lamp:#eba347;--sc-gold:#e8c83b;--sc-purple:#75509f;--sc-purple-2:#69458b;--sc-wood:#8a5333;--sc-wood-2:#6b3c2f;
   --sc-cream:#e9d2b0;--sc-chair:#404361;--sc-screen:#29397d;--sc-deep:#011d4e}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold])[data-view=overview] body.studio{background:radial-gradient(55vw 38vw at 70% 30%,rgba(235,163,71,.22),transparent 62%),radial-gradient(40vw 34vw at 20% 100%,rgba(126,140,60,.55),transparent 62%),linear-gradient(180deg,#637533 0%,#5a6b31 45%,#4e5e2f 100%);background-color:#4e5e2f}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold])[data-view=overview]{background:#4e5e2f}
-@media (min-width:768px){:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-top{background:linear-gradient(180deg,#45531f,#3a461b 55%,#2f3a15)}}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] body.studio{background:radial-gradient(55vw 38vw at 70% 30%,rgba(235,163,71,.22),transparent 62%),radial-gradient(40vw 34vw at 20% 100%,rgba(126,140,60,.55),transparent 62%),linear-gradient(180deg,#637533 0%,#5a6b31 45%,#4e5e2f 100%);background-color:#4e5e2f}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview]{background:#4e5e2f}
+@media (min-width:768px){:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#45531f,#3a461b 55%,#2f3a15)}}
 @media (max-width:767px){
-  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-top{background:linear-gradient(180deg,#45531f,#3a461b);border-bottom-color:rgba(233,210,176,.3)}
-  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-rail{background:rgba(52,64,24,.97);border-color:rgba(233,210,176,.3)}
-  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio .studio-top .lang-switch button[aria-pressed=true]{background:#0257d1}
+  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#45531f,#3a461b);border-bottom-color:rgba(233,210,176,.3)}
+  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail{background:rgba(52,64,24,.97);border-color:rgba(233,210,176,.3)}
+  :root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio .studio-top .lang-switch button[aria-pressed=true]{background:#0257d1}
 }
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-rail a svg{color:var(--sc-cream)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .rail-pill{background:linear-gradient(180deg,#2f6be6,#0257d1);box-shadow:0 0 0 1px rgba(135,194,233,.8),0 0 18px -2px rgba(77,94,242,.7),inset 3px 0 0 var(--sc-gold)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-tools .motion-toggle,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .studio-tools .docs-quick{background:rgba(41,57,125,.7);border-color:rgba(233,210,176,.7);color:#fffaf0;box-shadow:0 0 12px -4px rgba(232,200,59,.7)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-hero .cap-tag{color:var(--sc-gold)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail a svg{color:var(--sc-cream)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .rail-pill{background:linear-gradient(180deg,#2f6be6,#0257d1);box-shadow:0 0 0 1px rgba(135,194,233,.8),0 0 18px -2px rgba(77,94,242,.7),inset 3px 0 0 var(--sc-gold)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-tools .motion-toggle,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-tools .docs-quick{background:rgba(41,57,125,.7);border-color:rgba(233,210,176,.7);color:#fffaf0;box-shadow:0 0 12px -4px rgba(232,200,59,.7)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-hero .cap-tag{color:var(--sc-gold)}
 
 /* the five tiles: each its own colour from the picture, a matching glow */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi{border-width:1.5px;box-shadow:0 10px 22px -14px rgba(0,0,0,.65),0 0 18px -6px var(--glow,var(--c)),inset 0 1px 0 rgba(255,255,255,.18)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-blue{--c:#87c2e9;--glow:#4d5ef2;background:linear-gradient(160deg,#0257d1 0%,#3a4fe0 100%)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-gold{--c:#fff1b8;--glow:#e8c83b;background:linear-gradient(160deg,#e59844 0%,#e8c83b 100%)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-red{--c:#f7b3bf;--glow:#de4758;background:linear-gradient(160deg,#9a3a66 0%,#bb3a50 100%)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-purple{--c:#d6c2f0;--glow:#75509f;background:linear-gradient(160deg,#69458b 0%,#75509f 100%)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-teal{--c:#d9fbff;--glow:#24b8f8;background:linear-gradient(160deg,#0bd9dc 0%,#24b8f8 100%)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi .kpi-icon{background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);color:#fff}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi .kpi-label,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi .kpi-v,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi .kpi-sub,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi .kpi-go{color:#fffaf0}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-red .kpi-v{color:#fff3e3}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi{border-width:1.5px;box-shadow:0 10px 22px -14px rgba(0,0,0,.65),0 0 18px -6px var(--glow,var(--c)),inset 0 1px 0 rgba(255,255,255,.18)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-blue{--c:#87c2e9;--glow:#4d5ef2;background:linear-gradient(160deg,#0257d1 0%,#3a4fe0 100%)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-gold{--c:#fff1b8;--glow:#e8c83b;background:linear-gradient(160deg,#e59844 0%,#e8c83b 100%)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-red{--c:#f7b3bf;--glow:#de4758;background:linear-gradient(160deg,#9a3a66 0%,#bb3a50 100%)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-purple{--c:#d6c2f0;--glow:#75509f;background:linear-gradient(160deg,#69458b 0%,#75509f 100%)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-teal{--c:#d9fbff;--glow:#24b8f8;background:linear-gradient(160deg,#0bd9dc 0%,#24b8f8 100%)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi .kpi-icon{background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);color:#fff}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi .kpi-label,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi .kpi-v,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi .kpi-sub,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi .kpi-go{color:#fffaf0}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-red .kpi-v{color:#fff3e3}
 /* light tiles (gold, cyan): navy text from the screen frame */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) :is(.kpi-gold,.kpi-teal) :is(.kpi-label,.kpi-v,.kpi-sub,.kpi-go,.kpi-icon){color:#011d4e}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) :is(.kpi-gold,.kpi-teal) .kpi-icon{background:rgba(1,29,78,.12);box-shadow:inset 0 0 0 1px rgba(1,29,78,.3)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-gold .kpi-v{color:#29397d}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) :is(.kpi-gold,.kpi-teal) :is(.kpi-label,.kpi-v,.kpi-sub,.kpi-go,.kpi-icon){color:#011d4e}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) :is(.kpi-gold,.kpi-teal) .kpi-icon{background:rgba(1,29,78,.12);box-shadow:inset 0 0 0 1px rgba(1,29,78,.3)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-gold .kpi-v{color:#29397d}
 
 /* the basis strip: the navy chairs; the warning in gold */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-facts{background:linear-gradient(90deg,#404361,#363a58);border-color:rgba(135,194,233,.4)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-icon{color:var(--sc-cyan)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-facts li:nth-child(1) b{color:var(--sc-cyan)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-facts li:nth-child(2) b{color:var(--sc-gold)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-facts li:nth-child(3) b{color:var(--sc-sky)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .strip-warn{background:var(--sc-gold);border-color:#fff1b8;color:#29397d;box-shadow:0 0 18px -6px rgba(232,200,59,.9)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .warn-dot{background:#29397d;color:var(--sc-gold)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts{background:linear-gradient(90deg,#404361,#363a58);border-color:rgba(135,194,233,.4)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-icon{color:var(--sc-cyan)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts li:nth-child(1) b{color:var(--sc-cyan)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts li:nth-child(2) b{color:var(--sc-gold)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts li:nth-child(3) b{color:var(--sc-sky)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-warn{background:var(--sc-gold);border-color:#fff1b8;color:#29397d;box-shadow:0 0 18px -6px rgba(232,200,59,.9)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .warn-dot{background:#29397d;color:var(--sc-gold)}
 
 /* "Where your capital goes": the wood of the table */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card.ovd-funding{background:linear-gradient(170deg,#8a5333 0%,#6b3c2f 100%);border-color:rgba(235,163,71,.7);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 20px -8px rgba(235,163,71,.8)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .ovd-funding .panel-title .icon{background:radial-gradient(circle at 35% 30%,#f2b964,#e59844);box-shadow:0 0 0 2px rgba(255,220,160,.7)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .ovd-funding .ovd-go{border-color:var(--sc-cream);background:rgba(233,210,176,.16);color:#fffaf0!important}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .ovd-funding .ovd-ring-track{stroke:rgba(40,20,10,.35)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-legend button{background:rgba(40,20,12,.32);border-color:rgba(233,210,176,.35);border-left:4px solid var(--c)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-legend button.lit,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-legend button[aria-pressed=true]{background:color-mix(in srgb,var(--c) 22%,rgba(40,20,12,.4))}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card.ovd-funding{background:linear-gradient(170deg,#8a5333 0%,#6b3c2f 100%);border-color:rgba(235,163,71,.7);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 20px -8px rgba(235,163,71,.8)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .ovd-funding .panel-title .icon{background:radial-gradient(circle at 35% 30%,#f2b964,#e59844);box-shadow:0 0 0 2px rgba(255,220,160,.7)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .ovd-funding .ovd-go{border-color:var(--sc-cream);background:rgba(233,210,176,.16);color:#fffaf0!important}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .ovd-funding .ovd-ring-track{stroke:rgba(40,20,10,.35)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-legend button{background:rgba(40,20,12,.32);border-color:rgba(233,210,176,.35);border-left:4px solid var(--c)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-legend button.lit,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-legend button[aria-pressed=true]{background:color-mix(in srgb,var(--c) 22%,rgba(40,20,12,.4))}
 
 /* "Cash flow & scenario lab": the glowing screen's navy; the snapshot on cream */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card.ovd-year{background:linear-gradient(170deg,#29397d 0%,#011d4e 100%);border-color:rgba(11,217,220,.6);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 22px -8px rgba(11,217,220,.75)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .ovd-year .panel-title .icon{background:radial-gradient(circle at 35% 30%,#24b8f8,#0257d1)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .chart-grid-line{stroke:rgba(135,194,233,.18)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .chart-grid-label,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .chart-month{fill:#dbe9fb}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .receipt-line{stroke:var(--sc-cyan);filter:drop-shadow(0 0 5px rgba(11,217,220,.75))}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .receipt-area{fill:rgba(11,217,220,.16)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .spending-line{stroke:var(--sc-lamp);filter:drop-shadow(0 0 5px rgba(235,163,71,.75))}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .gap-area{fill:rgba(235,163,71,.2)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart :is(.m-rec,.ovd-dot-rec){fill:var(--sc-cyan)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart :is(.m-spend,.ovd-dot-spend){fill:var(--sc-lamp)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .m-dot{stroke:#011d4e}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) #ovChart .ovd-cursor{stroke:var(--sc-gold)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-key .k-rec::before{background:var(--sc-cyan);box-shadow:0 0 8px var(--sc-cyan)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-key .k-spend::before{background:var(--sc-lamp);box-shadow:0 0 8px var(--sc-lamp)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-snap{background:var(--sc-cream);border-color:#f6e6c9}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-snap h3{color:#29397d}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-snap h3 small{color:#4a4f6b}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-snap dl{background:#fffaf0}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .snap-kids .snap-icon{color:#0257d1}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .snap-rec .snap-icon{background:#0a8f92}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .snap-spend .snap-icon{background:#b8682a}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .snap-rec dd{color:#0a6e70}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card.ovd-year{background:linear-gradient(170deg,#29397d 0%,#011d4e 100%);border-color:rgba(11,217,220,.6);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 22px -8px rgba(11,217,220,.75)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .ovd-year .panel-title .icon{background:radial-gradient(circle at 35% 30%,#24b8f8,#0257d1)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .chart-grid-line{stroke:rgba(135,194,233,.18)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .chart-grid-label,:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .chart-month{fill:#dbe9fb}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .receipt-line{stroke:var(--sc-cyan);filter:drop-shadow(0 0 5px rgba(11,217,220,.75))}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .receipt-area{fill:rgba(11,217,220,.16)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .spending-line{stroke:var(--sc-lamp);filter:drop-shadow(0 0 5px rgba(235,163,71,.75))}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .gap-area{fill:rgba(235,163,71,.2)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart :is(.m-rec,.ovd-dot-rec){fill:var(--sc-cyan)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart :is(.m-spend,.ovd-dot-spend){fill:var(--sc-lamp)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .m-dot{stroke:#011d4e}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #ovChart .ovd-cursor{stroke:var(--sc-gold)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-key .k-rec::before{background:var(--sc-cyan);box-shadow:0 0 8px var(--sc-cyan)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-key .k-spend::before{background:var(--sc-lamp);box-shadow:0 0 8px var(--sc-lamp)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-snap{background:var(--sc-cream);border-color:#f6e6c9}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-snap h3{color:#29397d}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-snap h3 small{color:#4a4f6b}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-snap dl{background:#fffaf0}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .snap-kids .snap-icon{color:#0257d1}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .snap-rec .snap-icon{background:#0a8f92}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .snap-spend .snap-icon{background:#b8682a}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .snap-rec dd{color:#0a6e70}
 
 /* the documents dock: cream, each document its own colour */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card.ovd-docs{background:linear-gradient(180deg,#efdcbd,#e9d2b0);border-color:rgba(255,245,225,.8)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-docs-head h2{color:#29397d}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-docs-head p{color:#4a4f6b}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-docs-head .icon{color:#29397d}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .cap-doc{background:#fffaf0}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-purple{--c:#0257d1;--ci:#dbe6fb;--ct:#0249b0}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-yellow{--c:#e8c83b;--ci:#fbf1c8;--ct:#7a5a00}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-green{--c:#0bd9dc;--ci:#d3f7f7;--ct:#086a6c}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-orange{--c:#e59844;--ci:#fbe8d2;--ct:#9a5410}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-red{--c:#de4758;--ci:#fadde1;--ct:#b02338}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .doc-blue{--c:#75509f;--ci:#ece3f6;--ct:#5d3c84}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .view-overview .ovd-docs::after{background:linear-gradient(90deg,#0257d1,#24b8f8,#0bd9dc,#e8c83b,#e59844,#de4758,#9a3a66,#75509f)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold])[data-view=overview] .studio-foot{color:var(--cap-dim)}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold])[data-view=overview] .studio-foot a{color:#fff1b8}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card.ovd-docs{background:linear-gradient(180deg,#efdcbd,#e9d2b0);border-color:rgba(255,245,225,.8)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-docs-head h2{color:#29397d}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-docs-head p{color:#4a4f6b}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-docs-head .icon{color:#29397d}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-doc{background:#fffaf0}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-purple{--c:#0257d1;--ci:#dbe6fb;--ct:#0249b0}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-yellow{--c:#e8c83b;--ci:#fbf1c8;--ct:#7a5a00}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-green{--c:#0bd9dc;--ci:#d3f7f7;--ct:#086a6c}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-orange{--c:#e59844;--ci:#fbe8d2;--ct:#9a5410}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-red{--c:#de4758;--ci:#fadde1;--ct:#b02338}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .doc-blue{--c:#75509f;--ci:#ece3f6;--ct:#5d3c84}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .ovd-docs::after{background:linear-gradient(90deg,#0257d1,#24b8f8,#0bd9dc,#e8c83b,#e59844,#de4758,#9a3a66,#75509f)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] .studio-foot{color:var(--cap-dim)}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] .studio-foot a{color:#fff1b8}
 
 /* ================================================================ v2272: six KPI tiles (owner: "key information at a first glance ... in a
    positive right direction"): the icon moves to the top-right corner so each figure has the tile's full width */
@@ -664,10 +664,10 @@
   .kpi-ramp{right:56px;top:14px;width:60px;height:22px}
 }
 /* the scene palette for the new tiles: 03 the screen's cyan, 04 the flowers' leaves (deep moss, a bright leaf glow), 05 the rose jackets */
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-green{--c:#cfe88a;--glow:#9cc14a;background:linear-gradient(160deg,#2f3a15 0%,#49572b 100%);border-color:#a8c25a}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-green .kpi-v{color:#e4f7a8}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-red .kpi-v{color:#fff3e3}
-:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold]) .kpi-teal .kpi-ramp{color:#011d4e}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-green{--c:#cfe88a;--glow:#9cc14a;background:linear-gradient(160deg,#2f3a15 0%,#49572b 100%);border-color:#a8c25a}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-green .kpi-v{color:#e4f7a8}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-red .kpi-v{color:#fff3e3}
+:root:is([data-theme=scene],[data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .kpi-teal .kpi-ramp{color:#011d4e}
 :root[data-theme=money] .kpi-green{--c:#c8f7a0}
 
 /* ================================================================ v2273 (owner: "we have plenty of room at the bottom ... let's get the spacing
@@ -823,21 +823,21 @@
    background"): the page is built around the owner's swatch #3550d4; the tiles, panels and docs keep the picture's accent palette
    (the "scene" rules above apply to royal too) and are re-tuned here where they would sink into the blue. Flip back with one attribute:
    data-theme="scene" | "money" | "navy". */
-:root:is([data-theme=royal],[data-theme=gold]){--hero-bg:#1b2780;--rail-edge:#1f2f8f;--page-foot:#3550d4;--cap-line:rgba(205,218,255,.42);--cap-muted:#eef2ff;--cap-dim:#e1e8ff}
-:root:is([data-theme=royal],[data-theme=gold])[data-view=overview] body.studio{background:radial-gradient(60vw 40vw at 70% 22%,rgba(140,170,255,.35),transparent 62%),radial-gradient(42vw 34vw at 8% 96%,rgba(120,90,255,.30),transparent 62%),radial-gradient(36vw 30vw at 98% 70%,rgba(90,220,255,.16),transparent 60%),linear-gradient(180deg,#2a40b8 0%,#3550d4 48%,#4a63e0 100%);background-color:#3550d4}
-:root:is([data-theme=royal],[data-theme=gold])[data-view=overview]{background:#3550d4}
-@media (min-width:768px){:root:is([data-theme=royal],[data-theme=gold]) .studio-top{background:linear-gradient(180deg,#24369e,#1f2f8f 55%,#18257a)}}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]){--hero-bg:#1b2780;--rail-edge:#1f2f8f;--page-foot:#3550d4;--cap-line:rgba(205,218,255,.42);--cap-muted:#eef2ff;--cap-dim:#e1e8ff}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] body.studio{background:radial-gradient(60vw 40vw at 70% 22%,rgba(140,170,255,.35),transparent 62%),radial-gradient(42vw 34vw at 8% 96%,rgba(120,90,255,.30),transparent 62%),radial-gradient(36vw 30vw at 98% 70%,rgba(90,220,255,.16),transparent 60%),linear-gradient(180deg,#2a40b8 0%,#3550d4 48%,#4a63e0 100%);background-color:#3550d4}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview]{background:#3550d4}
+@media (min-width:768px){:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#24369e,#1f2f8f 55%,#18257a)}}
 @media (max-width:767px){
-  :root:is([data-theme=royal],[data-theme=gold]) .studio-top{background:linear-gradient(180deg,#24369e,#1f2f8f);border-bottom-color:rgba(205,218,255,.3)}
-  :root:is([data-theme=royal],[data-theme=gold]) .studio-rail{background:rgba(26,39,128,.97);border-color:rgba(205,218,255,.3)}
+  :root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#24369e,#1f2f8f);border-bottom-color:rgba(205,218,255,.3)}
+  :root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail{background:rgba(26,39,128,.97);border-color:rgba(205,218,255,.3)}
 }
-:root:is([data-theme=royal],[data-theme=gold]) .rail-pill{background:linear-gradient(180deg,#5b74ff,#3a4fe0);box-shadow:0 0 0 1px rgba(200,215,255,.9),0 0 20px -2px rgba(120,150,255,.9),inset 3px 0 0 #ffc83d}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .rail-pill{background:linear-gradient(180deg,#5b74ff,#3a4fe0);box-shadow:0 0 0 1px rgba(200,215,255,.9),0 0 20px -2px rgba(120,150,255,.9),inset 3px 0 0 #ffc83d}
 /* panels: deeper fills and brighter edges so each reads as its own card on the blue */
-:root:is([data-theme=royal],[data-theme=gold]) .strip-facts{background:linear-gradient(90deg,#1b2470,#232c80);border-color:rgba(135,194,233,.55)}
-:root:is([data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card.ovd-year{background:linear-gradient(170deg,#1a2668 0%,#06133f 100%);border-color:rgba(11,217,220,.75)}
-:root:is([data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card.cap-lab{background:linear-gradient(170deg,#3d2366 0%,#22123e 100%)}
-:root:is([data-theme=royal],[data-theme=gold]) .lab-controls{background:linear-gradient(170deg,#141d5a,#0b1240)}
-:root:is([data-theme=royal],[data-theme=gold]) .view-overview .panel.ovd-card{box-shadow:0 18px 38px -20px rgba(6,10,50,.75)}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts{background:linear-gradient(90deg,#1b2470,#232c80);border-color:rgba(135,194,233,.55)}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card.ovd-year{background:linear-gradient(170deg,#1a2668 0%,#06133f 100%);border-color:rgba(11,217,220,.75)}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card.cap-lab{background:linear-gradient(170deg,#3d2366 0%,#22123e 100%)}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .lab-controls{background:linear-gradient(170deg,#141d5a,#0b1240)}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card{box-shadow:0 18px 38px -20px rgba(6,10,50,.75)}
 
 /* ================================================================ v2276 KPI tiles: digital, animated (owner: "next level") */
 #kpis .kpi{overflow:hidden;isolation:isolate}
@@ -861,8 +861,8 @@
 @media (hover:hover) and (pointer:fine){#kpis .kpi:hover{transform:translateY(-4px);box-shadow:0 18px 34px -16px rgba(0,0,0,.6),0 0 0 2px var(--c),0 0 34px -4px var(--glow,var(--c))}}
 
 /* tile colours on royal: 01 a deep indigo so it never sinks into the page blue; 05 a deep plum so red and green both read */
-:root:is([data-theme=royal],[data-theme=gold]) #kpis .kpi-blue{--c:#7fe8ff;--glow:#22e5ff;background:linear-gradient(160deg,#141a5c 0%,#26208a 100%);border-color:#7fe8ff}
-:root:is([data-theme=royal],[data-theme=gold]) #kpis .kpi-red{--c:#ff9ab4;--glow:#ff4f8a;background:linear-gradient(160deg,#3d0f33 0%,#6a1747 100%);border-color:#ff7aa2}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-blue{--c:#7fe8ff;--glow:#22e5ff;background:linear-gradient(160deg,#141a5c 0%,#26208a 100%);border-color:#7fe8ff}
+:root:is([data-theme=royal],[data-theme=gold],[data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-red{--c:#ff9ab4;--glow:#ff4f8a;background:linear-gradient(160deg,#3d0f33 0%,#6a1747 100%);border-color:#ff7aa2}
 
 /* ---- the charts */
 #kpis .kpi-chart{display:block;width:100%;height:calc(2.7*var(--u));min-height:30px;margin:calc(.2*var(--u)) 0 calc(.45*var(--u));overflow:visible}
@@ -995,3 +995,54 @@
 /* the status strip and the documents dock: deep cards so they stand apart from the gold */
 :root[data-theme=gold] .strip-facts{background:linear-gradient(90deg,#1b2470,#232c80);border-color:rgba(255,236,190,.6)}
 :root[data-theme=gold] .view-overview .panel.ovd-card.ovd-docs{border-color:rgba(90,60,10,.35)}
+
+/* ================================================================ v2279 blends of the three page colours (owner: "a blend of the three"):
+   royal blue #3550d4, the picture's moss/teal green, gold #ddae57. Two candidates; the default stays gold until the owner picks.
+   data-theme="blend-sunrise": a diagonal sweep blue -> clean teal-green -> warm gold.  data-theme="blend-aurora": slow aurora blobs of the
+   three over a deep navy base. Page-level text sits on its own deep band, so it passes AA wherever the gradient runs. */
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]){--page-foot:#1d3d6a;--hero-bg:#141c52;--gold-trim:rgba(232,200,59,.75)}
+:root[data-theme=blend-sunrise]{--page-foot:#2f6f6a}
+:root[data-theme=blend-sunrise][data-view=overview] body.studio{background:
+  radial-gradient(50vw 36vw at 18% 20%,rgba(120,150,255,.30),transparent 62%),radial-gradient(46vw 34vw at 88% 88%,rgba(255,226,150,.45),transparent 62%),radial-gradient(40vw 30vw at 50% 55%,rgba(80,200,170,.18),transparent 60%),
+  linear-gradient(135deg,#2a40b8 0%,#3550d4 22%,#2f7d6e 50%,#4e7a45 66%,#ddae57 86%,#e8c172 100%);background-color:#2f7d6e}
+:root[data-theme=blend-sunrise][data-view=overview]{background:#2f7d6e}
+:root[data-theme=blend-aurora][data-view=overview] body.studio{background:linear-gradient(180deg,#0f1640 0%,#121c4e 55%,#0d1438 100%);background-color:#121c4e}
+:root[data-theme=blend-aurora][data-view=overview]{background:#121c4e}
+/* the aurora: two soft layers of blurred blobs drifting very slowly (transform / opacity only) */
+:root[data-theme=blend-aurora][data-view=overview] body.studio::before,:root[data-theme=blend-aurora][data-view=overview] body.studio::after{content:"";position:fixed;inset:-25%;z-index:0;pointer-events:none;will-change:transform}
+:root[data-theme=blend-aurora][data-view=overview] body.studio::before{background:radial-gradient(28% 24% at 22% 30%,rgba(53,80,212,.85),transparent 70%),radial-gradient(26% 22% at 72% 70%,rgba(221,174,87,.70),transparent 70%);filter:blur(40px)}
+:root[data-theme=blend-aurora][data-view=overview] body.studio::after{background:radial-gradient(30% 26% at 62% 28%,rgba(47,125,110,.80),transparent 70%),radial-gradient(24% 22% at 28% 78%,rgba(99,117,51,.75),transparent 70%);filter:blur(46px);opacity:.9}
+@media (prefers-reduced-motion:no-preference){
+  :root[data-theme=blend-aurora][data-view=overview]:not([data-motion=off]):not(.motion-paused) body.studio::before{animation:auroraA 28s ease-in-out infinite alternate}
+  :root[data-theme=blend-aurora][data-view=overview]:not([data-motion=off]):not(.motion-paused) body.studio::after{animation:auroraB 36s ease-in-out infinite alternate}
+}
+@keyframes auroraA{from{transform:translate3d(-4%,-3%,0) scale(1)}to{transform:translate3d(5%,4%,0) scale(1.08)}}
+@keyframes auroraB{from{transform:translate3d(4%,2%,0) scale(1.05);opacity:.75}to{transform:translate3d(-5%,-4%,0) scale(1);opacity:1}}
+:root[data-theme=blend-aurora] .studio-frame,:root[data-theme=blend-aurora] .studio-stage{position:relative;z-index:1}
+/* the rail: deep navy with gold trim and a gold active state (both blends) */
+@media (min-width:768px){:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#18205e,#141c52 55%,#0f1640);box-shadow:inset -1px 0 0 var(--gold-trim)}}
+@media (max-width:767px){
+  :root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-top{background:linear-gradient(180deg,#18205e,#141c52);border-bottom:1px solid var(--gold-trim)}
+  :root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail{background:rgba(20,28,82,.97);border-top:1px solid var(--gold-trim)}
+}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .rail-pill{background:linear-gradient(180deg,#e8c172,#c99536);box-shadow:0 0 0 1px #fff1c4,0 0 18px -2px rgba(232,193,114,.9)}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail a[aria-current=page]{color:#1b1206}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .studio-rail a[aria-current=page] svg{color:#1b1206}
+/* tile 02: deep emerald (as on gold) with a gold edge so it stays apart from the green zone; gold trim on panels, strip and dock */
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-gold{--c:#ffd76a;--glow:#ffc83d;background:linear-gradient(160deg,#053b2f 0%,#0a5e47 100%);border-color:#ffd76a}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-gold :is(.kpi-label,.kpi-v,.kpi-sub,.kpi-go){color:#f4fff9}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-gold .kpi-v{color:#b9ffe0}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-gold .tc-bar{fill:#bff7e0}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi-gold .tc-bar.lit{fill:#ffd23f}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) #kpis .kpi{box-shadow:0 12px 26px -14px rgba(5,10,40,.75),0 0 0 1px var(--gold-trim),0 0 16px -6px var(--glow,var(--c))}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .view-overview .panel.ovd-card{border-color:var(--gold-trim);box-shadow:0 18px 36px -20px rgba(5,10,40,.8)}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-facts{background:linear-gradient(90deg,#141c52,#1b2470);border-color:var(--gold-trim)}
+/* page-level text on its own deep band (AA wherever the blend runs) */
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-staff{justify-self:start;padding:6px 14px;border-radius:999px;background:#141c52;color:#fffaf0;border:1px solid var(--gold-trim)}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .strip-staff-dot{background:#e8c172}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-foot{padding:8px 16px;border-radius:12px;background:#141c52;color:#e9efff;border:1px solid var(--gold-trim)}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-foot-brand{color:#fff}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-foot-right{color:#dfe6ff}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora]) .cap-heart{color:#ff8fa3}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] .studio-foot{margin:16px 0 0;padding:12px 16px;border-radius:12px;background:#141c52;border:1px solid var(--gold-trim);color:#e9efff}
+:root:is([data-theme=blend-sunrise],[data-theme=blend-aurora])[data-view=overview] .studio-foot a{color:#ffd76a}
