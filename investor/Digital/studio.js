@@ -766,7 +766,14 @@
       };
     }
     const savings = () => levers.reduce((a, b) => a + (b.checked ? amounts[b.dataset.lever] || 0 : 0), 0);
-    const per = (k, t2, c2) => calc.variable(k) + calc.fees(k, t2, c2);
+    // v2276 (model v5.2): caregivers are hired as enrollment grows (staffing.hiring_rule), each at the model's all-in annual cost,
+    // so the year-1 replay moves staffing with the scenario's children exactly as the published cash rows do
+    const staffFor = (k) => {
+      const st = (m && m.staffing) || {}, rule = st.hiring_rule; if (!rule || !st.caregiver_annual_all_in) return 0;
+      const hit = rule.find((x) => k <= x.up_to_children) || rule[rule.length - 1];
+      return hit.caregivers * st.caregiver_annual_all_in;
+    };
+    const per = (k, t2, c2) => calc.variable(k) + calc.fees(k, t2, c2) + staffFor(k);
     // the pilot year replayed at the scenario: the published ramp capped at your children, receipts at your tuition and collections,
     // food and fees moving with them, the levers' savings spread over the months, the published one-time costs unchanged
     function year1(n, tt, c, save) {

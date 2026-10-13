@@ -64,7 +64,7 @@
     .then(data => {
       const {funding, totals, platform, assumptions, metrics, meta} = data;
       const amounts = [funding.request_before_financing,totals.refinance,platform.first_year,platform.completion,platform.assurance_one_time,platform.recurring,platform.one_time,platform.monthly,assumptions.tuition,metrics.breakeven_tuition,metrics.year2_margin,funding.peak_deficit,totals.contingency,funding.cash_floor];
-      if (!amounts.every(Number.isFinite) || !['pilot-38-v5.1'].includes(meta.version)) throw new Error('Unrecognized financial model');
+      if (!amounts.every(Number.isFinite) || !['pilot-38-v5.1', 'pilot-38-v5.2'].includes(meta.version)) throw new Error('Unrecognized financial model');
       const sum = totals.refinance + funding.peak_deficit + totals.contingency + funding.cash_floor;
       if (Math.abs(sum - funding.request_before_financing) > .02 || Math.abs(platform.completion + platform.assurance_one_time + platform.recurring - platform.first_year) > .02) throw new Error('Financial model does not reconcile');
       const rowGroups = [

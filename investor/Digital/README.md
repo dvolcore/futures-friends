@@ -4,7 +4,7 @@ Open `index.html` first. The branded overview connects the funding breakdown, pi
 
 The overview reads the current pilot model, flags failed data loads, and supports reduced motion. The suited character artwork and curriculum image are presentation concepts, not evidence of an installed classroom or approved curriculum. Loan terms and monthly repayment remain pending; the overview does not invent an investor return or conceal the pilot-year cash deficit.
 
-## Current financial basis — model pilot-38-v5.1, October 13, 2026
+## Current financial basis — model pilot-38-v5.2, October 13, 2026
 
 One owned Independence, Missouri location, 38 children ages 2–5 in all-day care, twelve operating months, and a first-month operational checkpoint. Four full-time caregivers and a part-time floater, all at $16/hour; the owner serves as director, unpaid; no food worker, no paid substitutes. Owner-set budgets: food capped at $2,000.00/month (Missouri meal pattern still met); toiletries and cleaning within $300.00/month ($3,110.18/year with paper towels halved); classroom and office consumables halved to $1,599.87/year; utilities locked at $1,500.00/month; tax preparation $1,000.00/year; curriculum mapping $7,500.00 and native Spanish review $1,500.00, one-time, with no recurring curriculum or Spanish review fee; RN consultation $2,000.00/year; administration cut to $5,872.00/year (part-time bookkeeper); building upkeep handled in-house (lawn, HVAC service, electrical, parking and staff mobile removed; snow halved). Four caregivers on the floor in two groups of no more than 20 holds only with no more than four 2-year-olds per group (5 CSR 25-500.112). Confirm the actual age mix, license, rooms and schedule before accepting this roster.
 

@@ -97,7 +97,7 @@ def model_blocks(d):
     tuition = f"{whole(a['tuition_weekly'])}/week ({whole(a['tuition'])}/month)"
     staff = (f"The owner serves as director, unpaid; {st['full_time']} full-time caregivers and {part} part-time floater are paid {rate}/hour, "
              f"with {st['floor_caregivers']} caregivers on the floor in {st['groups']} groups of no more than {st['max_group']}. "
-             + st.get('additional_coverage', ''))
+             + st.get('hiring_note', '') + ' ' + st.get('additional_coverage', ''))
     payback = (f" Net cash turns positive in month {m.get('first_cash_positive_month')}; cumulative pilot cash turns positive in month "
                f"{m.get('cumulative_cash_positive_month')} at the month-12 rate, before building payments and debt.")
     margin = (f"At the locked-in {tuition} tuition and {a['collection'] * 100:.0f}% collection, year-two operating margin is {money(m['year2_margin'])} "

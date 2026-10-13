@@ -3,7 +3,7 @@
 Audit date: 2026-10-11  
 Scope: local Downloads project records, investor/business-plan records, and relevant Desktop files. This is a read-only evidence review. Forecasts, proposed rates, targets, and owner-confirmation prompts are not treated as actual operating records.
 
-> **Current model (13 October 2026):** this audit reviews the records that existed on 11 October; its figures below are restated on the current model. The current model is pilot-38-v5.1: 38 children ages 2–5 in all-day care, the owner as unpaid director, 4 full-time caregivers and a part-time floater at $16/hour, owner-confirmed locked-in tuition of $210/week ($910/month), and a year-two operating margin of $112,354.23 before building payments and debt. The older proposals cited below were moved to `99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/` in the project folder. The audit's finding stands: no primary operating record (license, roster, payroll, ledger, bank, debt) has been supplied.
+> **Current model (13 October 2026):** this audit reviews the records that existed on 11 October; its figures below are restated on the current model. The current model is pilot-38-v5.2: 38 children ages 2–5 in all-day care, the owner as unpaid director, 4 full-time caregivers and a part-time floater at $16/hour, owner-confirmed locked-in tuition of $210/week ($910/month), and a year-two operating margin of $112,354.23 before building payments and debt. The older proposals cited below were moved to `99_OUTDATED_TO_REMOVE/superseded_investor_models_2026-10-13/` in the project folder. The audit's finding stands: no primary operating record (license, roster, payroll, ledger, bank, debt) has been supplied.
 
 ## Executive finding
 
@@ -26,22 +26,22 @@ The reviewed package does not contain a current primary record proving licensed 
 
 ### Historical or forecast figures
 
-* Capacity: the owner confirmed 38 children ages 2–5 (model pilot-38-v5.1, 2026-10-13). The license document and occupancy/fire records are not yet in the record.
+* Capacity: the owner confirmed 38 children ages 2–5 (model pilot-38-v5.2, 2026-10-13). The license document and occupancy/fire records are not yet in the record.
 * Hours: the model plans all-day care, 7am–5pm. A current posted schedule and licensing record are not yet in the record.
 * Enrollment: the original business-plan PDF p. 4 describes an old snapshot of three children and says it is not current traction. v4.3 lines 44–54 labels “children enrolled today: 3” as `[OWNER: confirm]`. No current roster, attendance report, tuition ledger or matched deposits was found.
-* Staffing/payroll (model pilot-38-v5.1): owner-director unpaid; 4 full-time caregivers and a part-time floater at $16/hour; planned wages $149,760.00 a year; no food worker, no paid substitutes. No staff roster or payroll register is in the record yet.
+* Staffing/payroll (model pilot-38-v5.2): owner-director unpaid; 4 full-time caregivers and a part-time floater at $16/hour; planned wages $149,760.00 a year; no food worker, no paid substitutes. No staff roster or payroll register is in the record yet.
 * Occupancy: the model treats the center as owned (no lease rent). The owner-specified $140,000.00 refinance-enabling need is part of the funding estimate; the payoff and lender statements are not yet in the record.
-* Food/utilities (owner-set budgets, model pilot-38-v5.1): food capped at $2,000.00/month; utilities locked at $1,500.00/month. These are budgets, not invoices or bank-backed actuals.
+* Food/utilities (owner-set budgets, model pilot-38-v5.2): food capped at $2,000.00/month; utilities locked at $1,500.00/month. These are budgets, not invoices or bank-backed actuals.
 * Collections: the model assumes 96% collection of the locked-in $210/week ($910/month) tuition. No current delinquency or deposit evidence was found.
 * Cash/reserves: the original plan pp. 7–8 and its cash bridge present modeled operating cash and reserve/financing cases. The plan says owner cash contribution is unknown pending bank statements and a contributed-cost ledger (p. 7). No bank statements, cash count or reserve account evidence was found.
-* Debt: the current model has no fixed loan; its funding estimate is $295,254.96 before financing (incl. the $140,000.00 refinance-enabling need); instrument and terms are Pending. No existing debt records were found.
+* Debt: the current model has no fixed loan; its funding estimate is $347,911.98 before financing (incl. the $140,000.00 refinance-enabling need); instrument and terms are Pending. No existing debt records were found.
 
 ## Material conflicts to preserve in the model/package
 
 1. **Licensed capacity:** owner-confirmed 38 children (2026-10-13). Attach the license and occupancy/fire records before presenting it as licensed capacity.
 2. **Enrollment:** “three children” is a dated/old snapshot and an owner-confirmation prompt, not current enrollment. Require a dated roster, attendance report and tuition ledger matched to deposits.
 3. **Hours/opening date:** 7:00–6:00 and “opened September 2026” are old/unconfirmed claims. Require a current schedule and opening/licensing record.
-4. **Financing:** funding estimate $295,254.96 (model pilot-38-v5.1); instrument and terms Pending. Require a signed commitment and a current debt schedule before any repayment claim.
+4. **Financing:** funding estimate $347,911.98 (model pilot-38-v5.2); instrument and terms Pending. Require a signed commitment and a current debt schedule before any repayment claim.
 5. **Occupancy:** the model treats the center as owned; ownership, payoff and the new building payment remain unverified.
 6. **Staff compliance:** the 4-caregiver plan meets Missouri 1:10 only with no more than four two-year-olds per group of up to 20; extra coverage comes from the owner-director and a head of administration. Require roster, credentials, duty hours and ratio evidence.
 

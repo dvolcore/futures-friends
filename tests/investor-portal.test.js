@@ -648,7 +648,7 @@ test('overview: every figure is the model\'s (KPI tiles, basis strip, capital do
   // the KPI tiles
   // v2272 (owner: "key information at a first glance"): six tiles, each computed here from pilot-budget.json
   assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent.replace(/\s+/g, ' ').trim())), KPI_TEXT());
-  assert.deepEqual(KPI_TEXT(), ['$295,254.96', '$398,362 /yr', 'Month 4', '+$112,354 /yr', `From Month ${MODEL.cash.find((r) => r.net > 0).month}`, '$95,852.20']);
+  assert.deepEqual(KPI_TEXT(), ['$347,911.98', '$398,362 /yr', `Month ${MODEL.cash.findIndex((r) => r.children === MODEL.assumptions.capacity) + 1}`, '+$112,354 /yr', `From Month ${MODEL.cash.find((r) => r.net > 0).month}`, '$95,852.20']);
   assert.deepEqual(await txt(['kpiGapFirst']), [money2(MODEL.cash[0].net)]);
   assert.deepEqual(await txt(['kpiGapLast']), ['+' + money2(MODEL.cash[11].net)]);
   assert.deepEqual(await txt([ 'kpiRampFrom', 'kpiRampTo', 'kpiRevTuition', 'kpiRevColl']), [String(MODEL.cash[0].children), String(CAP), whole(assumptions.tuition), '96%']);
@@ -682,7 +682,7 @@ test('overview: every figure is the model\'s (KPI tiles, basis strip, capital do
   const snap = () => txt(['ovMonthLabel', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet']);
   const row = (m) => { const [, children, receipts, recurring, oneTime, net] = CSV[m - 1]; return [`Month ${String(m).padStart(2, '0')} snapshot`, String(children), money2(receipts), money2(recurring + oneTime), money2(net)]; };
   assert.deepEqual(await snap(), row(1));
-  assert.deepEqual(await snap(), ['Month 01 snapshot', '30', '$26,208.00', '$87,887.60', '−$61,679.60']);
+  assert.deepEqual(await snap(), ['Month 01 snapshot', String(MODEL.cash[0].children), money2(MODEL.cash[0].receipts), money2(MODEL.cash[0].recurring + MODEL.cash[0].one_time), money2(MODEL.cash[0].net)]);
   await pg.focus('#ovChart'); await pg.keyboard.press('End');
   assert.deepEqual(await snap(), row(12));
   for (let i = 0; i < 5; i++) await pg.keyboard.press('ArrowLeft');
@@ -919,7 +919,7 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
   assert.ok(typeof slow === 'string' ? /Not (reached|within)/.test(slow) : slow > MODEL.metrics.cumulative_cash_positive_month, `30 children at $910: ${slow}`);
   await setRange('#labTuition', 1250); await pg.waitForTimeout(450);
   const fast = await cumPos();
-  assert.ok(typeof fast === 'number' && fast <= 12, `30 children at $1,250: ${fast}`);
+  assert.ok(typeof fast === 'number' && fast < MODEL.metrics.cumulative_cash_positive_month, `30 children at $1,250: ${fast}`);
   await setRange('#labChildren', CAP);
   assert.match(await pg.textContent('#labPayback'), /^\d+\.\d years$/, 'a positive margin pays the deficit back');
   // the levers: each adds its amount to the margin; the waterfall lists each step and the result
@@ -974,13 +974,13 @@ test('model v5: the generator reproduces the archived v4 (where the archive exis
     assert.equal(JSON.parse(fs.readFileSync(A('pilot-budget_v4_2026-10-11.json'), 'utf8')).funding.request_before_financing, 423849.52);
   } else t.diagnostic('v4 archive not present here: the reproduction check is skipped');
   const { funding: f, totals: tt, staffing: s, assumptions: a, cash } = MODEL;
-  assert.equal(MODEL.meta.version, 'pilot-38-v5.1');
+  assert.equal(MODEL.meta.version, 'pilot-38-v5.2');
   assert.ok(Math.abs(f.peak_deficit + tt.refinance + f.cash_floor + tt.contingency - f.request_before_financing) < 0.005);
   assert.ok(Math.abs(tt.recurring / 12 - f.cash_floor) < 0.006 && Math.abs(tt.one_time * 0.15 - tt.contingency) < 0.006);
   // 38 children all day, ages 2–5; Missouri 1:10, max group 20 (≤4 two-year-olds per group) -> ceil(38 / 10) = 4 caregivers on the floor
   assert.equal(CAP, 38); assert.equal(a.ages, '2–5'); assert.equal(Math.max(...a.cash_ramp), CAP);
-  assert.deepEqual(a.cash_ramp, [30, 34, 36, 38, 38, 38, 38, 38, 38, 38, 38, 38]);
-  assert.equal(cash.findIndex((r) => r.children === CAP) + 1, 4, 'full enrollment from month 4');
+  assert.deepEqual(a.cash_ramp, [6, 11, 15, 20, 24, 29, 33, 38, 38, 38, 38, 38]);   // v5.2 owner-set ramp: full enrollment month 8
+  assert.equal(cash.findIndex((r) => r.children === CAP) + 1, 8, 'full enrollment from month 8 (v5.2 ramp)');
   assert.ok(Math.ceil(CAP / 10) <= s.floor_caregivers && s.floor_caregivers === 4 && s.full_time === 4);
   assert.ok(s.max_group <= 20 && s.groups * s.max_group >= CAP, 'two groups of at most 20 hold the 38 children');
   assert.equal(a.tuition, 910); assert.equal(a.tuition_weekly, 210); assert.match(a.tuition_basis, /locked-in rate of \$210\/week/);
