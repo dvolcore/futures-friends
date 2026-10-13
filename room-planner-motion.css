@@ -1,0 +1,162 @@
+/* Futures Friends: the Room Planner page, jacked up (room-planner-motion.js). The still layout comes first and is complete on its own
+   (reduced motion, the Decorative motion switch, no JavaScript after the prerender, print): every friend in place, the demo plan on its
+   last frame. Movement lives under (prefers-reduced-motion:no-preference) and :root:not([data-motion=off]), keyed to classes the script
+   adds only while motion is allowed. Tokens from ff-tokens.css. Character art only moves, rotates or scales uniformly and is never
+   filtered, recoloured or cropped. The plan keeps fixed colours in both themes, like the planner's own plan. */
+
+/* ---------------------------------------------------------------- the hero: a felt planning room, full bleed */
+.rp-hero.rpm-hero{--floor:clamp(56px,5vw,74px);background:#E4EEF5;color:var(--ink,#14313D);padding-block:40px 0}
+.rp-hero.rpm-hero::before,.rp-hero.rpm-hero::after{display:none}
+.rpm-world{position:absolute;inset:-24px;z-index:-1;overflow:hidden;pointer-events:none}
+/* the wall: a blueprint felt board (deep blue felt, white chalk grid, a soft light from the top right) */
+.rpm-world .rpm-wall{position:absolute;inset:0;background:
+  radial-gradient(55% 65% at 72% 30%,rgba(255,255,255,.22),transparent 70%),
+  radial-gradient(70% 80% at 10% 100%,rgba(6,24,52,.35),transparent 70%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 24px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 24px),
+  linear-gradient(rgba(22,58,110,.62),rgba(22,58,110,.62)),
+  url("img/plush/textures/felt-blue-512.webp") 0 0/300px #2A5A9A}
+.rpm-world .rpm-wall::after{content:"";position:absolute;inset:18px 18px auto;height:calc(100% - var(--floor) - 60px);border:2px dashed rgba(255,255,255,.28);border-radius:22px}
+/* a single integrated scene, when one is set (BACKDROP in room-planner-motion.js) */
+.rpm-world .rpm-backdrop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 60%;max-width:none;border:0;border-radius:0}
+/* the kit carpets as felt swatches, pinned in the right-hand gutter (clear of the Nature / Sound dock, which sits lower) */
+.rpm-swatches{position:absolute;top:calc(13% + 30px);right:max(30px,calc((100vw - 1320px) / 2 - 10px));display:flex;flex-direction:column;gap:14px}
+.rpm-sw{position:relative;display:block;width:clamp(34px,3.6vw,54px);aspect-ratio:1;border-radius:10px;background:var(--c);rotate:calc(var(--i) * 9deg - 16deg);
+  box-shadow:inset 0 0 0 4px var(--c),inset 0 0 0 6px rgba(255,255,255,.7),0 3px 3px rgba(6,24,52,.35),0 14px 18px -8px rgba(6,24,52,.6)}
+.rpm-sw::after{content:"";position:absolute;top:-4px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#B3261E;box-shadow:0 2px 2px rgba(0,0,0,.3)}
+/* the floor: felt planks with a stitched baseboard */
+.rpm-floorband{position:absolute;left:0;right:0;bottom:0;height:calc(var(--floor) + 24px + 8px);
+  background:repeating-linear-gradient(90deg,rgba(91,58,18,.2) 0 2px,transparent 2px 190px),url("img/plush/textures/felt-cream-light-512.webp") 0 0/260px,linear-gradient(180deg,#E6C08A,#D2A060 70%,#C38E52);
+  background-blend-mode:normal,multiply,normal;box-shadow:0 -10px 0 #F4E7CF,0 -12px 0 #D9C3A0}
+.rpm-floorband::before{content:"";position:absolute;left:0;right:0;top:-7px;border-top:2px dashed rgba(138,90,0,.55)}
+.rpm-veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent calc(100% - var(--floor) - 70px),rgba(6,24,52,.28) calc(100% - var(--floor) - 34px),transparent calc(100% - var(--floor) - 30px))}
+
+.rpm-hero>.rpm-grid{position:relative;z-index:1;max-width:1320px;display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);grid-template-areas:'card plan' 'cast plan';gap:6px clamp(18px,3vw,44px);align-items:end}
+/* the frosted card (the same as the Centers heroes): the page's own words */
+.rpm-hero .rpm-card{grid-area:card;align-self:end;margin-bottom:8px;padding:clamp(20px,2.6vw,34px);border-radius:26px;background:rgba(251,246,236,.94);
+  -webkit-backdrop-filter:blur(14px) saturate(160%) brightness(1.06);backdrop-filter:blur(14px) saturate(160%) brightness(1.06);
+  border:1.5px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 24px 50px -24px rgba(10,43,56,.55);color:var(--ink,#14313D)}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.rpm-hero .rpm-card{background:rgba(251,246,236,.96)}}
+@media (prefers-reduced-transparency:reduce){.rpm-hero .rpm-card{background:#FBF6EC;-webkit-backdrop-filter:none;backdrop-filter:none}}
+.rpm-hero .rpm-card h1{color:var(--ink,#14313D)}
+.rpm-hero .rpm-card .lede{color:#2E4A55}
+.rpm-hero .rpm-card .rpm-kick{color:#7A5200}
+.rpm-hero .rpm-card .rk-facts li{color:var(--ink,#14313D);border:1px dashed rgba(20,49,61,.35);background:rgba(255,255,255,.62)}
+.rpm-hero .rpm-card .btn.soft{background:#fff;color:var(--ink,#14313D);border-color:rgba(20,49,61,.25)}
+.rpm-hero .rpm-card .btn{min-height:44px}
+
+/* the right-hand side: the plan pinned to the wall, the cast standing on the floor below it */
+.rpm-plan{grid-area:plan;align-self:center;justify-self:center;margin:0 max(0px,calc(165px - (100vw - min(100vw,1320px)) / 2 - 20px)) calc(var(--floor) * .9) 0;width:min(100% - max(0px,calc(165px - (100vw - min(100vw,1320px)) / 2 - 20px)),580px);display:grid;gap:10px}
+.rpm-sheet{position:relative;padding:12px;border-radius:6px;background:#FBF6EC;rotate:-.8deg;box-shadow:0 2px 0 rgba(255,255,255,.6) inset,0 1px 2px rgba(6,24,52,.25),0 14px 18px -8px rgba(6,24,52,.45),0 40px 60px -26px rgba(6,24,52,.7)}
+.rpm-sheet::before{content:"";position:absolute;right:-2px;bottom:-2px;width:46px;height:46px;background:linear-gradient(135deg,transparent 50%,#E9DFC9 50%);border-radius:0 0 6px 0;box-shadow:-3px -3px 6px -2px rgba(6,24,52,.25);pointer-events:none}
+.rpm-sheet::after{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(231,169,40,.55);border-radius:6px;pointer-events:none}
+.rpm-tapebit{position:absolute;top:-11px;width:76px;height:22px;background:rgba(245,197,83,.78);box-shadow:0 1px 2px rgba(0,0,0,.15);z-index:2}
+.rpm-tb1{left:-18px;rotate:-24deg}.rpm-tb2{right:-18px;rotate:22deg}
+.rpm-svg{display:block;width:100%;height:auto}
+.rpm-ok{position:absolute;left:16px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 6px;border-radius:999px;background:#1F6E43;color:#fff;
+  font:700 .8125rem/1.1 var(--display,inherit);box-shadow:0 0 0 3px rgba(255,255,255,.95),0 10px 18px -8px rgba(31,110,67,.8)}
+.rpm-ok b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;color:#1F6E43;font-size:.875rem}
+/* the example's caption lives under the plan, never on it */
+.rpm-cap{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;padding:4px 4px 4px 14px;border-radius:22px;background:rgba(251,246,236,.92);color:var(--ink,#14313D);
+  font:600 .8125rem/1.35 var(--body,inherit);box-shadow:0 6px 16px -10px rgba(10,43,56,.45)}
+.rpm-replay{display:none;flex:none;white-space:nowrap;min-height:44px;padding:8px 12px;font-size:.8125rem;background:#fff;color:var(--ink,#14313D);border-color:rgba(20,49,61,.25)}
+.rpm-plan.rpm-motion .rpm-replay{display:inline-flex;align-items:center}
+.rpm-replay:focus-visible{outline:3px solid var(--gold,#E7A928);outline-offset:2px}
+/* the demo's parts (their last frame is their resting style) */
+.rpm-svg :is(.rpm-zone,.rpm-a,.rpm-fixed){transform-box:fill-box;transform-origin:50% 50%}
+.rpm-svg .rpm-fr{transform-box:fill-box;transform-origin:50% 100%}
+.rpm-svg :is(.rpm-cone,.rpm-leaf){transform-box:view-box}
+.rpm-ok{transform-origin:20% 50%}
+
+/* the cast stands on the floor: each cut-out sized from its lineup scale, the friends each on their own kit carpet */
+.rpm-cast{grid-area:cast;--u:calc(var(--floor) * 1.9);position:relative;display:flex;align-items:flex-end;justify-content:flex-start;padding-left:calc(var(--floor) * .9) !important;gap:clamp(4px,1vw,12px);width:100%;padding:0 0 calc(var(--floor) * .44);pointer-events:none}
+.rpm-ch{position:relative;flex:none;height:calc(var(--u) * var(--s));aspect-ratio:var(--ar)}
+.rpm-bob{position:relative;z-index:1;display:block;width:100%;height:100%;transform-origin:50% 100%}
+.rpm-hero .rpm-ch img{display:block;width:100%;height:100%;max-width:none;object-fit:contain;transform-origin:50% 100%;border:0;border-radius:0;animation:none;filter:none}
+.rpm-ch::after{content:"";position:absolute;left:12%;right:12%;bottom:-3%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,26,8,.4),transparent);z-index:0}
+.rpm-ch[style*="--rug"]::before{content:"";position:absolute;z-index:0;left:-16%;right:-16%;bottom:calc(var(--floor) * -.13);height:calc(var(--floor) * .27);border-radius:50%;background:var(--rug);
+  border:2px dashed rgba(255,255,255,.8);box-shadow:0 0 0 3px var(--rug),0 7px 10px -5px rgba(40,26,8,.5)}
+.rpm-cast .rpm-tape{position:absolute;left:0;bottom:2px;height:calc(var(--floor) * .26);width:auto;aspect-ratio:5}
+.rpm-cast .rpm-basket{position:relative;flex:none;align-self:flex-end;width:auto;height:calc(var(--u) * .36);margin:0 0 -4px 6px;object-fit:contain;filter:drop-shadow(0 6px 5px rgba(40,26,8,.35))}
+.rpm-cast .rpm-pencils{position:absolute;left:38%;bottom:2px;height:calc(var(--floor) * .3);width:auto;aspect-ratio:3}
+.rpm-tapeband{transform-box:fill-box;transform-origin:0 50%}
+/* the honesty chip: one small caption, bottom corner */
+.rpm-chip{position:absolute;z-index:3;right:clamp(10px,2vw,22px);top:10px;padding:4px 10px;border-radius:999px;background:rgba(10,43,56,.74);color:#FBF6EC;font:500 .6875rem/1.3 var(--body,inherit);pointer-events:none}
+
+@media (max-width:980px){
+  .rpm-swatches{display:none}
+  .rpm-hero>.rpm-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:'card' 'plan' 'cast';align-items:stretch;gap:20px}
+  .rpm-hero .rpm-card{margin-bottom:0}
+  .rpm-plan{margin:0;width:100%;max-width:640px}
+  .rpm-cast{width:auto;align-self:stretch;margin-right:60px;padding-left:0!important;justify-content:center;padding-bottom:calc(var(--floor) * .5)}
+  .rpm-cast .rpm-basket{display:none}
+}
+@media (max-width:560px){
+  .rpm-hero .rpm-card{border-radius:20px}
+  .rpm-cast{gap:5px}
+  .rpm-chip{font-size:.625rem;top:9px}
+  .rpm-ok{font-size:.6875rem;left:12px;bottom:8px}
+  .rpm-tapebit{width:56px;height:18px}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .rpm-hero.rpm-live.is-landed .rpm-bob{animation:rpm-breathe 4.8s var(--ff-ease-inout) infinite alternate;animation-delay:calc(var(--i) * -.7s)}
+  :root:not([data-motion=off]) .rpm-hero.rpm-live :is(.rpm-world,.rpm-cast){transition:transform .6s var(--ff-ease-out)}
+  :root:not([data-motion=off]) .rpm-hero.ffm-paused *{animation-play-state:paused!important}
+  :root:not([data-motion=off]) .rpm-plan.rpm-playing .rpm-sheet{cursor:pointer}
+  @supports (animation-timeline:view()){
+    :root:not([data-motion=off]) .rpm-hero.rpm-live .rpm-world{animation:rpm-par linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  }
+}
+@keyframes rpm-breathe{from{translate:0 0}to{translate:0 -4px}}
+@keyframes rpm-par{from{translate:0 0}to{translate:0 60px}}
+
+/* ---------------------------------------------------------------- below the hero: felt graph paper instead of plain white */
+.rp.rpm{background:
+  repeating-linear-gradient(0deg,rgba(47,111,192,.07) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(90deg,rgba(47,111,192,.07) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(0deg,rgba(47,111,192,.035) 0 1px,transparent 1px 24px),
+  repeating-linear-gradient(90deg,rgba(47,111,192,.035) 0 1px,transparent 1px 24px),
+  url("img/plush/textures/felt-cream-light-512.webp") 0 0/360px var(--paper,#FBF6EC)}
+.rp.rpm>.rp-sec.rpm-paper,.rp.rpm>#rp-guide{background:transparent}
+.rp.rpm>#rp-app{position:relative}
+.rp.rpm>#rp-app::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:linear-gradient(180deg,rgba(138,90,0,.14),transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rp.rpm{background:
+  repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 120px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 24px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 24px),var(--paper)}}
+:root[data-theme="dark"] .rp.rpm{background:
+  repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 120px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 120px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 24px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 24px),var(--paper)}
+
+/* ---------------------------------------------------------------- the step-by-step section: a stitched thread through the five steps */
+.rpm-thread [data-rp-tab]{position:relative}
+.rpm-thread [data-rp-tab]:not(:last-child)::before,.rpm-thread [data-rp-tab]:not(:last-child)::after{content:"";position:absolute;z-index:0;top:calc(50% - 9.5px);left:calc(50% + 13px);width:calc(100% - 24px);height:3px;pointer-events:none}
+.rpm-thread [data-rp-tab]:not(:last-child)::before{background:linear-gradient(90deg,rgba(10,43,56,.28) 55%,transparent 0) 0 50%/7px 2px repeat-x}
+.rpm-thread [data-rp-tab]:not(:last-child)::after{background:linear-gradient(90deg,#E7A928 60%,transparent 0) 0 0/8px 3px repeat-x;clip-path:inset(0 100% 0 0)}
+.rpm-thread [data-rp-tab][data-rpm-done]::after{clip-path:inset(0 0 0 0)}
+.rpm-thread [data-rp-tab][data-rpm-done] .rp-tabn{background:#E7A928;color:#0A2B38}
+.rpm-thread .rp-tabn{position:relative;z-index:1}
+
+/* ---------------------------------------------------------------- inside the planner: snap squish, drag shadow, fit-check moments */
+[data-rp-canvas] .rp-it{transform-box:fill-box;transform-origin:50% 50%}
+[data-rp-canvas].rpm-drag .rp-it.is-sel{filter:drop-shadow(0 3px 2.5px rgba(10,43,56,.38)) drop-shadow(0 8px 8px rgba(10,43,56,.18));cursor:grabbing}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .rpm-thread [data-rp-tab]:not(:last-child)::after{transition:clip-path var(--ff-dur-4,600ms) var(--ff-ease-inout,ease)}
+  :root:not([data-motion=off]) .rpm-pre :is(.rp-head,.rp-toolbar,.rp-stage,.rp-side,.rp-files){opacity:0}
+  :root:not([data-motion=off]) .rp-chips li.rpm-pass,:root:not([data-motion=off]) .rp-allok.rpm-pass{animation:rpm-glow 1.2s var(--ff-ease-out,ease-out) 1}
+  :root:not([data-motion=off]) .rp-chips li.rpm-alert,:root:not([data-motion=off]) .rp-is-stop.rpm-alert{animation:rpm-pulse .45s var(--ff-ease-inout,ease-in-out) 2}
+  :root:not([data-motion=off]) .rp-fithead b.rpm-pass{animation:rpm-glowtext 1.2s var(--ff-ease-out,ease-out) 1}
+  :root:not([data-motion=off]) .rp-fithead b.rpm-alert{display:inline-block;animation:rpm-pulse .45s var(--ff-ease-inout,ease-in-out) 2}
+}
+@keyframes rpm-glow{0%{box-shadow:0 0 0 0 rgba(31,110,67,.6)}100%{box-shadow:0 0 0 12px rgba(31,110,67,0)}}
+@keyframes rpm-glowtext{0%{text-shadow:0 0 0 rgba(31,110,67,0)}30%{text-shadow:0 0 12px rgba(31,110,67,.55)}100%{text-shadow:0 0 0 rgba(31,110,67,0)}}
+@keyframes rpm-pulse{0%,100%{scale:1}50%{scale:1.07}}
+
+@media print{
+  .rpm-world,.rpm-cast,.rpm-chip,.rpm-replay,.rpm-tapebit{display:none!important}
+  .rpm-hero .rpm-card{background:#fff;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .rp.rpm{background:#fff}
+  .rpm-pre :is(.rp-head,.rp-toolbar,.rp-stage,.rp-side,.rp-files){opacity:1!important}
+}
