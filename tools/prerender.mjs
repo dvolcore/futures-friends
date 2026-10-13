@@ -90,6 +90,8 @@ async function snapshot(list) {
       clone.querySelectorAll('script,template,noscript,.mh-letters').forEach(x => x.remove());     // .mh-letters: the home title's decorative animated letters (the h1 keeps its logo image and alt)
       clone.querySelectorAll('video').forEach(vd => { vd.removeAttribute('src'); vd.removeAttribute('autoplay'); vd.setAttribute('preload', 'none'); vd.querySelectorAll('source').forEach(x => x.remove()); });     // no early video download from the static copy
       clone.querySelectorAll('[class*="is-pre"]').forEach(x => x.classList.remove('is-pre'));
+      // the 3D friends band (friends-3d.js): written as its first, unloaded state (the official cut-out, no canvas), whatever the capture loaded
+      if (window.FFFriends3D) clone.querySelectorAll('[data-f3d-root]').forEach(x => { x.outerHTML = window.FFFriends3D.band(); });
       // load state is not content: every picture is written as loaded (so no shimmer placeholder shows without JS and the output is the same on every run)
       clone.querySelectorAll('img.sp-img').forEach(i => { i.classList.add('is-ready'); const m = i.closest('.sp-media,.sp-gal-zoom,.sp-tile-media,.sp-friend-img,.sp-chip-i'); if (m) m.classList.add('is-loaded'); });
       const big = [...v.querySelectorAll('img')].find(i => (i.naturalWidth || 0) >= 300 && (i.getAttribute('src') || '').length);

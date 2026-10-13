@@ -1,0 +1,43 @@
+/* Meet the friends in 3D (friends-3d.js, owner 2026-10-12). Bop's accent purple for the controls (--bop / --bop-ink). The stage has a
+   fixed 4:5 box (no layout shift while the model loads); the official cut-out poster is contained, never cropped. */
+.f3d .f3d-pick{margin:4px 0 16px}
+.f3d .f3d-pick button[aria-pressed="true"]{background:var(--bop-ink,#6B2A8E);color:#fff}
+.f3d-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:760px){.f3d-grid{grid-template-columns:1fr;gap:14px}}
+.f3d-stage{position:relative;margin:0;aspect-ratio:4/5;max-height:72vh;width:100%;border-radius:24px;overflow:hidden;
+  background:radial-gradient(120% 80% at 50% 92%,color-mix(in srgb,var(--bop,#8236AE) 16%,transparent),transparent 60%),var(--bop-s,#F3EAFB);
+  border:1px solid color-mix(in srgb,var(--bop,#8236AE) 22%,transparent)}
+@media (max-width:760px){.f3d-stage{aspect-ratio:1/1;max-height:none}}
+.f3d-poster{position:absolute;inset:8% 10%;width:80%;height:84%;object-fit:contain;transition:opacity .35s}
+.f3d-gl{position:absolute;inset:0;touch-action:pan-y;cursor:grab}
+.f3d-gl:active{cursor:grabbing}
+.f3d-gl canvas{display:block;width:100%!important;height:100%!important}
+.f3d-stage[data-state="ready"] .f3d-poster{opacity:0}
+.f3d-load{position:absolute;left:50%;bottom:18px;transform:translateX(-50%)}
+.f3d-busy{position:absolute;right:14px;top:14px;width:22px;height:22px;border-radius:50%;border:3px solid color-mix(in srgb,var(--bop,#8236AE) 25%,transparent);
+  border-top-color:var(--bop-ink,#6B2A8E);opacity:0}
+.f3d-stage[data-state="loading"] .f3d-busy{opacity:1;animation:f3d-spin 1s linear infinite}
+@keyframes f3d-spin{to{transform:rotate(1turn)}}
+.f3d-cap{margin:0}
+.f3d [hidden]{display:none!important}
+.f3d-panel{display:grid;gap:12px;align-content:start}
+.f3d-name{margin:0;color:var(--bop-ink,#6B2A8E)}
+.f3d-moves,.f3d-tools{display:flex;flex-wrap:wrap;gap:8px}
+.f3d-move,.f3d-tool{font:inherit;font-weight:600;min-height:44px;min-width:44px;padding:8px 18px;border-radius:999px;cursor:pointer;
+  border:2px solid var(--bop-ink,#6B2A8E);background:var(--paper,#fff);color:var(--bop-ink,#6B2A8E)}
+.f3d-move{background:var(--bop-ink,#6B2A8E);color:#fff}
+.f3d-move:hover:not(:disabled),.f3d-tool:hover:not(:disabled){filter:brightness(1.08)}
+.f3d-move:disabled,.f3d-tool:disabled{opacity:.45;cursor:default}
+.f3d-move:focus-visible,.f3d-tool:focus-visible,.f3d-arbtn:focus-visible{outline:3px solid var(--bop-ink,#6B2A8E);outline-offset:3px}
+.f3d-fur[aria-pressed="true"]{background:color-mix(in srgb,var(--bop,#8236AE) 18%,var(--paper,#fff))}
+.f3d-fur::before{content:"";display:inline-block;width:.7em;height:.7em;margin-right:.45em;border-radius:50%;border:2px solid currentColor;vertical-align:-.05em}
+.f3d-fur[aria-pressed="true"]::before{background:currentColor}
+.f3d-ar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.f3d-arbtn{background:var(--bop-ink,#6B2A8E);color:#fff;min-height:44px}
+.f3d-arlink{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.f3d-arnote{margin:0;font-size:.875rem;color:var(--muted,#55606e)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .f3d-move,:root:not([data-theme="light"]) .f3d-arbtn,:root:not([data-theme="light"]) .f3d .f3d-pick button[aria-pressed="true"]{color:#1d1030}}
+:root[data-theme="dark"] .f3d-move,:root[data-theme="dark"] .f3d-arbtn,:root[data-theme="dark"] .f3d .f3d-pick button[aria-pressed="true"]{color:#1d1030}
+@media (prefers-reduced-motion:reduce){.f3d-poster{transition:none}.f3d-stage[data-state="loading"] .f3d-busy{animation:none}}
+[data-motion="off"] .f3d-poster{transition:none}
+[data-motion="off"] .f3d-stage[data-state="loading"] .f3d-busy{animation:none}

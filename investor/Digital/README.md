@@ -1,6 +1,8 @@
-# Futures Friends investor presentation
+# Futures Friends investor overview
 
-Open `index.html` for the presentation, `pilot-plan.html` for the active model, and `pilot-one-sheet.html` for the investor summary. All package links are relative; research links need internet access.
+Open `index.html` first. The branded overview connects the funding breakdown, pilot scope, platform build, operating gap, curriculum concept, phase navigation, line-item costs, documents and current PDFs. Open `pilot-plan.html` for the active model and `pilot-one-sheet.html` for the investor summary. All package links are relative; research links need internet access.
+
+The overview reads the current pilot model, flags failed data loads, and supports reduced motion. The suited character artwork and curriculum image are presentation concepts, not evidence of an installed classroom or approved curriculum. Loan terms and monthly repayment remain pending; the overview does not invent an investor return or conceal the operating deficit.
 
 ## Current financial basis — October 11, 2026
 
