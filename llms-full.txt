@@ -1016,6 +1016,7 @@ For child care centers, home daycares, churches and pre-K partners: the four fri
 
 Book a demo
 See pricing
+Storybook illustration · Story-world characters
 Trusted by professionals
 
 A curriculum educator and a registered nurse each reviewed part of what we offer: the curriculum and the Eat the Rainbow menu. These are their own words.
@@ -1039,10 +1040,6 @@ Read the full statement
 
 Each statement and profile was supplied by the professional for Futures Learning Center. They are reviews of the curriculum and the menu, not an accreditation or a certification of every recipe.
 
-Piloting in Independence, Missouri
-Ordering opens soon
-
-See what is available today
 LEARNING ZONES KIT
 Five friend zones. One chime.
 
@@ -1121,6 +1118,36 @@ Learning Zones kits, rugs and classroom signs for your rooms. Pick what fits, se
 Shop the kit
 See the whole store
 
+How a center’s day gets recorded
+
+Every check a classroom logs travels one way: onto the director’s “What’s due”, into one record ready for licensing, and back as the next thing on the calendar.
+
+1
+Each classroom logs the checks a licensed center keeps: ratios, nap checks, drills and daily health checks.
+2
+Every check is time-stamped on the classroom tablet as it happens.
+3
+The director’s “What’s due” shows what is done today and what is coming up.
+4
+The day’s checks are filed into one record, ready when licensing asks for it.
+5
+The next drill goes on the calendar, so tomorrow starts the loop again.
+
+FUTURES HUB
+Director portal
+
+The center dashboard
+
+Today checklist, ratios, meals and family updates.
+
+Try the director portal
+
+Interactive demo (sample data)
+
+Piloting in Independence, Missouri
+Ordering opens soon
+
+See what is available today
 START WHERE YOU ARE
 Which program are you?
 
@@ -1183,21 +1210,6 @@ Impact and research
 Why the early years matter and what we will measure.
 Why Futures Friends
 Teacher-led and hands-on, not video-first.
-How a center’s day gets recorded
-
-Every check a classroom logs travels one way: onto the director’s “What’s due”, into one record ready for licensing, and back as the next thing on the calendar.
-
-1
-Each classroom logs the checks a licensed center keeps: ratios, nap checks, drills and daily health checks.
-2
-Every check is time-stamped on the classroom tablet as it happens.
-3
-The director’s “What’s due” shows what is done today and what is coming up.
-4
-The day’s checks are filed into one record, ready when licensing asks for it.
-5
-The next drill goes on the calendar, so tomorrow starts the loop again.
-
 What we have built so far
 
 Counted from our own library, and every one is open to look at. Draft means no reviewer has approved it yet.
@@ -1405,9 +1417,7 @@ Bring Futures Friends to your child care center, starting with Unit 1
 The same four friends in the twos room and the pre-K room, so a child who moves up a room already knows who is waiting. Unit 1 is ready to teach as a draft; the rest of the year is planned.
 
 Ask about your rooms
-Illustration
-The storybook world, not a photo of our center
-STORY-WORLD CHARACTERS
+Storybook illustration · Story-world characters
 Trusted by professionals
 
 A curriculum educator and a registered nurse each reviewed part of what we offer: the curriculum and the Eat the Rainbow menu. These are their own words.
@@ -1693,12 +1703,16 @@ Friday circle
 On Friday the class sits together and names who showed the week's value. The news goes home to families.
 
 Four zones, open all day
+LEARN
 Booker's Reading Area
 Early literacy, storytelling, listening, and the courage to try again.
+BELONG
 Lumi's Calm Corner
 Naming feelings, calming down, friendship and making room for everyone.
+EXPLORE
 Zuri's Discovery Zone
 Questions, nature, numbers, shapes and simple experiments.
+MOVE
 Bop's Movement Zone
 Movement, music, routines, clean-up and doing it myself.
 Twos, pre-K and everyone in between
@@ -1940,9 +1954,7 @@ A big program sized for your home daycare
 One plan that works when the two-year-old and the four-year-old share a table. The welcome box is smaller, and a credential for licensed home providers is planned.
 
 Ask about your rooms
-Illustration
-The storybook world, not a photo of our center
-STORY-WORLD CHARACTERS
+Storybook illustration · Story-world characters
 LEARNING ZONES KIT
 Five friend zones. One chime.
 
@@ -2089,12 +2101,16 @@ Friday circle
 On Friday the class sits together and names who showed the week's value. The news goes home to families.
 
 Four zones, open all day
+LEARN
 Booker's Reading Area
 Early literacy, storytelling, listening, and the courage to try again.
+BELONG
 Lumi's Calm Corner
 Naming feelings, calming down, friendship and making room for everyone.
+EXPLORE
 Zuri's Discovery Zone
 Questions, nature, numbers, shapes and simple experiments.
+MOVE
 Bop's Movement Zone
 Movement, music, routines, clean-up and doing it myself.
 Twos, pre-K and everyone in between
@@ -2268,6 +2284,7 @@ Published package prices before tax
 
 Start now with Unit 1 and a live session for your staff, or look ahead to the annual bundle. Each price says where it comes from, and every one is a proposed launch price until it is final. Ordering opens soon: nothing is for sale online yet.
 
+Storybook illustration · Story-world characters
 LEARNING ZONES KIT
 Five friend zones. One chime.
 
