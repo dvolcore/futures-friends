@@ -15,8 +15,12 @@
      form on the Overview, with the same model figures; see "Overview" below. The other views stay as the deep dives.
    - v2270 (owner 2026-10-13, "more like the command center"): the Overview is a command center: a dark command header with the hero
      scene slot, a compact KPI strip and the scenario simulator as its centerpiece, wired live to the pilot-year chart.
-   No library; transform / opacity / stroke only. Loops: the command header's scene drift, light sweep, status dot and ticker only
-   (all stopped by every motion switch). Sends nothing, stores nothing. */
+   - v2271 (owner 2026-10-13, "Capital command center", his own layout 1:1): the Overview is the owner's mockup: title row, the gold-
+     framed meeting banner, five KPI tiles, the basis strip, the capital donut beside the cash-flow lab, the documents dock. The rail
+     reads Overview · The ask · Cash flow · Payback · All costs (the cost explorer page) · Evidence; Inside the pilot stays a view
+     (?view=inside), reached from Evidence and the Platform tile.
+   No library; transform / opacity / stroke only. Loops: the banner's drift and light sweep only (both stopped by every motion
+   switch). Sends nothing, stores nothing. */
 (function () {
   'use strict';
   const D = document, R = D.documentElement, $ = (s, r = D) => r.querySelector(s), $$ = (s, r = D) => [...r.querySelectorAll(s)];
@@ -47,7 +51,9 @@
   }
   function pill() {
     const a = rail && $(`[data-view-link="${view}"]`, rail), p = rail && $('.rail-pill', rail);
-    if (!a || !p) return;
+    if (!p) return;
+    p.classList.toggle('off', !a);   // Inside the pilot has no rail item (reached from Evidence and the Platform tile)
+    if (!a) return;
     p.style.setProperty('--x', `${a.offsetLeft}px`); p.style.setProperty('--y', `${a.offsetTop}px`);
     p.style.setProperty('--w', `${a.offsetWidth}px`); p.style.setProperty('--h', `${a.offsetHeight}px`);
   }
@@ -94,7 +100,7 @@
 
   // ================================================================ Funding: "Where the funding goes" donut
   // one donut per host: the Funding view's and the Overview's compact one (same geometry, same model slices)
-  function makeDonut({ host, tip, detail, hint, buttons, total: totalEl, deep, onSelect }) {
+  function makeDonut({ host, tip, detail, hint, buttons, total: totalEl, deep, onSelect, colors }) {
     const C = 160, RAD = 118, CIRC = 2 * Math.PI * RAD, GAP = 3, LIFT = 12;
     let slices = [], pinned = -1, built = false;
     const wrap = host.parentElement;
@@ -108,6 +114,7 @@
       ];
       let at = 0;
       slices.forEach((s, i) => {
+        if (colors && colors[s.key]) s.color = colors[s.key];
         s.share = (s.v / total * 100).toFixed(1) + '%';
         s.len = Math.max(0, (s.v / total) * CIRC - GAP);
         const mid = (-90 + (at + s.v / total / 2) * 360) * Math.PI / 180;
@@ -128,7 +135,7 @@
           b.style.setProperty('--c', s.color);
         }
       });
-      totalEl.textContent = money(total);
+      if (totalEl) totalEl.textContent = money(total);
       built = true;
       const want = deep && params().get('slice');
       if (want) pick(want, true);
@@ -188,7 +195,7 @@
     const land = () => anims.forEach((a) => a.finish());
     // a part named elsewhere on the page (linked highlighting): lift it without pinning; null returns to the pinned part
     const hover = (key) => { if (!built) return; const i = key ? slices.findIndex((s) => s.key === key) : -1; select(i >= 0 ? i : pinned, false); };
-    return { build, pick, draw, land, select, hover, keys: () => slices.map((s) => s.key) };
+    return { build, pick, draw, land, select, hover, keys: () => slices.map((s) => s.key), get: (key) => slices.find((s) => s.key === key) };
   }
   const donut = makeDonut({ host: $('#allocationArcs'), tip: $('#donutTip'), detail: $('#allocationDescription'), hint: $('#donutHint'), buttons: $$('#allocationControls [data-slice]'), total: $('#donutTotal'), deep: true });
 
@@ -221,7 +228,7 @@
       shown = target = rows;
       chart.dataset.source = ok ? 'csv' : 'model';
       layout();
-      scrub.disabled = false;
+      if (scrub) scrub.disabled = false;
       select(month);
       if (wantDraw) { wantDraw = false; draw(true); }
     }
@@ -238,7 +245,7 @@
       chart.classList.toggle('chart-narrow', (RGT - L) / 12 < 44);
       const sets = [rows, ...(o.envelope ? o.envelope(rows) : [])];
       const top = Math.ceil(Math.max(...sets.flatMap((s) => s.map((r) => Math.max(spend(r), r.receipts)))) / 25000) * 25000, ystep = top / 4;
-      const bottom = Math.floor(Math.min(0, ...sets.flatMap((s) => s.map((r) => r.net))) / ystep) * ystep;
+      const bottom = o.positiveOnly ? 0 : Math.floor(Math.min(0, ...sets.flatMap((s) => s.map((r) => r.net))) / ystep) * ystep;
       step = (RGT - L) / 12; x = (i) => L + step / 2 + i * step;
       y = (v) => BOT - (v - bottom) / (top - bottom) * (BOT - TOP);
       const grid = part('grid'); grid.replaceChildren();
@@ -246,7 +253,7 @@
         grid.append(svg('line', { x1: L, x2: RGT, y1: y(v).toFixed(2), y2: y(v).toFixed(2), class: v === 0 ? 'chart-zero' : 'chart-grid-line' }));
         if (v >= 0) { const lab = svg('text', { x: L - 12, y: (y(v) + 5).toFixed(2), class: 'chart-grid-label', 'text-anchor': 'end' }); lab.textContent = v === 0 ? '$0' : '$' + Math.round(v / 1000) + 'k'; grid.append(lab); }
       }
-      rows.forEach((r, i) => { const lab = svg('text', { x: x(i).toFixed(2), y: BOT + 26, class: `chart-month${r.month % 2 ? '' : ' m-even'}`, 'text-anchor': 'middle' }); lab.textContent = 'M' + String(r.month).padStart(2, '0'); grid.append(lab); });
+      rows.forEach((r, i) => { const lab = svg('text', { x: x(i).toFixed(2), y: BOT + 26, class: `chart-month${r.month % 2 ? '' : ' m-even'}`, 'text-anchor': 'middle' }); lab.textContent = o.monthLabel ? o.monthLabel(r.month) : 'M' + String(r.month).padStart(2, '0'); grid.append(lab); });
       const bars = part('bars'); bars.replaceChildren();
       rows.forEach((r, i) => { const b = svg('rect', { rx: 6, class: 'gap-bar' }); b.style.setProperty('--i', i); bars.append(b); });
       for (const k of ['rec', 'spend']) part(k).setAttribute('pathLength', '1');
@@ -255,7 +262,7 @@
       const hits = part('hits'); hits.replaceChildren();
       rows.forEach((r, i) => {
         const hit = svg('rect', { x: (x(i) - step / 2).toFixed(2), y: 0, width: step.toFixed(2), height: H, class: 'cash-hit' });
-        hit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !dragging) select(r.month); });
+        hit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !dragging) { if (o.hoverStops) pause(); select(r.month); } });
         hits.append(hit);
       });
       paint(shown);
@@ -267,7 +274,13 @@
       const rec = line(vals.map((r) => r.receipts));
       part('area').setAttribute('d', `${rec} L${x(11).toFixed(2)},${y(0).toFixed(2)} L${x(0).toFixed(2)},${y(0).toFixed(2)} Z`);
       part('rec').setAttribute('d', rec);
-      part('spend').setAttribute('d', line(vals.map(spend)));
+      const sp = line(vals.map(spend));
+      part('spend').setAttribute('d', sp);
+      // the Overview: the monthly gap shaded between the two lines, and a marker on each month
+      const ga = part('gapArea');
+      if (ga) ga.setAttribute('d', `${sp} ${vals.map((r, i) => `L${x(11 - i).toFixed(2)},${y(vals[11 - i].receipts).toFixed(2)}`).join(' ')} Z`);
+      const dots = part('dots');
+      if (dots) dots.innerHTML = vals.map((r, i) => `<circle class="m-dot m-rec" cx="${x(i).toFixed(2)}" cy="${y(r.receipts).toFixed(2)}" r="4"/><circle class="m-dot m-spend" cx="${x(i).toFixed(2)}" cy="${y(spend(r)).toFixed(2)}" r="4"/>`).join('');
       const bw = Math.max(10, Math.min(34, step * 0.5));
       $$('.gap-bar', chart).forEach((b, i) => {
         const v = vals[i].net, y0 = y(0), yv = y(v), h = Math.max(1.5, Math.abs(yv - y0));
@@ -298,12 +311,11 @@
       if (!rows) return;
       month = Math.min(12, Math.max(1, mo));
       const i = month - 1, r = target[i];
-      scrub.value = month;
       const deficit = Math.max(0, -r.cumulative);
-      I.setAttr(scrub, 'aria-valuetext', `Month ${month}, ${r.children} children, cumulative cash deficit ${money(deficit)}`);
-      out.month.textContent = String(month).padStart(2, '0');
-      I.set(out.label, 'Month ' + month);
-      out.deficit.textContent = money(deficit);
+      if (scrub) { scrub.value = month; I.setAttr(scrub, 'aria-valuetext', `Month ${month}, ${r.children} children, cumulative cash deficit ${money(deficit)}`); }
+      if (out.month) out.month.textContent = String(month).padStart(2, '0');
+      if (out.label) I.set(out.label, o.labelText ? o.labelText(month) : 'Month ' + month);
+      if (out.deficit) out.deficit.textContent = money(deficit);
       out.children.textContent = String(r.children);
       out.receipts.textContent = money(r.receipts);
       out.spending.textContent = money(spend(r));
@@ -322,9 +334,16 @@
     chart.addEventListener('pointerdown', (e) => { if (!rows) return; dragging = true; chart.setPointerCapture?.(e.pointerId); pause(); select(monthAt(e)); });
     chart.addEventListener('pointermove', (e) => { if (dragging) select(monthAt(e)); });
     for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) chart.addEventListener(ev, () => { dragging = false; });
-    scrub.addEventListener('input', () => { pause(); select(Number(scrub.value)); });
+    if (scrub) scrub.addEventListener('input', () => { pause(); select(Number(scrub.value)); });
+    // no scrubber (the Overview): the chart itself takes the arrow keys
+    else chart.addEventListener('keydown', (e) => {
+      const k = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }[e.key];
+      if (!k && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault(); pause();
+      select(e.key === 'Home' ? 1 : e.key === 'End' ? 12 : month + k);
+    });
     // "Play timeline": walks M01 -> M12 once, on request only (never on load); pausable; picks up where it was paused
-    const playLabel = (on) => { playBtn.setAttribute('aria-pressed', String(on)); I.set($('span', playBtn), on ? 'Pause timeline' : 'Play timeline'); chart.classList.toggle('playing', on); };
+    const playLabel = (on) => { if (playBtn) { playBtn.setAttribute('aria-pressed', String(on)); I.set($('span', playBtn), on ? 'Pause timeline' : 'Play timeline'); } chart.classList.toggle('playing', on); chart.dataset.playing = String(on); };
     function play() {
       if (!rows) return;
       if (month >= 12) select(1);
@@ -333,7 +352,7 @@
       timer = setTimeout(tick, 450);
     }
     function pause() { if (timer) clearTimeout(timer); timer = null; playLabel(false); }
-    playBtn.addEventListener('click', () => (timer ? pause() : play()));
+    if (playBtn) playBtn.addEventListener('click', () => (timer ? pause() : play()));
     D.addEventListener('studio:view', (e) => { if (e.detail.view !== o.view) pause(); });
     // Revenue / Expenses / Operating gap: what the chart shows (at least one stays on)
     for (const b of o.toggles) b.addEventListener('click', () => {
@@ -352,7 +371,7 @@
       if (!rows) { wantDraw = true; return; }
       const k = { easing: EASE, fill: 'backwards' };
       for (const id of ['rec', 'spend']) anims.push(part(id).animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { ...k, duration: DUR, delay: 250 }));
-      anims.push(part('area').animate([{ opacity: 0 }, { opacity: 1 }], { ...k, duration: 700, delay: 250 + DUR * 0.6 }));
+      for (const id of ['area', 'gapArea', 'dots']) if (part(id)) anims.push(part(id).animate([{ opacity: 0 }, { opacity: 1 }], { ...k, duration: 700, delay: 250 + DUR * 0.6 }));
       $$('.gap-bar', chart).forEach((b, i) => anims.push(b.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { ...k, duration: 520, delay: 350 + i * 80 })));
       for (const id of ['cursor', 'recDot', 'spendDot']) anims.push(part(id).animate([{ opacity: 0 }, { opacity: 1 }], { ...k, duration: 400, delay: 250 + DUR }));
       if (o.autoplay && !played) { played = true; const a = anims[anims.length - 1]; a.finished.then(() => { if (motionOn() && !timer && month === 1) play(); }, () => {}); }
@@ -362,7 +381,7 @@
     D.addEventListener('studio:view', (e) => { if (e.detail.view === o.view) layout(); });
     if (typeof ResizeObserver === 'function') { let lastW = 0, lastH = 0, rt = 0; new ResizeObserver((es) => { const w = Math.round(es[0].contentRect.width), hh = Math.round(es[0].contentRect.height); if (!w || (Math.abs(w - lastW) < 2 && (!o.height || Math.abs(hh - lastH) < 2))) return; lastW = w; lastH = hh; clearTimeout(rt); rt = setTimeout(layout, 120); }).observe(chart.parentElement); }
     I.onChange(() => { if (rows) select(month); });
-    return { build, draw, land, select, pause, setRows, rows: () => rows, shown: () => target };
+    return { build, draw, land, select, pause, setRows, rows: () => rows, shown: () => target, month: () => month };
   }
   const year = makeYear({ chart: $('#cashChart'), scrub: $('#monthScrubber'), play: $('#playTimeline'), toggles: $$('[data-series]'), view: 'pilot',
     out: { month: $('#cashMonth'), label: $('#monthLabel'), deficit: $('#cashDeficit'), children: $('#cashChildren'), receipts: $('#cashReceipts'), spending: $('#cashSpending'), net: $('#cashNet') },
@@ -463,218 +482,71 @@
     dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
   })();
 
-  // ================================================================ Overview: the command center (owner 2026-10-13, v2270)
-  // "It needs to have more of a dashboard feel ... more like the command center." One screen, the QEP spine's structure in the
-  // Futures Friends palette: a dark command header (status, the tagline, the Pending terms board, a ticker of the key figures and
-  // the hero scene slot), a compact KPI strip (ring + sparkline + status chip), and the centerpiece: the scenario simulator wired
-  // to the pilot-year chart, the operating-gap readout and the break-even gauge. Around it: funding, repayment, platform costs,
-  // what the pilot includes and the documents dock. Phones: a sticky KPI ticker, the centerpiece first, then the panels in a
-  // swipeable dock with a segmented control. Every panel opens its deep dive.
-  // Every figure is the model's (pilot-budget.json) or the published monthly cash file's. The scenario uses the model's method
-  // (scen.method()): the pilot year at your assumptions keeps the published enrollment ramp (capped at your enrolled children) and
-  // the published one-time costs; receipts are children x tuition x collections, and food and payment fees move with them, exactly
-  // as the model builds its monthly cash. At the planning assumptions every row is the published file's, to the cent.
-  // Motion (motion on only): panels rise in one after another, figures count to the exact model text, the donut draws, the gauge
-  // needles sweep, the chart draws then walks the year once, the chart glides when a slider moves, the scene drifts (ken burns)
-  // under a soft light sweep, the status dot breathes and the ticker runs. Reduce Motion, the site's motion switch, "Pause motion"
-  // and ?reveal=off: everything static and final.
+  // ================================================================ Overview: the capital command center (owner 2026-10-13, v2271)
+  // The owner's own layout, 1:1: title row, the gold-framed meeting banner, five KPI tiles, the basis strip with the repayment warning,
+  // "Where your capital goes" (donut + the selected part + four rows) beside the "Cash flow & scenario lab" (receipts vs total spending,
+  // month snapshot), the key documents dock and the footer line. Every tile and panel opens its deep dive; the scenario sliders live
+  // on the Payback view. Every figure is the model's (pilot-budget.json) or the published monthly cash file's.
+  // Motion (motion on only): the KPI tiles count one at a time (portal.js reveal), panels rise one after another, the donut draws
+  // and lights the part you pick, the chart draws then walks the twelve months once (hover, a tap or the arrow keys take over),
+  // the banner drifts slowly under a soft light sweep. Reduce Motion, the site's motion switch, "Pause motion" and ?reveal=off:
+  // everything static and final.
   const ov = (() => {
     const root = $('#ovd'); if (!root) return { build() {} };
     const cards = $$('[data-ov-card]', root);
     const armed = motionOn() && params().get('reveal') !== 'off';
     if (armed) R.classList.add('ovd-armed');
-    let ready = false, mdl = null; const seen = new Set(), enders = [], enderOf = new Map();
-    // linked highlighting: a funding part (or the total) named in several panels lights up everywhere it appears
+    let ready = false, mdl = null; const seen = new Set(), enders = [];
+    // linked highlighting: the funding total (KPI 01) lights while its parts are in focus
     const link = (key) => $$('[data-link]').forEach((el) => el.classList.toggle('linked', !!key && el.dataset.link === key));
-    const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), total: $('#ovDonutTotal'), onSelect: link });
-    let calc = null;
-    // the pilot year at the scenario's assumptions (the model's method; see above). Planning assumptions: the published rows.
-    const cents = (v) => Math.round(v * 100) / 100;
-    function scenarioRows(rows, n, tt, c) {
-      const a = calc.assumptions;
-      if (n >= Math.max(...rows.map((r) => r.children)) && tt === a.tuition && c === a.collection) return rows;
-      const per = (k, t2, c2) => calc.variable(k) + calc.fees(k, t2, c2);
-      let cum = 0;
-      return rows.map((r) => {
-        const k = Math.min(r.children, n);
-        const receipts = cents(r.receipts + (k * tt * c - r.children * a.tuition * a.collection));
-        const recurring = cents(r.recurring + (per(k, tt, c) - per(r.children, a.tuition, a.collection)) / 12);
-        const net = cents(receipts - recurring - r.one_time); cum = cents(cum + net);
-        return { ...r, children: k, receipts, recurring, net, cumulative: cum };
-      });
-    }
-    const ovYear = makeYear({ chart: $('#ovChart'), scrub: $('#ovScrub'), play: $('#ovPlay'), toggles: $$('[data-ov-series]', root), view: 'overview', autoplay: true,
-      // desktop: the chart fills the centerpiece's free height (its box is sized by the grid); elsewhere a height from its width
-      height: (w, ph, box) => (ph ? 240 : (box && getComputedStyle(box).position === 'relative' && box.clientHeight >= 160 ? box.clientHeight : Math.round(Math.min(240, Math.max(190, w * 0.44))))),
-      envelope: (rows) => (calc ? [scenarioRows(rows, 20, 600, 0.8), scenarioRows(rows, 40, 1600, 1)] : []),
-      out: { month: $('#ovMonth'), label: $('#ovMonthLabel'), deficit: $('#ovDeficit'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') },
-      mute: (k) => $(`.ro-${{ revenue: 'rev', expenses: 'exp', gap: 'gap' }[k]}`, root) });
-    const fill = (id, f) => { const el = $(`#${id}`); if (el) el.style.setProperty('--s', Math.max(0, Math.min(1, f)).toFixed(4)); };
+    // the selected part: the ring's centre shows its share, the headline its figure and what it covers (default: the pilot deficit)
+    const hl = (key) => {
+      const s = ovDonut.get(key || 'deficit'); if (!s) return;
+      $('#ovDonutPct').textContent = s.share;
+      I.set($('#ovHlLabel'), s.label);
+      $('#ovHlValue').textContent = s.f(s.v);
+      I.set($('#ovHlDesc'), s.desc);
+      $('.cap-alloc').style.setProperty('--sel', s.color);
+      link(key ? 'funding' : null);
+    };
+    const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), onSelect: (k) => { if (ready) hl(k); },
+      colors: { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' } });
+    const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
+      height: (w, ph) => (ph ? 200 : Math.round(Math.min(200, Math.max(120, w * 0.255)))),
+      monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
+      out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
 
-    // ---- a break-even gauge: a half dial from the lowest to the highest tuition the explorer offers; the needle is the tuition, the
-    // gold tick is the break-even, the red wedge between them is the gap. No numbers on the dial (they are printed beside it).
-    function gauge(el) {
-      const LO = 600, HI = 1700, at = (v) => Math.max(0, Math.min(1, (v - LO) / (HI - LO)));
-      const arc = (cls) => svg('path', { d: 'M18,100 A82,82 0 0 1 182,100', class: cls, pathLength: 1 });
-      const track = arc('g-track'), fillA = arc('g-fill'), gapA = arc('g-gap');
-      const tick = svg('line', { x1: 100, y1: 8, x2: 100, y2: 30, class: 'g-tick' });
-      const needle = svg('g', { class: 'g-needle' }); needle.append(svg('line', { x1: 100, y1: 100, x2: 100, y2: 30 }), svg('circle', { cx: 100, cy: 100, r: 7 }));
-      el.append(track, gapA, fillA, tick, needle);
-      let first = true;
-      return {
-        set(tu, be, { from = false } = {}) {
-          const ft = at(tu), fb = at(be);
-          const rot = (f) => `rotate(${(-90 + 180 * f).toFixed(2)}deg)`;
-          if (from) { needle.style.transform = rot(0); fillA.style.strokeDasharray = '0 1'; gapA.style.strokeDasharray = '0 0 0 1'; return; }
-          needle.style.transform = rot(ft);
-          tick.style.transform = rot(fb);
-          fillA.style.strokeDasharray = `${ft.toFixed(4)} 1`;
-          const lo = Math.min(ft, fb), hi = Math.max(ft, fb);
-          gapA.style.strokeDasharray = `0 ${lo.toFixed(4)} ${(hi - lo).toFixed(4)} 1`;
-          el.classList.toggle('g-ok', tu >= be);
-          first = false;
-        },
-        get first() { return first; }
-      };
-    }
-    const g1 = gauge($('#ovGauge')), g2 = gauge($('#ovRepayGauge'));
-
-    // ---- the scenario (centerpiece): the same model method as the Scenarios view, its own sliders, wired to the chart
-    const sc = (() => {
-      const tu = $('#ovTuition'), ch = $('#ovChildren'), co = $('#ovCollection'), reset = $('#ovReset'), sr = $('#ovMarginSr');
-      const counter = makeCounter($('#ovMargin'));
-      let srTimer = 0, m = null;
-      const planning = () => { tu.value = m.assumptions.tuition; ch.value = 40; co.value = Math.round(m.assumptions.collection * 100); };
-      function update(animate, quiet) {
-        if (!calc) return;
-        const tt = Number(tu.value), n = Number(ch.value), c = Number(co.value) / 100;
-        const margin = calc.margin(n, tt, c), be = calc.breakEven(n, c);
-        text('ovTuitionOut', whole(tt)); text('ovChildrenOut', String(n)); text('ovCollectionOut', Math.round(c * 100) + '%');
-        text('ovScenTuition', whole(tt)); text('ovScenBreakEven', money(be));
-        counter.to(margin);
-        clearTimeout(srTimer); srTimer = setTimeout(() => { sr.textContent = signed(money(margin)); }, 300);
-        if (!quiet) I.set($('#ovScenStatus'), margin >= 0 ? 'Operating surplus · building payments & debt excluded' : 'Operating shortfall · building payments & debt excluded');
-        $('#ovMarginBox').classList.toggle('positive', margin >= 0);
-        g1.set(tt, be);
-        const rows = ovYear.rows();
-        if (rows) {
-          const next = scenarioRows(rows, n, tt, c);
-          ovYear.setRows(next, animate);
-          I.set($('#ovPlanChip'), next === rows ? 'Published forecast' : 'Your scenario');
-          $('#ovPlanChip').classList.toggle('chip-scen', next !== rows);
-          scene.screen(next);
-        }
-      }
-      function build(model) {
-        m = model;
-        // a slider moved while the card's figures still count: land the count first, then follow the slider
-        const input = () => { enderOf.get($('.ovd-scen'))?.(); update(true); };
-        for (const el of [tu, ch, co]) { el.disabled = false; el.addEventListener('input', input); }
-        reset.disabled = false;
-        reset.addEventListener('click', () => { planning(); input(); });
-        planning(); counter.reset(); update(false);
-        I.set($('#ovScenStatus'), 'Before building payments & debt');
-        sr.textContent = $('#ovMargin').textContent;
-      }
-      return { build, update };
-    })();
-
-    // ---- the hero scene slot. ONE attribute swaps the art: the src of #ccSceneImg (index.html). The figure's data-screen="x y w h"
-    // (percent of the IMAGE, not of the slot) turns on the wall-screen overlay: a live mini chart of the pilot year at the current
-    // scenario, laid over the screen painted in the scene. Empty data-screen = no overlay (the current art has no screen).
-    // The image is contained (never cropped) over a blurred copy of itself; the stage drifts slowly and a soft light sweeps it.
+    // ---- the banner. ONE constant picks the art: data-scene on #ccScene (index.html). Each scene names its file and the frame that
+    // keeps every character whole: ratio = the banner's width / height on wider screens, y = where the crop sits (object-position).
+    // Phones show the whole picture (no crop at all). A file whose own ratio matches the banner simply fills it edge to edge.
+    // wide-1: the long table, everyone seated in a row, Principal Hazel at the felt chart (owner-approved 2026-10-13). The tightest
+    //   crop that keeps every head and ear whole is 4.7:1 (the mockup's banner is 4.9:1; at 4.9 the elephant's chin is cut).
+    // wide-2: the round table (heads span more height): 4.3:1 is its tightest whole-character crop.
+    const SCENES = { 'wide-1': { file: 'investor-meeting-wide-1', ratio: 4.7, y: 26.7 }, 'wide-2': { file: 'investor-meeting-wide-2', ratio: 4.3, y: 15.6 } };
     const scene = (() => {
       const fig = $('#ccScene'), img = $('#ccSceneImg');
-      if (!fig || !img) return { screen() {} };
-      const stage = $('.cc-scene-stage', fig), scr = $('.cc-screen', fig), plot = $('svg', scr);
-      let last = null;
-      function fit() {
-        const W = fig.clientWidth, H = fig.clientHeight, iw = img.naturalWidth || Number(img.getAttribute('width')), ih = img.naturalHeight || Number(img.getAttribute('height'));
-        if (!W || !H || !iw || !ih) return;
-        const k = Math.min((W * 0.94) / iw, (H * 0.94) / ih);   // 6% air: the slow drift never pushes a character out of frame
-        stage.style.width = `${(iw * k).toFixed(1)}px`; stage.style.height = `${(ih * k).toFixed(1)}px`;
-        fig.style.setProperty('--scene', `url("${img.currentSrc || img.src}")`);
-      }
-      function box() {
-        const v = (fig.dataset.screen || '').trim().split(/[\s,]+/).map(Number);
-        const on = v.length === 4 && v.every((n) => Number.isFinite(n) && n >= 0) && v[2] > 0 && v[3] > 0;
-        scr.hidden = !on;
-        fig.classList.toggle('has-screen', on);
-        if (on) { const [l, tp, w, h] = v; Object.assign(scr.style, { left: `${l}%`, top: `${tp}%`, width: `${w}%`, height: `${h}%` }); if (last) screen(last); }
-      }
-      // the wall screen: the twelve monthly operating gaps as bars and the cumulative cash line (decoration; the figures are printed)
-      function screen(rows) {
-        last = rows;
-        if (scr.hidden || !rows) return;
-        const lo = Math.min(...rows.map((r) => r.cumulative), ...rows.map((r) => r.net), 0), hi = Math.max(0, ...rows.map((r) => r.cumulative), ...rows.map((r) => r.net));
-        const y = (v) => 6 + (hi - v) / ((hi - lo) || 1) * 48, x = (i) => 8 + i * (104 / 11);
-        const bars = rows.map((r, i) => { const a = y(Math.max(0, r.net)), b = y(Math.min(0, r.net)); return `<rect x="${(x(i) - 3).toFixed(1)}" y="${a.toFixed(1)}" width="6" height="${Math.max(0.8, b - a).toFixed(1)}" class="${r.net < 0 ? 'neg' : 'pos'}"/>`; }).join('');
-        const path = rows.map((r, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(r.cumulative).toFixed(1)}`).join(' ');
-        plot.innerHTML = `<line x1="4" x2="116" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" class="zero"/>${bars}<path d="${path}" class="cum" pathLength="1"/>`;
-      }
-      img.addEventListener('load', fit);
-      if (typeof ResizeObserver === 'function') new ResizeObserver(fit).observe(fig);
-      if (typeof MutationObserver === 'function') {
-        new MutationObserver(box).observe(fig, { attributes: true, attributeFilter: ['data-screen'] });
-        new MutationObserver(fit).observe(img, { attributes: true, attributeFilter: ['src'] });
-      }
-      fit(); box();
-      return { screen, fit };
-    })();
-
-    // ---- the KPI strip's sparklines (decoration; the figures sit beside them): the cumulative pilot cash deficit, the enrollment
-    // ramp, the twelve months with the first-month checkpoint, and the refinance among the four parts of the funding estimate
-    function sparks(m) {
-      const put = (k, html) => { const el = $(`[data-spark="${k}"]`); if (el) el.innerHTML = html; };
-      const cum = m.cash.map((r) => -r.cumulative), top = Math.max(...cum);
-      const pts = cum.map((v, i) => `${(2 + i * 116 / 11).toFixed(1)},${(33 - v / top * 28).toFixed(1)}`);
-      put('funding', `<path class="sp-area" d="M2,34 L${pts.join(' L')} L118,34 Z"/><path class="sp-line" d="M${pts.join(' L')}" pathLength="1"/>`);
-      const ramp = m.cash.map((r) => r.children), rt = Math.max(...ramp);
-      put('ramp', ramp.map((v, i) => `<rect class="sp-bar" style="--i:${i}" x="${(2 + i * 10).toFixed(1)}" y="${(34 - v / rt * 30).toFixed(1)}" width="7" height="${(v / rt * 30).toFixed(1)}" rx="1.5"/>`).join(''));
-      put('months', m.cash.map((r, i) => `<rect class="sp-seg${i === 0 ? ' sp-check' : ''}" style="--i:${i}" x="${(2 + i * 10).toFixed(1)}" y="13" width="8" height="10" rx="2"/>`).join(''));
-      const { funding, totals } = m, total = funding.request_before_financing;
-      let at = 2;
-      put('refinance', [['deficit', funding.peak_deficit], ['refinance', totals.refinance], ['floor', funding.cash_floor], ['contingency', totals.contingency]].map(([k, v]) => { const w = v / total * 116, r = `<rect class="sp-part${k === 'refinance' ? ' sp-lit' : ''}" x="${at.toFixed(1)}" y="12" width="${Math.max(0.5, w - 1).toFixed(1)}" height="12" rx="2"/>`; at += w; return r; }).join(''));
-    }
-
-    // ---- the ticker: the key figures, from the model; a copy follows the first for a seamless run (the copy is hidden from readers)
-    const ticker = (() => {
-      const vp = $('.cc-tick-viewport'), track = $('.cc-tick-track'); if (!vp || !track) return { build() {} };
-      const belt = D.createElement('div'); belt.className = 'cc-tick-belt'; track.before(belt); belt.append(track);
-      function copy() {
-        $('.cc-tick-clone', belt)?.remove();
-        const c = track.cloneNode(true); c.classList.add('cc-tick-clone'); c.setAttribute('aria-hidden', 'true'); c.setAttribute('data-i18n-skip', '');
-        belt.append(c);
-      }
-      function build(m) {
-        const v = { funding: money(m.funding.request_before_financing), deficit: money(m.funding.peak_deficit), refinance: whole(m.totals.refinance), tuition: whole(m.assumptions.tuition),
-          breakeven: money(m.metrics.breakeven_tuition), gap: signed(money(m.metrics.year2_margin)), platform: money(m.platform.first_year), lines: String(m.meta.line_count) };
-        for (const b of $$('[data-tick]', track)) if (v[b.dataset.tick]) b.textContent = v[b.dataset.tick];
-        copy();
-      }
-      I.onChange(copy);
-      return { build };
+      if (!fig || !img) return {};
+      const cfg = SCENES[fig.dataset.scene] || SCENES['wide-1'];
+      fig.style.setProperty('--ar', String(cfg.ratio));
+      fig.style.setProperty('--fy', `${cfg.y}%`);
+      img.sizes = '(max-width: 767px) 100vw, 88vw';
+      img.srcset = `assets/${cfg.file}-1200.webp 1200w, assets/${cfg.file}.webp 2400w`;
+      img.src = `assets/${cfg.file}.webp`;
+      const loaded = () => { fig.classList.add('ready'); fig.style.setProperty('--nat', String(img.naturalWidth / img.naturalHeight)); };
+      if (img.complete && img.naturalWidth) loaded(); else img.addEventListener('load', loaded, { once: true });
+      return { cfg };
     })();
 
     function build(m) {
       mdl = m;
-      const { platform, assumptions, metrics } = m;
-      calc = scen.method();
+      const { totals, platform, assumptions, metrics, cash } = m;
       ovDonut.build(m);
-      ovYear.build(m).then(() => { sc.update(false, true); });
-      sc.build(m);
-      sparks(m); ticker.build(m);
-      text('ovPlatformBuild', whole(platform.completion)); text('ovPlatformAssurance', whole(platform.assurance_one_time)); text('ovPlatformRecurring', money(platform.recurring));
-      text('ovPlatformYear', money(platform.first_year)); text('ovPlatformOnce', whole(platform.one_time)); text('ovPlatformMonthly', money(platform.monthly));
-      const big = Math.max(platform.completion, platform.assurance_one_time, platform.recurring);
-      fill('ovPlatformBuildBar', platform.completion / big); fill('ovPlatformAssuranceBar', platform.assurance_one_time / big); fill('ovPlatformRecurringBar', platform.recurring / big);
-      text('ovTuition0', whole(assumptions.tuition)); text('ovBreakEven0', money(metrics.breakeven_tuition)); text('ovGap', signed(money(metrics.year2_margin)));
-      g2.set(assumptions.tuition, metrics.breakeven_tuition);
-      I.setAttr($('#ovCompare'), 'aria-label', `Draft monthly tuition ${money(assumptions.tuition)}; operating break-even ${money(metrics.breakeven_tuition)} before building payments and debt`);
-      // the needles start at the low end and sweep in when their panel rises (motion on)
-      if (armed && motionOn()) { for (const [g, card] of [[g1, '.ovd-scen'], [g2, '.ovd-repay']]) if (!$(card)?.dataset.ovPlayed) g.set(0, 0, { from: true }); }
+      ovYear.build(m);
+      text('kpiRefi', whole(totals.refinance)); text('kpiGap', signed(money(metrics.year2_margin))); text('kpiPlatform', money(platform.first_year));
+      text('capacity', String(Math.max(...cash.map((r) => r.children)))); text('pilotDuration', String(cash.length)); text('collections', Math.round(assumptions.collection * 100) + '%');
       ready = true;
+      hl(null);
       seen.forEach(play);
     }
     // a panel on screen: it rises (CSS, .ovd-in); once the model is in, its figures count and its picture draws
@@ -682,18 +554,14 @@
       if (card.dataset.ovPlayed) return;
       card.dataset.ovPlayed = '1';
       const go = armed && motionOn();
-      if (go && window.FFInvReveal?.count) { const end = window.FFInvReveal.count($$('[data-ov-count]', card)); enders.push(end); enderOf.set(card, end); }
+      if (go && window.FFInvReveal?.count) enders.push(window.FFInvReveal.count($$('[data-ov-count]', card)));
       if (card.classList.contains('ovd-funding')) ovDonut.draw(go);
       if (card.classList.contains('ovd-year')) ovYear.draw(go);
-      const later = (f) => requestAnimationFrame(() => requestAnimationFrame(f));   // after the start position has been drawn
-      if (card.classList.contains('ovd-scen')) later(() => sc.update(false, true));
-      if (card.classList.contains('ovd-repay') && mdl) later(() => g2.set(mdl.assumptions.tuition, mdl.metrics.breakeven_tuition));
     }
     let order = 0;
     function enter(card) {
-      // panels that arrive together rise one after another (90 ms apart), like a console booting
-      const delay = armed ? (order++) * 90 : 0;
-      card.style.setProperty('--ovd-delay', `${delay}ms`);
+      // panels that arrive together rise one after another (110 ms apart)
+      card.style.setProperty('--ovd-delay', `${armed ? (order++) * 110 : 0}ms`);
       card.classList.add('ovd-in');
       seen.add(card);
       if (ready) play(card);
@@ -702,7 +570,6 @@
       cards.forEach((c) => c.classList.add('ovd-in'));
       enders.splice(0).forEach((end) => end && end());
       ovDonut.land(); ovYear.land();
-      if (mdl) { sc.update(false, true); g2.set(mdl.assumptions.tuition, mdl.metrics.breakeven_tuition); }
     }
     if (armed && typeof IntersectionObserver === 'function') {
       const io = new IntersectionObserver((es) => { es.filter((e) => e.isIntersecting).forEach((e) => { io.unobserve(e.target); enter(e.target); }); order = 0; }, { threshold: 0.12 });
@@ -710,48 +577,19 @@
     } else cards.forEach(enter);
     D.addEventListener('inv:land', (e) => { if (e.detail.all) landAll(); });
     D.addEventListener('inv:motion', (e) => { if (e.detail?.paused) { landAll(); ovYear.pause(); } });
+    I.onChange(() => { if (ready) hl(ovDonut.keys().find((k) => $(`#ovLegend [data-ov-slice="${k}"]`)?.getAttribute('aria-pressed') === 'true') || null); });
     // every panel opens its deep dive: a click on the panel itself (not on one of its controls) follows the panel's own link
     root.addEventListener('click', (e) => {
       if (e.defaultPrevented || e.button !== 0) return;
       const card = e.target.closest('[data-ov-card]');
       if (!card || e.target.closest('a, button, input, label, select, summary, .ovd-chart, .ovd-donut-wrap, [data-ov-slice]')) return;
       if (String(getSelection?.() || '').trim()) return;   // selecting text is not a click
-      if (card.classList.contains('ovd-docs')) { window.FFInvDocs?.open(null, $('.ovd-all', card)); return; }
+      if (card.classList.contains('ovd-docs')) { window.FFInvDocs?.open(null, $('[data-docs-open]')); return; }
       if (card.dataset.ovGo) show(card.dataset.ovGo);
     });
-    // linked highlighting from the other side: pointing at a KPI, a ticker figure or the deficit readout lifts its funding part
-    const slices = ['deficit', 'refinance', 'floor', 'contingency'];
-    for (const el of $$('#kpis [data-link], .cc-tick-track [data-link], #ovd .ro-total[data-link]')) {
-      const k = el.dataset.link;
-      el.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse') return; link(k); if (slices.includes(k)) ovDonut.hover(k); });
-      el.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'mouse') return; link(null); if (slices.includes(k)) ovDonut.hover(null); });
-    }
-
-    // the sticky KPI ticker (phones) sits exactly under the top bar, whatever its height
-    (() => { const bar = $('.studio-top'); if (!bar) return; const put = () => R.style.setProperty('--cc-sticky', `${bar.offsetHeight}px`); put(); if (typeof ResizeObserver === 'function') new ResizeObserver(put).observe(bar); })();
-    // ---- phones: the panels around the centerpiece sit in a swipeable dock; the segmented control follows the swipe and jumps
-    (() => {
-      const dock = $('#ovDock'), tabs = $$('.ovd-tabs [data-dock]'); if (!dock || !tabs.length) return;
-      const panel = (k) => $(`[data-dock-panel="${k}"]`, dock);
-      const mark = (k) => tabs.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dock === k)));
-      tabs.forEach((b) => b.addEventListener('click', () => {
-        const p = panel(b.dataset.dock); if (!p) return;
-        mark(b.dataset.dock);
-        dock.scrollTo({ left: p.offsetLeft - parseFloat(getComputedStyle(dock).paddingLeft || '0'), behavior: motionOn() ? 'smooth' : 'auto' });
-      }));
-      let raf = 0;
-      dock.addEventListener('scroll', () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          if (dock.scrollWidth <= dock.clientWidth + 2) return;
-          const mid = dock.scrollLeft + dock.clientWidth / 2;
-          let best = null, d = Infinity;
-          for (const p of $$('[data-dock-panel]', dock)) { const c = p.offsetLeft + p.offsetWidth / 2, dd = Math.abs(c - mid); if (dd < d) { d = dd; best = p; } }
-          if (best) mark(best.dataset.dockPanel);
-        });
-      }, { passive: true });
-    })();
-    return { build, scene: () => scene };
+    // a KPI tile opens its deep dive too (its arrow is the link)
+    for (const k of $$('#kpis .kpi')) k.addEventListener('click', (e) => { if (e.defaultPrevented || e.button !== 0 || e.target.closest('a')) return; $('.kpi-go', k)?.click(); });
+    return { build, scene: () => scene, year: () => ovYear };
   })();
 
   // ================================================================ wiring

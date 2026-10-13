@@ -163,6 +163,26 @@
       "sha256": "3d1ccacbe4c31956dd16f928489e474d410f548afcda31439a9debaa9b83392a"
     },
     {
+      "path": "investor/Digital/assets/investor-meeting-wide-1-1200.webp",
+      "bytes": 118320,
+      "sha256": "2bc3cfa91a20b983dd83729f413906157c1dfff94a4182ea763543e061bf9f3e"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-wide-1.webp",
+      "bytes": 318496,
+      "sha256": "48fcd6f5227d9aef22ab7d99cda7c5874a7400b1852def8d2cb3e5a7d982c385"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-wide-2-1200.webp",
+      "bytes": 111432,
+      "sha256": "955b1eca3a13f5a407a14f854f9283c8bf741f7c7417f765607429151e9bf85a"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-wide-2.webp",
+      "bytes": 320618,
+      "sha256": "5b2cf6a13eedbb9a8daa46f2198d2a0fcee278ebab40c3f9d213bf7bb82ba24d"
+    },
+    {
       "path": "investor/Digital/assets/keyart.webp",
       "bytes": 536202,
       "sha256": "27c08778aca482d91a10a54831463866d046de06cba78a5e71b685d87ee89962"
@@ -234,8 +254,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 52177,
-      "sha256": "7efb1b39a490fc3b593410d6f4463041a7aedc927228521c75c7d4deb16154e2"
+      "bytes": 47028,
+      "sha256": "f60a87b6f42d9dc254d22bdb9b593ddded6fd53415e7b826578ac4495d490613"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -294,8 +314,8 @@
     },
     {
       "path": "investor/Digital/portal-i18n.js",
-      "bytes": 28873,
-      "sha256": "79e2a59d24081b45780a78328056ce768c961055381c8e0bebc07511b3a5e86b"
+      "bytes": 33512,
+      "sha256": "6cc7ded322688e8d82d8f1d48a62177076f15370552414276e2284c589f77a0c"
     },
     {
       "path": "investor/Digital/portal.css",
@@ -309,18 +329,18 @@
     },
     {
       "path": "investor/Digital/studio-overview.css",
-      "bytes": 40014,
-      "sha256": "b3daf9adab0866846037c5b3306341d81b913f7e97955f660950193b91203acd"
+      "bytes": 32475,
+      "sha256": "f66b51f933360ae534fa3d5f84b5654eced89c4e774caa1ce0b66c97120a7927"
     },
     {
       "path": "investor/Digital/studio.css",
-      "bytes": 45894,
-      "sha256": "2a60ab14e752211fb82b386347bf3e9e2560af395a81e4a22df250f34637cab4"
+      "bytes": 45890,
+      "sha256": "a5bf75e9e7f83a662392d8398e5000400972f1fdc68563b6a62b8a1867594fb3"
     },
     {
       "path": "investor/Digital/studio.js",
-      "bytes": 56939,
-      "sha256": "e1e952803fef6da4c7b8e63fca871f184fd0f4c6ca91f2fd80e207b48f10d310"
+      "bytes": 45214,
+      "sha256": "5632e4603b89872057bff14cc31b267c1c755039803769d4d5c3b5f868e0e5a0"
     },
     {
       "path": "investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",

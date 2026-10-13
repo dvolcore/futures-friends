@@ -28,6 +28,15 @@ const V2262 = JSON.parse(read('tests/fixtures/investor-numbers-v2262.json')).ove
 const RETIRED = ['$1,035.30'];
 const VIEWS = ['overview', 'funding', 'pilot', 'scenarios', 'inside', 'documents'];
 const OVERVIEW = 'investor/Digital/index.html';
+// v2271: the rail reads Overview · The ask · Cash flow · Payback · All costs (the cost explorer page) · Evidence; Inside the pilot is a
+// view without a rail item, reached from the Evidence view (and the Platform tile)
+const RAIL = ['overview', 'funding', 'pilot', 'scenarios', 'documents'];
+const goView = async (pg, v) => {
+  if (v === 'inside') { if (await pg.evaluate(() => document.documentElement.dataset.view) !== 'documents') await pg.click('.studio-rail [data-view-link="documents"]'); await pg.click('.view-documents .inside-link'); }
+  else await pg.click(`.studio-rail [data-view-link="${v}"]`);
+};
+// words the owner excluded from the investor studio (mockup slogans and labels; "Pending" stays Pending)
+const EXCLUDED = /Unpriced|Illustrative|Design concept|Figures supplied|A brighter tomorrow together|Children today|Brighter tomorrows|A kinder,? brighter,? bolder world|Ideas,? People,? Places,? Potential|\bdemo\b|not audited data/i;
 
 // ------------------------------------------------------------------ static checks
 test('the Sign in / Portals menu lists the Investor portal: one tap, no credential, official composed art in 1x and 2x', () => {
@@ -61,8 +70,15 @@ test('the overview: logo and a link go home; the tagline is the only line; Pendi
   assert.doesNotMatch(h, /Social-emotional learning|Safe (&amp;|&|and) supportive/i);
   assert.doesNotMatch(h, /type="search"|placeholder="Search|role="search"/i);
   for (const v of VIEWS) assert.match(h, new RegExp(`data-studio-view="${v}"`), v);
-  for (const k of ['Interest', 'Monthly repayment', 'Term']) assert.match(h, new RegExp(`<dt>${k}</dt><dd>Pending</dd>`), k);
-  assert.match(h, /<dt>Ownership<\/dt><dd>No equity proposed<\/dd>/);
+  // v2271: the loan rate and the repayment are Pending (never "Unpriced"); no equity is proposed; loan terms are not agreed
+  assert.equal((h.match(/<strong class="kpi-v kpi-pending">Pending<\/strong>/g) || []).length, 2, 'two Pending tiles');
+  assert.match(h, /<span>Loan interest rate<\/span>[\s\S]{0,200}Pending[\s\S]{0,120}No agreed rate or signed loan terms\./);
+  assert.match(h, /<span>Your repayment<\/span>[\s\S]{0,200}Pending/);
+  assert.match(h, /<li><span>No equity proposed<\/span><\/li>/);
+  assert.match(h, /Loan terms not yet agreed/);
+  // the excluded words, in the page and in its Spanish
+  assert.doesNotMatch(h.replace(/<script[\s\S]*?<\/script>/g, ''), EXCLUDED);
+  assert.doesNotMatch(read('investor/Digital/portal-i18n.js'), /Unpriced|Sin precio|Design concept|Figures supplied|A brighter tomorrow|Children today/i);
 });
 
 test('publication-manifest.json matches every investor file it lists (bytes, sha256, PDF pages)', () => {
@@ -143,8 +159,8 @@ test('number integrity after the reveal plays (motion on): the counted figures e
   await model(pg);
   // visit every view through the rail and let each entrance play out (cards: 250 + (n - 1) x 700 + 1400 ms)
   for (const v of VIEWS) {
-    await pg.click(`.studio-rail [data-view-link="${v}"]`);
-    await pg.waitForFunction((v) => document.documentElement.dataset.view === v && [...document.querySelectorAll(`[data-studio-view="${v}"] [data-reveal-unit]`)].every((u) => u.classList.contains('inv-landed')) && !window.FFInvReveal.running(), v, { timeout: 15000 });
+    await goView(pg, v);
+    await pg.waitForFunction((v) => document.documentElement.dataset.view === v && [...document.querySelectorAll(`[data-studio-view="${v}"] [data-reveal-unit]`)].every((u) => u.classList.contains('inv-landed')) && !window.FFInvReveal.running(), v, { timeout: 20000 });
   }
   const after = await n.extract(pg);
   assert.deepEqual(V2262.filter((x) => !after.includes(x)), RETIRED);
@@ -277,14 +293,14 @@ test('English / Español: the switch translates the page and keeps every figure;
   const en = await n.extract(pg);
   await pg.click('[data-lang="es"]');
   assert.equal(await pg.getAttribute('html', 'lang'), 'es');
-  assert.match(await pg.textContent('.metric-blue .metric-label'), /Necesidad preliminar/);
-  assert.equal(await pg.textContent('.terms dd'), 'Pendiente');
+  assert.match(await pg.textContent('.kpi-blue .kpi-label'), /Financiamiento total solicitado/);
+  assert.deepEqual(await pg.$$eval('.kpi-pending', (e) => e.map((x) => x.textContent)), ['Pendiente', 'Pendiente']);
   assert.deepEqual(await n.extract(pg), en, 'identical figures in Spanish');
   assert.equal(await pg.evaluate(() => localStorage.getItem('ff-lang')), 'es');
   await pg.reload(); await model(pg);
   assert.equal(await pg.getAttribute('html', 'lang'), 'es', 'remembered');
   await pg.click('[data-lang="en"]');
-  assert.equal(await pg.textContent('.metric-blue .metric-label'), 'Preliminary funding need');
+  assert.equal(await pg.textContent('.kpi-blue .kpi-label'), '01 / Total funding ask');
   await ctx.close();
 });
 
@@ -295,15 +311,17 @@ for (const width of [1280, 390]) {
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`);
     await model(pg);
     for (const view of VIEWS) {
-      await pg.click(`.studio-rail [data-view-link="${view}"]`);
+      await goView(pg, view);
       await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
       await pg.waitForTimeout(150);
       const v = await h.axe(pg, { openDetails: false });
       assert.deepEqual(v.filter((x) => h.BLOCKING.includes(x.impact)), [], `${view}: ${JSON.stringify(v, null, 1)}`);
       const sw = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       assert.ok(sw <= 0, `${view}: no sideways scroll (${sw}px)`);
-      const small = await pg.$$eval(`[data-studio-view="${view}"] :is(a, button, input, summary), .studio-rail a`, (els) => els.filter((e) => e.offsetParent && !e.closest('.sr, .cost-detail, .inv-table-wrap')).map((e) => ({ t: (e.textContent || e.id).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height) })).filter((x) => x.h < 44));
-      assert.deepEqual(small, [], `${view}: 44 px targets`);
+      // 44 px everywhere, except the Overview on wider screens, which follows the owner's mockup 1:1 at WCAG 2.2 AA's 24 px minimum
+      const min = view === 'overview' && width >= 768 ? 24 : 44;
+      const small = await pg.$$eval(`[data-studio-view="${view}"] :is(a, button, input, summary), .studio-rail a`, (els, min) => els.filter((e) => e.offsetParent && !e.closest('.sr, .cost-detail, .inv-table-wrap, .cc-kpi-tools')).map((e) => ({ t: (e.textContent || e.id).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height) })).filter((x) => x.h < min), min);
+      assert.deepEqual(small, [], `${view}: ${min} px targets`);
     }
     await pg.click('.studio-rail [data-view-link="overview"]');
     const small = await pg.$$eval('header a, header button, .hero-actions button, .hero-actions a, .as-table, .all-docs, .lang-switch button', (els) => els.filter((e) => e.offsetParent).map((e) => ({ t: e.textContent.trim().slice(0, 20), h: Math.round(e.getBoundingClientRect().height) })).filter((x) => x.h < 36));
@@ -339,28 +357,34 @@ test('studio: six full-screen views, one at a time; ?view= and #hash deep links;
   const { ctx, pg, errors } = await page(1440);
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off`);
   await model(pg);
-  assert.deepEqual(await pg.$$eval('.studio-rail [data-view-link]', (a) => a.map((x) => x.dataset.viewLink)), VIEWS);
-  for (const v of VIEWS) {
-    await pg.click(`.studio-rail [data-view-link="${v}"]`);
+  assert.deepEqual(await pg.$$eval('.studio-rail [data-view-link]', (a) => a.map((x) => x.dataset.viewLink)), RAIL);
+  assert.deepEqual(await pg.$$eval('.studio-rail a', (a) => a.map((x) => x.textContent.trim())), ['Overview', 'The ask', 'Cash flow', 'Payback', 'All costs', 'Evidence']);
+  assert.equal(await pg.getAttribute('.studio-rail a.rail-out', 'href'), 'pilot-plan.html#budget', 'All costs opens the cost explorer');
+  for (const v of [...RAIL, 'inside']) {
+    await goView(pg, v);
     await pg.waitForFunction((v) => document.documentElement.dataset.view === v, v);
     const shown = await pg.$$eval('[data-studio-view]', (s) => s.filter((x) => getComputedStyle(x).display !== 'none').map((x) => x.dataset.studioView));
     assert.deepEqual(shown, [v], `only ${v} is on screen`);
-    assert.equal(await pg.getAttribute(`.studio-rail [data-view-link="${v}"]`, 'aria-current'), 'page');
+    if (v !== 'inside') assert.equal(await pg.getAttribute(`.studio-rail [data-view-link="${v}"]`, 'aria-current'), 'page');
+    else assert.equal(await pg.$$eval('.studio-rail [aria-current]', (a) => a.length), 0, 'no rail item is current on Inside the pilot');
     assert.equal(new URL(pg.url()).searchParams.get('view'), v === 'overview' ? null : v);
   }
-  await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'inside');
+  await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'documents');
   await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'scenarios');
-  await pg.goForward(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'inside');
+  await pg.goForward(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'documents');
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off#pilot`); await model(pg);
   assert.equal(await pg.evaluate(() => document.documentElement.dataset.view), 'pilot', '#pilot deep link');
-  // the four KPI cards open their views; refinance lifts its slice
-  for (const [card, view] of [['metric-blue', 'funding'], ['metric-green', 'inside'], ['metric-pink', 'pilot'], ['metric-gold', 'funding']]) {
-    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-    await pg.click(`.${card} .metric-go`);
-    await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
+  // the five KPI tiles open their deep dives (the arrow, and a tap on the tile itself)
+  for (const [card, view] of [['kpi-blue', 'funding'], ['kpi-gold', 'scenarios'], ['kpi-red', 'pilot'], ['kpi-purple', 'scenarios'], ['kpi-teal', 'inside']]) {
+    for (const target of ['.kpi-go', '.kpi-sub']) {
+      await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
+      await pg.click(`.${card} ${target}`);
+      await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
+    }
   }
-  assert.equal(await pg.getAttribute('button[data-slice="refinance"]', 'aria-pressed'), 'true', 'refinance card: the refinance slice is lifted');
-  assert.match(pg.url(), /view=funding&slice=refinance/);
+  // a slice deep link lifts its part of the funding ring
+  await pg.goto(`${site.base}${OVERVIEW}?reveal=off&view=funding&slice=refinance`); await model(pg);
+  assert.equal(await pg.getAttribute('button[data-slice="refinance"]', 'aria-pressed'), 'true', 'the refinance slice is lifted');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -448,7 +472,7 @@ test('studio: scenarios use the model\'s method (the break-even fix): $1,036.37 
   const { ctx, pg, errors } = await page(1440);
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off&view=scenarios`);
   await model(pg);
-  assert.match(await pg.textContent('.tag-illustrative'), /Illustrative — not a forecast/);
+  assert.match(await pg.textContent('.tag-scenario'), /Scenario — not a forecast/);
   const get = () => pg.evaluate(() => ({ be: document.getElementById('scenarioBreakEven').textContent, margin: document.getElementById('scenarioMarginSr').textContent, shown: document.getElementById('scenarioMargin').textContent, rev: document.getElementById('scenarioRevenue').textContent }));
   let s = await get();
   assert.equal(s.be, money2(MODEL.metrics.breakeven_tuition), 'the explorer and the overview agree on break-even');
@@ -533,38 +557,45 @@ test('studio on a phone: the rail is a bottom tab bar of six 44 px tabs; views s
   await ctx.close();
 });
 
-// ------------------------------------------------------------------ Overview dashboard (v2269, owner 2026-10-13: "I need this information back in
-// there and then I need it to be an animated motion interactive"): every studio module in compact form on the Overview, each figure from the
-// model (or the published monthly cash file), each card opening its deep dive; counts / draws / fills on scroll-in, never with motion off.
-const OV_SLOGANS = /kinder,? brighter tomorrow|A kinder|Invest in early|brighter tomorrows|Children today|Kind hearts\. Kind words|stronger tomorrow|Small lessons|Big hearts|world of possibility/i;
+
+// ------------------------------------------------------------------ Overview: the Capital command center (v2271, owner 2026-10-13: his own
+// mockup, "use the exact layout that I gave you"): title row, the gold-framed meeting banner, five KPI tiles, the basis strip, "Where your
+// capital goes" beside the "Cash flow & scenario lab", the documents dock and the footer line. Every figure from the model or the published
+// monthly cash file; every tile and panel opens its deep dive; counts / draws / walks with motion on, never with motion off.
+const OV_SLOGANS = /kinder,? brighter|A kinder|Invest in early|brighter tomorrow|Children today|Kind hearts\. Kind words|stronger tomorrow|Small lessons|Big hearts|world of possibility|Ideas,? People,? Places/i;
 const overviewSection = () => { const h = read(OVERVIEW); const a = h.indexOf('data-studio-view="overview"'); return h.slice(a, h.indexOf('<section class="studio-view', a + 10)); };
 
-test('overview dashboard: every module in order; no slogans, no demo / concept / illustrative labels; EN + ES for its text', () => {
+test('overview: the mockup\'s modules in its order; no slogans, no demo / concept / illustrative labels; EN + ES for its text', () => {
   const sec = overviewSection();
-  // v2270 command center: header (terms board) -> KPI strip -> centerpiece (scenario + pilot year) -> funding, platform, repayment,
-  // what the pilot includes, documents (the phone dock's order)
-  const order = ['class="cc-band"', 'class="terms"', 'id="kpis"', 'ovd-center', 'ovd-scen', 'ovd-year', 'ovd-funding', 'ovd-platform', 'ovd-repay', 'ovd-includes', 'ovd-docs'].map((k) => sec.indexOf(k));
+  const order = ['class="cap-head"', 'id="ccScene"', 'id="kpis"', 'class="cap-strip"', 'ovd-funding', 'ovd-year', 'ovd-docs', 'class="cap-foot"'].map((k) => sec.indexOf(k));
   assert.ok(order.every((i) => i > 0), `all modules are on the Overview: ${order}`);
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'header + terms, KPIs, scenario + pilot year, funding, platform, repayment, includes, documents');
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'title, banner, KPIs, strip, capital, cash-flow lab, documents, footer');
+  assert.match(sec, /<h1 id="hero-title" tabindex="-1">Capital command center<\/h1><p class="cap-tag">Small beginnings\. Big futures\.<\/p>/);
+  assert.match(sec, /One location\. 40 children\. One year\./);
+  // the KPI tiles: five, numbered, in the mockup's order
+  assert.deepEqual([...sec.matchAll(/<p class="kpi-label"><span class="kpi-n">(\d+)<\/span> \/ <span>([^<]+)<\/span>/g)].map((m) => `${m[1]} ${m[2]}`),
+    ['01 Total funding ask', '02 Loan interest rate', '03 Operating profit outlook', '04 Your repayment', '05 Platform · year one']);
+  // the scenario sliders stay on the Payback view (not on the Overview: they are not in the mockup)
+  assert.doesNotMatch(sec, /type="range"/);
   for (const src of [read(OVERVIEW), read('investor/Digital/portal-i18n.js'), read('investor/Digital/studio.js'), read('investor/Digital/studio-overview.css')]) assert.doesNotMatch(src, OV_SLOGANS);
-  // visible words of the Overview (attributes that are spoken included; file names left out)
   const words = sec.replace(/\s(src|href|class|id|data-[\w-]+|style|width|height|viewBox|d|fill|stroke[\w-]*|loading)="[^"]*"/g, '').replace(/<[^>]+>/g, ' ');
-  assert.doesNotMatch(words, /\b(demo|concept|illustrative|test)\b/i);
-  // the four included items, as on Inside the pilot (no new claims)
-  assert.doesNotMatch(sec, /Social-emotional|Safe (&amp;|&|and) supportive/i);
-  // every new English line has its Spanish
+  assert.doesNotMatch(words, /\b(demo|concept|illustrative|test|unpriced)\b/i);
+  assert.doesNotMatch(words, EXCLUDED);
+  // every English line of the Overview and the rail has its Spanish
   const ctx = { window: {}, document: { documentElement: { lang: 'es', dataset: {} }, readyState: 'complete', querySelectorAll: () => [], title: '' }, localStorage: { getItem: () => 'es', setItem() {} }, location: { search: '' }, NodeFilter: { SHOW_TEXT: 4 } };
   ctx.document.createTreeWalker = () => ({ nextNode: () => null }); ctx.document.body = { querySelectorAll: () => [] }; ctx.window.window = ctx.window;
   vm.createContext(ctx); vm.runInContext(`var window = this.window, document = this.document, localStorage = this.localStorage, location = this.location, NodeFilter = this.NodeFilter; ${read('investor/Digital/portal-i18n.js')}`, ctx);
   const I = ctx.window.FFInvI18n;
-  const ovd = sec;   // v2270: the whole Overview (command header, KPI strip and panels), not only the panels
-  const texts = [...ovd.replace(/<small data-inv-docs[^>]*><\/small>/g, '').matchAll(/>([^<>]*[A-Za-z][^<>]*)</g)].map((m) => m[1].replace(/&amp;/g, '&').trim()).filter((x) => x && !/^[−$\d.,%\s/·]+$/.test(x));
-  const attrs = [...ovd.matchAll(/\s(?:aria-label|alt)="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, '&'));
-  const missing = [...new Set([...texts, ...attrs])].filter((x) => I.t(x) === x);
-  assert.deepEqual(missing, [], 'Spanish for every Overview line');
+  const h = read(OVERVIEW), rail = h.slice(h.indexOf('<header class="header studio-top"'), h.indexOf('<main'));
+  for (const src of [sec, rail]) {
+    const texts = [...src.matchAll(/>([^<>]*[A-Za-z][^<>]*)</g)].map((m) => m[1].replace(/&amp;/g, '&').trim()).filter((x) => x && !/^[−$\d.,%\s/·]+$/.test(x) && !/^(Futures Friends|English|Español)$/.test(x));
+    const attrs = [...src.matchAll(/\s(?:aria-label|alt)="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, '&')).filter((x) => x !== 'Futures Friends');
+    assert.deepEqual([...new Set([...texts, ...attrs])].filter((x) => I.t(x) === x), [], 'Spanish for every Overview line');
+  }
+  assert.equal(I.t('Month 07 snapshot'), 'Resumen del mes 07');
 });
 
-test('overview dashboard: every figure is the model\'s (donut, scenario, platform, repayment, pilot year); the scenario follows the model method', async (t) => {
+test('overview: every figure is the model\'s (KPI tiles, basis strip, capital donut, cash-flow lab); Pending twice', async (t) => {
   if (skip) return t.skip(skip);
   const { ctx, pg, errors } = await page(1440);
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off`);
@@ -572,284 +603,210 @@ test('overview dashboard: every figure is the model\'s (donut, scenario, platfor
   const { funding, totals, platform, assumptions, metrics } = MODEL, total = funding.request_before_financing;
   const whole = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
   const txt = (ids) => pg.evaluate((ids) => ids.map((id) => document.getElementById(id).textContent), ids);
-  // funding: the four model allocations, their shares, the ring geometry of the Funding view
-  assert.equal(await pg.textContent('#ovDonutTotal'), money2(total));
-  assert.deepEqual(await pg.$$eval('#ovLegend button', (b) => b.map((x) => [x.dataset.ovSlice, x.querySelector('.lg-val').textContent, x.querySelector('.lg-share').textContent])),
-    [['deficit', money2(funding.peak_deficit), '52.4%'], ['refinance', whole(totals.refinance), '33.0%'], ['floor', money2(funding.cash_floor), '9.4%'], ['contingency', money2(totals.contingency), '5.2%']]);
-  assert.equal(whole(totals.refinance), '$140,000', 'refinance is the model\'s $140,000');
+  // the KPI tiles
+  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), [money2(total), 'Pending', money2(metrics.year2_margin), 'Pending', money2(platform.first_year)]);
+  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), ['$423,849.52', 'Pending', '−$57,738.02', 'Pending', '$95,852.20']);
+  assert.equal(await pg.textContent('#kpiRefi'), whole(totals.refinance));
+  assert.equal(await pg.textContent('#kpiRefi'), '$140,000');
+  // the basis strip
+  assert.deepEqual(await txt(['capacity', 'pilotDuration', 'collections']), [String(Math.max(...MODEL.cash.map((r) => r.children))), String(MODEL.cash.length), Math.round(assumptions.collection * 100) + '%']);
+  assert.deepEqual(await txt(['capacity', 'pilotDuration', 'collections']), ['40', '12', '96%']);
+  assert.match(await pg.textContent('.strip-warn'), /The repayment case still needs to be proven\./);
+  // the capital donut: the four model allocations (values and shares for readers), the ring geometry, the selected part in the centre
+  assert.deepEqual(await pg.$$eval('#ovLegend button', (b) => b.map((x) => [x.dataset.ovSlice, x.querySelector('.lg-name').textContent, x.querySelector('.lg-val').textContent, x.querySelector('.lg-share').textContent])),
+    [['deficit', 'Pilot deficit', money2(funding.peak_deficit), '52.4%'], ['refinance', 'Refinance', whole(totals.refinance), '33.0%'], ['floor', 'Cash floor', money2(funding.cash_floor), '9.4%'], ['contingency', 'Contingency', money2(totals.contingency), '5.2%']]);
   const arcs = await pg.$$eval('#ovArcs .arc', (a) => a.map((x) => Number(x.getAttribute('stroke-dasharray').split(' ')[0])));
   const C = 2 * Math.PI * 118;
   [funding.peak_deficit, totals.refinance, funding.cash_floor, totals.contingency].forEach((v, i) => assert.ok(Math.abs(arcs[i] - (v / total * C - 3)) < 0.02, `slice ${i}`));
-  // platform and repayment
-  assert.deepEqual(await txt(['ovPlatformBuild', 'ovPlatformAssurance', 'ovPlatformRecurring', 'ovPlatformYear', 'ovPlatformOnce', 'ovPlatformMonthly']),
-    [whole(platform.completion), whole(platform.assurance_one_time), money2(platform.recurring), money2(platform.first_year), whole(platform.one_time), money2(platform.monthly)]);
-  assert.deepEqual(await txt(['ovTuition0', 'ovBreakEven0', 'ovGap']), [whole(assumptions.tuition), money2(metrics.breakeven_tuition), money2(metrics.year2_margin)]);
-  assert.deepEqual(await txt(['ovTuition0', 'ovBreakEven0', 'ovGap']), ['$910', '$1,036.37', '−$57,738.02']);
-  // the scenario: the planning case is the model's; a moved slider follows the model method (independent restatement), Reset returns
-  assert.deepEqual(await txt(['ovScenTuition', 'ovScenBreakEven', 'ovMargin']), ['$910', '$1,036.37', '−$57,738.02']);
-  const rc = MODEL.recurring_components, a = MODEL.assumptions;
-  const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
-  const base = MODEL.totals.recurring - 40 * rc.service_days * rc.variable_per_child_day - fees(40, a.tuition, a.collection);
-  const margin = (n, tt, c) => n * tt * 12 * c - base - n * rc.service_days * rc.variable_per_child_day - fees(n, tt, c);
-  const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
-  await setRange('#ovTuition', 1250); await setRange('#ovChildren', 36); await setRange('#ovCollection', 92);
-  await pg.waitForTimeout(450);
-  let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (margin(36, mid, 0.92) < 0) lo = mid; else hi = mid; }
-  assert.deepEqual(await txt(['ovScenTuition', 'ovScenBreakEven', 'ovMargin', 'ovMarginSr']), ['$1,250', money2(Math.round(hi * 100) / 100), money2(margin(36, 1250, 0.92)), money2(margin(36, 1250, 0.92))]);
-  await pg.click('#ovReset'); await pg.waitForTimeout(450);
-  assert.deepEqual(await txt(['ovScenBreakEven', 'ovMargin']), ['$1,036.37', '−$57,738.02']);
-  // the pilot year: the published monthly cash file; the scrubber and the readout agree
+  assert.deepEqual(await txt(['ovDonutPct', 'ovHlLabel', 'ovHlValue']), ['52.4%', 'Peak pilot cash deficit', money2(funding.peak_deficit)]);
+  // a part picked from the list: the centre, the headline and the ring follow
+  await pg.click('#ovLegend [data-ov-slice="refinance"]');
+  assert.equal(await pg.getAttribute('#ovLegend [data-ov-slice="refinance"]', 'aria-pressed'), 'true');
+  assert.deepEqual(await txt(['ovDonutPct', 'ovHlLabel', 'ovHlValue']), ['33.0%', 'Refinance-enabling allocation', '$140,000']);
+  assert.equal(await pg.evaluate(() => document.querySelector('#ovArcs .slice[data-slice="refinance"]').classList.contains('on')), true);
+  await pg.click('#ovLegend [data-ov-slice="floor"]');
+  assert.deepEqual(await txt(['ovDonutPct', 'ovHlValue']), ['9.4%', money2(funding.cash_floor)]);
+  await pg.click('#ovLegend [data-ov-slice="floor"]');
+  assert.deepEqual(await txt(['ovDonutPct', 'ovHlValue']), ['52.4%', '$222,049.42'], 'unpicked: back to the pilot deficit');
+  // the cash-flow lab: the published monthly cash file; the snapshot follows the chart (arrow keys, as hover and taps do)
   await pg.waitForFunction(() => document.getElementById('ovChart').dataset.source);
   assert.equal(await pg.getAttribute('#ovChart', 'data-source'), 'csv');
-  assert.equal(await pg.$$eval('#ovChart .gap-bar', (b) => b.length), 12);
-  await setRange('#ovScrub', 7);
-  const [, children, receipts, recurring, oneTime, net, cumulative] = CSV[6];
-  assert.deepEqual(await txt(['ovMonth', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet', 'ovDeficit']), ['07', String(children), money2(receipts), money2(recurring + oneTime), money2(net), money2(-cumulative)]);
+  const snap = () => txt(['ovMonthLabel', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet']);
+  const row = (m) => { const [, children, receipts, recurring, oneTime, net] = CSV[m - 1]; return [`Month ${String(m).padStart(2, '0')} snapshot`, String(children), money2(receipts), money2(recurring + oneTime), money2(net)]; };
+  assert.deepEqual(await snap(), row(1));
+  assert.deepEqual(await snap(), ['Month 01 snapshot', '30', '$26,208.00', '$105,038.49', '−$78,830.49']);
+  await pg.focus('#ovChart'); await pg.keyboard.press('End');
+  assert.deepEqual(await snap(), row(12));
+  for (let i = 0; i < 5; i++) await pg.keyboard.press('ArrowLeft');
+  assert.deepEqual(await snap(), row(7));
+  const box = await pg.$eval('#ovChart', (c) => { const b = c.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height }; });
+  await pg.mouse.move(box.x + box.w * 0.97, box.y + box.h * 0.5);
+  assert.deepEqual(await snap(), row(12), 'hover picks the month');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('overview dashboard: every card opens its deep dive (its link and a tap on the card); documents open in the drawer; curriculum preview', async (t) => {
+test('overview: every panel and tile opens its deep dive; the documents dock opens each document in the drawer', async (t) => {
   if (skip) return t.skip(skip);
   const { ctx, pg, errors } = await page(1440);
-  for (const [card, view] of [['ovd-funding', 'funding'], ['ovd-scen', 'scenarios'], ['ovd-platform', 'inside'], ['ovd-repay', 'scenarios'], ['ovd-year', 'pilot'], ['ovd-includes', 'inside']]) {
+  for (const [card, view] of [['ovd-funding', 'funding'], ['ovd-year', 'pilot']]) {
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-    assert.ok(await pg.$(`.${card} a, .${card} button`), `${card} has a link of its own`);
-    await pg.click(`.${card} .panel-title p`);   // the card itself, not one of its controls
+    await pg.click(`.${card} .panel-title p`);   // the panel itself, not one of its controls
     await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view, { timeout: 4000 });
+    await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'overview');
+    await pg.click(`.${card} .ovd-go[data-view-link]`); await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
   }
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-  for (const [k, view] of [['ovd-funding', 'funding'], ['ovd-scen', 'scenarios'], ['ovd-year', 'pilot']]) {
-    await pg.click(`.${k} .ovd-go[data-view-link]`); await pg.waitForFunction((v) => document.documentElement.dataset.view === v, view);
-    await pg.goBack(); await pg.waitForFunction(() => document.documentElement.dataset.view === 'overview');
-  }
-  // the documents strip: six tiles straight to their document in the drawer, with size and pages from the manifest
-  const tiles = await pg.$$eval('.ovd-doc', (a) => a.map((x) => ({ id: x.dataset.doc, meta: x.querySelector('[data-doc-meta]').textContent })));
-  assert.deepEqual(tiles.map((x) => x.id), ['plan-pdf', 'one-sheet-pdf', 'costs-csv', 'cash-csv', 'bible-pdf', 'operations-pdf']);
-  for (const tl of tiles) assert.match(tl.meta, /(KB|MB)$/, `${tl.id} shows its size`);
-  await pg.click('.ovd-doc[data-doc="cash-csv"]');
+  assert.deepEqual(await pg.$$eval('.cap-doc', (a) => a.map((x) => [x.dataset.doc, x.querySelector('strong').textContent])),
+    [['plan-pdf', 'Business plan'], ['one-sheet-pdf', 'One-sheet'], ['costs-csv', 'Every cost'], ['cash-csv', 'Cash forecast'], ['bible-pdf', 'Production Bible'], ['operations-pdf', 'Evidence & merchandise']]);
+  await pg.click('.cap-doc[data-doc="cash-csv"]');
   await pg.waitForSelector('#invDocs[open] .inv-preview[data-doc="cash-csv"] table.inv-csv tbody tr');
   assert.equal(await pg.$$eval('#invDocs .inv-csv tbody tr', (r) => r.length), 12);
   await pg.keyboard.press('Escape'); await pg.waitForFunction(() => !document.getElementById('invDocs').open);
-  await pg.click('.ovd-all'); await pg.waitForSelector('#invDocs[open] .inv-doc');
+  await pg.click('.cap-docs-head p'); await pg.waitForSelector('#invDocs[open] .inv-doc');
   await pg.keyboard.press('Escape'); await pg.waitForFunction(() => !document.getElementById('invDocs').open);
-  // what the pilot includes: the same four items; the published curriculum art; focus returns to the Overview's button
-  assert.deepEqual(await pg.$$eval('.ovd-features li', (l) => l.map((x) => x.innerText.replace(/\s+/g, ' ').trim())), ['Parent & child sign-in', 'Curriculum & learning records', 'Family communication', 'Secure hosting & support']);
-  assert.equal(await pg.getAttribute('.ovd-art img', 'src'), 'assets/curriculum-concept.webp');
-  await pg.click('.ovd-includes [data-curriculum-open]');
-  assert.equal(await pg.evaluate(() => document.getElementById('curriculumPreview').open), true);
-  await pg.keyboard.press('Escape');
-  assert.equal(await pg.evaluate(() => document.activeElement.matches('.ovd-includes [data-curriculum-open]')), true, 'focus returns to the opener');
-  // the donut: legend and ring are linked, with the tooltip inside the card
-  await pg.click('#ovLegend [data-ov-slice="refinance"]');
-  assert.equal(await pg.getAttribute('#ovLegend [data-ov-slice="refinance"]', 'aria-pressed'), 'true');
-  assert.match(await pg.textContent('#ovDonutTip'), /\$140,000 · 33\.0%/);
-  assert.equal(await pg.evaluate(() => document.querySelector('#ovArcs .slice[data-slice="refinance"]').classList.contains('on')), true);
-  const inside = await pg.evaluate(() => { const c = document.querySelector('.ovd-funding').getBoundingClientRect(), t = document.getElementById('ovDonutTip').getBoundingClientRect(); return t.left >= c.left && t.right <= c.right && t.top >= c.top && t.bottom <= c.bottom; });
-  assert.equal(inside, true, 'the tooltip stays inside the card');
+  // the Platform tile and the Evidence view lead to Inside the pilot
+  await pg.click('.kpi-teal .kpi-go'); await pg.waitForFunction(() => document.documentElement.dataset.view === 'inside');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('overview dashboard motion: cards rise and count on scroll-in and land on the exact model text; the chart draws then walks the year; reduced motion = all there, final', async (t) => {
+test('overview motion: tiles count one at a time, panels rise, the donut draws, the chart draws then walks the year once; reduced motion = all final', async (t) => {
   if (skip) return t.skip(skip);
   const { ctx, pg, errors } = await page(1440, { motion: true });
   await pg.goto(`${site.base}${OVERVIEW}`);
-  // v2270: the command center is above the fold, so its panels boot at once (one after another): the funding total counts, the ring
-  // draws, the gauge needles sweep, the chart draws; a panel below the fold still waits for its scroll-in
-  await pg.waitForFunction(() => document.querySelector('#ovDonutTotal').classList.contains('inv-counting'), null, { timeout: 8000 });
-  const mid = await pg.evaluate(() => ({ total: document.getElementById('ovDonutTotal').textContent, arcs: [...document.querySelectorAll('#ovArcs .arc')].filter((a) => a.getAnimations().length).length, delays: ['.ovd-scen', '.ovd-year', '.ovd-funding', '.ovd-repay'].map((s) => document.querySelector(s).style.getPropertyValue('--ovd-delay')) }));
-  assert.notEqual(mid.total, '$423,849.52', 'the total is counting');
-  assert.ok(mid.arcs >= 1, 'the ring draws');
-  assert.equal(new Set(mid.delays).size, 4, `the panels rise one after another (${mid.delays})`);
-  assert.equal(await pg.evaluate(() => document.querySelector('.ovd-docs').classList.contains('ovd-in')), false, 'a panel below the fold waits');
-  await pg.waitForFunction(() => !document.querySelector('#ovd .inv-counting'), null, { timeout: 5000 });
-  await pg.waitForFunction(() => !window.FFInvReveal.running(), null, { timeout: 10000 });
-  const finals = await pg.$$eval('#ovd [data-ov-count]', (n) => n.map((x) => x.textContent));
-  assert.deepEqual(finals.slice(0, 1), ['−$57,738.02'], 'the margin lands on the model figure');
-  await pg.waitForFunction(() => document.getElementById('ovPlay').getAttribute('aria-pressed') === 'true', null, { timeout: 6000 });
-  await pg.waitForFunction(() => document.getElementById('ovScrub').value === '12' && document.getElementById('ovPlay').getAttribute('aria-pressed') === 'false', null, { timeout: 15000 });
-  assert.equal(await pg.textContent('#ovDeficit'), money2(-CSV[11][6]), 'the walk ends on the peak deficit');
-  await pg.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
-  await pg.waitForTimeout(2200);
-  assert.deepEqual(await pg.$$eval('#ovd [data-ov-count]', (n) => n.map((x) => x.textContent)), finals, 'every count ends on the exact model text');
-  assert.equal(await pg.evaluate(() => [...document.querySelectorAll('.ovd-card')].every((c) => c.classList.contains('ovd-in'))), true);
+  await model(pg);
+  await pg.waitForFunction(() => [...document.querySelectorAll('#ovArcs .arc')].some((a) => a.getAnimations().length) || document.getElementById('ovHlValue').classList.contains('inv-counting'), null, { timeout: 8000 });
+  const delays = await pg.evaluate(() => ['.ovd-funding', '.ovd-year'].map((s) => document.querySelector(s).style.getPropertyValue('--ovd-delay')));
+  assert.equal(new Set(delays).size, 2, `the panels rise one after another (${delays})`);
+  await pg.waitForFunction(() => document.getElementById('ovChart').dataset.playing === 'true', null, { timeout: 8000 });
+  await pg.waitForFunction(() => document.getElementById('ovMonthLabel').textContent === 'Month 12 snapshot' && document.getElementById('ovChart').dataset.playing === 'false', null, { timeout: 15000 });
+  assert.equal(await pg.textContent('#ovNet'), money2(CSV[11][5]), 'the walk ends on month 12');
+  await pg.waitForFunction(() => !document.querySelector('.inv-counting') && !window.FFInvReveal.running(), null, { timeout: 10000 });
+  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), ['$423,849.52', 'Pending', '−$57,738.02', 'Pending', '$95,852.20'], 'the counts land on the model text');
+  assert.equal(await pg.textContent('#ovHlValue'), '$222,049.42');
   const loops = await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length);
-  assert.ok(loops <= 4, `ambient loops: ${loops}`);
-  // the gauge needles ended on the model's tuition, the gold tick on its break-even (the same angles as the reduced-motion page)
-  const needles = await pg.$$eval('.g-needle', (n) => n.map((x) => x.style.transform));
-  assert.equal(needles.length, 2);
-  assert.ok(needles.every((x) => x === needles[1] && /rotate\(-?\d/.test(x)), `needles: ${needles}`);
+  assert.ok(loops >= 1 && loops <= 4, `ambient loops: ${loops}`);
+  // Pause motion: everything stops and stays final
+  await pg.click('#motionToggle'); await pg.waitForTimeout(200);
+  assert.equal(await pg.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length), 0, 'paused: nothing runs');
   assert.deepEqual(errors, []);
   await ctx.close();
-  // reduced motion: nothing waits, nothing counts, nothing runs; every card is there with its final figures
+  // reduced motion: nothing waits, counts or runs; the chart does not walk
   const r = await page(1440);
-  await r.pg.goto(`${site.base}${OVERVIEW}`); await model(r.pg); await r.pg.waitForTimeout(200);
-  await r.pg.evaluate(() => document.querySelector('.ovd-docs').scrollIntoView());
-  await r.pg.waitForTimeout(300);
-  const s = await r.pg.evaluate(() => ({ armed: document.documentElement.classList.contains('ovd-armed'), hidden: [...document.querySelectorAll('.ovd-card')].filter((c) => getComputedStyle(c).opacity !== '1').length, counting: document.querySelectorAll('#ovd .inv-counting').length, anims: document.getAnimations().filter((a) => a.playState === 'running' && a.effect?.getComputedTiming().iterations !== Infinity).length, total: document.getElementById('ovDonutTotal').textContent, scrub: document.getElementById('ovScrub').value }));
-  assert.deepEqual(s, { armed: false, hidden: 0, counting: 0, anims: 0, total: '$423,849.52', scrub: '1' });
+  await r.pg.goto(`${site.base}${OVERVIEW}`); await model(r.pg); await r.pg.waitForTimeout(1500);
+  const s = await r.pg.evaluate(() => ({ armed: document.documentElement.classList.contains('ovd-armed'), hidden: [...document.querySelectorAll('.ovd-card')].filter((c) => getComputedStyle(c).opacity !== '1').length, counting: document.querySelectorAll('.inv-counting').length, anims: document.getAnimations().filter((a) => a.playState === 'running').length, total: document.getElementById('funding').textContent, month: document.getElementById('ovMonthLabel').textContent }));
+  assert.deepEqual(s, { armed: false, hidden: 0, counting: 0, anims: 0, total: '$423,849.52', month: 'Month 01 snapshot' });
   await r.ctx.close();
 });
 
-test('overview dashboard in Spanish: the cards are translated, the figures identical', async (t) => {
+test('overview in Spanish: translated, the figures identical, no English left on the panels', async (t) => {
   if (skip) return t.skip(skip);
   const { ctx, pg } = await page(1440);
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
   const grab = () => pg.evaluate(() => {
-    const out = [], w = document.createTreeWalker(document.getElementById('ovd'), NodeFilter.SHOW_TEXT);
-    for (let n = w.nextNode(); n; n = w.nextNode()) if (!n.parentElement.closest('[data-inv-docs], svg') && /[A-Za-z]{3,}/.test(n.nodeValue)) out.push(n.nodeValue.trim());
+    const out = [];
+    for (const root of [document.getElementById('cc')]) { const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); for (let n = w.nextNode(); n; n = w.nextNode()) if (!n.parentElement.closest('[data-inv-docs], svg, .cc-kpi-tools') && /[A-Za-z]{3,}/.test(n.nodeValue)) out.push(n.nodeValue.trim()); }
     return out;
   });
   const en = await grab(), figs = await n.extract(pg);
   await pg.click('[data-lang="es"]');
   const es = await grab();
-  const same = en.filter((x, i) => x === es[i] && !/^(Futures Friends|PDF|CSV)$/.test(x));
-  assert.deepEqual(same, [], 'no English left on the Overview cards');
+  const same = en.filter((x, i) => x === es[i] && !/^(Futures Friends|PDF|CSV|Contingency)$/.test(x));
+  assert.deepEqual(same, [], 'no English left on the Overview');
   assert.deepEqual(await n.extract(pg), figs, 'identical figures');
-  assert.equal(await pg.textContent('#ovd .ovd-funding h3'), 'A dónde va el financiamiento');
+  assert.equal(await pg.textContent('.ovd-funding h2'), 'A dónde va su capital');
+  assert.equal(await pg.textContent('#hero-title'), 'Centro de mando del capital');
+  assert.equal(await pg.textContent('#ovMonthLabel'), 'Resumen del mes 01');
+  assert.doesNotMatch(await pg.evaluate(() => document.body.innerText), EXCLUDED);
   await ctx.close();
 });
 
-// ------------------------------------------------------------------ Overview command center (v2270, owner 2026-10-13: "it needs to have more of
-// a dashboard feel ... more like the command center"): dense grid above the fold; the scenario simulator drives the pilot-year chart; phones
-// get a sticky KPI ticker and a swipeable panel dock instead of a long stack; one attribute swaps the hero scene.
-const SCEN = (() => {
-  // an independent restatement of the model (investor/tools/build_pilot_budget.py): the pilot year at a scenario's assumptions, keeping the
-  // published ramp (capped at the enrolled children) and the published one-time costs; food and payment fees move with the receipts
-  const rc = MODEL.recurring_components, a = MODEL.assumptions;
-  const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
-  const per = (k, tt, c) => k * rc.service_days * rc.variable_per_child_day + fees(k, tt, c);
-  const cents = (v) => Math.round(v * 100) / 100;
-  return (n, tt, c) => { let cum = 0; return CSV.map(([month, children, receipts, recurring, oneTime]) => {
-    const k = Math.min(children, n), rec = cents(receipts + k * tt * c - children * a.tuition * a.collection);
-    const rcur = cents(recurring + (per(k, tt, c) - per(children, a.tuition, a.collection)) / 12), net = cents(rec - rcur - oneTime); cum = cents(cum + net);
-    return { month, children: k, receipts: rec, spending: rcur + oneTime, net, cumulative: cum };
-  }); };
-})();
-
-test('command center: at 1440 x 900 the header, the KPI strip, the centerpiece, funding and repayment all fit above the fold', async (t) => {
+test('capital command center at 1280 x 853: the mockup\'s layout (rail, title row, banner, five tiles in a row, strip, two panels, dock, footer)', async (t) => {
   if (skip) return t.skip(skip);
-  const { ctx, pg, errors } = await page(1440);
-  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-  await pg.waitForTimeout(300);
-  const r = await pg.evaluate(() => Object.fromEntries(['.cc-band', '#kpis', '.ovd-center', '.ovd-scen', '.ovd-year', '#ovChart', '.ovd-funding', '.ovd-repay', '.cc-scene'].map((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [s, { top: b.top, bottom: b.bottom, left: b.left, right: b.right, area: b.width * b.height }]; })));
+  const { ctx, pg, errors } = await browser.newContext({ viewport: { width: 1280, height: 853 }, reducedMotion: 'reduce' }).then(async (c) => { const p = await c.newPage(); const e = []; p.on('pageerror', (x) => e.push(x.message)); return { ctx: c, pg: p, errors: e }; });
+  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(400);
+  const r = await pg.evaluate(() => Object.fromEntries(['.studio-top', '.studio-rail', '.cap-head', '#ccScene', '#kpis', '.cap-strip', '.ovd-funding', '.ovd-year', '.ovd-docs', '.cap-foot', '.studio-top .brand', '.studio-top .lang-switch', '.rail-tag'].map((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [s, { t: Math.round(b.top), b: Math.round(b.bottom), l: Math.round(b.left), r: Math.round(b.right), w: Math.round(b.width), h: Math.round(b.height) }]; })));
+  // the rail: a dark column on the left with the logo on top, the views, then English | Español and the tagline at the bottom
+  assert.ok(r['.studio-top'].l === 0 && r['.studio-top'].w >= 120 && r['.studio-top'].w <= 150 && r['.studio-top'].h === 853, JSON.stringify(r['.studio-top']));
+  assert.ok(r['.studio-top .brand'].t < r['.studio-rail'].t && r['.studio-rail'].b < r['.studio-top .lang-switch'].t && r['.studio-top .lang-switch'].b <= r['.rail-tag'].t, 'logo, views, language, tagline');
+  // the content column: title row, then the banner, the tiles, the strip, the two panels side by side, the dock, the footer
+  const col = r['#ccScene'];
+  assert.ok(col.l >= r['.studio-top'].r && col.l - r['.studio-top'].r <= 12, 'content starts right after the rail');
+  assert.ok(r['.cap-head'].b <= col.t && col.t <= 95, `banner directly under the title (${col.t})`);
+  for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - col.l) <= 2 && Math.abs(r[s].r - col.r) <= 2, `${s} spans the content width`);
+  const ratio = col.w / col.h;
+  assert.ok(ratio > 4.3 && ratio < 5.2, `a wide banner like the mockup's (~4.9:1): ${ratio.toFixed(2)}`);
+  assert.ok(col.b <= r['#kpis'].t && r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'banner, tiles, strip, panels');
+  assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
+  assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
+  assert.equal(r['.ovd-funding'].t, r['.ovd-year'].t, 'the two panels side by side');
+  assert.ok(r['.ovd-funding'].w < r['.ovd-year'].w && r['.ovd-funding'].r < r['.ovd-year'].l, 'capital on the left (narrower), the lab on the right');
+  assert.ok(Math.max(r['.ovd-funding'].b, r['.ovd-year'].b) <= r['.ovd-docs'].t && r['.ovd-docs'].b <= r['.cap-foot'].t, 'the dock under both, then the footer');
+  assert.ok(r['#kpis'].t < 853 && r['.ovd-funding'].t < 853, 'the tiles and the panels start on the first screen');
+  assert.equal(await pg.$$eval('.cap-doc', (d) => new Set(d.map((x) => Math.round(x.getBoundingClientRect().top))).size), 1, 'six document tiles in one row');
+  // dark royal navy with colour: the page, the gold banner frame, a different neon border per tile
+  assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(16, 37, 92\)/);
+  assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 5, 'five tile colours');
   assert.equal(await pg.evaluate(() => scrollY), 0);
-  for (const [s, b] of Object.entries(r)) assert.ok(b.top >= 0 && b.bottom <= 900 && b.right <= 1440, `${s} is above the fold (${Math.round(b.top)}-${Math.round(b.bottom)})`);
-  // the centerpiece is the biggest panel on the screen, the KPI strip one row of four, the header dark
-  for (const s of ['.ovd-funding', '.ovd-repay', '.cc-band']) assert.ok(r['.ovd-center'].area > r[s].area, `the centerpiece is bigger than ${s}`);
-  assert.equal(new Set(await pg.$$eval('#kpis .metric', (m) => m.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'four KPIs in one row');
-  const bg = await pg.evaluate(() => getComputedStyle(document.querySelector('.cc-band')).backgroundImage);
-  assert.match(bg, /rgb\(6, 31, 41\)|rgb\(10, 43, 56\)/, 'a dark command header');
-  // a sparkline and a status chip on every KPI; a live status line with the model date; the ticker carries the key figures
-  assert.equal(await pg.$$eval('#kpis .metric', (m) => m.filter((x) => x.querySelector('.metric-spark *') && x.querySelector('.metric-chip')).length), 4);
-  assert.match(await pg.textContent('.cc-status'), /Planning model · October 11, 2026/);
-  assert.deepEqual(await pg.$$eval('.cc-tick-track:not(.cc-tick-clone) [data-tick]', (b) => b.map((x) => x.textContent)),
-    ['$423,849.52', '$222,049.42', '$140,000', '$910', '$1,036.37', '−$57,738.02', '$95,852.20', String(MODEL.meta.line_count)]);
-  assert.equal(await pg.getAttribute('.cc-tick-clone', 'aria-hidden'), 'true', 'the ticker copy is hidden from readers');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('command center: the scenario sliders redraw the pilot-year chart, the gap readout and the gauge, by the model method; Reset returns to the published file', async (t) => {
+test('the banner never crops a character: one constant picks the art and its frame; desktop crops only empty wall and table; phones show the whole picture', async (t) => {
+  const h = read(OVERVIEW), js = read('investor/Digital/studio.js');
+  assert.equal((h.match(/data-scene="/g) || []).length, 1, 'one constant: data-scene on the banner');
+  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="wide-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
+  assert.doesNotMatch(h, /investor-meeting/, 'the file is named once, in the scene table');
+  assert.match(js, /'wide-1': \{ file: 'investor-meeting-wide-1', ratio: 4\.7, y: 26\.7 \}, 'wide-2': \{ file: 'investor-meeting-wide-2', ratio: 4\.3, y: 15\.6 \}/);
+  for (const f of ['investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 400000, `${f}${v}.webp is ${st.size} bytes`); }
   if (skip) return t.skip(skip);
-  const { ctx, pg, errors } = await page(1440);
-  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-  await pg.waitForFunction(() => document.getElementById('ovChart').dataset.source === 'csv');
-  await pg.waitForTimeout(500);   // the chart has taken the centerpiece's final height
-  const shape = () => pg.evaluate(() => ({ rec: document.querySelector('#ovChart [data-part=rec]').getAttribute('d'), spend: document.querySelector('#ovChart [data-part=spend]').getAttribute('d'), bars: [...document.querySelectorAll('#ovChart .gap-bar')].map((b) => b.getAttribute('height')).join(), scen: document.getElementById('ovChart').classList.contains('scenario'), chip: document.getElementById('ovPlanChip').textContent, needle: document.querySelector('#ovGauge .g-needle').style.transform, margin: document.getElementById('ovMargin').textContent }));
-  const before = await shape();
-  assert.equal(before.scen, false); assert.equal(before.chip, 'Published forecast'); assert.equal(before.margin, '−$57,738.02');
-  const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
-  await setRange('#ovTuition', 1250); await setRange('#ovChildren', 36); await setRange('#ovCollection', 92);
-  await pg.waitForTimeout(600);
-  const after = await shape();
-  assert.notEqual(after.rec, before.rec, 'the receipts line redraws');
-  assert.notEqual(after.spend, before.spend, 'the spending line redraws (food and fees move)');
-  assert.notEqual(after.bars, before.bars, 'the gap bars redraw');
-  assert.notEqual(after.needle, before.needle, 'the gauge needle moves');
-  assert.equal(after.scen, true, 'the published year stays as a ghost line');
-  assert.equal(after.chip, 'Your scenario');
-  // the month readout is the scenario's month, computed independently from the published file and the model's method
-  const rows = SCEN(36, 1250, 0.92);
-  for (const m of [1, 7, 12]) {
-    await setRange('#ovScrub', m);
-    const r = rows[m - 1];
-    assert.deepEqual(await pg.evaluate(() => ['ovMonth', 'ovChildrenM', 'ovReceipts', 'ovSpending', 'ovNet', 'ovDeficit'].map((id) => document.getElementById(id).textContent)),
-      [String(m).padStart(2, '0'), String(r.children), money2(r.receipts), money2(r.spending), money2(r.net), money2(Math.max(0, -r.cumulative))], `month ${m}`);
+  // the band every character occupies, in fractions of the picture's height (top of the highest ear .. the lowest chin): measured on the files
+  const BAND = { 'wide-1': [0.16, 0.61], 'wide-2': [0.08, 0.61] };
+  const seen = (pg) => pg.evaluate(() => {
+    const f = document.getElementById('ccScene'), art = f.querySelector('.cap-banner-art'), i = document.getElementById('ccSceneImg'), b = art.getBoundingClientRect(), cs = getComputedStyle(i);
+    const nat = i.naturalWidth / i.naturalHeight, box = b.width / b.height, fit = cs.objectFit;
+    if (fit === 'contain') return { fit, whole: true, wFrac: 1, top: 0, bottom: 1, nat, box, src: i.currentSrc };
+    // cover: the picture fills the width when it is taller than the box; the visible part of its height starts at object-position y
+    const visH = nat / box, fy = parseFloat(cs.objectPosition.split(' ')[1]) / 100;
+    return { fit, wFrac: nat <= box ? 1 : box / nat, top: (1 - visH) * fy, bottom: (1 - visH) * fy + visH, nat, box, src: i.currentSrc };
+  });
+  for (const scene of ['wide-1', 'wide-2']) {
+    const { ctx, pg, errors } = await page(1280);
+    if (scene !== 'wide-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="wide-1"', `data-scene="${scene}"`) })));
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
+    await pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
+    const v = await seen(pg);
+    assert.match(v.src, new RegExp(`investor-meeting-${scene}`), `${scene}: the art follows the constant`);
+    assert.equal(v.wFrac, 1, `${scene}: the full width is shown (nobody cut at the left or the right)`);
+    assert.ok(v.top <= BAND[scene][0] && v.bottom >= BAND[scene][1], `${scene}: every head and ear inside (${v.top.toFixed(3)}..${v.bottom.toFixed(3)} covers ${BAND[scene]})`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
   }
-  // planning assumptions: the scenario method gives back the published file to the cent
-  const plan = SCEN(40, MODEL.assumptions.tuition, MODEL.assumptions.collection);
-  plan.forEach((r, i) => { assert.ok(Math.abs(r.receipts - CSV[i][2]) < 0.005 && Math.abs(r.net - CSV[i][5]) < 0.005 && Math.abs(r.cumulative - CSV[i][6]) < 0.005, `month ${i + 1}`); });
-  await pg.click('#ovReset'); await pg.waitForTimeout(600);
-  const back = await shape();
-  assert.deepEqual([back.rec, back.spend, back.bars, back.scen, back.chip, back.margin], [before.rec, before.spend, before.bars, false, 'Published forecast', '−$57,738.02']);
-  await setRange('#ovScrub', 12);
-  assert.equal(await pg.textContent('#ovDeficit'), money2(-CSV[11][6]), 'the peak deficit, as published');
-  assert.deepEqual(errors, []);
-  await ctx.close();
+  const ph = await page(390);
+  await ph.pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(ph.pg);
+  await ph.pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
+  const v = await seen(ph.pg);
+  assert.equal(v.fit, 'contain'); assert.ok(Math.abs(v.box - v.nat) < 0.03, `phone: the whole picture (${v.box.toFixed(2)} / ${v.nat.toFixed(2)})`);
+  await ph.ctx.close();
 });
 
-test('command center on a phone: a sticky KPI ticker, the centerpiece first, the other panels in one swipeable dock (no long stack)', async (t) => {
+test('capital command center on a phone: the same order, tiles and documents as swipe rows, the strip as chips, no sideways page scroll', async (t) => {
   if (skip) return t.skip(skip);
   const { ctx, pg, errors } = await page(390);
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
   await pg.waitForTimeout(300);
-  const tops = await pg.evaluate(() => Object.fromEntries(['.cc-band', '#kpis', '.ovd-center', '.ovd-tabs', '#ovDock'].map((s) => [s, Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY)])));
-  assert.ok(tops['.cc-band'] < tops['#kpis'] && tops['#kpis'] < tops['.ovd-center'] && tops['.ovd-center'] < tops['.ovd-tabs'] && tops['.ovd-tabs'] < tops['#ovDock'], JSON.stringify(tops));
-  // the five panels share one row of the dock, which scrolls sideways inside itself (the page never does)
-  const dock = await pg.evaluate(() => { const d = document.getElementById('ovDock'); return { tops: [...d.querySelectorAll('[data-dock-panel]')].map((p) => Math.round(p.getBoundingClientRect().top)), scroll: d.scrollWidth > d.clientWidth + 100, overflow: getComputedStyle(d).overflowX }; });
-  assert.equal(new Set(dock.tops).size, 1, `one row: ${dock.tops}`);
-  assert.equal(dock.tops.length, 5);
-  assert.ok(dock.scroll && dock.overflow === 'auto', 'the dock swipes');
+  const tops = await pg.evaluate(() => ['.cap-head', '#ccScene', '#kpis', '.cap-strip', '.ovd-funding', '.ovd-year', '.ovd-docs', '.cap-foot'].map((s) => Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY)));
+  assert.deepEqual([...tops].sort((a, b) => a - b), tops, `the mockup's order, stacked: ${tops}`);
+  const row = (sel, item) => pg.evaluate(([sel, item]) => { const c = document.querySelector(sel); return { tops: new Set([...c.querySelectorAll(item)].map((x) => Math.round(x.getBoundingClientRect().top))).size, swipes: c.scrollWidth > c.clientWidth + 50, snap: getComputedStyle(c).scrollSnapType }; }, [sel, item]);
+  for (const [sel, item] of [['#kpis', '.kpi'], ['.cap-docs', '.cap-doc']]) {
+    const r = await row(sel, item);
+    assert.equal(r.tops, 1, `${sel}: one row`); assert.ok(r.swipes, `${sel}: swipes`); assert.match(r.snap, /x mandatory/, `${sel}: snaps`);
+  }
   assert.ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 0, 'no sideways page scroll');
-  // the page is a few screens, not a long stack of giant cards
-  const height = await pg.evaluate(() => document.documentElement.scrollHeight);
-  assert.ok(height < 844 * 3.4, `page height ${height}`);
-  // the segmented control: five 44 px tabs that jump to their panel; a swipe moves the selection
-  const tabs = await pg.$$eval('.ovd-tabs [data-dock]', (b) => b.map((x) => ({ k: x.dataset.dock, h: x.getBoundingClientRect().height })));
-  assert.deepEqual(tabs.map((x) => x.k), ['funding', 'platform', 'repay', 'includes', 'docs']);
-  for (const tb of tabs) assert.ok(tb.h >= 44, `${tb.k} tab is 44 px`);
-  await pg.tap('.ovd-tabs [data-dock="docs"]');
-  await pg.waitForFunction(() => { const p = document.querySelector('[data-dock-panel="docs"]').getBoundingClientRect(); return p.left >= 0 && p.right <= 390; }, null, { timeout: 3000 });
-  assert.equal(await pg.getAttribute('.ovd-tabs [data-dock="docs"]', 'aria-pressed'), 'true');
-  await pg.$eval('#ovDock', (d) => { d.scrollLeft = 0; d.dispatchEvent(new Event('scroll')); });
-  await pg.waitForFunction(() => document.querySelector('.ovd-tabs [data-dock="funding"]').getAttribute('aria-pressed') === 'true', null, { timeout: 3000 });
-  // the KPI strip stays under the top bar while the page scrolls
-  await pg.evaluate(() => scrollTo(0, 1400)); await pg.waitForTimeout(200);
-  const k = await pg.evaluate(() => ({ top: Math.round(document.getElementById('kpis').getBoundingClientRect().top), bar: Math.round(document.querySelector('.studio-top').getBoundingClientRect().bottom), pos: getComputedStyle(document.getElementById('kpis')).position }));
-  assert.equal(k.pos, 'sticky');
-  assert.ok(Math.abs(k.top - k.bar) <= 2, `the KPI ticker sits under the top bar (${k.top} / ${k.bar})`);
-  assert.deepEqual(errors, []);
-  await ctx.close();
-});
-
-test('command center: the hero scene slot swaps by ONE attribute (the image src); the wall-screen overlay is off for the current art and follows data-screen', async (t) => {
-  const h = read(OVERVIEW), js = read('investor/Digital/studio.js');
-  assert.equal((h.match(/assets\/investor-friends\.webp/g) || []).length, 1, 'the scene path is written once, in the slot');
-  assert.match(h, /<figure class="cc-scene" id="ccScene" data-screen="" aria-hidden="true"><div class="cc-scene-stage"><img id="ccSceneImg" src="assets\/investor-friends\.webp"/);
-  assert.doesNotMatch(js, /investor-friends|investor-meeting/, 'no second copy of the scene path in the script');
-  if (skip) return t.skip(skip);
-  const { ctx, pg, errors } = await page(1440);
-  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
-  await pg.waitForTimeout(300);
-  const box = () => pg.evaluate(() => { const f = document.getElementById('ccScene'), s = f.querySelector('.cc-scene-stage').getBoundingClientRect(), b = f.getBoundingClientRect(), i = document.getElementById('ccSceneImg'), sc = f.querySelector('.cc-screen'), r = sc.getBoundingClientRect();
-    return { fit: s.left >= b.left && s.right <= b.right && s.top >= b.top && s.bottom <= b.bottom, ratio: +(s.width / s.height).toFixed(2), nat: +(i.naturalWidth / i.naturalHeight).toFixed(2), fitMode: getComputedStyle(i).objectFit, screen: !sc.hidden, inside: r.left >= s.left - 1 && r.right <= s.right + 1 && r.top >= s.top - 1 && r.bottom <= s.bottom + 1, bars: sc.querySelectorAll('rect').length, blur: getComputedStyle(f).getPropertyValue('--scene') }; });
-  let b = await box();
-  assert.equal(b.fit, true, 'the art sits whole inside the slot');
-  assert.equal(b.fitMode, 'contain');
-  assert.ok(Math.abs(b.ratio - b.nat) < 0.03, `never cropped (stage ${b.ratio}, image ${b.nat})`);
-  assert.equal(b.screen, false, 'no overlay on the current art');
-  assert.match(b.blur, /investor-friends\.webp/, 'the blurred backdrop is the same art');
-  // the swap: a different file (here another published asset) and a screen box in percent of the image
-  await pg.evaluate(() => { document.getElementById('ccSceneImg').src = 'assets/classroom.webp'; document.getElementById('ccScene').dataset.screen = '58 14 24 22'; });
-  await pg.waitForFunction(() => document.getElementById('ccSceneImg').complete && getComputedStyle(document.getElementById('ccScene')).getPropertyValue('--scene').includes('classroom'), null, { timeout: 5000 });
-  await pg.waitForTimeout(200);
-  b = await box();
-  assert.ok(b.fit && Math.abs(b.ratio - b.nat) < 0.03, 'the new art is contained too');
-  assert.equal(b.screen, true, 'data-screen turns the wall screen on');
-  assert.equal(b.inside, true, 'the screen sits inside the image');
-  assert.equal(b.bars, 12, 'the wall screen shows the twelve months');
+  // 44 px targets on the Overview's controls
+  const small = await pg.$$eval('[data-studio-view="overview"] :is(a, button)', (els) => els.filter((e) => e.offsetParent && !e.closest('.sr, .cc-kpi-tools')).map((e) => ({ t: e.textContent.trim().slice(0, 20), h: Math.round(e.getBoundingClientRect().height) })).filter((x) => x.h < 44));
+  assert.deepEqual(small, []);
   assert.deepEqual(errors, []);
   await ctx.close();
 });
