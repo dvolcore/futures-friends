@@ -510,60 +510,66 @@
       link(key ? 'funding' : null);
     };
     const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), onSelect: (k) => { if (ready) hl(k); },
-      colors: { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' } });
+      colors: R.dataset.theme === 'navy' ? { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' } : { deficit: '#5cecff', refinance: '#6f8dff', floor: '#ffb340', contingency: '#d6a1ff' } });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
       height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.232, 9.6 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
       out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
 
-    // ---- the banner. ONE constant picks the art: data-scene on #ccScene (index.html). Each scene names its file and the band every
-    // character occupies (top of the highest ear .. the lowest chin, as fractions of the picture's height, measured on the file). The
-    // banner keeps the mockup's 4.87:1 strip; the picture is framed so the whole band shows with a margin. When the band needs more
-    // height than the strip gives at full width, the picture narrows a little (nobody is ever cut at the sides) and a blurred copy of
-    // itself fills the two slim edges. Phones show the whole picture. A file composed for the strip (its band fits) fills it edge to edge.
-    const BANNER = 4.87, AIR = 0.03;
-    // glam-1 (default): the gold-lit boardroom, all ten friends in one band, Principal Hazel at the glowing dashboard wall; deer ears and
-    //   giraffe ossicones are the top-most points (16.5%), the lowest chins 58.5%: it fills the 4.87:1 strip edge to edge.
-    // glam-2: the same room, the high-five (15% .. 58.5%). wide-1 / wide-2: the earlier long-table and round-table meetings.
-    // cast-1 (default, owner's pick): the full cast of 22, teachers and parents standing behind the seated children; the giraffe's
-    //   ossicones are the top-most point (15.5%), the lowest chin (the frog, front right) 72%. Taller than the 4.87:1 strip allows, so
-    //   its strip is 4.34:1 (about 260 px at 1280; the other blocks give back the height, still one screen) and the picture narrows a
-    //   little over its blurred copy: the giraffe (far left) and the raccoon (far right) stay whole.
+    // ---- the hero (v2272, owner: "you could've just used a full image all the way across the top"). ONE constant picks the art:
+    // data-scene on #ccScene (index.html). The picture runs full bleed across the top of the page, from the sidebar to the window's
+    // right edge, its full width shown (never narrowed, never blurred at the sides). Each scene names the band every character occupies
+    // (top of the highest ear .. the lowest chin, as fractions of the picture's height, measured on the file): the hero shows the
+    // picture from its top down to the band's foot (+3%), so every head is whole, and the title sits over the ceiling above the band.
+    // On a short screen the hero trims ceiling from the top (never a face under the title). The only blends: into the sidebar on the left and
+    // into the page under the KPI tiles. Phones: the title above, the whole picture below.
+    const AIR = 0.03;
     const SCENES = {
-      'cast-1': { file: 'investor-meeting-cast-1', band: [0.155, 0.72], strip: 4.34 },
+      // cast-2 (default, owner's pick): the packed full cast, every seat filled; the giraffe's ossicones are the top-most point
+      //   (19%), the lowest chin (the frog, front right) 72%.
+      'cast-2': { file: 'investor-meeting-cast-2', band: [0.19, 0.72] },
+      'cast-1': { file: 'investor-meeting-cast-1', band: [0.155, 0.72] },
       'glam-1': { file: 'investor-meeting-glam-1', band: [0.165, 0.585] }, 'glam-2': { file: 'investor-meeting-glam-2', band: [0.15, 0.585] },
       'wide-1': { file: 'investor-meeting-wide-1', band: [0.165, 0.61] }, 'wide-2': { file: 'investor-meeting-wide-2', band: [0.077, 0.612] }
     };
     const scene = (() => {
       const fig = $('#ccScene'), img = $('#ccSceneImg');
       if (!fig || !img) return {};
-      const cfg = SCENES[fig.dataset.scene] || SCENES['cast-1'];
-      const art = $('.cap-banner-art', fig), STRIP = cfg.strip || BANNER;
-      $('#cc')?.classList.toggle('tall-banner', STRIP < BANNER - 0.05);
-      let nat0 = 0;
-      const frame = (nat) => {
-        nat0 = nat || nat0;
-        // the strip's real shape (4.87:1, or lower when a short screen caps its height)
-        const box = art.clientWidth && art.clientHeight ? art.clientWidth / art.clientHeight : STRIP;
-        const top = Math.max(0, cfg.band[0] - AIR), v = Math.min(1, cfg.band[1] + AIR - top);
-        const w = Math.min(1, nat0 / (v * box));               // the picture's width in the strip (1 = edge to edge)
-        const shown = Math.min(1, nat0 / (box * w));            // the fraction of its height the strip shows at that width
-        const fy = shown >= 1 ? 50 : Math.min(100, Math.max(0, top / (1 - shown) * 100));
-        fig.style.setProperty('--ar', String(STRIP));
-        fig.style.setProperty('--bh', (88.2 / STRIP).toFixed(3));
-        fig.style.setProperty('--iw', `${(w * 100).toFixed(3)}%`);
-        fig.style.setProperty('--fy', `${fy.toFixed(2)}%`);
-        fig.style.setProperty('--nat', String(nat0));
+      const cfg = SCENES[fig.dataset.scene] || SCENES['cast-2'];
+      const hero = fig.closest('.cap-hero') || fig, head = $('.cap-head', hero), foot = $('.cap-foot');
+      let nat = Number(img.getAttribute('width')) / Number(img.getAttribute('height')), last = '';
+      // the hero's height: the picture from its top to the band's foot, unless the screen is short: then the hero gets lower (down
+      // to the whole page fitting the window) by trimming ceiling from the top, never so much that a face reaches the title, and
+      // never the band's foot. A screen too short for both scrolls a little rather than covering a face.
+      const frame = () => {
+        const footF = Math.min(1, cfg.band[1] + AIR), W = hero.clientWidth;
+        fig.style.setProperty('--nat', String(nat));
+        hero.style.setProperty('--ar', String(nat / footF));
+        const overlay = head && getComputedStyle(head).position === 'absolute';
+        if (!W || !overlay) { hero.style.removeProperty('--hero-h'); hero.style.removeProperty('--img-top'); return; }
+        const Himg = W / nat, natural = Himg * footF, headBottom = head.offsetTop + head.offsetHeight + 6;
+        const rest = foot ? foot.getBoundingClientRect().bottom - hero.getBoundingClientRect().bottom + 8 : 0;
+        const fitH = innerHeight - rest;
+        const minH = natural - Math.max(0, cfg.band[0] * Himg - headBottom);   // the most ceiling that may go
+        const H = Math.round(Math.max(minH, Math.min(natural, fitH)));
+        const key = `${H}|${Math.round(natural - H)}`;
+        if (key === last) return;
+        last = key;
+        hero.style.setProperty('--hero-h', `${H}px`);
+        hero.style.setProperty('--img-top', `${-Math.round(natural - H)}px`);
+        hero.dataset.trim = String(Math.round(natural - H));
       };
-      if (typeof ResizeObserver === 'function') new ResizeObserver(() => frame()).observe(art);
-      frame(Number(img.getAttribute('width')) / Number(img.getAttribute('height')));
-      img.sizes = '(max-width: 767px) 100vw, 88vw';
+      frame();
+      img.sizes = '(max-width: 767px) 100vw, 90vw';
       img.srcset = `assets/${cfg.file}-1200.webp 1200w, assets/${cfg.file}.webp 2400w`;
       img.src = `assets/${cfg.file}.webp`;
-      const loaded = () => { frame(img.naturalWidth / img.naturalHeight); fig.style.setProperty('--scene', `url("${img.currentSrc || img.src}")`); fig.classList.add('ready'); };
+      const loaded = () => { nat = img.naturalWidth / img.naturalHeight; frame(); fig.classList.add('ready'); };
       if (img.complete && img.naturalWidth) loaded(); else img.addEventListener('load', loaded, { once: true });
-      return { cfg };
+      if (typeof ResizeObserver === 'function') new ResizeObserver(() => frame()).observe(hero);
+      addEventListener('resize', frame, { passive: true });
+      D.fonts?.ready?.then(frame);
+      return { cfg, frame };
     })();
 
     function build(m) {

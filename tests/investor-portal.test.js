@@ -567,9 +567,10 @@ const overviewSection = () => { const h = read(OVERVIEW); const a = h.indexOf('d
 
 test('overview: the mockup\'s modules in its order; no slogans, no demo / concept / illustrative labels; EN + ES for its text', () => {
   const sec = overviewSection();
-  const order = ['class="cap-head"', 'id="ccScene"', 'id="kpis"', 'class="cap-strip"', 'ovd-funding', 'ovd-year', 'ovd-docs', 'class="cap-foot"'].map((k) => sec.indexOf(k));
+  const order = ['class="cap-hero"', 'id="ccScene"', 'class="cap-head"', 'id="kpis"', 'class="cap-strip"', 'ovd-funding', 'ovd-year', 'ovd-docs', 'class="cap-foot"'].map((k) => sec.indexOf(k));
   assert.ok(order.every((i) => i > 0), `all modules are on the Overview: ${order}`);
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'title, banner, KPIs, strip, capital, cash-flow lab, documents, footer');
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'the hero (picture + title over it), KPIs, strip, capital, cash-flow lab, documents, footer');
+  assert.match(sec, /<div class="cap-hero">\n<figure class="cap-banner" id="ccScene"[\s\S]*?<\/figure>\n<header class="cap-head">[\s\S]*?<\/header>\n<\/div>/, 'the title sits inside the hero, over the picture');
   assert.match(sec, /<h1 id="hero-title" tabindex="-1">Capital command center<\/h1><p class="cap-tag">Small beginnings\. Big futures\.<\/p>/);
   assert.match(sec, /One location\. 40 children\. One year\./);
   // the KPI tiles: five, numbered, in the mockup's order
@@ -722,75 +723,75 @@ test('overview in Spanish: translated, the figures identical, no English left on
   await ctx.close();
 });
 
-test('capital command center at 1280 x 853: the mockup\'s layout (rail, title row, banner, five tiles in a row, strip, two panels, dock, footer)', async (t) => {
+test('capital command center at 1280 x 853 and 1440 x 900: one screen; the hero across the top; tiles, strip, two panels, dock, footer', async (t) => {
   if (skip) return t.skip(skip);
-  const { ctx, pg, errors } = await browser.newContext({ viewport: { width: 1280, height: 853 }, reducedMotion: 'reduce' }).then(async (c) => { const p = await c.newPage(); const e = []; p.on('pageerror', (x) => e.push(x.message)); return { ctx: c, pg: p, errors: e }; });
-  await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(400);
-  const r = await pg.evaluate(() => Object.fromEntries(['.studio-top', '.studio-rail', '.cap-head', '#ccScene', '#kpis', '.cap-strip', '.ovd-funding', '.ovd-year', '.ovd-docs', '.cap-foot', '.studio-top .brand', '.studio-top .lang-switch', '.rail-tag'].map((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [s, { t: Math.round(b.top), b: Math.round(b.bottom), l: Math.round(b.left), r: Math.round(b.right), w: Math.round(b.width), h: Math.round(b.height) }]; })));
-  // the rail: a dark column on the left with the logo on top, the views, then English | Español and the tagline at the bottom
-  assert.ok(r['.studio-top'].l === 0 && r['.studio-top'].w >= 120 && r['.studio-top'].w <= 150 && r['.studio-top'].h === 853, JSON.stringify(r['.studio-top']));
-  assert.ok(r['.studio-top .brand'].t < r['.studio-rail'].t && r['.studio-rail'].b < r['.studio-top .lang-switch'].t && r['.studio-top .lang-switch'].b <= r['.rail-tag'].t, 'logo, views, language, tagline');
-  // the content column: title row, then the banner, the tiles, the strip, the two panels side by side, the dock, the footer
-  const col = r['#ccScene'];
-  assert.ok(col.l >= r['.studio-top'].r && col.l - r['.studio-top'].r <= 12, 'content starts right after the rail');
-  assert.ok(r['.cap-head'].b <= col.t && col.t <= 95, `banner directly under the title (${col.t})`);
-  for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - col.l) <= 2 && Math.abs(r[s].r - col.r) <= 2, `${s} spans the content width`);
-  const ratio = col.w / col.h;
-  assert.ok(ratio > 4.2 && ratio < 5.2, `a wide banner (the frame included) like the mockup's (~4.9:1; the full cast's 4.34:1): ${ratio.toFixed(2)}`);
-  // ONE screen like the mockup: the footer line ends inside 853 px
-  assert.ok(r['.cap-foot'].b <= 853, `the whole Overview fits the first screen (footer ends at ${r['.cap-foot'].b})`);
-  for (const [s, h, tol] of [['#ccScene', 262, 10], ['#kpis', 96, 10], ['.cap-strip', 38, 6], ['.ovd-funding', 240, 16], ['.ovd-docs', 66, 10]]) assert.ok(Math.abs(r[s].h - h) <= tol, `${s} is about the mockup's ${h} px (${r[s].h})`);
-  assert.ok(col.b <= r['#kpis'].t && r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'banner, tiles, strip, panels');
-  assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
-  assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
-  assert.equal(r['.ovd-funding'].t, r['.ovd-year'].t, 'the two panels side by side');
-  assert.ok(r['.ovd-funding'].w < r['.ovd-year'].w && r['.ovd-funding'].r < r['.ovd-year'].l, 'capital on the left (narrower), the lab on the right');
-  assert.ok(Math.max(r['.ovd-funding'].b, r['.ovd-year'].b) <= r['.ovd-docs'].t && r['.ovd-docs'].b <= r['.cap-foot'].t, 'the dock under both, then the footer');
-  assert.ok(r['#kpis'].t < 853 && r['.ovd-funding'].t < 853, 'the tiles and the panels start on the first screen');
-  assert.equal(await pg.$$eval('.cap-doc', (d) => new Set(d.map((x) => Math.round(x.getBoundingClientRect().top))).size), 1, 'six document tiles in one row');
-  // dark royal navy with colour: the page, the gold banner frame, a different neon border per tile
-  assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(13, 33, 84\)/);
-  assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 5, 'five tile colours');
-  assert.equal(await pg.evaluate(() => scrollY), 0);
-  assert.deepEqual(errors, []);
-  await ctx.close();
+  for (const [W, H] of [[1280, 853], [1440, 900]]) {
+    const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce' }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
+    await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
+    const r = await pg.evaluate(() => Object.fromEntries(['.studio-top', '.studio-rail', '.cap-hero', '.cap-head', '#kpis', '.cap-strip', '.ovd-funding', '.ovd-year', '.ovd-docs', '.cap-foot', '.studio-top .brand', '.studio-top .lang-switch', '.rail-tag'].map((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [s, { t: Math.round(b.top), b: Math.round(b.bottom), l: Math.round(b.left), r: Math.round(b.right), w: Math.round(b.width), h: Math.round(b.height) }]; })));
+    // the rail: a green column on the left, logo on top, the views, then English | Español and the tagline at the bottom
+    assert.ok(r['.studio-top'].l === 0 && r['.studio-top'].w >= 120 && r['.studio-top'].w <= 160 && r['.studio-top'].h === H, JSON.stringify(r['.studio-top']));
+    assert.ok(r['.studio-top .brand'].t < r['.studio-rail'].t && r['.studio-rail'].b < r['.studio-top .lang-switch'].t && r['.studio-top .lang-switch'].b <= r['.rail-tag'].t, 'logo, views, language, tagline');
+    // the hero: from the rail's edge to the window's edge, from the very top; the title over it
+    const hero = r['.cap-hero'];
+    assert.ok(hero.t === 0 && Math.abs(hero.l - r['.studio-top'].r) <= 1 && hero.r === W, `full bleed: ${JSON.stringify(hero)}`);
+    assert.ok(r['.cap-head'].t >= hero.t && r['.cap-head'].b <= hero.b && r['.cap-head'].l > hero.l, 'the title over the picture');
+    for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - r['#kpis'].l) <= 2 && Math.abs(r[s].r - r['#kpis'].r) <= 2, `${s} spans the content width`);
+    assert.ok(r['#kpis'].t < hero.b && r['#kpis'].t > hero.b - 30, 'the tiles overlap the hero\'s bottom fade a little');
+    // ONE screen: the footer line ends inside the window
+    assert.ok(r['.cap-foot'].b <= H, `${W} x ${H}: the whole Overview fits the first screen (footer ends at ${r['.cap-foot'].b})`);
+    assert.ok(r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'tiles, strip, panels');
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
+    assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
+    assert.equal(r['.ovd-funding'].t, r['.ovd-year'].t, 'the two panels side by side');
+    assert.ok(r['.ovd-funding'].w < r['.ovd-year'].w && r['.ovd-funding'].r < r['.ovd-year'].l, 'capital on the left (narrower), the lab on the right');
+    assert.ok(Math.max(r['.ovd-funding'].b, r['.ovd-year'].b) <= r['.ovd-docs'].t && r['.ovd-docs'].b <= r['.cap-foot'].t, 'the dock under both, then the footer');
+    assert.equal(await pg.$$eval('.cap-doc', (d) => new Set(d.map((x) => Math.round(x.getBoundingClientRect().top))).size), 1, 'six document tiles in one row');
+    // nothing in a panel is cut off by its fixed height
+    const clipped = await pg.$$eval('.ovd-funding .cap-legend button, .ovd-year .cap-snap dl', (els) => els.filter((e) => { const p = e.closest('.ovd-card').getBoundingClientRect(), b = e.getBoundingClientRect(); return b.bottom > p.bottom + 0.5; }).length);
+    assert.equal(clipped, 0, 'every legend row and the month snapshot sit inside their panels');
+    // money green (data-theme="money"), a different colour per tile
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'money');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(29, 103, 71\)/);
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 5, 'five tile colours');
+    assert.equal(await pg.evaluate(() => scrollY), 0);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
 });
 
-test('the banner never crops a character: one constant picks the art and its frame; desktop crops only empty wall and table; phones show the whole picture', async (t) => {
-  const h = read(OVERVIEW), js = read('investor/Digital/studio.js');
-  assert.equal((h.match(/data-scene="/g) || []).length, 1, 'one constant: data-scene on the banner');
-  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="cast-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
+test('the hero never crops a character and no title covers a face: full width, no side blur, one constant picks the art; phones show the whole picture', async (t) => {
+  const h = read(OVERVIEW), js = read('investor/Digital/studio.js'), css = read('investor/Digital/studio-overview.css');
+  assert.equal((h.match(/data-scene="/g) || []).length, 1, 'one constant: data-scene on the picture');
+  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="cast-2" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
   assert.doesNotMatch(h, /investor-meeting/, 'the file is named once, in the scene table');
-  assert.match(js, /const BANNER = 4\.87, AIR = 0\.03;/);
-  assert.match(js, /'cast-1': \{ file: 'investor-meeting-cast-1', band: \[0\.155, 0\.72\], strip: 4\.34 \}/);
-  assert.match(js, /'glam-1': \{ file: 'investor-meeting-glam-1', band: \[0\.165, 0\.585\] \}, 'glam-2': \{ file: 'investor-meeting-glam-2', band: \[0\.15, 0\.585\] \}/);
-  assert.match(js, /'wide-1': \{ file: 'investor-meeting-wide-1', band: \[0\.165, 0\.61\] \}, 'wide-2': \{ file: 'investor-meeting-wide-2', band: \[0\.077, 0\.612\] \}/);
-  for (const f of ['investor-meeting-cast-1', 'investor-meeting-glam-1', 'investor-meeting-glam-2', 'investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 480000, `${f}${v}.webp is ${st.size} bytes`); }
+  assert.match(js, /'cast-2': \{ file: 'investor-meeting-cast-2', band: \[0\.19, 0\.72\] \}/);
+  assert.match(css, /\.cap-hero \.cap-banner-art::before\{display:none\}/, 'no blurred side copy');
+  for (const f of ['investor-meeting-cast-2', 'investor-meeting-cast-1', 'investor-meeting-glam-1', 'investor-meeting-glam-2', 'investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 480000, `${f}${v}.webp is ${st.size} bytes`); }
   if (skip) return t.skip(skip);
   // the band every character occupies, in fractions of the picture's height (top of the highest ear .. the lowest chin): measured on the files
-  const STRIP = { 'cast-1': 4.34 };
-  const BAND = { 'cast-1': [0.155, 0.72], 'glam-1': [0.165, 0.585], 'glam-2': [0.15, 0.585], 'wide-1': [0.165, 0.61], 'wide-2': [0.077, 0.612] };
+  const BAND = { 'cast-2': [0.19, 0.72], 'cast-1': [0.155, 0.72], 'glam-1': [0.165, 0.585] };
   const seen = (pg) => pg.evaluate(() => {
-    const f = document.getElementById('ccScene'), art = f.querySelector('.cap-banner-art').getBoundingClientRect(), i = document.getElementById('ccSceneImg'), b = i.getBoundingClientRect(), cs = getComputedStyle(i);
-    const nat = i.naturalWidth / i.naturalHeight, box = b.width / b.height, fit = cs.objectFit, strip = art.width / art.height;
-    // the picture's own box sits inside the strip (it may be a little narrower; a blurred copy fills the edges)
-    const inside = b.left >= art.left - 1 && b.right <= art.right + 1 && b.top >= art.top - 1 && b.bottom <= art.bottom + 1;
-    if (fit === 'contain') return { fit, inside, wFrac: 1, top: 0, bottom: 1, nat, box, strip, src: i.currentSrc };
-    // cover: a picture taller than its box keeps its full width; the visible part of its height starts at object-position y
-    const visH = nat / box, fy = parseFloat(cs.objectPosition.split(' ')[1]) / 100;
-    return { fit, inside, wFrac: nat <= box + 1e-3 ? 1 : box / nat, top: (1 - visH) * fy, bottom: (1 - visH) * fy + visH, nat, box, strip, src: i.currentSrc };
+    const hero = document.querySelector('.cap-hero').getBoundingClientRect(), art = document.querySelector('.cap-banner-art'), a = art.getBoundingClientRect(), i = document.getElementById('ccSceneImg'), b = i.getBoundingClientRect(), head = document.querySelector('.cap-head').getBoundingClientRect();
+    return { hero: [hero.left, hero.right, hero.top, hero.bottom], art: [a.left, a.right, a.top, a.bottom], img: [b.left, b.right, b.top, b.bottom, b.height], head: [head.left, head.right, head.top, head.bottom], blur: getComputedStyle(art, '::before').display, nat: i.naturalWidth / i.naturalHeight, src: i.currentSrc, fit: getComputedStyle(i).objectFit, vw: innerWidth };
   });
-  for (const scene of ['cast-1', 'glam-1', 'glam-2', 'wide-1', 'wide-2']) {
-    const { ctx, pg, errors } = await page(1280);
-    if (scene !== 'cast-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="cast-1"', `data-scene="${scene}"`) })));
+  for (const [W, H] of [[1280, 853], [1440, 900]]) for (const scene of Object.keys(BAND)) {
+    const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce' }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
+    if (scene !== 'cast-2') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="cast-2"', `data-scene="${scene}"`) })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
     await pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
-    const v = await seen(pg);
-    assert.match(v.src, new RegExp(`investor-meeting-${scene}`), `${scene}: the art follows the constant`);
-    assert.equal(v.inside, true, `${scene}: the picture sits inside the strip`);
-    assert.equal(v.wFrac, 1, `${scene}: the full width is shown (nobody cut at the left or the right)`);
-    assert.ok(Math.abs(v.strip - (STRIP[scene] || 4.87)) < 0.05, `${scene}: its strip (${v.strip.toFixed(2)})`);
-    assert.ok(v.top <= BAND[scene][0] && v.bottom >= BAND[scene][1], `${scene}: every head and ear inside (${v.top.toFixed(3)}..${v.bottom.toFixed(3)} covers ${BAND[scene]})`);
+    await pg.waitForTimeout(300);
+    const v = await seen(pg), tag = `${scene} @ ${W}`;
+    assert.match(v.src, new RegExp(`investor-meeting-${scene}`), `${tag}: the art follows the constant`);
+    assert.equal(v.blur, 'none', `${tag}: no blurred copy`);
+    assert.ok(Math.abs(v.img[0] - v.hero[0]) <= 1 && Math.abs(v.img[1] - v.vw) <= 1, `${tag}: the picture spans the hero edge to edge (${v.img[0]}..${v.img[1]})`);
+    assert.ok(Math.abs((v.img[1] - v.img[0]) / v.img[4] - v.nat) < 0.02, `${tag}: drawn at its own shape (nothing squeezed or cut at the sides)`);
+    // the part of the picture the hero shows, in fractions of its height
+    const top = (v.art[2] - v.img[2]) / v.img[4], bottom = (v.art[3] - v.img[2]) / v.img[4];
+    assert.ok(top <= BAND[scene][0] && bottom >= BAND[scene][1], `${tag}: every head and ear inside (${top.toFixed(3)}..${bottom.toFixed(3)} covers ${BAND[scene]})`);
+    // the title over the ceiling: it ends above the highest head
+    const faceTop = v.img[2] + BAND[scene][0] * v.img[4];
+    assert.ok(v.head[3] <= faceTop, `${tag}: the title (bottom ${Math.round(v.head[3])}) ends above every face (top ${Math.round(faceTop)})`);
     assert.deepEqual(errors, []);
     await ctx.close();
   }
@@ -798,7 +799,9 @@ test('the banner never crops a character: one constant picks the art and its fra
   await ph.pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(ph.pg);
   await ph.pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
   const v = await seen(ph.pg);
-  assert.equal(v.fit, 'contain'); assert.ok(Math.abs(v.box - v.nat) < 0.03, `phone: the whole picture (${v.box.toFixed(2)} / ${v.nat.toFixed(2)})`);
+  const box = (v.art[1] - v.art[0]) / (v.art[3] - v.art[2]);
+  assert.ok(Math.abs(box - v.nat) < 0.03 && v.img[2] >= v.art[2] - 1 && v.img[3] <= v.art[3] + 1, `phone: the whole picture (${box.toFixed(2)} / ${v.nat.toFixed(2)})`);
+  assert.ok(v.head[3] <= v.art[2] + 1, 'phone: the title above the picture, over no face');
   await ph.ctx.close();
 });
 

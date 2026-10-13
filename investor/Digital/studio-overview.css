@@ -443,3 +443,89 @@
   .cap.tall-banner .ovd-docs{height:calc(4.85*var(--u))}
   .cap.tall-banner .cap-head{min-height:0}
 }
+
+/* ================================================================ v2272 (owner: "you could've just used a full image all the way across the
+   top ... the blend could've just been where the sidebar starts"): the hero picture runs full bleed across the top of the page, from
+   the sidebar to the window's right edge, its whole width shown; the title sits over the ceiling; the only blends are into the
+   sidebar (left) and into the page under the KPI tiles (bottom). The picture's height shows every head (studio.js SCENES). */
+.cap-hero{position:relative;z-index:0}
+.cap-hero .cap-banner{margin:0;padding:0;border-radius:0;background:none;box-shadow:none}
+.cap-hero .cap-banner-art{width:100%;max-height:none;aspect-ratio:auto;height:100%;border-radius:0;background:var(--hero-bg,#0d2154)}
+.cap-hero .cap-banner-art::before{display:none}
+.cap-hero .cap-banner-art img{position:absolute;left:0;top:var(--img-top,0px);width:100%;height:auto;transform:none;object-fit:cover;object-position:50% 0;transform-origin:50% 0}
+@media (prefers-reduced-motion:no-preference){
+  /* the drift: a slow 1.2% breath anchored at the top (the edges lose at most 0.6% each: no character is near them) */
+  :root:not([data-motion=off]):not(.motion-paused) .cap-hero .cap-banner.ready .cap-banner-art img{animation:capBreath 26s ease-in-out infinite alternate}
+}
+@keyframes capBreath{from{transform:scale(1)}to{transform:scale(1.012)}}
+@media (min-width:768px){
+  .cap-hero{margin:calc(-.6*var(--u)) calc(-1.17*var(--u)) 0 0;aspect-ratio:var(--ar,3.11);height:var(--hero-h,auto)}
+  .cap-hero .cap-banner{position:absolute;inset:0}
+  /* the fades: into the sidebar, a soft shade under the title, into the page under the tiles */
+  .cap-hero .cap-banner::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,var(--rail-edge,#10265b) 0,color-mix(in srgb,var(--rail-edge,#10265b) 55%,transparent) 1.6%,transparent 6%),
+      linear-gradient(180deg,rgba(0,0,0,.52) 0,rgba(0,0,0,.28) 14%,transparent 26%),
+      linear-gradient(0deg,var(--page-foot,#0d2154) 0,color-mix(in srgb,var(--page-foot,#0d2154) 70%,transparent) 5%,transparent 15%)}
+  .cap-hero .cap-head{position:absolute;z-index:2;left:calc(3.4*var(--u));right:calc(9.5*var(--u));top:calc(.9*var(--u));min-height:0;padding:0}
+  .cap-hero .cap-head h1,.cap-hero .cap-scope,.cap-hero .cap-status{text-shadow:0 2px 12px rgba(0,0,0,.65),0 0 2px rgba(0,0,0,.5)}
+  .cap-hero .cap-tag{color:#ffd76a;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.8)}
+  .kpis{position:relative;z-index:2;margin-top:calc(-1.3*var(--u))}
+  .studio-top{border-right:0}
+}
+@media (min-width:1024px){
+  .cap{gap:calc(.62*var(--u))}
+  .kpi{height:calc(7.75*var(--u))}
+  .cap-strip{height:calc(2.85*var(--u))}
+  .ovd{height:calc(19.05*var(--u))}
+  .view-overview .ovd-docs{height:calc(4.85*var(--u))}
+  .kpi-sub{line-height:1.12}
+}
+@media (max-width:767px){
+  /* phones: the title first, then the whole picture (nothing cut), fading into the page */
+  .cap-hero{display:flex;flex-direction:column-reverse;margin:-14px -14px 0}
+  .cap-hero .cap-head{position:static;padding:14px 16px 10px;background:var(--hero-bg,#0d2154)}
+  .cap-hero .cap-banner{position:relative}
+  .cap-hero .cap-banner-art{aspect-ratio:var(--nat,2.333);height:auto}
+  .cap-hero .cap-banner-art img{position:static;animation:none!important}
+  .cap-hero .cap-banner::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,var(--page-foot,#0d2154) 0,transparent 12%)}
+}
+
+/* ================================================================ THEMES: one attribute on <html>. data-theme="money" (default, owner
+   2026-10-13: "a little lighter ... let's see what money green looks like") or data-theme="navy" (the v2271 look). */
+:root{--hero-bg:#0d2154;--rail-edge:#10265b;--page-foot:#0f2457}
+:root[data-theme=money]{
+  --cap-bg:#1f6b4a;--cap-bg-2:#1a5f41;--cap-rail:#17583c;--cap-line:rgba(200,245,220,.32);
+  --cap-text:#fbfff9;--cap-muted:#e3f5ea;--cap-dim:#cfeadb;
+  --hero-bg:#123f2b;--rail-edge:#17583c;--page-foot:#1d6747;
+  --pop-blue:#62b4ff;--pop-teal:#4ff3dc;--pop-purple:#cf9dff;--pop-pink:#ff7cc8}
+:root[data-theme=money][data-view=overview] body.studio{background:radial-gradient(60vw 40vw at 62% 26%,rgba(140,230,170,.22),transparent 62%),radial-gradient(40vw 30vw at 96% 75%,rgba(255,200,61,.10),transparent 60%),radial-gradient(40vw 34vw at 30% 100%,rgba(42,138,95,.5),transparent 62%),linear-gradient(180deg,#1f6b4a 0%,#237553 45%,#1d6747 100%);background-color:#1d6747}
+:root[data-theme=money][data-view=overview]{background:#1d6747}
+@media (min-width:768px){:root[data-theme=money] .studio-top{background:linear-gradient(180deg,#1a6043,#17583c 55%,#134b33)}}
+@media (max-width:767px){
+  :root[data-theme=money] .studio-top{background:linear-gradient(180deg,#1a6043,#17583c);border-bottom-color:rgba(200,245,220,.25)}
+  :root[data-theme=money] .studio-rail{background:rgba(19,77,52,.97);border-color:rgba(200,245,220,.28)}
+}
+:root[data-theme=money] .studio-rail a svg{color:#c6f5da}
+:root[data-theme=money] .rail-pill{background:linear-gradient(180deg,#2c9a69,#1f7a52);box-shadow:0 0 0 1px rgba(170,250,205,.75),0 0 18px -2px rgba(94,227,143,.6),inset 3px 0 0 #ffc83d}
+:root[data-theme=money] .studio-tools .motion-toggle,:root[data-theme=money] .studio-tools .docs-quick{background:rgba(20,80,52,.6);border-color:rgba(200,245,220,.6);color:#f1fff6;box-shadow:0 0 12px -4px rgba(255,200,61,.6)}
+:root[data-theme=money] .kpi{background:linear-gradient(160deg,color-mix(in srgb,var(--c) 22%,#185a3d) 0%,#144d34 100%)}
+:root[data-theme=money] .kpi-blue{background:linear-gradient(160deg,#2a6fd0 0%,#1e529f 100%)}
+:root[data-theme=money] .kpi-icon{background:color-mix(in srgb,var(--c) 22%,rgba(6,36,22,.6))}
+:root[data-theme=money] .strip-facts{background:rgba(16,70,46,.82)}
+:root[data-theme=money] .strip-facts li:nth-child(1) b{color:#9ff7e0}
+:root[data-theme=money] .view-overview .panel.ovd-card{background:linear-gradient(180deg,rgba(28,104,70,.94),rgba(20,84,56,.94))}
+:root[data-theme=money] .cap-legend button{background:rgba(10,54,34,.55);border-color:rgba(200,245,220,.4)}
+:root[data-theme=money] .cap-snap{background:rgba(10,54,34,.62);border-color:rgba(200,245,220,.38)}
+:root[data-theme=money] .ovd-ring-track{stroke:rgba(6,40,24,.55)}
+:root[data-theme=money] #ovChart .chart-grid-line{stroke:rgba(220,255,235,.16)}
+:root[data-theme=money] #ovChart .chart-grid-label,:root[data-theme=money] #ovChart .chart-month{fill:#e3f5ea}
+:root[data-theme=money] #ovChart .receipt-line{stroke:#5cecff;filter:drop-shadow(0 0 5px rgba(92,236,255,.7))}
+:root[data-theme=money] #ovChart .receipt-area{fill:rgba(92,236,255,.18)}
+:root[data-theme=money] #ovChart .m-rec,:root[data-theme=money] #ovChart .ovd-dot-rec{fill:#5cecff}
+:root[data-theme=money] #ovChart .m-dot{stroke:#145a3a}
+:root[data-theme=money] .cap-key .k-rec::before{background:#5cecff;box-shadow:0 0 8px #5cecff}
+:root[data-theme=money] .cap-docs-head .icon{color:#e3f5ea}
+:root[data-theme=money][data-view=overview] .studio-foot{color:var(--cap-dim)}
+:root[data-theme=money][data-view=overview] .studio-foot a{color:#ffe08a}
+:root[data-theme=money] .view-overview .panel-title .icon{background:radial-gradient(circle at 35% 30%,#4c8dff,#2457c4)}
+@media (max-width:767px){:root[data-theme=money] .studio .studio-top .lang-switch button[aria-pressed=true]{background:#2c9a69}}
