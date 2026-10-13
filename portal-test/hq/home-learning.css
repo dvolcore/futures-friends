@@ -1,0 +1,16 @@
+/* The home-learning hub (home-learning.js, hub/HOME_LEARNING.md). Reuses the Kid Mode family list styles (kid-mode.css). */
+.hl-head{display:flex;gap:16px;align-items:flex-start}
+.hl-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.hl-uploads{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+@media (min-width:860px){.hl-uploads{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hl-upload{display:grid;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0;background:#fff}
+.hl-media{display:block;width:100%;max-height:360px;object-fit:contain;border-radius:10px;background:#F4F1EA}
+.hl-upload-body{min-width:0;overflow-wrap:anywhere}
+.hl-comments{list-style:none;margin:6px 0;padding:0;display:grid;gap:4px;font-size:.92rem}
+.hl-comments li{display:flex;gap:6px;align-items:baseline}
+.hl-react{font-size:1.1rem}
+.hl-reacts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.hl-reacts .btn{min-width:44px;min-height:44px}
+.hl-comment{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+.hl-comment .f{flex:1 1 200px}
+@media (max-width:560px){.hl-head{flex-direction:column}#hlActs .km-item{flex-wrap:wrap}#hlActs .km-item-body{flex:1 1 calc(100% - 58px)}#hlActs .hl-item-actions{flex:1 1 100%;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start}}

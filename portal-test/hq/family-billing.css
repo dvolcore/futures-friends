@@ -1,0 +1,69 @@
+/* The family's billing page (family-billing.js, hub/FAMILY_BILLING.md) and absence reporting (absence.js, hub/ABSENCES.md).
+   Mobile first (390 px). Tokens from app.css. No inline styles (CSP). Targets at least 44 px. Statements print on their own
+   (the browser's "Save as PDF"). */
+.fb,.abs{display:grid;gap:16px;min-width:0}
+.fb h2,.abs h2{font-size:1.25rem;margin:0 0 .5em}
+.fb-balance{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin:6px 0}
+.fb-balance > span:first-child{font-weight:600;color:var(--muted)}
+.fb-balance b{font-family:var(--display);font-size:2rem;color:var(--navy)}
+.fb-acc{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.fb-acc li{display:grid;gap:2px;border-top:1px solid var(--line);padding-top:8px}
+.fb-invs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fb-inv{border:1.5px solid var(--line);border-radius:12px;background:#fff;min-width:0}
+.fb-inv summary{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:52px;padding:10px 14px;cursor:pointer;list-style:none}
+.fb-inv summary::-webkit-details-marker{display:none}
+.fb-inv details[open] summary{border-bottom:1px solid var(--line)}
+.fb-inv details > :not(summary){margin:10px 14px}
+.fb-inv-h{display:grid;gap:2px;min-width:0}
+.fb-inv-h .small{overflow-wrap:anywhere}
+.fb-inv-r{display:grid;justify-items:end;gap:4px;flex:none}
+.fb-lines,.fb-table{width:100%;border-collapse:collapse;font-size:.94rem}
+.fb-lines caption{text-align:left;padding-bottom:4px}
+.fb-lines th,.fb-lines td,.fb-table th,.fb-table td{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.fb-lines td,.fb-num{text-align:right !important;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fb-lines th{font-weight:400}
+.fb-sum th,.fb-sum td{font-weight:600}
+.fb-scroll{overflow-x:auto;max-width:100%}
+.fb-pick{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:12px}
+.fb-pick .f{flex:1 1 180px}
+.fb-pay{margin:8px 14px 14px;min-height:44px}
+.fb-doc{border:1.5px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.fb-doc-h{display:grid;gap:2px;margin-bottom:10px}
+.fb-doc-h h3{margin:8px 0 0}
+.fb-dl{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:4px 14px;margin:10px 0}
+.fb-dl dt{font-weight:600} .fb-dl dd{margin:0;overflow-wrap:anywhere}
+.fb-draft{margin:8px 0}
+.msg.warn{background:var(--warn-bg);color:var(--warn)}
+.fb-foot{display:flex;flex-wrap:wrap;gap:6px}
+.fb .btn,.abs .btn{min-height:44px}
+.fb a[data-inv]{min-height:44px;display:inline-flex;align-items:center}
+
+/* absences */
+.abs-form{display:grid;gap:14px}
+.abs-checks{display:flex;flex-wrap:wrap;gap:4px 18px}
+.abs-checks label.check{margin:4px 0;min-height:44px;align-items:center}
+.abs-checks label.check input{margin-top:0;width:20px;height:20px}
+.choices.three,.choices.four{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.abs-choice{min-height:48px;align-items:center}
+.abs-dates{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.abs-rows{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.abs-mine,.abs-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;min-width:0}
+.abs-mine > span:first-child,.abs-row{display:grid;gap:2px;min-width:0}
+.abs-row a{display:grid;gap:2px;min-height:44px;text-decoration:none;color:inherit}
+.abs-row a b{color:var(--navy)}
+.abs-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.abs-cancelled{background:#FAF7F0} .abs-cancelled > span:first-child > b{text-decoration:line-through}
+.abs-settings{margin-top:12px}
+.abs-settings summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--navy)}
+.abs-chip{white-space:normal}
+
+@media (min-width:768px){
+  .fb-balance b{font-size:2.4rem}
+}
+@media print{
+  body.fb-printing .top,body.fb-printing nav.tabs,body.fb-printing .center-band,body.fb-printing .center-head,body.fb-printing #familyBilling > :not(:has(.fb-print-target)),
+  body.fb-printing #familyBilling .card > :not(.fb-print-target),body.fb-printing .fb-noprint,body.fb-printing .draft-note,body.fb-printing .skip{display:none !important}
+  body.fb-printing{background:#fff}
+  body.fb-printing .card{box-shadow:none;border:none;padding:0}
+  body.fb-printing .fb-doc{border:none;padding:0}
+}

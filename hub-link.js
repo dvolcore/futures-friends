@@ -76,6 +76,7 @@
     { id: 'family', label: 'Family portal', label_es: 'Portal para familias', sub: 'The parent dashboard', sub_es: 'El panel para familias', href: `${PREVIEW}?enter=family`, ink: 'var(--zuri-ink, #1B7541)', art: 'family', alt: 'Rose and Lumi' },
     { id: 'teacher', label: 'Teacher portal', label_es: 'Portal para maestros', sub: 'The classroom dashboard', sub_es: 'El panel del salón', href: `${PREVIEW}?enter=teacher`, ink: 'var(--booker-ink, #23589F)', art: 'teacher', alt: 'Ms. June' },
     { id: 'director', label: 'Director portal', label_es: 'Portal de dirección', sub: 'The center dashboard', sub_es: 'El panel del centro', href: `${PREVIEW}?enter=director`, ink: 'var(--bop-ink, #6B2A8E)', art: 'director', alt: 'Principal Hazel' },
+    { id: 'hq', label: 'Owner / HQ', label_es: 'Dueño / HQ', sub: 'The network dashboard', sub_es: 'El panel de la red', href: `${PREVIEW}?enter=hq`, ink: 'var(--hq-ink, #0A2B38)', art: 'director', alt: 'Principal Hazel' },
     { id: 'kids', label: 'Kids\u2019 corner', label_es: 'Rincón de los niños', sub: 'The child space, after a grown-up hands over', sub_es: 'El espacio del niño, después de que un adulto lo entrega', href: `${PREVIEW}?enter=kids`, ink: 'var(--lumi-ink, #B02F6C)', art: 'kids', alt: 'Booker, Lumi, Zuri and Bop' },
     // { id: 'investor', label: 'Investor portal', label_es: '…', sub: '…', sub_es: '…', href: 'investor/…', ink: '#0A2B38', art: 'investor', alt: '…' },
     //   (art: img/portals/portal-<art>.webp and @2x, the official character cutouts composed, never redrawn)

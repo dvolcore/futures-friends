@@ -1,0 +1,61 @@
+/* Teacher planning, room roster, substitute sheet (plan-ui.js) and the parent help desk (help-ui.js). 44px touch targets; tablet + phone. */
+.pl .btn,.hd .btn,.pl select.i,.hd select.i,.pl .choice,.hd-faq summary,.pl details>summary{min-height:44px}
+.pl .btn,.hd .btn{display:inline-flex;align-items:center;justify-content:center}
+.pl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.pl-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pl-room{display:flex;align-items:center;gap:8px}
+.pl-room select{width:auto;min-width:10rem}
+.pl-week{display:grid;gap:16px}
+@media (min-width:1100px){.pl-week{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pl-day h3{margin:0 0 4px}
+.pl-off{opacity:.85}
+.pl-sub{margin:0 0 8px}
+.pl-blocks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pl-block{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.pl-bhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pl-bhead .chip{margin-left:auto}
+.pl-block p{margin:6px 0 0}
+.pl-mark>summary,.pl-supplies>summary,.pl-settings>summary{cursor:pointer;display:flex;align-items:center;gap:8px}
+.pl-form{display:grid;gap:8px;margin-top:8px}
+.pl-status{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:0}
+.pl-status .choice{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1.5px solid var(--line);border-radius:999px}
+.pl-dayform{display:grid;gap:8px;margin-top:12px}
+.pl-settings h4{margin:18px 0 4px}
+.pl-pace input{width:6rem}
+.pl-roster{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:16px}
+@media (min-width:700px){.pl-roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.pl-roster{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pl-roster>.card{margin-top:0}
+.pl-kidhead{display:flex;gap:12px;align-items:center}
+.pl-kidhead h3{margin:0}
+.pl-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;background:#EEF1F2}
+.pl-initial{display:inline-flex;align-items:center;justify-content:center;font:600 1.5rem var(--display);color:var(--navy)}
+.pl-nophoto{display:block}
+.pl-alerts,.pl-pickup{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.pl-alert{border-left:4px solid var(--line);padding:4px 8px;background:#FAFAF7}
+.pl-alert.bad{border-color:var(--bad);background:var(--bad-bg)}
+.pl-alert.warn{border-color:var(--warn);background:var(--warn-bg)}
+.pl-alert.gold{border-color:var(--gold)}
+.pl-never{margin-top:8px}
+.pl-h{margin:16px 0 0}
+.hd-faq{border-top:1px solid var(--line);padding:4px 0}
+.hd-faq summary{cursor:pointer;display:flex;align-items:center;font-weight:600}
+.hd-filter{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.hd-thread{list-style:none;margin:12px 0;padding:0;display:grid;gap:10px}
+.hd-msg{border:1px solid var(--line);border-radius:10px;padding:8px 12px;max-width:44rem}
+.hd-msg p{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.hd-center{background:#F2F7F8;justify-self:end}
+.hd-assign{margin-top:16px;max-width:24rem}
+.hd .list li,.pl .list li{flex-wrap:wrap}
+@media (max-width:600px){.pl-bar .btn,.hd-filter .btn{flex:1 1 auto}.pl-room{width:100%}.pl-room select{flex:1}}
+@media print{
+  .top,nav.tabs,.center-band,.no-print,.pl-mark,#live,.draft-note{display:none !important}
+  .pl-week{grid-template-columns:1fr !important}
+  .card{box-shadow:none !important;border:1px solid #999 !important;break-inside:avoid}
+  .pl-day{break-inside:auto}
+  .pl-block{break-inside:avoid}
+  .pl-dayform textarea{border:1px solid #bbb;min-height:3em}
+  .pl-roster{grid-template-columns:repeat(2,1fr) !important}
+  .pl-kid{break-inside:avoid}
+  body{background:#fff}
+}

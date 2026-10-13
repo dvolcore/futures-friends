@@ -137,7 +137,10 @@ const ROLES = {
   family: { dash: '#fdKpis', tiles: '#fdKpis a[data-drawer], #fdKpis .fd-kpi', copy: '' },
   teacher: { dash: '#sv2Kpis', tiles: '#sv2Kpis .ffs-kpi', copy: 'staff/' },
   director: { dash: '#sv2Kpis', tiles: '#sv2Kpis .ffs-kpi', copy: 'staff/' },
+  // the owner's network portal (/hq, its own copy): greeted "Hello, Ralph"; break-glass shows its form and explains itself on send
+  hq: { dash: '#hq .ffs-kpi', tiles: '#hq .ffs-kpi', copy: 'hq/', home: 'hq', links: '/portal-test/hq/hq', more: /\/hq\?/ },
 };
+const homeRe = (R) => new RegExp(`/portal-test/${R.copy}${R.home || `c/${SLUG}/home`}`);
 // Owner 2026-10-12: no credentials and no "test" labels in the pages (they stay unindexed); the center reads "Futures Friends Learning Center".
 const LABELS = /\bTEST\b|Demo Center|Demo preview|Test version|fake demo|nothing is saved/;
 
@@ -190,10 +193,11 @@ for (const [role, R] of Object.entries(ROLES)) {
         await page.click('#signinForm button[type=submit]');
       } else await page.click(`#ftRoles [data-ft-role="${role}"]`);
       await page.waitForSelector(R.dash, { timeout: 30000 });
-      assert.match(page.url(), new RegExp(`/portal-test/${R.copy}c/${SLUG}/home`), `${role} lands on the ${R.copy || 'parents\''} copy`);
+      assert.match(page.url(), homeRe(R), `${role} lands on the ${R.copy || 'parents\''} copy`);
       await okPage(`${role} dashboard`);
       // each role is greeted as itself (the director is Dana, never the parent Pat)
       if (role === 'director') await page.waitForFunction(() => /Dana/.test(document.querySelector('#main').innerText) && !/Good (morning|afternoon|evening), Pat/.test(document.querySelector('#main').innerText), null, { timeout: 8000 });
+      if (role === 'hq') await page.waitForFunction(() => /Hello, Ralph/.test(document.querySelector('#main').innerText), null, { timeout: 8000 });
       if (width === 1440) assert.deepEqual(await axeRun(), [], `axe on the ${role} dashboard`);
       const home = page.url();
 
@@ -209,7 +213,7 @@ for (const [role, R] of Object.entries(ROLES)) {
       }
       // every view and tab (?view= / ?tab=), then every page they link to: no dead end
       const links = new Set(), visited = new Set();
-      const collect = async () => { for (const a of await page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')))) if (a.includes(`/portal-test/${R.copy}c/${SLUG}/`)) links.add(a); };
+      const collect = async () => { for (const a of await page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')))) if (a.includes(R.links || `/portal-test/${R.copy}c/${SLUG}/`)) links.add(a); };
       await page.goto(home); await page.waitForSelector(R.dash); await collect();
       for (let round = 0; round < 2; round++) {
         for (const href of [...links]) {
@@ -219,11 +223,23 @@ for (const [role, R] of Object.entries(ROLES)) {
           await page.waitForLoadState('networkidle');
           await page.waitForTimeout(200);
           await okPage(`${role} ${href}`);
-          if (/\/home\?/.test(href)) await collect();
+          if ((R.more || /\/home\?/).test(href)) await collect();
         }
       }
       assert.ok(visited.size >= 10, `${role}: ${visited.size} views, tabs and pages`);
 
+      if (role === 'hq') {
+        // break-glass: the request form shows; sending it explains that it needs the live Hub (never an error code)
+        await page.goto(`${home.split('?')[0]}?view=breakglass&tab=request`); await page.waitForSelector('#hqBgOpen');
+        await page.click('#hqBgOpen');
+        await page.selectOption('#hqBgForm select[name=center]', { index: 1 }).catch(() => {});
+        await page.fill('#hqBgForm input[name=ticket]', 'HQ-1234');
+        await page.fill('#hqBgForm textarea[name=reason]', 'The director asked for help correcting a child record during the morning check-in.');
+        await page.check('#hqBgForm input[name=scope] >> nth=0');
+        await page.click('#hqBgSend'); await page.click('#hqBgConfirm [data-yes]');
+        await page.waitForFunction(() => /not available in the preview/.test(document.querySelector('#hqBgForm').innerText), null, { timeout: 8000 });
+        await okPage('hq break-glass');
+      }
       if (role === 'family') {
         // a write does nothing, silently (no error, no note)
         const inc = [...visited].find((h) => /\/incident\?id=/.test(h));
@@ -271,7 +287,7 @@ for (const [role, R] of Object.entries(ROLES)) {
       const other = role === 'family' ? 'teacher' : 'family';
       await page.click(`#ftSwitch [data-ft-role="${other}"]`);
       await page.waitForSelector(ROLES[other].dash, { timeout: 30000 });
-      assert.match(page.url(), new RegExp(`/portal-test/${ROLES[other].copy}c/${SLUG}/home`));
+      assert.match(page.url(), homeRe(ROLES[other]));
       // ?enter=<role> (the website's links) brings this role back
       await page.goto(`${BASE}/c/${SLUG}/?enter=${role}`); await page.waitForSelector(R.dash, { timeout: 30000 });
 
@@ -319,14 +335,14 @@ test('the website: the Sign in / Portals menu opens every portal (and each logo 
     assert.ok(!/portal-test/.test(page.url()), 'Home stays Home');
     if (!live) {
       // the "Sign in / Portals" menu: every portal, one tap (FFHubLink.menu is the one list to extend, e.g. an Investor portal)
-      for (const [id, dash, copy] of [['family', '#fdKpis', ''], ['teacher', '#sv2Kpis', 'staff/'], ['director', '#sv2Kpis', 'staff/'], ['kids', '#kcStart', 'kids/']]) {
+      for (const [id, dash, copy] of [['family', '#fdKpis', ''], ['teacher', '#sv2Kpis', 'staff/'], ['director', '#sv2Kpis', 'staff/'], ['hq', '#hq .ffs-kpi', 'hq/'], ['kids', '#kcStart', 'kids/']]) {
         await page.goto(`${ORIGIN}/futures-friends/`); await page.waitForSelector('a.ffw-signin', { state: 'attached' }); await page.waitForTimeout(300);
         await page.evaluate(() => document.querySelector('a.ffw-signin').click());
         await page.waitForSelector('#ffPortals:not([hidden])');
-        assert.deepEqual(await page.$$eval('#ffPortals a', (as) => as.map((a) => a.dataset.portal)), ['family', 'teacher', 'director', 'kids']);
+        assert.deepEqual(await page.$$eval('#ffPortals a', (as) => as.map((a) => a.dataset.portal)), ['family', 'teacher', 'director', 'hq', 'kids']);
         await page.click(`#ffPortals a[data-portal="${id}"]`);
         await page.waitForSelector(dash, { timeout: 30000 });
-        assert.match(page.url(), new RegExp(`/portal-test/${copy}c/test-family-demo-center/${id === 'kids' ? 'kids' : 'home'}`), id);
+        assert.match(page.url(), new RegExp(id === 'hq' ? '/portal-test/hq/hq' : `/portal-test/${copy}c/test-family-demo-center/${id === 'kids' ? 'kids' : 'home'}`), id);
         // and back: the logo opens the website home
         if (id !== 'kids') { await page.click('header .brand'); await page.waitForURL(/\/futures-friends\/(\?.*)?$/); }
       }

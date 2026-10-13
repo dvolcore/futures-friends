@@ -25,14 +25,16 @@
     location.replace(url);
   }
   var LEAVING = false;   // a page that is going to another copy: the visible parts are not mounted
-  var COPY = { family: '', teacher: '/staff', director: '/staff' };
+  var COPY = { family: '', teacher: '/staff', director: '/staff', hq: '/hq' };
   // pages a separate copy serves whatever the role (the Kids' corner is recorded from its own front-end)
-  var PATH_COPY = [[/^\/c\/[a-z0-9-]+\/kids\/?$/, '/kids']];
+  var PATH_COPY = [[/^\/c\/[a-z0-9-]+\/kids\/?$/, '/kids'], [/^\/hq(?:\/content)?\/?$/, '/hq']];   // the owner's network portal: its own copy
   function copyFor(role, path) {
     for (var i = 0; i < PATH_COPY.length; i++) if (PATH_COPY[i][0].test(path)) return PATH_COPY[i][1];
     return COPY[role] !== undefined ? COPY[role] : '';
   }
-  var START = { family: '/home', teacher: '/home?room=threes', director: '/home' };
+  var START = { family: '/home', teacher: '/home?room=threes', director: '/home', hq: '' };
+  // where each role lands (HQ: the network portal, outside any one center)
+  function homeOf(r) { return r === 'hq' ? '/hq' : '/c/' + SLUG + START[r]; }
   var ORIGIN = location.origin;
   var SB_PATH = BASE + '/sb';
   var SB = ORIGIN + SB_PATH;
@@ -55,11 +57,11 @@
     if (u.charAt(0) !== '/' || u.charAt(1) === '/' || u.indexOf(BASE + '/') === 0) return u;
     var path = u.split(/[?#]/)[0];
     // the hub's own home page, "Start your center" and Futures at Home are not part of the test: they open the demo center's sign-in page
-    if (path === '/' || path === '/start' || path === '/at-home' || path === '/hq') u = SIGNIN;
+    if (path === '/' || path === '/start' || path === '/at-home' || (/^\/hq(?:\/content)?$/.test(path) && SUB !== '/hq' && sessionRole() !== 'hq')) u = SIGNIN;
     return BASE + u;
   }
   var q = new URLSearchParams(location.search), back = q.get('p');   // a deep link that came through the site's 404.html
-  var subOf = back && back.match(/^\/(staff|kids)(\/.*)$/);
+  var subOf = back && back.match(/^\/(staff|kids|hq)(\/.*)$/);
   if (subOf && '/' + subOf[1] !== SUB) hop(ROOT + '/' + subOf[1] + '/?p=' + encodeURIComponent(subOf[2]) + location.hash);   // another copy's page
   else if (back && back.charAt(0) === '/' && back.charAt(1) !== '/') history.replaceState(null, '', toReal(subOf ? subOf[2] : back));
   else if (strip(location.pathname) === '/' || strip(location.pathname) === '') history.replaceState(null, '', BASE + SIGNIN + '/' + location.hash);
@@ -71,7 +73,7 @@
       // a page another copy serves (another role's dashboard, the Kids' corner): open it there
       if (typeof u === 'string' && u.charAt(0) === '/') {
         var v = u.indexOf(BASE + '/') === 0 ? u.slice(BASE.length) : u;   // the app's own path, with or without this copy's folder
-        if (/^\/c\/[a-z0-9-]+\/./.test(v)) {
+        if (/^\/c\/[a-z0-9-]+\/./.test(v) || /^\/hq(?:\/content)?\/?(?:[?#]|$)/.test(v)) {
           var want = copyFor(sessionRole() || 'family', v.split(/[?#]/)[0]);
           if (want !== SUB) { location.assign(ROOT + want + v); return; }
         }
@@ -86,6 +88,7 @@
   (function () {
     var r = sessionRole(), path = strip(location.pathname);
     if (/^\/c\/[a-z0-9-]+\/?$/.test(path)) return;   // the sign-in page: any copy
+    if (/^\/hq(?:\/content)?\/?$/.test(path) && r && r !== 'hq') { hop(ROOT + COPY[r] + homeOf(r)); return; }
     var want = copyFor(r || 'family', path.replace(/\/$/, ''));
     if ((r || want) && want !== SUB) hop(ROOT + want + path + location.search + location.hash);
   })();
@@ -112,7 +115,7 @@
   var realFetch = W.fetch.bind(W);
   var FIX = { entries: [], silent: [] }, BY = {}, LOGINS = [], USERS = {};
   // who each role signs in as (no credentials in the test copy: any sign-in, or one tap, enters)
-  var PERSONA = { family: 'pat@example.com', teacher: 'tess@example.com', director: 'director@example.com' };
+  var PERSONA = { family: 'pat@example.com', teacher: 'tess@example.com', director: 'director@example.com', hq: 'owner@example.com' };
   var ready = Promise.all([
     realFetch(BASE + '/fixtures.json').then(function (r) { return r.json(); }).then(function (f) {
       FIX = f;
@@ -159,7 +162,7 @@
     if (!NEAR) {
       NEAR = {};
       FIX.entries.forEach(function (e) {
-        var mm = e.k.match(/^(?:(family|teacher|director) )?(\S+) ([^?]*)\?(\S*) ?(.*)$/);
+        var mm = e.k.match(/^(?:(family|teacher|director|hq) )?(\S+) ([^?]*)\?(\S*) ?(.*)$/);
         if (!mm) return;
         var id = (mm[1] || 'family') + ' ' + mm[2] + ' ' + idOf(mm[3], mm[4], mm[5]);
         if (!NEAR[id]) NEAR[id] = e;
@@ -214,7 +217,7 @@
   }
   function userFor(email) {
     var role = roleOf(email), u = USERS[role] || (FIX.users && (FIX.users[role] || FIX.users.family)) || {};
-    var director = role === 'director';
+    var director = role === 'director' || role === 'hq';   // two-step roles (the owner too)
     return { id: u.id || FIX.userId, aud: 'authenticated', role: 'authenticated', email: email, email_confirmed_at: '2026-10-01T12:00:00Z',
       phone: '', app_metadata: { provider: 'email', providers: ['email'], ft_role: role }, user_metadata: { full_name: u.fullName || FIX.fullName || 'TEST Parent Pat' },
       identities: [], factors: director ? [{ id: 'portal-test-totp', factor_type: 'totp', status: 'verified', friendly_name: 'Test version (skipped)', created_at: '2026-10-01T12:00:00Z', updated_at: '2026-10-01T12:00:00Z' }] : [], created_at: '2026-10-01T12:00:00Z', updated_at: '2026-10-12T12:00:00Z', is_anonymous: false };
@@ -222,7 +225,8 @@
   function sessionFor(email) {
     var now = Math.floor(Date.now() / 1000), life = 7 * 86400, user = userFor(email), role = roleOf(email);
     // directors sign in with two steps in the real Hub; the test version skips the second step (the banner says so)
-    var aal = role === 'director' ? 'aal2' : 'aal1', amr = role === 'director' ? [{ method: 'totp', timestamp: now }, { method: 'password', timestamp: now }] : [{ method: 'password', timestamp: now }];
+    var twoStep = role === 'director' || role === 'hq';
+    var aal = twoStep ? 'aal2' : 'aal1', amr = twoStep ? [{ method: 'totp', timestamp: now }, { method: 'password', timestamp: now }] : [{ method: 'password', timestamp: now }];
     var jwt = b64u(JSON.stringify({ alg: 'none', typ: 'JWT' })) + '.' + b64u(JSON.stringify({ sub: user.id, email: email, role: 'authenticated',
       aud: 'authenticated', aal: aal, amr: amr, session_id: 'portal-test', iat: now, exp: now + life,
       is_anonymous: false })) + '.portal-test';
@@ -245,7 +249,7 @@
         var r0 = (known && known.role) || PENDING || 'family';
         var email = known ? typed : PERSONA[r0];
         ROLE = r0;
-        if (COPY[ROLE] !== SUB) goCopy = ROOT + COPY[ROLE] + '/c/' + SLUG + START[ROLE];
+        if (COPY[ROLE] !== SUB) goCopy = ROOT + COPY[ROLE] + homeOf(ROLE);
         return Promise.resolve(json(sessionFor(email)));
       }
       if (grant === 'refresh_token') {
@@ -365,6 +369,9 @@
     if (path.indexOf('/realtime/') === 0 || path.indexOf('/functions/') === 0) return Promise.resolve(json({}));
     var rpc = path.match(/^\/rest\/v1\/rpc\/([a-z0-9_]+)$/);
     if (rpc && rpc[1] === 'my_preferred_language') return Promise.resolve(json(JSON.stringify(lang())));
+    if (rpc && /^support_grant_(request|revoke)$/.test(rpc[1])) {   // break-glass needs the live Hub: the form shows, the request explains itself
+      return Promise.resolve(json({ message: lang() === 'es' ? 'El acceso de emergencia no est\u00e1 disponible en la vista previa.' : 'Break-glass access is not available in the preview.' }, 400));
+    }
     if (rpc && /^moment_share_(create|revoke)$/.test(rpc[1])) {   // share links need the live hub: a friendly note, never an error code
       return Promise.resolve(json({ message: lang() === 'es' ? 'Los enlaces para compartir funcionan en el Futures Hub de su centro.' : 'Share links work in your center’s own Futures Hub.' }, 400));
     }
@@ -480,10 +487,10 @@
   // ---- the visible parts: one-tap entry per role, "View as" switcher, "Coming soon" panels -------------------------------------------
   // Owner 2026-10-12: no credentials, no "test" labels. Writes do nothing, silently. The pages stay out of search (noindex, robots).
   var TXT = {
-    en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', kids: 'Kids\u2019 corner', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
+    en: { choose: 'Choose your view', family: 'Family', teacher: 'Teacher', director: 'Director', kids: 'Kids\u2019 corner', hq: 'Owner / HQ', hqSub: 'Network dashboard', famSub: 'Parent dashboard', teaSub: 'Classroom dashboard',
       dirSub: 'Center dashboard', kidSub: 'The child space', viewAs: 'View as', website: 'Back to the website', soonH: 'Coming soon', soonP: 'This part of the Futures Hub is on its way.',
       back: 'Back to the dashboard', site: 'Futures Friends website', startOver: 'Start over', privH: 'For licensed centers', privP: 'The curriculum and the library open for licensed centers.' },
-    es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', kids: 'Rincón de los niños', famSub: 'Panel para familias', teaSub: 'Panel del salón',
+    es: { choose: 'Elige tu vista', family: 'Familia', teacher: 'Maestro', director: 'Dirección', kids: 'Rincón de los niños', hq: 'Dueño / HQ', hqSub: 'Panel de la red', famSub: 'Panel para familias', teaSub: 'Panel del salón',
       dirSub: 'Panel del centro', kidSub: 'El espacio del niño', viewAs: 'Ver como', website: 'Volver al sitio web', soonH: 'Próximamente', soonP: 'Esta parte de Futures Hub está en camino.',
       back: 'Volver al panel', site: 'Sitio web de Futures Friends', startOver: 'Empezar de nuevo', privH: 'Para centros con licencia', privP: 'El currículo y la biblioteca se abren para los centros con licencia.' },
   };
@@ -502,6 +509,7 @@
     return ready.then(function () {
       ROLE = role;
       try { localStorage.setItem('ff-hub-web-auth', JSON.stringify(sessionFor(PERSONA[role]))); } catch (e) { /* private mode: the sign-in form still works */ }
+      if (role === 'hq') { location.assign(ROOT + COPY.hq + '/hq'); return; }
       var path = '/c/' + SLUG + (kids ? '/kids' : '/home');
       location.assign(ROOT + copyFor(role, path) + path + (kids ? '?kid=demo-mia' : START[role].replace(/^\/home/, '')));
     });
@@ -514,7 +522,7 @@
   if (COPY[wantEnter] !== undefined || wantEnter === 'kids') { enter(wantEnter); }
 
   var CSS = '#ftRoles{margin:0 0 14px}#ftRoles h2{margin:0 0 8px;font:600 15px/1.3 Fredoka,Poppins,system-ui,sans-serif;color:#0A2B38}'
-    + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media (max-width:520px){#ftRoles .ft-row{grid-template-columns:repeat(2,1fr)}}'
+    + '#ftRoles .ft-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}@media (max-width:520px){#ftRoles .ft-row{grid-template-columns:repeat(2,1fr)}}'
     + '#ftRoles button img{display:block;height:64px;width:auto;max-width:100%;object-fit:contain;margin:0 auto 4px}'
     + '#ftRoles button{min-height:64px;padding:8px 6px;border:2px solid #0A2B38;border-radius:14px;background:#fff;color:#0A2B38;cursor:pointer;font:600 16px/1.15 Poppins,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}'
     + '#ftRoles button small{font:400 11px/1.2 Poppins,system-ui,sans-serif;color:#33505C}'
@@ -538,11 +546,12 @@
     var h = D.createElement('section'); h.id = 'ftRoles'; h.setAttribute('aria-labelledby', 'ftRolesH');
     h.innerHTML = '<h2 id="ftRolesH"></h2><div class="ft-row"></div>';
     h.querySelector('h2').textContent = tx('choose');
-    // the official character cutouts, composed (img/portals on the website): Rose and Lumi, Ms. June, Principal Hazel, the four friends
-    [['family', 'famSub'], ['teacher', 'teaSub'], ['director', 'dirSub'], ['kids', 'kidSub']].forEach(function (x) {
+    // the official character cutouts, composed (img/portals on the website): Rose and Lumi, Ms. June, Principal Hazel, the four friends;
+    // the owner's portal (HQ) is led by Principal Hazel too
+    [['family', 'famSub'], ['teacher', 'teaSub'], ['director', 'dirSub'], ['hq', 'hqSub', 'director'], ['kids', 'kidSub']].forEach(function (x) {
       var bt = D.createElement('button'); bt.type = 'button'; bt.setAttribute('data-ft-role', x[0]);
       bt.setAttribute('aria-pressed', String(PENDING === x[0]));
-      var art = ORIGIN + SITE + 'img/portals/portal-' + x[0];
+      var art = ORIGIN + SITE + 'img/portals/portal-' + (x[2] || x[0]);
       bt.innerHTML = '<img alt="" src="' + art + '.webp" srcset="' + art + '.webp 1x, ' + art + '@2x.webp 2x" height="64"><span></span><small></small>';
       bt.querySelector('span').textContent = tx(x[0]); bt.querySelector('small').textContent = tx(x[1]);
       bt.onclick = function () { enter(x[0]); };
@@ -557,8 +566,8 @@
     d.innerHTML = '<summary></summary><div class="ft-menu"></div>';
     d.querySelector('summary').textContent = tx('viewAs');
     var menu = d.querySelector('.ft-menu');
-    ['family', 'teacher', 'director'].forEach(function (r) {
-      var a = D.createElement('a'); a.href = ROOT + COPY[r] + '/c/' + SLUG + START[r]; a.textContent = tx(r); a.setAttribute('data-ft-role', r);
+    ['family', 'teacher', 'director', 'hq'].forEach(function (r) {
+      var a = D.createElement('a'); a.href = ROOT + COPY[r] + homeOf(r); a.textContent = tx(r); a.setAttribute('data-ft-role', r);
       if (r === roleNow()) a.setAttribute('aria-current', 'true');
       a.onclick = function (e) { e.preventDefault(); enter(r); };
       menu.appendChild(a);
@@ -574,7 +583,7 @@
   // parts not built yet (the Kids' corner) and any page the copy does not have: a friendly "Coming soon", never a dead end
   function soon(path, kind) {
     var m = el('main'); if (!m) return;
-    var home = ROOT + COPY[roleNow()] + '/c/' + SLUG + START[roleNow()];
+    var home = ROOT + COPY[roleNow()] + homeOf(roleNow());
     m.innerHTML = '<section id="ftSoon" aria-labelledby="ftSoonH"><h1 id="ftSoonH"></h1><p></p><a></a></section>';
     m.querySelector('h1').textContent = tx(kind === 'private' ? 'privH' : 'soonH'); m.querySelector('p').textContent = tx(kind === 'private' ? 'privP' : 'soonP');
     var a = m.querySelector('a'); a.href = home; a.textContent = tx('back');
