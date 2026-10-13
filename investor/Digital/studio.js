@@ -240,7 +240,7 @@
       const ph = phoneMq.matches;
       W = Math.max(280, Math.round(chart.parentElement.clientWidth || 960));
       H = o.height ? o.height(W, ph, chart.parentElement) : (ph ? 340 : Math.round(Math.min(440, Math.max(380, W * 0.46))));
-      L = ph ? 50 : 64; RGT = W - 10; TOP = 18; BOT = H - 40;
+      L = ph ? 50 : 64; RGT = W - 10; TOP = o.bottomPad ? 10 : 18; BOT = H - (o.bottomPad || 40);
       chart.setAttribute('viewBox', `0 0 ${W} ${H}`);
       chart.classList.toggle('chart-narrow', (RGT - L) / 12 < 44);
       const sets = [rows, ...(o.envelope ? o.envelope(rows) : [])];
@@ -253,7 +253,7 @@
         grid.append(svg('line', { x1: L, x2: RGT, y1: y(v).toFixed(2), y2: y(v).toFixed(2), class: v === 0 ? 'chart-zero' : 'chart-grid-line' }));
         if (v >= 0) { const lab = svg('text', { x: L - 12, y: (y(v) + 5).toFixed(2), class: 'chart-grid-label', 'text-anchor': 'end' }); lab.textContent = v === 0 ? '$0' : '$' + Math.round(v / 1000) + 'k'; grid.append(lab); }
       }
-      rows.forEach((r, i) => { const lab = svg('text', { x: x(i).toFixed(2), y: BOT + 26, class: `chart-month${r.month % 2 ? '' : ' m-even'}`, 'text-anchor': 'middle' }); lab.textContent = o.monthLabel ? o.monthLabel(r.month) : 'M' + String(r.month).padStart(2, '0'); grid.append(lab); });
+      rows.forEach((r, i) => { const lab = svg('text', { x: x(i).toFixed(2), y: BOT + (o.bottomPad ? 20 : 26), class: `chart-month${r.month % 2 ? '' : ' m-even'}`, 'text-anchor': 'middle' }); lab.textContent = o.monthLabel ? o.monthLabel(r.month) : 'M' + String(r.month).padStart(2, '0'); grid.append(lab); });
       const bars = part('bars'); bars.replaceChildren();
       rows.forEach((r, i) => { const b = svg('rect', { rx: 6, class: 'gap-bar' }); b.style.setProperty('--i', i); bars.append(b); });
       for (const k of ['rec', 'spend']) part(k).setAttribute('pathLength', '1');
@@ -492,7 +492,7 @@
   // the banner drifts slowly under a soft light sweep. Reduce Motion, the site's motion switch, "Pause motion" and ?reveal=off:
   // everything static and final.
   const ov = (() => {
-    const root = $('#ovd'); if (!root) return { build() {} };
+    const root = $('#cc'); if (!root) return { build() {} };
     const cards = $$('[data-ov-card]', root);
     const armed = motionOn() && params().get('reveal') !== 'off';
     if (armed) R.classList.add('ovd-armed');
@@ -512,28 +512,49 @@
     const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), onSelect: (k) => { if (ready) hl(k); },
       colors: { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' } });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
-      height: (w, ph) => (ph ? 200 : Math.round(Math.min(200, Math.max(120, w * 0.255)))),
+      height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.232, 9.6 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
       out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
 
-    // ---- the banner. ONE constant picks the art: data-scene on #ccScene (index.html). Each scene names its file and the frame that
-    // keeps every character whole: ratio = the banner's width / height on wider screens, y = where the crop sits (object-position).
-    // Phones show the whole picture (no crop at all). A file whose own ratio matches the banner simply fills it edge to edge.
-    // wide-1: the long table, everyone seated in a row, Principal Hazel at the felt chart (owner-approved 2026-10-13). The tightest
-    //   crop that keeps every head and ear whole is 4.7:1 (the mockup's banner is 4.9:1; at 4.9 the elephant's chin is cut).
-    // wide-2: the round table (heads span more height): 4.3:1 is its tightest whole-character crop.
-    const SCENES = { 'wide-1': { file: 'investor-meeting-wide-1', ratio: 4.7, y: 26.7 }, 'wide-2': { file: 'investor-meeting-wide-2', ratio: 4.3, y: 15.6 } };
+    // ---- the banner. ONE constant picks the art: data-scene on #ccScene (index.html). Each scene names its file and the band every
+    // character occupies (top of the highest ear .. the lowest chin, as fractions of the picture's height, measured on the file). The
+    // banner keeps the mockup's 4.87:1 strip; the picture is framed so the whole band shows with a margin. When the band needs more
+    // height than the strip gives at full width, the picture narrows a little (nobody is ever cut at the sides) and a blurred copy of
+    // itself fills the two slim edges. Phones show the whole picture. A file composed for the strip (its band fits) fills it edge to edge.
+    const BANNER = 4.87, AIR = 0.03;
+    // glam-1 (default): the gold-lit boardroom, all ten friends in one band, Principal Hazel at the glowing dashboard wall; deer ears and
+    //   giraffe ossicones are the top-most points (16.5%), the lowest chins 58.5%: it fills the 4.87:1 strip edge to edge.
+    // glam-2: the same room, the high-five (15% .. 58.5%). wide-1 / wide-2: the earlier long-table and round-table meetings.
+    const SCENES = {
+      'glam-1': { file: 'investor-meeting-glam-1', band: [0.165, 0.585] }, 'glam-2': { file: 'investor-meeting-glam-2', band: [0.15, 0.585] },
+      'wide-1': { file: 'investor-meeting-wide-1', band: [0.165, 0.61] }, 'wide-2': { file: 'investor-meeting-wide-2', band: [0.077, 0.612] }
+    };
     const scene = (() => {
       const fig = $('#ccScene'), img = $('#ccSceneImg');
       if (!fig || !img) return {};
-      const cfg = SCENES[fig.dataset.scene] || SCENES['wide-1'];
-      fig.style.setProperty('--ar', String(cfg.ratio));
-      fig.style.setProperty('--fy', `${cfg.y}%`);
+      const cfg = SCENES[fig.dataset.scene] || SCENES['glam-1'];
+      const art = $('.cap-banner-art', fig);
+      let nat0 = 0;
+      const frame = (nat) => {
+        nat0 = nat || nat0;
+        // the strip's real shape (4.87:1, or lower when a short screen caps its height)
+        const box = art.clientWidth && art.clientHeight ? art.clientWidth / art.clientHeight : BANNER;
+        const top = Math.max(0, cfg.band[0] - AIR), v = Math.min(1, cfg.band[1] + AIR - top);
+        const w = Math.min(1, nat0 / (v * box));               // the picture's width in the strip (1 = edge to edge)
+        const shown = Math.min(1, nat0 / (box * w));            // the fraction of its height the strip shows at that width
+        const fy = shown >= 1 ? 50 : Math.min(100, Math.max(0, top / (1 - shown) * 100));
+        fig.style.setProperty('--ar', String(BANNER));
+        fig.style.setProperty('--iw', `${(w * 100).toFixed(3)}%`);
+        fig.style.setProperty('--fy', `${fy.toFixed(2)}%`);
+        fig.style.setProperty('--nat', String(nat0));
+      };
+      if (typeof ResizeObserver === 'function') new ResizeObserver(() => frame()).observe(art);
+      frame(Number(img.getAttribute('width')) / Number(img.getAttribute('height')));
       img.sizes = '(max-width: 767px) 100vw, 88vw';
       img.srcset = `assets/${cfg.file}-1200.webp 1200w, assets/${cfg.file}.webp 2400w`;
       img.src = `assets/${cfg.file}.webp`;
-      const loaded = () => { fig.classList.add('ready'); fig.style.setProperty('--nat', String(img.naturalWidth / img.naturalHeight)); };
+      const loaded = () => { frame(img.naturalWidth / img.naturalHeight); fig.style.setProperty('--scene', `url("${img.currentSrc || img.src}")`); fig.classList.add('ready'); };
       if (img.complete && img.naturalWidth) loaded(); else img.addEventListener('load', loaded, { once: true });
       return { cfg };
     })();

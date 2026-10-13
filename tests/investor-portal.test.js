@@ -736,7 +736,10 @@ test('capital command center at 1280 x 853: the mockup\'s layout (rail, title ro
   assert.ok(r['.cap-head'].b <= col.t && col.t <= 95, `banner directly under the title (${col.t})`);
   for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - col.l) <= 2 && Math.abs(r[s].r - col.r) <= 2, `${s} spans the content width`);
   const ratio = col.w / col.h;
-  assert.ok(ratio > 4.3 && ratio < 5.2, `a wide banner like the mockup's (~4.9:1): ${ratio.toFixed(2)}`);
+  assert.ok(ratio > 4.6 && ratio < 5.2, `a wide banner like the mockup's (~4.9:1): ${ratio.toFixed(2)}`);
+  // ONE screen like the mockup: the footer line ends inside 853 px
+  assert.ok(r['.cap-foot'].b <= 853, `the whole Overview fits the first screen (footer ends at ${r['.cap-foot'].b})`);
+  for (const [s, h, tol] of [['#ccScene', 232, 12], ['#kpis', 102, 12], ['.cap-strip', 38, 6], ['.ovd-funding', 248, 12], ['.ovd-docs', 68, 10]]) assert.ok(Math.abs(r[s].h - h) <= tol, `${s} is about the mockup's ${h} px (${r[s].h})`);
   assert.ok(col.b <= r['#kpis'].t && r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'banner, tiles, strip, panels');
   assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
   assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
@@ -746,7 +749,7 @@ test('capital command center at 1280 x 853: the mockup\'s layout (rail, title ro
   assert.ok(r['#kpis'].t < 853 && r['.ovd-funding'].t < 853, 'the tiles and the panels start on the first screen');
   assert.equal(await pg.$$eval('.cap-doc', (d) => new Set(d.map((x) => Math.round(x.getBoundingClientRect().top))).size), 1, 'six document tiles in one row');
   // dark royal navy with colour: the page, the gold banner frame, a different neon border per tile
-  assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(16, 37, 92\)/);
+  assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(13, 33, 84\)/);
   assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 5, 'five tile colours');
   assert.equal(await pg.evaluate(() => scrollY), 0);
   assert.deepEqual(errors, []);
@@ -756,29 +759,35 @@ test('capital command center at 1280 x 853: the mockup\'s layout (rail, title ro
 test('the banner never crops a character: one constant picks the art and its frame; desktop crops only empty wall and table; phones show the whole picture', async (t) => {
   const h = read(OVERVIEW), js = read('investor/Digital/studio.js');
   assert.equal((h.match(/data-scene="/g) || []).length, 1, 'one constant: data-scene on the banner');
-  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="wide-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
+  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="glam-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
   assert.doesNotMatch(h, /investor-meeting/, 'the file is named once, in the scene table');
-  assert.match(js, /'wide-1': \{ file: 'investor-meeting-wide-1', ratio: 4\.7, y: 26\.7 \}, 'wide-2': \{ file: 'investor-meeting-wide-2', ratio: 4\.3, y: 15\.6 \}/);
-  for (const f of ['investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 400000, `${f}${v}.webp is ${st.size} bytes`); }
+  assert.match(js, /const BANNER = 4\.87, AIR = 0\.03;/);
+  assert.match(js, /'glam-1': \{ file: 'investor-meeting-glam-1', band: \[0\.165, 0\.585\] \}, 'glam-2': \{ file: 'investor-meeting-glam-2', band: \[0\.15, 0\.585\] \}/);
+  assert.match(js, /'wide-1': \{ file: 'investor-meeting-wide-1', band: \[0\.165, 0\.61\] \}, 'wide-2': \{ file: 'investor-meeting-wide-2', band: \[0\.077, 0\.612\] \}/);
+  for (const f of ['investor-meeting-glam-1', 'investor-meeting-glam-2', 'investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 420000, `${f}${v}.webp is ${st.size} bytes`); }
   if (skip) return t.skip(skip);
   // the band every character occupies, in fractions of the picture's height (top of the highest ear .. the lowest chin): measured on the files
-  const BAND = { 'wide-1': [0.16, 0.61], 'wide-2': [0.08, 0.61] };
+  const BAND = { 'glam-1': [0.165, 0.585], 'glam-2': [0.15, 0.585], 'wide-1': [0.165, 0.61], 'wide-2': [0.077, 0.612] };
   const seen = (pg) => pg.evaluate(() => {
-    const f = document.getElementById('ccScene'), art = f.querySelector('.cap-banner-art'), i = document.getElementById('ccSceneImg'), b = art.getBoundingClientRect(), cs = getComputedStyle(i);
-    const nat = i.naturalWidth / i.naturalHeight, box = b.width / b.height, fit = cs.objectFit;
-    if (fit === 'contain') return { fit, whole: true, wFrac: 1, top: 0, bottom: 1, nat, box, src: i.currentSrc };
-    // cover: the picture fills the width when it is taller than the box; the visible part of its height starts at object-position y
+    const f = document.getElementById('ccScene'), art = f.querySelector('.cap-banner-art').getBoundingClientRect(), i = document.getElementById('ccSceneImg'), b = i.getBoundingClientRect(), cs = getComputedStyle(i);
+    const nat = i.naturalWidth / i.naturalHeight, box = b.width / b.height, fit = cs.objectFit, strip = art.width / art.height;
+    // the picture's own box sits inside the strip (it may be a little narrower; a blurred copy fills the edges)
+    const inside = b.left >= art.left - 1 && b.right <= art.right + 1 && b.top >= art.top - 1 && b.bottom <= art.bottom + 1;
+    if (fit === 'contain') return { fit, inside, wFrac: 1, top: 0, bottom: 1, nat, box, strip, src: i.currentSrc };
+    // cover: a picture taller than its box keeps its full width; the visible part of its height starts at object-position y
     const visH = nat / box, fy = parseFloat(cs.objectPosition.split(' ')[1]) / 100;
-    return { fit, wFrac: nat <= box ? 1 : box / nat, top: (1 - visH) * fy, bottom: (1 - visH) * fy + visH, nat, box, src: i.currentSrc };
+    return { fit, inside, wFrac: nat <= box + 1e-3 ? 1 : box / nat, top: (1 - visH) * fy, bottom: (1 - visH) * fy + visH, nat, box, strip, src: i.currentSrc };
   });
-  for (const scene of ['wide-1', 'wide-2']) {
+  for (const scene of ['glam-1', 'glam-2', 'wide-1', 'wide-2']) {
     const { ctx, pg, errors } = await page(1280);
-    if (scene !== 'wide-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="wide-1"', `data-scene="${scene}"`) })));
+    if (scene !== 'glam-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="glam-1"', `data-scene="${scene}"`) })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
     await pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
     const v = await seen(pg);
     assert.match(v.src, new RegExp(`investor-meeting-${scene}`), `${scene}: the art follows the constant`);
+    assert.equal(v.inside, true, `${scene}: the picture sits inside the strip`);
     assert.equal(v.wFrac, 1, `${scene}: the full width is shown (nobody cut at the left or the right)`);
+    assert.ok(Math.abs(v.strip - 4.87) < 0.05, `${scene}: the mockup's strip (${v.strip.toFixed(2)})`);
     assert.ok(v.top <= BAND[scene][0] && v.bottom >= BAND[scene][1], `${scene}: every head and ear inside (${v.top.toFixed(3)}..${v.bottom.toFixed(3)} covers ${BAND[scene]})`);
     assert.deepEqual(errors, []);
     await ctx.close();

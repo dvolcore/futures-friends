@@ -163,6 +163,26 @@
       "sha256": "3d1ccacbe4c31956dd16f928489e474d410f548afcda31439a9debaa9b83392a"
     },
     {
+      "path": "investor/Digital/assets/investor-meeting-glam-1-1200.webp",
+      "bytes": 138780,
+      "sha256": "5794614241914f36d84663753e87856d906be5d0cbd80570b50cfbfd5f05963a"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-glam-1.webp",
+      "bytes": 379548,
+      "sha256": "9f9c65ba23f2066e3914f73fc6d29822b1bb8834a56953f443a7909efa0c61a9"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-glam-2-1200.webp",
+      "bytes": 143636,
+      "sha256": "8491b8d9c9d8c38f905684bd52f718f704d220cf87e7d22c3200b9774cb98bf8"
+    },
+    {
+      "path": "investor/Digital/assets/investor-meeting-glam-2.webp",
+      "bytes": 399870,
+      "sha256": "480eb13e0cab08be2c5527d200d47820d9be229306b85a467d1ed7f0094a21b8"
+    },
+    {
       "path": "investor/Digital/assets/investor-meeting-wide-1-1200.webp",
       "bytes": 118320,
       "sha256": "2bc3cfa91a20b983dd83729f413906157c1dfff94a4182ea763543e061bf9f3e"
@@ -255,7 +275,7 @@
     {
       "path": "investor/Digital/index.html",
       "bytes": 47028,
-      "sha256": "f60a87b6f42d9dc254d22bdb9b593ddded6fd53415e7b826578ac4495d490613"
+      "sha256": "766b8b53ca5442a56d7f3c1269dbd4ea2f8b469b5024a398b554780641625a37"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -329,8 +349,8 @@
     },
     {
       "path": "investor/Digital/studio-overview.css",
-      "bytes": 32475,
-      "sha256": "f66b51f933360ae534fa3d5f84b5654eced89c4e774caa1ce0b66c97120a7927"
+      "bytes": 40864,
+      "sha256": "dc97458305467beb71e710b50b63aa851a4569a27ddfc45f11865dd73cbeef0c"
     },
     {
       "path": "investor/Digital/studio.css",
@@ -339,8 +359,8 @@
     },
     {
       "path": "investor/Digital/studio.js",
-      "bytes": 45214,
-      "sha256": "5632e4603b89872057bff14cc31b267c1c755039803769d4d5c3b5f868e0e5a0"
+      "bytes": 46940,
+      "sha256": "93271f7227128b02abdb962e31976ed9cc9064e7b3a538e89d82dda9928819a5"
     },
     {
       "path": "investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
