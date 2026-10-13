@@ -53,7 +53,7 @@
     'Skip to investor overview': 'Ir al resumen para inversionistas',
     'Investor overview': 'Resumen para inversionistas',
     'Overview': 'Resumen', 'Pilot plan': 'Plan piloto', 'Every cost': 'Cada costo', 'Cash forecast': 'Pronóstico de caja', 'Documents': 'Documentos',
-    'ONE LOCATION. A WORLD OF POSSIBILITY.': 'UNA SEDE. UN MUNDO DE POSIBILIDADES.',
+    'PILOT PLAN': 'PLAN PILOTO',
     'Small beginnings.': 'Comienzos pequeños.', 'Big futures.': 'Grandes futuros.',
     'One location. 40 children. One year.': 'Una sede. 40 niños. Un año.',
     'Learn. Move. Explore. Belong.': 'Aprende. Muévete. Explora. Pertenece.',

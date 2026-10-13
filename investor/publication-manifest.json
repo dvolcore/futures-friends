@@ -234,8 +234,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 32162,
-      "sha256": "1c1024576c288dd88e2713e6762dd51b79accbdd6521a027ef928e417d5b77a1"
+      "bytes": 32135,
+      "sha256": "6f71fa491a9982e291d510e18aea9da171f22d9f24374c817c99c06ba6ef3f49"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -294,8 +294,8 @@
     },
     {
       "path": "investor/Digital/portal-i18n.js",
-      "bytes": 26796,
-      "sha256": "71b8e150bb09a004f79c2a70600d8805ae72f9aabfc6f1141785517cade67d93"
+      "bytes": 26744,
+      "sha256": "e701fa885fe027489e7eb47fede1f1790fcca26653e6391662b4a7bb9d272260"
     },
     {
       "path": "investor/Digital/portal.css",

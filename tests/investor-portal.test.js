@@ -54,6 +54,9 @@ test('the overview: logo and a link go home; the tagline is the only line; Pendi
   assert.match(h, /class="home-link" href="\.\.\/\.\.\/"/);
   assert.match(h, /Learn\. Move\. Explore\. Belong\./);
   assert.doesNotMatch(h, /kinder,? brighter tomorrow|Invest in early|brighter tomorrows|Children today|Kind hearts\. Kind words|stronger tomorrow|Small lessons\. Big hearts/i);
+  // the old hero eyebrow was a slogan (owner: the tagline is the only line): gone in both languages
+  assert.doesNotMatch(h, /world of possibility/i);
+  assert.doesNotMatch(read('investor/Digital/portal-i18n.js'), /world of possibility|mundo de posibilidades/i);
   // the mockup's new claims and its search box are not taken
   assert.doesNotMatch(h, /Social-emotional learning|Safe (&amp;|&|and) supportive/i);
   assert.doesNotMatch(h, /type="search"|placeholder="Search|role="search"/i);
