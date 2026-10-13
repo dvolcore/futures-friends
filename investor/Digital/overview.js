@@ -77,10 +77,10 @@
       if (!Number.isFinite(totals.recurring) || totals.recurring <= 0 || assumptions.collection !== .96 || assumptions.tuition < 600 || assumptions.tuition > 1600 || !Array.isArray(data.cash) || data.cash.length !== 12) throw new Error('Invalid explorer assumptions');
       let previous = 0;
       data.cash.forEach((row, index) => {
-        if (row.month !== index + 1 || ![row.children,row.receipts,row.recurring,row.one_time,row.net,row.cumulative].every(Number.isFinite) || row.children < 0 || row.children > 40 || row.recurring < 0 || row.one_time < 0 || row.receipts < 0 || Math.abs(row.receipts - row.recurring - row.one_time - row.net) > .02 || Math.abs(previous + row.net - row.cumulative) > .02) throw new Error('Cash forecast does not reconcile');
+        if (row.month !== index + 1 || ![row.children,row.receipts,row.recurring,row.one_time,row.net,row.cumulative].every(Number.isFinite) || row.children < 0 || row.children > (assumptions.capacity || 38) || row.recurring < 0 || row.one_time < 0 || row.receipts < 0 || Math.abs(row.receipts - row.recurring - row.one_time - row.net) > .02 || Math.abs(previous + row.net - row.cumulative) > .02) throw new Error('Cash forecast does not reconcile');
         previous = row.cumulative;
       });
-      if (Math.abs(Math.min(...data.cash.map(row => row.cumulative)) + funding.peak_deficit) > .02 || Math.abs(assumptions.tuition * (assumptions.capacity || 40) * assumptions.collection * 12 - totals.recurring - metrics.year2_margin) > .02) throw new Error('Explorer totals do not reconcile');
+      if (Math.abs(Math.min(...data.cash.map(row => row.cumulative)) + funding.peak_deficit) > .02 || Math.abs(assumptions.tuition * (assumptions.capacity || 38) * assumptions.collection * 12 - totals.recurring - metrics.year2_margin) > .02) throw new Error('Explorer totals do not reconcile');
       set('funding', money(funding.request_before_financing));
       set('refinance', wholeMoney(totals.refinance));
       set('platformYear', money(platform.first_year));
@@ -101,7 +101,7 @@
       const date = new Date(meta.prepared + 'T12:00:00');
       set('modelDate', 'Planning model · ' + date.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}));
       const chart = document.querySelector('.comparison');
-      label(chart, 'aria-label', `Draft monthly tuition ${money(assumptions.tuition)}; operating break-even ${money(metrics.breakeven_tuition)} before building payments and debt`);
+      label(chart, 'aria-label', `Locked-in monthly tuition ${money(assumptions.tuition)}; operating break-even ${money(metrics.breakeven_tuition)} before building payments and debt`);
       const max = Math.max(assumptions.tuition, metrics.breakeven_tuition) / .9;
       document.querySelector('.bar-tuition').style.setProperty('--height', (assumptions.tuition / max * 100) + '%');
       document.querySelector('.bar-break-even').style.setProperty('--height', (metrics.breakeven_tuition / max * 100) + '%');

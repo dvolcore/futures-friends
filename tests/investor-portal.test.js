@@ -521,7 +521,9 @@ test('studio: scenarios use the model\'s method: the model\'s break-even and mar
   assert.equal(rc.food_cap_annual, 24000);
   const base = MODEL.totals.recurring - food(CAP) - fees(CAP, a.tuition, a.collection);
   assert.ok(Math.abs(base - rc.fixed_annual) < 0.05, 'the anchor is the model\'s fixed cost base');
-  const margin = (n, tt, c) => n * tt * 12 * c - base - food(n) - fees(n, tt, c);
+  // v2276: the generator's annual_margin, cent for cent: fixed_annual + food + fees rounded half-up, margin rounded half-up
+  const r2 = (v) => (v < 0 ? -1 : 1) * Math.round(Math.abs(v) * 100 + 1e-6) / 100;
+  const margin = (n, tt, c) => r2(n * tt * 12 * c - rc.fixed_annual - food(n) - r2(fees(n, tt, c)));
   const setRange = (id, v) => pg.$eval(id, (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }, String(v));
   await setRange('#scenarioTuition', 1100); await setRange('#scenarioChildren', 30); await setRange('#scenarioCollection', 90);
   await pg.waitForTimeout(500);
@@ -905,12 +907,19 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
   const row = sensitivity.find((r) => r.children === CAP && r.tuition === 1250);
   const shown = Number((await pg.textContent('#labMargin')).replace(/[^\d.]/g, ''));
   assert.ok(Math.abs(shown - row.annual_operating_margin) <= 0.011, `$1,250: ${shown} vs the model's ${row.annual_operating_margin}`);
-  // v2274: every sensitivity row of the model, to the cent (±1¢)
+  // v2276: every sensitivity row of the model, exactly to the cent (the lab uses the generator's rounding)
   for (const r of sensitivity) {
     await setRange('#labTuition', r.tuition); await setRange('#labChildren', r.children); await pg.waitForTimeout(450);
-    const txtM = await pg.textContent('#labMargin'), v = Number(txtM.replace(/[^\d.]/g, '')) * (txtM.startsWith('−') ? -1 : 1);
-    assert.ok(Math.abs(v - r.annual_operating_margin) <= 0.011, `${r.children} children at $${r.tuition}: ${v} vs ${r.annual_operating_margin}`);
+    assert.equal(await pg.textContent('#labMargin'), money2(r.annual_operating_margin), `${r.children} children at $${r.tuition}`);
   }
+  // v2276: the cumulative-positive month follows the scenario (the model's method: twelve months, then month 12 repeated)
+  const cumPos = async () => (await pg.$eval('#labCumPosMonth', (e) => e.hidden) ? (await pg.textContent('#labCumPosNone')) : Number(await pg.textContent('#labCumPos')));
+  await setRange('#labTuition', 910); await setRange('#labChildren', 30); await pg.waitForTimeout(450);
+  const slow = await cumPos();
+  assert.ok(typeof slow === 'string' ? /Not (reached|within)/.test(slow) : slow > MODEL.metrics.cumulative_cash_positive_month, `30 children at $910: ${slow}`);
+  await setRange('#labTuition', 1250); await pg.waitForTimeout(450);
+  const fast = await cumPos();
+  assert.ok(typeof fast === 'number' && fast <= 12, `30 children at $1,250: ${fast}`);
   await setRange('#labChildren', CAP);
   assert.match(await pg.textContent('#labPayback'), /^\d+\.\d years$/, 'a positive margin pays the deficit back');
   // the levers: each adds its amount to the margin; the waterfall lists each step and the result
@@ -926,6 +935,7 @@ test('Profit lab: sliders, levers and charts from the model; the margin reproduc
   // Reset returns to the plan
   await pg.click('#labReset'); await pg.waitForTimeout(500);
   assert.deepEqual(await txt(['labMargin', 'labBreakEven']), [money2(metrics.year2_margin), money2(metrics.breakeven_tuition)]);
+  assert.equal(await pg.textContent('#labCumPos'), String(MODEL.metrics.cumulative_cash_positive_month), 'at the plan, the model\'s month');
   assert.equal(await pg.$$eval('[data-lever]:checked', (c) => c.length), 0);
   // the ramp: twelve months from assumptions.cash_ramp; the dollar bar: the recurring budget by group (shares sum to 100%)
   assert.deepEqual(await pg.$$eval('#labRamp .rp-val', (v) => v.map((x) => Number(x.textContent))), assumptions.cash_ramp);
@@ -976,7 +986,7 @@ test('model v5: the generator reproduces the archived v4 (where the archive exis
   assert.equal(a.tuition, 910); assert.equal(a.tuition_weekly, 210); assert.match(a.tuition_basis, /locked-in rate of \$210\/week/);
   const rows = itemized(), wages = rows.filter((r) => r.category === 'Staff wages');
   assert.deepEqual(wages.map((r) => [r.item, r.quantity, r.rate]), [['Owner-director (unpaid)', '2080.0', '0.0'], ['Full-time caregiver 1', '2080.0', '16.0'], ['Full-time caregiver 2', '2080.0', '16.0'], ['Full-time caregiver 3', '2080.0', '16.0'], ['Full-time caregiver 4', '2080.0', '16.0'], ['Part-time break/admin floater', '1040.0', '16.0']]);
-  assert.match(wages[0].notes, /Owner serves as director \(unpaid\); a market director salary \(~\$60k all-in\) is excluded\. Missouri requires a qualified director on duty 40 h\/wk \(5 CSR 25-500\.102\(2\)\)\./);
+  assert.match(wages[0].notes, /Owner serves as director \(unpaid\); a market director salary \(about \$60,240\.72 all-in\) is excluded\. Missouri requires a qualified director on duty 40 h\/wk \(5 CSR 25-500\.102\(2\)\)\./);
   assert.ok(wages.slice(1).every((r) => /All staff \$16\/hr \(owner-confirmed 2026-10-13\); above Missouri 2026 minimum wage \$15\.00\./.test(r.notes)));
   assert.ok(!rows.some((r) => /^(Staff|Employer|Staff insurance|Staff readiness)/.test(r.category) && /food worker|Substitute|teacher/i.test(r.item)), 'no food worker, substitute or v4 teacher lines');
   assert.ok(!rows.some((r) => r.category === 'Staff benefits'), 'no employer health or retirement benefit');
@@ -1025,4 +1035,21 @@ test('KPI tiles: six animated charts bound to the model, distinct colours, glass
   assert.equal(await pg.evaluate(() => document.getElementById('kpis').classList.contains('tiles-live')), false, 'Pause motion stops the clock');
   assert.deepEqual(errors, []);
   await ctx.close();
+});
+
+// v2276 (audit): generated documents never carry an unrendered template placeholder such as {fmt(...)} or {category_sum(...)}
+test('generated investor documents carry no template placeholders', () => {
+  const dirs = ['investor/documents', 'investor/costs'];
+  const files = dirs.flatMap((d) => fs.readdirSync(path.join(ROOT, d)).filter((f) => /\.(md|csv|json)$/.test(f)).map((f) => `${d}/${f}`)).concat(['investor/README.md', 'investor/Digital/README.md']);
+  for (const f of files) {
+    const text = read(f);
+    assert.doesNotMatch(text, /\{[a-z_]+\(|fmt\(|category_sum\(/, `${f} has an unrendered placeholder`);
+  }
+  const { execFileSync } = require('node:child_process');
+  let pdftotext = true; try { execFileSync('pdftotext', ['-v'], { stdio: 'pipe' }); } catch (e) { pdftotext = !(e.code === 'ENOENT'); }
+  if (!pdftotext) return;
+  for (const f of fs.readdirSync(path.join(ROOT, 'investor')).filter((x) => x.endsWith('.pdf'))) {
+    const text = execFileSync('pdftotext', [path.join(ROOT, 'investor', f), '-'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    assert.doesNotMatch(text, /\{[a-z_]+\(|fmt\(|category_sum\(/, `${f} has an unrendered placeholder`);
+  }
 });

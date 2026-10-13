@@ -532,3 +532,7 @@ body.studio{margin:0;min-height:100vh;background:var(--cream);color:var(--ink);f
   .studio-tools .reveal-skip{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:46;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(10,43,56,.6)}
 }
 @media (max-width:767px){.studio-top{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(251,246,236,.97)}}
+
+/* v2276: without JavaScript every view shows at once with its static figures (the same values the model writes) */
+:root:not(.js) [data-studio-view]{display:block;min-height:0}
+:root:not(.js) .studio-rail{display:none}

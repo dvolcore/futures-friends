@@ -354,7 +354,7 @@
     function pause() { if (timer) clearTimeout(timer); timer = null; playLabel(false); }
     if (playBtn) playBtn.addEventListener('click', () => (timer ? pause() : play()));
     D.addEventListener('studio:view', (e) => { if (e.detail.view !== o.view) pause(); });
-    // Revenue / Expenses / Operating gap: what the chart shows (at least one stays on)
+    // Revenue / Expenses / Net cash: what the chart shows (at least one stays on)
     for (const b of o.toggles) b.addEventListener('click', () => {
       const k = b.dataset.series || b.dataset.ovSeries, on = b.getAttribute('aria-pressed') === 'true';
       if (on && hidden.size === 2) return;
@@ -424,11 +424,13 @@
       const fees = (n, tt, c) => { const tr = n * 12 * c; return tr * (0.95 * Math.min(tt * 0.008, 5) + 0.05 * (tt * 0.029 + 0.30)) + tr * tt * 0.007; };
       const variable = (n) => (rc.food_cap_annual == null ? n * rc.service_days * rc.variable_per_child_day
         : Math.min(rc.food_fixed_annual + n * rc.service_days * rc.variable_per_child_day, rc.food_cap_annual));
-      // anchored to the model's recurring total (which carries the line-item cent rounding), so the planning case is exact
-      const CAP = a.capacity || 40;   // full enrollment (v5: 38)
-      const base = m.totals.recurring - variable(CAP) - fees(CAP, a.tuition, a.collection);
-      const cost = (n, tt, c) => base + variable(n) + fees(n, tt, c);
-      const margin = (n, tt, c) => n * tt * 12 * c - cost(n, tt, c);
+      // v2276: the generator's own arithmetic (annual_margin): fixed_annual + food + fees rounded to the cent (half-up, like Python's
+      // Decimal ROUND_HALF_UP), margin rounded to the cent, so every sensitivity row and the plan match the model exactly
+      const r2 = (v) => (v < 0 ? -1 : 1) * Math.round(Math.abs(v) * 100 + 1e-6) / 100;
+      const CAP = a.capacity || 38;   // full enrollment
+      const base = rc.fixed_annual != null ? rc.fixed_annual : m.totals.recurring - variable(CAP) - fees(CAP, a.tuition, a.collection);
+      const cost = (n, tt, c) => base + variable(n) + r2(fees(n, tt, c));
+      const margin = (n, tt, c) => r2(n * tt * 12 * c - cost(n, tt, c));
       const breakEven = (n, c) => { let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (margin(n, mid, c) < 0) lo = mid; else hi = mid; } return Math.round(hi * 100) / 100; };
       return { base, margin, breakEven, cost, variable, fees, revenue: (n, tt, c) => n * tt * 12 * c, assumptions: a };
     }
@@ -454,8 +456,8 @@
       calc = method(m);
       for (const el of [tu, ch, co]) { el.disabled = false; el.addEventListener('input', update); }
       reset.disabled = false;
-      reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 40; co.value = Math.round(m.assumptions.collection * 100); update(); });
-      tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 40; co.value = Math.round(m.assumptions.collection * 100);
+      reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 38; co.value = Math.round(m.assumptions.collection * 100); update(); });
+      tu.value = m.assumptions.tuition; ch.value = m.assumptions.capacity || 38; co.value = Math.round(m.assumptions.collection * 100);
       table();
       counter.reset(); update();
       sr.textContent = out.textContent;
@@ -777,6 +779,23 @@
       }
       return Math.max(0, -low);
     }
+    // the month cumulative pilot cash turns positive at the scenario: the same replay of the twelve published months, then the
+    // scenario's month-12 net repeated (full enrollment, no one-time costs left), as the model's cumulative_cash_positive_month.
+    // null: month-12 net is not positive (never); Infinity: not within ten years.
+    function payback(n, tt, c, save) {
+      const a = calc.assumptions; let cum = 0, last = 0;
+      for (const r of m.cash) {
+        const k = Math.min(r.children, n);
+        const receipts = r.receipts + (k * tt * c - r.children * a.tuition * a.collection);
+        const recurring = r.recurring + (per(k, tt, c) - per(r.children, a.tuition, a.collection)) / 12 - save / 12;
+        last = cents(receipts - recurring - r.one_time); cum = cents(cum + last);
+        if (cum >= 0) return r.month;
+      }
+      if (last <= 0) return null;
+      let month = m.cash.length;
+      while (cum < 0) { month++; cum = cents(cum + last); if (month > 120) return Infinity; }
+      return month;
+    }
     const breakEven = (n, c, save) => { let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (calc.margin(n, mid, c) + save < 0) lo = mid; else hi = mid; } return Math.round(hi * 100) / 100; };
     // ---- the break-even gauge: a half dial over the tuition range; the needle is your tuition, the gold tick the break-even
     const gauge = (() => {
@@ -815,7 +834,9 @@
       text('labBreakEven', money(be)); text('labTuitionNow', whole(tt)); text('labDeficit', money(deficit));
       I.set($('#labPayback'), margin > 0 ? `${(deficit / margin).toFixed(1)} years` : 'Not reached');
       // v2275: the plan's payback timing and the one-time vs recurring split, straight from the model (not scenario-dependent)
-      if (m.metrics.cumulative_cash_positive_month) text('labCumPos', String(m.metrics.cumulative_cash_positive_month));
+      const pb = payback(n, tt, c, save), pbOk = Number.isFinite(pb) && pb !== null;
+      $('#labCumPosMonth').hidden = !pbOk; $('#labCumPosNone').hidden = pbOk;
+      if (pbOk) text('labCumPos', String(pb)); else I.set($('#labCumPosNone'), pb === null ? 'Not reached' : 'Not within 10 years');
       text('labOneTime', money(m.totals.one_time)); text('labRecurring', money(m.totals.recurring));
       gauge.set(tt, be);
       const m0 = m.metrics.year2_margin, rowsW = [{ name: 'Today’s plan', v: m0, total: true }];

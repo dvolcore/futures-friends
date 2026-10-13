@@ -7,7 +7,7 @@
    Every Spanish string is a DRAFT pending review; the English text governs (said in the footer while Spanish is on). Sends nothing. */
 (function () {
   'use strict';
-  const ES = {
+  const ES = Object.assign({
     "/week": "/semana", "/month": "/mes", ". Before building payments and debt.": ". Antes de pagos del edificio y deuda.",
     // v2274: model v5 (38 children all day, four caregivers, owner-director unpaid)
     "Ages 2–5 · 38 children all day · 4 caregivers on the floor in two groups of ≤20 (Missouri 1:10, ≤4 two-year-olds per group)": "Edades 2–5 · 38 niños todo el día · 4 cuidadoras en el aula en dos grupos de ≤20 (Missouri 1:10, ≤4 niños de 2 años por grupo)",
@@ -22,7 +22,7 @@
     "One fewer afternoon teacher (3–5 pm), if attendance allows": "Una maestra de la tarde menos (3–5 pm), si la asistencia lo permite",
     "Paid ads cut back after full enrollment": "Menos publicidad pagada con la inscripción completa",
     "Break-even tuition": "Colegiatura de equilibrio", "Your tuition": "Su colegiatura", "Year-1 cash deficit": "Déficit de caja del año 1",
-    "Years to pay back the pilot deficit": "Años para recuperar el déficit del piloto", "Cumulative cash turns positive": "La caja acumulada pasa a positivo", "One-time vs recurring": "Único frente a recurrente", "one-time": "único", "a year, recurring": "al año, recurrente", "Not reached": "No se alcanza",
+    "Years to pay back the pilot deficit": "Años para recuperar el déficit del piloto", "Cumulative cash turns positive": "La caja acumulada pasa a positivo", "Not within 10 years": "No en 10 años", "One-time vs recurring": "Único frente a recurrente", "one-time": "único", "a year, recurring": "al año, recurrente", "Not reached": "No se alcanza",
     "From today’s plan to your scenario": "Del plan actual a su escenario", "Annual operating margin, step by step.": "Margen operativo anual, paso a paso.",
     "Enrollment ramp": "Aumento de la inscripción", "Children enrolled, month by month.": "Niños inscritos, mes a mes.",
     "Children enrolled in months 1 to 12 of the pilot": "Niños inscritos en los meses 1 a 12 del piloto",
@@ -60,7 +60,7 @@
     "Inspect model": "Ver el modelo", "Receipts": "Ingresos", "Total spending": "Gasto total",
     "Monthly receipts and total spending during the 12-month pilot. Use the arrow keys to move between months.": "Ingresos mensuales y gasto total durante el piloto de 12 meses. Use las flechas para moverse entre meses.",
     "(distinct from the annual operating margin and peak cash deficit)": "(distinto del margen operativo anual y del déficit máximo de caja)",
-    "Monthly receipts": "Ingresos del mes", "Monthly cash gap": "Diferencia de caja del mes",
+    "Monthly receipts": "Ingresos del mes", "Monthly net cash": "Caja neta del mes", "Monthly cash gap": "Diferencia de caja del mes",
     "Key documents & evidence": "Documentos clave y evidencia", "Explore the full set of materials.": "Explore el conjunto completo de materiales.",
     "The full pilot case": "El caso completo del piloto", "The decision at a glance": "La decisión de un vistazo", "Itemized financials": "Finanzas detalladas",
     "Cash forecast": "Pronóstico de caja", "Operations before repayment": "Operaciones antes del pago", "Production Bible": "Biblia de producción",
@@ -128,11 +128,11 @@
     "Enrollment ramp, receipts, spending and the funding gap, from the monthly cash forecast.": "Aumento de inscripción, ingresos, gastos y el déficit de financiamiento, según el pronóstico de caja mensual.",
     "Revenue": "Ingresos",
     "Expenses": "Gastos",
-    "Operating gap": "Déficit operativo",
+    "Operating gap": "Déficit operativo", "Net cash": "Caja neta",
     "Play timeline": "Reproducir la línea de tiempo",
     "Pause timeline": "Pausar la línea de tiempo",
     "Show on the chart": "Mostrar en la gráfica",
-    "Monthly receipts, spending and the operating gap during the 12-month pilot": "Ingresos, gastos y déficit operativo mensuales durante el piloto de 12 meses",
+    "Monthly receipts, spending and net cash during the 12-month pilot": "Ingresos, gastos y caja neta mensuales durante el piloto de 12 meses",
     "The selected month": "El mes seleccionado",
     "WHAT IF?": "¿Y SI…?",
     "Try a scenario": "Pruebe un escenario",
@@ -186,7 +186,7 @@
     'Current tuition assumption': 'Supuesto de colegiatura actual', 'Operating break-even': 'Punto de equilibrio operativo',
     'Per child / month · building payments and debt excluded': 'Por niño / mes · sin pagos del edificio ni deuda',
     'Annual operating gap': 'Déficit operativo anual', 'Before building payments and debt': 'Antes de pagos del edificio y deuda',
-    '40 enrolled · 96% collections': '40 inscritos · 96% de cobranza',
+    '38 enrolled · 96% collections': '38 inscritos · 96% de cobranza',
     'The building payment and lender terms must be known before debt terms.': 'El pago del edificio y los términos del prestamista deben conocerse antes de los términos de la deuda.',
     'The owner-confirmed, locked-in tuition is $210/week, converted using 52/12 to $910/month. Signed enrollment agreements are not yet on file. Break-even covers recurring operations at full enrollment and 96% collections; it excludes mortgage payments, debt and lender costs. No return is promised.': 'La colegiatura fija confirmada por la dueña es de $210/semana, convertida con 52/12 a $910/mes. Aún no hay contratos de inscripción firmados en archivo. El punto de equilibrio cubre la operación recurrente con inscripción completa y 96% de cobranza; excluye pagos de hipoteca, deuda y costos del prestamista. No se promete ningún rendimiento.',
     'What drives this comparison?': '¿Qué determina esta comparación?',
@@ -263,7 +263,7 @@
     'This preview could not load. Use Download or open it in a new tab.': 'No se pudo cargar la vista previa. Use Descargar o ábrala en otra pestaña.',
     'Loading…': 'Cargando…', 'Documents are in English.': 'Los documentos están en inglés.',
     'Spanish is a draft translation; the English text governs.': 'El español es una traducción en borrador; prevalece el texto en inglés.'
-  };
+  }, window.FFInvEsExtra || {});   // v2276: the pilot plan, one-sheet and source room add their own strings (pages-i18n.js)
   // text with figures in it: the figures pass through untouched
   const PATTERNS = [
     [/^Planning model · (\w+) (\d+), (\d{4})$/, (m, mo, d, y) => `Modelo de planificación · ${d} de ${MONTHS[mo] || mo} de ${y}`],
@@ -273,7 +273,7 @@
     [/^Month (\d+): (\d+) children$/, (m, n, c) => `Mes ${n}: ${c} niños`],
     [/^Month (\d+), (\d+) children$/, (m, n, c) => `Mes ${n}, ${c} niños`],
     [/^Month (\d+), (\d+) children, cumulative cash deficit (.+)$/, (m, n, c, v) => `Mes ${n}, ${c} niños, déficit de caja acumulado ${v}`],
-    [/^Draft monthly tuition (.+); operating break-even (.+) before building payments and debt$/, (m, a, b) => `Colegiatura mensual en borrador ${a}; punto de equilibrio operativo ${b} antes de pagos del edificio y deuda`],
+    [/^Locked-in monthly tuition (.+); operating break-even (.+) before building payments and debt$/, (m, a, b) => `Colegiatura mensual fija ${a}; punto de equilibrio operativo ${b} antes de pagos del edificio y deuda`],
     [/^(\d+) pages?$/, (m, n) => `${n} ${n === '1' ? 'página' : 'páginas'}`],
     [/^(\d+) lines$/, (m, n) => `${n} partidas`],
     [/^(\d+) months$/, (m, n) => `${n} meses`]

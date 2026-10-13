@@ -46,7 +46,15 @@ REDACT = {
         'Partner daycares and churches are Phase 2 opportunities, not part of the pilot repayment plan. Monthly curriculum licenses and '
         'support can renew; setup, training seats and merchandise create separate receipts, each evaluated on its own unit economics. '
         'Unsigned partner, licensing or merchandise receipts are excluded from debt underwriting; the current controls at the front of '
-        'this document and the pilot register govern every financial figure.')],
+        'this document and the pilot register govern every financial figure.'),
+        # v2276 (audit): the pilot has no paid substitutes; absences are covered by the floater, owner-director and head of administration
+        ('The center maintains a substitute plan.', 'The center maintains a substitute plan.', 'contingency materials.',
+         "The center keeps an absence-coverage plan: the floater, owner-director and head of administration cover absences (no paid "
+         "substitutes). Its pack holds the day's lesson summary, safe activity, transition language, record steps and escalation "
+         "contacts, printed or stored securely in case a login fails."),
+        ('A substitute receives time-limited access', 'A substitute receives time-limited access', 'contingency pack.',
+         'A covering adult gets time-limited access or a printed pack.'),
+        ('and substitute pack.', 'and substitute pack.', 'substitute pack.', 'and absence-coverage pack.')],
 }
 
 
@@ -281,11 +289,18 @@ def redact(doc, first_ref, rules):
             a = page.search_for(start)
             if not a: continue
             b = page.search_for(end_line)
-            c = [r for r in page.search_for(last_word) if r.y0 > b[0].y0]
+            c = [r for r in page.search_for(last_word) if r.y0 >= b[0].y0 - 1]
             rect = fitz.Rect(a[0].x0, a[0].y0 - 1, page.rect.width - 40, c[0].y1 + 1)
+            # match the original body size and colour where the passage starts
+            size, color = 8.6, (0.145, 0.216, 0.275)
+            for blk in page.get_text('dict')['blocks']:
+                for ln in blk.get('lines', []):
+                    for sp in ln['spans']:
+                        if fitz.Rect(sp['bbox']).intersects(a[0]) and sp['text'].strip():
+                            size = round(sp['size'] * 0.92, 1); col = sp['color']; color = (((col >> 16) & 255) / 255, ((col >> 8) & 255) / 255, (col & 255) / 255)
             page.add_redact_annot(rect, fill=(1, 1, 1))
             page.apply_redactions(images=fitz.PDF_REDACT_IMAGE_NONE)
-            rc = page.insert_textbox(rect + (0, 0, 0, 40), replacement, fontname='helv', fontsize=8.6, color=(0.145, 0.216, 0.275), lineheight=1.35)
+            rc = page.insert_textbox(rect + (0, 0, 0, 40), replacement, fontname='helv', fontsize=size, color=color, lineheight=1.32)
             assert rc >= 0, 'replacement text does not fit'
             print(f'  redacted and replaced p{pno + 1}: {start[:50]}...')
             break

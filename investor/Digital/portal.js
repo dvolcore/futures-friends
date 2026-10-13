@@ -255,7 +255,7 @@
     tableToggle($('.platform .cost-caption'), 'platformTable', 'Platform costs, year one', ['Item', 'Amount'],
       [['Platform completion', whole(platform.completion)], ['Security testing & counsel', whole(platform.assurance_one_time)], ['Annual support & hosting', money(platform.recurring)], ['Platform year one', money(platform.first_year)]], 'after');
     tableToggle($('.comparison .chart-unit'), 'cashCompareTable', 'Tuition and operating break-even, per child per month', ['Item', 'Amount'],
-      [['Current tuition assumption', whole(assumptions.tuition)], ['Operating break-even', money(metrics.breakeven_tuition)], ['Annual operating gap', signed(money(metrics.year2_margin))]], 'after');
+      [['Current tuition assumption', whole(assumptions.tuition)], ['Operating break-even', money(metrics.breakeven_tuition)], [metrics.year2_margin >= 0 ? 'Annual operating margin' : 'Annual operating gap', signed(money(metrics.year2_margin))]], 'after');
     tableToggle($('.donut-side .donut-legend'), 'capitalTable', 'The four parts of the funding estimate', ['Item', 'Amount'], parts, 'after');
     const spend = (r) => r.recurring + r.one_time;
     tableToggle($('#forecastView .trajectory'), 'cashTable', 'Monthly cash forecast', ['Month', 'Children', 'Receipts', 'Spending', 'Net', 'Cumulative'],

@@ -27,7 +27,7 @@
       "bucket": "recurring",
       "basis": "KC preschool wage benchmark; chosen rate is a planning offer",
       "url": "https://www.onetonline.org/link/localwages/25-2011.00?st=MO",
-      "notes": "Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
+      "notes": "Owner serves as director (unpaid); a market director salary (about $60,240.72 all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
       "purpose": "",
       "deliverable": ""
     },
@@ -3702,7 +3702,7 @@
     "max_group": 20,
     "children": 38,
     "ages": "2\u20135",
-    "director": "Owner serves as director (unpaid); a market director salary (~$60k all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
+    "director": "Owner serves as director (unpaid); a market director salary (about $60,240.72 all-in) is excluded. Missouri requires a qualified director on duty 40 h/wk (5 CSR 25-500.102(2)).",
     "ratio_note": "Ages 2\u20135 \u00b7 38 children all day \u00b7 4 caregivers on the floor in two groups of \u226420 (Missouri 1:10, \u22644 two-year-olds per group; 5 CSR 25-500.112).",
     "additional_coverage": "Any additional classroom coverage beyond the four caregivers and floater is provided by the owner-director and a head of administration at no added payroll cost (owner, 2026-10-13). Anyone counted in ratio keeps Missouri records on file: background check, medical/TB report, orientation, 12 annual training hours (5 CSR 25-500.102, .122).",
     "ratio_basis": "5 CSR 25-500.112: mixed ages 2+ with \u22644 two-year-olds per group 1:10, max group 20; >4 two-year-olds 1:8, max 16",

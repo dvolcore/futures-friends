@@ -62,13 +62,13 @@ test('printables/ holds only family take-homes, the marketing kit and the one sa
 // updated here on purpose (shasum -a 256 investor/*.pdf).
 // Every other PDF, including any new file under investor/, still counts against the 25 MB guard; the content checks below run on all.
 const INVESTOR_PDFS = {
-  'investor/01_Investor_Business_Plan.pdf': 'ae72b15001e1b9011dbeb018309cc3fbbedd2a1203287d54bbbfa94423cbe17e',
-  'investor/02_Series_Curriculum_Production_Bible.pdf': '4b2670eaf0fe7a62b15f6642c50033507ec8136d2bfb2600e652d1dd4614bfba',
-  'investor/03_Program_Operations_Evidence_Companion.pdf': 'ecdf05a60fb5f589ada88554255058a18904810f5199a57c787ef9f98750e738',
-  'investor/05_Investor_One_Sheet.pdf': '0e27d13ff41c905057c49725a53b6dc196058062378dc03eed08fe99504910c1',
-  'investor/06_Financial_Reconciliation.pdf': 'ae72b15001e1b9011dbeb018309cc3fbbedd2a1203287d54bbbfa94423cbe17e',
-  'investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf': 'ae72b15001e1b9011dbeb018309cc3fbbedd2a1203287d54bbbfa94423cbe17e',
-  'investor/Futures_Friends_CURRENT_Pilot_One_Sheet.pdf': '0e27d13ff41c905057c49725a53b6dc196058062378dc03eed08fe99504910c1',
+  'investor/01_Investor_Business_Plan.pdf': 'f92645858e11870982cbe7ddb1c96090a0f9d5bbb132aa422a32ad1b82ad5213',
+  'investor/02_Series_Curriculum_Production_Bible.pdf': '510ed264098ee2f6bfb3dc57ae58dd68f565f2d266e598593320be5f2a444bec',
+  'investor/03_Program_Operations_Evidence_Companion.pdf': 'b0fd289d86a8cde0c75db581424e196d56ccf31629738e7784370f0a8fb82ae8',
+  'investor/05_Investor_One_Sheet.pdf': '594bdf504471e12f81d3d3c18092b561817e1f7424d1ef4cd7cc2d68ceb56703',
+  'investor/06_Financial_Reconciliation.pdf': 'f92645858e11870982cbe7ddb1c96090a0f9d5bbb132aa422a32ad1b82ad5213',
+  'investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf': 'f92645858e11870982cbe7ddb1c96090a0f9d5bbb132aa422a32ad1b82ad5213',
+  'investor/Futures_Friends_CURRENT_Pilot_One_Sheet.pdf': '594bdf504471e12f81d3d3c18092b561817e1f7424d1ef4cd7cc2d68ceb56703',
 };
 const INVESTOR_CAP = 16e6;
 

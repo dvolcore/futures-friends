@@ -41,7 +41,7 @@ html.inv-reveal [data-count]{color:transparent!important}
 }
 @keyframes invBloom{0%{box-shadow:0 0 0 0 transparent}35%{box-shadow:0 0 0 3px color-mix(in srgb,var(--tone) 40%,transparent),0 0 30px color-mix(in srgb,var(--tone) 50%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
 
-/* ---- neon KPI rings around each card's icon: funding by its four parts, 40 places, 12 months, the refinance share ------------ */
+/* ---- neon KPI rings around each card's icon: funding by its four parts, 38 places, 12 months, the refinance share ------------ */
 #kpis .metric-icon{overflow:visible}
 #kpis .metric-icon .inv-ring{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);max-width:none;overflow:visible;pointer-events:none}
 .inv-ring-track{fill:none;stroke:rgba(10,43,56,.08);stroke-width:5}
