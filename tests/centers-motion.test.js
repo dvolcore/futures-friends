@@ -43,7 +43,9 @@ test('wiring: linked once, after the motion system; gated on FFMotion.allowed; s
   assert.match(js, /M\(\)\.allowed\(ok\)/);
   assert.match(js, /FFhooks\.push\(setup\)/);
   assert.match(js, /live\.abort\(\)/);
-  assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|indexedDB|document\.cookie/);
+  // the one stored thing: the reception plays once per visit (sessionStorage 'ff-cm-reception', this tab only)
+  assert.deepEqual([...js.matchAll(/sessionStorage\.\w+Item\('([\w-]+)'/g)].map(m => m[1]), ['ff-cm-reception', 'ff-cm-reception']);
+  assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|indexedDB|document\.cookie/);
   assert.doesNotMatch(js + css, /skew|scaleX|scaleY|hue-rotate|grayscale|invert\(|sepia/, 'no cut-out is skewed, stretched or recoloured');
   assert.match(css, /\.cm-ch img\{[^}]*object-fit:contain[^}]*filter:none/);
   assert.match(css, /prefers-reduced-motion:no-preference/);
@@ -65,24 +67,27 @@ for (const viewport of [{ width: 1024, height: 768 }, { width: 1280, height: 720
       await page.waitForFunction(r => document.querySelector(`#view .cm-hero[data-cm-hero="${r}"]`), r, { timeout: 30000 });
       await page.evaluate(() => scrollTo(0, 0));
       await page.waitForTimeout(2600);
-      await page.waitForFunction(() => Array.from(document.querySelectorAll('.cm-hero img')).filter(i => !i.loading || i.loading !== 'lazy').every(i => i.complete && i.naturalWidth > 0), null, { timeout: 30000 });
+      await page.waitForFunction(() => Array.from(document.querySelectorAll('.cm-hero img')).filter(i => i.getAttribute('src') && i.loading !== 'lazy' && !i.hidden).every(i => i.complete && i.naturalWidth > 0), null, { timeout: 30000 });
       const s = await page.evaluate(() => {
         scrollTo(0, 0);
         const hero = document.querySelector('.cm-hero'), hb = hero.getBoundingClientRect(), art = hero.querySelector('.cm-art').getBoundingClientRect();
         const room = hero.querySelector('.cm-room').getBoundingClientRect();
         const dockEl = document.querySelector('.ffs'), dk = dockEl && dockEl.getBoundingClientRect().width ? dockEl.getBoundingClientRect() : null;
-        const chars = Array.from(hero.querySelectorAll('.cm-ch')).map(c => { const i = c.querySelector('img'), b = i.getBoundingClientRect(); return { k: c.dataset.cmCh, dock: !!dk && !(b.right <= dk.left || b.left >= dk.right || b.bottom + scrollY <= dk.top + scrollY || b.top >= dk.bottom), feet: hb.bottom - b.bottom, ok: i.complete && i.naturalWidth > 0, inArt: b.left >= art.left - 1 && b.right <= art.right + 1 && b.top >= art.top - 1 && b.bottom <= art.bottom + 1, inHero: b.left >= hb.left && b.right <= hb.right && b.top >= hb.top && b.bottom <= hb.bottom, fit: getComputedStyle(i).objectFit, ar: Math.abs(b.width / b.height - i.naturalWidth / i.naturalHeight) }; });
+        const cardR = hero.querySelector('.cm-card').getBoundingClientRect();
+        const chars = Array.from(hero.querySelectorAll('.cm-ch, .cm-actor')).filter(c => c.getBoundingClientRect().width > 0).map(c => { const i = c.querySelector('img'), b = i.getBoundingClientRect(), actor = c.classList.contains('cm-actor'); return { k: c.dataset.cmCh || c.dataset.actor, actor, card: !(b.right <= cardR.left || b.left >= cardR.right || b.bottom <= cardR.top || b.top >= cardR.bottom), dock: !!dk && !(b.right <= dk.left || b.left >= dk.right || b.bottom + scrollY <= dk.top + scrollY || b.top >= dk.bottom), feet: hb.bottom - b.bottom, ok: i.complete && i.naturalWidth > 0, inArt: actor || b.left >= art.left - 1 && b.right <= art.right + 1 && b.top >= art.top - 1 && b.bottom <= art.bottom + 1, inHero: b.left >= hb.left && b.right <= hb.right && b.top >= hb.top && b.bottom <= hb.bottom, fit: getComputedStyle(i).objectFit, ar: Math.abs(b.width / b.height - i.naturalWidth / i.naturalHeight) }; });
         return { full: room.width >= innerWidth - 2 && Math.abs(hb.left) < 1, chars, chip: (hero.querySelector('.cm-chip') || {}).textContent || '', flags: hero.querySelectorAll('.ffa-flag').length, over: document.documentElement.scrollWidth - innerWidth, card: !!hero.querySelector('.cm-card h1') };
       });
       assert.ok(s.full, `${r}: the world runs edge to edge`);
       assert.ok(s.card, `${r}: the heading sits on the frosted card`);
-      assert.ok(s.chars.length >= 3, `${r}: a grown-up and friends`);
-      assert.match(s.chars[0].k, /principal-hazel|ms-june|ms-fern|mr-moss/, `${r}: a grown-up of the cast leads`);
+      assert.ok(s.chars.length >= 2, `${r}: a grown-up and friends`);
+      if (r === 'book-demo') assert.deepEqual(s.chars.filter(c => c.actor).map(c => c.k).sort(), ['mara', 'rowan'], 'the reception: Mara and Rowan');
+      else assert.match(s.chars[0].k, /principal-hazel|ms-june|ms-fern|mr-moss/, `${r}: a grown-up of the cast leads`);
       for (const c of s.chars) {
         assert.ok(c.ok, `${r}: ${c.k} loaded`);
         assert.ok(c.inArt && c.inHero, `${r}: ${c.k} stands whole inside the hero (never cropped)`);
+        assert.ok(!c.card, `${r}: ${c.k} never overlaps the text card`);
         assert.equal(c.fit, 'contain', `${r}: ${c.k} is never stretched`);
-        assert.ok(c.feet >= 8, `${r}: ${c.k} has its feet on the ground inside the hero, with a margin (${c.feet}px)`);
+        if (c.k !== 'mara') assert.ok(c.feet >= 8, `${r}: ${c.k} has its feet on the ground inside the hero, with a margin (${c.feet}px)`);
         assert.ok(!c.dock, `${r}: the Nature / Sound dock never covers ${c.k}`);
       }
       assert.match(s.chip, /Storybook illustration/);
@@ -196,6 +201,70 @@ test('#book-demo steps are stitched in, and "Trusted by professionals" cards ris
   await page.waitForTimeout(1500);
   assert.equal(await page.$$eval('.cm-steps > li.is-in', a => a.length), 3);
   assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+// ---------------------------------------------------------------- grounding: feet on the floor of each backdrop (owner: "floating on the gate")
+for (const viewport of [{ width: 1024, height: 768 }, { width: 1280, height: 720 }, DESK, PHONE]) {
+  test(`grounded at ${viewport.width}: every cut-out's feet are on its backdrop's ground band (the open floor, never a gate, fence, basket or desk)`, T, async () => {
+    const { ctx, page, errors } = await open('centers', { viewport, touch: viewport === PHONE, motion: 'reduce' });
+    for (const r of ROUTES) {
+      await page.evaluate(r => { location.hash = '#' + r; scrollTo(0, 0); }, r);
+      await page.waitForFunction(r => document.querySelector(`#view .cm-hero[data-cm-hero="${r}"][data-cm-ground]`), r, { timeout: 30000 });
+      await page.waitForTimeout(250);
+      const bad = await page.evaluate(() => {
+        const hero = document.querySelector('.cm-hero'), world = hero.querySelector('.cm-world'), g = window.FFCentersMotion.GROUND[world.dataset.env];
+        const R = hero.querySelector('.cm-room').getBoundingClientRect(), out = [];
+        hero.querySelectorAll('.cm-ch').forEach(c => {
+          const b = c.getBoundingClientRect(); if (!b.width) return;
+          const fy = (b.bottom - R.top) / R.height * 100, fx = ((b.left + b.right) / 2 - R.left) / R.width * 100;
+          if (Math.abs(fy - g.y) > 2.5 || fx < g.x0 - 1 || fx > g.x1 + 1) out.push(`${c.dataset.cmCh} feet at ${fx.toFixed(1)}%, ${fy.toFixed(1)}% (ground ${g.x0}-${g.x1}%, ${g.y}%)`);
+        });
+        return out;
+      });
+      assert.deepEqual(bad, [], r);
+    }
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  });
+}
+
+test('#book-demo reception: Rowan walks the floor from the doorway to the desk; Mara stands behind the counter; the bubbles take turns inside the hero', T, async () => {
+  for (const viewport of [{ width: 1024, height: 768 }, DESK, PHONE]) {
+    const { ctx, page, errors } = await open('book-demo', { viewport, touch: viewport === PHONE, settle: 200 });
+    const geo = () => page.evaluate(() => {
+      const hero = document.querySelector('.cm-hero'), C = window.FFCentersMotion.REC, R = hero.querySelector('.cm-room').getBoundingClientRect();
+      const row = hero.querySelector('.cm-rowan'), walk = row.querySelector('.cm-stride').getBoundingClientRect(), mara = hero.querySelector('.cm-mara').getBoundingClientRect();
+      const p = (x, y) => [(x - R.left) / R.width * 100, (y - R.top) / R.height * 100];
+      const [dx, dy] = (row.dataset.from || '0,0').split(',').map(Number), end = row.getBoundingClientRect();
+      const occ = hero.querySelector('.cm-occluder');
+      return { C, now: p((walk.left + walk.right) / 2, walk.bottom), end: p((end.left + end.right) / 2, end.bottom), start: p((end.left + end.right) / 2 + dx, end.bottom + dy),
+        maraBottom: mara.bottom, counter: R.top + C.counter / 100 * R.height, occ: !!occ && /polygon/.test(getComputedStyle(occ).clipPath) && occ.compareDocumentPosition(hero.querySelector('.cm-mara')) === Node.DOCUMENT_POSITION_PRECEDING,
+        hb: hero.getBoundingClientRect().toJSON(), bubbles: Array.from(hero.querySelectorAll('.cm-bubble')).map(b => b.getBoundingClientRect().toJSON()), on: Array.from(hero.querySelectorAll('.cm-bubble[data-on]')).map(b => b.dataset.bubble) };
+    });
+    const near = (a, b, d) => Math.abs(a - b) <= d;
+    let g = await geo();
+    if (viewport !== PHONE) {
+      // at the start: in the doorway, on the floor; part way: still on the floor line between the door and the desk
+      assert.ok(near(g.start[0], g.C.from.x, 1.5) && near(g.start[1], g.C.from.y, 1.5), `starts in the doorway on the floor: ${g.start}`);
+      await page.waitForTimeout(1800);
+      g = await geo();
+      const t = (g.now[1] - g.C.from.y) / (g.C.to.y - g.C.from.y), onLine = g.C.from.x + t * (g.C.to.x - g.C.from.x);
+      assert.ok(t > 0.02 && t < 0.98 && near(g.now[0], onLine, 2), `walking on the floor line: ${g.now} (t ${t.toFixed(2)})`);
+    }
+    await page.waitForTimeout(viewport === PHONE ? 8500 : 9500);
+    g = await geo();
+    assert.ok(near(g.now[0], g.C.to.x, 1) && near(g.now[1], g.C.to.y, 1), `ends at the desk, feet on the floor: ${g.now}`);
+    assert.ok(g.maraBottom > g.counter + 20, 'Mara\'s lower body is below the counter top (hidden by the desk)');
+    assert.ok(g.occ, 'the desk is drawn over Mara (a clipped copy of the room, after her in the page)');
+    assert.deepEqual(g.on, ['2'], 'the last bubble stays');
+    for (const b of g.bubbles) assert.ok(b.left >= g.hb.left && b.right <= g.hb.right && b.top >= g.hb.top && b.bottom <= g.hb.bottom, `bubble inside the hero ${JSON.stringify(b)}`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+  // reduced motion: the final frame at once (Rowan at the desk, one bubble); the scene is decoration with a hidden description
+  const { ctx, page } = await open('book-demo', { motion: 'reduce', settle: 200 });
+  assert.deepEqual(await page.evaluate(() => [document.querySelectorAll('.cm-bubble[data-on]').length, document.querySelector('.cm-fx').getAttribute('aria-hidden'), !!document.querySelector('.cm-sr').textContent.trim(), document.getAnimations().filter(a => a.effect && a.effect.target && a.effect.target.closest('.cm-fx')).length]), [1, 'true', true, 0]);
   await ctx.close();
 });
 
