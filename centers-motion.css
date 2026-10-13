@@ -3,81 +3,41 @@
    (prefers-reduced-motion:no-preference) and :root:not([data-motion=off]), keyed to classes the script adds only while motion is allowed.
    Tokens from ff-tokens.css. Character art only moves, rotates or scales uniformly and is never filtered, recoloured or cropped. */
 
-/* ---------------------------------------------------------------- the living hero: a full-bleed felt world (like Home's meadow) */
-.phero.cm-hero{background:#CFE6F2;color:var(--ink,#14313D);padding-block:clamp(28px,4vw,48px) 0;min-height:clamp(500px,calc(100svh - 200px),740px);display:flex;align-items:stretch}
-.phero.cm-hero::before,.phero.cm-hero::after{display:none}
-.phero.cm-hero>.wrap{position:relative;z-index:2;flex:1;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:end;gap:clamp(16px,3vw,40px)}
-.cm-world{position:absolute;inset:0;z-index:0;overflow:hidden}
-.phero .cm-world .cm-room{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,center 62%);border:0;border-radius:0;animation:none;max-width:none}
-.cm-veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(10,43,56,.30),rgba(10,43,56,.06) 48%,transparent 70%),linear-gradient(180deg,transparent 70%,rgba(30,20,6,.16))}
-.phero .cm-world .cm-sun{position:absolute;width:clamp(90px,11vw,170px);height:auto;right:8%;top:8%;border:0;animation:none}
-.phero .cm-world .cm-cloud{position:absolute;width:clamp(120px,15vw,230px);height:auto;left:46%;top:4%;opacity:.95;border:0;animation:none}
-.cm-lamp{position:absolute;inset:0;pointer-events:none;background:radial-gradient(45% 50% at 72% 30%,rgba(255,214,140,.42),transparent 70%),linear-gradient(180deg,transparent 55%,rgba(255,190,110,.18))}
-/* the frosted card (Home's "Learn. Move. Explore. Belong." card): the words read on the world */
-.phero.cm-hero .cm-card{align-self:center;margin-bottom:clamp(28px,4vw,48px);padding:clamp(20px,2.6vw,34px);border-radius:26px;background:rgba(251,246,236,.86);
-  -webkit-backdrop-filter:blur(14px) saturate(160%) brightness(1.06);backdrop-filter:blur(14px) saturate(160%) brightness(1.06);
-  border:1.5px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 24px 50px -24px rgba(10,43,56,.55);color:var(--ink,#14313D)}
-@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.phero.cm-hero .cm-card{background:rgba(251,246,236,.96)}}
-@media (prefers-reduced-transparency:reduce){.phero.cm-hero .cm-card{background:#FBF6EC;-webkit-backdrop-filter:none;backdrop-filter:none}}
-.phero.cm-hero .cm-card h1{color:var(--ink,#14313D)}
-.phero.cm-hero .cm-card .lede{color:#2E4A55}
-.phero.cm-hero .cm-card .eyebrow{color:#8A5A00}
-.phero.cm-hero .cm-card .crumbs{color:#3C5560}
-.phero.cm-hero .cm-card .crumbs button,.phero.cm-hero .cm-card .crumbs a{color:var(--ink,#14313D)}
-.phero.cm-hero .cm-card .btn.soft{background:#fff;border-color:rgba(20,49,61,.25)}
-/* the cast stands in the scene: a box on the floor line, each cut-out centred on --x and sized from its lineup scale */
-/* the right gutter keeps every cut-out clear of the fixed Nature / Sound dock (sound.css .ffs: 18 px from the edge, about 136 px wide) */
-.phero .art.cm-art{display:block;justify-self:stretch;align-self:end;position:relative;width:auto;height:auto;aspect-ratio:1.1;max-height:min(520px,calc(100svh - 250px));max-width:none;margin:0 max(0px,calc(170px - (100vw - min(100vw,1320px)) / 2)) 0 0}
-.cm-cast{position:absolute;inset:0;pointer-events:none}
-.cm-ch{position:absolute;bottom:7%;left:var(--x);height:var(--h);aspect-ratio:var(--ar);transform:translateX(-50%)}
-.cm-bob{display:block;width:100%;height:100%;transform-origin:50% 100%}
-.phero .art.cm-art .cm-ch img{display:block;width:100%;height:100%;max-width:none;object-fit:contain;transform-origin:50% 100%;border:0;border-radius:0;animation:none;filter:none}
-.cm-ch::before{content:"";position:absolute;left:10%;right:10%;bottom:-2.5%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,26,8,.38),transparent);z-index:-1}
-/* the honesty chip: one small caption, bottom corner */
-.cm-chip{position:absolute;z-index:3;left:clamp(10px,2vw,22px);bottom:10px;padding:4px 10px;border-radius:999px;background:rgba(10,43,56,.72);color:#FBF6EC;font:500 .6875rem/1.3 var(--body);letter-spacing:.01em;pointer-events:none}
+/* ---------------------------------------------------------------- the hero: the scene full width like a movie still, the words below */
+.phero.cm-scenehero{background:var(--paper,#FBF6EC);color:var(--ink,#14313D);padding:0 0 clamp(24px,4vw,44px);overflow:visible;isolation:isolate}
+.phero.cm-scenehero::before,.phero.cm-scenehero::after{display:none}
+.cm-still{position:relative;margin:0;height:min(56.25vw,78vh);overflow:hidden;background:#DCCFB4}
+figure.cm-still>img{border:0;border-radius:0;animation:none;max-width:none;box-shadow:none}
+figure.cm-still>img.cm-stillfill{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(22px) saturate(.95);opacity:.9}
+figure.cm-still>img.cm-scene{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 50%}
+.cm-still .cm-chip{position:absolute;z-index:3;left:clamp(10px,2vw,22px);bottom:10px;padding:4px 10px;border-radius:999px;background:rgba(10,43,56,.72);color:#FBF6EC;font:500 .6875rem/1.3 var(--body);letter-spacing:.01em;pointer-events:none}
+.phero.cm-scenehero>.wrap{position:relative;z-index:2;display:block;margin-top:calc(-1 * var(--cm-overlap,0px))}
+.phero.cm-scenehero .cm-card{display:grid;gap:12px;width:min(640px,100%);padding:clamp(18px,2.4vw,30px);border-radius:24px;background:rgba(251,246,236,.94);
+  -webkit-backdrop-filter:blur(12px) saturate(150%);backdrop-filter:blur(12px) saturate(150%);border:1.5px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 24px 50px -26px rgba(10,43,56,.5);color:var(--ink,#14313D)}
+@media (prefers-reduced-transparency:reduce){.phero.cm-scenehero .cm-card{background:#FBF6EC;-webkit-backdrop-filter:none;backdrop-filter:none}}
+.phero.cm-scenehero[data-cm-align="center"] .cm-card{margin-inline:auto}
+.phero.cm-scenehero[data-cm-align="right"] .cm-card{margin-left:auto}
+.phero.cm-scenehero .cm-card h1{color:var(--ink,#14313D)}
+.phero.cm-scenehero .cm-card .lede{color:#2E4A55}
+.phero.cm-scenehero .cm-card .eyebrow{color:#8A5A00}
+.phero.cm-scenehero .cm-card .crumbs{color:#3C5560}
+.phero.cm-scenehero .cm-card .crumbs button,.phero.cm-scenehero .cm-card .crumbs a{color:var(--ink,#14313D)}
+.phero.cm-scenehero .cm-card .btn.soft,.phero.cm-scenehero .cm-card .anchors button{background:#fff;color:var(--ink,#14313D);border-color:rgba(20,49,61,.25)}
+@media (max-width:639.98px){
+  .cm-still{height:auto;aspect-ratio:1600/905}
+  .phero.cm-scenehero>.wrap{margin-top:14px}
+  .phero.cm-scenehero .cm-card{width:100%;border-radius:20px;box-shadow:0 14px 30px -22px rgba(10,43,56,.45)}
+  .cm-still .cm-chip{font-size:.625rem;bottom:6px}
+}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .cm-scenehero.cm-live .cm-scene{animation:cm-kb 26s var(--ff-ease-inout) 1s infinite alternate}
+  :root:not([data-motion=off]) .cm-scenehero.ffm-paused .cm-scene{animation-play-state:paused}
+}
+@keyframes cm-kb{from{scale:1;translate:0 0}to{scale:1.015;translate:-3px -2px}}
+
+/* never a border or shadow on art */
 .cm-zonefr img,.cm-screen img{border:0!important;box-shadow:none}
-.phero .cm-world .cm-fill[hidden]{display:none}
-@media (max-width:980px){
-  .phero.cm-hero{min-height:0}
-  .phero.cm-hero>.wrap{grid-template-columns:1fr;align-items:stretch;gap:0}
-  .phero.cm-hero .cm-card{margin-bottom:0}
-  .phero .art.cm-art{max-height:none;max-width:560px;margin-right:72px}
-}
-@media (max-width:560px){.phero.cm-hero .cm-card{border-radius:20px}.cm-chip{font-size:.625rem;bottom:6px}}
-
-@media (prefers-reduced-motion:no-preference){
-  :root:not([data-motion=off]) .cm-hero.cm-live.is-landed .cm-bob{animation:cm-breathe 4.8s var(--ff-ease-inout) infinite alternate;animation-delay:calc(var(--i) * -.7s)}
-  :root:not([data-motion=off]) .cm-hero.cm-live .cm-cloud{animation:cm-drift 38s linear infinite alternate}
-  :root:not([data-motion=off]) .cm-hero.cm-live .cm-sun{animation:cm-spin 60s linear infinite}
-  :root:not([data-motion=off]) .cm-hero.cm-live :is(.cm-cloud,.cm-sun,.cm-lamp){transition:transform .6s var(--ff-ease-out)}
-  :root:not([data-motion=off]) .cm-hero.ffm-paused *{animation-play-state:paused!important}
-}
-@keyframes cm-breathe{from{translate:0 0}to{translate:0 -4px}}
-@keyframes cm-drift{from{translate:-30% 0}to{translate:40% 0}}
-@keyframes cm-spin{to{rotate:360deg}}
-
-/* ---------------------------------------------------------------- #book-demo: the reception (Mara behind the desk, Rowan walks in) */
-.phero .cm-world .cm-fill{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);max-width:none;object-fit:cover;object-position:center 30%;filter:blur(18px) saturate(.9);opacity:.95;border:0}
-.cm-actor{position:absolute;display:block;transform:translateX(-50%);pointer-events:none}
-.phero .cm-actor img{display:block;height:100%;width:auto;max-width:none;object-fit:contain;border:0;border-radius:0;animation:none;filter:none}
-.phero .cm-world .cm-occluder{position:absolute;max-width:none;object-fit:fill;border:0;border-radius:0;pointer-events:none}
-.cm-fx{position:absolute;inset:0;z-index:1;pointer-events:none}
-.cm-stride{display:block;height:100%;transform-origin:50% 100%}
-.cm-rowan::before{content:"";position:absolute;left:12%;right:12%;bottom:-2%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,26,8,.36),transparent);z-index:-1}
-.cm-bubble{position:absolute;z-index:2;display:block;width:max-content;max-width:260px;padding:10px 14px;border-radius:18px;background:#FFFDF6;color:var(--ink,#14313D);
-  font:600 .875rem/1.35 var(--body);box-shadow:0 10px 24px -12px rgba(10,43,56,.55),inset 0 0 0 4px #FFFDF6,inset 0 0 0 5.5px rgba(176,122,0,.45);opacity:0;visibility:hidden}
-.cm-bubble::after{content:"";position:absolute;width:14px;height:14px;background:#FFFDF6;bottom:-6px;left:calc(50% - 7px);rotate:45deg;box-shadow:3px 3px 6px -3px rgba(10,43,56,.35)}
-.cm-bubble.cm-b-mara::after{left:auto;right:-5px;bottom:auto;top:calc(50% - 7px);box-shadow:3px -3px 6px -3px rgba(10,43,56,.25)}
-.cm-bubble[data-on]{opacity:1;visibility:visible}
-.cm-bubble>span{position:relative;z-index:1}
-.cm-solo .cm-cast{display:none}
-@media (max-width:640px){.cm-reception .art.cm-art{aspect-ratio:.82}}
-@media (prefers-reduced-motion:no-preference){
-  :root:not([data-motion=off]) .cm-bubble{transition:opacity var(--ff-dur-2) var(--ff-ease-out),scale var(--ff-dur-3) var(--ff-ease-spring),visibility 0s var(--ff-dur-2);scale:.85;transform-origin:50% 100%}
-  :root:not([data-motion=off]) .cm-bubble[data-on]{scale:1;transition:opacity var(--ff-dur-2) var(--ff-ease-out),scale var(--ff-dur-3) var(--ff-ease-spring),visibility 0s}
-  :root:not([data-motion=off]) .cm-stride.is-walking img{animation:cm-waddle .52s var(--ff-ease-inout) infinite alternate;transform-origin:50% 100%}
-}
-@keyframes cm-waddle{from{rotate:-2.5deg}to{rotate:2.5deg}}
 
 /* ---------------------------------------------------------------- learning zones: each room lights up with its friend */
 .cm-zones .cm-zone{position:relative;overflow:hidden;isolation:isolate;background:color-mix(in srgb,var(--c) 9%,#fff)}
@@ -156,6 +116,7 @@
 
 @media print{
   .cm-tiers>*,.cm-steps>li,.cm-device{opacity:1!important;translate:none!important;transform:none!important}
-  .cm-spot,.cm-cloud{display:none!important}
+  .cm-spot{display:none!important}
+  .cm-scene{animation:none!important;scale:none!important}
   .ffe-item.cm-stitch::after{display:none}
 }

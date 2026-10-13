@@ -1,28 +1,22 @@
-/* Futures Friends: the Centers & Programs pages come alive (owner 2026-10-12: the centers side "is not matching the rest ... needs motion
-   graphics, animations, and just all the characters"). Brings #centers, #for-centers, #for-home, #for-faith, #pricing and #book-demo up
-   to the level of Home and the Families side, using only what the site already has: the plush cast (FFPlush, the official cut-outs, never
-   redrawn), the story-world rooms, the motion kit (ff-motion.js scope, tokens, magnet), the reveal and heading rise (ff-reveal.js) and the
-   felt sounds (sound.js, only when the visitor has sound on).
+/* Futures Friends: the Centers & Programs pages (and their neighbours) open on one big storybook scene (owner 2026-10-13, v3 batch:
+   "characters big, at true room scale, actually sitting in the chairs and using the furniture"; layout "picture full-width, text below").
 
-   1. A living hero on every page (markup, decorated inside render() before first paint, so nothing jumps): a story-world room in a
-      fixed-ratio stage with a grown-up of the cast (Principal Hazel, Ms. June, Ms. Fern, Mr. Moss) and the friends standing in it,
-      labelled "Illustration · Story-world characters" (FFArt.flag) like every other story-world scene. With motion: the room settles,
-      the grown-up steps in and waves, the friends hop in one by one (spring token), then everyone breathes gently; a fine pointer gives
-      the room and the cast a little depth. Any key, tap or wheel finishes the entrance at once (skippable).
-   2. One signature moment per page:
-      #centers      the director's "How a day travels" moves up under the program cards, followed by a peek at the real director
-                    dashboard of the Futures Hub preview (a framed screenshot, sample data) whose highlight tours its own panels once;
-                    the "What we have built so far" numbers count up when they arrive (numbers already on the page).
-      #for-centers  "Four zones, open all day": the rooms light up one by one, each friend popping up in its zone with its pillar
-      #for-home     (Booker LEARN, Lumi BELONG, Zuri EXPLORE, Bop MOVE). On #for-home the hero builds like a cozy room: the room
-      #for-faith    warms, a lamp glow comes on, then the cast arrives. On #for-faith a felt sun rises behind the hall.
-      #pricing      the three package cards turn in one by one and their published prices count up to the exact catalog figure.
-      #book-demo    "What happens next": the three steps are stitched together by a gold thread as they arrive.
-      everywhere    "Trusted by professionals": the reviewer cards get a gold stitch drawn around them as they arrive (their words
-                    and photos untouched).
-   Reduced motion or the Decorative motion switch (FFMotion.allowed()): the same pages, still and complete (every friend in place, every
-   room lit, every price final). Character art only ever moves, rotates or scales uniformly, and is always whole inside its stage.
-   Sends nothing, stores nothing. Loaded after audiences.js, pricing-all-in.js and ff-signatures.js, before FFstart(). */
+   1. The hero (markup, decorated inside render() before first paint, so nothing jumps): the page's scene runs across the top like a
+      movie still (img/scenes/<route>-800/-1600.webp; the whole picture, never cropped, over a soft blur of itself on wide screens), with
+      one small "Storybook illustration · Story-world characters" chip. The page's own words sit on a frosted card below it; on desktop
+      the card overlaps the still's bottom edge by 48 px only where no character stands (place()); on phones the picture comes first,
+      then the card. With motion the still settles in with a very slow drift and the card rises in; reduced motion or the Decorative
+      motion switch: still and complete. Any key, tap or wheel finishes the entrance at once.
+   2. One signature moment per page (unchanged):
+      #centers      the director's "How a day travels" and a peek at the real director dashboard of the Futures Hub preview (sample
+                    data) whose highlight tours its panels once; the "What we have built so far" numbers count up.
+      #for-centers, #for-home, #for-faith, #for-prek  "Four zones, open all day": the rooms light up one by one, each friend with its
+                    pillar (Booker LEARN, Lumi BELONG, Zuri EXPLORE, Bop MOVE).
+      #pricing      the three package cards turn in and their published prices count up to the exact catalog figure.
+      #book-demo    "What happens next": the three steps are stitched together by a gold thread.
+      everywhere    "Trusted by professionals": the reviewer cards rise and get a gold stitch (their words and photos untouched); the
+                    Learning Zones Kit chips pop in and its Real room / With the kit switch wipes.
+   Sends nothing; stores nothing. Loaded after audiences.js, pricing-all-in.js and ff-signatures.js, before FFstart(). */
 (function () {
   'use strict';
   if (typeof window === 'undefined' || typeof V === 'undefined') return;
@@ -39,97 +33,78 @@
       'El panel de dirección de la vista previa de Futures Hub, con datos de ejemplo: proporciones cubiertas en cada salón, inscripción, asistencia de hoy, personal en turno, el tablero de proporciones y lo que necesita atención.',
     'Storybook illustration': 'Ilustración de cuento',
     'Story-world characters': 'Personajes del mundo del cuento',
-    'Welcome to Futures Friends! Here for a demo?': '¡Bienvenido a Futures Friends! ¿Viene por una demostración?',
-    'Yes, we run a small program. Can we see the rooms?': 'Sí, tenemos un programa pequeño. ¿Podemos ver los salones?',
-    'Of course! I\u2019ll show you the Futures Hub.': '¡Claro! Le muestro Futures Hub.',
-    'Illustration: at the reception desk, Mara welcomes Rowan, who has come for a demo, while the friends play on the rug.': 'Ilustración: en la recepción, Mara recibe a Rowan, que viene por una demostración, mientras los amigos juegan en la alfombra.',
     LEARN: 'APRENDE', BELONG: 'PERTENECE', EXPLORE: 'EXPLORA', MOVE: 'MUÉVETE'
   };
   try { if (W.FFi18n && W.FFi18n.add) W.FFi18n.add('es', ES); } catch (e) { /* Spanish is optional */ }
 
-  // ---------------------------------------------------------------- the stages: room, grown-up, friends (x = centre, % of the stage)
-  const ENV_ALT = {
-    'school-arrival-entrance': 'Plush-world school entrance: a big felt sign over wooden double doors, flower beds and a curved path.',
-    'school-exterior-wide': 'Plush-world school seen from the gate: a long building with red felt roofs, a heart gate and flower beds under a blue sky.',
-    'hall-reception': 'Plush-world reception hall: a welcome desk with felt leaves, a green sofa and bench, arched doorways and an oval rug leading to the front doors.',
-    'classroom-empty-master': 'Plush-world classroom: round rug, reading bench, art shelves, small tables and a leaf-canopy nook by a sunny window.',
-    'classroom-reverse-angle': 'Plush-world classroom seen from the other side: green door with a round window, felt sun and tree wall art, shelves, small tables and a round rug.',
-    'activity-rug': 'Plush-world classroom: a round green rug with a stitched yellow border, small tables and chairs, cubbies with backpacks and a leaf-canopy reading nook by the window.'
-  };
-  // the same descriptions in Spanish (draft, pending teacher review); the alt is written in the page language at render time
-  const ENV_ALT_ES = {
-    'school-arrival-entrance': 'Entrada de la escuela en el mundo de peluche: un gran letrero de fieltro sobre puertas dobles de madera, jardineras con flores y un camino curvo.',
-    'school-exterior-wide': 'La escuela del mundo de peluche vista desde la reja: un edificio largo con techos de fieltro rojo, una reja con corazón y jardineras con flores bajo un cielo azul.',
-    'hall-reception': 'Recepción del mundo de peluche: un mostrador de bienvenida con hojas de fieltro, un sofá y una banca verdes, puertas en arco y una alfombra ovalada que lleva a la entrada.',
-    'classroom-empty-master': 'Salón del mundo de peluche: alfombra redonda, banca de lectura, estantes de arte, mesitas y un rincón con techo de hojas junto a una ventana soleada.',
-    'classroom-reverse-angle': 'Salón del mundo de peluche visto desde el otro lado: puerta verde con ventana redonda, sol y árbol de fieltro en la pared, estantes, mesitas y una alfombra redonda.',
-    'activity-rug': 'Salón del mundo de peluche: una alfombra verde redonda con borde amarillo cosido, mesitas y sillas, casilleros con mochilas y un rincón de lectura con techo de hojas junto a la ventana.'
+  // ---------------------------------------------------------------- the scenes (owner-approved v3 batch, 2026-10-13)
+  // One integrated picture per page (GPT Image 2 with the official references attached; Book a demo uses the owner's fox visitor and otter
+  // receptionist). `who` = where the characters are in the picture, in % (x0, x1, y0, y1), measured by eye on the delivered images: the
+  // card that overlaps the picture's bottom edge is placed (left, centre or right of the content column) where it covers none of them.
+  const SCENES = {
+    centers: { who: [[0, 25, 21, 80], [22, 42, 25, 87], [41, 72, 3, 90], [55, 73, 30, 89], [79, 98, 46, 87]],
+      alt: 'Storybook illustration: at the school entrance, Principal Hazel kneels to welcome the children; Lumi hugs her, Booker waves, Zuri looks at the flowers and Bop hops up the path.',
+      es: 'Ilustración de cuento: en la entrada de la escuela, la directora Hazel se arrodilla para recibir a los niños; Lumi la abraza, Booker saluda, Zuri mira las flores y Bop llega saltando por el camino.' },
+    'for-centers': { who: [[5, 29, 30, 90], [26, 46, 5, 62], [45, 59, 25, 60], [57, 74, 34, 70], [71, 98, 36, 94]],
+      alt: 'Storybook illustration: Ms. June sits at a round table with Booker, Lumi, Zuri and Bop, sorting colourful felt shapes together.',
+      es: 'Ilustración de cuento: la Sra. June está sentada en una mesa redonda con Booker, Lumi, Zuri y Bop, ordenando juntos figuras de fieltro de colores.' },
+    pricing: { who: [[8, 26, 29, 73], [25, 41, 10, 83], [37, 52, 22, 77], [47, 61, 52, 91], [61, 75, 56, 91], [69, 94, 26, 80]],
+      alt: 'Storybook illustration: on a garden bench outside the school, Principal Hazel and Mara look through a folder with Booker beside them, while Lumi, Zuri and Bop play with a ball.',
+      es: 'Ilustración de cuento: en una banca del jardín de la escuela, la directora Hazel y Mara revisan una carpeta con Booker a su lado, mientras Lumi, Zuri y Bop juegan con una pelota.' },
+    'book-demo': { who: [[5, 26, 41, 93], [27, 45, 40, 87], [47, 72, 7, 78], [71, 88, 12, 43]],
+      alt: 'Storybook illustration: at the reception desk, a fox visitor with a shoulder bag talks with the otter receptionist, while Booker and Zuri build with blocks on the rug.',
+      es: 'Ilustración de cuento: en la recepción, un zorro visitante con un bolso conversa con la nutria recepcionista, mientras Booker y Zuri construyen con bloques en la alfombra.' },
+    quote: { who: [[3, 26, 24, 94], [33, 48, 29, 88], [48, 66, 37, 85], [67, 92, 4, 88]],
+      alt: 'Storybook illustration: at the cubbies, Booker hangs his backpack, Lumi ties her shoe on the bench, Zuri points at an empty cubby and Principal Hazel kneels with a clipboard.',
+      es: 'Ilustración de cuento: en los casilleros, Booker cuelga su mochila, Lumi se ata el zapato en la banca, Zuri señala un casillero vacío y la directora Hazel se arrodilla con un portapapeles.' },
+    options: { who: [[6, 18, 15, 90], [15, 30, 35, 91], [26, 46, 11, 88], [44, 66, 31, 93], [66, 93, 13, 92]],
+      alt: 'Storybook illustration: at the school gate, Principal Hazel kneels to shake Booker’s hand while Rowan, Rose and Lumi arrive.',
+      es: 'Ilustración de cuento: en la entrada de la escuela, la directora Hazel se arrodilla para darle la mano a Booker mientras llegan Rowan, Rose y Lumi.' },
+    'for-prek': { who: [[2, 26, 44, 96], [21, 38, 2, 82], [46, 62, 38, 79], [63, 79, 41, 87], [76, 99, 42, 92]],
+      alt: 'Storybook illustration: Ms. June sits by an easel with a circle, a square and a triangle; Zuri points at the triangle, Booker raises his paw, and Lumi and Bop watch from the rug.',
+      es: 'Ilustración de cuento: la Sra. June está sentada junto a un caballete con un círculo, un cuadrado y un triángulo; Zuri señala el triángulo, Booker levanta la mano y Lumi y Bop miran desde la alfombra.' },
+    'for-employers': { who: [[2, 34, 21, 86], [26, 42, 26, 85], [43, 61, 8, 71], [52, 74, 35, 84], [68, 94, 14, 85]],
+      alt: 'Storybook illustration: at morning drop-off, Rowan hugs Booker goodbye, Bruno straightens Bop’s overall strap and Principal Hazel holds the school door open.',
+      es: 'Ilustración de cuento: al dejar a los niños por la mañana, Rowan abraza a Booker para despedirse, Bruno le acomoda el tirante a Bop y la directora Hazel sostiene la puerta.' },
+    hub: { who: [[4, 33, 19, 90], [29, 50, 34, 89], [60, 76, 2, 53], [74, 96, 13, 60]],
+      alt: 'Storybook illustration: Bop and Zuri walk past the welcome desk waving, where Ms. June checks a clipboard and Mara looks at a tablet.',
+      es: 'Ilustración de cuento: Bop y Zuri pasan saludando junto a la recepción, donde la Sra. June revisa un portapapeles y Mara mira una tableta.' },
+    membership: { who: [[6, 26, 31, 83], [23, 47, 8, 66], [52, 70, 41, 89], [66, 80, 15, 59], [81, 99, 26, 75]],
+      alt: 'Storybook illustration: Mr. Moss pours water at the snack table for Booker and Zuri, while Lumi washes her hands at the sink and Bop dries his.',
+      es: 'Ilustración de cuento: el Sr. Moss sirve agua en la mesa de la merienda para Booker y Zuri, mientras Lumi se lava las manos y Bop se las seca.' },
+    'founding-partners': { who: [[1, 20, 39, 84], [14, 34, 11, 79], [31, 52, 23, 75], [48, 66, 32, 78], [60, 78, 34, 85], [73, 98, 25, 85]],
+      alt: 'Storybook illustration: Principal Hazel, Mara and the four friends kneel around a young tree they are planting together.',
+      es: 'Ilustración de cuento: la directora Hazel, Mara y los cuatro amigos se arrodillan alrededor de un árbol joven que plantan juntos.' },
+    training: { who: [[8, 34, 30, 90], [33, 51, 33, 85], [50, 76, 1, 88], [69, 93, 36, 97]],
+      alt: 'Storybook illustration: in the reading corner, Ms. June reads a picture book aloud while Ms. Fern and Mr. Moss take notes and Booker reads on the bench.',
+      es: 'Ilustración de cuento: en el rincón de lectura, la Sra. June lee un libro en voz alta mientras la Sra. Fern y el Sr. Moss toman notas y Booker lee en la banca.' },
+    'start-center': { who: [[15, 33, 38, 92], [34, 61, 26, 92], [62, 84, 6, 89]],
+      alt: 'Storybook illustration: Principal Hazel opens the school door as Booker waves and Zuri walks in for the first morning.',
+      es: 'Ilustración de cuento: la directora Hazel abre la puerta de la escuela mientras Booker saluda y Zuri entra en la primera mañana.' },
+    readiness: { who: [[6, 26, 44, 91], [20, 40, 4, 84], [36, 57, 34, 84], [57, 74, 31, 75], [80, 99, 29, 80]],
+      alt: 'Storybook illustration: Ms. June kneels to help Bop with his zipper while Lumi ties her shoe, Booker zips his backpack and Zuri sorts blocks.',
+      es: 'Ilustración de cuento: la Sra. June se arrodilla para ayudar a Bop con el cierre mientras Lumi se ata el zapato, Booker cierra su mochila y Zuri ordena bloques.' },
+    why: { who: [[0, 30, 21, 89], [27, 43, 27, 72], [42, 66, 26, 73], [60, 74, 7, 59], [71, 99, 29, 85]],
+      alt: 'Storybook illustration: at the garden beds, Mr. Moss shows Zuri a seedling while Bop pats the soil, Booker digs and Lumi waters the plants.',
+      es: 'Ilustración de cuento: en los huertos, el Sr. Moss le muestra un brote a Zuri mientras Bop aplana la tierra, Booker cava y Lumi riega las plantas.' },
+    'for-home': { who: [[2, 22, 30, 85], [16, 35, 28, 72], [38, 56, 37, 80], [53, 79, 7, 84], [72, 94, 20, 77]],
+      alt: 'Storybook illustration: in a cozy home daycare, Ms. Fern reads a picture book on the sofa with Booker beside her and Zuri on the rug, while Lumi and Bop build with blocks at a small table.',
+      es: 'Ilustración de cuento: en una guardería acogedora, la Sra. Fern lee un libro en el sofá con Booker a su lado y Zuri en la alfombra, mientras Lumi y Bop construyen con bloques en una mesita.' },
+    'for-faith': { who: [[2, 28, 30, 96], [22, 40, 26, 70], [34, 61, 10, 64], [57, 77, 26, 72], [71, 96, 40, 98]],
+      alt: 'Storybook illustration: at a round table, Mr. Moss hands out felt hearts to Bop, Lumi, Booker and Zuri.',
+      es: 'Ilustración de cuento: en una mesa redonda, el Sr. Moss reparte corazones de fieltro a Bop, Lumi, Booker y Zuri.' }
   };
   const es = () => !!(W.FFi18n && W.FFi18n.lang === 'es');
-  const BUBBLES = [['mara', 'Welcome to Futures Friends! Here for a demo?'], ['rowan', 'Yes, we run a small program. Can we see the rooms?'], ['mara', 'Of course! I\u2019ll show you the Futures Hub.']];
-  const REC_SR = 'Illustration: at the reception desk, Mara welcomes Rowan, who has come for a demo, while the friends play on the rug.';
-  const FOUR = [['booker', 37], ['lumi', 53], ['zuri', 69], ['bop', 86]];
-  const STAGES = {
-    centers: { env: 'school-arrival-entrance', lead: ['principal-hazel', 16], cast: FOUR },
-    'for-centers': { env: 'classroom-empty-master', lead: ['ms-june', 15], cast: [['booker', 36], ['zuri-pointing', 53], ['lumi', 69], ['bop-waving', 86]] },
-    'for-home': { env: 'classroom-reverse-angle', lead: ['ms-fern', 16], cast: [['lumi', 37], ['bop-waving', 55], ['booker', 72], ['zuri', 88]], cozy: true },
-    'for-faith': { env: 'activity-rug', lead: ['mr-moss', 16], cast: [['lumi-heart-hands', 38], ['booker', 55], ['zuri', 71], ['bop', 87]], sun: true },
-    pricing: { env: 'school-exterior-wide', lead: ['principal-hazel', 15], cast: FOUR, sky: true },
-    'book-demo': { env: 'hall-reception', lead: null, cast: [['booker', 0], ['zuri', 0]], reception: true }
-  };
-  const UNIT = 62;
-  // Where people can stand in each backdrop (owner 2026-10-12: "the kid characters are floating on the gate"): the feet line `y` and the
-  // open stretch of floor `x0..x1` along it, in % of the picture (1600 x 900), checked by eye on a 10% grid; `adult` is how tall a
-  // grown-up of lineup scale 1.0 stands at that line, as a share of the picture's height (from the doors, chairs and desks around it).
-  //   school-arrival-entrance  the paved path in front of the doors, between the two lawns
-  //   school-exterior-wide     the path beyond the heart gate, between the lawns: the gate and fence are nearer, below their feet
-  //   hall-reception           the floor in front of the oval rug, left of the welcome desk (the reception sits behind them)
-  //   classroom-empty-master   the round rug, clear of the crayon basket (left) and the drum basket (right)
-  //   classroom-reverse-angle  the round rug, clear of the small tables (left) and the potted plant (right)
-  //   activity-rug             the big round rug
-  const GROUND = {
-    'school-arrival-entrance': { y: 85, x0: 20, x1: 78, adult: 0.36 },
-    'school-exterior-wide': { y: 67, x0: 32, x1: 70, adult: 0.2 },
-    'hall-reception': { y: 95, x0: 43, x1: 60, adult: 0.5 },
-    'classroom-empty-master': { y: 75, x0: 26, x1: 78, adult: 0.4 },
-    'classroom-reverse-angle': { y: 78, x0: 14, x1: 70, adult: 0.42 },
-    'activity-rug': { y: 80, x0: 8, x1: 90, adult: 0.44 }
-  };                         // a grown-up of lineup scale 1.0 stands this tall, % of the stage height
-
-  function envImg(e, said) {
-    const b = `img/plush/environments/${e}`;
-    const base = (es() ? ENV_ALT_ES : ENV_ALT)[e] || '';
-    return `<img class="cm-room" src="${b}-1600.webp" srcset="${b}-800.webp 800w, ${b}-1600.webp 1600w" sizes="100vw" alt="${E(base + (said ? ' ' + said : ''))}" data-i18n-skip width="1600" height="900" fetchpriority="high" decoding="async">`;
+  // the full-width still: the picture whole (contain) over a soft blur of itself, so wide screens never crop a character
+  function still(route, o = {}) {
+    const c = SCENES[route], b = `img/scenes/${route}`;
+    if (!c) return '';
+    const set = `${b}-800.webp 800w, ${b}-1600.webp 1600w`;
+    return `<figure class="cm-still${o.cls ? ' ' + o.cls : ''}" data-cm-still="${E(route)}">`
+      + `<img class="cm-stillfill" src="${b}-800.webp" alt="" aria-hidden="true" width="800" height="452" decoding="async">`
+      + `<img class="cm-scene" src="${b}-1600.webp" srcset="${set}" sizes="(max-width:1422px) 100vw, 1422px" width="1600" height="905" alt="${E(es() ? c.es : c.alt)}" data-i18n-skip fetchpriority="high" decoding="async">`
+      + `<span class="cm-chip"><span>${E(T('Storybook illustration'))}</span> · <span>${E(T('Story-world characters'))}</span></span></figure>`;
   }
-  // the hero's world, full bleed behind the card: the room, a felt sun or cloud, a lamp glow (cozy), and the honesty chip
-  function world(route) {
-    const s = STAGES[route], P = PL();
-    if (!s || !P) return null;
-    const all = (s.lead ? [s.lead] : []).concat(s.cast).filter(c => P.has(c[0])).map(c => c.slice());
-    const names = (s.reception ? ['Mara', 'Rowan'] : []).concat(all.map(c => P.name(c[0])));
-    const said = names.length > 1 ? names.slice(0, -1).join(', ') + (es() ? ' y ' : ' and ') + names[names.length - 1] + (es() ? ' están al frente.' : ' are in front.') : '';
-    const g = GROUND[s.env];
-    const bg = `<div class="cm-world" style="--pos:${g ? `${(g.x0 + g.x1) / 2}% ${g.y}%` : 'center 62%'}" data-env="${E(s.env)}"><img class="cm-fill" alt="" aria-hidden="true" decoding="async" hidden>${envImg(s.env, said)}<span class="cm-veil" aria-hidden="true"></span>${s.sun ? '<img class="cm-sun" src="img/plush/hero/felt-sun-320.webp" alt="" aria-hidden="true" width="320" height="320" decoding="async">' : ''}${s.sky ? '<img class="cm-cloud" src="img/plush/hero/felt-cloud-2-480.webp" alt="" aria-hidden="true" width="480" height="300" decoding="async" loading="lazy">' : ''}${s.cozy ? '<span class="cm-lamp" aria-hidden="true"></span>' : ''}</div>`;
-    const ch = ([k, x], i) => {
-      const lead = !!s.lead && i === 0, h = UNIT * P.P[k].scale, hpx = Math.round(lead ? 280 : 170);
-      return `<span class="cm-ch${lead ? ' cm-lead' : ''}" style="--x:${x}%;--h:${h.toFixed(1)}%;--ar:${P.ratio(k).toFixed(4)};--i:${i}" data-cm-ch="${E(k)}" data-scale="${P.P[k].scale}" data-ar="${P.ratio(k).toFixed(4)}"><i class="cm-bob">${P.img(k, { alt: '', h: hpx, eager: true })}</i></span>`;
-    };
-    const cast = `<div class="cm-cast">${all.map(ch).join('')}</div>`;
-    // #book-demo (owner 2026-10-12, "let's get creative"): the reception. Mara (official cut-out) stands behind the welcome desk, the
-    // desk itself drawn again over her (the same picture, clipped to the counter) so it hides her from the waist down; Rowan walks in
-    // from the hall and stops at the desk, and a short felt conversation follows. The bubbles are decoration (aria-hidden); one hidden
-    // line describes the scene.
-    const rec = s.reception ? {
-      back: `<span class="cm-actor cm-mara" data-actor="mara" data-ar="${P.ratio('mara').toFixed(4)}" aria-hidden="true">${P.img('mara', { alt: '', h: 300, eager: true })}</span>`
-        + `<img class="cm-occluder" src="img/plush/environments/${s.env}-1600.webp" alt="" aria-hidden="true" width="1600" height="900" decoding="async">`,
-      front: `<div class="cm-fx" aria-hidden="true"><span class="cm-actor cm-rowan" data-actor="rowan" data-ar="${P.ratio('rowan').toFixed(4)}"><i class="cm-stride">${P.img('rowan', { alt: '', h: 300, eager: true })}</i></span>`
-        + BUBBLES.map(([who, line], i) => `<span class="cm-bubble cm-b-${who}" data-bubble="${i}" data-who="${who}"${i === BUBBLES.length - 1 ? ' data-on' : ''}><span>${E(es() ? ES[line] || line : line)}</span></span>`).join('') + '</div>'
-        + `<span class="ffa-sr cm-sr">${E(es() ? ES[REC_SR] : REC_SR)}</span>`
-    } : null;
-    const chip = `<span class="cm-chip"><span>Storybook illustration</span> · <span>Story-world characters</span></span>`;
-    return { bg: rec ? bg.replace(/<\/div>$/, rec.back + '</div>') + rec.front : bg, cast, chip, cozy: !!s.cozy, reception: !!rec };
-  }
-  const stage = route => { const w = world(route); return w ? w.bg + w.cast + w.chip : ''; };
 
   // ---------------------------------------------------------------- markup decoration (inside render(), before first paint)
   const ZONE = { booker: 'LEARN', lumi: 'BELONG', zuri: 'EXPLORE', bop: 'MOVE' };
@@ -138,28 +113,22 @@
     const t = doc.createElement('template');
     t.innerHTML = html;
     const R = t.content;
-    // 1. the living hero: the world full bleed, the words on a frosted card, the cast standing in the scene
+    // 1. the hero: the scene full width like a movie still, the page's words on a card below it (overlapping its bottom edge where free)
     const hero = R.querySelector('.phero');
-    const w = world(route);
-    if (hero && w) {
-      hero.classList.add('cm-hero');
-      if (w.cozy) hero.classList.add('cm-cozy');
-      if (w.reception) hero.classList.add('cm-reception');
+    if (hero && SCENES[route]) {
+      hero.classList.add('cm-hero', 'cm-scenehero');
       hero.setAttribute('data-cm-hero', route);
       const wrap = hero.querySelector('.wrap');
-      let art = hero.querySelector('.art');
-      if (!art) { art = doc.createElement('div'); wrap.appendChild(art); }
-      art.className = 'art cm-art';
-      art.innerHTML = w.cast;
-      const txt = wrap.firstElementChild;
-      if (txt && txt !== art) txt.classList.add('cm-card');
-      hero.insertAdjacentHTML('afterbegin', w.bg);
-      hero.insertAdjacentHTML('beforeend', w.chip);
+      const art = hero.querySelector('.art');
+      if (art) art.remove();
+      const txt = wrap && wrap.firstElementChild;
+      if (txt) txt.classList.add('cm-card');
+      hero.insertAdjacentHTML('afterbegin', still(route));
       const gold = hero.querySelector('.btn.gold');
       if (gold) gold.setAttribute('data-ff-magnet', '');
     }
-    // 2. the learning zones (#for-centers, #for-home, #for-faith): each card gets its friend and its pillar
-    if (/^for-(centers|home|faith)$/.test(route) && PL()) {
+    // 2. the learning zones (#for-centers, #for-home, #for-faith, #for-prek): each card gets its friend and its pillar
+    if (/^for-(centers|home|faith|prek)$/.test(route) && PL()) {
       const g = Array.from(R.querySelectorAll('.grid.g4')).find(x => x.children.length === 4 && x.querySelector('b[style*="var(--booker)"]'));
       if (g) {
         g.classList.add('cm-zones');
@@ -182,7 +151,6 @@
     return out.innerHTML;
   }
 
-  // #centers: the peek at the director dashboard (the real Futures Hub preview, sample data)
   function showcase() {
     const H = W.FFHubLink, href = (H && H.preview ? H.preview : 'portal-test/c/test-family-demo-center/') + '?enter=director';
     const alt = 'The director dashboard of the Futures Hub preview, with sample data: ratio coverage for every room, enrollment, attendance today, staff on the clock, the ratio board and what needs attention.';
@@ -197,7 +165,10 @@
   }
 
   // wrap the six routes' views (audiences.js, views.js, pricing-all-in.js have defined them by now)
-  Object.keys(STAGES).forEach(r => {
+
+  // wrap the scene pages' views (audiences.js, views.js, pricing-all-in.js, offer-clarity.js, founding-partners.js, demo-portal.js and
+  // release-truth.js have defined them by now)
+  Object.keys(SCENES).forEach(r => {
     const orig = V[r];
     if (typeof orig !== 'function' || orig._cm) return;
     const f = function () { return decorate(r, orig.apply(this, arguments)); };
@@ -205,87 +176,85 @@
     V[r] = f;
   });
 
+  // ---------------------------------------------------------------- the card below the still: where it may overlap the picture
+  // The picture is drawn whole (contain) in the still; the card overlaps its bottom edge by up to 48 px (desktop) only where that strip
+  // holds no character: left of the content column, centred or right, whichever is free first; if none is, it sits just below. Phones:
+  // picture first, then the card, no overlap. Runs on render and resize; the result is data-cm-align / --cm-overlap on the hero.
+  const OVERLAP = 48;
+  function drawn(img, box) {   // the picture's drawn rectangle inside its box (object-fit: contain)
+    const r = 1600 / 905, bw = box.width, bh = box.height;
+    const w = Math.min(bw, bh * r), h = w / r;
+    return { left: box.left + (bw - w) / 2, top: box.top + (bh - h) / 2, width: w, height: h };
+  }
+  // the fixed Nature / Sound dock never covers a character: if it would, the still gets a little shorter (the picture narrower and
+  // centred, the blur either side) until it does not, down to half the window height. who: character boxes in % of the picture.
+  function fitDock(fig, who) {
+    fig.style.removeProperty('height');
+    const dk = doc.querySelector('.ffs'), Dk = dk && dk.getBoundingClientRect();
+    const boxes = Pp => who.map(([x0, x1, y0, y1]) => ({ l: Pp.left + x0 / 100 * Pp.width, r: Pp.left + x1 / 100 * Pp.width, t: Pp.top + y0 / 100 * Pp.height, b: Pp.top + y1 / 100 * Pp.height }));
+    const under = Pp => !!(Dk && Dk.width) && boxes(Pp).some(q => q.r > Dk.left && q.l < Dk.right && q.b > Dk.top && q.t < Dk.bottom);
+    let F = fig.getBoundingClientRect(), P = drawn(null, F);
+    const minH = (W.innerHeight || 800) * 0.5;
+    if (fig.clientWidth >= 640) {
+      while (under(P) && F.height > minH) {
+        fig.style.height = Math.round(F.height * 0.96) + 'px';
+        F = fig.getBoundingClientRect(); P = drawn(null, F);
+      }
+    }
+    return { F, P };
+  }
+  function place(hero) {
+    const c = SCENES[hero.dataset.cmHero], fig = hero.querySelector('.cm-still'), card = hero.querySelector('.cm-card'), wrap = hero.querySelector('.wrap');
+    if (!c || !fig || !card || !wrap) return null;
+    const W0 = hero.clientWidth, phone = W0 < 640;
+    if (phone) { fig.style.removeProperty('height'); hero.dataset.cmAlign = 'below'; hero.style.setProperty('--cm-overlap', '0px'); return { align: 'below' }; }
+    const { F, P } = fitDock(fig, c.who);
+    const Wr = wrap.getBoundingClientRect();
+    const cs = getComputedStyle(wrap), padL = parseFloat(cs.paddingLeft) || 0, padR = parseFloat(cs.paddingRight) || 0;
+    const colL = Wr.left + padL, colR = Wr.right - padR, cw = Math.min(card.getBoundingClientRect().width || 640, colR - colL);
+    const stripTop = P.top + P.height - OVERLAP;
+    const hits = (l, r) => c.who.some(([x0, x1, , y1]) => {
+      const bl = P.left + x0 / 100 * P.width, br = P.left + x1 / 100 * P.width, bb = P.top + y1 / 100 * P.height;
+      return bb > stripTop + 1 && br > l + 1 && bl < r - 1;
+    });
+    const opts = [['left', colL], ['center', colL + (colR - colL - cw) / 2], ['right', colR - cw]];
+    const pick = opts.find(([, l]) => !hits(l, l + cw));
+    hero.dataset.cmAlign = pick ? pick[0] : 'left';
+    hero.style.setProperty('--cm-overlap', (pick ? OVERLAP : 0) + 'px');
+    return { align: hero.dataset.cmAlign, overlap: pick ? OVERLAP : 0 };
+  }
+  let lo = null;
+  function placeSetup(view, root) {
+    if (lo) { lo.disconnect(); lo = null; }
+    const hero = root && root.querySelector && root.querySelector('.cm-scenehero');
+    if (!hero) return;
+    place(hero);
+    // the Nature / Sound dock is drawn after the first render (and resizes with the language): place again once it is there
+    [400, 1200].forEach(ms => setTimeout(() => { if (hero.isConnected) place(hero); }, ms));
+    if (typeof ResizeObserver === 'function') {
+      let id = 0, w = hero.clientWidth;
+      lo = new ResizeObserver(() => { if (!id) id = requestAnimationFrame(() => { id = 0; if (!hero.isConnected || hero.clientWidth === w) return; w = hero.clientWidth; place(hero); }); });
+      lo.observe(hero);
+    }
+  }
+
   // ---------------------------------------------------------------- motion (one scope per render)
   let live = null;
   const sfx = (n, g) => { try { if (W.FFSound && W.FFSound.enabled && W.FFSound.enabled()) W.FFSound.play(n, { gain: g || 0.4 }); } catch (e) { /* sound is optional */ } };
 
+  // the still settles in and drifts very slowly (ken burns, at most 1.5% so the edge characters stay whole); the card rises in under it
   function heroMotion(root, sc) {
-    const st = root.querySelector('.cm-hero');
+    const st = root.querySelector('.cm-scenehero');
     if (!st) return;
     const D = M().dur, Es = M().ease, anims = [];
-    const room = st.querySelector('.cm-room'), chars = Array.from(st.querySelectorAll('.cm-ch'));
     const push = a => { if (a) anims.push(a); return a; };
     st.classList.add('cm-live');
-    sc.add(() => st.classList.remove('cm-live', 'is-landed'));
-    const cozy = st.classList.contains('cm-cozy');
-    const card = st.querySelector('.cm-card');
-    push(sc.anim(card, [{ transform: 'translateY(22px) scale(.985)' }, { transform: 'none' }], { duration: D[3] + 150, easing: Es.out, fill: 'backwards' }));
-    // the room settles (scale only: the LCP picture is never hidden)
-    push(sc.anim(room, [{ scale: cozy ? '1.08' : '1.05' }, { scale: '1' }], { duration: cozy ? 1100 : D[4], easing: Es.out, fill: 'backwards' }));
-    if (cozy) { const lamp = st.querySelector('.cm-lamp'); push(sc.anim(lamp, [{ opacity: 0 }, { opacity: 1 }], { duration: 700, delay: 500, easing: Es.out, fill: 'backwards' })); }
-    const sun = st.querySelector('.cm-sun');
-    if (sun) push(sc.anim(sun, [{ transform: 'translate(0, 70%) rotate(-30deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 1400, delay: 150, easing: Es.out, fill: 'backwards' }));
-    const base = cozy ? 900 : 260;
-    chars.forEach((c, i) => {
-      const b = c.querySelector('.cm-bob');
-      if (c.classList.contains('cm-lead')) {   // the grown-up steps in from the side, then waves (a small uniform rotate of the whole cut-out)
-        push(sc.anim(b, [{ transform: 'translateX(-28px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D[3] + 120, delay: base, easing: Es.out, fill: 'backwards' }));
-        const img = b.querySelector('img');
-        push(sc.anim(img, [{ rotate: '0deg' }, { rotate: '-4deg', offset: .25 }, { rotate: '3deg', offset: .55 }, { rotate: '-2deg', offset: .8 }, { rotate: '0deg' }], { duration: 1100, delay: base + D[3] + 120, easing: Es.inout }));
-        return;
-      }
-      const a = push(sc.anim(b, [
-        { transform: 'translate(26px, 0) scale(.92)', opacity: 0 },
-        { transform: 'translate(12px, -34px) scale(1)', opacity: 1, offset: .45 },
-        { transform: 'translate(0, 0) scale(1)', offset: .8 },
-        { transform: 'translate(0, -6px) scale(1)', offset: .9 },
-        { transform: 'none' }], { duration: 620, delay: base + 380 + i * 170, easing: Es.out, fill: 'backwards' }));
-      if (a) a.addEventListener('finish', () => sfx('pop', 0.25));
-    });
-    const rec = reception2(st, sc, anims, base);
-    const last = anims[anims.length - 1];
-    const landed = () => { if (!sc.aborted) st.classList.add('is-landed'); };
-    if (last) last.addEventListener('finish', landed); else landed();
-    // skippable: any key, tap, click or wheel finishes the entrance at once
-    const skip = () => { if (rec) rec.skip(); anims.forEach(a => { try { if (a.playState !== 'finished') a.finish(); } catch (e) { /* cancelled */ } }); landed(); };
+    sc.add(() => st.classList.remove('cm-live'));
+    push(sc.anim(st.querySelector('.cm-scene'), [{ opacity: 0.001, scale: '1.015' }, { opacity: 1, scale: '1' }], { duration: D[4], easing: Es.out, fill: 'backwards' }));
+    push(sc.anim(st.querySelector('.cm-card'), [{ transform: 'translateY(26px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D[3] + 150, delay: 220, easing: Es.out, fill: 'backwards' }));
+    const skip = () => anims.forEach(a => { try { if (a.playState !== 'finished') a.finish(); } catch (e) { /* cancelled */ } });
     ['keydown', 'pointerdown', 'wheel', 'touchstart'].forEach(t => sc.listen(W, t, skip, { passive: true, once: true }));
-    // depth for a fine pointer; the idle breathing pauses off screen and on a hidden tab
-    sc.layers(st, [{ el: st.querySelector('.cm-cloud'), x: -14, y: -6 }, { el: st.querySelector('.cm-sun'), x: -10, y: -6 }, { el: st.querySelector('.cm-lamp'), x: -6, y: -4 }]);
     sc.pauseOffscreen(st);
-  }
-
-  // the reception's motion: Rowan walks in from the far doors (feet on the floor, a gentle waddle, growing with the perspective), the
-  // friends glance at him, then the three bubbles take turns (2.5 s each) and the last one stays. Once per visit (sessionStorage);
-  // phones start with Rowan already at the desk. Any input skips to the final frame (Rowan at the desk, the last bubble).
-  function reception2(st, sc, anims, base) {
-    const row = st.querySelector('.cm-rowan');
-    if (!row) return null;
-    const bubbles = Array.from(st.querySelectorAll('.cm-bubble')), walker = row.querySelector('.cm-stride');
-    const show = i => bubbles.forEach((b, j) => b.toggleAttribute('data-on', j === i));
-    let over = false;
-    const final = () => { over = true; walker.classList.remove('is-walking'); show(bubbles.length - 1); };
-    sc.add(final);
-    let seen = false;
-    try { seen = W.sessionStorage.getItem('ff-cm-reception') === '1'; W.sessionStorage.setItem('ff-cm-reception', '1'); } catch (e) { /* once per load */ }
-    if (seen) { final(); return { skip: final }; }
-    const talk = t0 => bubbles.forEach((b, i) => sc.timer(() => { if (over) return; show(i); sfx('pop', 0.2); if (i === bubbles.length - 1) over = true; }, t0 + i * 2500));
-    show(-1);
-    const phone = st.getBoundingClientRect().width < 640;
-    if (phone) { talk(base + 900); return { skip: final }; }
-    const [dx, dy, s0] = (row.dataset.from || '0,0,1').split(',').map(Number);
-    walker.classList.add('is-walking');
-    const a = sc.anim(walker, [{ transform: `translate(${dx}px, ${dy}px) scale(${s0})`, opacity: 0, offset: 0 }, { transform: `translate(${dx * 0.94}px, ${dy * 0.94}px) scale(${s0 + (1 - s0) * 0.06})`, opacity: 1, offset: 0.06 }, { transform: 'none', opacity: 1 }],
-      { duration: 3600, delay: base + 500, easing: 'cubic-bezier(.33,.1,.45,1)', fill: 'backwards' });
-    if (a) {
-      anims.push(a);
-      a.addEventListener('finish', () => {
-        walker.classList.remove('is-walking');
-        if (over) return;
-        st.querySelectorAll('.cm-ch img').forEach((im, i) => sc.anim(im, [{ rotate: '0deg' }, { rotate: '5deg', offset: .35 }, { rotate: '5deg', offset: .7 }, { rotate: '0deg' }], { duration: 1600, delay: i * 90, easing: M().ease.inout }));
-        talk(350);
-      });
-    } else final();
-    return { skip: final };
   }
 
   function zones(root, sc) {
@@ -409,131 +378,8 @@
     sc.enter(Array.from(list.querySelectorAll('.hc-prooftile')), t => { const n = t.querySelector('[data-count]'); if (n) M().count(n, +n.dataset.count, 1100, sc); }, { threshold: 0.35 });
   }
 
-  // ---------------------------------------------------------------- grounding: the room and the cast share one ground line
-  // The room is drawn at the size that covers the hero (like object-fit: cover) but placed by hand so its ground line meets the floor of
-  // the free area beside or below the card (.cm-art, which already keeps clear of the card and the Nature / Sound dock). The cast then
-  // stands on that line, inside the open stretch of floor, sized from the backdrop's own scale (smaller only when the stretch is too
-  // narrow), each with a contact shadow. Runs on every render and resize, with motion on or off; writes sizes and offsets only.
-  // the reception (#book-demo), in % of the picture: Mara behind the desk (feet hidden at y 51), Rowan from the open door in the right
-  // archway, across the floor, to the desk's left corner (clear of its front); `desk` is the counter's outline (front, top and back edge), drawn over Mara
-  const REC = {
-    mara: { x: 90, y: 51, h: 0.33 },
-    from: { x: 66.5, y: 48, adult: 0.17 }, to: { x: 62, y: 84, adult: 0.42 },
-    desk: [[70.8, 100], [70.8, 41.6], [73.2, 39.6], [86, 38.6], [100, 37.4], [100, 100]],
-    counter: 37.4
-  };
-  const adultAt = y => REC.from.adult + (y - REC.from.y) / (REC.to.y - REC.from.y) * (REC.to.adult - REC.from.adult);
-  function ground(hero) {
-    const world = hero.querySelector('.cm-world'), room = hero.querySelector('.cm-room'), art = hero.querySelector('.cm-art');
-    const g = world && GROUND[world.dataset.env];
-    if (!g || !room || !art) return null;
-    const H = hero.getBoundingClientRect(), W = H.width, HH = H.height;
-    if (!W || !HH) return null;
-    const A = art.getBoundingClientRect(), F = { l: A.left - H.left, r: A.right - H.left, t: A.top - H.top, b: A.bottom - H.top };
-    const phone = W < 640, rec = hero.classList.contains('cm-reception');
-    const want = Math.min(F.b, HH) - 10;                                     // feet a little above the hero's bottom edge
-    const cover = Math.max(HH, W * 9 / 16);
-    let sh;
-    if (rec && phone) {
-      // phones: Mara at the desk and Rowan already there, both whole, below the card: the picture is sized to hold that stretch
-      const wPct = (REC.mara.h * (+hero.querySelector('.cm-mara').dataset.ar) + REC.to.adult * (+hero.querySelector('.cm-rowan').dataset.ar)) * 56.25 / 2;
-      const span = (REC.mara.x - REC.to.x) + wPct + 2;
-      // ... and short enough that Mara's head (y 18) and a bubble fit between the card and the floor
-      sh = Math.min((W - 92) / (span / 100) * 9 / 16, (want - F.t - 70) / ((REC.to.y - 18) / 100));   // 72 px kept for the dock
-      sh = Math.max(sh, W * 9 / 16);
-    } else {
-      const target = (F.b - F.t) * 0.62;                                      // the grown-up stands about this tall
-      sh = Math.min(cover * 1.35, Math.max(phone ? W * 9 / 16 : cover, target / g.adult));
-    }
-    const sw = sh * 16 / 9;
-    const gy = rec && phone ? REC.to.y : g.y;
-    let top = Math.min(want - gy / 100 * sh, phone ? HH : 0);
-    top = Math.max(top, HH - sh);
-    const gc = rec ? (phone ? (REC.to.x + REC.mara.x) / 2 : 62) / 100 : (g.x0 + g.x1) / 2 / 100;
-    const fc = rec && phone ? (W - 72) / 2 : (F.l + F.r) / 2;
-    // (phones, reception: the picture may stop up to 80 px short of the right edge, under the dock; the blurred fill shows there)
-    const left = Math.max(W - sw - (rec && phone ? 80 : 0), Math.min(0, fc - gc * sw));
-    const fy = top + g.y / 100 * sh;
-    const box = { inset: 'auto', left: left + 'px', top: top + 'px', width: sw + 'px', height: sh + 'px', objectFit: 'fill', maxWidth: 'none' };
-    Object.assign(room.style, box);
-    // a gap above the picture (phones, where the card sits on top): the same room, softly blurred, fills it
-    const fill = hero.querySelector('.cm-fill');
-    if (fill) { if (top > 0.5 || left + sw < W - 0.5) { if (!fill.getAttribute('src')) fill.src = room.currentSrc || room.src; fill.hidden = false; } else fill.hidden = true; }
-    hero.classList.toggle('cm-gap', top > 0.5);
-    const out = { fy, top, left, sw, sh, W, HH, F };
-    // the friends on the open floor
-    const span = [Math.max(F.l, left + g.x0 / 100 * sw), Math.min(F.r, left + g.x1 / 100 * sw)];
-    const L = Math.max(40, span[1] - span[0]);
-    const chars = Array.from(hero.querySelectorAll('.cm-ch'));
-    hero.classList.toggle('cm-solo', rec && phone);                           // phones: the reception only
-    if (!(rec && phone) && chars.length) {
-      const base = chars.map(c => ({ c, h: g.adult * sh * (+c.dataset.scale || 0.6), ar: +c.dataset.ar || 0.7 }));
-      const GAP = 0.06, head = Math.max(...base.map(o => o.h));
-      const sum0 = base.reduce((a, o) => a + o.h * o.ar, 0);
-      const f = Math.min(1, L * 1.12 / (sum0 + GAP * head), (fy - Math.max(F.t, 8)) / head);
-      base.forEach(o => { o.h *= f; o.w = o.h * o.ar; });
-      const sum = base.reduce((a, o) => a + o.w, 0), gapLead = hero.querySelector('.cm-lead') ? GAP * head * f : 0;
-      const n = base.length, room2 = L - sum - gapLead;
-      const step = n > 2 ? Math.min(GAP * head * f * 0.4, room2 / (n - (gapLead ? 2 : 1))) : 0;
-      const used = sum + gapLead + step * (n - (gapLead ? 2 : 1));
-      let x = span[0] + Math.max(0, (L - used) / 2);
-      const ox = A.left - H.left, oy = A.top - H.top;
-      base.forEach((o, i) => {
-        o.c.style.left = (x + o.w / 2 - ox) + 'px';
-        o.c.style.bottom = (oy + A.height - fy) + 'px';
-        o.c.style.height = o.h + 'px';
-        x += o.w + (i === 0 && gapLead ? gapLead : step);
-      });
-      out.f = f;
-    }
-    if (rec) out.rec = reception(hero, out);
-    hero.dataset.cmGround = `${Math.round(fy)}`;
-    return out;
-  }
-  // places Mara, the desk, Rowan (at the desk; the walk-in starts from REC.from) and the bubbles, in hero pixels
-  function reception(hero, o) {
-    const pt = (x, y) => [o.left + x / 100 * o.sw, o.top + y / 100 * o.sh];
-    const mara = hero.querySelector('.cm-mara'), occ = hero.querySelector('.cm-occluder'), row = hero.querySelector('.cm-rowan');
-    const mh = REC.mara.h * o.sh, [mx, my] = pt(REC.mara.x, REC.mara.y);
-    // her head never leaves the hero: when the room is lifted high, she stands a little lower behind the counter (her feet are hidden)
-    const mTop = Math.max(my - mh, 8);
-    Object.assign(mara.style, { left: mx + 'px', top: mTop + 'px', height: mh + 'px' });
-    Object.assign(occ.style, { left: o.left + 'px', top: o.top + 'px', width: o.sw + 'px', height: o.sh + 'px', clipPath: `polygon(${REC.desk.map(([x, y]) => `${x}% ${y}%`).join(',')})` });
-    if (!occ.getAttribute('data-src-set')) { occ.src = hero.querySelector('.cm-room').currentSrc || occ.src; occ.setAttribute('data-src-set', ''); }
-    const rh = adultAt(REC.to.y) * o.sh * 0.98, [rx, ry] = pt(REC.to.x, REC.to.y);
-    Object.assign(row.style, { left: rx + 'px', top: (ry - rh) + 'px', height: rh + 'px' });
-    const [sx, sy] = pt(REC.from.x, REC.from.y), s0 = adultAt(REC.from.y) / adultAt(REC.to.y);
-    row.dataset.from = `${(sx - rx).toFixed(1)},${(sy - ry).toFixed(1)},${s0.toFixed(4)}`;
-    // bubbles: Mara's to the left of her head, Rowan's above his; always inside the hero and clear of the card
-    const card = hero.querySelector('.cm-card').getBoundingClientRect(), H = hero.getBoundingClientRect();
-    const C = { l: card.left - H.left, r: card.right - H.left, t: card.top - H.top, b: card.bottom - H.top };
-    const phone = o.W < 640, minX = phone ? 8 : C.r + 10, minY = phone ? C.b + 8 : 8;
-    hero.querySelectorAll('.cm-bubble').forEach(b => {
-      b.style.maxWidth = (phone ? Math.min(220, o.W - 24) : 260) + 'px';
-      const bw = b.offsetWidth, bh = b.offsetHeight;
-      let x, y;
-      if (b.dataset.who === 'mara') { x = mx - mh * 0.62 * (+mara.dataset.ar) / 2 - bw + 6; y = mTop - bh * 0.15; }
-      else { x = rx - bw / 2; y = ry - rh - bh - 10; }
-      x = Math.max(minX, Math.min(o.W - bw - 8, x)); y = Math.max(minY, Math.min(o.HH - bh - 8, y));
-      b.style.left = x + 'px'; b.style.top = y + 'px';
-    });
-    return { mara: [mx, mTop + mh, mh], to: [rx, ry, rh], from: [sx, sy] };
-  }
-  let lo = null;
-  function groundSetup(view, root) {
-    if (lo) { lo.disconnect(); lo = null; }
-    const hero = root && root.querySelector && root.querySelector('.cm-hero');
-    if (!hero) return;
-    ground(hero);
-    if (typeof ResizeObserver === 'function') {
-      let id = 0;
-      lo = new ResizeObserver(() => { if (!id) id = requestAnimationFrame(() => { id = 0; if (hero.isConnected) ground(hero); }); });
-      lo.observe(hero);
-      const card = hero.querySelector('.cm-card'); if (card) lo.observe(card);
-    }
-  }
 
-  const ROUTES = new Set(Object.keys(STAGES));
+  const ROUTES = new Set(Object.keys(SCENES));
   function setup(view, root, ok) {
     if (live) { live.abort(); live = null; }
     if (!ROUTES.has(view) || !root || !M() || !M().allowed(ok)) return;
@@ -549,7 +395,7 @@
     proof(root, sc);
   }
   W.FFhooks = W.FFhooks || [];
-  W.FFhooks.push(groundSetup);
+  W.FFhooks.push(placeSetup);
   W.FFhooks.push(setup);
-  W.FFCentersMotion = Object.freeze({ setup, ground, GROUND, REC, stage, showcase, decorate, routes: Array.from(ROUTES), STAGES });
+  W.FFCentersMotion = Object.freeze({ setup, place, fitDock, drawn, still, SCENES, showcase, decorate, routes: Array.from(ROUTES) });
 })();

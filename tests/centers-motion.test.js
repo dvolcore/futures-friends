@@ -1,9 +1,9 @@
-// Centers & Programs motion (owner 2026-10-12: the centers side "is not matching the rest ... needs motion graphics, animations, and
-// just all the characters"; centers-motion.js / centers-motion.css). Every page of the Centers nav (#centers, #for-centers, #for-home,
-// #for-faith, #pricing, #book-demo) opens on a full-bleed story-world hero with a grown-up of the cast and the friends, plus one signature
-// moment per page. Real headless Chromium (tests/a11y-harness.mjs): the entrance plays and can be skipped; reduced motion and the
-// Decorative motion switch show the final state; no console errors; every cut-out loads and stands whole inside the hero; Spanish; 390 px
-// has no sideways scroll; the gate's "Enter for centers & programs" never shows the Families Home first (tests/first-visit.test.js).
+// Centers & Programs heroes (owner 2026-10-13, v3 batch: "characters big, at true room scale ... sitting in the chairs and using the
+// furniture"; layout "picture full-width, text below"; centers-motion.js / centers-motion.css). Every scene page opens on its integrated
+// picture as a full-width movie still with the page's words on a card below it, plus the signature moments. Real headless Chromium
+// (tests/a11y-harness.mjs): the picture loads whole (never cropped), no character sits under the card, the Nature / Sound dock or off
+// the hero at 1024, 1280, 1440 and 390; reduced motion and the Decorative motion switch show the final state; no console errors;
+// English and Spanish alt text; 390 px has no sideways scroll.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -12,7 +12,8 @@ const path = require('node:path');
 const ROOT = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const T = { timeout: 300000 };
-const ROUTES = ['centers', 'for-centers', 'for-home', 'for-faith', 'pricing', 'book-demo'];
+const ROUTES = ['centers', 'for-centers', 'pricing', 'book-demo', 'quote', 'options', 'for-prek', 'for-employers', 'hub', 'membership',
+  'founding-partners', 'training', 'start-center', 'readiness', 'why', 'for-home', 'for-faith'];
 let h, site, browser;
 test.before(async () => { h = await import('./a11y-harness.mjs'); site = await h.startSite(); browser = await h.loadChromium().launch(); }, T);
 test.after(async () => { if (browser) await browser.close(); if (site) await site.close(); });
@@ -43,56 +44,53 @@ test('wiring: linked once, after the motion system; gated on FFMotion.allowed; s
   assert.match(js, /M\(\)\.allowed\(ok\)/);
   assert.match(js, /FFhooks\.push\(setup\)/);
   assert.match(js, /live\.abort\(\)/);
-  // the one stored thing: the reception plays once per visit (sessionStorage 'ff-cm-reception', this tab only)
-  assert.deepEqual([...js.matchAll(/sessionStorage\.\w+Item\('([\w-]+)'/g)].map(m => m[1]), ['ff-cm-reception', 'ff-cm-reception']);
-  assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|indexedDB|document\.cookie/);
+  assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|indexedDB|document\.cookie/);
+  // every scene ships at 800 and 1600; the picture is drawn whole (contain), never cropped; the drift is at most 1.5%
+  for (const r of ROUTES) for (const w of [800, 1600]) assert.ok(fs.existsSync(path.join(ROOT, `img/scenes/${r}-${w}.webp`)), `img/scenes/${r}-${w}.webp`);
+  for (const w of [800, 1600]) assert.ok(fs.existsSync(path.join(ROOT, `img/room-planner/hero-planning-${w}.webp`)));
+  assert.match(css, /figure\.cm-still>img\.cm-scene\{[^}]*object-fit:contain/);
+  assert.match(css, /@keyframes cm-kb\{from\{scale:1;translate:0 0\}to\{scale:1\.015;/);
   assert.doesNotMatch(js + css, /skew|scaleX|scaleY|hue-rotate|grayscale|invert\(|sepia/, 'no cut-out is skewed, stretched or recoloured');
-  assert.match(css, /\.cm-ch img\{[^}]*object-fit:contain[^}]*filter:none/);
   assert.match(css, /prefers-reduced-motion:no-preference/);
   assert.match(css, /:root:not\(\[data-motion=off\]\)/);
   assert.match(css, /@media print/);
   // no invented prices: the count-up only rewrites the text already on the card, and always ends on it
   assert.match(js, /const done = \(\) => \{ el\.textContent = txt;/);
-  // the official cut-outs only, from the plush library
-  assert.match(js, /P\.img\(k, \{ alt: '', h: hpx, eager: true \}\)/);
+  // no pasted cut-outs or speech bubbles in a scene hero any more
+  assert.doesNotMatch(js, /cm-bubble|cm-cast|data-cm-ch/);
   assert.doesNotMatch(js, /investor\//);
 });
 
-// ---------------------------------------------------------------- every page: the world, the cast, the chip
+// ---------------------------------------------------------------- every scene page: the still, the card, nobody covered
 for (const viewport of [{ width: 1024, height: 768 }, { width: 1280, height: 720 }, DESK, PHONE]) {
-  test(`all six Centers pages at ${viewport.width}: a full-bleed world, a grown-up and the friends, whole and loaded; one honesty chip; no sideways scroll; no errors`, T, async () => {
-    const { ctx, page, errors } = await open('centers', { viewport, touch: viewport === PHONE });
+  test(`scene heroes at ${viewport.width}: the picture loads whole with English alt text; no character under the card, the dock or off the hero; the chip; no sideways scroll`, T, async () => {
+    const { ctx, page, errors } = await open('hub', { viewport, touch: viewport === PHONE, motion: 'reduce' });
     for (const r of ROUTES) {
-      await page.evaluate(r => { location.hash = '#' + r; }, r);
-      await page.waitForFunction(r => document.querySelector(`#view .cm-hero[data-cm-hero="${r}"]`), r, { timeout: 30000 });
-      await page.evaluate(() => scrollTo(0, 0));
-      await page.waitForTimeout(2600);
-      await page.waitForFunction(() => Array.from(document.querySelectorAll('.cm-hero img')).filter(i => i.getAttribute('src') && i.loading !== 'lazy' && !i.hidden).every(i => i.complete && i.naturalWidth > 0), null, { timeout: 30000 });
-      const s = await page.evaluate(() => {
-        scrollTo(0, 0);
-        const hero = document.querySelector('.cm-hero'), hb = hero.getBoundingClientRect(), art = hero.querySelector('.cm-art').getBoundingClientRect();
-        const room = hero.querySelector('.cm-room').getBoundingClientRect();
-        const dockEl = document.querySelector('.ffs'), dk = dockEl && dockEl.getBoundingClientRect().width ? dockEl.getBoundingClientRect() : null;
-        const cardR = hero.querySelector('.cm-card').getBoundingClientRect();
-        const chars = Array.from(hero.querySelectorAll('.cm-ch, .cm-actor')).filter(c => c.getBoundingClientRect().width > 0).map(c => { const i = c.querySelector('img'), b = i.getBoundingClientRect(), actor = c.classList.contains('cm-actor'); return { k: c.dataset.cmCh || c.dataset.actor, actor, card: !(b.right <= cardR.left || b.left >= cardR.right || b.bottom <= cardR.top || b.top >= cardR.bottom), dock: !!dk && !(b.right <= dk.left || b.left >= dk.right || b.bottom + scrollY <= dk.top + scrollY || b.top >= dk.bottom), feet: hb.bottom - b.bottom, ok: i.complete && i.naturalWidth > 0, inArt: actor || b.left >= art.left - 1 && b.right <= art.right + 1 && b.top >= art.top - 1 && b.bottom <= art.bottom + 1, inHero: b.left >= hb.left && b.right <= hb.right && b.top >= hb.top && b.bottom <= hb.bottom, fit: getComputedStyle(i).objectFit, ar: Math.abs(b.width / b.height - i.naturalWidth / i.naturalHeight) }; });
-        return { full: room.width >= innerWidth - 2 && Math.abs(hb.left) < 1, chars, chip: (hero.querySelector('.cm-chip') || {}).textContent || '', flags: hero.querySelectorAll('.ffa-flag').length, over: document.documentElement.scrollWidth - innerWidth, card: !!hero.querySelector('.cm-card h1') };
-      });
-      assert.ok(s.full, `${r}: the world runs edge to edge`);
-      assert.ok(s.card, `${r}: the heading sits on the frosted card`);
-      assert.ok(s.chars.length >= 2, `${r}: a grown-up and friends`);
-      if (r === 'book-demo') assert.deepEqual(s.chars.filter(c => c.actor).map(c => c.k).sort(), ['mara', 'rowan'], 'the reception: Mara and Rowan');
-      else assert.match(s.chars[0].k, /principal-hazel|ms-june|ms-fern|mr-moss/, `${r}: a grown-up of the cast leads`);
-      for (const c of s.chars) {
-        assert.ok(c.ok, `${r}: ${c.k} loaded`);
-        assert.ok(c.inArt && c.inHero, `${r}: ${c.k} stands whole inside the hero (never cropped)`);
-        assert.ok(!c.card, `${r}: ${c.k} never overlaps the text card`);
-        assert.equal(c.fit, 'contain', `${r}: ${c.k} is never stretched`);
-        if (c.k !== 'mara') assert.ok(c.feet >= 8, `${r}: ${c.k} has its feet on the ground inside the hero, with a margin (${c.feet}px)`);
-        assert.ok(!c.dock, `${r}: the Nature / Sound dock never covers ${c.k}`);
-      }
+      await page.evaluate(r => { location.hash = '#' + r; scrollTo(0, 0); }, r);
+      await page.waitForFunction(r => document.querySelector(`#view .cm-scenehero[data-cm-hero="${r}"][data-cm-align]`), r, { timeout: 30000 });
+      await page.waitForFunction(() => { const i = document.querySelector('.cm-scene'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 30000 });
+      await page.waitForTimeout(150);
+      const s = await page.evaluate(r => {
+        const CM = window.FFCentersMotion, hero = document.querySelector('.cm-scenehero'), img = hero.querySelector('.cm-scene');
+        const H = hero.getBoundingClientRect(), P = CM.drawn(null, hero.querySelector('.cm-still').getBoundingClientRect()), C = hero.querySelector('.cm-card').getBoundingClientRect();
+        const dk = document.querySelector('.ffs'), D = dk && dk.getBoundingClientRect();
+        const hit = (q, z) => !!z && z.width > 0 && q.r > z.left + 1 && q.l < z.right - 1 && q.b > z.top + 1 && q.t < z.bottom - 1;
+        const bad = [];
+        CM.SCENES[r].who.forEach(([x0, x1, y0, y1], i) => {
+          const q = { l: P.left + x0 / 100 * P.width, r: P.left + x1 / 100 * P.width, t: P.top + y0 / 100 * P.height, b: P.top + y1 / 100 * P.height };
+          if (hit(q, C)) bad.push(`#${i} under the card`);
+          if (hit(q, D)) bad.push(`#${i} under the dock`);
+          if (q.l < H.left - 1 || q.r > H.right + 1 || q.t < H.top - 1) bad.push(`#${i} off the hero`);
+        });
+        return { bad, alt: img.alt, fit: getComputedStyle(img).objectFit, wide: P.width <= innerWidth + 1, chip: (hero.querySelector('.cm-chip') || {}).textContent || '',
+          cast: hero.querySelectorAll('.cm-ch, .cm-actor, .cm-bubble, .art').length, over: document.documentElement.scrollWidth - innerWidth, first: hero.firstElementChild.classList.contains('cm-still') };
+      }, r);
+      assert.deepEqual(s.bad, [], r);
+      assert.match(s.alt, /^Storybook illustration: /, r);
+      assert.equal(s.fit, 'contain', `${r}: the whole picture, never cropped`);
+      assert.ok(s.wide && s.first, `${r}: the picture comes first, inside the window`);
       assert.match(s.chip, /Storybook illustration/);
-      assert.match(s.chip, /Story-world characters/);
-      assert.equal(s.flags, 0, `${r}: one small chip, no big overlay`);
+      assert.equal(s.cast, 0, `${r}: no pasted cut-outs or bubbles`);
       assert.ok(s.over <= 0, `${r}: no sideways scroll (${s.over}px)`);
     }
     assert.deepEqual(errors, []);
@@ -100,22 +98,17 @@ for (const viewport of [{ width: 1024, height: 768 }, { width: 1280, height: 720
   });
 }
 
-// ---------------------------------------------------------------- the entrance plays, and any input finishes it
-test('the hero entrance plays (the cast hops in after the first paint) and a key press skips it to the final frame', T, async () => {
-  const { ctx, page, errors } = await open('centers', { settle: 150 });
+test('the card rises in under the still after the first paint, and a key press finishes it at once', T, async () => {
+  const { ctx, page, errors } = await open('centers', { settle: 120 });
   assert.ok(await running(page) > 0, 'the entrance is playing');
-  const mid = await page.evaluate(() => getComputedStyle(document.querySelector('.cm-ch:last-child .cm-bob')).opacity);
-  assert.ok(+mid < 1, `the last friend has not landed yet (${mid})`);
   await page.keyboard.press('Shift');
   await page.waitForTimeout(80);
   assert.equal(await running(page), 0, 'every entrance animation finished at once');
-  assert.ok(await page.evaluate(() => document.querySelector('.cm-hero').classList.contains('is-landed')));
-  assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('.cm-ch:last-child .cm-bob')).opacity), '1');
+  assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('.cm-card')).opacity), '1');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-// ---------------------------------------------------------------- reduced motion and the Decorative motion switch: final at once
 for (const motion of ['reduce', 'switch']) {
   test(`motion off (${motion}): the final frame at once on every page; zones lit, prices final, steps and cards shown`, T, async () => {
     const { ctx, page, errors } = await open('centers', { motion, settle: 100 });
@@ -125,10 +118,11 @@ for (const motion of ['reduce', 'switch']) {
       await page.waitForTimeout(120);
       const s = await page.evaluate(() => ({
         anims: document.getAnimations().filter(a => a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('.cm-hero, .cm-zones, .cm-tiers, .cm-steps, .cm-device, .ff-endorse')).length,
+        drift: getComputedStyle(document.querySelector('.cm-scene')).animationName,
         live: !!document.querySelector('.cm-live, .cm-walk, .cm-pre, .cm-rise, .cm-chip-pre'),
-        hidden: Array.from(document.querySelectorAll('.cm-ch .cm-bob, .cm-zone .cm-zonefr img, .pz-tier-card, .cm-steps li, .cm-device, .ffe-item')).filter(e => +getComputedStyle(e).opacity < 1).length
+        hidden: Array.from(document.querySelectorAll('.cm-scene, .cm-card, .cm-zone .cm-zonefr img, .pz-tier-card, .cm-steps li, .cm-device, .ffe-item')).filter(e => +getComputedStyle(e).opacity < 1).length
       }));
-      assert.deepEqual(s, { anims: 0, live: false, hidden: 0 }, r);
+      assert.deepEqual(s, { anims: 0, drift: 'none', live: false, hidden: 0 }, r);
     }
     // the published prices are exactly as written
     await page.evaluate(() => { location.hash = '#pricing'; });
@@ -154,8 +148,8 @@ test('#pricing: the package cards turn in and their prices count up to exactly t
   await ctx.close();
 });
 
-test('#for-centers / #for-home / #for-faith: the four learning zones light up one by one, each with its friend and pillar', T, async () => {
-  for (const r of ['for-centers', 'for-home', 'for-faith']) {
+test('#for-centers / #for-home / #for-faith / #for-prek: the four learning zones light up one by one, each with its friend and pillar', T, async () => {
+  for (const r of ['for-centers', 'for-home', 'for-faith', 'for-prek']) {
     const { ctx, page, errors } = await open(r);
     assert.deepEqual(await page.$$eval('.cm-zones .cm-pillar', a => a.map(x => x.textContent)), ['LEARN', 'BELONG', 'EXPLORE', 'MOVE']);
     assert.equal(await page.$$eval('.cm-zones .cm-zone.is-lit', a => a.length), 0, 'not lit before it arrives');
@@ -205,75 +199,13 @@ test('#book-demo steps are stitched in, and "Trusted by professionals" cards ris
 });
 
 // ---------------------------------------------------------------- grounding: feet on the floor of each backdrop (owner: "floating on the gate")
-for (const viewport of [{ width: 1024, height: 768 }, { width: 1280, height: 720 }, DESK, PHONE]) {
-  test(`grounded at ${viewport.width}: every cut-out's feet are on its backdrop's ground band (the open floor, never a gate, fence, basket or desk)`, T, async () => {
-    const { ctx, page, errors } = await open('centers', { viewport, touch: viewport === PHONE, motion: 'reduce' });
-    for (const r of ROUTES) {
-      await page.evaluate(r => { location.hash = '#' + r; scrollTo(0, 0); }, r);
-      await page.waitForFunction(r => document.querySelector(`#view .cm-hero[data-cm-hero="${r}"][data-cm-ground]`), r, { timeout: 30000 });
-      await page.waitForTimeout(250);
-      const bad = await page.evaluate(() => {
-        const hero = document.querySelector('.cm-hero'), world = hero.querySelector('.cm-world'), g = window.FFCentersMotion.GROUND[world.dataset.env];
-        const R = hero.querySelector('.cm-room').getBoundingClientRect(), out = [];
-        hero.querySelectorAll('.cm-ch').forEach(c => {
-          const b = c.getBoundingClientRect(); if (!b.width) return;
-          const fy = (b.bottom - R.top) / R.height * 100, fx = ((b.left + b.right) / 2 - R.left) / R.width * 100;
-          if (Math.abs(fy - g.y) > 2.5 || fx < g.x0 - 1 || fx > g.x1 + 1) out.push(`${c.dataset.cmCh} feet at ${fx.toFixed(1)}%, ${fy.toFixed(1)}% (ground ${g.x0}-${g.x1}%, ${g.y}%)`);
-        });
-        return out;
-      });
-      assert.deepEqual(bad, [], r);
-    }
-    assert.deepEqual(errors, []);
-    await ctx.close();
-  });
-}
-
-test('#book-demo reception: Rowan walks the floor from the doorway to the desk; Mara stands behind the counter; the bubbles take turns inside the hero', T, async () => {
-  for (const viewport of [{ width: 1024, height: 768 }, DESK, PHONE]) {
-    const { ctx, page, errors } = await open('book-demo', { viewport, touch: viewport === PHONE, settle: 200 });
-    const geo = () => page.evaluate(() => {
-      const hero = document.querySelector('.cm-hero'), C = window.FFCentersMotion.REC, R = hero.querySelector('.cm-room').getBoundingClientRect();
-      const row = hero.querySelector('.cm-rowan'), walk = row.querySelector('.cm-stride').getBoundingClientRect(), mara = hero.querySelector('.cm-mara').getBoundingClientRect();
-      const p = (x, y) => [(x - R.left) / R.width * 100, (y - R.top) / R.height * 100];
-      const [dx, dy] = (row.dataset.from || '0,0').split(',').map(Number), end = row.getBoundingClientRect();
-      const occ = hero.querySelector('.cm-occluder');
-      return { C, now: p((walk.left + walk.right) / 2, walk.bottom), end: p((end.left + end.right) / 2, end.bottom), start: p((end.left + end.right) / 2 + dx, end.bottom + dy),
-        maraBottom: mara.bottom, counter: R.top + C.counter / 100 * R.height, occ: !!occ && /polygon/.test(getComputedStyle(occ).clipPath) && occ.compareDocumentPosition(hero.querySelector('.cm-mara')) === Node.DOCUMENT_POSITION_PRECEDING,
-        hb: hero.getBoundingClientRect().toJSON(), bubbles: Array.from(hero.querySelectorAll('.cm-bubble')).map(b => b.getBoundingClientRect().toJSON()), on: Array.from(hero.querySelectorAll('.cm-bubble[data-on]')).map(b => b.dataset.bubble) };
-    });
-    const near = (a, b, d) => Math.abs(a - b) <= d;
-    let g = await geo();
-    if (viewport !== PHONE) {
-      // at the start: in the doorway, on the floor; part way: still on the floor line between the door and the desk
-      assert.ok(near(g.start[0], g.C.from.x, 1.5) && near(g.start[1], g.C.from.y, 1.5), `starts in the doorway on the floor: ${g.start}`);
-      await page.waitForTimeout(1800);
-      g = await geo();
-      const t = (g.now[1] - g.C.from.y) / (g.C.to.y - g.C.from.y), onLine = g.C.from.x + t * (g.C.to.x - g.C.from.x);
-      assert.ok(t > 0.02 && t < 0.98 && near(g.now[0], onLine, 2), `walking on the floor line: ${g.now} (t ${t.toFixed(2)})`);
-    }
-    await page.waitForTimeout(viewport === PHONE ? 8500 : 9500);
-    g = await geo();
-    assert.ok(near(g.now[0], g.C.to.x, 1) && near(g.now[1], g.C.to.y, 1), `ends at the desk, feet on the floor: ${g.now}`);
-    assert.ok(g.maraBottom > g.counter + 20, 'Mara\'s lower body is below the counter top (hidden by the desk)');
-    assert.ok(g.occ, 'the desk is drawn over Mara (a clipped copy of the room, after her in the page)');
-    assert.deepEqual(g.on, ['2'], 'the last bubble stays');
-    for (const b of g.bubbles) assert.ok(b.left >= g.hb.left && b.right <= g.hb.right && b.top >= g.hb.top && b.bottom <= g.hb.bottom, `bubble inside the hero ${JSON.stringify(b)}`);
-    assert.deepEqual(errors, []);
-    await ctx.close();
-  }
-  // reduced motion: the final frame at once (Rowan at the desk, one bubble); the scene is decoration with a hidden description
-  const { ctx, page } = await open('book-demo', { motion: 'reduce', settle: 200 });
-  assert.deepEqual(await page.evaluate(() => [document.querySelectorAll('.cm-bubble[data-on]').length, document.querySelector('.cm-fx').getAttribute('aria-hidden'), !!document.querySelector('.cm-sr').textContent.trim(), document.getAnimations().filter(a => a.effect && a.effect.target && a.effect.target.closest('.cm-fx')).length]), [1, 'true', true, 0]);
-  await ctx.close();
-});
-
 // ---------------------------------------------------------------- Spanish
 test('Spanish: the chip, the pillars and the dashboard peek are in Spanish; no sideways scroll at 390', T, async () => {
   const { ctx, page, errors } = await open('centers', { lang: 'es', viewport: PHONE, touch: true, settle: 1500 });
   await page.waitForFunction(() => /Ilustración de cuento/.test((document.querySelector('.cm-chip') || {}).textContent || ''), null, { timeout: 20000 });
   assert.match(await page.textContent('.cm-chip'), /Personajes del mundo del cuento/);
   assert.match(await page.textContent('.cm-dash a.btn'), /Prueba el portal de dirección/);
+  assert.match(await page.getAttribute('.cm-scene', 'alt'), /^Ilustración de cuento: /);
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 0);
   await page.evaluate(() => { location.hash = '#for-centers'; });
   await page.waitForSelector('.cm-zones .cm-pillar');

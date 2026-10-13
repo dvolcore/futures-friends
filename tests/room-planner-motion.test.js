@@ -1,8 +1,9 @@
 // The Room Planner page, jacked up (owner 2026-10-12; room-planner-motion.js / room-planner-motion.css). The planner itself is unchanged
 // (tests/room-planner.test.js still covers its rules); this file covers the new hero and polish in real headless Chromium
 // (tests/a11y-harness.mjs): the demo plays once and can be skipped (tap, key, scroll) and replayed; reduced motion and the Decorative
-// motion switch show the last frame; the example caption never overlaps the plan's zone labels; the grown-up and the friends stand whole
-// inside the hero, on its floor, clear of the Nature / Sound dock; Spanish; 390 px has no sideways scroll; axe is clean.
+// motion switch show the last frame; the example caption never overlaps the plan's zone labels; the hero is the owner-approved integrated
+// scene (v3 batch, 2026-10-13) as a full-width still above the card and the plan, and no character sits under the card, the plan or the
+// Nature / Sound dock; Spanish; 390 px has no sideways scroll; axe is clean.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -61,7 +62,7 @@ test('wiring: linked once, right after the planner; gated on FFMotion.allowed; s
   assert.match(js, /bop: '#8236AE'/);
 });
 
-test('render (VM): the hero keeps the page copy on a frosted card, adds the demo plan with its caption outside the plan, the cast and one chip', () => {
+test('render (VM): the hero is the scene still above the page copy (frosted card) and the demo plan with its caption outside the plan; one chip', () => {
   const c = baseSite();
   for (const f of ['room-kit-plans.js', 'room-kit.js', 'room-planner-core.js', 'room-planner.js', 'room-planner-motion.js']) vm.runInContext(read(f), c, { filename: f });
   const html = c.render('room-planner');
@@ -73,9 +74,12 @@ test('render (VM): the hero keeps the page copy on a frosted card, adds the demo
   assert.doesNotMatch(html, /rp-heroplan/, 'the old static figure is replaced');
   assert.doesNotMatch(html.slice(html.indexOf('data-rpm-plan'), html.indexOf('</figure>', html.indexOf('data-rpm-plan'))), /<title/, 'no tooltip on the plan');
   assert.match(html, /<figcaption class="rpm-cap"><span class="rpm-captext">Example: a 12 x 14 ft home daycare room<\/span>/);
-  assert.match(html, /data-rpm-ch="ms-june"/);
-  for (const k of ['booker', 'lumi', 'zuri', 'bop']) assert.match(html, new RegExp(`data-rpm-ch="${k}`), k);
-  assert.equal((html.match(/class="rpm-chip"/g) || []).length, 1);
+  // the integrated scene replaces the drawn room and the pasted cut-outs; it comes first, above the card and the plan
+  assert.match(html, /<header class="wc-hero rk-hero rp-hero rpm-hero rpm-scenehero" data-rpm-hero><figure class="cm-still rpm-still">/);
+  assert.match(html, /src="img\/room-planner\/hero-planning-1600\.webp" srcset="img\/room-planner\/hero-planning-800\.webp 800w, img\/room-planner\/hero-planning-1600\.webp 1600w"/);
+  assert.match(html, /alt="Storybook illustration: Ms\. June sits at a round planning table/);
+  assert.doesNotMatch(html, /data-rpm-ch=|class="rpm-cast"|class="rpm-world/);
+  assert.equal((html.match(/class="cm-chip"/g) || []).length, 1);
   assert.match(html, /Storybook illustration/);
   assert.doesNotMatch(html, /undefined|\[object Object\]|NaN/);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]);
@@ -88,9 +92,12 @@ test('render (VM): the hero keeps the page copy on a frosted card, adds the demo
 
 // ---------------------------------------------------------------- the demo
 test('the demo plays once (about 7.5 s): numbers count up, zones and friends arrive, the fit check ticks; any tap skips it to the last frame; replay works', T, async () => {
-  const { ctx, page, errors } = await open({ settle: 900 });
+  const { ctx, page, errors } = await open({ settle: 300 });
+  // the scene still comes first: the demo starts when the plan scrolls into view
+  await page.evaluate(() => document.querySelector('[data-rpm-plan]').scrollIntoView({ block: 'center' }));
+  await page.waitForTimeout(900);
   let s = await state(page);
-  assert.ok(s.motion && s.playing, 'playing on arrival');
+  assert.ok(s.motion && s.playing, 'playing once the plan is in view');
   assert.ok(s.run > 0, 'animations running');
   assert.ok(Number(s.nums[0]) < 14 || Number(s.nums[1]) < 12, 'the dimensions are counting: ' + s.nums);
   assert.equal(s.zones, 5); assert.equal(s.friends, 4);
@@ -114,13 +121,13 @@ test('the demo plays once (about 7.5 s): numbers count up, zones and friends arr
   assert.ok(s.done && s.run === 0);
   // replay, then a scroll skips it
   await page.click('[data-rpm-replay]');
-  await page.waitForTimeout(300);
+  await page.waitForTimeout(1300);
   await page.mouse.wheel(0, 300);
   await page.waitForTimeout(200);
   s = await state(page);
   assert.ok(s.done && s.run === 0, 'scroll skips: ' + JSON.stringify(s));
   // left alone, it ends by itself on the same last frame
-  await page.evaluate(() => scrollTo(0, 0));
+  await page.evaluate(() => document.querySelector('[data-rpm-plan]').scrollIntoView({ block: 'center' }));
   await page.click('[data-rpm-replay]');
   await page.waitForTimeout(8200);
   s = await state(page);
@@ -150,33 +157,34 @@ for (const motion of ['reduce', 'switch']) {
 
 // ---------------------------------------------------------------- layout: caption, cast, dock, 390, Spanish, axe
 for (const [viewport, lang] of [[DESK, ''], [{ width: 1280, height: 720 }, ''], [{ width: 1024, height: 768 }, ''], [PHONE, ''], [DESK, 'es'], [PHONE, 'es']]) {
-  test(`${viewport.width}${lang ? ' ' + lang : ''}: the caption is clear of every zone label; the cast stands whole on the floor inside the hero, clear of the dock; no sideways scroll`, T, async () => {
+  test(`${viewport.width}${lang ? ' ' + lang : ''}: the caption is clear of every zone label; the scene loads whole and no character sits under the card, the plan or the dock; no sideways scroll`, T, async () => {
     const { ctx, page, errors } = await open({ motion: 'reduce', viewport, lang, touch: viewport === PHONE, settle: 900 });
-    await page.waitForFunction(() => Array.from(document.querySelectorAll('[data-rpm-hero] .rpm-ch img')).every(i => i.complete && i.naturalWidth > 0), null, { timeout: 30000 });
+    await page.waitForFunction(() => { const i = document.querySelector('[data-rpm-hero] .cm-scene'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 30000 });
     const r = await page.evaluate(() => {
       scrollTo(0, 0);
       const ov = (a, b) => !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom);
       const hero = document.querySelector('[data-rpm-hero]'), hb = hero.getBoundingClientRect();
       const cap = hero.querySelector('.rpm-captext').getBoundingClientRect(), sheet = hero.querySelector('.rpm-sheet').getBoundingClientRect();
       const labels = Array.from(hero.querySelectorAll('.rpm-svg .rpm-lab, .rpm-svg text')).map(t => t.getBoundingClientRect());
-      const floor = hero.querySelector('.rpm-floorband').getBoundingClientRect();
       const dockEl = document.querySelector('.ffs'), dk = dockEl && dockEl.getBoundingClientRect().width ? dockEl.getBoundingClientRect() : null;
-      const chars = Array.from(hero.querySelectorAll('.rpm-ch')).map(c => { const i = c.querySelector('img'), b = i.getBoundingClientRect(); return { k: c.dataset.rpmCh, inHero: b.left >= hb.left - 0.5 && b.right <= hb.right + 0.5 && b.top >= hb.top - 0.5 && b.bottom <= hb.bottom + 0.5, onFloor: b.bottom > floor.top + 2 && b.bottom < floor.bottom, dock: !!dk && ov(b, dk), ar: Math.abs(b.width / b.height - i.naturalWidth / i.naturalHeight), fit: getComputedStyle(i).objectFit, overSheet: ov(b, sheet) }; });
+      const img = hero.querySelector('.cm-scene'), P = window.FFCentersMotion.drawn(null, hero.querySelector('.cm-still').getBoundingClientRect()), card = hero.querySelector('.rpm-card').getBoundingClientRect();
+      const chars = window.FFRoomPlannerMotion.SCENE_WHO.map(([x0, x1, y0, y1], i) => { const b = { left: P.left + x0 / 100 * P.width, right: P.left + x1 / 100 * P.width, top: P.top + y0 / 100 * P.height, bottom: P.top + y1 / 100 * P.height };
+        return { k: '#' + i, inHero: b.left >= hb.left - 0.5 && b.right <= hb.right + 0.5 && b.top >= hb.top - 0.5, dock: !!dk && ov(b, dk), overSheet: ov(b, sheet), overCard: ov(b, card) }; });
+      const whole = getComputedStyle(img).objectFit === 'contain';
       const ok = hero.querySelector('.rpm-ok').getBoundingClientRect();
-      return { capOverLabel: labels.some(l => ov(cap, l)), capInSheet: ov(cap, sheet), okOverLabel: labels.some(l => ov(ok, l)), chars, over: document.documentElement.scrollWidth - innerWidth, lang: document.documentElement.lang, capText: hero.querySelector('.rpm-captext').textContent, title: !!hero.querySelector('.rpm-svg title') };
+      return { capOverLabel: labels.some(l => ov(cap, l)), capInSheet: ov(cap, sheet), okOverLabel: labels.some(l => ov(ok, l)), chars, whole, over: document.documentElement.scrollWidth - innerWidth, lang: document.documentElement.lang, capText: hero.querySelector('.rpm-captext').textContent, title: !!hero.querySelector('.rpm-svg title') };
     });
     assert.ok(!r.capOverLabel, 'the example caption covers no label');
     assert.ok(!r.capInSheet, 'the caption sits under the plan, not on it');
     assert.ok(!r.okOverLabel, 'the fit-check tick covers no label');
     assert.ok(!r.title, 'no tooltip title on the plan');
-    assert.equal(r.chars.length, 5);
-    assert.equal(r.chars[0].k, 'ms-june');
+    assert.equal(r.chars.length, 5, 'Ms. June and the four friends');
+    assert.ok(r.whole, 'the whole picture, never cropped');
     for (const c of r.chars) {
-      assert.ok(c.inHero, `${c.k} is whole inside the hero`);
-      assert.ok(c.onFloor, `${c.k} has its feet on the floor`);
+      assert.ok(c.inHero, `${c.k} is inside the hero`);
       assert.ok(!c.dock, `${c.k} is clear of the Nature / Sound dock`);
-      assert.ok(!c.overSheet, `${c.k} does not cover the plan`);
-      assert.ok(c.ar < 0.02 && c.fit === 'contain', `${c.k} is not stretched`);
+      assert.ok(!c.overSheet, `the plan covers no character (${c.k})`);
+      assert.ok(!c.overCard, `the card covers no character (${c.k})`);
     }
     assert.ok(r.over <= 1, 'no sideways scroll: ' + r.over);
     if (lang === 'es') { assert.equal(r.lang, 'es'); assert.match(r.capText, /Ejemplo: un salón de guardería en casa de 12 x 14 pies/); }

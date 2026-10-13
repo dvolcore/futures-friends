@@ -160,3 +160,14 @@
   .rp.rpm{background:#fff}
   .rpm-pre :is(.rp-head,.rp-toolbar,.rp-stage,.rp-side,.rp-files){opacity:1!important}
 }
+
+/* the integrated scene (BACKDROP, owner-approved v3 batch 2026-10-13): the picture full width above, the card and the demo plan below it,
+   side by side on desktop, stacked on phones; nothing covers a character (still styles: centers-motion.css .cm-still) */
+.rp-hero.rpm-hero.rpm-scenehero{background:var(--paper,#FBF6EC);padding-block:0 clamp(24px,4vw,44px)}
+.rpm-scenehero>.rpm-grid{grid-template-areas:'card plan';align-items:start;margin-top:clamp(18px,2.4vw,30px)}
+.rpm-scenehero .rpm-card{align-self:start;margin-bottom:0}
+@media (max-width:980px){.rpm-scenehero>.rpm-grid{grid-template-columns:1fr;grid-template-areas:'card' 'plan'}}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]) .rpm-scenehero.rpm-live .cm-scene{animation:cm-kb 26s var(--ff-ease-inout) 1s infinite alternate}
+  :root:not([data-motion=off]) .rpm-scenehero.ffm-paused .cm-scene{animation-play-state:paused}
+}

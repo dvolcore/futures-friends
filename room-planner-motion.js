@@ -125,16 +125,28 @@
   // small felt props drawn as vectors (not characters): pencils, a felt tape measure with its tape, kit-carpet swatches
   const PENCILS = '<svg class="rpm-pencils" viewBox="0 0 120 40" aria-hidden="true" focusable="false"><g stroke="#5B3A12" stroke-width="1.2" stroke-linejoin="round"><g transform="rotate(-8 60 20)"><rect x="12" y="14" width="76" height="9" rx="2" fill="#E7A928"/><path d="M88 14l14 4.5-14 4.5z" fill="#F4D9A8"/><path d="M98.5 17.4l3.5 1.1-3.5 1.1z" fill="#3A2A12"/><rect x="6" y="14" width="8" height="9" rx="2" fill="#E9879F"/></g><g transform="rotate(6 60 24)"><rect x="18" y="22" width="70" height="8" rx="2" fill="#2F6FC0"/><path d="M88 22l12 4-12 4z" fill="#F4D9A8"/><path d="M97 25l3 1-3 1z" fill="#3A2A12"/><rect x="12" y="22" width="7" height="8" rx="2" fill="#8236AE"/></g></g></svg>';
   const TAPE = '<svg class="rpm-tape" viewBox="0 0 300 60" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false"><rect class="rpm-tapeband" x="40" y="34" width="256" height="12" rx="2" fill="#F5C553" stroke="#8A5A00" stroke-width="1.2"/><g stroke="#5B3A12" stroke-width="1.1">' + Array.from({ length: 21 }, (_, i) => `<path d="M${52 + i * 12} 34v${i % 4 ? 4 : 7}"/>`).join('') + '</g><circle cx="34" cy="32" r="26" fill="#E7A928" stroke="#7A5200" stroke-width="2"/><circle cx="34" cy="32" r="17" fill="none" stroke="#FFF3D6" stroke-width="2" stroke-dasharray="4 3"/><circle cx="34" cy="32" r="6" fill="#7A5200"/></svg>';
-  // One integrated scene can replace the drawn room and the cut-outs later (owner 2026-10-12: characters in the scene, not pasted on):
-  // set BACKDROP to { src, srcset, alt, altEs } of a single 16:9 webp and the hero shows it full bleed behind the card and the plan.
-  const BACKDROP = null;
+  // The integrated scene (owner-approved v3 batch, 2026-10-13: Ms. June and the four friends seated at the planning table, official
+  // references attached) replaces the drawn room and the cut-outs: it runs full width above the copy like a movie still (the whole
+  // picture, over a soft blur of itself; the still styles live in centers-motion.css), and the card and the demo plan sit below it, so
+  // nothing covers a character.
+  // where the characters are in the picture (% x0, x1, y0, y1), for the dock check (centers-motion.js FFCentersMotion.fitDock)
+  const SCENE_WHO = [[5, 30, 30, 90], [27, 52, 1, 66], [44, 66, 21, 63], [59, 77, 34, 79], [72, 98, 32, 98]];
+  const BACKDROP = {
+    src: 'img/room-planner/hero-planning-1600.webp',
+    srcset: 'img/room-planner/hero-planning-800.webp 800w, img/room-planner/hero-planning-1600.webp 1600w',
+    fill: 'img/room-planner/hero-planning-800.webp',
+    alt: 'Storybook illustration: Ms. June sits at a round planning table with Booker, Lumi, Zuri and Bop, pointing at a floor plan of coloured zones while the friends hold up carpet swatches and a tape measure.',
+    altEs: 'Ilustración de cuento: la Sra. June está sentada en una mesa redonda de planeación con Booker, Lumi, Zuri y Bop, señalando un plano con zonas de colores mientras los amigos sostienen muestras de alfombra y una cinta métrica.'
+  };
   function scene() {
     const P = PL();
     if (!P) return null;
     if (BACKDROP) {
       const alt = es() && BACKDROP.altEs ? BACKDROP.altEs : BACKDROP.alt;
-      return { world: `<div class="rpm-world rpm-hasbackdrop"><img class="rpm-backdrop" src="${E(BACKDROP.src)}"${BACKDROP.srcset ? ` srcset="${E(BACKDROP.srcset)}" sizes="100vw"` : ''} alt="${E(alt || '')}" width="1600" height="900" fetchpriority="high" decoding="async"></div>`,
-        castHtml: '', chip: `<span class="rpm-chip"><span>${E(T('Storybook illustration'))}</span> · <span>${E(T('Story-world characters'))}</span></span>` };
+      const chip = `<span class="cm-chip"><span>${E(T('Storybook illustration'))}</span> · <span>${E(T('Story-world characters'))}</span></span>`;
+      return { still: `<figure class="cm-still rpm-still"><img class="cm-stillfill" src="${E(BACKDROP.fill || BACKDROP.src)}" alt="" aria-hidden="true" width="800" height="452" decoding="async">`
+        + `<img class="cm-scene rpm-backdrop" src="${E(BACKDROP.src)}"${BACKDROP.srcset ? ` srcset="${E(BACKDROP.srcset)}" sizes="(max-width:1422px) 100vw, 1422px"` : ''} alt="${E(alt || '')}" width="1600" height="905" data-i18n-skip fetchpriority="high" decoding="async">${chip}</figure>`,
+        world: '', castHtml: '', chip: '' };
     }
     const cast = CAST.filter(([k]) => P.has(k));
     const names = cast.map(([k]) => P.name(k));
@@ -165,7 +177,9 @@
       .replace('rk-kick rk-kick-dark', 'rk-kick rpm-kick')
       .replace('<button type="button" class="btn gold" data-anchor="rp-app">', '<button type="button" class="btn gold" data-anchor="rp-app" data-ff-magnet>')
       .replace('<a class="btn ghost" href="#room-kit">', '<a class="btn soft" href="#room-kit">');
-    const hero = `<header class="wc-hero rk-hero rp-hero rpm-hero" data-rpm-hero>${sc.world}<div class="wrap rpm-grid">${copy}`
+    const hero = (sc.still
+      ? `<header class="wc-hero rk-hero rp-hero rpm-hero rpm-scenehero" data-rpm-hero>${sc.still}<div class="wrap rpm-grid">${copy}`
+      : `<header class="wc-hero rk-hero rp-hero rpm-hero" data-rpm-hero>${sc.world}<div class="wrap rpm-grid">${copy}`)
       + `${demoFigure()}${sc.castHtml}</div>${sc.chip}`;
     let rest = html.slice(b);
     // the step-by-step section and the guide sit on the felt graph paper; the step section has its own entrance
@@ -231,7 +245,10 @@
     if (last) last.a.addEventListener('finish', done); else done();
     // skippable: a tap, a key, the wheel or a scroll shows the last frame (the replay button itself never counts)
     const me = { finish, fig }, mine = e => !!(e && e.target && e.target.closest && e.target.closest('[data-rpm-replay]') && (e.type === 'pointerdown' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))));
-    const skip = e => { if (demo !== me || mine(e) || !fig.classList.contains('rpm-playing')) return; finish(); };
+    // with the scene above it, the plan starts when it is scrolled into view: the scroll that brought it there (wheel or finger, for about
+    // a second) does not skip it; a tap or a key always does
+    const t0 = Date.now(), coasting = e => e && (e.type === 'wheel' || e.type === 'touchmove') && Date.now() - t0 < 1200;
+    const skip = e => { if (demo !== me || mine(e) || coasting(e) || !fig.classList.contains('rpm-playing')) return; finish(); };
     sc.timer(() => ['keydown', 'pointerdown', 'wheel', 'touchmove'].forEach(t => sc.listen(W, t, skip, { passive: true })), 0);
     // a scroll counts once the page has settled from the click that started the demo
     sc.timer(() => { const y0 = W.scrollY || 0; sc.listen(W, 'scroll', e => { if (Math.abs((W.scrollY || 0) - y0) > 40) skip(e); }, { passive: true }); }, 300);
@@ -408,6 +425,14 @@
     observers.forEach(o => { try { o.disconnect(); } catch (e) { /* gone */ } });
     observers = [];
     if (view !== 'room-planner' || !root) return;
+    // the scene's still: the dock never covers a character (with motion on or off)
+    const still = root.querySelector('.rpm-still'), CM = W.FFCentersMotion;
+    if (still && CM && CM.fitDock) {
+      CM.fitDock(still, SCENE_WHO);
+      // the dock is drawn after the first render (and resizes with the language): check again once it is there
+      [400, 1200].forEach(ms => setTimeout(() => { if (still.isConnected) CM.fitDock(still, SCENE_WHO); }, ms));
+      if (typeof ResizeObserver === 'function') { let w = still.clientWidth; const ro = new ResizeObserver(() => { if (still.clientWidth !== w) { w = still.clientWidth; CM.fitDock(still, SCENE_WHO); } }); ro.observe(still); observers.push(ro); }
+    }
     const t = thread(root);
     if (t) observers.push(t);
     if (!M() || !M().allowed(ok)) return;
@@ -419,5 +444,5 @@
   }
   W.FFhooks = W.FFhooks || [];
   W.FFhooks.push(setup);
-  W.FFRoomPlannerMotion = Object.freeze({ setup, decorate, demoSvg, play: () => { const f = document.querySelector('[data-rpm-plan]'); if (f && live) playDemo(f, live); }, skip: () => { if (demo) demo.finish(); }, DEMO_MS });
+  W.FFRoomPlannerMotion = Object.freeze({ setup, decorate, SCENE_WHO, BACKDROP, demoSvg, play: () => { const f = document.querySelector('[data-rpm-plan]'); if (f && live) playDemo(f, live); }, skip: () => { if (demo) demo.finish(); }, DEMO_MS });
 })();
