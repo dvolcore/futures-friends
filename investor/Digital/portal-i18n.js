@@ -8,6 +8,24 @@
 (function () {
   'use strict';
   const ES = {
+    // v2273 Profit lab
+    "Profit lab": "Laboratorio de rentabilidad", "Move a slider or switch on a lever to see each step.": "Mueva un control o active una palanca para ver cada paso.", "Move the levers to explore a scenario. The published plan stays unchanged.": "Mueva las palancas para explorar un escenario. El plan publicado no cambia.",
+    "Reset to the plan": "Volver al plan", "Assumptions": "Supuestos", "Children enrolled": "Niños inscritos", "Collections": "Cobranza", "Cost levers": "Palancas de costo",
+    "Futures Friends carries its program costs (not the center)": "Futures Friends asume los costos de su programa (no el centro)",
+    "One fewer afternoon teacher (3–5 pm), if attendance allows": "Una maestra de la tarde menos (3–5 pm), si la asistencia lo permite",
+    "Paid ads cut back after full enrollment": "Menos publicidad pagada con la inscripción completa",
+    "Break-even tuition": "Colegiatura de equilibrio", "Your tuition": "Su colegiatura", "Year-1 cash deficit": "Déficit de caja del año 1",
+    "Years to pay back the pilot deficit": "Años para recuperar el déficit del piloto", "Not reached": "No se alcanza",
+    "From today’s plan to your scenario": "Del plan actual a su escenario", "Annual operating margin, step by step.": "Margen operativo anual, paso a paso.",
+    "Enrollment ramp": "Aumento de la inscripción", "Children enrolled, month by month.": "Niños inscritos, mes a mes.",
+    "Children enrolled in months 1 to 12 of the pilot": "Niños inscritos en los meses 1 a 12 del piloto",
+    "Where each operating dollar goes": "A dónde va cada dólar operativo", "Yearly recurring costs, from the itemized budget.": "Costos recurrentes anuales, según el presupuesto detallado.",
+    "Today’s plan": "Plan actual", "Your tuition, children and collections": "Su colegiatura, niños y cobranza", "Program costs carried by Futures Friends": "Costos del programa a cargo de Futures Friends",
+    "One fewer afternoon teacher": "Una maestra de la tarde menos", "Paid ads cut back": "Menos publicidad pagada",
+    "Staff wages, taxes, benefits and insurance": "Salarios, impuestos, beneficios y seguros del personal", "Food and nutrition": "Alimentación y nutrición",
+    "Building operations and cleaning": "Operación del edificio y limpieza", "Futures Friends program costs": "Costos del programa Futures Friends",
+    "Administration, insurance and other": "Administración, seguros y otros",
+    "tuition (price scenario). Today’s": "de colegiatura (escenario de precio). Actual",
     // v2272 KPI row
     "Revenue at full enrollment": "Ingresos con inscripción completa", " /yr": " /año", "/yr": "/año", "/yr.": "/año.",
     "children": "niños", "tuition": "colegiatura", "collections": "de cobranza",
@@ -29,7 +47,6 @@
     "Included in pilot costs. Build, assurance, hosting & support.": "Incluido en los costos del piloto. Desarrollo, verificación, alojamiento y soporte.",
     "See the payback case": "Ver el caso de pago", "See the platform costs": "Ver los costos de la plataforma",
     "Pilot basis": "Bases del piloto", "-child capacity": " niños de capacidad", "-month pilot": " meses de piloto", "collections assumed": "de cobranza supuesta",
-    "The repayment case still needs to be proven.": "El caso de pago aún debe demostrarse.",
     "Where your capital goes": "A dónde va su capital", "Allocation view of the total funding ask.": "Distribución del financiamiento total solicitado.",
     "Inspect details": "Ver detalles", "of funding": "del financiamiento", "Pilot deficit": "Déficit del piloto", "Refinance": "Refinanciamiento",
     "Cash flow & scenario lab": "Laboratorio de flujo de caja y escenarios",
@@ -249,6 +266,9 @@
     [/^Planning model · (\w+) (\d+), (\d{4})$/, (m, mo, d, y) => `Modelo de planificación · ${d} de ${MONTHS[mo] || mo} de ${y}`],
     [/^Month (\d+)$/, (m, n) => `Mes ${n}`],
     [/^Month (\d+) snapshot$/, (m, n) => `Resumen del mes ${n}`],
+    [/^(\d+(?:\.\d+)?) years$/, (m, n) => `${n} años`],
+    [/^Month (\d+): (\d+) children$/, (m, n, c) => `Mes ${n}: ${c} niños`],
+    [/^Month (\d+), (\d+) children$/, (m, n, c) => `Mes ${n}, ${c} niños`],
     [/^Month (\d+), (\d+) children, cumulative cash deficit (.+)$/, (m, n, c, v) => `Mes ${n}, ${c} niños, déficit de caja acumulado ${v}`],
     [/^Draft monthly tuition (.+); operating break-even (.+) before building payments and debt$/, (m, a, b) => `Colegiatura mensual en borrador ${a}; punto de equilibrio operativo ${b} antes de pagos del edificio y deuda`],
     [/^(\d+) pages?$/, (m, n) => `${n} ${n === '1' ? 'página' : 'páginas'}`],

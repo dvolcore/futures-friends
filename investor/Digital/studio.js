@@ -514,7 +514,7 @@
         // scene (default): the picture's colours: screen cyan, suit blue, lamp orange, purple-flower lilac
         scene: { deficit: '#0bd9dc', refinance: '#4d5ef2', floor: '#eba347', contingency: '#a685d4' } })[R.dataset.theme] || undefined });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
-      height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.232, 9.6 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
+      height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.27, 12 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
       out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
@@ -531,7 +531,7 @@
     const SCENES = {
       // cast-2 (default, owner's pick): the packed full cast, every seat filled; the giraffe's ossicones are the top-most point
       //   (19%), the lowest chin (the frog, front right) 72%.
-      'cast-2': { file: 'investor-meeting-cast-2', band: [0.19, 0.72] },
+      'cast-2': { file: 'investor-meeting-cast-2', band: [0.19, 0.72], show: 0.84 },   // v2273: down to the table's front edge
       'cast-1': { file: 'investor-meeting-cast-1', band: [0.155, 0.72] },
       'glam-1': { file: 'investor-meeting-glam-1', band: [0.165, 0.585] }, 'glam-2': { file: 'investor-meeting-glam-2', band: [0.15, 0.585] },
       'wide-1': { file: 'investor-meeting-wide-1', band: [0.165, 0.61] }, 'wide-2': { file: 'investor-meeting-wide-2', band: [0.077, 0.612] }
@@ -540,28 +540,26 @@
       const fig = $('#ccScene'), img = $('#ccSceneImg');
       if (!fig || !img) return {};
       const cfg = SCENES[fig.dataset.scene] || SCENES['cast-2'];
-      const hero = fig.closest('.cap-hero') || fig, head = $('.cap-head', hero), foot = $('.cap-foot');
+      const hero = fig.closest('.cap-hero') || fig, head = $('.cap-head', hero);
       let nat = Number(img.getAttribute('width')) / Number(img.getAttribute('height')), last = '';
-      // the hero's height: the picture from its top to the band's foot, unless the screen is short: then the hero gets lower (down
-      // to the whole page fitting the window) by trimming ceiling from the top, never so much that a face reaches the title, and
-      // never the band's foot. A screen too short for both scrolls a little rather than covering a face.
+      // the hero's height: the picture from its top down to the scene's 'show' line (cast-2: the table's front edge), so every
+      // head and the front row's bodies are whole; the title sits over the ceiling, above the highest head.
       const frame = () => {
-        const footF = Math.min(1, cfg.band[1] + AIR), W = hero.clientWidth;
+        const footF = Math.min(1, (cfg.show || cfg.band[1]) + AIR), W = hero.clientWidth;
         fig.style.setProperty('--nat', String(nat));
         hero.style.setProperty('--ar', String(nat / footF));
         const overlay = head && getComputedStyle(head).position === 'absolute';
         if (!W || !overlay) { hero.style.removeProperty('--hero-h'); hero.style.removeProperty('--img-top'); return; }
         const Himg = W / nat, natural = Himg * footF, headBottom = head.offsetTop + head.offsetHeight + 6;
-        const rest = foot ? foot.getBoundingClientRect().bottom - hero.getBoundingClientRect().bottom + 8 : 0;
-        const fitH = innerHeight - rest;
-        const minH = natural - Math.max(0, cfg.band[0] * Himg - headBottom);   // the most ceiling that may go
-        const H = Math.round(Math.max(minH, Math.min(natural, fitH)));
-        const key = `${H}|${Math.round(natural - H)}`;
+        // v2273 (owner: "we have plenty of room at the bottom"): the page may scroll, so the hero always shows its whole frame; if a
+        // title ever reached the highest head, the picture moves down under it by the overlap (a safety net)
+        const push = Math.max(0, Math.ceil(headBottom - cfg.band[0] * Himg)), H = Math.round(natural + push);
+        const key = `${H}|${push}`;
         if (key === last) return;
         last = key;
         hero.style.setProperty('--hero-h', `${H}px`);
-        hero.style.setProperty('--img-top', `${-Math.round(natural - H)}px`);
-        hero.dataset.trim = String(Math.round(natural - H));
+        hero.style.setProperty('--img-top', `${push}px`);
+        hero.dataset.push = String(push);
       };
       frame();
       img.sizes = '(max-width: 767px) 100vw, 90vw';
@@ -591,6 +589,12 @@
       const test = (m.sensitivity || []).find((r) => r.children === full && r.tuition === PROFIT_TUITION);
       if (test) { text('kpiProfit', whole(Math.round(test.annual_operating_margin))); text('kpiProfitTuition', whole(test.tuition)); }
       text('kpiTodayTuition', whole(assumptions.tuition));
+      const spark = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; };
+      const maxRec = Math.max(...cash.map((r) => r.receipts));
+      const recPts = cash.map((r, i) => `${(i * 120 / 11).toFixed(1)},${(28 - r.receipts / maxRec * 24).toFixed(1)}`);
+      spark('kpiRevSpark', `<path class="sp-fill" d="M0,30 L${recPts.join(' L')} L120,30 Z"/><path d="M${recPts.join(' L')}" pathLength="1"/>`);
+      const maxGap = Math.max(...cash.map((r) => Math.abs(r.net)));
+      spark('kpiGapSpark', cash.map((r, i) => { const hh = Math.max(1.5, Math.abs(r.net) / maxGap * 26); return `<rect x="${(i * 10).toFixed(1)}" y="${(29 - hh).toFixed(1)}" width="7" height="${hh.toFixed(1)}" rx="1.5" style="--i:${i}"/>`; }).join(''));
       const g1 = Math.abs(cash[0].net), g12 = Math.abs(cash[cash.length - 1].net);
       text('kpiShrink', String(Math.round((g1 - g12) / g1 * 100))); text('kpiGapFirst', signed(money(cash[0].net))); text('kpiGapLast', signed(money(cash[cash.length - 1].net)));
       text('kpiGapM1', String(cash[0].month)); text('kpiGapM12', String(cash[cash.length - 1].month));
@@ -642,6 +646,152 @@
     return { build, scene: () => scene, year: () => ovYear };
   })();
 
+  // ================================================================ Profit lab (v2273, owner: "I don't see any graphics, widgets, charts, sliders")
+  // A scenario explorer on the Overview: tuition, children and collections sliders and three cost levers, with live outputs. Every number
+  // is the model's: the margin and break-even use the model's method (scen.method(): food and payment fees move with enrollment, tuition
+  // and collections, so the defaults give exactly -$57,738.02 and $1,036.37, and 40 children at $1,250 gives the sensitivity table's
+  // +$97,610.11); the levers' amounts are summed from the itemized budget (../costs/Pilot_40_Children_Itemized.csv), the year-1 deficit
+  // replays the published monthly cash rows at your assumptions (planning assumptions = the published $222,049.42 peak deficit).
+  // Charts: the margin waterfall, a break-even gauge, the enrollment ramp and where each operating dollar goes; they grow in on scroll-in
+  // with motion on and are static otherwise. Nothing is stored; Reset returns to the plan.
+  const lab = (() => {
+    const root = $('#profitLab'); if (!root) return { build() {} };
+    const tu = $('#labTuition'), ch = $('#labChildren'), co = $('#labCollection'), reset = $('#labReset');
+    const levers = $$('[data-lever]', root);
+    const counter = makeCounter($('#labMargin'));
+    let calc = null, m = null, amounts = {}, srTimer = 0;
+    // the itemized budget: a small CSV reader (quoted fields may hold commas)
+    const parseCsv = (text) => {
+      const out = []; let row = [], cell = '', q = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (q) { if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; continue; }
+        if (c === '"') q = true; else if (c === ',') { row.push(cell); cell = ''; } else if (c === '\n') { row.push(cell); out.push(row); row = []; cell = ''; } else if (c !== '\r') cell += c;
+      }
+      if (cell || row.length) { row.push(cell); out.push(row); }
+      const [head, ...rows] = out; return rows.filter((r) => r.length === head.length).map((r) => Object.fromEntries(head.map((k, i) => [k, r[i]])));
+    };
+    const itemized = fetch('../costs/Pilot_40_Children_Itemized.csv', { cache: 'no-store' }).then((r) => (r.ok ? r.text() : Promise.reject())).then(parseCsv).catch(() => null);
+    // the cost levers and the cost groups, by the budget's own categories and lines
+    const FF_PROGRAM = ['Pilot content support', 'Curriculum and clinical review', 'Platform support', 'Platform assurance', 'Hosting and software', 'Pilot content production', 'Pilot devices'];
+    const GROUPS = [
+      ['staff', 'Staff wages, taxes, benefits and insurance', ['Staff wages', 'Employer taxes', 'Staff benefits', 'Staff insurance'], '#4d5ef2'],
+      ['food', 'Food and nutrition', ['Food and nutrition'], '#eba347'],
+      ['building', 'Building operations and cleaning', ['Building operations', 'Cleaning and consumables'], '#a0643e'],
+      ['ff', 'Futures Friends program costs', FF_PROGRAM, '#0bd9dc'],
+      ['other', 'Administration, insurance and other', null, '#b06c7e']
+    ];
+    const cents = (v) => Math.round(v * 100) / 100;
+    function levers0(rows) {
+      const rec = rows.filter((r) => r.bucket === 'recurring'), sum = (f) => cents(rec.filter(f).reduce((a, r) => a + Number(r.annual), 0));
+      const ads = rec.find((r) => /^Paid local advertising$/i.test(r.item));
+      return {
+        ff: sum((r) => FF_PROGRAM.includes(r.category)),
+        teacher: sum((r) => /^Part-time teacher 7\b/.test(r.item)),
+        // the paid local advertising line cut back to $1,500 a year once the centre is full
+        ads: ads ? cents(Number(ads.annual) - 1500) : 0
+      };
+    }
+    const savings = () => levers.reduce((a, b) => a + (b.checked ? amounts[b.dataset.lever] || 0 : 0), 0);
+    const per = (k, t2, c2) => calc.variable(k) + calc.fees(k, t2, c2);
+    // the pilot year replayed at the scenario: the published ramp capped at your children, receipts at your tuition and collections,
+    // food and fees moving with them, the levers' savings spread over the months, the published one-time costs unchanged
+    function year1(n, tt, c, save) {
+      const a = calc.assumptions; let cum = 0, low = 0;
+      for (const r of m.cash) {
+        const k = Math.min(r.children, n);
+        const receipts = r.receipts + (k * tt * c - r.children * a.tuition * a.collection);
+        const recurring = r.recurring + (per(k, tt, c) - per(r.children, a.tuition, a.collection)) / 12 - save / 12;
+        cum = cents(cum + cents(receipts - recurring - r.one_time)); low = Math.min(low, cum);
+      }
+      return Math.max(0, -low);
+    }
+    const breakEven = (n, c, save) => { let lo = 0, hi = 5000; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (calc.margin(n, mid, c) + save < 0) lo = mid; else hi = mid; } return Math.round(hi * 100) / 100; };
+    // ---- the break-even gauge: a half dial over the tuition range; the needle is your tuition, the gold tick the break-even
+    const gauge = (() => {
+      const el = $('#labGauge'); if (!el) return { set() {} };
+      const LO = 850, HI = 1400, at = (v) => Math.max(0, Math.min(1, (v - LO) / (HI - LO)));
+      const arc = (cls) => svg('path', { d: 'M18,100 A82,82 0 0 1 182,100', class: cls, pathLength: 1 });
+      const track = arc('g-track'), fillA = arc('g-fill'), tick = svg('line', { x1: 100, y1: 8, x2: 100, y2: 30, class: 'g-tick' });
+      const needle = svg('g', { class: 'g-needle' }); needle.append(svg('line', { x1: 100, y1: 100, x2: 100, y2: 30 }), svg('circle', { cx: 100, cy: 100, r: 7 }));
+      el.append(track, fillA, tick, needle);
+      return { set(tt, be) { const rot = (f) => `rotate(${(-90 + 180 * f).toFixed(2)}deg)`; needle.style.transform = rot(at(tt)); tick.style.transform = rot(at(be)); fillA.style.strokeDasharray = `${at(tt).toFixed(4)} 1`; el.classList.toggle('g-ok', tt >= be); } };
+    })();
+    // ---- the waterfall: today's plan, your assumptions, each lever on, the result (rows only for what changes)
+    function waterfall(rowsW) {
+      const host = $('#labFall'); if (!host) return;
+      let at = 0; const pts = [0];
+      for (const r of rowsW) { if (r.total) at = r.v; else at += r.v; pts.push(at); }
+      const lo = Math.min(0, ...pts), hi = Math.max(0, ...pts), span = (hi - lo) || 1, x = (v) => (v - lo) / span * 100;
+      at = 0;
+      host.innerHTML = rowsW.map((r) => {
+        const from = r.total ? 0 : at, to = r.total ? r.v : at + r.v; at = to;
+        const l = x(Math.min(from, to)), w = Math.max(0.6, Math.abs(x(to) - x(from)));
+        const cls = r.total ? (r.v >= 0 ? 'wf-total pos' : 'wf-total neg') : (r.v >= 0 ? 'wf-up' : 'wf-down');
+        const val = r.total ? signed(money(r.v)) : (r.v >= 0 ? '+' : '') + signed(money(r.v));
+        return `<div class="wf-row ${cls}"><span class="wf-name" data-en="${r.name}">${t(r.name)}</span><div class="wf-track"><i class="wf-zero" style="left:${x(0).toFixed(2)}%"></i><i class="wf-bar" style="--l:${l.toFixed(2)}%;--w:${w.toFixed(2)}%"></i></div><b class="wf-val">${val}</b></div>`;
+      }).join('') + (rowsW.length <= 2 ? `<p class="wf-hint" data-en="Move a slider or switch on a lever to see each step.">${t('Move a slider or switch on a lever to see each step.')}</p>` : '');
+    }
+    function update(animate) {
+      if (!calc) return;
+      const tt = Number(tu.value), n = Number(ch.value), c = Number(co.value) / 100, save = cents(savings());
+      text('labTuitionOut', whole(tt)); text('labChildrenOut', String(n)); text('labCollectionOut', Math.round(c * 100) + '%');
+      const base = calc.margin(n, tt, c), margin = base + save, be = breakEven(n, c, save), deficit = year1(n, tt, c, save);
+      if (animate) counter.to(margin); else { counter.reset(); counter.to(margin); }
+      clearTimeout(srTimer); srTimer = setTimeout(() => { $('#labMarginSr').textContent = signed(money(margin)); }, 300);
+      root.classList.toggle('lab-positive', margin >= 0);
+      I.set($('#labStatus'), margin >= 0 ? 'Operating surplus · building payments & debt excluded' : 'Operating shortfall · building payments & debt excluded');
+      text('labBreakEven', money(be)); text('labTuitionNow', whole(tt)); text('labDeficit', money(deficit));
+      I.set($('#labPayback'), margin > 0 ? `${(deficit / margin).toFixed(1)} years` : 'Not reached');
+      gauge.set(tt, be);
+      const m0 = m.metrics.year2_margin, rowsW = [{ name: 'Today’s plan', v: m0, total: true }];
+      if (Math.abs(base - m0) >= 0.005) rowsW.push({ name: 'Your tuition, children and collections', v: cents(base - m0) });
+      for (const b of levers) if (b.checked && amounts[b.dataset.lever]) rowsW.push({ name: { ff: 'Program costs carried by Futures Friends', teacher: 'One fewer afternoon teacher', ads: 'Paid ads cut back' }[b.dataset.lever], v: amounts[b.dataset.lever] });
+      rowsW.push({ name: 'Your scenario', v: cents(margin), total: true });
+      waterfall(rowsW);
+      reset.disabled = false;
+    }
+    const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
+    // ---- the enrollment ramp: the twelve months' children (assumptions.cash_ramp), bars that grow in, a tooltip on hover / focus
+    function ramp() {
+      const el = $('#labRamp'), tip = $('#labRampTip'); if (!el) return;
+      const r = m.assumptions.cash_ramp, top = Math.max(...r), W = 480, H = 160, L = 26, B = 136, step = (W - L) / r.length;
+      el.innerHTML = `<line x1="${L}" x2="${W}" y1="${B}" y2="${B}" class="rp-axis"/>` + r.map((v, i) => { const h = v / top * (B - 14); return `<g class="rp-col" data-i="${i}" tabindex="0" role="img" aria-label="Month ${i + 1}, ${v} children"><rect class="rp-bar" x="${(L + i * step + 4).toFixed(1)}" y="${(B - h).toFixed(1)}" width="${(step - 8).toFixed(1)}" height="${h.toFixed(1)}" rx="4" style="--i:${i}"/><text x="${(L + i * step + step / 2).toFixed(1)}" y="${B + 16}" class="rp-month" text-anchor="middle">${i + 1}</text><text x="${(L + i * step + step / 2).toFixed(1)}" y="${(B - h - 5).toFixed(1)}" class="rp-val" text-anchor="middle">${v}</text></g>`; }).join('');
+      const show = (g) => { const i = Number(g.dataset.i), b = g.querySelector('rect').getBoundingClientRect(), w = el.parentElement.getBoundingClientRect(); I.set(tip, `Month ${i + 1}: ${r[i]} children`); tip.hidden = false; tip.style.left = `${(b.left - w.left + b.width / 2).toFixed(0)}px`; tip.style.top = `${(b.top - w.top - 8).toFixed(0)}px`; };
+      for (const g of $$('.rp-col', el)) { g.addEventListener('pointerenter', () => show(g)); g.addEventListener('focus', () => show(g)); g.addEventListener('pointerleave', () => { tip.hidden = true; }); g.addEventListener('blur', () => { tip.hidden = true; }); }
+      I.onChange(() => { for (const g of $$('.rp-col', el)) I.setAttr(g, 'aria-label', `Month ${Number(g.dataset.i) + 1}, ${r[Number(g.dataset.i)]} children`); });
+    }
+    // ---- where each operating dollar goes: the recurring budget by group, one stacked bar, a key with amounts and shares
+    function dollar(rows) {
+      const host = $('#labDollar'), key = $('#labDollarKey'); if (!host || !rows) return;
+      const rec = rows.filter((r) => r.bucket === 'recurring'), total = rec.reduce((a, r) => a + Number(r.annual), 0);
+      const used = new Set(GROUPS.flatMap((g) => g[2] || []));
+      const parts = GROUPS.map(([k, name, cats, color]) => ({ k, name, color, v: cents(rec.filter((r) => (cats ? cats.includes(r.category) : !used.has(r.category))).reduce((a, r) => a + Number(r.annual), 0)) }));
+      host.innerHTML = parts.map((p, i) => `<span class="dollar-seg" role="img" tabindex="0" style="--w:${(p.v / total * 100).toFixed(3)}%;--c:${p.color};--i:${i}" data-k="${p.k}" aria-label="${t(p.name)}: ${money(p.v)}, ${(p.v / total * 100).toFixed(1)}%"></span>`).join('');
+      key.innerHTML = parts.map((p) => `<li data-k="${p.k}" style="--c:${p.color}"><i aria-hidden="true"></i><span data-en="${p.name}">${t(p.name)}</span><b>${money(p.v)}</b><small>${(p.v / total * 100).toFixed(1)}%</small></li>`).join('');
+      const lit = (k) => { for (const el of $$('[data-k]', root)) el.classList.toggle('lit', el.dataset.k === k); };
+      for (const el of $$('.dollar-seg, .dollar-key li', root)) { el.addEventListener('pointerenter', () => lit(el.dataset.k)); el.addEventListener('pointerleave', () => lit(null)); el.addEventListener('focus', () => lit(el.dataset.k)); el.addEventListener('blur', () => lit(null)); }
+    }
+    async function build(model) {
+      m = model; calc = scen.method();
+      const rows = await itemized;
+      if (rows) { amounts = levers0(rows); text('labLeverFF', money(amounts.ff)); text('labLeverTeacher', money(amounts.teacher)); text('labLeverAds', whole(amounts.ads)); }
+      for (const el of [tu, ch, co, ...levers]) { el.disabled = false; el.addEventListener('input', () => update(true)); el.addEventListener('change', () => update(true)); }
+      reset.addEventListener('click', () => { tu.value = m.assumptions.tuition; ch.value = Math.max(...m.cash.map((r) => r.children)); co.value = Math.round(m.assumptions.collection * 100); levers.forEach((b) => { b.checked = false; }); update(true); });
+      tu.value = m.assumptions.tuition; ch.value = Math.max(...m.cash.map((r) => r.children)); co.value = Math.round(m.assumptions.collection * 100);
+      ramp(); dollar(rows); update(false);
+      I.onChange(() => update(false));
+      // the charts grow in when the lab scrolls into view (motion on); otherwise they are simply there
+      if (motionOn() && params().get('reveal') !== 'off' && typeof IntersectionObserver === 'function') {
+        root.classList.add('lab-armed');
+        const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); root.classList.add('lab-in'); } }, { threshold: 0.15 });
+        io.observe(root);
+      } else root.classList.add('lab-in');
+      D.addEventListener('inv:motion', (e) => { if (e.detail?.paused) root.classList.add('lab-in'); });
+    }
+    return { build, state: () => ({ amounts: { ...amounts } }) };
+  })();
+
   // ================================================================ wiring
   D.addEventListener('inv:entrance', (e) => {
     const { view: v, animate } = e.detail;
@@ -655,7 +805,7 @@
   });
   D.addEventListener('inv:model', (e) => {
     model = e.detail;
-    donut.build(model); scen.build(model); year.build(model); ov.build(model);
+    donut.build(model); scen.build(model); year.build(model); ov.build(model); lab.build(model);
   });
-  window.FFInvStudio = Object.freeze({ show, view: () => view, views: VIEWS, scenario: () => scen.method(), year: () => year.rows() });
+  window.FFInvStudio = Object.freeze({ show, view: () => view, views: VIEWS, scenario: () => scen.method(), year: () => year.rows(), lab: () => lab.state() });
 })();

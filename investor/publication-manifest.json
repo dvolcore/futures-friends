@@ -294,8 +294,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 48656,
-      "sha256": "44c03345990a9b492449939bedba11c92ad0280885c686738babf92e1ffff22a"
+      "bytes": 52771,
+      "sha256": "5eec9a75c36297f3971142d52693e98b88a16e72db4b3c91e44a6f4182d7a23c"
     },
     {
       "path": "investor/Digital/library-data.json",
@@ -354,8 +354,8 @@
     },
     {
       "path": "investor/Digital/portal-i18n.js",
-      "bytes": 34259,
-      "sha256": "e14b872a7b27be31270f05fae7b374c0d19f6490a3b0fbe7071a4eedb1871885"
+      "bytes": 36929,
+      "sha256": "72d17934d8d65885b9dba180ea11b239fab60b413c32c33ff2d16161bfec0053"
     },
     {
       "path": "investor/Digital/portal.css",
@@ -369,8 +369,8 @@
     },
     {
       "path": "investor/Digital/studio-overview.css",
-      "bytes": 61492,
-      "sha256": "874c8147bb59d80ec060c8f791335e1d330463628adcdc6a4f5777b3a7f5405d"
+      "bytes": 73972,
+      "sha256": "bbefebbd51e2316c500155d486df3153aa16817fbe2b073448701db27444dbdc"
     },
     {
       "path": "investor/Digital/studio.css",
@@ -379,8 +379,8 @@
     },
     {
       "path": "investor/Digital/studio.js",
-      "bytes": 50095,
-      "sha256": "8452ab39234314956e759038a91b369dd76c542c6b04002d2b86bee10997a245"
+      "bytes": 64894,
+      "sha256": "365779afac1f4ba650605005361261efe8b96b73d8a0ca28986d259218c2f0f4"
     },
     {
       "path": "investor/Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
