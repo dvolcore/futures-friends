@@ -71,9 +71,9 @@ test('the overview: logo and a link go home; the tagline is the only line; Pendi
   assert.doesNotMatch(h, /type="search"|placeholder="Search|role="search"/i);
   for (const v of VIEWS) assert.match(h, new RegExp(`data-studio-view="${v}"`), v);
   // v2271: the loan rate and the repayment are Pending (never "Unpriced"); no equity is proposed; loan terms are not agreed
-  assert.equal((h.match(/<strong class="kpi-v kpi-pending">Pending<\/strong>/g) || []).length, 2, 'two Pending tiles');
-  assert.match(h, /<span>Loan interest rate<\/span>[\s\S]{0,200}Pending[\s\S]{0,120}No agreed rate or signed loan terms\./);
-  assert.match(h, /<span>Your repayment<\/span>[\s\S]{0,200}Pending/);
+  // v2272: the loan terms stay Pending in the basis strip (the owner moved them out of the KPI row); the price test is disclosed
+  assert.match(h, /<li><span>Loan terms:<\/span> <b class="strip-pending">Pending<\/b><\/li>/);
+  assert.match(h, /tuition \(a price scenario, not verified market tuition\)\. At today’s/);
   assert.match(h, /<li><span>No equity proposed<\/span><\/li>/);
   assert.match(h, /Loan terms not yet agreed/);
   // the excluded words, in the page and in its Spanish
@@ -114,6 +114,16 @@ const page = async (width, opts = {}) => {
 };
 const model = (pg) => pg.waitForFunction(() => document.documentElement.dataset.modelVersion === 'pilot-40-v4', null, { timeout: 15000 });
 
+// v2272 KPI row, computed from the model: funding ask, revenue at full enrollment, the month the ramp is full, the $1,250 price test,
+// how much the monthly gap shrinks from month 1 to month 12, platform year one
+function KPI_TEXT() {
+  const money = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+  const whole = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
+  const { funding, metrics, cash, platform, sensitivity } = MODEL, full = Math.max(...cash.map((r) => r.children));
+  const test = sensitivity.find((r) => r.children === full && r.tuition === 1250);
+  const g1 = Math.abs(cash[0].net), g12 = Math.abs(cash[11].net);
+  return [money(funding.request_before_financing), `${whole(metrics.full_enrollment_receipts)} /yr`, `Month ${cash.findIndex((r) => r.children === full) + 1}`, `+${whole(Math.round(test.annual_operating_margin))} /yr`, `${Math.round((g1 - g12) / g1 * 100)}%`, money(platform.first_year)];
+}
 // the figures the portal may ADD (tables): every one is a formatted value of the model
 function modelFigures() {
   const money = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
@@ -124,6 +134,9 @@ function modelFigures() {
   [funding, totals, metrics].forEach((o) => Object.values(o).forEach(add));
   Object.values(platform).forEach(add); add(assumptions.tuition);
   for (const r of cash) { add(r.month); add(r.children); add(r.receipts); add(r.recurring + r.one_time); add(r.net); add(r.cumulative); out.add(String(r.month).padStart(2, '0')); }
+  // v2272: the price-test rows (the "Path to profit" tile) and the share by which the monthly gap shrinks
+  for (const r of MODEL.sensitivity || []) { add(r.tuition); add(Math.round(r.annual_operating_margin)); }
+  out.add(String(Math.round((Math.abs(cash[0].net) - Math.abs(cash[11].net)) / Math.abs(cash[0].net) * 100)));
   // the donut's shares of the funding estimate (each allocation / request_before_financing, one decimal)
   for (const v of [funding.peak_deficit, totals.refinance, funding.cash_floor, totals.contingency]) out.add((v / funding.request_before_financing * 100).toFixed(1) + '%');
   return out;
@@ -294,7 +307,7 @@ test('English / Español: the switch translates the page and keeps every figure;
   await pg.click('[data-lang="es"]');
   assert.equal(await pg.getAttribute('html', 'lang'), 'es');
   assert.match(await pg.textContent('.kpi-blue .kpi-label'), /Financiamiento total solicitado/);
-  assert.deepEqual(await pg.$$eval('.kpi-pending', (e) => e.map((x) => x.textContent)), ['Pendiente', 'Pendiente']);
+  assert.equal(await pg.textContent('.strip-pending'), 'Pendiente');
   assert.deepEqual(await n.extract(pg), en, 'identical figures in Spanish');
   assert.equal(await pg.evaluate(() => localStorage.getItem('ff-lang')), 'es');
   await pg.reload(); await model(pg);
@@ -375,7 +388,7 @@ test('studio: six full-screen views, one at a time; ?view= and #hash deep links;
   await pg.goto(`${site.base}${OVERVIEW}?reveal=off#pilot`); await model(pg);
   assert.equal(await pg.evaluate(() => document.documentElement.dataset.view), 'pilot', '#pilot deep link');
   // the five KPI tiles open their deep dives (the arrow, and a tap on the tile itself)
-  for (const [card, view] of [['kpi-blue', 'funding'], ['kpi-gold', 'scenarios'], ['kpi-red', 'pilot'], ['kpi-purple', 'scenarios'], ['kpi-teal', 'inside']]) {
+  for (const [card, view] of [['kpi-blue', 'funding'], ['kpi-gold', 'scenarios'], ['kpi-teal', 'pilot'], ['kpi-green', 'scenarios'], ['kpi-red', 'pilot'], ['kpi-purple', 'inside']]) {
     for (const target of ['.kpi-go', '.kpi-sub']) {
       await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
       await pg.click(`.${card} ${target}`);
@@ -575,7 +588,7 @@ test('overview: the mockup\'s modules in its order; no slogans, no demo / concep
   assert.match(sec, /One location\. 40 children\. One year\./);
   // the KPI tiles: five, numbered, in the mockup's order
   assert.deepEqual([...sec.matchAll(/<p class="kpi-label"><span class="kpi-n">(\d+)<\/span> \/ <span>([^<]+)<\/span>/g)].map((m) => `${m[1]} ${m[2]}`),
-    ['01 Total funding ask', '02 Loan interest rate', '03 Operating profit outlook', '04 Your repayment', '05 Platform · year one']);
+    ['01 Total funding ask', '02 Revenue at full enrollment', '03 Full enrollment', '04 Path to profit', '05 Monthly gap shrinks', '06 Platform · year one']);
   // the scenario sliders stay on the Payback view (not on the Overview: they are not in the mockup)
   assert.doesNotMatch(sec, /type="range"/);
   for (const src of [read(OVERVIEW), read('investor/Digital/portal-i18n.js'), read('investor/Digital/studio.js'), read('investor/Digital/studio-overview.css')]) assert.doesNotMatch(src, OV_SLOGANS);
@@ -605,8 +618,13 @@ test('overview: every figure is the model\'s (KPI tiles, basis strip, capital do
   const whole = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
   const txt = (ids) => pg.evaluate((ids) => ids.map((id) => document.getElementById(id).textContent), ids);
   // the KPI tiles
-  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), [money2(total), 'Pending', money2(metrics.year2_margin), 'Pending', money2(platform.first_year)]);
-  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), ['$423,849.52', 'Pending', '−$57,738.02', 'Pending', '$95,852.20']);
+  // v2272 (owner: "key information at a first glance"): six tiles, each computed here from pilot-budget.json
+  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent.replace(/\s+/g, ' ').trim())), KPI_TEXT());
+  assert.deepEqual(KPI_TEXT(), ['$423,849.52', '$419,328 /yr', 'Month 5', '+$97,610 /yr', '94%', '$95,852.20']);
+  assert.equal(await pg.textContent('#kpiGap'), money2(metrics.year2_margin), 'the loss at today\'s tuition stays on the Path to profit tile');
+  assert.equal(await pg.textContent('#kpiProfitTuition'), whole(1250));
+  assert.deepEqual(await txt(['kpiGapFirst', 'kpiGapLast', 'kpiRampFrom', 'kpiRampTo', 'kpiRevTuition', 'kpiRevColl']), [money2(MODEL.cash[0].net), money2(MODEL.cash[11].net), String(MODEL.cash[0].children), '40', whole(assumptions.tuition), '96%']);
+  assert.ok(await pg.$eval('#kpiRamp path', (p) => p.getAttribute('d').split('V').length - 1 === 11), 'the ramp is a twelve-month step line');
   assert.equal(await pg.textContent('#kpiRefi'), whole(totals.refinance));
   assert.equal(await pg.textContent('#kpiRefi'), '$140,000');
   // the basis strip
@@ -667,7 +685,7 @@ test('overview: every panel and tile opens its deep dive; the documents dock ope
   await pg.click('.cap-docs-head p'); await pg.waitForSelector('#invDocs[open] .inv-doc');
   await pg.keyboard.press('Escape'); await pg.waitForFunction(() => !document.getElementById('invDocs').open);
   // the Platform tile and the Evidence view lead to Inside the pilot
-  await pg.click('.kpi-teal .kpi-go'); await pg.waitForFunction(() => document.documentElement.dataset.view === 'inside');
+  await pg.click('.kpi-purple .kpi-go'); await pg.waitForFunction(() => document.documentElement.dataset.view === 'inside');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -684,7 +702,7 @@ test('overview motion: tiles count one at a time, panels rise, the donut draws, 
   await pg.waitForFunction(() => document.getElementById('ovMonthLabel').textContent === 'Month 12 snapshot' && document.getElementById('ovChart').dataset.playing === 'false', null, { timeout: 15000 });
   assert.equal(await pg.textContent('#ovNet'), money2(CSV[11][5]), 'the walk ends on month 12');
   await pg.waitForFunction(() => !document.querySelector('.inv-counting') && !window.FFInvReveal.running(), null, { timeout: 10000 });
-  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent)), ['$423,849.52', 'Pending', '−$57,738.02', 'Pending', '$95,852.20'], 'the counts land on the model text');
+  assert.deepEqual(await pg.$$eval('#kpis .kpi-v', (e) => e.map((x) => x.textContent.replace(/\s+/g, ' ').trim())), KPI_TEXT(), 'the counts land on the model text');
   assert.equal(await pg.textContent('#ovHlValue'), '$222,049.42');
   const loops = await pg.evaluate(() => document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations === Infinity).length);
   assert.ok(loops >= 1 && loops <= 4, `ambient loops: ${loops}`);
@@ -741,8 +759,8 @@ test('capital command center at 1280 x 853 and 1440 x 900: one screen; the hero 
     // ONE screen: the footer line ends inside the window
     assert.ok(r['.cap-foot'].b <= H, `${W} x ${H}: the whole Overview fits the first screen (footer ends at ${r['.cap-foot'].b})`);
     assert.ok(r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'tiles, strip, panels');
-    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
-    assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'six tiles in one row');
+    assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 6);
     assert.equal(r['.ovd-funding'].t, r['.ovd-year'].t, 'the two panels side by side');
     assert.ok(r['.ovd-funding'].w < r['.ovd-year'].w && r['.ovd-funding'].r < r['.ovd-year'].l, 'capital on the left (narrower), the lab on the right');
     assert.ok(Math.max(r['.ovd-funding'].b, r['.ovd-year'].b) <= r['.ovd-docs'].t && r['.ovd-docs'].b <= r['.cap-foot'].t, 'the dock under both, then the footer');
@@ -750,10 +768,10 @@ test('capital command center at 1280 x 853 and 1440 x 900: one screen; the hero 
     // nothing in a panel is cut off by its fixed height
     const clipped = await pg.$$eval('.ovd-funding .cap-legend button, .ovd-year .cap-snap dl', (els) => els.filter((e) => { const p = e.closest('.ovd-card').getBoundingClientRect(), b = e.getBoundingClientRect(); return b.bottom > p.bottom + 0.5; }).length);
     assert.equal(clipped, 0, 'every legend row and the month snapshot sit inside their panels');
-    // money green (data-theme="money"), a different colour per tile
-    assert.equal(await pg.getAttribute('html', 'data-theme'), 'money');
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(29, 103, 71\)/);
-    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 5, 'five tile colours');
+    // the picture's palette (data-theme="scene": moss from the flowers' leaves), a different colour per tile
+    assert.equal(await pg.getAttribute('html', 'data-theme'), 'scene');
+    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(78, 94, 47\)/);
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, 'a colour per tile');
     assert.equal(await pg.evaluate(() => scrollY), 0);
     assert.deepEqual(errors, []);
     await ctx.close();

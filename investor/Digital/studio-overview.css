@@ -529,3 +529,143 @@
 :root[data-theme=money][data-view=overview] .studio-foot a{color:#ffe08a}
 :root[data-theme=money] .view-overview .panel-title .icon{background:radial-gradient(circle at 35% 30%,#4c8dff,#2457c4)}
 @media (max-width:767px){:root[data-theme=money] .studio .studio-top .lang-switch button[aria-pressed=true]{background:#1e6e4a}}
+
+/* ================================================================ data-theme="scene" (default since v2272b; owner 2026-10-13: "pull the image
+   colors from the actual photo ... the green to use would be the green in the bottom flowers ... the boxes need to all not feel so
+   blended together"). Every token below is sampled from the hero picture, investor-meeting-cast-2 (pixel-extracted):
+     moss greens  #3a461b #49572b #637533 #7e8c3c  - the centrepiece flowers' leaves (page, sidebar)
+     blues        #0257d1 #4d5ef2                  - the friends' blue suits (KPI 01, the selected rail item)
+     cyans        #0bd9dc #24b8f8                  - the glowing dashboard screen (KPI 05, receipts, the pilot deficit)
+     sky          #87c2e9                          - the windows' sky (figures on navy)
+     red / rose   #de4758 #9a3a66 #b06c7e          - the red flowers, the rose jackets (KPI 03: the loss)
+     orange       #e59844 #eba347                  - the orange flowers and the lamps (KPI 02, spending, the cash floor)
+     gold         #e8c83b                          - the gilded frames and chandeliers (KPI 02, the warning, the tagline)
+     purples      #75509f #69458b                  - the purple flowers (KPI 04, contingency)
+     wood         #a0643e (deepened #8a5333 #6b3c2f) - the table and the panelling ("Where your capital goes")
+     cream        #e9d2b0                          - the walls and the papers (the month snapshot, the documents dock)
+     navies       #404361 #29397d #011d4e          - the chairs and the screen's frame (the strip, the cash-flow lab, text on light)
+   Flip back with one attribute: data-theme="money" (v2272 money green) or "navy" (v2271). */
+:root[data-theme=scene]{
+  --cap-bg:#637533;--cap-bg-2:#4e5e2f;--cap-rail:#3a461b;--cap-line:rgba(233,210,176,.4);
+  --cap-text:#fffaf0;--cap-muted:#f6eedd;--cap-dim:#efe3c8;
+  --hero-bg:#2c3614;--rail-edge:#3a461b;--page-foot:#55672f;
+  --sc-blue:#0257d1;--sc-blue-2:#4d5ef2;--sc-cyan:#0bd9dc;--sc-cyan-2:#24b8f8;--sc-sky:#87c2e9;--sc-red:#de4758;--sc-rose:#9a3a66;
+  --sc-orange:#e59844;--sc-lamp:#eba347;--sc-gold:#e8c83b;--sc-purple:#75509f;--sc-purple-2:#69458b;--sc-wood:#8a5333;--sc-wood-2:#6b3c2f;
+  --sc-cream:#e9d2b0;--sc-chair:#404361;--sc-screen:#29397d;--sc-deep:#011d4e}
+:root[data-theme=scene][data-view=overview] body.studio{background:radial-gradient(55vw 38vw at 70% 30%,rgba(235,163,71,.22),transparent 62%),radial-gradient(40vw 34vw at 20% 100%,rgba(126,140,60,.55),transparent 62%),linear-gradient(180deg,#637533 0%,#5a6b31 45%,#4e5e2f 100%);background-color:#4e5e2f}
+:root[data-theme=scene][data-view=overview]{background:#4e5e2f}
+@media (min-width:768px){:root[data-theme=scene] .studio-top{background:linear-gradient(180deg,#45531f,#3a461b 55%,#2f3a15)}}
+@media (max-width:767px){
+  :root[data-theme=scene] .studio-top{background:linear-gradient(180deg,#45531f,#3a461b);border-bottom-color:rgba(233,210,176,.3)}
+  :root[data-theme=scene] .studio-rail{background:rgba(52,64,24,.97);border-color:rgba(233,210,176,.3)}
+  :root[data-theme=scene] .studio .studio-top .lang-switch button[aria-pressed=true]{background:#0257d1}
+}
+:root[data-theme=scene] .studio-rail a svg{color:var(--sc-cream)}
+:root[data-theme=scene] .rail-pill{background:linear-gradient(180deg,#2f6be6,#0257d1);box-shadow:0 0 0 1px rgba(135,194,233,.8),0 0 18px -2px rgba(77,94,242,.7),inset 3px 0 0 var(--sc-gold)}
+:root[data-theme=scene] .studio-tools .motion-toggle,:root[data-theme=scene] .studio-tools .docs-quick{background:rgba(41,57,125,.7);border-color:rgba(233,210,176,.7);color:#fffaf0;box-shadow:0 0 12px -4px rgba(232,200,59,.7)}
+:root[data-theme=scene] .cap-hero .cap-tag{color:var(--sc-gold)}
+
+/* the five tiles: each its own colour from the picture, a matching glow */
+:root[data-theme=scene] .kpi{border-width:1.5px;box-shadow:0 10px 22px -14px rgba(0,0,0,.65),0 0 18px -6px var(--glow,var(--c)),inset 0 1px 0 rgba(255,255,255,.18)}
+:root[data-theme=scene] .kpi-blue{--c:#87c2e9;--glow:#4d5ef2;background:linear-gradient(160deg,#0257d1 0%,#3a4fe0 100%)}
+:root[data-theme=scene] .kpi-gold{--c:#fff1b8;--glow:#e8c83b;background:linear-gradient(160deg,#e59844 0%,#e8c83b 100%)}
+:root[data-theme=scene] .kpi-red{--c:#f7b3bf;--glow:#de4758;background:linear-gradient(160deg,#9a3a66 0%,#bb3a50 100%)}
+:root[data-theme=scene] .kpi-purple{--c:#d6c2f0;--glow:#75509f;background:linear-gradient(160deg,#69458b 0%,#75509f 100%)}
+:root[data-theme=scene] .kpi-teal{--c:#d9fbff;--glow:#24b8f8;background:linear-gradient(160deg,#0bd9dc 0%,#24b8f8 100%)}
+:root[data-theme=scene] .kpi .kpi-icon{background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);color:#fff}
+:root[data-theme=scene] .kpi .kpi-label,:root[data-theme=scene] .kpi .kpi-v,:root[data-theme=scene] .kpi .kpi-sub,:root[data-theme=scene] .kpi .kpi-go{color:#fffaf0}
+:root[data-theme=scene] .kpi-red .kpi-v{color:#fff3e3}
+/* light tiles (gold, cyan): navy text from the screen frame */
+:root[data-theme=scene] :is(.kpi-gold,.kpi-teal) :is(.kpi-label,.kpi-v,.kpi-sub,.kpi-go,.kpi-icon){color:#011d4e}
+:root[data-theme=scene] :is(.kpi-gold,.kpi-teal) .kpi-icon{background:rgba(1,29,78,.12);box-shadow:inset 0 0 0 1px rgba(1,29,78,.3)}
+:root[data-theme=scene] .kpi-gold .kpi-v{color:#29397d}
+
+/* the basis strip: the navy chairs; the warning in gold */
+:root[data-theme=scene] .strip-facts{background:linear-gradient(90deg,#404361,#363a58);border-color:rgba(135,194,233,.4)}
+:root[data-theme=scene] .strip-icon{color:var(--sc-cyan)}
+:root[data-theme=scene] .strip-facts li:nth-child(1) b{color:var(--sc-cyan)}
+:root[data-theme=scene] .strip-facts li:nth-child(2) b{color:var(--sc-gold)}
+:root[data-theme=scene] .strip-facts li:nth-child(3) b{color:var(--sc-sky)}
+:root[data-theme=scene] .strip-warn{background:var(--sc-gold);border-color:#fff1b8;color:#29397d;box-shadow:0 0 18px -6px rgba(232,200,59,.9)}
+:root[data-theme=scene] .warn-dot{background:#29397d;color:var(--sc-gold)}
+
+/* "Where your capital goes": the wood of the table */
+:root[data-theme=scene] .view-overview .panel.ovd-card.ovd-funding{background:linear-gradient(170deg,#8a5333 0%,#6b3c2f 100%);border-color:rgba(235,163,71,.7);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 20px -8px rgba(235,163,71,.8)}
+:root[data-theme=scene] .ovd-funding .panel-title .icon{background:radial-gradient(circle at 35% 30%,#f2b964,#e59844);box-shadow:0 0 0 2px rgba(255,220,160,.7)}
+:root[data-theme=scene] .ovd-funding .ovd-go{border-color:var(--sc-cream);background:rgba(233,210,176,.16);color:#fffaf0!important}
+:root[data-theme=scene] .ovd-funding .ovd-ring-track{stroke:rgba(40,20,10,.35)}
+:root[data-theme=scene] .cap-legend button{background:rgba(40,20,12,.32);border-color:rgba(233,210,176,.35);border-left:4px solid var(--c)}
+:root[data-theme=scene] .cap-legend button.lit,:root[data-theme=scene] .cap-legend button[aria-pressed=true]{background:color-mix(in srgb,var(--c) 22%,rgba(40,20,12,.4))}
+
+/* "Cash flow & scenario lab": the glowing screen's navy; the snapshot on cream */
+:root[data-theme=scene] .view-overview .panel.ovd-card.ovd-year{background:linear-gradient(170deg,#29397d 0%,#011d4e 100%);border-color:rgba(11,217,220,.6);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 22px -8px rgba(11,217,220,.75)}
+:root[data-theme=scene] .ovd-year .panel-title .icon{background:radial-gradient(circle at 35% 30%,#24b8f8,#0257d1)}
+:root[data-theme=scene] #ovChart .chart-grid-line{stroke:rgba(135,194,233,.18)}
+:root[data-theme=scene] #ovChart .chart-grid-label,:root[data-theme=scene] #ovChart .chart-month{fill:#dbe9fb}
+:root[data-theme=scene] #ovChart .receipt-line{stroke:var(--sc-cyan);filter:drop-shadow(0 0 5px rgba(11,217,220,.75))}
+:root[data-theme=scene] #ovChart .receipt-area{fill:rgba(11,217,220,.16)}
+:root[data-theme=scene] #ovChart .spending-line{stroke:var(--sc-lamp);filter:drop-shadow(0 0 5px rgba(235,163,71,.75))}
+:root[data-theme=scene] #ovChart .gap-area{fill:rgba(235,163,71,.2)}
+:root[data-theme=scene] #ovChart :is(.m-rec,.ovd-dot-rec){fill:var(--sc-cyan)}
+:root[data-theme=scene] #ovChart :is(.m-spend,.ovd-dot-spend){fill:var(--sc-lamp)}
+:root[data-theme=scene] #ovChart .m-dot{stroke:#011d4e}
+:root[data-theme=scene] #ovChart .ovd-cursor{stroke:var(--sc-gold)}
+:root[data-theme=scene] .cap-key .k-rec::before{background:var(--sc-cyan);box-shadow:0 0 8px var(--sc-cyan)}
+:root[data-theme=scene] .cap-key .k-spend::before{background:var(--sc-lamp);box-shadow:0 0 8px var(--sc-lamp)}
+:root[data-theme=scene] .cap-snap{background:var(--sc-cream);border-color:#f6e6c9}
+:root[data-theme=scene] .cap-snap h3{color:#29397d}
+:root[data-theme=scene] .cap-snap h3 small{color:#4a4f6b}
+:root[data-theme=scene] .cap-snap dl{background:#fffaf0}
+:root[data-theme=scene] .snap-kids .snap-icon{color:#0257d1}
+:root[data-theme=scene] .snap-rec .snap-icon{background:#0a8f92}
+:root[data-theme=scene] .snap-spend .snap-icon{background:#b8682a}
+:root[data-theme=scene] .snap-rec dd{color:#0a6e70}
+
+/* the documents dock: cream, each document its own colour */
+:root[data-theme=scene] .view-overview .panel.ovd-card.ovd-docs{background:linear-gradient(180deg,#efdcbd,#e9d2b0);border-color:rgba(255,245,225,.8)}
+:root[data-theme=scene] .cap-docs-head h2{color:#29397d}
+:root[data-theme=scene] .cap-docs-head p{color:#4a4f6b}
+:root[data-theme=scene] .cap-docs-head .icon{color:#29397d}
+:root[data-theme=scene] .cap-doc{background:#fffaf0}
+:root[data-theme=scene] .doc-purple{--c:#0257d1;--ci:#dbe6fb;--ct:#0249b0}
+:root[data-theme=scene] .doc-yellow{--c:#e8c83b;--ci:#fbf1c8;--ct:#7a5a00}
+:root[data-theme=scene] .doc-green{--c:#0bd9dc;--ci:#d3f7f7;--ct:#086a6c}
+:root[data-theme=scene] .doc-orange{--c:#e59844;--ci:#fbe8d2;--ct:#9a5410}
+:root[data-theme=scene] .doc-red{--c:#de4758;--ci:#fadde1;--ct:#b02338}
+:root[data-theme=scene] .doc-blue{--c:#75509f;--ci:#ece3f6;--ct:#5d3c84}
+:root[data-theme=scene] .view-overview .ovd-docs::after{background:linear-gradient(90deg,#0257d1,#24b8f8,#0bd9dc,#e8c83b,#e59844,#de4758,#9a3a66,#75509f)}
+:root[data-theme=scene][data-view=overview] .studio-foot{color:var(--cap-dim)}
+:root[data-theme=scene][data-view=overview] .studio-foot a{color:#fff1b8}
+
+/* ================================================================ v2272: six KPI tiles (owner: "key information at a first glance ... in a
+   positive right direction"): the icon moves to the top-right corner so each figure has the tile's full width */
+.kpi-green{--c:var(--pop-green)}
+.kpis.kpis-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.kpis-6 .kpi{grid-template-columns:minmax(0,1fr);padding-right:calc(.8*var(--u))}
+.kpis-6 .kpi-icon{position:absolute;top:calc(.6*var(--u));right:calc(.6*var(--u));grid-row:auto;width:calc(2.1*var(--u));height:calc(2.1*var(--u));min-width:24px;min-height:24px;border-radius:8px}
+.kpis-6 .kpi-label{padding-right:calc(2.4*var(--u))}
+.kpis-6 .kpi .kpi-v{font-size:clamp(17px,calc(1.62*var(--u)),26px)}
+.kpi-per{font:600 clamp(10px,calc(.78*var(--u)),13px)/1 'DM Sans',sans-serif;opacity:.85}
+.kpis-6 .kpi-sub{padding-right:calc(1.9*var(--u));font-size:clamp(9.5px,calc(.72*var(--u)),12px)}
+.kpi-ramp{position:absolute;right:calc(2.6*var(--u));top:calc(2.55*var(--u));width:calc(4.2*var(--u));height:calc(1.6*var(--u));overflow:visible}
+.kpi-ramp path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.9}
+@media (prefers-reduced-motion:no-preference){
+  :root:not([data-motion=off]):not(.motion-paused) .kpi.inv-play .kpi-ramp path{stroke-dasharray:1;animation:rampDraw 1.4s cubic-bezier(.22,1,.36,1) both}
+}
+@keyframes rampDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.strip-pending{font-weight:700}
+@media (max-width:1180px) and (min-width:768px){.kpis.kpis-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:767px){
+  .kpis.kpis-6{grid-template-columns:none}
+  .kpis-6 .kpi{padding-right:14px}
+  .kpis-6 .kpi-icon{width:34px;height:34px;top:12px;right:12px}
+  .kpis-6 .kpi .kpi-v{font-size:27px}
+  .kpis-6 .kpi-sub{font-size:12.5px;padding-right:46px}
+  .kpi-ramp{right:56px;top:14px;width:60px;height:22px}
+}
+/* the scene palette for the new tiles: 03 the screen's cyan, 04 the flowers' leaves (deep moss, a bright leaf glow), 05 the rose jackets */
+:root[data-theme=scene] .kpi-green{--c:#cfe88a;--glow:#9cc14a;background:linear-gradient(160deg,#2f3a15 0%,#49572b 100%);border-color:#a8c25a}
+:root[data-theme=scene] .kpi-green .kpi-v{color:#e4f7a8}
+:root[data-theme=scene] .kpi-red .kpi-v{color:#fff3e3}
+:root[data-theme=scene] .kpi-teal .kpi-ramp{color:#011d4e}
+:root[data-theme=money] .kpi-green{--c:#c8f7a0}

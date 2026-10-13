@@ -510,12 +510,15 @@
       link(key ? 'funding' : null);
     };
     const ovDonut = makeDonut({ host: $('#ovArcs'), tip: $('#ovDonutTip'), detail: $('#ovDonutDetail'), hint: $('#ovDonutHint'), buttons: $$('#ovLegend [data-ov-slice]'), onSelect: (k) => { if (ready) hl(k); },
-      colors: R.dataset.theme === 'navy' ? { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' } : { deficit: '#5cecff', refinance: '#6f8dff', floor: '#ffb340', contingency: '#d6a1ff' } });
+      colors: ({ navy: { deficit: '#2ee6a8', refinance: '#5b8cff', floor: '#ff9d42', contingency: '#b98cff' }, money: { deficit: '#5cecff', refinance: '#6f8dff', floor: '#ffb340', contingency: '#d6a1ff' },
+        // scene (default): the picture's colours: screen cyan, suit blue, lamp orange, purple-flower lilac
+        scene: { deficit: '#0bd9dc', refinance: '#4d5ef2', floor: '#eba347', contingency: '#a685d4' } })[R.dataset.theme] || undefined });
     const ovYear = makeYear({ chart: $('#ovChart'), toggles: [], view: 'overview', autoplay: true, hoverStops: true, positiveOnly: true,
       height: (w, ph) => (ph ? 200 : Math.round(Math.max(100, Math.min(w * 0.232, 9.6 * Math.min(innerWidth / 100, innerHeight * 0.015))))), bottomPad: 28,
       monthLabel: (m) => String(m), labelText: (m) => `Month ${String(m).padStart(2, '0')} snapshot`,
       out: { label: $('#ovMonthLabel'), children: $('#ovChildrenM'), receipts: $('#ovReceipts'), spending: $('#ovSpending'), net: $('#ovNet') } });
     const text = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
+    const PROFIT_TUITION = 1250;   // the owner's "path to profit" price scenario (pilot-budget.json sensitivity row: 40 children at $1,250)
 
     // ---- the hero (v2272, owner: "you could've just used a full image all the way across the top"). ONE constant picks the art:
     // data-scene on #ccScene (index.html). The picture runs full bleed across the top of the page, from the sidebar to the window's
@@ -578,6 +581,19 @@
       ovDonut.build(m);
       ovYear.build(m);
       text('kpiRefi', whole(totals.refinance)); text('kpiGap', signed(money(metrics.year2_margin))); text('kpiPlatform', money(platform.first_year));
+      // v2272 KPI row (owner: "key information at a first glance"), every figure from the model:
+      const full = Math.max(...cash.map((r) => r.children)), fullAt = cash.findIndex((r) => r.children === full) + 1;
+      text('kpiRevenue', whole(metrics.full_enrollment_receipts)); text('kpiRevKids', String(full)); text('kpiRevTuition', whole(assumptions.tuition)); text('kpiRevColl', Math.round(assumptions.collection * 100) + '%');
+      text('kpiFullMonth', String(fullAt)); text('kpiFullKids', String(full)); text('kpiRampFrom', String(cash[0].children)); text('kpiRampTo', String(full));
+      const ramp = $('#kpiRamp path');
+      if (ramp) { const lo = Math.min(...cash.map((r) => r.children)), y = (c) => 27 - (c - lo) / ((full - lo) || 1) * 23; ramp.setAttribute('d', cash.map((r, i) => `${i ? 'H' : 'M0,'}${i ? (i * 10).toFixed(1) : y(r.children).toFixed(1)}${i ? ` V${y(r.children).toFixed(1)}` : ''}`).join(' ') + ' H120'); ramp.setAttribute('pathLength', '1'); }
+      // the price scenario the owner chose: full enrollment at $1,250 tuition (the model's sensitivity table; not verified market tuition)
+      const test = (m.sensitivity || []).find((r) => r.children === full && r.tuition === PROFIT_TUITION);
+      if (test) { text('kpiProfit', whole(Math.round(test.annual_operating_margin))); text('kpiProfitTuition', whole(test.tuition)); }
+      text('kpiTodayTuition', whole(assumptions.tuition));
+      const g1 = Math.abs(cash[0].net), g12 = Math.abs(cash[cash.length - 1].net);
+      text('kpiShrink', String(Math.round((g1 - g12) / g1 * 100))); text('kpiGapFirst', signed(money(cash[0].net))); text('kpiGapLast', signed(money(cash[cash.length - 1].net)));
+      text('kpiGapM1', String(cash[0].month)); text('kpiGapM12', String(cash[cash.length - 1].month));
       text('capacity', String(Math.max(...cash.map((r) => r.children)))); text('pilotDuration', String(cash.length)); text('collections', Math.round(assumptions.collection * 100) + '%');
       ready = true;
       hl(null);

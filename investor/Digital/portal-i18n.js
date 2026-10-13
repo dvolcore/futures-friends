@@ -8,6 +8,13 @@
 (function () {
   'use strict';
   const ES = {
+    // v2272 KPI row
+    "Revenue at full enrollment": "Ingresos con inscripción completa", " /yr": " /año", "/yr": "/año", "/yr.": "/año.",
+    "children": "niños", "tuition": "colegiatura", "collections": "de cobranza",
+    "Full enrollment": "Inscripción completa", "children by then. Ramp": "niños para entonces. Aumento", ", then full all year.": ", luego completo todo el año.",
+    "Path to profit": "Camino a la rentabilidad", "At": "Con",
+    "tuition (a price scenario, not verified market tuition). At today’s": "de colegiatura (un escenario de precio, no es colegiatura de mercado verificada). Con la colegiatura actual de",
+    "Monthly gap shrinks": "La diferencia mensual baja", "Loan terms:": "Términos del préstamo:",
     // Capital command center (2026-10-13, v2271): the owner's layout
     "Private investor presentation": "Presentación privada para inversionistas",
     "The ask": "La solicitud", "Cash flow": "Flujo de caja", "Payback": "Pago", "All costs": "Todos los costos", "Evidence": "Evidencia",
