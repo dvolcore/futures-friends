@@ -526,25 +526,32 @@
     // glam-1 (default): the gold-lit boardroom, all ten friends in one band, Principal Hazel at the glowing dashboard wall; deer ears and
     //   giraffe ossicones are the top-most points (16.5%), the lowest chins 58.5%: it fills the 4.87:1 strip edge to edge.
     // glam-2: the same room, the high-five (15% .. 58.5%). wide-1 / wide-2: the earlier long-table and round-table meetings.
+    // cast-1 (default, owner's pick): the full cast of 22, teachers and parents standing behind the seated children; the giraffe's
+    //   ossicones are the top-most point (15.5%), the lowest chin (the frog, front right) 72%. Taller than the 4.87:1 strip allows, so
+    //   its strip is 4.34:1 (about 260 px at 1280; the other blocks give back the height, still one screen) and the picture narrows a
+    //   little over its blurred copy: the giraffe (far left) and the raccoon (far right) stay whole.
     const SCENES = {
+      'cast-1': { file: 'investor-meeting-cast-1', band: [0.155, 0.72], strip: 4.34 },
       'glam-1': { file: 'investor-meeting-glam-1', band: [0.165, 0.585] }, 'glam-2': { file: 'investor-meeting-glam-2', band: [0.15, 0.585] },
       'wide-1': { file: 'investor-meeting-wide-1', band: [0.165, 0.61] }, 'wide-2': { file: 'investor-meeting-wide-2', band: [0.077, 0.612] }
     };
     const scene = (() => {
       const fig = $('#ccScene'), img = $('#ccSceneImg');
       if (!fig || !img) return {};
-      const cfg = SCENES[fig.dataset.scene] || SCENES['glam-1'];
-      const art = $('.cap-banner-art', fig);
+      const cfg = SCENES[fig.dataset.scene] || SCENES['cast-1'];
+      const art = $('.cap-banner-art', fig), STRIP = cfg.strip || BANNER;
+      $('#cc')?.classList.toggle('tall-banner', STRIP < BANNER - 0.05);
       let nat0 = 0;
       const frame = (nat) => {
         nat0 = nat || nat0;
         // the strip's real shape (4.87:1, or lower when a short screen caps its height)
-        const box = art.clientWidth && art.clientHeight ? art.clientWidth / art.clientHeight : BANNER;
+        const box = art.clientWidth && art.clientHeight ? art.clientWidth / art.clientHeight : STRIP;
         const top = Math.max(0, cfg.band[0] - AIR), v = Math.min(1, cfg.band[1] + AIR - top);
         const w = Math.min(1, nat0 / (v * box));               // the picture's width in the strip (1 = edge to edge)
         const shown = Math.min(1, nat0 / (box * w));            // the fraction of its height the strip shows at that width
         const fy = shown >= 1 ? 50 : Math.min(100, Math.max(0, top / (1 - shown) * 100));
-        fig.style.setProperty('--ar', String(BANNER));
+        fig.style.setProperty('--ar', String(STRIP));
+        fig.style.setProperty('--bh', (88.2 / STRIP).toFixed(3));
         fig.style.setProperty('--iw', `${(w * 100).toFixed(3)}%`);
         fig.style.setProperty('--fy', `${fy.toFixed(2)}%`);
         fig.style.setProperty('--nat', String(nat0));

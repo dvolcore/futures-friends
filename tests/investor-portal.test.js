@@ -736,10 +736,10 @@ test('capital command center at 1280 x 853: the mockup\'s layout (rail, title ro
   assert.ok(r['.cap-head'].b <= col.t && col.t <= 95, `banner directly under the title (${col.t})`);
   for (const s of ['#kpis', '.cap-strip', '.ovd-docs']) assert.ok(Math.abs(r[s].l - col.l) <= 2 && Math.abs(r[s].r - col.r) <= 2, `${s} spans the content width`);
   const ratio = col.w / col.h;
-  assert.ok(ratio > 4.6 && ratio < 5.2, `a wide banner like the mockup's (~4.9:1): ${ratio.toFixed(2)}`);
+  assert.ok(ratio > 4.2 && ratio < 5.2, `a wide banner (the frame included) like the mockup's (~4.9:1; the full cast's 4.34:1): ${ratio.toFixed(2)}`);
   // ONE screen like the mockup: the footer line ends inside 853 px
   assert.ok(r['.cap-foot'].b <= 853, `the whole Overview fits the first screen (footer ends at ${r['.cap-foot'].b})`);
-  for (const [s, h, tol] of [['#ccScene', 232, 12], ['#kpis', 102, 12], ['.cap-strip', 38, 6], ['.ovd-funding', 248, 12], ['.ovd-docs', 68, 10]]) assert.ok(Math.abs(r[s].h - h) <= tol, `${s} is about the mockup's ${h} px (${r[s].h})`);
+  for (const [s, h, tol] of [['#ccScene', 262, 10], ['#kpis', 96, 10], ['.cap-strip', 38, 6], ['.ovd-funding', 240, 16], ['.ovd-docs', 66, 10]]) assert.ok(Math.abs(r[s].h - h) <= tol, `${s} is about the mockup's ${h} px (${r[s].h})`);
   assert.ok(col.b <= r['#kpis'].t && r['#kpis'].b <= r['.cap-strip'].t && r['.cap-strip'].b <= r['.ovd-funding'].t, 'banner, tiles, strip, panels');
   assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => Math.round(x.getBoundingClientRect().top)))).size, 1, 'five tiles in one row');
   assert.equal(await pg.$$eval('#kpis .kpi', (k) => k.length), 5);
@@ -759,15 +759,17 @@ test('capital command center at 1280 x 853: the mockup\'s layout (rail, title ro
 test('the banner never crops a character: one constant picks the art and its frame; desktop crops only empty wall and table; phones show the whole picture', async (t) => {
   const h = read(OVERVIEW), js = read('investor/Digital/studio.js');
   assert.equal((h.match(/data-scene="/g) || []).length, 1, 'one constant: data-scene on the banner');
-  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="glam-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
+  assert.match(h, /<figure class="cap-banner" id="ccScene" data-scene="cast-1" aria-hidden="true"><div class="cap-banner-art"><img id="ccSceneImg" alt="" width="2400" height="1029" fetchpriority="high"><\/div><\/figure>/);
   assert.doesNotMatch(h, /investor-meeting/, 'the file is named once, in the scene table');
   assert.match(js, /const BANNER = 4\.87, AIR = 0\.03;/);
+  assert.match(js, /'cast-1': \{ file: 'investor-meeting-cast-1', band: \[0\.155, 0\.72\], strip: 4\.34 \}/);
   assert.match(js, /'glam-1': \{ file: 'investor-meeting-glam-1', band: \[0\.165, 0\.585\] \}, 'glam-2': \{ file: 'investor-meeting-glam-2', band: \[0\.15, 0\.585\] \}/);
   assert.match(js, /'wide-1': \{ file: 'investor-meeting-wide-1', band: \[0\.165, 0\.61\] \}, 'wide-2': \{ file: 'investor-meeting-wide-2', band: \[0\.077, 0\.612\] \}/);
-  for (const f of ['investor-meeting-glam-1', 'investor-meeting-glam-2', 'investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 420000, `${f}${v}.webp is ${st.size} bytes`); }
+  for (const f of ['investor-meeting-cast-1', 'investor-meeting-glam-1', 'investor-meeting-glam-2', 'investor-meeting-wide-1', 'investor-meeting-wide-2']) for (const v of ['', '-1200']) { const st = fs.statSync(path.join(ROOT, `investor/Digital/assets/${f}${v}.webp`)); assert.ok(st.size > 20000 && st.size < 480000, `${f}${v}.webp is ${st.size} bytes`); }
   if (skip) return t.skip(skip);
   // the band every character occupies, in fractions of the picture's height (top of the highest ear .. the lowest chin): measured on the files
-  const BAND = { 'glam-1': [0.165, 0.585], 'glam-2': [0.15, 0.585], 'wide-1': [0.165, 0.61], 'wide-2': [0.077, 0.612] };
+  const STRIP = { 'cast-1': 4.34 };
+  const BAND = { 'cast-1': [0.155, 0.72], 'glam-1': [0.165, 0.585], 'glam-2': [0.15, 0.585], 'wide-1': [0.165, 0.61], 'wide-2': [0.077, 0.612] };
   const seen = (pg) => pg.evaluate(() => {
     const f = document.getElementById('ccScene'), art = f.querySelector('.cap-banner-art').getBoundingClientRect(), i = document.getElementById('ccSceneImg'), b = i.getBoundingClientRect(), cs = getComputedStyle(i);
     const nat = i.naturalWidth / i.naturalHeight, box = b.width / b.height, fit = cs.objectFit, strip = art.width / art.height;
@@ -778,16 +780,16 @@ test('the banner never crops a character: one constant picks the art and its fra
     const visH = nat / box, fy = parseFloat(cs.objectPosition.split(' ')[1]) / 100;
     return { fit, inside, wFrac: nat <= box + 1e-3 ? 1 : box / nat, top: (1 - visH) * fy, bottom: (1 - visH) * fy + visH, nat, box, strip, src: i.currentSrc };
   });
-  for (const scene of ['glam-1', 'glam-2', 'wide-1', 'wide-2']) {
+  for (const scene of ['cast-1', 'glam-1', 'glam-2', 'wide-1', 'wide-2']) {
     const { ctx, pg, errors } = await page(1280);
-    if (scene !== 'glam-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="glam-1"', `data-scene="${scene}"`) })));
+    if (scene !== 'cast-1') await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace('data-scene="cast-1"', `data-scene="${scene}"`) })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg);
     await pg.waitForFunction(() => document.getElementById('ccScene').classList.contains('ready'), null, { timeout: 8000 });
     const v = await seen(pg);
     assert.match(v.src, new RegExp(`investor-meeting-${scene}`), `${scene}: the art follows the constant`);
     assert.equal(v.inside, true, `${scene}: the picture sits inside the strip`);
     assert.equal(v.wFrac, 1, `${scene}: the full width is shown (nobody cut at the left or the right)`);
-    assert.ok(Math.abs(v.strip - 4.87) < 0.05, `${scene}: the mockup's strip (${v.strip.toFixed(2)})`);
+    assert.ok(Math.abs(v.strip - (STRIP[scene] || 4.87)) < 0.05, `${scene}: its strip (${v.strip.toFixed(2)})`);
     assert.ok(v.top <= BAND[scene][0] && v.bottom >= BAND[scene][1], `${scene}: every head and ear inside (${v.top.toFixed(3)}..${v.bottom.toFixed(3)} covers ${BAND[scene]})`);
     assert.deepEqual(errors, []);
     await ctx.close();
