@@ -26,20 +26,20 @@ Those figures omit rejected shots, revisions, editorial, music, voices, Spanish 
 
 Scope: 12 episodes × seven minutes = 84 minutes; 24 QR/home clips × 30 seconds = 12 minutes; 12 promotional shorts × 30 seconds = six minutes. Total original picture: **102 finished minutes**. Bilingual audio does not automatically double picture minutes; localized picture needs separate scope.
 
-| Planning case | Retry assumption | Credits | 5,000-credit packs | Cash allowance |
+| Planning case | Retry assumption | Credits | 5,000-credit packs | Cash budget |
 |---|---:|---:|---:|---:|
 | Lower retry | 3× | 220,320 | 45 | **$10,575** |
 | Base | 4× | 293,760 | 59 | **$13,865** |
 | Higher retry | 6× | 440,640 | 89 | **$20,915** |
 
-The 3×/4×/6× ratios are assumptions, not measured acceptance yield. Whole-pack rounding leaves unused credits. The allowance assumes purchases occur inside production windows before expiration; it does not count subscription credits again, add the historic $565 to future cash, or assume unlimited Seedance 2.5 video. Taxes, subscription treatment and alternate models require separate scope confirmation. The **$13,865** tool allowance remains separate from the **$122,640** human animation-labor allowance for 84 episode minutes.
+The 3×/4×/6× ratios are assumptions, not measured usable yield. Whole-pack rounding leaves unused credits. The budget assumes purchases occur inside production windows before expiration; it does not count subscription credits again, add the historic $565 to future cash, or assume unlimited Seedance 2.5 video. Taxes, subscription treatment and alternate models require separate scope confirmation. The **$13,865** tool budget remains separate from the **$122,640** human animation-labor estimate for 84 episode minutes.
 
 ## Consumer credits are not API pricing
 
 The public API page listed separate per-second offers at review, including Seedance 2.5 from $0.144/second. The API console was not signed in during this review. Consumer credits must not be presented as API charges, and historic API estimates must not be presented as paid actuals.
 
-## Acceptance gate
+## Sign-off checkpoint
 
-Before ordering a season, finish one seven-minute episode, two QR assets and one bilingual promo. Log every credit debit, project, generation duration, rejected shot, accepted second, human hour, sound/voice/license cost, rework and approved output. Education, native-Spanish, accessibility, rights and safeguarding reviewers must accept the pilot. Replace the retry assumption and labor allowance with observed cost per accepted minute, then obtain a comparable written season quote.
+Before ordering a season, finish one seven-minute episode, two QR assets and one bilingual promo. Log every credit debit, project, generation duration, rejected shot, accepted second, human hour, sound/voice/license cost, rework and approved output. Education, native-Spanish, accessibility, rights and safeguarding reviewers must accept the pilot. Replace the retry assumption and labor estimate with observed cost per usable minute, then obtain a comparable written season quote.
 
 Research trail: [billing](https://higgsfield.ai/me/settings/billing), [subscription](https://higgsfield.ai/me/settings/subscription), [usage](https://higgsfield.ai/me/settings/usage), and [API offer](https://higgsfield.ai/higgsfield-api). The first three require account-owner login.

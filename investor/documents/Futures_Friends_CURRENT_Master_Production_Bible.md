@@ -45,7 +45,7 @@ The episode rhythm is: cold open; welcome; visible problem; first attempt; wobbl
 
 ### Episode One: Booker Makes Room
 
-Pip arrives for her first day with Mom and watches before entering. Booker tries to solve her feeling too quickly and overwhelms her. Ms. June helps him ask what Pip needs. He offers a small duck game and waits. When Pip misses Mom, he offers company instead of distraction. Pip retains agency and later asks Booker to save her place. The screenplay, table read, blocking, timing, approved assets, voice, and connected render remain acceptance gates.
+Pip arrives for her first day with Mom and watches before entering. Booker tries to solve her feeling too quickly and overwhelms her. Ms. June helps him ask what Pip needs. He offers a small duck game and waits. When Pip misses Mom, he offers company instead of distraction. Pip retains agency and later asks Booker to save her place. The screenplay, table read, blocking, timing, approved assets, voice, and connected render remain sign-off checkpoints.
 
 ### Season One pipeline
 
@@ -69,7 +69,7 @@ The current slate is thirteen short episodes. Episode 101 is the active working 
 
 The older **Wobbly Welcome Tower** title is superseded and must not appear as the active Episode One title.
 
-**Forward production boundary:** the national 12-episode / seven-minute season, related bulk tablet rollout, national marketing and partner expansion are Phase 2. The current pilot includes a finite $3,000 generation cap for pilot assets; it is not a quote to produce a complete season. The Higgsfield account audit records observed mixed-project activity and must remain separate from the pilot allowance. A future season budget requires an approved schedule, vendor quotes, rights, voice, bilingual adaptation, captions, editing, review, storage and delivery.
+**Forward production boundary:** the national 12-episode / seven-minute season, related bulk tablet rollout, national marketing and partner expansion are Phase 2. The current pilot includes a finite $3,000 generation cap for pilot assets; it is not a quote to produce a complete season. The Higgsfield account audit records observed mixed-project activity and must remain separate from the pilot budget. A future season budget requires an approved schedule, vendor quotes, rights, voice, bilingual adaptation, captions, editing, review, storage and delivery.
 
 ## 4. Curriculum architecture
 
@@ -87,15 +87,15 @@ The source library describes 12 monthly units and 48 theme weeks, 36 recipe conc
 
 ## 5. Bilingual inclusion
 
-English and Spanish are product-wide requirements across public pages, family materials, character messages, portals, curriculum, captions, and support. Zuri carries a natural bilingual bridge, but Spanish is never a joke, decoration, or accent gag. A Spanish line is shown with immediate meaning in English and is reviewed by a native-speaking Spanish educator before recording or printing. Current Spanish pages, subtitles, and printables must remain labeled draft or review until acceptance is documented.
+English and Spanish are product-wide requirements across public pages, family materials, character messages, portals, curriculum, captions, and support. Zuri carries a natural bilingual bridge, but Spanish is never a joke, decoration, or accent gag. A Spanish line is shown with immediate meaning in English and is reviewed by a native-speaking Spanish educator before recording or printing. Current Spanish pages, subtitles, and printables must remain labeled draft or review until sign-off is documented.
 
 ## 6. Digital platform and role experience
 
 The future operating platform is an adult-controlled LMS and center system. It must support separated roles and tenant data:
 
-| Role | Required experience | Acceptance evidence |
+| Role | Required experience | Sign-off evidence |
 |---|---|---|
-| Student/Kid Mode | Adult-linked child profile, finite approved messages, curriculum tasks, progress, character media, safe exit gate | Staging walkthrough with test children and server-enforced authorization |
+| Student/Kid Mode | Adult-linked child profile, finite approved messages, curriculum tasks, progress, character media, safe exit step | Staging walkthrough with test children and server-enforced authorization |
 | Parent/family | Consent, child linkage, weekly digest, assignments, messages, progress, home activities, bilingual settings | Two-family isolation, consent and export/delete test |
 | Teacher | Roster, lesson sequence, observation notes, activities, meal/movement prompts, family communication | Role test with audit trail and no director-only data |
 | Director | Enrollment, staffing, curriculum assignment, portal administration, reports, billing view | Tenant isolation, invite/reset, audit and backup restore |
@@ -122,11 +122,11 @@ A production package is accepted only when it includes:
 2. Script, timing sheet, scene/prop/continuity sheet, and animatic.
 3. Teacher pause map, movement/song plan, bilingual line sheet, and accessibility notes.
 4. Safety, rights, music, voice, trademark, and asset provenance records.
-5. Final picture master, classroom/home versions, captions, audio-only version, teacher pack, family sheet, and acceptance record.
+5. Final picture master, classroom/home versions, captions, audio-only version, teacher pack, family sheet, and sign-off record.
 
-Every generated or licensed asset records source file, creator/provider, generation or license identifier, date, rights status, reviewer, revision, and final hash. A polished image, PDF, or local browser preview is still a proposal until its acceptance fields are complete.
+Every generated or licensed asset records source file, creator/provider, generation or license identifier, date, rights status, reviewer, revision, and final hash. A polished image, PDF, or local browser preview is still a proposal until its sign-off fields are complete.
 
-### Approval gates
+### Approval checkpoints
 
 - Canon and character reference locked.
 - Table read and child-development review complete.
@@ -134,21 +134,21 @@ Every generated or licensed asset records source file, creator/provider, generat
 - Connected render proves continuity and sync.
 - Captions, bilingual lines, safety, rights, and accessibility accepted.
 - Classroom/home masters delivered and reviewed.
-- Release owner signs the acceptance record.
+- Release owner signs the sign-off record.
 
 ## 9. Commercial extensions
 
 The same canon can support classroom kits, branded carpets and posters, books, cards, plush after safety clearance, apparel, family tablets, QR habit packs, teacher training, licensing, partner subscriptions, church/daycare implementation, and family merchandise. These are staged opportunities. No future partner revenue is treated as contracted without signed pilots, deposits, renewal terms, or collection evidence.
 
-## 10. Budget linkage and operating gates
+## 10. Budget linkage and operating checkpoints
 
-The current gross model is linked to `investor/costs/pilot-budget.json`, <!-- model:lines -->the 234-line itemized CSV<!-- /model:lines -->, and the current workbook rather than hidden inside this narrative. Every line carries an item, quantity, rate, formula, bucket, evidence basis and source URL where one exists. Published references, supplier quotes and planning allowances remain distinct; a price with cents is not proof of a quote or payment.
+The current gross model is linked to `investor/costs/pilot-budget.json`, <!-- model:lines -->the 234-line itemized CSV<!-- /model:lines -->, and the current workbook rather than hidden inside this narrative. Every line carries an item, quantity, rate, formula, bucket, evidence basis and source URL where one exists. Published references, supplier quotes and planning estimates remain distinct; a price with cents is not proof of a quote or payment.
 
-Budget release gates are: scope approval; vendor quote or written assumption; owner and quantity; purchase approval; delivery/acceptance; invoice and payment record; asset or service handoff; and operating owner sign-off. Root finance work should fill cash timing, draws, receipts, payroll taxes, debt service, and contingency separately. Financing costs are excluded from the current gross total unless the model says otherwise.
+Budget release checkpoints are: scope approval; vendor quote or written assumption; owner and quantity; purchase approval; delivery/sign-off; invoice and payment record; asset or service handoff; and operating owner sign-off. Root finance work should fill cash timing, draws, receipts, payroll taxes, debt service, and contingency separately. Financing costs are excluded from the current gross total unless the model says otherwise.
 
 ## 11. Roles and accountability
 
-The founder/creative owner owns canon, mission, commercial priorities, and final creative approval. A production lead owns schedule, shot and asset continuity, and vendor coordination. A curriculum lead owns developmental sequence and educator review. A bilingual reviewer owns Spanish acceptance. A nurse/health reviewer and food lead own health, allergy, movement, and menu review within their engagement. Engineering owns platform, privacy controls, data isolation, observability, backups, and release evidence. Operations owns staffing, family support, inventory, purchasing, and partner onboarding. Finance owns the model, invoices, cash forecast, and lender reporting. Counsel owns contracts, privacy, child-safety, employment, licensing, and financing terms.
+The founder/creative owner owns canon, mission, commercial priorities, and final creative approval. A production lead owns schedule, shot and asset continuity, and vendor coordination. A curriculum lead owns developmental sequence and educator review. A bilingual reviewer owns Spanish sign-off. A nurse/health reviewer and food lead own health, allergy, movement, and menu review within their engagement. Engineering owns platform, privacy controls, data isolation, observability, backups, and release evidence. Operations owns staffing, family support, inventory, purchasing, and partner onboarding. Finance owns the model, invoices, cash forecast, and lender reporting. Counsel owns contracts, privacy, child-safety, employment, licensing, and financing terms.
 
 ## 12. Known contradictions and decisions still required
 
@@ -162,19 +162,19 @@ The founder/creative owner owns canon, mission, commercial priorities, and final
 - At the stated tuition and collection assumptions, the pilot shows a positive year-two operating margin of $112,354.23 before building payment or debt, with the owner as unpaid director; signed enrollment, the building payment and lender terms must be documented before lender terms are negotiated.
 <!-- /model:decisions -->
 
-The next release is ready only when each open decision has an owner, evidence requirement, date, and signed acceptance record.
+The next release is ready only when each open decision has an owner, evidence requirement, date, and signed sign-off record.
 
 ## Evidence map
 
 | Claim area | Source of record | Boundary |
 |---|---|---|
 | Current website/catalog and family positioning | `https://dvolcore.github.io/futures-friends/` | Public copy is not proof of backend operation |
-| Character canon, episode engine, production gates | [Complete current Bible and historical reference](https://dvolcore.github.io/futures-friends/investor/02_Series_Curriculum_Production_Bible.pdf) | Working/current labels preserved |
+| Character canon, episode engine, production checkpoints | [Complete current Bible and historical reference](https://dvolcore.github.io/futures-friends/investor/02_Series_Curriculum_Production_Bible.pdf) | Working/current labels preserved |
 | Education, meals, movement, training | [Operations companion](https://dvolcore.github.io/futures-friends/investor/03_Program_Operations_Evidence_Companion.pdf) | Drafts require review and local compliance |
 | Current claims and contradictions | [Current business plan and evidence controls](https://dvolcore.github.io/futures-friends/investor/01_Investor_Business_Plan.pdf) | Conflicts remain explicit |
-| Cost and financing | <!-- model:costrow -->`investor/costs/pilot-budget.json`, `Pilot_38_Children_Itemized.csv` | 38-child pilot register; allowances are not quotes; financing costs excluded unless modeled<!-- /model:costrow --> |
+| Cost and financing | <!-- model:costrow -->`investor/costs/pilot-budget.json`, `Pilot_38_Children_Itemized.csv` | 38-child pilot register; estimates are not quotes; financing costs excluded unless modeled<!-- /model:costrow --> |
 | Historical PDFs | Original 35-page Bible and 117-page operations companion | Reference only; not silently current |
 
 ## Current production-finance control note
 
-Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning allowances.
+Before batch production, approve a seven-minute episode, two QR clips and one bilingual promo. Record accepted-shot yield, rights, review and complete finishing costs. The [account audit](https://dvolcore.github.io/futures-friends/investor/costs/Higgsfield_Actual_Usage_Audit.md) and [budget reconciliation](https://dvolcore.github.io/futures-friends/investor/costs/Animation_Budget_Reconciliation.md) distinguish observed usage from planning estimates.

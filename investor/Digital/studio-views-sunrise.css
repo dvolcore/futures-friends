@@ -1,0 +1,27 @@
+/* v2282: the command center's inner views (The ask, Cash flow, Payback, Inside the pilot, Evidence) in the Overview's Sunrise
+   system: the same blend background and navy + gold trim, with the working panels on warm paper so every chart keeps its contrast. */
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]){background:#2f7d6e}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .atmosphere{display:none}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) body.studio{background:
+  radial-gradient(50vw 36vw at 18% 20%,rgba(120,150,255,.30),transparent 62%),radial-gradient(46vw 34vw at 88% 88%,rgba(255,226,150,.45),transparent 62%),radial-gradient(40vw 30vw at 50% 55%,rgba(80,200,170,.18),transparent 60%),
+  linear-gradient(135deg,#2a40b8 0%,#3550d4 22%,#2f7d6e 50%,#4e7a45 66%,#ddae57 86%,#e8c172 100%);background-color:#2f7d6e}
+
+/* view heading: gold eyebrow, white serif title (the Overview's "Capital command center" voice) */
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head .eyebrow{color:#ffd76a}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head h2{color:#fff;font-family:'DM Serif Display',Georgia,serif;font-weight:400;letter-spacing:-.01em;text-shadow:0 2px 14px rgba(10,16,60,.35)}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head p{color:#eef2ff}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head h2::after{background:#ffd76a}
+
+/* working panels and document cards: warm paper, navy ink, gold trim */
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) :is(.panel,.route,.docs-group){background:#fffaf0;border:1px solid rgba(232,184,74,.75);border-top:3px solid #e8b84a;box-shadow:0 18px 48px rgba(10,16,60,.28)}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .route{border-top-width:4px}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .series-toggles button,
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head-actions :is(a,button),
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head-actions .ghost-button{background:#141c52;color:#fff!important;border-color:rgba(255,215,106,.7)}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head-actions :is(a,button)[aria-pressed=true],
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head-actions :is(a,button):hover,
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .view-head-actions .ghost-button:is(:hover,[aria-pressed=true]){background:#ffd76a;color:#141c52!important}
+
+/* footer: the Overview's navy card */
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .studio-foot{margin:16px 0 0;padding:12px 16px;border-radius:12px;background:#141c52;border:1px solid rgba(255,215,106,.6);color:#e9efff}
+:root[data-theme=blend-sunrise][data-view]:not([data-view=overview]) .studio-foot a{color:#ffd76a}

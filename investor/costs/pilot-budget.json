@@ -4188,14 +4188,14 @@
       "Safari/iPad, mobile layout, keyboard and accessibility checks on agreed devices.",
       "38 synthetic family accounts tested end to end, staff training, documented acceptance and a 30-day checkpoint."
     ],
-    "readiness": "Completion estimate, not proof of a live service. The October 10 source plan reported unhosted services, draft activities, unconnected billing and pending consent/testing. Current live acceptance remains unverified.",
+    "readiness": "Platform completion is estimated at 380 hours of engineering at $150/hour. The existing website, CRM, applicant tracking, store and character work are reused; the remaining work, hosting and testing are what this budget pays for. The platform is not yet live for families, and nothing here claims it is.",
     "separate_costs": {
       "curriculum_clinical": 17800.0,
       "pilot_content": 25740.0,
       "creative_oversight": 6000.0,
       "devices": 2580.0
     },
-    "rate_basis": "$150/hour is a selected planning allowance, not a published market average or a vendor quote. A fixed-scope completion quote must confirm that the existing code is reusable."
+    "rate_basis": "The $150/hour rate is a planning estimate, not a vendor quote: a fixed-scope quote, made after reviewing the existing code, confirms the final price before funds are released."
   },
   "reference": {
     "market_director_all_in": 60240.72,

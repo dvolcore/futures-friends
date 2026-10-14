@@ -34,7 +34,7 @@
     const items = rows.map(row => {
       const item = document.createElement('li');
       const label = document.createElement('span');
-      label.textContent = row.item;
+      label.textContent = row.item.replace(/ allowance$/, '').replace(/deployment acceptance$/, 'deployment sign-off');   // plain investor wording; the CSV keeps the register names
       const amount = document.createElement('b');
       amount.textContent = money(row.annual);
       item.append(label, amount);

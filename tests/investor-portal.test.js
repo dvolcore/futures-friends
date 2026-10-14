@@ -1188,3 +1188,64 @@ test('Spanish: no English sentence left on the overview, pilot plan, one-sheet a
   }
 });
 
+
+// v2282 (documents pass): every investor page and source document reads as current, plain investor language in the Sunrise system.
+// No stale October 10 notes, no internal register line IDs (P175 ·…; those stay in the CSV), no "allowance"/"acceptance gate" jargon;
+// every sub-page carries the Sunrise theme and the shared header with its way back to the command center.
+const STALE_V2282 = [/October 10/, /\bP\d{3}\b/, /\ballowances?\b/i, /\bacceptance\b/i];
+test('v2282: rendered investor pages and every source-room document carry no stale notes, line IDs or jargon', async (t) => {
+  if (skip) return t.skip(skip);
+  const lib = JSON.parse(read('investor/Digital/library-data.json')).documents;
+  const pages = [...VIEWS.map((v) => `index.html?view=${v}&reveal=off`), 'pilot-plan.html', 'pilot-one-sheet.html', 'library.html', ...lib.map((d) => `library.html#${d.id}`)];
+  for (const lang of ['en', 'es']) for (const p of pages) {
+    const { ctx, pg, errors } = await page(1440);
+    const [file, hash] = p.split('#');
+    await pg.goto(`${site.base}investor/Digital/${file}${file.includes('?') ? '&' : '?'}lang=${lang}${hash ? '#' + hash : ''}`); await pg.waitForTimeout(1500);
+    if (hash) await pg.waitForFunction(() => !/Loading source/.test(document.querySelector('#reader .source')?.innerText || 'Loading source'), null, { timeout: 8000 });
+    const text = await pg.evaluate(() => { document.querySelectorAll('details').forEach((d) => { d.open = true; }); return document.body.innerText; });
+    for (const re of STALE_V2282) assert.doesNotMatch(text, re, `${p} (${lang}): ${re}`);
+    assert.doesNotMatch(text, /<!--|Source unavailable/, `${p} (${lang}): the source renders cleanly`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});
+
+test('v2282: every investor sub-page uses the Sunrise theme, the shared header and a way back to the command center', async (t) => {
+  if (skip) return t.skip(skip);
+  for (const f of ['pilot-plan.html', 'pilot-one-sheet.html', 'library.html', 'business-plan.html', 'cost-explorer.html', 'financial-update.html']) {
+    const h = read(`investor/Digital/${f}`);
+    assert.match(h, /<html lang="en" data-theme="blend-sunrise">/, `${f}: Sunrise theme`);
+    assert.match(h, /investor-pages\.css\?v=/, `${f}: the shared Sunrise stylesheet`);
+    assert.match(h, /<header class="ip-top">[\s\S]*?class="ip-home"[^>]*>← Command center</, `${f}: header with the way back`);
+    assert.doesNotMatch(h, /<header class="top"|class="lang-bar"/, `${f}: no old cream header`);
+  }
+  for (const f of ['pilot-plan.html', 'pilot-one-sheet.html', 'library.html']) {
+    const { ctx, pg, errors } = await page(1440);
+    await pg.goto(`${site.base}investor/Digital/${f}?reveal=off`); await pg.waitForTimeout(1200);
+    const s = await pg.evaluate(() => ({ theme: document.documentElement.dataset.theme, top: getComputedStyle(document.querySelector('.ip-top')).backgroundImage, layer: getComputedStyle(document.body, '::before').backgroundImage }));
+    assert.equal(s.theme, 'blend-sunrise', f);
+    assert.match(s.top, /rgba\(15, 22, 64/, `${f}: navy header`);
+    assert.match(s.layer, /linear-gradient/, `${f}: the Sunrise blend behind the page`);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+  // the command center's inner views share the Overview's blend (no cream wash behind them)
+  const { ctx, pg } = await page(1440);
+  for (const v of ['funding', 'pilot', 'scenarios', 'inside', 'documents']) {
+    await pg.goto(`${site.base}${OVERVIEW}?view=${v}&reveal=off`); await pg.waitForTimeout(900);
+    const s = await pg.evaluate(() => ({ atm: getComputedStyle(document.querySelector('.atmosphere')).display, bg: getComputedStyle(document.body).backgroundImage }));
+    assert.equal(s.atm, 'none', `${v}: no cream atmosphere`);
+    assert.match(s.bg, /linear-gradient\(135deg/, `${v}: Sunrise blend`);
+  }
+  await ctx.close();
+});
+
+test('v2282: the source documents read the current model (no superseded cases; markdown keeps line IDs only in the CSV)', () => {
+  for (const f of ['investor/documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md', 'investor/documents/Futures_Friends_CURRENT_Pilot_One_Sheet.md', 'investor/documents/Futures_Friends_CURRENT_Master_Production_Bible.md', 'investor/documents/Futures_Friends_CURRENT_Operations_Companion.md']) {
+    const s = read(f);
+    for (const re of [...STALE_V2282, /3,139,152\.61|\$700,000/]) assert.doesNotMatch(s, re, `${f}: ${re}`);
+  }
+  assert.match(read('investor/costs/Pilot_38_Children_Itemized.csv').split('\n')[1], /^P001,/, 'the CSV keeps its line IDs for audit');
+  assert.equal(MODEL.platform.readiness.includes('380 hours'), true);
+  assert.doesNotMatch(MODEL.platform.readiness + MODEL.platform.rate_basis, /October 10|allowance|acceptance/i);
+});

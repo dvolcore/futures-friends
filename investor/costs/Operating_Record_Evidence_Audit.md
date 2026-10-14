@@ -7,7 +7,7 @@ Scope: local Downloads project records, investor/business-plan records, and rele
 
 ## Executive finding
 
-The reviewed package does not contain a current primary record proving licensed capacity, enrollment, attendance, tuition collections, staffing/payroll, rent, cash, reserves, or debt. The package itself says those records must be supplied before sending. The only enrollment figure found is an explicitly old snapshot of three children; it must not be reported as current. The operating cost model therefore remains a scenario/allowance model, not a statement of present operations.
+The reviewed package does not contain a current primary record proving licensed capacity, enrollment, attendance, tuition collections, staffing/payroll, rent, cash, reserves, or debt. The package itself says those records must be supplied before sending. The only enrollment figure found is an explicitly old snapshot of three children; it must not be reported as current. The operating cost model therefore remains a scenario/estimate model, not a statement of present operations.
 
 ## Evidence that records are absent or unresolved
 
@@ -55,4 +55,4 @@ The reviewed package does not contain a current primary record proving licensed 
 * Bank statements, cash-on-hand proof, reserves, owner-contribution ledger, accounts payable, signed debt notes and current debt schedule.
 * Food/kitchen or caterer permits, invoices and any CACFP participation record.
 
-Until those records are produced, the cost model should label all capacity, staffing, rent, food, utilities, collections, cash, reserves and financing figures as forecast, allowance, benchmark or quote-required scope. No primary record in this reviewed set was found that can safely replace those assumptions.
+Until those records are produced, the cost model should label all capacity, staffing, rent, food, utilities, collections, cash, reserves and financing figures as forecast, estimate, benchmark or quote-required scope. No primary record in this reviewed set was found that can safely replace those assumptions.

@@ -6,9 +6,9 @@
       "kind": "Current pilot",
       "source": "../documents/Futures_Friends_CURRENT_Pilot_Business_Plan.md",
       "pdf": "../Futures_Friends_CURRENT_Pilot_Business_Plan.pdf",
-      "summary": "Active one-location, one-year pilot model for 38 children. Open assumptions and debt-affordability gates are shown explicitly.",
+      "summary": "Active one-location, one-year pilot model for 38 children. Open assumptions and debt-affordability checks are shown explicitly.",
       "view": "pilot-plan.html",
-      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and estimates are kept distinct; open quotes and repayment limits stay visible."
     },
     {
       "id": "pilot-one-sheet",
@@ -18,7 +18,7 @@
       "pdf": "../Futures_Friends_CURRENT_Pilot_One_Sheet.pdf",
       "summary": "Active pilot scope, operating logic, funding purpose and next-stage path in one digital page.",
       "view": "pilot-one-sheet.html",
-      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and estimates are kept distinct; open quotes and repayment limits stay visible."
     },
     {
       "id": "pilot-costs",
@@ -26,10 +26,10 @@
       "kind": "Current pilot",
       "source": "../costs/Pilot_38_Children_Itemized.csv",
       "pdf": null,
-      "summary": "Line-item pilot costs and evidence fields. Values remain tied to the current generator and source status.",
+      "summary": "Line-item pilot costs and evidence fields. Every value comes from the current pilot model.",
       "view": "pilot-plan.html#budget",
       "format": "csv",
-      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and planning allowances are distinct; open quotes and repayment limits remain visible."
+      "scopeNote": "Current 38-child pilot. Published prices, owner inputs and estimates are kept distinct; open quotes and repayment limits stay visible."
     },
     {
       "id": "bible",

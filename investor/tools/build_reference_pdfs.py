@@ -34,7 +34,7 @@ DOCS_SPEC = [
          pdf_title='Master production bible | Current controls + complete original reference'),
     dict(pdf='03_Program_Operations_Evidence_Companion.pdf', md='Futures_Friends_CURRENT_Operations_Companion.md',
          title='The promise. The delivery.', sub='One operating standard across classroom, home and platform.',
-         callout='Responsibilities, acceptance and evidence before expansion.',
+         callout='Responsibilities, sign-off and evidence before expansion.',
          pdf_title='Operations companion | Current controls + complete original reference'),
 ]
 # a passage of the 03 original reference that described partner receipts as part of a repayment plan (pre-pilot national model)
@@ -135,7 +135,7 @@ def model_blocks(d):
         'tablets': (f"The pilot models {tablets:g} school-owned classroom tablets with a {mdm:g}-device management minimum; a family tablet "
                     f"program is a Phase 2 planning assumption."),
         'lines': f'the {n}-line itemized CSV',
-        'costrow': f"`investor/costs/pilot-budget.json`, `{csv}` | {cap}-child pilot register; allowances are not quotes; financing costs excluded unless modeled",
+        'costrow': f"`investor/costs/pilot-budget.json`, `{csv}` | {cap}-child pilot register; estimates are not quotes; financing costs excluded unless modeled",
     }
 
 
