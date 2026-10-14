@@ -815,8 +815,9 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
     // v2279 (owner picked "A Sunrise"): data-theme="blend-sunrise" by default, the navy rail with a gold active pill
     assert.equal(await pg.getAttribute('html', 'data-theme'), 'blend-sunrise');
     assert.equal(await pg.getAttribute('html', 'data-rail'), 'navy');
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundColor), /rgb\(47, 125, 110\)/);
-    assert.match(await pg.evaluate(() => getComputedStyle(document.body).backgroundImage), /42, 64, 184[\s\S]*47, 125, 110[\s\S]*221, 174, 87/, 'blue -> teal-green -> gold');
+    // candy pass (owner, 2026-10-13): one candy night sky under the page; the Sunrise tokens stay underneath for the theme variants
+    assert.match(await pg.evaluate(() => getComputedStyle(document.documentElement).backgroundColor), /rgb\(14, 24, 70\)/, 'the candy night sky');
+    assert.equal(await pg.$$eval('.cnd-sky .cnd-drift i', (i) => i.length), 5, 'five friend-colour glows drift as one layer');
     assert.match(await pg.$eval('.rail-pill', (p) => getComputedStyle(p).backgroundImage), /232, 193, 114|201, 149, 54/, 'a gold active pill');
     // page-level text sits on its own deep band and passes AA against it, wherever the sunrise runs
     const bands = await pg.evaluate(() => {
@@ -825,7 +826,7 @@ test('capital command center at 1280 x 853 and 1440 x 900: the hero across the t
       return [...document.querySelectorAll('.strip-staff, .cap-foot, .studio-foot')].filter((e) => e.offsetParent).flatMap((e) => { const bg = getComputedStyle(e).backgroundColor; return [e, ...e.querySelectorAll('span, a, small, b')].filter((x) => x.textContent.trim() && !x.closest('[aria-hidden="true"]')).map((x) => [x.textContent.trim().slice(0, 24), bg, +ratio(getComputedStyle(x).color, bg).toFixed(2)]); });
     });
     assert.ok(bands.length >= 6 && bands.every(([, bg, r]) => !/rgba\(0, 0, 0, 0\)/.test(bg) && r >= 4.5), `page-level text AA on its band: ${JSON.stringify(bands)}`);
-    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).borderTopColor))).size, 6, 'a colour per tile');
+    assert.equal(new Set(await pg.$$eval('#kpis .kpi', (k) => k.map((x) => getComputedStyle(x).backgroundImage))).size, 6, 'a colour per tile');
     assert.ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 0, 'no sideways scroll');
     assert.deepEqual(errors, []);
     await ctx.close();
@@ -1088,7 +1089,7 @@ test('blend themes: sunrise and aurora keep page-level text AA at sample points,
   const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
   for (const theme of ['blend-sunrise', 'blend-aurora']) for (const motion of [false, true]) {
     const { ctx, pg, errors } = await page(1440, { motion });
-    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+"/, `data-theme="${theme}"`) })));
+    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+"/, `data-theme="${theme}"`).replace(/<link[^>]*candy\.css[^>]*>|<script[^>]*candy\.js[^>]*><\/script>/g, '') })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(500);
     assert.equal(await pg.getAttribute('html', 'data-theme'), theme);
     // every page-level line sits on an opaque deep band; its text against that band is AA, whatever the gradient does around it
@@ -1113,7 +1114,7 @@ test('the gold theme (one attribute away): #ddae57 page, espresso rail, page-lev
   if (skip) return t.skip(skip);
   for (const [W, H] of [[1280, 853], [1440, 900]]) {
     const ctx = await browser.newContext({ viewport: { width: W, height: H }, reducedMotion: 'reduce' }); const pg = await ctx.newPage(); const errors = []; pg.on('pageerror', (x) => errors.push(x.message));
-    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+" data-rail="[a-z]+"/, 'data-theme="gold" data-rail="espresso"') })));
+    await pg.route('**/investor/Digital/index.html*', (route) => route.fetch().then(async (res) => route.fulfill({ response: res, body: (await res.text()).replace(/data-theme="[a-z-]+" data-rail="[a-z]+"/, 'data-theme="gold" data-rail="espresso"').replace(/<link[^>]*candy\.css[^>]*>|<script[^>]*candy\.js[^>]*><\/script>/g, '') })));
     await pg.goto(`${site.base}${OVERVIEW}?reveal=off`); await model(pg); await pg.waitForTimeout(400);
     // v2278 (owner: "make the background this color"): data-theme="gold" around #ddae57, an espresso rail, the picture's palette on the tiles
     assert.equal(await pg.getAttribute('html', 'data-theme'), 'gold');
@@ -1233,9 +1234,9 @@ test('v2282: every investor sub-page uses the Sunrise theme, the shared header a
   const { ctx, pg } = await page(1440);
   for (const v of ['funding', 'pilot', 'scenarios', 'inside', 'documents']) {
     await pg.goto(`${site.base}${OVERVIEW}?view=${v}&reveal=off`); await pg.waitForTimeout(900);
-    const s = await pg.evaluate(() => ({ atm: getComputedStyle(document.querySelector('.atmosphere')).display, bg: getComputedStyle(document.body).backgroundImage }));
+    const s = await pg.evaluate(() => ({ atm: getComputedStyle(document.querySelector('.atmosphere')).display, sky: getComputedStyle(document.documentElement).backgroundColor, glows: document.querySelectorAll('.cnd-sky .cnd-drift i').length }));
     assert.equal(s.atm, 'none', `${v}: no cream atmosphere`);
-    assert.match(s.bg, /linear-gradient\(135deg/, `${v}: Sunrise blend`);
+    assert.ok(/rgb\(14, 24, 70\)/.test(s.sky) && s.glows === 5, `${v}: the Overview's candy sky behind the view`);
   }
   await ctx.close();
 });

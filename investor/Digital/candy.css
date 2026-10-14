@@ -29,7 +29,8 @@ html,:root[data-candy]{background:var(--cb-sky)!important}
 body.studio{background:transparent!important}
 .cnd-sky{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:
   radial-gradient(120% 80% at 50% 0%,#1b2a78 0%,var(--cb-sky) 60%)}
-.cnd-sky i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.cnd-drift{position:absolute;inset:-6vh -6vw;will-change:transform}
+.cnd-sky i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55}
 .cnd-sky i:nth-child(1){width:46vw;height:46vw;left:-10vw;top:-12vw;background:var(--cb-booker)}
 .cnd-sky i:nth-child(2){width:38vw;height:38vw;right:-8vw;top:18vh;background:var(--cb-lumi);opacity:.42}
 .cnd-sky i:nth-child(3){width:44vw;height:44vw;left:12vw;bottom:-18vw;background:var(--cb-bop)}
@@ -81,7 +82,7 @@ body.studio{background:transparent!important}
 
 /* Strip and footer pick up the same felt */
 :root[data-candy] .cap-strip > *{border-radius:999px}
-:root[data-candy] .studio-foot{background:linear-gradient(180deg,#14205e,#0b1440)!important;border-radius:18px}
+:root[data-candy] .studio-foot{background-color:#0b1440!important;background-image:linear-gradient(180deg,#14205e,#0b1440)!important;border-radius:18px}
 
 /* ---------- 3. Type: Fredoka for headlines ---------- */
 :root[data-candy] #hero-title,
@@ -89,7 +90,6 @@ body.studio{background:transparent!important}
 :root[data-candy] .ovd-card :is(h2,h3),
 :root[data-candy] .lab-card :is(h3,h4){font-family:'Fredoka','DM Sans',system-ui,sans-serif!important;font-weight:600!important;letter-spacing:-.01em}
 :root[data-candy] #hero-title{font-size:clamp(30px,3.4vw,52px)!important;line-height:1.02;text-shadow:0 3px 0 rgba(10,20,70,.55),0 10px 30px rgba(0,0,0,.45)}
-:root[data-candy] #hero-title .cnd-w{display:inline-block;white-space:pre}
 :root[data-candy] .cap-hero .cap-tag{color:var(--cb-gold-l)!important;text-shadow:0 2px 0 rgba(10,20,70,.6),0 0 14px rgba(0,0,0,.6)}
 
 /* ---------- 4. Motion ---------- */
@@ -97,14 +97,11 @@ body.studio{background:transparent!important}
 .cnd-confetti{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:60}
 
 @media (prefers-reduced-motion:no-preference){
-  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-sky i{animation:cndDrift 26s ease-in-out infinite alternate}
-  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-sky i:nth-child(2){animation-duration:31s;animation-delay:-7s}
-  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-sky i:nth-child(3){animation-duration:34s;animation-delay:-13s}
-  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-sky i:nth-child(4){animation-duration:23s;animation-delay:-4s}
-  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-sky i:nth-child(5){animation-duration:29s;animation-delay:-18s}
+  /* one ambient loop: the whole sky drifts as one layer (the page allows four loops in total) */
+  :root[data-candy]:not([data-motion=off]):not(.motion-paused) .cnd-drift{animation:cndDrift 30s ease-in-out infinite alternate}
 
-  /* headline words hop in once */
-  :root[data-candy].cnd-intro #hero-title .cnd-w{animation:cndHop .7s var(--cb-spring) both;animation-delay:calc(var(--i)*90ms + 150ms)}
+  /* headline hops in once */
+  :root[data-candy].cnd-intro #hero-title{animation:cndHop .7s var(--cb-spring) .15s both}
   :root[data-candy].cnd-intro .cap-hero .cap-tag{animation:cndRise .6s var(--cb-out) .55s both}
 
   /* tiles and panels pop up with a little overshoot when they enter */

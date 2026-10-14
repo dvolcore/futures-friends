@@ -283,6 +283,16 @@
       "sha256": "a2f8837191cbbdc42e74fc462f696d76199f62442bf307f18c667c40dc954bbb"
     },
     {
+      "path": "investor/Digital/candy.css",
+      "bytes": 10540,
+      "sha256": "e085e0e390163e401f99bae99c83576f3fdcbb7b040783a7c5bace6f928320b9"
+    },
+    {
+      "path": "investor/Digital/candy.js",
+      "bytes": 9597,
+      "sha256": "966745666cdacefff9b64d855ebbca8a2fa1629c5543971f06d7898778b57cf0"
+    },
+    {
       "path": "investor/Digital/cost-explorer.html",
       "bytes": 1675,
       "sha256": "d37c08a513bb2d8842fa98219ab055f097e52e79ffa1ec2347f14d5521cb7c1d"
@@ -294,8 +304,8 @@
     },
     {
       "path": "investor/Digital/index.html",
-      "bytes": 54160,
-      "sha256": "50216688c0eccff4b0ce5df37dcde23515b408dab1a8be22ff9cf73ddc042d54"
+      "bytes": 54246,
+      "sha256": "ae97ee39c93225dc9333883ab7f1c78108d510ca98a967ed09a3e2af3530b4b7"
     },
     {
       "path": "investor/Digital/investor-pages.css",

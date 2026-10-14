@@ -13,7 +13,7 @@
     // Candy sky behind everything
     var sky = document.createElement('div');
     sky.className = 'cnd-sky'; sky.setAttribute('aria-hidden', 'true');
-    sky.innerHTML = '<i></i><i></i><i></i><i></i><i></i>';
+    sky.innerHTML = '<div class="cnd-drift"><i></i><i></i><i></i><i></i><i></i></div>';
     document.body.insertBefore(sky, document.body.firstChild);
 
     // Gold gradient for chart sticks
@@ -32,13 +32,7 @@
       el.appendChild(g); el.appendChild(s);
     });
 
-    // Headline: split into words that hop in
-    var h1 = document.getElementById('hero-title');
-    if (h1 && !h1.querySelector('.cnd-w') && h1.children.length === 0) {
-      var words = h1.textContent.trim().split(/\s+/);
-      h1.setAttribute('aria-label', h1.textContent.trim());
-      h1.innerHTML = words.map(function (w, i) { return '<span class="cnd-w" aria-hidden="true" style="--i:' + i + '">' + w + '</span>'; }).join(' ');
-    }
+    // Headline: hops in as one piece, so the Spanish switch can still swap its text
     if (motionOn()) { R.classList.add('cnd-intro'); setTimeout(function () { R.classList.remove('cnd-intro'); }, 2600); }
 
     // Entrances: tiles pop, stitches draw, once each
